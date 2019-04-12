@@ -1,0 +1,3732 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat 07 : Intégrales
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/commandes-tex.org"
+
+* Mesures
+
+#+TOC: headlines 1 local
+
+\label{chap:mesure}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:ensemble} : Les ensembles
+  - Chapitre \ref{chap:ordre} : Les ordres et extréma
+  - Chapitre \ref{chap:fonction} : Les fonctions
+
+
+** Introduction
+
+L'objectif des mesures est de « mesurer » des ensembles, ou plutôt des sous-ensembles d'un ensemble donné. Soit l'ensemble $\Omega$ et une tribu de sous-ensembles $\mathcal{T} \subseteq \sousens(\Omega)$. Une mesure sur $\mathcal{T}$ est une fonction $\mu : \mathcal{T} \mapsto \setR$ associant une valeur réelle à chaque ensemble de la tribu. On demande que cette mesure soit positive :
+
+$$\mu(A) \ge 0$$
+
+pour tout $A \in \mathcal{T}$. Il semble également logique que la mesure d'un ensemble vide soit nulle :
+
+$$\mu(\emptyset) = 0$$
+
+Pour toute suite discrète (finie ou infinie) $\{ A_1,A_2,... \} \subseteq \mathcal{T}$ d'ensembles disjoints deux à deux, on a :
+
+$$A_i \cap A_j = \emptyset$$
+
+pour tout $(i,j)$ tels que $i \ne j$. On exige dans ce cas que la mesure vérifie la propriété d'additivité :
+
+$$\mu\left( \bigcup_i A_i \right) = \sum_i \mu(A_i)$$
+
+
+*** Inclusion
+
+Soit $A,B \in \mathcal{T}$ avec $A \subseteq B$. Comme $C = B \setminus A$ et $A$ vérifient $C \cup A = B$ et $C \cap A = \emptyset$, on a :
+
+$$\mu(B) = \mu(C) + \mu(A) \ge \mu(A)$$
+
+La mesure d'un ensemble « plus petit » au sens de l'inclusion est donc plus petite :
+
+$$\mu(A) \le \mu(B)$$
+
+
+*** Union
+
+Soit $A,B \in \mathcal{T}$. Comme $A \cup B = (A \setminus B) \cup B$ et $(A \setminus B) \cap B = \emptyset$, on a :
+
+$$\mu(A \cup B) = \mu(A \setminus B) + \mu(B)$$
+
+Comme $A \setminus B \subseteq A$, on a aussi $\mu(A \setminus B) \le \mu(A)$. On en déduit que :
+
+$$\mu(A \cup B) \le \mu(A) + \mu(B)$$
+
+On peut en conclure par récurrence que :
+
+$$\mu\left( \bigcup_{i = 0}^n A_i \right) \le \sum_{i = 0}^n \mu(A_i)$$
+
+Puis, par passage à la limite :
+
+$$\mu\left( \bigcup_{i = 0}^{+\infty} A_i \right) \le \sum_{i = 0}^{+\infty} \mu(A_i)$$
+
+
+*** Appellation
+
+On dit qu'un ensemble $A$ est mesurable (pour $\mu$) si $A \in \mathcal{T}$. Dans la suite, nous considérons une mesure $\mu : \mathcal{T} \mapsto \setR$ et un ensemble mesurable $A \in \mathcal{T}$.
+
+
+** Lebesgue
+
+La mesure de Lebesgue $\mu_L$ est définie sur la tribu $\mathcal{T}$ engendrée par les ensembles ouverts de $\setR$. Elle exprime simplement la longueur d'un intervalle. Pour tout :
+
+$$I \in \big\{ \ [a,b], \intervalleouvert{a}{b}, \intervallesemiouvertgauche{a}{b}, \intervallesemiouvertdroite{a}{b} \big\}$$
+
+on a simplement :
+
+$$\mu_L(I) = b - a$$
+
+Soit $\mathfrak{J}$ l'ensemble des collections au plus dénombrables d'intervalles ouverts disjoints. Pour tout $A \in \mathcal{T}$, on définit :
+
+$$\mu_I(A) = \inf \accolades{ \sum_{n \in N} \mu_L(I_n) : \{ I_n : n \in N \subseteq \setN \} \in \mathfrak{J} , \ A \subseteq \bigcup_{n \in N} I_n}$$
+
+et :
+
+$$\mu^S(A) = \sup \accolades{ \sum_{n \in N} \mu_L(I_n) : \{ I_n : n \in N \subseteq \setN \} \in \mathfrak{J} , \ \bigcup_{n \in N} I_n \subseteq A }$$
+
+Si :
+
+$$\mu_I(A) = \mu^S(A)$$
+
+on dit que l'ensemble $A$ est mesurable au sens de Lebesgue et on définit :
+
+$$\mu_L(A) = \mu_I(A) = \mu^S(A)$$
+
+
+*** Mesure nulle
+
+Pour tout ensemble $N$ inclus dans un ensemble $A \in \mathcal{T}$ de mesure nulle :
+
+$$\mu_L(A) = 0$$
+
+on définit :
+
+$$\mu_L(N) = 0$$
+
+
+*** Singleton
+
+On voit que les ensembles de la forme $\{a\} = [a,a]$ sont de mesure nulle :
+
+$$\mu_L(\{a\}) = a - a = 0$$
+
+On en conclut que pour toute suite discrète de réels $a_1,a_2,...$, on a :
+
+$$\mu_L(\{a_1,a_2,...\}) = \sum_i \mu_L(\{a_i\}) = 0$$
+
+On a aussi :
+
+\begin{eqnarray*}
+b - a = \mu_L([a,b]) &=& \mu_L([a,b] \setminus \{a_1,a_2,...\}) + \mu_L(\{a_1,a_2,...\}) \\
+&=& \mu_L([a,b] \setminus \{a_1,a_2,...\}) + 0
+\end{eqnarray*}
+
+et donc :
+
+$$\mu_L([a,b] \setminus \{a_1,a_2,...\}) = b - a$$
+
+
+** Mesure de Stieltjes
+
+On associe à toute fonction croissante $g : \setR \mapsto \setR$ une mesure de Stieltjes $\mu_g$. Pour tout :
+
+$$I \in \big\{ \ [a,b], \intervalleouvert{a}{b}, \intervallesemiouvertgauche{a}{b}, \intervallesemiouvertdroite{a}{b} \big\}$$
+
+on définit :
+
+$$\mu_g(I) = g(b) - g(a)$$
+
+Soit $\mathfrak{J}$ l'ensemble des collections au plus dénombrables d'intervalles ouverts disjoints. Pour tout $A \in \mathcal{T}$, on définit :
+
+$$\mu_g(A) = \inf \accolades{ \sum_{n \in N} \mu_L(I_n) : \{ I_n : n \in N \subseteq \setN \} \in \mathfrak{J} , \ A \subseteq \bigcup_{n \in N} I_n}$$
+
+
+*** Mesure nulle
+
+Pour tout ensemble $N$ inclus dans un ensemble $A \in \mathcal{T}$ de mesure nulle :
+
+$$\mu_g(A) = 0$$
+
+on définit :
+
+$$\mu_g(N) = 0$$
+
+
+** Dirac
+
+La mesure de Dirac $\mu_D^a$ en $a$ est définie sur $\sousens(\Omega)$. Il s'agit d'une mesure permettant de détecter si un $A \subseteq \Omega$ donné contient $a$. Elle est donc basée sur les fonctions indicatrices :
+
+#+BEGIN_CENTER
+\(
+\mu_D^a(A) = \indicatrice_A(a) =
+\begin{cases}
+1 & \mbox{  si  } a \in A \\
+0 & \mbox{  si  } a \notin A
+\end{cases}
+\)
+#+END_CENTER
+
+
+** Mesure produit
+
+Soit les tribus $\mathcal{T}_1$ et $\mathcal{T}_2$ et la tribu produit :
+
+$$\mathcal{P} = \{ A \times B : A \in \mathcal{T}_1, \ B \in \mathcal{T}_2 \}$$
+
+A partir de mesures $\mu : \mathcal{T}_1 \mapsto \setR$ et $\nu : \mathcal{T}_2 \mapsto \setR$, on peut construire une mesure produit $\mu \otimes \nu : \mathcal{P} \mapsto \setR$ par :
+
+$$(\mu \otimes \nu)(A \times B) = \mu(A) \cdot \nu(B)$$
+
+
+*** Dimension $n$
+
+On généralise la mesure de Lebesgue sur $\setR^n$ par :
+
+$$\mu_L( \intervalleouvert{a_1}{b_1} \times \intervalleouvert{a_2}{b_2} ... \times \intervalleouvert{a_n}{b_n}) = \prod_{i = 1}^n (b_i - a_i)$$
+
+et l'extension à la tribu engendrée par les ouverts de $\setR^n$ au moyen des
+supremum et infimum.
+
+
+** Fonction mesurable
+
+On dit qu'une fonction $f : A \mapsto \setR$ est mesurable (au sens de la tribu $\mathcal{T}$) si la relation $f^{-1}$ vérifie $f^{-1}(]a,+\infty[) \in \mathcal{T}$ et $f^{-1}(]-\infty,a[) \in \mathcal{T}$ pour tout $a \in \setR$. On a donc :
+
+#+BEGIN_CENTER
+\(
+\{ x \in A : f(x) \strictsuperieur a \} \in \mathcal{T} \\
+\{ x \in A : f(x) \strictinferieur a \} \in \mathcal{T}
+\)
+#+END_CENTER
+
+
+*** Corollaires
+
+On a :
+
+#+BEGIN_CENTER
+\(
+\{ x \in A : f(x) \ge a \} = A \setminus \{ x \in A : f(x) \strictinferieur a \} \in \mathcal{T} \\
+\{ x \in A : f(x) \le a \} = A \setminus \{ x \in A : f(x) \strictsuperieur a \} \in \mathcal{T}
+\)
+#+END_CENTER
+
+et :
+
+$$\{ x \in A : f(x) = a \} = \{ x \in A : f(x) \ge a \} \cap \{ x \in A : f(x) \le a \} \in \mathcal{T}$$
+
+Les mesures de tous ces ensembles sont donc bien définies pour tout $a \in \setR$.
+
+
+** Opposé d'une fonction mesurable
+
+Soit une fonction mesurable $f : A \mapsto \setR$. On a :
+
+#+BEGIN_CENTER
+\(
+\{ x \in A : -f(x) \strictsuperieur a \} = \{ x \in A : f(x) \strictinferieur -a \} \in \mathcal{T} \\
+\{ x \in A : -f(x) \strictinferieur a \} = \{ x \in A : f(x) \strictsuperieur -a \} \in \mathcal{T}
+\)
+#+END_CENTER
+
+On en déduit que la fonction opposée $-f$ est mesurable.
+
+
+** Fonctions extrema
+
+Soit la suite $\{ f_n : n \in \setN \}$ de fonctions mesurables. Posons :
+
+#+BEGIN_CENTER
+\(
+S = \sup \{ f_n : n \in \setN \} \\
+I = \inf \{ f_n : n \in \setN \}
+\)
+#+END_CENTER
+
+On a :
+
+#+BEGIN_CENTER
+\(
+\{ x \in A : S(x) \strictsuperieur a \} = \bigcup_n \{ x \in A : f_n(x) \strictsuperieur a \} \in \mathcal{T} \\
+\{ x \in A : S(x) \strictinferieur a \} = \bigcap_n \{ x \in A : f_n(x) \strictinferieur a \} \in \mathcal{T}
+\)
+#+END_CENTER
+
+On en conclut que $\sup_n f_n$ est mesurable. Symétriquement, on a :
+
+#+BEGIN_CENTER
+\(
+\{ x \in A : I(x) \strictsuperieur a \} = \bigcap_n \{ x \in A : f_n(x) \strictsuperieur a \} \in \mathcal{T} \\
+\{ x \in A : I(x) \strictinferieur a \} = \bigcup_n \{ x \in A : f_n(x) \strictinferieur a \} \in \mathcal{T}
+\)
+#+END_CENTER
+
+On en conclut que $\inf_n f_n$ est mesurable.
+
+
+* Essentialité
+
+#+TOC: headlines 1 local
+
+\label{chap:essentialite}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:mesure} : Les mesures
+
+
+** Introduction
+
+Soit la mesure $\mu : \mathcal{T} \mapsto \setR$ et l'ensemble $A \in \mathcal{T}$. On a envie de dire que tout sous-ensemble de mesure nulle de $A$ est « négligeable ». L'essentiel de l'information demeurera donc si on s'abstrait d'un quelconque ensemble $N \subseteq A$ vérifiant $N \in \mathcal{T}$ et $\mu(N) = 0$. Le résultat de cette abstraction, soit $A \setminus N$, est appelé sous-ensemble essentiel de $A$. On note :
+
+$$\essentiel(A) = \{ A \setminus N : N \subseteq A, \ N \in \mathcal{T}, \ \mu(N) = 0 \}$$
+
+l'ensemble des sous-ensembles essentiels de $A$.
+
+
+** Ensembles de mesure nulle
+
+
+*** Inclusion
+
+Soit $A,B \in \mathcal{T}$ avec $A \subseteq B$ et $\mu(B) = 0$. On a alors :
+
+$$0 \le \mu(A) \le \mu(B) = 0$$
+
+On en déduit que :
+
+$$\mu(A) = 0$$
+
+Un ensemble inclus dans un ensemble de mesure nulle est également de mesure nulle.
+
+
+*** Union
+
+Soit $A,B \in \mathcal{T}$ avec $\mu(A) = \mu(B) = 0$. On a alors :
+
+$$0 \le \mu(A \cup B) \le \mu(A) + \mu(B) = 0 + 0 = 0$$
+
+On en déduit que :
+
+$$\mu(A \cup B) = 0$$
+
+De même, la mesure d'une union d'une suite finie d'ensembles de mesure nulle est de mesure nulle :
+
+$$\mu\left( \bigcup_{i = 1}^n A_i \right) = 0$$
+
+On a le même résultat pour les suites infinies :
+
+$$\mu\left( \bigcup_{i = 1}^{+\infty} A_i \right) = 0$$
+
+
+** Mesure d'un sous-ensemble essentiel
+
+Soit $E \in \essentiel(A)$. On peut alors trouver $Z \in \mathcal{T}$ tel que $Z \subseteq A$, $E = A \setminus Z$ et vérifiant $\mu(Z) = 0$. Comme les ensembles $E$ et $Z$ sont disjoints et d'union égale à $A$, on a :
+
+$$\mu(A) = \mu(E) + \mu(Z) = \mu(E) + 0 = \mu(E)$$
+
+On a donc :
+
+$$\mu(E) = \mu(A)$$
+
+pour tout sous-ensemble essentiel $E \in \essentiel(A)$.
+
+
+** Convergence de la mesure
+
+Soit une suite d'ensembles $\{ A_n \in \mathcal{T} : n \in \setN \}$ telle que $A_m \subseteq A_n$ pour tout naturels $m,n$ vérifiant $m \le n$. Posons :
+
+$$A = \bigcup_{n \in \setN} A_n \in \mathcal{T}$$
+
+Considérons la suite d'ensemble $\{D_n \subseteq A : n \in \setN \}$ définie par :
+
+\begin{eqnarray*}
+D_0 &=& A_0 \\
+D_n &=& A_n \setminus A_{n - 1}
+\end{eqnarray*}
+
+pour tout $n \ge 1$. Comme $A_{n - 1}, D_n \subseteq A_n$, on a $A_n = A_{n - 1} \cup D_n$. Nous allons montrer par récurrence que :
+
+$$A_n = \bigcup_{k = 0}^n D_k$$
+
+On sait que c'est vrai pour $n = 0$. Supposons que ce soit vrai pour $n - 1$. On a :
+
+$$A_n = D_n \cup A_{n - 1} = D_n \cup \bigcup_{k = 0}^{n - 1} D_k = \bigcup_{k = 0}^n D_k$$
+
+Si $x$ appartient à au moins un des $A_n$, il appartient à au moins un des $D_k$ pour $0 \le k \le n$, et inversément. On en déduit que :
+
+$$A = \bigcup_{n \in \setN} A_n = \bigcup_{k \in \setN} D_k$$
+
+Soit les naturels $i,j$ avec $i \ne j$. Soit $m = \max \{ i, j \}$ et $n = \min \{ i,j \}$. Si $D_i = \emptyset$ ou si $D_j = \emptyset$, on a forcément $D_i \cap D_j = \emptyset$. Sinon, soit $x \in D_m$. On a alors $x \in A_m$ et $x \notin A_{m - 1}$. Comme $i \ne j$, on a $m - 1 \ge n$ et $A_n \subseteq A_{m - 1}$. On en déduit que :
+
+$$x \notin A_n = \bigcup_{k = 0}^n D_k \subseteq A_{m - 1}$$
+
+En particulier, $x$ ne peut pas appartenir à $D_n$. On en conclut que $D_i \cap D_j = D_m \cap D_n = \emptyset$. Les propriétés de la mesure nous disent alors que :
+
+$$\mu(A_n) = \sum_{k = 0}^n \mu(D_k)$$
+
+et que :
+
+$$\mu(A) = \sum_{n \in \setN} \mu(D_n)$$
+
+Par définition de la somme infinie sur $\setN$, on a :
+
+$$\sum_{n \in \setN} \mu(D_n) = \lim_{n \to \infty} \sum_{k = 0}^n \mu(D_k)$$
+
+et donc :
+
+$$\lim_{n \to \infty} \mu(A_n) = \mu(A)$$
+
+
+** Convergence étendue
+
+Soit une suite d'ensembles $\{ A_n \in \mathcal{T} : n \in \setN \}$ telle que, pour tout $n \in \setN$, on puisse trouver un sous-ensemble essentiel $E_n \subseteq A_n$ vérifiant $E_n \subseteq A_{n + 1}$. Posons :
+
+$$A = \bigcup_{n \in \setN} A_n \in \mathcal{T}$$
+
+Pour tout $n \in \setN$, on peut donc trouver un $Z_n \subseteq A_n$ vérifiant $\mu(Z_n) = 0$ et $E_n = A_n \setminus Z_n \subseteq A_{n + 1}$. Notons $Z$ l'union de ces ensembles :
+
+$$Z = \bigcup_{n \in \setN} Z_n$$
+
+et analysons le comportement des $C_n = A_n \setminus Z$. Notons $C$ l'union de ces ensembles. On a :
+
+$$C = \bigcup_{n \in \setN} C_n = \bigcup_{n \in \setN} A_n \setminus Z = A \setminus Z$$
+
+Supposons que $x \in C_n$. On a alors $x \in A_n$ et $x \notin Z_n$, d'où $x \in A_{n + 1}$. Comme $x \notin Z$, on a aussi $x \in A_{n + 1} \setminus Z = C_{n + 1}$. On en conclut que $C_n \subseteq C_{n + 1}$. La récurrence :
+
+$$C_0 \subseteq C_1 \subseteq C_2 \subseteq C_3 \subseteq ...$$
+
+nous montre alors que $C_m \subseteq C_n$ pour tout $m,n \in \setN$ vérifiant $m \le n$. La mesure converge par conséquent vers la mesure de l'union :
+
+$$\lim_{n \to \infty} \mu(C_n) = \mu(C) = \mu(A \setminus Z)$$
+
+Mais comme $C$ est un sous-ensemble essentiel de $A$, on a $\mu(C) = \mu(A)$. Pour la même raison, on a $\mu(C_n) = \mu(A_n)$. On a donc finalement :
+
+$$\lim_{n \to \infty} \mu(A_n) = \mu(A)$$
+
+
+** Ordre faible
+
+
+*** Infériorité essentielle
+
+Soit deux fonctions $f,g : A \mapsto \setR$ telles que $f - g$ soit mesurable.
+On dit que $f$ est {\em essentiellement} inférieure à $g$, et on le note :
+
+$$f \essinferieur g$$
+
+si on peut trouver un sous-ensemble essentiel $S$ de $A$ tel que $f(x) \le g(x)$ en tout point $x \in S$. On a donc :
+
+$$\mu(\{ x \in A : f(x) \strictsuperieur g(x) \}) = 0$$
+
+
+*** Supériorité essentielle
+
+Soit deux fonctions $f,g : A \mapsto \setR$ telles que $f - g$ soit mesurable.
+On dit que $f$ est {\em essentiellement} supérieure à $g$, et on le note :
+
+$$f \esssuperieur g$$
+
+si on peut trouver un sous-ensemble essentiel $S$ de $A$ tel que $f(x) \ge g(x)$ en tout point $x \in S$. On a donc :
+
+$$\mu(\{ x \in A : f(x) \strictinferieur g(x) \}) = 0$$
+
+
+*** Validité
+
+La définition de $f \essinferieur g$ revient à imposer que :
+
+$$\mu(\{ x \in A : f(x) - g(x) \strictsuperieur 0 \}) = 0$$
+
+La définition de $f \esssuperieur g$ revient à imposer que :
+
+$$\mu(\{ x \in A : f(x) - g(x) \strictinferieur 0 \}) = 0$$
+
+Comme $f - g$ est mesurable, ces notions sont correctement définies.
+
+
+** Transitivité
+
+Soit les fonctions $f,g,h : A \mapsto \setR$ telles que :
+
+#+BEGIN_CENTER
+\(
+f \essinferieur g \\ \\
+g \essinferieur h
+\)
+#+END_CENTER
+
+Si on pose :
+
+#+BEGIN_CENTER
+\(
+Z = \{ x \in A : f(x) \strictsuperieur g(x)\} \\
+N = \{ x \in A : g(x) \strictsuperieur h(x)\}
+\)
+#+END_CENTER
+
+on a $\mu(Z) = \mu(N) = 0$. Comme une union finie d'ensembles de mesure nulle est de mesure nulle, on a $\mu(N \cup Z) = 0$. Pour tout $A \setminus (N \cup Z)$, on a $f(x) \le g(x)$ et $g(x) \le h(x)$. On en déduit que $f(x) \le h(x)$. Notre $f$ est donc inférieure à $h$ sur $A$ sauf sur l'ensemble de mesure nulle $N \cup Z$. On en conclut que la fonction étagée $f$ est essentiellement inférieure à $h$ :
+
+$$f \essinferieur h$$
+
+
+** Conservation sous l'addition
+
+Supposons que $f \essinferieur g$ et que $u \essinferieur v$. Les ensembles :
+
+#+BEGIN_CENTER
+\(
+Z = \{ x \in A : f(x) \strictsuperieur g(x)\} \\
+N = \{ x \in A : u(x) \strictsuperieur v(x)\}
+\)
+#+END_CENTER
+
+sont de mesure nulle. Leur union est donc également de mesure nulle et on a bien entendu $f(x) + u(x) \le g(x) + v(x)$ sur $A \setminus (Z \cup N)$ c'est-à-dire sur une sous-ensemble essentiel de $A$. On en conclut que :
+
+$$f + u \essinferieur g + v$$
+
+
+** Conservation sous la soustraction
+
+Supposons que $f \essinferieur g$ et que $u \esssuperieur v$. Les ensembles :
+
+#+BEGIN_CENTER
+\(
+Z = \{ x \in A : f(x) \strictsuperieur g(x)\} \\
+N = \{ x \in A : u(x) \strictinferieur v(x)\}
+\)
+#+END_CENTER
+
+sont de mesure nulle. Leur union est donc également de mesure nulle et on a bien entendu $f(x) - u(x) \le g(x) - v(x)$ sur $A \setminus (Z \cup N)$ c'est-à-dire sur une sous-ensemble essentiel de $A$. On en conclut que :
+
+$$f - u \essinferieur g - v$$
+
+
+** Fonctions max et min
+
+
+*** Max
+
+Supposons que $f,g \essinferieur h$. Les ensembles :
+
+#+BEGIN_CENTER
+\(
+Z = \{ x \in A : f(x) \strictsuperieur h(x)\} \\
+N = \{ x \in A : g(x) \strictsuperieur h(x)\}
+\)
+#+END_CENTER
+
+sont de mesure nulle. Leur union est donc également de mesure nulle et on a bien entendu $\max\{f(x) , g(x)\} \le h(x)$ sur $A \setminus (Z \cup N)$ c'est-à-dire sur une sous-ensemble essentiel de $A$. On en conclut que :
+
+$$\max\{f,g\} \essinferieur h$$
+
+
+*** Min
+
+Supposons que $f,g \esssuperieur h$. Les ensembles :
+
+#+BEGIN_CENTER
+\(
+Z = \{ x \in A : f(x) \strictinferieur h(x)\} \\
+N = \{ x \in A : g(x) \strictinferieur h(x)\}
+\)
+#+END_CENTER
+
+sont de mesure nulle. Leur union est donc également de mesure nulle et on a bien entendu $\min\{f(x) , g(x)\} \ge h(x)$ sur $A \setminus (Z \cup N)$ c'est-à-dire sur une sous-ensemble essentiel de $A$. On en conclut que :
+
+$$\min\{f,g\} \esssuperieur h$$
+
+
+** Egalité
+
+On dit que $f$ est essentiellement égale à $g$, et on le note :
+
+$$f \essegal g$$
+
+si et seulement si $f \essinferieur g$ et $f \esssuperieur g$. Les ensembles :
+
+#+BEGIN_CENTER
+\(
+Z = \{ x \in A : f(x) \strictinferieur g(x)\} \\
+N = \{ x \in A : f(x) \strictsuperieur g(x)\}
+\)
+#+END_CENTER
+
+sont alors de mesure nulle. Donc, l'ensemble :
+
+$$D = \{ x \in A : f(x) \ne g(x)\} = Z \cup N$$
+
+est également de mesure nulle.
+
+
+* Extrema essentiels
+
+#+TOC: headlines 1 local
+
+\label{chap:essextr}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:mesure} : Les mesures
+
+
+** Bornes
+
+Soit la fonction mesurable $f : A \mapsto \setR$.
+
+
+*** Supérieure
+
+On dit que $f$ est {\em essentiellement} inférieure au réel $\sigma \in \setR$, et on le note :
+
+$$f \essinferieur \sigma$$
+
+si on peut trouver un sous-ensemble essentiel $S$ de $A$ tel que $f(x) \le \sigma$ en tout point $x \in S$. On a donc :
+
+$$\mu(\{ x \in A : f(x) \strictsuperieur \sigma \}) = 0$$
+
+On dit aussi que $f$ est essentiellement majorée par $\sigma$.
+
+
+*** Inférieure
+
+On dit que $f$ est {\em essentiellement} supérieure au réel $\lambda \in \setR$, et on le note :
+
+$$f \esssuperieur \lambda$$
+
+si on peut trouver un sous-ensemble essentiel $S$ de $A$ tel que $f(x) \ge \lambda$ en tout point $x \in S$. On a donc :
+
+$$\mu(\{ x \in A : f(x) \strictinferieur \lambda \}) = 0$$
+
+On dit aussi que $f$ est essentiellement minorée par $\lambda$.
+
+
+** Extrema essentiels
+
+Soit une fonction mesurable $f : A \mapsto \setR$. Pour tout $\sigma \in \setR$, notons :
+
+$$\Psi(\sigma) = \{ x \in A : f(x) \strictsuperieur \sigma \}$$
+
+Comme on ne se soucie pas des ensembles de mesure nulle, on peut choisir (si elle existe) une borne supérieure $\sigma \in \setR$ telle que $f \essinferieur \sigma$, ce qui revient à imposer que $\mu(\Psi(\sigma)) = 0$. Notons :
+
+$$\Theta = \{ \sigma \in \setR : f \essinferieur \sigma \} = \{ \sigma \in \setR : \mu(\Psi(\sigma)) = 0 \}$$
+
+La finalité des bornes étant d'encadrer au plus près un ensemble, nous considérons l'infimum (s'il existe) des réels $\sigma$ possédant cette propriété, et nous l'appelons supremum essentiel :
+
+$$\supessentiel_{x \in A} f(x) = \inf \Theta$$
+
+Symétriquement, on note :
+
+$$\Gamma(\lambda) = \{ x \in A : f(x) \strictinferieur \lambda \}$$
+
+pour tout $\lambda \in \setR$ et :
+
+$$\Lambda = \{ \lambda \in \setR : f \esssuperieur \lambda \} = \{ \lambda \in \setR : \mu(\Gamma(\lambda)) = 0 \}$$
+
+Si le supremum de $\Lambda$ existe, on définit alors l'infimum essentiel par :
+
+$$\infessentiel_{x \in A} f(x) = \sup \Lambda$$
+
+Nous disposons donc des bornes :
+
+#+BEGIN_CENTER
+\(
+\supessentiel_{x \in A} f(x) = \inf \{ \sigma \in \setR : f \essinferieur \sigma \} \\ \\
+\infessentiel_{x \in A} f(x) = \sup \{ \lambda \in \setR : f \esssuperieur \lambda \}
+\)
+#+END_CENTER
+
+
+*** Notation
+
+On note aussi :
+
+#+BEGIN_CENTER
+\(
+\supessentiel \{f(x) : x \in A\} = \supessentiel_{x \in A} f(x) \\
+\infessentiel \{f(x) : x \in A\} = \infessentiel_{x \in A} f(x)
+\)
+#+END_CENTER
+
+Au besoin, la mesure $\mu$ utilisée est indiquée par :
+
+#+BEGIN_CENTER
+\(
+\supessentiel_{x \in A}^\mu f(x) \\ \\
+\infessentiel_{x \in A}^\mu f(x)
+\)
+#+END_CENTER
+
+
+** Existence et estimation
+
+
+*** Supremum essentiel
+
+Supposons que $f$ soit essentiellement inférieure (sur $A$) à un certain $\sigma \in \setR$ et que $f$ soit essentiellement supérieure à un certain $\lambda \in \setR$ sur un ensemble $L \subseteq A$ de mesure strictement positive. On a $\sigma \in \Theta \ne \emptyset$. Pour tout $\alpha \in \setR$ tel que $\alpha \ge \sigma$, on a $\Psi(\alpha) \subseteq \Psi(\sigma)$. Comme $\mu(\Psi(\sigma)) = 0$, l'ensemble $\Psi(\alpha)$ est inclus dans un ensemble de mesure nulle. Il est donc lui-même de mesure nulle et $\alpha \in \Theta$. On en conclut que :
+
+$$[\sigma, +\infty[ \ \subseteq \Theta$$
+
+pour tout $\sigma \in \Theta$. Comme $f$ est essentiellement supérieure à $\lambda$ sur $L$, on peut trouver un ensemble de mesure nulle $Z \subseteq L$ tel que :
+
+$$L \setminus Z = \{ x \in L : f(x) \ge \lambda \}$$
+
+Comme $L \setminus Z$ est un sous-ensemble essentiel de $L$, on a $\mu(L \setminus Z) = \mu(L) \strictsuperieur 0$. Posons :
+
+$$C = \{ x \in A : f(x) \ge \lambda \}$$
+
+Comme $L \subseteq A$, on a $L \setminus Z \subseteq C$ et $\mu(C) \ge \mu(L \setminus Z) \strictsuperieur 0$. Soit $\beta \in \setR$ vérifiant $\beta \strictinferieur \lambda$. La condition $f(x) \ge \lambda$ implique que $f(x) \strictsuperieur \beta$. On en déduit que :
+
+$$C \subseteq \{ x \in A : f(x) \strictsuperieur \beta \} = \Psi(\beta)$$
+
+On a alors $\mu(\Psi(\beta)) \ge \mu(C) \strictsuperieur 0$, ce qui implique que $\beta$ ne peut pas appartenir à $\Theta$. Tous les éléments $\theta \in \Theta$ vérifient donc $\theta \ge \lambda$ et :
+
+$$\Theta \subseteq [\lambda, +\infty[$$
+
+Comme $\lambda \le \Theta$, l'ensemble de réels $\Theta$ est non vide et minoré. Il admet donc un infimum :
+
+$$\supessentiel_{x \in A} f(x) = \inf \Theta$$
+
+On se rappelle que l'inclusion $X \subseteq Y$ implique que $\inf X \ge \inf Y$. Comme $\lambda = \inf [\lambda, +\infty[$ et $\sigma = \inf [\sigma, +\infty[$, les inclusions :
+
+$$[\sigma, +\infty[ \ \subseteq \Theta \subseteq [\lambda, +\infty[$$
+
+nous montrent que :
+
+$$\lambda \le \supessentiel_{x \in A} f(x) \le \sigma$$
+
+
+*** Infimum essentiel
+
+Supposons que $f$ soit essentiellement supérieure (sur $A$) à un certain $\lambda \in \setR$ et que $f$ soit essentiellement inférieure à un certain $\sigma \in \setR$ sur un ensemble $S \subseteq A$ de mesure strictement positive. On a $\lambda \in \Lambda \ne \emptyset$. Pour tout $\alpha \in \setR$ tel que $\alpha \le \lambda$, on a $\Gamma(\alpha) \subseteq \Gamma(\lambda)$. Comme $\mu(\Gamma(\lambda)) = 0$, l'ensemble $\Gamma(\alpha)$ est inclus dans un ensemble de mesure nulle. Il est donc lui-même de mesure nulle et $\alpha \in \Lambda$. On en conclut que :
+
+$$]-\infty, \lambda] \subseteq \Lambda$$
+
+pour tout $\lambda \in \Lambda$. Comme $f$ est essentiellement inférieure à $\sigma$ sur $S$, on peut trouver un ensemble de mesure nulle $Z \subseteq S$ tel que :
+
+$$S \setminus Z = \{ x \in S : f(x) \le \sigma \}$$
+
+Comme $S \setminus Z$ est un sous-ensemble essentiel de $S$, on a $\mu(S \setminus Z) = \mu(S) \strictsuperieur 0$. Posons :
+
+$$C = \{ x \in A : f(x) \le \sigma \}$$
+
+Comme $S \subseteq A$, on a $S \setminus Z \subseteq C$ et $\mu(C) \ge \mu(S \setminus Z) \strictsuperieur 0$. Soit $\beta \in \setR$ vérifiant $\beta \strictsuperieur \sigma$. La condition $f(x) \le \sigma$ implique que $f(x) \strictinferieur \beta$. On en déduit que :
+
+$$C \subseteq \{ x \in A : f(x) \strictinferieur \beta \} = \Gamma(\beta)$$
+
+On a alors $\mu(\Gamma(\beta)) \ge \mu(C) \strictsuperieur 0$, ce qui implique que $\beta$ ne peut pas appartenir à $\Lambda$. Tous les éléments $\gamma \in \Lambda$ vérifient donc $\gamma \le \sigma$ et :
+
+$$\Theta \subseteq \ ]-\infty, \sigma]$$
+
+Comme $\sigma \ge \Lambda$, l'ensemble de réels non vide $\Lambda$ est majoré. Il admet donc un supremum :
+
+$$\infessentiel_{x \in A} f(x) = \sup \Lambda$$
+
+On se rappelle que l'inclusion $X \subseteq Y$ implique que $\sup X \le \sup Y$. Comme $\lambda = \sup \ ]-\infty, \lambda]$ et $\sigma = \sup \ ]-\infty, \sigma]$, les inclusions :
+
+$$]-\infty, \lambda] \ \subseteq \Theta \subseteq \ ]-\infty, \sigma]$$
+
+nous montrent que :
+
+$$\lambda \le \infessentiel_{x \in A} f(x) \le \sigma$$
+
+
+** Intersection
+
+Supposons que $A$ soit de mesure strictement positive et que $\Theta \cap \Lambda \ne \emptyset$. Pour tout $\alpha \in \setR$, posons :
+
+$$\Xi(\alpha) = \{ x \in A : f(x) = \alpha \}$$
+
+et :
+
+$$\Upsilon(\alpha) = \{ x \in A : f(x) \ne \alpha \}$$
+
+Il est clair que :
+
+$$A = \Xi(\alpha) \cup \Upsilon(\alpha)$$
+
+Comme imposer la différence revient à imposer soit la supériorité soit l'infériorité stricte, on a :
+
+$$\Upsilon(\alpha) = \Psi(\alpha) \cup \Gamma(\alpha)$$
+
+Soit à présent $\alpha \in \Theta \cap \Lambda$. Comme $\mu(\Psi(\alpha)) = \mu(\Gamma(\alpha)) = 0$, leur union est également de mesure nulle :
+
+$$\mu(\Upsilon(\alpha)) = 0$$
+
+Si l'intersection $\Theta \cap \Lambda$ n'est pas vide, la fonction $f$ est donc essentiellement constante sur $A$ et $\Xi(\alpha) = A \setminus \Upsilon(\alpha)$ est un sous-ensemble essentiel de $A$. On a donc $\mu(\Xi(\alpha)) = \mu(A) \strictsuperieur 0$. Soit à présent $\beta \in \setR$ et supposons que $\beta \ne \alpha$. Si $f(x) = \beta$, on a forcément $f(x) \ne \alpha$, donc :
+
+$$\Xi(\beta) = \{ x \in A : f(x) = \beta \} \subseteq \{ x \in A : f(x) \ne \alpha \}$$
+
+L'ensemble $\Xi(\beta)$ étant inclus dans un ensemble de mesure nulle, on doit avoir $\mu(\Xi(\beta)) = 0$. Comme $\mu(\Xi(\alpha)) \strictsuperieur 0$ pour tout $\alpha \in \Theta \cap \Lambda$, $\beta$ ne peut pas appartenir à $\Theta \cap \Lambda$. On en conclut que l'intersection vérifie soit :
+
+$$\Theta \cap \Lambda = \emptyset$$
+
+soit :
+
+$$\Theta \cap \Lambda = \{ \alpha \}$$
+
+pour un certain $\alpha \in \setR$.
+
+
+*** Extrema
+
+Supposons que $f$ soit essentiellement inférieure à $\sigma$ et essentiellement supérieure à $\lambda$ sur $A$ qui est de mesure strictement positive. On en déduit que les supremum et infimum essentiels existent :
+
+#+BEGIN_CENTER
+\(
+S = \supessentiel \{ f(x) : x \in A \} \\
+I = \infessentiel \{ f(x) : x \in A \}
+\)
+#+END_CENTER
+
+et que $\lambda \le \{ S,I \} \le \sigma$. Supposons que $S \strictinferieur I$ et posons $\delta = I - S \strictsuperieur 0$. Soit le réel strictement positif $\epsilon = \delta / 4$. Comme l'infimum est dans l'adhérence, on peut trouver un $\alpha \in \Theta$ tel que $\abs{\alpha - S} \le \epsilon$, d'où $\alpha \le S + \epsilon$. On a alors :
+
+$$[\alpha, +\infty[ \ \subseteq \Theta$$
+
+Comme le supremum est dans l'adhérence, on peut trouver un $\beta \in \Lambda$ tel que $\abs{I - \beta} \le \epsilon$, d'où $\beta \ge I - \epsilon$. On a alors :
+
+$$]-\infty, \beta] \subseteq \Lambda$$
+
+On voit que :
+
+\begin{eqnarray*}
+S + \epsilon &=& S + \frac{\delta}{4} \\
+I - \epsilon &=& S + \delta - \frac{\delta}{4} = S  + \frac{3 \delta}{4}
+\end{eqnarray*}
+
+On a donc :
+
+$$\alpha \le S + \epsilon \strictinferieur I - \epsilon \le \beta$$
+
+et $\alpha \strictinferieur \beta$. On a aussi :
+
+$$[\alpha,\beta] = \ ]-\infty, \beta] \cap [\alpha, +\infty[ \ \subseteq \Theta \cap \Lambda$$
+
+Donc $\alpha,\beta \in \Theta \cap \Lambda$ avec $\alpha \ne \beta$ ce qui impossible. Notre hypothèse est donc fausse et $I \le S$, c'est-à-dire :
+
+$$\infessentiel_{x \in A} f(x) \le \supessentiel_{x \in A} f(x)$$
+
+
+** Ordre
+
+Soit les fonctions $f,g : A \mapsto \setR$ telles que $f \essinferieur g$.
+
+
+*** Supremum essentiel
+
+On a bien entendu :
+
+$$f \essinferieur g \essinferieur \supessentiel_{x \in A} g(x)$$
+
+On en déduit que :
+
+$$\supessentiel_{x \in A} f(x) \le \supessentiel_{x \in A} g(x)$$
+
+
+*** Infimum essentiel
+
+On a bien entendu :
+
+$$\infessentiel_{x \in A} f(x) \essinferieur f \essinferieur g$$
+
+On en déduit que :
+
+$$\infessentiel_{x \in A} f(x) \le \infessentiel_{x \in A} g(x)$$
+
+
+** Addition
+
+Soit les fonctions $f,g : A \mapsto \setR$.
+
+
+*** Supremum essentiel
+
+On sait que :
+
+#+BEGIN_CENTER
+\(
+f \essinferieur \sigma = \supessentiel \{ f(x) : x \in A \} \\
+g \essinferieur \tau = \supessentiel \{ g(x) : x \in A \}
+\)
+#+END_CENTER
+
+On a donc :
+
+$$f + g \essinferieur \sigma + \tau$$
+
+On en conclut que :
+
+$$\supessentiel_{x \in A} [f(x) + g(x)] \le \supessentiel_{x \in A} f(x) + \supessentiel_{x \in A} g(x)$$
+
+
+*** Infimum essentiel
+
+On sait que :
+
+#+BEGIN_CENTER
+\(
+f \esssuperieur \lambda = \infessentiel \{ f(x) : x \in A \} \\
+g \esssuperieur \gamma = \infessentiel \{ g(x) : x \in A \}
+\)
+#+END_CENTER
+
+On a donc :
+
+$$f + g \esssuperieur \lambda + \gamma$$
+
+On en conclut que :
+
+$$\infessentiel_{x \in A} [f(x) + g(x)] \ge \infessentiel_{x \in A} f(x) + \infessentiel_{x \in A} g(x)$$
+
+
+* Fonctions étagées
+
+#+TOC: headlines 1 local
+
+\label{chap:etagee}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:fonction} : Les fonctions
+  - Chapitre \ref{chap:mesure} : Les mesures
+
+
+** Définition
+
+Soit la mesure $\mu : \mathcal{T} \mapsto \setR$, l'ensemble $\Phi \in \mathcal{T}$ et $A \in \mathcal{T}$ vérifiant $A \subseteq \Phi$. On dit que la fonction $w : \Phi \to \setR$ est étagée sur $A$ si on peut trouver une collection finie $\{ A_1, ..., A_n \} \subseteq \mathcal{T}$ formant une partition de $A$ et des réels $w_i \in \setR$ tels que :
+
+$$w(x) = \sum_{i = 1}^n w_i \cdot \indicatrice_{A_i}(x)$$
+
+pour tout $x \in A$. On note $\etagee(A)$ l'ensemble des fonctions étagées sur $A$.
+
+
+** Mesurabilité
+
+Soit $a \in \setR$. Comme :
+
+$$\{ x \in A : w(x) \strictsuperieur a \} = \bigcup \{ A_i : i \in \{1,...,n\}, \ w_i \strictsuperieur a \}$$
+
+et que l'union s'opère sur un nombre fini d'ensembles, on a :
+
+$$\{ x \in A : w(x) \strictsuperieur a \} \in \mathcal{T}$$
+
+On a aussi :
+
+$$\{ x \in A : w(x) \strictinferieur a \} = \bigcup \{ A_i : i \in \{1,...,n\}, \ w_i \strictinferieur a \} \in \mathcal{T}$$
+
+Les fonctions étagées sont mesurables.
+
+
+** Multiplication par une fonction indicatrice
+
+Soit $B \subseteq A$. On a :
+
+\begin{eqnarray*}
+w(x) \cdot \indicatrice_B(x) &=& \sum_{i = 1}^n w_i \cdot \indicatrice_{A_i}(x) \cdot \indicatrice_B(x) \\
+&=& \sum_{i = 1}^n w_i \cdot \indicatrice[A_i \cap B](x)
+\end{eqnarray*}
+
+Soit $B_i = A_i \cap B$. La fonction $u = w \cdot \indicatrice_B$ peut se définir par :
+
+$$u(x) = w(x) \cdot \indicatrice_B(x) = \sum_{i = 1}^n w_i \cdot \indicatrice_{B_i}(x)$$
+
+pour tout $x \in A$. Si $i \ne j$, on a :
+
+$$B_i \cap B_j = (A_i \cap B) \cap (A_j \cap B) = (A_i \cap A_j) \cap B = \emptyset$$
+
+L'union des $B_i$ nous donne :
+
+$$\bigcup_i B_i = \bigcup_i (A_i \cap B) = B \cap \bigcup_i A_i = B \cap A = B$$
+
+On en conclut que les ensembles $B_i$ forment une partition de $B$. La fonction $u$ est donc une fonction étagée sur $B$. Comme $u$ est nulle sur $A \setminus B$, on a même :
+
+$$u = 0 \cdot \indicatrice[A \setminus B] + \sum_{i = 1}^n w_i \cdot \indicatrice_{B_i}$$
+
+ce qui montre que $u$ est une fonction étagée sur $(A \setminus B) \cup B = A$.
+
+
+** Essentialité
+
+
+*** Bornes
+
+Soit l'ensemble $M$ rassemblant les indices correspondant aux ensembles de mesure non nulle :
+
+$$M = \{ i \in \{1,...,n\} : \mu(A_i) \strictsuperieur 0 \}$$
+
+et l'ensemble $N$ rassemblant les indices correspondant aux ensembles de mesure nulle :
+
+$$N = \{ i \in \{1,...,n\} : \mu(A_i) = 0 \}$$
+
+Par positivité de la mesure, on a clairement $M \cup N = \{1,...,n\}$. Comme l'union d'ensembles de mesure nulle est également de mesure nulle, l'ensemble :
+
+$$Z = \bigcup_{i \in N} A_i$$
+
+vérifie $\mu(Z) = 0$. L'ensemble :
+
+$$A \setminus Z = A \setminus \bigcup_{i \in N} A_i = \bigcup_{i \in M} A_i$$
+
+est donc un sous-ensemble essentiel de $A$. Comme :
+
+$$\min_{i \in M} w_i \le w(x) \in \{ w_i : i \in M \} \le \max_{i \in M} w_i$$
+
+pour tout $x \in A \setminus Z$, on a :
+
+$$\min \{ w_i : i \in M \} \essinferieur w \essinferieur \max \{ w_i : i \in M \}$$
+
+
+*** Extrema
+
+Soit :
+
+#+BEGIN_CENTER
+\(
+\alpha = \arg\max_{i \in M} w_i \in M \\
+\beta = \arg\min_{i \in M} w_i \in M
+\)
+#+END_CENTER
+
+On a alors :
+
+#+BEGIN_CENTER
+\(
+\sigma = w_\alpha = \max \{ w_i : i \in M \} \\
+\lambda = w_\beta = \min \{ w_i : i \in M \}
+\)
+#+END_CENTER
+
+Comme $w \essinferieur \sigma$, on doit avoir :
+
+$$\supessentiel_{x \in A} w(x) \le \sigma$$
+
+Mais on a aussi $w = w_\alpha = \sigma$ sur $A_\alpha$, et a fortiori $w \ge \sigma$ sur $A_\alpha$, avec $\mu(A_\alpha) \strictsuperieur 0$, ce qui implique :
+
+$$\supessentiel_{x \in A} w(x) \ge \sigma$$
+
+Ces deux inégalités nous imposent que :
+
+$$\supessentiel_{x \in A} w(x) = \sigma$$
+
+Comme $w \esssuperieur \lambda$, on a :
+
+$$\infessentiel_{x \in A} w(x) \ge \lambda$$
+
+Mais on a aussi $w = w_\beta =\lambda$ sur $A_\beta$, et a fortiori $w \le \lambda$ sur $A_\beta$, avec $\mu(A_\beta) \strictsuperieur 0$, ce qui implique :
+
+$$\infessentiel_{x \in A} w(x) \le \lambda$$
+
+Ces deux inégalités nous imposent que :
+
+$$\infessentiel_{x \in A} w(x) = \lambda$$
+
+Les extrema essentiels d'une fonction étagée existent toujours et sont très simples à évaluer :
+
+#+BEGIN_CENTER
+\(
+\supessentiel_{x \in A} w(x) = \max \{ w_i : i \in \{1,...,n\}, \ \mu(A_i) \strictsuperieur 0 \} \\ \\
+\infessentiel_{x \in A} w(x) = \min \{ w_i : i \in \{1,...,n\}, \ \mu(A_i) \strictsuperieur 0 \}
+\)
+#+END_CENTER
+
+
+** Intégrale d'une mesure
+
+L'intégrale d'une mesure $\mu : \mathcal{T} \mapsto \setR$ sur $A \in \mathcal{T}$ est simplement la mesure de $A$ :
+
+$$\int_A d\mu(x) = \mu(A)$$
+
+
+** Intégrale d'une constante
+
+On étend la définition aux constantes $c \in \setR$ par linéarité :
+
+$$\int_A c \ d\mu(x) = c \cdot \int_A d\mu(x) = c \cdot \mu(A)$$
+
+
+*** Fonction nulle
+
+La fonction nulle peut être considérée comme la constante $0$. On a donc :
+
+$$\int_A 0 \ d\mu(x) = 0 \cdot \int_A d\mu(x) = 0$$
+
+
+** Intégrale d'une fonction étagée
+
+Soit un ensemble $A$ et une fonction $w \in \etagee(A)$. On peut trouver des $w_i \in \setR$ et des $A_i \in \mathcal{T}$ formant une partition de $A$ et tels que :
+
+$$w(x) = \sum_{i = 1}^n w_i \cdot \indicatrice_{A_i}(x)$$
+
+pour tout $x \in A$. On étend la définition de l'intégrale en imposant la linéarité :
+
+$$\int_A w(x) \ d\mu(x) = \sum_{i = 1}^n \int_{A_i} w(x) \ d\mu(x)$$
+
+La fonction étagée $w$ étant constante et valant $w_i$ sur chaque $A_i$, on a :
+
+$$\int_{A_i} w(x) \ d\mu(x) = \int_{A_i} w_i \ d\mu(x) = w_i \cdot \mu(A_i)$$
+
+et finalement :
+
+$$\int_A w(x) \ d\mu(x) = \sum_{i = 1}^n w_i \cdot \mu(A_i)$$
+
+
+** Unicité
+
+Nous allons vérifier que, pour une fonction étagée $w$ donnée, l'intégrale ainsi définie ne dépend pas de la partition utilisée. Soit les collections finies d'ensembles $A_i \in \mathcal{T}$ et $B_j \in \mathcal{T}$ telles que $\{A_1,A_2,...,A_m\}$ et $\{B_1,B_2,...,B_n\}$ forment deux partitions de $A$ et telles que l'on puisse trouver des $a_i,b_j \in \setR$ vérifiant :
+
+$$w(x) = \sum_{i = 1}^m a_i \cdot \indicatrice[A_i](x) = \sum_{j = 1}^n b_j \cdot \indicatrice[B_j](x)$$
+
+pour tout $x \in A$.
+
+
+*** Intersection des partitions
+
+Posons $P = \{1,...,m\} \times \{1,...,n\}$ et $C_{ij} = A_i \cup B_j \in \mathcal{T}$ pour tout $(i,j) \in P$. Si $i \ne k$ ou si $j \ne l$, on a :
+
+$$C_{ij} \cap C_{kl} = A_i \cap B_j \cap A_k \cap B_l = (A_i \cap A_k) \cap (B_j \cap B_l) = \emptyset$$
+
+On voit également que :
+
+#+BEGIN_CENTER
+\(
+\bigcup_j C_{ij} = \bigcup_j (A_i \cap B_j) = A_i \cap \bigcup_j B_j = A_i \cap A = A_i \\
+\bigcup_i C_{ij} = \bigcup_i (A_i \cap B_j) = B_j \cap \bigcup_i A_i = A \cap B_j = B_j
+\)
+#+END_CENTER
+
+Leur union globale sur les $(i,j)$ s'écrit donc :
+
+$$\bigcup_{i,j} C_{ij} = \bigcup_i A_i = A$$
+
+Les $C_{ij}$ forment également une partition de $A$.
+
+Nous savons que les $C_{ij}$ ne se chevauchent pas et que leur union sur $j$ permet de reformer les $A_i$. De même, leur union sur $i$ permet de reformer les $B_j$. On en conclut que :
+
+#+BEGIN_CENTER
+\(
+\mu(A_i) = \sum_j \mu(C_{ij}) \\
+\mu(B_j) = \sum_i \mu(C_{ij})
+\)
+#+END_CENTER
+
+et :
+
+#+BEGIN_CENTER
+\(
+\indicatrice[A_i] = \sum_j \indicatrice[C_{ij}] \\
+\indicatrice[B_j] = \sum_i \indicatrice[C_{ij}]
+\)
+#+END_CENTER
+
+
+*** Expression alternative
+
+Utilisant les propriétés des $C_{ij}$, la fonction $w$ peut se réécrire comme suit :
+
+$$w(x) = \sum_{(i,j) \in P} a_i \cdot \indicatrice[C_{ij}](x) = \sum_{(i,j) \in P} b_j \cdot \indicatrice[C_{ij}](x)$$
+
+On en conclut que :
+
+$$\sum_{(i,j) \in P} (a_i - b_j) \cdot \indicatrice[C_{ij}](x) = 0$$
+
+
+*** Implication de l'égalité
+
+Soit un couple $(i,j) \in P$ tel que $\indicatrice[C_{ij}] \ne 0$, c'est-à-dire $C_{ij} \ne \emptyset$. Soit $x \in C_{ij}$. Pour tout $(k,l) \in P \setminus (i,j)$, on a $C_{kl} \cap C_{ij} = \emptyset$ et donc $\indicatrice[C_{kl}](x) = 0$. La somme :
+
+$$\sum_{(k,l) \in P} (a_k - b_l) \cdot \indicatrice[C_{kl}](x) = 0$$
+
+se réduit donc à :
+
+$$(a_i - b_j) \cdot \indicatrice[C_{ij}](x) = 0$$
+
+On doit donc avoir $a_i - b_j = 0$, c'est-à-dire $a_i = b_j$. On pose :
+
+$$F = \{ (i,j) \in P : C_{ij} \ne \emptyset \}$$
+
+
+*** Intégrales
+
+L'intégrale évaluée sur le découpage des $A_i$ s'écrit :
+
+$$I = \sum_i a_i \cdot \mu(A_i) = \sum_{(i,j) \in P} a_i \cdot \mu(C_{ij})$$
+
+Mais comme $\mu(C_{ij}) = \mu(\emptyset) = 0$ pour tout $(i,j) \in P \setminus F$, on a finalement :
+
+$$I = \sum_{(i,j) \in F} a_i \cdot \mu(C_{ij})$$
+
+De même, l'intégrale évaluée sur le découpage des $B_j$ s'écrit :
+
+$$J = \sum_j b_j \cdot \mu(B_j) = \sum_{(i,j) \in P} b_j \cdot \mu(C_{ij}) = \sum_{(i,j) \in F} b_j \cdot \mu(C_{ij})$$
+
+Comme $a_i = b_j$ pour tous les couples $(i,j) \in F$, on en déduit que :
+
+$$J = \sum_{(i,j) \in F} a_i \cdot \mu(C_{ij}) = I$$
+
+L'intégrale d'une fonction étagée ne dépend donc pas du choix de la partition utilisée.
+
+
+** Ordre
+
+Soit les fonctions étagées $u,v \in \etagee(A)$ vérifiant $u \essinferieur v$. Soit les partitions $\{U_1,...,U_m\}$ et $\{V_1,...,V_n\}$ et les réels $u_i,v_j$ tels que :
+
+#+BEGIN_CENTER
+\(
+u(x) = \sum_{i = 1}^m u_i \cdot \indicatrice_{U_i}(x) \\
+v(x) = \sum_{j = 1}^n v_j \cdot \indicatrice_{V_j}(x)
+\)
+#+END_CENTER
+
+pour tout $x \in A$. Si $W_{ij} = U_i \cap V_j$, on sait que :
+
+#+BEGIN_CENTER
+\(
+u(x) = \sum_{i,j} u_i \cdot \indicatrice[W_{ij}](x) \\
+v(x) = \sum_{i,j} v_j \cdot \indicatrice[W_{ij}](x)
+\)
+#+END_CENTER
+
+Posons $P = \{1,...,m\} \times \{1,...,n\}$ et :
+
+$$M = \{ (i,j) \in P : \mu(W_{ij}) \strictsuperieur 0 \}$$
+
+Considérons le choix $(i,j) \in P$ et $x \in W_{ij}$. Comme $u$ est essentiellement inférieure à $v$, on doit avoir $u_i \le v_j$ dès que $\mu(W_{ij}) \strictsuperieur 0$, c'est-à-dire lorsque $(i,j) \in M$. Examinons à présent les intégrales. Les mesures des $W_{ij}$ s'annulant pour tout $(i,j) \in P \setminus M$, on a :
+
+$$\int_A u(x) \ d\mu(x) = \sum_{i,j} u_i \cdot \mu(W_{ij}) = \sum_{(i,j) \in M} u_i \cdot \mu(W_{ij})$$
+
+et :
+
+$$\int_A v(x) \ d\mu(x) = \sum_{i,j} v_j \cdot \mu(W_{ij}) = \sum_{(i,j) \in M} v_j \cdot \mu(W_{ij})$$
+
+La propriété $u_i \le v_j$ étant vérifiée pour tout $(i,j) \in M$, on en conclut que :
+
+$$\int_A u(x) \ d\mu(x) \le \int_A v(x) \ d\mu(x)$$
+
+L'intégrale conserve l'ordre essentiel entre fonctions étagées.
+
+
+*** Signe
+
+Comme la fonction constante $0$ est un cas particulier de fonction étagée, l'intégrale d'une fonction étagée $u$ essentiellement supérieure à zéro est positive. De même, l'intégrale d'un fonction étagée $v$ essentiellement inférieure à zéro est négative.
+
+
+*** Egalité
+
+Soit deux fonctions étagées $u,v$ essentiellement égales ($u \essegal v$). On a $u \essinferieur v$ et l'intégrale de $u$ est inférieure à l'intégrale de $v$. Mais on a aussi $u \esssuperieur v$ et l'intégrale de $u$ est supérieure à l'intégrale de $v$. On en conclut que :
+
+$$\int_A u(x) \ d\mu(x) = \int_A v(x) \ d\mu(x)$$
+
+
+** Encadrement
+
+Soit $w \in \etagee(A)$. Comme les constantes sont des cas particuliers de fonctions étagées et que l'on a :
+
+$$\infessentiel_{x \in A} w(x) \essinferieur w \essinferieur \supessentiel_{x \in A} w(x)$$
+
+on en conclut en intégrant que :
+
+$$\mu(A) \cdot \infessentiel_{x \in A} w(x) \le \int_A w(x) \ d\mu(x) \le \mu(A) \cdot \supessentiel_{x \in A} w(x)$$
+
+
+** Propriétés extrémales
+
+Soit $w \in \etagee(A)$. Si $u$ est une fonction étagée vérifiant $u \essinferieur w$, l'intégrale de $u$ est inférieure à l'intégrale de $w$. Par ailleurs, le choix $u = w \essinferieur w$ reproduit bien entendu l'intégrale de $w$. On en conclut que :
+
+$$\int_A w(x) \ d\mu(x) = \sup \left\{ \int_A u(x) \ d\mu(x) : u \in \etagee(A), \ u \essinferieur w \right\}$$
+
+On aboutit avec un raisonnement analogue à :
+
+$$\int_A w(x) \ d\mu(x) = \inf \left\{ \int_A v(x) \ d\mu(x) : v \in \etagee(A), \ v \esssuperieur w \right\}$$
+
+
+** Additivité
+
+Soit les ensembles $A$ et $B$ disjoints :
+
+$$A \cap B = \emptyset$$
+
+et une fonction $w \in \etagee(A \cup B)$. On peut trouver des $w_i \in \setR$ et des $C_i \in \mathcal{T}$ formant une partition de $A \cup B$ et tels que :
+
+$$w(x) = \sum_i w_i \cdot \indicatrice_{C_i}(x)$$
+
+pour tout $x \in A$. On sait que les $A_i = C_i \cap A$ forment une partition de $A$ et que les $B_i = C_i \cap B$ forment une partition de $B$. On a aussi :
+
+$$A_i \cap B_i = C_i \cap A \cap C_i \cap B = C_i \cap (A \cap B) = \emptyset$$
+
+Comme :
+
+$$C_i = C_i \cap (A \cup B) = (C_i \cap A) \cup (C_i \cap B) = A_i \cup B_i$$
+
+on a $\indicatrice[C_i] = \indicatrice[A_i] + \indicatrice[B_i]$ et :
+
+\begin{eqnarray*}
+w &=& \sum_i w_i \cdot (\indicatrice[A_i] + \indicatrice[B_i]) \\
+&=& \sum_i w_i \cdot \indicatrice[A_i] + \sum_i w_i \cdot \indicatrice[B_i]
+\end{eqnarray*}
+
+Evaluons l'intégrale de $w$ sur $A \cup B$. Il vient :
+
+\begin{eqnarray*}
+\int_{A \cup B} w(x) \ d\mu(x) &=& \sum_i w_i \cdot \mu(A_i) + \sum_i w_i \cdot \mu(B_i) \\
+&=& \int_A w(x) \ d\mu(x) + \int_B w(x) \ d\mu(x)
+\end{eqnarray*}
+
+L'intégrale des fonctions étagées est donc additive sur les ensembles concernés.
+
+
+** Propriétés diverses
+
+Soit $u,v \in \etagee(A)$. On peut trouver des $u_i,v_j \in \setR$ et des $U_i,V_i \in \mathcal{T}$ tels que $\{U_1,...,U_n\}$ et $\{V_1,...,V_m\}$ forment des partitions de $A$ et vérifiant :
+
+#+BEGIN_CENTER
+\(
+u(x) = \sum_{i = 1}^n u_i \cdot \indicatrice[U_i](x) \\
+v(x) = \sum_{j = 1}^m v_j \cdot \indicatrice[V_j](x)
+\)
+#+END_CENTER
+
+pour tout $x \in A$. Nous avons vu que les intersections $W_{ij} = U_i \cup V_j \in \mathcal{T}$ forment aussi une partition de $A$ et qu'elles possèdent les propriétés :
+
+#+BEGIN_CENTER
+\(
+\mu(U_i) = \sum_j \mu(W_{ij}) \\
+\mu(V_j) = \sum_i \mu(W_{ij})
+\)
+#+END_CENTER
+
+et :
+
+#+BEGIN_CENTER
+\(
+\indicatrice[U_i] = \sum_j \indicatrice[W_{ij}] \\
+\indicatrice[V_j] = \sum_i \indicatrice[W_{ij}]
+\)
+#+END_CENTER
+
+Les fonctions $u,v$ peuvent donc également s'exprimer comme :
+
+#+BEGIN_CENTER
+\(
+u(x) = \sum_{i,j} u_i \cdot \indicatrice[W_{ij}](x) \\
+v(x) = \sum_{i,j} v_j \cdot \indicatrice[W_{ij}](x)
+\)
+#+END_CENTER
+
+
+*** Espace vectoriel
+
+Soit $\alpha,\beta \in \setR$. On voit que la fonction $w : A \mapsto \setR$ définie par :
+
+$$w(x) = \alpha \cdot u(x) + \beta \cdot v(x)$$
+
+est également une fonction étagée puisque :
+
+$$w(x) = \sum_{i,j} (\alpha \cdot u_i + \beta \cdot v_j) \cdot \indicatrice[W_{ij}](x)$$
+
+Nous venons de montrer que toute combinaison linéaire de fonctions étagées est une fonction étagée. L'ensemble $\etagee(A)$ forme donc un espace vectoriel sur $\setR$.
+
+
+*** Intégrale
+
+Evaluons l'intégrale de $w$. On obtient :
+
+\begin{eqnarray*}
+\int_A w(x) \ d\mu(x) &=& \sum_{i,j} (\alpha \cdot u_i + \beta \cdot v_j) \cdot \mu(W_{ij}) \\
+&=& \alpha \sum_i u_i \sum_j \mu(W_{ij}) + \beta \sum_j v_j \sum_i \mu(W_{ij}) \\
+&=& \alpha \sum_i u_i \cdot \mu(U_i) + \beta \sum_j v_j \cdot \mu(V_j) \\
+&=& \alpha \int_A u(x) \ d\mu(x) + \beta \int_A v(x) \ d\mu(x)
+\end{eqnarray*}
+
+On en conclut que :
+
+$$\int_A (\alpha \cdot u(x) + \beta \cdot v(x)) \ d\mu(x) = \alpha \cdot \int_A u(x) \ d\mu(x) + \beta \cdot \int_A v(x) \ d\mu(x)$$
+
+Nous venons de prouver la linéarité de l'intégrale des fonctions étagées.
+
+
+*** Fonctions max et min
+
+On voit que la fonction :
+
+$$\max\{u,v\}(x) = \sum_{i,j} \max\{u_i,v_j\} \cdot \indicatrice[W_{ij}](x)$$
+
+est également une fonction étagée. Il en va de même pour :
+
+$$\min\{u,v\}(x) = \sum_{i,j} \min\{u_i,v_j\} \cdot \indicatrice[W_{ij}](x)$$
+
+
+** Mesure nulle
+
+Soit un ensemble $A$ vérifiant $\mu(A) = 0$ et une fonction $w$ étagée sur $A$ définie par :
+
+$$w(x) = \sum_{i = 1}^n w_i \cdot \indicatrice_{A_i}(x)$$
+
+pour tout $x \in A$. Les $w_i$ sont bien entendu des réels et les $A_i$ forment une partition de $A$. Comme les $A_i$ sont inclus dans l'ensemble $A$ qui est de mesure nulle, on a $\mu(A_i) = 0$. L'intégrale s'écrit donc :
+
+$$\int_A w(x) \ d\mu(x) = \sum_{i = 1}^n w_i \cdot \mu(A_i) = \sum_{i = 1}^n w_i \cdot 0 = 0$$
+
+L'intégrale d'une fonction étagée sur un ensemble de mesure nulle est nulle.
+
+
+** Mesurabilité et opérations
+
+Soit la mesure $\mu : \mathcal{T} \mapsto \setR$, l'ensemble $A \in \mathcal{T}$, une fonction mesurable $f : A \mapsto \setR$ et une fonction étagée $w \in \etagee(A)$. Considérons un choix de $w_i \in \setR$ et de $A_i \in \mathcal{T}$ formant une partition de $A$ et tels que :
+
+$$w(x) = \sum_{i = 1}^n w_i \cdot \indicatrice_{A_i}(x)$$
+
+pour tout $x \in A$.
+
+
+*** Addition
+
+On a clairement :
+
+\begin{eqnarray*}
+\{ x \in A : f(x) + w(x) \strictsuperieur a \} &=& \bigcup_{i = 1}^n \{ x \in A_i : f(x) + w(x) \strictsuperieur a \} \\
+&=& \bigcup_{i = 1}^n \{ x \in A_i : f(x) + w_i \strictsuperieur a \} \\
+&=& \bigcup_{i = 1}^n \{ x \in A_i : f(x) \strictsuperieur a - w_i \}
+\end{eqnarray*}
+
+Comme $f$ est mesurable, les ensembles :
+
+$$F_i = \{ x \in A_i : f(x) \strictsuperieur a - w_i \}$$
+
+appartiennent à $\mathcal{T}$. Comme l'union opère sur un nombre fini d'ensembles, on a :
+
+$$\{ x \in A : f(x) + w(x) \strictsuperieur a \} = \bigcup_{i = 1}^n F_i \in \mathcal{T}$$
+
+On conclut de même que :
+
+$$\{ x \in A : f(x) + w(x) \strictinferieur a \} = \bigcup_{i = 1}^n \{ x \in A_i : f(x) \strictinferieur a - w_i \} \in \mathcal{T}$$
+
+La fonction $f + w$ est donc mesurable. Il en va de même pour $-(f + w) = -f - w$.
+
+
+*** Soustraction
+
+Comme l'opposé d'une fonction étagée est une fonction étagée :
+
+$$-w(x) = - \sum_{i = 1}^n w_i \cdot \indicatrice_{A_i}(x) = \sum_{i = 1}^n (-w_i) \cdot \indicatrice_{A_i}(x)$$
+
+la fonction $f - w = f + (-w)$ est également mesurable. Il en va de même pour $-(f - w) = w - f$.
+
+
+* Décomposition en fonctions positives
+
+#+TOC: headlines 1 local
+
+\label{chap:mesure}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:ensemble} : Les ensembles
+  - Chapitre \ref{chap:ordre} : Les ordres et extréma
+  - Chapitre \ref{chap:fonction} : Les fonctions
+
+
+** Introduction
+
+On considère une fonction mesurable $f : A \mapsto \setR$ et les fonctions positives associées $f^+,f^- : A \mapsto \setR$ définies par :
+
+\begin{eqnarray*}
+f^+(x) &=& \max \{ f(x) , 0 \} \ge 0 \\
+f^-(x) &=& \max \{ -f(x) , 0 \} \ge 0
+\end{eqnarray*}
+
+
+** Mesurabilité
+
+On constate que les ensembles suivant sont dans la tribu :
+
+\begin{eqnarray*}
+A^+ &=& \{ x \in A : f(x) \strictsuperieur 0 \} \in \mathcal{T} \\
+A^0 &=& \{ x \in A : f(x) = 0 \} \in \mathcal{T} \\
+A^- &=& \{ x \in A : f(x) \strictinferieur 0 \} \in \mathcal{T}
+\end{eqnarray*}
+
+On a clairement $A = A^+ \cup A^0 \cup A^-$. On voit que :
+
+  - Sur $A^+$, on a $f^+ = f \strictsuperieur 0$ et $f^- = 0$
+  - Sur $A^0$, on a $f^+ = f = 0$ et $f^- = -f = 0$
+  - Sur $A^-$ on a $f^+ = 0$ et $f^- = -f \strictsuperieur 0$
+
+*** Conditions $\strictsuperieur a$
+
+Soit un réel $a \strictinferieur 0$. La condition $f^+(x) \ge 0 \strictsuperieur a$ implique que $f^+(x) \strictsuperieur a$. Comme $f^+$ est positive, cette condition est satisfaite pour tout $x \in A$. Il en va de même pour $f^-$. Donc :
+
+#+BEGIN_CENTER
+\(
+\{ x \in A : f^+(x) \strictsuperieur a \} = \{ x \in A : f^+(x) \ge 0 \} = A \in \mathcal{T} \\
+\{ x \in A : f^-(x) \strictsuperieur a \} = \{ x \in A : f^-(x) \ge 0 \} = A \in \mathcal{T}
+\)
+#+END_CENTER
+
+Soit un réel $a \ge 0$. La condition $f^+(x) \strictsuperieur a$ implique que $f^+(x) \strictsuperieur 0$. Un $x$ vérifiant cette condition est donc forcément dans $A^+$, où $f^+ = f$. On peut alors faire sortir la condition $x \in A^+$ en utilisant l'intersection. Comme l'intersection de deux ensembles d'une tribu est dans la tribu, on a finalement :
+
+\begin{eqnarray*}
+\{ x \in A : f^+(x) \strictsuperieur a \} &=& \{ x \in A^+ : f^+(x) \strictsuperieur a \} \\
+&=& \{ x \in A^+ : f(x) \strictsuperieur a \} \\
+&=& \{ x \in A : f(x) \strictsuperieur a \} \cap A^+ \in \mathcal{T}
+\end{eqnarray*}
+
+La condition $f^-(x) \strictsuperieur a$ implique que $f^-(x) \strictsuperieur 0$. Un $x$ vérifiant cette condition est donc forcément dans $A^-$, où $f^- = -f$. On peut alors faire sortir la condition $x \in A^-$ en utilisant l'intersection. La fonction $-f$ étant mesurable, on a finalement :
+
+\begin{eqnarray*}
+\{ x \in A : f^-(x) \strictsuperieur a \} &=& \{ x \in A^- : f^-(x) \strictsuperieur a \} \\
+&=& \{ x \in A^- : -f(x) \strictsuperieur a \} \\
+&=& \{ x \in A : -f(x) \strictsuperieur a \} \cap A^- \in \mathcal{T}
+\end{eqnarray*}
+
+*** Conditions $\strictinferieur a$
+
+Soit un réel $a \le 0$. Comme $f^+ \ge 0$, la condition $f^+(x) \strictinferieur a \le 0$ n'est satisfaite pour aucun $x \in A$. Il en va de même pour $f^-$. Donc :
+
+#+BEGIN_CENTER
+\(
+\{ x \in A : f^+(x) \strictinferieur a \} = \emptyset \in \mathcal{T} \\
+\{ x \in A : f^-(x) \strictinferieur a \} = \emptyset \in \mathcal{T}
+\)
+#+END_CENTER
+
+Soit un réel $a \strictsuperieur 0$. Les $x \in A$ vérifiant La condition $f^+(x) \strictinferieur a$ sont de deux types :
+
+  - Si $x \in A^- \cup A^0$, on a $f^+(x) = 0 \strictinferieur a$. La condition est alors a fortiori satisfaite.
+  - Sinon, $x \in A \setminus (A^- \cup A^0) = A^+$ et il faut toujours imposer $f^+(x) \strictinferieur a$. Par contre, on a alors $f = f^+$.
+
+On a donc :
+
+\begin{eqnarray*}
+\{ x \in A : f^+(x) \strictinferieur a \} &=& (A^- \cup A^0) \cup \{ x \in A^+ : f^+(x) \strictsuperieur a \} \\
+&=& A^- \cup A^0 \cup \{ x \in A^+ : f(x) \strictsuperieur a \} \in \mathcal{T}
+\end{eqnarray*}
+
+Les $x \in A$ vérifiant La condition $f^-(x) \strictinferieur a$ sont de deux types :
+
+  - Si $x \in A^+ \cup A^0$, on a $f^-(x) = 0 \strictinferieur a$. La condition est alors a fortiori satisfaite.
+  - Sinon, $x \in A \setminus (A^+ \cup A^0) = A^-$ et il faut toujours imposer $f^-(x) \strictinferieur a$. Par contre, on a alors $f = -f^-$.
+
+On a donc :
+
+\begin{eqnarray*}
+\{ x \in A : f^-(x) \strictinferieur a \} &=& (A^+ \cup A^0) \cup \{ x \in A^- : f^-(x) \strictsuperieur a \} \\
+&=& A^- \cup A^0 \cup \{ x \in A^- : -f(x) \strictsuperieur a \} \in \mathcal{T}
+\end{eqnarray*}
+
+On conclut de ce qui précède que les fonctions $f^+$ et $f^-$ sont mesurables.
+
+
+* Intégrales
+
+#+TOC: headlines 1 local
+
+\label{chap:integral}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:fonction} : Les fonctions
+  - Chapitre \ref{chap:mesure} : Les mesures
+
+
+** Introduction
+
+Soit une fonction $f : A \mapsto \setR$ mesurable et essentiellement positive ($f \esssuperieur 0$) :
+
+$$\mu(\{x : f(x) \strictinferieur 0\}) = 0$$
+
+Pour toute fonction étagée $w : A \mapsto \setR$, on sait que la fonction $w - f$ est mesurable. Le réel :
+
+$$\mu(\{ x \in A : w(x) \strictsuperieur f(x) \}) = \mu(\{ x \in A : w(x) - f(x) \strictsuperieur 0 \})$$
+
+est donc bien défini. On peut dès lors introduire l'ensemble des fonctions étagées $w$ essentiellement inférieures à $f$ :
+
+$$\mathcal{E}_A(f) = \{ w \in \etagee(A) : w \essinferieur f \}$$
+
+Evaluant les intégrales des fonctions étagées appartenant à $\mathcal{E}_A(f)$, on obtient l'ensemble de réels associé :
+
+$$\mathcal{I}_A(f) = \left\{ \int_A w(x) \ d\mu(x) \ : w \in \mathcal{E}_A(f)  \right\}$$
+
+Cet ensemble est non vide car $0 \in \mathcal{E}_A(f)$ produit une intégrale $0 \in \mathcal{I}_A(f)$. Deux cas peuvent se présenter :
+
+  - L'ensemble de réels $\mathcal{I}_A(f)$ est majoré. Il admet donc un supremum. Nous pouvons alors définir l'intégrale de $f$ sur $A$ par :
+
+$$\int_A f(x) \ d\mu(x) = \sup \left\{ \int_A w(x) \ d\mu(x) \ : w \in \mathcal{E}_A(f)  \right\}$$
+
+On dit alors que $f$ est intégrable sur $A$. On le note parfois :
+
+$$\int_A f(x) \ d\mu(x) \strictinferieur +\infty$$
+
+  - Dans le cas contraire, on a $\sup \mathcal{I}_A(f) = +\infty$. On définit par analogie :
+
+$$\int_A f(x) \ d\mu(x) = +\infty$$
+
+
+
+*** Consistance
+
+Les propriétés extrémales des intégrales des fonctions étagées nous montrent que, dans le cas particulier où $f \in \etagee(A)$, l'intégrale obtenue par le supremum est identique à l'intégrale au sens des fonctions étagées.
+
+
+** Signe quelconque
+
+Soit une fonction mesurable $f : A \mapsto \setR$. On peut décomposer $f$ en fonctions positives $f^+,f^- : A \mapsto \setR$ définies par :
+
+\begin{eqnarray*}
+f^+(x) &=& \max \{ f(x) , 0 \} \ge 0 \\
+f^-(x) &=& \max \{ -f(x) , 0 \} \ge 0
+\end{eqnarray*}
+
+pour tout $x \in A$. On a alors :
+
+$$f = f^+ - f^-$$
+
+Les fonctions $f^+$ et $f^-$ étant également mesurables, leurs intégrales sont bien définies (finies ou infinies). Plusieurs cas peuvent se présenter :
+
+  - Les fonctions $f^+$ et $f^-$ sont intégrables sur $A$. On étend alors la définition de l'intégrale par :
+
+$$\int_A f(x) \ d\mu(x) = \int_A f^+(x) \ d\mu(x) - \int_A f^-(x) \ d\mu(x)$$
+
+On dit alors que $f$ est intégrable.
+
+  - La fonction $f^+$ produit une intégrale infinie, mais $f^-$ est intégrable sur $A$. On définit alors :
+
+$$\int_A f(x) \ d\mu(x) = +\infty$$
+
+  - La fonction $f^-$ produit une intégrale infinie, mais $f^+$ est intégrable sur $A$. On définit alors :
+
+$$\int_A f(x) \ d\mu(x) = -\infty$$
+
+  - Si  aucune des fonction $f^+,f^-$ n'est intégrable, l'intégrale de $f$ n'est pas définie.
+
+
+** Intégrale de Riemann
+
+Soit une fonction $f$ mesurable et essentiellement positive. Posons :
+
+$$\mathcal{F}_A(f) = \{ w \in \etagee(A) : w \esssuperieur f \}$$
+
+et :
+
+$$\mathcal{J}_A(f) = \left\{ \int_A w(x) \ d\mu(x) \ : w \in \mathcal{F}_A(f)  \right\}$$
+
+Si $f$ est intégrable et que son intégrale vérifie la dualité :
+
+$$\int_A f(x) \ d\mu(x) = \sup \mathcal{I}_A(f) = \inf \mathcal{J}_A(f)$$
+
+on dit que $f$ est intégrable au sens de Riemann.
+
+
+** Fonctions essentiellement positives
+
+Soit une fonction $f$ mesurable et essentiellement positive.
+
+
+*** Signe de l'intégrale
+
+Comme la fonction étagée nulle $0 \in \mathcal{E}_A(f)$, on a :
+
+$$\int_A f(x) \ d\mu(x) \ge \int_A 0 \ d\mu(x) = 0$$
+
+par définition du supremum. L'intégrale d'une fonction essentiellement positive est positive.
+
+
+*** Intégrale nulle
+
+Supposons que :
+
+$$\int_A f(x) \ d\mu(x) = 0$$
+
+Soit le réel $\epsilon \strictsuperieur 0$. Si il existait un ensemble $C \subseteq A$ de mesure non nulle tel que $f \strictsuperieur \epsilon$ sur $C$, la fonction étagée $w = \epsilon \cdot \indicatrice_C$ vérifierait $w \essinferieur f$ et appartiendrait donc à $\mathcal{E}_A(f)$. On aurait alors par définition du supremum :
+
+$$\int_A f(x) \ d\mu(x) \ge \int_A \epsilon \cdot \indicatrice_C(x) \ d\mu(x) = \epsilon \cdot \mu(C) \strictsuperieur 0$$
+
+ce qui contredit l'hypothèse. On doit donc avoir $f \essinferieur \epsilon$ quel que soit $\epsilon \strictsuperieur 0$. On en conclut que $f \essinferieur 0$. Mais comme on a également $f \esssuperieur 0$, on en déduit que $f \essegal 0$. Une fonction essentiellement positive présentant une intégrale nulle est essentiellement nulle.
+
+
+** Ordre
+
+
+*** Fonctions positives
+
+Soit les fonctions essentiellement positives et intégrables $f,g : A \to \setR$ telles que $f \essinferieur g$. Soit $w \in \mathcal{E}_A(f)$. Comme on a  $w \essinferieur f$ et $f \essinferieur g$, on en conclut que $w \essinferieur g$, c'est-à-dire que $w \in \mathcal{E}_A(g)$. On a donc $\mathcal{E}_A(f) \subseteq \mathcal{E}_A(g)$. On en déduit que $\mathcal{I}_A(f) \subseteq \mathcal{I}_A(g)$, d'où :
+
+$$\sup \mathcal{I}_A(f) \le \sup \mathcal{I}_A(g)$$
+
+Comme ces supremums sont par définition égaux aux intégrales correspondantes, on a :
+
+$$\int_A f(x) \ d\mu(x) \le \int_A g(x) \ d\mu(x)$$
+
+
+*** Généralisation
+
+On considère à présent le cas de fonctions $f,g$ de signe quelconque, toujours avec $f \essinferieur g$. On définit les fonctions positives :
+
+\begin{eqnarray*}
+f^+(x) &=& \max \{ f(x) , 0 \} \\
+f^-(x) &=& \max \{ -f(x) , 0 \} \\
+g^+(x) &=& \max \{ g(x) , 0 \} \\
+g^-(x) &=& \max \{ -g(x) , 0 \}
+\end{eqnarray*}
+
+On a donc $f^+ \essinferieur g^+$ et $g^- \essinferieur f^-$. On en conclut que :
+
+$$\int_A f^+(x) \ d\mu(x) - \int_A f^-(x) \ d\mu(x) \le \int_A g^+(x) \ d\mu(x) - \int_A g^-(x) \ d\mu(x)$$
+
+d'où, par définition :
+
+$$\int_A f(x) \ d\mu(x) \le \int_A g(x) \ d\mu(x)$$
+
+L'ordre des intégrales correspond à l'ordre essentiel sur les fonctions.
+
+
+*** Egalité
+
+Soit deux fonctions intégrables $f,g$ vérifiant $f \essegal g$. On a $f \essinferieur g$ et l'intégrale de $f$ est inférieure à l'intégrale de $g$. Mais on a aussi $f \esssuperieur g$ et l'intégrale de $f$ est supérieure à l'intégrale de $g$. On en conclut que :
+
+$$\int_A f(x) \ d\mu(x) = \int_A g(x) \ d\mu(x)$$
+
+
+** Valeur moyenne
+
+La valeur moyenne d'une fonction $f$ sur $A$ est définie par :
+
+$$M = \unsur{\mu(A)} \int_A f(x) \ d\mu(x)$$
+
+
+** Bornes
+
+Soit une fonction intégrable $f : A \mapsto \setR$.
+
+  - Si $f$ est essentiellement majorée, on a :
+
+$$f \essinferieur \supessentiel \{ f(x) : x \in A \}$$
+
+En intégrant sur $A$, il vient :
+
+$$\int_A f(x) \ d\mu(x) \le \mu(A) \cdot \supessentiel_{x \in A} f(x)$$
+
+  - Si $f$ est essentiellement minorée, on a :
+
+$$f \esssuperieur \infessentiel \{ f(x) : x \in A \}$$
+
+En intégrant sur $A$, il vient :
+
+$$\int_A f(x) \ d\mu(x) \ge \mu(A) \cdot \infessentiel_{x \in A} f(x)$$
+
+  - Si $f$ est majorée et minorée, et si $A$ est de mesure non nulle, on peut réexprimer ces bornes en terme de valeur moyenne de $f$ :
+
+$$\infessentiel_{x \in A} f(x) \le \unsur{\mu(A)} \int_A f(x) \ d\mu(x) \le \supessentiel_{x \in A} f(x)$$
+
+
+
+*** Corollaires
+
+Si $f$ est essentiellement nulle, les supremum et infimum essentiels s'annulent, et :
+
+$$0 \le \int_A f(x) \ d\mu(x) \le 0$$
+
+On en conclut que :
+
+$$\int_A f(x) \ d\mu(x) = 0$$
+
+Il en va de même si $\mu(A) = 0$.
+
+
+** Opposé
+
+Soit une fonction intégrable $f$ et $g = -f$. On a :
+
+\begin{eqnarray*}
+g^+(x) &=& \max \{ g(x) , 0 \} = \max \{ -f(x) , 0 \} = f^-(x) \\
+g^-(x) &=& \max \{ -g(x) , 0 \} = \max \{ f(x) , 0 \} = f^+(x)
+\end{eqnarray*}
+
+et :
+
+$$\int_A g(x) \ d\mu(x) = \int_A f^-(x) \ d\mu(x) - \int_A f^+(x) \ d\mu(x) = - \int_A f(x) \ d\mu(x)$$
+
+L'intégrale de la fonction opposée est donc l'opposé de l'intégrale :
+
+$$\int_A (-f(x)) \ d\mu(x) = - \int_A f(x) \ d\mu(x)$$
+
+
+** Multiplication par une fonction indicatrice
+
+
+*** Fonctions positives
+
+Soit une fonction $f$ essentiellement positive et intégrable sur $A$ et l'ensemble $C \in \mathcal{T}$ vérifiant $C \subseteq A$. Soit le réel $\epsilon \strictsuperieur 0$.
+
+
+  - Comme le supremum est dans l'adhérence, on peut trouver une fonction $u \in \mathcal{E}_A(f \cdot \indicatrice_C)$ telle que :
+
+$$\abs{\int_A f(x) \cdot \indicatrice_C(x) \ d\mu(x) - \int_A u(x) \ d\mu(x)} \le \epsilon$$
+
+On a donc :
+
+$$\int_A f(x) \cdot \indicatrice_C(x) \ d\mu(x) - \epsilon \le \int_A u(x) \ d\mu(x)$$
+
+Les ensembles $A \setminus C$ et $C$ étant disjoints et d'union égale à $A$, on a aussi :
+
+$$\int_A u(x) \ d\mu(x) = \int_{A \setminus C} u(x) \ d\mu(x) + \int_C u(x) \ d\mu(x)$$
+
+Sur $A \setminus C$, on a $u \essinferieur f \cdot \indicatrice_C = 0$. La fonction $u$ y est donc essentiellement négative. Son intégrale y est donc négative et :
+
+$$\int_A u(x) \ d\mu(x) \le \int_C u(x) \ d\mu(x)$$
+
+La fonction étagée $u$ étant essentiellement inférieure à $f$ sur $C$, on a aussi :
+
+$$\int_C u(x) \ d\mu(x) \le \int_C f(x) \ d\mu(x)$$
+
+Rassemblant ces résultats, on obtient :
+
+$$\int_A f(x) \cdot \indicatrice_C(x) \ d\mu(x) - \epsilon \le \int_C f(x) \ d\mu(x)$$
+
+Cette inégalité étant satisfaite quel que soit $\epsilon \strictsuperieur 0$, on a :
+
+$$\int_C f(x) \ d\mu(x) \ge \int_A f(x) \cdot \indicatrice_C(x) \ d\mu(x)$$
+
+  - Comme le supremum est dans l'adhérence, on peut trouver un $w \in \mathcal{E}_C(f)$ tel que :
+
+$$\int_C f(x) \ d\mu(x) - \epsilon \le \int_C w(x) \ d\mu(x)$$
+
+Considérons l'extension de $w$ sur $A$ définie par :
+
+#+BEGIN_CENTER
+\(
+u =
+\begin{cases}
+w & \text{ sur } C \\
+0 & \text{ sur } A \setminus C
+\end{cases}
+\)
+#+END_CENTER
+
+On voit que $u$ est une fonction étagée. On a :
+
+$$\int_A u(x) \ d\mu(x) = \int_{A \setminus C} u(x) \ d\mu(x) + \int_C u(x) \ d\mu(x)$$
+
+Sur $A \setminus C$, $u$ est nulle et l'intégrale correspondante l'est aussi. Sur $C$, on a $u = w$. Donc :
+
+$$\int_A u(x) \ d\mu(x) = 0 + \int_C u(x) \ d\mu(x) = \int_C w(x) \ d\mu(x)$$
+
+Comme :
+
+#+BEGIN_CENTER
+\(
+u \essinferieur
+\begin{cases}
+f & \text{ sur } C \\
+0 & \text{ sur } A \setminus C
+\end{cases}
+\)
+#+END_CENTER
+
+on voit que $u \in \mathcal{E}_A(f \cdot \indicatrice_C)$ et que :
+
+$$\int_A u(x) \ d\mu(x) \le \int_A f(x) \cdot \indicatrice_C(x) \ d\mu(x)$$
+
+par définition du supremum. En rassemblant ces résultats, on obtient :
+
+$$\int_C f(x) \ d\mu(x) - \epsilon \le \int_A f(x) \cdot \indicatrice_C(x) \ d\mu(x)$$
+
+Ce résultat étant vérifié pour tout $\epsilon \strictsuperieur 0$, on a finalement :
+
+$$\int_C f(x) \ d\mu(x) \le \int_A f(x) \cdot \indicatrice_C(x) \ d\mu(x)$$
+
+
+L'intégrale de $f$ sur $C$ étant à la fois inférieure et supérieure à l'intégrale de $f \cdot \indicatrice_C$ sur $A$, elle doit lui être égale :
+
+$$\int_A f(x) \cdot \indicatrice_C(x) \ d\mu(x) = \int_C f(x) \ d\mu(x)$$
+
+
+*** Généralisation
+
+Soit une fonction $f$ mesurable et sa décomposition en fonctions positives $f = f^+ - f^-$. On voit que :
+
+$$(f^+ - f^-) \cdot \indicatrice_C = f^+ \cdot \indicatrice_C - f^- \cdot \indicatrice_C$$
+
+Comme on a aussi :
+
+#+BEGIN_CENTER
+\(
+(f \cdot \indicatrice_C)^+ = f^+ \cdot \indicatrice_C \\
+(f \cdot \indicatrice_C)^- = f^- \cdot \indicatrice_C
+\)
+#+END_CENTER
+
+on en conclut que :
+
+\begin{eqnarray*}
+\int_A f(x) \cdot \indicatrice_C(x) \ d\mu(x) &=& \int_A f^+(x) \cdot \indicatrice_C(x) \ d\mu(x) - \int_A f^-(x) \cdot \indicatrice_C(x) \ d\mu(x) \\
+&=& \int_C f^+(x) \ d\mu(x) - \int_C f^-(x) \ d\mu(x) \\
+&=& \int_C f(x) \ d\mu(x)
+\end{eqnarray*}
+
+
+** Additivité
+
+
+*** Fonctions positives
+
+Soit deux ensembles $A$ et $B$ disjoints ($A \cap B = \emptyset$) et une fonction $f$ essentiellement positive et mesurable sur $A \cup B$. Comme $A$ et $B$ sont disjoints, on a $\indicatrice[A \cap B] = 0$ et :
+
+$$1 = \indicatrice[A \cup B](x) = \indicatrice_A(x) + \indicatrice_B(x)$$
+
+pour tout $x \in A \cup B$. Soit le réel $\epsilon \strictsuperieur 0$.
+
+  - Comme le supremum est dans l'adhérence, on peut trouver des fonctions $u \in \mathcal{E}_{A \cup B}(f \cdot \indicatrice_A)$ et $v \in \mathcal{E}_{A \cup B}(f \cdot \indicatrice_B)$ telles que leurs intégrales soit situées à une distance inférieure à $\epsilon$ des intégrales de $f \cdot \indicatrice_A$ et $f \cdot \indicatrice_B$. Comme $A,B \subseteq A \cup B$, on a :
+
+\begin{eqnarray*}
+\int_{A \cup B} u(x) \ d\mu(x) &\ge& \int_{A \cup B} f(x) \cdot \indicatrice_A(x) \ d\mu(x) - \epsilon \\
+&\ge& \int_A f(x) \ d\mu(x) - \epsilon \\
+\int_{A \cup B} v(x) \ d\mu(x) &\ge& \int_{A \cup B} f(x) \cdot \indicatrice_B(x) \ d\mu(x) - \epsilon \\
+&\ge& \int_B f(x) \ d\mu(x) - \epsilon
+\end{eqnarray*}
+
+Par linéarité des intégrales des fonctions étagées, on a :
+
+\begin{eqnarray*}
+\int_{A \cup B} [u(x) + v(x)] \ d\mu(x) &=& \int_{A \cup B} u(x) \ d\mu(x) + \int_{A \cup B} v(x) \ d\mu(x) \\
+&\ge& \int_A f(x) \ d\mu(x) + \int_B f(x) \ d\mu(x) - 2 \epsilon
+\end{eqnarray*}
+
+On voit que :
+
+$$u + v \essinferieur f \cdot \indicatrice_A + f \cdot \indicatrice_B = f \cdot (\indicatrice_A + \indicatrice_B) = f$$
+
+La fonction $u + v$ est donc essentiellement inférieure à $f$ et on a $u + v \in \mathcal{E}_{A \cup B}(f)$. La définition du supremum nous montre alors que :
+
+$$\int_{A \cup B} f(x) \ d\mu(x) \ge \int_{A \cup B} [u(x) + v(x)] \ d\mu(x)$$
+
+En rassemblant ces résultats, on arrive à :
+
+$$\int_{A \cup B} f(x) \ d\mu(x) \ge \int_A f(x) \ d\mu(x) + \int_B f(x) \ d\mu(x) - 2 \epsilon$$
+
+Ce résultat étant valable pour tout $\epsilon \strictsuperieur 0$ et aucune grandeur ne dépendant de $\epsilon$, on a finalement :
+
+$$\int_{A \cup B} f(x) \ d\mu(x) \ge \int_A f(x) \ d\mu(x) + \int_B f(x) \ d\mu(x)$$
+
+  - Le supremum étant dans l'adhérence, on peut trouver une fonction $w \in \mathcal{E}_{A \cup B}(f)$ telle que :
+
+$$\int_{A \cup B} f(x) \ d\mu(x) - \epsilon \le \int_{A \cup B} w(x) \ d\mu(x)$$
+
+Posons $u = w \cdot \indicatrice_A$ et $v = w \cdot \indicatrice_B$. On a :
+
+$$w = w \cdot (\indicatrice_A + \indicatrice_B) = w \cdot \indicatrice_A + w \cdot \indicatrice_B = u + v$$
+
+La multiplication par une fonction indicatrice conservant le caractère étagé d'une fonction, $u$ et $v$ sont étagées. On a :
+
+#+BEGIN_CENTER
+\(
+u =
+\begin{cases}
+w & \text{ sur } A \\
+0 & \text{ sur } B
+\end{cases}
+\essinferieur
+\begin{cases}
+f & \text{ sur } A \\
+0 & \text{ sur } B
+\end{cases}
+\)
+#+END_CENTER
+
+et :
+
+#+BEGIN_CENTER
+\(
+v =
+\begin{cases}
+0 & \text{ sur } A \\
+w & \text{ sur } B
+\end{cases}
+\essinferieur
+\begin{cases}
+0 & \text{ sur } A \\
+f & \text{ sur } B
+\end{cases}
+\)
+#+END_CENTER
+
+On en conclut que $u$ est essentiellement inférieure à $f \cdot \indicatrice_A$ et que $v$ est essentiellement inférieure à $f \cdot \indicatrice_B$. On a $u \in \mathcal{E}_{A \cup B}(f \cdot \indicatrice_A)$ et $v \in \mathcal{E}_{A \cup B}(f \cdot \indicatrice_B)$. On peut donc écrire :
+
+#+BEGIN_CENTER
+\(
+\int_{A \cup B} u(x) \ d\mu(x) \le \int_{A \cup B} f(x) \cdot \indicatrice_A(x) \ d\mu(x) \\
+\int_{A \cup B} v(x) \ d\mu(x) \le \int_{A \cup B} f(x) \cdot \indicatrice_B(x) \ d\mu(x)
+\)
+#+END_CENTER
+
+inégalités que l'on peut réécrire sous la forme :
+
+#+BEGIN_CENTER
+\(
+\int_{A \cup B} u(x) \ d\mu(x) \le \int_A f(x) \ d\mu(x) \\
+\int_{A \cup B} v(x) \ d\mu(x) \le \int_B f(x) \ d\mu(x)
+\)
+#+END_CENTER
+
+En utilisant la linéarité des intégrales des fonctions étagées, on a :
+
+\begin{eqnarray*}
+\int_{A \cup B} f(x) \ d\mu(x) - \epsilon &\le& \int_{A \cup B} w(x) \ d\mu(x) \\
+&\le& \int_{A \cup B} [u(x) + v(x)] \ d\mu(x) \\
+&\le& \int_{A \cup B} u(x) \ d\mu(x) + \int_{A \cup B} v(x) \ d\mu(x) \\
+&\le& \int_A f(x) \ d\mu(x) + \int_B f(x) \ d\mu(x)
+\end{eqnarray*}
+
+Comme cette inégalité doit être valable pour tout $\epsilon \strictsuperieur 0$, on a finalement :
+
+$$\int_{A \cup B} f(x) \ d\mu(x) \le \int_A f(x) \ d\mu(x) + \int_B f(x) \ d\mu(x)$$
+
+
+L'intégrale sur $A \cup B$ devant être à la fois supérieure et inférieure à la somme de l'intégrale sur $A$ et de l'intégrale sur $B$, on en conclut que :
+
+$$\int_{A \cup B} f(x) \ d\mu(x) = \int_A f(x) \ d\mu(x) + \int_B f(x) \ d\mu(x)$$
+
+
+*** Généralisation
+
+Nous allons étendre le résultat précédent aux fonctions mesurables quelconques. Soit la fonction mesurable $f$. En utilisant la décomposition en fonctions positives $f = f^+ - f^-$, on obtient :
+
+\begin{eqnarray*}
+\int_{A \cup B} f(x) \ d\mu(x) &=& \int_{A \cup B} f^+(x) - \int_{A \cup B} f^-(x) \ d\mu(x) \\
+&=& \int_A f^+ + \int_B f^+ - \int_A f^- - \int_B f^- \\
+&=& \int_A f(x) \ d\mu(x) + \int_B f(x) \ d\mu(x)
+\end{eqnarray*}
+
+
+*** Corollaire
+
+Si $C \subseteq A$, les ensembles $A \setminus C$ et $C$ sont disjoints et d'union égale à $A$. On a donc :
+
+$$\int_A f(x) \ d\mu(x) = \int_{A \setminus C} f(x) \ d\mu(x)  + \int_C f(x) \ d\mu(x) \ge \int_C f(x) \ d\mu(x)$$
+
+
+*** Invariance
+
+Soit un sous-ensemble essentiel $C$ de $A$. On a alors $C = A \setminus Z$ avec $Z \subseteq A$ et $\mu(Z) = 0$. Les ensembles $C$ et $Z = A \setminus C$ sont disjoints et d'union égale à $A$. Comme l'intégrale de $f$ sur l'ensemble de mesure nulle $Z$ est nulle, on a :
+
+\begin{eqnarray*}
+\int_A f(x) \ d\mu(x) &=& \int_C f(x) \ d\mu(x)  + \int_Z f(x) \ d\mu(x) \\
+&=& \int_C f(x) \ d\mu(x)  + 0 \\
+&=& \int_C f(x) \ d\mu(x)
+\end{eqnarray*}
+
+L'intégrale est invariante lorsqu'on ajoute ou s'abstrait d'un ensemble de mesure nulle.
+
+
+** Union
+
+Soit à présent $A,B \in \mathcal{T}$ quelconques et une fonction intégrable $f : A \cup B \mapsto \setR$. Comme $A \setminus B$ et $B$ sont disjoints et d'union égale à $A \cup B$, on a :
+
+$$\int_{A \cup B} f(x) \ d\mu(x) = \int_{A \setminus B} f(x) \ d\mu(x) + \int_B f(x) \ d\mu(x)$$
+
+On peut également décomposer $A$ en les ensembles disjoints $A \setminus B$ et $A \cap B$. Donc :
+
+$$\int_A f(x) \ d\mu(x) = \int_{A \setminus B} f(x) \ d\mu(x) + \int_{A \cap B} f(x) \ d\mu(x)$$
+
+et :
+
+$$\int_{A \setminus B} f(x) \ d\mu(x) = \int_A f(x) \ d\mu(x) - \int_{A \cap B} f(x) \ d\mu(x)$$
+
+En injectant cette relation dans l'expression de l'intégrale sur $A \cup B$, on obtient :
+
+$$\int_{A \cup B} f(x) \ d\mu(x) = \int_A f(x) \ d\mu(x) + \int_B f(x) \ d\mu(x) - \int_{A \cap B} f(x) \ d\mu(x)$$
+
+
+*** Corollaire
+
+Si l'ensemble $A \cap B$ vérifie $\mu(A \cap B) = 0$, l'intégrale correspondante est nulle et :
+
+$$\int_{A \cup B} f(x) \ d\mu(x) = \int_A f(x) \ d\mu(x) + \int_B f(x) \ d\mu(x)$$
+
+Il suffit donc d'avoir une intersection de mesure nulle (et pas forcément vide) pour vérifier l'additivité.
+
+
+** Convergence des mesures
+
+Soit une fonction $f : A \mapsto \setR$ essentiellement positive et intégrable. On a :
+
+$$I = \int_A f(x) \ d\mu(x) \strictinferieur +\infty$$
+
+Posons :
+
+#+BEGIN_CENTER
+\(
+C(\alpha) = \{ x \in A : f(x) \le \alpha \} \\
+Z(\alpha) = \{ x \in A : f(x) \strictsuperieur \alpha \}
+\)
+#+END_CENTER
+
+pour tout $\alpha \in \setR$. Il est clair que $A = C(\alpha) \cup Z(\alpha)$. On a :
+
+$$\int_{Z(\alpha)} f(x) \ d\mu(x) \le \int_{C(\alpha)} f(x) \ d\mu(x) + \int_{Z(\alpha)} f(x) \ d\mu(x) = I$$
+
+Mais comme $f \esssuperieur \alpha$ sur $Z(\alpha)$, on a :
+
+$$\infessentiel_{x \in Z(\alpha)} f(x) \ge \alpha$$
+
+et :
+
+$$\mu(Z(\alpha)) \cdot \alpha \le \mu(Z(\alpha)) \cdot \infessentiel_{x \in Z(\alpha)} f(x) \le \int_{Z(\alpha)} f(x) \ d\mu(x)$$
+
+Rassemblant ces résultats, il vient :
+
+$$\mu(Z(\alpha)) \cdot \alpha \le I$$
+
+Soit $\epsilon \strictsuperieur 0$. Si on choisit $\alpha \ge I / \epsilon$, on a :
+
+$$\mu(Z(\alpha)) \le \frac{I}{\alpha} \le \epsilon$$
+
+On en déduit que :
+
+$$\lim_{\alpha \to +\infty} \mu(Z(\alpha)) = \lim_{\alpha \to +\infty} \mu(\{ x \in A : f(x) \strictsuperieur \alpha \}) = 0$$
+
+
+** Convergence des intégrales
+
+Soit une fonction $f : A \mapsto \setR$ essentiellement positive et intégrable. On a :
+
+$$I = \int_A f(x) \ d\mu(x) \strictinferieur +\infty$$
+
+Soit la collection $\{ C(\alpha) \in \sousens(A) : \alpha \in \setR \}$ et la collection associée $\{ Z(\alpha) \in \sousens(A) : \alpha \in \setR \}$ définie par :
+
+$$Z(\alpha) = A \setminus C(\alpha)$$
+
+Nous supposons que :
+
+$$\lim_{\alpha \to \infty} \mu(Z(\alpha)) = 0$$
+
+et que $Z(\alpha) \subseteq Z(\beta)$ pour tout $\alpha,\beta \in \setR$ vérifiant $\alpha \ge \beta$.
+
+Soit le réel $\epsilon \strictsuperieur 0$. Comme le supremum est dans l'adhérence, on peut trouver un $w \in \mathcal{E}_A(f)$ tel que :
+
+$$\int_A f(x) \ d\mu(x) \le \int_A w(x) \ d\mu(x) + \epsilon$$
+
+Comme $A = C(\alpha) \cup Z(\alpha)$, on a :
+
+#+BEGIN_CENTER
+\(
+\int_A f(x) \ d\mu(x) = \int_{C(\alpha)} f(x) \ d\mu(x) + \int_{Z(\alpha)} f(x) \ d\mu(x) \\ \\
+\int_A w(x) \ d\mu(x) = \int_{C(\alpha)} w(x) \ d\mu(x) + \int_{Z(\alpha)} w(x) \ d\mu(x)
+\)
+#+END_CENTER
+
+pour tout $\alpha \in \setR$. On en déduit que :
+
+$$\int_{Z(\alpha)} f(x) \ d\mu(x) \le \int_{C(\alpha)} w(x) \ d\mu(x) - \int_{C(\alpha)} f(x) \ d\mu(x) + \int_{Z(\alpha)} w(x) \ d\mu(x) + \epsilon$$
+
+Soit la fonction $I : \setR \mapsto \setR$ définie par :
+
+$$I(\alpha) = \int_{Z(\alpha)} f(x) \ d\mu(x) \ge 0$$
+
+On sait que $w \essinferieur f$. Par conséquent, $\int w \le \int f$ sur $C(\alpha)$ et :
+
+$$I(\alpha) \le \int_{Z(\alpha)} w(x) \ d\mu(x) + \epsilon$$
+
+Comme $w$ est une fonction étagée, son supremum existe :
+
+$$M = \supessentiel_{x \in A} w(x)$$
+
+De plus, on a $C(\alpha) \subseteq A$ pour tout $\alpha \in \setR$, d'où :
+
+$$S(\alpha) = \supessentiel_{x \in C(\alpha)} w(x) \le M$$
+
+On a donc :
+
+$$\int_{Z(\alpha)} w(x) \ d\mu(x) \le \mu(Z(\alpha)) \cdot S(\alpha) \le \mu(Z(\alpha)) \cdot M$$
+
+et :
+
+$$I(\alpha) \le \mu(Z(\alpha)) \cdot M + \epsilon$$
+
+pour tout $\alpha \in \setR$. Si $\alpha \ge \beta$, on a $Z(\alpha) \subseteq Z(\beta)$, d'où $I(\alpha) \le I(\beta)$. La fonction $I$ est décroissante et minorée par zéro. Elle admet donc une limite à l'infini. Comme $M$ ne dépend pas de $\alpha$, on a :
+
+$$\lim_{\alpha \to +\infty} [\mu(Z(\alpha)) \cdot M + \epsilon] = 0 \cdot M + \epsilon = \epsilon$$
+
+La limite de cette expression existe donc, et $\limsup = \lim$. On en conclut que :
+
+$$0 \le \lim_{\alpha \to +\infty} I(\alpha) \le \epsilon$$
+
+Ce résultat devant être satisfait pour tout $\epsilon \strictsuperieur 0$, on a :
+
+$$\lim_{\alpha \to +\infty} I(\alpha) = 0$$
+
+c'est-à-dire :
+
+$$\lim_{\alpha \to +\infty} \int_{Z(\alpha)} f(x) \ d\mu(x) = 0$$
+
+
+*** Corollaire
+
+On en déduit que :
+
+\begin{eqnarray*}
+\int_A f(x) \ d\mu(x) &=& \lim_{\alpha \to +\infty} \int_{C(\alpha)} f(x) \ d\mu(x) + \lim_{\alpha \to +\infty} \int_{Z(\alpha)} f(x) \ d\mu(x) \\
+&=& \lim_{\alpha \to +\infty} \int_{C(\alpha)} f(x) \ d\mu(x) + 0
+\end{eqnarray*}
+
+d'où :
+
+$$\lim_{\alpha \to +\infty} \int_{C(\alpha)} f(x) \ d\mu(x) = \int_A f(x) \ d\mu(x)$$
+
+
+*** Généralisation
+
+Soit $f$ est une fonction intégrable de signe quelconque et sa décomposition en fonctions positives $f = f^+ - f^-$. On a :
+
+#+BEGIN_CENTER
+\(
+\lim_{\alpha \to +\infty} \int_{C(\alpha)} f^+(x) \ d\mu(x) = \int_A f^+(x) \ d\mu(x) \\ \\
+\lim_{\alpha \to +\infty} \int_{C(\alpha)} f^-(x) \ d\mu(x) = \int_A f^-(x) \ d\mu(x)
+\)
+#+END_CENTER
+
+On en déduit que :
+
+\begin{eqnarray*}
+\lim_{\alpha \to +\infty} \int_{C(\alpha)} f(x) \ d\mu(x) &=& \lim_{\alpha \to +\infty} \int_{C(\alpha)} f^+ - \lim_{\alpha \to +\infty} \int_{C(\alpha)} f^- \\
+&=& \int_A f^+ - \int_A f^- \\
+&=& \int_A f(x) \ d\mu(x)
+\end{eqnarray*}
+
+
+** Adhérence
+
+Soit un ensemble $A$ vérifiant $\mu(A) \strictsuperieur 0$ et une fonction $f : A \mapsto \setR$ mesurable, essentiellement positive et majorée :
+
+$$M = \supessentiel_{x \in A} f(x) \strictinferieur +\infty$$
+
+Comme $\mu(A) \strictsuperieur 0$ et $f \esssuperieur 0$, on a :
+
+$$M \ge \infessentiel_{x \in A} f(x) \ge 0$$
+
+Soit :
+
+$$\Theta = \left\{ \supessentiel_{x \in A} [f(x) - w(x)] : w \in \mathcal{E}_A(f) \right\}$$
+
+et :
+
+$$\lambda = \inf_{w \in \mathcal{E}_A(f)} \supessentiel_{x \in A} [f(x) - w(x)]$$
+
+Comme la fonction nulle $0 \in \mathcal{E}_A(f)$, on a :
+
+$$\lambda \le \supessentiel_{x \in A} [f(x) - 0] = M$$
+
+Choisissons $w \in \mathcal{E}_A(f)$. On a $w \essinferieur f$, d'où $f - w \esssuperieur 0$ et :
+
+$$\supessentiel_{x \in A} [f(x) - w(x)] \ge \infessentiel_{x \in A} [f(x) - w(x)] \ge 0$$
+
+Donc $\Theta \ge 0$ et $\lambda = \inf \Theta \ge 0$.
+
+Si $M = 0$, on a également $\lambda \le 0$, d'où $\lambda = 0$. Supposons à présent que $M \strictsuperieur 0$. Nous allons construire une suite $\{ w_n : n \in \setN \} \subseteq \mathcal{E}_A(f)$ convergeant vers $f$ au sens du supremum essentiel. Posons $w_0 = 0 \in \mathcal{E}_A(f)$, le réel $\Delta_0 = M / 2$ et l'ensemble :
+
+$$A_0 = \{ x \in A : f(x) - w_0(x) \strictsuperieur \Delta_0 \}$$
+
+On construit ensuite la fonction $w_1$ par :
+
+#+BEGIN_CENTER
+\(
+w_1 = w_0 + \Delta_0 \cdot \indicatrice[A_0] =
+\begin{cases}
+w_0 + \Delta_0 & \text{ sur } A_0 \\
+w_0 & \text{ sur } A \setminus A_0
+\end{cases}
+\)
+#+END_CENTER
+
+La fonction $\Delta_0 \cdot \indicatrice[A_0]$ étant étagée, $w_1$ l'est aussi. En utilisant $w_0 \essinferieur f$ sur $A$ et $w_0 + \Delta_0 \strictinferieur f$ sur $A_0$, on obtient :
+
+#+BEGIN_CENTER
+\(
+w_1 =
+\begin{cases}
+w_0 + \Delta_0 & \text{ sur } A_0 \\
+w_0 & \text{ sur } A \setminus A_0
+\end{cases}
+\essinferieur
+\begin{cases}
+f & \text{ sur } A_0 \\
+f & \text{ sur } A \setminus A_0
+\end{cases}
+\)
+#+END_CENTER
+
+On en conclut que $w_1 \essinferieur f$ et que $w_1 \in \mathcal{E}_A(f)$. Sur $A \setminus A_0$, on a par définition $f - w_1 = f - w_0 \le \Delta_0$. Sur $A_0$, on a :
+
+$$f - w_1 = f - w_0 - \Delta_0 \le M - \frac{M}{2} = \frac{M}{2}$$
+
+On en conclut que :
+
+$$\supessentiel_{x \in A} [f(x) - w_1(x)] \le \frac{M}{2} = \Delta_0$$
+
+Supposons à présent être arrivé à l'étape $n - 1$ avec la fonction étagée $w_{n - 1}$ vérifiant $w_{n - 1} \essinferieur f$ et :
+
+$$\supessentiel_{x \in A} [f(x) - w_{n - 1}(x)] \le \Delta_{n - 1}$$
+
+On construit l'étape $n$ par :
+
+\begin{eqnarray*}
+\Delta_n &=& \Delta_{n - 1} / 2 \\
+A_n &=& \{ x \in A : f(x) - w_{n - 1}(x) \strictsuperieur \Delta_n \} \\
+w_n &=& w_{n - 1} + \Delta_n \cdot \indicatrice[A_n]
+\end{eqnarray*}
+
+La fonction $\Delta_n \cdot \indicatrice[A_n]$ étant étagée, $w_n$ l'est aussi. En utilisant $w_{n - 1} \essinferieur f$ sur $A$ et $w_{n - 1} + \Delta_n \strictinferieur f$ sur $A_n$, on obtient :
+
+#+BEGIN_CENTER
+\(
+w_n =
+\begin{cases}
+w_{n - 1} + \Delta_n & \text{ sur } A_n \\
+w_{n - 1} & \text{ sur } A \setminus A_n
+\end{cases}
+\essinferieur
+\begin{cases}
+f & \text{ sur } A_n \\
+f & \text{ sur } A \setminus A_n
+\end{cases}
+\)
+#+END_CENTER
+
+On en conclut que $w_n \essinferieur f$ et que $w_n \in \mathcal{E}_A(f)$. Sur $A \setminus A_n$, on a $f - w_n = f - w_{n - 1} \le \Delta_n$. Sur $A_n$, on a :
+
+$$f - w_n = f - w_{n - 1} - \Delta_n \le \Delta_{n - 1} - \Delta_n = 2 \Delta_n - \Delta_n = \Delta_n$$
+
+On a donc :
+
+$$\supessentiel_{x \in A} [f(x) - w_n(x)] \le \Delta_n$$
+
+Comme :
+
+$$\Delta_n = \frac{\Delta_{n - 1}}{2} = ... = \frac{\Delta_0}{2^{n - 1}} = \frac{M}{2^n}$$
+
+On voit que :
+
+$$0 \le \supessentiel_{x \in A} [f(x) - w_n(x)] \le \frac{M}{2^n}$$
+
+Comme :
+
+$$\limsup_{n \to \infty} \frac{M}{2^n} = \liminf_{n \to \infty} 0 = 0$$
+
+la limite de $\supessentiel_{x \in A} [f(x) - w_n(x)]$ existe et :
+
+$$\lim_{n \to \infty} \supessentiel_{x \in A} [f(x) - w_n(x)] = 0$$
+
+Pour tout réel $\epsilon \strictsuperieur 0$, on peut donc trouver un $n$ tel que :
+
+$$\supessentiel_{x \in A} [f(x) - w_m(x)] \le \epsilon$$
+
+pour tout $m \in \setN$ vérifiant $m \ge n$. Par conséquent, $\lambda$ ne peut pas être strictement positif et :
+
+$$\inf_{w \in \mathcal{E}_A(f)} \supessentiel_{x \in A} [f(x) - w(x)] = 0$$
+
+
+** Multiplication par un réel
+
+Soit une fonction intégrable $f$ essentiellement positive et le réel $\lambda \strictsuperieur 0$. Si $w$ est une fonction étagée, on voit que $w \le f \Leftrightarrow \lambda \cdot w \le \lambda \cdot f$. On peut donc associer une fonction $\lambda \cdot w \in \mathcal{E}_A(\lambda \cdot f)$ à toute fonction $w \in \mathcal{E}_A(f)$, et réciproquement. Par linéarité de l'intégrale des fonctions étagées, on en conclut que :
+
+$$\int_A \lambda \cdot w(x) \ d\mu(x) = \lambda \cdot \int_A w(x) \ d\mu(x)$$
+
+En passant au supremum sur $w \in \mathcal{E}_A(f) \Leftrightarrow \lambda \cdot w \in \mathcal{E}_A(\lambda \cdot f)$, on obtient donc :
+
+$$\int_A \lambda \cdot f(x) \ d\mu(x) = \lambda \cdot \int_A f(x) \ d\mu(x)$$
+
+Le même résultat est bien évidemment vérifié lorsque $\lambda = 0$. Lorsque $\lambda \strictinferieur 0$, on pose $\alpha = - \lambda \strictsuperieur 0$. On a alors :
+
+\begin{eqnarray*}
+\int_A \lambda \cdot f(x) \ d\mu(x) &=& \int_A - \alpha \cdot f(x) \ d\mu(x) \\
+&=& - \int_A \alpha \cdot f(x) \ d\mu(x) \\
+&=& - \alpha \int_A f(x) \ d\mu(x) \\
+&=& \lambda \int_A f(x) \ d\mu(x)
+\end{eqnarray*}
+
+Nous avons donc prouvé la relation pour tout $\lambda \in \setR$.
+
+
+** Addition
+
+
+*** Positives et majorées
+
+Soit deux fonctions $f,g : A \mapsto \setR$ intégrables, essentiellement positives et majorées :
+
+#+BEGIN_CENTER
+\(
+\supessentiel \{ f(x) : x \in A \} \strictinferieur +\infty \\
+\supessentiel \{ g(x) : x \in A \} \strictinferieur +\infty
+\)
+#+END_CENTER
+
+Soit le réel $\epsilon \strictsuperieur 0$.
+
+  - Le supremum étant dans l'adhérence, on peut trouver un $u \in \mathcal{E}_A(f)$ tel que :
+
+$$\int_A u(x) \ d\mu(x) \ge \int_A f(x) \ d\mu(x) - \epsilon$$
+
+et un $v \in \mathcal{E}_A(g)$ tel que :
+
+$$\int_A v(x) \ d\mu(x) \ge \int_A g(x) \ d\mu(x) - \epsilon$$
+
+On sait que $u + v$ est une fonction étagée. Les conditions $u \essinferieur f$ et $v \essinferieur g$ impliquent que $u + v \essinferieur f + g$. On a donc $u + v \in \mathcal{E}_A(f + g)$. En utilisant la linéarité des intégrales de fonctions étagées et la définition du supremum, il vient :
+
+\begin{eqnarray*}
+\int_A u(x) \ d\mu(x) + \int_A v(x) \ d\mu(x) &=&  \int_A [u(x) + v(x)] \ d\mu(x) \\
+&\le& \int_A [f(x) + g(x)] \ d\mu(x)
+\end{eqnarray*}
+
+En rassemblant ces résultats, on obtient :
+
+$$\int_A f(x) \ d\mu(x) + \int_A g(x) \ d\mu(x) - 2 \epsilon \le \int_A [f(x) + g(x)] \ d\mu(x)$$
+
+Cette relation étant valable quel que soit $\epsilon \strictsuperieur 0$, on a  :
+
+$$\int_A f(x) \ d\mu(x) + \int_A g(x) \ d\mu(x) \le \int_A [f(x) + g(x)] \ d\mu(x)$$
+
+  - Comme $f$ et $g$ sont essentiellement majorées, on peut trouver un $u \in \mathcal{E}_A(f)$ et un $v \in \mathcal{E}_A(g)$ vérifiant :
+
+#+BEGIN_CENTER
+\(
+\supessentiel \{ f(x) - u(x) : x \in A \} \le \epsilon \\
+\supessentiel \{ g(x) - v(x) : x \in A) \} \le \epsilon
+\)
+#+END_CENTER
+
+Donc $f \essinferieur u + \epsilon$ et $g \essinferieur v + \epsilon$. On en conclut que $f + g \essinferieur u + v + 2 \epsilon$, d'où :
+
+\begin{eqnarray*}
+\int_A [f(x) + g(x)] \ d\mu(x) &\le& \int_A [u(x) + v(x) + 2 \epsilon] \ d\mu(x) \\
+&\le& \int_A u(x) \ d\mu(x) + \int_A v(x) \ d\mu(x) + 2 \epsilon \cdot \mu(A)
+\end{eqnarray*}
+
+par linéarité des intégrales de fonctions étagées. On a aussi, par définition du supremum :
+
+#+BEGIN_CENTER
+\(
+\int_A u(x) \ d\mu(x) \le \int_A f(x) \ d\mu(x) \\ \\
+\int_A v(x) \ d\mu(x) \le \int_A g(x) \ d\mu(x)
+\)
+#+END_CENTER
+
+On a finalement la borne :
+
+$$\int_A [f(x) + g(x)] \ d\mu(x) \le \int_A f(x) \ d\mu(x) + \int_A g(x) \ d\mu(x) + 2 \epsilon \cdot \mu(A)$$
+
+Cette inégalité devant être satisfaite pour tout $\epsilon \strictsuperieur 0$, on en déduit que :
+
+$$\int_A [f(x) + g(x)] \ d\mu(x) \le \int_A f(x) \ d\mu(x) + \int_A g(x) \ d\mu(x)$$
+
+
+L'intégrale de $f + g$ devant être simultanément supérieure et inférieure à la somme de l'intégrale de $f$ et de l'intégrale de $g$, on en conclut que :
+
+$$\int_A [f(x) + g(x)] \ d\mu(x) = \int_A f(x) \ d\mu(x) + \int_A g(x) \ d\mu(x)$$
+
+
+*** Positives
+
+Soit deux fonctions $f,g$ intégrables et essentiellement positives. Posons :
+
+#+BEGIN_CENTER
+\(
+F(\alpha) = \{ x \in A : f(x) \le \alpha \} \\
+G(\alpha) = \{ x \in A : g(x) \le \alpha \}
+\)
+#+END_CENTER
+
+et :
+
+#+BEGIN_CENTER
+\(
+N(\alpha) = \{ x \in A : f(x) \strictsuperieur \alpha \} = A \setminus F(\alpha) \\
+T(\alpha) = \{ x \in A : g(x) \strictsuperieur \alpha \} = A \setminus G(\alpha)
+\)
+#+END_CENTER
+
+pour tout $\alpha \in \setR$. Pour tous réels $\alpha,\beta$ vérifiant $\alpha \ge \beta$, il est clair que $N(\alpha) \subseteq N(\beta)$ et $T(\alpha) \subseteq T(\beta)$. Soit :
+
+$$C(\alpha) = F(\alpha) \cap G(\alpha) = A \setminus (N(\alpha) \cup T(\alpha))$$
+
+et :
+
+$$Z(\alpha) = A \setminus C(\alpha) = N(\alpha) \cup T(\alpha)$$
+
+Choisissons des réels $\alpha,\beta$ tels que $\alpha \ge \beta$ et un $x \in Z(\alpha)$. On a soit $x \in N(\alpha)$, d'où $x \in N(\beta)$ et $x \in Z(\beta)$, soit $x \in T(\alpha)$, d'où $x \in T(\beta)$ et $x \in Z(\beta)$. On en conclut que $Z(\alpha) \subseteq Z(\beta)$.
+On voit que :
+
+$$0 \le \mu(Z(\alpha)) \le \mu(N(\alpha)) + \mu(T(\alpha))$$
+
+Comme :
+
+$$\limsup_{\alpha \to +\infty} [\mu(N(\alpha)) + \mu(T(\alpha))] = \liminf_{\alpha \to +\infty} 0 = 0$$
+
+la fonction $\alpha \mapsto \mu(Z(\alpha))$ converge et :
+
+$$\lim_{\alpha \to +\infty} \mu(Z(\alpha)) = 0$$
+
+Si $\varphi$ est intégrable, par exemple $\varphi \in \{f, g, f + g\}$, on a donc :
+
+$$\lim_{\alpha \to +\infty} \int_{C(\alpha)} \varphi(x) \ d\mu(x) = \int_A \varphi(x) \ d\mu(x)$$
+
+Sur $C(\alpha) \subseteq F(\alpha)$, on a $0 \essinferieur f \essinferieur \alpha$. Le supremum essentiel existe par conséquent sur $C(\alpha)$ et :
+
+$$0 \le \supessentiel \{ f(x) : x \in C(\alpha) \} \le \alpha$$
+
+On conclut de même que :
+
+$$0 \le \supessentiel \{ g(x) : x \in C(\alpha) \} \le \alpha$$
+
+Les fonctions $f$ et $g$ sont donc essentiellement majorées sur $C(\alpha)$ et on a :
+
+$$\int_{C(\alpha)} [f(x) + g(x)] \ d\mu(x) = \int_{C(\alpha)} f(x) \ d\mu(x) + \int_{C(\alpha)} g(x) \ d\mu(x)$$
+
+Passant à la limite pour $\alpha \to +\infty$, on obtient alors :
+
+$$\int_A [f(x) + g(x)] \ d\mu(x) = \int_A f(x) \ d\mu(x) + \int_A g(x) \ d\mu(x)$$
+
+
+*** Soustraction
+
+Soit $f,g$ deux fonctions intégrables essentiellement positives vérifiant $h = f - g \esssuperieur 0$. Comme $f = g + h$, on a :
+
+$$\int_A f(x) \ d\mu(x) = \int_A g(x) \ d\mu(x) + \int_A h(x) \ d\mu(x)$$
+
+On en déduit que :
+
+$$\int_A h(x) \ d\mu(x) = \int_A f(x) \ d\mu(x) - \int_A g(x) \ d\mu(x)$$
+
+c'est-à-dire :
+
+$$\int_A [f(x) - g(x)] \ d\mu(x) = \int_A f(x) \ d\mu(x) - \int_A g(x) \ d\mu(x)$$
+
+
+*** Généralisation
+
+Soit deux fonctions intégrables $f,g$ et leurs décompositions en fonctions positives $f = f^+ - f^-$ et $g = g^+ - g^-$. Posons :
+
+#+BEGIN_CENTER
+\(
+s^+ = f^+ + g^+ \\
+s^- = f^- + g^-
+\)
+#+END_CENTER
+
+On a :
+
+$$f + g = f^+ - f^- + g^+ - g^- = (f^+ + g^+) - (f^- + g^-) = s^+ - s^-$$
+
+Décomposons $A$ en les ensembles :
+
+#+BEGIN_CENTER
+\(
+P = \{ x \in A : s^+(x) - s^-(x) \ge 0 \} \\
+M = \{ x \in A : s^+(x) - s^-(x) \strictinferieur 0 \}
+\)
+#+END_CENTER
+
+Comme $s^+ - s^- \esssuperieur 0$ sur $P$, on a :
+
+$$\int_P [s^+(x) - s^-(x)] \ d\mu(x) = \int_P s^+(x) \ d\mu(x) - \int_P s^-(x) \ d\mu(x)$$
+
+Comme $s^+ - s^- \essinferieur 0$ sur $M$, on y a $s^- - s^+ \esssuperieur 0$ et :
+
+\begin{eqnarray*}
+\int_M [s^+(x) - s^-(x)] \ d\mu(x) &=& - \int_M [s^-(x) - s^+(x)] \ d\mu(x) \\
+&=& - \left[ \int_M s^-(x) \ d\mu(x) - \int_M s^+(x) \ d\mu(x) \right] \\
+&=& \int_M s^+(x) \ d\mu(x) - \int_M s^-(x) \ d\mu(x)
+\end{eqnarray*}
+
+Rassemblant ces résultats, il vient :
+
+\begin{eqnarray*}
+\int_A [f(x) + g(x)] \ d\mu(x) &=& \int_A [s^+(x) - s^-(x)] \ d\mu(x) \\
+&=& \int_P [s^+(x) - s^-(x)] \ d\mu(x) + \int_M [s^+(x) - s^-(x)] \ d\mu(x) \\
+&=& \int_P s^+ - \int_P s^- + \int_M s^+ - \int_M s^- \\
+&=& \int_A s^+ - \int_A s^- \\
+&=& \int_A [f^+(x) + g^+(x)] \ d\mu(x) - \int_A [f^-(x) + g^-(x)] \ d\mu(x) \\
+&=& \int_A f^+ + \int_A g^+ - \int_A f^- - \int_A g^- \\
+&=& \int_A f(x) \ d\mu(x) + \int_A g(x) \ d\mu(x)
+\end{eqnarray*}
+
+L'intégrale d'une somme est la somme des intégrales.
+
+
+** Linéarité
+
+Soit les réels $\alpha,\beta$ et les fonctions intégrables $f,g : A \mapsto \setR$. On a :
+
+\begin{eqnarray*}
+\int_A [\alpha \cdot f(x) + \beta \cdot g(x)] \ d\mu(x) &=& \int_A \alpha \cdot f(x) \ d\mu(x) + \int_A \beta \cdot g(x) \ d\mu(x) \\
+&=& \alpha \cdot \int_A f(x) \ d\mu(x) + \beta \cdot \int_A g(x) \ d\mu(x)
+\end{eqnarray*}
+
+L'intégrale est linéaire.
+
+
+* Intégrales et mesures
+
+#+TOC: headlines 1 local
+
+
+** Addition de mesure
+
+Soit les mesures $\gamma, \lambda$ et la mesure $\mu$ définie par :
+
+$$\mu = \gamma + \lambda$$
+
+Soit un ensemble $A$ et une fonction $w \in \etagee(A)$. On peut trouver des $w_i \in \setR$ et des $A_i \in \mathcal{T}$ formant une partition de $A$ et tels que :
+
+$$w(x) = \sum_{i = 1}^n w_i \cdot \indicatrice_{A_i}(x)$$
+
+On a alors :
+
+\begin{eqnarray*}
+\int_A w(x) \ d\mu(x) &=& \sum_{i = 1}^n w_i \cdot \mu(A_i) \\
+&=& \sum_{i = 1}^n w_i \cdot (\gamma(A_i) + \lambda(A_i)) \\
+&=& \sum_{i = 1}^n w_i \cdot \gamma(A_i) + \sum_{i = 1}^n w_i \cdot \lambda(A_i) \\
+&=& \int_A w(x) \ d\gamma(x) + \int_A w(x) \ d\lambda(x)
+\end{eqnarray*}
+
+En passant au suprémum sur toutes les fonctions étagées $w$ essentiellement inférieures à une fonction positive intégrable, puis en utilisant la définition d'une fonction intégrable $f$ on en déduit que :
+
+$$\int_A f(x) \ d(\gamma + \lambda)(x) = \int_A f(x) \ d\gamma(x) + \int_A f(x) \ d\lambda(x)$$
+
+
+** Mesure de Lebesgue
+
+Soit $A \subseteq \setR^n$ et $\mu_L$ la mesure de Lebesgue. On note alors $d\mu_L(x) = dx$ ou :
+
+$$d\mu_L(x) = dx = dx_1 \ ... \ dx_n$$
+
+et :
+
+$$\int_A f(x) \ dx = \int_A f(x) \ d\mu_L(x)$$
+
+
+** Intégrale de Stieltjes
+
+Soit la fonction croissante $\gamma : A \mapsto \setR$. L'intégrale de Stieltjes associée à $\gamma$ se note :
+
+$$\int_A f(x) \ d\gamma(x)$$
+
+Elle se définit d'après la mesure de Stieltjes $\mu_\gamma$ associée à $\gamma$ :
+
+$$\int_A f(x) \ d\gamma(x) = \int_A f(x) \ d\mu_\gamma(x)$$
+
+
+*** Fonction à variation bornée
+
+Nous allons étendre la définition à des fonctions non nécessairement croissantes. Soit une fonction $g : [\alpha,\beta] \mapsto \setR$ et $S[a,b]$ l'ensemble des suites réelles croissantes inclues dans $[a,b]$ :
+
+$$S[a,b] = \Big\{ \{x_0, x_1, x_2, ..., x_n \} : a \le x_0 \le x_1 \le x_2 \le ... \le b, \ n \in \setN \Big\}$$
+
+Nous supposons que la fonction $g$ nous permet de définir les fonctions $\sigma,\lambda$ associées par :
+
+$$\sigma(x) = \sup \accolades{ \sum_{i = 0}^n \max\{g(x_{i + 1}) - g(x_i), 0\} : \{x_0, x_1, ..., x_n \} \in S[\alpha,x] }$$
+
+et :
+
+$$\lambda(x) = - \inf \accolades{ \sum_{i = 0}^n \min\{g(x_{i + 1}) - g(x_i), 0\} : \{x_0, x_1, ..., x_n \} \in S[\alpha,x] }$$
+
+pour tout $x \in [\alpha,\beta]$. Il est clair que les fonctions $\sigma, \lambda$ sont croissantes. On peut donc définir l'intégrale de Stieltjes associée à $g$ par :
+
+$$\int_A f(x) \ dg(x) = \int_A f(x) \ d\sigma(x) - \int_A f(x) \ d\lambda(x)$$
+
+
+*** Positivité
+
+L'intégrale de Stieltjes d'une fonction essentiellement positive n'est généralement pas positive.
+
+
+** Mesure pondérée
+
+Soit une fonction essentiellement positive $\varphi$ telle que la fonction $\mu$ associée définie par :
+
+$$\mu(A) = \int_A \varphi(x) \ dx$$
+
+soit une mesure. Considérons une fonction $w \in \mathcal{E}_A(f)$, avec :
+
+$$w = \sum_i w_i \cdot \indicatrice_{A_i}$$
+
+où les $A_i$ forment une partition de $A$ et où les $w_i \in \setR$. On a alors :
+
+$$\int_A w(x) \ d\mu(x) = \sum_i w_i \cdot \int_{A_i} \varphi(x) \ dx$$
+
+Par linéarité de l'intégrale, on voit aussi que :
+
+\begin{eqnarray*}
+\int_A w(x) \cdot \varphi(x) \ dx &=& \sum_i w_i \cdot \int_A \varphi(x) \cdot \indicatrice_{A_i}(x) \ dx \\
+&=& \sum_i w_i \cdot \int_{A_i} \varphi(x) \ dx
+\end{eqnarray*}
+
+On en conclut que :
+
+$$\int_A w(x) \ d\mu(x) = \int_A w(x) \cdot \varphi(x) \ dx$$
+
+Comme $\varphi$ est positive, on a l'équivalence entre $w \essinferieur f$ et $w \cdot \varphi \essinferieur f \cdot \varphi$. En passant au supremum, on obtient donc :
+
+$$\int_A f(x) \ d\mu(x) = \int_A f(x) \cdot \varphi(x) \ dx$$
+
+pour toute fonction intégrable $f : A \to \setR$. On note symboliquement :
+
+$$d\mu(x) = \varphi(x) \ dx$$
+
+
+*** Problème inverse
+
+Remarquons qu'on ne sait généralement pas faire correspondre une fonction $\varphi$ à une mesure $\mu$ donnée.
+
+
+** Mesure de Dirac
+
+L'intégrale d'une fonction $f : \setR \to \setR$ par rapport à une mesure de Dirac $\mu_D^a$ est fort simple à calculer. En effet :
+
+$$\int_A d\mu_D^a(x) = \mu_D^a(A) = \indicatrice_A(a)$$
+
+par définition. Si $a \notin A$, l'ensemble $A$ est de mesure nulle et :
+
+$$\int_A f(x) \ d\mu_D^a(x) = 0$$
+
+Considérons à présent le cas où $a \in A$. L'ensemble $A \setminus \{a\}$ étant disjoint de $\{a\}$ et de mesure nulle :
+
+$$\int_{A \setminus \{a\}} d\mu_D^a(x) = \indicatrice_{A \setminus \{a\}}(a) = 0$$
+
+on a :
+
+$$\int_A f(x) \ d\mu_D^a(x) = \int_{\{a\}} f(x) \ d\mu_D^a(x)$$
+
+La fonction $f$ étant constante sur $\{a\}$ et valant $f(a)$, on a finalement :
+
+$$\int_A f(x) \ d\mu_D^a(x) = f(a) \cdot \indicatrice_{\{a\}}(a) = f(a)$$
+
+Dans le cas général, on a donc :
+
+$$\int_A f(x) \ d\mu_D^a(x) = f(a) \cdot \indicatrice_A(a)$$
+
+On note également :
+
+$$\int_A f(x) \ \indicatrice(x - a) \ dx = f(a) \cdot \indicatrice_A(a)$$
+
+
+** Pondérée - Dirac
+
+Soit une mesure $\mu$ définie par :
+
+$$d\mu(x) = \left[ \varphi(x) + \sum_i \alpha_i \cdot \indicatrice(x - x_i) \right] \ dx$$
+
+où les $\alpha_i \in \setR$. Si les $x_i$ appartiennent tous à $A$, l'intégrale d'une fonction $f$ par rapport à cette mesure s'écrit :
+
+$$\int_A f(x) \ d\mu(x) = \int_A f(x) \cdot \varphi(x) \ dx + \sum_i \alpha_i \cdot f(x_i)$$
+
+
+* Intégrales unidimensionnelles
+
+#+TOC: headlines 1 local
+
+
+** Intreduction
+
+Soit une fonction $f : \setR \mapsto \setR$ et $a,b \in \setR$ tels que $a \le b$.
+
+
+*** Intervalle
+
+On définit la notation particulière :
+
+$$\int_a^b f(x) \ d\mu(x) = \int_{[a,b]} f(x) \ d\mu(x)$$
+
+
+*** Intervalle inversé
+
+On étend la notation à des « intervalles » inversés par :
+
+$$\int_b^a f(x) \ d\mu(x) = - \int_a^b f(x) \ d\mu(x)$$
+
+
+*** Intervalle ouvert
+
+Pour les intervalles ouverts, on considère la limite :
+
+$$\int_{]a,b[} f(x) \ d\mu(x) = \lim_{(s,t) \to (a,b)} \int_s^t f(x) \ d\mu(x)$$
+
+
+*** Infini
+
+Quand une des bornes de l'intervalle tend vers l'infini, on définit l'intégrale par :
+
+#+BEGIN_CENTER
+\(
+\int_a^{+\infty} f(x) \ d\mu(x) = \lim_{b \to +\infty} \int_a^b f(x) \ d\mu(x) \\
+\int_{-\infty}^b f(x) \ d\mu(x) = \lim_{a \to -\infty} \int_a^b f(x) \ d\mu(x)
+\)
+#+END_CENTER
+
+
+*** Sur l'ensemble des réels
+
+Enfin, l'intégrale sur $\setR$ entier est définie par :
+
+$$\int_{-\infty}^{+\infty} f(x) \ d\mu(x) = \int_\setR f(x) \ d\mu(x) = \lim_{a \to -\infty} \int_{-a}^a f(x) \ d\mu(x)$$
+
+
+** Additivité d'intervalles
+
+Soit $a,b,c,\alpha,\beta \in \setR$ avec $\alpha \le a,b,c \le \beta$. Soit une fonction intégrable $f : [\alpha,\beta] \mapsto \setR$. Posons :
+
+$$I(x,y) = \int_x^y f(\xi) \ d\xi$$
+
+où $d\xi = d\mu_L(\xi)$ est la mesure de Lebesgue. Par définition, on a :
+
+$$I(y,x) = - I(x,y)$$
+
+Si $a \le b \le c$, on a :
+
+$$\mu_L( [a,b] \cap [b,c] ) = \mu_L( \{ b \} ) = 0$$
+
+L'additivité nous donne alors :
+
+$$I(a,c) = I(a,b) + I(b,c)$$
+
+Si $a \le c \le b$, on a :
+
+$$\mu_L( [a,c] \cap [c, b] ) = \mu_L( \{ c \} ) = 0$$
+
+et :
+
+$$I(a,b) = I(a,c) + I(c,b)$$
+
+On en déduit que :
+
+$$I(a,c) = I(a,b) - I(c,b) = I(a,b) + I(b,c)$$
+
+On vérifie pareillement, en considérant tous les cas, que $I(a,b) = I(a,c) + I(c,b)$ quel que soit l'ordre des réels $a,b,c$. On a donc :
+
+$$\int_a^c f(x) \ dx = \int_a^b f(x) \ dx + \int_b^c f(x) \ dx$$
+
+
+** Valeur moyenne d'une intégrale
+
+Soit la fonction intégrable et continue $f : [a,b] \mapsto \setR$. Pour la mesure de Lebesgue, on a :
+
+#+BEGIN_CENTER
+\(
+\supessentiel \{ f(x) : x \in [a,b] \} = \max f([a,b]) \\
+\infessentiel \{ f(x) : x \in [a,b] \} = \min f([a,b])
+\)
+#+END_CENTER
+
+Les bornes d'une fonction continue sur un intervalle fermé étant atteintes, on peut trouver des réels $\sigma,\lambda \in [a,b]$ tels que :
+
+#+BEGIN_CENTER
+\(
+f(\sigma) = \max f([a,b]) \\
+f(\lambda) = \min f([a,b])
+\)
+#+END_CENTER
+
+Les bornes de l'intégrales nous disent que :
+
+$$f(\lambda) \le \unsur{b - a} \int_a^b f(s) ds \le f(\sigma)$$
+
+Le théorème des valeurs intermédiaires nous permet alors de trouver un $c$ compris entre $\lambda$ et $\sigma$ (et donc dans $[a,b]$) tel que :
+
+$$f(c) = \unsur{b - a} \int_a^b f(s) ds$$
+
+
+* Les espaces fonctionnels
+
+#+TOC: headlines 1 local
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:mesure} : Les normes
+  - Chapitre \ref{chap:ps} : Les produits scalaires
+  - Chapitre \ref{chap:integral} : Les intégrales
+
+
+** Fonctions intégrables
+
+Soit une fonction $f : A \mapsto \setR$ et sa décomposition en fonctions positives $f = f^+ - f^-$. Soit $\abs{f} : A \mapsto \setR$ définie par :
+
+$$\abs{f}(x) = \abs{f(x)}$$
+
+pour tout $x \in A$. Si $f(x) \ge 0$, on a $f^-(x) = 0$ et :
+
+$$\abs{f(x)} = f(x) = f^+(x) = f^+(x) + f^-(x)$$
+
+Si $f(x) \strictinferieur 0$, on a $f^+(x) = 0$ et :
+
+$$\abs{f(x)} = -f(x) = f^-(x) = f^+(x) + f^-(x)$$
+
+On en conclut que $\abs{f} = f^+ + f^-$. Si $f$ est intégrable, $f^+$ et $f^-$ le sont aussi et :
+
+$$\int_A \abs{f(x)} \ d\mu(x) = \int_A f^+(x) \ d\mu(x) + \int_A f^-(x) \ d\mu(x) \strictinferieur +\infty$$
+
+La fonction $\abs{f}$ est donc également intégrable. Inversément, si $\abs{f}$ est intégrable, on a $f^+ = \abs{f} - f^- \le \abs{f}$ et $f^- = \abs{f} - f^+ \le \abs{f}$, d'où :
+
+#+BEGIN_CENTER
+\(
+\int_A f^+(x) \ d\mu(x) \le \int_A \abs{f(x)} \ d\mu(x) \strictinferieur +\infty \\ \\
+\int_A f^-(x) \ d\mu(x) \le \int_A \abs{f(x)} \ d\mu(x) \strictinferieur +\infty
+\)
+#+END_CENTER
+
+La fonction $f$ est donc également intégrable. On en conclut que l'on peut représenter l'ensemble des fonctions intégrables par :
+
+$$\lebesgue(A) = \left\{ f \in \setR^A : \int_A \abs{f(x)} \ d\mu(x) \strictinferieur +\infty \right\}$$
+
+
+** Intégrale complexe
+
+Soit une fonction à valeurs complexes $u : A \mapsto \setC$. On définit les fonctions à valeurs réelles associées $v,w : A \mapsto \setR$ par :
+
+#+BEGIN_CENTER
+\(
+\phi(x) = \Re(u(x)) \\
+\psi(x) = \Im(u(x)) \\
+\)
+#+END_CENTER
+
+L'intégrale de la fonction $u$ est alors définie par :
+
+$$\int_A u(x) \ d\mu(x) = \int_A \phi(x) \ d\mu(x) + \img \int_A \psi(x) \ d\mu(x)$$
+
+
+** Produit scalaire
+
+Par analogie avec le produit scalaire sur $\corps^n$ :
+
+$$\scalaire{x}{y} = \sum_i \conjaccent{x}_i \cdot y_i \equiv \sum_i \conjaccent{x}(i) \cdot y(i)$$
+
+on définit le produit scalaire entre deux fonctions $u,v : A \mapsto \setC$ par :
+
+$$\scalaire{u}{v} = \int_A \conjaccent{u(x)} \cdot v(x) \ d\mu(x)$$
+
+Cette application est clairement hermitienne et linéaire à droite. Comme l'intégrale d'une fonction positive est positive, on a aussi :
+
+$$\scalaire{u}{u} = \int_A \abs{u(x)}^2 \ d\mu(x) \ge 0$$
+
+Il ne s'agit cependant pas tout à fait d'un produit scalaire, car la condition :
+
+$$\scalaire{u}{u} = \int_A \abs{u(x)}^2 \ d\mu(x) = 0$$
+
+n'implique pas que $u = 0$ partout sur $A$. Par contre, l'annulation de cette intégrale implique que la fonction positive $x \mapsto \abs{u(x)}^2$ soit essentiellement nulle. On aura donc également $u \essegal 0$. L'application $\scalaire{}{}$ est donc essentiellement un produit scalaire. On parlera aussi de produit scalaire au sens faible. La norme essentielle (ou norme faible) associée est :
+
+$$\norme{u} = \sqrt{ \scalaire{u}{u} } = \sqrt{ \int_A \abs{u(x)}^2 \ d\mu(x) }$$
+
+Sur quel espace ce « produit scalaire » est-il correctement défini ? Il faut que la norme associée soit finie :
+
+$$\norme{u}^2 = \scalaire{u}{u} = \int_A \abs{u(x)}^2 \ d\mu(x) \strictinferieur +\infty$$
+
+Si les normes de $u$ et $v$ sont finies, Cauchy-Schwartz nous garantit que :
+
+$$\abs{\int_A \conjaccent{u(x)} \cdot v(x) \ d\mu(x)} \le \left[ \int_A \abs{u(x)}^2 \ d\mu(x) \right] \cdot \left[ \int_A \abs{v(x)}^2 \ d\mu(x) \right] \strictinferieur +\infty$$
+
+Nous définissons donc notre produit scalaire fonctionnel sur l'espace :
+
+$$\lebesgue^2(A) = \left\{ u \in \setC^A : \int_A \abs{u(x)}^2 \ d\mu(x) \strictinferieur +\infty \right\}$$
+
+nommé espace de Lebesgue de degré $2$.
+
+
+** Espaces de Lebesgue
+
+L'espace de Lebesgue de degré $k$ est l'ensemble des fonctions telles que l'intégrale
+de la puissance $k$ existe (et ne soit donc pas infinie) :
+
+$$\lebesgue^k(A,B) = \left\{ u \in \setC^A : \int_A \abs{u(x)}^k \ d\mu(x) \strictinferieur +\infty \right\}$$
+
+
+*** Norme
+
+La norme usuelle sur cet espace est définie par :
+
+$$\norme{u}_k = \left[ \int_A \abs{u(x)}^k \ dx \right]^{1/k}$$
+
+Il s'agit d'une norme faible.
+
+
+** Espace de fonctions essentiellement bornées
+
+Par analogie avec la norme « max », on définit l'espace des fonctions essentiellement bornées par :
+
+$$\lebesgue^\infty(A,B) = \left\{ u \in \setR^A : \supessentiel \{ \abs{u(x)} : x \in A \} \strictinferieur +\infty \right\}$$
+
+
+** Noyau
+
+On peut généraliser le produit scalaire usuel de $\lebesgue^2(A,B)$ en généralisant la notion de « matrice de produit scalaire ». On choisit une fonction $K : A^2 \to B$ appelée « noyau » et on définit le produit scalaire associé :
+
+$$\braket{u}{K}{v} = \scalaire{u}{v}_K = \int_{A^2} u(x) \cdot K(x,y) \cdot v(y) \ d\mu(x) \ d\mu(y)$$
+
+Ce noyau doit bien entendu respecter certaines propriétés afin de s'assurer que $\scalaire{}{}_K$ soit bien un produit scalaire.
+
+
+* Convergence et intégration
+
+#+TOC: headlines 1 local
+
+\label{chap:convint}
+
+
+** Convergence monotone
+
+Soit une suite de fonctions intégrables :
+
+$$\{ u_n \in \setR^A : n \in \setR \}$$
+
+Nous supposons que $u_n \esssuperieur 0$ pour tout $n \in \setN$ et que la suite soit essentiellement croissante :
+
+$$u_0 \essinferieur u_1 \essinferieur u_2 \essinferieur u_3 \essinferieur ...$$
+
+Nous supposons également que la fonction :
+
+$$s = \sup \{ u_n : n \in \setN\}$$
+
+est bien définie et intégrable :
+
+$$S = \int_A s(x) \ d\mu(x) \strictinferieur +\infty$$
+
+
+*** Convergence des fonctions
+
+Pour tout $n \in \setN$, on a $u_n \essinferieur u_{n + 1}$ et l'ensemble :
+
+$$Z_n = \{ x \in A : u_n(x) \strictsuperieur u_{n + 1}(x) \}$$
+
+est de mesure nulle. Il en va donc de même pour leur union :
+
+$$Z = \bigcup_n Z_n$$
+
+L'ensemble $\Phi = A \setminus Z$ est donc un sous-ensemble essentiel de $A$. Soit $x \in \Phi$. On a alors :
+
+$$u_0(x) \le u_1(x) \le u_2(x) \le ...$$
+
+La suite $\{ u_n(x) : n \in \setN \}$ est donc croissante et majorée par $s(x) = \sup_n u_n(x)$. Elle converge dès lors vers son supremum :
+
+$$\lim_{n \to \infty} u_n(x) = s(x)$$
+
+
+*** Suite d'intégrales
+
+On définit la suite $\{ I_n : n \in \setN \}$ par :
+
+$$I_n = \int_A u_n(x) \ d\mu(x)$$
+
+pour tout $n \in \setN$. Comme $u_n$ croît essentiellement avec $n$, on a $I_m \le I_n$ pour tout $m,n \in \setN$ vérifiant $m \le n$. Comme $u_n \le s$, on a aussi $I_n \le S$. On en conclut que la suite des $I_n$ converge vers son supremum et que :
+
+$$L = \lim_{n \to \infty} I_n \le S = \int_A s(x) \ d\mu(x)$$
+
+
+*** Fonction étagée
+
+Soit le réel $\epsilon \strictsuperieur 0$. Choisissons $w \in \mathcal{E}_A(s)$ telle que :
+
+$$\int_A s(x) \ d\mu(x) \le \int_A w(x) \ d\mu(x) + \epsilon$$
+
+Comme $w \essinferieur s$ l'ensemble :
+
+$$N = \{ x \in A : w(x) \strictsuperieur s(x) \}$$
+
+est de mesure nulle. Posons $\Psi = \Phi \setminus N$. La fonction $w$ étant étagée, on dispose d'une partition $\{A_1,...,A_N\}$ de $A$ et de réels $w_i$ tels que :
+
+$$w = \sum_i w_i \cdot \indicatrice[A_i]$$
+
+Posons $\Psi_i = A_i \cap \Psi$. Comme $\Psi \subseteq A$, les $\Psi_i$ forment une partition de $\Psi$ et on a :
+
+$$w \cdot \indicatrice[\Psi] = \sum_i w_i \cdot \indicatrice[A_i] \cdot \indicatrice[\Psi] = \sum_i w_i \cdot \indicatrice[\Psi_i]$$
+
+On en déduit que :
+
+$$\int_\Psi w(x) \ d\mu(x) = \int_A w(x) \cdot \indicatrice_\Psi(x) \ d\mu(x) = \sum_i w_i \cdot \mu(\Psi_i)$$
+
+L'intégrale étant invariante par abstraction d'un ensemble de mesure nulle, on a :
+
+$$\int_\Psi w(x) \ d\mu(x) = \int_\Phi w(x) \ d\mu(x) = \int_A w(x) \ d\mu(x)$$
+
+et finalement :
+
+$$\int_A w(x) \ d\mu(x) = \sum_i w_i \cdot \mu(\Psi_i)$$
+
+
+*** Mesures convergentes
+
+Choisissons un réel $\alpha$ vérifiant $0 \strictinferieur \alpha \strictinferieur 1$ et posons :
+
+$$C_n = \{ x \in \Psi : \alpha \cdot w(x) \le u_n(x) \}$$
+
+Soit :
+
+\begin{eqnarray*}
+W_n^i &=& C_n \cap \Psi_i = \{ x \in \Psi_i : \alpha \cdot w(x) \le u_n(x) \} \\
+X_n^i &=& Z_n \cap \Psi_i = \{ x \in \Psi_i : u_n(x) \strictsuperieur u_{n + 1}(x) \}
+\end{eqnarray*}
+
+Comme $X_n^i \subseteq Z_n$, on a $\mu(X_n^i) = 0$. Si $x \in W_n^i \setminus X_n^i$, on a :
+
+$$\alpha \cdot w(x) \le u_n(x) \le u_{n + 1}(x)$$
+
+On en déduit que $x \in W_{n + 1}^i$. Donc $W_n^i \setminus X_n^i \subseteq W_{n + 1}^i$ et :
+
+$$\lim_{n \to \infty} \mu(W_n^i) = \mu\left( \bigcup_n W_n^i \right)$$
+
+Comme les $W_n^i \subseteq \Psi_i$, il est clair que leur union sur $n$ est inclue dans $\Psi_i$. Soit $x \in \Psi_i$.
+
+  - Si $s(x) = 0$, on a $0 \le u_n(x) \le s(x) = 0$ pour tout $n \in \setN$ et $u_n(x) = 0$. On a aussi $w(x) \le s(x) = 0$, d'où $\alpha \cdot w(x) \le 0 = u_n(x)$ et $x \in W_n^i$.
+
+  - Considérons à présent le cas où $s(x) \strictsuperieur 0$. On se rappelle que $\Psi_i \subseteq \Psi = \Phi \setminus N$. Donc $x \notin N$ et on a $w(x) \le s(x)$. Multipliant cette relation par $\alpha \strictsuperieur 0$, on obtient $\alpha \cdot w(x) \le \alpha \cdot s(x)$. Soit le réel :
+
+$$\delta = (1 - \alpha) \cdot s(x) \strictsuperieur 0$$
+
+Sur $\Psi_i \subseteq \Psi \subseteq \Phi$, la suite des $\{ u_n(x) : n \in \setN \}$ converge vers $s(x)$. On peut donc trouver un $K \in \setN$ tel que $\abs{u_n(x) - s(x)} \le \delta$ pour tout naturel $n$ vérifiant $n \ge K$. On a alors :
+
+$$u_n(x) \ge s(x) - \delta = s(x) - (1 - \alpha) \cdot s(x) = \alpha \cdot s(x) \ge \alpha \cdot w(x)$$
+
+Il existe donc un naturel $n$ tel que $x \in C_n$, d'où $x \in C_n \cap \Psi_i = W_n^i$.
+
+Notre $x$ appartient donc à l'union sur $n$ des $W_n^i$. On en conclut que $\Psi_i$ est inclu dans l'union sur $n$ des $W_n^i$. La réciproque étant également vraie, on a :
+
+$$\bigcup_n W_n^i = \Psi_i$$
+
+et :
+
+$$\lim_{n \to \infty} \mu(W_n^i) = \mu(\Psi_i)$$
+
+
+*** Convergence des intégrales
+
+Fixons $n \in \setN$. Comme $C_n \subseteq A$, les $W_n^i = C_n \cap \Psi_i$ forment une partition de $C_n$ et on a :
+
+$$w \cdot \indicatrice[C_n] = \sum_i w_i \cdot \indicatrice[C_n] \cdot \indicatrice[\Psi_i] = \sum_i w_i \cdot \indicatrice[W_n^i]$$
+
+On en déduit que :
+
+$$\int_{C_n} w(x) \ d\mu(x) = \int_A w(x) \cdot \indicatrice_{C_n}(x) \ d\mu(x) = \sum_i w_i \cdot \mu(W_n^i)$$
+
+En passant à la limite sur $n$, on obtient donc :
+
+\begin{eqnarray*}
+\lim_{n \to \infty} \int_{C_n} w(x) \ d\mu(x) &=& \sum_i w_i \cdot \lim_{n \to \infty} \mu(W_n^i) \\
+&=& \sum_i w_i \cdot \mu(\Psi_i) \\
+&=& \int_A w(x) \ d\mu(x)
+\end{eqnarray*}
+
+Comme $\alpha \cdot w \le u_n$ sur $C_n$, on a a fortiori l'infériorité essentielle et :
+
+$$\int_{C_n} \alpha \cdot w(x) \ d\mu(x) = \alpha \int_{C_n} w(x) \ d\mu(x) \le \int_A u_n(x) \ d\mu(x) = I_n$$
+
+En passant à la limite sur $n$ et en multipliant par $1/\alpha$, on en déduit que :
+
+$$\int_A w(x) \ d\mu(x) \le \unsur{\alpha} \lim_{n \to \infty} I_n = \frac{L}{\alpha}$$
+
+Se rappelant la propriété de $w$ par rapport à $s$, on a :
+
+$$\int_A s(x) \ d\mu(x) - \epsilon \le \int_A w(x) \ d\mu(x) \le \frac{L}{\alpha}$$
+
+Donc :
+
+$$S - \epsilon = \int_A s(x) \ d\mu(x) - \epsilon \le \frac{L}{\alpha}$$
+
+Ce résultat devant être satisfait pour tout $\epsilon \strictsuperieur 0$ et pour tout $0 \strictsuperieur \alpha \strictsuperieur 1$, on a finalement $S \le L$. Mais nous avons vu précédemment que $L \le S$. On en conclut que $S = L$, c'est-à-dire :
+
+$$\int_A \lim_{n \to \infty} u_n(x) \ d\mu(x) = \lim_{n \to \infty} \int_A u_n(x) \ d\mu(x)$$
+
+
+** Convergence des sommes
+
+Soit une suite $\{ f_n \in \setR^A : n \in \setN \}$ de fonctions intégrables essentiellement positives. Posons :
+
+$$u_n = \sum_{i = 0}^n f_i$$
+
+On voit que la suite des $u_n$ est croissante et essentiellement positive. Si la somme converge, on a :
+
+$$\lim_{n \to \infty} u_n(x) = \sum_{i = 0}^{+\infty} f_i(x) = s(x)$$
+
+pour tout $x \in A$. Si la fonction $s$ ainsi définie est intégrable, on a donc :
+
+$$\int_A \sum_{i = 0}^{+\infty} f_i(x) \ d\mu(x) = \lim_{n \to \infty} \int_A \sum_{i = 0}^n f_i(x) \ d\mu(x)$$
+
+
+** Lemme de Fatou
+
+Soit une suite $\{ f_n \in \setR^A : n \in \setN \}$ de fonctions intégrables essentiellement positives. Posons :
+
+$$u_n = \inf \{ f_m : m \in \setN, \  m \ge n \}$$
+
+et supposons que la fonction $s = \sup_n u_n$ soit bien définie et intégrable. Par construction, la suite des $u_n$ est croissante et essentiellement positive. On a donc $\int_A \lim_n u_n = \lim_n \int_A u_n$, c'est-à-dire :
+
+$$\int_A \liminf_{n \to \infty} f_n(x) \ d\mu(x) = \lim_{n \to \infty} \int_A u_n(x) \ d\mu(x)$$
+
+Comme la limite des $U_n = \int_A u_n$ existe, on a $\liminf_n U_n = \lim_n U_n$ et :
+
+$$\int_A \liminf_{n \to \infty} f_n(x) \ d\mu(x) = \liminf_{n \to \infty} \int_A u_n(x) \ d\mu(x)$$
+
+Comme $u_n \le f_n$, on a $U_n \le F_n = \int_A f_n$. On en conclut que $\liminf_n U_n \le \liminf_n F_n$ :
+
+$$\liminf_{n \to \infty} \int_A u_n(x) \ d\mu(x) \le \liminf_{n \to \infty} \int_A f_n(x) \ d\mu(x)$$
+
+Rassemblant ces résultats, il vient :
+
+$$\int_A \liminf_{n \to \infty} f_n(x) \ d\mu(x) \le \liminf_{n \to \infty} \int_A f_n(x) \ d\mu(x)$$
+
+
+** Convergence dominée
+
+Soit une suite de fonctions $\{ f_n : n \in \setN \}$ intégrables sur $\Omega$. Nous supposons qu'il existe un sous-ensemble essentiel $A$ de $\Omega$ et une fonction $f : A \mapsto \setR$ telle que :
+
+$$\lim_{n \to \infty} f_n(x) = f(x)$$
+
+pour tout $x \in A$. Nous supposons également qu'il existe une fonction intégrable $\varphi : A \mapsto \setR$ telle que $\abs{f_n} \le \varphi$ pour tout $n \in \setN$.
+
+Soit $x \in A$. Puisque la suite $\{ \abs{f_n(x)} : n \in \setN \}$ est inférieure à $\varphi(x)$, sa limite $\abs{f(x)}$ vérifie $\abs{f(x)} \le \varphi(x)$. On a donc $\abs{f} \le \varphi$ et $\int_A \abs{f} \le \int_A \varphi \strictinferieur +\infty$, ce qui montre que $f$ est intégrable. La majoration par $\varphi$ nous montre également que $\varphi - \max \{ f_n , -f_n \} \ge 0$, d'où :
+
+#+BEGIN_CENTER
+\(
+\varphi - f_n \ge 0 \\
+\varphi + f_n \ge 0
+\)
+#+END_CENTER
+
+On peut donc appliquer le lemme de Fatou à la suite de fonctions $\psi_n = \varphi - f_n$. On obtient :
+
+$$\int_A \liminf_{n \to \infty} [\varphi(x) - f_n(x)] \ d\mu(x) \le \liminf_{n \to \infty} \int_A [\varphi(x) - f_n(x)] \ d\mu(x)$$
+
+On sait que la fonction $\varphi$ ne dépend pas de $n$ et que la limite de $f_n$ existe. On a donc $\liminf_n f_n = \limsup_n f_n = \lim f_n$. Comme $\inf(-X) = -\sup(X)$, on a aussi :
+
+$$\liminf_n (-f_n) = - \limsup_n f_n = - \lim_n f_n = -f$$
+
+On en déduit que :
+
+$$\int_A \liminf_n [\varphi - f_n] = \int_A \varphi - \int_A f$$
+
+Pour le second membre, on a :
+
+$$\liminf_n \int_A [\varphi - f_n] = \int_A \varphi + \liminf_n \left[ - \int_A f_n \right] = \int_A \varphi - \limsup_n \int_A f_n$$
+
+On se retrouve donc avec l'inégalité :
+
+$$\int_A \varphi - \int_A f \le \int_A \varphi - \limsup_n \int_A f_n$$
+
+Eliminant l'intégrale de $\varphi$, il vient :
+
+$$\int_A f(x) \ d\mu(x) \ge \limsup_{n \to \infty} \int_A f_n(x) \ d\mu(x)$$
+
+Appliquons à présent le lemme de Fatou à la suite de fonctions $\omega_n = \varphi + f_n$. On obtient :
+
+$$\int_A \liminf_{n \to \infty} [\varphi(x) + f_n(x)] \ d\mu(x) \le \liminf_{n \to \infty} \int_A [\varphi(x) + f_n(x)] \ d\mu(x)$$
+
+Utilisant les mêmes remarques que précédemment et éliminant l'intégrale de $\varphi$, il vient :
+
+$$\int_A f(x) \ d\mu(x) \le \liminf_{n \to \infty} \int_A  f_n(x) \ d\mu(x)$$
+
+Rassemblant ces résultats, on en déduit que :
+
+$$\limsup_{n \to \infty} \int_A f_n(x) \ d\mu(x) \le \liminf_{n \to \infty} \int_A  f_n(x) \ d\mu(x)$$
+
+Mais on sait que $\liminf(X) \le \limsup(X)$. On conclut de ces deux inégalités que :
+
+$$\limsup_{n \to \infty} \int_A f_n(x) \ d\mu(x) = \liminf_{n \to \infty} \int_A  f_n(x) \ d\mu(x)$$
+
+La limite de la suite d'intégrales existe donc et :
+
+$$\lim_{n \to \infty} \int_A f_n(x) \ d\mu(x) = \limsup_{n \to \infty} \int_A f_n(x) \ d\mu(x) = \liminf_{n \to \infty} \int_A  f_n(x) \ d\mu(x)$$
+
+Les bornes faisant intervenir l'intégrale de $f$ deviennent :
+
+$$\lim_{n \to \infty} \int_A f_n(x) \ d\mu(x) \le \int_A f(x) \ d\mu(x) \le \lim_{n \to \infty} \int_A  f_n(x) \ d\mu(x)$$
+
+d'où :
+
+$$\int_A f(x) \ d\mu(x) = \lim_{n \to \infty} \int_A f_n(x) \ d\mu(x)$$
+
+Nous venons de prouver que :
+
+$$\int_A \lim_{n \to \infty} f_n(x) \ d\mu(x) = \lim_{n \to \infty} \int_A f_n(x) \ d\mu(x)$$
+
+L'intégrale étant invariante sous abstraction d'un ensemble de mesure nulle, on a même :
+
+$$\int_\Omega f(x) \ d\mu(x) = \lim_{n \to \infty} \int_\Omega f_n(x) \ d\mu(x)$$
+
+pour autant que $f$ soit définie sur $\Omega$.
+
+
+* Additivité généralisée
+
+#+TOC: headlines 1 local
+
+\label{chap:fubini}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:fonction} : Les fonctions
+  - Chapitre \ref{chap:mesure} : Les mesures
+
+
+** Introduction
+
+
+*** Mesure induite
+
+Soit les ensembles $\Omega$ et $\Psi$, les tribus $\mathcal{T} \subseteq \sousens(\Omega)$ et $\mathcal{U} \subseteq \sousens(\Psi)$ et les mesures $\mu : \mathcal{T} \mapsto \setR$ et $\nu : \mathcal{U} \mapsto \setR$.
+
+On considère un ensemble $X \subseteq \Psi$ mesurable pour $\nu$ et paramétrant la collection $\mathcal{C} = \{ P(x) \in \sousens(\Omega) : x \in X \}$ formant une partition de $\Omega$. Nous supposons également que chaque ensemble-élément de $\mathcal{C}$ est mesurable pour $\mu$. Choisissons un sous-ensemble quelconque $A \subseteq \Omega$. Posons $A(x) = P(x) \cap A$ et :
+
+$$\mathcal{P}(A) = \{ A(x) : x \in X \} = \{ P(x) \cap A : x \in X \}$$
+
+On a :
+
+$$\bigcup_{x \in X} A(x) = A \cap \bigcup_{x \in X} P(x) = A \cap \Omega = A$$
+
+Si $x,y \in X$ vérifient $x \ne y$, on a aussi :
+
+$$A(x) \cap A(y) = P(x) \cap P(y) \cap A = \emptyset$$
+
+On en déduit que $\mathcal{P}(A)$ forme une partition de $A$. Soit la collection $\mathcal{M}$ des sous-ensembles $A$ de $\Omega$ tels que la fonction $x \mapsto \mu(A(x))$ soit mesurable. Si $\mathcal{M}$ forme une tribu, on peut définir une mesure $\sigma : \mathcal{M} \mapsto \setR$ par la relation :
+
+$$\sigma(A) = \int_X \mu(A(x)) \ d\nu(x)$$
+
+
+*** Validité
+
+Par positivité de $\mu$ et de l'intégrale, on a clairement $\sigma \ge 0$. L'ensemble vide étant de mesure nulle au sens de $\mu$, on a :
+
+\begin{eqnarray*}
+\sigma(\emptyset) &=& \int_X \mu(\emptyset \cap P(x)) \ d\nu(x) \\
+&=& \int_X \mu(\emptyset) \ d\nu(x) \\
+&=& \int_X 0 \ d\nu(x) \\
+&=& 0
+\end{eqnarray*}
+
+Soit $A,B \subseteq \Omega$ avec $A \cap B = \emptyset$. On a :
+
+\begin{eqnarray*}
+A(x) \cup B(x) &=& (A \cap P(x)) \cup (B \cap P(x)) \\
+&=& (A \cup B) \cap P(x) \\
+&=& (A \cup B)(x)
+\end{eqnarray*}
+
+Par additivité de $\mu$ et linéarité de l'intégrale, on a :
+
+\begin{eqnarray*}
+\sigma(A \cup B) &=& \int_X \mu((A \cup B)(x)) \ d\nu(x) \\
+&=& \int_X \mu(A(x) \cup B(x)) \ d\nu(x) \\
+&=& \int_X [\mu(A(x)) + \mu(B(x))] \ d\nu(x) \\
+&=& \int_X \mu(A(x)) \ d\nu(x) + \int_X \mu(B(x)) \ d\nu(x) \\
+&=& \sigma(A) + \sigma(B)
+\end{eqnarray*}
+
+La fonction $\sigma$ est donc également additive et représente bien une mesure.
+
+
+** Notation
+
+Soit une fonction $f : A \mapsto \setR$ et la fonction $I : X \mapsto \setR$ définie par :
+
+$$I(x) = \int_{A(x)} f(y) \ d\mu(y)$$
+
+pour tout $x \in X$. On note dans la suite :
+
+$$\int_X \int_{A(x)} f(y) \ d\mu(y) \ d\nu(x) = \int_X I(x) \ d\nu(x)$$
+
+ou encore :
+
+$$\int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y) = \int_X I(x) \ d\nu(x)$$
+
+
+*** Fonctions étagées
+
+Soit une fonction étagée $w : A \mapsto \setR$. On dispose d'une partition $\{A_1,...,A_n\}$ de $A$ et de réels $w_i$ tels que :
+
+$$w = \sum_i w_i \cdot \indicatrice_{A_i}$$
+
+Evaluons son intégrale :
+
+\begin{eqnarray*}
+\int_A w(z) \ d\sigma(z) &=& \sum_i w_i \cdot \sigma(A_i) \\
+&=& \sum_i w_i \int_X \mu(A_i(x)) \ d\nu(x) \\
+&=& \int_X \sum_i w_i \cdot \mu(A_i(x)) \ d\nu(x) \\
+&=& \int_X \left[ \int_{A(x)} w(y) \ d\mu(y) \right] \ d\nu(x)
+\end{eqnarray*}
+
+On a donc :
+
+$$\int_A w(z) \ d\sigma(z) = \int_X \ d\nu(x) \int_{A(x)} w(y) \ d\mu(y)$$
+
+pour toute fonction étagée.
+
+
+*** Ordre
+
+Soit les fonctions mesurables $f,g$ vérifiant $f \essinferieur g$ au sens de la mesure $\sigma$. Soit :
+
+$$N = \{ z \in A : f(z) \strictsuperieur g(z) \}$$
+
+Comme $N \subseteq A$, on a $N = N \cap A$ et :
+
+\begin{eqnarray*}
+N(x) = N \cap P(x) &=& N \cap A \cap P(x) \\
+&=& N \cap A(x) \\
+&=& \{ z \in A(x) : f(z) \strictsuperieur g(z) \}
+\end{eqnarray*}
+
+La mesure de $N$ étant $\sigma$-nulle, on a :
+
+$$\sigma(N) = \int_X \mu(N(x)) \ d\nu(x) = 0$$
+
+Comme $\mu$ est positive, elle est essentiellement positive. On en conclut que la fonction $x \mapsto \mu(N(x))$ est essentiellement nulle sur $X$ (au sens de la mesure $\nu$). L'ensemble :
+
+$$Z = \{ x \in X : \mu(N(x)) \strictsuperieur 0 \}$$
+
+vérifie $\nu(Z) = 0$. Le sous-ensemble :
+
+$$E = X \setminus Z = \{ x \in X : \mu(N(x)) = 0 \}$$
+
+est donc $\nu$-essentiel dans $X$. Soit les fonctions $F,G : X \mapsto \setR$ définies par :
+
+#+BEGIN_CENTER
+\(
+F(x) = \int_{A(x)} f(y) \ d\mu(y) \\ \\
+G(x) = \int_{A(x)} g(y) \ d\mu(y)
+\)
+#+END_CENTER
+
+Pour tout $x \in E$, on a $\mu(N(x)) = 0$. Le sous-ensemble :
+
+$$C(x) = A(x) \setminus N(x) = \{ y \in A(x) : f(y) \le g(y) \}$$
+
+est donc $\mu$-essentiel dans $A(x)$. On a donc $w \essinferieur f$ au sens de $\mu$ sur $A(x)$ et :
+
+$$F(x) = \int_{A(x)} f(y) \ d\mu(y) \le \int_{A(x)} g(y) \ d\mu(y) = G(x)$$
+
+On a donc $F \le G$ sur $E$ qui est un sous-ensemble essentiel de $X$. Donc, $F \essinferieur G$ au sens de $\nu$ sur $X$ et :
+
+$$\int_X F(x) \ d\nu(x) \le \int_X G(x) \ d\nu(x)$$
+
+Autrement dit :
+
+$$\int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y) \le \int_X \ d\nu(x) \int_{A(x)} g(y) \ d\mu(y)$$
+
+
+*** Positives majorées
+
+Soit une fonction intégrable $f : A \mapsto \setR$ essentiellement positive et majorée au sens de $\sigma$ :
+
+$$\supessentiel_{x \in A}^\sigma f(x) \strictinferieur +\infty$$
+
+Soit un réel $\epsilon \strictsuperieur 0$.
+
+  - Le supremum étant dans l'adhérence, on peut trouver une fonction étagée $w$ essentiellement inférieure à $f$ au sens de $\sigma$ et telle que :
+
+$$\int_A f(z) \ d\sigma(z) - \epsilon \le \int_A w(z) \ d\sigma(z)$$
+
+On a aussi :
+
+\begin{eqnarray*}
+\int_A w(x) \ d\sigma(x) &=& \int_X \ d\nu(x) \int_{A(x)} w(y) \ d\mu(y) \\
+&\le& \int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y)
+\end{eqnarray*}
+
+d'où finalement :
+
+$$\int_A f(x) \ d\sigma(x) - \epsilon \le \int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y)$$
+
+Comme cette relation est valable pour tout $\epsilon \strictsuperieur 0$, on doit avoir :
+
+$$\int_A f(x) \ d\sigma(x) \le \int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y)$$
+
+  - Comme $f$ est essentiellement majorée, on peut trouver une fonction étagée $w$ essentiellement inférieure à $f$ au sens de $\sigma$ et telle que :
+
+$$\supessentiel_{x \in A}^\sigma [f(x) - w(x)] \le \epsilon$$
+
+On a donc $f \essinferieur w + \epsilon$ au sens de $\sigma$ et :
+
+$$\int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y) \le \int_X \ d\nu(x) \int_{A(x)} [w(y) + \epsilon] \ d\mu(y)$$
+
+On voit que :
+
+\begin{eqnarray*}
+\int_X \ d\nu(x) \int_{A(x)} [w(y) + \epsilon] \ d\mu(y) &=& \int_X \ d\nu(x) \left[ \int_{A(x)} w(y) \ d\mu(y) + \epsilon \cdot \mu(A(x)) \right] \\
+&=& \int_X \ d\nu(x) \int_{A(x)} w(y) \ d\mu(y) + \epsilon \cdot \int_X \mu(A(x)) \ d\nu(x) \\
+&=& \int_X \ d\nu(x) \int_{A(x)} w(y) \ d\mu(y) + \epsilon \cdot \sigma(A)
+\end{eqnarray*}
+
+Or :
+
+$$\int_X \ d\nu(x) \int_{A(x)} w(y) \ d\mu(y) = \int_A w(z) \ d\sigma(z) \le \int_A f(z) \ d\sigma(z)$$
+
+par définition du supremum. Rassemblant tous ces résultats, il vient :
+
+$$\int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y) \le \int_A f(z) \ d\sigma(z) + \epsilon \cdot \sigma(A)$$
+
+Cette inégalité devant être satisfaite pour tout $\epsilon \strictsuperieur 0$, on en conclut que :
+
+$$\int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y) \le \int_A f(z) \ d\sigma(z)$$
+
+
+L'intégrale double $\int_X \int_{A(x)}$ devant être simultanément supérieure et inférieure à l'intégrale $\int_A$, on a :
+
+$$\int_A f(z) \ d\sigma(z) = \int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y)$$
+
+
+*** Positives
+
+Posons :
+
+#+BEGIN_CENTER
+\(
+C(\alpha) = \{ x \in A : f(x) \le \alpha \} \\
+Z(\alpha) = \{ x \in A : f(x) \strictsuperieur \alpha \}
+\)
+#+END_CENTER
+
+et :
+
+#+BEGIN_CENTER
+\(
+C(\alpha,x) = C(\alpha) \cap A(x) = \{ x \in A(x) : f(x) \le \alpha \} \\
+Z(\alpha,x) = A(x) \setminus C(\alpha) = \{ x \in A(x) : f(x) \strictsuperieur \alpha \}
+\)
+#+END_CENTER
+
+Comme $f$ est essentiellement majorée sur $C(\alpha)$, on a :
+
+$$\int_{C(\alpha)} f(z) \ d\sigma(z) = \int_X \ d\nu(x) \int_{C(\alpha,x)} f(y) \ d\mu(y)$$
+
+Les propriétés de $Z(\alpha) = A \setminus C(\alpha)$ nous montrent que :
+
+$$\lim_{\alpha \to +\infty} \int_{C(\alpha)} f(z) \ d\sigma(z) = \int_A f(z) \ d\sigma(z)$$
+
+On obtient bien entendu le même résultat en se restreignant aux entiers $n \in \setN$ :
+
+$$\lim_{n \to \infty} \int_{C(n)} f(z) \ d\sigma(z) = \int_A f(z) \ d\sigma(z)$$
+
+Comme $Z(\alpha,x)$ vérifie les mêmes propriétés, on a :
+
+$$\lim_{n \to \infty} \int_{C(n,x)} f(y) \ d\mu(y) = \int_{A(x)} f(y) \ d\mu(y)$$
+
+Pour tout $n \in \setN$, posons :
+
+$$u_n(x) = \int_{C(n,x)} f(y) \ d\mu(y)$$
+
+Il s'agit d'une suite de fonctions positives. Comme l'inégalité $m \le n$ implique $C(m,x) \subseteq C(n,x)$, on a $u_m \le u_n$. La suite est donc croissante et converge vers :
+
+$$\lim_{n \to \infty} u_n(x) = \int_{A(x)} f(y) \ d\mu(y)$$
+
+La convergence monotone nous montre alors que :
+
+\begin{eqnarray*}
+\lim_{n \to \infty} \int_X u_n(x) \ d\nu(x) &=& \int_X \lim_{n \to \infty} u_n(x) \ d\nu(x) \\
+&=& \int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y)
+\end{eqnarray*}
+
+D'un autre coté, on a :
+
+\begin{eqnarray*}
+\lim_{n \to \infty} \int_X u_n(x) \ d\nu(x) &=& \lim_{n \to \infty} \int_X \ d\nu(x) \int_{C(n,x)} f(y) \ d\mu(y) \\
+&=& \lim_{n \to \infty} \int_{C(n)} f(z) \ d\sigma(z) \\
+&=& \int_A f(z) \ d\sigma(z)
+\end{eqnarray*}
+
+On en conclut finalement que :
+
+$$\int_A f(z) \ d\sigma(z) = \int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y)$$
+
+
+*** Signe quelconque
+
+Soit une fonction intégrable $f : A \mapsto \setR$ et sa décomposition en fonctions positives $f = f^+ - f^-$. On a :
+
+\begin{eqnarray*}
+\int_A f(z) \ d\sigma(z) &=& \int_A f^+(z) \ d\sigma(z) - \int_A f^-(z) \ d\sigma(z) \\
+&=& \int_X \ d\nu(x) \int_{A(x)} f^+(y) \ d\mu(y) - \int_X \ d\nu(x) \int_{A(x)} f^-(y) \ d\mu(y) \\
+&=& \int_X \left[ \int_{A(x)} f^+(y) \ d\mu(y) - \int_{A(x)} f^-(y) \ d\mu(y) \right] \ d\nu(x) \\
+&=& \int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y)
+\end{eqnarray*}
+
+
+** Fubini
+
+Sur $\setR^2$, la mesure de Lebesgue, que nous notons ici $\sigma$, est basée sur des ensembles de la forme :
+
+$$P = [a,b] \times [c,d]$$
+
+où $a,b,c,d \in \setR$ et $a \le b$, $c \le d$. Si $\mu$ est la mesure de Lebesgue sur $\setR$, on a alors :
+
+$$\sigma(P) = (\mu \otimes \mu)([a,b] \times [c,d]) = \mu([a,b]) \cdot \mu([c,d]) = (b - a) \cdot (d - c)$$
+
+Considérons le partionnement formé des segments $[(x,c),(x,d)]$ pour tous les $x$ compris
+entre $a$ et $b$ :
+
+$$\mathcal{P} = \{ [(x,c),(x,d)] : x \in [a,b] \}$$
+
+Comme :
+
+$$[(x,c),(x,d)] = \{ (x,y) : y \in [c,d] \}$$
+
+on définit la mesure $\mu$ d'un tel segment par extension de la mesure de Lebesgue :
+
+$$\mu([(x,c),(x,d)]) = d - c$$
+
+La mesure $\sigma_x$ qui en découle s'évalue :
+
+$$\sigma_x(A) = \int_a^b (d - c) dx = (d - c) \int_a^b dx = (d - c) \cdot (b - a)$$
+
+Considérons le partionnement alternatif :
+
+$$\mathcal{Q} = \{ [(a,y),(b,y)] : y \in [c,d] \}$$
+
+Comme :
+
+$$[(a,y),(b,y)] = \{ (x,y) : x \in [a,b] \}$$
+
+on définit la mesure $\mu$ d'un tel segment par extension de la mesure de Lebesgue :
+
+$$\mu([(a,y),(b,y)]) = b - a$$
+
+La mesure $\sigma_y$ qui en découle s'évalue :
+
+$$\sigma_y(A) = \int_c^d (b - a) dy = (b - a) \int_c^d dy = (b - a) \cdot (d - c)$$
+
+On en conclut que $\sigma_x = \sigma_y = \sigma$. Si $f$ est une fonction intégrable sur $A = [\alpha,\beta] \times [\gamma,\delta] \subseteq \setR^2$, on a alors :
+
+$$\int_A f(x,y) \ d\sigma(x,y) = \int_\alpha^\beta dx \int_\gamma^\delta f(x,y) \ dy = \int_\gamma^\delta dy \int_\alpha^\beta f(x,y) \ dx$$
+
+On note souvent $d\sigma(x,y) = dx \ dy$ et :
+
+$$\int_A f(x,y) \ dx \ dy = \int_\alpha^\beta dx \int_\gamma^\delta f(x,y) \ dy = \int_\gamma^\delta dy \int_\alpha^\beta f(x,y) \ dx$$
+
+
+*** Dimension $n$
+
+Soit $A = [a_1,b_1] \times [a_2,b_2] ... \times [a_n,b_n] \subseteq \setR^n$. On a :
+
+$$\int_A f(x) \ dx = \int_{a_1}^{b_1} dx_1 \ ... \int_{a_n}^{b_n} dx_n \ f(x_1,...x_n)$$
+
+où $dx$ correspond à la mesure de Lebesgue $\sigma = \mu \otimes ... \otimes \mu$.
+
+
+** Produit cartésien
+
+On peut généraliser Fubini dans certaines conditions. On a alors :
+
+$$\int_{A \times B} f(x,y) \ d\mu(x) \ d\nu(y) = \int_B d\nu(y) \ \int_A f(x,y) \ d\mu(x)$$
+
+et symétriquement :
+
+$$\int_{A \times B} f(x,y) \ d\mu(x) \ d\nu(y) = \int_A \ d\mu(x) \int_B f(x,y) \ d\nu(y)$$
+
+
+** Domaine régulier
+
+Soit les réels $a,b$ et les fonctions $S,I : [a,b] \mapsto \setR$ permettant de définir l'ensemble :
+
+$$A = \{ (x,y) \in [a,b] \times \setR : I(x) \le y \le S(x) \}$$
+
+Posons :
+
+$$A(x) = \{ (x,y) : I(x) \le y \le S(x) \}$$
+
+On voit que $A(x) \cap A(z) = \emptyset$ si $x \ne z$ et que :
+
+$$A = \bigcup_{x \in [a,b]} A(x)$$
+
+On a donc :
+
+$$\int_A f(x,y) \ d\sigma(x,y) = \int_a^b d\nu(x) \ \int_{I(x)}^{S(x)} f(x,y) \ d\mu(y)$$
+
+
+** Lemme du triangle
+
+Un petit lemme intéressant permettant de permuter l'intégration de deux
+variables. Soit le triangle $\Delta$ :
+
+$$\Delta = \{ (s,t) \in \setR^2 : 0 \le s,t \le T, \quad s \ge t \}$$
+
+On peut redéfinir cet ensemble de deux manières équivalentes :
+
+#+BEGIN_CENTER
+\(
+\Delta = \{ (s,t) \in \setR^2 : 0 \le s \le T, \quad 0 \le t \le s \} \\
+\Delta = \{ (s,t) \in \setR^2 : 0 \le t \le T, \quad t \le s \le T \}
+\)
+#+END_CENTER
+
+On a donc :
+
+$$\int_\Delta f(x) \ dx = \int_0^T \ ds \int_0^s f(s,t) \ dt = \int_0^T \ dt \int_t^T f(s,t) \ ds$$
+
+
+*** Cas particulier
+
+En particulier, si la fonction à intégrer ne dépend que de $t$, on a :
+
+$$\int_0^T \ ds \int_0^s u(t) \ dt = \int_0^T u(t) \ dt \int_t^T  \ ds = \int_0^T (T - t) \cdot u(t) \ dt$$
+
+
+* Sommes et intégrales
+
+#+TOC: headlines 1 local
+
+
+** Introduction
+
+Soit une fonction décroissante $f : \setR \mapsto \setR$. Choisissons $k \in \setZ$. Comme $f(k)$ maximise $f$ sur $[k,k+1]$, l'intégrale vérifie :
+
+$$\int_k^{k + 1} f(x) \ dx \le \int_k^{k + 1} f(k) \ dx= f(k) \cdot 1$$
+
+Comme $f(k)$ minimise $f$ sur $[k-1,k]$, l'intégrale vérifie :
+
+$$f(k) = f(k) \cdot 1 = \int_{k - 1}^k f(k) \ dx \le \int_{k - 1}^k f(x) \ dx$$
+
+On en déduit l'encadrement :
+
+$$\int_k^{k + 1} f(x) \ dx \le f(k) \le \int_{k - 1}^k f(x) \ dx$$
+
+Soit $m, n \in \setZ$. On a :
+
+$$\sum_{k = m}^n \int_k^{k + 1} f(x) \ dx = \int_m^{n + 1} f(x) \ dx$$
+
+et :
+
+$$\sum_{k = m}^n \int_{k - 1}^k f(x) \ dx = \int_{m - 1}^n f(x) \ dx$$
+
+En sommant les inégalités sur $k \in \setZ[m,n]$, on obtient :
+
+$$\int_m^{n + 1} f(x) \ dx \le \sum_{k = m}^n f(k) \le \int_{m - 1}^n f(x) \ dx$$
+
+
+** Sommes infinies
+
+Sous réserve de convergence des sommes et des intégrales, on a :
+
+$$\int_0^{+\infty} f(x) \ dx \le \sum_{k = 0}^{+\infty} f(k) \le \int_{-1}^{+\infty} f(x) \ dx$$

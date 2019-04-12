@@ -1,0 +1,606 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Ordina 06 : Utilitaires
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index. html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+* Texte
+
+#+TOC: headlines 1 local
+
+
+** Généralités
+
+| stat        | Affiche les informations du fichier  contenues dans le système de fichiers |
+| file        | Information sur le type d'un fichier                                       |
+| cat         | Affiche et concatène des fichiers                                          |
+| strings     | Chaînes de texte d'un fichier binaire                                      |
+| nl          | Affiche des fichiers  avec les numéros de ligne                            |
+| split       | Coupe un fichier en plusieurs morceaux                                     |
+| head        | Affiche le début d'un fichier                                              |
+| tail        | Affiche la fin d'un fichier                                                |
+| wc          | Affiche le nombre de lignes, de mots  et de caractères d'un fichier        |
+| cmp         | Compare deux fichiers octet par octet                                      |
+| seq /M/ /N/ | Affiche une séquence d'entiers  de /M/ à /N/ inclus                        |
+| shuf        | Affiche les lignes d'un fichier  dans le désordre                          |
+| tac         | Affiche un fichier en inversant  l'ordre des lignes                        |
+| pr          | Formattage pour impression :  numéros de page, colonnes, ...               |
+
+
+** Grep
+
+Grep filtre les lignes d'un fichier par rapport à une expression régulière.
+Voici l'allure générale d'une commande grep :
+
+#+BEGIN_EXAMPLE
+grep /options/ /motif/ /fichier(s)/
+#+END_EXAMPLE
+
+Exemples :
+
+| grep /motif/ /fichier(s)/ | Affiche les lignes contenant /motif/ le dans les /fichier(s)/ |
+| egrep grep -E             | Analogue à grep mais pour les expressions régulières étendues |
+
+
+*** Options
+
+La suite recense les principales options.
+
+| -v     | Affiche les lignes ne contenant pas le motif      |
+| -i     | Insensible à la casse                             |
+| -c     | Compte le nombre de lignes correspondant au motif |
+| -C /N/ | Affiche /N/ lignes de contexte                    |
+
+
+** Cut
+
+Cut permet de filtrer chaque ligne d'un fichier. Voici l'aspect général
+d'une commande cut :
+
+#+BEGIN_EXAMPLE
+cut /options/ /fichiers/
+#+END_EXAMPLE
+
+La suite recense les principales options.
+
+
+*** Champs
+
+| -f /N/              | Affiche le /N/<sup>ème</sup> champ |
+| -f /N1/,/N2/, /.../ | Affiche plusieurs champs           |
+| -d /délimiteur/     | Modifie le séparateur de champs    |
+
+
+*** Caractères
+
+| -c /N/     | Affiche le /N/<sup>ième</sup> caractère de chaque ligne |
+| -c /M/-/N/ | Affiche les caractères /M/ à /N/                        |
+| -c /N/-    | Affiche les caractères de position supérieure à /N/     |
+| -c -/N/    | Affiche les caractères de position inférieure à /N/     |
+
+
+** Fold
+
+Fold ajuste les lignes d'un fichier. Voici l'allure générale d'une commande fold :
+
+#+BEGIN_EXAMPLE
+fold /options/ /fichier/
+#+END_EXAMPLE
+
+La suite recense les principales options.
+
+| -w /largeur/ | Ajuste les lignes pour qu'aucune ne dépasse largeur      |
+| -s           | Coupe les lignes aux espaces (conserve les mots entiers) |
+
+
+** Fmt
+
+Fmt formatte du texte paragraphe par paragraphe.
+
+| fmt -/M/ -w /N/ /fichier/ | Formatte /fichier/ pour avoir plus ou moins /M/  caractères et maximum /N/ caractères par ligne |
+
+
+** Tr
+
+Tr utilise deux groupes de caractères et s'en sert comme règle de
+remplacement : chaque caractère à l'entrée standard qui appartient au
+premier groupe est remplacé à la sortie standard par son équivalent
+dans le second groupe. Un caractère qui n'appartient pas au premier
+groupe ressort inchangé. Voici la syntaxe générale :
+
+#+BEGIN_EXAMPLE
+tr /groupe1/ /groupe2/
+#+END_EXAMPLE
+
+La commande suivante transforme des minuscules en majuscules :
+
+#+BEGIN_EXAMPLE
+echo "/minuscules/" | tr '/[a-z]/' '/[A-Z]/'
+#+END_EXAMPLE
+
+
+** Sort
+
+Sort trie les lignes d'un ou de plusieurs fichiers.
+
+La suite recense les principales options.
+
+| -k /N/             | Trie avec comme clé le /N/<sup>ème</sup> champ  |
+| -k /N1/./N2/./.../ | Trie avec comme clés les champs /N1/, /N2/, ... |
+| -r                 | Inverse l'ordre                                 |
+| -d                 | Tri analogue à un dictionnaire : alphanumérique |
+| -g                 | Tri par valeurs numérique                       |
+| -f                 | Insensible à la casse                           |
+
+
+** Uniq
+
+Uniq omet ou affiche les lignes répétées. Voici l'allure générale
+d'une commande uniq :
+
+#+BEGIN_EXAMPLE
+uniq /options/ /fichier/
+#+END_EXAMPLE
+
+La suite recense les options principales.
+
+| -u     | N'affiche pas les lignes dupliquées (par défaut) |
+| -d     | Affiche seulement les lignes dupliquées          |
+| -c     | Compte le nombre d'occurences de chaque ligne    |
+| -f /N/ | Ne compare pas les /N/ premiers champs           |
+| -i     | Insensible à la casse                            |
+
+
+** Comm
+
+La commande *comm* effectue des opérations ensemblistes
+sur le contenu de deux fichiers :
+
+#+BEGIN_EXAMPLE
+comm /fichier-1/ /fichier-2/
+#+END_EXAMPLE
+
+Sa sortie compte trois colonnes. La première colonne contient les lignes
+présentes uniquement dans le premier fichier, la seconde colonne contient
+les lignes présentes uniquement dans le second fichier et la troisième
+compte les lignes présentes dans les deux fichiers.
+
+La ligne :
+
+#+BEGIN_EXAMPLE
+comm -1 /fichier-1/ /fichier-2/
+#+END_EXAMPLE
+
+supprime les lignes apparaissant uniquement dans le premier fichier. La ligne :
+
+#+BEGIN_EXAMPLE
+comm -2 /fichier-1/ /fichier-2/
+#+END_EXAMPLE
+
+supprime les lignes apparaissant uniquement dans le second fichier. La ligne :
+
+#+BEGIN_EXAMPLE
+comm -3 /fichier-1/ /fichier-2/
+#+END_EXAMPLE
+
+supprime les lignes apparaissant dans les deux fichiers.
+
+
+** Paste
+
+Paste colle les fichiers en argument côte à côte, chacun occupant
+une colonne. Voici l'allure générale d'une commande paste :
+
+#+BEGIN_EXAMPLE
+paste /listeDeFichiers/
+#+END_EXAMPLE
+
+La suite recense les principales options.
+
+| -d '/délimiteur/' | Modifie le délimiteur |
+
+
+** Astuces
+
+| uniq -c /fichier/ ¦ sort -nr | Trie par nombre d'occurences                      |
+| tail -f                      | Affiche la fin d'un fichier en suivant les ajouts |
+
+
+* Système de fichiers
+
+#+TOC: headlines 1 local
+
+
+** Généralités
+
+| lsblk | Affiche les partitions d’un disque  |
+| tree  | Affiche l'arborescence des fichiers |
+
+
+** Recherche avancée
+
+L'utilitaire :
+
+#+BEGIN_EXAMPLE
+find
+#+END_EXAMPLE
+
+permet de réaliser des recherches avancées dans le système de
+fichiers.  exemple, si nous recherchons récursivement les fichiers
+réguliers contenu dans le répertoire /dir/ :
+
+#+BEGIN_EXAMPLE
+find /dir/ -type f -print
+#+END_EXAMPLE
+
+Nous pouvons restreindre la recherche au répertoire /dir/
+et à ses sous-répertoires directs :
+
+#+BEGIN_EXAMPLE
+find /dir/ -maxdepth 2 -type f -print
+#+END_EXAMPLE
+
+Nous pouvons encore restreindre la recherche aux fichiers correspondant
+à un motif de globalisation /glob/ :
+
+#+BEGIN_EXAMPLE
+find /dir/ -maxdepth 2 -type f -name '/glob/' -print
+#+END_EXAMPLE
+
+Le format d'affichage peut être modifié. Ainsi, pour insérer
+un « = » avant le nom de chaque fichier et un
+« + » après, on demande :
+
+#+BEGIN_EXAMPLE
+find /dir/ -maxdepth 2 -type f -name '/glob/' -printf '=%f+ '
+#+END_EXAMPLE
+
+Si on souhaite un résultat par ligne, on remplace l'espace par un caractère
+de fin de ligne dans la zone de format :
+
+#+BEGIN_EXAMPLE
+find /dir/ -maxdepth 2 -type f -name '/glob/' -printf '=%f+\n'
+#+END_EXAMPLE
+
+On voudra généralement afficher le répertoire de chaque fichier. Dans ce
+cas, on aura :
+
+#+BEGIN_EXAMPLE
+find /dir/ -maxdepth 2 -type f -name '/glob/' -printf '%h/%f\n'
+#+END_EXAMPLE
+
+Quelques autres options :
+
+| -path /glob/        | Le chemin d'accès au fichier  correspond au motif de globalisation              |
+| -newer /référence/  | Le fichier a été modifié plus récemment  que le fichier /référence/             |
+| -fprint /fichier/   | Comme -print, mais écrit dans un fichier                                        |
+| -fprintf /fichier/  | Comme -printf, mais écrit dans un fichier                                       |
+| -exec /commande/    | Exécute une commande.  {} symbolise le fichier courant                          |
+| -execdir /commande/ | Comme -exec mais 		avec pour répertoire  celui du fichier courant |
+
+
+** Copie de bas niveau
+
+La commande « dd » permet de réaliser une copie de bas niveau. Par
+exemple, la commande suivante :
+
+#+BEGIN_EXAMPLE
+dd if=/source/ of=/destination/ bs=1M count=128
+#+END_EXAMPLE
+
+copie /source/ vers
+/destination/ en 128 blocs de 1 mega
+
+
+** Écraser des données
+
+La commande /rm/ se contente d'enlever des fichiers, répertoires
+du système de fichier. La commande /shred/ écrase le contenu du
+fichier avec un contenu aléatoire :
+
+#+BEGIN_EXAMPLE
+shred -u /fichier/
+#+END_EXAMPLE
+
+
+* Processus
+
+#+TOC: headlines 1 local
+
+| pstree                      | Affiche l'arborescence des processus                                  |
+| watch                       | Exécute une commande périodiquement  et affiche le résultat à l'écran |
+| crontab /fichier/           | Automatisation des tâches régulières                                  |
+| crontab -l                  | Liste des tâches régulières                                           |
+| at /date-heure/ -f /script/ | Exécution d'une tâche à une date et heure précise                     |
+| atq                         | File d'attente des tâches programmées par « at »                      |
+| atrm                        | Annule une tâche programmée par « at »                                |
+
+
+** Xargs
+
+| xargs /commande/ < /arguments/ | Applique une commande à plusieurs arguments |
+| ... ¦ xargs /commande/         |                                             |
+
+
+*** Options
+
+| -n /N/       | Groupe les arguments par paquets de /N/  puis exécute la commande avec chaque groupe d'arguments |
+| -L /N/       | Comme -n mais avec les lignes                                                                    |
+| -a /fichier/ | Lis les arguments dans un fichier                                                                |
+| -I /symbole/ | Détermine un symbole pour le nom de l'argument courant                                           |
+
+
+*** Exemples
+
+| cat /fichier/ ¦ xargs -n 1 /commande/         | Applique les lignes d'un fichier une par une à une commande |
+| ls            ¦ xargs -I {} echo {}./suffixe/ | Affiche chaque fichier du répertoire avec un suffixe        |
+
+
+* Réseau
+
+#+TOC: headlines 1 local
+
+
+** Généralités
+
+| ping                    | Vérifie si une machine répond                                              |
+| telnet /adresse/ /port/ | Outil générique permettant de se connecter  à une adresse et un port donné |
+| wget                    | Téléchargement http récursif sur les liens                                 |
+| curl                    | Téléchargement http par motifs                                             |
+| ncftp                   | Téléchargement par ftp                                                     |
+
+
+** Astuces
+
+| wget -r -l /N/ -k -E -p|Téléchargement http récursif sur les liens|
+
+
+* Archives
+
+#+TOC: headlines 1 local
+
+
+** Généralités
+
+Voici quelques archiveurs :
+
+#+BEGIN_EXAMPLE
+ar   tar   cpio   pax   shar
+#+END_EXAMPLE
+
+
+** Compression
+
+Voici quelques compresseurs :
+
+#+BEGIN_EXAMPLE
+gzip   bzip2   lzma   zip
+#+END_EXAMPLE
+
+et les décompresseurs associés :
+
+#+BEGIN_EXAMPLE
+gunzip   bunzip2   unlzma   unzip
+#+END_EXAMPLE
+
+On dispose aussi des commandes d'affichage associées :
+
+| zcat  | Affiche le contenu d'une archive gzip |
+| bzcat | Affiche le contenu d'une archive bzip |
+| lzcat | Affiche le contenu d'une archive lzma |
+
+
+** Tar
+
+Pour créer une archive :
+
+#+BEGIN_EXAMPLE
+tar -cvf /archive/ /répertoire/
+#+END_EXAMPLE
+
+Pour ajouter des fichiers dans l'archive :
+
+#+BEGIN_EXAMPLE
+tar -rvf /archive/ /fichiers/
+#+END_EXAMPLE
+
+Pour en extraire les fichiers :
+
+#+BEGIN_EXAMPLE
+tar -xvf /archive/
+#+END_EXAMPLE
+
+Pour lister le contenu de l'archive :
+
+#+BEGIN_EXAMPLE
+tar -tvf /archive/
+#+END_EXAMPLE
+
+
+*** Compression gzip
+
+On peut compresser le contenu d'une archive tar avec gzip :
+
+#+BEGIN_EXAMPLE
+gzip /archive/.tar
+#+END_EXAMPLE
+
+ce qui produit un fichier :
+
+#+BEGIN_EXAMPLE
+/archive/.tar.gz
+#+END_EXAMPLE
+
+On peut en extraire le contenu en passant par gunzip et
+tar -xvf, on directement en ajoutant l'option « z » à tar :
+
+#+BEGIN_EXAMPLE
+tar -xzvf /archive/.tar.gz
+#+END_EXAMPLE
+
+
+*** Compression bzip
+
+On peut compresser le contenu d'une archive tar avec bzip :
+
+#+BEGIN_EXAMPLE
+bzip2 /archive/.tar
+#+END_EXAMPLE
+
+ce qui produit un fichier :
+
+#+BEGIN_EXAMPLE
+/archive/.tar.bz2
+#+END_EXAMPLE
+
+On peut en extraire le contenu en passant par bunzip2 et
+tar -xvf, on directement en ajoutant l'option « j » à tar :
+
+#+BEGIN_EXAMPLE
+tar -xjvf /archive/.tar.bz2
+#+END_EXAMPLE
+
+
+*** Compression lzma
+
+On peut compresser le contenu d'une archive tar avec lzma :
+
+#+BEGIN_EXAMPLE
+lzma /archive/.tar
+#+END_EXAMPLE
+
+ce qui produit un fichier :
+
+#+BEGIN_EXAMPLE
+/archive/.tar.lzma
+#+END_EXAMPLE
+
+On peut en extraire le contenu en passant par unlzma et
+tar -xvf, on directement en ajoutant l'option « --lzma » à tar :
+
+#+BEGIN_EXAMPLE
+tar --lzma -xvf /archive/.tar.lzma
+#+END_EXAMPLE
+
+
+** Zip
+
+Pour créer une archive récursivement ou
+y ajouter / remplacer des fichiers :
+
+#+BEGIN_EXAMPLE
+zip -rv /archive/ /fichiers/
+#+END_EXAMPLE
+
+Avec l'option -u, les fichiers seront seulement remplacés
+par des fichiers plus récents :
+
+#+BEGIN_EXAMPLE
+zip -rvu /archive/ /fichiers/
+#+END_EXAMPLE
+
+Pour extraire les fichiers, on écrit :
+
+#+BEGIN_EXAMPLE
+unzip /archive/
+#+END_EXAMPLE
+
+Pour afficher le contenu de l'archive :
+
+#+BEGIN_EXAMPLE
+zipinfo /archive/
+#+END_EXAMPLE
+
+
+** Ar
+
+Ar est un archiveur semblable à tar. Il est surtout utilisé pour les
+bibliothèques logicielles, mais on peut également s'en servir comme
+archiveur pour n'importe quel collection de fichiers. Pour créer une
+archive :
+
+#+BEGIN_EXAMPLE
+ar cr /archive/ /fichiers/
+#+END_EXAMPLE
+
+Pour ajouter un ou plusieurs fichiers à une archive :
+
+#+BEGIN_EXAMPLE
+ar r /archive/ /fichiers/
+#+END_EXAMPLE
+
+Pour afficher le contenu d'une archive :
+
+#+BEGIN_EXAMPLE
+ar t /archive/ /fichiers/
+#+END_EXAMPLE
+
+Pour extraire les fichiers d'une archive :
+
+#+BEGIN_EXAMPLE
+ar x /archive/
+#+END_EXAMPLE
+
+
+** Shar
+
+Shar permet de créer une archive en forme de script shell
+auto-extractible. Pour créer une archive :
+
+#+BEGIN_EXAMPLE
+shar /répertoire/ > /archive/
+#+END_EXAMPLE
+
+Pour en extraire les fichiers :
+
+#+BEGIN_EXAMPLE
+sh /archive/
+#+END_EXAMPLE
+
+ou :
+
+#+BEGIN_EXAMPLE
+chmod a+x /archive/
+.//archive/
+#+END_EXAMPLE
+
+
+* Synchronisation
+
+#+TOC: headlines 1 local
+
+
+** Unidirectionnelle
+
+L'utilitaire /rsync/ permet de synchroniser une
+/destination/ avec une
+/source/ :
+
+| rsync -avz --delete /source/ /utilisateur@hôte:destination/ | options réseau |
+| rsync -rtv --delete /source/ /destination/                  | options local  |
+
+
+** Bidirectionnelle
+
+| unison | Synchronisation bidirectionnelle |
+
+
+** Chiffrement
+
+| duplicity | Sauvegardes incrémentales chiffrées  via rsync et gpg |

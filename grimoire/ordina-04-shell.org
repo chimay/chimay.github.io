@@ -1,0 +1,4722 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Ordina 04 : Shell
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index. html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+
+* Zsh
+
+#+TOC: headlines 1 local
+
+
+** Base
+
+Un *shell* est un programme qui intéragit avec l’utilisateur
+au moyen d'un interpréteur de commande. Il permet de dialoguer avec le système
+d'exploitation. Nous allons étudier *zsh*, un shell très complet.
+
+| man /commande/      | Donne le manuel d'une commande                                            |
+| man -k /mot_clé/    | Donne la liste des commandes  correspondant à un mot_clé                  |
+| run-help /commande/ | Aide sur une commande                                                     |
+| apropos /mot_clé/   | Donne la liste des commandes  correspondant à un mot_clé                  |
+| type /mot/          | Donne la nature du mot : brique du shell,  alias, fonction, commande, etc |
+| rehash              | Recharge le cache                                                         |
+| exit                | Sort du shell courant                                                     |
+
+
+*** Lecture et écriture
+
+| print | Affiche du texte                |
+| cat   | Affiche le contenu d'un fichier |
+
+
+*** Terminal
+
+| <ctrl s> | Stoppe le terminal                                        |
+| <ctrl q> | Reprend le terminal                                       |
+| setterm  | Contrôle du comportement du terminal                      |
+| stty -a  | Affiche les principales commandes de contrôle du terminal |
+| reset    | Réinitialise le terminal                                  |
+| clear    | Nettoie le terminal                                       |
+
+
+*** Divers
+
+|  :|Commande qui ne fait rien, 		mais qui est parfois exigée  par la syntaxe|
+
+
+** Ligne de commande
+
+Une ligne de commande est une ligne interprétable et donc exécutable
+par le shell. On exécute une ligne de commande au moyen de la touche
+« Return » :
+
+#+BEGIN_EXAMPLE
+/ligne_de_commande/ <Return>
+#+END_EXAMPLE
+
+Une ligne de commande basique se compose généralement d'un mot
+désignant la commande, éventuellement suivi par un ou plusieurs mots
+pouvant influencer le comportement de cette commandes. Ces derniers sont
+appelés arguments de la commande. On a donc schématiquement une des
+dispositions suivantes :
+
+#+BEGIN_EXAMPLE
+/commande/
+/commande/ /argument/
+/commande/ /argument_1/ /argument_2/ /.../ /argument_N/
+#+END_EXAMPLE
+
+Il existe bien entendu des lignes de commandes plus complexes :
+commandes composées de commandes simples, multilignes, représentant
+des structure de contrôle, etc.
+
+
+*** Espaces
+
+Les espaces ont une fonction essentielle : séparer les chaînes
+de caractères que le shell va considérer comme des mots. On a vu par
+exemple que dans une ligne de commande, les arguments sont des mots
+séparés par un espace.
+
+Lorsqu'on souhaite signaler au shell qu'une chaîne de caractères
+contenant des espaces doit malgré tout être considérée comme un seul
+mot, on dispose de trois techniques.
+
+La première méthode utilise le préfixe
+« \ » devant chaque espace. Exemple :
+
+#+BEGIN_EXAMPLE
+Chaîne\ de\ caractères\ vue\ comme\ un\ seul\ mot
+#+END_EXAMPLE
+
+La deuxième méthode entoure la chaîne de guillemets simples :
+
+#+BEGIN_EXAMPLE
+'Chaîne de caractères vue comme un seul mot'
+#+END_EXAMPLE
+
+La troisième méthode entoure la chaîne de guillemets doubles :
+
+#+BEGIN_EXAMPLE
+&quot;Chaîne de caractères vue comme un seul mot&quot;
+#+END_EXAMPLE
+
+
+*** Précommande
+
+Une précommande modifie la façon dont le shell interprète la
+ligne. Comme son nom l'indique, on la place avant la commande :
+
+#+BEGIN_EXAMPLE
+/precommande/ /commande/ /argument(s)/
+#+END_EXAMPLE
+
+
+*** Commandes internes et externes
+
+Une commande interne du shell est appelée
+*builtin*, par opposition aux commandes externes du
+système d'exploitation. Lorsqu'il y a un risque d'ambiguité, les
+précommandes suivantes permettent de préciser quel type de commande
+on souhaite exécuter :
+
+| builtin /commande_interne/ | Précise que l'on souhaite l'exécution  d'une commande interne |
+| command /commande_externe/ | Précise que l'on souhaite l'exécution  d'une commande externe |
+
+
+** Caractères magiques
+
+Certains caractères ou groupes de caractères sont interprétés
+de façon particulière par le shell. On nomme *caractères
+magiques* de tels caractères. C'est le cas par exemple
+de :
+
+#+BEGIN_EXAMPLE
+$ * ? [ ] < > << >> [[ ]] Espaces, tabulations, retours ligne
+#+END_EXAMPLE
+
+
+*** Forme littérale
+
+Il existe plusieurs méthodes pour transformer les caractères
+magiques en caractères ordinaires. La première méthode utilise le
+préfixe « \ »:
+
+#+BEGIN_EXAMPLE
+\/caractère_magique/
+#+END_EXAMPLE
+
+La deuxième méthode utilise des guillemets simples sur une chaîne
+contenant des caractères magiques :
+
+#+BEGIN_EXAMPLE
+'/chaine_avec_caractères_magiques/'
+#+END_EXAMPLE
+
+La troisième méthode utilise des guillemets doubles :
+
+#+BEGIN_EXAMPLE
+&quot;/chaine_avec_caractères_magiques/&quot;
+#+END_EXAMPLE
+
+ce qui a pour effet d'annuler l'effet spécial de certains
+caractères (dont les espaces) mais pas de tous. Par exemple, le
+« $ » est toujours actif.
+
+
+** Motifs
+
+Le shell utilise un peu partout des motifs magiques. En voici les principaux :
+
+| *                       | N'importe quelle chaîne de caractères         |
+| ?                       | N'importe quel caractère                      |
+| [/groupeDeCaractère/]   | N'importe quel caractère du groupe            |
+| [^/groupeDeCaractère/]  | N'importe quel caractère sauf ceux du groupe  |
+| </M/-/N/>               | N'importe quel nombre entier entre /M/ et /N/ |
+| (/chaine-1/¦/chaine-2/) | /chaine-1/ ou /chaine-2/                      |
+
+
+*** Variantes
+
+Les accolades permettent de jongler avec les variantes d'un mot. Ainsi :
+
+#+BEGIN_EXAMPLE
+{/Chaine/,/Variante/}
+#+END_EXAMPLE
+
+est équivalent à :
+
+#+BEGIN_EXAMPLE
+/Chaine/   /Variante/
+#+END_EXAMPLE
+
+Plus généralement :
+
+#+BEGIN_EXAMPLE
+/abc/{/Chaine/,/Variante/}/xyz/
+#+END_EXAMPLE
+
+est équivalent à :
+
+#+BEGIN_EXAMPLE
+/abc//Chaine//xyz/
+ 
+/abc//Variante//xyz/
+#+END_EXAMPLE
+
+Un exemple courant d'utilisation est de renommer un fichier
+vers un nom proche. Ainsi, pour modifier l'extension .txt en .sh,
+on fait :
+
+#+BEGIN_EXAMPLE
+mv /fichier/.{txt,sh}
+#+END_EXAMPLE
+
+qui sera étendu par le shell en :
+
+#+BEGIN_EXAMPLE
+mv /fichier/.txt /fichier/.sh
+#+END_EXAMPLE
+
+
+*** Plages
+
+Les accolades permettent également de générer une plage de nombres
+entiers. On utilise alors la forme :
+
+#+BEGIN_EXAMPLE
+{/M/../N/}
+#+END_EXAMPLE
+
+
+** Fichiers
+
+
+*** Objets
+
+Un *fichier* est un objet destiné à contenir
+des données.
+
+Un *répertoire* est un objet destiné à contenir
+d'autres objets : fichiers, sous-répertoires, etc.
+
+Un *lien symbolique* est un objet destiné à contenir
+une adresse permettant d'accéder à un autre objet : fichier, répertoire, etc.
+On dit que le lien symbolique *référence* l'objet auquel
+il permet d'accéder.
+
+Un *lien dur* est un fichier synonyme d'un autre
+fichier : les deux noms référencent le même fichier.
+
+
+**** Fichier standard ou régulier
+
+On part des constatations suivantes :
+
+  - un répertoire peut être vu comme un fichier particulier contenant
+    une liste de fichiers, sous-répertoires, liens, etc
+
+  - un lien symbolique peut être vu comme un fichier contenant une
+    adresse vers un objet
+
+On utilise donc par extension le terme de *fichier* pour
+désigner également des répertoires, liens symboliques, etc.
+
+Lorsqu'on veut préciser qu'un fichier n'a rien de particulier,
+c'est-à-dire qu'il n'est ni un répertoire, ni un lien symbolique,
+etc, on parle de *fichier standard*
+ou de *fichier régulier*.
+
+
+**** Arborescence
+
+Une arborescence est constituée de répertoires emboîtés les uns dans
+les autres. Le répertoire racine contient tous les répertoires de niveau
+un. Chaque répertoire de niveau un contient à son tour des répertoires
+de niveau deux. Chaque répertoire de niveau deux contient des répertoires
+dits de niveau trois, etc.
+
+
+**** Système de fichier
+
+Un système de fichiers est grossièrement une table constituée
+de deux colonnes : la première colonne contient les noms de fichiers
+et la seconde contient l'adresse permettant d'accéder au contenu
+du fichier sur le disque :
+
+| fichier-1 | adresse-1 |
+| fichier-2 | adresse-2 |
+| ...       | ...       |
+| fichier-N | adresse-N |
+
+
+***** Montage
+
+Les système Unix permettent généralement de monter l'arborescence
+complète d'un système de fichier dans un répertoire d'un autre
+système de fichiers, ce qui fait qu'une arborescence peut contenir
+plusieurs systèmes de fichiers.
+
+
+*** Symboles
+
+Le répertoire racine est symbolisé par :
+
+#+BEGIN_EXAMPLE
+/
+#+END_EXAMPLE
+
+Le répertoire courant est désigné par un point :
+
+#+BEGIN_EXAMPLE
+.
+#+END_EXAMPLE
+
+Le répertoire parent est le répertoire contenant
+le répertoire courant. On le désigne par deux points consécutifs :
+
+#+BEGIN_EXAMPLE
+..
+#+END_EXAMPLE
+
+Le tilde désigne le répertoire personnel (souvent /home//utilisateur/)
+de l'utilisateur courant :
+
+#+BEGIN_EXAMPLE
+~
+#+END_EXAMPLE
+
+Le symbole :
+
+#+BEGIN_EXAMPLE
+~/utilisateur/
+#+END_EXAMPLE
+
+désigne le répertoire personnel d'un utilisateur donné.
+
+Le zsh a également comme convention de désigner par :
+
+#+BEGIN_EXAMPLE
+~+
+#+END_EXAMPLE
+
+le répertoire actuel et par :
+
+#+BEGIN_EXAMPLE
+~-
+#+END_EXAMPLE
+
+le répertoire d'où l'on vient.
+
+
+*** Navigation dans les répertoires
+
+La commande *cd* permet d'accéder
+à un sous-répertoire /Rép/ du répertoire courant :
+
+#+BEGIN_EXAMPLE
+cd /Rép/
+#+END_EXAMPLE
+
+Il est possible de se déplacer de plusieurs niveaux
+d'un coup. La commande :
+
+#+BEGIN_EXAMPLE
+cd /Rép_1///Rép_2/
+#+END_EXAMPLE
+
+accède au sous-répertoire /Rép_2/ du
+sous-répertoire /Rép_1/ du répertoire
+courant. On généralise cette commande par :
+
+#+BEGIN_EXAMPLE
+cd /Rép_1///Rép_2///...///Rép_N/
+#+END_EXAMPLE
+
+On parle pour :
+
+#+BEGIN_EXAMPLE
+/Rép_1///Rép_2///...///Rép_N/
+#+END_EXAMPLE
+
+de chemin relatif, car il dépend du répertoire courant.
+Il est également possible de désigner le chemin de
+répertoires en partant de la racine du système de fichier.
+Il suffit pour cela de faire précéder le chemin du symbole
+/ désignant la racine :
+
+#+BEGIN_EXAMPLE
+cd //Rép_1///Rép_2///...///Rép_N/
+#+END_EXAMPLE
+
+On parle pour :
+
+#+BEGIN_EXAMPLE
+//Rép_1///Rép_2///...///Rép_N/
+#+END_EXAMPLE
+
+de chemin absolu, car il ne dépend pas du répertoire courant.
+
+On se déplace vers le répertoire parent par :
+
+#+BEGIN_EXAMPLE
+cd ..
+#+END_EXAMPLE
+
+On se déplace vers le répertoire racine par :
+
+#+BEGIN_EXAMPLE
+cd /
+#+END_EXAMPLE
+
+On se déplace vers le répertoire d'où l'on vient par :
+
+#+BEGIN_EXAMPLE
+cd -
+#+END_EXAMPLE
+
+La commande :
+
+#+BEGIN_EXAMPLE
+pwd
+#+END_EXAMPLE
+
+affiche le répertoire courant.
+
+
+*** Pile de répertoires
+
+La pile de répertoires permet de conserver les
+répertoires fréquemment utilisés. Le répertoire
+courant sera toujours adapté au répertoire situé
+au sommet de la pile.
+
+On ajoute un répertoire au sommet de la pile par :
+
+#+BEGIN_EXAMPLE
+pushd /répertoire/
+#+END_EXAMPLE
+
+Cette commande a donc également pour effet de
+se déplacer vers le répertoire donné.
+
+On supprime le répertoire situé au sommet de la pile par :
+
+#+BEGIN_EXAMPLE
+popd
+#+END_EXAMPLE
+
+Cette commande a également pour effet de se déplacer
+vers le répertoire qui était situé juste sous le sommet
+de la pile et qui devient à présent le sommet.
+
+On affiche le contenu de la pile par :
+
+#+BEGIN_EXAMPLE
+dirs -v
+#+END_EXAMPLE
+
+On se déplace au /N/<sup>ème</sup> répertoire en partant
+du sommet de la pile par :
+
+#+BEGIN_EXAMPLE
+pushd +/N/
+#+END_EXAMPLE
+
+On se déplace au /N/<sup>ème</sup> répertoire en partant
+du bas de la pile par :
+
+#+BEGIN_EXAMPLE
+pushd -/N/
+#+END_EXAMPLE
+
+Chaque répertoire de la pile est également accessible par :
+
+#+BEGIN_EXAMPLE
+cd ~/N/
+#+END_EXAMPLE
+
+où /N/ est le numéro du répertoire donné par la sortie de
+« dirs -v »
+
+
+*** Liste des fichiers
+
+La commande :
+
+#+BEGIN_EXAMPLE
+ls
+#+END_EXAMPLE
+
+affiche le contenu du répertoire courant : fichiers,
+sous-répertoires, liens, etc. Par défaut, elle n'affiche pas les
+objets cachés, qui commencent par convention par un point dans les
+systèmes Unix.  L'option -a permet d'afficher tous les objets, masqués
+ou non :
+
+#+BEGIN_EXAMPLE
+ls -a
+#+END_EXAMPLE
+
+On peut donner en argument le nom du répertoire dont on souhaite
+afficher le contenu :
+
+#+BEGIN_EXAMPLE
+ls /répertoire/
+#+END_EXAMPLE
+
+L'option -l affiche plus d'information :
+
+#+BEGIN_EXAMPLE
+ls -l
+#+END_EXAMPLE
+
+L'option -t trie par date de dernière modification :
+
+#+BEGIN_EXAMPLE
+ls -t
+#+END_EXAMPLE
+
+L'option -d permet d'afficher seulement les informations
+sur un répertoire, sans en explorer le contenu :
+
+#+BEGIN_EXAMPLE
+ls -d /répertoire/
+#+END_EXAMPLE
+
+On la combine souvent avec l'option -l :
+
+#+BEGIN_EXAMPLE
+ls -l -d /répertoire/
+#+END_EXAMPLE
+
+Les options pouvant se condenser devant un unique tiret,
+on a la forme équivalente :
+
+#+BEGIN_EXAMPLE
+ls -ld /répertoire/
+#+END_EXAMPLE
+
+
+*** Création de répertoire
+
+La commande :
+
+#+BEGIN_EXAMPLE
+mkdir /répertoire/
+#+END_EXAMPLE
+
+crée un répertoire. L'option -p permet de créer plusieurs niveaux de
+répertoires d'un coup :
+
+#+BEGIN_EXAMPLE
+mkdir -p /Rép_1///Rép_2///...///Rép_N/
+#+END_EXAMPLE
+
+
+*** Copie
+
+La commande *cp* permet de copie un fichier
+source vers un fichier ou répertoire destination :
+
+#+BEGIN_EXAMPLE
+cp /source/ /destination/
+#+END_EXAMPLE
+
+Cet exemple copie le contenu d'un fichier dans un autre :
+
+#+BEGIN_EXAMPLE
+cp /fichier_1/ /fichier_2/
+#+END_EXAMPLE
+
+Cet exemple copie un fichier dans un répertoire donné :
+
+#+BEGIN_EXAMPLE
+cp /fichier/ /répertoire/
+#+END_EXAMPLE
+
+Cet exemple copie un fichier provenant d'un autre
+répertoire dans le répertoire courant :
+
+#+BEGIN_EXAMPLE
+cp /chemin///fichier/ .
+#+END_EXAMPLE
+
+Cet exemple copie un fichier dans le répertoire parent :
+
+#+BEGIN_EXAMPLE
+cp /fichier/ ..
+#+END_EXAMPLE
+
+Par défaut, la commande cp n'agit que sur des fichiers.
+L'option -R lui demande d'agir récursivement sur les répertoires,
+les sous-répertoires, et ainsi de suite :
+
+#+BEGIN_EXAMPLE
+cp -R /répertoire-source/ /répertoire-destination/
+#+END_EXAMPLE
+
+
+*** Renommer ou déplacer
+
+La commande *mv* permet de renommer ou déplacer un fichier.
+Sa syntaxe est similaire à celle de cp :
+
+#+BEGIN_EXAMPLE
+mv /source/ /destination/
+#+END_EXAMPLE
+
+Cet exemple renomme un fichier :
+
+#+BEGIN_EXAMPLE
+mv /fichier_1/ /fichier_2/
+#+END_EXAMPLE
+
+Cet exemple déplace un fichier dans un répertoire donné :
+
+#+BEGIN_EXAMPLE
+mv /fichier/ /répertoire/
+#+END_EXAMPLE
+
+Cet exemple déplace un fichier provenant d'un autre
+répertoire dans le répertoire courant :
+
+#+BEGIN_EXAMPLE
+mv /chemin///fichier/ .
+#+END_EXAMPLE
+
+Cet exemple déplace un fichier dans le répertoire parent :
+
+#+BEGIN_EXAMPLE
+mv /fichier/ ..
+#+END_EXAMPLE
+
+
+*** Suppression
+
+La commande *rm* efface des fichiers :
+
+#+BEGIN_EXAMPLE
+rm /fichier(s)/
+#+END_EXAMPLE
+
+L'option -r lui demande d'agir récursivement sur des répertoires :
+
+#+BEGIN_EXAMPLE
+rm -r /répertoire(s)/
+#+END_EXAMPLE
+
+L'option -f lui demande de ne pas demander confirmation :
+
+#+BEGIN_EXAMPLE
+rm -f /fichier(s)/
+rm -rf /répertoire(s)/
+#+END_EXAMPLE
+
+Pour être plus précis, la commande rm n'efface pas les contenus
+des fichiers sur le disque, mais uniquement les entrée correspondantes
+dans la table du système de fichier.
+
+
+*** Liens
+
+
+**** Symboliques
+
+La commande *ln* permet de créer des liens.
+L'option -s crée un lien symbolique :
+
+#+BEGIN_EXAMPLE
+ln -s /cible/ /lien_symbolique/
+#+END_EXAMPLE
+
+La cible peut être un fichier, un répertoire, un autre lien, etc. Les
+accés au lien seront considérés comme des accès à la cible qu'il référence.
+Ainsi, si on crée un lien symbolique vers un fichier :
+
+#+BEGIN_EXAMPLE
+ln -s /fichier/ /lien_fichier/
+#+END_EXAMPLE
+
+et qu'on demande à un éditeur de texte d'ouvrir le lien, ce sera bien
+le contenu du fichier cible qui apparaîtra. Si on crée un lien symbolique
+vers un répertoire en donnant un chemin absolu ou relatif pour cible :
+
+#+BEGIN_EXAMPLE
+ln -s /répertoire/ /lien_répertoire/
+#+END_EXAMPLE
+
+la commande :
+
+#+BEGIN_EXAMPLE
+cd /lien_répertoire/
+#+END_EXAMPLE
+
+sera équivalente à :
+
+#+BEGIN_EXAMPLE
+cd /répertoire/
+#+END_EXAMPLE
+
+
+**** Durs
+
+La commande ln sans option -s crée un lien dur :
+
+#+BEGIN_EXAMPLE
+ln /cible/ /lien_dur/
+#+END_EXAMPLE
+
+
+**** Différences
+
+Un lien symbolique contient une référence à un nom de fichier, ce dernier
+permettant de retrouver dans la table du système de fichier auquel
+il appartient l'adresse du contenu sur le disque. On a donc le schéma :
+
+#+BEGIN_EXAMPLE
+Lien_symbolique ——> Nom_du_fichier ——> Contenu
+#+END_EXAMPLE
+
+Si on supprime le lien symbolique :
+
+#+BEGIN_EXAMPLE
+rm Lien_symbolique
+#+END_EXAMPLE
+
+le fichier sera toujours accessible :
+
+#+BEGIN_EXAMPLE
+Nom_du_fichier ——> Contenu
+#+END_EXAMPLE
+
+Par contre, si on supprime le fichier
+ciblé par le lien :
+
+#+BEGIN_EXAMPLE
+rm Nom_du_fichier
+#+END_EXAMPLE
+
+le lien référencera une entrée dans la table du système de fichier
+qui n'existe plus :
+
+#+BEGIN_EXAMPLE
+Lien_symbolique ——> ??? ——> Contenu
+#+END_EXAMPLE
+
+et le contenu du fichier sera introuvable.
+
+Un lien dur est un synonyme ajoutant une entrée dans la table
+du système de fichier :
+
+| ...            | ...                |
+| Nom_du_fichier | Adresse_du_contenu |
+| Lien_dur       | Adresse_du-contenu |
+| ...            | ...                |
+
+On a donc le schéma :
+
+#+BEGIN_EXAMPLE
+Nom_du_fichier ——> Contenu <—— Lien_dur
+#+END_EXAMPLE
+
+Si on supprime le lien dur :
+
+#+BEGIN_EXAMPLE
+rm Lien_dur
+#+END_EXAMPLE
+
+le fichier sera toujours accessible :
+
+#+BEGIN_EXAMPLE
+Nom_du_fichier ——> Contenu
+#+END_EXAMPLE
+
+Il en va de même si on supprime le fichier ciblé par le lien :
+
+#+BEGIN_EXAMPLE
+rm Nom_du_fichier
+#+END_EXAMPLE
+
+car le contenu sera alors accessible via le lien :
+
+#+BEGIN_EXAMPLE
+Contenu ⟻ Lien_dur
+#+END_EXAMPLE
+
+Le lien dur est donc symétrique pour la suppression, tandis que le
+lien symbolique est asymétrique. Comme autres différences, notons qu'un
+lien symbolique peut référencer un fichier situé dans un autre système
+de fichiers, tandis que les liens durs sont confinés à l'intérieur
+d'un même système de fichier.
+
+
+*** Propriétaire et groupe
+
+Sous les systèmes UNIX, un fichier appartient à un propriétaire
+et à un groupe. On peut modifier ces paramètres via la commande :
+
+#+BEGIN_EXAMPLE
+chown /propriétaire/:/groupe/ /fichier/
+#+END_EXAMPLE
+
+Attention toutefois, une fois que l'on n'est plus propriétaire du
+fichier, il n'y a plus de retour en arrière possible : seul le
+propriétaire d'un fichier et le super-utilisateur *root*
+peuvent modifier propriétaire et groupe d'un fichier.
+
+
+*** Permissions
+
+Les principales permissions attachées à un fichier sont :
+
+  - r : Droit de lecture
+  - w : Droit d'écriture (de modification)
+  - x : Droit d'exécution
+
+Ces permissions peuvent être données ou retirées :
+
+  - u : au propriétaire
+  - g : aux membres du groupe
+  - o : aux autres
+
+Les permissions s'ajoutent au moyen de la commande :
+
+#+BEGIN_EXAMPLE
+chmod /qui/+/quoi/ /fichier/
+#+END_EXAMPLE
+
+ou se retirent au moyen de la commande :
+
+#+BEGIN_EXAMPLE
+chmod /qui/-/quoi/ /fichier/
+#+END_EXAMPLE
+
+où :
+  - /qui/ = u, g ou o
+  - /quoi/ = r, w ou x
+
+Ainsi, la commande :
+
+#+BEGIN_EXAMPLE
+chmod g+w /fichier/
+#+END_EXAMPLE
+
+donne les droits d'écriture aux membres du groupes.
+
+
+*** Attributs
+
+Les attributs permettent de configurer finement certains fichiers
+Ils se modifient avec la commande :
+
+#+BEGIN_EXAMPLE
+chattr
+#+END_EXAMPLE
+
+qui utilise une syntexe +attribut/-attribut analogue à *chmod*.
+
+
+*** Montage
+
+La commande mount permet de monter un système de fichiers
+dans le répertoire d'un autre. Ce dernier répertoire est appelé
+point de montage :
+
+#+BEGIN_EXAMPLE
+mount /systèmeDeFichiers/
+ /pointDeMontage/
+#+END_EXAMPLE
+
+Les systèmes de fichiers sont généralement accessible
+par des fichiers magiques situés dans le répertoire /dev :
+
+#+BEGIN_EXAMPLE
+mount /dev//systèmeDeFichiers/
+ /pointDeMontage/
+#+END_EXAMPLE
+
+Un fichier image est un fichier contenant un système
+de fichiers. L'option -o loop permet de monter un fichier image :
+
+#+BEGIN_EXAMPLE
+mount -o loop /fichierImage/
+ /pointDeMontage/
+#+END_EXAMPLE
+
+Que faire si l’on souhaite manipuler plusieurs images en même temps
+? On utilise losetup :
+
+#+BEGIN_EXAMPLE
+losetup -f
+#+END_EXAMPLE
+
+qui affiche le premier périphérique de boucle libre :
+
+#+BEGIN_EXAMPLE
+/dev/loop0
+#+END_EXAMPLE
+
+On lie ensuite ce résultat au fichier image par :
+
+#+BEGIN_EXAMPLE
+losetup /dev/loop0 /fichierImage/
+#+END_EXAMPLE
+
+Il ne reste plus qu'à monter ce périphérique :
+
+#+BEGIN_EXAMPLE
+mount /dev/loop0 /pointDeMontage/
+#+END_EXAMPLE
+
+Si on souhaite recommencer avec une autre image :
+
+#+BEGIN_EXAMPLE
+losetup -f
+#+END_EXAMPLE
+
+qui affiche le premier périphérique de boucle libre :
+
+#+BEGIN_EXAMPLE
+/dev/loop1
+#+END_EXAMPLE
+
+On lie ensuite ce résultat au fichier image par :
+
+#+BEGIN_EXAMPLE
+losetup /dev/loop1 /autreFichierImage/
+#+END_EXAMPLE
+
+Il ne reste plus qu'à monter ce périphérique :
+
+#+BEGIN_EXAMPLE
+mount /dev/loop1 /pointDeMontage/
+#+END_EXAMPLE
+
+
+*** Autres commandes
+
+| basename /fichier/ | Nom du fichier sans le répertoire |
+| dirname /fichier/  | Nom du répertoire sans le fichier |
+| readlink /lien/    | Cible du lien                     |
+| readlink -f /lien/ | Cible récursive du lien           |
+
+
+** Processus
+
+Une commande attachée au terminal s'appelle un *job*.
+
+Lorsque le shell attend la fin de l'exécution d'un job avant d'accepter
+d'autres commandes, on dit que le job est en *avant-plan*.
+Il ne peut donc y avoir au maximum qu'un seul job en avant-plan
+à un instant donné.
+
+Lorsque le shell exécute un job en parallèle tout en acceptant d'autres
+commandes, on dit que le job est en *arrière-plan*. Il peut
+donc y avoir plusieurs jobs en arrière-plan à un instant donné.
+
+
+*** Contrôle du terminal
+
+| <ctrl d> | Signale la fin de fichier ou sort du shell courant |
+| <ctrl s> | Suspend la sortie du terminal                      |
+| <ctrl q> | Reprend la sortie du terminal                      |
+
+
+*** Contrôle des jobs en avant-plan
+
+| /job/    | Lance un job en avant-plan |
+| <ctrl c> | Annule le job              |
+| <ctrl z> | Suspend le job             |
+
+
+*** Contrôle des jobs en arrière-plan
+
+| /job/ &                              | Lance un job en arrière-plan                    |
+| /job1/ & /job2/ & /...../ & /jobN/ & | Lance plusieurs jobs en parallèle               |
+| jobs                                 | Donne la liste des jobs                         |
+| wait %/nom/                          | Attend la fin du job dont le nom contient /nom/ |
+| kill %/nom/                          | Termine le job dont le nom contient /nom/       |
+
+
+*** Contrôle hybride
+
+|  /job1/ & /job2/|Lance /job1/ en arrière-plan    et /job2/ en avant-plan|
+
+
+**** Passage entre avant-plan et arrière-plan
+
+La commande *fg* permet de faire passer en avant-plan
+un job lancé en arrière-plan ou suspendu par <ctrl z> :
+
+#+BEGIN_EXAMPLE
+fg %/nom/
+#+END_EXAMPLE
+
+La commande *bg* permet de faire passer en arrière-plan
+un job lancé en avant-plan et suspendu par <ctrl z> :
+
+#+BEGIN_EXAMPLE
+bg %/nom/
+#+END_EXAMPLE
+
+
+*** Détachement
+
+| /job/ &!      | Lance un job et le détache du shell   		Il ne sera pas terminé lors de la  fermeture du shell |
+| disown %/nom/ | Détache du shell le job  dont le nom contient /nom/                                                         |
+
+
+*** Exécution conditionnelle
+
+La structure :
+
+#+BEGIN_EXAMPLE
+/commande1/ && /commande2/
+#+END_EXAMPLE
+
+exécute /commande2/ uniquement si
+/commande1/ réussit.
+
+La structure :
+
+#+BEGIN_EXAMPLE
+/commande1/ || /commande2/
+#+END_EXAMPLE
+
+exécute /commande2/ uniquement si
+/commande1/ échoue.
+
+La structure :
+
+#+BEGIN_EXAMPLE
+/commande1/ &&
+/commande2/ ||
+/commande3/
+#+END_EXAMPLE
+
+exécute /commande2/ si
+/commande1/ réussit. Si
+/commande1/ ou /commande2/
+échoue, /commande3/ sera exécutée.
+
+Par exemple, la commande :
+
+#+BEGIN_EXAMPLE
+wait %/nom/ && /commande/
+#+END_EXAMPLE
+
+attend la fin du job dont le nom contient /nom/ et exécute
+/commande/ ensuite.
+
+
+** Redirections
+
+Chaque commande executée dans un shell possède trois canaux par défaut
+où transitent les données :
+
+  - l'entrée standard, où la commande lit ses données
+  - la sortie standard, où la commande écrit ses données ordinaires
+  - l'erreur standard, où la commande écrit ses messages d'erreurs
+
+Par défaut, entrée, sortie et erreur standard se font sur le terminal,
+mais on peut demander au shell de rediriger ces canaux vers un fichier.
+
+
+*** Entrée
+
+La ligne suivante demande à la commande de lire son entrée standard
+dans un fichier :
+
+#+BEGIN_EXAMPLE
+/commande/ < /fichier/
+#+END_EXAMPLE
+
+On dit alors que l'entrée standard est redirigée vers le fichier.
+
+
+**** Herescript
+
+Les lignes suivantes :
+
+#+BEGIN_EXAMPLE
+/commande/ << /signalFin/
+/blabla/
+/signalFin/
+#+END_EXAMPLE
+
+demandent à la commande de lire ses données d'entrée standard
+dans la où les lignes /blabla/ jusqu'à
+l'apparition de /signalFin/. La variante
+suivante ignore les tabulations en début de ligne :
+
+/commande/ <<- /signalFin/
+#+BEGIN_EXAMPLE
+/blabla/
+#+END_EXAMPLE
+/signalFin/
+
+
+**** Herestring
+
+La ligne suivante :
+
+/commande/ <<< "/chaîne/"</div>
+
+demande à la commande de lire ses données d'entrée standard dans
+une chaîne de caractères. La chaîne de caractères peut occuper
+plusieurs lignes :
+
+/commande/ <<< "/blabla/
+#+BEGIN_EXAMPLE
+/blabla/
+/blabla/"
+#+END_EXAMPLE
+
+
+*** Sortie
+
+On peut demander à une commande d'écrire ses données de sortie standard
+dans un fichier :
+
+#+BEGIN_EXAMPLE
+/commande/ > /fichier/
+#+END_EXAMPLE
+
+Le fichier est écrasé si il existe déjà. On dit que la sortie standard
+est redirigée vers le fichier.
+
+
+**** Ajout
+
+On peut demander à une commande d'écrire ses données de sortie standard
+*en ajout* à la fin d'un fichier :
+
+#+BEGIN_EXAMPLE
+/commande/ >> /fichier/
+#+END_EXAMPLE
+
+
+**** Écraser
+
+Suivant les options, il est possible que zsh refuse d'écraser un fichier
+qui existe déjà. On peut le forcer à le faire par :
+
+#+BEGIN_EXAMPLE
+/commande/ >! /fichier/
+#+END_EXAMPLE
+
+La ligne suivante produit le même résultat :
+
+#+BEGIN_EXAMPLE
+/commande/ >| /fichier/
+#+END_EXAMPLE
+
+
+**** Créer
+
+Si zsh refuse d'écrire en ajout dans un fichier qu'il doit créer,
+on peut le forcer à le faire par :
+
+#+BEGIN_EXAMPLE
+/commande/ >>! /fichier/
+#+END_EXAMPLE
+
+La ligne suivante produit le même résultat :
+
+#+BEGIN_EXAMPLE
+/commande/ >>| /fichier/
+#+END_EXAMPLE
+
+
+*** Sortie et erreur
+
+On peut demander à une commande d'écrire ses données de sortie
+*et* d'erreur standard dans un fichier :
+
+#+BEGIN_EXAMPLE
+/commande/ >& /fichier/
+#+END_EXAMPLE
+
+La ligne suivante produit le même résultat :
+
+#+BEGIN_EXAMPLE
+/commande/ &> /fichier/
+#+END_EXAMPLE
+
+On peut demander à une commande d'écrire ses données de sortie
+*et* d'erreur standard *en ajout*
+à la fin d'un fichier :
+
+#+BEGIN_EXAMPLE
+/commande/ >>& /fichier/
+#+END_EXAMPLE
+
+La ligne suivante produit le même résultat :
+
+#+BEGIN_EXAMPLE
+/commande/ &>> /fichier/
+#+END_EXAMPLE
+
+
+**** Écraser
+
+Suivant les options, il est possible que zsh refuse d'écraser un fichier
+qui existe déjà. On peut le forcer à le faire par :
+
+#+BEGIN_EXAMPLE
+/commande/ >&! /fichier/
+#+END_EXAMPLE
+
+
+**** Créer
+
+Si zsh refuse d'écrire en ajout dans un fichier qu'il doit créer,
+on peut le forcer à le faire par :
+
+#+BEGIN_EXAMPLE
+/commande/ >>&! /fichier/
+#+END_EXAMPLE
+
+
+*** Tube
+
+La sortie standard d'une commande peut être redirigée vers
+l'entrée standard d'une autre commande, le flux de données passant
+de la première à la seconde :
+
+#+BEGIN_EXAMPLE
+/commande-1/ | /commande-2/
+#+END_EXAMPLE
+
+Plusieurs commandes peuvent être chaînées ainsi :
+
+#+BEGIN_EXAMPLE
+/commande-1/ | /commande-2/ |
+/.../ | /commande-N/
+#+END_EXAMPLE
+
+Les données passent donc d'une commande à l'autre, un peu comme
+l'eau circule dans une canalisation. Cette analogie explique la
+dénomination anglaise de « pipe », qui
+peut se traduire par « tube ».
+
+
+**** Sortie et erreur
+
+Le flux agrégé de sortie et d'erreur standard d'une commande
+peut être redirigée vers l'entrée standard d'une autre commande :
+
+#+BEGIN_EXAMPLE
+/commande-1/ |& /commande-2/
+#+END_EXAMPLE
+
+Plusieurs commandes peuvent être chaînées ainsi :
+
+#+BEGIN_EXAMPLE
+/commande-1/ |& /commande-2/ |&
+/.../ |& /commande-N/
+#+END_EXAMPLE
+
+
+**** Tube nommé
+
+Un tube nommé se crée par :
+
+#+BEGIN_EXAMPLE
+mknod /tube/ p
+#+END_EXAMPLE
+
+ou :
+
+#+BEGIN_EXAMPLE
+mkfifo /tube/
+#+END_EXAMPLE
+
+La suite de commandes :
+
+#+BEGIN_EXAMPLE
+/commande-1/ > /tube/ &
+/commande-2/ < /tube/
+#+END_EXAMPLE
+
+est alors équivalente à :
+
+#+BEGIN_EXAMPLE
+/commande-1/ | /commande-2/
+#+END_EXAMPLE
+
+Remarquons que la première commande ne peut pas s'exécuter tant
+que la seconde ne va pas lire dans le tube nommé.
+
+
+*** Arguments
+
+
+**** Sortie d'une commande
+
+Lorsqu'une commande /commande-1/ accepte des
+arguments, il est possible de lui indiquer que ceux-ci proviennent
+de la sortie d'une autre commande. Supposons que la sortie de
+/commande-2/ soit :
+
+#+BEGIN_EXAMPLE
+/arg1 arg2 arg3 .../
+#+END_EXAMPLE
+
+La ligne de commande :
+
+#+BEGIN_EXAMPLE
+/commande-1/ $(/commande-2/)
+#+END_EXAMPLE
+
+est équivalente à :
+
+#+BEGIN_EXAMPLE
+/commande-1/ /arg1 arg2 arg3 .../
+#+END_EXAMPLE
+
+
+**** Fichier contenant des arguments
+
+Lorsqu'une commande /commande-1/ accepte des
+arguments, il est possible de lui indiquer que ceux-ci sont contenus
+dans un fichier. Supposons que /fichier/ contienne :
+
+#+BEGIN_EXAMPLE
+/arg1 arg2 arg3 .../
+#+END_EXAMPLE
+
+La ligne de commande :
+
+#+BEGIN_EXAMPLE
+/commande-1/ $(</fichier/)
+#+END_EXAMPLE
+
+est équivalente à :
+
+#+BEGIN_EXAMPLE
+/commande-1/ /arg1 arg2 arg3 .../
+#+END_EXAMPLE
+
+
+**** Fichier virtuel en entrée
+
+Lorsqu'une commande /commande-1/
+accepte un fichier en argument, il est possible de remplacer le
+contenu de ce fichier par la sortie standard d'une commande <span
+class="rouge">commande-2/. On utilise alors la notation :
+
+#+BEGIN_EXAMPLE
+/commande-1/ <(/commande-2/)
+#+END_EXAMPLE
+
+Lorsqu'une commande accepte plusieurs fichiers en arguments,
+on a la notation :
+
+#+BEGIN_EXAMPLE
+/commande-1/ <(/commande-2/) /.../ <(/commande-N/)
+#+END_EXAMPLE
+
+
+***** Fichier temporaire
+
+La forme :
+
+#+BEGIN_EXAMPLE
+/commande-1/ =(/commande-2/)
+#+END_EXAMPLE
+
+est équivalente à :
+
+#+BEGIN_EXAMPLE
+/commande-1/ <(/commande-2/)
+#+END_EXAMPLE
+
+mais utilise un fichier temporaire au lieu d'un tube nommé, ce qui
+est plus lent mais permet plus de possibilités en lecture.
+
+
+**** Processus en sortie
+
+Il est possible d’envoyer la sortie d’une commande
+/commande/ vers l’entrée standard d’un
+processus /commande-2/.
+On utilise alors la notation :
+
+#+BEGIN_EXAMPLE
+/commande/ > >(/processus/)
+#+END_EXAMPLE
+
+Lorsque la commande écrit dans le fichier qu’elle reçoit en argument,
+on a la forme plus simple :
+
+#+BEGIN_EXAMPLE
+/commande/ >(/processus/)
+#+END_EXAMPLE
+
+
+*** Codes et canaux
+
+Les canaux d'entrée et de sortie par défaut ont des codes :
+  - 0 : entrée standard
+  - 1 : sortie standard
+  - 2 : erreur standard
+
+Les autres canaux (de 3 à 9) sont des canaux auxiliaires.
+
+
+**** Redirection d'un canal
+
+Il est possible de se servir de ces codes pour rediriger un de ces
+canaux vers un fichier :
+
+#+BEGIN_EXAMPLE
+/commande/ /canal/> /fichier/
+#+END_EXAMPLE
+
+Ainsi, la ligne :
+
+#+BEGIN_EXAMPLE
+/commande/ 1> /fichier/
+#+END_EXAMPLE
+
+redirige l'entrée standard vers le fichier. Elle est donc équivalente
+à :
+
+#+BEGIN_EXAMPLE
+/commande/ > /fichier/
+#+END_EXAMPLE
+
+La ligne :
+
+#+BEGIN_EXAMPLE
+/commande/ 2> /fichier/
+#+END_EXAMPLE
+
+redirige l'erreur standard vers le fichier.
+
+
+**** Redirection d'un canal vers un autre
+
+Il est également possible de rediriger un de ces canaux vers un autre
+au moyen de la syntaxe :
+
+#+BEGIN_EXAMPLE
+/canal-1/>&/canal-2/
+#+END_EXAMPLE
+
+pour un canal de sortie ou :
+
+#+BEGIN_EXAMPLE
+/canal-1/<&/canal-2/
+#+END_EXAMPLE
+
+pour un canal d’entrée. Ainsi, la ligne :
+
+#+BEGIN_EXAMPLE
+/commande/ > /fichier/ 2>&1
+#+END_EXAMPLE
+
+redirige la sortie vers le fichier, puis l'erreur vers la sortie.
+Les deux flux sont donc agrégés, et la commande est équivalente à :
+
+#+BEGIN_EXAMPLE
+/commande/ >& /fichier/
+#+END_EXAMPLE
+
+La ligne :
+
+#+BEGIN_EXAMPLE
+/commande-1/ 2>&1 | /commande-2/
+#+END_EXAMPLE
+
+agrège sortie et erreur avant de les envoyer dans le tube. Elle est
+donc équivalente à :
+
+#+BEGIN_EXAMPLE
+/commande-1/ |& /commande-2/
+#+END_EXAMPLE
+
+
+***** Par défaut
+
+La notation :
+
+#+BEGIN_EXAMPLE
+>&/canal/
+#+END_EXAMPLE
+
+est un raccourci pour :
+
+#+BEGIN_EXAMPLE
+1>&/canal/
+#+END_EXAMPLE
+
+
+**** Fermeture d'un canal
+
+On ferme un canal de sortie par l'instruction :
+
+#+BEGIN_EXAMPLE
+/canal/>&-
+#+END_EXAMPLE
+
+On ferme un canal d’entrée par l'instruction :
+
+#+BEGIN_EXAMPLE
+/canal/<&-
+#+END_EXAMPLE
+
+
+**** Exec
+
+La commande *exec* permet de rediriger un canal jusqu'à
+instruction contraire. Par exemple, l'instruction suivante conserve
+l'ancienne sortie dans le canal auxiliaire 3 :
+
+#+BEGIN_EXAMPLE
+exec 3>&1
+#+END_EXAMPLE
+
+On peut à présent rediriger la sortie vers un fichier :
+
+#+BEGIN_EXAMPLE
+exec >>| /fichier/
+#+END_EXAMPLE
+
+On peut alors exécuter plusieurs commandes, leurs sorties seront redirigées vers le fichier.
+La commande :
+
+#+BEGIN_EXAMPLE
+exec 1>&3
+#+END_EXAMPLE
+
+revient à la sortie antérieure et l'instruction :
+
+#+BEGIN_EXAMPLE
+exec 3>&-
+#+END_EXAMPLE
+
+ferme le canal auxiliaire.
+
+
+*** Modification
+
+La commande suivante :
+
+#+BEGIN_EXAMPLE
+/commande/ <> /fichier/
+#+END_EXAMPLE
+
+ouvre le fichier en lecture et en écriture tout en redirigeant
+l'entrée vers le fichier. Lorsqu'on la combine avec une redirection de
+la sortie standard vers l'entrée, la commande va lire et écrire ses
+données dans le même fichier :
+
+#+BEGIN_EXAMPLE
+/commande/ <> /fichier/ 1>&0
+#+END_EXAMPLE
+
+
+*** Multios
+
+Un *multios* est une redirection multiple.
+
+On peut rediriger l'entrée vers plusieurs fichiers :
+
+#+BEGIN_EXAMPLE
+/commande/
+ < /fichier-1/
+ < /fichier-2/
+#+END_EXAMPLE
+
+Les fichiers sont lus dans l'ordre de leur apparition.
+
+On peut rediriger la sortie vers plusieurs fichiers :
+
+#+BEGIN_EXAMPLE
+/commande/
+ > /fichier-1/
+ > /fichier-2/
+#+END_EXAMPLE
+
+La sortie est alors écrite dans chaque fichier vers lequel on redirige.
+
+On peut combiner entrée et pipe. La ligne suivante demande à la seconde
+commande de lire ses données dans la sortie de la première commande, puis
+dans le fichier :
+
+#+BEGIN_EXAMPLE
+/commande-1/ | /commande-2/
+	 < /fichier/
+#+END_EXAMPLE
+
+On peut combiner sortie et pipe. La ligne suivante demande à la première
+commande d'écrire ses données dans le fichier et de les envoyer à l'entrée
+de la seconde commande :
+
+#+BEGIN_EXAMPLE
+/commande-1/ > /fichier/ |
+/commande-2/
+#+END_EXAMPLE
+
+
+*** Lecture et écriture
+
+
+**** Cat
+
+Cette section décrit quelques commandes de base permettant de lire et d'écrire.
+
+La commande « cat » lit du texte dans un fichier
+ou plusieurs fichiers passés en argument  :
+
+#+BEGIN_EXAMPLE
+cat /fichier(s)-entrée/
+#+END_EXAMPLE
+
+et l'affiche à la sortie standard.
+
+Si aucun argument n'est donné, le texte est lu à l'entrée standard
+et affiché à la sortie standard. Par exemple, pour insérer du texte
+dans un fichier, on peut utiliser la commande :
+
+#+BEGIN_EXAMPLE
+cat > /fichier-sortie/
+#+END_EXAMPLE
+
+Le texte est ensuite lu via l'entrée standard. On signale
+la fin de l'entrée en utilisant le caractère de fin de fichier
+« ctrl d ».
+
+
+**** Print
+
+La commande « print » affiche à l'entrée
+standard une simple chaîne de caractère ou plus généralement une
+expression interprétable par le shell :
+
+#+BEGIN_EXAMPLE
+print &quot;/chaîne/&quot;
+print /expression/
+#+END_EXAMPLE
+
+
+***** Lignes
+
+Pour afficher du texte à raison d'un mot par ligne on utilise la variante :
+
+#+BEGIN_EXAMPLE
+print -l /expression/
+#+END_EXAMPLE
+
+
+***** Colonnes
+
+Pour afficher du texte disposé en colonnes on utilise la variante :
+
+#+BEGIN_EXAMPLE
+print -c /expression/
+#+END_EXAMPLE
+
+
+**** Echo
+
+La commande « echo » est similaire à
+« print » :
+
+#+BEGIN_EXAMPLE
+echo /expression/
+#+END_EXAMPLE
+
+
+**** Tee
+
+La commande *tee* recopie son entrée standard
+sur sa sortie standard et dans un fichier. Cette commande est au tube
+ce que le « T » est au réseau de canalisations.
+Par exemple, dans cette structure :
+
+#+BEGIN_EXAMPLE
+/commande-1/ |
+tee /fichier/ |
+/commande-2/
+#+END_EXAMPLE
+
+la sortie de /commande-1/ est envoyée vers tee.
+Tee la recopie dans le fichier et la passe à
+/commande-2/. On aurait pu obtenir le même résultat
+avec :
+
+#+BEGIN_EXAMPLE
+/commande-1/ > /fichier/ |
+/commande-2/
+#+END_EXAMPLE
+
+
+***** Plusieurs fichiers
+
+On peut passer autant de fichiers que l'on veut en argument à
+*tee* : celui-ci va alors recopier l'entrée
+standard dans tous les fichiers donnés avant de l'envoyer vers la
+sortie standard :
+
+#+BEGIN_EXAMPLE
+/commande-1/ |
+tee /fichier-1/ /.../ /fichier-N/ |
+/commande-2/
+#+END_EXAMPLE
+
+
+** Variables
+
+Une variable est un objet contenant une valeur.
+
+
+*** Déclaration
+
+On peut déclarer une variable par :
+
+#+BEGIN_EXAMPLE
+typeset /variable/
+#+END_EXAMPLE
+
+L'instruction *unset* permet de donner
+un statut indéfini à une variable :
+
+#+BEGIN_EXAMPLE
+unset /variable/
+#+END_EXAMPLE
+
+
+*** Valeur
+
+L'instruction :
+
+#+BEGIN_EXAMPLE
+/variable/=/valeur/
+#+END_EXAMPLE
+
+définit ou modifie la valeur contenue dans une variable. L'accès
+au contenu de cette variable se fait via la syntaxe :
+
+#+BEGIN_EXAMPLE
+$/variable/
+#+END_EXAMPLE
+
+Il peut être souhaitable de délimiter clairement
+le nom d'une variable, surtout si celle-ci est entourée
+de texte. On utilise alors des accolades :
+
+#+BEGIN_EXAMPLE
+${/variable/}
+#+END_EXAMPLE
+
+
+*** Guillemets
+
+Supposons que :
+
+#+BEGIN_EXAMPLE
+/variable/=/contenu/
+#+END_EXAMPLE
+
+On souhaite que l'expression :
+
+#+BEGIN_EXAMPLE
+/abc/ $/variable/ /xyz/
+#+END_EXAMPLE
+
+soit considérée comme un seul mot malgré les espaces. On est alors
+tenté d'utiliser les guillemets simples :
+
+#+BEGIN_EXAMPLE
+print '/abc/ $/variable/ /xyz/'
+#+END_EXAMPLE
+
+mais il faut savoir que cette méthode annule l'effet de tous les
+caractères magiques et donc des « $ ». La commande
+précédente affichera donc littéralement :
+
+#+BEGIN_EXAMPLE
+/abc/ $/variable/ /xyz/
+#+END_EXAMPLE
+
+Si on souhaite afficher le contenu de la variable, on utilisera les
+guillemets doubles. La commande : :
+
+#+BEGIN_EXAMPLE
+print &quot;/abc/ $/variable/ /xyz/&quot;
+#+END_EXAMPLE
+
+remplacera la variable par son contenu avant d'afficher :
+
+#+BEGIN_EXAMPLE
+/abc/ /contenu/ /xyz/
+#+END_EXAMPLE
+
+
+*** Éclatement en plusieurs mots
+
+Une variable contenant des espaces, du type :
+
+#+BEGIN_EXAMPLE
+/variable/=&quot;/abc/ /def/ /.../ /uvw/&quot;
+#+END_EXAMPLE
+
+est considérée comme un seul mot à cause des guillemets doubles,
+d'ailleurs nécessaires à la définition. On peut cependant demander
+au shell de considérer le contenu de la variable comme une liste de
+mots. On utilise alors la syntaxe :
+
+#+BEGIN_EXAMPLE
+${=/variable/}
+#+END_EXAMPLE
+
+Lorsque le séparateur n'est pas un espace, on peut le signaler
+par :
+
+#+BEGIN_EXAMPLE
+${(s//séparateur//)/variable/}
+#+END_EXAMPLE
+
+
+*** Lecture et écriture
+
+| read /variable/|Lit une variable sur l'entrée standard|
+| print $/variable/|Affiche le contenu d'une variable sur la sortie standard|
+
+
+*** Redirections
+
+
+**** Sortie d'une commande
+
+Il est possible de placer la sortie d'une commande dans une variable
+via la syntaxe :
+
+#+BEGIN_EXAMPLE
+/variable/=$(/commande/)
+#+END_EXAMPLE
+
+ou la forme alternative :
+
+#+BEGIN_EXAMPLE
+/variable/=`/commande/`
+#+END_EXAMPLE
+
+
+**** Contenu d'un fichier
+
+Il est possible de placer le contenu d'un fichier dans une variable
+via la syntaxe :
+
+#+BEGIN_EXAMPLE
+/variable/=$(< /fichier/)
+#+END_EXAMPLE
+
+Cette commande est équivalente à :
+
+#+BEGIN_EXAMPLE
+/variable/=$(cat /fichier/)
+#+END_EXAMPLE
+
+mais en plus rapide.
+
+
+*** Référence
+
+On dit qu'une variable en référence une autre lorsqu'elle contient
+le nom d'une autre variable. La syntaxe :
+
+#+BEGIN_EXAMPLE
+${(P)/variable/}
+#+END_EXAMPLE
+
+s'évalue au contenu de la variable que contient
+/variable/. Pour y voir plus clair,
+supposons que :
+
+#+BEGIN_EXAMPLE
+/variable_cible/=/contenu/
+/variable_référence/=/variable_cible/
+#+END_EXAMPLE
+
+La commande :
+
+#+BEGIN_EXAMPLE
+print $/variable_référence/
+#+END_EXAMPLE
+
+affiche le texte :
+
+#+BEGIN_EXAMPLE
+/variable_cible/
+#+END_EXAMPLE
+
+tandis que  :
+
+#+BEGIN_EXAMPLE
+print ${(P)/variable/}
+#+END_EXAMPLE
+
+affiche le texte :
+
+#+BEGIN_EXAMPLE
+/contenu/
+#+END_EXAMPLE
+
+
+*** Évaluation
+
+Par défaut, le shell n'interprète qu'une seule fois les motifs magiques
+d'une ligne de commande. Donc, si :
+
+#+BEGIN_EXAMPLE
+/variable/=/contenu/
+#+END_EXAMPLE
+
+La syntaxe :
+
+#+BEGIN_EXAMPLE
+$/variable/
+#+END_EXAMPLE
+
+sera simplement transformée en :
+
+#+BEGIN_EXAMPLE
+/contenu/
+#+END_EXAMPLE
+
+sans étape suplémentaire, et ce, même si le contenu de la variable
+contient des motifs réinterprétables. Il est cependant possible de
+demander au shell de réinterpréter le contenu de la variable. Cela se
+fait au moyen de la syntaxe :
+
+#+BEGIN_EXAMPLE
+${(e)/variable/}
+#+END_EXAMPLE
+
+Par exemple, si :
+
+#+BEGIN_EXAMPLE
+/variable_cible/=/contenu/
+/variable/='$/variable_cible/'
+#+END_EXAMPLE
+
+la commande :
+
+#+BEGIN_EXAMPLE
+print $/variable/
+#+END_EXAMPLE
+
+affichera :
+
+#+BEGIN_EXAMPLE
+$/variable_cible/
+#+END_EXAMPLE
+
+tandis que :
+
+#+BEGIN_EXAMPLE
+print ${(e)/variable/}
+#+END_EXAMPLE
+
+affichera :
+
+#+BEGIN_EXAMPLE
+/contenu/
+#+END_EXAMPLE
+
+
+*** Expressions mathématiques
+
+|  /variable/=$[ /expression/ ]|La variable contient le résultat  d'une expression mathématique|
+| /variable/=$(( /expression/ ))||
+
+
+*** Base
+
+La commande :
+
+#+BEGIN_EXAMPLE
+print $(( [#/base/] /variable/ ))
+#+END_EXAMPLE
+
+exprime la valeur numérique contenue dans /variable/ dans
+la base /base/.
+
+
+*** Substitutions
+
+Une substitution remplace la première occurence d'un motif par une chaîne donnée.
+
+Une substitution globale remplace toutes les occurences d'un motif par une chaîne donnée.
+
+| ${/variable///avant///après/}          | La première occurence d'/avant/  est remplacée par /après/                                              |
+| ${/variable////avant///après/}         | Toutes les occurences d'/avant/  sont remplacées par /après/                                            |
+| ${(I:/N/:)/variable///avant///après/}  | Comme ${.../.../...} mais remplace  la /N/<sup>ième</sup> correspondance                                |
+| ${(I:/N/:)/variable////avant///après/} | Comme ${...//.../...} mais remplace à partir  de la /N/<sup>ième</sup> correspondance                   |
+| ${(S)/variable///avant///après/}       | Comme ${.../.../...} mais remplace la correspondance  la plus courte possible au lieu de la plus longue |
+| ${(S)/variable////avant///après/}      | Comme ${...//.../...} mais remplace les correspondances  les plus courtes possible                      |
+
+
+*** Suppressions
+
+| ${/variable/#/motif/}  | Enlève la plus petite correspondance au début |
+| ${/variable/##/motif/} | Enlève la plus grande correspondance au début |
+| ${/variable/%/motif/}  | Enlève la plus petite correspondance à la fin |
+| ${/variable/%%/motif/} | Enlève la plus grande correspondance à la fin |
+
+On peut utiliser des fanions afin de demander d'afficher la partie
+supprimée ou la partie restante :
+
+| ${(M)/variable/#/motif/}  | Montre la partie enlevée  |
+| ${(M)/variable/##/motif/} |                           |
+| ${(M)/variable/%/motif/}  |                           |
+| ${(M)/variable/%%/motif/} |                           |
+| ${(R)/variable/#/motif/}  | Montre la partie restante |
+| ${(R)/variable/##/motif/} |                           |
+| ${(R)/variable/%/motif/}  |                           |
+| ${(R)/variable/%%/motif/} |                           |
+
+La forme en (R) est en général inutile, puisqu'elle correspond au
+cas par défaut, mais peut être utile dans certains cas.
+
+
+*** Valeur alternative
+
+Certaines expressions permettent de spécifier une valeur alternative
+si la variable est vide ou non définie.
+
+
+**** Variable indéfinie
+
+| ${/variable/-/valeur/}    | Valeur contenue dans la variable 		ou /valeur/ si la variable  n'est pas définie |
+| ${/variable/=/valeur/}    | Comme ${...-...} mais assigne la  valeur à la variable                                         |
+| ${/variable/?}            | Provoque une erreur si la variable  n'est pas définie                                          |
+| ${/variable/?"/message/"} | Comme ${...?} mais avec  un message d'erreur personnalisé                                      |
+| ${/variable/+/valeur/}    | Donne /valeur/ si la variable  est définie                                                     |
+
+
+**** Variable vide ou indéfinie
+
+| ${/variable/:-/valeur/}    | Valeur contenue dans la variable 		ou /valeur/ si la variable  est vide ou n'est pas définie |
+| ${/variable/:=/valeur/}    | Comme ${...:-...} mais assigne la  valeur à la variable                                                    |
+| ${/variable/:?}            | Provoque une erreur si la variable  est vide ou n'est pas définie                                          |
+| ${/variable/:?"/message/"} | Comme ${...:?} mais avec  un message d'erreur personnalisé                                                 |
+| ${/variable/:+/valeur/}    | Donne /valeur/ si la variable  n'est pas vide                                                              |
+
+
+*** Casse
+
+| ${(L)/variable/} | Tous les caractères en minuscules                                       |
+| ${(U)/variable/} | Tous les caractères en majuscules                                       |
+| ${(C)/variable/} | La première lettre de chaque mot  en majuscules, le reste en minuscules |
+
+
+*** Forme littérale
+
+Il est possible d'annuler l'effet magique de cartains caractères contenus dans une variable.
+
+| ${(q)/variable/}   | Méthode \caractère                           |
+| ${(qq)/variable/}  | Méthode guillemets simples : '...'           |
+| ${(qqq)/variable/} | Méthode guillemets doubles : &quot;...&quot; |
+| ${(Q)/variable/}   | Rétablit l'effet magique                     |
+
+
+** Globalisation
+
+La globalisation (ou globbing en anglais) est une expression permettant
+de générer une liste de noms de fichiers correspondant à un motif donné. Par
+exemple, le caractère joker « * » génère la
+liste de tous les fichiers du répertoire courant. On peut afficher cette
+liste au moyen de la commande « print » :
+
+#+BEGIN_EXAMPLE
+print *
+#+END_EXAMPLE
+
+Les fichiers sont entendus au sens large : répertoires, liens,
+etc sont également considérés comme des fichiers. Voici les motifs
+les plus courants :
+
+| *                     | N'importe quelle chaîne de caractères         |                          |
+| ?                     | N'importe quel caractère                      |                          |
+| [/groupeDeCaractère/] | N'importe quel caractère du groupe            |                          |
+| </M/-/N/>             | N'importe quel nombre entier entre /M/ et /N/ |                          |
+| (/chaine-1/           | /chaine-2/)                                   | /chaine-1/ ou /chaine-2/ |
+
+
+*** Récursif
+
+| **   | Comme * mais récursif dans les répertoires                         |
+| **/* | Tous les fichiers du répertoire courant et de ses sous-répertoires |
+
+| **/*/chaine/* | Tous les fichiers contenant /chaine/  dans les sous-répertoires du répertoire courant |
+| ***           | Comme ** mais suit les liens symboliques                                              |
+
+
+*** Étendus
+
+Si on active l'option :
+
+#+BEGIN_EXAMPLE
+setopt extendedglob
+#+END_EXAMPLE
+
+on dispose en plus des motifs de globbing suivant :
+
+| ^*/chaine/*         | Tous les fichiers sauf ceux contenant /chaine/                          |
+| /globe-1/~/globe-2/ | Les fichiers correspondant au globbing   /globe-1/ mais pas à /globe-2/ |
+| (/chaine/)#         | Un nombre quelconque de fois la /chaine/  (de zéro à l'infini)          |
+| (/chaine/)##        | Au moins une fois la /chaine/                                           |
+
+
+*** Qualificateurs
+
+| /globe/([/N/])     | /N/<sup>ième</sup> fichier généré                         |
+| /globe/([/M/,/N/]) | Du /M/<sup>iène</sup>au /N/<sup>ième</sup> fichier généré |
+
+
+**** Fichiers standard
+
+| /globe/(.) | Tous les fichiers réguliers correspondant  au globbing /globe/                                         |
+| /globe/(D) | Tous les fichiers réguliers, 		y compris les fichiers cachés,  correspondant au globbing |
+
+
+**** Répertoire
+
+| /globe/(/)   | Répertoires           |
+| /globe/(F)   | Répertoires non vides |
+| /globe/(/^F) | Répertoires vides     |
+
+
+**** Liens
+
+| /globe/(@)   | Liens symboliques                         |
+| /globe/(-.)  | Fichiers ou liens vers des fichiers       |
+| /globe/(-/)  | Répertoires ou liens vers des répertoires |
+| /globe/(@-.) | Liens vers des fichiers standard          |
+| /globe/(@-/) | Liens vers des répertoires                |
+| /globe/(-@)  | Liens cassés                              |
+
+
+**** Propriétaire
+
+| /globe/(U)                 | Fichiers dont on est propriétaire                                                |
+| /globe/(G)                 | Fichiers dont on le groupe est le même  que le groupe par défaut du propriétaire |
+| /globe/(u:/propriétaire/:) | Fichiers dont le propriétaire est donné                                          |
+| /globe/(g:/groupe/:)       | Fichiers dont le groupe est donné                                                |
+
+
+**** Permissions
+
+| /globe/(f:/permissions/:) | Fichiers respectant la liste de permissions  donnée sous la forme u+wx,g+w,o-w |
+| /globe/(r)                | Fichiers lisibles par le propriétaire                                          |
+| /globe/(w)                | Fichiers modifiables par le propriétaire                                       |
+| /globe/(x)                | Fichiers exécutables par le propriétaire, répertoires inclus                   |
+| /globe/(R)                | Fichiers lisibles par tous                                                     |
+| /globe/(W)                | Fichiers modifiables par tous                                                  |
+| /globe/(X)                | Fichiers exécutables par tous                                                  |
+| /globe/(*)                | Fichiers exécutables                                                           |
+
+
+**** Date de modification
+
+| /globe/(m-/N/)  | Fichiers modifiés il y a au plus /N/ jours    |
+| /globe/(ms-/N/) | Fichiers modifiés il y a au plus /N/ secondes |
+| /globe/(mm-/N/) | Fichiers modifiés il y a au plus /N/ minutes  |
+| /globe/(mh-/N/) | Fichiers modifiés il y a au plus /N/ heures   |
+| /globe/(mw-/N/) | Fichiers modifiés il y a au plus /N/ semaines |
+| /globe/(mM-/N/) | Fichiers modifiés il y a au plus /N/ mois     |
+
+
+**** Taille
+
+| /globe/(Lk-/N/) | Fichiers occupant au plus /N/ KB  |
+| /globe/(Lk+/N/) | Fichiers occupant au moins /N/ KB |
+| /globe/(Lm-/N/) | Fichiers occupant au plus /N/ MB  |
+| /globe/(Lk+/N/) | Fichiers occupant au moins /N/ MB |
+
+
+**** Tri
+
+| /globe/(n)       | Trie aussi suivant les nombres                       |
+| (o/.../)         | Tri                                                  |
+| (O/.../)         | Tri inversé                                          |
+| /globe/(on)      | Tri suivant le nom                                   |
+| /globe/(On)      | Tri inverse suivant le nom                           |
+| /globe/(oL)      | Tri suivant la taille                                |
+| /globe/(om)      | Tri suivant la date de modification                  |
+| /globe/(od)      | Tri suivant la profondeur dans les sous-répertoires  |
+| /globe/(om[/N/]) | /N/<sup>ième</sup> fichier le plus récemment modifié |
+| /globe/(oL[/N/]) | /N/<sup>ième</sup> fichier au classement par taille  |
+
+
+**** Opérations
+
+Enchaîner plusieurs qualificateurs produit un « et » logique
+implicite. Les séparer par une virgule produit un « ou » logique. Le
+« non » logique est représenté par un « ^ ».
+
+| /globe/(.w)  | Fichiers standard modifiables          |
+| /globe/(.,w) | Fichiers standard ou modifiables       |
+| /globe/(^.)  | Fichiers sauf les fichiers standard    |
+| /globe/(.^*) | Fichiers standard sauf les exécutables |
+
+
+**** Indices
+
+| /globe/([/N/])     | /N/<sup>ième</sup> élément de la liste  générée par le globbing                          |
+| /globe/([/M/,/N/]) | Du /M/<sup>ième</sup> au /N/<sup>ième</sup> élément de la liste  générée par le globbing |
+
+
+**** Code
+
+La syntaxe :
+
+#+BEGIN_EXAMPLE
+/globe/(e:'/code/')
+#+END_EXAMPLE
+
+exécute le code pour chaque fichier de la liste générée par le
+globbing. Si la commande réussit, le fichier est affiché. Le fichier
+en cours de traitement est stocké dans la variable :
+
+#+BEGIN_EXAMPLE
+$REPLY
+#+END_EXAMPLE
+
+Le tableau  :
+
+#+BEGIN_EXAMPLE
+$reply
+#+END_EXAMPLE
+
+permet de remplacer le fichier en cours de traitement par une liste
+de fichiers.
+
+
+*** Modificateurs
+
+| (/qualificateur(s)/:/modificateur(s)/) | Ordre de la syntaxe                                             |
+| /chemin///fichier/(:t)                 | Affiche les noms de fichiers sans le chemin                     |
+| /globe/(:t)                            |                                                                 |
+| /chemin///fichier/(:h)                 | Affiche seulement le chemin                                     |
+| /globe/(:h)                            |                                                                 |
+| /fichier/./extension/(:r)              | Affiche les noms de fichier sans extension                      |
+| /globe/(:r)                            |                                                                 |
+| /fichier/./extension/(:e)              | Affiche seulement les extensions                                |
+| /globe/(:e)                            |                                                                 |
+| /globe/(:u)                            | Affiche le résultat du globbing  en majuscules                  |
+| /globe/(:l)                            | Affiche le résultat du globbing  en minuscules                  |
+| =/nom/                                 | Remplace le /nom/ par le chemin complet  du fichier si possible |
+
+
+**** Substitution
+
+| /globe/(:s//avant///après//)  | La première occurence d'/avant/ est remplacée par /après/  dans le résultat du globbing /globe/ |
+| /globe/(:gs//avant///après//) | Toutes les occurences d'/avant/ sont remplacées par /après/  dans le résultat du globbing       |
+| /globe/(:&)                   | Répétition de la dernière substitution                                                          |
+| /globe/(:g&)                  | Répétition globale de la dernière substitution                                                  |
+
+
+**** Variables
+
+La plupart des modificateurs agissent aussi sur les variables. On utilise alors la syntaxe :
+
+#+BEGIN_EXAMPLE
+${/variable/:/modificateur/}
+#+END_EXAMPLE
+
+On peut enchaîner plusieurs modificateurs  :
+
+#+BEGIN_EXAMPLE
+${/variable/:/modificateur_1/:/modificateur_2/}
+#+END_EXAMPLE
+
+
+*** Fanions
+
+Les fanions s'insèrent aux motifs de globbing pour modifier leur comportement.
+
+| (#i)    | Rend la suite de la correspondance insensible à la casse                      |
+| (#l)    | Rend la suite de la correspondance insensible à la casse  pour les minuscules |
+| (#I)    | Rend la suite de la correspondance sensible à la casse                        |
+| (#a/N/) | Autorise au maximum /N/ erreurs de frappe                                     |
+
+
+*** Rétro-références
+
+Les rétro-références peuvent être utilisées dans :
+
+  - les remplacements si le motif modifié dépend du motif initial
+  - les motifs où des sous-motifs doivent être répétés
+
+L'activation des rétro-référence remplit le tableau
+*$match* avec chaque sous-motif inclus dans des
+parenthèses.
+
+| (#b)   | Active les rétro-références    |
+| (#B)   | Désactive les rétro-références |
+| $match | Tableau des sous-motif         |
+
+
+*** Variables
+
+Lorsqu'une variable contient un motif de globbing, ce dernier n'est
+par défaut pas activé. On peut toutefois provoquer la génération
+des noms de fichiers via l'expression :
+
+#+BEGIN_EXAMPLE
+${~/variable/}
+#+END_EXAMPLE
+
+Ainsi, la suite :
+
+#+BEGIN_EXAMPLE
+/variable/=*
+print $/variable/
+#+END_EXAMPLE
+
+affiche le caractère « * » tandis que la suite :
+
+#+BEGIN_EXAMPLE
+/variable/=*
+print ${~/variable/}
+#+END_EXAMPLE
+
+affiche la liste de tous les fichiers du répertoire.
+
+
+*** Désactivation
+
+La précommande *noglob* permet de désactiver la
+génération de fichiers pour la commande qui suit :
+
+#+BEGIN_EXAMPLE
+noglob /commande/ /globe-désactivé/
+#+END_EXAMPLE
+
+
+** Tableaux
+
+On rencontre souvent en programmation au moins deux types de variables :
+  - Les variables de type scalaire, pouvant contenir un nombre, une chaîne de caractères
+  - Les variables de type tableau pouvant contenir plusieurs éléments de type scalaire
+
+/Remarques :/ dans certains langages de programmation :
+  - un élément d'un tableau peut également être un tableau. 	 Autrement dit, un tableau peut être imbriqué dans un autre.
+  - on parle de liste plutôt que de tableau. Je n'emploie pas 		ce terme ici pour éviter la confusion avec les listes de mots, 	 concept fréquemment utilisé par les shells.
+
+
+*** Déclaration
+
+On peut déclarer une variable comme étant un tableau par :
+
+#+BEGIN_EXAMPLE
+typeset -a /tableau/
+#+END_EXAMPLE
+
+
+*** Éléments
+
+La syntaxe :
+
+#+BEGIN_EXAMPLE
+/tableau/=(/element_1 element_2 ... element_N/)
+#+END_EXAMPLE
+
+définit ou modifie un tableau.
+
+
+*** Indices
+
+On accède à un élément d'un tableau par :
+
+#+BEGIN_EXAMPLE
+/tableau/[/indice/]
+#+END_EXAMPLE
+
+Précisons que cet accès peut servir autant en lecture :
+
+#+BEGIN_EXAMPLE
+print $/tableau/[/indice/]
+#+END_EXAMPLE
+
+qu'en écriture :
+
+#+BEGIN_EXAMPLE
+/tableau/[/indice/]=/valeur/
+#+END_EXAMPLE
+
+Les indices positifs sont comptés à partir de 1 au début du tableau
+et les indices négatifs à partir de la fin. L'élément :
+
+#+BEGIN_EXAMPLE
+$/tableau/[2]
+#+END_EXAMPLE
+
+est donc le deuxième et :
+
+#+BEGIN_EXAMPLE
+$/tableau/[-2]
+#+END_EXAMPLE
+
+l'avant-dernier.
+
+
+*** Tranches
+
+On peut accéder à un sous-tableau contenant les
+éléments /M/ à /N/ :
+
+#+BEGIN_EXAMPLE
+$/tableau/[/M/,/N/]
+#+END_EXAMPLE
+
+
+*** Tout le tableau
+
+Notons la notation particulière :
+
+#+BEGIN_EXAMPLE
+$/tableau/[*]
+#+END_EXAMPLE
+
+décrivant tout le tableau, et donc équivalente à :
+
+#+BEGIN_EXAMPLE
+$/tableau/[1,-1]
+#+END_EXAMPLE
+
+
+**** Guillemets
+
+La notation :
+
+#+BEGIN_EXAMPLE
+$/tableau/[@]
+#+END_EXAMPLE
+
+est semblable à :
+
+#+BEGIN_EXAMPLE
+$/tableau/[*]
+#+END_EXAMPLE
+
+mais elle est affichée comme une suite de mots même
+entre guillemets doubles :
+
+#+BEGIN_EXAMPLE
+&quot;$/tableau/[@]&quot;
+#+END_EXAMPLE
+
+Pour s'en convaincre, supposons que :
+
+#+BEGIN_EXAMPLE
+/tableau/=(/abc/ /xyz/)
+#+END_EXAMPLE
+
+La commande :
+
+#+BEGIN_EXAMPLE
+print -l "$/tableau/[*]"
+#+END_EXAMPLE
+
+affichera :
+
+#+BEGIN_EXAMPLE
+/abc/ /xyz/
+#+END_EXAMPLE
+
+tandis que :
+
+#+BEGIN_EXAMPLE
+print -l "$/tableau/[@]"
+#+END_EXAMPLE
+
+affichera :
+
+#+BEGIN_EXAMPLE
+/abc/
+/xyz/
+#+END_EXAMPLE
+
+La syntaxe :
+
+#+BEGIN_EXAMPLE
+${(@)/tableau/}
+#+END_EXAMPLE
+
+produira le même effet que :
+
+#+BEGIN_EXAMPLE
+$/tableau/[@]
+#+END_EXAMPLE
+
+
+*** Éclatement en tableau
+
+Une variable contenant des espaces, du type :
+
+#+BEGIN_EXAMPLE
+/variable/=&quot;/abc/ /def/ /.../ /uvw/&quot;
+#+END_EXAMPLE
+
+peut être éclatée en un tableau de mots au moyen la syntaxe :
+
+#+BEGIN_EXAMPLE
+${(z)/variable/}
+#+END_EXAMPLE
+
+On obtient le même effet en éclatant en mots puis en insérant
+la liste dans les parenthèses servant à définir la valeur d'un
+tableau :
+
+#+BEGIN_EXAMPLE
+( ${=/variable/} )
+#+END_EXAMPLE
+
+
+*** Fusion
+
+Supposons que :
+
+#+BEGIN_EXAMPLE
+/tableau/=( /abc/ /def/ /.../ /uvw/ )
+#+END_EXAMPLE
+
+On peut fusionner les éléments d'un tableau en une seule chaîne
+de caractère au moyen de la syntaxe :
+
+#+BEGIN_EXAMPLE
+${(j//Séparateur//)/tableau/}
+#+END_EXAMPLE
+
+Le résultat s'écrira :
+
+#+BEGIN_EXAMPLE
+&quot;/abc//Séparateur//def//Séparateur//...//Séparateur//uvw/&quot;
+#+END_EXAMPLE
+
+
+*** Redirections
+
+Il est possible de former un tableau à partir d'un fichier, à raison
+d'un élément par ligne. On utilise la syntaxe :
+
+#+BEGIN_EXAMPLE
+/tableau/=( ${(f)"$(< /fichier/)"} )
+#+END_EXAMPLE
+
+
+*** Scalaires
+
+| $#/tableau/|Nombre d'éléments d'un tableau|
+| ${#/tableau/}||
+
+
+*** Recherche
+
+| $/tableau/[(r)/motif/] | Recherche du motif dans les éléments  en partant du début du tableau  |
+| $/tableau/[(R)/motif/] | Recherche du motif dans les éléments  en partant de la fin du tableau |
+| $/tableau/[(i)/motif/] | Comme la recherche avec (r), mais retourne l'indice                   |
+| $/tableau/[(I)/motif/] | Comme la recherche avec (R), mais retourne l'indice                   |
+
+
+*** Tri
+
+| ${(o)/tableau/}  | Tri alphabétique des éléments         |
+| ${(O)/tableau/}  | Tri alphabétique inverse des éléments |
+| ${(oi)/tableau/} | Tri insensible à la casse             |
+| ${(Oi)/tableau/} | Tri inverse insensible à la casse     |
+
+
+*** Unicité
+
+| ${(u)/tableau/} | Chaque élément du tableau n'est repris qu'une fois |
+
+
+*** Expansion tensorielle
+
+Supposons que :
+
+#+BEGIN_EXAMPLE
+/tableau_1/=(/T_1_ T_2_ T_3_/)
+/tableau_2/=(/U_1 U_2/)
+#+END_EXAMPLE
+
+La commande :
+
+#+BEGIN_EXAMPLE
+print ${^/tableau_1/}${^/tableau_2/}
+#+END_EXAMPLE
+
+affiche :
+
+#+BEGIN_EXAMPLE
+/T_1_//U_1/ /T_1_//U_2/ /T_2_//U_1/ /T_2_//U_2/ /T_3_//U_1/ /T_3_//U_2/
+#+END_EXAMPLE
+
+
+*** Expansion hybride
+
+Supposons que :
+
+#+BEGIN_EXAMPLE
+/tableau/=(/ELT_1 ELT_2 ... ELT_N/)
+#+END_EXAMPLE
+
+La commande :
+
+#+BEGIN_EXAMPLE
+print &quot;/abc/${/tableau/}/xyz/&quot;
+#+END_EXAMPLE
+
+affiche sans surprise :
+
+#+BEGIN_EXAMPLE
+/abc//ELT_1 ELT_2  ... ELT_N//xyz/
+#+END_EXAMPLE
+
+Il est possible de reproduire le contexte pour chaque élément du tableau. La commande :
+
+#+BEGIN_EXAMPLE
+print &quot;/abc/${^/tableau/}/xyz/&quot;
+#+END_EXAMPLE
+
+affiche :
+
+#+BEGIN_EXAMPLE
+/abc//ELT_1//xyz/ /abc</bleu>/ELT_2//xyz/ /.../ /abc//ELT_N//xyz/ /.../
+#+END_EXAMPLE
+
+
+*** Globalisation
+
+On peut utiliser la génération de fichiers pour remplir un tableau
+via la syntaxe :
+
+#+BEGIN_EXAMPLE
+/tableau/=( /globbing/ )
+#+END_EXAMPLE
+
+Les éléments du tableau seront alors les fichiers générés.
+
+
+*** Modificateurs
+
+La plupart des modificateurs agissent aussi sur les tableaux. On utilise alors la syntaxe :
+
+#+BEGIN_EXAMPLE
+${/tableau/:/modificateur/}
+#+END_EXAMPLE
+
+Le modificateur est alors appliqué à chaque élément du tableau.
+
+
+** Dictionnaires
+
+Un dictionnaire, ou table de hachage, est un tableau particulier qui
+associe des clés à des valeurs.
+
+
+*** Déclaration
+
+On peut déclarer une variable comme étant un dictionnaire par :
+
+#+BEGIN_EXAMPLE
+typeset -A /dictionnaire/
+#+END_EXAMPLE
+
+
+*** Éléments
+
+La syntaxe :
+
+#+BEGIN_EXAMPLE
+/dictionnaire/=(/clé_1 val_1 clé_2 val_2 .../)
+#+END_EXAMPLE
+
+définit ou modifie un dictionnaire.
+
+
+*** Indices
+
+On accède à un élément d'un dictionnaire par :
+
+#+BEGIN_EXAMPLE
+/dictionnaire/[/clé/]
+#+END_EXAMPLE
+
+Précisons que cet accès peut servir autant en lecture :
+
+#+BEGIN_EXAMPLE
+print $/dictionnaire/[/clé/]
+#+END_EXAMPLE
+
+qu'en écriture :
+
+#+BEGIN_EXAMPLE
+/dictionnaire/[/clé/]=/valeur/
+#+END_EXAMPLE
+
+
+*** Clés et valeurs
+
+| ${(k)/dictionnaire/}  | Renvoie un tableau contenant les clés                |
+| ${(v)/dictionnaire/}  | Renvoie un tableau contenant les valeurs             |
+| ${(kv)/dictionnaire/} | Renvoie un tableau contenant les clés et les valeurs |
+
+
+*** Recherche
+
+| $/dictionnaire/[(i)/motif/] | recherche de la première correspondance  au motif dans les clés    |
+| $/dictionnaire/[(I)/motif/] | recherche de toutes les correspondances  au motif dans les clés    |
+| $/dictionnaire/[(r)/motif/] | recherche de la première correspondance  au motif dans les valeurs |
+| $/dictionnaire/[(R)/motif/] | recherche de toutes les correspondances  au motif dans les valeurs |
+
+
+** Environnement
+
+
+*** Variable d'environnement
+
+Une variable ordinaire n'est accessible que depuis le shell courant.
+Pour qu'une variable soit également accessible dans les sous-processus
+lancés par le shell courant, il faut la déclarer en utilisant le mot
+clef *export* :
+
+#+BEGIN_EXAMPLE
+export /variable/=/valeur/
+#+END_EXAMPLE
+
+Une telle variable est nommée variable d'environnement.
+Voici quelques exemples de variables d'environnements :
+
+| SHELL      | Shell                         |
+| USER       | Utilisateur                   |
+| HOME       | Répertoire personnel          |
+| LANG       | Langue et encodage par défaut |
+| NNTPSERVER | Serveur de nouvelles          |
+
+
+**** Chemins d'accès
+
+Certaines variables d'environnement contiennent des chemins d'accès
+séparés par des « : ». C'est le cas de la variable
+*PATH*, qui contient les chemins d'accès aux éxécutables :
+
+#+BEGIN_EXAMPLE
+export PATH=/cheminA/:/cheminB/:/.../
+#+END_EXAMPLE
+
+Voici quelques autres variables contenant des chemins d'accès :
+
+| MAILPATH   | Chemins d'accès aux courriels          |
+| PYTHONPATH | Chemins d'accès aux exécutables python |
+
+
+**** Chemin vers une commande
+
+La notation :
+
+#+BEGIN_EXAMPLE
+=/commande/
+#+END_EXAMPLE
+
+donne le chemin complet du fichier exécutable correspondant à la commande. Par exemple :
+
+#+BEGIN_EXAMPLE
+print =/commande/
+#+END_EXAMPLE
+
+affiche ce chemin et :
+
+#+BEGIN_EXAMPLE
+cat =/script/
+#+END_EXAMPLE
+
+affiche le contenu d'un script
+
+
+*** Tableaux associés aux variables d'environnements
+
+Le shell zsh associe un tableau aux variables d'environnement contenant
+des chemins d'accès. Les deux-points y sont remplacés par des espaces.
+La syntaxe :
+
+#+BEGIN_EXAMPLE
+path=/cheminA/:/cheminB/:/.../
+#+END_EXAMPLE
+
+est équivalente à :
+
+#+BEGIN_EXAMPLE
+export PATH=/cheminA/:/cheminB/:/.../
+#+END_EXAMPLE
+
+Autres exemples :
+
+| mailpath | MAILPATH |
+
+
+** Scripts
+
+Lorsqu'on exécute souvent une même série de commandes, il est
+possible des les sauvegarder dans un fichier :
+
+#+BEGIN_EXAMPLE
+/ligne_de_commande-1/
+/ligne_de_commande-2/
+/  ......./
+/ligne_de_commande-N/
+#+END_EXAMPLE
+
+On rend ensuite le fichier exécutable par :
+
+#+BEGIN_EXAMPLE
+chmod u+x /fichier/
+#+END_EXAMPLE
+
+Il suffit ensuite d'exécuter le fichier en indiquant son chemin absolu :
+
+#+BEGIN_EXAMPLE
+//chemin-absolu///fichier/
+#+END_EXAMPLE
+
+ou, si le fichier est dans le répertoire courant :
+
+#+BEGIN_EXAMPLE
+.//fichier/
+#+END_EXAMPLE
+
+La suite de commandes sera alors exécutée à chaque exécution
+du fichier. On appelle *script* un tel fichier. Bien
+entendu, un script peut contenir autre chose que de simples lignes
+de commandes : variables, fonctions, conditions, structures de
+contrôle permettent de le transformer en programme plus évolué.
+
+
+*** Lancement
+
+Pour lancer un script avec son chemin absolu :
+
+#+BEGIN_EXAMPLE
+//chemin-absolu///script/
+#+END_EXAMPLE
+
+Pour lancer un script du répertoire courant :
+
+#+BEGIN_EXAMPLE
+.//script/
+#+END_EXAMPLE
+
+Le plus simple est encore de placer le script dans un répertoire
+contenu dans la variable d'environnement $PATH. On le lance alors
+simplement par :
+
+#+BEGIN_EXAMPLE
+/script/
+#+END_EXAMPLE
+
+
+*** Eval
+
+La commande *eval* exécute une chaine de caractère, mono
+ou multiligne. Exemple :
+
+#+BEGIN_EXAMPLE
+/var/=`cat /fichier/`
+eval $/var/
+#+END_EXAMPLE
+
+
+*** Source
+
+Pour lancer un script, le shell crée un nouveau processus dans
+lequel le script est exécuté. Si on désire exécuter le script dans
+le processus courant, on fait :
+
+#+BEGIN_EXAMPLE
+source /chemin///script/
+#+END_EXAMPLE
+
+ou, si le script est dans $PATH :
+
+#+BEGIN_EXAMPLE
+source /script/
+#+END_EXAMPLE
+
+
+*** Interpréteur
+
+Par défaut, le shell exécute un script en lançant une nouvelle
+instance de lui-même qui va exécuter les commandes contenues dans le
+fichier. On peut toutefois demander que l'exécution du script soit
+effectuée par un interpréteur de commande donné. On insère alors
+la syntaxe :
+
+#+BEGIN_EXAMPLE
+#!/interpréteur/
+#+END_EXAMPLE
+
+à la première ligne du fichier. En fait, les caractères
+« #! » doivent être les deux premiers du
+fichier. Voici quelques exemples d'interpréteurs de commandes de type
+shell :
+
+| #!/bin/sh   | Début d'un script shell standard |
+| #!/bin/zsh  | Début d'un script shell zsh      |
+| #!/bin/bash | Début d'un script shell bash     |
+| #!/bin/csh  | Début d'un script c-shell        |
+| #!/bin/tcsh | Début d'un script tenex-c-shell  |
+| #!/bin/ksh  | Début d'un script korn shell     |
+
+et quelques exemples d'autres langages de script :
+
+| #!/usr/bin/perl   | Début d'un script perl   |
+| #!/usr/bin/python | Début d'un script python |
+| #!/usr/bin/ruby   | Début d'un script ruby   |
+
+
+*** Valeurs des variables internes
+
+Une variable utilisée dans un script peut recevoir
+une valeur dans la ligne de commande appelante :
+
+#+BEGIN_EXAMPLE
+/variable/=/valeur/   /script/
+#+END_EXAMPLE
+
+La variable est alors accessible dans le code du script et uniquement
+dans celui-ci.
+
+
+*** Arguments
+
+Tout comme n'importe quelle commande, un  script peut être appelé avec des arguments :
+
+#+BEGIN_EXAMPLE
+/script/ /argument_1/ /argument_2/ /.../ /argument_N/
+#+END_EXAMPLE
+
+Dans le code du script, ces arguments sont disponibles
+via des variables particulières :
+
+| 0            | Nom du script en cours d'exécution |
+| 1, 2, 3, ... | Arguments passé au script          |
+| #            | Nombre d'arguments du script       |
+| *            | Liste des arguments                |
+| @            |                                    |
+
+Les valeurs correspondant à ces variables s'obtiennent, comme pour
+n'importe quelle variable, en ajoutant un « $ »
+devant leur nom :
+
+| $0                | Nom du script en cours d'exécution                                       |
+| $1, $2, $3, ...   | Arguments passé au script                                                |
+| ${10}, ${11}, ... | Les arguments de plusieurs chiffres  nécessitent la forme avec accolades |
+| $#                | Nombre d'arguments du script                                             |
+| $*                | Liste des arguments                                                      |
+| $@                |                                                                          |
+
+
+**** Modifications
+
+La commande *set* permet de modifier les variables
+associées aux arguments. Après l'instruction :
+
+#+BEGIN_EXAMPLE
+set /valeur1/ /valeur2/ /valeur3/ /.../
+#+END_EXAMPLE
+
+on aura les égalités :
+
+#+BEGIN_EXAMPLE
+$1 = /valeur1/
+$2 = /valeur2/
+$3 = /valeur3/
+...
+#+END_EXAMPLE
+
+On peut également modifier la variable associée à l'argument /N/ en utilisant
+la syntaxe :
+
+#+BEGIN_EXAMPLE
+/N/=/valeur/
+#+END_EXAMPLE
+
+On aura alors l'égalité :
+
+#+BEGIN_EXAMPLE
+$/N/ = /valeur/
+#+END_EXAMPLE
+
+La commande *shift* décale les variables
+$1, $2, $3, ... en laissant tomber $1. Après :
+
+#+BEGIN_EXAMPLE
+shift
+#+END_EXAMPLE
+
+on aura :
+
+#+BEGIN_EXAMPLE
+$2 —> $1
+$3 —> $2
+$4 —> $3
+...
+#+END_EXAMPLE
+
+Si /N/ est un entier, la commande :
+
+#+BEGIN_EXAMPLE
+shift /N/
+#+END_EXAMPLE
+
+décale les variables $1, $2, $3, ...
+de /N/ positions.
+
+
+**** Liste des arguments
+
+Les valeurs $* et $@ donnent toutes deux la liste des arguments. Le shell considère :
+
+#+BEGIN_EXAMPLE
+$*
+#+END_EXAMPLE
+
+comme une suite de mots. Par contre :
+
+#+BEGIN_EXAMPLE
+"$*"
+#+END_EXAMPLE
+
+est considéré comme un seul mot à cause des guillemets. Le cas de $@
+est légèrement différent. Le shell considère :
+
+#+BEGIN_EXAMPLE
+$@
+#+END_EXAMPLE
+
+comme une suite de mots, et il en va de même pour :
+
+#+BEGIN_EXAMPLE
+"$@"
+#+END_EXAMPLE
+
+malgré les guillemets.
+
+En fait, si on veut passer tous les arguments du script à une commande
+qu'il est chargé d'exécuter, le mieux est généralement d'écrire :
+
+#+BEGIN_EXAMPLE
+/commande/ &quot;$@&quot;
+#+END_EXAMPLE
+
+
+*** Variables spéciales
+
+| $$ | Identifiant du processus courant                                                   |
+| $! | Identifiant du dernier processus  lancé en arrière-plan                            |
+| $? | Code de sortie de la dernière commande exécutée (0 si réussie, autre nombre sinon) |
+| $- | Variable contenant les options actives du shell                                    |
+
+
+*** Remplacement du shell
+
+La commande :
+
+#+BEGIN_EXAMPLE
+exec /commande/
+#+END_EXAMPLE
+
+remplace le shell exécutant le script par /commande/.  Ce peut
+être utile afin d'éviter la création d'un processus superflu.  Le cas
+typique est celui du script uniligne, ou alors en lançant la dernière
+commande du script :
+
+#+BEGIN_EXAMPLE
+#!/bin/sh
+...
+exec /commande/
+#+END_EXAMPLE
+
+
+*** Sortie
+
+L'instruction *exit* termine le script et
+renvoie un code de sortie /N/ :
+
+#+BEGIN_EXAMPLE
+exit /N/
+#+END_EXAMPLE
+
+où /N/ est un entier compris entre 0 et 255.
+
+
+*** Groupement
+
+Le groupement par parenthèses crée un sous-shell exécutant
+une suite de commandes :
+
+#+BEGIN_EXAMPLE
+( /commande1/ ; /commande2/ ; /.../ ; /commandeN/ )
+#+END_EXAMPLE
+
+Le groupement par accolades exécute une suite de commandes vue comme
+une commande unique dans le shell courant :
+
+#+BEGIN_EXAMPLE
+{ /commande1/ ; /commande2/ ; /.../ ; /commandeN/ ; }
+#+END_EXAMPLE
+
+
+**** Redirections
+
+Un groupe de commande est également une commande, avec ses canaux
+d'entrée et sortie qui peuvent être redirigés :
+
+#+BEGIN_EXAMPLE
+( /.../ ; /.../ ; /.../ ) > /fichier/
+{ /.../ ; /.../ ; /.../ } > /fichier/
+#+END_EXAMPLE
+
+Cette technique peut donc être utilisée pour agréger la sortie
+de plusieurs commandes en un seul flux. Mais ce n’est pas la seule
+utilisation possible. Ainsi, pour obtenir une version de print qui
+affiche à l’erreur standard, on utilise :
+
+#+BEGIN_EXAMPLE
+{ print "/texte/" 1>&2 }
+#+END_EXAMPLE
+
+
+*** Options
+
+La commande *set* permet entre-autres de modifier les
+options du shell :
+
+| set -x | Active les informations de débugage commande :  affiche chaque commande avant de l'exécuter |
+| set +x | Désactive les informations de débugage commande                                             |
+|--------+---------------------------------------------------------------------------------------------|
+| set -v | Active les informations de débugage ligne :  affiche chaque ligne avant de l'exécuter       |
+| set +v | Désactive les informations de débugage ligne                                                |
+|--------+---------------------------------------------------------------------------------------------|
+| set -u | Active les messages d'erreur  pour toute variable non déclarée                              |
+| set +u | Désactive les messages d'erreur  des variables non déclarée                                 |
+|--------+---------------------------------------------------------------------------------------------|
+| set -a | Transforme toute variable déclarée ou modifiée dans le script  en variable d'environnement  |
+| set +a | Désactive -a                                                                                |
+
+
+** Configuration
+
+
+*** Fichiers d'initialisation
+
+Le shell zsh lit sa configuration dans plusieurs fichiers :
+
+  - Le fichier ~/.zshrc, lu à chaque démarrage d'un zsh intéractif
+  - Le fichier ~/.zshenv, contenant les initialisations 	 des variables d'environnement
+  - Le fichier ~/.zprofile, lu à chaque démarrage d'un zsh de session
+  - Le fichier ~/.zlogin, lu à chaque démarrage d'un zsh de session
+  - Le fichier ~/.zlogout, lu à chaque fermeture de session zsh
+
+Le mode intéractif est simplement celui correspondant à
+l'interpréteur de commande, par opposition au shell non intéractif
+exécutant un script. L'option -i peut forcer le mode intéractif :
+
+#+BEGIN_EXAMPLE
+zsh -i
+#+END_EXAMPLE
+
+Un zsh de session (on dit aussi de login) s'obtient par :
+
+#+BEGIN_EXAMPLE
+zsh -
+#+END_EXAMPLE
+
+ou :
+
+#+BEGIN_EXAMPLE
+zsh -l
+#+END_EXAMPLE
+
+
+** Fonctions
+
+Une fonction se définit par la syntaxe :
+
+function /fonction/ () {
+#+BEGIN_EXAMPLE
+/commande(s)/
+#+END_EXAMPLE
+}
+
+On peut passer des arguments à une fonction :
+
+#+BEGIN_EXAMPLE
+/fonction/ /argument1/
+/.../ /argumentN/
+#+END_EXAMPLE
+
+Ces arguments peuvent être utilisé dans la définition de
+la fonction sous les noms $1, $2, $3, etc. Exemple :
+
+function /fonction/ () {
+#+BEGIN_EXAMPLE
+... $1 ...
+#+END_EXAMPLE
+}
+
+L'instruction *return* permet de quitter
+la fonction avec un code de retour :
+
+function /fonction/ () {
+#+BEGIN_EXAMPLE
+/commande(s)/
+return /N/
+#+END_EXAMPLE
+}
+
+
+** Conditions
+
+La logique d'un shell est particulière : la valeur vraie est associée
+à une commande qui réussit (code de retour 0) et la valeur fausse à une
+commande qui échoue (codes de retour non nuls).
+
+Les commandes logiques élémentaires sont :
+
+| :     | Commande nulle :  ne fait rien et retourne vrai |
+| true  | Ne fait rien, retourne vrai                     |
+| false | Ne fait rien, retourne faux                     |
+
+
+*** Nombres
+
+| [ /A/ -eq /B/ ]  | Vrai si le nombre /A/ est égal au nombre /B/                       |
+| (( /A/ == /B/ )) |                                                                    |
+| [ /A/ -ge /B/ ]  | Vrai si le nombre /A/ est plus grand que le nombre /B/             |
+| (( /A/ >= /B/ )) |                                                                    |
+| [ /A/ -le /B/ ]  | Vrai si le nombre /A/ est plus petit que le nombre /B/             |
+| (( /A/ <= /B/ )) |                                                                    |
+| [ /A/ -gt /B/ ]  | Vrai si le nombre /A/ est strictement plus grand que le nombre /B/ |
+| (( /A/ > /B/ ))  |                                                                    |
+| [ /A/ -lt /B/ ]  | Vrai si le nombre /A/ est strictement plus petit que le nombre /B/ |
+| (( /A/ < /B/ ))  |                                                                    |
+
+
+*** Variables
+
+La valeur d'une variable « $<span
+class="bleu">variable/ » peut bien entendu s'utiliser partout
+à la place d'une chaîne de caractères ou d'un nombre. Il existe en plus
+certains tests propres aux variables.
+
+| ${+/variable/}|Renvoi vrai si la variable est définie|
+
+
+*** Fichiers
+
+| [ -e /fichier/ ]              | Vrai si le /fichier/ existe                                   |
+| [ -f /fichier/ ]              | Vrai si le /fichier/ existe et est un fichier régulier        |
+| [ -d /repertoire/ ]           | Vrai si le /repertoire/ existe  et est un répertoire          |
+| [ -L /lienSymbolique/ ]       | Vrai si le /lienSymbolique/ existe  et est un lien symbolique |
+| [ /fichier1/ -nt /fichier2/ ] | Vrai si /fichier1/ est plus récent que /fichier2/             |
+| [ /fichier1/ -ot /fichier2/ ] | Vrai si /fichier1/ est plus ancien que /fichier2/             |
+
+
+*** Remarque
+
+Notons que dans d'autres langages de programmation comme python,
+c'est l'inverse : les valeurs non nulles sont vraies et une valeur
+nulle est fausse.
+
+
+** StructuresDeControle
+
+
+*** Structures conditionnelles uniligne
+
+| [ /condition/ ] && /commande/ | Exécute la commande uniquement si    la condition est vraie |
+| [ /condition/ ] ¦¦ /commande/ | Exécute la commande uniquement si  la condition est fausse  |
+
+La suite de commandes :
+
+#+BEGIN_EXAMPLE
+( /commande1/ ; exit 0 )
+#+END_EXAMPLE
+
+réussit toujours. Par conséquent, la structure :
+
+#+BEGIN_EXAMPLE
+/condition/ &&
+( /commande1/ ; exit 0 ) ||
+/commande2/
+#+END_EXAMPLE
+
+va exécuter /commande1/ si
+la /condition/ est vraie et
+/commande2/ dans le cas contraire.
+
+
+*** Structure if
+
+La structure *if* permet d'exécuter conditionnellement
+une suite de commandes. La forme la plus simple est :
+
+#+BEGIN_EXAMPLE
+if [ /condition/ ]
+then
+/commande(s)/
+fi
+#+END_EXAMPLE
+
+Dans la forme suivante, la suite /commande(s)-1/
+est exécutée si la condition est vraie. Dans le cas contraire, c'est
+la suite /commande(s)-2/ qui est exécutée :
+
+#+BEGIN_EXAMPLE
+if [ /condition/ ]
+then
+/commande(s)-1/
+else
+/commande(s)-2/
+fi
+#+END_EXAMPLE
+
+Dans la forme suivante, la suite /commande(s)-1/ est exécutée si la
+/condition-1/ est vraie. Si la /condition-1/ est fausse mais que la
+/condition-2/ est vraie, la suite /commande(s)-2/ est exécutée. Si les
+deux conditions sont fausses, c'est la suite /commande(s)-3/ qui est
+exécutée :
+
+#+BEGIN_EXAMPLE
+if [ /condition-1/ ]
+then
+/commande(s)-1/
+elif [ /condition-2/ ]
+then
+/commande(s)-2/
+else
+/commande(s)-3/
+fi
+#+END_EXAMPLE
+
+Avec « et » :
+
+#+BEGIN_EXAMPLE
+if [ /condition1/ -a /condition2/ ]
+then
+/commande/
+fi
+#+END_EXAMPLE
+
+Avec « ou » :
+
+#+BEGIN_EXAMPLE
+if [ /condition1/ -o /condition2/ ]
+then
+/commande/
+fi
+#+END_EXAMPLE
+
+Avec « et » sur des commandes :
+
+#+BEGIN_EXAMPLE
+if /commande1/ && /commande2/
+then
+/commande/
+fi
+#+END_EXAMPLE
+
+Avec « ou » sur des commandes :
+
+#+BEGIN_EXAMPLE
+if /commande1/ || /commande2/
+then
+/commande/
+fi
+#+END_EXAMPLE
+
+
+*** Structure case
+
+La structure *case* compare une variable avec une série de motifs de
+type globbing. Au premier motif qui correspond avec le contenu de la
+variable, les commandes correspondantes sont exécutées et le shell
+sort de la structure. La forme générique est :
+
+#+BEGIN_EXAMPLE
+case /variable/ in
+/motif-1/) /commande(s)-1/ ;;
+/motif-2/) /commande(s)-2/ ;;
+...
+/motif-N/) /commande(s)-N/ ;;
+esac
+#+END_EXAMPLE
+
+Un motif du type :
+
+#+BEGIN_EXAMPLE
+/motif-1/ | /motif-2/ )
+#+END_EXAMPLE
+
+correspondra avec la variable si /motif-1/
+ou /motif-2/ correspond
+
+Cet exemple applique une série de commandes dans le cas
+où la variable contient un nom de fichier html ou php
+et une autre série de commandes dans le cas contraire :
+
+#+BEGIN_EXAMPLE
+case /variable/ in
+*.html | *.php) /commande(s)-1/ ;;
+*) /commande(s)-2/ ;;
+esac
+#+END_EXAMPLE
+
+
+*** Boucle for
+
+La boucle *for* applique une même opération à tous
+les éléments d'une liste. La forme générique est :
+
+#+BEGIN_EXAMPLE
+for /variable/ in /liste/
+do
+... $/variable/ ...
+done
+#+END_EXAMPLE
+
+Si aucune liste, n'est donnée, la boucle sera appliquée à $1, $2, $3, etc.
+Ainsi :
+
+#+BEGIN_EXAMPLE
+for /variable/
+do
+... $/variable/ ...
+done
+#+END_EXAMPLE
+
+est équivalent à :
+
+#+BEGIN_EXAMPLE
+for /variable/ in $1 $2 $3 ...
+do
+... $/variable/ ...
+done
+#+END_EXAMPLE
+
+Exemple : appliquer la même opération à une liste de valeurs données :
+
+#+BEGIN_EXAMPLE
+for /variable/ in /val1 val2 ... valN/
+do
+... $/variable/ ...
+done
+#+END_EXAMPLE
+
+Exemple : appliquer la même opération à tous les fichiers d'un répertoire :
+
+#+BEGIN_EXAMPLE
+for /fichier/ in *
+do
+/commande/ $/fichier/
+done
+#+END_EXAMPLE
+
+Exemple : appliquer la même opération à tous les fichiers se terminant
+par .ogg :
+
+#+BEGIN_EXAMPLE
+for /fichier/ in */.ogg/
+do
+/commande/ $/fichier/
+done
+#+END_EXAMPLE
+
+
+*** Boucle while
+
+La boucle *while* exécute une même série de commandes jusqu'au moment
+où une condition devient fausse. Cette boucle dispose d'une entrée et
+d'une sortie standard. La forme générique est :
+
+#+BEGIN_EXAMPLE
+while /condition/
+do
+/commande/
+done
+#+END_EXAMPLE
+
+On peut appliquer une même commande à chaque ligne d'un fichier, il
+suffit de rediriger l'entrée standard d'une boucle while vers ce
+fichier :
+
+#+BEGIN_EXAMPLE
+while read /ligne/
+do
+/commande/ $/ligne/
+done < /fichier/
+#+END_EXAMPLE
+
+On peut également rediriger la sortie de la boucle :
+
+#+BEGIN_EXAMPLE
+while read /ligne/
+do
+/commande/ $/ligne/
+done < /fichier/ > /sortie/
+#+END_EXAMPLE
+
+On peut appliquer une même commande /commande2/
+à chaque ligne de la sortie d'une autre commande
+/commande1/, il suffit de rediriger l'entrée standard
+de /commande1/ vers une boucle while :
+
+#+BEGIN_EXAMPLE
+/commande1/ | while read /ligne/
+do
+/commande2/ $/ligne/
+done
+#+END_EXAMPLE
+
+
+*** Break et continue
+
+L'instruction *break* sert à sortir d'une
+boucle for ou while.
+
+L'instruction *continue* sert à aller directement
+à la prochaine itération d'une boucle for ou while.
+
+
+** Abréviations
+
+Le shell permet de définir des abréviations de commandes. On nomme
+*alias* de telles abréviations.
+
+| alias /surnom/=/commande/        | Définit un alias pour une commande                                        |
+| alias -g /surnom/=/nom/          | Alias global d'une commande, d'un fichier ou autre                        |
+| alias -s /suffixe/=/application/ | .//nom/./suffixe/ correspondra à : 	 /application/ /nom/./suffixe/ |
+
+
+*** Répertoires nommés
+
+| hash -d /nom/=/chemin/ | Définit un répertoire nommé         |
+| cd ~/nom/              | Se déplace vers un répertoire nommé |
+
+
+** Édition de la ligne de commande
+
+
+*** Fonctions d'éditions et combinaisons
+
+Les combinaisons de touches permettant d'éditer la ligne de
+commande sont associées à des fonctions d'édition via l'instruction
+« bindkey » :
+
+#+BEGIN_EXAMPLE
+bindkey /combinaison/ /fonction-edition/
+#+END_EXAMPLE
+
+
+**** Personnalisées
+
+On peut créer une fonction personnalisées (voir plus loin) et
+signaler ensuite à l'éditeur de commande de zsh (zle pour zsh line
+editor) que cette fonction est utilisable pour l'édition via :
+
+#+BEGIN_EXAMPLE
+zle -N /fonction/
+#+END_EXAMPLE
+
+Il ne reste plus alors qu'à associer cette fonction à une combinaison clavier :
+
+#+BEGIN_EXAMPLE
+bindkey /combinaison/ /fonction/
+#+END_EXAMPLE
+
+Il est possible de définir explicitement une fonction personnalisée
+dans un des fichiers d'initialisation, comme le zshrc. On peut
+aussi utiliser le mécanisme d'autoload permettant le chargement à
+la demande. Il faut alors sauver le corps de cette fonction dans un
+fichier portant son nom. Ce fichier devra être alors situé dans un des
+répertoires de la variable « fpath ». On charge
+ensuite cette fonction par :
+
+#+BEGIN_EXAMPLE
+autoload -U /fonction/
+#+END_EXAMPLE
+
+
+**** Action quelconque
+
+Il existe bien entendu de nombreuses combinaisons par défaut, dont
+certaines sont décrites dans la suite de cette section. Dans le cas où aucune combinaison n'est associée à une fonction particulière, où qu'on ne s'en rappelle plus, il est possible d'accéder à cette fonction par son nom, au moyen de l'instruction :
+
+#+BEGIN_EXAMPLE
+<alt x>
+#+END_EXAMPLE
+
+ou :
+
+#+BEGIN_EXAMPLE
+<esc> x
+#+END_EXAMPLE
+
+Cette instruction présente un prompt qui permet d'entrer le nom de
+la fonction souhaitée. La complétion y est disponible.
+
+
+**** Éditeur
+
+Il est possible d'utiliser son éditeur favori (contenu dans les
+variables d'environnement $VISUAl ou $EDITOR) pour éditer une ligne de
+commande. La configuration suivante :
+
+#+BEGIN_EXAMPLE
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\ee' edit-command-line
+#+END_EXAMPLE
+
+définit la combinaison « <esc> e »
+ou <alt e> comme déclencheur de cette fonction.
+
+
+*** Générique
+
+| <ctrl g> | Annule la ligne de commande                                                                           |
+| <alt h>  | Lance l'aide sur la commande                                                                          |
+| <esc> h  |                                                                                                       |
+| <alt '>  | Place la ligne de commande entre guillements  en utilisant des caractères d'échappement si nécessaire |
+| <esc> '  |                                                                                                       |
+
+
+*** Déplacements
+
+| <ctrl a> | Va au début de la ligne de commande       |
+| <home>   |                                           |
+| <ctrl e> | Va à la fin de la ligne de commande       |
+| <end>    |                                           |
+| <alt f>  | Avance d'un mot dans la ligne de commande |
+| <esc> f  |                                           |
+| <alt b>  | Recule d'un mot dans la ligne de commande |
+| <esc> b  |                                           |
+| <ctrl f> | Avance d'un caractère                     |
+| <right>  |                                           |
+| <ctrl b> | Recule d'un caractère                     |
+| <left>   |                                           |
+
+
+*** Modifications
+
+| <ctrl u> | Supprime la ligne de commande        |
+| <ctrl k> | Supprime jusqu'à la fin de la ligne  |
+| <ctrl w> | Supprime le mot précédant le curseur |
+| <alt d>  | Supprime jusqu'à la fin du mot       |
+| <esc> d  |                                      |
+| <alt t>  | Échange les deux derniers mots       |
+| <esc> t  |                                      |
+
+
+*** Copier, coller
+
+| <ctrl @>    | Place la marque à l'endroit du curseur                             |
+| <alt w>     | Copie la région de la marque au curseur                            |
+| <esc> w     |                                                                    |
+| <ctrl y>    | Colle le dernier texte copié ou supprimé                           |
+| <alt y>     | Après un collage, va en arrière  dans la pile des textes supprimés |
+| <shift ins> | Colle le contenu du presse-papier                                  |
+
+
+*** Répétitions
+
+| <alt a> | Exécute la ligne et l'affiche à nouveau |
+| <esc> a |                                         |
+
+
+*** Annulation
+
+| <ctrl x> u | Annule la dernière action |
+
+
+*** Pile
+
+La fonction d'édition « push-line-or-edit », associée
+par défaut à la combinaison :
+
+#+BEGIN_EXAMPLE
+<alt q>
+#+END_EXAMPLE
+
+ou :
+
+#+BEGIN_EXAMPLE
+<esc> q
+#+END_EXAMPLE
+
+place la ligne de commande en cours d'édition sur une pile, puis
+l'efface pour permettre d'entrer une autre ligne de commande. Une fois
+cette autre ligne entrée et exécutée, la commande antérieure est
+retirée de la pile et affichée à nouveau.
+
+On peut ajouter plusieurs lignes successives dans la pile en utilisant
+« <alt q> » plusieurs fois de suite. Dès qu'une commande entrée est
+exécutée de façon classique avec « <Return> », la ligne la plus haute
+dans la pile (si cette dernière n'est pas vide) est retirée et
+affichée.
+
+
+*** Correction
+
+| <ctrl x> c | Propose des corrections du mot courant |
+
+
+*** Échappement
+
+La combinaison <ctrl v> permet d'écrire littéralement
+une touche ou une combinaison de touches ayant un effet spécial.
+Par exemple, la suite :
+
+#+BEGIN_EXAMPLE
+<ctrl v> <ctrl u>
+#+END_EXAMPLE
+
+affichera le caractère <ctrl u> sous la forme ^U,
+sans l'effet habituel qui efface la ligne de commande.
+
+
+** Complétion
+
+La complétion permet de compléter les débuts de mots dans
+les lignes de commandes en utilisant les possibilités disponibles.
+
+
+*** Options
+
+| autoload -U compinit compinit         | Complétion         |
+| setopt autolist  setopt listtypes     | Complétion avancée |
+| setopt automenu setopt completeinword |                    |
+| setopt alwaystoend                    |                    |
+
+
+*** Fonctionnement
+
+La touche activant la complétion est simplement la tabulation.
+Elle agit de différentes façons suivant le contexte :
+
+  - Si le mot en cours peut être complété partiellement ou totalement 	 de façon non ambiguë, la tabulation complète le mot
+  - Si il existe plusieurs solutions possible, la tabulation les affiche
+  - Si les solutions sont déjà affichées, la tabulation permet d'accéder 	 au menu
+
+Petit exemple, dans un répertoire qui contient bidule.html et bidule.tex.
+Si on tape :
+
+#+BEGIN_EXAMPLE
+ls bid
+#+END_EXAMPLE
+
+une première tabulation complètera la partie non ambiguë :
+
+#+BEGIN_EXAMPLE
+ls bidule
+#+END_EXAMPLE
+
+Une deuxième tabulation affichera les solutions :
+
+#+BEGIN_EXAMPLE
+bidule.html bidule.tex
+#+END_EXAMPLE
+
+et une troisième tabulation accèdera au menu correspondant,
+permettant de sélectionner la solution désirée.
+
+/Remarque :/ ce comportement peut changer suivant les options,
+mais l'idée générale reste la même.
+
+
+*** Combinaisons
+
+| <tab>    | Complétion standard                             |
+| <ctrl d> | Liste les choix possibles                       |
+| <alt ,>  | Complète par les mots de l'historique           |
+| <alt .>  | Insère le dernier mot de la commande précédente |
+
+
+*** Personnalisation
+
+| fignore=(/liste des suffixes/)             | Suffixes à ignorer lors de la complétion                        |
+| compctl -k (/liste d'arguments) /commande/ | La complétion après /commande/ sera choisie                     |
+|                                            | dans la liste d'arguments                                       |
+| compctl -g '/motif/' /commande/            | La complétion après /commande/ sera choisie                     |
+|                                            | parmi les fichiers correspondant au motif                       |
+| compctl -s '$(/comListe/)' /commande/      | La complétion après /commande/ sera choisie                     |
+|                                            | dans la liste correspondant à la sortie de /comListe/           |
+| compctl -f /commande/                      | La complétion après /commande/ sera choisie parmi les fichiers  |
+| compctl -c /commande/                      | La complétion après /commande/ sera choisie parmi les commandes |
+
+
+** Historique des commandes
+
+
+*** Options
+
+Avec ces options :
+
+#+BEGIN_EXAMPLE
+bindkey '/codeToucheUp/' history-beginning-search-backward
+bindkey '/codeToucheDown/' history-beginning-search-forward
+#+END_EXAMPLE
+
+les flèches haut et bas donnent accès à l'historique des commandes
+correspondant à la partie déjà frappée. Par exemple, si l'historique
+contient :
+
+#+BEGIN_EXAMPLE
+ls bidule
+ls -l tutu
+pwd
+ls -l toto
+ls machin
+cd repertoire
+#+END_EXAMPLE
+
+et que l'on tape :
+
+#+BEGIN_EXAMPLE
+ls -l (flèches vers le haut)
+#+END_EXAMPLE
+
+on aura accès sucessivement à :
+
+#+BEGIN_EXAMPLE
+ls -l toto
+ls -l tutu
+#+END_EXAMPLE
+
+Les codes des touches dépendent du type de terminal.
+Ils s'obtiennent par :
+
+#+BEGIN_EXAMPLE
+<ctrl v> <up>
+<ctrl v> <down>
+#+END_EXAMPLE
+
+
+*** Commandes
+
+| fc -l /N1/ /N2/ | Liste de l'historique du numéro /N1/ à /N2/                      |
+| <ctrl p>        | Affiche la commande précédente                                   |
+| <up>            |                                                                  |
+| <ctrl n>        | Affiche la commande suivante                                     |
+| <down>          |                                                                  |
+| <ctrl o>        | Exécute la ligne et affiche  la ligne suivante dans l'historique |
+| !/N/            | Ligne de commande numéro /N/ de l'historique                     |
+| !-/N/           | /N/ lignes de commandes avant                                    |
+
+
+*** Recherche
+
+| <ctrl r>                                          | Recherche d'une commande en arrière dans le temps |
+| En mode recherche, aller à l'occurence précédente |                                                   |
+| <ctrl x> r                                        | Recherche d'une commande en arrière dans le temps |
+| En mode recherche, aller à l'occurence précédente |                                                   |
+| <ctrl x> s                                        | Recherche d'une commande en avant dans le temps   |
+| En mode recherche, aller à l'occurence suivante   |                                                   |
+| !/motif/                                          | Commande précédente commençant par le motif       |
+| !?/motif/?                                        | Commande précédente contenant par le motif        |
+| !%                                                | Dernier motif de recherche                        |
+
+
+*** Complétion
+
+|  <alt p>|Complétion du premier mot par la ligne de commande    précédente dans l'historique|
+| <esc> p  ||
+ <td><alt n></td>
+ <td>Complétion du premier mot par la ligne de commande
+	 suivante dans l'historique</td>
+</tr>
+| <esc> n||
+
+
+*** Arguments
+
+| !/N/:0       | Ligne de commande numéro /N/ de l'historique,  argument 0 (début de ligne, commande)              |
+| !/N/:/I/     | Ligne de commande numéro /N/ de l'historique,  /I/<sup>ème</sup> argument                         |
+| !/N/:$       | Ligne de commande numéro /N/ de l'historique,  dernier argument (fin de ligne)                    |
+| !/N/:/I/-/J/ | Ligne de commande numéro /N/ de l'historique,  du /I/<sup>ème</sup> au /J/<sup>ème</sup> argument |
+| !/N/:*       | Équivalent à !/N/:1-$                                                                             |
+
+
+*** Modificateurs
+
+|  !/N/:s//motif1///motif2//|Ligne de commande numéro /N/ de l'historique,  avec /motif1/ remplacé par /motif2/|
+
+
+*** Dernière commande
+
+| !!                      | Dernière ligne de commande,  équivalent à !-1                    |
+| !:/I/                   | Dernier (/I/ + 1)<sup>ème</sup> mot                              |
+| !!:s//motif1///motif2// | Dernière ligne de commande,  avec /motif1/ remplacé par /motif2/ |
+
+
+*** Édition
+
+| fc                       | Lance un éditeur sur la dernière commande                                                                                                      |
+| fc /mot/                 | Lance un éditeur sur la dernière ligne de commande  commençant par /mot/                                                                       |
+| fc /avant/=/après/ /mot/ | Lance un éditeur sur la dernière ligne de commande 		commençant par /mot/, en modifiant chaque occurence  de /avant/ par /après/ |
+| fc /N/                   | Lance un éditeur sur la commande /N/ de l'historique                                                                                           |
+| vared /variable/         | Édition d'une variable, les modifications  sont enregistrées lorsqu'on fait <Return>                                                           |
+
+
+** Conventions
+
+Ces conventions ne fonctionnent pas pour toutes les commandes,
+mais de nombreuses commandes les respectent.
+
+| /commande/ -/lettre/               | Option courte                                                                            |                                                                                                |
+| /commande/ --/chaine/              | Option longue                                                                            |                                                                                                |
+| /commande/ -                       | Le tiret « - » demande à une commande d'aller  chercher son entrée sur l'entrée standard |                                                                                                |
+| /commande1/                        | /commande2/ -                                                                            | Demande à la seconde commande d'aller chercher  son entrée à la sortie de la première commande |
+| /commande/ /options/ -- /fichiers/ | -- Signale la fin des options  Utile lorsqu'un nom de fichier commence par - ou --       |                                                                                                |
+
+
+* Bash
+
+#+TOC: headlines 1 local
+
+| <Ctrl-X> <Ctrl-E> | Édite la commande dans un éditeur |
+
+
+* Expressions régulieres
+
+#+TOC: headlines 1 local
+
+
+** Généralites
+
+Les expressions régulières permettent de faire des recherches et
+substitutions évoluées. Par défaut, une expression régulière essaie
+d'englober un maximum de caractères.
+
+
+** Caractères
+
+| /caractère/  | Correspond à un caractère ordinaire                                       |
+| \/caractère/ | Correspond à un caractère ayant  autrement une signification particulière |
+| \.           | Point « . »                                                               |
+| \[           | Crochet « [ »                                                             |
+| \]           | Crochet « ] »                                                             |
+
+
+** Groupes de caractères
+
+| .                         | N'importe quel caractère, sauf fin de ligne |
+| [/groupe de caractères/]  | N'importe quel caractère du groupe          |
+| [^/groupe de caractères/] | N'importe quel caractère tant qu'il         |
+|                           | n'appartient pas au groupe et n'est pas     |
+|                           | une fin de ligne                            |
+| [/A/-/Z/]                 | Caractères entre /A/ et /Z/                 |
+| [0-9]                     | Chiffres                                    |
+| [A-Z]                     | Majuscules                                  |
+| [a-z]                     | Minuscules                                  |
+| [0-z]                     | Alphanumériques                             |
+
+
+*** Expressions étendues
+
+| (/motif1/ | /motif2/) | /motif1/ ou /motif2/ |
+
+
+** Frontières
+
+| ^  | Début de ligne |
+| $  | Fin de ligne   |
+| \< | Début de mot   |
+| \> | Fin de mot     |
+
+
+** Quantités
+
+| /x/*            | 0 ou plus d'occurence(s) de /x/    |
+| /x/\{/N/\}      | Exactement /N/ occurences de /x/   |
+| /x/\{/M/, /N/\} | Entre /M/ et /N/ occurences de /x/ |
+| /x/\{/M/, \}    | Au moins /M/ occurences de /x/     |
+| /x/\{,/N/\}     | Au plus /N/ occurences de /x/      |
+
+
+*** Expressions étendues
+
+| /x/? | 0 ou 1 occurence de /x/         |
+| /x/+ | 1 ou plus d'occurence(s) de /x/ |
+
+
+** Rétro-références
+
+Les rétro-références peuvent être utilisées dans :
+
+  - les remplacements si le motif modifié dépend du motif initial
+  - les motifs où des sous-motifs doivent être répétés
+
+| &           | Fait référence au dernier motif rencontré                                                     |
+| \(/...../\) | Permettent d'isoler un sous-motif                                                             |
+| \/N/        | Fait référence au /N/<sup>ème</sup> sous-motif désigné  par des parenthèses : \(/sousMotif/\) |
+
+
+*** Expressions étendues
+
+Dans les expressions régulières étendues, les parenthèses
+isolant les sous-motifs ne sont pas précédées par des backslashs \ :
+
+| (/...../) | Permettent d'isoler un sous-motif |
+
+
+* Sed
+
+#+TOC: headlines 1 local
+
+
+** Structure
+
+Sed signifie « stream editor », éditeur de flux. Il permet de modifier
+un flux de texte, en opèrant ligne par ligne et en utilisant entrée et
+sortie standard.
+
+| sed '/commandeSed/'    | Sed en mode bavard, affiche toutes les lignes     |
+| sed -n '/commandeSed/' | Sed en mode silencieux, n'affiche que sur demande |
+
+Une commande sed se décompose généralement en une condition
+restrictive suivie d'une ou plusieurs instructions. Les accolades
+permettent de grouper des instructions sur une même condition.
+Lorsqu'il y a plus d'une instruction par ligne, on les sépare par des
+points-virgules :
+
+#+BEGIN_EXAMPLE
+'/condition/ { /instruction-1/ ; /instruction-2/ ; /.../ }'
+#+END_EXAMPLE
+
+Dans les scripts, on dispose généralement une instruction par ligne :
+
+#+BEGIN_EXAMPLE
+#!/bin/sed -f
+/condition-1/ {
+/instruction-1-1/
+/instruction-2-1/
+/.../
+}
+/condition-2/ {
+/instruction-2-1/
+/instruction-2-2/
+/.../
+}
+/.../
+#+END_EXAMPLE
+
+
+*** Mode positif
+
+Le mode positif correspond au sed bavard. Il s'utilise en ligne de
+commande sous la forme :
+
+#+BEGIN_EXAMPLE
+sed '/commandeSed/'
+#+END_EXAMPLE
+
+ou, dans un script :
+
+#+BEGIN_EXAMPLE
+#!/bin/sed -f
+/commandeSed/
+#+END_EXAMPLE
+
+
+*** Mode négatif
+
+Le mode négatif correspond au sed silencieux.
+Il s'utilise en ligne de commande sous la forme :
+
+#+BEGIN_EXAMPLE
+sed -n '/commandeSed/'
+#+END_EXAMPLE
+
+ou, dans un script :
+
+#+BEGIN_EXAMPLE
+#!/bin/sed -nf
+/commandeSed/
+#+END_EXAMPLE
+
+
+*** Plusieurs commandes
+
+
+**** Mode positif
+
+En ligne de commande :
+
+#+BEGIN_EXAMPLE
+sed -e '/commande1/' -e '/commande2/'
+#+END_EXAMPLE
+
+Dans un script :
+
+#+BEGIN_EXAMPLE
+#!/bin/sed -f
+/commande1/
+/commande2/
+/...../
+#+END_EXAMPLE
+
+
+**** Mode négatif
+
+En ligne de commande :
+
+#+BEGIN_EXAMPLE
+sed -n -e '/commande1/' -e '/commande2/'
+#+END_EXAMPLE
+
+Dans un script :
+
+#+BEGIN_EXAMPLE
+#!/bin/sed -nf
+/commande1/
+/commande2/
+/...../
+#+END_EXAMPLE
+
+
+** Conditions
+
+
+*** Motifs
+
+| //motif//             | Vrai si la ligne contient /motif/                         |
+| //motif//I            | Vrai si la ligne contient /motif/,  insensible à la casse |
+| //motif1//,//motif2// | Vrai de /motif1/ à /motif2/                               |
+
+
+*** Numéros de lignes
+
+| /N/     | Vrai sur la ligne /N/                                |
+| /M/,/N/ | Vrai entre les lignes /M/ à /N/                      |
+| /M/~/N/ | Vrai toutes les /N/ lignes  à partir de la ligne /M/ |
+| /N/,$   | Vrai à partir de la ligne /N/                        |
+
+
+*** Hybride
+
+| /N/,//motif// | Vrai de la ligne /N/ jusqu'à /motif/ |
+| //motif//,/N/ | Vrai de /motif/ jusqu'à la ligne /N/ |
+
+
+*** Négation
+
+| //motif// ! | Vrai si la ligne ne contient pas /motif/ |
+| /N/ !       | Vrai partout sauf sur la ligne /N/       |
+
+
+** Affichage
+
+Voici quelques exemples de commandes sed d'affichage. Elles s'utilisent
+généralement en mode /négatif/.
+
+| /M/,/N/ p               | Affiche les lignes /M/ à /N/         |
+| //motif// p             | Affiche les lignes contenant /motif/ |
+| //motif1//,//motif2// p | Affiche de /motif1/ à /motif2/       |
+
+
+*** Numéros de lignes
+
+| =|Affiche le numéro de ligne|
+| = ; p|Affiche le numéro de ligne suivi de la ligne|
+
+
+** Écriture dans un fichier
+
+La commande :
+
+#+BEGIN_EXAMPLE
+sed -n '/...../ w /fichier/'
+#+END_EXAMPLE
+
+est similaire à :
+
+#+BEGIN_EXAMPLE
+sed -n '/...../ p'
+#+END_EXAMPLE
+
+si ce n'est qu'elle écrit dans /fichier/ au lieu
+de la sortie standard. Les commandes d'écriture s'utilisent
+généralement en mode /négatif/.
+
+
+** Suppression
+
+Voici quelques exemples de commandes sed de suppression. Elles s'utilisent
+généralement en mode /positif/.
+
+| /M/,/N/ d               | Supprime les lignes /M/ à /N/         |
+| //motif// d             | Supprime les lignes contenant /motif/ |
+| //motif1//,//motif2// d | Supprime de /motif1/ à /motif2/       |
+
+
+** Quitter
+
+| /N/ q       | Quitte à la ligne /N/                |
+| //motif// q | Quitte dès que /motif/ est rencontré |
+
+
+** Shell
+
+Voici quelques exemples de commandes sed permettant
+de faire exécuter certaines lignes par le shell. Elles s'utilisent
+généralement en mode /positif/.
+
+| /M/,/N/ e               | Exécute les lignes /M/ à /N/         |
+| //motif// e             | Exécute les lignes contenant /motif/ |
+| //motif1//,//motif2// e | Exécute de /motif1/ à /motif2/       |
+
+
+** Translittération
+
+| y//groupe1///groupe2// | Remplace chaque caractère de /groupe1/  par son correspondant dans /groupe2/ |
+
+
+** Substitution
+
+Voici les commandes sed de substitution. Elles s'utilisent en mode
+/positif/ lorsqu'on souhaite afficher également les lignes non substituées :
+
+#+BEGIN_EXAMPLE
+sed '/...../ s//motif1///motif2// /...../'
+#+END_EXAMPLE
+
+ou en mode /négatif/ si on désire un affichage sélectif :
+
+#+BEGIN_EXAMPLE
+sed -n '/...../ s//motif1///motif2//p /...../'
+#+END_EXAMPLE
+
+
+*** Mode positif
+
+| s//motif1///motif2//     | Remplace la première occurence de /motif1/ par /motif2/                                           |
+| s//motif1///motif2///N/  | Remplace la /N/<sup>ème</sup> occurence de /motif1/ par /motif2/                                  |
+| s//motif1///motif2//g    | Remplace chaque occurence de /motif1/ par /motif2/                                                |
+| s//motif1///motif2///N/g | Remplace toutes les occurences de /motif1/ 	 à partir de la /N/<sup>ème</sup> par /motif2/ |
+
+
+*** Mode négatif
+
+|  s//motif1///motif2//p|Écrit les lignes substituées dans la sortie standard|
+
+
+*** Rétro-références
+
+| &    | Fait référence au dernier motif trouvé                         |
+| \/N/ | Fait référence au /N/<sup>ème</sup> sous-motif mis entre \( \) |
+
+
+*** Restreinte
+
+Voici quelques commandes sed de substitutions restreintes.
+
+| /M/,/N/ s//.....///.....//               | Ne traite que les lignes /M/ à /N/                                                  |
+| //motif// s//.....///.....//             | Ne traite que les lignes contenant /motif/                                          |
+| //motif1//,//motif2// s//.....///.....// | Traite à partir de la ligne contenant /motif1/  jusqu'à la ligne contenant /motif2/ |
+
+
+*** Caractère de séparation
+
+| \/                       | Permet de placer un / dans un motif                        |
+| s:/...../:/...../:       | Autre caractère de séparation, ici :                       |
+| \/caractèreDeSéparation/ | Permet de placer le caractère  de séparation dans un motif |
+
+
+*** Exemples
+
+Exemple : remplacer /motif/ par (/motif/ /motif/) :
+
+#+BEGIN_EXAMPLE
+sed 's//motif//(& &)/g' < /entree/ > /sortie/
+#+END_EXAMPLE
+
+
+** Insertion
+
+| //motif// r /fichier/ | Insère /fichier/ juste après /motif/    |
+| //motif// a \ /Texte/ | Ajoute du texte après la ligne du motif |
+| //motif// i \ /Texte/ | Ajoute du texte avant la ligne du motif |
+
+
+** Modifications
+
+|  //motif// c \ /Ligne/|Modifie la ligne du motif|
+
+
+** Multi-lignes
+
+Dans la plupart des commandes sed, l'espace de travail
+correspond à la ligne en cours de traitement. Il est possible
+de modifier cet espace de travail.
+
+| n | Passe à la ligne suivante                        |
+| N | Ajoute la ligne suivante à l'espace de travail   |
+| D | Efface la première ligne de l'espace de travail  |
+| P | Affiche la première ligne de l'espace de travail |
+
+
+** Mémoire annexe
+
+En plus de l'espace de travail, sed dispose d'une mémoire
+annexe.
+
+| h | Copie l'espace de travail dans la mémoire annexe                |
+| H | Ajoute l'espace de travail dans la mémoire annexe               |
+| g | Copie le contenu de la mémoire annexe dans l'espace de travail  |
+| G | Ajoute le contenu de la mémoire annexe dans l'espace de travail |
+| x | Échange le contenu des 2 mémoires                               |
+
+
+** Étiquettes
+
+| :/étiquette/  | Définit une étiquette                                                              |
+| b /étiquette/ | Va à une étiquette                                                                 |
+| t /étiquette/ | Va à une étiquette si la 		dernière substitution a  modifié la ligne |
+
+
+* Awk
+
+#+TOC: headlines 1 local
+
+
+** Généralites
+
+Awk analyse l'entrée standard comme une succession de lignes (enregistrements),
+chacune contenant plusieurs colonnes (champs). Voici la structure générique d'un
+code awk :
+
+#+BEGIN_EXAMPLE
+BEGIN {
+/Opérations de pré-traitement/
+}
+
+{
+/Opérations/
+
+/condition/ {
+/Opérations/
+}
+
+END {
+/Opérations de post-traitement/
+}
+#+END_EXAMPLE
+
+Le bloc BEGIN est exécuté avant la lecture du fichier, le bloc central
+pendant et le bloc END après la lecture du fichier. Chaque sous-bloc
+entre accolades peut être précédé d'une condition qui détermine son
+exécution éventuelle.
+
+
+*** En ligne de commande
+
+#+BEGIN_EXAMPLE
+awk '/commandesAwk/'
+#+END_EXAMPLE
+
+
+*** Dans un script
+
+#+BEGIN_EXAMPLE
+#!/usr/bin/awk -f
+/commandesAwk/
+#+END_EXAMPLE
+
+
+** Variables
+
+| FS       | Contient le séparateur de champ du fichier d'entrée  <Espace> ou <tab> par défaut  |
+| RS       | Contient le séparateur d'enregistrement du fichier d'entrée  <Return> par défaut   |
+| OFS      | Contient le séparateur de champ du fichier de sortie  <Espace> par défaut          |
+| ORS      | Contient le séparateur d'enregistrement du fichier de sortie  <Return> par défaut  |
+| NF       | Contient le nombre de champs de la ligne courante                                  |
+| NR       | Contient le nombre de lignes déjà traitées                                         |
+| FNR      | Contient le nombre de lignes déjà traitées  dans le fichier en cours de traitement |
+| FILENAME | Contient le nom du fichier en cours de traitement                                  |
+| $0       | Contient toute la ligne                                                            |
+| $1       | Contient le premier champ                                                          |
+| $/N/     | Contient le champ numéro /N/                                                       |
+| $NF      | Contient le dernier champ                                                          |
+
+
+*** Options
+
+L'option -F permet de modifier le séparateur de champ à l'entrée :
+
+#+BEGIN_EXAMPLE
+awk -F '/séparateur/' /.../
+#+END_EXAMPLE
+
+
+*** Script
+
+| /script/ /variable/=/valeur/|Appel d'un script en passant des valeurs aux variables|
+
+
+** Opérations
+
+| /N/++     | Incrémentation |
+| /N/--     | Décrémentation |
+| /M/ % /N/ | Modulo         |
+| /M/^/N/   | Exposant       |
+
+
+** Logique
+
+| == | Égal à              |
+| != | Différent de        |
+| <= | Inférieur ou égal à |
+| >= | Supérieur ou égal à |
+| && | Et                  |
+| ¦¦ | Ou                  |
+
+
+** Expressions régulières
+
+Awk utilise les expressions régulières étendues.
+
+
+*** Correspondances
+
+| /variable/ ~ //motif//  | Vaut vrai si le contenu de la variable  correspond au motif        |
+| /variable/ !~ //motif// | Vaut vrai si le contenu de la variable  ne correspond pas au motif |
+| //motif//               | Équivalent à $0 ~ //motif//                                        |
+| ! //motif//             | Équivalent à $0 !~ //motif//                                       |
+
+
+*** Substitutions
+
+| sub(//motif1//,"/motif2/",/variable/)  | La première occurence de /motif1/ dans /variable/  est remplacée par /motif2/ |
+| gsub(//motif1//,"/motif2/",/variable/) | Chaque occurence de /motif1/ dans /variable/  est remplacée par /motif2/      |
+| gsub(//motif1//,"/motif2/")            | Équivalent à gsub(//motif1//,"/motif2/",$0)                                   |
+
+
+** Affichage
+
+| print | Affiche chaînes, variables sur la sortie standard |
+
+
+*** Exemples
+
+| print $2, $1               | Inverse les deux premières colonnes  d'un fichier |
+| NR % /N/ == 0 { print $0 } | Affiche toutes les /N/ lignes                     |
+
+
+** Multi-lignes
+
+| getline                   | Passe à la ligne suivante                                        |                                   |
+| getline /var/ < /fichier/ | Récupère une ligne dans un fichier et la place dans une variable |                                   |
+| /commande/                | getline                                                          | Récupère la sortie d'une commande |
+
+
+** Structures
+
+| if ( /condition/ ) { /.../ }            | Condition |
+| while ( /condition/ ) { /.../ }         | Tant que  |
+| for ( /variable/ in /liste/ ) { /.../ } | Boucle    |
+| function /fonction/(/.../) { /.../ }    | Fonction  |
+
+
+* Gpg
+
+#+TOC: headlines 1 local
+
+
+** Généralités
+
+| gpg --gen-key                 | Génère un couple clé publique, clé privée |
+| gpg --list-keys               | Donne la liste des clés                   |
+| gpg --delete-secret-key /clé/ | Supprime une clé privée                   |
+| gpg --delete-key /clé/        | Supprime une clé publique                 |
+
+
+** Export
+
+| gpg --export /clé/ > /clé/.pub                     | Exporte une clé publique en binaire    |
+| gpg --armor --export /clé/ > /clé/.pub             | Exporte une clé publique en ascii      |
+| gpg --fingerprint /clé/ > /empreinteClé/           | Empreinte d'une clé                    |
+| gpg --keyserver /adresseServeur/ --send-keys /clé/ | Envoie la clé publique vers un serveur |
+
+
+** Import
+
+| gpg --import /clé/.pub | Importe une clé publique  |
+| gpg --sign-key /clé/   | Certifie une clé importée |
+
+
+** Révocation
+
+| gpg --gen-revoke /clé/ > /révocation/ | Génère un certificat de révocation d'une clé |
+| gpg --import /révocation/             | Valide une révocation en l'important         |
+
+
+** Édition
+
+La commande :
+
+#+BEGIN_EXAMPLE
+gpg --edit-key /clé/
+#+END_EXAMPLE
+
+accède à un interpréteur de commande permettant d'éditer une clé.
+En voici les principales commandes :
+
+| help    | Aide                                                                                            |
+| uid /N/ | Sélectionne ou désélectionne le /N/<sup>ième</sup> utilisateur                                  |
+| key /N/ | Sélectionne ou désélectionne la /N/<sup>ième</sup> clé                                          |
+| adduid  | Ajoute un utilisateur de la clé                                                                 |
+| deluid  | Supprime le ou les utilisateurs sélectionnés                                                    |
+| revuid  | Révoque le ou les utilisateurs sélectionnés  Nécessaire si la clé a été envoyée vers un serveur |
+| primary | Marque l'utilisateur sélectionné comme principal                                                |
+| addkey  | Ajoute une sous-clé                                                                             |
+| delkey  | Supprime la ou les sous-clés sélectionnées                                                      |
+| revkey  | Révoque la ou les sous-clés sélectionnées                                                       |
+| list    | Informations sur la clé                                                                         |
+| fpr     | Empreinte de la clé                                                                             |
+| passwd  | Change le mot de passe de la clé                                                                |
+| save    | Enregistre les modifications et quitte                                                          |
+| quit    | Quitte                                                                                          |
+
+
+** Chiffrement
+
+| gpg --encrypt --recipient /clé/ /fichier/ | Chiffre un fichier                                              |
+| gpg --symmetric /fichier/                 | Chiffre un fichier symétriquement,  protection par mot de passe |
+| gpg --decrypt /fichier/.gpg > /fichier/   | Déchiffre un fichier                                            |
+
+
+** Signature
+
+
+*** Crypté et signé
+
+| gpg --sign --encrypt /fichier/ > /fichier/.sig         | Génère un message chiffré et signé, format binaire |
+| gpg --armor --sign --encrypt /fichier/ > /fichier/.asc | Génère un message chiffré et signé, format ascii   |
+| gpg --sign --symmetric /fichier/                       | Génère un message chiffré symétriquement et signé  |
+| gpg --verify /fichier/                                 | Vérifie un message signé                           |
+| gpg --decrypt /chiffré/ > /déchiffré/                  | Déchiffre et vérifie un fichier crypté et signé    |
+
+
+*** Signature uniquement
+
+| gpg --detach-sign /fichier/ > /fichier/.sig         | Génère une signature binaire  |
+| gpg --armor --detach-sign /fichier/ > /fichier/.asc | Génère une signature ascii    |
+| gpg --verify /fichier/.sig /fichier/                | Vérifie une signature binaire |
+| gpg --verify /fichier/.asc /fichier/                | Vérifie une signature ascii   |
+
+
+*** Document en clair
+
+| gpg --clearsign /fichier/ | Génère un fichier contenant le document en clair  suivi de sa signature au format ascii |
+
+
+* Ssh
+
+#+TOC: headlines 1 local
+
+Ssh est un shell sécurisé permettant d'accéder
+à distance à une machine. La syntaxe générique pour
+ouvrir une connexion de l'utilisateur /nom/
+sur la machine /hôte/ au répertoire /chemin/
+est la suivante :
+
+#+BEGIN_EXAMPLE
+ssh /nom/@/hôte/:/chemin/
+#+END_EXAMPLE
+
+Le nom de l'utilisateur est optionnel, il est
+par défaut égal au nom de l'utilisateur sur la machine
+depuis laquelle on ouvre la connexion. Le répertoire
+par défaut est le répertoire personnel de l'utilisateur.
+Ssh peut également simplement exécuter une commande sur
+la machine distante :
+
+#+BEGIN_EXAMPLE
+ssh /nom/@/hôte/ /commande/
+#+END_EXAMPLE
+
+Ssh comporte aussi d'autres outils respectant la même
+syntaxe :
+
+| sftp|Protocole de transfert de fichiers sécurisé|
+| scp|Copie à distance sécurisée|
+
+
+** Clé
+
+| ssh-keygen -t dsa                                    | Génère un couple clé publique, privée             |
+| ssh-keygen -l                                        | Liste des clés                                    |
+| ssh-copy-id -i /cléPublique/ /utilisateur/@/machine/ | Installe la clé publique sur une machine distante |
+
+
+*** Ne pas retaper son mot de passe à chaque fois
+
+| ssh-agent /shell/ | Lance un shell avec agent d'authentification ssh              |
+| ssh-agent zsh     | Lance zsh avec agent d'authentification ssh                   |
+| ssh-add           | Ajoute une clé au cache de ssh-agent,                         |
+|                   | permettant de ne taper le mot de passe  de la clé qu'une fois |
+
+
+** Sshfs
+
+Sshfs permet de monter des répertoires distants en utilisant
+le protocole ssh.
+
+| sshfs /utilisateur/@/machine/://répertoire/ /pointDeMontage/ | Montage   |
+| fusermount -u /pointDeMontage/                               | Démontage |
+
+
+* Screen
+
+#+TOC: headlines 1 local
+
+
+** Sessions
+
+| screen                          | Lance une session de screen              |
+| screen -S /nomSession/          | Lance une session nommée de screen       |
+| <ctrl a>   d                    | Se détache de la session screen          |
+| screen -ls                      | Affiche la liste des sessions screen     |
+| screen -rx /identifiantSession/ | S'attache à une session screen existante |
+| <ctrl a>   x                    | Verrouille la session screen             |
+
+
+** Consoles
+
+| <ctrl a>   c      | Crée une nouvelle console virtuelle  dans la session screen courante |
+| <ctrl a>   k      | Supprime la console virtuelle courante                               |
+| <ctrl a>   \      | Supprime toutes les consoles virtuelles et quitte screen             |
+| <ctrl a>   n      | Passe à la console virtuelle suivante                                |
+| <ctrl a>   p      | Passe à la console virtuelle précédente                              |
+| <ctrl a>   &quot; | Permet de sélectionner une console virtuelle                         |
+| <ctrl a>   /N/    | Passe à la /N/<sup>ème</sup> console virtuelle                       |
+| <ctrl a>   A      | Renomme une console virtuelle                                        |
+
+
+** Mode ligne de commande
+
+| <ctrl a>   :     | Accède au mode ligne  de commande de screen |
+| <ctrl a>   :help | Aide                                        |
+| <ctrl a>   :quit | Quitte                                      |
+
+
+** Mode copie
+
+| <ctrl a>   [  | Entre en mode copie  Permet de se balader dans l'écran à la mode vi   |
+| <ctrl f>      | Un écran vers le bas (mode copie)                                     |
+| <ctrl b>      | Un écran vers le haut (mode copie)                                    |
+| //expression/ | Recherche vers le bas (mode copie)                                    |
+| ?/expression/ | Recherche vers le haut (mode copie)                                   |
+| <Espace>      | Permet de marquer le début et la fin de la  zone à copier (mode copie |
+| <esc>         | Sort du mode copie                                                    |
+| <ctrl a>   ]  | Colle le texte copié                                                  |
+
+
+** Journalisation
+
+| <ctrl a> H|Débute/Termine la journalisation d'un écran|
+
+
+** Sous-écrans
+
+| <ctrl a>   S     | Divise horizontalement l'écran en deux  |                                      |
+| <ctrl a>         |                                         | Divise verticalement l'écran en deux |
+| <ctrl a>   <tab> | Passe sur la partie suivante de l'écran |                                      |
+| <ctrl a>   X     | Supprime le sous-écran courant          |                                      |
+
+
+** Imbrication
+
+| <ctrl a>   a   /commande/ <ctrl a>   a   c, ", k, d, ... | Envoie une commande à  un screen imbriqué dans un autre |
+
+
+** Configuration
+
+Voici un exemple de fichier de configuration <a href="exemples/screenrc.txt">screenrc</a>.
+
+#+BEGIN_EXAMPLE
+<a href="../../index.php">Accueil</a>
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+<a title="Site déposé sur CopyrightFrance.com" href="http://www.copyrightfrance.com/phtml/p_logo1.php" target="_blank"><img border="0" src="images/logsc15.gif" alt="CopyrightFrance.com"></a>
+#+END_EXAMPLE

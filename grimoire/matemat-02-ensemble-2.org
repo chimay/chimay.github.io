@@ -1,0 +1,855 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat 01 : Ensembles - 2
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/commandes-tex.org"
+
+* Relations
+
+#+TOC: headlines 1 local
+
+\label{chap:relations}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:ensembles} : Les ensembles
+  - Chapitre \ref{chap:produitCartesien} : Produit cartésien
+
+
+** Définition
+
+Une relation $R$ est un ensemble de couples $(x,y) \in A \times B$ reliant des éléments de $A$ à des élements de $B$. On note $\relation(A,B)$ l'ensemble des relations sur $A,B$ :
+
+$$\relation(A,B) = \{ R : R \subseteq A \times B \}$$
+
+On dit que $x \in A$ est en relation $R$ avec $y \in B$ si $(x,y) \in R$. On le note aussi :
+
+$$x \ R \ y$$
+
+
+** Relation inverse
+
+A toute relation $R$, on associe une relation inverse $R^{-1}$ en intervertissant $x$ et $y$ :
+
+$$R^{-1} = \{ (y,x) \in B \times A : (x,y) \in R \}$$
+
+
+** Relation identité
+
+La relation identité $\identite \subseteq X \times X$ est définie par :
+
+$$\identite = \{ (x,x) : x \in X  \}$$
+
+Elle vérifie la propriété :
+
+$$\identite^{-1} = \identite$$
+
+
+*** Egalité
+
+Si $x = y$, on a $(x,y) \in \identite$ et inversément. L'égalité correspond donc à la relation identité.
+
+
+** Image
+
+L'image de $x \in A$ par $R$ est l'ensemble des éléments de $B$ en relation avec $x$ :
+
+$$R(x) = \{ y \in B : (x,y) \in R \}$$
+
+On généralise la notion d'image aux sous-ensembles $X \subseteq A$ :
+
+$$R(X) = \{ y \in B : x \in X, \ (x,y) \in R \}$$
+
+
+** Image inverse
+
+L'image inverse de $y \in B$ est l'ensemble des éléments de $A$ en relation avec $y$ :
+
+$$R^{-1}(y) = \{ x \in A : (x,y) \in R \}$$
+
+On généralise la notion d'image inverse aux sous-ensembles $Y \subseteq B$ :
+
+$$R^{-1}(Y) = \{ x \in A : y \in Y, \ (x,y) \in R \}$$
+
+
+** Image
+
+Lorsqu'on ne précise pas l'ensemble, l'image de $R$ est simplement l'image de $A$ :
+
+$$\image R = R(A)$$
+
+
+** Domaine
+
+Le domaine de $R$ est un cas particulier d'image inverse :
+
+$$\domaine R = R^{-1}(B) = \{ x \in A : y \in B, \ (x,y) \in R \}$$
+
+
+** Composée
+
+A partir d'une relation $R$ reliant $A$ à $B$ et d'une relation $S$ reliant $B$ à $C$, on peut construire une relation composée $S \circ R$ (lire $S$ après $R$) reliant $A$ a $C$. Pour que le couple $(x,z)$ appartienne à $S \circ R$, on doit pouvoir trouver un élément intermédiaire $y \in B$ tel que $(x,y) \in R$ et $(y,z)\in S$. Ce $y$ doit donc appartenir simultanément à $R(x)$ et à $S^{-1}(z)$. On a par conséquent :
+
+$$S \circ R = \{ (x,z) \in A \times C : R(x) \cap S^{-1}(z) \ne \emptyset \}$$
+
+ou encore :
+
+$$S \circ R = \{ (x,z) \in A \times C : \exists y \in B : (x,y) \in R, \ (y,z) \in S \}$$
+
+
+** Puissance
+
+Soit une relation $R \in \relation(A,A)$. On définit la puissance par :
+
+\begin{eqnarray*}
+R^0 &=& \identite \\
+R^n &=& R \circ R^{n-1}
+\end{eqnarray*}
+
+On a donc en particulier $R^1 = R$ et :
+
+$$R^n = R \circ ... \circ R$$
+
+
+* Fonctions
+
+#+TOC: headlines 1 local
+
+
+\label{chap:fonctions}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:ensembles} : Les ensembles
+  - Chapitre \ref{chap:relations} : Les relations
+
+
+** Définitions
+
+Une fonction $f$ de $A$ vers $B$ associe à chaque $x \in A$ un unique élément $f(x) \in B$. On note $\fonction(A,B)$ l'ensemble des fonctions $f$ de $A$ vers $B$. On utilise aussi la notation :
+
+$$f : A \mapsto B$$
+
+pour préciser que $f \in \fonction(A,B)$ et :
+
+$$f : x \mapsto f(x)$$
+
+pour préciser que $f$ associe $x \in A$ à $f(x) \in B$. On dit que $f(x)$ est la valeur de $f$ en $x$.
+
+
+*** Remarque
+
+La notation $f : A \mapsto B$ signifie que :
+
+  - $f(x)$ est défini pour tout $x \in A$
+  - $f(x) \in B$
+
+Par conséquent, si $C \subseteq A$ et si $B \subseteq D$, la condition $f : A \mapsto B$ implique $f : C \mapsto D$.
+
+
+*** Synonymes
+
+On parle indifféremment de fonction ou d'application.
+
+
+** Fonctions discrètes
+
+Dans le cas particulier où $f \in \fonction( \{ 1,2,...,N \} , B )$, on peut associer à $f$ un nombre $(f_1,f_2,...,f_N) \in B^N$ par :
+
+$$f_i = f(i)$$
+
+pour tout $i \in \{ 1,2,...,N \}$. Inversément, à tout $(f_1,f_2,...,f_N) \in B^N$, on associe une fonction $f : \{ 1,2,...,N \} \mapsto B$ par :
+
+$$f(i) = f_i$$
+
+On voit donc l'équivalence :
+
+$$\fonction( \{ 1,2,...,N \} , B ) \equiv B^N$$
+
+
+*** Notation
+
+Dans le cas de fonctions quelconques, on pose par analogie :
+
+$$B^A = \fonction(A,B)$$
+
+
+** Relation associée
+
+On peut associer à toute fonction $f : A \mapsto B$ une relation $R \in \relation(A,B)$ définie par :
+
+$$R = \{ (x,f(x)) : x \in A \}$$
+
+On a clairement :
+
+$$R(x) = \{ f(x) \}$$
+
+
+** Relation inverse
+
+Soit $f : A \mapsto B$ associée à la relation $R \in \relation(A,B)$. La relation inverse $R^{-1} \in \relation(B,A)$ est définie par :
+
+$$R^{-1} = \{ (f(x),x) \in B \times A : x \in A \}$$
+
+
+** Fonction identité
+
+La fonction identité $\identite : A \mapsto A$ est définie par :
+
+$$\identite : x \mapsto \identite(x) = x$$
+
+
+*** Relation
+
+La relation associée à la fonction identité s'écrit :
+
+$$\{ (x,\identite(x)) \in A^2 : x \in A \} = \{ (x,x) \in A^2 : x \in A \}$$
+
+La fonction identité est donc associée à la relation identité.
+
+
+** Image d'un ensemble
+
+Soit $f : A \mapsto B$. L'image d'un sous-ensemble $X \subseteq A$ par $f$ est l'ensemble des valeurs que prend $f$ en tous les éléments de $X$ :
+
+$$f(X) = \{ f(x) : x \in X \}$$
+
+
+** Image d'une fonction
+
+Soit $f : A \mapsto B$. L'image de $f$ est l'ensemble des valeurs que prend $f$ en tous les éléments de $A$ :
+
+$$\image f = f(A) = \{ f(x) : x \in A \}$$
+
+
+** Image inverse
+
+Soit $f : A \mapsto B$. Pour tout $y \in B$, l'image inverse est l'ensemble défini par :
+
+$$f^{-1}(y) = \{ x \in A : f(x) = y \}$$
+
+L'image inverse d'un ensemble $Y \subseteq B$ est définie par :
+
+$$f^{-1}(Y) = \{ x \in A : f(x) \in Y \}$$
+
+
+** Domaine
+
+Soit un ensemble $A \subseteq \Omega$ et une fonction $f : A \mapsto B$. Le domaine de $f$ est l'ensemble des éléments de $x \in \Omega$ tels que $f(x) \in B$ existe. Autrement dit :
+
+$$\domaine f = A$$
+
+
+** Composée
+
+Soit les fonctions $f : A \mapsto B$ et $g : B \mapsto C$.
+
+Supposons que les grandeurs $x \in A$, $y \in B$ et $z \in C$ soient reliées par les égalités $y = f(x)$ et $z = g(y)$. On a a alors $z = g\left(f(x)\right)$. On définit une nouvelle fonction $g \circ f : A \mapsto C$ associée à ce résultat par :
+
+$$g \circ f : x \mapsto (g \circ f)(x) = g\left(f(x)\right)$$
+
+On nomme $g \circ f$ la composée de $f$ et $g$. On note aussi :
+
+$$g \circ f(x) = (g \circ f)(x)$$
+
+
+*** Association
+
+Soit aussi $h : C \mapsto D$. On remarque que :
+
+$$\left(h \circ (g \circ f)\right)(x) = h\left(g\left(f(x)\right)\right) = \left((h \circ g) \circ f\right)(x)$$
+
+On note :
+
+$$h \circ g \circ f = (h \circ (g \circ f)) = ((h \circ g) \circ f)$$
+
+
+*** Neutre
+
+On constate que
+
+$$\identite \circ f = f \circ \identite = f$$
+
+On dit que la fonction identité est neutre pour la composition.
+
+
+** Puissance
+
+Soit une fonction $f : A \mapsto A$. La « puissance » d'une fonction est définie au moyen de la composée $\circ$ par :
+
+\begin{eqnarray*}
+f^0 &=& \identite \\
+f^n &=& f \circ f^{n-1}
+\end{eqnarray*}
+
+pour tout $n \in \setN$. On a donc en particulier $f^1 = f$ et :
+
+$$f^n = f \circ ... \circ f$$
+
+
+** Fonction constante
+
+On associe souvent à tout élément $c \in B$ une fonction constante $\hat{c} : A \mapsto B$ définie par :
+
+$$\hat{c}(x) = c$$
+
+pour tout $x \in A$. On note abusivement :
+
+$$\hat{c} = c$$
+
+
+** Egalité
+
+Deux fonctions $f,g : A \mapsto B$ sont égales si et seulement si leurs valeurs sont égales en tout point $x \in A$ :
+
+$$f = g \quad \Leftrightarrow \quad f(x) = g(x)$$
+
+
+* Opérations
+
+#+TOC: headlines 1 local
+
+
+\label{chap:operations}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:fonctions} : Les fonctions
+
+
+** Introduction
+
+Soit un ensemble $\Omega$. Une opération $\opera$ sur $\Omega$, ou loi de composition interne sur $\Omega$, est une fonction qui, à deux éléments de $\Omega$, associe un troisième élément de $\Omega$ appelé résultat. On a donc formellement :
+
+$$\opera : \Omega \times \Omega \mapsto \Omega$$
+
+Si $z \in \Omega$ est le résultat de l'opération $\opera$ sur $x,y \in \Omega$, on le note :
+
+$$z = x \opera y$$
+
+
+** Neutre
+
+
+*** À gauche
+
+On dit qu'un élément $n \in \Omega$ est neutre à gauche pour la loi $\opera$ si :
+
+$$n \opera x = x$$
+
+pour tout $x \in \Omega$.
+
+
+*** À droite
+
+On dit qu'un élément $n \in \Omega$ est neutre à droite pour la loi $\opera$ si :
+
+$$x \opera n = x$$
+
+pour tout $x \in \Omega$.
+
+
+*** Simultané
+
+On dit qu'un élément $n \in \Omega$ est neutre pour la loi $\opera$ si :
+
+$$x \opera n = n \opera x = x$$
+
+pour tout $x \in \Omega$.
+
+
+*** Unicité
+
+Si $m,n \in \Omega$ sont des éléments neutres pour $\opera$, on a :
+
+$$m = m \opera n = n$$
+
+Si un neutre existe, il est unique.
+
+
+** Inverse
+
+Supposons que $n \in \Omega$ soit l'unique neutre pour la loi $\opera$.
+
+
+*** À gauche
+
+On dit qu'un élément $y \in \Omega$ est un inverse à gauche de $x \in \Omega$ pour la loi $\opera$ si :
+
+$$y \opera x = n$$
+
+
+*** À droite
+
+On dit qu'un élément $y \in \Omega$ est un inverse à droite de $x \in \Omega$ pour la loi $\opera$ si :
+
+$$x \opera y = n$$
+
+
+*** Simultané
+
+On dit qu'un élément $x^\inverse \in \Omega$ est l'inverse de $x \in \Omega$ pour la loi $\opera$ si :
+
+$$x \opera x^\inverse = x^\inverse \opera x = n$$
+
+
+** Associativité
+
+On dit que $\opera$ est associative si :
+
+$$(x \opera y) \opera z = x \opera (y \opera z)$$
+
+pour tout $x,y,z \in \Omega$. On définit alors :
+
+$$x \opera y \opera z = x \opera (y \opera z) = (x \opera y) \opera z$$
+
+
+*** Extension
+
+Soit $x_1,x_2,...,x_n \in \Omega$. On définit
+
+
+*** Unicité de l'inverse
+
+On suppose que $\opera$ admet $n$ comme neutre. Soit $x \in \Omega$ et $y,z \in \Omega$ deux inverses de $x$. On a :
+
+$$y \opera x \opera z = y \opera (x \opera z) = y \opera n = y$$
+
+et :
+
+$$y \opera x \opera z = (y \opera x) \opera z = n \opera z = z$$
+
+On a donc :
+
+$$y = z$$
+
+Dans le cadre d'une opération associative, l'inverse d'un élément donné est unique.
+
+
+** Commutativité
+
+On dit que $\opera$ est commutative si :
+
+$$x \opera y = y \opera x$$
+
+pour tout $x,y \in \Omega$.
+
+
+** Distributivité
+
+Soit $\autreaddition, \autremultiplication$ deux lois de composition interne sur $\Omega$. On dit que $\autremultiplication$ se distribue sur $\autreaddition$ si :
+
+$$z \autremultiplication (x \autreaddition y) = (z \autremultiplication x) \autreaddition (z \autremultiplication y)$$
+
+et :
+
+$$(x \autreaddition y) \autremultiplication z = (x \autremultiplication z) \autreaddition (y \autremultiplication z)$$
+
+pour tout $x,y,z \in \Omega$.
+
+
+** Opération induite
+
+Soit une opération $\opera$ définie sur l'ensemble $\Omega$. L'opération
+induite par $\opera$ sur $\Omega^n$ est définie par :
+
+$$(x_1,x_2,...,x_n) \opera (y_1,y_2,...,y_n) = (x_1 \opera y_1, x_2 \opera y_2, ..., x_n \opera y_n)$$
+
+pour tout :
+
+$$(x_1,x_2,...,x_n), (y_1,y_2,...,y_n) \in \Omega^n$$
+
+On note aussi :
+
+$$z = x \opera y$$
+
+pour :
+
+$$x = (x_1,x_2,...,x_n) \in \Omega^n$$
+
+$$y = (y_1,y_2,...,y_n) \in \Omega^n$$
+
+et :
+
+$$z = (z_1,z_2,...,z_n) \in \Omega^n$$
+
+avec :
+
+$$z_i = x_i \opera y_i$$
+
+pour tout $i \in \{1,2,...,n\}$.
+
+
+* Algèbre
+
+#+TOC: headlines 1 local
+
+\label{chap:algebre}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:operations} : Les opérations
+
+
+** Monoïde
+
+Soit un ensemble $M$ sur lequel est défini une opération $\opera$.
+On dit que le couple $(M,\opera)$ est un monoïde si $\opera$ est associative.
+
+
+*** Nomenclature
+
+Lorsque l'opération $\opera$ est évidente d'après le contexte, on dit
+simplement que $M$ est un monoïde.
+
+
+** Groupes
+
+Soit un ensemble $G$ sur lequel est défini une opération $\opera$.
+On dit que le couple $(G,\opera)$ est un groupe si :
+
+  - $\opera$ est associative
+  - Il existe un neutre pour $\opera$
+  - Chaque élément de $G$ possède un inverse pour $\opera$
+
+
+*** Nomenclature
+
+Lorsque l'opération $\opera$ est évidente d'après le contexte, on dit
+simplement que $G$ est un groupe.
+
+
+*** Commutatif
+
+Si $\opera$ est également commutative, on dit que $(G,\opera)$ est un
+groupe abélien ou commutatif.
+
+
+** Monoïde et groupe
+
+Soit un monoïde $(G,\opera)$ tel qu'il existe un neutre à droite $n \in G$
+pour $\opera$ et que chaque élément $x \in G$ admet un inverse à droite
+$x^\inverse$ pour $\opera$ :
+
+$$x \opera x^\inverse = n$$
+
+Soit :
+
+$$y = x^\inverse \opera x$$
+
+En utilisant l'associativité de $\opera$, on se rend compte que :
+
+$$y = x^\inverse \opera n \opera x = x^\inverse \opera x \opera x^\inverse \opera x = y \opera y$$
+
+En utilisant ce résultat, on obtient :
+
+$$y = y \opera n = y \opera y \opera y^\inverse = y \opera y^\inverse = n$$
+
+Donc :
+
+$$x^\inverse \opera x = n$$
+
+et $x^\inverse$ est un inverse de $x$. On a aussi :
+
+$$n \opera x = x \opera x^\inverse \opera x = x \opera n = x$$
+
+L'élément $n$ est donc l'unique neutre de $G$ et tout élément $x \in G$
+admet un inverse. On en conclut que le couple $(G,\opera)$ est un groupe.
+
+
+** Anneaux
+
+Soit un ensemble $A$ sur lequel sont définies les opérations
+$\autreaddition$, appelée addition, et l'opération
+$\autremultiplication$, appelée multiplication. On dit que le tuple
+$(A,\autreaddition,\autremultiplication)$ est un anneau si :
+
+  - L'addition est commutative et associative
+  - Il existe un neutre pour l'addition
+  - Chaque élément de $A$ possède un inverse pour l'addition appelé opposé
+  - La multiplication est associative
+  - La multiplication se distribue sur l'addition
+
+
+*** Nomenclature
+
+Lorsque les opérations sont évidentes d'après le contexte, on dit simplement
+que $A$ est un anneau.
+
+
+*** Unitaire
+
+Si la multiplication admet également un neutre, on parle d'anneau unitaire.
+
+
+*** Notations
+
+Soit un anneau $A$. L'addition de $x,y \in A$ est généralement notée :
+
+$$x + y$$
+
+La multiplication est généralement notée :
+
+$$x \cdot y$$
+
+On désigne généralement par $0$ le neutre pour l'addition :
+
+$$x + 0 = 0 + x = x$$
+
+Si l'anneau $A$ est unitaire, on désigne généralement par $1$ le neutre
+pour la multiplication :
+
+$$x \cdot 1 = 1 \cdot x = x$$
+
+L'inverse de $x$ pour l'addition, aussi nommé opposé, est noté $-x$ :
+
+$$x + (-x) = (-x) + x = 0$$
+
+
+*** Intègre
+
+Soit un anneau $(A,+,\cdot)$. Si la relation :
+
+$$a \cdot b = 0$$
+
+implique :
+
+$$a = 0 \ \text{ ou } \ b = 0$$
+
+on dit que $(A,+,\cdot)$ est un anneau intègre.
+
+
+** Corps
+
+Soit un ensemble $K$ sur lequel sont définies les opérations
+$\autreaddition$, appelée addition, et l'opération
+$\autremultiplication$, appelée multiplication. On dit que le tuple
+$(K,\autreaddition,\autremultiplication)$ est un corps si :
+
+  - L'addition est commutative et associative
+  - Il existe un neutre pour l'addition
+  - Chaque élément de $K$ possède un inverse pour l'addition appelé opposé
+  - La multiplication est associative
+  - Il existe un neutre pour la multiplication
+  - Chaque élément de $K$, à l'exception du neutre pour l'addition,
+possède un inverse pour la multiplication appelé inverse
+  - La multiplication se distribue sur l'addition
+
+
+*** Nomenclature
+
+Lorsque les opérations sont évidentes d'après le contexte,
+on dit simplement que $K$ est un corps.
+
+
+*** Symbole
+
+On utilise souvent le symbole $\corps$ pour désigner un corps
+générique.
+
+
+*** Commutatif
+
+Si la multiplication est également commutative, on parle de corps commutatif.
+
+
+*** Notations
+
+Soit un corps $K$. L'addition de $x,y \in K$ est notée :
+
+$$x + y$$
+
+La multiplication est notée :
+
+$$x \cdot y$$
+
+On désigne généralement par $0$ le neutre pour l'addition :
+
+$$x + 0 = 0 + x = x$$
+
+et par $1$ le neutre pour la multiplication :
+
+$$x \cdot 1 = 1 \cdot x = x$$
+
+L'inverse de $x$ pour l'addition, aussi nommé opposé, est noté $-x$ :
+
+$$x + (-x) = (-x) + x = 0$$
+
+et l'inverse de $x$ pour la multiplication est noté $x^{-1}$ ou $1/x$ :
+
+$$x \cdot x^{-1} = x^{-1} \cdot x = 1$$
+
+
+** Soustraction et division
+
+Lorsque l'addition est définie et que $b$ possède un opposé $-b$, on définit
+généralement l'opération de soustraction par :
+
+$$a - b = a + (-b)$$
+
+Lorsque la multiplication est définie et que $b$ dispose d'un inverse $b^{-1}$,
+on définit généralement l'opération de division par :
+
+$$\frac{a}{b} = a \cdot b^{-1}$$
+
+On note aussi :
+
+$$a / b = \frac{a}{b}$$
+
+
+** Les puissances
+
+On définit généralement les puissances positives par :
+
+\begin{eqnarray*}
+x^0 &=& 1 \\
+x^k &=& x \cdot x^{k - 1}
+\end{eqnarray*}
+
+pour tout $k \in \setN$. Si l'inverse de $x$ existe, on définit généralement
+les puissances négatives par :
+
+$$x^{-k} = (x^{-1})^k$$
+
+pour tout $k \in \setN$.
+
+
+** Somme d'ensembles
+
+Soit l'ensemble $\Omega$ sur lequel est définie une opération d'addition.
+On définit la somme de deux sous-ensembles $A,B \subseteq \Omega$ par :
+
+$$A + B = \{ x + y : (x,y) \in A \times B \}$$
+
+
+*** Somme directe
+
+Si, pour tout $s \in S$, il existe un et un seul couple $(x,y) \in A \times B$
+tel que $s = x + y$, on dit que $S$ est la somme directe de $A$ et $B$ et
+on le note :
+
+$$S = A \bigoplus B$$
+
+
+** Multiplication mixte
+
+Soit l'ensemble $\Omega$ sur lequel est définie une opération de
+multiplication. On définit la multiplication de $\lambda \in \Omega$
+et de $A \subseteq \Omega$ par :
+
+$$\lambda \cdot A = \{ \lambda \cdot x : x \in A \}$$
+
+
+* Equivalences
+
+#+TOC: headlines 1 local
+
+\label{chap:equivalences}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:relations} : Les relations
+
+
+** Définition
+
+Une équivalence $\equiv$ sur un ensemble $A$ est une relation permettant de regrouper les éléments ayant une caractéristique similaire. Choisissons $x,y,z \in A$. Tout élément $x$ étant égal à lui-même, il doit bien entendu être équivalent à lui-même. Notre équivalence doit donc respecter la propriété :
+
+$$x \equiv x$$
+
+Par ailleurs, si $x$ est équivalent à $y$, l'inverse doit aussi être vrai :
+
+$$x \equiv y \quad \Rightarrow \quad y \equiv x$$
+
+Il est également clair que si $x$ est équivalent $y$ et que $y$ est équivalent à $z$, notre $x$ doit être équivalent à $z$. Donc :
+
+$$x \equiv y, \quad y \equiv z \quad \Rightarrow \quad x \equiv z$$
+
+
+*** Relation
+
+On peut associer une relation $R$ à toute équivalence en posant :
+
+$$R = \{ (x,y) \in A^2 : x \equiv y \}$$
+
+On a alors $x \equiv y$ si et seulement si $(x,y) \in R$.
+
+
+*** Multiple
+
+La notation $x \equiv y \equiv z$ signifie que $x \equiv y$ et que $y \equiv z$.
+
+
+** Classe d'équivalence
+
+Soit $x \in A$. La classe d'équivalence associée à $x$ est l'ensemble des éléments de $A$ qui lui sont équivalents :
+
+$$\mathcal{E}(x) = \{ y \in A : y \equiv x \}$$
+
+
+** Ensemble quotient
+
+Soit la relation $R \subseteq A^2$ associée à l'équivalence $\equiv$ définie sur $A$. L'ensemble quotient de $A$ par $R$ est la collection des classes d'équivalence :
+
+$$A / R = \{ \mathcal{E}(x) \in \sousens(A) : x \in A \}$$
+
+
+*** Intersection
+
+Soit $x,y \in A$.
+
+  - Supposons que $x$ n'est pas équivalent à $y$ et choisissons un $z$ dans l'intersection :
+
+$$z \in \mathcal{E}(x) \cap \mathcal{E}(y)$$
+
+On doit donc avoir $x \equiv z$ et $z \equiv y$, alors que $x$ n'est pas équivalent à $y$, ce qui contredit la définition des équivalences. Par conséquent, un tel $z$ ne peut pas exister et l'intersection est vide :
+
+$$\mathcal{E}(x) \cap \mathcal{E}(y) = \emptyset$$
+
+  - A présent, supposons que $x$ est équivalent à $y$ et choisissons un $z \in \mathcal{E}(x)$. On a donc $z \equiv x$ et $x \equiv y$. On en déduit que $z \equiv y$, d'où $z \in \mathcal{E}(y)$ et $\mathcal{E}(x) \subseteq \mathcal{E}(y)$. Symétriquement, si $w \in \mathcal{E}(y)$, on a $w \equiv y$ et $y \equiv x$, d'où $w \in \mathcal{E}(x)$ et $\mathcal{E}(y) \subseteq \mathcal{E}(x)$. On a donc :
+
+$$\mathcal{E}(x) = \mathcal{E}(y)$$
+
+
+
+*** Union
+
+Quel que soit $x \in A$, tous les éléments de $\mathcal{E}(x)$ sont dans $A$ par définition. L'union :
+
+$$E = \bigcup_{x \in A} \mathcal{E}(x)$$
+
+est donc également inclue dans $A$. D'un autre coté, tout $x \in A$ étant équivalent à lui-même, chaque $\mathcal{E}(x)$ contient au moins $x$. On en conclut que $A$ est inclus dans $E$. La double inclusion nous montre que :
+
+$$A = \bigcup_{x \in A} \mathcal{E}(x)$$
+
+
+*** Partition
+
+On déduit de ce qui précède que la collection des classes d'équivalences :
+
+$$\mathcal{P} = A / R$$
+
+forme une partition de $A$. Cette constation explique la terminologie de quotient, liée à celle de division et de partition.

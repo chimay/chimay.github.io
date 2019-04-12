@@ -1,0 +1,3652 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Ordina 05 : Édition
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index. html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+* Pageurs
+
+#+TOC: headlines 1 local
+
+
+** More
+
+| <espace> | Page vers le bas                             |
+| b        | Page vers le haut                            |
+| v        | Édition du fichier dans l'éditeur par défaut |
+
+
+** Less
+
+
+*** Généralités
+
+| =        | Informations sur le fichier courant |
+| <ctrl l> | Recharge l'affichage                |
+|          |                                     |
+
+
+*** Options
+
+| _/option/  | Description d'une option      |
+| -/option/  | Modifie une option            |
+| -+/option/ | Valeur par défaut de l'option |
+|            |                               |
+
+
+**** Liste
+
+| -M | Beaucoup d'informations   dans la ligne de statut                             |
+| -N | Affiche une colonne   avec les numéros de lignes                              |
+| -J | Affiche une colonne avec les lignes contenant une correspondance de recherche |
+| -G | Ne met pas en évidence   les occurences de recherche                          |
+| -g | Ne met en évidence   que la dernière occurence de recherche                   |
+| -i | Recherche insensible à la casse,   sauf si le motif contient des majuscules   |
+| -r | Les caractères de contrôle sont interprétés                                   |
+| -W | Met en évidence la première ligne   après chaque mouvement vers le bas        |
+| -n | Décalage entre la page réelle   et la page de défilement                      |
+| -# | Nombre de caractères   pour le défilement horizontal                          |
+| -s | Transforme plusieurs lignes vides consécutives   en une seule                 |
+
+
+*** Édition
+
+| :e     | Édite un fichier et   l'ajoute à la liste des fichiers           |
+| :n     | Fichier suivant                                                  |
+| :p     | Fichier précédent                                                |
+| /N/ :x | Va au /N/<sup>ième</sup> fichier                                 |
+| :d     | Efface le fichier courant de la liste des fichiers               |
+| q      | Quitte                                                           |
+| s      | Sauve dans un fichier (uniquement si le flux provient d'un tube) |
+
+
+**** Dynamique
+
+| R | Recharge le fichier                                                                    |
+| F | Se place en fin de fichier et reste à l'écoute de la suite au cas où le fichier change |
+
+
+*** Mouvements
+
+| <espace> | Page vers le bas          |
+| f        |                           |
+| b        | Page vers le haut         |
+| d        | Demi-page vers le bas     |
+| u        | Demi-page vers le haut    |
+| g        | Début du fichier          |
+| G        | Fin du fichier            |
+| <alt (>  | Défilement vers la gauche |
+| <alt )>  | Défilement vers la droite |
+
+
+**** Signets
+
+| m | Définit un signet |
+| ' | Va à un signet |
+
+
+*** Recherche
+
+| /          | Recherche avant                                                      |
+| ?          | Recherche arrière                                                    |
+| n          | Occurrence suivante                                                  |
+| N          | Occurrence précédente                                                |
+| /*         | Recherche avant dans tous les fichiers passés en ligne de commande   |
+| ?*         | Recherche arrière dans tous les fichiers passés en ligne de commande |
+| /!         | Recherche avant des lignes   ne correspondant pas au motif           |
+| & /motif/  | Affiche seulement les lignes   qui correspondent au motif            |
+| &! /motif/ | Affiche seulement les lignes   qui ne correspondent pas au motif     |
+| <alt u>    | Annule la mise en évidence   des correspondances                     |
+
+
+*** Commandes
+
+| +/commande/           | Exécute la commande less à chaque nouveau fichier édité                         |
+| !                     | Commande shell                                                                  |
+| ¦ /signet/ /commande/ | Envoie le texte entre le haut de l'écran et le signet à l'entrée d'une commande |
+
+
+*** Programmes externes
+
+| v | Édition du fichier dans l'éditeur par défaut |
+
+
+** Most
+
+| <espace> | Page vers le bas |
+
+
+* Ed
+
+#+TOC: headlines 1 local
+
+
+** Introduction
+
+Ed est un éditeur de texte orienté ligne. Il fonctionne par commandes.
+
+Pour ajouter du texte, on donne le numéro de la ligne suivi de
+la commande « *a* » et du texte
+désiré. On termine l'ajout par une ligne contenant uniquement un
+point. Voici un ajout disposé après la ligne 10 :
+
+#+BEGIN_EXAMPLE
+10a
+Du texte
+encore
+toujours
+dernière ligne ajoutée
+.
+#+END_EXAMPLE
+
+Le symbole « $ » représente la fin du
+fichier. Pour ajouter du texte à la fin du fichier, on utilise donc
+« $a » :
+
+#+BEGIN_EXAMPLE
+$a
+Du texte
+.
+#+END_EXAMPLE
+
+La commande « *i* » insère
+le texte avant la ligne donnée. Voici une insertion avant la ligne
+9 :
+
+#+BEGIN_EXAMPLE
+9i
+Du texte
+.
+#+END_EXAMPLE
+
+Voici une insertion ajoutant du texte au début du fichier :
+
+#+BEGIN_EXAMPLE
+1i
+Du texte
+.
+#+END_EXAMPLE
+
+Lorsqu'aucune ligne n'est fournie à la commande d'ajout ou
+d'insertion, le texte est ajouté après ou inséré avant la ligne
+courante.
+
+
+** Commandes
+
+| /N/         | Va à la ligne /N/                                                 |
+| $           | Va à la fin du fichier                                            |
+| p           | Affiche la ligne courante                                         |
+| %p          | Affiche tout le fichier                                           |
+| a           | Ajoute après la ligne                                             |
+| i           | Insère avant la ligne                                             |
+| c           | Change une ou plusieurs lignes                                    |
+| d           | Supprime une ou plusieurs lignes                                  |
+| e /fichier/ | Édite un fichier                                                  |
+| E /fichier/ | Édite un fichier même si des modifications ne sont pas enregistrées |
+| w           | Sauve le fichier                                                  |
+| w /fichier/ | Sauve sous un nom donné                                           |
+| q           | Quitte                                                            |
+| Q           | Quitte même si des modifications ne sont pas sauvées              |
+
+
+** Scripts
+
+On peut faire exécuter à ed un script contenant des commandes ed au moyen de la syntaxe :
+
+#+BEGIN_EXAMPLE
+ed < /script-ed/
+#+END_EXAMPLE
+
+
+* Vi - Vim - Gvim
+
+#+TOC: headlines 1 local
+
+
+** Généralités
+
+Vim est un éditeur de texte qui dispose de plusieurs modes :
+
+  - Le mode /normal/ est le mode par défaut. Il permet d'entrer des
+    commandes sous la forme de simples caractères ou de combinaisons
+    de caractères.
+  - Le mode /ex/ permet d'entrer des lignes de commandes complexes
+  - Le mode /insertion/ permet d'entrer du texte
+  - Le mode /visuel/ permet de sélectionner du texte
+
+
+*** Démarrage
+
+| vim    | Lance vim en mode texte     |
+| gvim   | Lance vim en mode graphique |
+| vim -g |                             |
+| vi     | Un alias fréquent pour vim  |
+
+
+*** Aide
+
+Vim dispose d'une aide intégrée. Cette aide est notamment disponible
+au moyen des commandes ex :
+
+| :h            | Aide                         |
+| :help         |                              |
+| :h helphelp   | Comment bien utiliser l'aide |
+| :h /commande/ | Aide relative à une commande |
+
+
+*** Configuration
+
+| ~/.vimrc        | Fichier de configuration                                       |
+| ~/.vim          | Répertoire des scripts                                         |
+| ~/.vim/plugin   | Répertoire des extensions                                      |
+| ~/.vim/ftplugin | Répertoire des extensions relatives à un type de fichier       |
+| ~/.vim/syntax   | Répertoire des extensions relatives à la coloration syntaxique |
+
+
+** Mode normal
+
+En /mode normal/, n'importe quelle touche du clavier est
+susceptible de faire partie d'une commande. Par exemple, on bascule en
+mode insertion en une seule touche :
+
+#+BEGIN_EXAMPLE
+i
+#+END_EXAMPLE
+
+On peut alors entrer du texte, puis revenir au mode normal via :
+
+#+BEGIN_EXAMPLE
+<esc>
+#+END_EXAMPLE
+
+Nous verrons beaucoup d'autres commandes du mode normal par la suite.
+
+
+*** Intéractions avec le mode insertion
+
+| i     | Passe du mode normal au mode insertion                                            |
+| <ins> |                                                                                   |
+| a     | Passe en mode insertion  au caractère suivant le curseur                          |
+| A     | Passe en mode insertion  à la fin de la ligne                                     |
+| I     | Passe en mode insertion  au début de la ligne                                     |
+| o     | Crée une nouvelle ligne sous la ligne courante   et passe en mode insertion       |
+| O     | Crée une nouvelle ligne au-dessus de la ligne courante et passe en mode insertion |
+
+
+** Mode ex
+
+Vim dispose d'un interpréteur de commandes interne et d'un mode
+associé, appelé /mode ex/. On débute une commande ex par un
+« : » :
+
+#+BEGIN_EXAMPLE
+:/commande-ex/
+#+END_EXAMPLE
+
+La commande est ensuite validée par <Return>.
+
+
+*** Convention
+
+Dans la suite, nous adoptons une convention qui consiste à préfixer
+les commandes ex par un « : », afin de ne pas les
+confondre avec les commandes du mode normal.
+
+
+*** Multicommande
+
+Notons qu'on peut entrer plusieurs commandes sur une même ligne au
+moyen de la syntaxe :
+
+#+BEGIN_EXAMPLE
+:/commande-1/ | /commande-2/
+#+END_EXAMPLE
+
+
+*** Multiligne
+
+Si on souhaite entre plusieurs lignes de commande ex d'affilée,
+on peut entrer dans le mode ex multiligne au moyen de la commande du
+mode normal (et donc non préfixée) :
+
+#+BEGIN_EXAMPLE
+Q
+#+END_EXAMPLE
+
+On entre alors les lignes de commandes ex que l'on souhaite sans devoir les
+préfixer par un « : ». On quitte ensuite le mode ex
+multiligne via la commande :
+
+#+BEGIN_EXAMPLE
+:vi
+#+END_EXAMPLE
+
+En résumé, nous avons donc :
+
+| :   | Passe du mode normal au mode ex uniligne   |
+| Q   | Passe du mode normal au mode ex multiligne |
+| :vi | Passe du mode ex multiligne au mode normal |
+
+
+*** Scripts
+
+Le mode ex multiligne est agréable pour entrer quelques commandes,
+mais si l'on souhaite entre de longs blocs de codes, le mieux
+est de créer un script, c'est-à-dire un fichier qui accueillera
+toutes vos commandes. Cerise sur le gâteau, les commandes ex d'un
+script ne doivent pas être obligatoirement préfixées par un
+« : ». Un script peut s'exécuter au moyen de
+la commande :
+
+#+BEGIN_EXAMPLE
+:source /script/
+#+END_EXAMPLE
+
+On peut également l'exécuter au démarrage de vim :
+
+#+BEGIN_EXAMPLE
+vim -S /script/
+#+END_EXAMPLE
+
+
+*** Intermode
+
+Il est possible d'exécuter une commande du mode normal à partir du mode ex, il
+suffit d'utiliser la syntaxe :
+
+#+BEGIN_EXAMPLE
+:normal /commande-du-mode-normal/
+#+END_EXAMPLE
+
+On rencontre ce genre de construction dans les scripts.
+
+
+*** Chaîne de caractères
+
+Il est possible d'exécuter le code contenu dans une chaîne de
+caractères :
+
+#+BEGIN_EXAMPLE
+:exe /chaine/
+#+END_EXAMPLE
+
+
+*** Raccourcis
+
+Voici quelques raccourcis disponibles dans le mode ex :
+
+| <ctrl u>                  | Efface du curseur jusqu'au début de la ligne    |
+| <ctrl w>                  | Efface le mot précédant le curseur              |
+| <ctrl v> /toucheSpéciale/ | Échappement permettant d'afficher littéralement |
+|                           | une touche ou une combinaison spéciale          |
+| <ctrl v> <Return>         | Affiche un Return littéral, souvent ^M ou ^J    |
+
+
+*** Insertion
+
+« *Vim* » reprend en partie la philosophie de « *Ed* » et certaines de
+ses commandes, en particulier les commandes d'ajout et d'insertion :
+
+| :a | Ajoute du texte après la ligne courante, la fin de l'ajout     |
+|    | est signalée par un ligne contenant uniquement un point        |
+| :i | Insère du texte avant la ligne courante, la fin de l'insertion |
+|    | est signalée par un ligne contenant uniquement un point        |
+| :c | Change une ou plusieurs lignes, la fin de la modification      |
+|    | est signalée par un ligne contenant uniquement un point        |
+| :d | Supprime une ou plusieurs lignes                               |
+
+
+** Mode insertion
+
+Le mode insertion permet d'insérer le texte frappé au clavier dans un
+fichier. Par conséquent, seules les touches du clavier ne correspondant
+pas aux caractères imprimables (lettres, chiffres, espaces, etc)
+peuvent faire partie d'une commande du mode insertion.
+
+
+*** Intéractions avec le mode normal
+
+| <ctrl o> /commande/       | Permet d'exécuter une commande du mode normal   |
+|                           | lorsqu'on est en mode insertion ou sélection    |
+| <ctrl v> /toucheSpéciale/ | Échappement permettant d'afficher littéralement |
+|                           | une touche ou une combinaison spéciale          |
+
+
+** Mode remplacement
+
+Le mode remplacement est une variante du mode insertion. On peut d'ailleurs
+basculer de l'un à l'autre via la touche :
+
+#+BEGIN_EXAMPLE
+<ins>
+#+END_EXAMPLE
+
+
+*** Intéractions avec le mode normal
+
+| R | Passe du mode normal au mode remplacement         |
+| r | Passe en mode remplacement pour un seul caractère |
+
+
+** Mode visuel
+
+Le mode visuel permet de sélectionner du texte afin d'y appliquer
+une opération quelconque. Les mouvements effectués en mode visuel
+modifient la sélection en conséquence.
+
+
+*** Intéractions avec le mode normal
+
+| v        | Bascule entre le mode normal et le mode visuel    |
+| gv       | Passe du mode normal à la dernière sélection      |
+| V        | Passe du mode normal au mode visuel ligne         |
+| <ctrl v> | Passe du mode normal au mode visuel rectangulaire |
+
+
+*** Commandes
+
+| o   | Les mouvements suivants modifient le début / la fin de la sélection |
+| <esc> | Passe du mode visuel au mode normal                               |
+
+
+** Mode sélection
+
+Le mode sélection ressemble au mode visuel, mais il effectue
+un remplacement de la sélection par le texte saisi ensuite. Il
+n'accepte donc pas les commandes en mode normal.
+
+| gh         | Passe du mode normal au mode sélection                  |
+| gH         | Comme /gh/, mais permet de sélectionner ligne par ligne |
+| g <ctrl h> | Comme /gh/, mais permet  de sélectionner un rectangle   |
+| <ctrl g>   | Passe du mode visuel au mode sélection  et vice versa   |
+
+
+** Édition
+
+
+*** Démarrage
+
+| vim /fichier(s)/     | Édite un ou plusieurs fichiers ou répertoires à la suite |
+| vim /fichierArchive/ | Édite le contenu d'une archive                           |
+| /commande/ ¦ vim -   | Envoie la sortie   d'une commande à vim                  |
+
+
+*** Ouverture
+
+| :e /fichier/  | Édite un fichier ou un répertoire                                       |
+| :e! /fichier/ | Édite un autre fichier sans sauver les modifications du fichier courant |
+| :e %          | Réédite le fichier courant                                              |
+| :e #          | Édite l’avant-dernier fichier édité                                     |
+
+
+**** Chemins d'accès
+
+| :set path+=/chemin/ | Ajoute un chemin d'accès aux fichiers   dans la variable path     |
+| :set path-=/chemin/ | Supprime un chemin de la variable path                            |
+| :find /fichier/     | Trouve un fichier dans les chemins de la variable path et l'édite |
+
+
+*** Informations
+
+| <ctrl g> | Informations sur un fichier |
+
+
+*** Lecture
+
+| :r /fichier/ | Lis un fichier et l'insère dans le fichier courant |
+
+
+*** Écriture
+
+| :w             | Sauve le fichier courant                                      |
+| :w /fichier/   | Enregistre une copie du fichier courant sous le nom /fichier/ |
+| :up            | Sauve le fichier courant si il y a des modifications          |
+| :sav /fichier/ | Sauve le fichier courant sous le nom /fichier/                |
+
+
+**** Encodage
+
+| :w ++enc=/encodage/ /fichier/ | Enregistre une copie du fichier courant avec un encodage différent |
+
+
+*** Lecture seule
+
+| view           | Lance vim en mode lecture seule        |
+| vim -R         |                                        |
+| gview          | Lance gvim en mode lecture seule       |
+| :set readonly! | Interrupteur de l'option lecture seule |
+
+
+**** Modifiable
+
+Un fichier ouvert avec l'option lecture-seule ne peut plus être écrit
+sur le disque, mais peut toujours être modifié à l'intérieur de
+vim, car ce dernier en tient une copie (un tampon) pour l'édition. Si
+vous désirez que le tampon ne soit pas modifiable, il faut activer
+l'option :
+
+#+BEGIN_EXAMPLE
+:set nomodifiable
+#+END_EXAMPLE
+
+L'interrupteur de l'option s'écrit :
+
+#+BEGIN_EXAMPLE
+:set modifiable!
+#+END_EXAMPLE
+
+
+*** Quitter
+
+| :q  | Quitte                                    |
+| :wq | Sauve et quitte                           |
+| :x | Sauve si le fichier a été modifié et quitte |
+| :q! | Quitte sans sauver                        |
+
+
+** Répétitions
+
+| .  | Répète la dernière action          |
+| @: | Répète la dernière ligne de commande |
+
+
+*** Mode normal
+
+
+**** Préfixes numériques
+
+| /N/ /commande/  | Exécute une commande un nombre /N/ de fois    |
+| /N/ /mouvement/ | Répète /N/ fois un mouvement                  |
+| /N/ .           | Répète /N/ fois   la dernière action          |
+| /N/ @:          | Répète /N/ fois la dernière ligne de commande |
+|                 |                                               |
+
+
+*** Mode insertion
+
+| <ctrl a>|Reproduit l'insertion précédente|
+
+
+** Défaire et refaire
+
+| :undo            | Annule la dernière action                            |
+| u                |                                                      |
+| :redo            | Annule la dernière annulation                        |
+| <ctrl r>         |                                                      |
+| U                | Annule la dernière modification de la ligne courante |
+| :undolist        | Donne la liste des annulations                       |
+| g-               | État temporel précédent du fichier                   |
+| :earlier         |                                                      |
+| g+               | État temporel suivant du fichier                     |
+| :later           |                                                      |
+| :earlier /durée/ | Recule en arrière dans le temps                      |
+|                  | d'une durée donnée (10s, 7m, 3h, ...)                |
+| :later /durée/   | Avance en avant dans le temps d'une durée donnée     |
+
+
+** Mouvements
+
+| h | va au caractère précédent           |
+| j | va à la ligne suivante              |
+| k | va à la ligne précédente            |
+| l | va au caractère suivant             |
+| w | Va au mot suivant, au sens strict   |
+| b | Va au mot précédent, au sens strict |
+| e | Va à la fin du mot, au sens strict  |
+| W | Va au mot suivant, au sens large    |
+| B | Va au mot précédent, au sens large  |
+| E | Va à la fin du mot, au sens large   |
+| ) | Va à la phrase suivante             |
+| ( | Va à la phrase précédente           |
+| } | Va au paragraphe suivant            |
+| { | Va au paragraphe suivant            |
+|  [[ | Va à la section précédente          |
+|  ]] | Va à la section suivante            |
+
+
+*** Lignes
+
+| 0     | Va au début de la ligne            |
+| $     | Va à la fin de la ligne            |
+| +     | Va au début de la ligne suivante   |
+| -     | Va au début de la ligne précédente |
+| /N/ G | Va à la ligne /N/                  |
+| :/N/  |                                    |
+| /N/ ¦ | Va à la colonne /N/                |
+| /N/ + | Descend de /N/ lignes              |
+| /N/ - | Monte de /N/ lignes                |
+| gg    | Va à la première ligne             |
+| :0    |                                    |
+| :1    |                                    |
+| G     | Va à la dernière ligne             |
+| :$    |                                    |
+
+
+*** Lignes virtuelles
+
+Les lignes assez longues pour dépasser la largeur
+de la fenêtre sont affichées sous la forme de plusieurs
+lignes virtuelles visibles écran si l'option :
+
+#+BEGIN_EXAMPLE
+set wrap
+#+END_EXAMPLE
+
+est activée. Les mouvement habituel considérent des lignes
+réelles, mais il existe aussi des commandes permettant de se
+déplacer dans les lignes virtuelles.
+
+| g0 | Va au début de la ligne virtuelle |
+| g$ | Va à la fin de la ligne virtuelle |
+| gj | Va à la ligne virtuelle suivante |
+| gk | Va à la ligne virtuelle précédente |
+
+
+*** Écran
+
+| H | Positionne le curseur en haut de l'écran |
+| M | Positionne le curseur au milieu de l'écran |
+| L | Positionne le curseur en bas de l'écran  |
+
+
+*** Défilement
+
+| <ctrl e> | Descend la fenêtre d'une ligne  |
+| <ctrl y> | Monte la fenêtre d'une ligne    |
+| <ctrl d> | Va au demi-écran suivant        |
+| <ctrl u> | Va au demi-écran précédent      |
+| <ctrl f> | Va à l'écran suivant            |
+| <ctrl b> | Va à l'écran précédent          |
+| z+       | Place la ligne courante en haut |
+| zt       |                                 |
+| z.     | Place la ligne courante au milieu |
+| zz       |                                 |
+| z-       | Place la ligne courante en bas  |
+| zb       |                                 |
+
+
+*** Signets
+
+On peut définir :
+
+  - 26 signets locaux par fichier, chacun correspondant à une lettre minuscule (a...z)
+  - 26 signets globaux, chacun correspondant à une lettre majuscule (A...Z)
+
+| m/A/</td> | Définit le signet /A/ à l'emplacement courant |
+| :ma /A/   |                                               |
+| :k /A/    |                                               |
+| `/A/      | Va au signet /A/                              |
+| '/A/      | Va à la ligne de signet /A/                   |
+| ]`        | Va au signet suivant                          |
+| [`        | Va au signet précédent                        |
+| :marks    | Donne la liste des signets                    |
+
+
+*** Contextes
+
+| :ju           | Affiche la liste des contextes                                                |
+| :jumps        |                                                                               |
+| <ctrl o>      | Va au contexte précédent   (dans le même fichier ou un autre)                 |
+| <ctrl i>      | Va au contexte suivant   (dans le même fichier ou un autre)                   |
+| ` ` (2 x `)   | Alterne les deux derniers contextes                                           |
+| ' ' (2 x ')   | Alterne les lignes des deux derniers contextes                                |
+| ` ^           | Va à la position où le curseur   était à la fin de la dernière insertion      |
+| ' ^           | Va à la ligne où le curseur   était à la fin de la dernière insertion         |
+| ` "           | Va à la position où le curseur était lors de la dernière fermeture du fichier |
+| ' "           | Va à la ligne où le curseur   était lors de la dernière fermeture  du fichier |
+
+
+*** Modifications
+
+| :changes | Affiche la liste des modifications                           |
+| g;       | Va à la modification précédente                              |
+| g,       | Va à la modification suivante                                |
+| '.       | Va à la dernière ligne éditée                                |
+| gi     | Insère à nouveau du texte à l'endroit de la dernière insertion |
+| `[       | Va au début du dernier changement                            |
+| `]       | Va à la fin du dernier changement                            |
+| '[       | Va à la première ligne du dernier changement                 |
+| ']       | Va à la dernière ligne du dernier changement                 |
+
+
+** Expressions régulières
+
+
+*** Caractères
+
+| /caractère/  | Correspond à un caractère ordinaire                                    |
+| \/caractère/ | Correspond à un caractère ayant autrement une signification particulière |
+| \.           | Point « . »                                                            |
+| \[           | Crochet « [ »                                                          |
+| \]           | Crochet « ] »                                                          |
+
+
+*** Caractères blancs
+
+| <espace> | Espace                |
+| \t       | Tabulation            |
+| \s       | Espace ou tabulation  |
+| \n   | Caractère de fin de ligne |
+
+
+*** Caractères invisibles
+
+| \e | <esc>   |
+| \b | <Backspace> |
+| \r | <Return> |
+
+
+*** Coordonnées
+
+| \%/N/l      | Ligne /N/       |
+| \%/N/c      | Colonne /N/     |
+| \%'/signet/ | Signet          |
+| \%#     | Position du curseur |
+
+
+*** Délimiteurs
+
+| ^          | Début de ligne |
+| \_^          |              |
+| $            | Fin de ligne |
+| \_$          |              |
+| \<           | Début de mot |
+| \>           | Fin de mot   |
+| \%^      | Début de fichier |
+| \%$        | Fin de fichier |
+| \%<'/signet/ | Avant un signet |
+| \%>'/signet/ | Après un signet |
+
+
+*** Plages
+
+| \%V|Dans la dernière sélection visuelle|
+
+
+*** Jokers
+
+| .  | N'importe quel caractère sauf fin de ligne |
+| \_. | N'importe quel caractère, fin de ligne inclue |
+| \s  | Espace ou tabulation                      |
+| \a  | Lettre                                    |
+| \d  | Chiffre                                   |
+| \l  | Lettre minuscule                          |
+| \u  | Lettre majuscule                          |
+
+
+**** Négations
+
+| \S | Non \s |
+| \A | Non \a |
+| \D | Non \d |
+| \L | Non \l |
+| \U | Non \u |
+
+
+*** Groupes
+
+| [/caractères/]   | Un des caractères du groupe                               |
+| [/A/-/Z/]        | Caractères entre /A/ et /Z/                               |
+| [^/caractères/]  | Tout sauf un des caractères du groupe ou une fin de ligne |
+| \_[/caractères/] | Un des caractères du groupe   ou fin de ligne             |
+| \_[/caractères/] | (Tout sauf un des caractères du groupe) ou fin de ligne   |
+| \%[/chaîne/]     | Rien ou une partie quelconque   au début de la chaîne     |
+
+
+**** Exemples
+
+| [0-9]   | Chiffres                 |
+| [A-Z]   | Majuscules               |
+| [a-z]   | Minuscules               |
+
+
+*** Logique
+
+| \( /.../ \)          | Groupement logique et pour les rétro-références            |
+| \%( /.../ \)       | Groupement logique ne comptant pas pour les rétro-références |
+| /motif1/ \¦ /motif2/ | Tout ce qui correspond à /motif1/ ou à /motif2/            |
+| /motif1/ \& /motif2/ | Tout ce qui correspond à /motif1/ et à /motif2/            |
+
+
+*** Quantité
+
+| \(/motif/\)\{/N/}     | /N/ correspondances au motif          |
+| \(/motif/\)\{/M/,/N/} | Entre /M/ et /N/ correspondances au motif |
+| \(/motif/\)\{,/N/}    | Au plus /N/ correspondances au motif  |
+| \(/motif/\)\{/N/,}  | Au minimum /N/ correspondances au motif |
+| \(/motif/\)\{}     | N'importe quel nombre de correspondances |
+
+
+**** Cas particuliers
+
+| * | \{} |
+| \= | \{0,1} |
+| \? |    |
+| \+ | \{1,} |
+
+
+**** Minimum
+
+<tr>
+ <td>\{-/.../}</td>
+ <td>Comme \{/.../} mais
+ correspond au minimum
+ de correspondances possible
+ dans la plage</td>
+</tr>
+| \{-}|Correspond au minimum de correspondances possible|
+
+
+*** Contexte
+
+Les clefs suivantes indiquent le début et la fin
+du motif :
+
+| \zs | Début de motif |
+| \ze | Fin de motif |
+
+Tout ce qui intervient en dehors de ces limites
+constitue le contexte. Exemple :
+
+#+BEGIN_EXAMPLE
+/contexteAvant/\zs/motif/\ze/contexteArrière/
+#+END_EXAMPLE
+
+
+*** Vérifications
+
+| /motif/\(/test/\)\@=  | Correspond à /motif/ si /test/ suit                          |
+| /motif/\(/test/\)\@!  | Correspond à /motif/ si /test/ ne suit pas                   |
+| \(/test/\)\@<=/motif/ | Correspond à /motif/ si /test/   le précède directement      |
+| \(/test/\)\@<!/motif/ | Correspond à /motif/ si /test/ ne le pas précède directement |
+
+
+*** Contrôle
+
+| \C | Active la sensibilité à la casse |
+| \c | Désactive la sensibilité à la casse |
+
+
+*** Fichiers
+
+| *   | N'importe quelle chaîne de caractères dans un nom de fichier ou de répertoire |
+| **    | N'importe quel sous-répertoire                                              |
+| **/N/ | N'importe quel sous-répertoire jusqu'au niveau /N/                          |
+
+
+** Recherches
+
+| //expression/ | recherche (de haut en bas)   de l’expression /expression/   |
+| ?/expression/ | rétro-recherche (de bas en haut) de l’expression /expression/ |
+| n             | Va à l'occurrence suivante                                  |
+| N             | Va à l'occurrence précédente                                |
+
+
+*** Décalage
+
+| //expression//b     | recherche l'expression puis place le curseur                  |
+| //expression//s     | au début de la correspondance                                 |
+| //expression//e     | recherche l'expression puis place le curseur                  |
+|                     | à la fin la correspondance                                    |
+| //expression//b+/N/ | recherche l'expression puis place le curseur                  |
+| //expression//s+/N/ | /N/ caractères après le début de la correspondance            |
+| //expression//e+/N/ | recherche l'expression puis place le curseur                  |
+|                     | /N/ caractères après la fin la correspondance                 |
+| //expression//b-/N/ | recherche l'expression puis place le curseur                  |
+| //expression//s-/N/ | /N/ caractères avant le début de la correspondance            |
+| //expression//e-/N/ | recherche l'expression puis place le curseur                  |
+|                     | /N/ caractères avant la fin la correspondance                 |
+| //expression//+/N/  | recherche l'expression puis décale de /N/ lignes vers le bas  |
+| //expression//-/N/  | recherche l'expression puis décale de /N/ lignes vers le haut |
+
+Le princip est le même avec les rétro-recherches, le
+« / » est simplement remplacé par un
+« ? ». Exemples :
+
+| ?/expression/?+/N/ | rétro-recherche l'expression puis décale de /N/ lignes vers le bas |
+| ?/expression/?-/N/ | rétro-recherche l'expression puis décale de /N/ lignes vers le haut |
+
+
+*** Chaînage de recherches
+
+| //expr1//;//expr2/ | Effectue une recherche puis une autre   |
+| ?/expr1/?;?/expr2/ | Effectue une rétro-recherche puis une autre |
+| //expr1//;?/expr2/ | Recherche puis rétro-recherche          |
+| ?/expr1/?;//expr2/ | Rétro-recherche puis recherche          |
+
+
+*** Contextuel
+
+| *  | Va à la occurrence suivante du mot courant                             |
+| #  | Va à l'occurrence précédente du mot courant                            |
+| g* | Va à la occurrence suivante de la chaîne de caractères du mot courant  |
+| g# | Va à l'occurrence précédente de la chaîne de caractères du mot courant |
+| %  | Va à la parenthèse, le crochet ou l'accolade correspondante            |
+| [I | Affiche toutes les lignes contenant le mot courant                     |
+|    |                                                                        |
+
+
+*** Lettres
+
+| f /lettre/ | Va à la prochaine occurrence                      |
+|            | de la lettre  /lettre/ dans la ligne courante     |
+| F /lettre/ | Va à l'occurrence précédente                      |
+|            | de la lettre  /lettre/ dans la ligne courante     |
+| t /lettre/ | Se positionne juste avant l'occurrence suivante   |
+|            | de la lettre /lettre/  dans la ligne courante     |
+| T /lettre/ | Se positionne juste après l'occurrence précédente |
+|            | de la lettre /lettre/  dans la ligne courante     |
+
+
+*** Répétition
+
+| /            | Répète la recherche précédente de haut en bas         |
+| ?            | Répète la recherche précédente de bas en haut         |
+| ///décalage/ | Répète la recherche précédente avec un autre décalage |
+| ??/décalage/ | Comme ///décalage/ mais  de bas en haut               |
+| ;            | Répète une recherche effectuée par f ou F             |
+
+
+*** Mise en évidence
+
+On peut associer un motif à une couleur via un groupe. On commence
+par définir le groupe :
+
+#+BEGIN_EXAMPLE
+match /Groupe/ //motif//
+#+END_EXAMPLE
+
+Ensuite, on définit les couleurs d'avant-plan (ctermfg) et
+d'arrière-plan (ctermbg) :
+
+highlight /Groupe/ ctermfg=/couleur/ guifg=/couleur/
+highlight /Groupe/ ctermbg=/couleur/ guibg=/couleur/
+
+
+*** Annuler la mise en évidence
+
+| :nohl | Annule la mise en évidence du dernier motif recherché |
+
+
+** Plages et adresses
+
+Un certain nombre de commandes ex peuvent s'exécuter sélectivement
+sur une plage donnée de texte. La forme générale est :
+
+#+BEGIN_EXAMPLE
+: /plage/ /commande/
+#+END_EXAMPLE
+
+
+*** Par défaut
+
+Par défaut, la plage est souvent la ligne courante.
+
+
+*** Adresses
+
+Une plage peut se définir par une adresse de début et une adresse
+de fin. La forme générale est :
+
+#+BEGIN_EXAMPLE
+: /adresseDébut/ , /adresseFin/ /commande/
+#+END_EXAMPLE
+
+ou :
+
+#+BEGIN_EXAMPLE
+: /adresseDébut/ ; /adresseFin/ /commande/
+#+END_EXAMPLE
+
+La forme en « ; » provoque le déplacement
+du curseur à chaque nouvelle adresse, tandis que la forme
+« , » laisse le curseur constant. Nous verrons la
+raison de cette nuance plus loin.
+
+
+**** Numéros de lignes
+
+Une adresse peut être définie par un numéro de ligne :
+
+| /N/   | Ligne /N/            |
+| .     | Ligne courante       |
+| .+/N/ | Ligne courante + /N/ |
+| .-/N/ | Ligne courante - /N/ |
+| $     | Dernière ligne       |
+
+
+***** Exemples
+
+<tr>
+ <td>: /M/ , /N/ w
+ /fichier/</td>
+ <td>Sauve les lignes /M/ à
+ /N/ du fichier courant
+ sous le nom /fichier/</td>
+</tr>
+
+
+**** Motifs
+
+Une adresse peut être définie par un motif :
+
+| //motif// | La première ligne vers le bas contenant le motif      |
+| ?/motif/? | La première ligne vers le haut contenant le motif     |
+| \/     | La première ligne vers le bas contenant le dernier motif |
+| \?    | La première ligne vers le haut contenant le dernier motif |
+
+Par exemple la plage :
+
+#+BEGIN_EXAMPLE
+/N/ , //motif//
+#+END_EXAMPLE
+
+va de la ligne /N/ à la première occurence du motif suivant le curseur, tandis que :
+
+#+BEGIN_EXAMPLE
+/N/ ; //motif//
+#+END_EXAMPLE
+
+va de la ligne /N/ à la première occurence
+du motif suivant la ligne /N/
+
+
+**** Signets
+
+Une adresse peut être définie par un signet :
+
+| '/signet/|Ligne d'un signet|
+
+
+***** Exemples
+
+<tr>
+ <td>: '/M/ , '/N/ w
+ /fichier/</td>
+ <td>Sauve les lignes entre les signets
+ /M/ et /N/
+ sous le nom /fichier/</td>
+</tr>
+
+
+*** Retour aux plages
+
+Voici quelques plages possibles :
+
+| .    | Ligne courante, équivalent à .,.          |
+| /N/  | Ligne /N/, équivalent à /N/,/N/           |
+| '/A/ | Ligne d'un signet, équivalent à '/A/,'/A/ |
+| %    | Désigne tout le fichier Équivalent à 1,$  |
+| ;/N/ | Équivalent à .,/N/                        |
+| ;/$/ | Équivalent à .,/$/                        |
+
+
+*** Nombre
+
+Lorsqu'un nombre est entré avant une ligne de commande :
+
+#+BEGIN_EXAMPLE
+/N/ :
+#+END_EXAMPLE
+
+la plage part de la ligne courante et compte
+/N/ lignes au total :
+
+#+BEGIN_EXAMPLE
+:.,.+/(N - 1)/
+#+END_EXAMPLE
+
+On peut alors entrer la commande :
+
+#+BEGIN_EXAMPLE
+:.,.+/(N - 1)/ /commande/
+#+END_EXAMPLE
+
+
+** Objets textuels
+
+
+*** Forme intérieure
+
+Les objets textuels permettent d'appliquer une commande du
+mode normal sur un mot, une phrase, un contenu entre (), [], {},
+etc. La forme générale est :
+
+#+BEGIN_EXAMPLE
+/commande/i/objet/
+#+END_EXAMPLE
+
+| iw | Commande sur un mot au sens strict                             |
+| iW | Commande sur un mot au sens large                              |
+| is | Commande sur une phrase                                        |
+| ip | Commande sur paragraphe                                        |
+| i' | Commande sur le texte entre guillemets simples                 |
+| i" | Commande sur le texte entre guillemets doubles                 |
+| i( | Commande sur le texte entre parenthèses                        |
+| i[ | Commande sur le texte entre crochets                           |
+| i{ | Commande sur le texte entre accolades                          |
+| i< | Commande sur le texte entre < >                                |
+| it | Commande sur le texte entre balises (tags en anglais) html/xml |
+
+
+*** Forme adjacente
+
+La forme adjacente est similaire, mais permet de
+sélectionner également les caractères à la frontière.
+La forme générale est :
+
+#+BEGIN_EXAMPLE
+/commande/a/objet/
+#+END_EXAMPLE
+
+Exemples :
+
+| a( | Comme i(, mais sélectionne également les ( ) |
+| a[ | Comme i[, mais sélectionne également les [ ] |
+| at | Comme it, mais sélectionne également les balises |
+
+
+** Copier, coller
+
+| y  | Copie                                                                |
+| :y |                                                                      |
+| d  | Coupe (copie et efface)                                              |
+| c  | Change (coupe et passe en insertion)                                 |
+| s  | Substitue (coupe le caractère sous le curseur et passe en insertion) |
+| p  | Colle après le curseur                                               |
+| P  | Colle avant le curseur                                               |
+| gp | Colle après le curseur et se déplace   après le texte collé          |
+| gP | Colle avant le curseur et se déplace   après le texte collé          |
+
+
+*** Caractères
+
+| x | Coupe le caractère courant |
+| X | Coupe le caractère précédent |
+| s | Substitue le caractère courant |
+
+
+*** Lignes de commande
+
+| :/plage/ move /adresse/ | Déplace la plage juste après la ligne donnée par l'adresse |
+| :/plage/ copy /adresse/ | Copie la plage juste après  la ligne donnée par l'adresse |
+| :/plage/ move 0         | Déplace la plage au   début du fichier                    |
+| :/plage/ copy 0         | Copie la plage au   début du fichier                      |
+| :/plage/ move $         | Déplace la plage à la   fin du fichier                    |
+| :/plage/ copy $         | Copie la plage à la   fin du fichier                      |
+| :t                      | Équivalent à :copy                                        |
+
+
+*** Mode visuel
+
+| y | Copie la sélection |
+| d | Coupe la sélection |
+| c | Change la sélection |
+| s | Substitue la sélection |
+
+
+*** Mouvements
+
+Les opérateurs de copie acceptent les mouvements en argument :
+
+| y /mouvement/ | Copie la plage de texte allant du curseur  |
+|               | jusqu'au point obtenu après le mouvement   |
+| d /mouvement/ | Coupe la plage de texte allant du curseur  |
+|               | jusqu'au point obtenu après le mouvement   |
+| c /mouvement/ | Change la plage de texte allant du curseur |
+|               | jusqu'au point obtenu après le mouvement,  |
+|               | puis passe en mode insertion               |
+
+Exemples :
+
+| y$ | Copie jusqu'à la fin de la ligne |
+| d) | Coupe jusqu'à la fin de la phrase |
+| c4w | Modifie 4 mots                |
+
+
+*** Signets
+
+Les opérateurs de copie acceptent les signets en argument :
+
+| y '/signet/ | Copie la plage de texte allant du curseur jusqu'au signet                                |
+| d '/signet/ | Coupe la plage de texte allant du curseur jusqu'au signet                                |
+| c '/signet/ | Change la plage de texte allant du curseur jusqu'au signet, puis passe en mode insertion |
+
+
+*** Objets textuels
+
+Les opérateurs de copie acceptent les objets textuels
+en argument. Exemple :
+
+| yis | Copie la phrase courante                        |
+| yat | Copie entre deux balises html, balises incluses |
+| di( | Coupe le contenu entre parenthèses              |
+| cip | Modifie le paragraphe                           |
+
+
+*** Lignes
+
+| yy | Copie la ligne courante                                     |
+| dd | Coupe la ligne courante                                     |
+| cc | Coupe la ligne courante et   passe en mode insertion        |
+| S  |                                                             |
+| D  | Coupe jusqu'à la fin de la ligne                            |
+| C  | Coupe jusqu'à la fin de la ligne et passe en mode insertion |
+
+
+**** Nombres
+
+| /N/ yy|Copie /N/ lignes à partir de la ligne courante|
+| /N/ dd|Coupe /N/ lignes à partir de la ligne courante|
+
+
+*** Mode insertion
+
+| <ctrl w> | Efface le mot précédant le curseur |
+| <ctrl u> | Efface la ligne jusqu'au curseur |
+
+
+** Registres
+
+Les registres permettent de stocker 26 plages de texte, chacun
+correspondant à une des lettres de l'alphabet. Les lettres minuscules
+remplacent le contenu d'un registre par la plage de texte, les lettres
+majuscules ajoutent la plage de texte au contenu du registre.
+
+| a ... z | Registres                    |
+| A ... Z | Accès aux registres en ajout |
+
+
+*** Liste
+
+Pour afficher la liste des registres et leurs contenus,
+on dispose de la commande :
+
+#+BEGIN_EXAMPLE
+:registers
+#+END_EXAMPLE
+
+ou, sous forme abrégée :
+
+#+BEGIN_EXAMPLE
+:reg
+#+END_EXAMPLE
+
+
+*** Couper / Copier / Coller
+
+| "/registre/ y /mouvement/ | Copie du curseur jusqu'au point obtenu après le /mouvement/ dans le registre /registre/ |
+| "/registre/ d /mouvement/ | Coupe du curseur jusqu'au point obtenu après le /mouvement/ dans le registre /registre/ |
+| "/registre/ p             | Colle le registre /registre/ après le curseur                                          |
+| "/registre/ P             | Colle le registre /registre/ avant le curseur                                          |
+
+
+*** Spéciaux
+
+| "            | Registre par défaut                                                                     |
+| 0  1  ...  9 | Contiennent les derniers copiés / collés                                                |
+| -            | Dernière petite suppression                                                             |
+| .            | Dernier texte inséré                                                                    |
+| :            | Dernière commande exécutée                                                              |
+| /            | Dernier motif de recherche                                                              |
+| %            | Nom du fichier courant                                                                  |
+| #            | Nom du fichier alternatif, c'est-à-dire le fichier édité juste avant le fichier courant |
+| =            | Registre de capture du résultat   d'une expression vim (variable,   fonction, ...)      |
+
+
+*** Presse-papier
+
+| *|Texte sélectionné|
+| +|Presse-papier|
+
+Exemples :
+
+| "+y | Copie dans le presse-papier           |
+| "*p | Colle le contenu de la dernière sélection |
+
+
+*** Mode visuel
+
+| v /mouvement(s)/ "/registre/ y | Passe en mode visuel, sélectionne au fil des mouvements et copie dans le registre /registre/ |
+| v /mouvement(s)/ "/registre/ d | Passe en mode visuel, sélectionne au fil des mouvements et coupe dans le registre /registre/ |
+
+
+*** Mode insertion
+
+| <ctrl r> /registre/|Colle un registre|
+
+
+*** Mode ligne de commande
+
+| :@ /registre/       | Exécute le contenu d'un registre           |
+| :@@             | Exécute le contenu du dernier registre utilisé |
+| <ctrl r> /registre/ | Colle un registre                          |
+
+
+*** Enregistrements
+
+Les registres servent également à enregistrer des macros.
+
+| q/registre/ | Débute l'enregistrement dans le registre /registre/ |
+| q           | Termine l'enregistrement                            |
+| @/registre/ | Exécute le contenu du registre /registre/           |
+| @@          | Exécute la dernière macro utilisée                  |
+
+
+*** Exécuter une plage de texte
+
+On peut aussi copier une plage de texte dans un registre
+pour l'exécuter ensuite. La commande suivante exécute la ligne courante :
+
+#+BEGIN_EXAMPLE
+"/registre/ yy @/registre/
+#+END_EXAMPLE
+
+
+** Mode visuel avancé
+
+
+*** Modifications d'une sélection
+
+| <ctrl v> c  | Permet de sélectionner un rectangle et de remplacer l'ancien texte par un nouveau. |
+|              | <esc> termine la commande.                                                        |
+| <ctrl v> I   | Permet de sélectionner un rectangle et de passer                                  |
+|              | en mode insertion pour ajouter un même texte                                      |
+|              | avant la sélection sur toutes les lignes sélectionnées.                           |
+|              | <esc> termine la commande.                                                        |
+| <ctrl v> A   | Permet de sélectionner un rectangle                                               |
+|              | et de passer en mode insertion pour                                               |
+|              | ajouter un même texte après la sélection                                          |
+|              | sur toutes les lignes sélectionnées                                               |
+| <ctrl v> r | Permet de sélectionner un rectangle et de remplacer toute une colonne de caractères |
+
+
+*** Objets textuels
+
+Les objets textuels peuvent être utilisés pour
+sélectionner un mot, une phrase, un paragraphe,
+un contenu entre (), [], {}, etc. Exemples :
+
+| vi{ | Passe en mode visuel et sélectionne   le contenu entre accolades                   |
+| va{ | Passe en mode visuel et sélectionne le contenu entre accolades, accolades incluses |
+
+
+*** Adresses
+
+| `<                 | Va au début de la dernière sélection                      |
+| `>                 | Va à la fin de la dernière sélection                      |
+| '<                 | Va à la première ligne de la dernière sélection           |
+| '>                 | Va à la dernière ligne de la dernière sélection           |
+| : '<,'> /commande/ | Applique une commande aux lignes de la sélection courante |
+|                    | ou de la dernière sélection                               |
+| :                  | Permet d'appliquer une commande sur la sélection          |
+|                    | en introduisant automatiquement la plage '<,'>            |
+
+
+** Substitutions
+
+Par défaut, l'opérateur de substitution opère sur la ligne courante :
+
+| :s//avant///après//   | Remplace une seule occurrence de /avant/ par /après/ |
+| :s//avant///après//g | Remplace toutes les occurrences de /avant/ par /après/ |
+| :s//avant///après//gc | Remplace toutes les occurrences de /avant/ par /après/ |
+|                       | en demandant confirmation à chaque occurrence        |
+
+
+*** Adresses
+
+On peut indiquer à l'opérateur de substitution une plage où opérer :
+
+| :%s//avant///après//g       | Remplace /avant/ par /après/   dans tout le fichier                  |
+| :'<,'>s//avant///après//g | Remplace /avant/ par /après/ dans toute la dernière sélection visuelle |
+| :/M/,/N/s//avant///après//g | Remplace /avant/ par /après/   entre les lignes /M/ et /N/           |
+
+Le dernier motif de substitution définit l'adresse :
+
+| \&|La ligne juste après le dernier motif de substitution|
+
+
+*** Rétro-références
+
+| &    | Représente le motif à remplacer                         |
+| \/N/ | Représente le /N/<sup>ème</sup> sous-motif \(/motifN/\) |
+
+Exemples :
+
+| :s//motif//(&)/                   | Place un motif entre parenthèses                                           |
+| :s/\(/motif1/\)\(/motif2/\)/\2\1/ | Intervertit deux motifs                                                    |
+| /\(/Abc/\)\(/Def/\)\1             | Recherche /Abc/ puis /Def/ puis la répétition de la correspondance à /Abc/ |
+
+
+*** Répétitions
+
+| :s///après//         | Répète la dernière substitution   mais en remplaçant le même motif   par une autre chaîne      |
+| :s//avant//~/        | Répète la dernière substitution   mais en remplaçant un autre motif   par la même chaîne       |
+| :s//avant///après//& | Substitution avec les mêmes options   que la substitution précédente                           |
+| :&                   | Répète la dernière substitution                                                                |
+| :&&                  | Répète la dernière substitution   avec les mêmes options                                       |
+| :%&                  | Répète la dernière substitution   dans tout le fichier                                         |
+| :%&&                 | Répète la dernière substitution   dans tout le fichier avec les mêmes options                  |
+| :~                   | Répète la dernière substition mais en remplaçant le dernier motif recherché par la même chaîne |
+| &                    | Répète la dernière substitution                                                                |
+| g&                   | Répète la dernière substitution   dans tout le fichier avec les mêmes options                  |
+
+
+** Tri
+
+La commande *sort* trie une plage ligne par ligne :
+
+#+BEGIN_EXAMPLE
+:/plage/ sort
+#+END_EXAMPLE
+
+Exemples :
+
+| : % sort  | Trie tout le fichier                  |
+| : % sort! | Trie tout le fichier en ordre inversé |
+
+
+** Complétion
+
+
+*** Mode ligne de commande
+
+La touche de tabulation a différents effets suivant le contexte :
+
+  - Complétion non ambiguë si possible
+  - Liste de solutions possibles si il y en a plusieurs
+  - Choix suivant dans la liste si celle-ci est affichée
+
+Pour revenir en arrière dans la liste, il suffit de presser
+shift et tab simultanément.
+
+| <tab>             | Complète le nom d'une commande ou d'un fichier   |
+| <tab>             | Solutions suivante si il y en a plusieurs        |
+| <shift tab>       | Solutions précédente si il y en a plusieurs      |
+| <ctrl d>          | Donne la liste des complétions possibles         |
+| <ctrl a>          | Insère toutes les complétions possibles          |
+| <ctrl r> <ctrl w> | Insère le mot au sens strict sous le curseur     |
+| <ctrl r> <ctrl a> | Insère le mot au sens large sous le curseur      |
+| <ctrl r> <ctrl f> | Insère le nom de fichier sous le curseur         |
+| <ctrl r> <ctrl p> | Insère le nom de fichier avec chemin sous le curseur |
+
+
+**** Menu
+
+Voici les options de complétion avec menu à placer
+dans le fichier vimrc :
+
+set wildmenu
+set wildmode=list:full
+
+On peut naviguer dans ce menu au moyen des flèches.
+
+
+*** Mode insertion
+
+| <ctrl y> | Insère le caractère disposé sur la même colonne dans la ligne située juste au-dessus  |
+| <ctrl e> | Insère le caractère disposé sur la même colonne dans la ligne située juste en-dessous |
+| <ctrl n> | Propose le choix suivant pour compléter   le mot courant                              |
+| <ctrl p> | Propose le choix précédent pour compléter   le mot courant                            |
+| <ctrl x> | Entre dans le sous-mode ctrl-X                                                        |
+
+
+**** Commandes valables dans le sous-mode ctrl-X</td>
+
+| <ctrl n> | Propose le choix suivant de complétion   à partir du fichier courant                      |
+| <ctrl p> | Propose le choix précédent de complétion   à partir du fichier courant                    |
+| <ctrl i> | Propose le choix suivant de complétion à partir du fichier courant et des fichiers inclus |
+| <ctrl k> | Propose le choix suivant de complétion   à partir du dictionnaire                         |
+| <ctrl t> | Propose le choix suivant de complétion   à partir du dictionnaire des synonymes           |
+| <ctrl v> | Propose le choix suivant de complétion   à partir des commandes vim                       |
+| s        | Propose la suggestion orthographique suivante                                             |
+| <ctrl l> | Propose le choix suivant pour compléter   la ligne courante                               |
+| <ctrl f> | Complétion des noms de fichier                                                            |
+
+
+*** Omni
+
+L'omni-complétion se sert du langage et du contexte
+pour déterminer les mots-clés. On l'active avec l'option
+omnifunc. Exemple :
+
+#+BEGIN_EXAMPLE
+omnifunc=htmlcomplete#CompleteTags
+#+END_EXAMPLE
+
+Ensuite, on utilise l'omni-complétion dans le sous-mode ctrl-X du
+mode insertion avec :
+
+#+BEGIN_EXAMPLE
+<ctrl o>
+#+END_EXAMPLE
+
+
+** Historique des commandes
+
+Depuis le mode normal :
+
+| :his : | Affiche l'historique des commandes        |
+| :his / | Affiche l'historique des recherches       |
+| q:     | Donne accès à l'historique des commandes  |
+| q/     | Donne accès à l'historique des recherches |
+
+Depuis le mode ligne de commande (:...) :
+
+| <ctrl f> | Accède à l'historique des commandes |
+
+Depuis le mode ligne de commande version recherche (/... ou ?...) :
+
+| <ctrl f> | Accède à l'historique des recherches |
+
+La fenêtre d'historique peut se manipuler comme
+n'importe quel fichier :
+
+| //motif/ | Effectue une recherche avant dans l'historique                             |
+| ?/motif/ | Effectue une recherche arrière dans l'historique                           |
+| <Return> | Sélectionne une commande ou recherche   et l'exécute                       |
+| :q       | Quitte l'historique                                                        |
+| i        | Passe en mode insertion pour pouvoir compléter la commande ou la recherche |
+
+
+*** Mode ligne de commande
+
+Après avoir inséré le préfixe de la ligne de commande « : »
+en mode normal, on a accès à l'historique avec les flèches :
+
+| <up> | Ligne de commande précédente dans l'historique |
+| <down> | Ligne de commande suivante dans l'historique |
+
+Après avoir inséré le préfixe de la ligne de commande
+« : » et le début d'une ligne de commande,
+les flèches haut et bas donnent accès à l'historique des commandes
+correspondant à la partie déjà frappée.
+
+| <up> | Ligne de commande précédente dans l'historique correspondant au début déjà frappé |
+| <down> | Ligne de commande suivante dans l'historique correspondant au début déjà frappé |
+
+
+*** Recherches
+
+Après avoir inséré un préfixe de recherche (/ ou ?)
+en mode normal, on a accès à l'historique des motifs
+de recherche avec les flèches :
+
+| <up>   | Motif de recherche précédent dans l'historique |
+| <down> | Motif de recherche suivant dans l'historique   |
+|        |                                                |
+
+Après avoir inséré le préfixe de recherche (/ ou ?) et
+le début d'un motif de recherche, les flèches donnent accès
+à l'historique des motifs qui correspondent à la partie
+déjà frappée.
+
+| <up>   | Motif de recherche précédent dans l'historique correspondant au début déjà frappé |
+| <down> | Motif de recherche suivant dans l'historique correspondant au début déjà frappé   |
+
+
+** Indentation
+
+| >             | Indente la sélection                  |
+| <             | Désindente la sélection               |
+| > /mouvement/ | Indente jusqu'au mouvement            |
+| < /mouvement/ | Désindente jusqu'au mouvement         |
+| >>            | Indente une ligne                     |
+| <<            | Désindente une ligne                  |
+| /N/ >>        | Indente /N/ lignes                    |
+| /N/ <<        | Désindente /N/ lignes                 |
+| =             | Arrange l'indentation de la sélection |
+
+
+*** Mode insertion
+
+| <ctrl t> | Indente la ligne |
+| <ctrl d> | Désindente la ligne |
+
+
+** Pliage
+
+
+*** Définition
+
+On peut définir des blocs de textes au sein d'un fichier.
+Un nombre quelconque de blocs pouvant être imbriqué dans un
+autre, on donne ainsi une allure arborescente au texte.
+Chaque bloc peut être plié ou déplié à volonté.
+
+
+**** Indentation
+
+La définition des blocs se fait automatiquement
+par indentation avec l'option :
+
+#+BEGIN_EXAMPLE
+:set foldmethod=indent
+#+END_EXAMPLE
+
+
+**** Marques
+
+Les blocs peuvent aussi être définis par des marques.
+
+| :set foldmethod=marker            | Définition des blocs d'après les marques |
+| {{{ /commentaire/                 | Marque par défaut initiale d'un bloc     |
+| }}}                               | Marque par défaut finale d'un bloc       |
+| :set foldmarker=/initial/,/final/ | Modifie les marques                      |
+
+
+**** Manuelle
+
+Les blocs peuvent aussi être définis manuellement :
+
+| :set foldmethod=manual | Autorise la définition manuelle de bloc                    |
+| zf /mouvement/         | Définit manuellement un bloc                               |
+| zf                     | Définit manuellement un bloc   sur la sélection courante   |
+| zd                     | Supprime un niveau du bloc courant                         |
+| zD                     | Supprime récursivement tous les sous-blocs du bloc courant |
+| zD                     | Supprime récursivement tous les blocs                      |
+
+
+*** Affichage
+
+L'affichage de /N/ niveaux de l'arborescence à gauche
+du texte se fait au moyen de l'option :
+
+#+BEGIN_EXAMPLE
+:set foldcolumn=/N/
+#+END_EXAMPLE
+
+
+*** Pliage / Dépliage
+
+
+**** Local
+
+| za | Plie / Déplie le contenu du bloc courant               |
+| zA | Plie / Déplie récursivement le contenu du bloc courant |
+| zo | Déplie le contenu du bloc courant                      |
+| zc | Plie le contenu du bloc courant                        |
+| zv | Déplie assez de niveaux pour afficher le curseur       |
+
+
+**** Global
+
+| zr | Déplie un niveau supplémentaire                   |
+| zm | Plie un niveau supplémentaire                     |
+| zR | Déplie récursivement le contenu de tous les blocs |
+| zM | Plie récursivement le contenu de tous les blocs   |
+
+
+*** Déplacements
+
+| [z | Va au début du bloc courant |
+| ]z | Va à la fin du bloc courant |
+| zj | Va au bloc suivant          |
+| zk | Va au bloc précédent        |
+
+
+*** Opérations
+
+Les opérations de sélection en mode visuel, de copie,
+de déplacement et autres peuvent se faire aisément sur
+des blocs pliés. Par exemple, si on se place sur la ligne
+d'un bloc plié et qu'on fait :
+
+#+BEGIN_EXAMPLE
+dd
+#+END_EXAMPLE
+
+cela coupe tout le bloc. On peut le déplacer
+en se rendant à la destination voulue et en
+le collant avec p ou P. On peut aussi passer
+en mode visuel et copier, couper ou faire
+une substitution sur plusieurs blocs.
+
+
+*** Filtre
+
+| :folddoopen /commande/  | Applique une commande aux lignes qui ne font pas partie d'un bloc plié   |
+| :folddoclose /commande/ | Applique une commande aux lignes qui ne font pas partie d'un bloc déplié |
+
+
+** Multi-fichiers
+
+
+*** Arguments
+
+Les arguments sont les fichiers passés en ligne de commande
+à vim. La liste des arguments peut être modifié dans vim lui-même.
+
+| vim /liste/     | Lance vim avec une liste de fichiers à éditer                 |
+| :ar             | Montre la liste des fichiers à éditer                         |
+| :args           |                                                               |
+| :ar /liste/     | Définit /liste/ comme la nouvelle liste de fichiers à éditer  |
+| :arga /fichier/ | Ajoute /fichier/ à la liste à éditer                          |
+| :arge /fichier/ | Ajoute si nécessaire /fichier/ à la liste à éditer et l'édite |
+| :argd /motif/   | Supprime les fichiers correspondant  au motif dans la liste   |
+| :n              | Passe au fichier suivant de la liste à éditer                 |
+| :N              | Passe au fichier précédent de la liste à éditer               |
+| :wn             | Sauve et passe au fichier suivant de la liste à éditer        |
+| :e #/N/         | Édite le /N/<sup>ième</sup> fichier de la liste des arguments |
+
+
+*** Éclatements
+
+L'éclatement (ou split en anglais) consiste à scinder une fenêtre
+en plusieurs sous-fenêtres, ce qui permet de visualiser plusieurs
+fichiers simultanément. On peut aussi utiliser les splits pour disposer
+de plusieurs vues sur un même fichier.
+
+
+**** Au lancement
+
+On peut lancer vim avec des options pour éditer
+les fichiers en arguments dans des splits séparées :
+
+| vim -o /fichiers/ | Ouvre des fichiers dans des splits horizontaux |
+| vim -O /fichiers/ | Ouvre des fichiers dans des splits verticaux   |
+
+
+**** Manipulation
+
+| :sp /fichier/   | Ouvre un fichier dans un nouvel éclatement horizontal |
+| :split /...../  |                                                       |
+| :vs /fichier/   | Ouvre un fichier dans un nouvel éclatement vertical   |
+| :vsplit /...../ |                                                       |
+| <ctrl w> s      | Éclate horizontalement la fenêtre                     |
+| <ctrl w> v      | Éclate verticalement la fenêtre                       |
+| :only           | Garde seulement le split courant                      |
+| <ctrl w> o      |                                                       |
+| :close          | Ferme le split courant                                |
+| <ctrl w> c      |                                                       |
+| :q              | Quitte le split courant                               |
+| <ctrl w> q      |                                                       |
+
+
+**** Mouvements entre les splits
+
+| <ctrl w> w       | Se ballade entre les splits   |
+| <ctrl w> <left>  | Aller au split situé à gauche |
+| <ctrl w> h       |                               |
+| <ctrl w> <down>  | Aller au split inférieur      |
+| <ctrl w> j       |                               |
+| <ctrl w> <up>    | Aller au split supérieur      |
+| <ctrl w> k       |                               |
+| <ctrl w> <right> | Aller au split situé à droite |
+| <ctrl w> l       |                               |
+
+
+**** Déplacements des splits
+
+| <ctrl w> H | Déplacer le split tout à gauche |
+| <ctrl w> J | Déplacer le split tout en bas   |
+| <ctrl w> K | Déplacer le split tout en haut  |
+| <ctrl w> L | Déplacer le split tout à droite |
+
+
+**** Tailles
+
+| <ctrl w> =     | Donne une taille égale à toutes les fenêtres                 |
+| <ctrl w> /I/ > | Augmenter la taille de la fenêtre d'un éclatement vertical   |
+| <ctrl w> /I/ < | Diminuer la taille de la fenêtre d'un éclatement vertical    |
+| <ctrl w> /I/ + | Augmenter la taille de la fenêtre d'un éclatement horizontal |
+| <ctrl w> /I/ - | Diminuer la taille de la fenêtre d'un éclatement horizontal  |
+
+
+**** Forcer
+
+Forcer un nouveau split vertical :
+
+| :vert /commande/ | Si la commande ouvre un nouveau split horizontal, ouvre un nouveau split vertical à la place |
+
+
+*** Onglets
+
+On peut lancer vim avec des options pour éditer
+les fichiers en arguments dans des onglets séparés :
+
+
+**** Au lancement
+
+On peut demander à vim d'ouvrir dès son démarrage
+les fichiers en argument dans des onglets :
+
+#+BEGIN_EXAMPLE
+vim -p /fichiers/
+#+END_EXAMPLE
+
+
+**** Gestion
+
+| :tabs           | Affiche la liste des onglets et des fenêtres qu'ils contiennent |
+| :tabnew         | Ouvre un nouvel onglet                                          |
+| :tabe /fichier/ | Ouvre /fichier/ dans un nouvel onglet                           |
+| :tabc           | Ferme l'onglet courant                                          |
+| :q              |                                                                 |
+| :tabo           | Garde uniquement l'onglet courant                               |
+| :tabm           | Déplace l'onglet courant                                        |
+
+
+**** Mouvements entre les onglets
+
+| :tabn | Passe à l'onglet suivant   |
+| gt    |                            |
+| :tabp | Passe à l'onglet précédent |
+| gT    |                            |
+
+
+**** Splits et onglets
+
+| <ctrl w> T | Déplace le split dans un nouvel onglet |
+
+
+**** Forcer
+
+Forcer un nouvel onglet :
+
+| :tab /commande/ | Si la commande ouvre une nouveau split horizontal, ouvre un nouvel onglet à la place |
+
+
+*** Tampons
+
+Vim conserve en mémoire une copie de chaque fichier ouvert depuis
+son lancement. Une telle copie s'appelle un tampon (ou buffer en
+anglais). Les tampons ne sont supprimés que sur demande explicite,
+ou si on quitte vim.
+
+| :ls               | Donne la liste des fichiers ouverts (tampons)                 |
+| :buffers          |                                                               |
+| :b /tampon/       | Ouvre un tampon                                               |
+| :bn               | Va au tampon suivant                                          |
+| :bnext            |                                                               |
+| :bp               | Va au tampon précédent                                        |
+| :bprevious        |                                                               |
+| :b #              | Édite l’avant-dernier tampon édité                            |
+| :bad /fichier/    | Ajoute un tampon à la liste                                   |
+| :badd /.../       |                                                               |
+| :bd /tampon/      | Supprime un tampon                                            |
+| :bdelete /.../    |                                                               |
+| :bun              | Décharge un tampon de la mémoire, mais le garde dans la liste |
+| :sb /tampon/      | Ouvre un tampon dans un split horizontal                      |
+| :vert sb /tampon/ | Ouvre un tampon dans un split vertical                        |
+| :tab sb /tampon/  | Ouvre un tampon dans un nouvel onglet                         |
+
+
+*** Chemins
+
+| :sf /fichier/ | Recherche le fichier dans la variable path et l'ouvre dans un nouveau split horizontal |
+| :tabf /fichier/ | Recherche le fichier dans la variable path et l'ouvre dans un nouvel onglet          |
+
+
+*** Édition
+
+| :wa | Enregistre tous les fichiers ouverts       |
+| :qa | Ferme tous les fichiers ouverts et quitte  |
+| :xa | Sauve tous les fichiers modifiés et quitte |
+
+
+*** Recherches
+
+Pour rechercher dans plusieurs fichiers, on peut
+utiliser la commande :vimgrep :
+
+#+BEGIN_EXAMPLE
+:vimgrep //motifRecherché// /fichiers/
+#+END_EXAMPLE
+
+Cette commande établit une liste des endroits
+où les occurrences du motif sont rencontrées et se
+déplace au premier élément de la liste. On peut
+se déplacer dans la liste avec les commandes suivantes :
+
+| :cl     | Affiche la liste                                |
+| :cope   | Affiche la liste dans une nouvelle sous-fenêtre |
+| :ccl    | Ferme la sous-fenêtre de la liste               |
+| :cn     | Va à l'élément suivant                          |
+| :cp     | Va à l'élément suivant                          |
+| :cc /N/ | Va à l'élément /N/                              |
+
+On peut également passer d'une liste à
+une liste plus ancienne ou plus récente :
+
+| :col  | Va à la liste précédente dans l'historique |
+| :cnew | Va à la liste suivante dans l'historique   |
+
+La variante :
+
+#+BEGIN_EXAMPLE
+:vimgrepa //motifRecherché// /fichiers/
+#+END_EXAMPLE
+
+ajoute les occurrences à la liste au lieu d'en
+créer une nouvelle.
+
+
+**** Exemples
+
+La commande :
+
+#+BEGIN_EXAMPLE
+:vimgrep //motifRecherché// **/*.php
+#+END_EXAMPLE
+
+recherche le motif dans tous les fichiers de la sous-arborescence
+dont le nom se termine par « .php ».
+
+
+*** Mode différentiel
+
+Le mode différentiel permet de comparer plusieurs fichiers (de 2 à 4),
+leurs différences étant mises en évidence.
+
+
+**** Au lancement
+
+On peut demander le mode différentiel au lancement de vim :
+
+#+BEGIN_EXAMPLE
+vimdiff /fichiers/
+#+END_EXAMPLE
+
+ou :
+
+#+BEGIN_EXAMPLE
+vim -d /fichiers/
+#+END_EXAMPLE
+
+
+**** Manipulation
+
+| :diffsplit /fichier/      | Compare le fichier courant avec un autre fichier qui s'ouvre dans un nouveau split horizontal |
+| :vert diffsplit /fichier/ | Comme diffsplit mais avec un split vertical                                                   |
+| ]c                        | Va à la différence suivante                                                                   |
+| [c                        | Va à la différence précédente                                                                 |
+| :diffget                  | Modifie le fichier courant pour annuler les différences avec un autre fichier                 |
+| do                        |                                                                                               |
+| :diffput                  | Modifie un autre fichier pour annuler les differences avec le fichier courant                 |
+| dp                        |                                                                                               |
+
+
+** Traitement par lot
+
+| :g//motif///commande/        | Exécute la même commande ex à toutes les lignes correspondant à /motif/             |
+| :g!//motif///commande/       | Exécute /commande/ à toutes les lignes ne correspondant pas à /motif/               |
+| :g//motif//normal /commande/ | Exécute la même commande du mode normal à toutes les lignes correspondant à /motif/ |
+| :v                           | Équivalent à :g!                                                                    |
+
+Exemples :
+
+| :g//motif//p | Affiche toutes les lignes correspondant à /motif/ |
+| :g//motif//d | Efface toutes les lignes correspondant à /motif/ |
+
+
+*** Multi-fichiers
+
+| :argdo /commande/        | Applique une même ligne de commande à tous les arguments       |
+| :bufdo /commande/        | Applique une même ligne de commande à tous les tampons         |
+| :tabdo /commande/        | Applique une même ligne de commande à tous les onglets         |
+| :windo /commande/        | Applique une même ligne de commande à tous les splits          |
+| :argdo normal /commande/ | Applique une même commande du mode normal à tous les arguments |
+| :bufdo normal /commande/ | Applique une même commande du mode normal à tous les tampons   |
+| :tabdo normal /commande/ | Applique une même commande du mode normal à tous les onglets   |
+| :windo normal /commande/ | Applique une même commande du mode normal à tous les splits    |
+
+Il faut parfois placer la commande dans une chaîne de caractère
+afin de la séparer de la suivante. Exemple :
+
+| :argdo exe "normal /commande-1/" ¦ /commande-2/ | Applique une même commande du mode normal     |
+|                                                 | impliquant une insertion à tous les arguments |
+
+
+** Labels
+
+Un label (ou tag en anglais) permettent de mémoriser
+le lieu de définition ou de développement correspondant à
+un mot-clé.
+
+
+*** Fichier des labels
+
+Pour utiliser les labels, il faut d'avoir remplir un
+fichier les contenant. En voici le format :
+
+#+BEGIN_EXAMPLE
+/label1/ /fichier1/ /commande1/
+/label2/ /fichier2/ /commande2/
+/label3/ /fichier3/ /commande3/
+/.../
+#+END_EXAMPLE
+
+Les colonnes sont séparées par des tabulations. Les
+fichiers sont ceux contenant les définitions des labels
+correspondant, et les commandes sont les commandes vim
+permettant d'y accéder. Le plus souvent, il s'agit de
+motifs de recherche :
+
+#+BEGIN_EXAMPLE
+/label1/ /fichier1/ //motif1//
+/label2/ /fichier2/ //motif2//
+/label3/ /fichier3/ //motif3//
+/.../
+#+END_EXAMPLE
+
+Attention toutefois, à part ^ et $, vim considère tous
+les caractères d'un fichier de labels de façon littérale.
+Un motif de recherche vim :
+
+#+BEGIN_EXAMPLE
+/.*bidule.*/
+#+END_EXAMPLE
+
+deviendra :
+
+#+BEGIN_EXAMPLE
+/\.\*bidule\.\*/
+#+END_EXAMPLE
+
+dans le fichier de labels. Voir :
+
+#+BEGIN_EXAMPLE
+:h magic
+#+END_EXAMPLE
+
+pour plus de détails.
+
+
+**** Tri
+
+Si le fichier des labels est trié, les
+recherches sont plus rapides.
+
+
+*** Chemin
+
+On ajoute le nom du fichier de labels dans le chemin d'accès :
+
+#+BEGIN_EXAMPLE
+set tags+=/fichierDesLabels/
+#+END_EXAMPLE
+
+ou, si le fichier est dans le répertoire courant des fichiers
+concernés :
+
+#+BEGIN_EXAMPLE
+set tags+=.//fichierDesLabels/
+#+END_EXAMPLE
+
+
+*** Déplacements
+
+
+**** Lancement
+
+On peut demander à vim d'aller directement à
+un label au démarrage :
+
+#+BEGIN_EXAMPLE
+ vim -t /label/
+#+END_EXAMPLE
+
+
+**** Ligne de commande
+
+| :ta /label/        | Va à la définition d'un label                                     |
+| :ta //motif/ <tab> | Donne une liste de complétion   des tags correspondant à un motif |
+| :tags              | Affiche la pile des labels                                        |
+| :pop /N/           | retourne /N/ entrées en arrière dans la pile des labels           |
+| :ts /nom/          | Affiche le menu de sélection des labels homonymes                 |
+| :ts //motif/       | Affiche le menu de sélection  des labels correspondant à un motif |
+| :tn                | Va à la correspondance suivante de :ts                            |
+| :tp                | Va à la correspondance précédente de :ts                          |
+
+
+**** Mode normal
+
+| <ctrl ]> | Va à la définition du label situé sous le curseur                                  |
+| <ctrl t> | Retourne en arrière dans la pile des labels                                        |
+| g]       | Affiche le menu de sélection des labels correspondant au mot situé sous le curseur |
+
+
+*** Complétion
+
+Dans le sous-mode ctrl-X du mode insertion, la commande :
+
+#+BEGIN_EXAMPLE
+<ctrl ]>
+#+END_EXAMPLE
+
+propose le choix de complétion suivant d'après les labels.
+
+
+** Mise en forme
+
+
+*** Casse
+
+| U              | Place la sélection en majuscules                                 |
+| u              | Place la sélection en minuscules                                 |
+| gU /mouvement/ | Place en casse majuscule du curseur jusqu'à la fin du mouvement  |
+| gu /mouvement/ | Place en casse minuscule du curseur jusqu'à la fin du mouvement  |
+| ~              | Alterne la casse du caractère sous le curseur ou de la sélection |
+| g~ /mouvement/ | Alterne la casse depuis le curseur jusqu'à la fin du mouvement   |
+
+
+*** Fusion de lignes
+
+| : /plage/ j|Fusionne les lignes d'une plage|
+| J|Fusionne deux lignes|
+
+
+*** Largeur du texte
+
+| set textwidth=/N/ | Définit une largeur maximale pour le texte                                                                     |
+| gq                | Formate le texte sélectionné pour que la largeur ne dépasse pas la largeur maximale                            |
+| gq /mouvement/    | Formate le texte du curseur jusqu'à la fin du mouvement pour que la largeur ne dépasse pas la largeur maximale |
+| gw                | Comme gq, mais laisse le curseur à sa position préalable                                                       |
+
+
+**** Objets textuels
+
+Le mouvement peut être un objet textuel. Exemples :
+
+| gqap|Formate le paragraphe courant|
+
+
+*** Nombres
+
+| <ctrl a> | Incrémente un nombre |
+| <ctrl x> | Décrémente un nombre |
+
+
+*** Chiffrement
+
+| g? | Encode / Décode la sélection en ROT 13 |
+
+
+** Orthographe
+
+
+*** Installation
+
+Si le dictionnaire de votre langue est déjà installé, il
+suffit d'activer l'option :
+
+#+BEGIN_EXAMPLE
+set spell
+#+END_EXAMPLE
+
+La langue se définit par :
+
+#+BEGIN_EXAMPLE
+set spelllang=en
+#+END_EXAMPLE
+
+pour l'anglais ou :
+
+#+BEGIN_EXAMPLE
+set spelllang=fr
+#+END_EXAMPLE
+
+pour le français. Si vous voulez utiliser les deux langues, il suffit
+de faire :
+
+#+BEGIN_EXAMPLE
+set spelllang=en,fr
+#+END_EXAMPLE
+
+Si vous recevez un message d'erreur, c'est que le dictionnaire n'est
+pas installé. Dans ce cas, il vous faut d'abord obtenir un dictionnaire
+sous forme d'un fichier contenant une liste de mot. On peut en créer un
+léger avec les erreurs les plus courantes soi-même, mais il en existe
+de disponibles sur internet, par exemple ici :
+
+#+BEGIN_EXAMPLE
+http://extensions.libreoffice.org/extension-center/dictionnaires-francais">http://extensions.libreoffice.org/extension-center/dictionnaires-francais
+#+END_EXAMPLE
+
+pour les dictionnaires français ou :
+
+#+BEGIN_EXAMPLE
+http://extensions.libreoffice.org/extension-center/american-british-canadian-spelling-hyphen-thesaurus-dictionaries">http://extensions.libreoffice.org/extension-center/american-british-canadian-spelling-hyphen-thesaurus-dictionaries
+#+END_EXAMPLE
+
+pour les dictionnaires anglais. On extrait si nécessaire les fichiers
+de l'archive contenant les dictionnaires, puis on lance vim et on
+construit le dictionnaire utilisable par vim avec la commande :
+
+#+BEGIN_EXAMPLE
+:mkspell /langage/ /dictionnaire(s)/
+#+END_EXAMPLE
+
+Par défaut, vim recherche les listes de mots dans :
+
+#+BEGIN_EXAMPLE
+/dictionnaire(s)/
+/dictionnaire(s)/.dic
+/dictionnaire(s)/.aff
+#+END_EXAMPLE
+
+La commande mkspell crée le fichier :
+
+#+BEGIN_EXAMPLE
+/langage/./encodage/.spl
+#+END_EXAMPLE
+
+que l'on déplace dans le répertoire :
+
+#+BEGIN_EXAMPLE
+~/.vim/spell
+#+END_EXAMPLE
+
+Il ne reste plus qu'à activer l'option
+de correction orthographique :
+
+#+BEGIN_EXAMPLE
+set spell
+set spelllang=/langue(s)/
+#+END_EXAMPLE
+
+
+
+*** Utilisation
+
+| ]s      | Va au mot erroné suivant                                                      |
+| [s      | Va au mot erroné précédent                                                    |
+| z=      | Ouvre le menu des suggestions de correction du mot sous le curseur            |
+| :spellr | Répète la correction effectuée par z= dans toutes les occurrences du même mot |
+| zg      | Marque un mot comme correct                                                   |
+| zw      | Marque un mot comme erroné                                                    |
+| zug     | Annule zg                                                                     |
+| zuw     | Annule zw                                                                     |
+| zG      | Marque un mot comme correct dans la liste interne des mots                    |
+| zW      | Marque un mot comme erroné dans la liste interne des mots                     |
+| zuG     | Annule zG                                                                     |
+| zuW     | Annule zW                                                                     |
+
+
+*** Complétion
+
+On peut définir une liste de fichiers contenant des mots
+servant à la complétion :
+
+#+BEGIN_EXAMPLE
+set dictionary=/fichier(s)Dicos(s)/
+#+END_EXAMPLE
+
+On peut aussi référencer des fichiers contenant des synonymes :
+
+#+BEGIN_EXAMPLE
+set thesaurus=/fichier(s)Synonymes(s)/
+#+END_EXAMPLE
+
+La complétion basée sur ces fichiers s'utilise
+comme suit :
+
+| <ctrl x> <ctrl k> | Complétion avec le dictionnaire  |
+| <ctrl x> <ctrl t> | Complétion avec les synonymes    |
+| <ctrl x> s        | Suggestions avec le dictionnaire |
+
+
+** Explorateur de fichiers
+
+
+*** Lancement
+
+| :Ex       | Ouvre l'explorateur de fichier                                  |
+| :Explore  |                                                                 |
+| :Sexplore | Ouvre l'explorateur de fichier dans un nouveau split horizontal |
+| :Hexplore |                                                                 |
+| :Vexplore | Ouvre l'explorateur de fichier dans un nouveau split vertical   |
+| :Texplore | Ouvre l'explorateur de fichier dans un nouvel onglet            |
+| :e .      | Ouvre l'explorateur de fichier au répertoire courant            |
+
+
+*** Marques
+
+| mf | Marque un fichier                                            |
+| mr | Marque les fichiers correspondant à une expression régulière |
+| mu | Démarque tous les fichiers marqués                           |
+| mt | Marque le répertoire courant comme destination               |
+
+
+*** Affichage
+
+| i        | Cycle à travers les modes d'affichage |
+| qf       | Informations sur un fichier           |
+| <ctrl l> | Recharge l'affichage                  |
+
+
+**** Masque
+
+| gh       | Affiche ou non les fichiers commençant par un point                        |
+| a        | Affiche ou non les fichiers correspondant au filtre de masquage            |
+| mh       | Ajoute ou enlève les extensions des fichiers marqués au filtre de masquage |
+| <ctrl h> | Édite le filtre de masquage                                                |
+
+
+**** Tri
+
+| s | Cycle à travers les modes de tri |
+| r | Inverse l'ordre de tri           |
+
+
+*** Répertoires
+
+| c | Le répertoire actuel devient le répertoire courant |
+| - | Accède au répertoire parent                        |
+| d | Crée un répertoire                                 |
+
+
+*** Édition
+
+| <Return> | Ouvre le fichier sous le curseur                                  |
+| o        | Ouvre le fichier sous le curseur dans un nouveau split horizontal |
+| v        | Ouvre le fichier sous le curseur dans un nouveau split vertical   |
+| t        | Ouvre le fichier sous le curseur dans un nouvel onglet            |
+| %        | Édite un nouveau fichier dans le répertoire                       |
+
+
+*** Recherches
+
+| //motif/ | Recherche avant d'un fichier   |
+| ?/motif/ | Recherche arrière d'un fichier |
+
+
+*** Fichiers marqués
+
+| D  | Efface les fichiers marqués                            |
+| R  | Renomme les fichiers marqués                           |
+| me | Place les fichiers marqués dans la liste des arguments |
+| mz | Compresse / Décompresse les fichiers marqués           |
+| mx | Applique une commande shell sur les fichiers marqués   |
+| md | Compare les fichiers marqués                           |
+
+
+**** Copie et déplacement
+
+| mc | Copie les fichiers marqués vers la destination   |
+| mm | Déplace les fichiers marqués vers la destination |
+
+
+*** Historique
+
+| u | Location précédente dans l'historique |
+| U | Location suivante dans l'historique   |
+|   |                                       |
+
+
+*** Signets
+
+| mb | Ajoute un signet     |
+| mB | Supprime un signet   |
+| gb | Retourne à un signet |
+| qb | Liste des signets    |
+
+
+** Raccourcis
+
+
+*** Maps
+
+Un map associe une chaîne de caractère à une autre chaîne
+de caractères, qui peut être ordinaire ou contenir une commande.
+Le map est immédiatement remplacé par la chaîne.
+
+| :map /raccourci/ /chaîne/     | Associe une chaîne à un raccourci clavier                                |
+|                               | (récursif si /chaîne/ contient des raccourcis)                           |
+| :noremap /raccourci/ /chaîne/ |                                                                          |
+|                               | Associe une chaîne à un raccourci clavier (non récursif)                 |
+| :nmap                         | Comme map et noremap mais en mode normal                                 |
+| :nnoremap                     |                                                                          |
+| :cmap                         | Comme map et noremap mais en mode ligne de chaîne                        |
+| :cnoremap                     |                                                                          |
+| :imap                         | Comme map et noremap mais en mode insertion                              |
+| :inoremap                     |                                                                          |
+| :vmap                         | Comme map et noremap mais en mode visuel ou sélection                    |
+| :vnoremap                     |                                                                          |
+| :xmap                         | Comme map et noremap mais en mode visuel                                 |
+| :xnoremap                     |                                                                          |
+| :smap                         | Comme map et noremap mais en mode sélection                              |
+| :snoremap                     |                                                                          |
+| :omap                         | Comme map et noremap mais en attente d'un mouvement (après y, d, c, ...) |
+| :onoremap                     |                                                                          |
+
+
+*** Abréviations
+
+Une abréviation associe un mot à une chaîne de caractères
+ordinaire ou contenant une commande. L'abréviation est remplacée
+par la chaîne au premier espace, tabulation, fin de ligne ou :
+
+#+BEGIN_EXAMPLE
+<ctrl ]>
+#+END_EXAMPLE
+
+| :ab /abréviation/ /commande/ | Associe une commande à une abréviation             |
+| :abbreviate /...../          |                                                    |
+| :unab /abréviation/          | Supprime une abréviation                           |
+| :norea                       | Comme :ab mais non récursif                        |
+| :ca                          | Comme :ab mais en mode ligne de commande seulement |
+| :ia                          | Comme :ab mais en mode insertion seulement         |
+
+
+*** Commandes
+
+On peut définir une commande personnalisée par :
+
+#+BEGIN_EXAMPLE
+:com /Commande/ /Définition/
+#+END_EXAMPLE
+
+On peut ensuite utiliser :
+
+#+BEGIN_EXAMPLE
+:/Commande/
+#+END_EXAMPLE
+
+Le nom d'une commande personnalisée doit obligatoirement
+commencer par une majuscule, pour la différencier des commandes
+internes de vim.
+
+
+*** Autocommandes
+
+Une autocommande permet d'associer une action à un
+événement intervenant sur les fichiers respectant
+un motif :
+
+#+BEGIN_EXAMPLE
+:au /événement/ /motif/ /action/
+#+END_EXAMPLE
+
+Quelques événements :
+
+| BufRead   | Lecture d'un fichier                             |
+| BufWrite  | Écriture d'un fichier                            |
+| BufEnter  | Après l'entrée dans un fichier                   |
+| BufLeave  | Avant de sortir d'un fichier                     |
+| BufAdd    | Ajout d'un fichier à la liste des tampons        |
+| BufDelete | Suppression d'un fichier de la liste des tampons |
+
+Exemples de motif :
+
+| *./extension/ |Fichier se terminant par une extension|
+
+
+** Scripts
+
+| vim -S /script/    | Lance vim et lui demande d'exécuter un script de lignes de commande ex au démarrage |
+| #! /usr/bin/vim -S | Début d'un script vim exécutable via le shell                                       |
+
+
+*** Variables
+
+| let /variable/ = /valeur/  | Assigne une valeur à une variable                 |
+| let @/variable/ = /valeur/ | Assigne une valeur à un registre                  |
+| let &/option/ = /valeur/   | Assigne une valeur à une option                   |
+| set /option/ = /valeur/    |                                                   |
+| let $/variable/ = /valeur/ | Assigne une valeur à une variable d'environnement |
+| unlet /variable/           | Détruit une variable                              |
+
+
+**** Portée
+
+| g:/variable/ | Variable globale               |
+| s:/variable/ | Variable locale au script      |
+| a:/variable/ | Argument d'une fonction        |
+| l:/variable/ | Variable locale à une fonction |
+| v:/variable/ | Variable interne de vim        |
+| b:/variable/ | Variable locale à un tampon    |
+| w:/variable/ | Variable locale à une fenêtre  |
+
+
+*** Liste
+
+On définit une liste par :
+
+#+BEGIN_EXAMPLE
+let /liste/ = [/element-1/, /element-2/, ...]
+#+END_EXAMPLE
+
+On accède à un élément d'une liste par :
+
+#+BEGIN_EXAMPLE
+let /var/ = /liste/[/indice/]
+let /liste/[/indice/] = /valeur/
+#+END_EXAMPLE
+
+
+
+**** Liste de listes
+
+Une liste peut en contenir d'autres :
+
+#+BEGIN_EXAMPLE
+let /liste/ = [ [...], [...], ... ]
+#+END_EXAMPLE
+
+
+**** Copie
+
+Par défaut, assigner une liste à une autre procède par adresse.
+Il n'y a donc pas de copie des éléments :
+
+#+BEGIN_EXAMPLE
+let /listeB/ = /listeA/
+#+END_EXAMPLE
+
+Pour copier les éléments, il faut utiliser :
+
+#+BEGIN_EXAMPLE
+let /listeB/ = copy(/listeA/)
+#+END_EXAMPLE
+
+Si certains éléments sont eux-mêmes des listes et qu'on
+souhaite copier leurs éléments, il faut utiliser la copie en
+profondeur :
+
+#+BEGIN_EXAMPLE
+let /listeB/ = deepcopy(/listeA/)
+#+END_EXAMPLE
+
+
+*** Dictionnaires
+
+On définit un dictionnaire par :
+
+#+BEGIN_EXAMPLE
+let /dictionnaire/ = {'/cle-1/': '/valeur-1/', '/cle-2/': '/valeur-2/' ...}
+#+END_EXAMPLE
+
+On accède à un élément d'un dictionnaire par :
+
+let /var/ = /dictionnaire/[/cle/]
+let /dictionnaire/[/cle/] = /valeur/
+
+ou :
+
+let /var/ = /dictionnaire/./cle/
+let /dictionnaire/./cle/ = /valeur/
+
+
+**** Fonctions
+
+| keys(/dictionnaire/)   | Donne la liste des clés d'un dictionnaires                         |
+| values(/dictionnaire/) | Donne la liste des valeurs d'un dictionnaires                      |
+| items(/dictionnaire/)  | Retourne une liste où chaque élément est de la forme [clé, valeur] |
+
+
+*** Affichage
+
+La commande *echo* affiche à la sortie standard.
+
+| echo "/chaîne/" | Affiche une chaîne de caractères  |
+| echo /var/      | Affiche le contenu d'une variable |
+| echo @/var/     | Affiche le contenu d'un registre  |
+| echo &/option/  | Affiche le contenu d'une option   |
+| set /option/    |                                   |
+
+
+**** Commandes silencieuses
+
+| silent /commande/ | Exécute une commande sans rien afficher à l'écran |
+
+
+**** Redirection
+
+| redir > /fichier/    | Redirige la sortie standard vers un fichier                                |
+| redir ! > /fichier/  | Redirige la sortie standard vers un fichier, écrase le fichier s'il existe |
+| redir >> /fichier/   | Redirige la sortie standard en ajout vers un fichier                       |
+| redir @/registre/    | Redirige la sortie standard vers un registre (a ... z)                     |
+| redir @/registre/>   |                                                                            |
+| redir @/registre/>>  | Redirige la sortie standard en ajout vers un registre (a ... z)            |
+| redir @/Registre/    | Redirige la sortie standard en ajout vers un registre (A ... Z)            |
+| redir @/Registre/>   |                                                                            |
+| redir => /variable/  | Redirige la sortie standard vers une variable                              |
+| redir =>> /variable/ | Redirige la sortie standard en ajout vers une variable                     |
+| redir END            | Termine la redirection en cours                                            |
+
+
+**** Capture
+
+Le registre de capture permet d'insérer facilement le contenu d'une
+variable dans un fichier :
+
+#+BEGIN_EXAMPLE
+:let variable="contenu"
+i <ctrl r>=variable <Return> <esc>
+#+END_EXAMPLE
+
+On obtient le même résultat en écrivant dans un registre :
+
+#+BEGIN_EXAMPLE
+:let @a="contenu"
+"a p
+#+END_EXAMPLE
+
+ou en utilisant une redirection :
+
+#+BEGIN_EXAMPLE
+:let a= ...
+:redir @a
+:echo a
+:redir END
+"a p
+#+END_EXAMPLE
+
+
+*** Source
+
+| :so /script/    | Exécute un script                     |
+| :source /...../ |                                       |
+| :so %           | Exécute le fichier en cours d'édition |
+
+
+*** Fonctions
+
+On définit une fonction par :
+
+#+BEGIN_EXAMPLE
+function /Fonction/()
+/.../
+endfunction
+#+END_EXAMPLE
+
+On l'appelle ensuite par :
+
+#+BEGIN_EXAMPLE
+:call /Fonction/()
+#+END_EXAMPLE
+
+Le nom d'une fonction personnalisée doit obligatoirement
+commencer par une majuscule, pour la différencier des fonctions
+internes de vim.
+
+
+**** Return
+
+L'instruction *return* permet de retourner une
+valeur. Exemple :
+
+#+BEGIN_EXAMPLE
+function Fonction()
+return "chaine"
+endfunction
+#+END_EXAMPLE
+
+Cette valeur peut être ensuite placée dans une variable :
+
+#+BEGIN_EXAMPLE
+let variable = Fonction()
+#+END_EXAMPLE
+
+
+*** Commande
+
+Une commande se définit par :
+
+#+BEGIN_EXAMPLE
+:com /Commande/ /Expression/
+#+END_EXAMPLE
+
+On l'appelle ensuite par :
+
+#+BEGIN_EXAMPLE
+:/Commande/
+#+END_EXAMPLE
+
+et l'expression sera exécutée.
+
+
+**** Arguments
+
+On peut signaler la présence possible d'arguments dans la définition
+d'une commande :
+
+#+BEGIN_EXAMPLE
+:com -nargs=* /Commande/ /Expression/
+#+END_EXAMPLE
+
+
+*** Commandes et fonctions
+
+On peut définir une commande associée à une fonction par :
+
+#+BEGIN_EXAMPLE
+:com /Commande/ /:call Fonction/()
+#+END_EXAMPLE
+
+
+**** Arguments
+
+Les arguments d'une commande peuvent être passé à une fonction
+sous forme de liste d'arguments via le symbole <f-args> :
+
+#+BEGIN_EXAMPLE
+:com -nargs=* /Commande/ /:call Fonction/(<f-args>)
+#+END_EXAMPLE
+
+Ils peuvent aussi être passés sous forme de chaîne de caractères
+entourée de guillemets via le symbole <q-args> :
+
+#+BEGIN_EXAMPLE
+:com -nargs=* /Commande/ /:call Fonction/(<q-args>)
+#+END_EXAMPLE
+
+
+*** Fichiers
+
+| :/commande/ % | Applique une commande au fichier courant       |
+| :/commande/ # | Applique une commande au fichier alternatif    |
+|               | (fichier édité juste avant le fichier courant) |
+
+
+*** Boucles
+
+for /elt/ in /liste/
+#+BEGIN_EXAMPLE
+endfor
+#+END_EXAMPLE
+
+while /condition/
+#+BEGIN_EXAMPLE
+endwhile
+#+END_EXAMPLE
+
+| continue | Passe à l'itération suivante  |
+| break    | Sort de la boucle             |
+| finish   | Termine l'exécution du script |
+
+
+** Sessions
+
+Une session est un script vim permettant de revenir
+ultérieurement à l'état actuel (configuration, tampons,
+splits, onglets, ...). On sauve une session de vim par
+la commande ex :
+
+#+BEGIN_EXAMPLE
+:mksession /fichier/
+#+END_EXAMPLE
+
+On la restaure ensuite en lançant vim avec l'option
+-S et le nom du fichier contenant la session :
+
+#+BEGIN_EXAMPLE
+vim -S /fichier/
+#+END_EXAMPLE
+
+On peut aussi exécuter la session dans vim même :
+
+#+BEGIN_EXAMPLE
+:so /fichier/
+#+END_EXAMPLE
+
+
+** Divers
+
+
+*** Caractères
+
+| ga | Affiche le numéro du caractère sous le curseur       |
+| g8 | Affiche le numéro utf-8 du caractère sous le curseur |
+
+
+*** Digraphes
+
+Un digraphe est une combinaison de deux caractères qui permet insérer
+un caractère spécial (symboles, lettres de certaines langues, etc).
+
+| :dig                                                 | Affiche la liste des digraphes         |
+| :dig /caractère-1/ /caractère-2/ /numéroDuCaractère/ | Définit un digraphe                    |
+| <ctrl k> /caractère-1/ /caractère-2/                 | Insère un digraphe (en mode insertion) |
+
+
+*** Contextuel
+
+| gf         | Ouvre le fichier dont le nom est sous le curseur                          |
+| <ctrl w> f | Ouvre le fichier dont le nom est sous le curseur dans un split horizontal |
+| K          | Ouvre la page de manuel pour la commande dont le nom est sous le curseur  |
+
+
+** Commandes externes
+
+| : ! /commande/   | Exécute une commande externe via le shell        |
+| : ! /commande/ % | Applique une commande externe au fichier courant |
+| : !!             | Répète la dernière commande externe              |
+
+
+*** Insertion
+
+| : r ! /commande/          | Insère la sortie standard   d'une commande shell dans le fichier courant                      |
+| : ... `/commande/` ...    | Utilise la sortie d’une commande externe au sein d’une commande ex.                           |
+| : ... `=/expression/` ... | Utilise le résultat d’une expression vim (variable, fonction, ...) au sein d’une commande ex. |
+
+
+*** Filtre
+
+On peut filtrer une plage de texte en l'envoyant
+à l'entrée d'une commande externe et en la remplaçant
+par la sortie :
+
+| : /plage/ ! /commande/   | Filtre la plage donnée à travers la commande               |
+| ! /mouvement/ /commande/ | Filtre du curseur jusqu'au point obtenu après le mouvement |
+| /N/ !! /commande/        | Filtre /N/ lignes à partir de la ligne courante            |
+| ! /commande/             | En mode visuel, filtre la sélection                        |
+
+
+**** Exemples
+
+| : /plage/ ! sed -n '//expression//p' | Conserve uniquement les lignes correspondant à expression |
+| : /plage/ ! sed '//expression//d'    | Efface uniquement les lignes correspondant à expression   |
+
+
+*** Terminal
+
+Pour accéder à un shell dans un terminal, on entre :
+
+#+BEGIN_EXAMPLE
+:sh
+#+END_EXAMPLE
+
+
+** Langages externes
+
+
+*** Perl
+
+Une fois le paquet vim-perl installé, vim permet
+d'exécuter des commandes et scripts perl :
+
+| :pe /commandePerl/  | Exécute une commande perl |
+| :perl /...../       |                           |
+| perl << /signalFin/ | Herescript perl           |
+| /...../             |                           |
+| /signalFin/         |                           |
+
+
+*** Python
+
+Une fois le paquet vim-python installé, vim permet
+d'exécuter des commandes et scripts python :
+
+| :py /commandePython/  | Exécute une commande python |
+| :python /...../       |                             |
+| :pyf /scriptPython/   | Exécute un script python    |
+| :pyfile /...../       |                             |
+| python << /signalFin/ | Herescript python           |
+| /...../               |                             |
+| /signalFin/</td>      |                             |
+
+De son coté, python dispose d'un module lui permettant
+d'exécuter des commandes vim :
+
+import vim
+vim.command("/commandeVim/")
+
+Il peut également demander des données :
+
+#+BEGIN_EXAMPLE
+/chaine/ = vim.eval("input('/Donnez une chaîne/ :')")
+#+END_EXAMPLE
+
+Le tuple vim.buffers permet de boucler sur les tampons ouverts :
+
+for /tampon/ in vim.buffers :
+#+BEGIN_EXAMPLE
+print /tampon/.name
+#+END_EXAMPLE
+
+Le tampon courant porte un nom particulier :
+
+#+BEGIN_EXAMPLE
+vim.current.buffer
+#+END_EXAMPLE
+
+Chaque tampon peut être vu comme une liste de lignes. On peut
+donc par exemple ajouter une ligne à la fin :
+
+#+BEGIN_EXAMPLE
+vim.current.buffer.append("/ligne/")
+#+END_EXAMPLE
+
+Le tuple vim.windows contient la liste des fenêtres. La fenêtre
+courante est désignée par vim.current.window. Un exemple qui modifie
+la position du curseur :
+
+#+BEGIN_EXAMPLE
+vim.current.window.cursor(/M/, /N/)
+#+END_EXAMPLE
+
+
+*** Ruby
+
+Une fois le paquet vim-ruby installé, vim permet
+d'exécuter des commandes et scripts python :
+
+| :rub /commandeRuby/ | Exécute une commande python |
+| :ruby /...../       |                             |
+| :rubyf /scriptRuby/ | Exécute un script python    |
+| :rubyfile /...../   |                             |
+| ruby << /signalFin/ | Herescript ruby             |
+| /...../             |                             |
+| /signalFin/</td>    |                             |
+
+
+** Extensions
+
+Les extensions (ou plugin, addon en anglais) permettent
+d'étendre les fonctionnalités d'un programme. Voici une liste
+non exhaustive de plugins pour vim que je trouve utiles :
+
+
+*** Gestionnaires d’extensions
+
+| vim-addon-manager          | Regroupe tous les répertoires de plugins dans un même dossier. Permet d’activer des plugins à volonté |
+| pathogen                   | Regroupe tous les répertoires de plugins dans un même dossier                                         |
+| Vimball                    | Création d'archives contenant des plugins installables avec :so %                                     |
+| GetLatestVimScripts        | Mise à jour automatique des plugins qui le supportent                                                 |
+| paquet : vim-addon-manager | Paquet ubuntu, fournit la commande vim-addons                                                         |
+
+
+*** Fichiers, tampons
+
+| bufexplorer   | Explorateur des tampons               |
+| Command-T     | Ouverture rapide d'un fichier         |
+| LustyExplorer | Explorateur de fichiers et de tampons |
+| NERD Tree     | Explorateur de fichiers               |
+
+
+*** Complétion
+
+| SuperTab continued | Complétion avec la touche <tab>                                     |
+| AutoComplPop       | Menu automatique pour complétion                                    |
+| FuzzyFinder        | Fichiers, tampons, étiquettes, commandes, etc avec complétion floue |
+
+
+*** Étiquettes
+
+| Yate    | Liste dynamique de correspondances lors d’une recherche de tag. |
+| taglist | Liste de tags organisée                                         |
+
+
+*** Copier - Coller
+
+| YankRing | Explorateur des derniers Copier / Coller |
+
+
+*** Bouts de code, squelettes
+
+| UltiSnips | Complétion de textes courants avec sauts prédéfinis |
+| tSkeleton | Modèles pour les nouveaux fichiers                  |
+
+
+*** Filtre
+
+| NarrowRegion | Ouvre une partie du fichier dans un autre tampon afin de réaliser des opérations sur cette partie seulement |
+
+
+*** Commentaires
+
+| tComment       | Commenter et décommenter du texte |
+| NERD Commenter | Commenter et décommenter du texte |
+
+
+*** VCS
+
+| rcs        | Gestion de Revision Control System |
+| vcscommand | Commandes svn, cvs, ...            |
+
+
+*** Mode visuel
+
+| visPlugin | Opérations en mode visuel |
+| visincr   | Incrémentation visuelle   |
+| visswap   | Échange visuel            |
+| vissort   | Tri visuel                |
+
+
+*** Thèmes
+
+| Color Sample Pack | Thèmes                                                  |
+| CSApprox          | Permet d'utiliser les thèmes graphiques en mode console |
+
+
+*** Divers
+
+| Align           | Alignement                                                                                     |
+| AutoAlign       | Alignement automatique                                                                         |
+| cecscope        | Utilisation de cscope pour les recherche dans un code                                          |
+| conque          | Lancement d'un terminal dans un tampon                                                         |
+| DirDiff         | Différences entre répertoires                                                                  |
+| LogiPat         | Logique sur expressions régulières                                                             |
+| ManPageView     | Pages de manuel                                                                                |
+| matchit         | Correspondances étendues entre objets (), [], {}, balises XML/HTML ouvrantes et fermantes, etc |
+| searchInRuntime | Recherche de fichiers avec complétion                                                          |
+| surround        | Gestion des délimiteurs (), [], {}, balises XML/HTML, etc                                      |
+| project         | Gestion des projets                                                                            |
+| utl             | Liens internes actifs : fichiers, signets, http, références, notes de bas de page, etc         |
+| vimomni         | Omni-complétion vim                                                                            |
+| pythoncomplete  | Omni-complétion python                                                                         |
+| delimitMate     | Ferme automatiquement les (), [], {}, etc                                                      |
+| xmledit         | Édition XML/HTML                                                                               |
+
+
+*** Installation
+
+
+**** Zip
+
+Pour installer les plugins au format zip,
+il faut en général les extraire dans ~/.vim,
+puis aller dans ~/.vim/doc, lancer vim et
+exécuter :
+
+#+BEGIN_EXAMPLE
+:helptags .
+#+END_EXAMPLE
+
+pour mettre à jour l'aide intégrée de vim.
+
+
+**** Vimballs
+
+Pour les extensions sous forme de vimball (extension
+.vba), il suffit d'éditer le fichier dans vim
+et de faire :
+
+#+BEGIN_EXAMPLE
+:so %
+#+END_EXAMPLE
+
+pour lancer l'installation.
+
+
+** Configuration
+
+Toutes les commandes, options que vous voulez appliquer systématiquement
+à chaque démarrage de vim peuvent être placées dans le fichier ~/.vimrc.
+Voici un exemple commenté de <a href="exemples/vimrc.txt">vimrc</a>.
+Si l'encodage n'est pas correct, vous pouver changer l'option dans firefox :
+
+#+BEGIN_EXAMPLE
+Affichage ⟼ Encodage des caractères ⟼ UTF 8
+#+END_EXAMPLE
+
+Quelques exemples :
+
+| set shell=/usr/bin/zsh         | Définit le shell par défaut                                            |
+| set path+=/répertoire/         | Ajoute un répertoire dans la liste des chemins                         |
+| set guifont=Monospace\ 12      | Définit la police pour gvim                                            |
+| set backspace=eol,indent,start | Activation de la touche backspace                                      |
+| syntax on                      | Active la coloration syntaxique                                        |
+| set number                     | Affiche les numéros de ligne                                           |
+| set cursorline                 | Souligne la ligne courante                                             |
+| set showmatch                  | Montre les (), [], {} correspondantes                                  |
+| set scrolloff=4                | Minimum 4 lignes visibles à l'écran au-dessus et en-dessous du curseur |
+| set wrap                       | Coupe les longues lignes en plusieurs lignes écran                     |
+| set incsearch                  | Recherche incrémentale                                                 |
+| set ignorecase                 | Ignore la casse                                                        |
+
+
+* Ctags
+
+#+TOC: headlines 1 local
+
+
+** Présentation
+
+Le logiciel ctags du paquet exuberant-tags permet de générer
+automatiquement des fichiers labels utilisables par vim sur les
+objets de langages variés : classes et fonctions python, ancres
+html et beaucoup d'autres, sans compter les objets de langages
+personnalisés.
+
+
+** Langages
+
+
+*** Création
+
+On peut ajouter un langage personnel en insérant :
+
+#+BEGIN_EXAMPLE
+--langdef=/langage/
+#+END_EXAMPLE
+
+dans le fichier ~/.ctags.
+
+
+*** Associations
+
+On associe des extensions à un langage en insérant une ligne de
+la forme :
+
+#+BEGIN_EXAMPLE
+--langmap=/langage/:./ext1/./ext2/./ext3/
+#+END_EXAMPLE
+
+dans le fichier ~/.ctags. Les fichiers de la forme :
+
+#+BEGIN_EXAMPLE
+*./ext1/
+*./ext2/
+*./ext3/
+#+END_EXAMPLE
+
+sont alors associés au langage.
+
+
+*** Objets
+
+On peut définir de nouveaux labels par la syntaxe :
+
+#+BEGIN_EXAMPLE
+--regex-/langage/=//motif///label///code/,/catégorie//
+#+END_EXAMPLE
+
+Le /motif/ contient une expression régulière étendue qui permet
+de trouver les lignes des labels. Le /label/ contient en général une
+rétro-référence permettant de donner un nom à chaque label trouvé.
+Le /code/ est une lettre permettant de regrouper les labels
+du langage en catégories. La chaîne /catégorie/ correspond au nom
+de la catégorie.
+
+L'exemple suivant définit le langage css et considère comme labels
+les lignes de la forme :
+
+#+BEGIN_EXAMPLE
+/bidule/ {
+#+END_EXAMPLE
+
+
+** Prévisualisation
+
+On peut obtenir une prévisualisation des labels générés par
+ctags par :
+
+#+BEGIN_EXAMPLE
+ctags -x /fichier(s)/
+#+END_EXAMPLE
+
+
+** Génération
+
+La commande :
+
+#+BEGIN_EXAMPLE
+ctags -V *
+#+END_EXAMPLE
+
+génère le fichier label (tags par défaut) pour le répertoire
+courant. Les fichiers de langages inconnus sont ignorés. Si on
+veut inclure les sous-répertoire, on a la variante :
+
+#+BEGIN_EXAMPLE
+ctags -RV *
+#+END_EXAMPLE
+
+
+* Emacs
+
+#+TOC: headlines 1 local
+
+
+** Aide
+
+| <ctrl h> <ctrl h>      | Aide à propos de l'aide                        |
+| <ctrl h> <ctrl a>      | À propos d’emacs                               |
+| <ctrl h> <ctrl e>      | À propos d’emacs et des paquets                |
+| <ctrl h> <ctrl f>      | FAQ (questions fréquemment posées)             |
+| <ctrl h> i             | Lance l’aide de type info                      |
+| <ctrl h> r             | Manuel d’emacs dans info                       |
+| <ctrl h> t             | Tutoriel                                       |
+| <ctrl h> n             | Nouveautés                                     |
+| <ctrl h> p             | Trouve les paquets liés à un sujet             |
+| <ctrl h> d /motif/     | Affiche l’aide correspondant à un motif        |
+| <ctrl h> a /motif/     | Aide à propos d’un mot-clé                     |
+| <ctrl h> m             | Aide à propos du mode en cours                 |
+| <ctrl h> v /variable/  | Documentation et contenu d'une variable        |
+| <ctrl h> f /fonction/  | Documentation d'une fonction                   |
+| <ctrl h> w /fonction/  | Quel raccourci clavier exécute la fonction ?   |
+| <ctrl h> c /raccourci/ | Quelle fonction exécute le raccourci clavier ? |
+| <ctrl h> k /raccourci/ | Documentation d'un raccourci                   |
+| <ctrl h> b             | Affiche tous les raccourcis                    |
+| <ctrl h> e             | Va vers le tampon des messages                 |
+| <ctrl h> l             | Dernières entrées                              |
+| <ctrl h> I             | Aide au sujet d’une méthode d’entrée           |
+| <ctrl h> h             | Message de bienvenue                           |
+
+
+** Argument
+
+| <ctrl u> /nombre/ /commande/ | Donne un argument numérique à une commande                     |
+| <ctrl u> /N/ /commande/      | Répète /N/ fois une commande qui accepte le mode de répétition |
+
+
+** Édition
+
+| <ctrl x> <ctrl f> | Ouvre un fichier                            |
+| <ctrl x> d        | Ouvre un répertoire                         |
+| <ctrl x> <ctrl s> | Sauve le fichier courant                    |
+| <ctrl x> <ctrl w> | Sauve le fichier courant sous un nom donnée |
+| <ctrl x> <ctrl c> | Quitte emacs                                |
+
+
+** Tampons
+
+| <ctrl x> <ctrl b>     | Liste des tampons (fichiers ouverts, informations diverses) |
+| <ctrl x> b /tampon/   | Va à un tampon. La complétion est disponible.               |
+| <ctrl x> <right>      | Tampon suivant                                              |
+| <ctrl x> <ctrl right> |                                                             |
+| <ctrl x> <left>       | Tampon précédent                                            |
+| <ctrl x> <ctrl left>  |                                                             |
+| <ctrl x> k            | Supprime un tampon                                          |
+
+
+** Éclatement
+
+| <ctrl x> 0 | Ferme le split courant     |
+| <ctrl x> 1 | Seulement le split courant |
+| <ctrl x> 2 | Split horizontal           |
+| <ctrl x> 3 | Split vertical             |
+
+
+** Fonctions
+
+| <alt x>                        | Entre dans le mini-tampon. Permet d'entrer le nom d'une fonction à exécuter |
+| <alt x> /fonction/             | Exécute une fonction                                                        |
+| <ctrl g>                       | Annule la commande en cours et sort du mini-tampon                          |
+| <ctrl x> <ctrl e>              | Évalue l'expression lisp précédant le curseur                               |
+| /motUn-motDeux-motTrois-.../   | Nom typique d'une fonction                                                  |
+| /u-d-t/<tab> ⟼ /un-deux-trois/ | Complétion mot par mot                                                      |
+
+
+*** Fonctions
+
+| finder-commentary | Documentation d'une bibliothèque |
+
+
+** Mouvements
+
+| <ctrl f> | Caractère suivant   |
+| <ctrl b> | Caractère précédent |
+| <ctrl n> | Ligne suivante      |
+| <ctrl p> | Ligne précédente    |
+| <alt n>  | Mot suivant         |
+| <alt p>  | Mot précédent       |
+| <ctrl a> | Début de la ligne   |
+| <ctrl e> | Fin de la ligne     |
+| <ctrl v> | Page suivante       |
+| <alt v>  | Page précédente     |
+| [alt <]  | Début du fichier    |
+| [alt >]  | Fin du fichier      |
+
+
+** Recherche
+
+| <ctrl s> | Recherche |
+
+
+** Pliage
+
+| <ctrl u> /Nombre/ <ctrl x> $ | Règle le niveau de pliage |
+| <ctrl x> $                   | Déplie tout               |
+
+
+** Copier, coller
+
+| <ctrl espace>     | Place la marque sous le curseur                                                 |
+| <ctrl @>          |                                                                                 |
+| <ctrl x> <ctrl x> | Échange la marque et le curseur                                                 |
+| <alt w>           | Copie de la marque au caractère précédant le curseur                            |
+| <ctrl w>          | Coupe de la marque au caractère précédant le curseur                            |
+| <ctrl x> r k      | Coupe en rectangle de la marque au caractère précédant le curseur               |
+| <ctrl y>          | Colle                                                                           |
+| <alt y>           | Colle l’élément précédant dans la pile des extraits copiés (doit suivre ctrl y) |
+| <alt d>           | Coupe jusqu'au début du mot suivant                                             |
+| <ctrl k>          | Coupe jusqu'à la fin de la ligne                                                |
+
+
+** Annulation
+
+| <ctrl _>   | Annulation |
+| <ctrl x> u | Annulation |
+
+
+* Tex - Latex
+
+#+TOC: headlines 1 local
+
+
+** Généralités
+
+| $$/équation/$$                                                       | Grande équation                            |
+| $/équation/$                                                         | Petite équation insérée dans un paragraphe |
+| {/expression/}                                                       | Groupement                                 |
+| ^                                                                    | Exposant                                   |
+| _                                                                    | indice                                     |
+| ( /expression/) \left( /expression/ \right)                          | Parenthèses                                |
+| [ /expression/] \left[ /expression/ \right]                          | Crochets                                   |
+| \{ /expression/\} \left\{ /expression/ \right\}                      | Accolades                                  |
+| \langle /expression/ \rangle \left\langle /expression/ \right\rangle | Angles                                     |
+| ¦ /expression/ ¦ \left ¦ /expression/ \right ¦                       | Barres                                     |
+| \¦ /expression/ \ ¦ \left\¦ /expression/ \right\ ¦                   | Doubles barres                             |
+| \big \Big \bigg \Bigg                                                | Contrôle de la taille de (), [], {}, ...   |
+
+
+** Symboles
+
+| \emptyset | &empty;  |
+| \forall   | &forall; |
+| \exists   | &exist;  |
+| \infty    | &infin;  |
+| \dagger   | &dagger; |
+| \ddagger  | &Dagger; |
+
+
+** Relations
+
+| \in       | &isin;  |
+| \notin    | &notin; |
+| \subseteq | &sube;  |
+| \subset   | &sub;   |
+| \supseteq | &supe;  |
+| \supset   | &sup;   |
+| \equiv    | &equiv; |
+| \ne       | &ne;    |
+| \le       | &le;    |
+| \ge       | &ge;    |
+
+
+** Opérations
+
+| \cup    | &cup;    |
+| \cap    | &cap;    |
+| \times  | &times;  |
+| \oplus  | &oplus;  |
+| \otimes | &otimes; |
+| \div    | &divide; |
+
+
+** Opérateurs
+
+| \sup     | suprémum                   |
+| \inf     | infimum                    |
+| \lim     | limite                     |
+| \limsup  | limite supérieure          |
+| \liminf  | limite inférieure          |
+| \sum     | &sum;                      |
+| \prod    | &prod;                     |
+| \int     | intégrale &int;            |
+| \partial | Dérivée (partielle) &part; |
+
+
+** Polices
+
+| \mathbb{/lettre/}   | Lettres doubles         |
+| \mathfrak{/lettre/} | Lettres germaniques     |
+| \mathbb{N}          | Ensemble des naturels   |
+| \mathbb{Z}          | Ensemble des entiers    |
+| \mathbb{Q}          | Ensemble des rationnels |
+| \mathbb{R}          | Ensemble des réels      |
+
+
+** Lettres grecques
+
+
+*** Minuscules
+
+| \alpha      | &alpha;            |
+| \beta       | &beta;             |
+| \gamma      | &gamma;            |
+| \delta      | &delta;            |
+| \epsilon    | &epsilon;          |
+| \varepsilon | variante &epsilon; |
+| \zeta       | &zeta;             |
+| \eta        | &eta;              |
+| \theta      | &theta;            |
+| \vartheta   | variante &theta;   |
+| \iota       | &iota;             |
+| \kappa      | &kappa;            |
+| \lambda     | &lambda;           |
+| \mu         | &mu;               |
+| \nu         | &nu;               |
+| \xi         | &xi;               |
+| \pi         | &pi;               |
+| \varpi      | variante &pi;      |
+| \rho        | &rho;              |
+| \varrho     | variante &rho;     |
+| \sigma      | &sigma;            |
+| \varsigma   | variante &sigma;   |
+| \tau        | &tau;              |
+| \upsilon    | &upsilon;          |
+| \phi        | &phi;              |
+| \varphi     | variante &phi;     |
+| \chi        | &chi;              |
+| \psi        | &psi;              |
+| \omega      | &omega;            |
+
+
+*** Majuscules
+
+| \Gamma   | &Gamma;   |
+| \Delta   | &Delta;   |
+| \Theta   | &Theta;   |
+| \Lambda  | &Lambda;  |
+| \Xi      | &Xi;      |
+| \Pi      | &Pi;      |
+| \Sigma   | &Sigma;   |
+| \Upsilon | &Upsilon; |
+| \Phi     | &Phi;     |
+| \Psi     | &Psi;     |
+| \Omega   | &Omega;   |
+
+
+* XHTML
+
+#+TOC: headlines 1 local
+
+
+** Lettres et ponctuation
+
+| Code   | &Code;               |
+|--------+----------------------|
+| eacute | &eacute;             |
+| agrave | &agrave;             |
+| euml   | &euml;               |
+| ecirc  | &ecirc;              |
+| ccedil | &ccedil;             |
+| ntilde | &ntilde;             |
+| scaron | &scaron;             |
+| oslash | &oslash;             |
+| aelig  | &aelig;              |
+| oelig  | &oelig;              |
+| eth    | &eth;                |
+| thorn  | &thorn;              |
+|--------+----------------------|
+| quot   | &quot;               |
+| laquo  | «                    |
+| raquo  | »                    |
+| mdash  | —                    |
+| ndash  | &ndash;              |
+| hellip | &hellip;             |
+| iexcl  | &iexcl;              |
+| iquest | &iquest;             |
+| middot | &middot;             |
+|--------+----------------------|
+| emsp   | espace « »           |
+| ensp   | 1/2 espace           |
+| thinsp | 1/6 espace           |
+| nbsp   | espace insécable « » |
+|--------+----------------------|
+| amp    | &                    |
+| sect   | &sect;               |
+| para   | &para;               |
+
+
+** Alphabet grec
+
+| Code     | &Code;     |
+|----------+------------|
+| alpha    | &alpha;    |
+| beta     | &beta;     |
+| gamma    | &gamma;    |
+| delta    | &delta;    |
+| epsilon  | &epsilon;  |
+| theta    | &theta;    |
+| thetasym | &thetasym; |
+| lambda   | &lambda;   |
+| mu       | &mu;       |
+| pi       | &pi;       |
+| piv      | &piv;      |
+| sigma    | &sigma;    |
+| sigmaf   | &sigmaf;   |
+| phi      | &phi;      |
+| chi      | &chi;      |
+| psi      | &psi;      |
+| omega    | &omega;    |
+| Gamma    | &Gamma;    |
+| Delta    | &Delta;    |
+| Theta    | &Theta;    |
+| Lambda   | &Lambda;   |
+| Pi       | &Pi;       |
+| Sigma    | &Sigma;    |
+| Phi      | &Phi;      |
+| Chi      | &Chi;      |
+| Psi      | &Psi;      |
+| Omega    | &Omega;    |
+
+
+** Mathématiques
+
+| Code   | &Code;   |
+|--------+----------|
+| lang   | &lang;   |
+| rang   | &rang;   |
+|--------+----------|
+| empty  | &empty;  |
+| forall | &forall; |
+| exist  | &exist;  |
+| not    | &not;    |
+| infin  | &infin;  |
+| dagger | &dagger; |
+| Dagger | &Dagger; |
+| permil | &permil; |
+| ang    | &ang;    |
+| perp   | &perp;   |
+|--------+----------|
+| isin   | &isin;   |
+| notin  | &notin;  |
+| sub    | &sub;    |
+| sup    | &sup;    |
+| sube   | &sube;   |
+| supe   | &supe;   |
+| nsub   | &nsub;   |
+|--------+----------|
+| equiv  | &equiv;  |
+| sim    | &sim;    |
+| ne     | &ne;     |
+| cong   | &cong;   |
+| asymp  | &asymp;  |
+| lt     | <        |
+| gt     | >        |
+| le     | &le;     |
+| ge     | &ge;     |
+|--------+----------|
+| cap    | &cap;    |
+| cup    | &cup;    |
+| plusmn | &plusmn; |
+| minus  | &minus;  |
+| sdot   | &sdot;   |
+| bull   | &bull;   |
+| times  | &times;  |
+| divide | &divide; |
+| oplus  | &oplus;  |
+| otimes | &otimes; |
+| lowast | &lowast; |
+|--------+----------|
+| radic  | &radic;  |
+| sum    | &sum;    |
+| prod   | &prod;   |
+| int    | &int;    |
+| part   | &part;   |
+| nabla  | &nabla;  |
+|--------+----------|
+| uarr   | &uarr;   |
+| larr   | &larr;   |
+| rarr   | &rarr;   |
+| darr   | &darr;   |
+| harr   | &harr;   |
+| uArr   | &uArr;   |
+| lArr   | &lArr;   |
+| rArr   | &rArr;   |
+| dArr   | &dArr;   |
+| hArr   | &hArr;   |
+
+
+** Musique
+
+| Code   | &Code;  |
+|--------+---------|
+| #9833; | &#9833; |
+| #9834; | &#9834; |
+| #9835; | &#9835; |
+| #9836; | &#9836; |
+| #9837; | &#9837; |
+| #9838; | &#9838; |
+| #9839; | &#9839; |
+
+
+** Finance
+
+| Code   | &Code;   |
+|--------+----------|
+| euro   | &euro;   |
+| pound  | &pound;  |
+| yen    | &yen;    |
+| copy   | &copy;   |
+| trade  | &trade;  |
+| reg    | &reg;    |
+| #x20A4 | &#x20A4; |
+| 20A1   | &#x20A1; |
+
+
+** Divers
+
+| Code   | &Code;   |
+|--------+----------|
+| spades | &spades; |
+| hearts | &hearts; |
+| diams  | &diams;  |
+| clubs  | &clubs   |
+|--------+----------|
+| #9775  | &#9775;  |
+| #8258  | &#8258;  |
+| #9728  | &#9728;  |
+| #9729  | &#9729;  |
+| #9730  | &#9730;  |
+|--------+----------|
+| #9818  | &#9818;  |
+| #9819  | &#9819;  |
+| #9820  | &#9820;  |
+| #9821  | &#9821;  |
+| #9822  | &#9822;  |
+| #9823  | &#9823;  |

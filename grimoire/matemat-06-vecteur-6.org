@@ -1,0 +1,446 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat 06 : Vecteurs - 6
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/commandes-tex.org"
+
+* Produit extérieur
+
+#+TOC: headlines 1 local
+
+\label{chap:prdext}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:vecteur} : Les vecteurs
+  - Chapitre \ref{chap:tenseur} : Les tenseurs
+
+
+** Dimension 2
+
+Soit l'espace vectoriel $E = \combilin{e_1,e_2}$ sur $S$, où $(e_1,e_2)$ forme est une base orthonormée. Soit $u,v \in E$. On a :
+
+#+BEGIN_CENTER
+\(
+u = \sum_{i = 1}^2 u_i e_i \\
+v = \sum_{i = 1}^2 v_i e_i
+\)
+#+END_CENTER
+
+pour certains $u_i,v_i \in S$.
+
+Les symboles $\permutation_{ij}\quad (i,j=1,2)$ sont définis de telle sorte que pour tout $u,v$ la double somme :
+
+$$u \wedge v = \sum_{i,j=1}^2 \permutation_{ij} u_i v_j$$
+
+représente (au signe près) la surface du parallélogramme dont les sommets
+sont $(0,0)$, $(u_1,u_2)$, $(v_1,v_2)$ et $(u_1+v_1,u_2+v_2)$. On impose
+de plus l'antisymétrie :
+
+$$u \wedge v = - v \wedge u$$
+
+afin de donner une orientation à ce parallélogramme. Ces contraintes nous donnent :
+
+#+BEGIN_CENTER
+\(
+u = e_1, \quad v = e_1 \quad \Rightarrow \quad u \wedge v = 0 \\
+u = e_1, \quad v = e_2 \quad \Rightarrow \quad u \wedge v = 1 \\
+u = e_2, \quad v = e_2 \quad \Rightarrow \quad u \wedge v = 0 \\
+u = e_2, \quad v = e_1 \quad \Rightarrow \quad u \wedge v = -1
+\)
+#+END_CENTER
+
+ce qui nous amène à :
+
+#+BEGIN_CENTER
+\(
+\permutation_{11} = \permutation_{22} = 0 \\
+\permutation_{12} = 1 \qquad \permutation_{21} = -1
+\)
+#+END_CENTER
+
+On voit qu'il y a un certain arbitraire dans notre choix, on aurait
+pu également choisir :
+
+#+BEGIN_CENTER
+\(
+\permutation_{11} = \permutation_{22} = 0 \\
+\permutation_{12} = -1 \qquad \permutation_{21} = 1
+\)
+#+END_CENTER
+
+Le choix du signe détermine ce que l'on appelle l'orientation de l'espace $E$.
+
+
+** Dimension 3
+
+Soit l'espace vectoriel $E = \combilin{e_1,e_2,e_3}$ sur $S$, où $(e_1,e_2,e_3)$ forme est une base orthonormée. Soit $u,v,w \in E$. On a :
+
+#+BEGIN_CENTER
+\(
+u = \sum_{i = 1}^3 u_i e_i \\
+v = \sum_{i = 1}^3 v_i e_i \\
+w = \sum_{i = 1}^3 w_i e_i
+\)
+#+END_CENTER
+
+pour certains $u_i,v_i,w_i \in S$.
+
+Les symboles $\permutation_{ijk} \quad (i,j=1,2,3)$ sont définis de telle sorte que pour tout $u,v,w$ le scalaire :
+
+$$u \wedge v \wedge w = \sum_{i,j,k=1}^3 \permutation_{ijk} u_i v_j w_k$$
+
+représente (au signe près) le volume du parallélipipède dont les côtés
+sont définis par $u$, $v$ et $w$. On impose également l'antisymétrie
+
+#+BEGIN_CENTER
+\(
+u \wedge v \wedge w = - u \wedge w \wedge v \\
+u \wedge v \wedge w = - v \wedge u \wedge w
+\)
+#+END_CENTER
+
+Par un procédé analogue au cas bidimensionnel, on montre qu'un choix possible
+est donné par :
+
+#+BEGIN_CENTER
+\(
+\permutation_{123} = 1 \\
+\permutation_{ijj} = \permutation_{iij} = \permutation_{iji} = 0 \\
+\permutation_{ijk} = \permutation_{jki} = \permutation_{kij} \\
+\permutation_{ijk} = - \permutation_{jik} \qquad
+\permutation_{ijk} = - \permutation_{ikj}
+\)
+#+END_CENTER
+
+
+*** Produit vectoriel
+
+On peut également former un vecteur avec l'opérateur $\wedge$. On pose
+simplement :
+
+$$u \wedge v = \sum_{i,j,k = 1}^3 \left( \permutation_{ijk} u_j v_k \right) e_i$$
+
+Les composantes sont donc données par :
+
+#+BEGIN_CENTER
+\(
+(u \wedge v)_1 = u_2 v_3 - u_3 v_2  \\
+(u \wedge v)_2 = u_3 v_1 - u_1 v_3  \\
+(u \wedge v)_3 = u_1 v_2 - u_2 v_1
+\)
+#+END_CENTER
+
+On peut relier le produit extérieur au produit scalaire en constatant que :
+
+$$\scalaire{u}{v \wedge w} = \sum_{i,j,k} \permutation_{ijk} u_i v_j w_k = u \wedge v \wedge w$$
+
+
+** Permutations en dimension $N$
+
+Voyons quelles sont les propriétés communes aux $\permutation_*$ présentés
+ci-dessus. On remarque que $\permutation_{12} = \permutation_{123} = 1$. On note aussi que $\permutation_*$ est antysimétrique puisque l'inversion de deux indices change le signe. Ces propriétés nous permettent de généraliser la définition du produit extérieur à un espace de dimension $N$. On impose que le $\permutation$ à $N$ indices vérifie les conditions suivantes :
+
+\label{def:eps}
+
+#+BEGIN_CENTER
+\(
+\permutation_{1,2,...,N} = 1 \\
+\permutation_{i ... j ... k ... l} = - \permutation_{i ... k ... j ... l}
+\)
+#+END_CENTER
+
+Ces conditions nous permettent de retrouver la valeur de n'importe quel $\permutation_{ijk...l}$. Si deux indices sont égaux, l'antisymétrie nous permet d'affirmer que :
+
+$$\permutation_{i ... j ... j ... k} = - \permutation_{i ... j ... j ... k}$$
+
+et donc :
+
+$$\permutation_{i ... j ... j ... k} = 0$$
+
+Les seuls $\permutation$ non nuls sont donc ceux dont tous les indices $(i,j,k,...,s)$ sont distincts, c'est-à-dire les permutations de $(1,2,3,...,N)$. On se rend compte que si $p \in \setN$ est le nombre de permutations de couples d'indices nécessaires pour obtenir $(i,j,k,...,s)$ à partir de $(1,2,3,...,N)$, on a :
+
+$$\permutation_{i j k ... l} = (-1)^p$$
+
+
+** Tenseur de permutation
+
+Soit $(e_1,e_2,...,e_N)$ une base orthonormée d'un espace vectoriel $E$ sur $S$. Nous définissons le tenseur de permutation $\mathcal{E} \in \tenseur_N(E)$ par :
+
+$$\mathcal{E} = \sum_{i_1,i_2,...,i_N} \permutation_{i_1,i_2,...,i_N} \cdot e_{i_1} \otimes e_{i_2} \otimes ... \otimes e_{i_N}$$
+
+
+** Produit extérieur généralisé
+
+Soit $(e_1,e_2,...,e_N)$ une base orthonormée d'un espace vectoriel $E$ sur $\corps$,
+$M \le N$ et les vecteurs $u_1,u_2,...u_M \in E$ de coordonnées $u_k^i$ :
+
+$$u_k = \sum_{i = 1}^N u_k^i e_i$$
+
+Nous définissons leur produit extérieur par une contraction d'ordre $M$ :
+
+$$u_1 \wedge u_2 \wedge ... \wedge u_M = \contraction{ \mathcal{E} }{M}{ u_M \otimes ... \otimes u_1 }$$
+
+Par orthonormalité de la base, on a :
+
+$$\scalaire{e_j}{u_k} = u_k^j$$
+
+Le produit extérieur s'écrit donc :
+
+$$\mathcal{U} = u_1 \wedge u_2 \wedge ... \wedge u_M = \sum_{i_1,i_2,...i_N} \permutation_{i_1,i_2,...i_N} \cdot e_{i_1} \otimes ... \otimes e_{ i_{N - M} } \cdot u_M^{i_N} \cdot \hdots \cdot u_1^{ i_{N - M + 1} }$$
+
+ce qui nous donne les coordonnées du tenseur $\mathcal{U} \in \tenseur_{N-M}(E)$ par rapport à la base $(e_1,...,e_N)$ :
+
+$$U_{ i_1,...,i_{N - M} } = \sum_{i_{N - M + 1},...,i_N} \permutation_{i_1,i_2,...i_N} \cdot u_1^{ i_{N - M + 1} } \cdot \hdots \cdot u_M^{i_N}$$
+
+On vérifie les propriétés suivantes :
+
+#+BEGIN_CENTER
+\(
+u \wedge v = - v \wedge u \\
+u \wedge u = 0 \\
+(\alpha u + \beta v) \wedge w = \alpha u \wedge w + \beta v \wedge w \\
+w \wedge (\alpha u + \beta v) = \alpha w \wedge u + \beta w \wedge v
+\)
+#+END_CENTER
+
+pour tout $u,v,w,... \in E$ et $\alpha,\beta \in S$.
+
+
+*** $N$ vecteurs
+
+Dans le cas où $M = N$, le produit extérieur est le scalaire :
+
+$$\Delta = u_1 \wedge u_2 \wedge ... \wedge u_N = \sum_{i,j,...,k = 1}^N \permutation_{ij...k} \cdot u_1^i \cdot u_2^j \cdot \hdots \cdot u_N^k$$
+
+On appelle le $\Delta$ ainsi obtenu le déterminant des $N$ vecteurs $u_i$, et on le note :
+
+$$\det(u_1,...,u_N) = u_1 \wedge u_2 \wedge ... \wedge u_N$$
+
+
+** Déterminant d'une matrice
+
+Soit une matrice $A \in \matrice(K,N,N)$ :
+
+$$A = \left( a_{ij} \right)_{i,j}$$
+
+et les vecteurs correspondants :
+
+$$a_i = \sum_j a_{ij} e_j$$
+
+On définit alors simplement :
+
+#+BEGIN_CENTER
+\(
+\det(A) = a_1 \wedge ... \wedge a_N = \sum_{i_1,i_2,...i_N} \permutation_{i_1,i_2,...i_N} a_{1, i_1 } ...
+a_{N, i_N}
+\)
+#+END_CENTER
+
+
+* Matrices élémentaires
+
+#+TOC: headlines 1 local
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:matrice} : Les matrices
+  - Chapitre \ref{chap:tenseur} : Les tenseurs
+
+
+** Introduction
+
+Les matrices élémentaires constituent une classe importante de matrice. Elles permettent d'obtenir d'importants résultats utiles tant sur le plan théorique que pour les applications numériques. Une matrice élémentaire de taille $(n,n)$ est déterminée par un scalaire $\alpha \in \corps$ et le produit tensoriel de deux vecteurs $u,v \in \corps^n$ :
+
+$$\matelementaire(\alpha,u,v) = I + \alpha \cdot u \otimes v = I + \alpha \cdot u \cdot v^\dual$$
+
+
+** Inverse
+
+Considérons le produit :
+
+\begin{eqnarray*}
+\matelementaire(\alpha,u,v) \cdot \matelementaire(\beta,u,v) &=& I + (\alpha + \beta) \cdot u \cdot v^\dual + \alpha \cdot \beta \cdot u \cdot v^\dual \cdot u \cdot v^\dual \\
+&=& I + [\alpha + \beta + \alpha \cdot \beta \cdot (v^\dual \cdot u)] \cdot u \cdot v^\dual
+\end{eqnarray*}
+
+On voit que si on peut trouver un scalaire $\beta$ tel que :
+
+$$\alpha + \beta + \alpha \cdot \beta \cdot (v^\dual \cdot u) = 0$$
+
+le produit des deux matrices sera égal à la matrice identité. Ce sera possible si $1 + \alpha \cdot v^\dual \cdot u \ne 0$. On a alors :
+
+$$\beta = - \frac{\alpha}{1 + \alpha \cdot (v^\dual \cdot u)}$$
+
+et :
+
+$$\matelementaire(\alpha,u,v) \cdot \matelementaire(\beta,u,v) = I$$
+
+Par symétrie, il est clair que le produit des deux matrices ne change pas lorsqu'on intervertit $\alpha$ et $\beta$. On a donc aussi :
+
+$$\matelementaire(\beta,u,v) \cdot \matelementaire(\alpha,u,v) = I$$
+
+Ces deux conditions étant remplies, on a :
+
+$$\matelementaire(\beta,u,v) = \matelementaire(\alpha,u,v)^{-1}$$
+
+Les matrices élémentaires sont donc très faciles à inverser.
+
+
+** Matrices élémentaires de transformation
+
+Nous allons construire une matrice élémentaire qui transforme un vecteur  donné $x \in \matrice(\corps,n,1)$ non nul en un autre vecteur donné $y \in \matrice(\corps,n,1)$ de même taille.
+
+
+*** Colonne
+
+On cherche une matrice élémentaire $E_{yx}$ telle que $E_{yx} \cdot x = y$. L'équation :
+
+$$(I + \alpha \cdot u \cdot v^\dual) \cdot x = x + \alpha \cdot u \cdot (v^\dual \cdot x) = y$$
+
+nous donne la condition :
+
+$$\alpha \cdot (v^\dual \cdot x) \cdot u = y - x$$
+
+On peut donc choisir par exemple $u = y - x$ et $v = x$. On a alors $\alpha = 1 / (x^\dual \cdot x) \ne 0$ et on se retrouve avec la matrice élémentaire :
+
+$$E_{yx} = I + \unsur{x^\dual \cdot x} \cdot (y - x) \cdot x^\dual$$
+
+
+*** Inverse
+
+Si l'inverse existe, il s'agit d'une matrice élémentaire de paramètre scalaire :
+
+$$\beta = - \unsur{x^\dual \cdot x + x^\dual \cdot (y - x)} = - \unsur{x^\dual \cdot y}$$
+
+Sous réserve que $x^\dual \cdot y \ne 0$, on a donc :
+
+$$E_{yx}^{-1} = I - \unsur{x^\dual \cdot y} \cdot (y - x) \cdot x^\dual$$
+
+
+*** Ligne
+
+On cherche une matrice élémentaire $E_{yx}$ telle que $x^\dual \cdot E_{yx} = y^\dual$. L'équation :
+
+$$x^\dual \cdot (I + \alpha \cdot u \cdot v^\dual) = x^\dual + \alpha \cdot (x^\dual \cdot u) \cdot v^\dual = y^\dual$$
+
+nous donne la condition :
+
+$$\alpha \cdot (x^\dual \cdot u) \cdot v^\dual = y^\dual - x^\dual$$
+
+ou :
+
+$$\conjaccent{\alpha} \cdot (u^\dual \cdot x) \cdot v = y - x$$
+
+On peut donc choisir par exemple $v = y - x$ et $u = x$. On a alors $\alpha = \conjaccent{\alpha} = 1 / (x^\dual \cdot x) \ne 0$ et on se retrouve avec la matrice élémentaire :
+
+$$E_{yx} = I + \unsur{x^\dual \cdot x} \cdot x \cdot (y - x)^\dual$$
+
+
+*** Inverse
+
+Si l'inverse existe, il s'agit d'une matrice élémentaire de paramètre scalaire :
+
+$$\beta = - \unsur{x^\dual \cdot x + (y - x)^\dual \cdot x} = - \unsur{y^\dual \cdot x}$$
+
+Sous réserve que $y^\dual \cdot x \ne 0$, on a donc :
+
+$$E_{yx}^{-1} = I - \unsur{y^\dual \cdot x} \cdot x \cdot (y - x)^\dual$$
+
+
+** Matrices élémentaires de permutation
+
+Les matrices élémentaires de permutations permettent de permuter deux lignes ou deux colonnes d'une matrice. Soit $\canonique_1,...,\canonique_n$ les vecteurs de la base canonique de $\corps^n$. La matrice de permutation élémentaire de taille $(n,n)$ et de paramètres $i,j$ est définie par :
+
+$$\matpermutation_{n,i,j} = I - (\canonique_i - \canonique_j) \cdot (\canonique_i - \canonique_j)^\dual$$
+
+Dans la suite, nous considérons $A \in \matrice(\corps,m,n)$ et $P = \matpermutation_{n,i,j}$.
+
+
+*** Permutation des colonnes
+
+Soit les colonnes $C_i = A \cdot \canonique_i$. On a :
+
+$$A \cdot P = A - (C_i \cdot \canonique_i^\dual + C_j \cdot \canonique_j^\dual) + (C_j \cdot \canonique_i^\dual + C_i \cdot \canonique_j^\dual)$$
+
+Les colonnes $i$ et $j$ de $A$ sont donc permutées par multiplication à droite d'une matrice de permutation.
+
+
+*** Permutation des lignes
+
+Soit les lignes $L_i = \canonique_i^\dual \cdot A$. On a :
+
+$$P \cdot A = A - (\canonique_i \cdot L_i + \canonique_j \cdot L_j) + (\canonique_j \cdot L_i + \canonique_i \cdot L_j)$$
+
+Les lignes $i$ et $j$ de $A$ sont donc permutées par multiplication à gauche d'une matrice de permutation.
+
+
+*** Symétrie
+
+On constate que la transposée et la duale sont égales à la matrice elle-même :
+
+$$\matpermutation_{n,i,j} = \matpermutation_{n,i,j}^T = \matpermutation_{n,i,j}^\dual$$
+
+
+*** Inverse
+
+Soit $\Delta_{ij} = \canonique_i - \canonique_j$ et :
+
+$$P = \matpermutation_{n,i,j} = I - \Delta_{ij} \cdot \Delta_{ij}^\dual$$
+
+Le produit de cette matrice avec elle-même s'écrit :
+
+$$P \cdot P = I - 2 \Delta_{ij} \cdot \Delta_{ij}^\dual + \Delta_{ij} \cdot \Delta_{ij}^\dual  \cdot \Delta_{ij} \cdot \Delta_{ij}^\dual$$
+
+Mais comme $\Delta_{ij}^\dual \cdot \Delta_{ij} = 2$, on a :
+
+$$P \cdot P = I - 2 \Delta_{ij} \cdot \Delta_{ij}^\dual + 2 \Delta_{ij} \cdot \Delta_{ij}^\dual$$
+
+Les deux derniers termes s'annihilent et :
+
+$$P \cdot P = I$$
+
+Les matrices de permutations élémentaires sont donc égales à leur propre inverse :
+
+$$\matpermutation_{n,i,j} = \matpermutation_{n,i,j}^{-1}$$
+
+
+** Matrices de permutations
+
+Une matrice de permutation $P$ est une matrice de la forme :
+
+$$P = P_1 \cdot ... \cdot P_n$$
+
+où les $P_i$ sont des matrices élémentaires de permutation.
+
+
+*** Inverse
+
+#+BEGIN_CENTER
+\(
+P^\dual \cdot P = P_n \cdot ... \cdot P_1 \cdot P_1 \cdot ... \cdot P_n = I \\
+P \cdot P^\dual = P_1 \cdot ... \cdot P_n \cdot P_n \cdot ... \cdot P_1 = I
+\)
+#+END_CENTER
+
+Donc $P^\dual = P^{-1}$. Comme $P^\dual = P^T$, la transposée d'une matrice de permutation est identique à son inverse. On dit que ces matrices sont orthogonales.

@@ -1,0 +1,681 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat 06 : Vecteurs - 7
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/commandes-tex.org"
+
+* Systèmes linéaires et inverses
+
+#+TOC: headlines 1 local
+
+\label{chap:syslin}
+
+
+** Gauss-Jordan
+
+Nous allons tenter de diagonaliser une matrice $A \in \matrice(\corps,m,n)$ en une matrice diagonale aussi proche que possible de la matrice identité. Soit les $\canonique_i$, vecteurs de la base canonique de $\corps^m$ ou $\corps^n$ suivant le contexte. Si $A$ est non nulle, on peut trouver un $i$ et un $j$ tels que :
+
+$$a = \composante_{ij} A \ne 0$$
+
+On considère les matrices élémentaires de permutation $P_0 = \matpermutation_{n,i,1}$ et $Q_0 = \matpermutation_{n,j,1}$, et on évalue $P_0 \cdot A \cdot Q_0$ pour inverser les lignes $1$ et $i$ et les colonnes $1$ et $j$ de $A$. On se retrouve alors avec une matrice de la forme :
+
+$$Q_0 \cdot A \cdot P_0 = [x \ c_2 \ ... \ c_n ]$$
+
+où $x$ est la première colonne et où $x^\dual \cdot \canonique_1 = a \ne 0$. On utilise ensuite une première matrice élémentaire :
+
+$$E_0 = I + \unsur{x^\dual \cdot x} \cdot (\canonique_1 - x) \cdot x^\dual$$
+
+pour transformer la première colonne $x$ en $y = \canonique_1$. Partitionnant à part la première ligne et la première colonne du résultat, on a :
+
+#+BEGIN_CENTER
+\(
+E_0 \cdot P_0 \cdot A \cdot Q_0 =
+\begin{Matrix}{cc}
+1 & z^\dual \\
+0 & \ddots
+\end{Matrix}
+\)
+#+END_CENTER
+
+Posons $u^\dual = [1 \ z^\dual]$ pour la première ligne. On a $\canonique_1^\dual \cdot u = 1 \ne 0$. On utilise une seconde matrice élémentaire :
+
+$$F_0 = I + \unsur{u^\dual \cdot u} \cdot u \cdot (\canonique_1 - u)^\dual$$
+
+pour transformer la première ligne $u^\dual$ en $v^\dual = \canonique_1^\dual$. Mais comme $(\canonique_1 - u)^\dual = [0 \ -z^\dual]$, on a :
+
+#+BEGIN_CENTER
+\(
+u \cdot (\canonique_1 - u)^\dual =
+\begin{Matrix}{c}
+1 \\ z
+\end{Matrix}
+\cdot
+\begin{Matrix}{cc}
+0 & -z^\dual
+\end{Matrix}
+=
+\begin{Matrix}{cc}
+0 & -z^\dual \\
+0 & -z \cdot z^\dual
+\end{Matrix}
+\)
+#+END_CENTER
+
+On voit aussi que $u^\dual \cdot u = 1 + z^\dual \cdot z$. La matrice élémentaire $F_0$ est donc de la forme :
+
+#+BEGIN_CENTER
+\(
+F_0 = I + \unsur{1 + z^\dual \cdot z} \cdot
+\begin{Matrix}{cc}
+0 & -z^\dual \\
+0 & -z \cdot z^\dual
+\end{Matrix}
+\)
+#+END_CENTER
+
+On obtient alors une matrice modifiée de la forme :
+
+#+BEGIN_CENTER
+\(
+E_0 \cdot P_0 \cdot A \cdot Q_0 \cdot F_0 =
+\begin{Matrix}{cc}
+1 & z^\dual \\
+0 & \ddots
+\end{Matrix}
++ \unsur{1 + z^\dual \cdot z} \cdot
+\begin{Matrix}{cc}
+1 & z^\dual \\
+0 & \ddots
+\end{Matrix}
+\cdot
+\begin{Matrix}{cc}
+0 & -z^\dual \\
+0 & -z \cdot z^\dual
+\end{Matrix}
+\)
+#+END_CENTER
+
+et finalement :
+
+#+BEGIN_CENTER
+\(
+E_0 \cdot P_0 \cdot A \cdot Q_0 \cdot F_0 =
+\begin{Matrix}{cc}
+1 & 0 \\
+0 & A^{(n - 1)}
+\end{Matrix}
+\)
+#+END_CENTER
+
+Recommençons le même procédé pour transformer, au moyen des matrices de permutation $P^{(n-1)},Q^{(n-1)}$ et élémentaires $E^{(n-1)},F^{(n-1)}$, la première colonne et la première ligne de $A^{(n - 1)}$ en $e_1$ et $e_1^\dual$. Si on pose :
+
+#+BEGIN_CENTER
+\(
+P_1 =
+\begin{Matrix}{cc}
+1 & 0 \\
+0 & P^{(n - 1)}
+\end{Matrix}
+=
+\begin{Matrix}{cc}
+I_1 & 0 \\
+0 & P^{(n - 1)}
+\end{Matrix} \\
+Q_1 =
+\begin{Matrix}{cc}
+1 & 0 \\
+0 & Q^{(n - 1)}
+\end{Matrix}
+=
+\begin{Matrix}{cc}
+I_1 & 0 \\
+0 & Q^{(n - 1)}
+\end{Matrix} \\
+E_1 =
+\begin{Matrix}{cc}
+1 & 0 \\
+0 & E^{(n - 1)}
+\end{Matrix}
+=
+\begin{Matrix}{cc}
+I_1 & 0 \\
+0 & E^{(n - 1)}
+\end{Matrix} \\
+F_1 =
+\begin{Matrix}{cc}
+1 & 0 \\
+0 & F^{(n - 1)}
+\end{Matrix}
+=
+\begin{Matrix}{cc}
+I_1 & 0 \\
+0 & F^{(n - 1)}
+\end{Matrix}
+\)
+#+END_CENTER
+
+il vient :
+
+#+BEGIN_CENTER
+\(
+E_1 \cdot P_1 \cdot E_0 \cdot P_0 \cdot A \cdot Q_0 \cdot F_0 \cdot Q_1 \cdot F_1 =
+\begin{Matrix}{ccc}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & A^{(n - 2)}
+\end{Matrix}
+\)
+#+END_CENTER
+
+Soit $p = \min\{m, n\}$. On peut répéter le même processus $r$ fois en utilisant à l'étape $k$ :
+
+#+BEGIN_CENTER
+\(
+P_k =
+\begin{Matrix}{cc}
+I_k & 0 \\
+0 & P^{(n - k)}
+\end{Matrix} \\
+Q_k =
+\begin{Matrix}{cc}
+I_k & 0 \\
+0 & Q^{(n - k)}
+\end{Matrix} \\
+E_k =
+\begin{Matrix}{cc}
+I_k & 0 \\
+0 & E^{(n - k)}
+\end{Matrix} \\
+F_k =
+\begin{Matrix}{cc}
+I_k & 0 \\
+0 & F^{(n - k)}
+\end{Matrix}
+\)
+#+END_CENTER
+
+jusqu'à ce que la matrice $A^{(n - r)}$ soit nulle, ou jusqu'à ce qu'on ait atteint $r = p$. Posons :
+
+\begin{eqnarray*}
+E &=& E_r \cdot P_r \cdot ... \cdot E_0 \cdot P_0 \\
+F &=& Q_0 \cdot F_0 \cdot ... \cdot Q_r \cdot F_r
+\end{eqnarray*}
+
+On a alors schématiquement :
+
+$$E \cdot A \cdot F = C$$
+
+où :
+
+#+BEGIN_CENTER
+\(
+C \in \left\{
+I_p ,
+\begin{Matrix}{c}
+I_n \\ 0
+\end{Matrix} ,
+\begin{Matrix}{cc}
+I_m & 0
+\end{Matrix} ,
+\begin{Matrix}{cc}
+I_r & 0 \\
+0 & 0
+\end{Matrix}
+\right\}
+\)
+#+END_CENTER
+
+suivant que $r = p = m = n$, $r = p = n$, $r = p = m$ ou $r \strictinferieur p$.
+
+
+*** Inverse
+
+Les matrices élémentaires de permutation sont inversibles, d'inverse identique à elles-mêmes. On a donc $P_i^{-1} = P_i$ et $Q_i^{-1} = Q_i$. Les matrices élémentaires de transformation sont également inversibles. En effet, $x^\dual \cdot y = x^\dual \cdot \canonique_1 = a \ne 0$. L'inverse de $E_0$ existe donc et s'écrit :
+
+$$E_0^{-1} = I - \unsur{a} \cdot (\canonique_1 - x) \cdot x^\dual$$
+
+D'un autre coté $v^\dual \cdot u = \canonique_1^\dual \cdot u = 1 \ne 0$. L'inverse de $F_0$ existe aussi et s'écrit :
+
+$$F_0^{-1} = I - u \cdot (\canonique_1 - u)^\dual$$
+
+Comme on procède de même à chaque étape, l'inverse de chaque matrice élémentaire existe.  En appliquant la formule d'inversion d'un produit, on obtient :
+
+\begin{eqnarray*}
+E^{-1} &=& P_0 \cdot E_0^{-1} \cdot ... \cdot P_r \cdot E_r^{-1} \\
+F^{-1} &=& F_r^{-1} \cdot Q_r \cdot ... \cdot F_0^{-1} \cdot Q_0
+\end{eqnarray*}
+
+Posons $L = E^{-1}$ et $R = F^{-1}$. En multipliant l'équation $E \cdot A \cdot F = C$ à gauche par $L$ et à droite par $R$, on obtient :
+
+$$A = L \cdot C \cdot R$$
+
+Une telle décomposition est appelée décomposition de Gauss-Jordan et notée :
+
+$$(L,C,R) = \gaussjordan(A)$$
+
+
+*** Rang
+
+Le $r$ ainsi obtenu est appelé rang de la matrice $A$. On le note :
+
+$$r = \rang A$$
+
+On a par construction $r \le p$.
+
+
+** Systèmes linéaires
+
+Nous allons à présent utiliser la décomposition de Gauss-Jordan pour analyser les espaces de solutions :
+
+$$S(y) = \{ x \in \corps^n : A \cdot x = y \}$$
+
+pour tout $y \in \corps^m$. On a :
+
+$$A \cdot x = L \cdot C \cdot R \cdot x = y$$
+
+Multiplions cette équation par $L^{-1}$. Il vient :
+
+$$C \cdot R \cdot x = L^{-1} \cdot y$$
+
+On pose :
+
+#+BEGIN_CENTER
+\(
+z = R \cdot x \\
+b = L^{-1} \cdot y
+\)
+#+END_CENTER
+
+Le système linéaire s'écrit alors :
+
+$$C \cdot z = b$$
+
+
+*** Plein rang, matrice carrée
+
+Si $r = m = n$, on a :
+
+$$A = L \cdot I \cdot R = L \cdot R$$
+
+La matrice $A$ est un produit de matrices inversibles. Elle est donc inversible et :
+
+$$A^{-1} = R^{-1} \cdot L^{-1}$$
+
+L'équation $A \cdot x = y$ admet donc pour unique solution $x \in S(y)$ le vecteur :
+
+$$x = A^{-1} \cdot y = R^{-1} \cdot L^{-1} \cdot y$$
+
+
+*** Plein rang, matrice haute
+
+Si $r = n \strictinferieur m$, on a :
+
+#+BEGIN_CENTER
+\(
+C =
+\begin{Matrix}{c}
+I_n \\ 0
+\end{Matrix}
+\)
+#+END_CENTER
+
+Si on partitionne $b = L^{-1} \cdot y$ en deux vecteurs $b_1,b_2$ de tailles $(n,1)$ et $(m - n, 1)$, on a :
+
+#+BEGIN_CENTER
+\(
+\begin{Matrix}{c}
+I_n \\ 0
+\end{Matrix}
+\cdot
+z
+=
+\begin{Matrix}{c}
+z \\ 0
+\end{Matrix}
+=
+\begin{Matrix}{c}
+b_1 \\ b_2
+\end{Matrix}
+\)
+#+END_CENTER
+
+Il y a donc deux conditions pour que $x = R^{-1} \cdot z$ soit dans $S(y)$ :
+
+#+BEGIN_CENTER
+\(
+z = b_1 \\
+0 = b_2
+\)
+#+END_CENTER
+
+Si $b_2 \ne 0$, il n'existe pas de solution. Si $b_2 = 0$, il existe une unique solution $x \in S(y)$, qui s'écrit :
+
+$$x = R^{-1} \cdot z = R^{-1} \cdot b_1$$
+
+Remarquons que l'on peut toujours trouver un $y$ tel qu'il existe au moins une solution. En effet, il suffit de choisir :
+
+#+BEGIN_CENTER
+\(
+y = L \cdot
+\begin{Matrix}{c}
+b_1 \\ 0
+\end{Matrix}
+\)
+#+END_CENTER
+
+D'un autre coté, il existe toujours un $y$ tel qu'il n'existe pas de solution. En effet, il suffit de choisir :
+
+#+BEGIN_CENTER
+\(
+y = L \cdot
+\begin{Matrix}{c}
+b_1 \\ b_2
+\end{Matrix}
+\)
+#+END_CENTER
+
+où $b_2 \ne 0$.
+
+
+*** Plein rang, matrice longue
+
+Si $r = m \strictinferieur n$, on se retrouve alors avec :
+
+#+BEGIN_CENTER
+\(
+C =
+\begin{Matrix}{cc}
+I_m & 0
+\end{Matrix}
+\)
+#+END_CENTER
+
+Si on partitionne $z$ en deux vecteurs $z_1,z_2$ de tailles $(m,1)$ et $(n - m,1)$, on a :
+
+#+BEGIN_CENTER
+\(
+C \cdot z =
+\begin{Matrix}{cc}
+I_m & 0
+\end{Matrix}
+\cdot
+\begin{Matrix}{c}
+z_1 \\ z_2
+\end{Matrix}
+=
+I_m \cdot z_1 + 0 \cdot z_2 = z_1
+\)
+#+END_CENTER
+
+La condition pour que $x = R^{-1} \cdot z$ soit dans $S(y)$ se résume à :
+
+$$z_1 = b = L^{-1} \cdot y$$
+
+Nous n'avons par contre aucune condition sur $z_2 \in \matrice(\corps, n - m)$. Il y a donc une infinité de solutions $x \in S(y)$, de la forme :
+
+#+BEGIN_CENTER
+\(
+x =R^{-1} \cdot z = R^{-1} \cdot
+\begin{Matrix}{c}
+L^{-1} \cdot y \\ z_2
+\end{Matrix}
+\)
+#+END_CENTER
+
+
+*** Rang incomplet
+
+Supposons que $r \strictinferieur p$. On partitionne alors $z$ en deux vecteurs $z_1$ et $z_2$ de tailles $(r,1)$ et $(n - r, 1)$ et $b$ en deux vecteurs $b_1$ et $b_2$ de tailles $(r,1)$ et $(m - r,1)$. Avec ces notations, le produit $C \cdot z$ s'écrit :
+
+#+BEGIN_CENTER
+\(
+C \cdot z =
+\begin{Matrix}{cc}
+I_r & 0 \\
+0 & 0
+\end{Matrix}
+\cdot
+\begin{Matrix}{c}
+z_1 \\ z_2
+\end{Matrix}
+=
+\begin{Matrix}{c}
+z_1 \\ 0
+\end{Matrix}
+\)
+#+END_CENTER
+
+L'équation $C \cdot z = b$ prend donc la forme :
+
+#+BEGIN_CENTER
+\(
+\begin{Matrix}{c}
+z_1 \\ 0
+\end{Matrix}
+=
+\begin{Matrix}{c}
+b_1 \\ b_2
+\end{Matrix}
+\)
+#+END_CENTER
+
+Les deux conditions pour que $x = R^{-1} \cdot z$ soit dans $S(y)$ sont donc que $z_1 = b_1$ et que $b_2 = 0$. Il n'y a aucune condition sur $z_2$. Si $b_2 \ne 0$ il n'y a pas de solution. Si $b_2 = 0$, il existe une infinité de solutions $x \in S(y)$ de la forme :
+
+#+BEGIN_CENTER
+\(
+x = R^{-1} \cdot
+\begin{Matrix}{c}
+b_1 \\ z_2
+\end{Matrix}
+\)
+#+END_CENTER
+
+Remarquons que l'on peut toujours trouver un $y$ tel qu'il existe au moins une solution. En effet, il suffit de choisir :
+
+#+BEGIN_CENTER
+\(
+y = L \cdot
+\begin{Matrix}{c}
+b_1 \\ 0
+\end{Matrix}
+\)
+#+END_CENTER
+
+Un choix particulier est par exemple $y = b = 0$.
+
+D'un autre coté, il existe toujours un $y$ tel qu'il n'existe pas de solution. En effet, il suffit de choisir :
+
+#+BEGIN_CENTER
+\(
+y = L \cdot
+\begin{Matrix}{c}
+b_1 \\ b_2
+\end{Matrix}
+\)
+#+END_CENTER
+
+où $b_2 \ne 0$.
+
+
+*** Rang et existence
+
+On conclut de ce qui précède que si $r \strictinferieur m$ ou $r \strictinferieur p$, on peut toujours trouver un $y$ tel qu'il n'existe pas de solution. Pour qu'il existe au moins une solution du système quel que soit $y$, il faut donc avoir $r = m = p$.
+
+
+*** Rang et unicité
+
+On conclut de ce qui précède que si $r \strictinferieur n$ ou $r \strictinferieur p$, on peut toujours trouver un $y$ tel qu'il existe une infinité de solution, et même une infinité de solutions non nulles puisque $z_2 \ne 0$ peut être quelconque.
+
+Pour qu'il existe au maximum une solution du système quel que soit $y$, il faut donc avoir $r = n = p$.
+
+
+** Matrices hautes
+
+Soit une matrice $A \in \matrice(\corps,m,n)$ strictement haute ($m \strictsuperieur n$). Un inverse à droite $R$ vérifiant $A \cdot B = I$ ne peut pas exister, car sinon il suffirait de prendre $x = B \cdot y$ pour avoir :
+
+$$A \cdot x = A \cdot B \cdot y = I \cdot y = y$$
+
+Le système $A \cdot x = y$ admettrait toujours au moins une solution, ce qui contredit les résultats précédents.
+
+
+** Matrices longues
+
+Soit une matrice $A \in \matrice(\corps,m,n)$ strictement longue ($n \strictsuperieur m$). Un inverse à gauche $B$ vérifiant $B \cdot A = I$ ne peut pas exister, car sinon on aurait :
+
+$$(B \cdot A)^\dual = A^\dual \cdot B^\dual = I^\dual = I$$
+
+La matrice $B^\dual$ serait donc un inverse à droite de la matrice $A^\dual$. Or, $A^\dual$ est de taille $(n,m)$, donc strictement haute, et ne peut pas admettre d'inverse à droite. On en conclut qu'une matrice strictement longue ne peut pas admettre d'inverse à gauche.
+
+
+** Matrices carrées
+
+Supposons que $m = n$ et considérons deux matrices carrées $A,B \in \matrice(\corps,n,n)$ telles que :
+
+$$A \cdot B = I$$
+
+Il existe au moins une solution du système $A \cdot x = y$ quel que soit $y$, car il suffit de prendre $x = B \cdot y$ pour avoir $A \cdot x = A \cdot B \cdot y = y$. On a donc forcément $r = m \le n$. Mais comme $m = n$, cette solution est unique. On en déduit que l'application linéaire associée à $A$
+est inversible, donc $A$ aussi et :
+
+$$A \cdot (B - A^{-1}) = I - I = 0$$
+
+En multipliant à gauche par $A^{-1}$, il vient simplement $B - A^{-1} = 0$, c'est-à-dire $B = A^{-1}$. On a donc également :
+
+$$B \cdot A = A^{-1} \cdot A = I$$
+
+
+** Complément de Schur
+
+Soit le système suivant :
+
+#+BEGIN_CENTER
+\(
+\begin{Matrix}{cc}
+A & B \\ C & D
+\end{Matrix}
+\cdot
+\begin{Matrix}{c}
+x & y
+\end{Matrix}
+=
+\begin{Matrix}{c}
+F \\ G
+\end{Matrix}
+\)
+#+END_CENTER
+
+où $A,B,C,D,F,G$ et $x,y$ sont respectivement des matrices et des vecteurs matriciels de tailles compatibles. On a :
+
+#+BEGIN_CENTER
+\(
+A \cdot x + B \cdot y = F \\
+C \cdot x + D \cdot y = G
+\)
+#+END_CENTER
+
+Si $A$ est carrée et inversible, la première relation nous permet d'éliminer $x$ :
+
+$$x = A^{-1} \cdot F - A^{-1} \cdot B \cdot y$$
+
+On substitue alors dans la seconde relation, et on obtient :
+
+$$C \cdot A^{-1} \cdot F - C \cdot A^{-1} \cdot B \cdot y + D \cdot y = G$$
+
+En plaçant $y$ en évidence, on obtient :
+
+$$(D - C \cdot A^{-1} \cdot B) \cdot y = G - C \cdot A^{-1} \cdot F$$
+
+Sous réserve d'inversibilité, il ne nous reste alors plus qu'à résoudre par rapport à $y$ :
+
+$$y = (D - C \cdot A^{-1} \cdot B)^{-1} \cdot (G - C \cdot A^{-1} \cdot F)$$
+
+qui nous donne ensuite :
+
+$$x = A^{-1} \cdot [ F - B \cdot (D - C \cdot A^{-1} \cdot B)^{-1} \cdot (G - C \cdot A^{-1} \cdot F) ]$$
+
+Si $A$ est facilement inversible, et si $D - C \cdot A^{-1} \cdot B$ est de taille réduite comparativement à la taille de $A$, il peut être avantageux de résoudre le système global en $(x,y)$ de cette façon.
+
+
+** Dimension
+
+Soit un espace vectoriel $E$ sur $\corps$ possédant deux bases $(e_1,e_2,...,e_n)$ et $(f_1,f_2,...,f_m)$. Comme les $f_i \in E$, on a :
+
+$$f_i = \sum_{k = 1}^n a_{ik} \cdot e_k$$
+
+pour certains $a_{ij} \in \corps$. Comme les $e_k \in E$, on a également :
+
+$$e_k = \sum_{j = 1}^m b_{kj} \cdot f_j$$
+
+pour certains $b_{kj} \in \corps$. On en conclut que :
+
+$$f_i = \sum_{j = 1}^m \sum_{k = 1}^n a_{ik} \cdot b_{kj} \cdot f_j$$
+
+Par indépendance linéaire des $f_i$, on doit donc avoir :
+
+$$\sum_{k = 1}^m a_{ik} \cdot b_{kj} = \indicatrice_{ij}$$
+
+Si nous introduisons les matrices $A \in \matrice(\corps,m,n)$ et $B \in \matrice(\corps,n,m)$ de composantes $a_{ij}$ et $b_{ij}$ respectivement, on a donc $A \cdot B = I_m$. La matrice $A$ admettant un inverse à droite, elle ne peut pas être strictement haute et on a $m \le n$. Mais on a aussi :
+
+$$e_k = \sum_{k = 1}^n \sum_{j = 1}^m b_{kj} \cdot a_{ji} \cdot e_i$$
+
+d'où l'on conclut que $B \cdot A = I_n$. La matrice $A$ admettant un inverse à gauche, elle ne peut pas être strictement longue et on a également $n \le m$. On conclut de ces deux inégalités que $m = n$. Si on possède une base de $E$ comptant $n$ vecteurs, on peut-être sûr que toute autre base de $E$ comptera également $n$ vecteurs. On dit que $m = n$ est la dimension de $E$ et on le note :
+
+$$\dim E = n$$
+
+
+*** Corollaire
+
+La base canonique de $\corps^n$ comptant $n$ éléments,
+on en déduit que $\corps^n$ est de dimension $n$.
+
+
+** Indépendance linéaire
+
+Soit un espace vectoriel $E$ de dimension $m$ et une suite de vecteurs linéairement indépendants $(u_1,...,u_n)$ de $E$. Si $(e_1,...,e_m)$ est une base de $E$, on peut trouver des coordonnées $a_{ki} \in \corps$ telles que :
+
+$$u_i = \sum_{k = 1}^m a_{ki} \cdot e_k$$
+
+Pour tout $w \in E$, on sait aussi que l'on peut trouver des coordonnées $y_k \in \corps$ telles que :
+
+$$w = \sum_{k = 1}^m y_k \cdot e_k$$
+
+Nous allons à présent examiner si on peut également trouver des coordonnées $x_i \in \corps$ de $w$ par rapport aux $u_i$ :
+
+$$w = \sum_{i = 1}^n x_i \cdot u_i$$
+
+Si cette hypothèse est vérifiée, on doit avoir :
+
+$$\sum_{k = 1}^m y_k \cdot e_k = w = \sum_{k = 1}^m \sum_{i = 1}^n a_{ki} \cdot x_i \cdot e_k$$
+
+L'indépendance linéaire des $e_k$ implique alors que :
+
+$$y_k = \sum_{i = 1}^n a_{ki} \cdot x_i$$
+
+Utilisant les vecteurs matriciels associés $x = [x_1 \ ... \ x_n]^\dual$ et $y = [y_1 \ ... \ y_m]^\dual$ ainsi que la matrice $A = (a_{ki})_{k,i}$ de taille $(m,n)$, on se retrouve avec le système :
+
+$$y = A \cdot x$$
+
+Soit $r$ le rang de $A$. On sait déjà que $r \le \min \{m,n\}$. Examinons les différents cas :
+
+  - Si on avait $r \strictinferieur n$, on pourrait trouver un $y$ tel qu'il existe une infinité de solution en $x$, ce qui contredit l'unicité des coordonnées de $w$ par rapport à la suite de vecteurs linéairement indépendant $(u_1,...,u_n)$. On doit donc avoir $r = n \le m$.
+
+  - Dans le cas où $r = n \strictinferieur m$, on peut trouver un $y$ tel que la solution n'existe pas : la suite de $u_i$ ne forme donc pas une base de $E$.
+
+  - Dans le cas où $r = n = m$, il existe toujours une unique solution, la suite des $u_i$ forme alors une base de $E$. Il suffit donc de trouver une suite de $m$ vecteurs indépendants dans un espace de dimension $m$ pour former une base de cet espace.

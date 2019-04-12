@@ -1,0 +1,247 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Ordina 02 : BSD
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+* Système de fichiers
+
+#+TOC: headlines 1 local
+
+| mdconfig | Création de périphériques virtuels associés à un fichier      |
+| glabel   | Permet de donner un nom persistant à un périphérique amovible |
+| gmirror  | Création d'une association de périphériques redondant         |
+| geli     | Permet de chiffrer un système de fichier                      |
+| gshsec   | Permet de partager la clef permettant de déchiffrer           |
+|          | un système de fichier sur plusieurs périphériques             |
+
+
+* Administration
+
+#+TOC: headlines 1 local
+
+
+** Noyau
+
+| kldload   | Charge un module   |
+| kldunload | Décharge un module |
+
+
+** Processus
+
+| pkill <span class="brun">nom</span> | Permet de terminer un processus de nom |
+|                                     | /nom/ (équivalent de /killall/)        |
+
+
+** Réseau
+
+
+*** Pare-feu
+
+| pf           | pare-feu                                  |
+| pfctl        | Contrôle du pare-feu                      |
+| /etc/pf.conf | Fichier de configuration du pare-feu /pf/ |
+
+Voici quelques exemples de syntaxe pf. Définition de variables,
+interface et réseau local :
+
+#+BEGIN_EXAMPLE
+if="rl0" <br />
+lan="{ 192.168.123.100, 192.168.123.101, 192.168.123.102 }"
+#+END_EXAMPLE
+
+Bloque tout, journalise tout :
+
+#+BEGIN_EXAMPLE
+block in log all
+#+END_EXAMPLE
+
+Laisse passer ssh des autres membre du réseau local :
+
+#+BEGIN_EXAMPLE
+pass in inet proto tcp from $lan to $if port ssh flags S/SA keep state <br />
+pass in inet proto udp from $lan to $if port ssh flags S/SA keep state
+#+END_EXAMPLE
+
+
+** Démarrage
+
+| /sbin/init   | Processus de démarrage lancé par le noyau      |
+| /etc/rc      | Script de démarrage                            |
+| /etc/rc.conf | Configuration des services lancés au démarrage |
+
+
+** Services
+
+| /etc/rc.d | Répertoire contenant les scripts       |
+|           | activant ou désactivant les services   |
+| rcorder   | Gestion des dépendances entre services |
+
+
+** Configuration
+
+| /boot/loader.conf  | Fichiers de configuration                   |
+| /etc/rc.conf       | des services lancés au démarrage            |
+| /etc/rc.conf.local |                                             |
+| sysctl             | Permet de contrôler les options du noyau    |
+| /etc/sysctl.conf   | Fichier de configuration de /sysctl/        |
+| /etc/rc.d          | Répertoire contenant les scripts permettant |
+|                    | de lancer ou d'arrêter des services         |
+
+
+** Cloisonnement
+
+| jail           | Permet d'emprisonner un processus             |
+| /etc/rc.d/jail | dans un sous-système                          |
+| jexec          | Permet d'exécuter un processus dans un /jail/ |
+
+
+* Systeme
+
+#+TOC: headlines 1 local
+
+
+** Mise à jour
+
+Il faut se rendre dans le répertoire des sources du système,
+par exemple :
+
+#+BEGIN_EXAMPLE
+cd /usr/src
+#+END_EXAMPLE
+
+sous FreeBsd. On dispose ensuite des commandes :
+
+| make buildworld    | Compile le système d'exploitation           |
+| make buildkernel   | Compile le noyau du système d'exploitation  |
+| make installkernel | Installe le noyau du système d'exploitation |
+
+On redémarre en mode mono-utilisateur et on lance successivement
+les commandes :
+
+#+BEGIN_EXAMPLE
+adjkerntz -i
+mount -a -t ufs
+mergemaster -p
+make installworld
+mergemaster
+reboot
+#+END_EXAMPLE
+
+
+** Fichiers de configuration
+
+Pour installer les fichiers de configuration, il faut aller dans :
+
+#+BEGIN_EXAMPLE
+cd /usr/src/etc
+#+END_EXAMPLE
+
+et lancer :
+
+#+BEGIN_EXAMPLE
+make distribution
+#+END_EXAMPLE
+
+
+* Paquets
+
+#+TOC: headlines 1 local
+
+| pkg_add -r | Ajoute un paquet compilé et ses dépendances      |
+| pkg_del    | Supprime un paquet et les paquets dont il dépend |
+
+
+* Ports
+
+#+TOC: headlines 1 local
+
+Les ports constituent une arborescence d'instructions nécessaires
+à la compilation, l'installation ou la désinstallation de logiciels.
+Pour utiliser les ports, il faut d'abord se rendre dans le répertoire
+associé au logiciel souhaité. Il s'agit de :
+
+#+BEGIN_EXAMPLE
+cd /usr/ports//catégorie///logiciel/
+#+END_EXAMPLE
+
+sous FreeBsd et de :
+
+#+BEGIN_EXAMPLE
+cd /usr/pkgsrc//catégorie///logiciel/
+#+END_EXAMPLE
+
+sous NetBsd.
+
+On utilise alors la commande « make » suivi de l'action souhaitée :
+
+| make config  | Configuration des options de compilation |
+| make install | Installe                                 |
+| make clean   | Nettoie le répertoire                    |
+
+
+** Options de compilation
+
+| /etc/make.conf|Fichier de configuration des compilations de port|
+
+
+** Recherche
+
+La racine des ports permet de rechercher un logiciel :
+
+cd /usr/ports <br />
+make search key=<span class="rouge">motclef</span>
+
+
+** Précompilé
+
+Le « pkgsrc » de NetBsd permet d'installer des ports précompilés
+via la commande :
+
+make bin-install
+
+
+** Portupgrade
+
+| portinstall    | Installation d'un port  |
+| portversion    | Ports non à jour        |
+| portupgrade    | Mise à jour             |
+| port_deinstall | Suppression             |
+| portsclean     | Nettoyage               |
+| portaudit      | Mise à jour de sécurité |
+
+
+*** Configuration
+
+| /usr/local/etc/pkgtools.conf             | Fichier de configuration de portupgrade            |
+| IGNORE_CATEGORIES=['/port1/', '/port2/'] | Catégories ignorées                                |
+| HOLD_PKGS=['/port1/', '/port2/']         | Paquets non mis à jour                             |
+| USE_PKGS=['/port1/', '/port2/']          | Utilisation de paquets précompilés si disponibles, |
+|                                          | compilation dans le cas contraire                  |
+| USE_PKGS_ONLY=['/port1/', '/port2/']     | Utilisation de paquets précompilés uniquement      |
+
+On peut aussi définir des arguments particuliers de
+compilation pour certains ports :
+
+#+BEGIN_EXAMPLE
+MAKE_ARGS={ <br />
+'/port1/' =&gt; ['/.../', '/.../'],
+'/port2/' =&gt; ['/.../', '/.../']
+}
+#+END_EXAMPLE

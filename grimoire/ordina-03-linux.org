@@ -1,0 +1,713 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Ordina 03 : Linux
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+* Noyau
+
+#+TOC: headlines 1 local
+
+** Informations
+
+| uname       | Informations sur le noyau    |
+| lsb_release | Informations la distribution |
+
+** Combinaisons magiques
+
+Communication directe avec le noyau, utile quand plus
+rien ne répond.
+
+| <alt sysRq k> | Relance le serveur graphique                           |
+| <alt sysRq r> | Récupère le contrôle du clavier                        |
+| <alt sysRq e> | Envoie le signal de fin à tous les processus           |
+| <alt sysRq i> | Envoie le signal de fin immédiate à tous les processus |
+| <alt sysRq s> | Synchronise les partitions avec la mémoire             |
+| <alt sysRq u> | Démonte les partitions                                 |
+| <alt sysRq b> | Redémarre                                              |
+| <alt sysRq o> | Arrête l'ordinateur                                    |
+
+** Consoles virtuelles
+
+| <ctrl alt F1>  | Change de console virtuelle ou d'environnement graphique |
+| <ctrl alt F2>  |                                                          |
+| ...            |                                                          |
+| <ctrl alt F12> |                                                          |
+
+** Matériel
+
+| lscpu         | Information sur le processeur                   |
+| lshw          | Information sur le matériel                     |
+| lspci         | Information sur le matériel PCI                 |
+| update-usbids | Met à jour les informations sur le matériel USB |
+| lsusb         | Information sur le matériel USB                 |
+| dmidecode     | Informations du bios                            |
+| glxinfo       | Information sur GLX et openGL                   |
+| hdparm        | Paramètres des disques                          |
+| hddtemp       | Température des disques                         |
+| smartctl      | Surveillance des disques                        |
+| sensors       | Température des processeurs                     |
+
+** Options
+
+| sysctl|Permet de contrôler les options du noyau|
+
+** Modules
+
+| lsmod|Donne la liste des modules chargés|
+| modinfo|Information sur un module|
+| insmod|Charge un module|
+| rmmod|Décharge un module|
+| modprobe|Charge un module et les modules dont il dépend|
+| modprobe -r|Décharge un module et les modules qui en dépendent|
+
+* Système de fichiers
+
+#+TOC: headlines 1 local
+
+| mknod|Crée un noeud : fichier, répertoire, tube, etc|
+
+** Arborescence
+
+| /home      | Contient les répertoires personnels                                         |
+| /boot      | Fichiers d'amorçage                                                         |
+| /boot/grub | Chargeur de système d'exploitation                                          |
+| /etc       | Fichiers de configuration                                                   |
+| /tmp       | Fichiers temporaires                                                        |
+| /bin       | Binaires nécessaire pour démarrer/réparer le système                        |
+| /sbin      | Binaires système/administration nécessaire pour démarrer/réparer le système |
+| /usr       | Données de partage, éventuellement monté depuis plusieurs hôtes             |
+| /usr/bin   | Contient les binaires qui ne sont pas dans /bin                             |
+| /usr/sbin  | Contient les binaires système qui ne sont pas dans /sbin                    |
+| /media     | Point de montage des media amovibles (cédérom, clef usb, ...)               |
+| /sys       | Représentation du système en temps réel                                     |
+| /proc      | Représentation des processus en temps réel                                  |
+| /dev       | Représntation des périphériques en temps réel                               |
+
+* Administration
+
+#+TOC: headlines 1 local
+
+** Administrateur
+
+| su               | Ouvre un shell d'utilisateur « root », ce qui permet d'administrer le système |
+| su /utilisateur/ | Se connecte sous un autre compte utilisateur                                  |
+| sudo             | Exécute une commande en tant qu'administrateur                                |
+|                  | Permet d'accorder des droits supplémentaires à certains utilisateur           |
+
+** Processus
+
+| ps aux                | Donne la liste des processus                               |
+| top                   | Donne la liste des processus, les plus gourmands en tête   |
+| htop                  | top amélioré                                               |
+| killall /commande/    | Termine tous les processus dont le nom contient /commande/ |
+| killall -9 /commande/ | Force l'arrêt brutal de tous les processus                 |
+|                       | dont le nom contient /commande/                            |
+| pkill                 | Équivalent de killall                                      |
+| pgrep                 | Trouve des processus d'après le nom                        |
+
+** Gestion des utilisateurs
+
+| useradd  | Ajoute un utilisateur                            |
+| groupadd | Ajoute un groupe                                 |
+| adduser  | Ajoute un utilisateur (plus convivial)           |
+| addgroup | Ajoute un groupe (plus convivial)                |
+| usermod  | Modifier un utilisateur                          |
+| deluser  | Supprime un utilisateur                          |
+| delgroup | Supprime un groupe                               |
+| passwd   | Crée ou modifie le mot de passe d'un utilisateur |
+| newgrp   | Modifie le groupe courant                        |
+
+*** Informations
+
+| id                   | Donne l'identifiant utilisateur et groupe de l'utilisateur courant |
+| who                  | Liste des utilisateurs connectés                                   |
+| w                    | Liste des utilisateurs connectés                                   |
+| finger /utilisateur/ | Détails d'un utilisateur                                           |
+
+*** Propriétaire
+
+On peut changer le propriétaire et le groupe
+d'un fichier par :
+
+chown /propriétaire/:<span class="rouge">groupe</span> <span class="vert">fichier</span>
+
+*** Droits d'accès
+
+Les droits d'accès se gèrent au moyens des options :
+
+| u | Propriétaire                                          |
+| g | Groupe                                                |
+| o | Autres                                                |
+| a | Tous                                                  |
+| + | Accorde un droit                                      |
+| - | Retire un droit                                       |
+| r | Droit de lecture                                      |
+| w | Droit d'écriture                                      |
+| x | Droit d'exécution                                     |
+| s | Place le propriétaire et le groupe du fichier         |
+|   | comme propriétaire et groupe du processus             |
+|   | lors de l'exécution                                   |
+| t | Options pour répertoire : autorise chaque utilisateur |
+|   | à supprimer seulement les fichiers du répertoire      |
+|   | auxquels il a accès en écriture                       |
+
+Par exemple, on rend un fichier exécutable par tous les utilisateurs
+par :
+
+#+BEGIN_EXAMPLE
+chmod a+x /fichier/
+#+END_EXAMPLE
+
+On donne l'accès en lecture et écriture au propriétaire et au groupe
+par :
+
+#+BEGIN_EXAMPLE
+chmod ug+rw /fichier/
+#+END_EXAMPLE
+
+On supprime le droit de lecture aux autres par :
+
+#+BEGIN_EXAMPLE
+chmod o-r /fichier/
+#+END_EXAMPLE
+
+*** Attributs étendus
+
+| chattr | Change les attributs étendus                      |
+| lsattr | Donne la liste des attributs étendus d'un fichier |
+
+** Programmes par défaut
+
+| chsh                | Modifie le shell par défaut d'un utilisateur |
+| update-alternatives | Modifie un programme par défaut              |
+|                     | (pageur, éditeur, navigateur, ...)           |
+
+** Réseau
+
+| ifconfig                | Configuration des interfaces réseau filaires                      |
+| netstat                 | Informations sur le réseau                                        |
+| dhclient                | Configuration dynamique des interfaces réseau                     |
+| dhcpd                   | Serveur de configuration dynamique des interfaces réseau          |
+| pppoeconf               | Configuration PPP sur ethernet (ADSL lorsque pas de serveur DHCP) |
+| iwlist                  | Recherche des réseaux sans fil                                    |
+| iwconfig                | Configuration des interfaces réseau sans fil                      |
+| iwlist /interface/ scan | Détection des réseaux sans fil                                    |
+| iptables                | Configuration du pare-feu                                         |
+| /etc/hosts              | Noms et IP des hôtes connus                                       |
+| /etc/resolv.conf        | Adresse du serveur de nom                                         |
+
+** Démarrage
+
+| /sbin/initd         | Processus de démarrage lancé par le noyau            |
+| /etc/inittab        | Configuration des niveaux de démarrage               |
+| /etc/init.d/rc      | Script de démarrage                                  |
+| update-initramfs -u | Met à jour l'accompagnant du noyau pour le démarrage |
+| grub-install        | Installe le chargeur de démarrage grub               |
+| update-grub         | Met à jour la configuration de grub                  |
+| depmod              | Dépendances entre les modules                        |
+
+** Services
+
+| /etc/init.d              | Répertoire contenant les scripts activant ou désactivant les services |
+| /etc/init.d//nom/ start  | Lancement d'un service                                                |
+| /etc/init.d//nom/ stop   | Arrêt d'un service                                                    |
+| /etc/init.d//nom/ reload | Recharge de la configuration d'un service                             |
+
+*** Service
+
+La commande service permet d'accéder aux
+scripts de &laquo; /etc/init.d &raquo;.
+
+| service /nom/ start  | Lancement d'un service                    |
+| service /nom/ stop   | Arrêt d'un service                        |
+| service /nom/ reload | Recharge de la configuration d'un service |
+
+*** Au démarrage
+
+| update-rc.d /script/ default   | Demande que le script soit lancé        |
+|                                | automatiquement au démarrage            |
+| update-rc.d -f /script/ remove | Demande que le script ne soit pas lancé |
+|                                | automatiquement au démarrage            |
+
+** Imprimantes
+
+| localhost:631 | Accède à l'administration des imprimantes via cups |
+
+** Cloisonnement
+
+La commande « chroot » permet de lancer une application en limitant
+ses droits d'accès au répertoire choisi et à ses sous-répertoires. En
+voici la syntaxe :
+
+#+BEGIN_EXAMPLE
+chroot /répertoire/ /commande/
+#+END_EXAMPLE
+
+Le répertoire choisi doit contenir tous les fichiers nécessaires à
+l'exécution de la commande, y compris la commande elle-même.
+
+* Paquets
+
+#+TOC: headlines 1 local
+
+** Debian
+
+Cette section décrit le système de gestions de paquets logiciels de la
+famille des distributions debian : Debian, Ubuntu, Linux Mint, etc.
+
+*** Dpkg
+
+| dpkg                           | Gestionnaire de paquets                       |
+| dpkg-reconfigure               | Configuration d'un paquet                     |
+| dpkg-reconfigure console-setup | Configuration de la console (clavier, police) |
+| dpkg-reconfigure xserver-xorg  | Configuration du serveur graphique            |
+| dpkg-query                     | Recherche dans la base de données             |
+
+*** Apt
+
+Apt est un système de gestion des paquets prenant en compte les
+dépendances. Son fonctionnement se base sur des dépôts de logiciels
+dont les adresses sont recensées dans le fichier :
+
+#+BEGIN_EXAMPLE
+/etc/apt/sources.list
+#+END_EXAMPLE
+
+| apt-get                                     | Téléchargement, installation et suppression          |
+| apt-cache                                   | Informations                                         |
+| add-apt-repository                          | Ajoute un dépôt                                      |
+| add-apt-repository ppa:utilisateur/nomDuPpa | Ajoute un dépôt ppa (launchpad)                      |
+| aptsh                                       | Shell apt avec complétion                            |
+| apt-file                                    | Outil de recherche dans les paquets                  |
+| apt-build                                   | Gestionnaire de paquets source : compile et installe |
+|                                             | avec gestion des dépendances source et binaire       |
+| auto-apt                                    | Installe automatiquement les paquets nécessaires     |
+|                                             | à l'exécution d'une commande                         |
+
+**** Sous-commandes
+
+| apt-get update            | Met à jour la liste des paquets                   |
+| apt-cache search /motif/  | Recherche un paquet                               |
+| apt-cache show /motif/    | Affiche des informations sur un paquet            |
+| apt-cache showpkg /motif/ | Affiche des informations détaillées sur un paquet |
+| apt-get install /paquet/  | Installe un paquet                                |
+| apt-get remove /paquet/   | Supprime un paquet, conserve les                  |
+|                           | fichiers de configuration                         |
+| apt-get purge /paquet/    | Supprime un paquet sans conserver                 |
+|                           | les fichiers de configuration                     |
+| apt-get upgrade           | Met à jour tous les paquets dont                  |
+|                           | une nouvelle version est disponible,              |
+|                           | ne supprime aucun paquet                          |
+| apt-get dist-upgrade      | Met à jour tous les paquets dont                  |
+|                           | une nouvelle version est disponible,              |
+|                           | supprime des paquets si nécessaire                |
+
+*** Aptitude
+
+**** En ligne de commande
+
+Aptitude est une alternative à apt-get / apt-cache.
+Il peut s'utiliser en ligne de commande :
+
+| aptitude help                   | Aide                                                           |
+| aptitude update                 | Met à jour la liste des paquets                                |
+| aptitude search /motif/         | Recherche un paquet                                            |
+| aptitude show /motif/           | Affiche des informations sur un paquet                         |
+| aptitude download /paquet/      | Télécharge un paquet dans le cache                             |
+| aptitude install /paquet/       | Installe un paquet et ses dépendances,                         |
+|                                 | les télécharge si nécessaire                                   |
+| aptitude install /paquet/+      |                                                                |
+| aptitude reinstall /paquet/     | Rénstalle un paquet mal installé                               |
+| aptitude remove /paquet/        | Supprime un paquet, conserve les                               |
+|                                 | fichiers de configuration                                      |
+| aptitude install /paquet/-      |                                                                |
+| aptitude purge /paquet/         | Supprime un paquet sans conserver                              |
+|                                 | les fichiers de configuration                                  |
+| aptitude install /paquet/_      |                                                                |
+| aptitude hold /paquet/          | Conserve le paquet à la version actuelle                       |
+|                                 |                                                                |
+| aptitude install /paquet/=      |                                                                |
+| aptitude keep /paquet/          | Garde le paquet à la version actuelle, à moins                 |
+|                                 | qu'il ne soit automatiquement mis à jour                       |
+| aptitude install /paquet/:      |                                                                |
+| aptitude markauto /paquet/      | Marque un paquet comme installé automatiquement,               |
+|                                 | ce qui permet de le désinstaller                               |
+|                                 | si plus aucun paquet n'en dépend                               |
+| aptitude install /paquet/&amp;M |                                                                |
+| aptitude unmarkauto /paquet/    | Marque un paquet comme installé à la main                      |
+| aptitude install /paquet/&amp;m |                                                                |
+| aptitude safe-upgrade           | Met à jour tous les paquets dont une nouvelle                  |
+|                                 | version est disponible, ne supprime aucun paquet               |
+| aptitude full-upgrade           | Met à jour tous les paquets dont une nouvelle                  |
+|                                 | version est disponible, supprime des paquets                   |
+|                                 | si nécessaire                                                  |
+| aptitude build-dep /paquet      | Installe les dépendances de compilation d'un paquet            |
+| aptitude clean                  | Nettoie le cache en supprimant tous les paquets qu'il contient |
+| aptitude autoclean              | Nettoie le cache en supprimant les paquets obsolètes           |
+
+**** Intéractif
+
+Lancé sans option, aptitude offre une interface en mode
+texte dont voici les commandes :
+
+| ?              | Ouvre l'aide dans un nouvel onglet                                   |
+| &lt;ctrl t&gt; | Accès au menu supérieur                                              |
+| F6             | Onglet précédent                                                     |
+| F7             | Onglet suivant                                                       |
+| i              | Cycle dans les informations du paquet courant                        |
+| u              | Met à jour la liste des paquets                                      |
+| /              | Recherche avant                                                      |
+| \              | Recherche arrière                                                    |
+| +              | Marque un paquet pour installation                                   |
+| -              | Marque un paquet pour suppression, excepté fichiers de configuration |
+| _              | Marque un paquet pour suppression complète                           |
+| :              | Garder : annuler toute action sur le paquet sélectionné              |
+| =              | Geler : refuser toute mise-à-jour sur le paquet sélectionné          |
+| <ctrl u>       | Annuler                                                              |
+| g              | Applique les modifications                                           |
+
+**** Motifs
+
+Voici une liste des motifs de recherche d'aptitude. Les recherches
+sont insensibles à la casse. Les motifs internes peuvent être des
+expressions régulières. :
+
+| ?true                      | Tous les paquets                                       |
+| ~T                         |                                                        |
+| ?installed                 | Les paquets installés                                  |
+| ~i                         |                                                        |
+| ?automatic                 | Les paquets installés automatiquement                  |
+| ~M                         |                                                        |
+| ?config-files              | Les paquets enlevés mais dont on a gardé               |
+|                            | les fichiers de configuration                          |
+| ~c                         |                                                        |
+| ?new                       | Les nouveaux paquets                                   |
+| ~N                         |                                                        |
+| ?obsolete                  | Les paquets obsolètes                                  |
+| ~o                         |                                                        |
+| ?name(/motif/)             | Les paquets dont le nom contient le motif              |
+| ~n/motif/                  |                                                        |
+| ?description(/motif/)      | Les paquets dont la description contient le motif      |
+| ~d/motif/                  |                                                        |
+| ?task(/tâche/)             | Les paquets appartenant à une tâche (groupe de paquet) |
+| ~t/tâche/                  |                                                        |
+| ?action(/action/)          | Les paquets marqués pour être installés                |
+| ~a/action/                 |                                                        |
+| ?and(/motif-1/, /motif-2/) | Les paquets vérifiant les deux motifs                  |
+| /motif-1/ /motif-2/        |                                                        |
+| ?or(/motif-1/, /motif-2/)  | Les paquets vérifiant au moins un des deux motifs      |
+| /motif-1/ ¦ /motif-2/      |                                                        |
+| ?not(/motif/)              | Les paquets qui ne contiennent pas le motif            |
+| !/motif/                   |                                                        |
+
+*** Cloner
+
+Pour cloner une machine, on récupère la liste des
+paquets installés sur la machine source :
+
+#+BEGIN_EXAMPLE
+dpkg --get-selections > /liste/
+#+END_EXAMPLE
+
+On récupère les sélections dans la machine cible :
+
+#+BEGIN_EXAMPLE
+dpkg --set-selections < /liste/
+#+END_EXAMPLE
+
+et on met à jour :
+
+#+BEGIN_EXAMPLE
+apt-get update
+apt-get dist-upgrade
+#+END_EXAMPLE
+
+** Gentoo
+
+| emerge | Gestionnaire de paquets source |
+|        | avec gestion des dépendances   |
+| eix    | Recherche de paquets source    |
+
+* AntiVirus
+
+#+TOC: headlines 1 local
+
+| chkrootkit | Scan des rootkits |
+| clamscan   | Scan des virus    |
+
+* Divers
+
+#+TOC: headlines 1 local
+
+| w        | Liste des utilisateurs connectés                            |
+| who      | Liste des utilisateurs connectés                            |
+| finger   | Liste des utilisateurs connectés                            |
+| locate   | Recherche de fichiers                                       |
+|          | d'après une base de données                                 |
+| updatedb | Mise à jour de la base de données                           |
+|          | de locate                                                   |
+| lsof     | Détermine quels programmes utilisent                        |
+|          | un fichier ou un répertoire donné,                          |
+|          | ce qui peut empécher le démontage d'un périphérique         |
+| lsof -i  | Liste des fichiers réseau                                   |
+| fuser    | Détermine quels processus ont accès à un fichier/répertoire |
+| xkill    | Terminer une fenêtre                                        |
+| strace   | Suivi des appels système                                    |
+| ltrace   | Suivi des appels aux bibliothèques                          |
+| ldd      | Affiche les librairies requises par un programme            |
+| fsck     | Vérification et réparation des systèmes de fichier          |
+| e2fsck   |                                                             |
+| javaws   | Lancement de fichiers java jnlp sur le web (webstart)       |
+| lpadmin  | Administration des imprimantes                              |
+| lpq      | File d'attente des imprimantes                              |
+| lprm     | Efface une tâche de la file d'attente des imprimantes       |
+
+* Kde
+
+#+TOC: headlines 1 local
+
+** Divers
+
+| kdesudo   | Sudo pour applications graphiques kde |
+| plasmapkg | Installation de paquets pour plasma,  |
+|           | le gestionnaire de plasmoïdes         |
+
+* Gnome
+
+#+TOC: headlines 1 local
+
+** Configuration
+
+| gconftool-2                                 | Boîte à outil de configuration de gnome |
+| gconftool-2 --dump //chemin/ &gt; /fichier/ | Sauve une configuration                 |
+| gconftool-2 --load=/fichier/                | Charge une configuration                |
+
+** Divers
+
+| gksu|Su pour applications graphiques gnome|
+
+* Jeux
+
+#+TOC: headlines 1 local
+
+** Freeciv
+
+*** Généralités
+
+Au début, disposer les habitants des villes pour avoir une croissance
+rapide.
+
+Ballader les explorateurs d'île en île.
+
+Aménager aussi les cases sous les villes.
+
+Adapter les nouveaux habitants en artistes, scientifiques, percepteurs
+suivant les besoins.
+
+Ne pas diminuer trop le taux de taxation sinon les villes ne peuvent
+plus entretenir les bâtiments et les vendent.
+
+Utiliser les colons en surplus pour construire des routes, puis les
+faire traverser les océans.
+
+*** Civilisation insulaire
+
+Comme il n'y a pas d'ennemi, si ce n'est les pirates, on peut se
+contenter d'une production moindre au départ et passer rapidement en
+république afin d'accroître commerce, luxe, donc bonheur et taille des
+villes.
+
+Lorsque le bonheur est suffisant, on peut même passer en démocratie ce
+qui supprime toute corruption et augmente encore la rapidité du cycle
+vertueux.
+
+Une fois que l'on a une avance technologique confortable, on peut
+repasser dans un autre régime (sans période d'anarchie si on a la
+statue de la liberté) plus gérable en cas de conquête. La république
+est un bon compromis, la monarchie et le communisme sont très
+offensifs.
+
+| Technologies         | Unités                    | Bâtiments            | Merveilles                     | Consignes            |
+|----------------------+---------------------------+----------------------+--------------------------------+----------------------|
+| écriture             |                           | bibliothèque         |                                |                      |
+| république           |                           |                      |                                | passer en république |
+| commerce             | phalange  caravane        |                      |                                |                      |
+| navigation           | catapulte caravelle       |                      | pyramides                      |                      |
+| théologie            |                           |                      | magellan  michel-ange  js bach |                      |
+| magnétisme           | frégate  galion           |                      |                                |                      |
+| finance              |                           | banque               |                                |                      |
+| université           |                           | université           |                                |                      |
+| économie             |                           | bourse               | société de commerce            |                      |
+| Gravitation          |                           |                      | collège Isaac Newton           |                      |
+| industrialisation    | transporteur              | fabrique             |                                |                      |
+| démocratie           |                           |                      | statue de la liberté           | passer en démocratie |
+| combustion           | sous-marin                |                      |                                |                      |
+| tactique             | cavalerie  chasseur alpin |                      |                                |                      |
+| miniaturisation      |                           | plate-forme offshore | barrage hoover                 |                      |
+| assainissement       |                           | égoûts               |                                |                      |
+| guerre amphibie      | fusilier marin            | service portuaire    |                                |                      |
+| guerre mobile        | tank                      |                      |                                |                      |
+| ordinateur           |                           | laboratoire          |                                |                      |
+| robotique            | obusier                   | usine                |                                |                      |
+| fusée                | missile de croisière      | aéroport             |                                |                      |
+| recyclage            | usine de recyclage        |                      |                                |                      |
+| opérations combinées | parachutiste              |                      |                                |                      |
+| furtivité            | bombardier furtif         |                      |                                |                      |
+| syndicalisme         | infanterie mobile         |                      |                                |                      |
+
+*** Civilisation continentale / cotière
+
+On passe en monarchie rapidement, ce qui permet de diminuer
+la corruption (et donc d'augmenter la recherche et les revenus) sans
+trop amoindrir la production, puisque trois unités de chaque ville ne
+nécessitent aucune production pour être entretenues. La loi martiale
+jusqu'à trois unités dans la ville permet également de limiter les
+révoltes tout en gardant un taux de recherche important (souvent 80%).
+
+Lorsque les villes atteignent une taille conséquente, l'effet
+des unités à entretien gratuit devient négligeable. On peut alors
+augmenter le luxe (souvent de 0% à 20%) et quelques tours après passer
+en république, ce qui ne diminue que légèrement la production tout en
+augmentant fortement le commerce. Les villes croissent vite (avec les
+marché, banque, bourse elle passent souvent en extase et croissent à
+chaque tour) ce qui crée un cycle vertueux
+économie - recherche - production.
+
+
+| Technologies         | Unités               | Bâtiments         | Merveilles           | Consignes                        |
+|----------------------+----------------------+-------------------+----------------------+----------------------------------|
+| équitation           | cavalier             | caserne           |                      |                                  |
+| roue                 | char                 |                   |                      |                                  |
+| monarchie            |                      |                   |                      | passer en monarchie              |
+| poterie              | travailleurs         |                   |                      | routes                           |
+|                      |                      |                   |                      | mines                            |
+|                      |                      |                   |                      | irrigation des villes            |
+|                      |                      |                   |                      | à forte production               |
+|                      |                      |                   |                      | ne pas oublier d’aménager        |
+|                      |                      |                   |                      | les cases sous les villes        |
+| cartographie         | trirème              |                   |                      |                                  |
+| maçonnerie           |                      | palais  remparts  | pyramides            | utiliser les caravanes           |
+|                      |                      |                   |                      | pour accélérer                   |
+|                      |                      |                   |                      | la construction des merveilles   |
+| écriture             | diplomate            | bibliothèque      |                      |                                  |
+| commerce             | caravane             | marché            |                      |                                  |
+| chevalerie           | chevalier            |                   |                      |                                  |
+| navigation           | caravelle            |                   | magellan             |                                  |
+| poudre à canon       | mousquetaire         |                   |                      |                                  |
+| magnétisme           | frégate  galion      |                   |                      |                                  |
+| commandement         | dragon               |                   |                      |                                  |
+| théologie            |                      |                   | michel-Ange  js bach |                                  |
+| république           |                      |                   |                      | passer en république             |
+| finance              |                      | banque            |                      |                                  |
+| université           |                      | université        |                      |                                  |
+| métallurgie          | canon                |                   |                      |                                  |
+| service militaire    | fusilier             |                   |                      |                                  |
+| tactique             | cavalerie            |                   |                      |                                  |
+|                      | chasseur alpin       |                   |                      |                                  |
+| économie             |                      | bourse            | société de commerce  |                                  |
+| explosifs            | ingénieur            |                   |                      |                                  |
+| industrialisation    | transporteur         | fabrique          |                      |                                  |
+| théorie de la        |                      |                   | collège newton       |                                  |
+| gravitation          |                      |                   |                      |                                  |
+| assainissement       |                      | aqueduc  égoûts   |                      |                                  |
+| combustion           | sous-marin           |                   |                      |                                  |
+| électronique         |                      |                   | barrage hoover       |                                  |
+| guerre mobile        | tank                 |                   |                      |                                  |
+| production           |                      | transport         |                      |                                  |
+| de masse             |                      | en commun         |                      |                                  |
+| miniaturisation      |                      | plate-forme       |                      |                                  |
+|                      |                      | offshore          |                      |                                  |
+| ordinateur           |                      | laboratoire       |                      |                                  |
+| guerre               | fusilier marin       | service portuaire |                      |                                  |
+| amphibie             |                      |                   |                      |                                  |
+| robotique            | obusier              | usine             |                      |                                  |
+| recyclage            | usine de recyclage   |                   |                      |                                  |
+| énergie nucleaire    |                      |                   |                      | augmente la rapidité des navires |
+| syndicalisme         | infanterie mobile    |                   |                      |                                  |
+| fusée                | missile de croisière | aéroport          |                      |                                  |
+| opérations combinées | parachutiste         |                   |                      |                                  |
+| furtivité            | bombardier furtif    |                   |                      |                                  |
+|                      |                      |                   | vote des femmes      |                                  |
+|                      |                      |                   | seti                 |                                  |
+|                      |                      |                   | nations-unies        |                                  |
+|                      |                      |                   | statue de la liberté |                                  |
+
+#+BEGIN_EXAMPLE
+Poterie
+Cartographie
+Travail du bronze
+Monarchie
+Écriture
+Monnaie
+Ingéniérie
+Université
+Théorie de la gravitation
+Navigation
+Poudre à canon
+Commerce
+Économie
+Théologie
+Assainissement
+Métallurgie
+Chemin de fer
+Électricité
+Industrialisation
+Machine-outil
+Miniaturisation
+Syndicalisme
+Recyclage
+Opérations combinées
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+Casernes
+Bibliothèque
+Université
+Port
+Grenier
+Temple
+Colisée
+Marché
+Banque
+Bourse
+Supermarché
+Autoroutes
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+Phare
+Jardins suspendus
+Colosse
+Croisade du roi Richard
+Atelier de Leonard
+Observatoire de Copernic
+Collège Isaac Newton
+Magellan
+Théâtre Shakespeare
+Michel-Ange
+Bach
+Société de commerce
+École de guerre Sun-Tzu
+Statue de la liberté
+Vote des femmes
+Nations Unies
+Barrage Hoover
+Voyage de Darwin
+#+END_EXAMPLE

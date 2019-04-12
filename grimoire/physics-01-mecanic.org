@@ -1,0 +1,326 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Physics 01 : Mécanique
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+INCLUDE: "../include/commandes-tex.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/commandes-tex.org"
+
+* Notation
+
+
+** Dérivées temporelles
+
+Pour une fonction $x$ dépendant du temps $t$, nous utilisons la notation :
+
+$$\dot{x} = \OD{x}{t}$$
+
+pour la dérivée première et :
+
+$$\ddot{x} = \OOD{x}{t}$$
+
+pour la dérivée seconde.
+
+
+** Vecteurs tridimensionnels
+
+  - Les vecteurs tridimensionnels sont notés en gras
+
+  - Les composantes de ces vecteurs sont notées en fonte ordinaire
+    avec des indices
+
+  - Leur norme est notée en fonte ordinaire
+
+Voici par exemple un vecteur tridimensionnel $\mathbf{u}$, de
+composantes $u_i$ et de norme :
+
+$$u = \norme{\mathbf{u}} = \sqrt{\sum_{i=1}^3 u_i^2}$$
+
+
+* Corps ponctuel
+
+Dans ce chapitre, nous négligeons les effets mécaniques des dimensions
+du corps dont nous analysons la trajectoire.
+
+
+** Lois de Newton
+
+Soit la trajectoire $\mathbf{r} : \setR \mapsto \setR^3$ qui fait
+correspondre, à un instant donné $t$, la position $\mathbf{r}(t)$ d’un corps
+dans l'espace tridimensionnel.
+
+La vitesse du corps s’écrit alors :
+
+$$\dot{\mathbf{r}} = \OD{\mathbf{r}}{t}$$
+
+et l’accélération :
+
+$$\ddot{\mathbf{r}} = \OOD{\mathbf{r}}{t}$$
+
+Nous notons :
+
+#+ATTR_HTML: :class plat
+| $m$          | La masse du corps           |
+| $\mathbf{F}$ | La force appliquée au corps |
+
+Nous définissons la quantité de mouvement $\mathbf{p}$ par :
+
+$$\mathbf{p} = m \dot{\mathbf{r}}$$
+
+Les lois de Newton s’énoncent :
+
+  1. En l’absence de force appliquée, un corps continue en ligne droite
+     à la même vitesse
+
+  2. Principe fondamental de la dynamique : $\dot{\mathbf{p}} = \mathbf{F}$
+
+  3. À chaque action appliquée par un corps sur un autre, correspond
+     une réaction, force égale en intensité à l’action mais appliquée
+     dans la direction opposée
+
+
+** Principe fondamental de la dynamique
+
+Comme la masse du corps ne dépend pas du temps, la dérivée de la
+quantité de mouvement peut s’écrire :
+
+$$\dot{\mathbf{p}} = m \ddot{\mathbf{r}}$$
+
+Le principe fondamental de la dynamique devient :
+
+$$m \ddot{\mathbf{r}} = \mathbf{F}$$
+
+
+** Énergie
+
+
+*** Énergie cinétique
+
+Si nous effectuons le produit scalaire du principe fondamental de la
+dynamique avec $\dot{\mathbf{r}}$, nous obtenons :
+
+$$m \ddot{\mathbf{r}} \cdot \dot{\mathbf{r}} = \mathbf{F} \cdot \dot{\mathbf{r}}$$
+
+or :
+
+\begin{eqnarray*}
+\OD{\dot{r}^2}{t}  &=& \OD{}{t} \left[ \dot{\mathbf{r}} \cdot \dot{\mathbf{r}}\right]
+= \OD{}{t} \sum_{i=1}^3  \dot{r}_i^2
+= \sum_{i=1}^3 2 \dot{r}_i \ddot{r}_i
+= 2 \dot{\mathbf{r}} \cdot \ddot{\mathbf{r}}
+\end{eqnarray*}
+
+On en déduit que :
+
+$$ \OD{}{t} \left[ \frac{\dot{r}^2}{2} \right] = \dot{\mathbf{r}} \cdot \ddot{\mathbf{r}}$$
+
+Si nous définissons l’énergie cinétique $T$ par :
+
+$$T = \unsur{2} m \dot{r}^2$$
+
+nous avons :
+
+$$\dot{T} = m \dot{\mathbf{r}} \cdot \ddot{\mathbf{r}} = \mathbf{F} \cdot \dot{\mathbf{r}}$$
+
+
+*** Énergie potentielle
+
+Quand la force appliquée $\mathbf{F}$ ne dépend que de la position
+$\mathbf{r}$, il est parfois possible de trouver une énergie
+potentielle :
+
+$$U : \setR^3 \mapsto \setR$$
+
+telle que :
+
+$$\partial_i U = - F_i$$
+
+ce que nous notons :
+
+$$\deriveepartielle{U}{\mathbf{r}} = - \mathbf{F}$$
+
+La dérivée temporelle de $U$ s’écrit alors :
+
+$$\dot{U} = \deriveepartielle{U}{\mathbf{r}} \cdot \dot{\mathbf{r}} = - \mathbf{F} \cdot \dot{\mathbf{r}}$$
+
+
+*** Énergie totale
+
+Le principe fondamental de la dynamique peut se réécrire en fonction
+des énergies cinétique et potentielle :
+
+$$\dot{T} = - \dot{U}$$
+
+Autrement dit, lorsque la force appliquée dépend d’une énergie potentielle :
+
+$$\OD{}{t} \left[ T + U \right] = 0$$
+
+L’énergie totale :
+
+$$E = T + U$$
+
+est donc constante :
+
+$$\dot{E} = 0$$
+
+
+** Mécanique Lagrangienne
+
+Nous allons tenter de relier le principe fondamental de la dynamique
+aux équations d’[[file:matemat-11-equadiff.org::#section:eulerLagrange][Euler - Lagrange]]. Nous supposons que la force
+appliquée peut être dérivée d’une énergie potentielle.
+
+Comme l’énergie cinétique ne dépend pas explicitement de la position,
+on a :
+
+$$\deriveepartielle{T}{\mathbf{r}} = 0$$
+
+Par définition, on a aussi :
+
+$$\deriveepartielle{U}{\mathbf{r}} = - \mathbf{F}$$
+
+La dérivée de l’énergie cinétique par rapport aux composantes de
+la vitesse s’écrit :
+
+$$\deriveepartielle{T}{\dot{r}_i} = m \dot{r}_i$$
+
+ou, en notation vectorielle :
+
+$$\deriveepartielle{T}{\dot{\mathbf{r}}} = m \dot{\mathbf{r}}$$
+
+En dérivant par rapport au temps, on obtient :
+
+$$\OD{}{t}\deriveepartielle{T}{\dot{\mathbf{r}}} = m \ddot{\mathbf{r}}$$
+
+Par ailleurs, comme $U$ ne dépend pas explicitement de la vitesse :
+
+$$\deriveepartielle{U}{\dot{\mathbf{r}}} = 0$$
+
+et :
+
+$$\OD{}{t}\deriveepartielle{U}{\dot{\mathbf{r}}} = 0$$
+
+Définissons le Lagrangien :
+
+$$\lagrangien = T - U$$
+
+On a :
+
+$$\deriveepartielle{\lagrangien}{\mathbf{r}}
+= \deriveepartielle{}{\mathbf{r}}\left(T - U\right) = \mathbf{F}$$
+
+et :
+
+$$\OD{}{t}\deriveepartielle{\lagrangien}{\dot{\mathbf{r}}}
+= \OD{}{t}\deriveepartielle{}{\dot{\mathbf{r}}}\left(T - U \right)
+= m \ddot{\mathbf{r}}$$
+
+Le principe fondamental de la dynamique peut alors s’écrire :
+
+$$\OD{}{t}\deriveepartielle{\lagrangien}{\dot{\mathbf{r}}} = \deriveepartielle{\lagrangien}{\mathbf{r}}$$
+
+ou :
+
+$$\deriveepartielle{\lagrangien}{\mathbf{r}} - \OD{}{t}\deriveepartielle{\lagrangien}{\dot{\mathbf{r}}} = 0$$
+
+Si nous connaissans les positions $\mathbf{r}(t_1)$ et
+$\mathbf{r}(t_2)$ aux temps $t_1$ et $t_2$, résoudre cette équation
+revient à trouver la trajectoire $\mathbf{r}$ qui minimise l’intégrale
+de $\lagrangien$ entre $t_1$ et $t_2$. Nous appelons *action* cette
+quantité à minimiser, et la notons :
+
+$$\mathcal{S} = \int_{t_1}^{t_2} \lagrangien(\mathbf{r}(t),\dot{\mathbf{r}}(t))\ dt$$
+
+
+* TODO Corps rigide
+
+
+** TODO Cinématique
+
+
+
+
+* TODO Système de corps rigides
+
+Nous considérons un système de $N$ corps rigides.
+
+Soit $C$ le nombre de contraintes appliquées au système. Le nombre de
+degrés de liberté du système est alors de $n = 3 N - C$.
+
+Nous notons $m_k$ la masse du corps $k$ et $\mathbf{r}_k$ la position
+du corps $k$. La force appliquée au corps $k$ sera notée
+$\mathbf{F}_k$.
+
+
+** Principe de d’Alembert
+
+Nous exprimons la force $\mathbf{F}_k$ appliquée au corps $k$ comme la somme de
+la force due aux contraintes $\mathbf{C}_k$ et de la force qui n’est pas due
+aux contraintes $\mathbf{N}_k$ :
+
+$$\mathbf{F}_k = \mathbf{N}_k + \mathbf{C}_k$$
+
+Les contraintes des systèmes mécaniques sont dues à des articulations
+qui empêchent certaines pièces de bouger suivant certaines directions
+de translation ou de rotation.
+
+Les forces qui maintiennent ces articulations en place sont parallèles
+aux mouvements potentiels qu’elles empêchent. Elles doivent donc être
+perpendiculaires aux mouvements réels observés.
+
+Si nous choisissons de petits déplacements virtuels
+$\delta\mathbf{r}_k$ qui respectent les contraintes, la condition de
+perpendicularité s’exprime :
+
+$$\mathbf{C}_k\cdot\delta\mathbf{r}_k = 0$$
+
+Comme :
+
+$$\sum_k \left( \mathbf{N}_k + \mathbf{C}_k - m_k \mathbf{\ddot{r}}_k  \right) = 0$$
+
+on a :
+
+$$\sum_k \left( \mathbf{N}_k + \mathbf{C}_k - m_k \mathbf{\ddot{r}}_k  \right) \cdot \delta\mathbf{r}_k = 0$$
+
+Comme les forces de contraintes sont orthogonales, l’équation devient :
+
+$$\sum_k \left( \mathbf{N}_k - m_k \mathbf{\ddot{r}}_k  \right) \cdot \delta\mathbf{r}_k = 0$$
+
+
+** Coordonnées généralisées
+
+Pour tenir compte des contraintes appliquées au système, on exprime
+les positions $\mathbf{r}_i$ en fonction des coordonnées généralisée
+$q_1, q_2, ..., q_n$. On note :
+
+$$\mathbf{q} = (q_1, q_2, ..., q_n)$$
+
+le vecteur des coorddonnées généralisées.
+
+
+** TODO Mécanique Lagrangienne
+
+
+
+
+** TODO Mécanique Hamiltonienne
+
+| $\mathcal{H}$ | Hamiltonien |

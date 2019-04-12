@@ -1,0 +1,2608 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat 11 : Équations différentielles
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/commandes-tex.org"
+
+* Equations différentielles ordinaires
+
+#+TOC: headlines 1 local
+
+\label{chap:edo}
+
+
+** Fonctions Lipschitziennes
+
+Les fonctions Lipschitziennes sont des fonctions à variations bornées :
+
+$$\lipschitz(A,B) = \{ f \in \fonction(A,B) : \exists L \in \setR : \forall x,y \in A : \norme{f(x)-f(y)} \le L \norme{x-y} \}$$
+
+
+** Problème différentiel d'ordre un
+
+Soit $f\in\lipschitz( \setR \times \setR^n , \setR)$, et l'application $A$ définie par :
+
+$$A(u)(t) = u_0 + \int_0^t f(s, u(s)) \ ds$$
+
+pour toute fonction $u : U \subseteq \setR \mapsto \setR$.
+
+On peut montrer que $A$ est contractante pour la distance définie pour toutes fonctions $u,v$ par :
+
+$$\distance(u,v) = \sup_{a \le t \le b} \norme{u(t) - v(t)}$$
+
+où $\norme{.}$ est la norme usuelle sur $\setR^n$ :
+
+$$\norme{x} = \sqrt{ \sum_{i=1}^n x_i^2 }$$
+
+Cette application admet donc un unique point fixe $u$ tel que :
+
+$$u = A(u)$$
+
+En dérivant cette relation, on obtient :
+
+$$\OD{u}{t}(t) = \OD{}{t} A(u)(t) = \OD{}{t} \int_0^t f(s, u(s)) \ ds$$
+
+La dérivée de l'intégrale vaut $f(t, u(t)$ et on a :
+
+$$\OD{u}{t}(t) = f(t, u(t))$$
+
+On a aussi :
+
+$$u(0) = u_0 + \int_0^0 f(s, u(s)) \ ds = u_0$$
+
+Notre point fixe $u$ est donc solution du problème différentiel :
+
+\begin{eqnarray*}
+\OD{u}{t}(t) &=& f(t,u(t)) \\ \\
+u(0) &=& u_0
+\end{eqnarray*}
+
+Inversément, en intégrant la première équation ci-dessous entre $0$ et $t$, on obtient la relation :
+
+$$u(t) - u_0 = \int_0^t f(s, u(s)) \ ds$$
+
+autrement dit :
+
+$$u(t) = u_0 + \int_0^t f(s, u(s)) \ ds = A(u)$$
+
+Toute solution du problème différentiel est donc point fixe de $A$. Comme ce point fixe
+est unique, on en conclut que la solution du problème différentiel l'est aussi.
+
+
+*** Convergence
+
+La série des $u^{(n)}$ définie par :
+
+$$u^{(n)}(t) = A\big(u^{(n-1)}\big) = u_0 + \int_0^t f\big(s,u^{(n-1)}(s)\big) \ ds$$
+
+converge au sens de la distance $\sup$ définie ci-dessus vers la solution de ce problème différentiel :
+
+$$\lim_{n \to +\infty} \sup_{a \le t \le b} \norme{u(t) - u^{(n)}(t)} = 0$$
+
+
+*** Notation
+
+Pour toute fonction :
+
+$$u : \setR \mapsto \setR, \ t \mapsto u(t)$$
+
+on note aussi :
+
+#+BEGIN_CENTER
+\(
+\dot{u} = \OD{u}{t} \\
+\ddot{u} = \OOD{u}{t}
+\)
+#+END_CENTER
+
+ou :
+
+#+BEGIN_CENTER
+\(
+u'(t) = \OD{u}{t}(t) \\
+u''(t) = \OOD{u}{t}(t)
+\)
+#+END_CENTER
+
+
+** Problème différentiel d'ordre quelconque
+
+Soit les fonctions :
+
+$$a_0, a_1, ..., a_{n - 1} : \setR \mapsto \setR$$
+
+et une solution $u : \setR \mapsto \setR$ du problème différentiel d'ordre $n$ :
+
+\begin{eqnarray*}
+a_0(t) \cdot u(t) + \sum_{i=1}^{n-1} a_i(t) \cdot \NOD{u}{t}{i}(t) &=& 0 \\ \\
+u(0) &=& U_0 \\ \\
+\NOD{u}{t}{i}(0) &=& U_i \qquad (i=1,...,n - 1)
+\end{eqnarray*}
+
+Ce problème peut se ramener à un problème différentiel d'ordre un. Pour cela on définit la fonction $v : \setR \mapsto \setR^n$ par :
+
+#+BEGIN_CENTER
+\(
+v(t) = \Big(v_i(t)\Big)_{i = 0, ..., n - 1} = \Big( \NOD{u}{t}{i}(t) \Big)_{i = 0, ..., n - 1}
+\)
+#+END_CENTER
+
+pour tout $t \in \setR$. On voit alors que :
+
+#+BEGIN_CENTER
+\(
+\OD{v}{t} =
+\begin{Matrix}{ccccc}
+0 & 1 & 0 & \hdots & \\
+0 & 0 & 1 & 0 & \hots \\
+\vdots & & & & \\
+0 & \hdots & \hdots & 0 & 1 \\
+-a_0/a_n & -a_1/a_n & \hdots & \hdots & -a_{n-1}/a_n
+\end{Matrix}
+\cdot
+v
+\)
+#+END_CENTER
+
+La condition initiale s'écrit :
+
+#+BEGIN_CENTER
+\(
+v(0) = (U_i)_{i = 0, ..., n - 1}
+\)
+#+END_CENTER
+
+Comme il existe une et une seule solution $v$ au problème d'ordre un associé, le problème différentiel d'ordre $n$ admet également une unique solution :
+
+$$u : t \mapsto v_0(t)$$
+
+
+** Problème aux limites
+
+Soit la fonctionnelle $I : \continue^2([a,b],\setR) \mapsto \setR$. Nous allons tenter de minimiser $I$ sur l'ensemble :
+
+$$\mathcal{F} = \{ u \in \continue^2([a,b],\setR) : u(a) = U_1, \ u(b) = U_2 \}$$
+
+On voit que les valeurs de toute fonction $u \in \mathcal{F}$ sont contraintes aux extrémités du domaine de $u$. On parle dans ce cas de problème aux limites.
+
+Soit $u \in \mathcal{F}$ et la fonction $w$ appartenant à l'ensemble :
+
+$$\mathcal{W} = \{ w \in \continue^2([a,b],\setR) : w(a) = w(b) = 0 \}$$
+
+On a alors $u + \epsilon \cdot w \in \mathcal{F}$ pour tout $w \in \mathcal{W}$ et tout $\epsilon \in \setR$, car :
+
+#+BEGIN_CENTER
+\(
+u(a) + \epsilon \cdot w(a) = u(a) = U_1 \\
+u(b) + \epsilon \cdot w(b) = u(b) = U_2
+\)
+#+END_CENTER
+
+On considère la famille de fonctions $J_w : \setR \mapsto \setR$ définies par :
+
+$$J_w(\epsilon) = I(u + \epsilon \cdot w)$$
+
+pour tout $w \in \mathcal{W}$ et tout $\epsilon \in \setR$. Si $u$ minimise $I$ sur $\mathcal{F}$, on a évidemment $J_w(\epsilon) \ge J_w(0)$ pour tout $w \in \mathcal{W}$ et pour tout $\epsilon \in \setR$. Il est par conséquent nécessaire que la condition de stationarité :
+
+$$\OD{J_w}{\epsilon}(0) = 0$$
+
+soit satisfaite pour tout $w\in\mathcal{W}$.
+
+
+*** Équation d’Euler - Lagrange
+:PROPERTIES:
+:CUSTOM_ID: section:eulerLagrange
+:END:
+
+Un exemple typique de fonctionnelle $I$ est définie pour tout $u \in \continue^2([a,b],\setR)$ par :
+
+$$I(u) = \int_a^b f(t, u(t), u'(t)) \ dt$$
+
+avec :
+
+$$f\in \continue^2([a,b]\times\setR^2,\setR), \ (t,u,v) \mapsto f(t,u,v)$$
+
+On a :
+
+$$J_w(\epsilon) = \int_a^b f(t, u + \epsilon \cdot w, u' + \epsilon \cdot w') \ dt$$
+
+Donc :
+
+$$\OD{J_w}{\epsilon}(0) = \int_a^b \left(
+\deriveepartielle{f}{u}(t,u,u') \cdot w +
+\deriveepartielle{f}{v}(t,u,u') \cdot w' \right) dt = 0$$
+
+Nous allons tenter d'intégrer par parties le deuxième terme de l’intégrale. On sait que :
+
+$$\OD{}{t}\left[\deriveepartielle{f}{v} \ w \right] =
+\OD{}{t}\left[ \deriveepartielle{f}{v} \right] \ w + \deriveepartielle{f}{v} \ w'$$
+
+En intégrant, nous obtenons :
+
+$$\int_a^b \OD{}{t}\left[\deriveepartielle{f}{v} \ w \right] dt =
+\int_a^b \OD{}{t} \left[ \deriveepartielle{f}{v} \right] \ w \ dt +
+\int_a^b \deriveepartielle{f}{v} \ w' \ dt$$
+
+En utilisant le théorème fondamental et les conditions sur $w$, on arrive à :
+
+$$\int_a^b \OD{}{t}\left[\deriveepartielle{f}{v} \ w \right] dt = \deriveepartielle{f}{v}(b,u(b),u'(b)) \ w(b) - \deriveepartielle{f}{v}(a,u(a),u'(a)) \ w(a) = 0$$
+
+On en déduit que :
+
+$$0 = \int_a^b \OD{}{t} \left[ \deriveepartielle{f}{v} \right] \ w \ dt +
+\int_a^b \deriveepartielle{f}{v} \ w' \ dt$$
+
+et :
+
+$$\int_a^b \deriveepartielle{f}{v} \ w' \ dt = - \int_a^b
+\OD{}{t} \left[ \deriveepartielle{f}{v} \right] \ w \ dt$$
+
+La condition de stationarité sur $J_w$ devient alors :
+
+$$\int_a^b \left( \deriveepartielle{f}{u} - \OD{}{t} \deriveepartielle{f}{v}  \right) \ w \ dt = 0$$
+
+Comme cette équation est valable pour tout les $w$ dans $\mathcal{W}$,
+on en déduit que $u$ vérifie l'équation différentielle d’Euler - Lagrange :
+
+$$\deriveepartielle{f}{u} - \OD{}{t} \deriveepartielle{f}{v} = 0$$
+
+où les dérivées de $f$ sont bien entendu évaluées en $(t,u(t),u'(t))$.
+
+Il es possible de détailler la dérivation temporelle du second terme :
+
+$$\OD{}{t}\left[\deriveepartielle{f}{v} \right] = \dfdxdy{f}{t}{v} + \dfdxdy{f}{u}{v} \ u' + \dfdxdy{f}{v}{v} \ u''$$
+
+L’équation d’Euler - Lagrange devient alors :
+
+$$\deriveepartielle{f}{u} - \dfdxdy{f}{t}{v} - \dfdxdy{f}{u}{v} \ u' - \dfdxdy{f}{v}{v} \cdot u'' = 0$$
+
+
+*** Euler-Lagrange avec contraintes
+
+Nous tentons cette fois de minimiser :
+
+$$I(u) = \int_a^b f(t, u(t), u'(t)) \ dt$$
+
+mais en respectant les $m$ contraintes :
+
+$$g_i(t,u(t),u'(t)) = 0$$
+
+pour tout $i \in \{1, 2, ..., m\}$, où :
+
+$$g_i\in \continue^1([a,b]\times\setR^2,\setR), \ (t,u,v) \mapsto g(t,u,v)$$
+
+Nous devons donc minimiser $u$ sur l’espace :
+
+$$\mathcal{G} = \{ u \in \mathcal{F} : g_i(t,u(t),u'(t)) = 0  \ \ \ \forall i \in \{1,2,...,m\} \}$$
+
+Comme la fonction $g$ prend des valeurs nulles entre $a$ et $b$, son
+intégrale y est également nulle :
+
+$$\int_a^b g_i(t,u(t),u'(t)) \ dt = 0$$
+
+Nous pouvons même multiplier $g_i$ par un multiplicateur de lagrange :
+
+$$\lambda_i \in \continue([a,b]\times\setR^2,\setR), \ t \mapsto \lambda_i(t)$$
+
+et obtenir le même résultat :
+
+$$\int_a^b \lambda_i(t) \cdot g_i(t,u(t),u'(t)) \ dt = 0$$
+
+Définissons la fonctionnelle étendue :
+
+$$H(u) = \int_a^b \left( f(t, u(t), u'(t)) +
+\sum_{i=1}^m \lambda_i(t) \cdot g_i(t,u(t),u'(t)) \right) \ dt$$
+
+Comme $u$ doit respecter les contraintes $g_i$, on a :
+
+$$H(u) = I(u)$$
+
+Soit :
+
+$$\mathcal{X} = \{ u \in \mathcal{W} : g_i(t,u(t),u'(t)) = 0 \ \ \ \forall i \in \{1,2,...,m\} \}$$
+
+et $w \in \mathcal{X}$. On a :
+
+$$J_w(\epsilon) = I(u + \epsilon \cdot w) = H(u + \epsilon \cdot w)$$
+
+En développant, nous obtenons :
+
+$$J_w(\epsilon) = \int_a^b \left(
+f(t, u + \epsilon \cdot w, u' + \epsilon \cdot w') +
+\sum_{i=1}^m \lambda_i(t) \cdot g_i(t, u + \epsilon \cdot w ,u' + \epsilon \cdot w')
+\right) \ dt$$
+
+Donc :
+
+$$\OD{J_w}{\epsilon}(0) = \int_a^b \left[
+\deriveepartielle{f}{u}(t,u,u') \cdot w +
+\deriveepartielle{f}{v}(t,u,u') \cdot w' +
+\sum_{i=1}^m \lambda_i(t) \cdot \deriveepartielle{g_i}{u}(t,u,u') \cdot w +
+\sum_{i=1}^m \lambda_i(t) \cdot \deriveepartielle{g_i}{v}(t,u,u') \cdot w' +
+\right] dt = 0$$
+
+En utilisons l’intégration par parties et les conditions sur $w$, nous
+arrivons à :
+
+$$\int_a^b \deriveepartielle{f}{v} \ w' \ dt = - \int_a^b
+\OD{}{t} \left[ \deriveepartielle{f}{v} \right] \ w \ dt$$
+
+et :
+
+$$\int_a^b \lambda_i \cdot \deriveepartielle{g_i}{v} \ w' \ dt = - \int_a^b
+\OD{}{t} \left[ \lambda_i \cdot \deriveepartielle{g_i}{v} \right] \ w \ dt$$
+
+La condition de stationarité sur $J_w$ devient alors :
+
+$$\int_a^b \left(
+\deriveepartielle{f}{u} - \OD{}{t} \deriveepartielle{f}{v} +
+\sum_{i=1}^m \lambda_i \cdot \deriveepartielle{g_i}{u} -
+\sum_{i=1}^m \OD{}{t} \left[ \lambda_i \cdot \deriveepartielle{g_i}{v} \right]
+\right) \ w \ dt = 0$$
+
+Comme cette équation est valable pour tout les $w$ dans $\mathcal{W}$,
+on en déduit que $u$ vérifie l'équation différentielle d’Euler -
+Lagrange sous contrainte :
+
+$$\deriveepartielle{f}{u} - \OD{}{t} \deriveepartielle{f}{v} +
+\sum_{i=1}^m \lambda_i \cdot \deriveepartielle{g_i}{u} -
+\sum_{i=1}^m \OD{}{t} \left[ \lambda_i \cdot \deriveepartielle{g_i}{v} \right] = 0$$
+
+où les dérivées de $f$ et des $g_i$ sont bien entendu évaluées en
+$(t,u(t),u'(t))$.
+
+
+** Sturm-Liouville
+
+Nous considérons à présent une application importante du théorème
+de Lax-milgram. Soit l'espace :
+
+$$F = \{u \in \continue^2([a,b],\setR) : u(a) = u(b) = 0\}$$
+
+et les fonctions :
+
+$$p, q, f : \setR \mapsto \setR$$
+
+Considérons la fonctionnelle $\mathcal{L} : F \mapsto \Cont([a,b],\setR)$ définie par :
+
+$$\mathcal{L}(u) = \OD{}{t}\left[p \cdot \OD{u}{t} \right] - q \cdot u + f \\$$
+
+et le problème différentiel avec conditions aux limites associé :
+
+\begin{eqnarray*}
+\mathcal{L}(u) &=& 0 \\
+u(a) = u(b) &=& 0
+\end{eqnarray*}
+
+Choisissons $v\in F$ et intégrons l'équation :
+
+$$\mathcal{L}(u) \cdot v = 0$$
+
+sur $[a,b]$. On obtient :
+
+$$- \int_a^b \OD{}{t} \Big[ p(t) \ \OD{u}{t}(t) \Big] \ v(t) \ dt + \int_a^b q(t) \ u(t) \ v(t) \ dt = \int_a^b f(t) \ v(t) \ dt$$
+
+Nous allons tenter d'intégrer par parties. On a :
+
+$$\OD{}{t} \Big[ p(t) \ \OD{u}{t}(t) \ v(t) \Big] = \OD{}{t} \Big[ p(t) \ \OD{u}{t}(t) \Big] \ v(t) + p(t) \ \OD{u}{t}(t) \ \OD{v}{t}(t)$$
+
+En appliquant le théorème fondamental, on obtient :
+
+$$\int_a^b \OD{}{t} \Big[ p(t) \ \OD{u}{t}(t) \ v(t) \Big] \ dt = p(b) \ \OD{u}{t}(b) \ v(b) - p(a) \ \OD{u}{t}(a) \ v(a) = 0$$
+
+On en conclut que :
+
+$$\int_a^b \OD{}{t} \Big[ p(t) \ \OD{u}{t}(t) \Big] \ v(t) \ dt = - \int_a^b p(t) \ \OD{u}{t}(t) \ \OD{v}{t}(t) \ dt$$
+
+L'intégrale de $\mathcal{L}(u) \cdot v = 0$ devient :
+
+$$\int_a^b \Big[ p(t) \ \OD{u}{t}(t) \ \OD{v}{t}(t) + q(t) \ u(t) \ v(t) \Big] \ dt = \int_a^b f(t) \ v(t) \ dt$$
+
+Donc, si on définit
+
+\begin{eqnarray*}
+a(u,v) &=& \int_a^b \left[ p(t) \cdot \OD{u}{t}(t) \cdot \OD{v}{t}(t) + q(t) \cdot u(t) \cdot v(t) \right] \ dt \\ \\
+b(v) &=& \int_a^b f(t) \cdot v(t) \ dt
+\end{eqnarray*}
+
+on a :
+
+$$a(u,v) = b(v)$$
+
+pour tout $v \in F$. En appliquant le théorème de Lax-Milgram, on en déduit que la solution du probléme :
+
+\begin{eqnarray*}
+\mathcal{L}(u) &=& 0 \\
+u(a) = u(b) &=& 0
+\end{eqnarray*}
+
+minimise sur $F$ la fonctionnelle $I$ définie pour toute fonction $v \in \continue^2([a,b],\setR)$ par :
+
+$$I(v) = \int_a^b \Big[ p(x) \ \left(\OD{v}{x}(x)\right)^2 + q(x) \ v(x)^2 \Big] \ dx - \int_a^b f(x) \ v(x) \ dx$$
+
+
+** Séparation des variables
+
+Soit les fonctions :
+
+$$a, b : \setR \mapsto \setR$$
+
+et $f : \setR^2 \mapsto \setR$ définie par :
+
+$$f(t, u) = a(t) \cdot b(u)$$
+
+Si $f$ est lipschitzienne, le probléme différentiel :
+
+\begin{eqnarray*}
+\OD{u}{t}(t) &=& f(t, u(t)) = a(t) \cdot b\big( u(t) \big) \\ \\
+u(0) &=& u_0
+\end{eqnarray*}
+
+admet une unique solution. En faisant passer $u$ dans le premier membre et $dt$ dans le second, la première équation peut se réécrire symboliquement :
+
+$$\frac{du}{a(u)} = b(t) dt$$
+
+En intégrant les deux membres, il vient :
+
+$$\int_{u(0)}^{u(s)} \frac{du}{A(u)} = \int_0^s B(t) dt$$
+
+
+** Dérivées des fonctions usuelles
+
+
+*** Arcsinus
+
+AFAIRE : ARRANGER LA FIN DU CHAPITRE
+
+Soit la relation :
+
+#+BEGIN_CENTER
+\(
+y = \sin(x) \\
+x = \arcsin(y)
+\)
+#+END_CENTER
+
+Comme
+
+#+BEGIN_CENTER
+\(
+\OD{y}{x} = \cos(x) \\
+\sin(x)^2 + \cos(x)^2 = 1
+\)
+#+END_CENTER
+
+on a 
+
+#+BEGIN_CENTER
+\(
+\OD{y}{x} = \sqrt{1-y^2} \\
+\OD{}{y}\arcsin(y) = \unsur{\sqrt{1-y^2}}
+\)
+#+END_CENTER
+
+
+*** Table
+
+#+BEGIN_CENTER
+\(
+\OD{\tan(x)}{x} = 1 + \tan(x)^2 \\
+\OD{\arcsin(x)}{x} = \frac{1}{\sqrt{1-x^2}} \\
+\OD{\arccos(x)}{x} = -\frac{1}{\sqrt{1-x^2}} \\
+\OD{\arctan(x)}{x} = \frac{1}{1+x^2} \\
+\)
+#+END_CENTER
+
+% ===================================================================
+
+#+BEGIN_CENTER
+\(
+\cos(x) = \sum_{k=0}^{+\infty} \frac{(-1)^k}{(2k)!} x^{2k} \\
+\sin(x) = \sum_{k=0}^{+\infty} \frac{(-1)^k}{(2k+1)!} x^{2k+1}
+\)
+#+END_CENTER
+
+% ===================================================================
+
+
+*** Fonctions usuelles
+
+Le théorème fondamental appliqué aux dérivées des fonctions usuelles du chapitre \ref{chap:differ}
+nous permet d'obtenir les résultats suivants :
+
+#+BEGIN_CENTER
+\(
+\int_0^x {\frac{1}{\sqrt{1-\xi^2}}d\xi} = \arcsin(x) \\
+\int_0^x {\frac{1}{1+\xi^2}d\xi} = \arctan(x)
+\)
+#+END_CENTER
+
+
+* Exponentielle
+
+#+TOC: headlines 1 local
+
+
+** Dépendances
+
+
+  - Chapitre \ref{chap:edo} : Équations différentielles ordinaires
+
+
+
+** Introduction
+
+L'exponentielle est définie comme l'unique solution $\exp : \setR \mapsto \setR$ du problème différentiel :
+
+\begin{eqnarray*}
+\OD{\exp}{t}(t) &=& \exp(t) \\ \\
+\exp(0) &=& 1
+\end{eqnarray*}
+
+
+** Développement de Taylor
+
+On a :
+
+$$\OD{\exp}{t}(0) = \exp(0) = 1$$
+
+On montre par récurrence que :
+
+$$\NOD{\exp}{t}{k}(0) = \NOD{\exp}{t}{k - 1}(0) = 1$$
+
+Le développement de Taylor autour de $0$ s'écrit donc :
+
+$$\exp(t) = \sum_{k = 0}^{+\infty} \frac{t^k}{k !}$$
+
+
+** Additivité
+
+Soit $t \in \setR$. On remarque que les applications $f,g : \setR \mapsto \setR$ définies par :
+
+\begin{eqnarray*}
+f &:& s \mapsto \exp(s + t) \\
+g &:& s \mapsto \exp(s) \cdot \exp(t)
+\end{eqnarray*}
+
+pour tout $s \in \setR$ vérifient :
+
+\begin{eqnarray*}
+\partial f(s) &=& \exp(s + t) = f(s) \\
+f(0) &=& \exp(0 + t) = \exp(t)
+\end{eqnarray*}
+
+et :
+
+\begin{eqnarray*}
+\partial g(s) &=& \exp(s) \cdot \exp(t) = g(s) \\
+g(0) &=& \exp(0) \cdot \exp(t) = 1 \cdot \exp(t) = \exp(t)
+\end{eqnarray*}
+
+Par unicité de la solution en $u$ du problème différentiel :
+
+\begin{eqnarray*}
+\partial u(s) &=& u(s) \\
+u(0) &=& \exp(t)
+\end{eqnarray*}
+
+on en déduit que :
+
+$$\exp(s + t) = \exp(s) \cdot \exp(t)$$
+
+
+** Miroir
+
+On déduit de l'additivité que :
+
+$$1 = \exp(0) = \exp(t - t) = \exp(t) \cdot \exp(-t)$$
+
+pour tout $t \in \setR$. On en conclut que :
+
+$$\exp(-t) = \unsur{\exp(t)}$$
+
+
+** Limites
+
+On a :
+
+$$\lim_{t \to +\infty} \exp(t) = \lim_{t \to +\infty} (1 + t + \frac{t^2}{2} + ...) \ge \lim_{t \to +\infty} t = +\infty$$
+
+La limite à l'infini positif est donc infinie :
+
+$$\lim_{t \to +\infty} \exp(t) = +\infty$$
+
+En utilisant le changement de variable $t = -s$, on obtient la limite à l'infini négatif :
+
+$$\lim_{s \to -\infty} \exp(s) = \lim_{t \to +\infty} \exp(-t) = \lim_{t \to +\infty} \unsur{\exp(t)} = 0$$
+
+
+** Image
+
+Si $t \ge 0$ il est clair que $\exp(t) \strictsuperieur 0$ puisqu'il s'agit d'une somme infinie de termes strictement positifs. Si $s \le 0$, on a $t = - s \ge 0$ et :
+
+$$\exp(s) = \exp(-t) = \unsur{\exp(t)} \strictsuperieur 0$$
+
+On en conclut que :
+
+$$\exp : \setR \mapsto \setR^+ \setminus \{0\}$$
+
+Comme la fonction $\exp$ est continue et croît avec $t$ sur $\setR$ de :
+
+$$\lim_{t \to -\infty} \exp(t) = 0$$
+
+jusqu'à :
+
+$$\lim_{t \to +\infty} \exp(t) = +\infty$$
+
+on a :
+
+$$\exp(\setR) = \ ]0,+\infty[ \ = \setR^+ \setminus \{ 0 \}$$
+
+
+*** Réels positifs
+
+Comme la fonction $\exp$ est continue et croît avec $t$ sur $\setR^+$ de :
+
+$$\exp(0) = 1$$
+
+jusqu'à :
+
+$$\lim_{t \to +\infty} \exp(t) = +\infty$$
+
+on a :
+
+$$\exp(\setR^+) = [1,+\infty[$$
+
+
+*** Réels négatifs
+
+Comme la fonction $\exp$ est continue et croît avec $s$ sur $\setR^-$ de :
+
+$$\lim_{s \to -\infty} \exp(s) = 0$$
+
+jusqu'à :
+
+$$\exp(0) = 1$$
+
+on a :
+
+$$\exp(\setR^-) = \ ]0,1]$$
+
+
+** Intégrale
+
+Comme la fonction $\exp$ est une primitive d'elle-même, on a :
+
+$$\int_a^b \exp(t) \ dt = \exp(b) - \exp(a)$$
+
+En faisant tendre $a$ vers $-\infty$, on voit que :
+
+$$\int_{-\infty}^b \exp(t) \ dt = \lim_{a \to -\infty} } \Big(\exp(b) - \exp(a)\Big) = \exp(b)$$
+
+Les autres intégrales à bornes infinies sont infinies :
+
+$$\int_{-\infty}^{+\infty} \exp(t) \ dt = \lim_{ \substack{ a \to -\infty \\ b \to +\infty } } \Big(\exp(b) - \exp(a)\Big) = +\infty$$
+
+$$\int_a^{+\infty} \exp(t) \ dt = \lim_{b \to +\infty} \Big(\exp(b) - \exp(a)\Big) = +\infty$$
+
+
+* Logarithme
+
+#+TOC: headlines 1 local
+
+\label{chapter:log}
+
+
+** Introduction
+
+La fonction $\exp : \setR \mapsto \setR^+ \setminus \{ 0 \}$ étant strictement croissante et d'image égale à $\setR^+ \setminus \{ 0 \}$, elle est inversible. On définit le logarithme :
+
+$$\ln : \setR^+ \setminus \{ 0 \} \mapsto \setR$$
+
+comme la fonction inverse de $\exp$ :
+
+$$\ln = \exp^{-1}$$
+
+Pour tout $x,y \in \setR$ tels que $y = \exp(x) \strictsuperieur 0$, on a donc :
+
+$$\ln(y) = x$$
+
+
+** Valeurs particulières
+
+Le cas particulier $x = 0$ et $y = \exp(0) = 1$ nous montre que :
+
+$$\ln(1) = 0$$
+
+
+** Dérivée
+
+Soit les réels $x,y$ tels que :
+
+$$x = \ln(y)$$
+
+On a alors par définition  :
+
+$$y = \exp(x)$$
+
+La dérivée de cette relation s'écrit symboliquement :
+
+$$\OD{y}{x} = \exp(x) = y$$
+
+Comme la dérivée d'une fonction inverse est l'inverse de la dérivée, on a :
+
+$$\OD{x}{y} = \unsur{y}$$
+
+c'est-à-dire :
+
+$$\OD{\ln}{y}(y) = \unsur{y}$$
+
+
+** Développement de Taylor
+
+Soit la fonction $u : \setR \mapsto \setR$ définie par :
+
+$$u(t) = \ln(1 + t)$$
+
+pour tout réel $t$. On a :
+
+$$u(0) = \ln(1 + 0) = \ln(1) = 0$$
+
+La dérivée s'écrit :
+
+$$\partial u(t) = \unsur{1 + t}$$
+
+et en particulier :
+
+$$\partial u(0) = \unsur{1 + 0} = 1$$
+
+On procède de même pour la dérivée seconde :
+
+$$\partial^2 u(t) = -\unsur{(1 + t)^2}$$
+
+et en particulier :
+
+$$\partial^2 u(0) = -\unsur{(1 + 0)^2} = -1$$
+
+on procède de même pour la dérivée tierce :
+
+$$\partial^3 u(t) = \frac{2}{(1 + t)^3}$$
+
+et en particulier :
+
+$$\partial^3 u(0) = \frac{2}{(1 + 0)^3} = 2$$
+
+on procède de même pour la dérivée quarte :
+
+$$\partial^4 u(t) = \frac{-6}{(1 + t)^4}$$
+
+et en particulier :
+
+$$\partial^4 u(0) = \frac{-6}{(1 + 0)^4} = -6$$
+
+On voit que :
+
+$$\partial^k u(0) = (-1)^{1+k} \cdot (k - 1) !$$
+
+pour tout $k \in \setN$ vérifiant $k \ge 1$. Le développement de Taylor s'écrit donc :
+
+$$\ln(1+t) = \sum_{k=1}^{+\infty} \frac{(-1)^{1+k} \cdot (k - 1) !}{k !} \ t^k$$
+
+Comme $k ! = k \cdot (k - 1) !$, on a :
+
+$$\frac{(k - 1) !}{k !} = \unsur{k}$$
+
+Le développement s'écrit donc finalement :
+
+$$\ln(1+t) = \sum_{k=1}^{+\infty} \frac{(-1)^{1+k}}{k} \ t^k$$
+
+En posant $x = 1 + t$, on obtient la forme équivalente :
+
+$$\ln(x) = \sum_{k=1}^{+\infty} \frac{(-1)^{1+k}}{k} \ (x - 1)^k$$
+
+
+** Additivité
+
+Soit $a, b \in \setR$. En utilisant l'additivité de l'exponentielle, on obtient :
+
+$$\exp\Big[\ln(a \cdot b)\Big] = a \cdot b = \exp\big[\ln(a)\big] \cdot \exp\big[\ln(b)\big] = \exp\Big[\ln(a) + \ln(b)\Big]$$
+
+En prenant le logarithme de cette égalité, on en déduit que :
+
+$$\ln(a \cdot b) = \ln(a) + \ln(b)$$
+
+
+** Miroir
+
+Soit $a \in \setR$. On a :
+
+$$\ln(a) + \ln\left(\unsur{a}\right) = \ln\left(a \cdot \unsur{a}\right) = \ln(1) = 0$$
+
+On en conclut que :
+
+$$\ln\left(\unsur{a}\right) = - \ln(a)$$
+
+
+** Soustraction
+
+Soit les réels $a, b$. On a :
+
+$$\ln\left(\frac{a}{b}\right) = \ln(a) + \ln\left(\unsur{b}\right) = \ln(a) - \ln(b)$$
+
+
+** Intégrale de $x \mapsto 1/x$
+
+Comme $\ln$ est une primitive de la fonction :
+
+$$u : \setR \setminus \{ 0 \}, \ x \mapsto 1/x$$
+
+On a :
+
+$$\int_a^b \unsur{x} \ dx = \ln(b) - \ln(a) = \ln\left[\frac{b}{a}\right]$$
+
+
+** Gaussienne
+
+Soit les réels $\gamma$ et $u_0$. Nous cherchons la fonction $u : \setR \mapsto \setR$ solution du problème différentiel :
+
+\begin{eqnarray*}
+\OD{u}{t} &=& \gamma \cdot t \cdot u \\ \\
+u(0) &=& u_0
+\end{eqnarray*}
+
+en procédant par séparation de variables :
+
+$$\frac{du}{u} = \gamma \cdot t \ dt$$
+
+En intégrant :
+
+$$\int_{u_0}^{u(s)} \frac{du}{u} = \int_0^s \gamma \cdot t \ dt$$
+
+on obtient :
+
+$$\ln(u(s))-\ln(u_0) =  \gamma \cdot \frac{s^2}{2}$$
+
+ou :
+
+$$\ln\left(\frac{u(s)}{u_0}\right) =  \gamma \cdot \frac{s^2}{2}$$
+
+En prenant l'exponentielle, on arrive à la solution :
+
+$$u(s) =  u_0 \cdot \exp\left( \gamma \cdot \frac{s^2}{2} \right)$$
+
+Une fonction de cette forme est appelée gaussienne.
+
+
+* Fonctions hyperboliques
+
+#+TOC: headlines 1 local
+
+
+** Introduction
+
+Le cosinus hyperbolique $\cosh$ est défini comme étant la composante paire de l'exponentielle. On a donc :
+
+$$\cosh(x) = \unsur{2} \ \Big[ \exp(x) + \exp(-x) \Big]$$
+
+pour tout $x \in \setR$. Le sinus hyperbolique $\sinh$ est défini comme étant la composante impaire de l'exponentielle. On a donc :
+
+$$\sinh(x) = \unsur{2} \ \Big[ \exp(x) - \exp(-x) \Big]$$
+
+pour tout $x \in \setR$.
+
+
+*** Décomposition
+
+On a :
+
+$$\exp = \cosh + \sinh$$
+
+avec :
+
+\begin{eqnarray*}
+\cosh(x) &=& \cosh(-x) \\
+\sinh(x) &=& -\sinh(-x)
+\end{eqnarray*}
+
+pour tout réel $x$.
+
+
+*** Valeurs particulières
+
+On a :
+
+$$\cosh(0) = \unsur{2} \Big[ \exp(0) + \exp(0) \Big] = \unsur{2} (1 + 1) = 1$$
+
+et :
+
+$$\sinh(0) = \unsur{2} \Big[ \exp(0) - \exp(0) \Big] = 0$$
+
+
+** Relation fondamentale
+
+Soit un réel $x$ et :
+
+#+BEGIN_CENTER
+\(
+c = \cosh(x) \\
+s = \sinh(x)
+\)
+#+END_CENTER
+
+Le carré du cosinus hyperbolique se développe en :
+
+$$c^2 = \unsur{4} \ \Big[ \exp(x)^2 + 2 \ \exp(x) \cdot \exp(-x) + \exp(-x)^2 \Big]$$
+
+Comme $\exp(x) \cdot \exp(-x) = 1$, le développement devient :
+
+$$c^2 = \unsur{4} \ \Big[ \exp(x)^2  + \exp(-x)^2 + 2\Big]$$
+
+Le carré du sinus hyperbolique se développe en :
+
+$$s^2 = \unsur{4} \ \Big[ \exp(x)^2 - 2 \ \exp(x) \cdot \exp(-x) + \exp(-x)^2 \Big]$$
+
+Comme $\exp(x) \cdot \exp(-x) = 1$, le développement devient :
+
+$$s^2 = \unsur{4} \ \Big[ \exp(x)^2  + \exp(-x)^2 - 2\Big]$$
+
+En soustrayant ces deux équations, on obtient :
+
+\begin{eqnarray*}
+c^2 - s^2 &=& \frac{\exp(x)^2  + \exp(-x)^2 + 2 - \exp(x)^2  - \exp(-x)^2 + 2}{4} \\
+&=& \frac{4}{4} = 1
+\end{eqnarray*}
+
+On a donc :
+
+$$\cosh(x)^2 - \sinh(x)^2 = 1$$
+
+
+** Dérivées
+
+Pour tout réel $x$, on a :
+
+$$\OD{\cosh}{x}(x) = \unsur{2} \Big[ \exp(x) - \exp(-x) \Big] = \sinh(x)$$
+
+et :
+
+$$\OD{\sinh}{x}(x) = \unsur{2} \Big[ \exp(x) + \exp(-x) \Big] = \cosh(x)$$
+
+
+** Intégrales
+
+Comme $\sinh$ est une primitive de $\cosh$, on a :
+
+$$\int_a^b \cosh(x) \ dx = \sinh(b) - \sinh(a)$$
+
+Comme $\cosh$ est une primitive de $\sinh$, on a :
+
+$$\int_a^b \sinh(x) \ dx = \cosh(b) - \cosh(a)$$
+
+
+** Tangente
+
+La tangente hyperbolique $\tanh$ est définie par :
+
+$$\tanh(x) = \frac{\sinh x}{\cosh x}$$
+
+pour tout $x \in \setR$.
+
+
+*** Dérivée
+
+On a :
+
+$$\OD{\tanh}{x}(x) = \frac{\cosh(x)}{\cosh(x)} - \frac{\sinh(x) \cdot \sinh(x)}{\cosh(x)^2} = 1 - \tanh(x)^2$$
+
+
+*** Problème différentiel
+
+Comme :
+
+$$\tanh(0) = \frac{\sinh(0)}{\cosh(0)} = \frac{0}{1} = 0$$
+
+la tangente hyperbolique est solution $u : \setR \mapsto \setR$ du problème différentiel :
+
+\begin{eqnarray*}
+\partial u(t) &=& 1 - u(t)^2 \\
+u(0) &=& 0
+\end{eqnarray*}
+
+vérifié pour tout $t \in \setR$.
+
+
+* Exponentielle matricielle
+
+#+TOC: headlines 1 local
+
+\label{chap:expomat}
+
+
+** Introduction
+
+Soit une matrice $A\in\mathfrak{M}(\setR,n,n)$ et la fonction :
+
+$$E_A : \setR \mapsto \in\mathfrak{M}(\setR,n,n)$$
+
+définie comme étant l'unique solution de :
+
+#+BEGIN_CENTER
+\(
+\OD{E_A}{t} = A \cdot E_A \\ \\
+E_A(0) = I
+\)
+#+END_CENTER
+
+On définit alors l'exponentielle matricielle par :
+
+$$\exp(A) = E_A(1)$$
+
+
+** Matrice nulle
+
+Dans le cas où $A = 0$, on a :
+
+$$\OD{E_0}{t} = 0 \cdot E_0 = 0$$
+
+En intégrant, on voit que :
+
+$$E_0(t) - E_0(0) = \int_0^t 0 \ dt = 0$$
+
+La fonction $E_0$ est donc constante et vaut $E_0(t) = E_0(0) = I$ pour tout $t \in \setR$. On en conclut que :
+
+$$\exp(0) = I$$
+
+
+** Développement de Taylor
+
+Soit la fonction :
+
+$$u : \setR \mapsto \matrice(\setR, n, n), \ t \mapsto \exp(A \cdot t)$$
+
+On a :
+
+$$u(0) = \exp(A \cdot 0) = \exp(0) = I$$
+
+et :
+
+$$\OD{u}{t}(0) = A \cdot u(0) = A \cdot I = A$$
+
+On montre par récurrence que :
+
+$$\NOD{u}{t}{k}(0) = A \cdot \NOD{u}{t}{k - 1}(0) = A \cdot A^{k - 1} = A^k$$
+
+En évaluant le développement de Taylor de $u$ autour de $t=0$ on obtient :
+
+$$\exp(A \cdot t) = \sum_{k=0}^{+\infty} \frac{1}{k!} \cdot A^k \cdot t^k$$
+
+Évaluons la dérivée de ce développement :
+
+\begin{eqnarray*}
+\OD{}{t} \exp(A \cdot t) &=& \sum_{k=1}^{+\infty} \unsur{k!} \cdot A^k \cdot k \cdot t^{k - 1} \\
+&=& A \cdot \sum_{k=1}^{+\infty} \unsur{(k - 1) !} \cdot A^{k - 1} \cdot t^{k - 1} \\
+&=& A \cdot \sum_{k=0}^{+\infty} \unsur{k!} \cdot A^k \cdot k \cdot t^k \\
+&=& A \cdot \exp(A \cdot t)
+\end{eqnarray*}
+
+On a aussi :
+
+$$\exp(A \cdot 0) &=& I + \sum_{k=1}^{+\infty} \unsur{k!} \cdot A^k \cdot 0^k = I$$
+
+La fonction $t \mapsto \exp(A \cdot t)$ est donc identique à la solution $E$ :
+
+$$E(t) = \exp(A \cdot t)$$
+
+
+** Développement en série de l'exponentielle
+
+Le cas particulier $t = 1$ nous donne le développement de l'exponentielle matricielle :
+
+$$\exp(A) = \sum_{k=0}^{+\infty} \frac{1}{k!} \cdot A^k$$
+
+
+**** Sur $\setR$
+
+Quand $n=1$ et $A=1$, on retrouve le développement de l'exponentielle usuelle :
+
+$$\exp(t) = \sum_{k=0}^{+\infty} \frac{t^k}{k!}$$
+
+
+** Additivité
+
+Soit les fonctions $f, g : \setR \mapsto \setR$ définies par :
+
+\begin{eqnarray*}
+f &:& s \mapsto \exp\Big(A \cdot (s + t) \Big) \\
+g &:& s \mapsto \exp(A \cdot s) \cdot \exp(A \cdot t)
+\end{eqnarray*}
+
+pour tout $s \in \setR$. On a :
+
+\begin{eqnarray*}
+\partial f(s) &=& A \cdot \exp\Big(A \cdot (s + t) \Big) = A \cdot f(s) \\
+f(0) &=& \exp\Big(A \cdot (0 + t) \Big) = \exp(A \cdot t)
+\end{eqnarray*}
+
+et :
+
+\begin{eqnarray*}
+\partial g(s) &=& A \cdot \exp(A \cdot s) \cdot \exp(t) = A \cdot g(s) \\
+g(0) &=& \exp(A \cdot 0) \cdot \exp(A \cdot t) = I \cdot \exp(A \cdot t) = \exp(A \cdot t)
+\end{eqnarray*}
+
+Par unicité de la solution en $u$ du problème différentiel :
+
+\begin{eqnarray*}
+\partial u(s) &=& A \cdot u(s) \\
+u(0) &=& \exp(A \cdot t)
+\end{eqnarray*}
+
+on en déduit que :
+
+$$\exp\Big(A \cdot (s + t) \Big) = \exp(A \cdot s) \cdot \exp(A \cdot t)$$
+
+
+** Miroir
+
+L'additivité nous dit que :
+
+$$\exp(A \cdot (t - t)) = \exp(A \cdot t) \cdot \exp(A \cdot (-t)) = \exp(A \cdot t) \cdot \exp(- A \cdot t)$$
+
+Mais la condition initiale nous dit que :
+
+$$\exp(A \cdot (t - t)) = \exp(A \cdot 0) = I$$
+
+On a donc :
+
+$$\exp(A \cdot t) \cdot \exp(- A \cdot t) = I$$
+
+Comme les matrices sont carrées, on en déduit que l'inverse matriciel de $\exp(A \cdot t)$ existe et s'écrit :
+
+$$\exp(A \cdot t)^{-1} = \exp(- A \cdot t)$$
+
+Le cas particulier $t = 1$ nous donne :
+
+$$\exp(A)^{-1} = \exp(- A)$$
+
+
+** Solution vectorielle
+
+Soit un vecteur $x_0 \in \setR^n$ et la fonction $x : \setR \mapsto \setR^n$ définie par :
+
+$$x(t) = \exp(A \cdot t) \cdot x_0$$
+
+pour tout $t \in \setR$. On a :
+
+$$\dot{x}(t) = A \cdot \exp(A \cdot t) \cdot x_0 = A \cdot x$$
+
+et :
+
+$$x(0) = \exp(A \cdot 0) \cdot x_0 = I \cdot x_0 = x_0$$
+
+Notre fonction $x$ est donc l'unique solution de l'équation différentielle :
+
+#+BEGIN_CENTER
+\(
+\OD{x}{t} = A \cdot x \\ \\
+x(0) = x_0
+\)
+#+END_CENTER
+
+
+**** Sur $\setR$
+
+Dans le cas où $n=1$, et $A = 1$, on obtient l'exponentielle
+usuelle, qui est donc solution de :
+
+\begin{eqnarray*}
+\dot{u} &=& u \\
+u(0) &=& 1
+\end{eqnarray*}
+
+
+** Valeurs propres
+
+Il existe un lien entre l'exponentielle d'une matrice hermitienne et ses valeurs propres. Soit la fonction $X : \setR \mapsto \setR^n$ vérifiant l'équation différentielle :
+
+$$\dot{X}(t) = A \cdot X(t)$$
+
+où $A$ est une matrice carrée hermitienne. Comme $A = A^\dual$, on sait que la forme de Schur :
+
+$$A = U \cdot \Lambda \cdot U^\dual$$
+
+nous donne une matrice carrée unitaire $U$ qui vérifie par conséquent :
+
+$$U^\dual = U^{-1}$$
+
+et une matrice diagonale :
+
+$$\Lambda = (\lambda_i \cdot \delta_{ij})_{i,j}$$
+
+où les $\lambda_i$ sont les valeurs propres de $A$. Si on effectue le changement de variable :
+
+$$X = U \cdot Y \quad\Leftrightarrow\quad Y = U^\dual \cdot X$$
+
+l'équation différentielle devient :
+
+$$U \cdot \dot{Y} = A \cdot U \cdot Y \\$$
+
+En multipliant à gauche par $U^\dual$, on obtient :
+
+$$\dot{Y} = U^\dual \cdot A \cdot U \cdot Y = \Lambda \cdot Y$$
+
+Exprimée en terme de composantes $Y = (y_i)_i$, cette dernière équation devient :
+
+$$\dot{y}_i = \lambda_i \cdot y_i$$
+
+dont la solution est :
+
+$$y_i(t) = y_{i}(0) \cdot \exp(\lambda_i \cdot t)$$
+
+Comme :
+
+$$\sum_k \unsur{k !} \ \Lambda^k \cdot t^k = \Bigg( \sum_k \unsur{k !} \ \lambda_i^k \cdot t^k \cdot \indicatrice_{ij} \Bigg)_{i,j}$$
+
+on voit que :
+
+$$\exp(\Lambda \cdot t) = \Big( \exp(\lambda_i \cdot t) \cdot \indicatrice_{ij} \Big)_{i,j}$$
+
+On en conclut que :
+
+$$Y(t) = \exp(\Lambda \cdot t) \cdot Y(0)$$
+
+La condition initiale sur $Y$ est liée à celle sur $X$ par :
+
+$$Y(0) = U^\dual \cdot X(0)$$
+
+On a donc :
+
+$$Y(t) = \exp(\Lambda \cdot t) \cdot U^\dual \cdot X(0)$$
+
+et :
+
+$$X(t) = U \cdot Y(t) = U \cdot \exp(\Lambda \cdot t) \cdot U^\dual \cdot X(0)$$
+
+Par définition de l'exponentielle matricielle, on a aussi :
+
+$$X(t) = \exp(A \cdot t) \cdot X(0)$$
+
+On en conclut que :
+
+$$\exp(A \cdot t) \cdot X(0) = U \cdot \exp(\Lambda \cdot t) \cdot U^\dual \cdot X(0)$$
+
+Au point $t = 1$, on a :
+
+$$\exp(A) \cdot X(0) = U \cdot \exp(\Lambda) \cdot U^\dual \cdot X(0)$$
+
+Cette relation étant vérifiée quelque soit $X(0) \in \setR^n$, on en conclut la relation liant
+l'exponentielle d'une matrice hermitienne à ses valeurs propres :
+
+$$\exp(A) = U \cdot \exp(\Lambda) \cdot U^\dual$$
+
+
+** Dérivée
+
+AFAIRE : dérivée de u(t) = exp( L(t) ), arranger la fin du chapitre
+
+$$\OD{u}{t}(t) = \OD{L}{t}(t) \cdot u(t)$$ ???????
+
+
+** Intégrale
+
+Soit la fonction $R$ :
+
+$$R : \setR\mapsto\mathfrak{M}(\setR,n,n)$$
+
+solution de :
+
+\begin{eqnarray*}
+\dot{R}(t) &=& L(t) \cdot R(t) \\
+R(0) &=& I
+\end{eqnarray*}
+
+On vérifie que :
+
+$$R(t) = \exp\int_0^t L(s) ds$$
+
+
+** Systèmes linéaires
+
+\label{sec:edo_sys_lin}
+
+Considérons à présent le problème linéaire suivant :
+
+#+BEGIN_CENTER
+\(
+\dot{u}(t) = L(t) \cdot u(t) + b(t) \\ \\
+u(0) = u_0
+\)
+#+END_CENTER
+
+où on a :
+
+\begin{eqnarray*}
+L &:& \setR\mapsto\mathfrak{M}(\setR,n,n) \\
+b &:& \setR\mapsto\mathfrak{M}(\setR,n,1) \equiv \setR^n \\
+u &:& \setR\mapsto\mathfrak{M}(\setR,n,1) \equiv \setR^n
+\end{eqnarray*}
+
+Nous allons effectuer un changement de variable afin de résoudre ce problème.
+Nous supposons par la suite que $R(t)$ est inversible pour tout $t$.
+Posons $u = R \cdot x$. On constate tout de suite en utilisant $R(0) = I$ que
+$x(0) = u_0$.  On obtient aussi, en dérivant $u = R \cdot x$ :
+
+$$\dot{u} = \dot{R} \cdot x + R \cdot \dot{x} = L \cdot R \cdot x + R \cdot \dot{x}$$
+
+En comparant avec l'équation différentielle dont $u$ est solution :
+
+$$\dot{u} = L \cdot u + b = L \cdot R \cdot x + b$$
+
+on obtient :
+
+#+BEGIN_CENTER
+\(
+\dot{x} = R^{-1} \cdot b \\
+x(0) = u_0
+\)
+#+END_CENTER
+
+On en déduit que :
+
+$$x(t) = u_0 + \int_0^t \left[ R(s) \right]^{-1} \cdot b(s) ds$$
+
+et :
+
+$$u(t) = R(t) \cdot u_0 + \int_0^t R(t) \cdot [R(s)]^{-1} \cdot b(s) ds$$
+
+Dans le cas où $L(t) = L$ ne dépend pas de $t$, on peut montrer
+que
+
+$$R(s+t) = R(s) \cdot R(t)$$
+
+en vérifiant que $\varphi(s) = R(s+t)$ et $\psi(s) = R(s) \cdot R(t)$
+sont solutions en $w$ de :
+
+#+BEGIN_CENTER
+\(
+\OD{w}{s}(s) = L \cdot w(s) \\ \\
+w(0) = R(t)
+\)
+#+END_CENTER
+
+On a alors évidemment $R(-s) = [R(s)]^{-1}$ et
+
+$$u(t) = R(t) \cdot u_0 + \int_0^t R(t-s) \cdot b(s) ds$$
+
+La solution est donc donnée par l'intégrale de convolution de $R$ et $b$.
+
+
+** Conditions initiales
+
+Nous allons à présent étudier ce qu'il se passe lorsqu'on dérive la solution par rapport à la condition initiale $u_0 = x$. Posons $u(x,t)$ la solution de :
+
+#+BEGIN_CENTER
+\(
+\deriveepartielle{u}{t}(x,t) = f(t,u(x,t)) \\
+u(x,0) = x
+\)
+#+END_CENTER
+
+Nous allons utiliser la notation
+
+$$u_x(x,t) = \deriveepartielle{u}{x^T}(x,t)$$
+
+En intervertissant l'ordre de dérivation, on arrive à
+
+#+BEGIN_CENTER
+\(
+\deriveepartielle{u_x}{t}(x,t) = \deriveepartielle{}{x^T}\deriveepartielle{u}{t}(x,t) \\
+\deriveepartielle{u_x}{t}(x,t) = \deriveepartielle{f}{u^T}(t,u(x,t)) \cdot u_x(x,t)
+\)
+#+END_CENTER
+
+Par ailleurs, il est clair que :
+
+$$u_x(x,0) = I$$
+
+Utilisant les résultats de la section \ref{sec:edo_sys_lin} avec :
+
+#+BEGIN_CENTER
+\(
+L(t) \mapsto \deriveepartielle{f}{u^T}(t,u(x,t)) \\
+R(t) \mapsto u_x(x,t)
+\)
+#+END_CENTER
+
+nous obtenons :
+
+$$u_x(x,t) = \exp\int_0^t \deriveepartielle{f}{u^T}(s,u(x,s)) ds$$
+
+
+* Fonctions trigonométriques
+
+#+TOC: headlines 1 local
+
+
+** Dépendances
+
+
+  - Chapitre \ref{chap:complexe} : Les complexes
+
+
+
+** Introduction
+
+Les fonctions trigonométriques cosinus ($\cos$), sinus ($\sin$) et associées peuvent se définir
+à partir des rotations dans le plan $\setR^2$. Pour cela, commençons par définir ce qu'est
+une rotation. Soit la fonction :
+
+$$Q : \setR\mapsto \matrice(\setR, 2, 2), \qquad \theta \mapsto Q(\theta)$$
+
+qui associe à chaque valeur de l'angle de rotation $\theta \in \setR$ une matrice carrée réelle représentant une rotation dans le plan $\setR^2$.
+
+
+** Angle nul
+
+Il semble logique de demander qu'une rotation d'angle $0$ d'un vecteur ne modifie pas ce vecteur, c'est-à-dire :
+
+$$Q(0) = I$$
+
+
+** Produit scalaire
+
+Une rotation doit conserver les angles entre les vecteurs, ainsi que leur norme. Autrement dit, le produit scalaire sur $\setR^2$ :
+
+$$\scalaire{x}{y} = x^\dual \cdot y$$
+
+doit être conservé :
+
+$$\scalaire{Q(\theta) \cdot x}{Q(\theta) \cdot y} = \scalaire{x}{y}$$
+
+pour tout $x,y\in\setR^2$, c'est-à-dire :
+
+$$(Q(\theta) \cdot x)^\dual \cdot (Q(\theta) \cdot y) = x^\dual \cdot Q(\theta)^\dual \cdot Q(\theta) \cdot y = x^\dual \cdot y$$
+
+On en déduit que :
+
+$$Q(\theta)^\dual \cdot Q(\theta) = I$$
+
+Comme $Q(\theta)$ est carrée, on a :
+
+$$Q(\theta)^\dual  = Q(\theta)^{-1}$$
+
+où le $^{-1}$ désigne l'inverse matriciel. Quelques calculs suffisent à nous montrer que pour satisfaire cette condition, la forme de la matrice doit être l'une des deux solutions suivantes :
+
+#+BEGIN_CENTER
+\(
+\begin{Matrix}{cc}
+\cos(\theta) & -\sin(\theta) \\
+\sin(\theta) & \cos(\theta)
+\end{Matrix}
+\qquad\mathrm{ou}\qquad
+\begin{Matrix}{cc}
+\cos(\theta) & \sin(\theta) \\
+\sin(\theta) & -\cos(\theta)
+\end{Matrix}
+\)
+#+END_CENTER
+
+où $\cos, \sin : \setR \mapsto \setR$ sont des fonctions à déterminer vérifiant la relation fondamentale :
+
+$$\cos(\theta)^2 + \sin(\theta)^2 = 1$$
+
+Mais comme $Q(0)=I$, l'élément $(1,1)$ de la matrice doit être identique à l'élément
+$(2,2)$ et on a :
+
+#+BEGIN_CENTER
+\(
+Q(\theta) =
+\begin{Matrix}{cc}
+\cos(\theta) & -\sin(\theta) \\
+\sin(\theta) & \cos(\theta)
+\end{Matrix}
+\)
+#+END_CENTER
+
+avec :
+
+#+BEGIN_CENTER
+\(
+\cos(0) = 1 \\
+\sin(0) = 0
+\)
+#+END_CENTER
+
+
+*** Relation fondamentale et bornes
+
+Soit $x \in \setR$. Comme les fonctions $\cos$ et $\sin$ sont à valeurs dans $\setR$, on a :
+
+#+BEGIN_CENTER
+\(
+\cos(x)^2 \ge 0 \\
+\sin(x)^2 \ge 0
+\)
+#+END_CENTER
+
+On déduit de la relation fondamentale :
+
+$$\cos(x)^2 + \sin(x)^2 = 1$$
+
+les inégalités :
+
+\begin{eqnarray*}
+\cos(x)^2 = 1 - \sin(x)^2 \le 1 \\
+\sin(x)^2 = 1 - \cos(x)^2 \le 1
+\end{eqnarray*}
+
+On en déduit les bornes :
+
+#+BEGIN_CENTER
+\(
+-1 \le \cos \le 1 \\
+-1 \le \sin \le 1
+\)
+#+END_CENTER
+
+
+** Différentielle
+
+Posons $x = \cos(\theta)$ et $y = \sin(\theta)$. En différentiant la condition :
+
+$$x^2 + y^2 = 1$$
+
+on obtient :
+
+$$2 \ x \ dx + 2 \ y \ dy = 0$$
+
+En particulier, si $(x,y) = (1,0)$, le vecteur $(dx,dy)$ doit être
+de la forme :
+
+#+BEGIN_CENTER
+\(
+dx = 0 \\
+dy = \delta
+\)
+#+END_CENTER
+
+Une rotation infinitésimale doit donc modifier le vecteur $(1,0)$ en :
+
+$$(1,0)+(dx,dy)=(1,\delta)$$
+
+On en conclut que :
+
+#+BEGIN_CENTER
+\(
+Q(\delta) \cdot
+\begin{Matrix}{c}
+1 \\
+0
+\end{Matrix} \approx
+\begin{Matrix}{c}
+1 \\
+\delta
+\end{Matrix}
+\)
+#+END_CENTER
+
+Compte tenu des propriétés de symétrie de $Q(\delta)$, on a donc :
+
+#+BEGIN_CENTER
+\(
+Q(\delta) \approx
+\begin{Matrix}{cc}
+1 & -\delta \\
+\delta & 1
+\end{Matrix}
+\)
+#+END_CENTER
+
+lorsque $\delta$ suffisamment proche de $0$. Plus précisément, on a :
+
+#+BEGIN_CENTER
+\(
+Q(\delta) =
+\begin{Matrix}{cc}
+1 & -\delta \\
+\delta & 1
+\end{Matrix}
++
+\begin{Matrix}{cc}
+E_{11} & E_{12} \\
+E_{21} & E_{22}
+\end{Matrix}
+\)
+#+END_CENTER
+
+On impose que les valeurs absolues des composantes de l'erreur convergent plus vite vers zéro que $\delta$ :
+
+$$\lim_{\delta\to 0} \frac{\abs{E_{ij}(\delta)}}{\delta} = 0$$
+
+D'après la forme des matrices, il est clair que :
+
+#+BEGIN_CENTER
+\(
+E_{11} = E_{22} \\
+E_{12} = -E_{21}
+\)
+#+END_CENTER
+
+On en déduit qu'il suffit de vérifier la convergence des composantes $(1,1)$ et $(2,1)$. La première nous dit que :
+
+$$\lim_{\delta\to 0} \frac{\cos(\delta) - 1}{\delta} = 0$$
+
+et la seconde :
+
+$$\lim_{\delta\to 0} \frac{\sin(\delta)-\delta}{\delta} = 0$$
+
+ou :
+
+$$\lim_{\delta\to 0} \frac{\sin(\delta)}{\delta} = 1$$
+
+
+** Additivité
+
+Une rotation d'angle $\theta_1$ suivie d'une rotation d'angle $\theta_2$ doit
+donner le même résultat qu'une rotation directe d'angle $\theta_1+\theta_2$, ce qui s'écrit :
+
+$$Q(\theta_1+\theta_2) = Q(\theta_2) \cdot Q(\theta_1)$$
+
+On en déduit directement que :
+
+$$Q(\theta) \cdot Q(-\theta) = Q(\theta - \theta) = Q(0) = I$$
+
+Comme $Q(\theta)$ est carrée, on a :
+
+$$Q(-\theta) = Q(\theta)^{-1} = Q(\theta)^\dual$$
+
+Au niveau des composantes, la propriété d'additivité implique que :
+
+#+BEGIN_CENTER
+\(
+
+\begin{Matrix}{cc}
+\cos(\theta_2) & -\sin(\theta_2) \\
+\sin(\theta_2) & \cos(\theta_2)
+\end{Matrix}
+
+\cdot
+
+\begin{Matrix}{cc}
+\cos(\theta_1) & -\sin(\theta_1) \\
+\sin(\theta_1) & \cos(\theta_1)
+\end{Matrix}
+
+=
+
+\begin{Matrix}{cc}
+\cos(\theta_1+\theta_2) & -\sin(\theta_1+\theta_2) \\
+\sin(\theta_1+\theta_2) & \cos(\theta_1+\theta_2)
+\end{Matrix}
+
+\)
+#+END_CENTER
+
+En effectuant le produit matriciel et en comparant composante par composante, on obtient
+les formules suivantes :
+
+#+BEGIN_CENTER
+\(
+\cos(\theta_1+\theta_2) = \cos(\theta_1) \ \cos(\theta_2)-\sin(\theta_1) \ \sin(\theta_2) \\
+\sin(\theta_1+\theta_2) = \sin(\theta_1) \ \cos(\theta_2)+\cos(\theta_1) \ \sin(\theta_2)
+\)
+#+END_CENTER
+
+
+** Dérivées
+
+La dérivée de la fonction $\cos$ s'écrit :
+
+$$\OD{\cos}{\theta}(\theta) = \lim_{\delta\to 0} \frac{ \cos(\theta+\delta)-\cos(\theta)  }{  \delta } \\$$
+
+En appliquant les formules d'additivité ci-dessus avec $\theta_1 = \theta$ et $\theta_2  = \delta$,
+et en se rappelant les propriétés des fonctions $\cos$ et $\sin$ pour des angles $\delta\to 0$,
+on obtient :
+
+\begin{eqnarray*}
+\OD{\cos}{\theta}(\theta)
+&=& \lim_{\delta\to 0} \frac{ \cos(\theta) \ \cos(\delta) - \sin(\theta) \ \sin(\delta) - \cos(\theta) }{ \delta } \\
+&=& \lim_{\delta\to 0} \frac{ \cos(\theta) \ (\cos(\delta) - 1) - \sin(\theta) \ \sin(\delta) }{ \delta } \\
+&=& -\sin(\theta)
+\end{eqnarray*}
+
+La dérivée de la fonction $\sin$ s'écrit :
+
+$$\OD{\sin}{\theta}(\theta) = \lim_{\delta\to 0} \frac{\sin(\theta+\delta)-\sin(\theta)}{\delta} \\$$
+
+En procédant comme précédemment, on arrive à :
+
+\begin{eqnarray*}
+\OD{\sin}{\theta}(\theta)
+&=& \lim_{\delta\to 0} \frac{\sin(\theta) \ \cos(\delta) + \cos(\theta) \ \sin(\delta) - \sin(\theta)}{\delta} \\
+&=& \lim_{\delta\to 0} \frac{\sin(\theta) \ (\cos(\delta) - 1) + \cos(\theta) \ \sin(\delta)}{\delta} \\
+&=& \cos(\theta)
+\end{eqnarray*}
+
+On a donc :
+
+#+BEGIN_CENTER
+\(
+\OD{\cos}{\theta}(\theta) = -\sin(\theta) \\ \\
+\OD{\sin}{\theta}(\theta) = \cos(\theta)
+\)
+#+END_CENTER
+
+
+** Équations différentielles
+
+La dérivée seconde de la fonction $\cos$ s'écrit :
+
+$$\OOD{\cos}{\theta}(\theta) = \OD{(-\sin)}{\theta}(\theta) = -\cos(\theta)$$
+
+On a aussi $\cos(0) = 1$ et :
+
+$$\OD{\cos}{\theta}(0) = -\sin(0) = 0$$
+
+La fonction $\cos$ est donc l'unique solution $u : \setR \mapsto \setR$ du problème différentiel :
+
+\begin{eqnarray*}
+\partial^2 u(t) &=& -u(t) \\
+u(0) &=& 1 \\
+\partial u(0) &=& 0
+\end{eqnarray*}
+
+vérifié pour tout $t \in \setR$. La dérivée seconde de la fonction $\sin$ s'écrit :
+
+$$\OOD{\sin}{\theta}(\theta) = \OD{\cos}{\theta}(\theta) = -\sin(\theta)$$
+
+On a aussi $\sin(0) = 0$ et :
+
+$$\OD{\sin}{\theta}(0) = \cos(0) = 1$$
+
+La fonction $\sin$ est donc l'unique solution $v : \setR \mapsto \setR$ du problème différentiel :
+
+\begin{eqnarray*}
+\partial^2 v(t) &=& -v(t) \\
+v(0) &=& 0 \\
+\partial v(0) &=& 1
+\end{eqnarray*}
+
+vérifié pour tout $t \in \setR$.
+
+
+** Racines
+
+Nous allons maintenant nous occuper du problème des éventuelles racines
+des fonctions trigonométriques. Soit :
+
+#+BEGIN_CENTER
+\(
+u(t) = \cos(t) \\
+v(t) = \sin(t)
+\)
+#+END_CENTER
+
+La fonction $u$ vérifie :
+
+#+BEGIN_CENTER
+\(
+u(0) = 1 \\
+\partial u = -v
+\)
+#+END_CENTER
+
+La fonction $v$ vérifie :
+
+#+BEGIN_CENTER
+\(
+v(0) = 0 \\
+\partial v = u
+\)
+#+END_CENTER
+
+Soit $\varphi$ l'infimum des réels positifs donnant une valeur négative à la fonction $u$ :
+
+$$\varphi = \inf\{ x \in \setR : x \ge 0, \ u(x) < 0  \}$$
+
+Nous allons montrer que $\varphi$ est un réel, c'est-à-dire que $\varphi < +\infty$. Le théorème
+fondamental du calcul différentiel et intégral nous dit que :
+
+#+BEGIN_CENTER
+\(
+u(t) - u(0) = \int_0^t \OD{u}{t}(s) \ ds \\
+v(t) - v(0) = \int_0^t \OD{v}{t}(s) \ ds
+\)
+#+END_CENTER
+
+En tenant compte des propriétés de $u, v$, ces relations se réécrivent :
+
+#+BEGIN_CENTER
+\(
+u(t) - 1 = - \int_0^t v(s) ds \\
+v(t) - 0 = \int_0^t u(s) ds
+\)
+#+END_CENTER
+
+On a donc :
+
+#+BEGIN_CENTER
+\(
+u(t) = 1 - \int_0^t v(s) ds \\
+v(t) = \int_0^t u(s) ds
+\)
+#+END_CENTER
+
+Comme $u$ est dérivable, elle est continue et on peut trouver un $\epsilon\in \intervalleouvert{0}{\varphi}$ tel que, pour tout $t\in \intervalleouvert{0}{\epsilon}$ :
+
+$$\abs{u(t)-u(0)} = \abs{u(t) - 1} \strictinferieur 1$$
+
+On en déduit que :
+
+$$1 - u(t) \strictinferieur 1$$
+
+c'est-à-dire :
+
+$$u(t) \strictsuperieur 0$$
+
+La positivité de $u$ entraîne celle de $v$ :
+
+$$v(t) = \int_0^t u(s) ds > 0$$
+
+pour tout $t \in \intervalleouvert{0}{\epsilon}$.
+
+Pour $t\in \intervalleouvert{\epsilon}{\varphi}$, la définition de $\varphi$ nous dit que $u \ge 0$ sur $\intervalleouvert{0}{\varphi}$ et donc :
+
+\begin{eqnarray*}
+v(t) &=& \int_0^t u(s) ds = \int_0^\epsilon u(s) ds  + \int_\epsilon^t u(s) ds \\
+&\ge& \int_0^\epsilon u(s) ds > 0
+\end{eqnarray*}
+
+On pose :
+
+$$\delta = \int_0^\epsilon u(s) ds$$
+
+pour alléger les notations. Toujours avec $t \in \intervalleouvert{\epsilon}{\varphi}$, il vient :
+
+\begin{eqnarray*}
+u(t) &=& 1 - \int_0^t v(s) ds \le 1 - \int_\epsilon^t v(s) ds \\
+&\le& 1 - (t-\epsilon) \ \delta
+\end{eqnarray*}
+
+On peut donc trouver $t$ tel que $u(t) \le 0$. En effet, l'égalité :
+
+$$1 - (t-\epsilon) \ \delta = 0$$
+
+est équivalente à :
+
+$$t = \unsur{\delta} + \epsilon < +\infty$$
+
+donc :
+
+$$u\left(\unsur{\delta} + \epsilon\right) \le 0$$
+
+Comme $u$ est continue, elle ne peut pas devenir négative sans
+passer par $0$ et il existe au moins un :
+
+$$\psi \le \unsur{\delta} + \epsilon$$
+
+tel que $u(\psi) = 0$. Donc :
+
+$$\varphi \le \unsur{\delta} + \epsilon < +\infty$$
+
+
+** Périodicité
+
+Nous allons à présent montrer d'importantes propriétés de périodicité des fonctions trigonométriques. Considérons la plus petite racine positive de $u$ :
+
+$$\psi = \min\{ x \ge 0 : u(x) = 0 \}$$
+
+Vu que $u^2+v^2 = 1$, on doit avoir $v(\psi)^2 = 1 - u(\psi)^2 = 1$.
+Donc $v(\psi)=\pm 1$. Mais $v \ge \delta > 0$ sur l'intervalle $(\epsilon,\psi)$
+et par continuité :
+
+$$v(\psi) = \lim_{x\to\psi} v(x) \ge 0$$
+
+La seule solution acceptable est donc $v(\psi) = 1$. Donc $v$
+est solution du problème :
+
+#+BEGIN_CENTER
+\(
+\OOD{v}{t} = -v \\
+v(\psi) = 1 \\
+\OD{v}{t}(\psi) = 0
+\)
+#+END_CENTER
+
+Mais la fonction définie par $f(t) = u(t-\psi)$ vérifie également ce problème.
+Par unicité, on en déduit :
+
+$$u(t-\psi) = v(t)$$
+
+En particulier, en $t = 2 \psi$, on a :
+
+$$v(2\psi) = u(\psi) = 0$$
+
+Donc $u(2\psi)^2 = 1 - v(2\psi)^2 = 1$. Quel est le signe de $u(2\psi)$ ?
+Choisissons $s\in [\psi,2\psi]$ et $t = s-\psi \in [0,\psi]$. On a :
+
+$$v(s) = u(t) \ge 0$$
+
+par définition de $\psi$ et continuité de $u$ (la fonction de peut pas devenir
+négative avant de passer par $0$). Donc :
+
+$$u(t) = -\int_\psi^t v(s) ds \le 0$$
+
+et par continuité  $u(2\psi) = -1$. Par unicité de la solution de :
+
+#+BEGIN_CENTER
+\(
+\OOD{}{t}(-u) = -(-u) \\
+-u(0) = -1 \\
+\OD{}{t}(-u)(0) = 0
+\)
+#+END_CENTER
+
+on a :
+
+$$u(t-2\psi) = -u(t)$$
+
+Répétant le même procédé, on obtient successivement :
+
+#+BEGIN_CENTER
+\(
+u(0) = 1 \qquad v(0) = 0 \\
+u(\psi) = 0 \qquad v(\psi) = 1 \\
+u(2\psi) = -1 \qquad v(2\psi) = 0 \\
+u(3\psi) = 0 \qquad v(3\psi) = -1 \\
+u(4\psi) = 1 \qquad v(4\psi) = 0
+\)
+#+END_CENTER
+
+
+*** Extension
+
+Donc $u(4\psi) = u(0)$ et $v(4\psi) = v(0)$. On en déduit
+que $Q(4\psi)=Q(0)=I$. Mais, par additivité des rotations,
+
+$$Q(t + 4\psi) = Q(t) \ Q(4\psi) = Q(t)$$
+
+Et donc :
+
+#+BEGIN_CENTER
+\(
+u(t+4\psi) = u(t) \\
+v(t+4\psi) = v(t)
+\)
+#+END_CENTER
+
+pour tout $t\in\setR$. Définissant le nombre $\pi$ par :
+
+$$\pi = 2\psi$$
+
+on peut écrire la périodicité des fonctions trigonométriques :
+
+#+BEGIN_CENTER
+\(
+\cos(\theta+2\pi) = \cos(\theta) \\
+\sin(\theta+2\pi) = \sin(\theta)
+\)
+#+END_CENTER
+
+On en déduit directement que :
+
+#+BEGIN_CENTER
+\(
+\cos(\theta+2 k\pi) = ... = \cos(\theta) \\
+\sin(\theta+2 k\pi) = ... = \sin(\theta)
+\)
+#+END_CENTER
+
+pour tout $k\in\setZ$.
+
+
+** Angle double
+
+L'additivité nous donne :
+
+$$\cos(2 \ x) = \cos(x + x) = \cos(x) \cdot \cos(x) - \sin(x) \cdot \sin(x)$$
+
+On a donc :
+
+$$\cos(2 \ x) = \cos(x)^2 - \sin(x)^2$$
+
+
+*** Alternative
+
+En utilisant :
+
+$$\cos(x)^2 + \sin(x)^2 = 1$$
+
+on dispose des formulations alternatives :
+
+$$\cos(2 \ x) = 2 \cos(x)^2 - 1$$
+
+et :
+
+$$\cos(2 \ x) = 1 - 2 \sin(x)^2$$
+
+
+*** Relations inverses
+
+Il est aisé d'inverser ces deux relations, on a :
+
+$$\cos(x)^2 = \frac{\cos(2 \ x) + 1}{2}$$
+
+et :
+
+$$\sin(x)^2 = \frac{1 - \cos(2 \ x)}{2}$$
+
+
+** Intégrale
+
+Comme $\sin$ est une primitive de $\cos$, on a :
+
+$$\int_a^b \cos(t) \ dt = \sin(b) - \sin(a)$$
+
+Comme $\cos$ est une primitive de $-\sin$, on a :
+
+$$-\int_a^b \sin(t) \ dt = \cos(b) - \cos(a)$$
+
+ou :
+
+$$\int_a^b \sin(t) \ dt = \cos(a) - \cos(b)$$
+
+
+** Tangente
+
+La tangente $\tan$ est définie par :
+
+$$\tan(x) = \frac{\sin(x)}{\cos(x)}$$
+
+pour tout $x \in \setR$.
+
+
+*** Dérivée
+
+On a :
+
+$$\OD{\tan}{x}(x) = \frac{\cos(x)}{\cos(x)} - \frac{\sin(x) \cdot \big(-\sin(x)\big)}{\cos(x)^2} = 1 + \tan(x)^2$$
+
+
+*** Problème différentiel
+
+Comme :
+
+$$\tan(0) = \frac{\sin(0)}{\cos(0)} = \frac{0}{1} = 0$$
+
+la tangente est solution $u : \setR \mapsto \setR$ du problème différentiel :
+
+\begin{eqnarray*}
+\partial u(t) &=& 1 + u(t)^2 \\
+u(0) &=& 0
+\end{eqnarray*}
+
+vérifié pour tout $t \in \setR$.
+
+
+** Angle entre vecteurs
+
+Dans le cas où le produit scalaire est réel, on peut trouver un réel
+$\theta\in [0,\pi]$ tel que :
+
+$$-1 \le \cos(\theta) = \frac{ \scalaire{x}{y} }{ \norme{x}\ \norme{y} } \le 1$$
+
+On dit alors que $\theta$ est l'angle formé par les deux vecteurs $x$ et $y$.
+
+
+** Angles entre espaces
+
+Autre application des valeurs singulières, les angles entres espaces vectoriels
+générés par les vecteurs colonnes orthonormés des matrices :
+
+#+BEGIN_CENTER
+\(
+X \in \matrice(\setR, k, n) \\
+Y \in \matrice(\setR, l, n)
+\)
+#+END_CENTER
+
+On a donc :
+
+#+BEGIN_CENTER
+\(
+X^\dual \cdot X = I_k \\
+Y^\dual \cdot Y = I_l
+\)
+#+END_CENTER
+
+Les valeurs singulières de la matrice des produits scalaires :
+
+$$Y^\dual \cdot X$$
+
+nous donne les cosinus de ces angles.
+
+
+** Coordonnées polaires
+
+AFAIRE : CLARIFIER LA FIN DU CHAPITRE
+
+Soit les vecteurs $(c_1,c_2)$ formant une base orthonormée de $\setR^2$ :
+
+$$\scalaire{c_i}{c_j} = \delta_{ij}$$
+
+et ne dépendant pas de la position :
+
+$$\deriveepartielle{c_i}{x_j} = 0$$
+
+Soit le changement de variable vers $y = (R,\theta)$, exprimé par :
+
+#+BEGIN_CENTER
+\(
+x_1 = R \cdot \cos(\theta) \\
+x_2 = R \cdot \sin(\theta)
+\)
+#+END_CENTER
+
+#+BEGIN_CENTER
+\(
+r = x_1 \cdot c_1 + x_2 \cdot c_2 \\
+dr = e_R \ dR + e_\theta \ d\theta
+\)
+#+END_CENTER
+
+#+BEGIN_CENTER
+\(
+e_R = \deriveepartielle{r}{R} = \cos(\theta) \cdot c_1 + \sin(\theta) \cdot c_2 \\
+e_\theta = \deriveepartielle{r}{\theta} = -R \cdot \sin(\theta) c_1 + R \cdot \cos(\theta) \cdot c_2
+\)
+#+END_CENTER
+
+#+BEGIN_CENTER
+\(
+\deriveepartielle{e_R}{R} = 0 \\
+\deriveepartielle{e_R}{\theta} = -\sin(\theta) \cdot c_1 + \cos(\theta) \cdot c_2 = \unsur{R} \cdot e_\theta \\
+\deriveepartielle{e_\theta}{R} = -\sin(\theta) \cdot c_1 + \cos(\theta) \cdot c_2 = \unsur{R} \cdot e_\theta \\
+\deriveepartielle{e_\theta}{\theta} = -R \cdot \cos(\theta) \cdot c_1 - R \cdot \sin(\theta) \cdot c_2 = -R \cdot e_R
+\)
+#+END_CENTER
+
+#+BEGIN_CENTER
+\(
+de_R = \deriveepartielle{e_R}{R} \ dR + \deriveepartielle{e_R}{\theta} \ d\theta =
+\unsur{R} \ d\theta \ e_\theta \\
+de_\theta = \deriveepartielle{e_\theta}{R} \ dR + \deriveepartielle{e_\theta}{\theta} \ d\theta =
+\unsur{R} \ dR \ e\theta - R \ d\theta
+\)
+#+END_CENTER
+
+#+BEGIN_CENTER
+\(
+a = a^R \cdot e_R + a^\theta \cdot e_\theta \\
+da = \deriveepartielle{a^R}{R} \cdot e_R \ dR + \left( \deriveepartielle{a^R}{\theta} - R \cdot a^\theta \right)  \cdot e_R \ d\theta + \\
+\left( \deriveepartielle{a^\theta}{R} + \frac{a^\theta}{R} \right) \cdot e_\theta \ dR + \left( \deriveepartielle{a^\theta}{\theta} + \frac{a^R}{R} \right) \cdot e_\theta \ d\theta
+\)
+#+END_CENTER
+
+
+* Fonctions trigonométriques inverses
+
+#+TOC: headlines 1 local
+
+Les fonctions trigonométriques ne sont pas inversible. Soit $y \in \setR$ et $s \in \setR$ une solution
+du problème :
+
+$$\sin(s) = y$$
+
+alors, pour tout $k \in \setN$, on a :
+
+$$\sin(x + 2 \ k \ \pi) = \sin(x) = y$$
+
+L'ensemble des solutions :
+
+$$S(x) = \{ x \in \setR
+
+De même pour la fonction $\cos$. Par contre, elles sont localement inversible,
+et on peut définir les fonctions $\arcsin$, $\arccos$, $\arctan$ par :
+
+#+BEGIN_CENTER
+\(
+\arcsin(y) = x \\
+\Leftrightarrow\\
+y = \sin(x) \\
+x \in [-\pi/2,\pi/2]
+\)
+#+END_CENTER
+
+#+BEGIN_CENTER
+\(
+\arccos(y) = x \\
+\Leftrightarrow\\
+y = \cos(x) \\
+x \in [0,\pi]
+\)
+#+END_CENTER
+
+#+BEGIN_CENTER
+\(
+\arctan(y) = x \\
+\Leftrightarrow\\
+y = \tan(x) \\
+x \in [-\pi/2,\pi/2]
+\)
+#+END_CENTER
+
+
+* Equations aux dérivées partielles
+
+#+TOC: headlines 1 local
+
+\label{chap:pde}
+
+
+** Courbes caractéristiques
+
+Soit $u \in F = \continue^1(\setR^2,\setR)$ et l'équation aux dérivées partielles à résoudre sur $\Omega\subseteq\setR^2$ :
+
+$$a(x,y,u) \ u_x(x,y) + b(x,y,u) \ u_y(x,y) = c(x,y,u)$$
+
+où nous introduisons les notations :
+
+#+BEGIN_CENTER
+\(
+u_x(x,y) = \deriveepartielle{u}{x}(x,y) \\
+u_y(x,y) = \deriveepartielle{u}{y}(x,y)
+\)
+#+END_CENTER
+
+Les coefficients $a,b,c$ sont en général des fonctions de $x,y,u$ mais ne peuvent
+pas dépendre de $u_x$ ni de $u_y$. Soit à présent la courbe $\Gamma$ définie par :
+
+$$\Gamma = \{ \left(w_x(t),w_y(t)\right) : t \in\setR \}$$
+
+où $w_x$ et $w_y$ sont des fonctions dérivables. Définissons la restriction
+de $u$ à $\Gamma$ :
+
+$$\varphi(t) = u\left(w_x(t),w_y(t)\right)$$
+
+Si on s'arrange pour que :
+
+#+BEGIN_CENTER
+\(
+\OD{w_x}{t}(t) = a(w_x(t),w_y(t),u(w_x(t),w_y(t))) \\
+\OD{w_y}{t}(t) = b(w_x(t),w_y(t),u(w_x(t),w_y(t)))
+\)
+#+END_CENTER
+
+On a alors :
+
+$$\OD{\varphi}{t} = u_x \ a + u_y \ b = c$$
+
+Définissons alors :
+
+$$f : (t,u) \mapsto c\left(w_x(t),w_y(t),u\right)$$
+
+On a :
+
+$$\OD{\varphi}{t}(t) = f(t,u(t))$$
+
+qui est une équation différentielle ordinaire en $t$. On peut donc connaître $\varphi$ et
+donc $u$ sur $\Gamma$ si on ajoute la condition initiale :
+
+$$\varphi(0) = u_0$$
+
+On dit alors que $\Gamma$ est une courbe caractéristique de l'équation aux dérivées partielles.
+
+
+** Fonction de Green
+
+Soit un espace fonctionnel $F \subseteq \Leb^2(\setR^n,\setR)$ et une forme $\forme{}{} : F^D \times F \mapsto \setR$ à laquelle on associe par abus de notation :
+
+$$\int_A u(x) \cdot v(x) \ dx = \forme{u}{v}$$
+
+où $A \subseteq \setR^n$.
+
+Soit un opérateur $L : F \mapsto \Leb^2(\setR^n,\setR)$ qui vérifie :
+
+$$\forme{u}{L(v)} = \forme{L(u)}{v}$$
+
+pour tout $u,v\in F$. On dit d'un tel opérateur qu'il est auto-adjoint.
+
+Nous nous intéressons à l'équation différentielle :
+
+$$L(u) = f$$
+
+où $f \in F$.
+
+Introduisons la distribution $\delta$ de Dirac :
+
+$$\int_A \delta(x-a) \ f(x) \ dx = f(a)$$
+
+et définissons la famille de solutions $v_x$ telles que :
+
+$$L(v_x)(y)=\delta(y-x)$$
+
+On peut alors définir la fonction de Green $G$ :
+
+$$G(x,y)=v_x(y)$$
+
+Mais les propriétés de $L$ nous permettent d'écrire :
+
+$$\forme{L(v_x)}{u} = \forme{v_x}{L(u)}$$
+
+Si $u$ est la solution de $L(u) = f$, l'équation précédente peut se formeuler comme :
+
+$$\int_A \delta(y-x) \ u(y) \ dy = \int_A v_x(y) \ f(y) \ dy$$
+
+et finalement :
+
+$$u(x) = \int_A G(x,y) \ f(y) \ dy$$
+
+
+*** Exemple d'opérateur auto-adjoint
+
+Comme exemple d'opérateur auto-adjoint, citons :
+
+$$L : u \mapsto \lapl u = \sum_i \dfdxdx{u}{x_i}$$
+
+
+* Algorithmes de résolution d'EDO
+
+#+TOC: headlines 1 local
+
+\label{chap:algoedo}
+
+
+** Introduction
+
+AFAIRE : ARRANGER LE CHAPITRE
+
+Le but est de calculer une approximation de la solution $y$ de
+
+#+BEGIN_CENTER
+\(
+\OD{y}{x}(x) = f(x,y(x)) \\
+y(0) = y_0
+\)
+#+END_CENTER
+
+Pour cela, on choisit $n$ points $x_i$, et on tente de progresser en évaluant les approximations successives $y_{i+1} \approx y(x_{i+1})$ à partir de $y_i$, pour $i=0,1,2,...$. On pose :
+
+$$h_i = x_{i+1} - x_i$$
+
+
+*** Euler
+
+On se sert de la formulation intégrale correspondant à l'équation différentielle que l'on veut résoudre :
+
+$$y_{i+1} = y_i + \int_{x_i}^{x_{i+1}} f(x,y(x)) \ dx$$
+
+Si $h_i$ est suffisamment petit, la fonction $y$ sera plus ou moins constante sur l'intervalle $[x_i,x_{i+1}]$ et on peut approximer la formulation intégrale par :
+
+$$y_{i+1} = y_i + h_i \cdot f(x_i,y_i)$$
+
+Cette méthode se nomme Euler explicite.
+
+\label{page:euler_expl}
+
+
+*** Predicteur - Correcteur
+
+On part de nouveau de :
+
+$$y_{i+1} = y_i + \int_{x_i}^{x_{i+1}} f(x,y(x)) \ dx$$
+
+On commence par calculer une première estimation de $y(x_{i+1})$ en utilisant la méthode d'Euler explicite :
+
+$$y_{i+1}^* = y_i + h_i \cdot f(x_i,y_i)$$
+
+La valeur $y_{i+1}^*$ ainsi obtenue est nommé prédicteur.
+
+Une fois cette première estimation évaluée, on construit une meilleure approximation de l'intégrale en supposant que, pour $t\in [0,1]$ :
+
+$$f\left(x_i + t \cdot h_i,y(x_i + t h_i)\right) \approx f_i + t \cdot (f^*_{i+1} - f_i)$$
+
+avec :
+
+#+BEGIN_CENTER
+\(
+f_i = f(x_i,y_i) \\
+f^*_{i+1} = f(x_{i+1},y^*_{i+1})
+\)
+#+END_CENTER
+
+On obtient :
+
+\begin{eqnarray*}
+\int_{x_i}^{x_{i+1}} f(x,y(x)) \ dx &\approx&
+h_i \int_0^1 \left[ f_i + t \cdot (f^*_{i+1} - f_i) \right] dt \\
+&\approx&
+\frac{h_i}{2} \cdot \left( f_i + f^*_{i+1} \right)
+\end{eqnarray*}
+
+L'étape correctrice s'écrit donc :
+
+$$y_{i+1} = y_i + \frac{h_i}{2} \cdot [f(x_i,y_i) + f(x_{i+1},y_{i+1}^*)]$$
+
+
+*** Taylor
+
+Partant des dérivées de la fonction $y(x) = f(x,y(x))$ :
+
+\begin{eqnarray*}
+\OD{y}{x} &=& f \\
+\frac{d^2 y}{dx^2} &=& \deriveepartielle{f}{x}+\deriveepartielle{f}{y}\OD{y}{x} =
+\deriveepartielle{f}{x}+\deriveepartielle{f}{y} f \\
+\frac{d^3 y}{dx^3} &=& ...
+\end{eqnarray*}
+
+on peut écrire le développement en série de Taylor de $y$
+autour de $x_i$ :
+
+$$y_{i+1} = y_i + f(x_i,h_i) \ h_i + \OD{f}{x}(x_i,y_i) \ \frac{h_i^2}{2} + ...$$
+
+
+* Algorithmes de résolution d'EDP
+
+#+TOC: headlines 1 local
+
+\label{chap:algoedp}
+
+
+** Résolution par les caractéristiques
+
+AFAIRE : ARRANGER LE CHAPITRE
+
+Soit une équation du premier ordre à résoudre :
+
+$$a(x,y,u) \ u_x(x,y) + b(x,y,u) \ u_y(x,y) = c(x,y,u)$$
+
+Supposons que l'on connaisse la valeur de la solution :
+
+$$u_{i0} = u(x_{i0},y_{i0})$$
+
+pour $i = 1,2,...,n$. Les équations :
+
+$$\OD{x}{t} = a \qquad \OD{y}{t} = b \qquad \OD{u}{t} = c$$
+
+nous permettent de construire simultanément les courbes
+caractéristiques et la solution. Par exemple, si on utilise
+le schéma d'Euler explicite, on a :
+
+#+BEGIN_CENTER
+\(
+x_{i,k+1} = x_{ik} + h_k \ a(x_{ik},y_{ik},u_{ik}) \\
+y_{i,k+1} = y_{ik} + h_k \ b(x_{ik},y_{ik},u_{ik}) \\
+u_{i,k+1} = u_{ik} + h_k \ c(x_{ik},y_{ik},u_{ik})
+\)
+#+END_CENTER
+
+
+** Différences finies
+
+On vérifie sur le développement de Taylor de $u$ que :
+
+#+BEGIN_CENTER
+\(
+u_x(x,y) \approx \frac{u(x+h,y) - u(x-h,y)}{2 h} \\
+u_y(x,y) \approx \frac{u(x,y+h) - u(x,y-h)}{2 h}
+\)
+#+END_CENTER
+
+pour les dérivées premières et :
+
+#+BEGIN_CENTER
+\(
+u_{xx}(x,y) \approx \unsur{h^2} \ \left(u(x+h,y)-2 u(x,y) + u(x-h,y)\right) \\
+u_{yy}(x,y) \approx \unsur{h^2} \ \left(u(x,y+h)-2 u(x,y) + u(x,y-h)\right) \\
+u_{xy}(x,y) \approx \unsur{4h^2} \ \left(u(x+h,y+h) + u(x-h,y-h) \right\relax \\
+\qquad\qquad \left\relax - u(x+h,y-h) - u(x-h,y+h)\right)
+\)
+#+END_CENTER
+
+pour les dérivées secondes. L'erreur converge vers $0$ aussi vite que
+$h^2$. Posons :
+
+$$U_{ij} = u(i h, j h)$$
+
+Les dérivées approximatives s'écrivent :
+
+#+BEGIN_CENTER
+\(
+u_x \approx \Delta_x U_{ij} = \unsur{2 h} \ (U_{i+1,j} - U_{i-1,j}) \\
+u_y \approx \Delta_y U_{ij} = \unsur{2 h} \ (U_{i,j+1} - U_{i,j-1})
+\)
+#+END_CENTER
+
+et :
+
+#+BEGIN_CENTER
+\(
+u_{xx} \approx \Delta_x^2 U_{ij} = \unsur{h^2} \ (U_{i+1,j} - 2 U_{ij} + U_{i-1,j}) \\
+u_{yy} \approx \Delta_y^2 U_{ij} = \unsur{h^2} \ (U_{i,j+1} - 2 U_{ij} + U_{i,j-1}) \\
+u_{xy} \approx \Delta_x\Delta_y U_{ij} =
+\unsur{4 h^2} \ (U_{i+1,j+1} - U_{i+1,j-1} - U_{i-1,j+1} + U_{i-1,j-1})
+\)
+#+END_CENTER
+
+On substitue alors ces expressions dans l'équation :
+
+$$F(x,y,u,u_x,u_y,u_{xx},u_{xy},u_{yy}) = 0$$
+
+et on obtient un système linéaire à résoudre en les $U_{ij}$.
+
+
+** Eléments finis
+
+\label{sec:elements_finis}
+
+Soient des espaces fonctionnels $F,H\subset\fonction(\Omega,\setR)$ et un
+opérateur linéaire :
+
+$$L \in \lineaire(F,H)$$
+
+Nous cherchons à résoudre de manière approchée l'équation
+différentielle associée :
+
+$$L(u) = f$$
+
+où $f$ est une fonction de $H$. La méthode des éléments finis consiste à imposer l'annulation de l'intégrale du résidu $L(u)$, pondéré par des fonctions
+$\psi_i$ :
+
+$$\int_\Omega \left[L(u)(x)-f(x)] \ \psi_i(x) \ dx = 0$$
+
+pour $i = 1,2,...,n$. Afin de résoudre ce problème, on discrétise
+la solution approchée $u$ :
+
+$$u(x) = \sum_{i=1}^n U_i \ \varphi_i(x)$$
+
+où les $U_i$ sont des réels et les $\varphi_i$ des fonctions de $F$.
+On définit les grandeurs :
+
+#+BEGIN_CENTER
+\(
+A_{ij} = \int_\Omega L(\varphi_i)(x) \ \psi_i(x) \ dx \\
+F_i = \int_\Omega f(x) \ \psi_i(x) \ dx
+\)
+#+END_CENTER
+
+et les matrices :
+
+#+BEGIN_CENTER
+\(
+U = (U_i)_i \\
+A = (A_{ij})_{i,j} \\
+F = (F_i)_i
+\)
+#+END_CENTER
+
+En utilisant la linéarité de $L$, l'équation des résidus pondérés :
+
+$$\int_\Omega L(u)(x) \ \psi_i(x) \ dx = \int_\Omega f(x) \ \psi_i(x) \ dx$$
+
+devient :
+
+$$A \ U = F$$
+
+soit un système linéaire à résoudre en $U$ :
+
+$$U = A^{-1} \ F$$
+
+ce qui nous donne une forme approchée $u$ de la solution exacte.

@@ -1,0 +1,729 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat 06 : Vecteurs - 4
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/commandes-tex.org"
+
+* Produit scalaire
+
+#+TOC: headlines 1 local
+
+\label{chap:ps}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:vecteur} : Les espaces vectoriels
+  - Chapitre \ref{chap:norme} : Les normes
+
+
+** Introduction
+
+Soit $E$ un espace vectoriel sur $\corps$ et une famille de fonctions linéaires $\phi_u \in E^\dual$ où $u \in E$ est un paramètre vectoriel. Nous pouvons écrire :
+
+$$\phi_u(v) = \forme{\phi_u}{v}$$
+
+pour tout $u,v \in E$. Cette expression introduit implicitement le produit dérivé $\scalaire{}{} : E \times E \mapsto \corps$ défini par :
+
+$$\scalaire{u}{v} = \forme{\phi_u}{v}$$
+
+pour tout $u,v \in E$. Ce produit hérite bien entendu la linéarité à droite de la forme associée :
+
+$$\scalaire{u}{\alpha \cdot v + \beta \cdot w}  = \alpha \cdot \scalaire{u}{v} + \beta \cdot \scalaire{u}{w}$$
+
+pour tout $u,v,w \in E$ et pour tout $\alpha,\beta \in \corps$.
+
+Les produits scalaires sont des cas particuliers de ce type de produit.
+
+
+*** Notation
+
+On note aussi $u \cdot v = \scalaire{u}{v}$.
+
+
+** Produit scalaire réel
+
+Considérons le cas particulier où $\corps = \setR$. et un produit linéaire à droite $\scalaire{}{} : E \times E \mapsto \setR$. Nous voudrions en plus que la valeur de $\scalaire{u}{u}$ en chaque $u \in E$ puisse représenter la norme de $u$. Nous imposons donc la positivité :
+
+$$\scalaire{u}{u} \ge 0$$
+
+Pour compléter le caractère strictement défini positif, on impose également que le seul élément $u \in E$ vérifiant :
+
+$$\scalaire{u}{u} = 0$$
+
+soit le vecteur nul $u = 0$. Ce qui revient à dire que :
+
+$$\scalaire{u}{u} > 0$$
+
+pour tout $u \in E \setminus \{ 0 \}$.
+
+Si on peut également interchanger n'importe quels $u,v \in E$ sans changer le résultat :
+
+$$\scalaire{u}{v} = \scalaire{v}{u}$$
+
+on dit que $\scalaire{}{}$ est un produit scalaire réel sur $E$.
+
+Nous déduisons directement de la linéarité à droite et de la symétrie que :
+
+$$\scalaire{\alpha \cdot u + \beta \cdot v}{w} = \alpha \cdot \scalaire{u}{w} + \beta \cdot \scalaire{v}{w}$$
+
+pour tout $\alpha,\beta \in \setR$ et $u,v,w \in E$. Le produit scalaire réel est bilinéaire.
+
+
+** Produit scalaire complexe
+
+Examinons à présent le cas $\corps = \setC$. On demande qu'un produit scalaire $\scalaire{}{} : E \times E \mapsto \setC$ soit strictement défini positif. Pour cela, les valeurs de $\scalaire{u}{u}$ doivent être réelles et positives :
+
+#+BEGIN_CENTER
+\(
+\scalaire{u}{u} \in \setR \\
+\scalaire{u}{u} \ge 0
+\)
+#+END_CENTER
+
+pour tout $u \in E$. Ensuite, il faut également que le seul élément $u \in E$ vérifiant :
+
+$$\scalaire{u}{u} = 0$$
+
+soit le vecteur nul $u = 0$.
+
+Le caractère réel de $\scalaire{u}{u}$ implique que :
+
+$$\scalaire{u}{u} = \conjaccent{\scalaire{u}{u}}$$
+
+où la barre supérieure désigne comme d'habitude le complexe conjugué. Cette constatation nous mène à une variante de la symétrie. On impose :
+
+$$\scalaire{u}{v} = \conjaccent{\scalaire{v}{u}}$$
+
+pour tout $u,v \in E$. On dit que le produit scalaire complexe est hermitien.
+
+La linéarité à droite s'exprime simplement par :
+
+$$\scalaire{u}{\alpha \cdot v + \beta \cdot w}  = \alpha \cdot \scalaire{u}{v} + \beta \cdot \scalaire{u}{w}$$
+
+pour tout $u,v,w \in E$ et pour tout $\alpha,\beta \in \setC$. On déduit de la linéarité et du caractère hermitien du produit scalaire complexe que :
+
+\begin{eqnarray*}
+\scalaire{\alpha \cdot u + \beta \cdot v}{w}  &=& \conjaccent{\scalaire{w}{\alpha \cdot u + \beta \cdot v}} \\
+&=& \conjaccent{\alpha} \cdot \conjaccent{\scalaire{w}{u}} + \conjaccent{\beta} \cdot \conjaccent{\scalaire{w}{v}}
+\end{eqnarray*}
+
+et finalement :
+
+$$\scalaire{\alpha \cdot u + \beta \cdot v}{w} = \conjaccent{\alpha} \cdot \scalaire{u}{w} + \conjaccent{\beta} \cdot \scalaire{v}{w}$$
+
+On dit que le produit scalaire est antilinéaire à gauche.
+
+
+*** Corollaire
+
+En particulier, si $u,v,w,x$ sont des vecteurs de $E$ et
+si $\alpha = \scalaire{u}{v} \in \setC$, on a :
+
+#+BEGIN_CENTER
+\(
+\scalaire{w}{\alpha \cdot x} = \scalaire{w}{ \scalaire{u}{v} \cdot x} = \scalaire{u}{v} \cdot \scalaire{w}{x} \\
+\scalaire{\alpha \cdot w}{x} = \scalaire{ \scalaire{u}{v} \cdot w}{x} = \scalaire{v}{u} \cdot \scalaire{w}{x}
+\)
+#+END_CENTER
+
+
+*** Cas particulier
+
+Comme $\conjaccent{x} = x$ pour tout $x \in \setR \subseteq \setC$, on peut considérer le produit scalaire réel comme un cas particulier de produit scalaire complexe.
+
+
+** Espace orthogonal
+
+
+*** A un vecteur
+
+Soit $x \in H$. On définit l'ensemble $x^\orthogonal$ par :
+
+$$x^\orthogonal = \{ z \in E : \scalaire{x}{z} = 0 \}$$
+
+On dit des vecteurs de $x^\orthogonal$ qu'ils sont orthogonaux à $x$.
+
+
+*** A un ensemble
+
+Pour tout sous-ensemble $V \subseteq E$, l'ensemble orthogonal à $V$ est l'ensemble des vecteurs qui sont orthogonaux à tous les éléments de $V$ :
+
+$$V^\orthogonal = \bigcap_{x \in V} x^\orthogonal$$
+
+Pour tout $z \in V^\orthogonal$, on a donc $\scalaire{x}{z} = 0$ quel que soit $x \in V$.
+
+Nous allons vérifier que $V^\orthogonal$ est un sous-espace vectoriel. Soit $z \in V$. Comme $\scalaire{z}{0} = 0$, on a $0 \in V^\orthogonal$. Soit $x,y \in V^\orthogonal$, $\alpha,\beta \in \corps$. On a :
+
+$$\scalaire{z}{\alpha \cdot x + \beta \cdot y} = \alpha \cdot \scalaire{z}{x} + \beta \cdot \scalaire{z}{y} = 0 + 0 = 0$$
+
+ce qui montre que $\alpha \cdot x + \beta \cdot y \in V^\orthogonal$.
+
+
+** Egalité
+
+Si $u,v \in E$ sont tels que :
+
+$$\scalaire{u}{w} = \scalaire{v}{w}$$
+
+pour tout $w \in E$, on a :
+
+$$\scalaire{u - v}{w} = 0$$
+
+Le choix $w = u - v \in E$ nous donne alors :
+
+$$\scalaire{u - v}{u - v} = 0$$
+
+ce qui implique $u - v = 0$ et donc $u = v$.
+
+
+** Base orthonormée
+
+Une base $(e_1,...,e_n)$ de $E$ est dite orthonormée si le produit scalaire de deux vecteurs $e_i \ne e_j$ s'annule, tandis que le produit scalaire d'un $e_i$ avec lui-même donne l'unité :
+
+$$\scalaire{e_i}{e_j} = \indicatrice_{ij}$$
+
+
+*** Coordonnées
+
+Soit $u \in E$ de coordonnée $u_i \in \corps$ :
+
+$$u = \sum_{i = 1}^n u_i \cdot e_i$$
+
+En effectuant le produit scalaire de $u$ avec $e_k$, on arrive à  :
+
+#+BEGIN_CENTER
+\(
+\scalaire{e_k}{u} = \sum_{i = 1}^n u_i \cdot \scalaire{e_k}{e_i} \\
+\scalaire{e_k}{u} = \sum_{i = 1}^n u_i \cdot \indicatrice_{ik}
+\)
+#+END_CENTER
+
+Tous les termes de cette dernière somme s'annulent sauf lorsque $i = k$, et on a :
+
+$$\scalaire{e_k}{u} = u_k$$
+
+On peut donc écrire :
+
+$$y = \sum_{i = 1}^n \scalaire{e_i}{u} \cdot e_i$$
+
+
+*** Indépendance linéaire
+
+On peut voir que si une suite de vecteurs $e_i$ est orthonormée,
+(ils ne forment pas forcément une base) ils sont toujours linéairement
+indépendant. En effet si les scalaires $a_i$, sont tels que :
+
+$$\sum_{i=1}^n a_i \cdot e_i = 0$$
+
+on a alors :
+
+$$a_i = \scalaire{e_i}{0} = 0$$
+
+
+** Produit scalaire et coordonnées
+
+Soit $(e_1,...,e_n)$ une base de $E$ et $u,v \in E$. On a :
+
+#+BEGIN_CENTER
+\(
+u = \sum_i u_i \cdot e_i \\
+v = \sum_i v_i \cdot e_i
+\)
+#+END_CENTER
+
+pour certains $u_i,v_i \in \corps$. Posons :
+
+$$g_{ij} = \scalaire{e_i}{e_j}$$
+
+où $\scalaire{}{} : E \times E \mapsto \setC$ est un produit scalaire complexe. Nous pouvons faire sortir les sommes en utilisant les propriétés du produit scalaire, ce qui nous donne :
+
+$$\scalaire{u}{v} = \sum_{i,j} \conjaccent{u}_i \cdot g_{ij} \cdot v_j$$
+
+
+*** Réel
+
+Dans les cas d'un produit scalaire réel, on a $\conjaccent{u}_i = u_i$ et l'expression devient :
+
+$$\scalaire{u}{v} = \sum_{i,j} u_i \cdot g_{ij} \cdot v_j$$
+
+
+*** Base orthonormée
+
+Si la base $(e_1,...,e_n)$ est orthonormée, l'expression du produit scalaire se simplifie en :
+
+$$\scalaire{u}{v} = \sum_i \conjaccent{u}_i \cdot v_i$$
+
+
+** Application définie positive
+
+Soit une application linéaire $A : E \mapsto E$. Si le produit scalaire de $u$ avec $A(u)$ est un réel positif :
+
+$$\scalaire{u}{A(u)} = \scalaire{A(u)}{u} \ge 0$$
+
+pour tout $u \in E$, on dit que $A$ est définie positive.
+
+** Produit scalaire sur $\setR^n$
+
+Soit $x,y \in \setR^n$ tels que :
+
+#+BEGIN_CENTER
+\(
+x = (x_1,x_2,...,x_n) \\
+y = (y_1,y_2,...,y_n)
+\)
+#+END_CENTER
+
+pour certains $x_i,y_i \in \setR$.
+
+Le produit scalaire usuel sur $\setR^n$ est défini par :
+
+$$\scalaire{x}{y} = \sum_{i = 1}^n x_i y_i$$
+
+** Produit scalaire sur $\setC^n$
+
+Soit $x,y \in \setC^n$ tels que :
+
+#+BEGIN_CENTER
+\(
+x = (x_1,x_2,...,x_n) \\
+y = (y_1,y_2,...,y_n)
+\)
+#+END_CENTER
+
+pour certains $x_i,y_i \in \setC$.
+
+Le produit scalaire usuel est défini par :
+
+$$\scalaire{x}{y} = \sum_{i=1}^n \conjaccent{x}_i y_i$$
+
+** Base orthonormée sur $\corps^n$
+
+Soit $\corps \in \{ \setR , \setC \}$. Il est clair que la base canonique de $\corps^n$ :
+
+$$e_i = ( \indicatrice_{ij} )_{i,j}$$
+
+vérifie :
+
+$$\scalaire{e_i}{e_j} = \indicatrice_{ij}$$
+
+pour le produit scalaire usuel sur $\corps^n$. La suite $(e_1,...,e_n)$ forme une base orthonormée.
+
+
+** Représentation matricielle
+
+Soit $x = (x_1,..,x_n) , y = (y_1,...,y_n) \in \setC^n$. On définit les vecteurs colonne associé :
+
+#+BEGIN_CENTER
+\(
+x =
+\begin{Matrix}{c}
+x_1 \\
+x_2 \\
+\vdots \\
+x_n
+\end{Matrix}
+\qquad \qquad
+y =
+\begin{Matrix}{c}
+y_1 \\
+y_2 \\
+\vdots \\
+y_n
+\end{Matrix}
+\)
+#+END_CENTER
+
+L'équivalence entre $\setC^n$ et $\matrice(\setC,n,1)$ nous amène à :
+
+$$\scalaire{x}{y} = \sum_i \conjaccent{x}_i \cdot y_i$$
+
+Le membre de droite n'est rien d'autre que le produit « matriciel » $\conjaccent{x^T} \cdot y$ et on a donc :
+
+$$\scalaire{x}{y} = \conjaccent{x^T} \cdot y$$
+
+On vérifie que la base $(e_1,...,e_n)$ est orthonormée pour ce produit scalaire :
+
+$$e_i^T \cdot e_j = \indicatrice_{ij}$$
+
+
+** Application linéaire
+
+Soit les espaces vectoriels $E,F$ sur $\corps$ et une application linéaire $\mathcal{A} : E \mapsto F$. On prend une base $(e_1,..,e_n)$ de $E$ et une base orthonormée $(f_1,...,f_m)$ de $F$. Comme les composantes de la matrice associée $A$ sont les coordonnées de $\mathcal{A}(e_j)$ dans la base des $f_i$, on a :
+
+$$\composante_{ij} A = \scalaire{f_i}{\mathcal{A}(e_j)}$$
+
+
+** Matrice de produit scalaire
+
+Soit un espace vectoriel $E$ sur $\corps$ et un produit scalaire $\scalaire{}{}$ quelconque défini sur $E$. Soit $(e_1,...,e_n)$ une base quelconque de $E$ (nous ne supposons pas qu'elle soit orthonormée). Si $\hat{x},\hat{y} \in E$, on a :
+
+#+BEGIN_CENTER
+\(
+\hat{x} = \sum_i x_i \cdot e_i \\
+\hat{y} = \sum_i y_i \cdot e_i
+\)
+#+END_CENTER
+
+pour certains $x_i,y_i \in S$. Or, nous avons vu que :
+
+$$\scalaire{\hat{x}}{\hat{y}} = \sum_{i,j} \conjaccent{x}_i \scalaire{e_i}{e_j} y_j$$
+
+Si nous définissons la matrice des produits scalaires $A \in \matrice(\corps,m,n)$ par :
+
+$$\composante_{ij} A = \scalaire{e_i}{e_j}$$
+
+nous pouvons réécrire le produit scalaire sous la forme :
+
+$$\scalaire{\hat{x}}{\hat{y}} = \conjaccent{x^T} \cdot A \cdot y$$
+
+où $x,y$ sont les vecteurs colonne associés à $\hat{x},\hat{y}$ :
+
+#+BEGIN_CENTER
+\(
+x = [x_1 \ x_2 \ ... \ x_n]^T \\
+y = [y_1 \ y_2 \ ... \ y_n]^T
+\)
+#+END_CENTER
+
+Cette matrice possède d'importantes propriétés issues du produit scalaire. On a $\conjaccent{x^T} \cdot A \cdot x > 0$ pour tout $x \ne 0$. On dit que $A$ est une matrice définie positive. Le caractère hermitien du produit scalaire nous donne aussi $\conjaccent{A^T} = A$. On dit que $A$ est une matrice hermitienne, ou auto-adjointe.
+
+
+*** Réciproque
+
+Si $A$ est une matrice carrée définie positive et hermitienne, l'application définie par :
+
+$$\scalaire{x}{y} = \conjaccent{x^T} \cdot A \cdot y$$
+
+est bien un produit scalaire. En effet, la définie positivité de la matrice est équivalente à celle du produit ainsi défini. Pour le caractére hermitien, on a :
+
+\begin{eqnarray*}
+\scalaire{x}{y} &=& \sum_{i,j} \conjaccent{x}_i \cdot A_{ij} \cdot y_j = \sum_{i,j} \conjaccent{x}_i \cdot \conjaccent{A}_{ji} \cdot y_j \\
+&=& \sum_{i,j} y_j \cdot \conjaccent{A}_{ji} \cdot \conjaccent{x}_i = \conjugue \sum_{i,j} \conjaccent{y}_j \cdot A_{ji} \cdot x_i \\
+&=& \conjugue \scalaire{y}{x}
+\end{eqnarray*}
+
+
+** Bases de vecteurs matriciels
+
+Un cas particulier important survient lorsque les vecteurs sont des vecteurs matriciels. Soit une suite de vecteurs linéairement indépendants $u_1,u_2,...,u_m \in \matrice(\corps,n,1)$. Soit des $x_i,y_i \in \corps$ et les vecteurs :
+
+#+BEGIN_CENTER
+\(
+X = \sum_{i = 1}^m x_i \cdot u_i \\
+Y = \sum_{i = 1}^m y_i \cdot u_i
+\)
+#+END_CENTER
+
+Si nous considérons les vecteurs $x,y \in \matrice(\corps,m,1)$ associés :
+
+#+BEGIN_CENTER
+\(
+x = [x_1 \ x_2 \ ... \ x_m]^T \\
+y = [y_1 \ y_2 \ ... \ y_m]^T
+\)
+#+END_CENTER
+
+ainsi que la matrice $U \in \matrice(\corps,n,m)$ rassemblant les $u_i$ :
+
+$$U = [u_1 \ u_2 \ ... \ u_m]$$
+
+on peut réécrire la définition de $x,y$ sous la forme :
+
+#+BEGIN_CENTER
+\(
+X = U \cdot x \\
+Y = U \cdot y
+\)
+#+END_CENTER
+
+On a alors :
+
+$$\scalaire{X}{Y} = \conjaccent{X^T} \cdot Y = \conjaccent{x^T} \cdot \conjaccent{U^T} \cdot U \cdot y$$
+
+On en conclut que la matrice $A = \conjaccent{U^T} \cdot U \in \matrice(\corps,m,m)$ est une matrice de produit scalaire
+
+
+*** Réciproque
+
+Soit $U \in \matrice(\corps,n,m)$ telle que $\noyau U = \{0\}$. La matrice $A = \conjaccent{U^T} \cdot U \in \matrice(\corps,m,m)$ est une matrice de produit scalaire. En effet :
+
+$$\conjaccent{x^T} \cdot A \cdot x = \conjaccent{x^T} \cdot \conjaccent{U^T} \cdot U \cdot x = \conjugue(U \cdot x)^T \cdot (U \cdot x) \ge 0$$
+
+Si $x \ne 0$, on a de plus $U \cdot x \ne 0$ et $\conjaccent{x}^T \cdot A \cdot x \strictsuperieur 0$. Par ailleurs, on a évidemment :
+
+$$\conjaccent{A^T} = \conjaccent{(\conjaccent{U^T} \cdot U)^T} = \conjaccent{U^T} \cdot U = A$$
+
+
+** Noyau
+
+Soit $l_i = \ligne_i A$ et $x \in \noyau A$. On a alors :
+
+$$0 = \composante_i (A \cdot x) = l_i \cdot x$$
+
+On en conclut que les lignes de $A$ sont orthogonales aux $\conjaccent{l}_i$. Il en va de même pour toute combinaison linéaire de ces lignes, et :
+
+$$\noyau A = \combilin{\conjaccent{l}_1,...,\conjaccent{l}_m}^\orthogonal$$
+
+
+* Norme dérivée du produit scalaire
+
+#+TOC: headlines 1 local
+
+\label{chap:ps}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:vecteur} : Les espaces vectoriels
+  - Chapitre \ref{chap:norme} : Les normes
+
+
+** Introduction
+
+Soit un espace vectoriel $E$ muni du produit scalaire $\scalaire{}{}$. Nous allons analyser les propriétés de l'application $\norme{.} : E \mapsto \corps$ associée au produit scalaire et définie par :
+
+$$\norme{x} = \sqrt{ \scalaire{x}{x} }$$
+
+pour tout $x \in E$.
+
+
+** Addition
+
+Soit $x,y \in E$ et $\alpha,\beta \in \setC$. On a :
+
+\begin{eqnarray*}
+\norme{\alpha \cdot x + \beta \cdot y}^2 &=& \scalaire{\alpha \cdot x + \beta \cdot y}{\alpha \cdot x + \beta \cdot y} \\
+&=& \conjaccent{\alpha} \cdot \alpha \cdot \scalaire{x}{x} + \conjaccent{\alpha} \cdot \beta \cdot \scalaire{x}{y} + \conjaccent{\beta} \cdot \alpha \cdot \scalaire{y}{x} + \conjaccent{\beta} \cdot \beta \cdot \scalaire{y}{y} \\
+&=& \abs{\alpha}^2 \cdot \norme{x}^2 + \conjaccent{\alpha} \cdot \beta \cdot \scalaire{x}{y} + \conjaccent{\beta} \cdot \alpha \cdot \scalaire{y}{x} + \abs{\beta}^2 \cdot \norme{y}^2
+\end{eqnarray*}
+
+Dans le cas particulier où $\beta = 1$, on a :
+
+\begin{eqnarray*}
+\norme{y + \alpha \cdot x} &=& \norme{y}^2 + \alpha \cdot \scalaire{y}{x} + \conjaccent{\alpha} \cdot \scalaire{x}{y} + \abs{\alpha}^2 \cdot \norme{x}^2 \\
+&=& \norme{y}^2 + 2 \Re(\alpha \cdot \scalaire{y}{x}) + \abs{\alpha}^2 \cdot \norme{x}^2
+\end{eqnarray*}
+
+
+** Théorème de Pythagore
+
+Si $x,y \in E$ sont orthogonaux :
+
+$$\scalaire{x}{y} = 0$$
+
+on a également $\scalaire{y}{x} = \conjugue \scalaire{x}{y} = 0$ et :
+
+\begin{eqnarray*}
+\scalaire{x + y}{x + y} &=& \scalaire{x}{x} + \scalaire{x}{y} + \scalaire{y}{x} + \scalaire{y}{y} \\
+&=& \scalaire{x}{x} + \scalaire{y}{y}
+\end{eqnarray*}
+
+En exprimant cette relation en terme de $\norme{.}$, on obtient :
+
+$$\norme{x + y}^2 = \norme{x}^2 + \norme{y}^2$$
+
+résultat connu sous le nom de théorème de Pythagore.
+
+
+** Egalité du parallélogramme
+
+En additionnant les équations :
+
+#+BEGIN_CENTER
+\(
+\norme{x + y}^2 = \scalaire{x}{x} + \scalaire{x}{y} + \scalaire{y}{x} + \scalaire{y}{y} \\
+\norme{x - y}^2 = \scalaire{x}{x} - \scalaire{x}{y} - \scalaire{y}{x} + \scalaire{y}{y}
+\)
+#+END_CENTER
+
+on obtient :
+
+$$\norme{x + y}^2 + \norme{x - y}^2 = 2(\scalaire{x}{x} + \scalaire{y}{y}) = 2 (\norme{x}^2 + \norme{y}^2)$$
+
+
+** Inégalité de Cauchy-Schwartz
+
+Soit $x,y \in E$ et $\lambda \in \setC$. On a :
+
+$$\norme{y - \lambda \cdot x}^2 = \scalaire{y}{y} - \lambda \cdot \scalaire{y}{x} - \conjaccent{\lambda} \cdot \scalaire{x}{y} + \conjaccent{\lambda} \cdot \lambda \cdot \scalaire{x}{x} \ge 0$$
+
+Le choix magique de $\lambda$ (nous verrons d'où il vient en étudiant les projections) est :
+
+$$\lambda = \frac{ \scalaire{x}{y} }{ \scalaire{x}{x} }$$
+
+On a alors :
+
+$$\scalaire{y}{y} - \frac{ \scalaire{x}{y} \cdot \scalaire{y}{x} }{ \scalaire{x}{x} } - \frac{ \scalaire{y}{x} \cdot \scalaire{x}{y} }{ \scalaire{x}{x} } +  \frac{ \scalaire{y}{x} \cdot \scalaire{x}{y} }{ \scalaire{x}{x}^2 } \cdot \scalaire{x}{x} \ge 0$$
+
+En simplifiant les termes, on arrive à :
+
+$$\scalaire{y}{y}  - \frac{ \scalaire{x}{y} \cdot \scalaire{y}{x} }{ \scalaire{x}{x} } = \scalaire{y}{y}  - \frac{ \abs{\scalaire{x}{y}}^2 }{ \scalaire{x}{x} } \ge 0$$
+
+En faisant passer le second terme dans le second membre et en multipliant par $\scalaire{x}{x}$, on arrive finalement à :
+
+$$\abs{\scalaire{x}{y}}^2 \le \scalaire{x}{x} \cdot \scalaire{y}{y}$$
+
+En prenant la racine carrée, on obtient une relation connue sous le nom d'inégalite de Cauchy-Schwartz :
+
+$$\abs{\scalaire{x}{y}} \le \sqrt{\scalaire{x}{x} \cdot \scalaire{y}{y}} = \norme{x} \cdot \norme{y}$$
+
+
+** Norme et inégalité de Minkowski
+
+Nous allons à présent vérifier que l'application $\norme{.}$ est bien une norme.
+
+
+*** Définie positivité
+
+On voit que notre application est strictement définie positive car $\norme{x} \ge 0$ pour tout $x \in E$ et :
+
+$$\norme{x} = 0 \Rightarrow \scalaire{x}{x} = 0 \Rightarrow x = 0$$
+
+
+*** Produit mixte
+
+La multiplication par un scalaire $\alpha \in \setC$ nous donne :
+
+$$\norme{\alpha \cdot x} = \sqrt{ \abs{\alpha}^2 \cdot \scalaire{x}{x} } = \abs{\alpha} \cdot \sqrt{ \scalaire{x}{x} } = \abs{\alpha} \cdot \norme{x}$$
+
+
+*** Inégalité de Minkowski
+
+On a :
+
+\begin{eqnarray*}
+\norme{x + y}^2 &=& \scalaire{x}{x} + \scalaire{x}{y} + \scalaire{y}{x} + \scalaire{y}{y} \\
+&=& \scalaire{x}{x} + 2 \Re(\scalaire{x}{y}) + \scalaire{y}{y}
+\end{eqnarray*}
+
+Mais comme $\abs{\Re(\scalaire{x}{y})} \le \abs{\scalaire{x}{y}} \le \norme{x} \cdot \norme{y}$, on a finalement :
+
+$$\norme{x + y}^2 \le \norme{x}^2 + 2 \norme{x} \cdot \norme{y} + \norme{y}^2 = (\norme{x} + \norme{y})^2$$
+
+d'où :
+
+$$\norme{x + y} \le \norme{x} + \norme{y}$$
+
+Cette troisième et dernière propriété étant vérifiée, l'application $\norme{.} = \sqrt{\scalaire{}{}}$ est bien une norme.
+
+
+** Distance
+
+On associe une distance à la norme et au produit scalaire par :
+
+$$\distance(x,y) = \norme{x - y} = \sqrt{\scalaire{x - y}{x - y}}$$
+
+pour tout $x,y \in E$.
+
+
+** Produit scalaire à partir de la norme
+
+En soutrayant les équations :
+
+#+BEGIN_CENTER
+\(
+\norme{x + y}^2 = \scalaire{x}{x} + 2 \Re(\scalaire{x}{y}) + \scalaire{y}{y} \\
+\norme{x - y}^2 = \scalaire{x}{x} - 2 \Re(\scalaire{x}{y}) + \scalaire{y}{y}
+\)
+#+END_CENTER
+
+on obtient :
+
+$$\norme{x + y}^2 - \norme{x - y}^2 = 4 \Re(\scalaire{x}{y})$$
+
+Comme $\Re(\img z) = - \Im(z)$, on a aussi :
+
+\begin{eqnarray*}
+\norme{x + \img y}^2 &=& \scalaire{x}{x} + 2 \Re(\img \scalaire{x}{y}) + \scalaire{y}{y} \\
+&=&  \scalaire{x}{x} - 2 \Im(\scalaire{x}{y}) + \scalaire{y}{y} \\
+\norme{x - \img y}^2 &=& \scalaire{x}{x} - 2 \Re(\img \scalaire{x}{y}) + \scalaire{y}{y} \\
+&=&  \scalaire{x}{x} + 2 \Im(\scalaire{x}{y}) + \scalaire{y}{y}
+\end{eqnarray*}
+
+En soustrayant ces deux résultats, on a donc :
+
+$$\norme{x + \img y}^2 - \norme{x - \img y}^2 = - 4 \Im(\scalaire{x}{y})$$
+
+On en conclut que :
+
+\begin{eqnarray*}
+\scalaire{x}{y} &=& \Re(\scalaire{x}{y}) + \img \Im(\scalaire{x}{y}) \\
+&=& \unsur{4} (\norme{x + y}^2 + \norme{x - y}^2) + \frac{\img}{4} (\norme{x - \img y}^2 - \norme{x + \img y}^2)
+\end{eqnarray*}
+
+
+** Norme et coordonnées
+
+Soit $(e_1,...,e_n)$ une base de $E$ et $u \in E$. On a :
+
+$$u = \sum_i u_i \cdot e_i$$
+
+pour certains $u_i,v_i \in \corps$. La norme s'écrit alors :
+
+$$\norme{u} = \sqrt{ \sum_{i,j} \conjaccent{u}_i \cdot \scalaire{e_i}{e_j} \cdot u_j }$$
+
+
+*** Base orthonormée
+
+Si la base est orthonormée, les seuls termes ne s'annulant pas sont ceux où $i = j$, et on a :
+
+$$\norme{u} = \sqrt{ \sum_i \abs{u_i}^2 }$$
+
+** Norme sur $\corps^n$
+
+Soit $\corps \in \{ \setR , \setC \}$. On définit une norme sur $\corps^n$, dite norme euclidienne, à partir du produit scalaire :
+
+$$\norme{x} = \sqrt{ \scalaire{x}{x} } = \sqrt{\sum_{i=1}^n \abs{x_i}^2}$$
+
+
+*** Normes $k$
+
+Par extension, on définit une série de normes $k$ par :
+
+$$\norme{x}_k = \left( \sum_i \abs{x_i}^k \right)^{1/k}$$
+
+Lorsque $k$ devient très grand, il est clair que la contribution du $\abs{x_i}^k$ le plus grand en valeur absolue devient énorme par rapport aux autres contributions de la norme. On peut vérifier que :
+
+$$\lim_{k \mapsto +\infty} \norme{x}_k = \max_{i = 1}^n \abs{x_i}$$
+
+On s'inspire de ce résultat pour définir :
+
+$$\norme{x}_\infty = \max_{i = 1}^n \abs{x_i}$$
+
+On nomme $\norme{.}_\infty$ la norme « max ».
+
+Attention, une norme $k$ quelconque ne dérive en général pas d'un produit scalaire et ne possède donc pas les propriétés que nous avons vu pour la norme $\norme{.} = \norme{.}_2 = \sqrt{\scalaire{}{}}$.
+
+** Norme sur $\setC$
+
+Soit $(a,b) \in \setR^2$ et $z = a + \img b$. Il est clair que le module :
+
+$$\abs{z} = \abs{a + \img b} = \sqrt{a^2 + b^2} = \norme{(a,b)}$$
+
+définit une norme sur $\setC$.
+
+
+** Représentation matricielle
+
+Soit le vecteur matriciel $x = [x_1 \ ... \ x_n]^T$. Sa norme s'écrit :
+
+$$\norme{x} = \sqrt{ \scalaire{x}{x} } = \sqrt{\conjaccent{x}^T \cdot x}$$

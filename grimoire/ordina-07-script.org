@@ -1,0 +1,2637 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Ordina 07 : Langages de script
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index. html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+* Emacs-Lisp
+
+| Expression                             | Interprétation                                    |
+|----------------------------------------+---------------------------------------------------|
+| /expr/                                 | interprétation de l’expression /expr/             |
+| (quote /expr/)                         | /expr/                                            |
+| '/expr/                                | /expr/                                            |
+| #'/fun/                                | référence à la fonction /fun/                     |
+| `(... ,var ... ,@liste-a-plat)         | backquote                                         |
+| :symbol                                | constant symbol                                   |
+|----------------------------------------+---------------------------------------------------|
+| (type-of ...)                          | type d’un objet                                   |
+|----------------------------------------+---------------------------------------------------|
+| (set '/var/ /valeur/)                  | change la valeur dans /var/                       |
+| (setq /var/ /valeur/)                  | synonyme de (set '/var/ /valeur/)                 |
+| (setf /expr/ /valeur/)                 | change la valeur dans la variable                 |
+|                                        | référencée par le résultat de /expr/              |
+|                                        | par exemple /expr/ = (/fun/ ...)                  |
+|                                        | ne fonctionne pas avec toutes les fonctions       |
+|----------------------------------------+---------------------------------------------------|
+| (setq /ptr/ (gv-ref /expr/))           | définit un pointeur /ptr/ vers la variable        |
+|                                        | référencée par le résultat de /expr/              |
+| (setf (gv-deref /ptr/) /valeur/)       | modifie la valeur de la variable référencée       |
+|                                        | par /ptr/                                         |
+|----------------------------------------+---------------------------------------------------|
+| (cons /a/ /b/)                         | (/a/ . /b/)                                       |
+| (car '(/a/ . /b/))                     | /a/                                               |
+| (cdr '(/a/ . /b/))                     | /b/                                               |
+|----------------------------------------+---------------------------------------------------|
+| (setcar /liste/)                       | change le car de /liste/                          |
+| (setcdr /liste/)                       | change le cdr de /liste/                          |
+|----------------------------------------+---------------------------------------------------|
+| (list /a/ /b/)                         | (/a/ /b/)                                         |
+|                                        | (/a/ . (/b/))                                     |
+| (list /a/ /b/ /c/)                     | (/a/ /b/ /c/)                                     |
+|                                        | (/a/ . (/b/ /c/)                                  |
+|                                        | (/a/ . (/b/ . (/c/)))                             |
+| (car '(/a/ /b/ /c/))                   | /a/                                               |
+| (cdr '(/a/ /b/ /c/))                   | (/b/ /c/)                                         |
+|----------------------------------------+---------------------------------------------------|
+| (eq /a/ /b/)                           | teste si /a/ et /b/ référencent la même variable  |
+| (equal /a/ /b/)                        | teste si /a/ et /b/ contiennent la même valeur    |
+|----------------------------------------+---------------------------------------------------|
+| (elt /sequence/ /N/)                   | référence vers le /N/ième élément de /sequence/   |
+| (nth /N/ /liste/)                      | référence vers le /N/ième élément de /liste/      |
+| (nthcdr /index/ /liste/)               | référeence vers la liste sans ses /N/ premiers    |
+|                                        | éléments                                          |
+| (last /liste/ /N/)                     | référence vers la liste contenant                 |
+|                                        | les /N/ derniers éléments de /liste/              |
+| (butlast /liste/ /N/)                  | copie de /liste/ sans ses /N/ derniers éléments   |
+| (nbutlast /liste/ /N/)                 | enlève les /N/ derniers éléments de /liste/       |
+|----------------------------------------+---------------------------------------------------|
+| (copy-seq ...)                         | copie le contenu d’une séquence                   |
+| (copy-tree ...)                        | copie récursivement le contenu d’une liste        |
+|----------------------------------------+---------------------------------------------------|
+| (intern-soft "/var/")                  | symbole '/var/ de la variable de nom "/var/"      |
+| (intern "/var/")                       | comme intern-soft mais crée la variable           |
+|                                        | si elle n’existe pas encore                       |
+| (unintern "/var/")                     | détruit la variable /var/                         |
+| (symbol-name '/var/)                   | nom "/var/" de la variable                        |
+| (symbol-value '/var/)                  | valeur de la variable de symbole /var/            |
+| (symbol-function '/fun/)               | valeur de la fonction de symbole /fun/            |
+|----------------------------------------+---------------------------------------------------|
+| (eval /expr/)                          | évalue le contenu de l’expression /expr/          |
+| (eval '/expr/)                         | évalue le contenu de l’expression '/expr/         |
+| (eval `/expr/)                         | évalue le contenu de l’expression `/expr/         |
+| (eval (car (read-from-string /text/))) | évalue le contenu du texte /text/                 |
+| (eval-buffer /buffer/)                 | évalue le /buffer/                                |
+|----------------------------------------+---------------------------------------------------|
+| (/fun/ /args/)                         | application de la fonction /fun/                  |
+|                                        | aux arguments /args/                              |
+| (defun ...)                            | définition d’une fonction                         |
+| (lambda ... )                          | définition d’une fonction anonyme                 |
+| (funcall '/fun/ /args/)                | applique la fonction de symbole /fun/             |
+|                                        | aux /args/                                        |
+| (apply '/fun/ /args/)                  | similaire à funcall mais le dernier               |
+|                                        | argument est considéré comme la liste             |
+|                                        | des arguments restants                            |
+|----------------------------------------+---------------------------------------------------|
+| (defmacro ...)                         | définition d’une macro                            |
+| (macroexpand ...)                      | étend une macro                                   |
+| (macroexpand-all ...)                  | étend une macro récursivement                     |
+|----------------------------------------+---------------------------------------------------|
+| (caar ...)                             | (car (car ...))                                   |
+| (cadr ...)                             | (car  (cdr ...))                                  |
+| (cddr ...)                             | (cdr (cdr ...))                                   |
+|----------------------------------------+---------------------------------------------------|
+| (let ((...)) ...)                      | définition de variables locales                   |
+| (if ...)                               | if else                                           |
+| (when ...)                             | if sans else                                      |
+| (unless ...)                           | if not sans else                                  |
+| (cond ...)                             | série de conditions                               |
+| (pcase /var/ ...)                      | série de conditions sur une variable /var/        |
+| (progn ...)                            | bloc de code                                      |
+|----------------------------------------+---------------------------------------------------|
+| (push /elem/ /liste/)                  | Ajoute /elem/ au début de /liste/                 |
+| (pop /liste/)                          | Renvoie le premier élément de /liste/ et l’enlève |
+|                                        | de /liste/                                        |
+| (append ...)                           | Concatène plusieurs listes et renvoie le résultat |
+| (nconc ...)                            | Concatène plusieurs listes et les remplace        |
+|                                        | par les résultats                                 |
+
+
+* Perl
+
+#+TOC: headlines 1 local
+
+
+** Générique
+
+| perldoc /mot-clé/ | Documentation             |
+| print             | Affiche                   |
+| ;                 | Séparateur d'instructions |
+
+
+** Variables
+
+| $/variable/                  | Variable                                         |
+| $/variable/ = `/commande/`   | Substitution du résultat  d'une commande externe |
+| $/variable/ = qx//commande// |                                                  |
+| $_                           | Variable par défaut                              |
+
+
+** Chaînes de caractères
+
+
+*** Effet des caractères magiques annulé
+
+#+BEGIN_EXAMPLE
+$/variable/ = '/chaîne/'
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+$/variable/ = q//chaîne//
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+$/variable/ = q(/chaîne/)
+#+END_EXAMPLE
+
+
+*** Effet des caractères magiques actif
+
+#+BEGIN_EXAMPLE
+$/variable/ = &quot;/chaîne/&quot;
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+$/variable/ = qq//chaîne//
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+$/variable/ = qq(/chaîne/)
+#+END_EXAMPLE
+
+
+*** Concaténer
+
+#+BEGIN_EXAMPLE
+'/chaîne_1/' . '/chaîne_2/'
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+$/variable_1/ . $/variable_2/
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+&quot;$/variable_1/$/variable_2/&quot;
+#+END_EXAMPLE
+
+
+*** Répéter
+
+#+BEGIN_EXAMPLE
+&quot;/chaîne/&quot; x /Nombre/
+#+END_EXAMPLE
+
+
+** Fichiers
+
+| $/variable/ = <> | Lecture d'une variable à l'entrée standard  ou au(x) fichier(s) passé(s) en argument(s) |
+| </globbing/>     | Liste de fichiers  correspondant à un globbing                                          |
+| rename           | Renomme un fichier                                                                      |
+| unlink           | Supprime un fichier                                                                     |
+
+
+** Listes
+
+#+BEGIN_EXAMPLE
+@/liste/ = ( /élément_1/, /élément_2/, /.../, /élément_N/ )
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+@/liste/ = ( '/chaîne_1/', '/chaîne_2/', /.../, '/chaîne_N/' )
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+@/liste/ = qw//mot_1/ /mot_2/ /.../ /mot_N//
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+@/liste/ = (/M/../N/)
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+@/listeRépétée/ = ( /.../, /.../, /.../ ) x /N/
+#+END_EXAMPLE
+
+| @/liste/                     | Liste                                                   |
+| $/liste/[/indice/]           | Élément d'une liste                                     |
+| @/liste/[/M/,/N/]            | Tranche                                                 |
+| $#/liste/                    | Nombre d'éléments d'une liste                           |
+| @_                           | Liste par défaut                                        |
+| @ARGV                        | Liste des arguments  passés au script                   |
+| $ARGV[/N/]                   | /N/<sup>ième</sup> argument                             |
+| push @/liste/, /élément/     | Ajoute un élément à la fin de la liste                  |
+| $/variable/ = pop @/liste/   | Supprime un élément à la fin de la liste  et le renvoie |
+| unshift @/liste/, /élément/  | Ajoute un élément au début de la liste                  |
+| $/variable/ = shift @/liste/ | Supprime un élément au début de la liste  et le renvoie |
+
+/Remarque :/ push, pop, shift et unshift utilisent par défaut
+la liste @ARGV dans la partie principale du script et @_ dans les
+fonctions.
+
+
+*** Fusion
+
+#+BEGIN_EXAMPLE
+$/variable/ = join('/caractère/', @/liste/)
+#+END_EXAMPLE
+
+
+*** Éclatement
+
+#+BEGIN_EXAMPLE
+$/liste/ = join(//motif//, @/variable/)
+#+END_EXAMPLE
+
+
+** Dictionnaires
+
+#+BEGIN_EXAMPLE
+%/dictionnaire/ = ( /clé_1/ => /valeur_1/, /.../, /clé_N/ => /valeur_N/ )
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+%/dictionnaire/ = ( /clé_1/, /valeur_1/, /.../, /clé_N/, /valeur_N/ )
+#+END_EXAMPLE
+
+| %/dictionnaire/         | Dictionnaire              |
+| $/dictionnaire/{/clé/}  | Élément d'un dictionnaire |
+| keys %/dictionnaire/    | Liste des clés            |
+| values %/dictionnaire/  | Liste des valeurs         |
+| reverse %/dictionnaire/ | Inverse clé et valeurs    |
+
+
+** Conditions
+
+| /A/ == /B/  | Vrai si les deux nombres sont égaux       |   |    |
+| /A/ != /B/  | Vrai si les deux nombres sont différents  |   |    |
+| < > <= >=   | Comparaison de nombres                    |   |    |
+| /A/ eq /B/  | Vrai si les deux chaînes sont identiques  |   |    |
+| /A/ ne /B/  | Vrai si les deux chaînes sont différentes |   |    |
+| lt gt le ge | Comparaison de chaînes                    |   |    |
+| &&          | Et                                        |   |    |
+|             |                                           |   | Ou |
+| !           | Non                                       |   |    |
+| sort        | Trie une liste                            |   |    |
+
+La syntaxe /A/ <=> /B/ renvoie :
+
+  - 1 si /A/ > /B/
+
+  - 0 si /A/ = /B/
+
+  - -1 si /A/ < /B/
+
+
+Condition uniligne :
+
+#+BEGIN_EXAMPLE
+/commande/ if /condition/
+#+END_EXAMPLE
+
+
+** Expressions régulières
+
+| $/variable/ =~ m//motif//                 | Test de correspondance  d'un motif dans une variable              |
+| $/variable/ =~ s//motif///remplacement//  | Substitution                                                      |
+| $/variable/ =~ y//motif///remplacement//  | Translittération                                                  |
+| $/variable/ =~ tr//motif///remplacement// |                                                                   |
+| m//motif//                                | Équivalent à $_ =~ m//motif//  Idem avec s/.../.../ et y/.../.../ |
+| m/.../i s/.../.../i                       | Insensible à la casse                                             |
+| s/.../.../g                               | Substitution globale                                              |
+| $&                                        | Variable contenant  la dernière correspondance                    |
+| $1, $2, $3, ...                           | Rétro-références des groupes  entre parenthèses                   |
+| .                                         | N'importe quel caractère  sauf fin de ligne                       |
+| *                                         | Un nombre quelconque de fois  l'élément précédent                 |
+| +                                         | Au moins une fois  l'élément précédent                            |
+| ?                                         | Zéro ou une fois  l'élément précédent                             |
+| {/N/}                                     | /N/ fois  l'élément précédent                                     |
+| {/M/,/N/}                                 | Entre /M/ et /N/ fois  l'élément précédent                        |
+| [/groupe/]                                | Un des caractères du groupe                                       |
+| (/A/            ¦ /B/)                    | /A/ ou /B/                                                        |
+| ^                                         | Début de ligne                                                    |
+| $                                         | Fin de ligne                                                      |
+
+
+** Boucles
+
+Pour chaque élément de la liste :
+
+#+BEGIN_EXAMPLE
+foreach $/variable/ ( @/liste/ ) {
+/.../
+/.../ $/variable/ /.../
+/.../
+}
+#+END_EXAMPLE
+
+
+*** Variable par défaut
+
+#+BEGIN_EXAMPLE
+foreach ( @/liste/ ) {
+/.../
+/.../ $_ /.../
+/.../
+}
+#+END_EXAMPLE
+
+
+
+** Fonctions
+
+| @_              | Liste des arguments                        |
+| $_[/N/]         | Argument /N/                               |
+| my /variable/   | Déclare une variable  comme étant locale   |
+| return /valeur/ | Retourne une valeur  et quitte la fonction |
+
+#+BEGIN_EXAMPLE
+sub /fonction/ {
+my (/argument_1/, /.../) = @_
+/.../
+return /valeur/
+}
+#+END_EXAMPLE
+
+Appel :
+
+#+BEGIN_EXAMPLE
+/fonction/(/arguments/)
+/fonction/ /arguments/
+&/fonction/(/arguments/)
+&/fonction/ /arguments/
+#+END_EXAMPLE
+
+
+** Références
+
+| $/réf/ = \$/variable/            | Référence vers une variable    |
+| $/réf/ = \@/variable/            | Référence vers une liste       |
+| $/réf/ = \%/variable/            | Référence vers un dictionnaire |
+| $/réf/ = \&/fonction/            | Référence vers une fonction    |
+| $/réf/ = [ /.../, /.../, /.../ ] | Référence vers une liste       |
+| $/réf/ = { /.../, /.../, /.../ } | Référence vers un dictionnaire |
+
+
+** Options
+
+L'option *-p* permet de boucler implicitement sur les lignes de
+l'entrée standard ou des fichiers passés en argument. Chaque ligne est
+affichée à la suite des instructions. La ligne de commande :
+
+#+BEGIN_EXAMPLE
+perl -p -e '/instruction(s)/'
+#+END_EXAMPLE
+
+est équivalente à :
+
+#+BEGIN_EXAMPLE
+while ( <> ) {
+/instruction(s)/
+print $_
+}
+#+END_EXAMPLE
+
+Remarque : l'option *-p* produit un comportement que l'on peut
+rapprocher du fonctionnement de *sed*.
+
+L'option *-n* permet de boucler implicitement sur les lignes de
+l'entrée standard ou des fichiers passés en argument. Contrairement à
+l'option *-p*, aucune ligne n'est affichée à la suite des
+instructions. La ligne de commande :
+
+#+BEGIN_EXAMPLE
+perl -n -e '/instruction(s)/'
+#+END_EXAMPLE
+
+est équivalente à :
+
+#+BEGIN_EXAMPLE
+while ( <> ) {
+/instruction(s)/
+}
+#+END_EXAMPLE
+
+Remarque : l'option *-n* produit un comportement que
+l'on peut rapprocher du fonctionnement de *sed -n*.
+
+
+** CPAN
+
+| cpan                     | Lance cpan                           |
+| install /module/         | Installe un module                   |
+| o conf                   | Liste des options                    |
+| o conf /option/ /valeur/ | Assigne une valeur à une option      |
+| o conf commit            | Valide les modifications des options |
+
+
+* Python
+
+#+TOC: headlines 1 local
+
+
+** Scripts
+
+| #!/usr/bin/python | Début d'un script python |
+
+
+** Blocs
+
+Les blocs en python ne se déclarent pas en utilisant des accolades
+comme dans d'autres langages, mais en utilisant l'indentation :
+
+/déclaration/ :
+#+BEGIN_EXAMPLE
+/début bloc/
+...
+/fin bloc/
+#+END_EXAMPLE
+/suite du script/
+
+
+** Listes
+
+| /liste/ = [/e1/, /e2/, ..., /eN/] | Définition d'une liste                                                      |
+| /liste/[/i/]                      | L'élément /i/ de la liste,  en partant du premier d'indice 0                |
+| /liste/[-/i/]                     | L'élément /i/ de la liste,  en partant du dernier d'indice -1               |
+| /liste/[/i/:/j/]                  | Les éléments de la liste dont l'indice est supérieur ou égal à /i/          |
+|                                   | et strictement inférieur à /j/                                              |
+| /liste/[-/i/:-/j/]                | Les éléments de la liste dont l'indice négatif est supérieur ou égal à -/i/ |
+|                                   | et strictement inférieur à -/j/                                             |
+| /liste/[:]                        | Tous les éléments de la liste                                               |
+| /liste/[/i/:]                     | Tous les éléments de la liste, sauf les /i/ premiers                        |
+| /liste/[:-/i/]                    | Tous les éléments de la liste, sauf les /i/ derniers                        |
+| /liste/.insert(/pos/, /elt/)      | Insertion de l'élement /elt/ à la position /pos/                            |
+| del /liste/[/i/]                  | Suppression de l'élement d'indice /i/                                       |
+| /liste/.append(/elt/)             | Ajout d'un élément à la fin de la liste                                     |
+| /liste1/ + /liste2/               | Extension d'une liste par une autre                                         |
+| /liste1/.append(/liste2/)         |                                                                             |
+| /liste/.pop(/pos/)                | Suppression de l'élément en position /pos/                                  |
+| /liste/.index(/elt/)              | Renvoie l'indice de l'élement /elt/                                         |
+| /liste/.count(/elt/)              | Donne le nombre d'occurences de l'élement /elt/                             |
+| /liste/.reverse()                 | Renverse l'ordre des éléments                                               |
+| /liste/.sort()                    | Trie la liste                                                               |
+
+Pour éclater une chaîne de caractère :
+
+#+BEGIN_EXAMPLE
+/liste/ = /chaine/.split('/séparateur/')
+#+END_EXAMPLE <!-- code -->
+
+Pour fusionner une liste :
+
+#+BEGIN_EXAMPLE
+/chaine/ = '/séparateur/'.join(/liste/)
+#+END_EXAMPLE <!-- code -->
+
+
+*** Dictionnaires
+
+#+BEGIN_EXAMPLE
+/dictionnaire/ = {"/cle1/": "/valeur1/", ..., "/cleN/": "/valeur1/"};
+#+END_EXAMPLE <!-- code -->
+
+
+** Logique
+
+| /A/ and /B/ | Est vrai si /A/ et /B/ sont vrais, est faux sinon     |
+| /A/ or /B/  | Est vrai si /A/ ou /B/ sont vrais, est faux sinon     |
+| /a/ == /b/  | Teste l'égalité entre /a/ et /b/                      |
+| /a/ != /b/  | Teste la différence entre /a/ et /b/                  |
+| /a/ <= /b/  | Teste l'infériorité de /a/ par rapport à /b/          |
+| /a/ >= /b/  | Teste la supériorité de /a/ par rapport à /b/         |
+| /a/ < /b/   | Teste l'infériorité stricte de /a/ par rapport à /b/  |
+| /a/ > /b/   | Teste la supériorité stricte de /a/ par rapport à /b/ |
+
+
+** Conditions
+
+if /condition1/ :
+#+BEGIN_EXAMPLE
+...
+#+END_EXAMPLE
+elif /condition2/ :
+#+BEGIN_EXAMPLE
+...
+#+END_EXAMPLE
+..........
+else :
+#+BEGIN_EXAMPLE
+...
+#+END_EXAMPLE
+
+Forme concise :
+
+#+BEGIN_EXAMPLE
+variable = (1 if i == 2 else 0)
+#+END_EXAMPLE <!-- code -->
+
+
+** Boucles
+
+Boucle *for* :
+
+for /élément/ in /liste/ :
+#+BEGIN_EXAMPLE
+...
+#+END_EXAMPLE
+
+Boucle *while* :
+
+while /condition/ :
+#+BEGIN_EXAMPLE
+...
+#+END_EXAMPLE
+
+
+** Expressions de liste
+
+#+BEGIN_EXAMPLE
+/listeDérivée/ = [ /elt/ * /elt/ for /elt/ in /liste/]
+#+END_EXAMPLE <!-- code -->
+
+
+*** Multi-liste
+
+#+BEGIN_EXAMPLE
+/liste/ = [/e1/ + /e2/ for /e1/ in /L1/ for /e2/ in /L2/]
+#+END_EXAMPLE <!-- code -->
+
+
+*** Filtre
+
+#+BEGIN_EXAMPLE
+/listeFiltrée/ = [/elt/ for /elt/ in /liste/ if /condition/]
+#+END_EXAMPLE <!-- code -->
+
+
+** Itérateurs
+
+Un itérateur est une liste virtuelle qui ne sert qu'à être utilisée
+au sein d'une boucle, ce qui permet des optimisations.
+
+
+*** Générateur
+
+Un générateur est une fonction permettant de générer un itérateur.
+Une boucle /while/ ou /for/ indique la condition permettant
+la fin des itérations et le mot-clé /yield/ permet d'indiquer
+le passage à l'itération suivante. Un exemple permettant d'itérer sur
+les puissances de deux :
+
+#+BEGIN_EXAMPLE
+def puissancesDeDeux(/n/) :
+ /e/ = 1
+ while /e/ <= /n/ :
+	 yield /e/
+	 /e/ = 2*/e/
+#+END_EXAMPLE
+
+et une application :
+
+#+BEGIN_EXAMPLE
+for /element/ in puissancesDeDeux(10) :
+...
+#+END_EXAMPLE
+
+équivalente à :
+
+#+BEGIN_EXAMPLE
+for /element/ in (2**/x/ for /x/ in xrange(10)) :
+...
+#+END_EXAMPLE
+
+
+** Fonctions
+
+Définition :
+
+#+BEGIN_EXAMPLE
+def /fonction/(/argument1/, /argument2/, ...) :
+...
+return /variable/
+#+END_EXAMPLE
+
+Définition avec valeurs par défaut des arguments :
+
+#+BEGIN_EXAMPLE
+def /fonction/(/argument1/ = /valeurParDéfaut1/, ...) :
+...
+return /variable/
+#+END_EXAMPLE
+
+Définition avec liste :
+
+#+BEGIN_EXAMPLE
+def /fonction/(..., */liste/) :
+for /argument/ in /liste/ :
+...
+...
+#+END_EXAMPLE
+
+Définition avec dictionnaire :
+
+#+BEGIN_EXAMPLE
+def /fonction/(/arg1/, ..., **/dictionnaire/) :
+for (/clé/, /valeur/) in /dictionnaire/.items() :
+...
+...
+#+END_EXAMPLE
+
+Définition avec liste et dictionnaire :
+
+#+BEGIN_EXAMPLE
+def /fonction/(..., */liste/, **/dictionnaire/) :
+for /argument/ in /liste/ :
+...
+...
+for (/clé/, /valeur/) in /dictionnaire/.items() :
+...
+...
+#+END_EXAMPLE
+
+Appel avec nom des arguments :
+
+#+BEGIN_EXAMPLE
+/var/ = /fonction/(/nomArgument1/ = /valeur1/, ...)
+#+END_EXAMPLE <!-- code -->
+
+
+*** Récursivité
+
+#+BEGIN_EXAMPLE
+def factorielle(x) :
+ return 1 if x == 0 else x * factorielle(x-1)
+#+END_EXAMPLE
+
+
+*** Fonctionnelles
+
+#+BEGIN_EXAMPLE
+def /composée/(/f/, /g/) :
+def /h/(/x/) :
+return /g/(/f/(/x/))
+return /h/
+#+END_EXAMPLE
+
+
+** Classes
+
+class /Classe/(/ClasseDeBase1/, /ClasseDeBase2/, ...) :
+
+/Variable/ = ...
+
+#+BEGIN_EXAMPLE
+def /__init__/(self, /a1/, /a2/, ...) :
+self./attribut1/ = /a1/
+self./attribut2/ = /a2/
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+def /__repr__/(self, /a1/, /a2/, ...) :
+print self./attribut1/ + self./attribut2/
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+def /methode/(self, /a1/, /a2/, ...) :
+...
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+/c/ = /Classe/(...)
+/resultat/ = /c.methode(...)/
+/variableDeClasse/ = /Classe.Variable/
+#+END_EXAMPLE
+
+
+* Ruby
+
+#+TOC: headlines 1 local
+
+
+
+** Blocs
+
+Les blocs peuvent s'agencer de deux manières différentes. Soit :
+
+/déclaration / do |/variable1/, ..., /variableN/|
+#+BEGIN_EXAMPLE
+/bloc/
+#+END_EXAMPLE
+end
+
+soit :
+
+#+BEGIN_EXAMPLE
+/déclaration/ { |/variables/| /bloc/ }
+#+END_EXAMPLE <!-- code -->
+
+
+** Arythmétique
+
+#+BEGIN_EXAMPLE
+c = a + b
+c = a - b
+c = a * b
+c = a / b
+c = a ** b
+c = a % b
+a += b
+a -= b
+a *= b
+a /= b
+a **= b
+a %= b
+#+END_EXAMPLE
+
+Conversions :
+
+#+BEGIN_EXAMPLE
+# Vers entier
+/variable/.to_i
+# Vers réel
+/variable/.to_f
+#+END_EXAMPLE
+
+
+** Chaînes de caractère
+
+Afficher à la sortie standard :
+
+#+BEGIN_EXAMPLE
+# Sans passage à la ligne
+print "/Coucou, je suis la variable/ #{/variable/}"
+# Avec passage à la ligne
+puts "/Coucou, je suis la variable/ #{/variable/}"
+#+END_EXAMPLE
+
+Récupérer à l'entrée standard :
+
+#+BEGIN_EXAMPLE
+/chaine/ = gets
+#+END_EXAMPLE <!-- code -->
+
+Concaténer :
+
+#+BEGIN_EXAMPLE
+/chaine/ = /chaine1/ + /chaine2/
+/chaine/ += /autreChaine/
+/chaine/ << /autreChaine/
+#+END_EXAMPLE <!-- code -->
+
+Répéter :
+
+#+BEGIN_EXAMPLE
+/chaine/ = /texte/ * /nombre/
+#+END_EXAMPLE <!-- code -->
+
+Remplacer :
+
+#+BEGIN_EXAMPLE
+/chaine/[/avant/] = /apres/
+#+END_EXAMPLE <!-- code -->
+
+Conversion vers chaîne :
+
+#+BEGIN_EXAMPLE
+/variable/.to_s
+#+END_EXAMPLE
+
+Enlever fin de ligne :
+
+#+BEGIN_EXAMPLE
+/chaine/.chomp!/
+#+END_EXAMPLE <!-- code -->
+
+Enlever fin de ligne sans modifier la chaîne originale :
+
+#+BEGIN_EXAMPLE
+/autreChaine/ = /chaine/.chomp/
+#+END_EXAMPLE <!-- code -->
+
+Tester si une chaine est vide :
+
+#+BEGIN_EXAMPLE
+/chaine/.empty?/
+#+END_EXAMPLE <!-- code -->
+
+Passer en minuscules :
+
+#+BEGIN_EXAMPLE
+/chaine/.downcase/
+#+END_EXAMPLE <!-- code -->
+
+Passer en majuscules :
+
+#+BEGIN_EXAMPLE
+/chaine/.upcase/
+#+END_EXAMPLE <!-- code -->
+
+Echanger la casse :
+
+#+BEGIN_EXAMPLE
+/chaine/.swapcase/
+#+END_EXAMPLE <!-- code -->
+
+
+** Listes
+
+Listes :
+
+#+BEGIN_EXAMPLE
+/liste/ = ["/elt1/", "/elt2/", ..., "/eltN/"];
+#+END_EXAMPLE <!-- code -->
+
+Concaténer des listes :
+
+#+BEGIN_EXAMPLE
+/liste/ = /liste1/ + /liste2/
+/liste/ += /autreListe/
+/liste/ << /autreListe/
+/liste/ << /élement/
+#+END_EXAMPLE
+
+Soustraction ensembliste de listes :
+
+#+BEGIN_EXAMPLE
+/liste/ = /liste1/ - /liste2/
+#+END_EXAMPLE <!-- code -->
+
+| /liste/[/i/]         | L'élément /i/ de la liste,  en partant du premier d'indice 0  |
+| /liste/[-/i/]        | L'élément /i/ de la liste,  en partant du dernier d'indice -1 |
+| /liste/[/i/.../j/]   | Les éléments de la liste dont l'indice est supérieur          |
+|                      | ou égal à /i/ et strictement inférieur à /j/                  |
+| /liste/[-/i/...-/j/] | Les éléments de la liste dont l'indice négatif est supérieur  |
+|                      | ou égal à -/i/ et strictement inférieur à -/j/                |
+| /liste/[/i/, /n/]    | /n/ éléments à partir de l'indice /i/                         |
+| /liste/.pop()        | Suppression du dernier élément                                |
+| /liste/.shift()      | Suppression du premier élément                                |
+
+Pour éclater une chaîne de caractère :
+
+#+BEGIN_EXAMPLE
+/liste/ = /chaine/.split('/séparateur/')
+#+END_EXAMPLE <!-- code -->
+
+Pour fusionner une liste :
+
+#+BEGIN_EXAMPLE
+/chaine/ =/liste/.join('/séparateur/')
+#+END_EXAMPLE <!-- code -->
+
+Obtenir une liste à partir d'entiers ou de chaines :
+
+#+BEGIN_EXAMPLE
+(/i/../j/).to_a
+(/0/../9/).to_a
+(/'a'/../'z'/).to_a
+#+END_EXAMPLE <!-- code -->
+
+
+*** Dictionnaires
+
+#+BEGIN_EXAMPLE
+/dictionnaire/ = {"/cle1/" => "/valeur1/", ..., "/cleN/" => "/valeurN/"}
+#+END_EXAMPLE <!-- code -->
+
+
+** Logique
+
+| ! /A/              | Est vrai si /A/ est faux                              |
+| /A/ && /B/         | Est vrai si /A/ et /B/ sont vrais, est faux sinon     |
+| /A/ ¦¦ /B/         | Est vrai si /A/ ou /B/ sont vrais, est faux sinon     |
+| /a/ == /b/         | Teste l'égalité entre /a/ et /b/                      |
+| /a/ != /b/         | Teste la différence entre /a/ et /b/                  |
+| /a/ <= /b/         | Teste l'infériorité de /a/ par rapport à /b/          |
+| /a/ >= /b/         | Teste la supériorité de /a/ par rapport à /b/         |
+| /a/ < /b/          | Teste l'infériorité stricte de /a/ par rapport à /b/  |
+| /a/ > /b/          | Teste la supériorité stricte de /a/ par rapport à /b/ |
+| (/i/../j/) === /a/ | Teste si /a/ est compris entre /i/ et /j/             |
+
+
+** Conditions
+
+if /condition1/
+#+BEGIN_EXAMPLE
+...
+#+END_EXAMPLE
+elsif /condition2/
+#+BEGIN_EXAMPLE
+...
+#+END_EXAMPLE
+..........
+else
+#+BEGIN_EXAMPLE
+...
+#+END_EXAMPLE
+end
+
+Forme concise :
+
+#+BEGIN_EXAMPLE
+/commande/ if /condition/
+#+END_EXAMPLE <!-- code -->
+
+Forme ternaire :
+
+#+BEGIN_EXAMPLE
+/condition/ ? /commande si vrai/ : /commande si faux/
+#+END_EXAMPLE <!-- code -->
+
+Forme inverse :
+
+unless /condition/
+#+BEGIN_EXAMPLE
+...
+#+END_EXAMPLE
+end
+
+Aiguillage :
+
+case /variable/
+when /valeur(s)1/
+#+BEGIN_EXAMPLE
+/commande1/
+#+END_EXAMPLE
+...
+when /valeur(s)N/
+#+BEGIN_EXAMPLE
+/commandeN/
+#+END_EXAMPLE
+end
+
+Note : on peut aussi tester si la variable contient une correspondance
+d'une expression régulière.
+
+
+** Boucles
+
+Boucle /while/ :
+
+while /condition/
+#+BEGIN_EXAMPLE
+...
+#+END_EXAMPLE
+end
+
+Boucle /while/ inversée :
+
+until /condition/
+#+BEGIN_EXAMPLE
+...
+#+END_EXAMPLE
+end
+
+La boucle /loop/ est une boucle infinie :
+
+loop do
+#+BEGIN_EXAMPLE
+...
+break if /condition/
+...
+#+END_EXAMPLE
+end
+
+Boucle /for/ :
+
+for /i/ in /liste/ do
+#+BEGIN_EXAMPLE
+...
+#+END_EXAMPLE
+end
+
+Exemple classique :
+
+for /i/ in (/0/../N/) do
+#+BEGIN_EXAMPLE
+...
+#+END_EXAMPLE
+end
+
+Boucle /for/ sur un dictionnaire :
+
+for /cle/, /valeur/ in /dictionnaire/ do
+#+BEGIN_EXAMPLE
+...
+#+END_EXAMPLE
+end
+
+Les itérations utilisent des listes :
+
+/liste/.each do |/element/|
+#+BEGIN_EXAMPLE
+puts /element/
+#+END_EXAMPLE
+end
+
+L'équivalent d'une itération sur indice classique :
+
+/nombreFinal/.each do |/i/|
+#+BEGIN_EXAMPLE
+puts /i/
+#+END_EXAMPLE
+end
+
+En spécifiant les valeurs initiale et finale, en montant :
+
+/depart/.upto(/arrivee/) do |/i/|
+#+BEGIN_EXAMPLE
+puts /i/
+#+END_EXAMPLE
+end
+
+en descendant :
+
+/depart/.downto(/arrivee/) do |/i/|
+#+BEGIN_EXAMPLE
+puts /i/
+#+END_EXAMPLE
+end
+
+En spécifiant les valeurs initiale et finale et un pas de progression :
+
+/depart/.step(/arrivee/, /pas/) do |/i/|
+#+BEGIN_EXAMPLE
+puts /i/
+#+END_EXAMPLE
+end
+
+Les itérations peuvent aussi utiliser des dictionnaires :
+
+/dictionnaire/.each do |/cle/, /valeur/|
+#+BEGIN_EXAMPLE
+puts /cle/ + " ---> " + /valeur/
+#+END_EXAMPLE
+end
+
+Uniquement sur les clefs :
+
+/dictionnaire/.each_key do |/cle/|
+#+BEGIN_EXAMPLE
+puts /cle/ + " ---> " + /dictionnaire/[/cle/]
+#+END_EXAMPLE
+end
+
+Uniquement sur les valeurs :
+
+/dictionnaire/.each_value do |/valeur/|
+#+BEGIN_EXAMPLE
+puts /valeur/
+#+END_EXAMPLE
+end
+
+Itération sur les lignes d'une chaîne :
+
+/chaine/.each_line do |/ligne/|
+#+BEGIN_EXAMPLE
+...
+#+END_EXAMPLE
+end
+
+
+** Fonctions
+
+Définition :
+
+def /fonction/(/argument1/, /argument2/, ...)
+#+BEGIN_EXAMPLE
+......
+return ......
+#+END_EXAMPLE
+end
+
+La définition avec valeurs par défauts et les arguments rangés dans
+une liste sont similaires à celles du langage <a href="#pythonFonctions">python</a>.
+
+
+*** Symbole
+
+Le symbole de la fonction de nom /fonction/ est :
+
+#+BEGIN_EXAMPLE
+:/fonction/
+#+END_EXAMPLE <!-- code -->
+
+
+*** Alias
+
+Créer une copie d'une fonction
+
+def /fonction1/
+#+BEGIN_EXAMPLE
+...
+#+END_EXAMPLE
+end
+...
+alias /fonction2/ /fonction1/
+
+
+** Procédure
+
+Une procédure permet de donner un nom à un bloc de code.
+
+Définition d'une procédure :
+
+/procédure/ = proc {
+#+BEGIN_EXAMPLE
+...
+#+END_EXAMPLE
+}
+
+def /fonction/(...)
+#+BEGIN_EXAMPLE
+...
+/procédure/.call
+...
+#+END_EXAMPLE
+}
+
+
+*** Fonctions et blocs
+
+Une fonction peut envoyer des données vers un bloc :
+
+def /fonction/
+#+BEGIN_EXAMPLE
+yield 1
+yield 2
+yield 3
+#+END_EXAMPLE
+end
+
+/fonction/ do |/nombre/|
+#+BEGIN_EXAMPLE
+puts /nombre/
+#+END_EXAMPLE
+end
+
+Une fonction peut déléguer le calcul d'une valeur à un bloc :
+
+def /fonction/
+#+BEGIN_EXAMPLE
+puts yield(3)
+#+END_EXAMPLE
+end
+
+/fonction/ do |/nombre/|
+#+BEGIN_EXAMPLE
+/nombre/ * /nombre/
+#+END_EXAMPLE
+end
+
+Une fonction peut prendre un bloc en argument :
+
+def /fonction/(/argument/, &/bloc/)
+#+BEGIN_EXAMPLE
+......
+bloc.call(3)
+......
+#+END_EXAMPLE
+end
+
+/fonction/(/argument/) do |/nombre/|
+#+BEGIN_EXAMPLE
+puts /nombre/
+#+END_EXAMPLE
+end
+
+
+** Tri
+
+L'opérateur /a <=> b/ retourne 1 si /a > b/,
+0 si /a = b/, -1 si /a < b/
+
+/metaListe/.sort do |/L1/, /L2/|
+if /L1/[0] == /L2/[0]
+#+BEGIN_EXAMPLE
+/L1/[1] <=> /L2/[1]
+#+END_EXAMPLE
+else
+#+BEGIN_EXAMPLE
+/L1/[0] <=> /L2/[0]
+#+END_EXAMPLE
+end
+end
+
+L'équivalent d'une boucle /while/ :
+
+def /tantQue/(/condition/)
+#+BEGIN_EXAMPLE
+return if not /condition/
+yield
+retry
+#+END_EXAMPLE
+end
+....
+/tantQue/(/i/ < /10/) { print /i/ ; /i/ += 1 }
+
+
+** Modules
+
+Définition d'un module :
+
+module /Module/
+#+BEGIN_EXAMPLE
+...
+#+END_EXAMPLE
+end
+
+Utilisation d'un module :
+
+#+BEGIN_EXAMPLE
+/Module/./méthode/(...)
+/Module/::/Constante/
+#+END_EXAMPLE
+
+Utilisation concise :
+
+#+BEGIN_EXAMPLE
+include /Module/
+/méthode/(...)
+/Constante/
+#+END_EXAMPLE
+
+
+** Classes
+
+module /Module1/
+def /méthodeDuModule/()
+#+BEGIN_EXAMPLE
+...
+#+END_EXAMPLE
+end
+end
+
+module /Module2/
+def /méthodeDeClasseDuModule/()
+#+BEGIN_EXAMPLE
+...
+#+END_EXAMPLE
+end
+end
+
+class /Classe / < /ClasseDeBase/
+include /Module1/, /Module2/
+extend /Module2/
+
+@@/variableDeclasse/ = "Je m'appelle Classe";
+
+def /Classe/./methodeDeClasse/
+#+BEGIN_EXAMPLE
+......
+#+END_EXAMPLE
+end
+
+attr_accessor :/a/
+attr_reader :/b/
+attr_writer :/c/
+
+def initialize(/chaine/ = "")
+#+BEGIN_EXAMPLE
+super(/chaine/)
+@/a/ = /chaine/
+@/b/ = @/c/ = self./a/
+#+END_EXAMPLE
+end
+
+def to_s
+#+BEGIN_EXAMPLE
+puts "a = #{@a} ; b = #{@b} ; c = #{@c}"
+#+END_EXAMPLE
+end
+
+public
+
+def /methode_publique/
+#+BEGIN_EXAMPLE
+......
+#+END_EXAMPLE
+end
+
+protected
+
+def /methode_protegee/
+#+BEGIN_EXAMPLE
+......
+#+END_EXAMPLE
+end
+
+private
+
+def /methode_privee/
+#+BEGIN_EXAMPLE
+......
+#+END_EXAMPLE
+end
+
+.....
+
+public :methode1, :methode2
+end
+
+/objet/ = /Classe/.new("/chaine/")
+/objet/./méthodeDuModule()/
+/Classe/::/méthodeDeClasse()/
+/Classe/::/méthodeDeClasseDuModule()/
+
+Tester si un objet est nul :
+
+#+BEGIN_EXAMPLE
+/objet/.nil?
+#+END_EXAMPLE <!-- code -->
+
+Tester le type d'un objet :
+
+#+BEGIN_EXAMPLE
+/objet/.kind_of? /type/
+/objet/.instance_of? /classe/
+#+END_EXAMPLE <!-- code -->
+
+Accéder à l'identifiant d'un objet :
+
+#+BEGIN_EXAMPLE
+/objet/.object_id
+#+END_EXAMPLE <!-- code -->
+
+Tester si un objet possède une méthode :
+
+#+BEGIN_EXAMPLE
+/objet/.respond_to?("/methode/")
+#+END_EXAMPLE <!-- code -->
+
+Exécuter une méthode d'après son nom :
+
+#+BEGIN_EXAMPLE
+/objet/.send(:/nom/, /argument1/, ...)
+/objet/.send("/nom/", /argument1/, ...)
+#+END_EXAMPLE <!-- code -->
+
+Créer une méthode d'après une autre et l'appeler :
+
+#+BEGIN_EXAMPLE
+/méthode/ = method(:/nomFonction/)
+/méthode/.call(...)
+#+END_EXAMPLE <!-- code -->
+
+En Ruby, tout peut être redéfini : une méthode d'une classe de base,
+une méthode qui a déjà été définie dans la classe courante, ou même une
+méthode d'une instance particulière d'une classe.
+
+
+*** Classes particulières
+
+Classe qui n'existe que par une seule instance du même nom :
+
+class << /nom/
+#+BEGIN_EXAMPLE
+...
+#+END_EXAMPLE
+end
+
+
+** Expressions régulières
+
+| /chaine/ =~ //expression//    | Opérateur d'expression régulière, renvoie /true/                                 |
+|                               | si une correspondance de l'expression  est rencontré                             |
+|                               | dans la chaîne, /false/ sinon                                                    |
+| .                             | N'importe quel caractère, sauf fin de ligne                                      |
+| ^                             | Début de ligne                                                                   |
+| $                             | Fin de ligne                                                                     |
+| /x/*                          | 0 ou plus d'occurence(s) de /x/                                                  |
+| /x/+                          | 1 ou plus d'occurence(s) de /x/                                                  |
+| /x/?                          | 0 ou 1 occurence de /x/                                                          |
+| /x/{/m/, /n/}                 | Entre /m/ et /n/ occurences de /x/                                               |
+| /x/{/m/, }                    | Au moins /m/ occurences de /x/                                                   |
+| (/expression1/¦/expression2/) | /expression1/ ou /expression2/                                                   |
+| [/groupe de caractères/]      | N'importe quel caractère du groupe                                               |
+| [^/groupe de caractères/]     | N'importe quel caractère tant qu'il n'appartient pas au groupe                   |
+| [/b/-/y/]                     | n'importe quel caractère entre /b/ et /y/                                        |
+| \d                            | N'importe quel chiffre                                                           |
+| \D                            | N'importe quel caractère sauf un chiffre                                         |
+| \s                            | Espace                                                                           |
+| \S                            | N'importe quel caractère sauf un espace                                          |
+| \w                            | Mot                                                                              |
+| \W                            | N'importe quoi sauf un mot                                                       |
+| \b                            | Frontière de mot                                                                 |
+| \B                            | Frontière de non-mot                                                             |
+| $~                            | Liste contenant les correspondances lors du dernier  test d'expression régulière |
+| $&                            | Dernière correspondance                                                          |
+| \&                            | Dernière correspondance, utilisation dans  une chaîne de remplacement            |
+| $1, $2, ...                   | Variables où sont stockées les correspondances                                   |
+|                               | des expressions régulières mises entre parenthèses,                              |
+|                               | équivalent à $~[1], $~[2], ...                                                   |
+| \1, \2, ...                   | Variables où sont stockées les correspondances                                   |
+|                               | des expressions régulières mises entre parenthèses,                              |
+|                               | utilisation dans une chaîne de remplacement                                      |
+
+Correspondances :
+
+#+BEGIN_EXAMPLE
+/correspondances/ = //expression//.match(/chaine/)
+puts /correspondances/[0]
+puts /correspondances/[1]
+#+END_EXAMPLE <!-- code -->
+
+Remplacement :
+
+#+BEGIN_EXAMPLE
+/er/ = Regexp.new("/expression/")
+/chaineModifiée/ = /chaine/.gsub(/er/, '/remplaçant/')
+#+END_EXAMPLE <!-- code -->
+
+
+** Exceptions
+
+begin
+#+BEGIN_EXAMPLE
+/essais/
+#+END_EXAMPLE
+rescue
+#+BEGIN_EXAMPLE
+/cas particulier si ça n'a pas marché/
+#+END_EXAMPLE
+end
+
+
+* PostgreSQL
+
+#+TOC: headlines 1 local
+
+
+
+** Serveur
+
+| /usr/lib/postgresql//version//bin | Répertoire des exécutables postgresql  À ajouter au PATH |
+| postgres postmaster               | Serveur postgresql                                       |
+| service postgresql-/version/</td> | Contrôle du serveur :                                    |
+|                                   | start : démarrage                                        |
+|                                   | stop : arrêt                                             |
+|                                   | restart : redémarrage</td>                               |
+
+
+*** Environnement
+
+| PGDATA | Variable d'environnement contenant le chemin  de la grappe par défaut |
+
+
+*** Utilisateurs
+
+| postgres                    | Utilisateur administrateur de postgresql |
+| createuser /utilisateur/    | Crée un nouvel utilisateur postgresql    |
+| createuser -s /utilisateur/ | Crée un nouvel aministrateur postgresql  |
+
+
+*** Bases de donnée
+
+| createdb /nom/ | Crée une nouvelle base de données |
+| dropdb /nom/   | Supprime une base de données      |
+
+
+** Client
+
+| psql  | Client postgresql  (donne accès au serveur) |
+| \h    | Aide-mémoire des commandes SQL              |
+| \?    | Aide-mémoire des commandes psql             |
+| ; \g  | Termine une commande SQL                    |
+| \q    | Quitter                                     |
+| <tab> | Complétion                                  |
+
+*Remarque :* il faut faire attention à bien
+terminer chaque commande d'un point-virgule, sinon psql croira
+que la commande suivante continue la commande actuelle.
+
+
+** Scripts
+
+|  psql -f /script/|Exécute un script psql  Peut contenir des commandes SQL et psql|
+
+
+** Méta-commandes
+
+| CREATE | Crée un objet        |
+| ALTER  | Modifie un objet     |
+| UPDATE | Mets à jour un objet |
+| INSERT | Insère               |
+| SELECT | Sélectionne          |
+| DROP   | Supprime un objet    |
+
+
+** Types
+
+
+*** Date et heure
+
+| DATE                        | Date                       |
+| TIME WITHOUT TIME ZONE      | Heure sans la zone         |
+| TIME WITH TIME ZONE         | Heure avec la zone         |
+| TIMESTAMP WITHOUT TIME ZONE | Date et heure sans la zone |
+| TIMESTAMP WITH TIME ZONE    | Date et heure avec la zone |
+| INTERVAL                    | Intervalle de temps        |
+
+
+*** Nombres
+
+| INTEGER          | Entier                                |
+| SERIAL           | Numéro auto-incrémenté                |
+| BIGSERIAL        | Numéro auto-incrémenté, maximum élevé |
+| BOOLEAN          | Booléen                               |
+| REAL             | Réel simple précision                 |
+| DOUBLE PRECISION | Réel double précision                 |
+
+
+*** Texte
+
+| VARCHAR(/N/) | Texte d'au maximum /N/ caractères |
+| text         | Texte de taille quelconque        |
+
+
+*** Binaires
+
+| bytea|Binaire (image, son, ...)|
+
+
+*** Tableaux
+
+Déclaration d'un objet pouvant contenir un tableau
+d'éléments de type /type/ :
+
+#+BEGIN_EXAMPLE
+/objet/ /type/[]
+#+END_EXAMPLE
+
+Lorsque la taille du tableau est fixe et connue, on peut
+la préciser :
+
+#+BEGIN_EXAMPLE
+/objet/ /type/[/Taille/]
+#+END_EXAMPLE
+
+On a aussi la syntaxe du standard SQL :
+
+#+BEGIN_EXAMPLE
+/objet/ /type/ ARRAY[/Taille/]
+#+END_EXAMPLE
+
+L'accès à un élément d'un tableau se fait par :
+
+#+BEGIN_EXAMPLE
+/objet/[/indice/]
+#+END_EXAMPLE
+
+
+*** Composites
+
+Définition d'un type comportant plusieurs champs :
+
+CREATE TYPE /typeComposite/ AS (
+/champ1/ /type1/,
+/champ2/ /type2/,
+/.../
+/champN/ /typeN/
+) ;
+
+L'accès à un champ d'un objet de type composite se fait par :
+
+#+BEGIN_EXAMPLE
+/objet/./champ/
+#+END_EXAMPLE
+
+
+*** Énumération
+
+#+BEGIN_EXAMPLE
+CREATE TYPE /typeÉnuméré/
+AS ENUM ( /valeur1/, /.../, /valeurN/ ) ;
+#+END_EXAMPLE
+
+
+*** Conversion
+
+| CAST ( /valeur/ AS /type/ ) | Convertit une valeur en un type                      |
+| /valeur/::/type/            | Convertit une valeur en un type  (jargon postgresql) |
+
+
+** Conditions
+
+
+*** Opérations
+
+| NOT | Vrai si la condition est fausse |
+| AND | Et                              |
+| OR  | Ou                              |
+
+
+*** Existence
+
+| /valeur/ IS NULL     | Vrai si la valeur est vide                                                                       |
+| /valeur/ IS NOT NULL | Vrai si la valeur n'est pas vide                                                                 |
+| EXISTS /liste/       | Vrai si la liste n'est pas vide                                                                  |
+| UNIQUE /liste/       | Vrai si les éléments sont toutes distincts  Deux éléments vides sont considérés comme distincts  |
+| DISTINCT /liste/     | Vrai si les éléments sont toutes distincts  Deux éléments vides sont considérés comme identiques |
+
+
+*** Comparaison
+
+| =|Égalité (valeurs ou listes)|
+|  <> !=|Différent|
+| <|Strictement inférieur|
+| >|Strictement supérieur|
+| <=|Inférieur ou égal|
+| >=|Supérieur ou égal|
+
+
+**** Existence
+
+|  /A/ IS DISTINCT FROM /B/|Comme <>, mais donne vrai si une seule  des entrées est vide et faux si les deux le sont|
+
+
+*** Motifs
+
+| % | Correspond à n'importe quelle chaîne de caractère |
+| _ | Correspond à n'importe quel caractère             |
+
+
+*** Valeurs et listes
+
+
+**** Appartenance
+
+| /valeur/ IN (/liste/)            | Vrai si la valeure est dans la liste                                   |
+| /valeur/ LIKE /motif/            | Vrai si la valeur correspond au motif                                  |
+| /valeur/ BETWEEN /min/ AND /max/ | Vrai si la valeur est comprise  entre les valeurs minimale et maximale |
+| /I1/ OVERLAPS /I2/               | Vrai si les deux intervalles de temps se superposent                   |
+
+
+**** Comparaison
+
+| /valeur/ /comparaison/ ALL /liste/  | Vrai si la valeur valide la comparaison avec tous  les éléments de la liste        |
+| /valeur/ /comparaison/ ANY /liste/  | Vrai si la valeur valide la comparaison avec au moins  un des éléments de la liste |
+| /valeur/ /comparaison/ SOME /liste/ | Vrai si la valeur valide la comparaison avec au moins  un des éléments de la liste |
+
+
+** Tables
+
+
+*** Création
+
+CREATE TABLE /table/ (
+/colonne1/ /type1/,
+/colonne2/ /type2/,
+/.../
+/colonneN/ /typeN/,
+) ;
+
+
+*** Colonnes contenant des tableaux
+
+Les colonnes peuvent contenir des tableaux :
+
+CREATE TABLE /table/ (
+#+BEGIN_EXAMPLE
+/.../
+/colonne/ /type/ ARRAY[/taille/],
+/.../
+#+END_EXAMPLE
+) ;
+
+
+*** Colonnes composites
+
+Les colonnes peuvent contenir des types composites :
+
+CREATE TABLE /table/ (
+#+BEGIN_EXAMPLE
+/.../
+/colonne/ /typeComposite/,
+/.../
+#+END_EXAMPLE
+) ;
+
+
+*** Accès
+
+Lorsqu'il y a ambiguité, on accède à la colonne d'une table par :
+
+#+BEGIN_EXAMPLE
+/table/./colonne/
+#+END_EXAMPLE
+
+On peut accéder à un champ d'une colonne composite par :
+
+#+BEGIN_EXAMPLE
+/table/./colonne/./champ/
+#+END_EXAMPLE
+
+On peut accéder à un élément d'une colonne-tableau par :
+
+#+BEGIN_EXAMPLE
+/table/./colonne/[/indice/]
+#+END_EXAMPLE
+
+
+*** Valeurs par défaut
+
+#+BEGIN_EXAMPLE
+/colonne/ /type/ DEFAULT /valeur/
+#+END_EXAMPLE
+
+
+*** Modifications
+
+
+**** Ajout d'une colonne
+
+#+BEGIN_EXAMPLE
+ALTER TABLE /table/ ADD COLUMN /colonne/ /type/
+#+END_EXAMPLE
+
+
+**** Suppression d'une colonne
+
+#+BEGIN_EXAMPLE
+ALTER TABLE /table/ DROP COLUMN
+#+END_EXAMPLE
+
+
+*** Suppression
+
+#+BEGIN_EXAMPLE
+DROP TABLE /table/
+#+END_EXAMPLE
+
+
+** Contraintes
+
+Une contrainte peut être associée à une colonne dans la définition de la table :
+
+#+BEGIN_EXAMPLE
+/colonne/ /type/ /contrainte/
+#+END_EXAMPLE
+
+Dans certains cas, une contrainte fait intervenir plusieurs
+colonnes. Il faut alors la déclarer indépendamment :
+
+/.../
+/colonneA/ /typeA/,
+/colonneB/ /typeB/,
+/contrainte/,
+/.../
+
+Voici quelques exemples de contraintes :
+
+| UNIQUE|Chaque valeur de la colonne doit être unique|
+| NOT NULL|Aucun champ ne doit être laissé vide|
+| CHECK ( /condition/ )|Conditions diverses : inégalités entre colonnes ou avec une valeur, ...|
+
+
+*** Nommées
+
+#+BEGIN_EXAMPLE
+CONSTRAINT /nomContrainte/ /contrainte/
+#+END_EXAMPLE
+
+
+*** Ajout d'une contrainte
+
+#+BEGIN_EXAMPLE
+ALTER TABLE /table/
+ADD CONSTRAINT /nomContrainte/ CHECK ( /.../) ;
+#+END_EXAMPLE
+
+
+*** Domaines
+
+Les domaines sont des types avec valeurs par défaut
+et contraintes :
+
+CREATE DOMAIN /domaine/
+AS /typeDeBase/
+DEFAULT /valeurParDéfaut/
+CONSTRAINT /contrainte/ CHECK ( VALUE /.../ ) ;
+
+Exemple :
+
+CREATE DOMAIN /domaine/
+AS /typeDeBase/
+DEFAULT /valeurParDéfaut/
+CONSTRAINT /contrainte/ CHECK ( VALUE < 5 ) ;
+
+
+** Clés
+
+
+*** Clé primaire
+
+Une clé primaire est constituée d'une ou plusieurs colonnes
+d'une même table. Elle permet d'en identifier de façon unique
+chaque ligne.
+
+Lorsqu'elle ne concerne qu'une seule colonne, on peut la
+placer dans la définition de la table sous forme d'une contrainte
+de colonne :
+
+#+BEGIN_EXAMPLE
+/colonne/ /type/ PRIMARY KEY
+#+END_EXAMPLE
+
+Si la clé implique plusieurs colonnes, on la place sous
+la forme d'une contrainte de table :
+
+#+BEGIN_EXAMPLE
+CONSTRAINT /clé/
+PRIMARY KEY (/colonneA/, /colonneB/, /.../)
+#+END_EXAMPLE
+
+
+*** Clé étrangère
+
+Sous forme de contrainte associée à une colonne :
+
+#+BEGIN_EXAMPLE
+/colonne/ /type/ REFERENCES /autreTable/ (/autreColonne/)
+#+END_EXAMPLE
+
+Sous forme de contrainte indépendante :
+
+#+BEGIN_EXAMPLE
+FOREIGN KEY ( /colonne(s)/ )
+REFERENCES /autreTable/ ( /autreColonne(s)/ )
+#+END_EXAMPLE
+
+La valeur par défaut de la colonne de la table étrangère
+est sa clé primaire.
+
+
+** Dépendances
+
+Efface une table et toutes les instructions REFERENCES
+qui en dépendent :
+
+#+BEGIN_EXAMPLE
+DROP TABLE /table/ CASCADE ;
+#+END_EXAMPLE
+
+Lors de la définition d'une clé étrangère, on peut
+demander d'effacer les lignes qui dépendent de la clé
+référencée en même temps que celle-ci :
+
+#+BEGIN_EXAMPLE
+/colonne/ REFERENCES /table/ (/clé/) ON DELETE CASCADE ;
+#+END_EXAMPLE
+
+On peut aussi interdire d'effacer la clé référencée :
+
+#+BEGIN_EXAMPLE
+/colonne/ REFERENCES /table/ (/clé/) ON DELETE RESTRICT ;
+#+END_EXAMPLE
+
+Pour remplacer la valeur par une valeur nulle, on définit :
+
+#+BEGIN_EXAMPLE
+/colonne/ REFERENCES /table/ (/clé/) ON DELETE SET NULL ;
+#+END_EXAMPLE
+
+Pour remplacer la valeur par la valeur par défaut, on définit :
+
+#+BEGIN_EXAMPLE
+/colonne/ REFERENCES /table/ (/clé/) ON DELETE SET DEFAULT ;
+#+END_EXAMPLE
+
+
+** Schémas
+
+Un schéma est un regroupement de tables au sein
+d'une base de données. On en crée un par :
+
+#+BEGIN_EXAMPLE
+CREATE SCHEMA /schéma/ ;
+#+END_EXAMPLE
+
+Pour créer ou accéder à des tables au sein d'un schéma, on utilise :
+
+#+BEGIN_EXAMPLE
+/schéma/./table/
+#+END_EXAMPLE
+
+La création d'une table au sein d'un schéma se fait tout
+simplement par :
+
+#+BEGIN_EXAMPLE
+CREATE TABLE /schéma/./table/
+( /.../ ) ;
+#+END_EXAMPLE
+
+
+*** Suppression
+
+Pour supprimer un schéma et les tables qu'il contient,
+on utilise :
+
+#+BEGIN_EXAMPLE
+DROP SCHEMA /schéma/ CASCADE
+#+END_EXAMPLE
+
+
+*** Par défaut
+
+Lorsqu'on ne précise pas de schéma pour une table,
+elle appartient au schéma « public ». On a donc :
+
+#+BEGIN_EXAMPLE
+/table/ = public./table/
+#+END_EXAMPLE
+
+
+** Héritage
+
+Une table peut dériver d'une autre et hériter de sa structure.
+La table dérivée contiendra les colonnes de base en plus de ses
+propres colonnes. Exemple :
+
+CREATE TABLE /base/ (
+#+BEGIN_EXAMPLE
+/colonneA/ /typeA/,
+/colonneB/ /typeB/,
+#+END_EXAMPLE
+) ;
+
+CREATE TABLE /dérivée/ (
+#+BEGIN_EXAMPLE
+/colonneC/ /typeC/,
+/colonneD/ /typeD/,
+#+END_EXAMPLE
+) INHERITS (/base/) ;
+
+
+** Insertion
+
+#+BEGIN_EXAMPLE
+INSERT INTO /table/ ( /colonneA/, /colonneB/ )
+VALUES ( /valeurA/, /valeurB/ ) ;
+#+END_EXAMPLE
+
+Les valeurs non numériques se mettent entre guillemets simples.
+
+
+*** Tableaux
+
+Les valeurs des tableaux se mettent entre accolades :
+
+#+BEGIN_EXAMPLE
+INSERT INTO /table/ ( /colonne/ )
+VALUES ( '{ /elt1/, /.../, /eltN/ }' ) ;
+#+END_EXAMPLE
+
+
+** Import - Export
+
+
+*** Tables
+
+On peut insérer un fichier dans la table :
+
+#+BEGIN_EXAMPLE
+COPY /table/ FROM '/fichier/' ;
+#+END_EXAMPLE
+
+On peut insérer une table dans un fichier :
+
+#+BEGIN_EXAMPLE
+COPY /table/ TO '/fichier/' ;
+#+END_EXAMPLE
+
+
+*** Bases
+
+On peut sauvegarder une base de données en instructions SQL :
+
+#+BEGIN_EXAMPLE
+pg_dump /base/ > /fichier/
+#+END_EXAMPLE
+
+On la restaure par :
+
+#+BEGIN_EXAMPLE
+psql /base/ < /fichier/
+#+END_EXAMPLE
+
+
+**** Compression
+
+On peut faire une sauvegarde compressée :
+
+#+BEGIN_EXAMPLE
+pg_dump -Fc /base/ > /fichier/
+#+END_EXAMPLE
+
+On la restaure par :
+
+#+BEGIN_EXAMPLE
+pg_restore -d /base/ /fichier/
+#+END_EXAMPLE
+
+
+*** Grappe
+
+On peut sauvegarder toutes les bases de données d'une grappe
+en instructions SQL :
+
+#+BEGIN_EXAMPLE
+pg_dumpall > /fichier/
+#+END_EXAMPLE
+
+On la restaure par :
+
+#+BEGIN_EXAMPLE
+psql -f /fichier/ postgres
+#+END_EXAMPLE
+
+
+** Opérations scalaires
+
+Les opérations scalaires associe un nombre à toutes les valeurs
+d'une colonne.
+
+| count( /colonne/ )        | Compte le nombre de lignes            |
+| count(DISTINCT /colonne/) | Compte le nombre de lignes distinctes |
+| max( /colonne/ )          | Maximum                               |
+| min( /colonne/ )          | Minimum                               |
+| sum( /colonne/ )          | Somme                                 |
+| avg( /colonne/ )          | Moyenne                               |
+
+
+** Sélections
+
+
+*** Totale
+
+#+BEGIN_EXAMPLE
+SELECT * FROM /table(s)/ ;
+#+END_EXAMPLE
+
+
+*** Conditionnelle
+
+#+BEGIN_EXAMPLE
+SELECT /colonne(s)/ FROM /table(s)/
+WHERE /condition(s)/ ;
+#+END_EXAMPLE
+
+
+*** Groupement
+
+La clause GROUP BY regroupe les lignes par valeurs
+identiques d'une colonne :
+
+#+BEGIN_EXAMPLE
+SELECT /colonne(s)/ FROM /table(s)/
+GROUP BY /colonne(s)/ ;
+#+END_EXAMPLE
+
+On peut s'en servir pour opérer sur les groupes :
+
+#+BEGIN_EXAMPLE
+SELECT /A/, sum(/B/) FROM /table(s)/
+GROUP BY /A/ ;
+#+END_EXAMPLE
+
+
+*** Filtre de groupes
+
+La clause HAVING permet de filtrer les groupes :
+
+#+BEGIN_EXAMPLE
+SELECT /colonne(s)/ FROM /table(s)/
+GROUP BY /colonne(s)/
+HAVING /condition(s)/
+#+END_EXAMPLE
+
+Contrairement à la clause WHERE qui ne peut filtrer
+que sur la valeur de chaque ligne, la clause HAVING
+permet de faire intervenir des opérations scalaires
+dans les conditions.
+
+
+*** Tri
+
+La clause ORDER BY permet de trier les données :
+
+#+BEGIN_EXAMPLE
+SELECT /colonne(s)/ FROM /table(s)/
+ORDER BY /colonne(s)/ ;
+#+END_EXAMPLE
+
+Par défaut le tri est croissant. On peut préciser le
+sens, croissant :
+
+#+BEGIN_EXAMPLE
+SELECT /colonne(s)/ FROM /table(s)/
+ORDER BY /colonne(s)/ ASC ;
+#+END_EXAMPLE
+
+ou décroissant :
+
+#+BEGIN_EXAMPLE
+SELECT /colonne(s)/ FROM /table(s)/
+ORDER BY /colonne(s)/ DESC ;
+#+END_EXAMPLE
+
+
+*** Redondance
+
+On peut sélectionner seulement les lignes distinctes
+du point de vue de certaines colonnes :
+
+#+BEGIN_EXAMPLE
+SELECT DISTINCT ON ( /colonne(s)/ ) * FROM /table(s)/
+ORDER BY /colonne(s)/ ;
+#+END_EXAMPLE
+
+
+*** Héritage
+
+Une sélection regroupe toutes les valeurs valables de la table
+plus toutes celles des tables qui en sont dérivées.
+
+
+** Vues
+
+Une vue est une table virtuelle permettant de garder
+en mémoire une sélection particulière. Exemple :
+
+#+BEGIN_EXAMPLE
+CREATE VIEW /vue/
+AS SELECT /colonne(s)/ FROM /table(s)/
+WHERE /condition(s)/ ;
+#+END_EXAMPLE
+
+La plupart des opérations disponibles sur les tables
+le sont également sur les vues.
+
+
+*** Alias
+
+On peut définir des alias locaux à la vue pour
+les colonnes :
+
+#+BEGIN_EXAMPLE
+CREATE VIEW /vue/ ( /alias1/, /.../, /aliasN/ )
+AS SELECT /colonne(s)/ FROM /table(s)/
+WHERE /condition(s)/ ;
+#+END_EXAMPLE
+
+
+** Modifications
+
+On peut modifier conditionnellement les valeurs
+d'une table :
+
+#+BEGIN_EXAMPLE
+UPDATE /table/
+SET /colonne/ = /valeur/
+WHERE /condition/ ;
+#+END_EXAMPLE
+
+
+*** Références aux anciennes valeurs
+
+Les nouvelles valeurs peuvent dépendre des anciennes. Exemple :
+
+#+BEGIN_EXAMPLE
+UPDATE /table/
+SET /colonne/ = /colonne/ + 1 ;
+#+END_EXAMPLE
+
+
+*** Sélection
+
+La condition peut faire appel à une sélection :
+
+#+BEGIN_EXAMPLE
+UPDATE /table/
+SET /colonne/ = /valeur/
+WHERE /colonne/ IN ( SELECT /.../ ) ;
+#+END_EXAMPLE
+
+
+*** Suppression
+
+#+BEGIN_EXAMPLE
+DELETE FROM /table/
+WHERE /condition/ ;
+#+END_EXAMPLE
+
+
+** Copie
+
+Une copie de table à table peut se faire
+en insérant une sélection de la table source
+dans la table destination :
+
+#+BEGIN_EXAMPLE
+INSERT INTO /destination/
+SELECT /colonne(s)/ FROM /source/ ;
+#+END_EXAMPLE
+
+Si on veut réutiliser la sélection, on peut
+créer une vue associée
+
+#+BEGIN_EXAMPLE
+CREATE VIEW /vue/
+AS /.../ ;
+#+END_EXAMPLE
+
+et l'insérer dans la destination :
+
+#+BEGIN_EXAMPLE
+INSERT INTO /destination/
+SELECT * FROM /vue/ ;
+#+END_EXAMPLE
+
+
+** Jointures
+
+
+*** Produit cartésien
+
+Le produit cartésion CROSS JOIN affiche toutes les possibilités
+de combinaisons entre les lignes de deux tables :
+
+#+BEGIN_EXAMPLE
+SELECT * FROM /table1/ CROSS JOIN /table2/ ;
+#+END_EXAMPLE
+
+ce qui donne :
+
+/ligne1-Table1/ /ligne1-Table2/
+/.../
+/ligne1-Table1/ /ligneN-Table2/
+/.../
+/ligneM-Table1/ /ligne1-Table2/
+/.../
+/ligneM-Table1/ /ligneN-Table2/
+
+
+*** Interne
+
+La jointure interne est un sous-ensemble du produit
+cartésien : seules les lignes vérifiant les conditions
+seront affichées. Exemple :
+
+#+BEGIN_EXAMPLE
+SELECT * FROM /table1/ INNER JOIN /table2/
+ON /table1/./colonneA/ = /table2/./colonneB/ ;
+#+END_EXAMPLE
+
+La jointure interne étant la jointure par défaut, on a la commande
+équivalente :
+
+#+BEGIN_EXAMPLE
+SELECT * FROM /table1/ JOIN /table2/
+ON /table1/./colonneA/ = /table2/./colonneB/ ;
+#+END_EXAMPLE
+
+
+**** Colonnes homonymes
+
+La commande :
+
+#+BEGIN_EXAMPLE
+SELECT * FROM /table1/ INNER JOIN /table2/
+USING ( /colonne/ ) ;
+#+END_EXAMPLE
+
+est un raccourci pour :
+
+#+BEGIN_EXAMPLE
+SELECT * FROM /table1/ INNER JOIN /table2/
+ON /table1/./colonne/ = /table2/./colonne/ ;
+#+END_EXAMPLE
+
+à la différence près que les colonnes homonymes utilisées n'apparaissent
+qu'une fois dans l'affichage, au lieu de deux si on utilise la
+directive ON.
+
+
+**** Naturelle
+
+La commande :
+
+#+BEGIN_EXAMPLE
+SELECT * FROM /table1/ NATURAL INNER JOIN /table2/ ;
+#+END_EXAMPLE
+
+est un raccourci pour la directive USING sur toutes les
+colonnes homonymes des deux tables.
+
+
+*** Externe
+
+
+**** Gauche
+
+La jointure externe gauche est une jointure interne
+à laquelle on ajoute les colonnes de la première table ne respectant
+pas les conditions. Dans ces lignes ajoutées, les colonnes
+de la seconde table sont laissées à une valeur NULL (vide).
+Les directives ON, USING, NATURAL sont semblables. Exemple :
+
+#+BEGIN_EXAMPLE
+SELECT * FROM /table1/ LEFT OUTER JOIN /table2/
+ON /table1/./colonneA/ = /table2/./colonneB/ ;
+#+END_EXAMPLE
+
+Le raccourci LEFT JOIN est identique à LEFT OUTER JOIN :
+
+#+BEGIN_EXAMPLE
+SELECT * FROM /table1/ LEFT JOIN /table2/
+ON /table1/./colonneA/ = /table2/./colonneB/ ;
+#+END_EXAMPLE
+
+
+**** Droite
+
+La jointure externe droite est une jointure interne
+à laquelle on ajoute les colonnes de la seconde table ne respectant
+pas les conditions. Dans ces lignes ajoutées, les colonnes
+de la première table sont laissées à une valeur NULL (vide).
+Les directives ON, USING, NATURAL sont semblables. Exemple :
+
+#+BEGIN_EXAMPLE
+SELECT * FROM /table1/ RIGHT OUTER JOIN /table2/
+ON /table1/./colonneA/ = /table2/./colonneB/ ;
+#+END_EXAMPLE
+
+Le raccourci RIGHT JOIN est identique à RIGHT OUTER JOIN :
+
+#+BEGIN_EXAMPLE
+SELECT * FROM /table1/ RIGHT JOIN /table2/
+ON /table1/./colonneA/ = /table2/./colonneB/ ;
+#+END_EXAMPLE
+
+
+**** Complète
+
+La jointure externe complète est une jointure interne
+à laquelle ajoute les colonnes de la première table ne respectant
+pas les conditions. Dans ces lignes ajoutées, les colonnes
+de la seconde table sont laissées à une valeur NULL (vide).
+Ensuite, on ajoute les colonnes de la seconde table ne
+respectant pas les conditions. Dans ces lignes ajoutées, les colonnes
+de la première table sont laissées à une valeur NULL (vide).
+Les directives ON, USING, NATURAL sont semblables. Exemple :
+
+#+BEGIN_EXAMPLE
+SELECT * FROM /table1/ FULL OUTER JOIN /table2/
+ON /table1/./colonneA/ = /table2/./colonneB/ ;
+#+END_EXAMPLE
+
+Le raccourci FULL JOIN est identique à FULL OUTER JOIN :
+
+#+BEGIN_EXAMPLE
+SELECT * FROM /table1/ FULL JOIN /table2/
+ON /table1/./colonneA/ = /table2/./colonneB/ ;
+#+END_EXAMPLE
+
+
+** Opérations ensemblistes
+
+
+*** Les lignes redondantes sont retirées du résultat
+
+| /sélection1/ UNION /sélection2/     | Union de deux sélections                                             |
+| /sélection1/ INTERSECT /sélection2/ | Intersection de deux sélections                                      |
+| /sélection1/ EXCEPT /sélection2/    | Tout ce qui est dans la première sélection  mais pas dans la seconde |
+
+
+*** Les lignes redondantes ne sont pas retirées du résultat
+
+| /sélection1/ UNION ALL /sélection2/     | Union de deux sélections                                             |
+| /sélection1/ INTERSECT ALL /sélection2/ | Intersection de deux sélections                                      |
+| /sélection1/ EXCEPT ALL /sélection2/    | Tout ce qui est dans la première sélection  mais pas dans la seconde |
+
+
+** Index
+
+Lorsqu'une recherche impliquant une sélection particulière
+est fréquente, il peut être utile de l'accélérer en créant
+un index sur cette colonne :
+
+#+BEGIN_EXAMPLE
+CREATE INDEX /index/ ON /table/ ( /colonne/ ) ;
+#+END_EXAMPLE
+
+
+*** Reconstruction
+
+Lorsqu'une table est très modifiée, l'index finit par contenir
+des données devenues inutiles. On peut alors le reconstruire
+en utilisant la commande :
+
+#+BEGIN_EXAMPLE
+REINDEX INDEX /index/ ;
+#+END_EXAMPLE
+
+On peut aussi reconstruire tous les index d'une table :
+
+#+BEGIN_EXAMPLE
+REINDEX TABLE /table/
+#+END_EXAMPLE
+
+ou d'une base de données :
+
+#+BEGIN_EXAMPLE
+REINDEX DATABASE /base/
+#+END_EXAMPLE
+
+
+*** Suppression
+
+Pour supprimer un index, on fait :
+
+#+BEGIN_EXAMPLE
+DROP INDEX /index/ ;
+#+END_EXAMPLE
+
+
+** Structures
+
+Le langage SQL dispose d'une structure conditionnelle multiple
+qui renvoie un résultat. Voici un exemple combiné avec une sélection :
+
+SELECT
+CASE
+WHEN /condition1/ THEN /valeur1/
+/.../
+WHEN /conditionN/ THEN /valeurN/
+ELSE /valeurParDéfaut/
+END
+FROM /table/ ;
+
+
+*** Condition
+
+La clause CASE peut servir de condition :
+
+SELECT * FROM /table/
+WHERE CASE
+WHEN /condition1/ THEN /autreCondition1/
+/.../
+WHEN /conditionN/ THEN /autreConditionN/
+ELSE /autreConditionParDéfaut/
+END ;
+
+
+*** Raccourci
+
+La forme :
+
+CASE /colonne/
+WHEN /val1/ THEN /valeur1/
+/.../
+WHEN /valN/ THEN /valeurN/
+ELSE /valeurParDéfaut/
+END
+
+est équivalente à :
+
+CASE
+WHEN /colonne/ = /val1/ THEN /valeur1/
+/.../
+WHEN /colonne/ = /valN/ THEN /valeurN/
+ELSE /valeurParDéfaut/
+END
+
+
+** Transactions
+
+Une transaction permet de demander l'exécution
+tout-ou-rien d'un bloc de commandes SQL, évitant les
+incohérences en cas de problème. Exemple :
+
+#+BEGIN_EXAMPLE
+BEGIN ;
+/commandes SQL/
+COMMIT ;
+#+END_EXAMPLE
+
+
+** Administration
+
+
+*** Système de fichier
+
+On définit un emplacement dans le système de fichiers par :
+
+#+BEGIN_EXAMPLE
+CREATE TABLESPACE /espace/
+LOCATION '/répertoire/' ;
+#+END_EXAMPLE
+
+
+*** Base de donnnées
+
+On crée une base de donnée par :
+
+#+BEGIN_EXAMPLE
+CREATE DATABASE /nom/ ;
+#+END_EXAMPLE
+
+On peut préciser l'emplacement où elle sera
+stockée :
+
+#+BEGIN_EXAMPLE
+CREATE DATABASE /nom/
+TABLESPACE /espace/ ;
+#+END_EXAMPLE
+
+
+*** Utilisateurs
+
+| CREATE USER /utilisateur/ ;|Crée un utilisateur|
+| ALTER USER /utilisateur/ WITH /privilège/ ;|Modifie les privilèges d'un utilisateur|
+<tr>
+ <td>ALTER USER /utilisateur/
+	 WITH ENCRYPTED PASSWORD '/motDePasse/' ;</td>
+ <td>Modifie le mot de passe d'un utilisateur</td>
+</tr>
+
+
+*** Droits
+
+Pour accorder un droit à un utilisateur :
+
+#+BEGIN_EXAMPLE
+GRANT /droit/ ON /table/ TO /utilisateur ;/
+#+END_EXAMPLE
+
+Pour révoquer un droit à un utilisateur :
+
+#+BEGIN_EXAMPLE
+REVOKE /droit/ ON /table/ TO /utilisateur ;/
+#+END_EXAMPLE
+
+Voici quelques droits :
+
+CREATE  
+INSERT  
+UPDATE
+DELETE  
+SELECT  
+REFERENCES
+
+On peut aussi accorder ou révoquer des droits sur des schémas
+et autres objets.
+
+
+**** Transmission
+
+La clause WITH GRANT OPTION donne le droit à un utilisateur de partager
+les droits dont il dispose à d'autres utilisateurs :
+
+#+BEGIN_EXAMPLE
+GRANT /droit/ ON /table/ TO /utilisateur/
+WITH GRANT OPTION ;
+#+END_EXAMPLE
+
+
+*** Optimisation
+
+La commande :
+
+#+BEGIN_EXAMPLE
+VACUUM ;
+#+END_EXAMPLE
+
+récupère l'espace disque des ligne supprimées ou mises à jour.
+La commande :
+
+#+BEGIN_EXAMPLE
+ANALYZE ;
+#+END_EXAMPLE
+
+collecte des statistiques sur la base de données afin
+d'optimiser les requêtes.
+
+#+BEGIN_EXAMPLE
+<a href="../../index.php">Accueil</a>
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+<a title="Site déposé sur CopyrightFrance.com" href="http://www.copyrightfrance.com/phtml/p_logo1.php" target="_blank"><img border="0" src="images/logsc15.gif" alt="CopyrightFrance.com"></a>
+#+END_EXAMPLE

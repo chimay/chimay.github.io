@@ -1,0 +1,1215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<!-- 2018-04-03 mar 15:51 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Eclats de vers : Matemat 10 : Optimisation - 1</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="chimay" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Eclats de vers : Matemat 10 : Optimisation - 1</h1>
+<p>
+<a href="index.html">Index des Grimoires</a>
+</p>
+
+<p>
+<a href="file:///home/david/racine/site/orgmode/index.html">Retour à l’accueil</a>
+</p>
+
+<div id="table-of-contents">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgcf0f24c">1. Optimisation libre</a></li>
+</ul>
+</div>
+</div>
+
+<p>
+\( \newcommand{\parentheses}[1]{\left(#1\right)}
+\newcommand{\crochets}[1]{\left[#1\right]}
+\newcommand{\accolades}[1]{\left\{#1\right\}}
+\newcommand{\ensemble}[1]{\left\{#1\right\}}
+\newcommand{\identite}{\mathrm{Id}}
+\newcommand{\indicatrice}{\boldsymbol{\delta}}
+\newcommand{\dirac}{\delta}
+\newcommand{\moinsun}{{-1}}
+\newcommand{\inverse}{\ddagger}
+\newcommand{\pinverse}{\dagger}
+\newcommand{\topologie}{\mathfrak{T}}
+\newcommand{\ferme}{\mathfrak{F}}
+\newcommand{\img}{\mathbf{i}}
+\newcommand{\binome}[2]{
+\left\{ \begin{array}{c}
+#1 \\
+#2 \\
+\end{array} \right\}
+}
+\newcommand{\canonique}{\mathfrak{c}}
+\newcommand{\tenseuridentite}{\boldsymbol{\mathcal{I}}}
+\newcommand{\permutation}{\boldsymbol{\epsilon}}
+\newcommand{\matriceZero}{\mathfrak{0}}
+\newcommand{\matriceUn}{\mathfrak{1}}
+\newcommand{\christoffel}[2]{
+\left\{ \begin{array}{c}
+#1 \\
+#2 \\
+\end{array} \right\}
+}
+\newcommand{\lagrangien}{\mathfrak{L}}
+\newcommand{\sousens}{\mathfrak{P}}
+\newcommand{\partition}{\mathrm{Partition}}
+\newcommand{\tribu}{\mathrm{Tribu}}
+\newcommand{\topologies}{\mathrm{Topo}}
+\newcommand{\setB}{\mathbb{B}}
+\newcommand{\setN}{\mathbb{N}}
+\newcommand{\setZ}{\mathbb{Z}}
+\newcommand{\setQ}{\mathbb{Q}}
+\newcommand{\setR}{\mathbb{R}}
+\newcommand{\setC}{\mathbb{C}}
+\newcommand{\corps}{\mathbb{K}}
+\newcommand{\boule}{\mathfrak{B}}
+\newcommand{\intervalleouvert}[2]{\relax \ ] #1 , #2 [ \ \relax}
+\newcommand{\intervallesemiouvertgauche}[2]{\relax \ ] #1 , #2 ]}
+\newcommand{\intervallesemiouvertdroite}[2]{[ #1 , #2 [ \ \relax}
+\newcommand{\fonction}{\mathbb{F}}
+\newcommand{\bijection}{\mathrm{Bij}}
+\newcommand{\polynome}{\mathrm{Poly}}
+\newcommand{\lineaire}{\mathrm{Lin}}
+\newcommand{\continue}{\mathrm{Cont}}
+\newcommand{\homeomorphisme}{\mathrm{Hom}}
+\newcommand{\etagee}{\mathrm{Etagee}}
+\newcommand{\lebesgue}{\mathrm{Leb}}
+\newcommand{\lipschitz}{\mathrm{Lip}}
+\newcommand{\suitek}{\mathrm{Suite}}
+\newcommand{\matrice}{\mathbb{M}}
+\newcommand{\krylov}{\mathrm{Krylov}}
+\newcommand{\tenseur}{\mathbb{T}}
+\newcommand{\essentiel}{\mathfrak{E}}
+\newcommand{\relation}{\mathrm{Rel}}
+\newcommand{\strictinferieur}{\ < \ }
+\newcommand{\strictsuperieur}{\ > \ }
+\newcommand{\ensinferieur}{\eqslantless}
+\newcommand{\enssuperieur}{\eqslantgtr}
+\newcommand{\esssuperieur}{\gtrsim}
+\newcommand{\essinferieur}{\lesssim}
+\newcommand{\essegal}{\eqsim}
+\newcommand{\union}{\ \cup \ }
+\newcommand{\intersection}{\ \cap \ }
+\newcommand{\opera}{\divideontimes}
+\newcommand{\autreaddition}{\boxplus}
+\newcommand{\autremultiplication}{\circledast}
+\newcommand{\commutateur}[2]{\left[ #1 , #2 \right]}
+\newcommand{\convolution}{\circledcirc}
+\newcommand{\correlation}{\ \natural \ }
+\newcommand{\diventiere}{\div}
+\newcommand{\modulo}{\bmod}
+\newcommand{\pgcd}{pgcd}
+\newcommand{\ppcm}{ppcm}
+\newcommand{\scalaire}[2]{\left\langle #1 \left|\right\relax #2 \right\rangle}
+\newcommand{\braket}[3]{\left\langle #1 \right| #2 \left| #3 \right\rangle}
+\newcommand{\orthogonal}{\bot}
+\newcommand{\forme}[2]{\left\langle #1 , #2 \right\rangle}
+\newcommand{\biforme}[3]{\left\langle #1 , #2 , #3 \right\rangle}
+\newcommand{\contraction}[3]{\left\langle #1 \odot #3 \right\rangle_{#2}}
+\newcommand{\dblecont}[5]{\left\langle #1 \right| #3 \left| #5 \right\rangle_{#2,#4}}
+\newcommand{\major}{major}
+\newcommand{\minor}{minor}
+\newcommand{\maxim}{maxim}
+\newcommand{\minim}{minim}
+\newcommand{\argument}{arg}
+\newcommand{\argmin}{arg\ min}
+\newcommand{\argmax}{arg\ max}
+\newcommand{\supessentiel}{ess\ sup}
+\newcommand{\infessentiel}{ess\ inf}
+\newcommand{\dual}{\star}
+\newcommand{\distance}{\mathfrak{dist}}
+\newcommand{\norme}[1]{\left\| #1 \right\|}
+\newcommand{\normetrois}[1]{\left|\left\| #1 \right\|\right|}
+\newcommand{\adh}{adh}
+\newcommand{\interieur}{int}
+\newcommand{\frontiere}{\partial}
+\newcommand{\image}{im}
+\newcommand{\domaine}{dom}
+\newcommand{\noyau}{ker}
+\newcommand{\support}{supp}
+\newcommand{\signe}{sign}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\unsur}[1]{\frac{1}{#1}}
+\newcommand{\arrondisup}[1]{\lceil #1 \rceil}
+\newcommand{\arrondiinf}[1]{\lfloor #1 \rfloor}
+\newcommand{\conjugue}{conj}
+\newcommand{\conjaccent}[1]{\overline{#1}}
+\newcommand{\division}{division}
+\newcommand{\difference}{\boldsymbol{\Delta}}
+\newcommand{\differentielle}[2]{\mathfrak{D}^{#1}_{#2}}
+\newcommand{\OD}[2]{\frac{d #1}{d #2}}
+\newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
+\newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
+\newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
+\newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
+\newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\gradient}{\mathbf{\nabla}}
+\newcommand{\combilin}[1]{\mathrm{span}\{ #1 \}}
+\newcommand{\trace}{tr}
+\newcommand{\proba}{\mathbb{P}}
+\newcommand{\probaof}[1]{\mathbb{P}\left[#1\right]}
+\newcommand{\esperof}[1]{\mathbb{E}\left[#1\right]}
+\newcommand{\cov}[2]{\mathrm{cov} \left( #1 , #2 \right) }
+\newcommand{\var}[1]{\mathrm{var} \left( #1 \right) }
+\newcommand{\rand}{\mathrm{rand}}
+\newcommand{\variation}[1]{\left\langle #1 \right\rangle}
+\newcommand{\composante}{comp}
+\newcommand{\bloc}{bloc}
+\newcommand{\ligne}{ligne}
+\newcommand{\colonne}{colonne}
+\newcommand{\diagonale}{diag}
+\newcommand{\matelementaire}{\mathrm{Elem}}
+\newcommand{\matpermutation}{permut}
+\newcommand{\matunitaire}{\mathrm{Unitaire}}
+\newcommand{\gaussjordan}{\mathrm{GaussJordan}}
+\newcommand{\householder}{\mathrm{Householder}}
+\newcommand{\rang}{rang}
+\newcommand{\schur}{\mathrm{Schur}}
+\newcommand{\singuliere}{\mathrm{DVS}}
+\newcommand{\convexe}{\mathrm{Convexe}}
+\newcommand{\petito}[1]{o\left(#1\right)}
+\newcommand{\grando}[1]{O\left(#1\right)} \)
+</p>
+
+<div id="outline-container-orgcf0f24c" class="outline-2">
+<h2 id="orgcf0f24c"><span class="section-number-2">1</span> Optimisation libre</h2>
+<div class="outline-text-2" id="text-1">
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org85e11af">1.1. Minimum</a></li>
+<li><a href="#orgaf9fb34">1.2. Maximum</a></li>
+<li><a href="#org02de4f3">1.3. Equivalence</a></li>
+<li><a href="#org56635d7">1.4. Dérivées ordinaires</a></li>
+<li><a href="#org1e01a6b">1.5. Point de selle</a></li>
+<li><a href="#org37be0c5">1.6. Convexité</a></li>
+<li><a href="#org3684b23">1.7. Convexité stricte</a></li>
+<li><a href="#orge0a7719">1.8. Concavité</a></li>
+<li><a href="#org7e78379">1.9. Concavité stricte</a></li>
+<li><a href="#org0033c3d">1.10. Equation du second degré</a></li>
+<li><a href="#org23df5fd">1.11. Moindres-carrés</a></li>
+</ul>
+</div>
+
+<p>
+\label{chap:optimisationlibre}
+</p>
+</div>
+
+
+<div id="outline-container-org85e11af" class="outline-3">
+<h3 id="org85e11af"><span class="section-number-3">1.1</span> Minimum</h3>
+<div class="outline-text-3" id="text-1-1">
+\begin{theoreme}
+
+Soit $\varphi \in \continue^2(\setR^n,\setR)$. Supposons que que $a \in \setR^n$ annule la Jacobienne (on parlera ici plutôt de gradient) :
+
+$$\partial \varphi(a) = 0$$
+
+Supposons également que la Hessienne en $a$ soit définie positive, c'est-à-dire que :
+
+$$\Delta^\dual \cdot \partial^2 \varphi(a) \cdot \Delta \ge 0$$
+
+pour tout $\Delta \in \setR^n$ qui vérifie $\Delta \ne 0$. Si ces conditions sont remplies, nous nous proposons de montrer que $\varphi$ atteint un minimum local en $a$. On peut donc trouver $\delta \strictsuperieur 0$ tel que :
+
+$$\varphi(a) \le \varphi(a + \Delta)$$
+
+pour tout $\Delta \in \setR^n$ vérifiant $\norme{\Delta} \le \delta$. A l'inverse, si $\varphi$ atteint un minimum local en $a$, les conditions sur le gradient et la Hessienne seront remplies.
+\end{theoreme}
+
+<ul class="org-ul">
+<li>Supposons que les conditions sur le gradient et la hessienne soit remplies. Le développement d'ordre deux :</li>
+</ul>
+
+<p>
+\[\varphi(a + \Delta) = \varphi(a) + \partial \varphi(a) \cdot \Delta + \unsur{2} \Delta^\dual \cdot \partial^2 \varphi(a) \cdot \Delta + E(\Delta)\]
+</p>
+
+<p>
+où \(E \sim \petito{\Delta^2}\) devient alors simplement :
+</p>
+
+<p>
+\[\varphi(a + \Delta) = \varphi(a) + \unsur{2} \Delta^\dual \cdot \partial^2 \varphi(a) \cdot \Delta + E(\Delta)\]
+</p>
+
+<p>
+Choisissons \(h \in \setR^n\). Pour un \(\lambda \in \setR\) quelconque, posons \(\Delta = \lambda \cdot h\). On a alors :
+</p>
+
+<p>
+\[\varphi(a + \Delta) = \varphi(a) + \frac{\lambda^2}{2} \cdot h^\dual \cdot \partial^2 \varphi(a) \cdot h + E(\lambda \cdot h)\]
+</p>
+
+<p>
+Mais comme la Hessienne est définie positive et que \(E\) converge plus vite que \(\norme{\Delta}^2 = \lambda^2 \cdot \norme{h}^2\) vers \(0\), il suffit de choisir \(\lambda \strictsuperieur 0\) assez petit pour avoir :
+</p>
+
+<p>
+\[\abs{E(\lambda \cdot h)} \le \frac{\lambda^2}{2} \cdot h^\dual \cdot \partial^2 \varphi(a) \cdot h\]
+</p>
+
+<p>
+on a alors :
+</p>
+
+<p>
+\[\unsur{2} \Delta^\dual \cdot \partial^2 \varphi(a) \cdot \Delta + E(\Delta) \ge \unsur{2} \Delta^\dual \cdot \partial^2 \varphi(a) \cdot \Delta - \abs{E(\Delta)} \ge 0\]
+</p>
+
+<p>
+et :
+</p>
+
+<p>
+\[\varphi(a + \Delta) = \varphi(a) + \unsur{2} \cdot \Delta^\dual \cdot \partial^2 \varphi(a) \cdot \Delta + E(\Delta) \ge \varphi(a)\]
+</p>
+
+<p>
+Nous avons donc bien un minimum local de \(\varphi\) en \(a\).
+</p>
+
+<ul class="org-ul">
+<li>Inversément, si \(\varphi\) atteint un minimum local en \(a\), nous avons vu que la différentielle s'annulait. La jacobienne s'annule donc aussi et le développement d'ordre deux devient :</li>
+</ul>
+
+<p>
+\[\varphi(a + \Delta) = \varphi(a) + \unsur{2} \Delta^\dual \cdot \partial^2 \varphi(a) \cdot \Delta + E(\Delta) \ge \varphi(a)\]
+</p>
+
+<p>
+La condition de minimum local nous dit donc que :
+</p>
+
+<p>
+\[\Delta^\dual \cdot \partial^2 f(a) \cdot \Delta + E(\Delta) \ge 0\]
+</p>
+
+<p>
+Choisissons à nouveau \(h \in \setR^n\) et posons \(\Delta = \lambda \cdot h\) pour un  \(\lambda \in \setR\) quelconque. On a alors :
+</p>
+
+<p>
+\[\frac{\lambda^2}{2} \cdot h^\dual \cdot \partial^2 f(a) \cdot h + E(\lambda \cdot h) \ge 0\]
+</p>
+
+<p>
+Divisant par \(\lambda^2\), on obtient :
+</p>
+
+<p>
+\[\unsur{2} \cdot h^\dual \cdot \partial^2 f(a) \cdot h + \frac{E(\lambda \cdot h)}{\lambda^2 \cdot \norme{h}^2} \cdot \norme{h}^2 \ge 0\]
+</p>
+
+<p>
+Si on fait tendre \(\lambda \strictsuperieur 0\) vers \(0\), on arrive à la relation :
+</p>
+
+<p>
+\[\unsur{2} \cdot h^\dual \cdot \partial^2 f(a) \cdot h \ge 0\]
+</p>
+
+<p>
+Comme ce résultat est valable quel que soit \(h \in \setR^n\), on en conclut que la Hessienne est définie positive.
+</p>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgaf9fb34" class="outline-3">
+<h3 id="orgaf9fb34"><span class="section-number-3">1.2</span> Maximum</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Un raisonnement analogue nous montre que :
+</p>
+
+\begin{theoreme}
+
+Soit $\varphi \in \continue^2(\setR^n,\setR)$. Supposons que que $a \in \setR^n$ annule la Jacobienne (on parlera ici plutôt de gradient) :
+
+$$\partial \varphi(a) = 0$$
+
+Supposons également que la Hessienne en $a$ soit définie négative, c'est-à-dire que :
+
+$$\Delta^\dual \cdot \partial^2 \varphi(a) \cdot \Delta \le 0$$
+
+pour tout $\Delta \in \setR^n$ qui vérifie $\Delta \ne 0$. Si ces conditions sont remplies, $\varphi$ atteint un maximum local en $a$. On peut donc trouver $\delta \strictsuperieur 0$ tel que :
+
+$$\varphi(a) \ge \varphi(a + \Delta)$$
+
+pour tout $\Delta \in \setR^n$ vérifiant $\norme{\Delta} \le \delta$. A l'inverse, si $\varphi$ atteint un maximum local en $a$, les conditions sur le gradient et la Hessienne seront remplies.
+\end{theoreme}
+</div>
+</div>
+
+
+<div id="outline-container-org02de4f3" class="outline-3">
+<h3 id="org02de4f3"><span class="section-number-3">1.3</span> Equivalence</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+En pratique, on peut toujours se ramener à un problème de minimisation.
+En effet, maximiser une fonction revient à minimiser son opposé :
+</p>
+
+<p>
+\[\arg\max_{x \in A} \varphi(x) = \arg\min_{x \in A} (-\varphi(x))\]
+</p>
+
+<p>
+Nous nous restreindrons donc dans la suite aux problèmes de minimisation.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org56635d7" class="outline-3">
+<h3 id="org56635d7"><span class="section-number-3">1.4</span> Dérivées ordinaires</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Pour des fonctions \(f: \setR \mapsto \setR\), les conditions
+se simplifient en :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\OD{f}{t}(a) = 0 \\
+\OOD{f}{t}(a) \ge 0
+\)
+</p>
+</div>
+
+<p>
+pour un minimum et en :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\OD{f}{t}(a) = 0 \\
+\OOD{f}{t}(a) \le 0
+\)
+</p>
+</div>
+
+<p>
+pour un maximum.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org1e01a6b" class="outline-3">
+<h3 id="org1e01a6b"><span class="section-number-3">1.5</span> Point de selle</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+Soit une fonction \(\lagrangien : \setR^n \times \setR^m \mapsto \setR\). Un point de selle \((\gamma,\lambda) \in \setR^n \times \setR^m\) est un couple d'élément qui minimise \(\lagrangien(x,y)\) par rapport à \(x\) et qui la maximise par rapport à \(y\). On aura alors :
+</p>
+
+<p>
+\[\lagrangien(\gamma,y) \le \lagrangien(\gamma,\lambda) \le \lagrangien(x,\lambda)\]
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org37be0c5" class="outline-3">
+<h3 id="org37be0c5"><span class="section-number-3">1.6</span> Convexité</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+Soit l'ensemble :
+</p>
+
+<p>
+\[L = \{ (s,t) \in \setR^2 : (s,t) \ge 0 \text{ et } s + t = 1 \}\]
+</p>
+
+<p>
+Une fonction \(\varphi : \setR^n \mapsto \setR)\) est dite convexe si pour tout \(u, v \in \setR^n\) et \((s,t) \in L\), on a :
+</p>
+
+<p>
+\[\varphi(s \cdot u + t \cdot v) \le s \cdot \varphi(u) + t \cdot \varphi(v)\]
+</p>
+</div>
+
+
+<div id="outline-container-org2fd56d1" class="outline-4">
+<h4 id="org2fd56d1"><span class="section-number-4">1.6.1</span> Formulation équivalente</h4>
+<div class="outline-text-4" id="text-1-6-1">
+<p>
+En substituant \(s = 1 - t\), on obtient :
+</p>
+
+<p>
+\[\varphi(u + t \cdot (v - u)) \le \varphi(u) + t \cdot (\varphi(v) - \varphi(u))\]
+</p>
+
+<p>
+ou :
+</p>
+
+<p>
+\[\varphi(u + t \cdot (v - u)) - \varphi(u) \le t \cdot (\varphi(v) - \varphi(u))\]
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org0cdc59e" class="outline-4">
+<h4 id="org0cdc59e"><span class="section-number-4">1.6.2</span> Différentielle</h4>
+<div class="outline-text-4" id="text-1-6-2">
+<p>
+Si \(\varphi\) est différentiable, on peut écrire par définition :
+</p>
+
+<p>
+\[\differentielle{\varphi}{u}(t \cdot (v - u)) + \petito{t \cdot (v - u)} \le t \cdot (\varphi(v) - \varphi(u))\]
+</p>
+
+<p>
+On peut bien entendu faire sortir le \(t\) par linéarité :
+</p>
+
+<p>
+\[t \cdot \differentielle{\varphi}{u}(v - u) + \petito{t \cdot (v - u)} \le t \cdot (\varphi(v) - \varphi(u))\]
+</p>
+
+<p>
+Il ne nous reste plus qu'à diviser par \(t\) et à faire tendre \(t \to 0\) pour annuler le terme d'erreur. On a alors la borne supérieure :
+</p>
+
+<p>
+\[\differentielle{\varphi}{u}(v - u) \le \varphi(v) - \varphi(u)\]
+</p>
+
+<p>
+En termes matriciels, cela se réécrit :
+</p>
+
+<p>
+\[\partial \varphi(u) \cdot (v - u) \le \varphi(v) - \varphi(u)\]
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org54059fd" class="outline-4">
+<h4 id="org54059fd"><span class="section-number-4">1.6.3</span> Hessienne</h4>
+<div class="outline-text-4" id="text-1-6-3">
+<p>
+Supposons à présent que la fonction convexe \(\varphi : \setR^n \mapsto \setR\) soit deux fois continûment différentiable. Soit \(u,v \in \setR^n\). Posons \(\Delta = v - u\). On considère le développement d'ordre deux :
+</p>
+
+<p>
+\[\varphi(v) = \varphi(u) + \partial \varphi(u) \cdot \Delta + \unsur{2} \cdot \Delta^\dual \cdot \partial^2 \varphi(u) \cdot \Delta + \petito{\Delta^2}\]
+</p>
+
+<p>
+La borne supérieure de la différentielle nous dit que :
+</p>
+
+<p>
+\[\partial \varphi(u) \cdot \Delta \le \varphi(v) - \varphi(u)\]
+</p>
+
+<p>
+On a donc :
+</p>
+
+<p>
+\[\unsur{2} \cdot \Delta^\dual \cdot \partial^2 \varphi(u) \cdot \Delta + \petito{\Delta^2} = \varphi(v) - \varphi(u) - \partial \varphi(u) \cdot \Delta \ge 0\]
+</p>
+
+<p>
+c'est-à-dire :
+</p>
+
+<p>
+\[\Delta^\dual \cdot \partial^2 \varphi(u) \cdot \Delta + \petito{\Delta^2} \ge 0\]
+</p>
+
+<p>
+Choisissons \(\delta \in \setR^n\) et \(t \in \setR\). Considérons le cas où \(v = u + t \cdot \delta\). On a alors \(\Delta = t \cdot \delta\) et :
+</p>
+
+<p>
+\[t^2 \cdot \delta^\dual \cdot \partial^2 \varphi(u) \cdot \delta + \petito{t^2 \cdot \delta^2} \ge 0\]
+</p>
+
+<p>
+Il suffit alors de diviser par \(t^2\) et de faire tendre \(t \to 0\) pour obtenir :
+</p>
+
+<p>
+\[\delta^\dual \cdot \partial^2 \varphi(u) \cdot \delta \ge 0\]
+</p>
+
+<p>
+Comme ce doit être valable pour tout \(\delta \in \setR^n\), la Hessienne est définie positive en tout \(u \in \setR^n\).
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org518dc9f" class="outline-4">
+<h4 id="org518dc9f"><span class="section-number-4">1.6.4</span> Globalité</h4>
+<div class="outline-text-4" id="text-1-6-4">
+<p>
+Considérons le minimum global :
+</p>
+
+<p>
+\[\lambda \in \arg\min_{x \in \setR^n} \varphi(x)\]
+</p>
+
+<p>
+Supposons à présent que \(\varphi\) atteigne un minimum local en \(\gamma\). On sait que \(\varphi(\lambda) \le \varphi(\gamma)\) par définition de \(\lambda\). Mais comme \(\partial \varphi(\gamma) = 0\), on a aussi :
+</p>
+
+<p>
+\[0 = \partial \varphi(\gamma) \cdot (\lambda - \gamma) \le \varphi(\lambda) - \varphi(\gamma)\]
+</p>
+
+<p>
+On en déduit que :
+</p>
+
+<p>
+\[\varphi(\gamma) \le \varphi(\lambda)\]
+</p>
+
+<p>
+donc \(\varphi(\gamma) = \varphi(\lambda)\) est également un minimum global.
+</p>
+
+<p>
+Attention toutefois, cela ne prouve aucunement que le point minimisant \(\varphi\) est unique.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgd7e8f0d" class="outline-4">
+<h4 id="orgd7e8f0d"><span class="section-number-4">1.6.5</span> Corollaire</h4>
+<div class="outline-text-4" id="text-1-6-5">
+<p>
+Un corollaire important de ces résultats est que si \(\varphi\) est convexe et deux fois différentiable et que l'on trouve un point \(x\) tel que \(\partial \varphi(x) = 0\), ce point minimise localement \(\varphi\) car la Hessienne est définie positive. Le réel \(\varphi(x)\) est donc également le minimum global de \(\varphi\).
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org3684b23" class="outline-3">
+<h3 id="org3684b23"><span class="section-number-3">1.7</span> Convexité stricte</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+Une fonction \(\varphi : \setR^n \mapsto \setR)\) est dite strictement convexe si pour tout \(u, v \in \setR^n\) tels que \(u \ne v\) et tout \((s,t) \in L \setminus \{ (1,0),(0,1) \}\), on a :
+</p>
+
+<p>
+\[\varphi(s \cdot u + t \cdot v) \strictinferieur s \cdot \varphi(u) + t \cdot \varphi(v)\]
+</p>
+</div>
+
+
+<div id="outline-container-org54b9ef8" class="outline-4">
+<h4 id="org54b9ef8"><span class="section-number-4">1.7.1</span> Minima</h4>
+<div class="outline-text-4" id="text-1-7-1">
+<p>
+Supposons qu'il existe deux \(u,v \in \setR^n\) distincts (\(u \ne v\)) tels que \(\varphi(u) = \varphi(v)\) soit le minimum global de \(\varphi\). On a alors :
+</p>
+
+\begin{eqnarray*}
+\varphi(s \cdot u + t \cdot v) &\strictinferieur& s \cdot \varphi(u) + t \cdot \varphi(v) \\
+&\strictinferieur& (s + t) \cdot \varphi(u) = \varphi(u)
+\end{eqnarray*}
+
+<p>
+ce qui n'est pas possible puisque \(\varphi(u)\) est minimum global. Il existe donc au plus un seul \(u \in \setR^n\) minimisant globalement \(\varphi\) :
+</p>
+
+<p>
+\[u = \arg\min_{x \in \setR^n} \varphi(x)\]
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orge0a7719" class="outline-3">
+<h3 id="orge0a7719"><span class="section-number-3">1.8</span> Concavité</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+Une fonction \(\psi : \setR^n \mapsto \setR\) est dite concave si pour tout \(u, v \in \setR^n\) et \((s,t) \in L\), on a :
+</p>
+
+<p>
+\[\psi(s \cdot u + t \cdot v) \ge s \cdot \psi(u) + t \cdot \psi(v)\]
+</p>
+
+<p>
+On voit que si \(\psi\) est concave, \(\varphi = -\psi\) est convexe. L'équivalence max-min nous montre alors que tout maximum local de \(\psi\) est également un maximum global.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org7e78379" class="outline-3">
+<h3 id="org7e78379"><span class="section-number-3">1.9</span> Concavité stricte</h3>
+<div class="outline-text-3" id="text-1-9">
+<p>
+Une fonction \(\psi : \setR^n \mapsto \setR\) est dite strictement concave si pour tout \(u, v \in \setR^n\) tels que \(u \ne v\) et tout \((s,t) \in L \setminus \{ (1,0),(0,1) \}\), on a :
+</p>
+
+<p>
+\[\psi(s \cdot u + t \cdot v) \strictsuperieur s \cdot \psi(u) + t \cdot \psi(v)\]
+</p>
+
+<p>
+On voit que si \(\psi\) est strictement concave, \(\varphi = -\psi\) est strictement convexe. L'équivalence max-min nous montre alors qu'il existe au plus un seul élément de \(\setR^n\) maximisant globalement \(\psi\).
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org0033c3d" class="outline-3">
+<h3 id="org0033c3d"><span class="section-number-3">1.10</span> Equation du second degré</h3>
+<div class="outline-text-3" id="text-1-10">
+<p>
+Soit \(a,b,c \in \setR\) avec \(a \ne 0\). Soit le polynôme du second degré, ou polynôme de degré \(2\) défini par :
+</p>
+
+<p>
+\[p(x) = a \cdot x^2 + b \cdot x + c\]
+</p>
+
+<p>
+pour tout \(x \in \setR\). Nous allons chercher un éventuel extrema \(\gamma\) de ce polynôme. La dérivée première s'écrit :
+</p>
+
+<p>
+\[\OD{p}{x}(x) = 2 \cdot a \cdot x + b\]
+</p>
+
+<p>
+La condition :
+</p>
+
+<p>
+\[\OD{p}{x}(\gamma) = 2 \cdot a \cdot \gamma + b = 0\]
+</p>
+
+<p>
+nous donne :
+</p>
+
+<p>
+\[\gamma = -\frac{b}{2a}\]
+</p>
+
+<p>
+La dérivée seconde est donnée par :
+</p>
+
+<p>
+\[\OOD{p}{x}(x) = 2 \cdot a\]
+</p>
+
+<p>
+Si \(a \strictsuperieur 0\), la dérivée seconde est toujours positive et \(\gamma\) minimise localement \(p\). On vérifie que \(p\) est strictement convexe, et on en déduit que \(\gamma\) est l'unique réel qui minimise globalement \(p\).
+</p>
+
+<p>
+Par contre, si \(a \strictinferieur 0\), la dérivée seconde est toujours négative et \(\gamma\) maximise localement \(p\). On vérifie que \(p\) est strictement concave, et on en déduit que \(\gamma\) est l'unique réel qui maximise globalement \(p\).
+</p>
+</div>
+
+
+<div id="outline-container-org825d817" class="outline-4">
+<h4 id="org825d817"><span class="section-number-4">1.10.1</span> Racines</h4>
+<div class="outline-text-4" id="text-1-10-1">
+<p>
+Intéressons-nous à présent à l'écart par rapport à \(\gamma\) :
+</p>
+
+<p>
+\[\delta = x - \gamma = x + \frac{b}{2 a}\]
+</p>
+
+<p>
+On a donc :
+</p>
+
+<p>
+\[x = \gamma + \delta = - \frac{b}{2a} + \delta\]
+</p>
+
+<p>
+et :
+</p>
+
+<p>
+\[x^2 = (\gamma + \delta)^2 = \delta^2 - \frac{\delta \cdot b}{a} + \frac{b^2}{4 \cdot a^2}\]
+</p>
+
+<p>
+En injectant ces relations dans la définition du polynôme, on obtient :
+</p>
+
+\begin{eqnarray*}
+p(\gamma + \delta) &=& a \cdot \delta^2 - b \cdot \delta + \frac{b^2}{4 \cdot a} + b \cdot \delta - \frac{b^2}{2 \cdot a} + c \\
+&=& a \cdot \delta^2 - \frac{b^2}{4 \cdot a} + c
+\end{eqnarray*}
+
+<p>
+Cette expression nous permet d'obtenir les racines d'un polynôme du second degré. La condition :
+</p>
+
+<p>
+\[p(\delta + \gamma) = 0\]
+</p>
+
+<p>
+nous donne :
+</p>
+
+<p>
+\[\delta^2 = \frac{b^2 - 4 \cdot a \cdot c}{4 \cdot a^2}\]
+</p>
+
+<p>
+équation qui admet deux solution \(\delta_+, \delta_-\) :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\delta_+ = \frac{\sqrt{ b^2 - 4 \cdot a \cdot c }}{2 \cdot a} \\
+\delta_- = - \frac{\sqrt{ b^2 - 4 \cdot a \cdot c }}{2 \cdot a}
+\)
+</p>
+</div>
+
+<p>
+Nous avons donc deux racines \(x_+,x_-\) :
+</p>
+
+<div class="org-center">
+<p>
+\(
+x_+ = \frac{-b + \sqrt{b^2 - 4 \cdot a \cdot c}}{2 \cdot a} \\ \\
+x_- = \frac{-b - \sqrt{b^2 - 4 \cdot a \cdot c}}{2 \cdot a}
+\)
+</p>
+</div>
+
+<p>
+telles que \(p(x_+) = p(x_-) = 0\).
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org23df5fd" class="outline-3">
+<h3 id="org23df5fd"><span class="section-number-3">1.11</span> Moindres-carrés</h3>
+<div class="outline-text-3" id="text-1-11">
+<p>
+Soit la matrice \(A \in \matrice(\setR,m,n)\) et le vecteur matriciel \(b \in \matrice(\setR,m,1)\). On aimerait trouver le \(\xi \in \matrice(\setR^n,n,1)\) qui minimise la norme de l'erreur \(e\) définie par :
+</p>
+
+<p>
+\[e(x) = A \cdot x - b\]
+</p>
+
+<p>
+pour tout \(x \in \matrice(\setR^n,n,1)\). Comme la fonction \(\norme{x} \mapsto \norme{x}^2\) est strictement croissante sur \(\norme{x} \in \setR^+\), cela revient à minimiser :
+</p>
+
+<p>
+\[\mathcal{E}(x) = \norme{x}^2 = e(x)^\dual \cdot e(x) = (A \cdot x - b)^\dual \cdot (A \cdot x - b)\]
+</p>
+
+<p>
+En développant, on obtient :
+</p>
+
+<p>
+\[\mathcal{E}(x) = x^\dual \cdot A^\dual \cdot A \cdot x - x^\dual \cdot A^\dual \cdot b - b^\dual \cdot A \cdot x + b^\dual \cdot b\]
+</p>
+
+<p>
+Comme \((A^\dual \cdot A)^\dual = A^\dual \cdot A\) et \(x^\dual \cdot A^\dual \cdot b = b^\dual \cdot A^\dual \cdot x\), l'annulation de la dérivée nous donne :
+</p>
+
+<p>
+\[\partial \mathcal{E}(\xi) = 2 A^\dual \cdot A \cdot \xi - 2 A^\dual \cdot b = 0\]
+</p>
+
+<p>
+d'où l'on tire directement :
+</p>
+
+<p>
+\[A^\dual \cdot A \cdot \xi = A^\dual \cdot b\]
+</p>
+
+<p>
+Si \(A^\dual \cdot A\) est inversible, on en déduit que :
+</p>
+
+<p>
+\[\xi = \left(A^\dual \cdot A\right)^{-1} \cdot A^\dual \cdot b\]
+</p>
+</div>
+
+
+<div id="outline-container-org4f33c41" class="outline-4">
+<h4 id="org4f33c41"><span class="section-number-4">1.11.1</span> Orthogonalité</h4>
+<div class="outline-text-4" id="text-1-11-1">
+<p>
+Considérons la partition en colonne \(A = [c_1 \ ... \ c_n]\). On a alors :
+</p>
+
+<div class="org-center">
+<p>
+\(
+A^\dual =
+</p>
+\begin{Matrix}{c}
+c_1^\dual \\ \vdots \\ c_n^\dual
+\end{Matrix}
+<p>
+\)
+</p>
+</div>
+
+<p>
+La propriété :
+</p>
+
+<p>
+\[A^\dual \cdot (A \cdot \xi - b) = A^\dual \cdot A \cdot \xi - A^\dual \cdot b = 0\]
+</p>
+
+<p>
+nous dit donc que les colonnes de \(A\) sont orthogonales au vecteur \(r = A \cdot \xi - b\) :
+</p>
+
+<p>
+\[\scalaire{c_i}{r} = c_i^\dual \cdot r = \ligne_i [ A^\dual \cdot (A \cdot \xi - b) ] = 0\]
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org683b36c" class="outline-4">
+<h4 id="org683b36c"><span class="section-number-4">1.11.2</span> Approximation de fonctions</h4>
+<div class="outline-text-4" id="text-1-11-2">
+<p>
+On désire obtenir une approximation \(w\) d'une fonction \(u\) dont on connaît les valeurs aux points \(x_1,...,x_m\) en minimisant l'erreur :
+</p>
+
+<p>
+\[\sum_{i=1}^{m} ( u(x_i) - w(x_i) )^2\]
+</p>
+
+<p>
+On choisit alors les fonctions \(\varphi_1(x),...,\varphi_n(x)\), où \(n \le m\) et on pose :
+</p>
+
+<p>
+\[w(x) = \sum_{i=1}^m a_i \cdot \varphi_i(x)\]
+</p>
+
+<p>
+En utilisant les matrices :
+</p>
+
+\begin{eqnarray*}
+A &=& [\varphi_j(x_i)]_{i,j} \\
+a &=& [a_1 \ a_2 \ ... \ a_m]^T \\
+b &=& [u(x_1) \ u(x_2) \ ... \ u(x_n)]^T
+\end{eqnarray*}
+
+<p>
+on peut réécrire le problème de minimisation comme suit :
+</p>
+
+<p>
+\[a = \arg\min_z (A \cdot z - b)^\dual \cdot (A \cdot z - b)\]
+</p>
+
+<p>
+La solution est donc :
+</p>
+
+<p>
+\[a = (A^\dual \cdot A)^{-1} \cdot A^\dual \cdot b\]
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Auteur: chimay</p>
+<p class="date">Created: 2018-04-03 mar 15:51</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

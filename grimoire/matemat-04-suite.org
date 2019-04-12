@@ -1,0 +1,4700 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat 04 : Suites
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/commandes-tex.org"
+
+* Distances
+
+#+TOC: headlines 1 local
+
+\label{chap:distances}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:algebre} : Les structures algébriques
+  - Chapitre \ref{chap:ordres} : Les ordres
+  - Chapitre \ref{chap:topologies} : Les topologies
+
+
+** Définition
+
+Afin de généraliser le plus possible la notion de distance au sens usuel, nous allons nous poser la question : quelles sont les caractéristiques fondamentales d'une distance ? Nous en déduirons les propriétés que doit respecter une distance générique.
+
+Soit l'ensemble $\Omega$, un corps $\corps$ et une fonction $\distance : \Omega \times \Omega \to \corps$ représentant une distance entre deux éléments de l'ensemble $\Omega$. Choisissons des éléments quelconques $x,y,z \in \Omega$. Au sens usuel, une distance entre deux objets est clairement positive :
+
+$$\distance(x,y) \ge 0$$
+
+Elle est également symétrique puisqu'on obtient la même distance lorsqu'on intervertit les objets :
+
+$$\distance(x,y) = \distance(y,x)$$
+
+Par ailleurs , la distance entre deux objets identiques doit évidemment
+être nulle :
+
+$$\distance(x,x) = 0$$
+
+On impose également que le seul élément $y$ qui puisse être à distance nulle de $x$ soit l'élément $x$ lui-même :
+
+$$\distance(x,y) = 0 \ \Rightarrow \ x = y$$
+
+Enfin, il est toujours plus court d'aller directement de $x$ à $z$ plutôt que de passer par une étape $y$. On a donc l'inégalité triangulaire :
+
+$$\distance(x,z) \le \distance(x,y) + \distance(y,z)$$
+
+
+*** Remarque
+
+Parfois, au lieu d'imposer l'égalité de deux éléments situés à distance nulle l'un de l'autre, on impose juste l'équivalence suivant un critère prédéfini :
+
+$$\distance(x,y) = 0 \ \Rightarrow \ x \equiv y$$
+
+
+** Distance à un ensemble
+
+Quelle est la distance à parcourir d'une ville donnée lorsqu'on désire se rendre dans un certain pays ? On a envie de dire que la distance est parcourue dès que l'on a atteint la frontière du pays en question. Comme on choisit généralement le chemin le plus court pour arriver à destination, on se rend compte que la distance ville - pays est le minimum des distances entre la ville et tous les points appartenant au pays.
+
+Maintenant, remplaçons la ville par un élément $x \in \Omega$ et le pays par un ensemble $A \subseteq \Omega$. On définit simplement la distance de $x$ à $A$ comme étant l'infimum des distances de $x$ à un point quelconque de $A$ :
+
+$$\distance(x,A) = \inf_{a \in A} \distance(x,a) = \inf \{ \distance(x,a) : a \in A \}$$
+
+
+*** Inclusion
+
+Si $B \subseteq A$, on en déduit directement que :
+
+$$\distance(a,A) \le \distance(a,B)$$
+
+
+*** Notation
+
+On note aussi :
+
+$$\distance(A,a) = \distance(a,A)$$
+
+
+*** Self-distance
+
+Soit $a \in A$. Comme $\distance(a,a) = 0$ et que la distance $\distance(a,b) \ge 0$ pour tout $b \in A$, on voit que le choix $b = a$ minimise $\distance(a,b)$ sur $A$. Donc :
+
+$$\distance(a,A) = 0$$
+
+pour tout élément $a \in A$.
+
+
+** Distance inter-ensembles
+
+La distance entre deux ensembles $A$ et $B$ est l'infimum des distances possibles entre les couples $(a,b) \in A \times B$ :
+
+$$\distance(A,B) = \inf \{ \distance(a,b) : (a,b) \in A \times B \}$$
+
+On a bien évidemment :
+
+$$\distance(A,B) = \inf \{ \distance(a,B) : a \in A \} = \inf \{ \distance(A,b) : b \in B \}$$
+
+
+** Boules
+
+Les boules sont la généralisation des disques et des sphères. Or, ce qui caractèrise ces entités, c'est qu'elle incluent des points $x$ vérifiant $\distance(x,c) \le r$, où $c$ est le centre et $r$ le rayon. On définit par conséquent la boule fermée $\boule[c,r]$ par :
+
+$$\boule[c,r] = \{ x \in \Omega : \distance(x,c) \le r \}$$
+
+où $r$ est un réel positif.
+
+Si l'on veut que la distance soit strictement inférieure à $r$, on considérera plutôt la définition de la boule ouverte :
+
+$$\boule(c,r) = \{ x \in \Omega : \distance(x,c) \strictinferieur r \}$$
+
+
+** Topologie métrique
+
+La topologie usuelle définie sur les ensembles munis d'une distance est celle générée par les boules ouvertes, soit les éléments de la collection :
+
+$$\mathcal{B} = \{ \boule(c,r) : c \in \Omega, \ r \in \corps, \  r \strictsuperieur 0 \}$$
+
+La topologie métrique $\topologie$ s'écrit donc :
+
+$$\topologie = \topologies(\mathcal{B},\Omega)$$
+
+Toute union de boules ouvertes est donc un ouvert.
+
+
+** Intérieur
+
+Soit $A \subseteq \Omega$.
+
+  - Soit $x \in \interieur A$. L'élément $x$ appartient donc à un ouvert $U$ contenu dans $A$. Comme $x \in U$, on a $U \ne \emptyset$. On en conclut que $U$ doit être une union de boules ouvertes. On peut donc trouver un $a \in U$ et un $\delta \strictsuperieur 0$ tel que $x \in \boule(a,\delta) \subseteq U$. Comme $d = \distance(a,x) \strictinferieur \delta$, on a $\delta - d \strictsuperieur 0$. Soit $\epsilon = \delta - d$ et $y \in \boule(x,\epsilon)$. On a :
+
+$$\distance(a,y) \le \distance(a,x) + \distance(x,y) \strictinferieur d + \epsilon = \delta$$
+
+Donc $\boule(x,\epsilon) \subseteq \boule(a,\delta) \subseteq U \subseteq A$ et $\distance( x , \Omega \setminus A ) \strictsuperieur 0$.
+
+  - Réciproquement, si $z \in \Omega$ vérifie $d = \distance( x , \Omega \setminus A ) \strictsuperieur 0$, on a $z \in \boule(z,d/2) \subseteq A$. L'élément $z$ appartient donc à un ouvert contenu dans $A$. Il appartient donc à l'union des ouverts inclus dans $A$, c'est-à-dire $z \in \interieur A$.
+
+On conclut de ce qui précède que :
+
+$$\interieur A = \{ x \in \Omega : \distance( x , \Omega \setminus A ) \strictsuperieur 0 \}$$
+
+
+** Adhérence
+
+On voit que :
+
+$$\interieur (\Omega \setminus A) = \{ x \in \Omega : \distance(x,A) \strictsuperieur 0 \}$$
+
+Le complémentaire de cet ensemble est bien sur constitué des $x \in \Omega$ vérifiant $\distance(x,A) = 0$. Or, nous avons vu que ce complémentaire n'est rien d'autre que l'adhérence de $A$ :
+
+$$\adh A = \{ x \in \Omega : \distance(x,A) = 0 \}$$
+
+
+** Adhérence carrée
+
+Soit $x \in \Omega$, $A \subseteq \Omega$ et :
+
+#+BEGIN_CENTER
+\(
+B = \adh A \\
+C = \adh B = \adh \adh A
+\)
+#+END_CENTER
+
+Soit $c \in C$. Pour tout $\epsilon \in \corps$ avec $\epsilon \strictsuperieur 0$, on peut trouver $b \in B$ tel que :
+
+$$\distance(c,b) \le \epsilon$$
+
+et ensuite $a \in A$ tel que :
+
+$$\distance(b,a) \le \epsilon$$
+
+On a donc :
+
+$$\distance(c,a) \le \distance(c,b) + \distance(b,a) \le \epsilon + \epsilon$$
+
+L'infimum est par conséquent nul :
+
+$$\distance(c,A) = \inf_{a \in A} \distance(c,a) = 0$$
+
+On en déduit que $c \in \adh A$. Nous venons de montrer que :
+
+$$\adh \adh A \subseteq \adh A$$
+
+Mais comme l'inverse est également vrai, on a :
+
+$$\adh \adh A = \adh A$$
+
+
+* Limites
+
+#+TOC: headlines 1 local
+
+\label{chap:limites}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:distances} : Les distances
+
+
+** Définition
+
+Soit les ensembles $E,F$ munis respectivement des distances $\distance_E$ et $\distance_F$, un sous-ensemble $D \subseteq E$ et la fonction $f : D \mapsto F$. Comme la distance utilisée est sans ambiguité d'après la nature des objets dont elle mesure l'éloignement :
+
+#+BEGIN_CENTER
+\(
+\distance(x,y) = \distance_E(x,y) \Leftrightarrow x,y \in E \\
+\distance(x,y) = \distance_F(x,y) \Leftrightarrow x,y \in F
+\)
+#+END_CENTER
+
+on note dans la suite de ce chapitre $\distance$ à la place de $\distance_E$ et de $\distance_F$.
+
+Plaçons nous dans $A \subseteq D$. Nous nous intéressons au cas où $f(x)$ se rapproche de plus en plus d'un certain $L \in F$ lorsque $x \in A$ se rapproche suffisamment d'un certain $a \in E$. Pour toute précision $\epsilon \in \corps$, $\epsilon \strictsuperieur 0$ aussi petite que l'on veut, on doit alors pouvoir trouver un niveau de proximité $\delta(\epsilon) \in \corps$, $\delta(\epsilon) \strictsuperieur 0$ tel que :
+
+$$\distance(f(x),L) \le \epsilon$$
+
+pour tout les $x \in A$ vérifiant :
+
+$$\distance(x,a) \le \delta(\epsilon)$$
+
+Si cette condition est remplie, on dit que $L$ est la limite de $f$ en $a$, et on note :
+
+$$\lim_{ \substack{ x \to a \\ x \in A } } f(x) = L$$
+
+
+*** Notations
+
+Lorsque l'ensemble $A$ est évident d'après le contexte, on note simplement :
+
+$$\lim_{ x \to a } f(x) = \lim_{ \substack{ x \to a \\ x \in A } } f(x)$$
+
+Au lieu de noter l'ensemble, on peut citer les conditions qui le définissent. Ainsi par exemple :
+
+$$\lim_{ \substack{ x \to a \\ x \ne a } } f(x) = \lim_{ \substack{ x \to a \\ x \in X(a) } } f(x)$$
+
+où :
+
+$$X(a) = D \setminus \{ a \}$$
+
+Autre application :
+
+$$\lim_{ \substack{ x \to a \\ x \le a } } f(x) = \lim_{ \substack{ x \to a \\ x \in I(a) } } f(x)$$
+
+où :
+
+$$I(a) = \{ x \in D : x \le a \}$$
+
+
+*** Remarque
+
+Rien n'impose que $a$ appartienne à $A$. L'existence de la limite de $f$ en $a$ n'implique donc pas que la fonction $f$ soit définie en $a$.
+
+
+*** Unicité
+
+Supposons que $b$ et $c$ soient deux limites de $f$ en $a$. Soit $\epsilon \strictsuperieur 0$. On peut alors trouver un $\alpha \strictsuperieur 0$ tel que :
+
+$$\distance(f(x),b) \le \frac{\epsilon}{2}$$
+
+pour tout $x$ vérifiant $\distance(x,a) \le \alpha$ et un $\beta \strictsuperieur 0$ tel que :
+
+$$\distance(f(x),c) \le \frac{\epsilon}{2}$$
+
+pour tout $x$ vérifiant $\distance(x,a) \le \beta$. Posons $\delta = \min\{\alpha,\beta\}$. Si $x$ vérifie $\distance(x,a) \le \delta$, on a :
+
+$$\{ \ \distance(f(x),b) , \ \distance(f(x),c) \ \} \le \frac{\epsilon}{2}$$
+
+et :
+
+$$\distance(b,c) \le \distance(b,f(x)) + \distance(f(x),c) \le \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon$$
+
+Comme ce doit être vrai pour tout $\epsilon$ strictement positif, on en conclut que $\distance(b,c) = 0$, c'est-à-dire $b = c$. La limite est donc unique.
+
+
+*** Inclusion des boules
+
+Soit :
+
+#+BEGIN_CENTER
+\(
+B_1(\delta) = \boule(a,\delta) \cap A \\
+B_2(\epsilon) = \boule(f(a),\epsilon)
+\)
+#+END_CENTER
+
+La définition de la limite revient à exiger que, pour tout $\epsilon \strictsuperieur 0$, on puisse trouver un $\delta \strictsuperieur 0$ tel que tout élément de $B_1(\delta)$ auquel on applique la fonction $f$ se retrouve dans $B_2(\epsilon)$. Autrement dit, $f(B_1(\delta)) \subseteq B_2(\epsilon)$.
+
+
+*** Limite de la distance
+
+Si $L$ est la limite de $f$ en $a$, la distance doit converger vers zéro par définition :
+
+$$\lim_{ \substack{ x \to a \\ x \in A } } \distance(f(x),L) = 0$$
+
+
+** Chemin
+
+Supposons qu'il existe des sous-ensembles $A,B \subseteq D$ tels que :
+
+$$\lim_{ \substack{ x \to a \\ x \in A } } f(x) \ne \lim_{ \substack{ x \to a \\ x \in B } } f(x)$$
+
+On dit alors que la limite dépend du chemin parcouru.
+
+
+** Limites à l'infini
+
+Si $E$ est un ensemble ordonné, on peut définir la notion de limite à l'infini. Soit une fonction $f : E \mapsto F$ et $L \in F$. Si, pour toute précision $\epsilon > 0$, on peut trouver une borne inférieure $I(\epsilon) \in E$ telle que :
+
+$$\distance(f(x),L) \le \epsilon$$
+
+pour tout $x \in E$ vérifiant $x \ge I(\epsilon)$, on dit alors que $f$ tend vers $L$ à l'infini positif et on écrit :
+
+$$\lim_{ x \to +\infty } f(x) = L$$
+
+Symétriquement, si pour toute précision $\epsilon > 0$, on peut trouver une borne supérieure $S(\epsilon) \in E$ telle que :
+
+$$\distance(f(x),L) \le \epsilon$$
+
+pour tout $x \in E$ vérifiant $x \le S(\epsilon)$, on dit alors que $f$ tend vers $L$ à l'infini négatif et on écrit :
+
+$$\lim_{ x \to -\infty } f(x) = L$$
+
+
+*** Notation
+
+On a également la notation alternative :
+
+$$\lim_{ x \to \infty } f(x) = \lim_{ x \to +\infty } f(x)$$
+
+ainsi que :
+
+\begin{eqnarray*}
+f(+\infty) &=& \lim_{ x \to +\infty } f(x) \\ \\
+f(-\infty) &=& \lim_{ x \to -\infty } f(x)
+\end{eqnarray*}
+
+
+** Limite supremum et infimum
+
+
+*** Infini positif
+
+Il arrive que la limite à l'infini positif d'une fonction $f : E \mapsto F$ n'existe pas mais que la limite de la fonction $g : E \mapsto F$, que l'on suppose correctement définie pour tout $x \in E$ par :
+
+$$g(x) =  \inf \{ f(y) : y \in E, \ y \ge x \}$$
+
+existe. On note alors :
+
+$$\liminf_{ x \to +\infty } f(x) = \lim_{ x \to +\infty } \inf \{ f(y) : y \in E, \ y \ge x \}$$
+
+On définit pareillement la limite du supremum :
+
+$$\limsup_{ x \to +\infty } f(x) = \lim_{ x \to +\infty } \sup \{ f(y) : y \in E, \ y \ge x \}$$
+
+
+*** Infini négatif
+
+On définit également :
+
+#+BEGIN_CENTER
+\(
+\limsup_{ x \to -\infty } f(x) = \lim_{ x \to -\infty } \sup \{ f(y) : y \in E, \ y \le x \} \\ \\
+\liminf_{ x \to -\infty } f(x) = \lim_{ x \to -\infty } \inf \{ f(y) : y \in E, \ y \le x \}
+\)
+#+END_CENTER
+
+
+** Limites infinies
+
+Si $F$ est un ensemble ordonné, on peut définir la notion de limite infinie.
+
+
+*** Positive
+
+Si, pour tout $G \in F$ aussi grand que l'on veut, on peut trouver une proximité $\delta(G) > 0$ vérifiant :
+
+$$f(x) \ge G$$
+
+pour tout les $x \in A$ assez proche de $a$ :
+
+$$\distance(x,a) \le \delta(G)$$
+
+on dit alors que $f$ tend vers l'infini positif en $a$ et on écrit :
+
+$$\lim_{ x \to a } f(x) = +\infty$$
+
+
+*** Négative
+
+Si, pour tout $P \in F$ aussi petit que l'on veut, on peut trouver une proximité $\delta(P) > 0$ vérifiant :
+
+$$f(x) \le P$$
+
+pour tout les $x \in A$ assez proche de $a$ :
+
+$$\distance(x,a) \le \delta(P)$$
+
+on dit alors que $f$ tend vers l'infini négatif en $a$ et on écrit :
+
+$$\lim_{ x \to a } f(x) = -\infty$$
+
+
+*** Notation
+
+On a les notations alternatives :
+
+#+BEGIN_CENTER
+\(
+f(a) = +\infty \quad \Leftrightarrow \quad \lim_{ x \to a } f(x) = +\infty \\
+f(a) = -\infty \quad \Leftrightarrow \quad \lim_{ x \to a } f(x) = -\infty
+\)
+#+END_CENTER
+
+
+** Limite infinie à l'infini
+
+On suppose que $E$ et $F$ sont ordonnés. On dit que la limite de $f$ à l'infini positif est l'infini positif et on le note :
+
+$$\lim_{x \to +\infty} f(x) = +\infty$$
+
+si, pour tout $G \in F$ aussi grand que l'on veut, on peut trouver une borne inférieure $I(G) \in E$ telle que :
+
+$$f(x) \ge G$$
+
+pour tout $x \in E$ vérifiant $x \ge I(G)$. On dit que la limite de $f$ à l'infini positif est l'infini négatif et on le note :
+
+$$\lim_{x \to +\infty} f(x) = -\infty$$
+
+si, pour tout $P \in F$ aussi petit que l'on veut, on peut trouver une borne inférieure $I(G) \in E$ telle que :
+
+$$f(x) \le P$$
+
+pour tout $x \in E$ vérifiant $x \ge I(G)$. On dit que la limite de $f$ à l'infini négatif est l'infini positif et on le note :
+
+$$\lim_{x \to -\infty} f(x) = +\infty$$
+
+si, pour tout $G \in F$ aussi grand que l'on veut, on peut trouver une borne supérieure $S(G) \in E$ telle que :
+
+$$f(x) \ge G$$
+
+pour tout $x \in E$ vérifiant $x \le S(G)$. On dit que la limite de $f$ à l'infini négatif est l'infini négatif et on le note :
+
+$$\lim_{x \to -\infty} f(x) = -\infty$$
+
+si, pour tout $P \in F$ aussi petit que l'on veut, on peut trouver une borne supérieure $S(G) \in E$ telle que :
+
+$$f(x) \le P$$
+
+pour tout $x \in E$ vérifiant $x \le S(G)$.
+
+
+* Limites doubles
+
+#+TOC: headlines 1 local
+
+\label{chap:limitesDoubles}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:limites} : Les limites
+
+
+** Introduction
+
+Si les ensemble $A, B$ sont munis d'une distance, on définit la distance :
+
+$$\distance^2 : (A \times B) \times (A \times B) \mapsto \corps$$
+
+associée par :
+
+$$\distance^2\big[(x,y), (a,b)\big] = \max \big\{ \distance(x,a), \distance(y,b) \big\}$$
+
+pour tout $(x,y),(a,b) \in A \times B$. La fonction définie est-elle une distance ? On a clairement $\distance^2 \ge 0$ et :
+
+$$\distance^2\big[(x,y), (a,b)\big] = \distance^2\big[(a,b), (x,y)\big]$$
+
+On a aussi :
+
+$$\distance^2\big[(x,y), (x,y)\big] = \max \big\{ \distance(x,x), \distance(y,y) \big\} = \max \{ 0, 0 \} = 0$$
+
+Si :
+
+$$\distance^2\big[(x,y), (a,b)\big] = 0$$
+
+on a forcément :
+
+$$\distance(x,a) = \distance(y,b) = 0$$
+
+Donc $x = a$, $y = b$ et :
+
+$$(x,y) = (a,b)$$
+
+Pour l'inégalité triangulaire, soit $(x,y),(a,b),(c,d) \in A \times B$ et :
+
+$$d = \distance^2\big[(a,b), (c,d)\big] = \max \big\{ \distance(a,c), \distance(b,d) \big\}$$
+
+La distance sur $A$ vérifie :
+
+$$\distance(a,c) \le \distance(a,x) + \distance(x,c)$$
+
+La distance sur $B$ vérifie :
+
+$$\distance(b,d) \le \distance(b,y) + \distance(y,d)$$
+
+On en déduit que :
+
+\begin{eqnarray*}
+d &\le& \max \{ \distance(a,x) + \distance(x,c), \distance(b,y) + \distance(y,d) \} \\
+&\le& \max \{ \distance(a,x), \distance(b,y) \} + \max \{ \distance(x,c), \distance(y,d) \} \\
+&\le& \distance^2\big[(a,b), (x,y)\big] + \distance^2\big[(x,y), (c,d)\big]
+\end{eqnarray*}
+
+
+** Limite en un point
+
+Soit un ensemble $F$ et une fonction $f : A \times B \mapsto F$. On choisit un ensemble $U \subseteq A \times B$. On dit que $L$ est la limite de $f$ en $(a,b) \in A \times B$ et on le note :
+
+$$\lim_{ \substack{ (x,y) \to (a,b) \\ (x,y) \in U } } f(x,y) = L$$
+
+si, pour toute précision $\epsilon \strictsuperieur 0$, on peut trouver un $\delta \strictsuperieur 0$ tel que :
+
+$$\distance(f(x,y), L) \le \epsilon$$
+
+pour tout $(x,y) \in U$ vérifiant :
+
+$$\distance^2\big[ (x,y), (a,b) \big] = \max \{ \distance(x,a), \distance(y,b) \} \le \delta$$
+
+
+*** Formulation équivalente
+
+La condition :
+
+$$\max \{ \distance(x,a), \distance(y,b) \} \le \delta$$
+
+est équivalente à :
+
+#+BEGIN_CENTER
+\(
+\distance(x,a) \le \delta \\
+\distance(y,b) \le \delta
+\)
+#+END_CENTER
+
+On en conclut que :
+
+$$\lim_{ \substack{ (x,y) \to (a,b) \\ (x,y) \in U } } f(x,y) = L$$
+
+si et seulement si, pour toute précision $\epsilon \strictsuperieur 0$, on peut trouver un $\delta \strictsuperieur 0$ tel que :
+
+$$\distance(f(x,y), L) \le \epsilon$$
+
+pour tout $(x,y) \in U$ vérifiant :
+
+#+BEGIN_CENTER
+\(
+\distance(x,a) \le \delta \\
+\distance(y,b) \le \delta
+\)
+#+END_CENTER
+
+
+*** Extension
+
+Supposons que pour toute précision $\epsilon \strictsuperieur 0$ on puisse trouver des $\delta_1, \delta_2 \strictsuperieur 0$ tels que :
+
+$$\distance(f(x,y), L) \le \epsilon$$
+
+pour tout $(x,y) \in U$ vérifiant :
+
+#+BEGIN_CENTER
+\(
+\distance(x,a) \le \delta_1 \\
+\distance(y,b) \le \delta_2
+\)
+#+END_CENTER
+
+En posant :
+
+$$\delta = \min \{ \delta_1, \delta_2 \} \strictsuperieur 0$$
+
+on voit que :
+
+$$\distance(f(x,y), L) \le \epsilon$$
+
+pour tout $(x,y) \in U$ vérifiant :
+
+#+BEGIN_CENTER
+\(
+\distance(x,a) \le \delta \le \delta_1 \\
+\distance(y,b) \le \delta \le \delta_2
+\)
+#+END_CENTER
+
+On en conclut que :
+
+$$\lim_{ \substack{ (x,y) \to (a,b) \\ (x,y) \in U } } f(x,y) = L$$
+
+
+** Limite à l'infini
+
+On suppose que les ensembles $A, B$ sont ordonnés. On dit que $L \in F$ est la limite de $f : A \times B \mapsto F$ à l'infini positif et on le note :
+
+$$\lim_{(x,y) \to +\infty} f(x,y) = L$$
+
+si, pour toute précision $\epsilon \strictsuperieur 0$, on peut trouver des bornes inférieures $(I, J) \in A \times B$ telles que :
+
+$$\distance\big[f(x,y), L\big] \le \epsilon$$
+
+pour tout $(x,y) \in A \times B$ vérifiant :
+
+#+BEGIN_CENTER
+\(
+x \ge I \\
+y \ge J
+\)
+#+END_CENTER
+
+On dit que $L \in F$ est la limite de $f : A \times B \mapsto F$ à l'infini négatif et on le note :
+
+$$\lim_{(x,y) \to -\infty} f(x,y) = L$$
+
+si, pour toute précision $\epsilon \strictsuperieur 0$, on peut trouver des bornes supérieures $(I, J) \in A \times B$ telles que :
+
+$$\distance\big[f(x,y), L\big] \le \epsilon$$
+
+pour tout $(x,y) \in A \times B$ vérifiant :
+
+#+BEGIN_CENTER
+\(
+x \le I \\
+y \le J
+\)
+#+END_CENTER
+
+
+** Dualité
+
+
+*** $x$ puis $y$
+
+Supposons que la limite $\lambda(y)$ définie par :
+
+$$\lambda(y) = \lim_{x \to a} f(x,y)$$
+
+existe pour tout $y \in B$ et que :
+
+$$L = \lim_{y \to b} \lambda(y) = \lim_{y \to b} \lim_{x \to a} f(x,y)$$
+
+est bien définie. Nous supposons également que, quelque soit $\epsilon \strictsuperieur 0$, on peut trouver un $\delta \strictsuperieur 0$ tel que :
+
+$$\distance(f(x,y),\lambda(y)) \le \epsilon$$
+
+pour tout $(x,y) \in A \times B$ vérifiant :
+
+$$\distance(x,a) \le \delta$$
+
+Choissons $\epsilon \strictsuperieur 0$. On peut trouver $\delta_1 \strictsuperieur 0$ tel que :
+
+$$\distance(\lambda(y), L) \le \frac{\epsilon}{2}$$
+
+pour tout $(x,y) \in A \times B$ vérifiant :
+
+$$\distance(y,b) \le \delta_1$$
+
+On peut aussi trouver $\delta_2$ tel que :
+
+$$\distance(f(x,y),\lambda(y)) \le \frac{\epsilon}{2}$$
+
+pour tout $(x,y) \in A \times B$ vérifiant :
+
+$$\distance(x,a) \le \delta_2$$
+
+Soit $\delta = \min \{ \delta_1, \delta_2 \}$ et $(x,y) \in A \times B$ vérifiant :
+
+$$\max \{ \distance(x,a), \distance(y,b) \} \le \delta$$
+
+On a alors :
+
+\begin{eqnarray*}
+\distance(f(x,y),L) &\le& \distance(f(x,y),\lambda(y)) + \distance(\lambda(y),L) \\
+&\le& \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+\end{eqnarray*}
+
+On en conclut que :
+
+$$\lim_{(x,y) \to (a,b)} f(x,y) = L$$
+
+autrement dit :
+
+$$\lim_{(x,y) \to (a,b)} f(x,y) = \lim_{y \to b} \lim_{x \to a} f(x,y)$$
+
+
+*** $y$ puis $x$
+
+Supposons que la limite $\mu(x)$ définie par :
+
+$$\mu(x) = \lim_{y \to b} f(x,y)$$
+
+existe pour tout $x \in A$ et que :
+
+$$M = \lim_{x \to a} \mu(y) = \lim_{x \to a} \lim_{y \to b} f(x,y)$$
+
+est bien définie. Nous supposons également que, quelque soit $\epsilon \strictsuperieur 0$, on peut trouver un $\delta \strictsuperieur 0$ tel que :
+
+$$\distance(f(x,y),\mu(x)) \le \epsilon$$
+
+pour tout $(x,y) \in A \times B$ vérifiant :
+
+$$\distance(y,b) \le \delta$$
+
+Choissons $\epsilon \strictsuperieur 0$. On peut trouver $\delta_1 \strictsuperieur 0$ tel que :
+
+$$\distance(\mu(x), M) \le \frac{\epsilon}{2}$$
+
+pour tout $(x,y) \in A \times B$ vérifiant :
+
+$$\distance(x,a) \le \delta_1$$
+
+On peut aussi trouver $\delta_2$ tel que :
+
+$$\distance(f(x,y),\mu(x)) \le \frac{\epsilon}{2}$$
+
+pour tout $(x,y) \in A \times B$ vérifiant :
+
+$$\distance(y,b) \le \delta_2$$
+
+Soit $\delta = \min \{ \delta_1, \delta_2 \}$ et $(x,y) \in A \times B$ vérifiant :
+
+$$\max \{ \distance(x,a), \distance(y,b) \} \le \delta$$
+
+On a alors :
+
+\begin{eqnarray*}
+\distance(f(x,y),M) &\le& \distance(f(x,y),\mu(x)) + \distance(\mu(x),M) \\
+&\le& \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+\end{eqnarray*}
+
+On en conclut que :
+
+$$\lim_{(x,y) \to (a,b)} f(x,y) = M$$
+
+autrement dit :
+
+$$\lim_{(x,y) \to (a,b)} f(x,y) = \lim_{x \to a} \lim_{y \to b} f(x,y)$$
+
+
+* Suites
+
+#+TOC: headlines 1 local
+
+\label{chap:suites}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:limites} : Les limites
+
+
+** Définition
+
+Une suite est une fonction $s : \setN \mapsto \Omega$ définie par :
+
+$$s : n \mapsto s_n = s(n)$$
+
+pour tout $n \in \setN$. On note $\suitek(\Omega)$ l'ensemble
+des suites $s \subseteq \Omega$.
+
+
+** Limite
+
+On dit qu'une suite $s : n \mapsto s_n \in \Omega$ converge vers $L \in \Omega$
+au sens de la distance $\distance$, ou que $L$ est sa limite à l'infini :
+
+$$L = \lim_{n \to \infty} s_n$$
+
+si, pour toute précision $\epsilon > 0$ aussi petite que l'on veut,
+on peut trouver un naturel $K(\epsilon)$ à partir duquel l'erreur
+sera au moins aussi faible que demandée. On a donc :
+
+$$\distance(L,s_n) \le \epsilon$$
+
+pour tout $n \ge K(\epsilon)$.
+
+
+*** Notation
+
+Comme la limite d'une suite est toujours sous-entendue vers l'infini,
+on note :
+
+$$\lim_n s_n = \lim_{n \to \infty} s_n$$
+
+
+
+** Limites extrémales
+
+On définit :
+
+$$\limsup_{n \to \infty} s_n = \lim_{n \to \infty} \sup \{ s_m : m \in \setN, \ m \ge n \}$$
+
+$$\liminf_{n \to \infty} s_n = \lim_{n \to \infty} \inf \{ s_m : m \in \setN, \ m \ge n \}$$
+
+
+*** Notation
+
+On note aussi :
+
+$$\limsup_n s_n = \limsup_{n \to \infty} s_n$$
+
+$$\liminf_n s_n = \liminf_{n \to \infty} s_n$$
+
+
+** Équivalence
+
+Soit les suites :
+
+$$s : n \mapsto s_n \in \Omega$$
+
+et :
+
+$$t : n \mapsto t_n \in \Omega$$
+
+On dit que $s$ est équivalente à $t$, et on le note :
+
+$$s \equiv t$$
+
+si et seulement si la limite de la distance entre les deux suites converge vers zéro :
+
+$$\lim_{n \to \infty} \distance(s_n,t_n) = 0$$
+
+Quelque soit $\epsilon \strictsuperieur 0$, on peut donc trouver un naturel $K(\epsilon)$ tel que :
+
+$$\distance(s_n,t_n) \le \epsilon$$
+
+pour tout $n \ge K(\epsilon)$.
+
+
+*** Remarque
+
+L'équivalence entre $s$ et $t$ n'implique nullement que la limite de $s$ ou de $t$ existe.
+
+
+*** Existence des limites
+
+Suppons que $s \equiv t$ et que la limite :
+
+$$\sigma = \lim_{n \to \infty} s_n$$
+
+existe. On a :
+
+$$\distance(\sigma,t_n) \le \distance(\sigma,s_n) + \distance(s_n,t_n)$$
+
+Soit $\epsilon \strictsuperieur 0$. En choisissant $K_1$ tel que :
+
+$$\distance(\sigma,s_n) \le \frac{\epsilon}{2}$$
+
+pour tout $n \ge K_1$ et $K_2$ tel que :
+
+$$\distance(s_n,t_n) \le \frac{\epsilon}{2}$$
+
+pour tout $n \ge K_2$, on voit que :
+
+$$\distance(\sigma,t_n) \le \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon$$
+
+Cette relation étant valable quel que soit $\epsilon \strictsuperieur 0$,
+on en déduit que la limite des $t_n$ existe et que :
+
+$$\lim_{n \to \infty} t_n = \sigma = \lim_{n \to \infty} s_n$$
+
+Les limites de suites équivalentes sont identiques.
+
+
+** Ordre
+
+Soit les suites :
+
+$$s : n \mapsto s_n \in \Omega$$
+
+et :
+
+$$t : n \mapsto t_n \in \Omega$$
+
+Si un ordre est défini sur $\Omega$, on dit que $s$ est inférieure à $t$ :
+
+$$s \le t$$
+
+si et seulement si les éléments de $s$ sont inférieurs aux éléments de $t$ :
+
+$$s_n \le t_n$$
+
+pour tout $n \in \setN$.
+
+
+** Monotonie
+
+
+*** Croissance
+
+On dit qu'une suite :
+
+$$s : n \mapsto s_n \in \Omega$$
+
+est croissante si :
+
+$$s_i \ge s_j$$
+
+pour tout $i,j \in \setN$ tels que $i \ge j$.
+
+
+*** Décroissance
+
+On dit qu'une suite :
+
+$$s : n \mapsto s_n \in \Omega$$
+
+est décroissante si :
+
+$$s_i \le s_j$$
+
+pour tout $i,j \in \setN$ tels que $i \ge j$.
+
+
+** Opérations
+
+Soit les suites :
+
+$$s : n \mapsto s_n \in \Omega$$
+
+et :
+
+$$t : n \mapsto t_n \in \Omega$$
+
+Pour toute opération $\opera$ définie sur $\Omega$,
+on définit l'opération induite
+$\opera : \suitek(\Omega) \times \suitek(\Omega) \mapsto \suitek(\Omega)$ par :
+
+$$(s \opera t)(n) = s_n \opera t_n$$
+
+pour tout $n \in \setN$. On note aussi :
+
+$$(s \opera t)_n = (s \opera t)(n)$$
+
+
+*** Usuelles
+
+Sur les ensembles où sont définies les opérations usuelles,
+on aura l'addition :
+
+$$(s + t)_n = s_n + t_n$$
+
+la multiplication :
+
+$$(s - t)_n = s_n - t_n$$
+
+la soustraction :
+
+$$(s \cdot t)_n = s_n \cdot t_n$$
+
+la division :
+
+$$\left[ \frac{s}{t} \right]_n = \frac{s_n}{t_n}$$
+
+pour tout $n \in \setN$.
+
+
+** Cauchy
+
+On dit qu'une suite :
+
+$$s : n \mapsto s_n \in \Omega$$
+
+est de Cauchy si, pour toute précision $\epsilon > 0$ aussi petite
+que l'on veut, on peut trouver un naturel $K(\epsilon)$ à partir
+duquel la distance entre deux éléments de la suite $s_m, s_n$ sera
+aussi petite que demandée. On a donc :
+
+$$\distance(s_m,s_n) \le \epsilon$$
+
+pour tout $m,n \ge K(\epsilon)$.
+
+
+*** Suite convergente
+
+Toute suite convergente vers une limite :
+
+$$L = \lim_{n \to \infty} s_n \in \Omega$$
+
+est de Cauchy. En effet, soit $\epsilon \strictsuperieur 0$. Si on choisit
+$K$ tel que :
+
+$$\distance(L,s_n) \le \epsilon / 2$$
+
+pour tout $n \ge K$, on a :
+
+$$\distance(s_m,s_n) \le \distance(s_m,L) + \distance(L,s_n) = \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon$$
+
+pour tout $m,n \ge K$.
+
+
+** Ensemble complet
+
+On dit qu'un ensemble $X$ est complet si toute suite de Cauchy inclue
+dans $X$ converge vers une limite $L \in X$.
+
+
+*** Complétion
+
+On peut compléter tout ensemble $A$ incomplet en créant un ensemble
+$X$ tel que tout $x \in X$ soit associé à une suite de Cauchy :
+
+$$s : n \mapsto s_n \in A$$
+
+On note alors symboliquement :
+
+$$x = \lim_{n \to \infty} s_n$$
+
+
+* Sommes abstraites
+
+#+TOC: headlines 1 local
+
+\label{chap:sommesAbstraites}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:algebre} : Algèbre
+
+
+** Introduction
+
+Soit le corps commutatif $\corps$, un ensemble $\Omega$ et la fonction
+$f : \Omega \mapsto \corps$. On note la somme de $f$ sur $X$ par :
+
+$$\sum_{x \in X} f(x)$$
+
+pour tout sous-ensemble $X \subseteq \Omega$. Il s'agit intuitivement
+de la somme des $f(x) \in \corps$ lorsque $x$ parcourt $X$. Nous allons
+voir comment la formaliser.
+
+
+*** Notation
+
+Lorsque l'ensemble $X$ est évident d'après le contexte, on convient que :
+
+$$\sum_x f(x) = \sum_{x \in X} f(x)$$
+
+
+** Additivité
+
+Si deux ensembles $X,Y \subseteq \Omega$ ne se chevauchent pas :
+
+$$X \cap Y = \emptyset$$
+
+la somme sur l'union des deux est intuitivement l'addition des sommes
+sur chacun d'entre-eux :
+
+$$\sum_{z \in X \cup Y} f(z) = \sum_{z \in X} f(z) + \sum_{z \in Y} f(z)$$
+
+
+** Ensemble vide
+
+Comme $X = X \cup \emptyset$ et $X \cap \emptyset = \emptyset$,
+on en déduit que :
+
+$$\sum_{x \in X} f(x) = \sum_{x \in X \cup \emptyset} f(x) = \sum_{x \in X} f(x) + \sum_{x \in \emptyset} f(x)$$
+
+La somme sur l'ensemble vide doit donc être le neutre pour l'addition :
+
+$$\sum_{x \in \emptyset} f(x) = 0$$
+
+
+** Singleton
+
+Il semble également logique d'imposer que la somme sur un ensemble
+contenant un seul élément $a \in X$ soit égal à $f(a)$ :
+
+$$\sum_{ x \in \{ a \} } f(x) = f(a)$$
+
+Voilà qui complète les caractéristiques génériques des sommes.
+
+
+** Somme des éléments d'un ensemble
+
+Pour tout $A \subseteq \corps$, on note :
+
+$$\sum_{x \in A} x = \sum_{x \in A} \identite(x)$$
+
+la somme des éléments de $A$.
+
+
+** Algorithme
+
+Soit l'ensemble $X$ non vide, ensemble dont nous voulons évaluer la somme.
+Choisissons un élément $a \in A$ et considérons la décomposition :
+
+$$X = \{ a \} \cup ( X \setminus \{ a \} )$$
+
+Comme l'intersection des deux ensembles du membre de droite est vide :
+
+$$\{ a \} \cap ( X \setminus \{ a \} ) = \emptyset$$
+
+on peut écrire :
+
+$$\sum_{x \in X} f(x) = \sum_{ x \in \{ a \} } f(x) + \sum_{x \in X \setminus \{ a \} } f(x)$$
+
+c'est-à-dire :
+
+$$\sum_{x \in X} f(x) = f(a) + \sum_{x \in X \setminus \{ a \} } f(x)$$
+
+On en déduit un algorithme itératif permettant d'estimer la somme :
+
+$$S \approx \sum_{x \in X} f(x)$$
+
+Nous partons de :
+
+#+BEGIN_CENTER
+\(
+S_0 = 0 \\
+X_0 = X
+\)
+#+END_CENTER
+
+A chaque étape $k \in \setN$, nous choisissons $a_k \in X_k$ et nous
+adaptons notre estimation par :
+
+$$S_{k + 1} = f(a_k) + S_k$$
+
+On retire ensuite $a_k$ de $X_k$ pour éviter de le compter plus d'une
+fois, ce qui nous donne l'ensemble suivant :
+
+$$X_{k + 1} = X_k \setminus \{ a_k \}$$
+
+Cet algorithme va nous permettre de formaliser la définition des sommes.
+
+
+** Ensemble fini
+
+Soit l'ensemble $X$ contenant un nombre fini $N \in \setN$ d'éléments :
+
+$$X = \{ a_1, a_2, ..., a_N \}$$
+
+En appliquant l'algorithme d'évaluation d'une somme, on finit par
+arriver à l'itération $N$ avec :
+
+$$X_N = \emptyset$$
+
+On a simplement :
+
+$$\sum_{x \in X} f(x) = S_N + \sum_{x \in \emptyset} f(x) = S_N + 0 = S_N$$
+
+Comme :
+
+$$S_N = f(a_1) + f(a_2) + ... + f(a_N)$$
+
+on a simplement :
+
+$$\sum_{x \in X} f(x) = f(a_1) + f(a_2) + ... + f(a_N)$$
+
+On note :
+
+$$\sum_{k = 1}^N f(a_k) = f(a_1) + f(a_2) + ... + f(a_N)$$
+
+
+*** Numérotation
+
+Les éléments de $X$ peuvent être numérotés différemment. Soit $m, n \in \setZ$ et :
+
+$$X = \{ a_m, a_{m + 1}, ..., a_{n - 1}, a_n \}$$
+
+On a alors :
+
+$$\sum_{x \in X} f(x) = f(a_m) + f(a_{m+1}) + ... + f(a_{n-1}) + f(a_n)$$
+
+On note :
+
+$$\sum_{k = m}^n f(a_k) = f(a_m) + f(a_{m+1}) + ... + f(a_{n-1}) + f(a_n)$$
+
+
+*** Extension
+
+Soit un ensemble $X$ dont on peut extraire un sous-ensemble fini de la forme :
+
+$$F = \{ a_m, a_{m + 1}, ..., a_{n - 1}, a_n \} \subseteq X$$
+
+tel que :
+
+$$f(x) = 0$$
+
+pour tout $x \in X \setminus F$. La somme s'écrit alors :
+
+$$\sum_{x \in X} f(x) = \sum_{x \in F} f(x) = \sum_{k = m}^n f(a_k)$$
+
+
+** Ensemble dénombrable
+
+
+*** Naturels
+
+Soit :
+
+$$X = \{ a_0, a_1, a_2,... \} = \{ a_k : k \in \setN \}$$
+
+Si la suite $n \mapsto S_n$ définie par :
+
+$$S_n = \sum_{k = 0}^n f(a_k) = f(a_0) + f(a_1) + ... + f(a_n)$$
+
+pour tout $n \in \setN$ converge vers un certain $S \in \corps$, on définit :
+
+$$\sum_{x \in X} f(x) = \lim_{n \to \infty} S_n = S$$
+
+c'est-à-dire :
+
+$$\sum_{x \in X} f(x) = \lim_{n \to \infty} \sum_{k = 0}^n f(a_k)$$
+
+On introduit la notation :
+
+$$\sum_{k = 0}^{+\infty} f(a_k) = \lim_{n \to \infty} \sum_{k = 0}^n f(a_k)$$
+
+
+*** Entiers
+
+Soit :
+
+$$X = \{ ...,a_{-2},a_{-1},a_0, a_1, a_2,... \} = \{ a_k : k \in \setZ \}$$
+
+Si la suite des $n \mapsto S_n$ définie par :
+
+$$S_n = \sum_{k = -n}^n f(a_k) = f(a_{-n}) + f(a_{-n+1}) + ... + f(a_{n-1}) + f(a_n)$$
+
+pour tout $n \in \setN$ converge vers un certain $S \in \corps$, on définit :
+
+$$\sum_{x \in X} f(x) = \lim_{n \to \infty} S_n = S$$
+
+On introduit la notation :
+
+$$\sum_{k = -\infty}^{+\infty} f(a_k) = \lim_{n \to \infty} \sum_{k = -n}^{n} f(a_k)$$
+
+
+*** Extension
+
+Soit un ensemble $X$ dont on peut extraire un sous-ensemble $D$ de la forme :
+
+$$D = \{a_k : k \in \setN\} \subseteq X$$
+
+ou :
+
+$$D = \{a_k : k \in \setZ\} \subseteq X$$
+
+tel que :
+
+$$f(x) = 0$$
+
+pour tout $x \in X \setminus D$. La somme s'écrit alors :
+
+$$\sum_{x \in X} f(x) = \sum_{x \in D} f(x)$$
+
+
+** Linéarité
+
+Soit les fonctions $f,g : \Omega \mapsto \corps$ et l'ensemble fini $X \subseteq \Omega$. On a clairement :
+
+$$\sum_{x \in X} \Big[ f(x) + g(x) \Big] = \sum_{x \in X} f(x) + \sum_{x \in X} g(x)$$
+
+Comme le produit se distribue sur l'addition, on a également :
+
+$$\sum_{x \in X} \Big[ c \cdot f(x)\Big] = c \cdot \sum_{x \in X} f(x)$$
+
+pour tout $c \in \corps$. La somme sur un ensemble fini est linéaire.
+
+
+** Additivité
+
+Si les ensembles finis $X$ et $Y$ vérifient $X \cap Y = \emptyset$, la commutativité et l'associativité de l'addition nous donnent la propriété d'additivité :
+
+$$\sum_{x \in X \cup Y} f(x) = \sum_{x \in X} f(x) + \sum_{x \in Y} f(x)$$
+
+
+** Additivité généralisée
+
+Soit les ensembles $\Omega$ et $\Lambda$ comportant un nombre fini d'éléments, la fonction $f : \Omega \mapsto \corps$ et la collection d'ensembles :
+
+$$\Theta = \{ X(\lambda) \subseteq \Omega : \lambda \in \Lambda \}$$
+
+où $X : \Lambda \mapsto \sousens(\Omega)$. On définit la fonction $S : \Lambda \mapsto \corps$ représentant les sommes associées par :
+
+$$S(\lambda) = \sum_{x \in X(\lambda)} f(x)$$
+
+On suppose que $\Theta$ forme une partition de $\Omega$. On a alors :
+
+$$X(\lambda) \cap X(\mu) = \emptyset$$
+
+pour tout $\lambda,\mu \in \Lambda$ tels que $\lambda \ne \mu$ et :
+
+$$\Omega = \bigcup_{\lambda \in \Lambda} X(\lambda)$$
+
+Alors, l'associativité et la commutativité de l'addition nous permettent de regrouper les termes de $\Omega$ par sous-ensembles $X(\lambda)$, et on a :
+
+$$\sum_{x \in \Omega} f(x) = \sum_{\lambda \in \Lambda} S(\lambda) = \sum_{\lambda \in \Lambda} \left[ \sum_{x \in X(\lambda)} f(x) \right]$$
+
+
+*** Notation
+
+On note aussi :
+
+$$\sum_{\lambda \in \Lambda} \sum_{x \in X(\lambda)} f(x) = \sum_{\lambda \in \Lambda} \left[ \sum_{x \in X(\lambda)} f(x) \right]$$
+
+
+** Produit cartésien
+
+Soit les sous-ensembles $X,Y \subseteq \Omega$ comportant un nombre fini d'éléments et la fonction $f : X \times Y \mapsto \corps$. On définit la fonction $A : X \mapsto \sousens(X \times Y)$ par :
+
+$$A(x) = \{ (x,y) : y \in Y \}$$
+
+pour tout $x \in X$. Les sommes associées s'écrivent :
+
+$$S(x) = \sum_{(\lambda,y) \in A(x)} f(\lambda,y)$$
+
+Comme les éléments de $A(x)$ sont de la forme $(x,y)$, on a forcément $\lambda = x$. Par conséquent, parcourir $A(x)$ revient à parcourir les $y \in Y$ en gardant $\lambda = x$ fixé et on a :
+
+$$S(x) = \sum_{y \in Y} f(x,y)$$
+
+On se rend compte que les ensembles de cette collection ne se chevauchent pas :
+
+$$A(\lambda) \cap A(\mu) = \emptyset$$
+
+pour tout $\lambda, \mu \in X$ tels que $\lambda \ne \mu$. On a aussi :
+
+$$X \times Y = \bigcup_{\lambda \in X} A(\lambda)$$
+
+Nous pouvons par conséquent utiliser l'additivité généralisée, ce qui nous donne :
+
+$$\sum_{(x,y) \in X \times Y} f(x,y) = \sum_{x \in X} S(x)$$
+
+soit, en tenant compte de l'expression de $S(x)$ :
+
+$$\sum_{(x,y) \in X \times Y} f(x,y) = \sum_{x \in X} \sum_{y \in Y} f(x,y)$$
+
+On montre également que :
+
+$$\sum_{(x,y) \in X \times Y} f(x,y) = \sum_{y \in Y} \sum_{x \in X} f(x,y)$$
+
+
+** Somme d'un produit
+
+Soit les fonctions $f,g : \Omega \mapsto \corps$ et les sous-ensembles $X,Y \subseteq \Omega$ comportant un nombre fini d'éléments. On a :
+
+$$\sum_{(x,y) \in X \times Y} f(x) \cdot g(y) = \sum_{x \in X} \sum_{y \in Y} f(x) \cdot g(y)$$
+
+Mais comme la valeur de $f(x)$ ne dépend pas de $y$, on peut appliquer la distributivité du produit sur l'addition pour faire sortir les valeurs de $f$ de la somme sur $y$ et :
+
+$$\sum_{(x,y) \in X \times Y} f(x) \cdot g(y) = \sum_{x \in X} \left[ f(x) \cdot \sum_{y \in Y} g(y) \right]$$
+
+A nouveau, comme la somme de $g$ sur $Y$ ne dépend pas de $x$, on peut la faire sortir et :
+
+$$\sum_{(x,y) \in X \times Y} f(x) \cdot g(y) = \left[ \sum_{y \in Y} g(y) \right] \cdot \left[ \sum_{x \in X} f(x) \right]$$
+
+La multiplication étant commutative, on a également :
+
+$$\sum_{(x,y) \in X \times Y} f(x) \cdot g(y) = \left[ \sum_{x \in X} f(x) \right] \cdot \left[ \sum_{y \in Y} g(y) \right]$$
+
+
+* Sommes indicées
+
+#+TOC: headlines 1 local
+
+\label{chap:sommesIndicees}
+
+
+** Définition
+
+Soit un corps commutatif $\corps$ et l'ensemble d'indices $\mathcal{Z}$.
+Supposons que l'on puisse écrire l'ensemble $A \subseteq \corps$
+sous la forme :
+
+$$A = \{ a_k : k \in \mathcal{Z} \}$$
+
+On associe à $A$ la fonction $\varphi : \mathcal{Z} \mapsto A$ définie par :
+
+$$\varphi(k) = a_k$$
+
+pour tout $k \in \mathcal{Z}$. Pour tout sous-ensemble $I \subseteq \mathcal{Z}$, on définit alors :
+
+$$\sum_{k \in I} a_k = \sum_{k \in I} \varphi(k)$$
+
+sous réserve d'existence de la somme.
+
+
+*** Fonction
+
+Soit $f : A \mapsto \corps$. On définit :
+
+$$\sum_{k \in I} f(a_k) = \sum_{k \in I} (f \circ \varphi)(k)$$
+
+
+** Intervalles discrets
+
+Soit $m,n \in \setZ$. Nous définissons l'intervalle discret :
+
+$$\setZ[m,n] = \{ z \in \setZ : m \le z \le n \}$$
+
+Si $\setZ[m,n] \subseteq \mathcal{Z}$, on a simplement :
+
+$$\sum_{k \in \setZ[m,n]} a_k = a_m + a_{m+1} + ... + a_{n-1} + a_n$$
+
+On note aussi :
+
+$$\sum_{k = m}^n a_k = \sum_{k = n}^m a_k = \sum_{k \in \setZ[m,n] } a_k$$
+
+
+** Linéarité
+
+Soit les ensembles :
+
+$$A = \{ a_k : k \in \mathcal{Z} \} \subseteq \corps$$
+$$B = \{ b_k : k \in \mathcal{Z} \} \subseteq \corps$$
+
+et $\alpha, \beta \in \corps$. Si $I \subseteq \mathcal{Z}$ compte un nombre fini d'éléments, on a clairement :
+
+$$\sum_{k \in I} (\alpha \cdot a_{k} + \beta \cdot b_k) = \alpha \cdot \sum_{k \in I} a_k + \beta \cdot \sum_{k \in I} b_k$$
+
+
+** Produit cartésien
+
+Soit les sous-ensembles $I,J \subseteq \setZ$ comportant un nombre fini d'éléments, et :
+
+$$A = \{ a_{ij} \in E : (i,j) \in I \times J \}$$
+
+Il découle directement de la formule des sommes sur les produits cartésiens que :
+
+$$\sum_{(i,j) \in I \times J} a_{ij} = \sum_{i \in I} \sum_{j \in J} a_{ij} = \sum_{j \in J} \sum_{i \in I} a_{ij}$$
+
+
+*** Notation
+
+On note :
+
+$$\sum_{i,j = m}^n a_{ij} = \sum_{i = m}^n \sum_{j = m}^n a_{ij}$$
+
+
+** Somme d'un produit
+
+Soit les ensembles :
+
+$$A = \{ a_k : k \in \mathcal{Z} \} \subseteq \corps$$
+$$B = \{ b_k : k \in \mathcal{Z} \} \subseteq \corps$$
+
+et les ensembles $I,J \subseteq \mathcal{Z}$ comportant un nombre fini d'éléments. La somme
+du produit se déduit du résultat analogue des sommes génériques :
+
+$$\sum_{(i,j) \in I \times J} a_i \cdot b_j = \left[ \sum_{i \in I} a_i \right] \cdot \left[ \sum_{j \in J} b_j \right]$$
+
+
+** Lemme du triangle
+
+Soit le triangle discret :
+
+$$\Delta = \{ (i,j) \in \setZ[0,N] \times \setZ[0,N] : \ j \le i \}$$
+
+et un ensemble :
+
+$$A = \{ a_{ij} : (i,j) \in \Delta \}$$
+
+Le triangle $\Delta$ peut être aussi défini par :
+
+$$\Delta = \{ (i,j) \in \setZ^2 : 0 \le i \le N, \quad 0 \le j \le i\}$$
+
+La somme sur $\Delta$ peut donc se réécrire :
+
+$$\sum_{(i,j) \in \Delta} a_{ij} = \sum_{i=0}^N \sum_{j=0}^i a_{ij}$$
+
+Une autre définition alternative de $\Delta$ nous donne :
+
+$$\Delta = \{(i,j) \in \setZ^2 : 0 \le j \le N, \quad j \le i \le N\}$$
+
+On a donc également :
+
+$$\sum_{(i,j)\in\Delta} a_{ij} = \sum_{j=0}^N \sum_{i=j}^N a_{ij}$$
+
+On en déduit une relation permettant d'inverser les sommes :
+
+$$\sum_{i=0}^N \sum_{j=0}^i a_{ij} = \sum_{j=0}^N \sum_{i=j}^N a_{ij} = \sum_{(i,j)\in\Delta} a_{ij}$$
+
+
+* Produits
+
+#+TOC: headlines 1 local
+
+\label{chap:produits}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:reel} : Les réels
+  - Chapitre \ref{chap:complexe} : Les complexes
+  - Chapitre \ref{chap:somme} : Les sommes
+
+
+** Introduction
+
+Soit le corps $\corps$ sur lequel est défini une relation d'ordre total ainsi des opérations d'addition, de multiplication, de soustraction, de division et de puissance similaires à celles de $\setQ$.
+
+Soit un ensemble $\Omega$ et la fonction $f : \Omega \mapsto \corps$. On note le produit de $f$ sur $X$ par :
+
+$$\prod_{x \in X} f(x)$$
+
+pour tout sous-ensemble $X \subseteq \Omega$. Il s'agit intuitivement du produit des $f(x) \in \corps$ lorsque $x$ parcourt $X$. Nous allons voir comment le formaliser.
+
+
+** Multiplicativité finie
+
+Si deux ensembles $X,Y \subseteq \Omega$ ne se chevauchent pas :
+
+$$X \cap Y = \emptyset$$
+
+le produit sur l'union des deux est intuitivement le produit des produits sur chacun d'entre-eux :
+
+$$\prod_{z \in X \cup Y} f(z) = \left[ \prod_{z \in X} f(z) \right] \cdot \left[ \prod_{z \in Y} f(z) \right]$$
+
+
+** Ensemble vide
+
+Comme $X = X \cup \emptyset$ et $X \cap \emptyset = \emptyset$, on en déduit que :
+
+$$\prod_{x \in X} f(x) = \prod_{x \in X \cup \emptyset} f(x) = \prod_{x \in X} f(x) \cdot \prod_{x \in \emptyset} f(x)$$
+
+Le produit sur l'ensemble vide doit donc être le neutre pour la multiplication :
+
+$$\prod_{x \in \emptyset} f(x) = 1$$
+
+
+** Singleton
+
+Il semble également logique d'imposer que le produit sur un ensemble contenant un seul élément $a \in X$ soit égal à $f(a)$ :
+
+$$\prod_{ x \in \{ a \} } f(x) = f(a)$$
+
+Voilà qui complète les caractéristiques génériques des produits.
+
+
+** Algorithme
+
+Soit l'ensemble $X$ non vide, ensemble dont nous voulons évaluer le produit. Choisissons un élément $a \in A$ et considérons la décomposition :
+
+$$X = \{ a \} \cup ( X \setminus \{ a \} )$$
+
+Comme l'intersection des deux ensembles du membre de droite est vide :
+
+$$\{ a \} \cap ( X \setminus \{ a \} ) = \emptyset$$
+
+on peut écrire :
+
+$$\prod_{x \in X} f(x) = \prod_{ x \in \{ a \} } f(x) \cdot \prod_{x \in X \setminus \{ a \} } f(x)$$
+
+c'est-à-dire :
+
+$$\prod_{x \in X} f(x) = f(a) \cdot \prod_{x \in X \setminus \{ a \} } f(x)$$
+
+On en déduit un algorithme itératif permettant d'estimer le produit :
+
+$$S \approx \prod_{x \in X} f(x)$$
+
+Nous partons de :
+
+#+BEGIN_CENTER
+\(
+S_0 = 0 \\
+X_0 = X
+\)
+#+END_CENTER
+
+A chaque étape $k$, nous choisissons $a_k \in X_k$ et nous adaptons notre estimation par :
+
+$$S_{k + 1} = f(a_k) \cdot S_k$$
+
+On retire ensuite $a_k$ de $X_k$ pour éviter de le compter plus d'une fois, ce qui nous donne l'ensemble suivant :
+
+$$X_{k + 1} = X_k \setminus \{ a_k \}$$
+
+
+** Ensemble fini
+
+Soit l'ensemble $X$ contenant un nombre fini $N \in \setN$ d'éléments :
+
+$$X = \{ a_1, a_2, ..., a_N \}$$
+
+En appliquant l'algorithme d'évaluation d'une somme, on finit par arriver à l'itération $N$ avec :
+
+$$X_N = \emptyset$$
+
+On a simplement :
+
+$$\prod_{x \in X} f(x) = S_N \cdot \prod_{x \in \emptyset} f(x) = S_N \cdot 1 = S_N$$
+
+et :
+
+$$\prod_{x \in X} f(x) = S_N = f(a_1) \cdot f(a_2) \cdot ... \cdot f(a_N)$$
+
+On note :
+
+$$\prod_{k = 1}^N f(a_k) = f(a_1) \cdot f(a_2) \cdot ... \cdot f(a_N)$$
+
+
+*** Numérotation
+
+Les éléments de $X$ peuvent être numérotés différemment. Soit $m, n \in \setZ$ et :
+
+$$X = \{ a_m, a_{m + 1}, ..., a_{n - 1}, a_n \}$$
+
+On a alors :
+
+$$\prod_{x \in X} f(x) = f(a_m) \cdot f(a_{m+1}) \cdot ... \cdot f(a_{n-1}) \cdot f(a_n)$$
+
+On note :
+
+$$\prod_{k = m}^n f(a_k) = f(a_m) \cdot f(a_{m+1}) \cdot ... \cdot f(a_{n-1}) \cdot f(a_n)$$
+
+
+*** Extension
+
+Soit un ensemble $X$ dont on peut extraire un sous-ensemble fini de la forme :
+
+$$F = \{ a_m, a_{m + 1}, ..., a_{n - 1}, a_n \} \subseteq X$$
+
+tel que :
+
+$$f(x) = 1$$
+
+pour tout $x \in X \setminus F$. La somme s'écrit alors :
+
+$$\prod_{x \in X} f(x) = \prod_{x \in F} f(x) = \prod_{k = m}^n f(a_k)$$
+
+
+** Ensemble dénombrable
+
+
+*** Naturels
+
+Soit :
+
+$$X = \{ a_0, a_1, a_2,... \} = \{ a_k : k \in \setN \}$$
+
+Si la suite des $\{ S_n : n \in \setN \}$ définie par :
+
+$$S_n = \prod_{k = 0}^n f(a_k) = f(a_0) \cdot f(a_1) \cdot ... \cdot f(a_n)$$
+
+pour tout $n \in \setN$ converge vers un certain $S \in \corps$, on définit :
+
+$$\prod_{x \in X} f(x) = \lim_{n \to \infty} S_n = S$$
+
+c'est-à-dire :
+
+$$\prod_{x \in X} f(x) = \lim_{n \to \infty} \prod_{k = 0}^n f(a_k)$$
+
+On introduit la notation :
+
+$$\prod_{k = 0}^{+\infty} f(a_k) = \lim_{n \to \infty} \prod_{k = 0}^n f(a_k)$$
+
+
+*** Entiers
+
+Soit :
+
+$$X = \{ ...,a_{-2},a_{-1},a_0, a_1, a_2,... \} = \{ a_k : k \in \setZ \}$$
+
+Si la suite des $\{ S_n : n \in \setN \}$ définie par :
+
+$$S_n = \prod_{k = -n}^n f(a_k) = f(a_{-n}) \cdot f(a_{-n+1}) \cdot ... \cdot f(a_{n-1}) \cdot f(a_n)$$
+
+pour tout $n \in \setN$ converge vers un certain $S \in \corps$, on définit :
+
+$$\prod_{x \in X} f(x) = \lim_{n \to \infty} S_n = S$$
+
+On introduit la notation :
+
+$$\prod_{k = -\infty}^{+\infty} f(a_k) = \lim_{n \to \infty} \prod_{k = -n}^{n} f(a_k)$$
+
+
+*** Extension
+
+Soit un ensemble $X$ dont on peut extraire un sous-ensemble $D$ de la forme :
+
+$$D = \{a_k : k \in \setN\} \subseteq X$$
+
+ou :
+
+$$D = \{a_k : k \in \setZ\} \subseteq X$$
+
+tel que :
+
+$$f(x) = 1$$
+
+pour tout $x \in X \setminus D$. La somme s'écrit alors :
+
+$$\prod_{x \in X} f(x) = \prod_{x \in D} f(x)$$
+
+
+* Progressions
+
+#+TOC: headlines 1 local
+
+\label{chap:progressions}
+
+
+** Arithmétique
+
+Soit $n \in \setN$. Nous allons tenter d'évaluer la somme :
+
+$$S_n = \sum_{i = 0}^n i = 0 + 1 + 2 + ... + n$$
+
+L'idée est d'exprimer que cette somme est équivalente à :
+
+$$(n - 0) + (n - 1) + ... + (n - n)$$
+
+Si nous posons $j$ tel que $i = n - j$, on voit que l'on a $j = n -i$ et $0 \le j \le n$. Donc :
+
+$$S_n = \sum_{j = 0}^n (n-j)$$
+
+Développons :
+
+$$\sum_{j = 0}^n (n-j) = \sum_{j = 0}^{n} n - \sum_{j = 0}^{n} j$$
+
+Le premier terme du membre de droite peut se réécrire :
+
+$$\sum_{j = 0}^n n = n \cdot \sum_{j = 0}^{n} 1 = n \cdot (n + 1)$$
+
+Pour le second, on a clairement :
+
+$$\sum_{j = 0}^n j = S_n$$
+
+On en conclut que :
+
+$$S_n = n \cdot (n + 1) - S_n$$
+
+c'est-à-dire :
+
+$$2 S_n = n \cdot (n + 1)$$
+
+Divisant par $2$, on obtient le résultat final :
+
+$$\sum_{i = 0}^{n} i = \frac{ n \cdot (n + 1) }{ 2 }$$
+
+
+** Géométrique
+
+Soit $n \in \setN$ et $a \in \corps$. Nous allons rechercher une expression de la somme :
+
+$$G_n = \sum_{i=0}^n a^i = 1 + a + a^2 + ... + a^n$$
+
+Si $a = 1$, on a simplement :
+
+$$G_n = \sum_{i=0}^n a^i = 1 + ... + 1 = n$$
+
+Intéressons-nous à présent au cas où $a \ne 1$. On part du constat que la somme $G_n$ est équivalente à :
+
+$$1 + a \cdot (1 + a + a^2 + ... + a^n) - a^{n+1}$$
+
+On développe en ce sens :
+
+\begin{eqnarray*}
+G_n &=& 1 + \sum_{i = 1}^n a^i \\
+&=& 1 + a \cdot \sum_{i = 0}^{n - 1} a^i \\
+&=& 1 + a \cdot \sum_{i = 0}^n a^i - a^{n + 1}
+\end{eqnarray*}
+
+et finalement, on arrive à l'équation implicite :
+
+$$G_n = 1 + a \cdot G_n - a^{n + 1}$$
+
+En soustrayant $a \cdot G_n$ des deux membres, on obtient :
+
+$$(1 - a) \cdot G_n = 1 - a^{n + 1}$$
+
+Comme $a \ne 1$, on en déduit que :
+
+$$\sum_{i = 0}^n a^i = \frac{ 1 - a^{n + 1} }{ 1 - a }$$
+
+
+*** Autre forme
+
+En multipliant numérateur et dénominateur par $-1$, on obtient la forme équivalente :
+
+$$\sum_{i = 0}^n a^i = \frac{a^{n + 1} - 1}{a - 1}$$
+
+
+** Factorisation
+
+\label{sec:factorisation_progression_geometrique}
+
+Les progressions géométriques permettent d'obtenir une importante formule de
+factorisation. Soit $a,b \in \corps$ avec $a \ne 0$. Posons :
+
+$$r = \frac{b}{a}$$
+
+On a alors :
+
+$$(1 - r) \cdot \sum_{i = 0}^n r^i = 1 - r^{n + 1}$$
+
+Multipliant par $a^{n + 1}$, on obtient :
+
+$$(a - b) \cdot a^n \cdot \sum_{i = 0}^n \frac{b^i}{a^i} = a^{n + 1} - b^{n + 1}$$
+
+En faisant rentrer le facteur $a^n$ dans la somme, on a en définitive :
+
+$$a^{n + 1} - b^{n + 1} = (a - b) \cdot \sum_{i = 0}^n a^{n - i} \cdot b^i$$
+
+
+*** Extension
+
+Si $a = 0$, on a :
+
+$$a^{n + 1} - b^{n + 1} = - b^{n + 1}$$
+
+et :
+
+\begin{eqnarray*}
+(a - b) \cdot \sum_{i = 0}^n a^{n - i} \cdot b^i &=& -b \cdot (0^n + 0^{n -1} \cdot b + ... + 0 \cdot b^{n - 1} + b^n) \\
+&=& -b \cdot b^n = - b^{n + 1}
+\end{eqnarray*}
+
+La formule de factorisation est donc valable pour tout $a,b \in \corps$.
+
+
+*** Exemples
+
+Voici quelques exemples d'applications :
+
+\begin{eqnarray*}
+a^{2} - b^{2} &=& (a - b) \cdot (a + b) \\
+a^{3} - b^{3} &=& (a - b) \cdot (a^2 + a \cdot b + b^2)
+\end{eqnarray*}
+
+
+*** Symétrie
+
+On a clairement :
+
+$$\sum_{i = 0}^n a^{n - i} \cdot b^i = a^n + a^{n - 1} \cdot b + ... + a \cdot b^{n - 1} + b^n = \sum_{i = 0}^n a^i \cdot b^{n - i}$$
+
+et donc :
+
+$$a^{n + 1} - b^{n + 1} = (a - b) \cdot \sum_{i = 0}^n a^i \cdot b^{n - i}$$
+
+
+** Somme des carrés
+
+Considérons la somme :
+
+$$C_n = \sum_{i = 0}^n i^2 = 1 + 4 + 16 + ... + n^2$$
+
+La progression arythmétique nous dit que :
+
+$$\frac{1}{2} \cdot i \cdot (i+1) = \sum_{j=0}^i j$$
+
+On a par conséquent :
+
+$$\sum_{i = 0}^n \frac{1}{2} \cdot i \cdot (i+1) = \sum_{i = 0}^n \sum_{j = 0}^i j$$
+
+On peut utiliser le lemme du triangle pour inverser les deux sommes du membre de droite :
+
+$$\sum_{i = 0}^n \sum_{j = 0}^i j = \sum_{j = 0}^n \sum_{i = j}^n j$$
+
+Comme $j$ ne dépend pas de $i$, on peut le faire sortir de la somme sur $i$ et le membre de droite devient :
+
+$$\sum_{j = 0}^n \sum_{i = j}^n j = \sum_{j = 0}^n j \sum_{i = j}^n 1 = \sum_{j = 0}^n j \cdot (n - j + 1)$$
+
+En tenant compte de la linéarité des sommes, on a alors :
+
+\begin{eqnarray*}
+\sum_{j = 0}^n j \cdot (n - j + 1) &=& (n + 1) \cdot \sum_{j = 0}^n j - \sum_{j = 0}^n j^2 \\
+&=& \frac{1}{2} \cdot n \cdot (n + 1)^2 - C_n
+\end{eqnarray*}
+
+D'un autre côté, on a :
+
+$$\sum_{i = 0}^n \frac{1}{2} \cdot i \cdot (i+1) = \frac{1}{2} \sum_{i = 0}^n (i^2 + i) = \frac{1}{2} \cdot C_n + \frac{1}{4} \cdot n \cdot (n + 1)$$
+
+En égalisant ces deux expressions, on obtient :
+
+$$\frac{3}{2} \cdot C_n &=& \frac{1}{4} \cdot \Big[ 2 \cdot n \cdot (n + 1)^2 - n \cdot (n + 1) \Big]$$
+
+Ou encore :
+
+\begin{eqnarray*}
+6 \cdot C_n &=& ( 2 \cdot n \cdot (n + 1) - n ) \cdot (n + 1) \\
+&=& ( 2 \cdot n^2 + n ) \cdot (n + 1)
+\end{eqnarray*}
+
+On a donc la formule permettant d'évaluer la somme des carrés :
+
+$$\sum_{i = 0}^n i^2 = \frac{ (2 \cdot n^2 + n) \cdot (n + 1) }{ 6 }$$
+
+
+* Différences
+
+#+TOC: headlines 1 local
+
+\label{chap:differences}
+
+
+** Définition
+
+Etant donné une suite :
+
+$$A = \{ a_k : k \in \setN \} \subseteq \corps$$
+
+on définit l'opérateur des différences $\difference$ par :
+
+$$\difference a_k = a_{k + 1} - a_k$$
+
+
+** Addition
+
+Soit les suites :
+
+$$A = \{ a_k : k \in \setN \} \subseteq \corps$$
+
+et :
+
+$$B = \{ b_k : k \in \setN \} \subseteq \corps$$
+
+La différence de l'addition vérifie :
+
+$$\difference (a_k + b_k) = a_{k + 1} + b_{k + 1} - a_k - b_k = \difference a_k + \difference b_k$$
+
+
+** Multiplication
+
+Soit les suites :
+
+$$A = \{ a_k : k \in \setN \} \subseteq \corps$$
+
+et :
+
+$$B = \{ b_k : k \in \setN \} \subseteq \corps$$
+
+La différence de la multiplication vérifie :
+
+$$\difference (a_k \cdot b_k) = a_{k + 1} \cdot b_{k + 1} - a_k \cdot b_k$$
+
+Ajoutons et soustrayons le terme hybride $a_{k + 1} \cdot b_k$. On a :
+
+$$\difference (a_k \cdot b_k) = a_{k + 1} \cdot b_{k + 1} - a_{k + 1} \cdot b_k + a_{k + 1} \cdot b_k - a_k \cdot b_k$$
+
+et :
+
+$$\difference (a_k \cdot b_k) = a_{k + 1} \cdot \difference b_k + \difference a_k \cdot b_k$$
+
+Ajoutons et soustrayons le terme hybride $a_k \cdot b_{k + 1}$. On a :
+
+$$\difference (a_k \cdot b_k) = a_{k + 1} \cdot b_{k + 1} - a_k \cdot b_{k + 1} + a_k \cdot b_{k + 1} - a_k \cdot b_k$$
+
+et :
+
+$$\difference (a_k \cdot b_k) = \difference a_k \cdot b_{k + 1} + a_k \cdot \difference b_k$$
+
+
+** Somme et différence
+
+On définit également :
+
+$$\difference \sum_{k = 0}^n a_k = \sum_{k = 1}^{n + 1} a_k - \sum_{k = 0}^n a_k$$
+
+La définition nous donne directement :
+
+$$\difference \sum_{k = 0}^n a_k = (a_1 + ... + a_{n + 1}) - (a_0 + ... + a_n)$$
+
+Tous les termes se neutralisant sauf $a_0$ et $a_{n + 1}$, on a :
+
+$$\difference \sum_{k = 0}^n a_k = a_{n + 1} - a_0$$
+
+On voit aussi que :
+
+$$\sum_{k = 0}^n \difference a_k = (a_{n + 1} - a_n) + ... + (a_2 - a_1) + (a_1 - a_0)$$
+
+Tous les termes se neutralisant mutuellement sauf le permier et le dernier, on a :
+
+$$\sum_{k = 0}^n \difference a_k = a_{n + 1} - a_0$$
+
+Ce résultat étant identique au précédent, on a :
+
+$$\difference \sum_{k = 0}^n a_k = \sum_{k = 0}^n \difference a_k = a_{n + 1} - a_0$$
+
+
+** Sommation par parties
+
+Soit les suites :
+
+$$A = \{ a_k : k \in \setN \} \subseteq \corps$$
+
+et :
+
+$$B = \{ b_k : k \in \setN \} \subseteq \corps$$
+
+On a :
+
+$$\sum_{k = 0}^n \difference (a_k \cdot b_k) = a_{n + 1} \cdot b_{n + 1} - a_0 \cdot b_0$$
+
+En utilisant la loi de différence d'une multiplication, on obtient parallèlement :
+
+$$\sum_{k = 0}^n \difference (a_k \cdot b_k) = \sum_{k = 0}^n \difference a_k \cdot b_{k + 1} + \sum_{k = 0}^n a_k \cdot \difference b_k$$
+
+On a donc :
+
+$$\sum_{k = 0}^n a_k \cdot \difference b_k = \sum_{k = 0}^n \difference (a_k \cdot b_k) - \sum_{k = 0}^n \difference a_k \cdot b_{k + 1}$$
+
+c'est-à-dire :
+
+$$\sum_{k = 0}^n a_k \cdot \difference b_k = a_{n + 1} \cdot b_{n + 1} - a_0 \cdot b_0 - \sum_{k = 0}^n \difference a_k \cdot b_{k + 1}
+
+
+* Suites de rationnels
+
+#+TOC: headlines 1 local
+
+\label{chap:suitesDeRationnels}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:rationnels} : Les rationnels
+  - Chapitre \ref{chap:distances} : Les distances
+  - Chapitre \ref{chap:limites} : Les limites
+
+
+** Définition
+
+Une suite de rationnels, ou suite rationnelle est une suite $s : \setN \mapsto \setQ$ :
+
+$$s : n \mapsto s_n$$
+
+
+** Distance
+
+On définit une distance sur l'ensemble des rationnels $\setQ$ par :
+
+$$\distance(x,y) = \abs{x - y}$$
+
+pour tout $x,y \in \setQ$. On a bien $\distance(x,y) \ge 0$.
+La condition $\distance(x,y) = 0$ implique que $\abs{x - y}$,
+donc $x - y = 0$ et $x = y$. Enfin :
+
+\begin{eqnarray*}
+\distance(x,z) &=& \abs{x - z} \\
+&\le& \abs{x - y} + \abs{y - z} \\
+&\le& \distance(x,y) + \distance(y,z)
+\end{eqnarray*}
+
+
+** Équivalence
+
+Soit les suites rationnelles $s,t : \setN \mapsto \setQ$ vérifiant $s \equiv t$. On a :
+
+$$\lim_{n \to \infty} \distance(s_n,t_n) = \lim_{n \to \infty} \abs{s_n - t_n} = 0$$
+
+On en déduit que :
+
+$$\lim_{n \to \infty} (s_n - t_n) = 0$$
+
+
+*** Réciproque
+
+Supposons que :
+
+$$\lim_{n \to \infty} (s_n - t_n) = 0$$
+
+Choisissons $\epsilon \strictsuperieur 0$ et le naturel $K(\epsilon)$ tel que :
+
+$$\distance(s_n - t_n, 0) \le \epsilon$$
+
+pour tout $k \ge K(\epsilon)$. Par définition de la distance entre rationnels, on a :
+
+$$\distance(s_n - t_n, 0) = \abs{(s_n - t_n) - 0} = \abs{s_n - t_n}$$
+
+on en conclut que :
+
+$$\lim_{n \to \infty} \distance(s_n,t_n) = \lim_{n \to \infty} \abs{s_n - t_n} = 0$$
+
+c'est-à-dire $s \equiv t$ par définition.
+
+
+** Cauchy
+
+
+*** Croissante
+
+Soit une suite de Cauchy $u : \setN \mapsto \setQ$ :
+
+$$u : n \mapsto u_n$$
+
+croissante :
+
+$$u_0 \le u_1 \le ... \le u_k \le ...$$
+
+Comme :
+
+$$u_n \ge u_0$$
+
+pour tout $n \in \setN$, on voit que la suite est minorée
+par $u_0$. On peut trouver un naturel $K$ tel que :
+
+$$\distance(u_m,u_n) = \abs{u_m - u_n} \le 1$$
+
+pour tout naturels $m,n \ge K$. Soit $n \in \setN$
+vérifiant $n \ge K$. On a :
+
+$$\abs{u_n - u_K} = u_n - u_K \le 1$$
+
+d'où :
+
+$$u_n \le u_K + 1$$
+
+Pour tout naturel $k \le K$, on a :
+
+$$u_k \le u_n \le u_K + 1$$
+
+En posant :
+
+$$S = u_K + 1$$
+
+on voit que :
+
+$$u_n \le S$$
+
+pour tout $n \in \setN$. Une suite de Cauchy croissante est également majorée.
+
+
+*** Décroissante
+
+Soit une suite de Cauchy $u : \setN \mapsto \setQ$ :
+
+$$u : n \mapsto u_n$$
+
+décroissante :
+
+$$u_0 \ge u_1 \ge ... \ge u_k \ge ...$$
+
+Comme :
+
+$$u_n \le u_0$$
+
+pour tout $n \in \setN$, on voit que la suite est majorée
+par $u_0$. On peut trouver un naturel $K$ tel que :
+
+$$\distance(u_m,u_n) = \abs{u_m - u_n} \le 1$$
+
+pour tout naturels $m,n \ge K$. Soit $n \in \setN$
+vérifiant $n \ge K$. On a :
+
+$$\abs{u_n - u_K} = u_K - u_n \le 1$$
+
+d'où :
+
+$$u_n \ge u_K - 1$$
+
+Pour tout naturel $k \le K$, on a :
+
+$$u_k \ge u_n \ge u_K - 1$$
+
+En posant :
+
+$$I = u_K - 1$$
+
+on voit que :
+
+$$u_n \ge I$$
+
+pour tout $n \in \setN$. Une suite de Cauchy décroissante est également minorée.
+
+
+** Suite inverse
+
+Soit un rationnel $I_0$ vérifiant $I_0 \strictsuperieur 0$ et la suite
+$I : \setN \setminus \{ 0 \} \mapsto \setQ$ définie par :
+
+$$I : n \mapsto I_n = \frac{I_0}{n}$$
+
+pour tout naturel $n$ vérifiant $n \ne 0$. Soit $\epsilon \strictsuperieur 0$.
+Comme $I_0$ est strictement positif, on a :
+
+$$\epsilon \cdot \frac{1}{I_0} = \frac{\epsilon}{I_0} \strictsuperieur 0$$
+
+Soit $\epsilon \strictsuperieur 0$. On peut trouver un naturel $n$ tel que :
+
+$$\frac{1}{n} \strictinferieur \frac{\epsilon}{I_0}$$
+
+On a alors :
+
+$$\frac{I_0}{n} \strictinferieur \epsilon$$
+
+et :
+
+$$\distance\left(0,\frac{I_0}{n}\right) = \abs{\frac{I_0}{n} - 0} = \abs{\frac{I_0}{n}} \strictinferieur \epsilon$$
+
+On en déduit que :
+
+$$\lim_{n \to \infty} \frac{I_0}{n} = 0$$
+
+
+* Problème de la racine
+
+#+TOC: headlines 1 local
+
+\label{chap:problemeDeLaRacine}
+
+
+** Introduction
+
+Nous allons tenter de déterminer la racine de deux, c'est-à-dire
+chercher un nombre noté :
+
+$$x = \sqrt{2}$$
+
+tel que :
+
+$$x^2 = \left(\sqrt{2}\right)^2 = 2$$
+
+
+** Solution rationnelle ?
+
+Nous allons chercher une solution à ce problème sous la forme d'un rationnel
+$x \in \setQ$. Soit :
+
+$$x = \frac{i}{j}$$
+
+avec $i,j \in \setZ$ et $j \ne 0$. On a :
+
+$$x^2 = \frac{i^2}{j^2} = \frac{(-i)^2}{(-j)^2} = \frac{(-i)^2}{j^2} = \frac{i^2}{(-j)^2}$$
+
+On peut donc se restreindre aux entiers positifs, autrement dit
+aux naturels. Si $i = 0$, on a forcément :
+
+$$\frac{i^2}{j^2} = 0 \ne 2$$
+
+ce qui ne résout pas notre problème. Supposons à présent que
+$i \ne 0$ et posons :
+
+$$k = \pgcd(i,j)$$
+
+On a alors $k \ne 0$ et les quotients :
+
+$$a = i \diventiere k$$
+
+$$b = j \diventiere k$$
+
+vérifiant les divisions exactes :
+
+$$i = a \cdot k$$
+$$j = b \cdot k$$
+
+Si nous voulons résoudre le problème, il faut donc avoir :
+
+$$\left(\frac{a}{b}\right)^2 = \frac{a^2}{b^2} = \frac{a^2 \cdot k^2}{b^2 \cdot k^2} = \frac{i^2}{j^2} = 2$$
+
+c'est-à-dire :
+
+$$a^2 = 2 \ b^2$$
+
+On a donc :
+
+$$a^2 \diventiere 2 = b^2$$
+
+et :
+
+$$a^2 \modulo 2 = 0$$
+
+
+*** Lemme
+
+Soit un naturel $m \in \setN$ vérifiant :
+
+$$m^2 \modulo 2 = 0$$
+
+Posons :
+
+$$n = m \diventiere 2$$
+$$r = m \modulo 2$$
+
+Le modulo $r \in \setN$ vérifie :
+
+$$0 \le r \le 2 - 1 = 1$$
+
+autrement dit $r \in \{0,1\}$. Si on suppose que $r = 1$, on a :
+
+$$m = 2 \ n + 1$$
+
+Développons le carré :
+
+$$m^2 = (2 \ n + 1)^2 = 4 \ n^2 + 4 \ n + 1 = 4 \ (n^2 + n) + 1$$
+
+On aurait alors :
+
+$$m^2 \diventiere 2 = 2 \ (n^2 + n)$$
+
+et :
+
+$$m^2 \modulo 2 = 1$$
+
+contrairement à l'hypothèse. On en conclut que $r = 0$,
+la division entière de $m$ par $2$ est exacte :
+
+$$m \modulo 2 = 0$$
+
+
+*** Modulo nul
+
+Le naturel $a$ vérifiant :
+
+$$a^2 \modulo 2 = 0$$
+
+on a également :
+
+$$a \modulo 2 = 0$$
+
+Si on pose :
+
+$$n = a \diventiere 2$$
+
+on a l'expression de la division exacte :
+
+$$a = 2 \ n$$
+
+L'équation à résoudre devient alors :
+
+$$a^2 = 4 \ n^2 = 2 \ b^2$$
+
+On en déduit que :
+
+$$b^2 = 2 \ n^2$$
+
+vérifie :
+
+$$b^2 \diventiere 2 = n^2$$
+
+et :
+
+$$b^2 \modulo 2 = 0$$
+
+On a donc aussi :
+
+$$b \modulo 2 = 0$$
+
+Posons $p = b \diventiere 2$. On a :
+
+$$a = 2 \ n$$
+$$b = 2 \ p$$
+
+et :
+
+$$i = 2 \ n \cdot k = n \cdot (2 \ k)$$
+$$j = 2 \ p \cdot k = p \cdot (2 \ k)$$
+
+Le naturel $t = 2 \ k \strictsuperieur k$ vérifie donc :
+
+$$i \modulo t = j \modulo t = 0$$
+
+ce qui est contraire à l'hypothèse de supremum de $k = \pgcd(i,j)$.
+On ne peut donc pas trouver de rationnel $x$ vérifiant :
+
+$$x^2 = 2$$
+
+
+** Suite inférieure
+
+On ne peut pas trouver de solution exacte à l'équation $x^2 = 2$ dans
+l'ensemble des rationnels, mais on peut l'approcher autant qu'on le
+souhaite. Soit les suites de naturels $n : k \mapsto n_k$ et $M : k \mapsto M_k$
+définies par :
+
+$$n_k = 10^k$$
+
+$$M_k = \sup \accolades{p \in \setN : \frac{p^2}{n_k^2} \le 2}$$
+
+pour tout $k \in \setN$. On définit aussi les rationnels associés :
+
+$$x_k = \frac{M_k}{n_k}$$
+
+et les erreurs :
+
+$$E_k = 2 - x_k^2$$
+
+On a :
+
+$$n_0 = 1 \qquad M_0 = 1 \qquad x_0 = 1 \qquad E_0 = 1$$
+$$n_1 = 10 \qquad M_1 = 14 \qquad x_1 = 1,4 \qquad E_1 = 0,04$$
+$$n_2 = 100 \qquad M_2 = 141 \qquad x_2 = 1,41 \qquad E_2 = 0,0119$$
+
+et ainsi de suite.
+
+
+*** Maximum
+
+Soit :
+
+$$A_k = \accolades{p \in \setN : \frac{p^2}{n_k^2} \le 2}$$
+
+Pour tout $p \in \setN$ vérifiant $p \strictsuperieur 2 \ n_k$, on a :
+
+$$\frac{p^2}{n_k^2} \strictsuperieur \frac{2^2 \ n_k^2}{n_k^2} = \frac{4 \ n_k^2}{n_k^2} = 4 \strictsuperieur 2$$
+
+On en conclut que :
+
+$$A_k \subseteq \{ 0, 1, ..., 2 \ n_k - 1, 2 \ n_k \}$$
+
+L'ensemble $A_k$ contient donc un nombre fini d'éléments. Comme l'ordre
+usuel sur $\setN$ est total, on en conclut que $A_k$ admet un maximum
+identique au suprémum. La suite des $M_k$ est donc bien définie :
+
+$$M_k = \max A_k = \sup A_k$$
+
+
+*** Majoration
+
+L'inclusion nous donne l'inégalité des maxima :
+
+$$\max A_k \le \max \{ 0, 1, ..., 2 \ n_k \} = 2 \ n_k$$
+
+On en déduit que :
+
+$$M_k \le 2 \ n_k$$
+
+En divisant cette inégalité par $n_k \strictsuperieur 0$, on obtient une
+borne constante pour les rationnels associés :
+
+$$x_k = \frac{M_k}{n_k} \le 2$$
+
+La suite des $x_k$ est majorée.
+
+
+*** Suite croissante
+
+Le maximum appartenant à l'ensemble, on a :
+
+$$\frac{M_k^2}{n_k^2} \le 2$$
+
+et :
+
+$$\frac{(10 \ M_k)^2}{n_{k+1}^2} = \frac{(10 \ M_k)^2}{(10 \ n_k)^2} = \frac{100 \ M_k^2}{100 \ n_k^2} = \frac{M_k^2}{n_k^2} \le 2$$
+
+On en déduit que :
+
+$$10 \ M_k \in \accolades{p \in \setN : \frac{p^2}{n_{k+1}^2} \le 2}$$
+
+On conclut de ce résultat et du caractère de maximum de $M_{k+1}$ que :
+
+$$M_{k+1} \ge 10 \ M_k$$
+
+et :
+
+$$x_{k+1} = \frac{M_{k+1}}{n_{k+1}} \ge \frac{10 \ M_k}{n_{k+1}} = \frac{10 \ M_k}{10 \ n_k} = \frac{M_k}{n_k} = x_k$$
+
+On en conclut que :
+
+$$x_0 \le x_1 \le x_2 \le ...$$
+
+On a donc $x_i \ge x_j$ pour tout $i,j \in \setN$ vérifiant $i \ge j$,
+la suite des $x_k$ est croissante.
+
+
+*** Cadre
+
+Comme $M_k$ est le maximum de $A_k$, on a :
+
+$$x_k^2 = \frac{M_k^2}{n_k^2} \le 2$$
+
+et :
+
+$$\left(\frac{M_k + 1}{n_k}\right)^2 \strictsuperieur 2$$
+
+On a :
+
+$$\left(\frac{M_k + 1}{n_k}\right)^2 = \left(x_k + \frac{1}{n_k})^2$$
+
+En développant le binôme, on arrive à :
+
+$$\left(\frac{M_k + 1}{n_k}\right)^2 = x_k^2 + \frac{2 \ x_k}{n_k} + \frac{1}{n_k^2}$$
+
+On a donc l'inégalité :
+
+$$x_k^2 + \frac{2 \ x_k}{n_k} + \frac{1}{n_k^2} \strictsuperieur 2$$
+
+qui nous donne la borne inférieure :
+
+$$x_k^2 \strictsuperieur 2 - \left(\frac{2 \ x_k}{n_k} + \frac{1}{n_k^2}\right)$$
+
+Posons :
+
+$$\Delta_k =  \frac{2 \ x_k}{n_k} + \frac{1}{n_k^2}$$
+
+En divisant l'inégalité :
+
+$$1 \le n_k$$
+
+par $n_k^2 \strictsuperieur 0$, on obtient :
+
+$$\frac{1}{n_k^2} \le \frac{1}{n_k}$$
+
+On a donc :
+
+$$\Delta_k \le \frac{2 \ x_k}{n_k} + \frac{1}{n_k} = \frac{2 \ x_k + 1}{n_k}$$
+
+Comme $x_k \le 2$, on a :
+
+$$\Delta_k \le \frac{2 \cdot 2 + 1}{n_k} = \frac{5}{n_k}$$
+
+On a finalement la borne inférieure :
+
+$$x_k^2 \strictsuperieur 2 - \Delta_k \ge 2 - \frac{5}{n_k}$$
+
+Posons :
+
+$$\alpha_k = \frac{5}{n_k}$$
+
+On a l'encadrement :
+
+$$2 - \alpha_k \strictinferieur x_k^2 \le 2$$
+
+
+*** Bornes d'une différence
+
+Soit $i,j \in \setN$ tels que $i \ge j$. On dispose des bornes :
+
+$$2 - \alpha_i \strictinferieur x_i^2 \le 2$$
+$$2 - \alpha_j \strictinferieur x_j^2 \le 2$$
+
+En évaluant la différence de :
+
+$$x_i^2 \le 2$$
+
+$$x_j^2 \strictsuperieur 2 - \alpha_j$$
+
+on arrive à la majoration :
+
+$$x_i^2 - x_j^2 \le 2 - (2 - \alpha_j) = \alpha_j$$
+
+Comme la suite est croissante, on a $x_i \ge x_j$. Comme la fonction
+$f : x \mapsto x^2$ est croissante sur l'ensemble des rationnels
+positifs, on a également :
+
+$$x_i^2 \ge x_j^2$$
+
+ou :
+
+$$x_i^2 - x_j^2 \ge 0$$
+
+On a donc finalement :
+
+$$\abs{x_i^2 - x_j^2} = x_i^2 - x_j^2 \le \alpha_j$$
+
+
+*** Factorisation
+
+On a la factorisation :
+
+$$x_i^2 - x_j^2 = (x_i - x_j) \cdot (x_i + x_j)$$
+
+Comme la suite est croissante, on sait que :
+
+$$x_i,x_j \ge x_0 = 1$$
+
+Leur somme vérifie l'inégalité :
+
+$$x_i + x_j \ge 1 + 1 = 2$$
+
+La différence des carrés est donc minorée par :
+
+$$x_i^2 - x_j^2 = (x_i - x_j) \cdot (x_i + x_j) \ge (x_i - x_j) \cdot 2$$
+
+En divisant par $2$, on obtient :
+
+$$x_i - x_j \le \frac{1}{2} \ \parentheses{x_i^2 - x_j^2}$$
+
+Comme la suite est croissante, on a $x_i \ge x_j$ et :
+
+$$x_i - x_j \ge 0$$
+
+Donc :
+
+$$\abs{x_i - x_j} = x_i - x_j$$
+
+Comme la fonction $f : x \mapsto x^2$ est croissante sur l'ensemble
+des rationnels positifs, on a également :
+
+$$x_i^2 \ge x_j^2$$
+
+ou :
+
+$$x_i^2 - x_j^2 \ge 0$$
+
+Donc :
+
+$$\abs{x_i^2 - x_j^2} = x_i^2 - x_j^2$$
+
+On a donc :
+
+$$\abs{x_i - x_j} \le \frac{1}{2} \ \abs{x_i^2 - x_j^2} \le \frac{\alpha_j}{2}$$
+
+
+*** Suite de Cauchy
+
+Soit $\epsilon \strictsuperieur 0$. Comme :
+
+$$\lim_{k \to \infty} \alpha_k = \lim_{k \to \infty} \frac{5}{n_k} = \lim_{k \to \infty} \frac{5}{10^k} = 0$$
+
+on peut trouver un naturel $K$ tel que :
+
+$$\abs{\alpha_k} = \abs{\alpha_k - 0} \le \epsilon$$
+
+pour tout naturel $k$ vérifiant $k \ge K$. On note que :
+
+$$\alpha_k = \frac{5}{10^k} \le \frac{5}{10^K} = \alpha_K$$
+
+Si $i,j \in \setN$ vérifient $i,j \ge K$, on a donc :
+
+$$\abs{x_i - x_j} \le \frac{1}{2} \ \max \{ \alpha_i, \alpha_j \} \le \alpha_K \le \epsilon$$
+
+La suite des $x_k$ est de Cauchy.
+
+
+*** Erreur
+
+On déduit du cadre de $x_k$ que :
+
+$$-\alpha_k = (2 - \alpha_k) - 2 \strictinferieur x_k^2 - 2$$
+
+ou :
+
+$$E_k = 2 - x_k^2 \strictinferieur \alpha_k$$
+
+Comme on a également $x_k^2 \le 2$ par définition des $M_k$, on a
+aussi $E_k \ge 0$ et :
+
+$$\abs{E_k - 0} = \abs{E_k} = E_k \le \alpha_k$$
+
+La suite des $\alpha_k$ convergeant vers zéro, on en déduit que :
+
+$$\lim_{k \to \infty} E_k = 0$$
+
+
+*** Convergence
+
+Soit $\epsilon \strictsuperieur 0$. L'erreur convergeant vers zéro,
+on peut trouver un $K \in \setN$ tel que :
+
+$$\distance(x_k^2,2) = \abs{x_k^2 - 2} =  \abs{E_k} = \abs{E_k - 0} \le \epsilon$$
+
+pour tout naturel $k$ vérifiant $k \ge K$. On en déduit que :
+
+$$\lim_{k \to \infty} x_k^2 = 2$$
+
+
+*** Supremum
+
+Soit l'ensemble :
+
+$$X = \accolades{x_k^2 : k \in \setN}$$
+
+On sait déjà que :
+
+$$x_k^2 = \frac{M_k^2}{n_k^2} \le 2$$
+
+pour tout $k \in \setN$. On en conclut que :
+
+$$X \le 2$$
+
+Pour tout rationnel $u \ge 2 \ge X$, on a :
+
+$$u \in \major X$$
+
+On en déduit que :
+
+$$\{ u \in \setQ : u \ge 2 \} \subseteq \major X$$
+
+Soit un rationnel $v \strictinferieur 2$. Posons :
+
+$$\delta = 2 - v \strictsuperieur 0$$
+
+On choisit un rationnel $\epsilon$ vérifiant :
+
+$$0 \strictinferieur \epsilon \strictinferieur \delta$$
+
+Comme la suite $k \mapsto x_k^2$ converge vers $2$, on peut
+trouver un naturel $K$ tel que :
+
+$$\abs{x_k^2 - 2} = 2 - x_k^2 \le \epsilon$$
+
+pour tout naturel $k$ vérifiant $k \ge K$. On a alors :
+
+$$x_k^2 \ge 2 - \epsilon \strictsuperieur 2 - \delta = v$$
+
+Donc :
+
+$$v \notin \major X$$
+
+On a donc :
+
+$$\major X = \{ u \in \setQ : u \ge 2 \}$$
+
+et :
+
+$$\sup \accolades{x_k^2 : k \in \setN} = \min \{ u \in \setQ : u \ge 2 \} = 2$$
+
+
+** Suite supérieure
+
+Soit les suites de naturels $n : k \mapsto n_k$ et $m : k \mapsto m_k$
+définies par :
+
+$$n_k = 10^k$$
+
+$$m_k = \inf \accolades{p \in \setN : \frac{p^2}{n_k^2} \ge 2}$$
+
+pour tout $k \in \setN$. On définit aussi les rationnels associés :
+
+$$y_k = \frac{m_k}{n_k}$$
+
+et les erreurs :
+
+$$e_k = y_k^2 - 2$$
+
+On a :
+
+$$n_0 = 1 \qquad m_0 = 2 \qquad y_0 = 2 \qquad e_0 = 2$$
+$$n_1 = 10 \qquad m_1 = 15 \qquad y_1 = 1,5 \qquad e_1 = 0,25$$
+$$n_2 = 100 \qquad m_2 = 142 \qquad y_2 = 1,42 \qquad e_2 = 0,0164$$
+
+et ainsi de suite.
+
+
+*** Minimum
+
+Soit les ensembles :
+
+$$A_k = \accolades{p \in \setN : \frac{p^2}{n_k^2} \le 2}$$
+
+$$B_k = \accolades{p \in \setN : \frac{p^2}{n_k^2} \ge 2}$$
+
+Le problème de la racine de deux n'admettant pas de solution dans $\setQ$,
+on ne peut trouver de naturel $p$ tel que :
+
+$$\frac{p^2}{n_k^2} = 2$$
+
+Pour tout $p \in \setN$, on a donc soit :
+
+$$\frac{p^2}{n_k^2} \strictinferieur 2$$
+
+et $p \in A_k$, soit :
+
+$$\frac{p^2}{n_k^2} \strictsuperieur 2$$
+
+et $p \in B_k$. On en conclut que :
+
+$$A_k \cup B_k = \setN$$
+
+Si on pouvait trouver un $p \in A_k \cap B_k$, on aurait :
+
+$$2 \le \frac{p^2}{n_k^2} \le 2$$
+
+et donc :
+
+$$\frac{p^2}{n_k^2} = 2$$
+
+ce qui est impossible. On en conclut que :
+
+$$A_k \cap B_k = \emptyset$$
+
+Si $p \in \setN \setminus A_k$, on a $p \in B_k$ et vice versa. Donc :
+
+$$B_k = \setN \setminus A_k$$
+
+Soit $p \in A_k$. Pour tout $u \in \setN$ vérifiant $u \le p$, on a :
+
+$$\frac{u^2}{n_k^2} \le \frac{p^2}{n_k^2} \le 2$$
+
+On en conclut que $u \in A_k$. L'ensemble $A_k$ possédant un maximum :
+
+$$M_k = \max A_k$$
+
+il est donc de la forme :
+
+$$A_k = \{ 0, 1, ..., M_k - 1, M_k \}$$
+
+On en conclut que $B_k$ est de la forme :
+
+$$B_k = \setN \setminus A_k = \{ M_k + 1, M_k + 2, ... \} = \{ p \in \setN : p \ge M_k + 1 \}$$
+
+On en conclut que le minimum de $B_k$ existe et qu'il s'identifie à l'infimum. Les
+nombres $m_k$ sont donc bien définis et :
+
+$$m_k = \inf B_k = \min B_k = M_k + 1$$
+
+
+*** Minoration
+
+Comme $m_k = M_k + 1$, on a :
+
+$$1 = x_0 \le x_k = \frac{M_k}{n_k} \le \frac{M_k + 1}{n_k} = \frac{m_k}{n_k} = y_k$$
+
+La suite des $y_k$ est minorée.
+
+
+*** Suite décroissante
+
+Le minimum appartenant à l'ensemble, on a :
+
+$$\frac{m_k^2}{n_k^2} \ge 2$$
+
+et :
+
+$$\frac{(10 \ m_k)^2}{n_{k+1}^2} = \frac{(10 \ m_k)^2}{(10 \ n_k)^2} = \frac{100 \ m_k^2}{100 \ n_k^2} = \frac{m_k^2}{n_k^2} \ge 2$$
+
+On en déduit que :
+
+$$10 \ m_k \in \accolades{p \in \setN : \frac{p^2}{n_{k+1}^2} \ge 2}$$
+
+On conclut de ce résultat et du caractère de minimum de $m_{k+1}$ que :
+
+$$m_{k+1} \le 10 \ m_k$$
+
+et :
+
+$$y_{k+1} = \frac{m_{k+1}}{n_{k+1}} \le \frac{10 \ m_k}{n_{k+1}} = \frac{10 \ m_k}{10 \ n_k} = \frac{m_k}{n_k} = y_k$$
+
+On en conclut que :
+
+$$y_0 \ge y_1 \ge y_2 \ge ...$$
+
+On a donc $y_i \le y_j$ pour tout $i,j \in \setN$ vérifiant $i \ge j$,
+la suite des $y_k$ est décroissante.
+
+
+*** Cadre
+
+Comme $m_k$ est le minimum de $B_k$, on a :
+
+$$y_k^2 = \frac{m_k^2}{n_k^2} \ge 2$$
+
+et :
+
+$$\parentheses{\frac{m_k - 1}{n_k}}^2 \strictinferieur 2$$
+
+On a :
+
+$$\parentheses{\frac{m_k - 1}{n_k}}^2 = \parentheses{y_k - \frac{1}{n_k}}^2$$
+
+En développant le binôme, on arrive à :
+
+$$\parentheses{\frac{m_k - 1}{n_k}}^2 = y_k^2 - \frac{2 \ y_k}{n_k} + \frac{1}{n_k^2}$$
+
+On a donc l'inégalité :
+
+$$y_k^2 - \frac{2 \ y_k}{n_k} + \frac{1}{n_k^2} \strictinferieur 2$$
+
+qui nous donne la borne inférieure :
+
+$$y_k^2 \strictinferieur 2 + \parentheses{\frac{2 \ y_k}{n_k} - \frac{1}{n_k^2}}$$
+
+Posons :
+
+$$\delta_k =  \frac{2 \ y_k}{n_k} - \frac{1}{n_k^2}$$
+
+Comme :
+
+$$\frac{1}{n_k^2} \strictsuperieur 0$$
+
+on a :
+
+$$\delta_k \le \frac{2 \ y_k}{n_k}$$
+
+Comme $y_k \le y_0 = 2$, on a :
+
+$$\delta_k \le \frac{2 \cdot 2}{n_k} = \frac{4}{n_k}$$
+
+On a finalement la borne supérieure :
+
+$$y_k^2 \strictinferieur 2 + \delta_k \le 2 + \frac{4}{n_k}$$
+
+Posons :
+
+$$\gamma_k = \frac{4}{n_k}$$
+
+On a l'encadrement :
+
+$$2 \le y_k^2 \strictinferieur 2 + \gamma_k$$
+
+
+*** Bornes d'une différence
+
+Soit $i,j \in \setN$ tels que $i \le j$. On dispose des bornes :
+
+$$2 \le  y_i^2 \strictinferieur 2 + \gamma_i$$
+$$2 \le  y_j^2 \strictinferieur 2 + \gamma_j$$
+
+En évaluant la différence de :
+
+$$y_i^2 \strictinferieur 2 + \gamma_i$$
+
+$$y_j^2 \ge 2$$
+
+on arrive à la majoration :
+
+$$y_i^2 - y_j^2 \le 2 + \gamma_i - 2 = \gamma_i$$
+
+Comme la suite est croissante, on a $y_i \ge y_j$. Comme la fonction
+$f : x \mapsto x^2$ est croissante sur l'ensemble des rationnels
+positifs, on a également :
+
+$$y_i^2 \ge y_j^2$$
+
+ou :
+
+$$y_i^2 - y_j^2 \ge 0$$
+
+On a donc finalement :
+
+$$\abs{y_i^2 - y_j^2} = y_i^2 - y_j^2 \le \gamma_i$$
+
+
+*** Factorisation
+
+On a la factorisation :
+
+$$y_i^2 - y_j^2 = (y_i - y_j) \cdot (y_i + y_j)$$
+
+Comme :
+
+$$y_i,y_j \ge 1$$
+
+leur somme vérifie l'inégalité :
+
+$$y_i + y_j \ge 1 + 1 = 2$$
+
+La différence des carrés est donc minorée par :
+
+$$y_i^2 - y_j^2 = (y_i - y_j) \cdot (y_i + y_j) \ge (y_i - y_j) \cdot 2$$
+
+En divisant par $2$, on obtient :
+
+$$y_i - y_j \le \frac{1}{2} \ \parentheses{y_i^2 - y_j^2}$$
+
+Comme la suite est croissante, on a $y_i \ge y_j$ et :
+
+$$y_i - y_j \ge 0$$
+
+Donc :
+
+$$\abs{y_i - y_j} = y_i - y_j$$
+
+Comme la fonction $f : x \mapsto x^2$ est croissante sur l'ensemble
+des rationnels positifs, on a également :
+
+$$y_i^2 \ge y_j^2$$
+
+ou :
+
+$$y_i^2 - y_j^2 \ge 0$$
+
+Donc :
+
+$$\abs{y_i^2 - y_j^2} = y_i^2 - y_j^2$$
+
+On a donc :
+
+$$\abs{y_i - y_j} \le \frac{1}{2} \ \abs{y_i^2 - y_j^2} \le \frac{\gamma_i}{2}$$
+
+
+*** Suite de Cauchy
+
+Soit $\epsilon \strictsuperieur 0$. Comme :
+
+$$\lim_{k \to \infty} \gamma_k = \lim_{k \to \infty} \frac{4}{n_k} = \lim_{k \to \infty} \frac{4}{10^k} = 0$$
+
+on peut trouver un naturel $K$ tel que :
+
+$$\abs{\gamma_k} = \abs{\gamma_k - 0} \le \epsilon$$
+
+pour tout naturel $k$ vérifiant $k \ge K$. On note que :
+
+$$\gamma_k = \frac{4}{10^k} \le \frac{4}{10^K} = \gamma_K$$
+
+Si $i,j \in \setN$ vérifient $i,j \ge K$, on a donc :
+
+$$\abs{y_i - y_j} \le \frac{1}{2} \ \max \{ \gamma_i, \gamma_j \} \le \gamma_K \le \epsilon$$
+
+La suite des $y_k$ est de Cauchy.
+
+
+*** Erreur
+
+On déduit du cadre de $y_k$ que :
+
+$$e_k = y_k^2 - 2 \strictinferieur \gamma_k$$
+
+Comme on a également $y_k^2 \ge 2$ par définition des $m_k$, on a
+aussi $e_k \ge 0$ et :
+
+$$\abs{e_k - 0} = \abs{e_k} = e_k \le \gamma_k$$
+
+La suite des $\gamma_k$ convergeant vers zéro, on en déduit que :
+
+$$\lim_{k \to \infty} e_k = 0$$
+
+
+*** Convergence
+
+Soit $\epsilon \strictsuperieur 0$. L'erreur convergeant vers zéro,
+on peut trouver un $K \in \setN$ tel que :
+
+$$\distance(y_k^2,2) = \abs{y_k^2 - 2} =  \abs{e_k} = \abs{e_k - 0} \le \epsilon$$
+
+pour tout naturel $k$ vérifiant $k \ge K$. On en déduit que :
+
+$$\lim_{k \to \infty} y_k^2 = 2$$
+
+
+*** Infimum
+
+Soit l'ensemble :
+
+$$Y = \accolades{Y_k^2 : k \in \setN}$$
+
+On sait déjà que :
+
+$$y_k^2 = \frac{m_k^2}{n_k^2} \ge 2$$
+
+pour tout $k \in \setN$. On en conclut que :
+
+$$Y \ge 2$$
+
+Pour tout rationnel $u \le 2 \le Y$, on a :
+
+$$u \in \minor Y$$
+
+On en déduit que :
+
+$$\{ u \in \setQ : u \le 2 \} \subseteq \minor Y$$
+
+Soit un rationnel $v \strictsuperieur 2$. Posons :
+
+$$\delta = v - 2 \strictsuperieur 0$$
+
+On choisit un rationnel $\epsilon$ vérifiant :
+
+$$0 \strictinferieur \epsilon \strictinferieur \delta$$
+
+Comme la suite $k \mapsto y_k^2$ converge vers $2$, on peut
+trouver un naturel $K$ tel que :
+
+$$\abs{y_k^2 - 2} = y_k^2 - 2 \le \epsilon$$
+
+pour tout naturel $k$ vérifiant $k \ge K$. On a alors :
+
+$$y_k^2 \le 2 + \epsilon \strictinferieur 2 + \delta = v$$
+
+Donc :
+
+$$v \notin \minor Y$$
+
+On a donc :
+
+$$\minor Y = \{ u \in \setQ : u \le 2 \}$$
+
+et :
+
+$$\inf \accolades{y_k^2 : k \in \setN} = \max \{ u \in \setQ : u \le 2 \} = 2$$
+
+
+** Équivalence
+
+On sait que :
+
+$$x_k = \frac{M_k}{n_k} \le \frac{M_k + 1}{n_k} = \frac{m_k}{n_k} = y_k$$
+
+pour tout $k \in \setN$. Donc :
+
+$$y_k - x_k \ge 0$$
+
+et :
+
+$$\abs{y_k - x_k} = y_k - x_k$$
+
+On a aussi $x_k^2 \le y_k^2$ et :
+
+$$\abs{y_k^2 - x_k^2} = y_k^2 - x_k^2$$
+
+En soustrayant les inégalités :
+
+$$y_k^2 \le 2 + \gamma_k$$
+$$x_k^2 \ge 2 - \alpha_k$$
+
+on obtient :
+
+$$y_k^2 - x_k^2 \le (2 + \gamma_k) - (2 - \alpha_k) = \gamma_k + \alpha_k$$
+
+Posons :
+
+$$\varpi_k = \gamma_k + \alpha_k = \frac{4}{n_k} + \frac{5}{n_k} = \frac{9}{n_k}$$
+
+On a :
+
+$$\abs{y_k^2 - x_k^2} \le \varpi_k$$
+
+Comme $y_k \ge x_k \ge x_0 = 1$, on a :
+
+$$y_k + x_k \ge 1 + 1 = 2$$
+
+La factorisation :
+
+$$y_k^2 - x_k^2 = (y_k - x_k) \cdot (y_k + x_k) \ge (y_k - x_k) \cdot 2$$
+
+nous donne la borne :
+
+$$\abs{y_k - x_k} \le \frac{\abs{y_k^2 - x_k^2}}{2} \le \frac{\varpi_k}{2}$$
+
+Comme :
+
+$$\lim_{k \to \infty} \varpi_k = \lim_{k \to \infty} \frac{9}{n_k} = 0$$
+
+on en déduit que :
+
+$$\lim_{k \to \infty} \abs{y_k - x_k} = 0$$
+
+et :
+
+$$\lim_{k \to \infty} (x_k - y_k) = 0$$
+
+
+** Conclusion
+
+La racine de deux n'existe pas dans l'ensemble des rationnels, mais on peut
+trouver des suites de rationnels de Cauchy, croissante et majorée :
+
+$$1 = x_0 \le x_1 \le ... \le x_k \le ... \le 2$$
+
+ou décroissante et minorée :
+
+$$2 = y_0 \ge y_1 \ge ... \ge y_k \ge ... \ge 1$$
+
+dont les carrés convergent vers $2$ :
+
+$$\lim_{k \to \infty} x_k^2 = \lim_{k \to \infty} y_k^2 = 2$$
+
+On a également les propriétés extrémales :
+
+$$\sup \accolades{x_k^2 : k \in \setN} = \inf \accolades{y_k^2 : k \in \setN} = 2$$
+
+et l'équivalence :
+
+$$\lim_{k \to \infty} (x_k - y_k) = 0$$
+
+On aimerait en déduire que les suites convergent et que :
+
+$$\sqrt{2} = \lim_{k \to \infty} x_k = \lim_{k \to \infty} y_k = \sup \accolades{x_k : k \in \setN} = \inf \accolades{y_k : k \in \setN}$$
+
+Malheureusement, ces limites et extrema n'existent pas dans l'ensemble
+des rationnels. Nous sommes donc amenés à associer au nombre $\sqrt{2}$
+des ensembles associés à ces suites. La généralisation de ces propriétés
+nous mène à la construction des nombres réels.
+
+
+* Réels
+
+#+TOC: headlines 1 local
+
+\label{chap:reels}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:naturels} : Les nombres naturels
+  - Chapitre \ref{chap:entiers} : Les nombres entiers
+  - Chapitre \ref{chap:rationnels} : Les nombres rationnels
+
+
+** Suites
+
+On note $\mathfrak{C}^\top$ l'ensemble des suites de Cauchy rationnelles
+croissantes, $\mathfrak{C}^\bot$ l'ensemble des suites de Cauchy rationnelles
+décroissantes et :
+
+$$\mathfrak{C} = \mathfrak{C}^\top \cup \mathfrak{C}^\bot$$
+
+l'ensemble des suites de Cauchy rationnelles monotones.
+
+
+*** Équivalence
+
+$$\mathcal{E}^\top(s) = \accolades{t \in \mathfrak{C}^\top : s \equiv t}$$
+
+$$\mathcal{E}^\top(s) = \accolades{t \in \mathfrak{C}^\top : \lim_n (s_n - t_n) = 0}$$
+
+$$\mathcal{E}^\bot(s) = \accolades{t \in \mathfrak{C}^\bot : s \equiv t}$$
+
+$$\mathcal{E}^\bot(s) = \accolades{t \in \mathfrak{C}^\bot : \lim_n (s_n - t_n) = 0}$$
+
+$$\mathcal{E}(s) = \accolades{t \in \mathfrak{C} : s \equiv t}$$
+
+$$\mathcal{E}(s) = \accolades{t \in \mathfrak{C} : \lim_n (s_n - t_n) = 0}$$
+
+
+** Ensembles
+
+$$\lambda(u) = \{ v \in \setQ : v \le u \}$$
+
+$$\theta(u) = \{ v \in \setQ : v \ge u \}$$
+
+$$s : \setN \mapsto \setQ$$
+
+$$s : n \mapsto s_n$$
+
+$$\Lambda(s) = \sup_\subseteq \{ \lambda(s_n) : n \in \setN \}$$
+
+$$\Lambda(s) = \bigcup_{n \in \setN} \lambda(s_n) = \bigcup_{n \in \setN} \{ v \in \setQ : v \le s_n \}$$
+
+$$\Theta(s) = \inf_\subseteq \{ \theta(s_n) : n \in \setN \}$$
+
+$$\Theta(s) = \bigcap_{n \in \setN} \theta(s_n) = \bigcap_{n \in \setN} \{ v \in \setQ : v \ge s_n \}$$
+
+
+** Séparation
+
+On aimerait bien étendre $\setQ$ en construisant un ensemble
+qui contienne la solution $r$ d'équations telles que $r^2 = 2$.
+Notons que si $r^2 = 2$ et que l'on veut garder dans cet ensemble
+étendu les propriétés des rationnels, on doit également avoir
+$(-r)^2 = r^2 = 2$. Il y aurait donc deux solutions. Nous allons
+étudier séparément la solution liée aux rationnels positifs.
+Soit la fonction $f : \setQ \mapsto \setQ$ définie par :
+
+#+BEGIN_CENTER
+\(
+f(x) =
+\begin{cases}
+0 & \text{ si } x \le 0 \\
+x^2 & \text{ si } x \strictsuperieur 0
+\end{cases}
+\)
+#+END_CENTER
+
+pour tout $x \in \setQ$. On part de la constatation que, si la solution de $f(x) = 2$ n'existe pas dans $\setQ$, l'équation « sépare » les rationnels en deux catégories : les $x$ tels que $f(x) \strictinferieur 2$ et les $y$ tels que $f(y) \strictsuperieur 2$. Considérons l'ensemble :
+
+$$R = \{ x \in \setQ : f(x) \strictinferieur 2 \}$$
+
+Plus on augmente la valeur de $x \in R$, plus l'erreur $e = 2 - x^2 \strictsuperieur 0$ diminue. On a par conséquent envie de dire que la solution $r$ est le plus grand des éléments de $R$. Mais comme ni le maximum ni le supremum n'existent au sens de l'ordre $\le$, nous le considérons plutôt au sens de l'inclusion ensembliste $\subseteq$ sur les sous-ensembles de $R$ :
+
+$$r \equiv \sup_\subseteq \sousens(R) = R$$
+
+Nous sommes donc amenés à associer un sous-ensemble $R$ des rationnels à chaque élément $r$ de l'ensemble que nous désirons construire. Mais nous n'allons pas prendre n'importe quel sous-ensemble de $\setQ$ : on désire que les sous-ensembles acceptés vérifie des propriétés analogues à notre $R$ particulier. Or, pour tout $x \in R$, l'ensemble :
+
+$$\Lambda(x) = \{ y \in \setQ : y \strictinferieur x \}$$
+
+est inclus dans $R$. Cette propriété est à la base de la construction des réels.
+
+
+** Définition
+
+On nomme réel tout nombre $r$ associé à un sous-ensemble $R \subseteq \setQ$ tel que :
+
+  - $R \ne \emptyset$
+  - Il existe un $\mu \in \setQ$ tel que $R \le \mu$
+  - Pour tout $x \in R$ et $y \in \setQ$ tel que $y \strictinferieur x$, on a $y \in R$ :
+
+$$\Lambda(x) = \{ y \in \setQ : y \strictinferieur x \} \subseteq R$$
+
+  - Le maximum de $R$ n'existe pas.
+
+On note $\setR$ l'ensemble des réels.
+
+
+*** Corollaire
+
+Si le rationnel $x \in \setQ$ n'appartient pas à $R$, on a $y \notin R$ pour tout $y \in \setQ$ vérifiant $y \strictsuperieur x$ (dans le cas contraire, on aurait $x \notin R$ avec $x \strictinferieur y$ et $y \in R$, ce qui contredit la définition des réels).
+
+
+*** Notation
+
+Pour tout réel $r$ associé au sous-ensemble de rationnels $R$, on note bien entendu :
+
+$$r = \sup R$$
+
+
+** Inclusions
+
+On peut associer à tout rationnel $x \in \setQ$ un ensemble $\Lambda(x)$. Or, on a clairement $\Lambda(x) \ne \emptyset$ et $\Lambda(x) \le x$. Soit $s \in \Lambda(x)$. On a $\Lambda(s) \subseteq \Lambda(x)$. On peut aussi trouver un $t \in \Lambda(x)$ tel que $s \strictinferieur t \strictinferieur x$. Donc, $s$ ne peut pas être le maximum de $\Lambda(x)$. On en conclut que tout rationnel $x$ correspond au réel associé à $\Lambda(x)$. Les entiers pouvant être considérés comme des cas particuliers de rationnels et les naturels comme des cas particuliers d'entiers, on a donc finalement : $\setN \subseteq \setZ \subseteq \setQ \subseteq \setR$.
+
+
+** Ordre
+
+L'ordre sur les réels découle directement de l'ordre $\subseteq$ sur les ensembles. Soit $r \in \setR$ associé au sous-ensemble $R \subseteq \setQ$ et $s \in \setR$ associé au sous-ensemble $S \subseteq \setQ$. On dit que $r$ est plus petit que $s$ et on le note :
+
+$$r \le s$$
+
+si et seulement si $R$ est inclus dans $S$ :
+
+$$R \subseteq S$$
+
+
+*** Totalité
+
+Supposons que pour tout $x \in R$, on ait $x \in S$. On a alors $R \subseteq S$ et $r \le s$ par définition. Inversément, supposons que l'on puisse trouver un $x \in R$ tel que $x \notin S$. Tous les rationnels $z \in \setQ$ tels que $z = x$ ou $z \strictsuperieur x$ vérifient $z \notin S$. Par conséquent, si $y \in S$, on doit avoir $y \strictinferieur x$. Mais, par définition des réels et comme $x \in R$, on doit aussi avoir $y \in R$. On en conclut que $S \subseteq R$, et donc $s \le r$.
+
+Pour tout couple de réels $(r,s) \in \setR^2$, on a donc soit $r \le s$, soit $s \le r$. L'ordre ainsi défini est donc total.
+
+
+*** Ordre strict
+
+On a également l'analogue pour l'ordre et l'inclusion stricts :
+
+$$r \strictinferieur s \quad \Leftrightarrow \quad R \subset S$$
+
+Ce qui revient à dire que $r \strictinferieur s$ si et seulement si $r \le s$ et $r \ne s$.
+
+
+** Addition
+
+L'addition de $r \in \setR$ associé à $R$ et de $s \in \setR$ associé à $S$ est définie par :
+
+$$r + s \equiv \{ x + y \in \setQ : x \in R, \ y \in S \}$$
+
+
+** Neutre additif
+
+Soit $0 \in \setQ$ et le sous-ensemble de rationnel correspondant :
+
+$$Z = \{ x \in \setQ : x \strictinferieur 0 \}$$
+
+Soit $r \in \setR$ associé à l'ensemble $R$ et l'ensemble $S = R + Z$ associé à l'addition $r + 0$.
+
+Tout $s \in S$ peut s'écrire sous la forme $s = x + z$, pour un certain $x \in R$ et un certain $z \in Z$. Si $z = 0$, on a bien évidemment $s = x \in R$. Sinon, $z \strictinferieur 0$ et $s \strictinferieur x$, d'où $s \in R$ par définition des réels. On a donc $S \subseteq R$.
+
+Réciproquement, soit un rationnel $x \in R$. Si on avait $y \le x$ pour tout $y \in R$, notre $x$ serait le maximum de $R$, ce qui n'est pas possible par définition des réels. On peut donc trouver un $y \in R$ tel que $x \strictinferieur y$. Le rationnel $d = x - y$ est strictement négatif et appartient donc à $Z$. On en déduit que :
+
+$$x = x - y + y = d + y$$
+
+où $d \in Z$ et $y \in R$. Donc, $x \in S$ et $R \subseteq S$.
+
+La double inclusion nous montre alors que $R = S$, autrement dit que $r + 0 = r$. L'élement neutre pour l'addition, noté $0 \in \setR$, est donc associé à l'ensemble des rationnels strictement négatifs :
+
+$$0 \equiv \{ x \in \setQ : x \strictinferieur 0 \}$$
+
+
+** Positifs et négatifs
+
+On définit les ensembles des réels positifs et négatifs par :
+
+#+BEGIN_CENTER
+\(
+\setR^+ = \{ x \in \setR : x \ge 0 \} \\
+\setR^- = \{ x \in \setR : x \le 0 \}
+\)
+#+END_CENTER
+
+
+** Signe
+
+La fonction signe est définie par :
+
+#+BEGIN_CENTER
+\(
+\signe(x) =
+\begin{cases}
+1 & \text{ si } x \ge 0 \\
+-1 & \text{ si } x \strictinferieur 0
+\end{cases}
+\)
+#+END_CENTER
+
+pour tout $x \in \setR$
+
+
+** Opposé
+
+Soit $r \in \setR$. On aimerait bien trouver l'opposé $-r \in \setR$ tel que :
+
+$$r + (-r) = (-r) + r = 0$$
+
+Si $r \in \setQ$, on a simplement :
+
+$$-r \equiv \Lambda(-r) = \{ x \in \setQ : x \strictinferieur -r \}$$
+
+Si $r \in \setR \setminus \setQ$, on définit l'association :
+
+$$-r \equiv \{ -x : x \in \setQ \setminus R \}$$
+
+ou $R \subseteq \setQ$ est l'ensemble de rationnels associé à $r$.
+
+
+** Soustraction
+
+On définit la soustraction par :
+
+$$r - s = r + (-s)$$
+
+pour tout $r,s \in \setR$.
+
+
+** Valeur absolue
+
+La valeur absolue d'un réel $r \in \setR$ est définie par :
+
+$$\abs{r} = \sup \{ -r , r \}$$
+
+
+*** Propriétés
+
+On a clairement $\abs{-r} = \abs{r}$. Si $r \ge 0$, on a $\abs{r} = r \ge 0$. Si $r \strictinferieur 0$, on a $\abs{r} = -r \strictsuperieur 0$. On en conclut que $\abs{r} \ge 0$ pour tout $r \in \setR$. Si $\abs{r} = 0$, on a soit $r = 0$ ou $-r = 0$. On en conclut que $r = 0$. Enfin, choisissons $r,s \in \setR$ :
+
+  - Si $r,s \ge 0$, on a $\abs{r + s} = r + s$.
+  - Si $r \ge 0$ et $s \strictinferieur 0$, on a $\abs{r + s} \le \max\{ \abs{r} , \abs{s} \} \le \abs{r} + \abs{s}$.
+  - Si $r \strictinferieur 0$ et $s \ge 0$, on a $\abs{r + s} \le \max\{ \abs{r} , \abs{s} \} \le \abs{r} + \abs{s}$.
+  - si $r,s \strictinferieur 0$, on a $\abs{r + s} = (-r) + (-s) = \abs{r} + \abs{s}$.
+
+On en conclut que $\abs{r + s} \le \abs{r} + \abs{s}$ pour tout $r,s \in \setR$.
+
+
+** Distance
+
+On définit une distance sur $\setR$ par :
+
+$$\distance(x,y) = \abs{x - y}$$
+
+On a bien $\distance(x,y) \ge 0$. La condition $\distance(x,y) = 0$ implique que $\abs{x - y}$, donc $x - y = 0$ et $x = y$. Enfin :
+
+\begin{eqnarray*}
+\distance(x,z) &=& \abs{x - z} \\
+&\le& \abs{x - y} + \abs{y - z} \\
+&\le& \distance(x,y) + \distance(y,z)
+\end{eqnarray*}
+
+
+** Arrondis
+
+L'arrondi inférieur d'un réel $x \in \setR$ associé à $X$ est le plus grand entier dont l'ensemble associé est inclus dans $X$ :
+
+$$\arrondiinf{x} = \sup \{ n \in \setZ, \ \Lambda(n) \subseteq X \}$$
+
+L'arrondi supérieur est le plus petit entier dont l'ensemble associé inclut $X$ :
+
+$$\arrondisup{x} = \inf \{ n \in \setZ, \ X \subseteq \Lambda(n) \}$$
+
+
+*** Eloignement
+
+Supposons que :
+
+$$\abs{\arrondiinf{x} - x} \ge 1$$
+
+on aurait :
+
+#+BEGIN_CENTER
+\(
+x - \arrondiinf{x} \ge 1 \\
+x \ge \arrondiinf{x} + 1
+\)
+#+END_CENTER
+
+avec $\arrondiinf{x} + 1$ entier, ce qui contredit l'hypothèse de supremum de l'arrondi inférieur. On déduit l'analogue pour l'arrondi supérieur. On a donc :
+
+$$\max\{ \abs{\arrondisup{x} - x} , \abs{\arrondiinf{x} - x} \} \strictinferieur 1$$
+
+
+** Suites convergentes
+
+Soit $r \in \setR$, l'entier $m \in \setZ$ et le naturel $n \in \setN$ tel que $n \ne 0$. On considère la suite des rationnels $x_n \in \setQ$ définis par :
+
+$$x_n = \frac{m}{2^n}$$
+
+On va tenter de choisir $m$ pour que :
+
+$$\abs{ \frac{m}{2^n} - r} \le \frac{1}{2^n}$$
+
+Cette inégalité est équivalente à :
+
+#+BEGIN_CENTER
+\(
+\frac{m}{2^n} - r \le \frac{1}{2^n} \\
+r - \frac{m}{2^n} \le \frac{1}{2^n}
+\)
+#+END_CENTER
+
+En multipliant par $2^n$, on en déduit que :
+
+$$r \cdot 2^n - 1 \le m \le r \cdot 2^n + 1$$
+
+Il suffit donc de prendre :
+
+$$m \in \{ \arrondisup{r \cdot 2^n} , \arrondiinf{r \cdot 2^n} \}$$
+
+pour satisfaire la contrainte demandée. La suite des $x_n$ converge vers $r$ puisque :
+
+$$\lim_{n \to \infty} \abs{x_n - r} = 0$$
+
+On le note :
+
+$$\lim_{n \to \infty} x_n = r$$
+
+On peut donc également identifier tout réel à une suite de rationnels qui converge vers lui.
+
+
+*** Opération
+
+On peut se servir de ce résultat pour étendre une opération $\divideontimes$ définie sur $\setQ$. Soit $r,s \in \setR$ et les suites de rationnels $x_i,y_i \in \setQ$ convergent respectivement vers $r$ et $s$ :
+
+#+BEGIN_CENTER
+\(
+\lim_{n \to \infty} x_n = r \\
+\lim_{n \to \infty} y_n = s
+\)
+#+END_CENTER
+
+On définit alors :
+
+$$r \divideontimes s = \lim_{n \to \infty} \left[ x_n \divideontimes y_n \right]$$
+
+
+** Multiplication
+
+Soit $r,s \in \setR$. et les suites de rationnels $x_n$ et $y_n$ vérifiant :
+
+#+BEGIN_CENTER
+\(
+\lim_{n \to \infty} x_n = r \\
+\lim_{n \to \infty} y_n = s
+\)
+#+END_CENTER
+
+On définit la multiplication par :
+
+$$r \cdot s = \lim_{n \to \infty} x_n \cdot y_n$$
+
+
+** Inverse
+
+L'inverse d'un réel $r \in \setR$ est le réel $r^{-1}$ tel que :
+
+$$r \cdot r^{-1} = r^{-1} \cdot r = 1$$
+
+
+** Division
+
+Soit $r,s \in \setR$ avec $s \ne 0$. On définit la division de $r$ par $s$ par :
+
+$$\frac{r}{s} = r \cdot s^{-1}$$
+
+
+** Puissance
+
+Soit $x \in \setR$ et $n \in \setN$. La puissance de $x$ est comme d'habitude :
+
+#+BEGIN_CENTER
+\(
+x^0 = 1 \\
+x^n = x \cdot x^{n - 1}
+\)
+#+END_CENTER
+
+Les puissances négatives sont données par :
+
+$$x^{-n} = \left( x^{-1} \right)^n$$
+
+Comme l'inverse d'une puissance est la puissance de l'inverse, on a aussi :
+
+$$x^{-n} = \left( x^n \right)^{-1}$$
+
+
+** Racines
+
+Soit $x \in \setR$ et $n \in \setN$. On dit que $z$ est la $n^{ième}$ racine de $x$ si :
+
+$$z^n = x$$
+
+On note alors indifféremment :
+
+$$z = x^{1/n} = \sqrt[n]{x}$$
+
+Un cas particulier important est celui de la racine carrée :
+
+$$\sqrt{x} = \sqrt[2]{x} = x^{1/2}$$
+
+
+** Unicité
+
+
+*** Amplitude
+
+Soit $x,y,z \in \setR$ avec $x,y \ge 0$ et $n \in \setN$. Il est clair que si $x \ne y$, on a forcément $x^n \ne y^n$. On en conclut que si $x$ et $y$ sont tels que $x^n = y^n$, on a forcément $x = y$. Les racines sont uniques sur $\setR^+$.
+
+
+*** Signe
+
+Soit $x \in \setR$. On a :
+
+$$x^2 = (-x)^2$$
+
+Par conséquent, $x$ et $-x$ sont des racines carrées de $z = x^2$. Pour conserver l'unicité on impose que :
+
+$$\sqrt{z} = \abs{x} \ge 0$$
+
+Il en va de même pour les puissances paires $2 n$, où $n \in \setN$ car :
+
+$$x^{2 n} = \left( x^2 \right)^n = \left( (-x)^2 \right)^n = (-x)^{2 n}$$
+
+Par contre, pour les puissances impaires :
+
+$$x^{2 n + 1} = \left( x^2 \right)^n \cdot x = - \left( (-x)^2 \right)^n \cdot (-x) = - (-x)^{2 n + 1}$$
+
+Le signe n'est pas ambigu. En résumé, on a :
+
+#+BEGIN_CENTER
+\(
+\sqrt[2 n]{ x^{2 n} } = \abs{x} \\
+\sqrt[2 n + 1]{ x^{2 n + 1} } = x
+\)
+#+END_CENTER
+
+
+** Racine d'un produit
+
+Soit $n \in \setN$ et $a,b,x,y \in \setR$ avec :
+
+#+BEGIN_CENTER
+\(
+a^n = x \\
+b^n = y
+\)
+#+END_CENTER
+
+On a :
+
+$$a^n \cdot b^n = a \cdot ... \cdot a \cdot b \cdot ... \cdot b = a \cdot b \cdot ... \cdot a \cdot b = (a \cdot b)^n$$
+
+On en déduit que :
+
+$$\sqrt[n]{a^n \cdot b^n} = a \cdot b$$
+
+c'est-à-dire :
+
+$$\sqrt[n]{x \cdot y} = \sqrt[n]{x} \cdot \sqrt[n]{y} = (x \cdot y)^{1/n} = x^{1/n} \cdot y^{1/n}$$
+
+La racine d'un produit est égale au produit des racines.
+
+
+** Racine d'une racine
+
+Soit $m,n \in \setN$ et $a,b,c \in \setR$ avec :
+
+#+BEGIN_CENTER
+\(
+a^m = b \\
+b^n = c
+\)
+#+END_CENTER
+
+On voit que :
+
+$$a = b^{1/m} = \left( c^{1/n} \right)^{1/m}$$
+
+Mais on aussi :
+
+$$a^{m \cdot n} = \left( a^m \right)^n = b^n = c$$
+
+donc :
+
+$$a = c^{ 1/(m \cdot n) }$$
+
+On en déduit finalement que :
+
+$$\left( c^{1/n} \right)^{1/m} = c^{ 1/(m \cdot n) }$$
+
+
+** Puissances fractionnaires
+
+Soit $x \in \setR$ et $m,n \in \setN$. On définit les puissances fractionnaires par :
+
+#+BEGIN_CENTER
+\(
+x^{m/n} = \left( x^{1/n} \right)^m \\
+x^{-m/n} = \left( x^{1/n} \right)^{-m} = \frac{1}{x^{m/n}}
+\)
+#+END_CENTER
+
+Comme la racine d'un produit est égale au produit des racines, on a aussi :
+
+#+BEGIN_CENTER
+\(
+x^{m/n} = \left( x^m \right)^{1/n} \\
+x^{-m/n} = \left( x^{-m} \right)^{1/n} = \frac{1}{x^{m/n}}
+\)
+#+END_CENTER
+
+
+** Somme en exposant
+
+Soit $a,b \in \setZ$ et $x \in \setR$. Posons :
+
+$$z = x^{ 1/(b \cdot d) }$$
+
+On a alors :
+
+#+BEGIN_CENTER
+\(
+x^{1/b} = z^d \\
+x^{1/d} = z^b
+\)
+#+END_CENTER
+
+On voit que :
+
+$$x^{a/b} \cdot x^{c/d} = \left( z^d \right)^a \cdot \left( z^b \right)^c = z^{a \cdot d} \cdot z^{b \cdot c} = z^{a \cdot d + b \cdot c}$$
+
+c'est-à-dire :
+
+$$x^{a/b} \cdot x^{c/d} = x^{ \frac{a \cdot d + b \cdot c}{b \cdot d} }$$
+
+qui n'est rien d'autre que :
+
+$$x^{a/b} \cdot x^{c/d} = x^{ \frac{a}{b} + \frac{c}{d} }$$
+
+
+** Puissance d'une puissance
+
+Soit $a,b \in \setZ$ et $x \in \setR$. Posons :
+
+$$z = x^{ 1/(b \cdot d) }$$
+
+On constate que :
+
+$$\left( x^{a/b} \right)^{c/d} = \left( z^{a \cdot d} \right)^{c/d} = z^{a \cdot c}$$
+
+qui n'est rien d'autre que :
+
+$$\left( x^{a/b} \right)^{c/d} = x^{ \frac{a \cdot c}{b \cdot d} }$$
+
+
+** Puissance réelle
+
+Soit $x, s \in \setR$ et la suite de rationnels $\{ r_1,r_2,... \}$ convergeant vers $s$ :
+
+$$\lim_{i \to \infty} r_i = s$$
+
+On définit la puissance réelle par :
+
+$$x^s = \lim_{i \to +\infty} x^{r_i}$$
+
+
+*** Additivité
+
+Les propriétés des puissances fractionnaires nous montrent que :
+
+#+BEGIN_CENTER
+\(
+x^{r + s} = x^r \cdot x^s \\
+\left( x^r \right)^s = x^{r \cdot s}
+\)
+#+END_CENTER
+
+pour tout $x,r,s \in \setR$.
+
+
+* Extrema réels
+
+#+TOC: headlines 1 local
+
+\label{chap:extremaReels}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:reel} : Les nombres réels
+  - Chapitre \ref{chap:interval} : Les intervalles
+
+
+** Existence
+
+Soit un sous-ensemble $A \subseteq \setR$ avec $A \ne \emptyset$. Pour tout réel $x \in A$, on note $Q(x)$ le sous-ensemble de rationnels associé.
+
+
+  - Supposons que $A$ soit majoré ($\major A \ne \emptyset$). Choisissons $\mu \in \major A$ et considérons le sous-ensemble de rationnels $Q(\mu)$ associé à $\mu$. Comme $\mu \ge A$ et comme l'ordre $\le$ est dérivé de l'ordre inclusif sur les sous-ensembles de rationnels associés, on a $Q(x) \subseteq Q(\mu)$ pour tout $x \in A$. On en conclut que l'union $S$ des $Q(x)$ est inclue dans $Q(\mu)$ :
+
+$$S = \bigcup_{x \in A} Q(x) \subseteq Q(\mu)$$
+
+Comme $Q(\mu)$ est majoré, on peut trouver un rationnel $\sigma$ tel que :
+
+$$S \subseteq Q(\mu) \le \sigma$$
+
+Donc $S \le \sigma$, ce qui prouve que $S$ est majoré. D'un autre coté, comme les $Q(x)$ ne sont pas vides, il est clair que leur union $S$ n'est pas vide.
+
+Soit $\alpha \in S$ et le rationnel $\beta \in \setQ$ vérifiant $\beta \strictinferieur \alpha$. On peut trouver un $x \in A$ tel que $\alpha \in Q(x)$. Par définition des sous-ensembles de rationnels associés aux réels, on a $\beta \in Q(x)$, donc $\beta$ appartient à l'union $S$. Enfin, si $S$ admettait un maximum $M$, on on pourrait trouver un $x \in A$ tel que $M \in Q(x)$. On aurait aussi $Q(x) \subseteq S \le M$, et donc $Q(x) \le M$, ce qui contredit la définition des réels. On en conclut que l'ensemble $S$ correspond à un réel $s$. Mais on sait que le supremum inclusif est égal à l'union :
+
+$$S = \sup_\subseteq \{ Q(x) \in \sousens(\setQ) : x \in A \} $$
+
+L'ordre $\le$ des réels étant dérivé de $\subseteq$, on en conclut que le supremum de $A$ existe et que :
+
+$$s = \sup A$$
+
+Nous avonc donc prouvé que tout sous-ensemble $A$ non vide majoré de $\setR$ admet un supremum.
+
+  - Supposons que $A$ soit minoré ($\minor A \ne \emptyset$). Choisissons $\lambda \in \minor A$ et posons :
+
+$$-A = \{ -x \in \setR : x \in A \}$$
+
+Comme $\lambda \le x$ pour tout $x \in A$, on a $-\lambda \ge -x$ et $-\lambda \in \major(-A) \ne \emptyset$. L'ensemble non vide $-A$ est donc majoré et admet un supremum $S = \sup(-A)$. On a $S \ge -x$ pour tout $x \in A$, donc $I = -S \le x$ et $I \in \minor A$. Choisissons $\alpha \in \minor A$. On a $\alpha \le x$ pour tout $x \in A$, d'où $-\alpha \ge -x$ et $-\alpha \in \major(-A)$. On en déduit que $-A \le S \le -\alpha$, c'est-à-dire $\alpha \le I \le A$. Le
+réel $I = -S$ est donc l'infimum de $A$ :
+
+$$\inf A = - \sup(-A)$$
+
+Nous avonc donc prouvé que tout sous-ensemble $A$ non vide minoré de $\setR$ admet un infimum.
+
+
+
+** Adhérence et distance
+
+Soit $A \subseteq \setR$ et $r \in \setR$. Soit l'ensemble :
+
+$$D = \{ \distance(r,x) : x \in A \}$$
+
+
+  - Supposons que $r \in \adh A$. On a alors :
+
+$$\distance(r,A) = \inf D = 0$$
+
+Choisissons un réel $\delta \strictsuperieur 0$. Si on avait $\distance(x,r) \strictsuperieur \delta$ pour tout $x \in A$, on aurait $0 \strictinferieur \delta \le D$, ce qui contredit l'hypothèse d'infimum nul. Donc, pour tout $\delta \strictsuperieur 0$, on peut trouver un $x \in A$ tel que $\distance(x,r) \le \delta$.
+
+  - Réciproquement, supposons que pour tout réel $\delta \strictsuperieur 0$, on puisse trouver un $x \in A$ tel que $d = \distance(x,r) \le \delta$. Dans ce cas, on a $\delta \le d \in D$. On en conclut que $\delta \notin \minor D$. Par contre, si $\delta \le 0$, on a $\delta \le 0 \le D$ par positivité de la distance. On en conclut que $\minor D = \intervallesemiouvertgauche{-\infty}{0}$, d'où :
+
+$$\distance(r,A) = \inf D = \max \minor D = \max \intervallesemiouvertgauche{-\infty}{0} = 0$$
+
+et $r \in \adh A$.
+
+
+
+** Eloignement
+
+
+  - Supposons à présent que le supremum $S = \sup A$ existe et que l'on puisse trouver un $\delta \strictsuperieur 0$ tel que :
+
+$$\distance(S,x) = \abs{S - x} = S - x \ge \delta$$
+
+pour tout $x \in A$. Soit alors :
+
+$$y = S - \frac{\delta}{2}$$
+
+On voit que $S \strictsuperieur y$ et que :
+
+$$y - x = (y - S) + (S - x) \ge - \frac{\delta}{2} + \delta = \frac{\delta}{2} \strictsuperieur 0$$
+
+pour tout $x \in A$, c'est-à-dire $y \ge A$. On a donc $S \strictsuperieur y \ge A$, ce qui contredit la définition du supremum. Pour tout $\delta \strictsuperieur 0$, on peut donc trouver un $x \in A$ tel que $\distance(S,x) \le \delta$. On en conclut que $\distance(S,A) = 0$, c'est-à-dire :
+
+$$\sup A \in \adh A$$
+
+  - Soit l'ensemble $A$ admettant un infimum $I = \inf A$. Supposons que l'on puisse trouver un $\delta \strictsuperieur 0$ tel que :
+
+$$\distance(I,x) = \abs{I - x} = x - I \ge \delta$$
+
+pour tout $x \in A$. Soit alors :
+
+$$y = I + \frac{\delta}{2}$$
+
+On voit que $I \strictinferieur y$ et que :
+
+$$x - y = (x - I) + (I - y) \ge \delta - \frac{\delta}{2} = \frac{\delta}{2} \strictsuperieur 0$$
+
+pour tout $x \in A$, c'est-à-dire $y \le A$. On a donc $I \strictinferieur y \le A$, ce qui contredit la définition de l'infimum. Pour tout $\delta \strictsuperieur 0$, on peut donc trouver un $x \in A$ tel que $\distance(I,x) \le \delta$. On en conclut que $\distance(I,A) = 0$, c'est-à-dire :
+
+$$\inf A \in \adh A$$
+
+
+* Opérations sur les limites
+
+#+TOC: headlines 1 local
+
+\label{chap:operationSurLesLimites}
+
+Soit les fonction $f,g : \setR \mapsto \setR$ vérifiant :
+
+#+BEGIN_CENTER
+\(
+F = \lim_{x \to a} f(x) \\ \\
+G = \lim_{x \to a} g(x)
+\)
+#+END_CENTER
+
+où $F,G \in \setR$. Choisissons un réel $\epsilon \strictsuperieur 0$. Pour tout $\gamma \strictsuperieur 0$, on peut trouver un $\delta(\gamma) \strictsuperieur 0$ tel que :
+
+#+BEGIN_CENTER
+\(
+\distance(f(x),F) = \abs{f(x) - F} \le \gamma \\
+\distance(g(x),G) = \abs{g(x) - G} \le \gamma
+\)
+#+END_CENTER
+
+pour tout $x \in \setR$ tel que $\distance(x,a) = \abs{x - a} \le \delta(\gamma)$.
+
+
+*** Addition
+
+$$\abs{f(x) + g(x) - (F + G)} \le \abs{f(x) - F} + \abs{g(x) - G} = 2 \gamma$$
+
+Il suffit donc de choisir $\gamma = \epsilon / 2$ pour avoir $\abs{f(x) + g(x) - (F + G)} \le \epsilon$. On en déduit que la limite de $f + g$ est $F + G$, c'est-à-dire :
+
+$$\lim_{x \to a} \big[f(x) + g(x)\big] = \lim_{x \to a} f(x) + \lim_{x \to a} g(x)$$
+
+
+**** Fonction constante
+
+Dans le cas particulier où une des deux fonctions est une constante $G \in \setR$, soit :
+
+$$g : x \mapsto G$$
+
+pour tout $x \in \setR$, on a :
+
+$$\lim_{x \to a} g(x) = \lim_{x \to a} G = G$$
+
+et :
+
+$$\lim_{x \to a} \big[f(x) + G\big] = \lim_{x \to a} f(x) + G$$
+
+
+*** Opposé
+
+On a simplement :
+
+$$\abs{\big[-g(x)\big] - (-G)} = \abs{G - g(x)} = \abs{g(x) - G} \le \gamma$$
+
+Il suffit donc de choisir $\gamma = \epsilon$ pour avoir $\abs{(-g(x)) - (-G)} \le \epsilon$. On en déduit que la limite de $-g$ est $-G$, c'est-à-dire :
+
+$$\lim_{x \to a} \big[-g(x)\big] = - \lim_{x \to a} g(x)$$
+
+
+*** Soustraction
+
+On a :
+
+\begin{eqnarray*}
+\lim_{x \to a} \big[f(x) - g(x)\big] &=& \lim_{x \to a} \big[f(x) + \big(-g(x)\big)\big] \\
+&=& \lim_{x \to a} f(x) + \lim_{x \to a} \big(-g(x)\big) \\
+&=& \lim_{x \to a} f(x) - \lim_{x \to a} g(x)
+\end{eqnarray*}
+
+
+*** Multiplication
+
+On voit que :
+
+\begin{eqnarray*}
+\abs{f(x) \cdot g(x) - F \cdot G} &=& \abs{f(x) \cdot g(x) - f(x) \cdot G + f(x) \cdot G - F \cdot G} \\
+&=& \abs{f(x) \cdot (g(x) - G) + (f(x) - F) \cdot G} \\
+&\le& \abs{f(x) \cdot (g(x) - G)} + \abs{(f(x) - F) \cdot G} \\
+&\le& \abs{f(x)} \cdot \abs{g(x) - G} + \abs{(f(x) - F)} \cdot \abs{G} \\
+&\le& \abs{f(x)} \cdot \gamma + \gamma \cdot \abs{G}
+\end{eqnarray*}
+
+Comme :
+
+$$\abs{f(x)} = \abs{f(x) - F + F} \le \abs{f(x) - F} + F \le \gamma + \abs{F}$$
+
+notre borne peut se réécrire :
+
+\begin{eqnarray*}
+\abs{f(x) \cdot g(x) - F \cdot G} &\le& (\gamma + \abs{F}) \cdot \gamma + \gamma \cdot \abs{G} \\
+&\le& (\gamma + \abs{F} + \abs{G}) \cdot \gamma
+\end{eqnarray*}
+
+Si on choisit $\gamma = \min\{ 1 , \epsilon / (1 + \abs{F} + \abs{G}) \}$, on a $\gamma \le 1$ et :
+
+$$\abs{f(x) \cdot g(x) - F \cdot G} \le (1 + \abs{F} + \abs{G}) \cdot \gamma \le \epsilon$$
+
+On en déduit que la limite de $f \cdot g$ est $F \cdot G$, c'est-à-dire :
+
+$$\lim_{x \to a} \big[f(x) \cdot g(x)\big] = \left[ \lim_{x \to a} f(x) \right]  \cdot \left[ \lim_{x \to a} g(x) \right]$$
+
+
+*** Inverse multiplicatif
+
+Supposons que $G \ne 0$. On a :
+
+\begin{eqnarray*}
+\abs{\frac{1}{g(x)} - \frac{1}{G}} &=& \abs{\frac{G - g(x)}{g(x) \cdot \abs{G}}} \\
+&=& \frac{ \abs{G - g(x)} }{ \abs{g(x)} \cdot \abs{G} } \\
+&=& \frac{ \gamma }{ \abs{g(x)} \cdot \abs{G} } \\
+\end{eqnarray*}
+
+On voit aussi que :
+
+\begin{eqnarray*}
+\abs{g(x)} = \abs{g(x) - G + G} &=& \abs{G - (G - g(x))} \\
+&\ge& \abs{G} - \abs{G - g(x)} \\
+&\ge& \abs{G} - \gamma
+\end{eqnarray*}
+
+Donc, si $\gamma \strictinferieur \abs{G}$, on a :
+
+$$\abs{\frac{1}{g(x)} - \frac{1}{G}} \le \frac{ \gamma }{ (\abs{G} - \gamma) \cdot \abs{G} }$$
+
+Nous allons voir qu'il est possible de majorer cette expression par $\epsilon$. En effet, la condition :
+
+$$\frac{ \gamma }{ (\abs{G} - \gamma) \cdot \abs{G} } \le \epsilon$$
+
+est équivalente à :
+
+$$\gamma \le \epsilon \cdot (\abs{G} - \gamma) \cdot \abs{G} = G^2 \cdot \epsilon - \epsilon \cdot \abs{G} \cdot \gamma$$
+
+ce qui revient à dire que :
+
+$$(1 + \epsilon \cdot \abs{G}) \cdot \gamma \le G^2 \cdot \epsilon$$
+
+et enfin :
+
+$$0 \strictinferieur \gamma \le \frac{G^2 \cdot \epsilon}{1 + \epsilon \cdot \abs{G}}$$
+
+En imposant également $\gamma \strictinferieur \abs{G}$, on obtient la condition suffisante :
+
+$$0 \strictinferieur \gamma \strictinferieur \min\left\{ \abs{G} , \frac{G^2 \cdot \epsilon}{1 + \epsilon \cdot \abs{G}} \right\}$$
+
+On a alors $\abs{\frac{1}{g(x)} - \frac{1}{G}} \le \epsilon$. On en conclut que la limite de $1/g$ est $1/G$, c'est-à-dire :
+
+$$\lim_{x \to a} \frac{1}{g(x)} = \frac{1}{\lim_{x \to a} g(x)}$$
+
+
+*** Fraction
+
+Toujours sous l'hypothèse que $G \ne 0$, on a :
+
+$$\lim_{x \to a} \frac{f(x)}{g(x)} = \left[\lim_{x \to a} f(x)\right] \cdot \left[\lim_{x \to a} \frac{1}{g(x)}\right] = \frac{\lim_{x \to a} f(x)}{\lim_{x \to a} g(x)}$$
+
+
+* Limites réelles
+
+#+TOC: headlines 1 local
+
+\label{chap:limitesReelles}
+
+
+** Fonction croissante
+
+Soit une fonction $f : \setR \mapsto \setR$ croissante et majorée par un certain $M \in \setR$ :
+
+$$F = \{ f(x) \in \setR : x \in \setR \} \le M$$
+
+Comme l'ensemble de réels $F$ est non vide et majoré, on en conclut qu'il admet un supremum inclus dans l'adhérence :
+
+$$S = \sup F \in \adh F$$
+
+Choisissons un réel $\epsilon \strictsuperieur 0$. Comme $\distance(S,F) = 0$, on peut trouver un $\alpha \in \setR$ tel que :
+
+$$\distance(S,f(\alpha)) = \abs{S - f(\alpha)} \le \epsilon$$
+
+Comme $S \ge F$, on a $\abs{S - f(\alpha)} = S - f(\alpha) \le \epsilon$. Soit un $\beta \in \setR$ tel que $\beta \ge \alpha$. La fonction $f$ étant croissante, on a $f(\beta) \ge f(\alpha)$, et donc :
+
+$$\distance(S,f(\beta)) = S - f(\beta) \le S - f(\alpha) \le \epsilon$$
+
+On en déduit que $f(x)$ converge vers le supremum $S$ lorsque $x \to \infty$. Par unicité de la limite, on a :
+
+$$\lim_{x \to +\infty} f(x) = \sup \{ f(x) \in \setR : x \in \setR \}$$
+
+
+** Fonction décroissante
+
+Symétriquement, si $g : \setR \mapsto \setR$ est une fonction décroissante et minorée par un certain $L \in \setR$, l'ensemble non vide :
+
+$$G = \{ g(x) \in \setR : x \in \setR \} \ge L$$
+
+admet un infimum inclut dans l'adhérence :
+
+$$I = \inf G \in \adh G$$
+
+Choisissons un réel $\epsilon \strictsuperieur 0$. Comme $\distance(I,G) = 0$, on peut trouver un $\alpha \in \setR$ tel que :
+
+$$\distance(I,g(\alpha)) = \abs{I - g(\alpha)} \le \epsilon$$
+
+Comme $I \le F$, on a $\abs{I - g(\alpha)} = g(\alpha) - I \le \epsilon$. Soit un $\beta \in \setR$ tel que $\beta \ge \alpha$. La fonction $g$ étant décroissante, on a $g(\beta) \le g(\alpha)$, et donc :
+
+$$\distance(I,g(\beta)) = g(\beta) - I \le g(\alpha) - I \le \epsilon$$
+
+On en déduit que $g(x)$ converge vers le supremum $I$ lorsque $x \to \infty$. Par unicité de la limite, on a :
+
+$$\lim_{x \to +\infty} g(x) = \inf \{ g(x) \in \setR : x \in \setR \}$$
+
+
+** Limites supremum et infimum
+
+Soit une fonction $f : \setR \mapsto \setR$ majorée et minorée. On définit la famille $\{F(x) : x \in \setR \}$ d'ensembles non vides, majorés et minorés par :
+
+$$F(x) = \{f(z) : z \in \setR, \ z \ge x \}$$
+
+
+*** Limite supremum
+
+Si $x \ge y$, on a $F(x) \subseteq F(y)$, et donc $\sup F(x) \le \sup F(y)$. On en conclut que la fonction dérivée $d : \setR \mapsto \setR$ définie par :
+
+$$d(x) = \sup \{ f(z) : z \in \setR, \ z \ge x \}$$
+
+pour tout $x \in \setR$ est décroissante et minorée. Elle converge donc vers son infimum :
+
+$$\lim_{x \to +\infty} d(x) = \inf_{x \in \setR} d(x) = \inf_{x \in \setR} \sup \{f(z) : z \in \setR, \ z \ge x \}$$
+
+D'un autre coté, la définition de $d$ implique que :
+
+$$\lim_{x \to +\infty} d(x) = \lim_{x \to +\infty} \sup \{f(z) : z \in \setR, \ z \ge x \} = \limsup_{x \to +\infty} f(x)$$
+
+On en conclut que :
+
+$$\limsup_{x \to +\infty} f(x) = \inf_{x \in \setR} \sup \{f(z) : z \in \setR, \ z \ge x \}$$
+
+
+*** Limite infimum
+
+Si $x \ge y$, on a $F(x) \subseteq F(y)$, et donc $\inf F(x) \ge \inf F(y)$. On en conclut que la fonction dérivée $c : \setR \mapsto \setR$ définie par :
+
+$$c(x) = \inf \{ f(z) : z \in \setR, \ z \ge x \}$$
+
+pour tout $x \in \setR$ est croissante et majorée. Elle converge donc vers son supremum :
+
+$$\lim_{x \to +\infty} c(x) = \sup_{x \in \setR} c(x) = \sup_{x \in \setR} \inf \{f(z) : z \in \setR, \ z \ge x \}$$
+
+D'un autre coté, la définition de $c$ implique que :
+
+$$\lim_{x \to +\infty} c(x) = \lim_{x \to +\infty} \inf \{f(z) : z \in \setR, \ z \ge x \} = \liminf_{x \to +\infty} f(x)$$
+
+On en conclut que :
+
+$$\liminf_{x \to +\infty} f(x) = \sup_{x \in \setR} \inf \{f(z) : z \in \setR, \ z \ge x \}$$
+
+
+** Egalité des limites sup et inf
+
+Soit une fonction $f : \setR \mapsto \setR$ majorée et minorée. Posons :
+
+#+BEGIN_CENTER
+\(
+S(x) = \sup \{ f(z) : z \in \setR, \ z \ge x \} \\
+I(x) = \inf \{ f(z) : z \in \setR, \ z \ge x \}
+\)
+#+END_CENTER
+
+et choisissons un réel $\epsilon \strictsuperieur 0$.
+
+
+  - Considérons le cas particulier où les limites sup et inf sont identiques :
+
+$$L = \limsup_{x \to +\infty} f(x) = \liminf_{x \to +\infty} f(x)$$
+
+pour tout $x \in \setR$. Choisissons un $\sigma$ tel que $\abs{S(x) - L} \le \epsilon$ pour tout $x$ vérifiant $x \ge \sigma$ et un $\tau$ tel que $\abs{I(x) - L} \le \epsilon$ pour tout $x$ vérifiant $x \ge \tau$. Posant $M = \max\{\sigma,\tau\}$, il vient :
+
+#+BEGIN_CENTER
+\(
+f(z) \le S(M) \le L + \epsilon \\
+f(z) \ge I(M) \ge L - \epsilon
+\)
+#+END_CENTER
+
+pour tout réel $z$ vérifiant $z \ge M$. On a alors :
+
+$$\abs{f(z) - L} \le \epsilon$$
+
+On en conclut que la limite de $f$ à l'infini existe et que :
+
+$$\lim_{x \to +\infty} f(x) = \limsup_{x \to +\infty} f(x) = \liminf_{x \to +\infty} f(x)$$
+
+  - Inversément, supposons la limite de $f$ à l'infini existe :
+
+$$L = \lim_{x \to +\infty} f(x)$$
+
+Soit un réel $M$ tel que :
+
+$$\abs{f(x) - L} \le \epsilon$$
+
+pour tout réel $x$ vérifiant $x \ge M$. On a alors :
+
+$$L - \epsilon \le f(x) \le L + \epsilon$$
+
+On en déduit que :
+
+#+BEGIN_CENTER
+\(
+S(x) \le L + \epsilon \\
+I(x) \ge L - \epsilon
+\)
+#+END_CENTER
+
+Le supremum étant supérieur à l'infimum, on a finalement :
+
+$$L - \epsilon \le I(x) \le S(x) \le L + \epsilon$$
+
+et donc :
+
+$$\{ \abs{S(x) - L} , \abs{I(x) - L} \} \le \epsilon$$
+
+On en conclut que $S$ et $I$ convergent vers $L$, c'est-à-dire :
+
+$$\limsup_{x \to +\infty} f(x) = \liminf_{x \to +\infty} f(x) = \lim_{x \to +\infty} f(x)$$
+
+
+
+** Ordre et limite
+
+Soit les fonctions $f,g : \setR \mapsto \setR$ vérifiant $f \le g$.
+
+
+*** A l'infini
+
+Supposons que les limites à l'infini existent :
+
+#+BEGIN_CENTER
+\(
+\lim_{x \to +\infty} f(x) = b \\ \\
+\lim_{x \to +\infty} g(x) = c
+\)
+#+END_CENTER
+
+Supposons que $b \strictsuperieur c$ et posons $\epsilon = (b - c)/4 \strictsuperieur 0$. On a alors :
+
+$$b = c + 4 \epsilon$$
+
+On peut trouver un réel $F$ tel que :
+
+$$\abs{f(x) - b} \le \epsilon$$
+
+pour tout réel $x$ vérifiant $x \ge F$. De même, on peut trouver un réel $G$ tel que :
+
+$$\abs{g(x) - c} \le \epsilon$$
+
+pour tout réel $x$ vérifiant $x \ge G$. Donc, pour tout réel $x$ vérifiant $x \ge M = \max\{F,G\}$, on a :
+
+$$\{ \ \abs{f(x) - b} , \ \abs{g(x) - c} \ \} \le \epsilon$$
+
+On voit que :
+
+$$b - \epsilon = c + 3 \epsilon \strictsuperieur c + \epsilon$$
+
+On en déduit que :
+
+$$f(x) \ge b - \epsilon \strictsuperieur c + \epsilon \ge g(x)$$
+
+ce qui contredit $f \le g$. Notre hypothèse est donc fausse et $b \le c$, c'est-à-dire :
+
+$$\lim_{x \to +\infty} f(x) \le \lim_{x \to +\infty} g(x)$$
+
+
+*** Vers un réel
+
+On montre par un raisonnement analogue que, si les limites de $f,g$ en $a$ existent, on a :
+
+$$\lim_{x \to a} f(x) \le \lim_{x \to a} g(x)$$
+
+
+*** Supremum et infimum
+
+Pour tout $x \in \setR$, on a :
+
+$$\lambda(x) = \inf \{ f(z) : z \in \setR, \ z \ge x \} \le \sigma(x) = \sup \{ f(z) : z \in \setR, \ z \ge x \}$$
+
+On en conclut que $\lambda \le \sigma$. Leurs limites à l'infini respectent donc le même ordre. Mais comme ces limites correspondent aux limites infimum et supremum de $f$, on a :
+
+$$\liminf_{x \to +\infty} f(x) \le \limsup_{x \to +\infty} f(x)$$
+
+
+** Ordre et supremum-infimum
+
+Soit les fonctions $f,g : \setR \mapsto \setR$ majorées, minorées et vérifiant $f \le g$. Posons :
+
+$$\Theta(x) = \{ z \in \setR : z \ge x \}$$
+
+pour tout $x \in \setR$.
+
+
+*** Supremum
+
+Soit les fonctions $\varphi,\gamma$ définies par :
+
+#+BEGIN_CENTER
+\(
+\varphi(x) = \sup \{ f(z) : z \in \setR, \ z \ge x \} \\
+\gamma(x) = \sup \{ g(z) : z \in \setR, \ z \ge x \}
+\)
+#+END_CENTER
+
+pour tout $x \in \setR$. Quel que soit le réel $x$, on a $f \le g$ sur $\Theta(x)$. On en conclut que :
+
+$$\varphi(x) = \sup f(\Theta(x)) \le \sup g(\Theta(x)) = \gamma(x)$$
+
+ce qui revient à dire que $\varphi \le \gamma$. On doit donc avoir :
+
+$$\lim_{x \to +\infty} \varphi(x) \le \lim_{x \to +\infty} \gamma(x)$$
+
+c'est-à-dire :
+
+$$\limsup_{x \to +\infty} f(x) \le \limsup_{x \to +\infty} g(x)$$
+
+
+*** Infimum
+
+Soit les fonctions $\varphi,\gamma$ définies par :
+
+#+BEGIN_CENTER
+\(
+\varphi(x) = \inf \{ f(z) : z \in \setR, \ z \ge x \} \\
+\gamma(x) = \inf \{ g(z) : z \in \setR, \ z \ge x \}
+\)
+#+END_CENTER
+
+pour tout $x \in \setR$. Quel que soit le réel $x$, on a $f \le g$ sur $\Theta(x)$. On en conclut que :
+
+$$\varphi(x) = \inf f(\Theta(x)) \le \inf g(\Theta(x)) = \gamma(x)$$
+
+ce qui revient à dire que $\varphi \le \gamma$. On doit donc avoir :
+
+$$\lim_{x \to +\infty} \varphi(x) \le \lim_{x \to +\infty} \gamma(x)$$
+
+c'est-à-dire :
+
+$$\liminf_{x \to +\infty} f(x) \le \liminf_{x \to +\infty} g(x)$$
+
+
+*** Egalité
+
+Supposons que :
+
+$$L = \liminf_{x \to +\infty} f(x) = \limsup_{x \to +\infty} g(x)$$
+
+On a alors :
+
+$$L = \liminf_{x \to +\infty} f(x) \le \limsup_{x \to +\infty} f(x) \le \limsup_{x \to +\infty} g(x) = L$$
+
+Les limites sup et inf de $f$ sont donc toutes deux égales à $L$ et :
+
+$$\lim_{x \to +\infty} f(x) = \liminf_{x \to +\infty} f(x) = \limsup_{x \to +\infty} f(x) = L$$
+
+On a aussi :
+
+$$L = \liminf_{x \to +\infty} f(x) \le \liminf_{x \to +\infty} g(x) \le \limsup_{x \to +\infty} g(x) = L$$
+
+Les limites sup et inf de $g$ sont donc toutes deux égales à $L$ et :
+
+$$\lim_{x \to +\infty} g(x) = \liminf_{x \to +\infty} g(x) = \limsup_{x \to +\infty} g(x) = L$$
+
+On en conclut que les limites de $f$ et $g$ existent et que :
+
+$$\lim_{x \to +\infty} f(x) = \lim_{x \to +\infty} g(x)$$
+
+
+** Cadre
+
+Soit les fonctions $f,S,I : \setR \mapsto \setR$ majorées, minorées et vérifiant $I \le f \le S$. Supposons que :
+
+$$L = \liminf_{x \to +\infty} I(x) = \limsup_{x \to +\infty} S(x)$$
+
+On a alors :
+
+$$L = \liminf_{x \to +\infty} I(x) \le \liminf_{x \to +\infty} f(x) \le \limsup_{x \to +\infty} f(x) \le \limsup_{x \to +\infty} S(x) = L$$
+
+On en déduit que :
+
+$$\liminf_{x \to +\infty} f(x) = \limsup_{x \to +\infty} f(x) = L$$
+
+La limite de $f$ existe donc et :
+
+$$\lim_{x \to +\infty} f(x) = \liminf_{x \to +\infty} I(x) = \limsup_{x \to +\infty} S(x)$$
+
+
+* Suites de réels
+
+#+TOC: headlines 1 local
+
+\label{chap:suitesDeReels}
+
+
+** Monotones
+
+Soit une suite de réels $x_1 \le x_2 \le x_3 \le ...$ croissante et majorée. On a alors :
+
+$$\lim_{n \to \infty} x_n = \sup \{x_n \in \setR : n \in \setN \}$$
+
+Soit une suite de réels $y_1 \ge y_2 \ge y_3 \ge ...$ décroissante et minorée. On a alors :
+
+$$\lim_{n \to \infty} y_n = \inf \{y_n \in \setR : n \in \setN \}$$
+
+
+** Limites extrémales
+
+Soit une suite de réels $\{u_n \in \setR : n \in \setN\}$ majorée et minorée. On a :
+
+$$\limsup_{ n \to \infty } u_n = \inf_{n \in \setN} \sup \{u_m : m \in \setN, \ m \ge n \}$$
+
+$$\liminf_{ n \to \infty } u_n = \sup_{n \in \setN} \inf \{u_m : m \in \setN, \ m \ge n \}$$
+
+
+* Sommes réelles
+
+#+TOC: headlines 1 local
+
+\label{chap:sommesReelles}
+
+
+** Introduction
+
+Nous nous intéressons à des suites de réels $A \subseteq \setR$ de la forme :
+
+$$A = \{ a_k \in \setR : k \in \mathcal{Z} \}$$
+
+
+*** Dénombrable
+
+Supposons que $\mathcal{Z} \subseteq \setZ$. Si les sommes partielles convergent, on définit :
+
+$$\sum_{k \in \setN} a_k = \sum_{k = 0}^{+\infty} a_k = \lim_{n \to \infty} \sum_{k = 0}^n a_k$$
+
+dans le cas où $\mathcal{Z} = \setN$ et :
+
+$$\sum_{k \in \setZ} a_k = \sum_{k = -\infty}^{+\infty} a_k = \lim_{n \to \infty} \sum_{k = -n}^n a_k$$
+
+dans le cas où $\mathcal{Z} = \setZ$. On définit aussi :
+
+$$\sum_{k = m}^{+\infty} a_k = \lim_{n \to \infty} \sum_{k = m}^n a_k$$
+
+
+*** Quelconque
+
+Pour un ensemble $\mathcal{Z}$ quelconque, on pose :
+
+$$Z^+ = \{ k \in \mathcal{Z} : a_k \ge 0 \}$$
+
+et :
+
+$$Z^- = \{ k \in \mathcal{Z} : a_k \strictinferieur 0 \}$$
+
+Sous réserve d'existence du suprémum, on définit :
+
+$$\sum_{k \in Z^+} a_k = \sup \accolades{ \sum_{k \in I} a_k : I \subseteq Z^+, \ I \ \mathrm{fini} }$$
+
+ainsi que :
+
+$$\sum_{k \in Z^-} a_k = - \sup \accolades{ - \sum_{k \in I} a_k : I \subseteq Z^-, \ I \ \mathrm{fini} }$$
+
+On définit alors la somme par :
+
+$$\sum_{k \in \mathcal{Z}} a_k = \sum_{k \in Z^+} a_k + \sum_{k \in Z^-} a_k$$
+
+
+** Additivité
+
+Soit la suite :
+
+$$A = \{ a_k \in \setR : k \in \setN \}$$
+
+On définit la suite $\{ S_n : n \in \setN \}$ des sommes partielles par :
+
+$$S_n = \sum_{k = 0}^n a_k$$
+
+pour tout $n \in \setN$. Choisissons un $m \in \setN$ vérifiant $m \ge 1$. On définit la suite $\{ D_n : n \in \setN \}$ des sommes partielles commençant en $m$ par :
+
+$$D_n = \sum_{k = m}^n a_k$$
+
+pour tout $n \in \setN$ vérifiant $n \ge m$. Choisissons un naturel $n$ vérifiant $n \ge m$. On a :
+
+$$S_n = \sum_{k = 0}^{m - 1} a_k + \sum_{k = m}^n a_k = S_{m - 1} + D_n$$
+
+Si on pose :
+
+$$E = S_{m - 1}$$
+
+on a :
+
+$$S_n = E + D_n$$
+
+pour tout $n \in \setN$ vérifiant $n \ge m$. Si la limite de la suite des $D_n$ existe, celle des $S_n$ aussi et :
+
+$$\lim_{n \to \infty} S_n = E + \lim_{n \to \infty} D_n$$
+
+Inversément, si la limite des $S_n$ existe, celle des $D_n$ aussi et :
+
+$$\lim_{n \to \infty} D_n = \lim_{n \to \infty} S_n - E$$
+
+On a par définition :
+
+$$\lim_{n \to \infty} S_n = \sum_{k = 0}^{+\infty} a_k$$
+
+et :
+
+$$\lim_{n \to \infty} D_n = \sum_{k = m}^{+\infty} a_k$$
+
+On en conclut que :
+
+$$\sum_{k = 0}^{+\infty} a_k = \sum_{k = 0}^{m - 1} a_k + \sum_{k = m}^{+\infty} a_k$$
+
+
+** Somme résiduelle
+
+Si la somme des $a_k$ converge, l'additivité nous dit que :
+
+$$\sum_{k = m}^{+\infty} a_k = \sum_{k = 0}^{+\infty} a_k - \sum_{k = 0}^{m - 1} a_k$$
+
+En passant à la limite $m \to \infty$, on a :
+
+\begin{eqnarray*}
+\lim_{m \to \infty} \sum_{k = m}^{+\infty} a_k &=& \lim_{m \to \infty} \left[ \sum_{k = 0}^{+\infty} a_k - \sum_{k = 0}^{m - 1} a_k \right] \\
+&=& \sum_{k = 0}^{+\infty} a_k - \lim_{m \to \infty} \sum_{k = 0}^{m - 1} a_k \\
+&=& \sum_{k = 0}^{+\infty} a_k - \sum_{k = 0}^{+\infty} a_k \\
+&=& 0
+\end{eqnarray*}
+
+La suite des sommes résiduelles $R_m$ définie par :
+
+$$R_m = \sum_{k = m}^{+\infty} a_k$$
+
+pour tout $m \in \setN$ converge donc vers zéro lorsque $m$ tend vers l'infini.
+
+
+** Termes positifs
+
+Soit la suite positive :
+
+$$P = \{ p_k \in \setR : p_k \ge 0, \ k \in \setN \}$$
+
+et la suite des sommes partielles :
+
+$$S_n = \sum_{k = 0}^n p_k$$
+
+Choisissons $m,n \in \setN$ tels que $m \le n$. On a :
+
+$$S_n = \sum_{k = 0}^m p_k + \sum_{k = m + 1}^n p_k = S_m + \sum_{k = m + 1}^n p_k$$
+
+Par positivité, des $p_k$, on a :
+
+$$\sum_{k = m + 1}^n p_k \ge 0$$
+
+et :
+
+$$S_n \ge S_m$$
+
+La suite des $S_n$ est croissante. Si on peut trouver un $M \in \setR$ tel que :
+
+$$S_n \le M$$
+
+pour tout $n \in \setN$, la suite est majorée et converge vers son suprémum :
+
+$$\sum_{k = 0}^{+\infty} p_k = \lim_{n \to \infty} \sum_{k = 0}^n p_k = \sup_{n \in \setN} \sum_{k = 0}^n p_k$$
+
+
+** Convergence absolue
+
+Soit la suite :
+
+$$A = \{ a_k \in \setR : k \in \setN \}$$
+
+La suite dérivée :
+
+$$P = \{ \abs{a_k} \in \setR : k \in \setN \}$$
+
+est positive. Si on peut trouver un $K \in \setR$ tel que :
+
+$$\sum_{k = 0}^n \abs{a_k} \le K$$
+
+pour tout $n \in \setN$, la suite des valeurs absolues converge et :
+
+$$\sum_{k = 0}^{+\infty} \abs{a_k} = \sup_{n \in \setN} \sum_{k = 0}^n \abs{a_k}$$
+
+La suite des sommes résiduelles associées converge donc vers zéro :
+
+$$\lim_{m \to \infty} \sum_{k = m}^{+\infty} \abs{a_k} = 0$$
+
+Comme :
+
+$$-\abs{a_k} \le a_k \le \abs{a_k}$$
+
+on a :
+
+$$-K \le - \sum_{k = 0}^n \abs{a_k} \le \sum_{k = 0}^n a_k \le \sum_{k = 0}^n \abs{a_k} \le K$$
+
+et :
+
+$$-K \le \sum_{k = 0}^n a_k \le K$$
+
+La suite des sommes partielles $S_n$ définies par :
+
+$$S_n =  \sum_{k = 0}^n a_k$$
+
+est donc majorée et minorée. Elle admet par conséquent des limites suprémum :
+
+$$\sigma = \limsup_{n \to \infty} S_n = \inf_{n \in \setN} \sup \{ S_k : k \in \setN, \ k \ge n \}$$
+
+et infimum :
+
+$$\lambda = \liminf_{n \to \infty} S_n = \sup_{n \in \setN} \inf \{ S_k : k \in \setN, \ k \ge n \}$$
+
+La suite des $S_n$ converge-t-elle ? Autrement dit, les limites suprémum et infimum des $S_n$ sont-elles identiques ? On sait déjà que :
+
+$$\lambda \le \sigma$$
+
+Soit la famille de suprémums décroissants définie par :
+
+$$H_m = \sup\{ S_n : n \in \setN, \, n \ge m \}$$
+
+pour tout $m \in \setN$. On a :
+
+$$\sigma = \inf_{m \in \setN} H_m$$
+
+Soit la famille d'infimums croissants définie par :
+
+$$B_m = \inf\{ S_n : n \in \setN, \, n \ge m \}$$
+
+pour tout $m \in \setN$. On a :
+
+$$\lambda = \sup_{m \in \setN} B_m$$
+
+Soit $\epsilon \strictsuperieur 0$. Comme la somme résiduelle converge vers zéro, on peut trouver un naturel $M$ tel que :
+
+$$\sum_{k = m}^{+\infty} \abs{a_k} \le \frac{\epsilon}{2}$$
+
+pour tout naturel $m$ vérifiant $m \ge M$. Choisissons des naturels $m,n$ tels que $n \ge m + 1$ et $m \ge M$. L'additivité finie nous dit que :
+
+$$\sum_{k = 0}^n a_k = \sum_{k = 0}^m a_k + \sum_{k = m + 1}^n a_k$$
+
+c'est-à-dire :
+
+$$S_n = S_m + \sum_{k = m + 1}^n a_k$$
+
+ou :
+
+$$S_n - S_m = \sum_{k = m + 1}^n a_k$$
+
+En prenant la valeur absolue, il vient :
+
+$$\abs{S_n - S_m} = \abs{\sum_{k = m + 1}^n a_k} \le \sum_{k = m + 1}^n \abs{a_k}$$
+
+Les termes $\abs{a_k}$ étant positifs, la suite des $D_i$ définie par :
+
+$$D_i = \sum_{k = m + 1}^i \abs{a_k}$$
+
+pour tout naturel $i$ vérifiant $i \ge m + 1$ est croissante, majorée et converge vers son suprémum. On a donc :
+
+$$\sum_{k = m + 1}^n \abs{a_k} \le \lim_{i \to \infty} D_i = \sum_{k = m + 1}^{+\infty} \abs{a_k}$$
+
+et :
+
+$$\abs{S_m - S_n} \le \sum_{k = m + 1}^{+\infty} \abs{a_k}$$
+
+Comme $m + 1 \strictsuperieur m \ge M$, le terme de droite est majoré par $\epsilon / 2$ et :
+
+$$\abs{S_m - S_n} \le \frac{\epsilon}{2}$$
+
+Choisissons $m \ge M$. Pour tout naturel $n$ vérifiant $n \ge m$, on a soit $n = m$ et $S_n = S_m$, soit $n \ge m + 1$. On en déduit les inégalités :
+
+$$S_n \le \max \accolades{S_m, S_m +  \frac{\epsilon}{2}} = S_m +  \frac{\epsilon}{2}$$
+
+et :
+
+$$S_n \ge \min \accolades{S_m, S_m - \frac{\epsilon}{2}} = S_m - \frac{\epsilon}{2}$$
+
+En passant au suprémum pour les entiers $n$ vérifiant $n \ge m$, on en déduit que :
+
+$$H_m \le S_m + \frac{\epsilon}{2}$$
+
+En passant à l'infimum pour les entiers $n$ vérifiant $n \ge m$, on en déduit que :
+
+$$B_m \ge S_m - \frac{\epsilon}{2}$$
+
+En combinant ces deux inégalités, on obtient :
+
+$$H_m \le S_m + \frac{\epsilon}{2} = \parentheses{S_m - \frac{\epsilon}{2}} + \epsilon \le B_m + \epsilon$$
+
+et a fortiori :
+
+$$\inf_{ \substack{ m \in \setN \\ m \ge M } } H_m \le \sup_{ \substack{ m \in \setN \\ m \ge M } } B_m + \epsilon$$
+
+c'est-à-dire :
+
+$$\sigma \le \lambda + \epsilon$$
+
+Cette relation étant valable pour tout $\epsilon \strictsuperieur 0$, on en déduit que :
+
+$$\sigma \le \lambda$$
+
+Comme on a également $\lambda \le \sigma$, on en conclut que $\lambda = \sigma$. La somme converge donc et :
+
+$$\sum_{k = 0}^{+\infty} a_k = \limsup_{n \to \infty} S_n = \liminf_{n \to \infty} S_n$$
+
+
+** Progression géométrique infinie
+
+Si le réel $a$ vérifie $\abs{a} \strictsuperieur 1$, on voit que $a^{n + 1}$ converge vers $0$ lorsque $n$ tend vers l'infini. On a alors :
+
+$$\sum_{i=0}^{+\infty} a^i = \lim_{n \to \infty} \frac{a^{n + 1} - 1}{a - 1} = \frac{1}{1 - a}$$

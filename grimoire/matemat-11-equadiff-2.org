@@ -1,0 +1,567 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat 11 : Équations différentielles - 2
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/commandes-tex.org"
+
+* Fonctions hyperboliques
+
+#+TOC: headlines 1 local
+
+
+** Introduction
+
+Le cosinus hyperbolique $\cosh$ est défini comme étant la composante paire de l'exponentielle. On a donc :
+
+$$\cosh(x) = \unsur{2} \ \Big[ \exp(x) + \exp(-x) \Big]$$
+
+pour tout $x \in \setR$. Le sinus hyperbolique $\sinh$ est défini comme étant la composante impaire de l'exponentielle. On a donc :
+
+$$\sinh(x) = \unsur{2} \ \Big[ \exp(x) - \exp(-x) \Big]$$
+
+pour tout $x \in \setR$.
+
+
+*** Décomposition
+
+On a :
+
+$$\exp = \cosh + \sinh$$
+
+avec :
+
+\begin{eqnarray*}
+\cosh(x) &=& \cosh(-x) \\
+\sinh(x) &=& -\sinh(-x)
+\end{eqnarray*}
+
+pour tout réel $x$.
+
+
+*** Valeurs particulières
+
+On a :
+
+$$\cosh(0) = \unsur{2} \Big[ \exp(0) + \exp(0) \Big] = \unsur{2} (1 + 1) = 1$$
+
+et :
+
+$$\sinh(0) = \unsur{2} \Big[ \exp(0) - \exp(0) \Big] = 0$$
+
+
+** Relation fondamentale
+
+Soit un réel $x$ et :
+
+#+BEGIN_CENTER
+\(
+c = \cosh(x) \\
+s = \sinh(x)
+\)
+#+END_CENTER
+
+Le carré du cosinus hyperbolique se développe en :
+
+$$c^2 = \unsur{4} \ \Big[ \exp(x)^2 + 2 \ \exp(x) \cdot \exp(-x) + \exp(-x)^2 \Big]$$
+
+Comme $\exp(x) \cdot \exp(-x) = 1$, le développement devient :
+
+$$c^2 = \unsur{4} \ \Big[ \exp(x)^2  + \exp(-x)^2 + 2\Big]$$
+
+Le carré du sinus hyperbolique se développe en :
+
+$$s^2 = \unsur{4} \ \Big[ \exp(x)^2 - 2 \ \exp(x) \cdot \exp(-x) + \exp(-x)^2 \Big]$$
+
+Comme $\exp(x) \cdot \exp(-x) = 1$, le développement devient :
+
+$$s^2 = \unsur{4} \ \Big[ \exp(x)^2  + \exp(-x)^2 - 2\Big]$$
+
+En soustrayant ces deux équations, on obtient :
+
+\begin{eqnarray*}
+c^2 - s^2 &=& \frac{\exp(x)^2  + \exp(-x)^2 + 2 - \exp(x)^2  - \exp(-x)^2 + 2}{4} \\
+&=& \frac{4}{4} = 1
+\end{eqnarray*}
+
+On a donc :
+
+$$\cosh(x)^2 - \sinh(x)^2 = 1$$
+
+
+** Dérivées
+
+Pour tout réel $x$, on a :
+
+$$\OD{\cosh}{x}(x) = \unsur{2} \Big[ \exp(x) - \exp(-x) \Big] = \sinh(x)$$
+
+et :
+
+$$\OD{\sinh}{x}(x) = \unsur{2} \Big[ \exp(x) + \exp(-x) \Big] = \cosh(x)$$
+
+
+** Intégrales
+
+Comme $\sinh$ est une primitive de $\cosh$, on a :
+
+$$\int_a^b \cosh(x) \ dx = \sinh(b) - \sinh(a)$$
+
+Comme $\cosh$ est une primitive de $\sinh$, on a :
+
+$$\int_a^b \sinh(x) \ dx = \cosh(b) - \cosh(a)$$
+
+
+** Tangente
+
+La tangente hyperbolique $\tanh$ est définie par :
+
+$$\tanh(x) = \frac{\sinh x}{\cosh x}$$
+
+pour tout $x \in \setR$.
+
+
+*** Dérivée
+
+On a :
+
+$$\OD{\tanh}{x}(x) = \frac{\cosh(x)}{\cosh(x)} - \frac{\sinh(x) \cdot \sinh(x)}{\cosh(x)^2} = 1 - \tanh(x)^2$$
+
+
+*** Problème différentiel
+
+Comme :
+
+$$\tanh(0) = \frac{\sinh(0)}{\cosh(0)} = \frac{0}{1} = 0$$
+
+la tangente hyperbolique est solution $u : \setR \mapsto \setR$ du problème différentiel :
+
+\begin{eqnarray*}
+\partial u(t) &=& 1 - u(t)^2 \\
+u(0) &=& 0
+\end{eqnarray*}
+
+vérifié pour tout $t \in \setR$.
+
+
+* Exponentielle matricielle
+
+#+TOC: headlines 1 local
+
+\label{chap:expomat}
+
+
+** Introduction
+
+Soit une matrice $A\in\mathfrak{M}(\setR,n,n)$ et la fonction :
+
+$$E_A : \setR \mapsto \in\mathfrak{M}(\setR,n,n)$$
+
+définie comme étant l'unique solution de :
+
+#+BEGIN_CENTER
+\(
+\OD{E_A}{t} = A \cdot E_A \\ \\
+E_A(0) = I
+\)
+#+END_CENTER
+
+On définit alors l'exponentielle matricielle par :
+
+$$\exp(A) = E_A(1)$$
+
+
+** Matrice nulle
+
+Dans le cas où $A = 0$, on a :
+
+$$\OD{E_0}{t} = 0 \cdot E_0 = 0$$
+
+En intégrant, on voit que :
+
+$$E_0(t) - E_0(0) = \int_0^t 0 \ dt = 0$$
+
+La fonction $E_0$ est donc constante et vaut $E_0(t) = E_0(0) = I$ pour tout $t \in \setR$. On en conclut que :
+
+$$\exp(0) = I$$
+
+
+** Développement de Taylor
+
+Soit la fonction :
+
+$$u : \setR \mapsto \matrice(\setR, n, n), \ t \mapsto \exp(A \cdot t)$$
+
+On a :
+
+$$u(0) = \exp(A \cdot 0) = \exp(0) = I$$
+
+et :
+
+$$\OD{u}{t}(0) = A \cdot u(0) = A \cdot I = A$$
+
+On montre par récurrence que :
+
+$$\NOD{u}{t}{k}(0) = A \cdot \NOD{u}{t}{k - 1}(0) = A \cdot A^{k - 1} = A^k$$
+
+En évaluant le développement de Taylor de $u$ autour de $t=0$ on obtient :
+
+$$\exp(A \cdot t) = \sum_{k=0}^{+\infty} \frac{1}{k!} \cdot A^k \cdot t^k$$
+
+Évaluons la dérivée de ce développement :
+
+\begin{eqnarray*}
+\OD{}{t} \exp(A \cdot t) &=& \sum_{k=1}^{+\infty} \unsur{k!} \cdot A^k \cdot k \cdot t^{k - 1} \\
+&=& A \cdot \sum_{k=1}^{+\infty} \unsur{(k - 1) !} \cdot A^{k - 1} \cdot t^{k - 1} \\
+&=& A \cdot \sum_{k=0}^{+\infty} \unsur{k!} \cdot A^k \cdot k \cdot t^k \\
+&=& A \cdot \exp(A \cdot t)
+\end{eqnarray*}
+
+On a aussi :
+
+$$\exp(A \cdot 0) &=& I + \sum_{k=1}^{+\infty} \unsur{k!} \cdot A^k \cdot 0^k = I$$
+
+La fonction $t \mapsto \exp(A \cdot t)$ est donc identique à la solution $E$ :
+
+$$E(t) = \exp(A \cdot t)$$
+
+
+** Développement en série de l'exponentielle
+
+Le cas particulier $t = 1$ nous donne le développement de l'exponentielle matricielle :
+
+$$\exp(A) = \sum_{k=0}^{+\infty} \frac{1}{k!} \cdot A^k$$
+
+
+**** Sur $\setR$
+
+Quand $n=1$ et $A=1$, on retrouve le développement de l'exponentielle usuelle :
+
+$$\exp(t) = \sum_{k=0}^{+\infty} \frac{t^k}{k!}$$
+
+
+** Additivité
+
+Soit les fonctions $f, g : \setR \mapsto \setR$ définies par :
+
+\begin{eqnarray*}
+f &:& s \mapsto \exp\Big(A \cdot (s + t) \Big) \\
+g &:& s \mapsto \exp(A \cdot s) \cdot \exp(A \cdot t)
+\end{eqnarray*}
+
+pour tout $s \in \setR$. On a :
+
+\begin{eqnarray*}
+\partial f(s) &=& A \cdot \exp\Big(A \cdot (s + t) \Big) = A \cdot f(s) \\
+f(0) &=& \exp\Big(A \cdot (0 + t) \Big) = \exp(A \cdot t)
+\end{eqnarray*}
+
+et :
+
+\begin{eqnarray*}
+\partial g(s) &=& A \cdot \exp(A \cdot s) \cdot \exp(t) = A \cdot g(s) \\
+g(0) &=& \exp(A \cdot 0) \cdot \exp(A \cdot t) = I \cdot \exp(A \cdot t) = \exp(A \cdot t)
+\end{eqnarray*}
+
+Par unicité de la solution en $u$ du problème différentiel :
+
+\begin{eqnarray*}
+\partial u(s) &=& A \cdot u(s) \\
+u(0) &=& \exp(A \cdot t)
+\end{eqnarray*}
+
+on en déduit que :
+
+$$\exp\Big(A \cdot (s + t) \Big) = \exp(A \cdot s) \cdot \exp(A \cdot t)$$
+
+
+** Miroir
+
+L'additivité nous dit que :
+
+$$\exp(A \cdot (t - t)) = \exp(A \cdot t) \cdot \exp(A \cdot (-t)) = \exp(A \cdot t) \cdot \exp(- A \cdot t)$$
+
+Mais la condition initiale nous dit que :
+
+$$\exp(A \cdot (t - t)) = \exp(A \cdot 0) = I$$
+
+On a donc :
+
+$$\exp(A \cdot t) \cdot \exp(- A \cdot t) = I$$
+
+Comme les matrices sont carrées, on en déduit que l'inverse matriciel de $\exp(A \cdot t)$ existe et s'écrit :
+
+$$\exp(A \cdot t)^{-1} = \exp(- A \cdot t)$$
+
+Le cas particulier $t = 1$ nous donne :
+
+$$\exp(A)^{-1} = \exp(- A)$$
+
+
+** Solution vectorielle
+
+Soit un vecteur $x_0 \in \setR^n$ et la fonction $x : \setR \mapsto \setR^n$ définie par :
+
+$$x(t) = \exp(A \cdot t) \cdot x_0$$
+
+pour tout $t \in \setR$. On a :
+
+$$\dot{x}(t) = A \cdot \exp(A \cdot t) \cdot x_0 = A \cdot x$$
+
+et :
+
+$$x(0) = \exp(A \cdot 0) \cdot x_0 = I \cdot x_0 = x_0$$
+
+Notre fonction $x$ est donc l'unique solution de l'équation différentielle :
+
+#+BEGIN_CENTER
+\(
+\OD{x}{t} = A \cdot x \\ \\
+x(0) = x_0
+\)
+#+END_CENTER
+
+
+**** Sur $\setR$
+
+Dans le cas où $n=1$, et $A = 1$, on obtient l'exponentielle
+usuelle, qui est donc solution de :
+
+\begin{eqnarray*}
+\dot{u} &=& u \\
+u(0) &=& 1
+\end{eqnarray*}
+
+
+** Valeurs propres
+
+Il existe un lien entre l'exponentielle d'une matrice hermitienne et ses valeurs propres. Soit la fonction $X : \setR \mapsto \setR^n$ vérifiant l'équation différentielle :
+
+$$\dot{X}(t) = A \cdot X(t)$$
+
+où $A$ est une matrice carrée hermitienne. Comme $A = A^\dual$, on sait que la forme de Schur :
+
+$$A = U \cdot \Lambda \cdot U^\dual$$
+
+nous donne une matrice carrée unitaire $U$ qui vérifie par conséquent :
+
+$$U^\dual = U^{-1}$$
+
+et une matrice diagonale :
+
+$$\Lambda = (\lambda_i \cdot \delta_{ij})_{i,j}$$
+
+où les $\lambda_i$ sont les valeurs propres de $A$. Si on effectue le changement de variable :
+
+$$X = U \cdot Y \quad\Leftrightarrow\quad Y = U^\dual \cdot X$$
+
+l'équation différentielle devient :
+
+$$U \cdot \dot{Y} = A \cdot U \cdot Y \\$$
+
+En multipliant à gauche par $U^\dual$, on obtient :
+
+$$\dot{Y} = U^\dual \cdot A \cdot U \cdot Y = \Lambda \cdot Y$$
+
+Exprimée en terme de composantes $Y = (y_i)_i$, cette dernière équation devient :
+
+$$\dot{y}_i = \lambda_i \cdot y_i$$
+
+dont la solution est :
+
+$$y_i(t) = y_{i}(0) \cdot \exp(\lambda_i \cdot t)$$
+
+Comme :
+
+$$\sum_k \unsur{k !} \ \Lambda^k \cdot t^k = \Bigg( \sum_k \unsur{k !} \ \lambda_i^k \cdot t^k \cdot \indicatrice_{ij} \Bigg)_{i,j}$$
+
+on voit que :
+
+$$\exp(\Lambda \cdot t) = \Big( \exp(\lambda_i \cdot t) \cdot \indicatrice_{ij} \Big)_{i,j}$$
+
+On en conclut que :
+
+$$Y(t) = \exp(\Lambda \cdot t) \cdot Y(0)$$
+
+La condition initiale sur $Y$ est liée à celle sur $X$ par :
+
+$$Y(0) = U^\dual \cdot X(0)$$
+
+On a donc :
+
+$$Y(t) = \exp(\Lambda \cdot t) \cdot U^\dual \cdot X(0)$$
+
+et :
+
+$$X(t) = U \cdot Y(t) = U \cdot \exp(\Lambda \cdot t) \cdot U^\dual \cdot X(0)$$
+
+Par définition de l'exponentielle matricielle, on a aussi :
+
+$$X(t) = \exp(A \cdot t) \cdot X(0)$$
+
+On en conclut que :
+
+$$\exp(A \cdot t) \cdot X(0) = U \cdot \exp(\Lambda \cdot t) \cdot U^\dual \cdot X(0)$$
+
+Au point $t = 1$, on a :
+
+$$\exp(A) \cdot X(0) = U \cdot \exp(\Lambda) \cdot U^\dual \cdot X(0)$$
+
+Cette relation étant vérifiée quelque soit $X(0) \in \setR^n$, on en conclut la relation liant
+l'exponentielle d'une matrice hermitienne à ses valeurs propres :
+
+$$\exp(A) = U \cdot \exp(\Lambda) \cdot U^\dual$$
+
+
+** Dérivée
+
+AFAIRE : dérivée de u(t) = exp( L(t) ), arranger la fin du chapitre
+
+$$\OD{u}{t}(t) = \OD{L}{t}(t) \cdot u(t)$$ ???????
+
+
+** Intégrale
+
+Soit la fonction $R$ :
+
+$$R : \setR\mapsto\mathfrak{M}(\setR,n,n)$$
+
+solution de :
+
+\begin{eqnarray*}
+\dot{R}(t) &=& L(t) \cdot R(t) \\
+R(0) &=& I
+\end{eqnarray*}
+
+On vérifie que :
+
+$$R(t) = \exp\int_0^t L(s) ds$$
+
+
+** Systèmes linéaires
+
+\label{sec:edo_sys_lin}
+
+Considérons à présent le problème linéaire suivant :
+
+#+BEGIN_CENTER
+\(
+\dot{u}(t) = L(t) \cdot u(t) + b(t) \\ \\
+u(0) = u_0
+\)
+#+END_CENTER
+
+où on a :
+
+\begin{eqnarray*}
+L &:& \setR\mapsto\mathfrak{M}(\setR,n,n) \\
+b &:& \setR\mapsto\mathfrak{M}(\setR,n,1) \equiv \setR^n \\
+u &:& \setR\mapsto\mathfrak{M}(\setR,n,1) \equiv \setR^n
+\end{eqnarray*}
+
+Nous allons effectuer un changement de variable afin de résoudre ce problème.
+Nous supposons par la suite que $R(t)$ est inversible pour tout $t$.
+Posons $u = R \cdot x$. On constate tout de suite en utilisant $R(0) = I$ que
+$x(0) = u_0$.  On obtient aussi, en dérivant $u = R \cdot x$ :
+
+$$\dot{u} = \dot{R} \cdot x + R \cdot \dot{x} = L \cdot R \cdot x + R \cdot \dot{x}$$
+
+En comparant avec l'équation différentielle dont $u$ est solution :
+
+$$\dot{u} = L \cdot u + b = L \cdot R \cdot x + b$$
+
+on obtient :
+
+#+BEGIN_CENTER
+\(
+\dot{x} = R^{-1} \cdot b \\
+x(0) = u_0
+\)
+#+END_CENTER
+
+On en déduit que :
+
+$$x(t) = u_0 + \int_0^t \left[ R(s) \right]^{-1} \cdot b(s) ds$$
+
+et :
+
+$$u(t) = R(t) \cdot u_0 + \int_0^t R(t) \cdot [R(s)]^{-1} \cdot b(s) ds$$
+
+Dans le cas où $L(t) = L$ ne dépend pas de $t$, on peut montrer
+que
+
+$$R(s+t) = R(s) \cdot R(t)$$
+
+en vérifiant que $\varphi(s) = R(s+t)$ et $\psi(s) = R(s) \cdot R(t)$
+sont solutions en $w$ de :
+
+#+BEGIN_CENTER
+\(
+\OD{w}{s}(s) = L \cdot w(s) \\ \\
+w(0) = R(t)
+\)
+#+END_CENTER
+
+On a alors évidemment $R(-s) = [R(s)]^{-1}$ et
+
+$$u(t) = R(t) \cdot u_0 + \int_0^t R(t-s) \cdot b(s) ds$$
+
+La solution est donc donnée par l'intégrale de convolution de $R$ et $b$.
+
+
+** Conditions initiales
+
+Nous allons à présent étudier ce qu'il se passe lorsqu'on dérive la solution par rapport à la condition initiale $u_0 = x$. Posons $u(x,t)$ la solution de :
+
+#+BEGIN_CENTER
+\(
+\deriveepartielle{u}{t}(x,t) = f(t,u(x,t)) \\
+u(x,0) = x
+\)
+#+END_CENTER
+
+Nous allons utiliser la notation
+
+$$u_x(x,t) = \deriveepartielle{u}{x^T}(x,t)$$
+
+En intervertissant l'ordre de dérivation, on arrive à
+
+#+BEGIN_CENTER
+\(
+\deriveepartielle{u_x}{t}(x,t) = \deriveepartielle{}{x^T}\deriveepartielle{u}{t}(x,t) \\
+\deriveepartielle{u_x}{t}(x,t) = \deriveepartielle{f}{u^T}(t,u(x,t)) \cdot u_x(x,t)
+\)
+#+END_CENTER
+
+Par ailleurs, il est clair que :
+
+$$u_x(x,0) = I$$
+
+Utilisant les résultats de la section \ref{sec:edo_sys_lin} avec :
+
+#+BEGIN_CENTER
+\(
+L(t) \mapsto \deriveepartielle{f}{u^T}(t,u(x,t)) \\
+R(t) \mapsto u_x(x,t)
+\)
+#+END_CENTER
+
+nous obtenons :
+
+$$u_x(x,t) = \exp\int_0^t \deriveepartielle{f}{u^T}(s,u(x,s)) ds$$

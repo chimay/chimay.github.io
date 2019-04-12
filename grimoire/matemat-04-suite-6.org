@@ -1,0 +1,840 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat 04 : Suites - 6
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/commandes-tex.org"
+
+* Opérations sur les limites
+
+#+TOC: headlines 1 local
+
+\label{chap:operationSurLesLimites}
+
+Soit les fonction $f,g : \setR \mapsto \setR$ vérifiant :
+
+#+BEGIN_CENTER
+\(
+F = \lim_{x \to a} f(x) \\ \\
+G = \lim_{x \to a} g(x)
+\)
+#+END_CENTER
+
+où $F,G \in \setR$. Choisissons un réel $\epsilon \strictsuperieur 0$. Pour tout $\gamma \strictsuperieur 0$, on peut trouver un $\delta(\gamma) \strictsuperieur 0$ tel que :
+
+#+BEGIN_CENTER
+\(
+\distance(f(x),F) = \abs{f(x) - F} \le \gamma \\
+\distance(g(x),G) = \abs{g(x) - G} \le \gamma
+\)
+#+END_CENTER
+
+pour tout $x \in \setR$ tel que $\distance(x,a) = \abs{x - a} \le \delta(\gamma)$.
+
+
+*** Addition
+
+$$\abs{f(x) + g(x) - (F + G)} \le \abs{f(x) - F} + \abs{g(x) - G} = 2 \gamma$$
+
+Il suffit donc de choisir $\gamma = \epsilon / 2$ pour avoir $\abs{f(x) + g(x) - (F + G)} \le \epsilon$. On en déduit que la limite de $f + g$ est $F + G$, c'est-à-dire :
+
+$$\lim_{x \to a} \big[f(x) + g(x)\big] = \lim_{x \to a} f(x) + \lim_{x \to a} g(x)$$
+
+
+**** Fonction constante
+
+Dans le cas particulier où une des deux fonctions est une constante $G \in \setR$, soit :
+
+$$g : x \mapsto G$$
+
+pour tout $x \in \setR$, on a :
+
+$$\lim_{x \to a} g(x) = \lim_{x \to a} G = G$$
+
+et :
+
+$$\lim_{x \to a} \big[f(x) + G\big] = \lim_{x \to a} f(x) + G$$
+
+
+*** Opposé
+
+On a simplement :
+
+$$\abs{\big[-g(x)\big] - (-G)} = \abs{G - g(x)} = \abs{g(x) - G} \le \gamma$$
+
+Il suffit donc de choisir $\gamma = \epsilon$ pour avoir $\abs{(-g(x)) - (-G)} \le \epsilon$. On en déduit que la limite de $-g$ est $-G$, c'est-à-dire :
+
+$$\lim_{x \to a} \big[-g(x)\big] = - \lim_{x \to a} g(x)$$
+
+
+*** Soustraction
+
+On a :
+
+\begin{eqnarray*}
+\lim_{x \to a} \big[f(x) - g(x)\big] &=& \lim_{x \to a} \big[f(x) + \big(-g(x)\big)\big] \\
+&=& \lim_{x \to a} f(x) + \lim_{x \to a} \big(-g(x)\big) \\
+&=& \lim_{x \to a} f(x) - \lim_{x \to a} g(x)
+\end{eqnarray*}
+
+
+*** Multiplication
+
+On voit que :
+
+\begin{eqnarray*}
+\abs{f(x) \cdot g(x) - F \cdot G} &=& \abs{f(x) \cdot g(x) - f(x) \cdot G + f(x) \cdot G - F \cdot G} \\
+&=& \abs{f(x) \cdot (g(x) - G) + (f(x) - F) \cdot G} \\
+&\le& \abs{f(x) \cdot (g(x) - G)} + \abs{(f(x) - F) \cdot G} \\
+&\le& \abs{f(x)} \cdot \abs{g(x) - G} + \abs{(f(x) - F)} \cdot \abs{G} \\
+&\le& \abs{f(x)} \cdot \gamma + \gamma \cdot \abs{G}
+\end{eqnarray*}
+
+Comme :
+
+$$\abs{f(x)} = \abs{f(x) - F + F} \le \abs{f(x) - F} + F \le \gamma + \abs{F}$$
+
+notre borne peut se réécrire :
+
+\begin{eqnarray*}
+\abs{f(x) \cdot g(x) - F \cdot G} &\le& (\gamma + \abs{F}) \cdot \gamma + \gamma \cdot \abs{G} \\
+&\le& (\gamma + \abs{F} + \abs{G}) \cdot \gamma
+\end{eqnarray*}
+
+Si on choisit $\gamma = \min\{ 1 , \epsilon / (1 + \abs{F} + \abs{G}) \}$, on a $\gamma \le 1$ et :
+
+$$\abs{f(x) \cdot g(x) - F \cdot G} \le (1 + \abs{F} + \abs{G}) \cdot \gamma \le \epsilon$$
+
+On en déduit que la limite de $f \cdot g$ est $F \cdot G$, c'est-à-dire :
+
+$$\lim_{x \to a} \big[f(x) \cdot g(x)\big] = \left[ \lim_{x \to a} f(x) \right]  \cdot \left[ \lim_{x \to a} g(x) \right]$$
+
+
+*** Inverse multiplicatif
+
+Supposons que $G \ne 0$. On a :
+
+\begin{eqnarray*}
+\abs{\frac{1}{g(x)} - \frac{1}{G}} &=& \abs{\frac{G - g(x)}{g(x) \cdot \abs{G}}} \\
+&=& \frac{ \abs{G - g(x)} }{ \abs{g(x)} \cdot \abs{G} } \\
+&=& \frac{ \gamma }{ \abs{g(x)} \cdot \abs{G} } \\
+\end{eqnarray*}
+
+On voit aussi que :
+
+\begin{eqnarray*}
+\abs{g(x)} = \abs{g(x) - G + G} &=& \abs{G - (G - g(x))} \\
+&\ge& \abs{G} - \abs{G - g(x)} \\
+&\ge& \abs{G} - \gamma
+\end{eqnarray*}
+
+Donc, si $\gamma \strictinferieur \abs{G}$, on a :
+
+$$\abs{\frac{1}{g(x)} - \frac{1}{G}} \le \frac{ \gamma }{ (\abs{G} - \gamma) \cdot \abs{G} }$$
+
+Nous allons voir qu'il est possible de majorer cette expression par $\epsilon$. En effet, la condition :
+
+$$\frac{ \gamma }{ (\abs{G} - \gamma) \cdot \abs{G} } \le \epsilon$$
+
+est équivalente à :
+
+$$\gamma \le \epsilon \cdot (\abs{G} - \gamma) \cdot \abs{G} = G^2 \cdot \epsilon - \epsilon \cdot \abs{G} \cdot \gamma$$
+
+ce qui revient à dire que :
+
+$$(1 + \epsilon \cdot \abs{G}) \cdot \gamma \le G^2 \cdot \epsilon$$
+
+et enfin :
+
+$$0 \strictinferieur \gamma \le \frac{G^2 \cdot \epsilon}{1 + \epsilon \cdot \abs{G}}$$
+
+En imposant également $\gamma \strictinferieur \abs{G}$, on obtient la condition suffisante :
+
+$$0 \strictinferieur \gamma \strictinferieur \min\left\{ \abs{G} , \frac{G^2 \cdot \epsilon}{1 + \epsilon \cdot \abs{G}} \right\}$$
+
+On a alors $\abs{\frac{1}{g(x)} - \frac{1}{G}} \le \epsilon$. On en conclut que la limite de $1/g$ est $1/G$, c'est-à-dire :
+
+$$\lim_{x \to a} \frac{1}{g(x)} = \frac{1}{\lim_{x \to a} g(x)}$$
+
+
+*** Fraction
+
+Toujours sous l'hypothèse que $G \ne 0$, on a :
+
+$$\lim_{x \to a} \frac{f(x)}{g(x)} = \left[\lim_{x \to a} f(x)\right] \cdot \left[\lim_{x \to a} \frac{1}{g(x)}\right] = \frac{\lim_{x \to a} f(x)}{\lim_{x \to a} g(x)}$$
+
+
+* Limites réelles
+
+#+TOC: headlines 1 local
+
+\label{chap:limitesReelles}
+
+
+** Fonction croissante
+
+Soit une fonction $f : \setR \mapsto \setR$ croissante et majorée par un certain $M \in \setR$ :
+
+$$F = \{ f(x) \in \setR : x \in \setR \} \le M$$
+
+Comme l'ensemble de réels $F$ est non vide et majoré, on en conclut qu'il admet un supremum inclus dans l'adhérence :
+
+$$S = \sup F \in \adh F$$
+
+Choisissons un réel $\epsilon \strictsuperieur 0$. Comme $\distance(S,F) = 0$, on peut trouver un $\alpha \in \setR$ tel que :
+
+$$\distance(S,f(\alpha)) = \abs{S - f(\alpha)} \le \epsilon$$
+
+Comme $S \ge F$, on a $\abs{S - f(\alpha)} = S - f(\alpha) \le \epsilon$. Soit un $\beta \in \setR$ tel que $\beta \ge \alpha$. La fonction $f$ étant croissante, on a $f(\beta) \ge f(\alpha)$, et donc :
+
+$$\distance(S,f(\beta)) = S - f(\beta) \le S - f(\alpha) \le \epsilon$$
+
+On en déduit que $f(x)$ converge vers le supremum $S$ lorsque $x \to \infty$. Par unicité de la limite, on a :
+
+$$\lim_{x \to +\infty} f(x) = \sup \{ f(x) \in \setR : x \in \setR \}$$
+
+
+** Fonction décroissante
+
+Symétriquement, si $g : \setR \mapsto \setR$ est une fonction décroissante et minorée par un certain $L \in \setR$, l'ensemble non vide :
+
+$$G = \{ g(x) \in \setR : x \in \setR \} \ge L$$
+
+admet un infimum inclut dans l'adhérence :
+
+$$I = \inf G \in \adh G$$
+
+Choisissons un réel $\epsilon \strictsuperieur 0$. Comme $\distance(I,G) = 0$, on peut trouver un $\alpha \in \setR$ tel que :
+
+$$\distance(I,g(\alpha)) = \abs{I - g(\alpha)} \le \epsilon$$
+
+Comme $I \le F$, on a $\abs{I - g(\alpha)} = g(\alpha) - I \le \epsilon$. Soit un $\beta \in \setR$ tel que $\beta \ge \alpha$. La fonction $g$ étant décroissante, on a $g(\beta) \le g(\alpha)$, et donc :
+
+$$\distance(I,g(\beta)) = g(\beta) - I \le g(\alpha) - I \le \epsilon$$
+
+On en déduit que $g(x)$ converge vers le supremum $I$ lorsque $x \to \infty$. Par unicité de la limite, on a :
+
+$$\lim_{x \to +\infty} g(x) = \inf \{ g(x) \in \setR : x \in \setR \}$$
+
+
+** Limites supremum et infimum
+
+Soit une fonction $f : \setR \mapsto \setR$ majorée et minorée. On définit la famille $\{F(x) : x \in \setR \}$ d'ensembles non vides, majorés et minorés par :
+
+$$F(x) = \{f(z) : z \in \setR, \ z \ge x \}$$
+
+
+*** Limite supremum
+
+Si $x \ge y$, on a $F(x) \subseteq F(y)$, et donc $\sup F(x) \le \sup F(y)$. On en conclut que la fonction dérivée $d : \setR \mapsto \setR$ définie par :
+
+$$d(x) = \sup \{ f(z) : z \in \setR, \ z \ge x \}$$
+
+pour tout $x \in \setR$ est décroissante et minorée. Elle converge donc vers son infimum :
+
+$$\lim_{x \to +\infty} d(x) = \inf_{x \in \setR} d(x) = \inf_{x \in \setR} \sup \{f(z) : z \in \setR, \ z \ge x \}$$
+
+D'un autre coté, la définition de $d$ implique que :
+
+$$\lim_{x \to +\infty} d(x) = \lim_{x \to +\infty} \sup \{f(z) : z \in \setR, \ z \ge x \} = \limsup_{x \to +\infty} f(x)$$
+
+On en conclut que :
+
+$$\limsup_{x \to +\infty} f(x) = \inf_{x \in \setR} \sup \{f(z) : z \in \setR, \ z \ge x \}$$
+
+
+*** Limite infimum
+
+Si $x \ge y$, on a $F(x) \subseteq F(y)$, et donc $\inf F(x) \ge \inf F(y)$. On en conclut que la fonction dérivée $c : \setR \mapsto \setR$ définie par :
+
+$$c(x) = \inf \{ f(z) : z \in \setR, \ z \ge x \}$$
+
+pour tout $x \in \setR$ est croissante et majorée. Elle converge donc vers son supremum :
+
+$$\lim_{x \to +\infty} c(x) = \sup_{x \in \setR} c(x) = \sup_{x \in \setR} \inf \{f(z) : z \in \setR, \ z \ge x \}$$
+
+D'un autre coté, la définition de $c$ implique que :
+
+$$\lim_{x \to +\infty} c(x) = \lim_{x \to +\infty} \inf \{f(z) : z \in \setR, \ z \ge x \} = \liminf_{x \to +\infty} f(x)$$
+
+On en conclut que :
+
+$$\liminf_{x \to +\infty} f(x) = \sup_{x \in \setR} \inf \{f(z) : z \in \setR, \ z \ge x \}$$
+
+
+** Egalité des limites sup et inf
+
+Soit une fonction $f : \setR \mapsto \setR$ majorée et minorée. Posons :
+
+#+BEGIN_CENTER
+\(
+S(x) = \sup \{ f(z) : z \in \setR, \ z \ge x \} \\
+I(x) = \inf \{ f(z) : z \in \setR, \ z \ge x \}
+\)
+#+END_CENTER
+
+et choisissons un réel $\epsilon \strictsuperieur 0$.
+
+
+  - Considérons le cas particulier où les limites sup et inf sont identiques :
+
+$$L = \limsup_{x \to +\infty} f(x) = \liminf_{x \to +\infty} f(x)$$
+
+pour tout $x \in \setR$. Choisissons un $\sigma$ tel que $\abs{S(x) - L} \le \epsilon$ pour tout $x$ vérifiant $x \ge \sigma$ et un $\tau$ tel que $\abs{I(x) - L} \le \epsilon$ pour tout $x$ vérifiant $x \ge \tau$. Posant $M = \max\{\sigma,\tau\}$, il vient :
+
+#+BEGIN_CENTER
+\(
+f(z) \le S(M) \le L + \epsilon \\
+f(z) \ge I(M) \ge L - \epsilon
+\)
+#+END_CENTER
+
+pour tout réel $z$ vérifiant $z \ge M$. On a alors :
+
+$$\abs{f(z) - L} \le \epsilon$$
+
+On en conclut que la limite de $f$ à l'infini existe et que :
+
+$$\lim_{x \to +\infty} f(x) = \limsup_{x \to +\infty} f(x) = \liminf_{x \to +\infty} f(x)$$
+
+  - Inversément, supposons la limite de $f$ à l'infini existe :
+
+$$L = \lim_{x \to +\infty} f(x)$$
+
+Soit un réel $M$ tel que :
+
+$$\abs{f(x) - L} \le \epsilon$$
+
+pour tout réel $x$ vérifiant $x \ge M$. On a alors :
+
+$$L - \epsilon \le f(x) \le L + \epsilon$$
+
+On en déduit que :
+
+#+BEGIN_CENTER
+\(
+S(x) \le L + \epsilon \\
+I(x) \ge L - \epsilon
+\)
+#+END_CENTER
+
+Le supremum étant supérieur à l'infimum, on a finalement :
+
+$$L - \epsilon \le I(x) \le S(x) \le L + \epsilon$$
+
+et donc :
+
+$$\{ \abs{S(x) - L} , \abs{I(x) - L} \} \le \epsilon$$
+
+On en conclut que $S$ et $I$ convergent vers $L$, c'est-à-dire :
+
+$$\limsup_{x \to +\infty} f(x) = \liminf_{x \to +\infty} f(x) = \lim_{x \to +\infty} f(x)$$
+
+
+
+** Ordre et limite
+
+Soit les fonctions $f,g : \setR \mapsto \setR$ vérifiant $f \le g$.
+
+
+*** A l'infini
+
+Supposons que les limites à l'infini existent :
+
+#+BEGIN_CENTER
+\(
+\lim_{x \to +\infty} f(x) = b \\ \\
+\lim_{x \to +\infty} g(x) = c
+\)
+#+END_CENTER
+
+Supposons que $b \strictsuperieur c$ et posons $\epsilon = (b - c)/4 \strictsuperieur 0$. On a alors :
+
+$$b = c + 4 \epsilon$$
+
+On peut trouver un réel $F$ tel que :
+
+$$\abs{f(x) - b} \le \epsilon$$
+
+pour tout réel $x$ vérifiant $x \ge F$. De même, on peut trouver un réel $G$ tel que :
+
+$$\abs{g(x) - c} \le \epsilon$$
+
+pour tout réel $x$ vérifiant $x \ge G$. Donc, pour tout réel $x$ vérifiant $x \ge M = \max\{F,G\}$, on a :
+
+$$\{ \ \abs{f(x) - b} , \ \abs{g(x) - c} \ \} \le \epsilon$$
+
+On voit que :
+
+$$b - \epsilon = c + 3 \epsilon \strictsuperieur c + \epsilon$$
+
+On en déduit que :
+
+$$f(x) \ge b - \epsilon \strictsuperieur c + \epsilon \ge g(x)$$
+
+ce qui contredit $f \le g$. Notre hypothèse est donc fausse et $b \le c$, c'est-à-dire :
+
+$$\lim_{x \to +\infty} f(x) \le \lim_{x \to +\infty} g(x)$$
+
+
+*** Vers un réel
+
+On montre par un raisonnement analogue que, si les limites de $f,g$ en $a$ existent, on a :
+
+$$\lim_{x \to a} f(x) \le \lim_{x \to a} g(x)$$
+
+
+*** Supremum et infimum
+
+Pour tout $x \in \setR$, on a :
+
+$$\lambda(x) = \inf \{ f(z) : z \in \setR, \ z \ge x \} \le \sigma(x) = \sup \{ f(z) : z \in \setR, \ z \ge x \}$$
+
+On en conclut que $\lambda \le \sigma$. Leurs limites à l'infini respectent donc le même ordre. Mais comme ces limites correspondent aux limites infimum et supremum de $f$, on a :
+
+$$\liminf_{x \to +\infty} f(x) \le \limsup_{x \to +\infty} f(x)$$
+
+
+** Ordre et supremum-infimum
+
+Soit les fonctions $f,g : \setR \mapsto \setR$ majorées, minorées et vérifiant $f \le g$. Posons :
+
+$$\Theta(x) = \{ z \in \setR : z \ge x \}$$
+
+pour tout $x \in \setR$.
+
+
+*** Supremum
+
+Soit les fonctions $\varphi,\gamma$ définies par :
+
+#+BEGIN_CENTER
+\(
+\varphi(x) = \sup \{ f(z) : z \in \setR, \ z \ge x \} \\
+\gamma(x) = \sup \{ g(z) : z \in \setR, \ z \ge x \}
+\)
+#+END_CENTER
+
+pour tout $x \in \setR$. Quel que soit le réel $x$, on a $f \le g$ sur $\Theta(x)$. On en conclut que :
+
+$$\varphi(x) = \sup f(\Theta(x)) \le \sup g(\Theta(x)) = \gamma(x)$$
+
+ce qui revient à dire que $\varphi \le \gamma$. On doit donc avoir :
+
+$$\lim_{x \to +\infty} \varphi(x) \le \lim_{x \to +\infty} \gamma(x)$$
+
+c'est-à-dire :
+
+$$\limsup_{x \to +\infty} f(x) \le \limsup_{x \to +\infty} g(x)$$
+
+
+*** Infimum
+
+Soit les fonctions $\varphi,\gamma$ définies par :
+
+#+BEGIN_CENTER
+\(
+\varphi(x) = \inf \{ f(z) : z \in \setR, \ z \ge x \} \\
+\gamma(x) = \inf \{ g(z) : z \in \setR, \ z \ge x \}
+\)
+#+END_CENTER
+
+pour tout $x \in \setR$. Quel que soit le réel $x$, on a $f \le g$ sur $\Theta(x)$. On en conclut que :
+
+$$\varphi(x) = \inf f(\Theta(x)) \le \inf g(\Theta(x)) = \gamma(x)$$
+
+ce qui revient à dire que $\varphi \le \gamma$. On doit donc avoir :
+
+$$\lim_{x \to +\infty} \varphi(x) \le \lim_{x \to +\infty} \gamma(x)$$
+
+c'est-à-dire :
+
+$$\liminf_{x \to +\infty} f(x) \le \liminf_{x \to +\infty} g(x)$$
+
+
+*** Egalité
+
+Supposons que :
+
+$$L = \liminf_{x \to +\infty} f(x) = \limsup_{x \to +\infty} g(x)$$
+
+On a alors :
+
+$$L = \liminf_{x \to +\infty} f(x) \le \limsup_{x \to +\infty} f(x) \le \limsup_{x \to +\infty} g(x) = L$$
+
+Les limites sup et inf de $f$ sont donc toutes deux égales à $L$ et :
+
+$$\lim_{x \to +\infty} f(x) = \liminf_{x \to +\infty} f(x) = \limsup_{x \to +\infty} f(x) = L$$
+
+On a aussi :
+
+$$L = \liminf_{x \to +\infty} f(x) \le \liminf_{x \to +\infty} g(x) \le \limsup_{x \to +\infty} g(x) = L$$
+
+Les limites sup et inf de $g$ sont donc toutes deux égales à $L$ et :
+
+$$\lim_{x \to +\infty} g(x) = \liminf_{x \to +\infty} g(x) = \limsup_{x \to +\infty} g(x) = L$$
+
+On en conclut que les limites de $f$ et $g$ existent et que :
+
+$$\lim_{x \to +\infty} f(x) = \lim_{x \to +\infty} g(x)$$
+
+
+** Cadre
+
+Soit les fonctions $f,S,I : \setR \mapsto \setR$ majorées, minorées et vérifiant $I \le f \le S$. Supposons que :
+
+$$L = \liminf_{x \to +\infty} I(x) = \limsup_{x \to +\infty} S(x)$$
+
+On a alors :
+
+$$L = \liminf_{x \to +\infty} I(x) \le \liminf_{x \to +\infty} f(x) \le \limsup_{x \to +\infty} f(x) \le \limsup_{x \to +\infty} S(x) = L$$
+
+On en déduit que :
+
+$$\liminf_{x \to +\infty} f(x) = \limsup_{x \to +\infty} f(x) = L$$
+
+La limite de $f$ existe donc et :
+
+$$\lim_{x \to +\infty} f(x) = \liminf_{x \to +\infty} I(x) = \limsup_{x \to +\infty} S(x)$$
+
+
+* Suites de réels
+
+#+TOC: headlines 1 local
+
+\label{chap:suitesDeReels}
+
+
+** Monotones
+
+Soit une suite de réels $x_1 \le x_2 \le x_3 \le ...$ croissante et majorée. On a alors :
+
+$$\lim_{n \to \infty} x_n = \sup \{x_n \in \setR : n \in \setN \}$$
+
+Soit une suite de réels $y_1 \ge y_2 \ge y_3 \ge ...$ décroissante et minorée. On a alors :
+
+$$\lim_{n \to \infty} y_n = \inf \{y_n \in \setR : n \in \setN \}$$
+
+
+** Limites extrémales
+
+Soit une suite de réels $\{u_n \in \setR : n \in \setN\}$ majorée et minorée. On a :
+
+$$\limsup_{ n \to \infty } u_n = \inf_{n \in \setN} \sup \{u_m : m \in \setN, \ m \ge n \}$$
+
+$$\liminf_{ n \to \infty } u_n = \sup_{n \in \setN} \inf \{u_m : m \in \setN, \ m \ge n \}$$
+
+
+* Sommes réelles
+
+#+TOC: headlines 1 local
+
+\label{chap:sommesReelles}
+
+
+** Introduction
+
+Nous nous intéressons à des suites de réels $A \subseteq \setR$ de la forme :
+
+$$A = \{ a_k \in \setR : k \in \mathcal{Z} \}$$
+
+
+*** Dénombrable
+
+Supposons que $\mathcal{Z} \subseteq \setZ$. Si les sommes partielles convergent, on définit :
+
+$$\sum_{k \in \setN} a_k = \sum_{k = 0}^{+\infty} a_k = \lim_{n \to \infty} \sum_{k = 0}^n a_k$$
+
+dans le cas où $\mathcal{Z} = \setN$ et :
+
+$$\sum_{k \in \setZ} a_k = \sum_{k = -\infty}^{+\infty} a_k = \lim_{n \to \infty} \sum_{k = -n}^n a_k$$
+
+dans le cas où $\mathcal{Z} = \setZ$. On définit aussi :
+
+$$\sum_{k = m}^{+\infty} a_k = \lim_{n \to \infty} \sum_{k = m}^n a_k$$
+
+
+*** Quelconque
+
+Pour un ensemble $\mathcal{Z}$ quelconque, on pose :
+
+$$Z^+ = \{ k \in \mathcal{Z} : a_k \ge 0 \}$$
+
+et :
+
+$$Z^- = \{ k \in \mathcal{Z} : a_k \strictinferieur 0 \}$$
+
+Sous réserve d'existence du suprémum, on définit :
+
+$$\sum_{k \in Z^+} a_k = \sup \accolades{ \sum_{k \in I} a_k : I \subseteq Z^+, \ I \ \mathrm{fini} }$$
+
+ainsi que :
+
+$$\sum_{k \in Z^-} a_k = - \sup \accolades{ - \sum_{k \in I} a_k : I \subseteq Z^-, \ I \ \mathrm{fini} }$$
+
+On définit alors la somme par :
+
+$$\sum_{k \in \mathcal{Z}} a_k = \sum_{k \in Z^+} a_k + \sum_{k \in Z^-} a_k$$
+
+
+** Additivité
+
+Soit la suite :
+
+$$A = \{ a_k \in \setR : k \in \setN \}$$
+
+On définit la suite $\{ S_n : n \in \setN \}$ des sommes partielles par :
+
+$$S_n = \sum_{k = 0}^n a_k$$
+
+pour tout $n \in \setN$. Choisissons un $m \in \setN$ vérifiant $m \ge 1$. On définit la suite $\{ D_n : n \in \setN \}$ des sommes partielles commençant en $m$ par :
+
+$$D_n = \sum_{k = m}^n a_k$$
+
+pour tout $n \in \setN$ vérifiant $n \ge m$. Choisissons un naturel $n$ vérifiant $n \ge m$. On a :
+
+$$S_n = \sum_{k = 0}^{m - 1} a_k + \sum_{k = m}^n a_k = S_{m - 1} + D_n$$
+
+Si on pose :
+
+$$E = S_{m - 1}$$
+
+on a :
+
+$$S_n = E + D_n$$
+
+pour tout $n \in \setN$ vérifiant $n \ge m$. Si la limite de la suite des $D_n$ existe, celle des $S_n$ aussi et :
+
+$$\lim_{n \to \infty} S_n = E + \lim_{n \to \infty} D_n$$
+
+Inversément, si la limite des $S_n$ existe, celle des $D_n$ aussi et :
+
+$$\lim_{n \to \infty} D_n = \lim_{n \to \infty} S_n - E$$
+
+On a par définition :
+
+$$\lim_{n \to \infty} S_n = \sum_{k = 0}^{+\infty} a_k$$
+
+et :
+
+$$\lim_{n \to \infty} D_n = \sum_{k = m}^{+\infty} a_k$$
+
+On en conclut que :
+
+$$\sum_{k = 0}^{+\infty} a_k = \sum_{k = 0}^{m - 1} a_k + \sum_{k = m}^{+\infty} a_k$$
+
+
+** Somme résiduelle
+
+Si la somme des $a_k$ converge, l'additivité nous dit que :
+
+$$\sum_{k = m}^{+\infty} a_k = \sum_{k = 0}^{+\infty} a_k - \sum_{k = 0}^{m - 1} a_k$$
+
+En passant à la limite $m \to \infty$, on a :
+
+\begin{eqnarray*}
+\lim_{m \to \infty} \sum_{k = m}^{+\infty} a_k &=& \lim_{m \to \infty} \left[ \sum_{k = 0}^{+\infty} a_k - \sum_{k = 0}^{m - 1} a_k \right] \\
+&=& \sum_{k = 0}^{+\infty} a_k - \lim_{m \to \infty} \sum_{k = 0}^{m - 1} a_k \\
+&=& \sum_{k = 0}^{+\infty} a_k - \sum_{k = 0}^{+\infty} a_k \\
+&=& 0
+\end{eqnarray*}
+
+La suite des sommes résiduelles $R_m$ définie par :
+
+$$R_m = \sum_{k = m}^{+\infty} a_k$$
+
+pour tout $m \in \setN$ converge donc vers zéro lorsque $m$ tend vers l'infini.
+
+
+** Termes positifs
+
+Soit la suite positive :
+
+$$P = \{ p_k \in \setR : p_k \ge 0, \ k \in \setN \}$$
+
+et la suite des sommes partielles :
+
+$$S_n = \sum_{k = 0}^n p_k$$
+
+Choisissons $m,n \in \setN$ tels que $m \le n$. On a :
+
+$$S_n = \sum_{k = 0}^m p_k + \sum_{k = m + 1}^n p_k = S_m + \sum_{k = m + 1}^n p_k$$
+
+Par positivité, des $p_k$, on a :
+
+$$\sum_{k = m + 1}^n p_k \ge 0$$
+
+et :
+
+$$S_n \ge S_m$$
+
+La suite des $S_n$ est croissante. Si on peut trouver un $M \in \setR$ tel que :
+
+$$S_n \le M$$
+
+pour tout $n \in \setN$, la suite est majorée et converge vers son suprémum :
+
+$$\sum_{k = 0}^{+\infty} p_k = \lim_{n \to \infty} \sum_{k = 0}^n p_k = \sup_{n \in \setN} \sum_{k = 0}^n p_k$$
+
+
+** Convergence absolue
+
+Soit la suite :
+
+$$A = \{ a_k \in \setR : k \in \setN \}$$
+
+La suite dérivée :
+
+$$P = \{ \abs{a_k} \in \setR : k \in \setN \}$$
+
+est positive. Si on peut trouver un $K \in \setR$ tel que :
+
+$$\sum_{k = 0}^n \abs{a_k} \le K$$
+
+pour tout $n \in \setN$, la suite des valeurs absolues converge et :
+
+$$\sum_{k = 0}^{+\infty} \abs{a_k} = \sup_{n \in \setN} \sum_{k = 0}^n \abs{a_k}$$
+
+La suite des sommes résiduelles associées converge donc vers zéro :
+
+$$\lim_{m \to \infty} \sum_{k = m}^{+\infty} \abs{a_k} = 0$$
+
+Comme :
+
+$$-\abs{a_k} \le a_k \le \abs{a_k}$$
+
+on a :
+
+$$-K \le - \sum_{k = 0}^n \abs{a_k} \le \sum_{k = 0}^n a_k \le \sum_{k = 0}^n \abs{a_k} \le K$$
+
+et :
+
+$$-K \le \sum_{k = 0}^n a_k \le K$$
+
+La suite des sommes partielles $S_n$ définies par :
+
+$$S_n =  \sum_{k = 0}^n a_k$$
+
+est donc majorée et minorée. Elle admet par conséquent des limites suprémum :
+
+$$\sigma = \limsup_{n \to \infty} S_n = \inf_{n \in \setN} \sup \{ S_k : k \in \setN, \ k \ge n \}$$
+
+et infimum :
+
+$$\lambda = \liminf_{n \to \infty} S_n = \sup_{n \in \setN} \inf \{ S_k : k \in \setN, \ k \ge n \}$$
+
+La suite des $S_n$ converge-t-elle ? Autrement dit, les limites suprémum et infimum des $S_n$ sont-elles identiques ? On sait déjà que :
+
+$$\lambda \le \sigma$$
+
+Soit la famille de suprémums décroissants définie par :
+
+$$H_m = \sup\{ S_n : n \in \setN, \, n \ge m \}$$
+
+pour tout $m \in \setN$. On a :
+
+$$\sigma = \inf_{m \in \setN} H_m$$
+
+Soit la famille d'infimums croissants définie par :
+
+$$B_m = \inf\{ S_n : n \in \setN, \, n \ge m \}$$
+
+pour tout $m \in \setN$. On a :
+
+$$\lambda = \sup_{m \in \setN} B_m$$
+
+Soit $\epsilon \strictsuperieur 0$. Comme la somme résiduelle converge vers zéro, on peut trouver un naturel $M$ tel que :
+
+$$\sum_{k = m}^{+\infty} \abs{a_k} \le \frac{\epsilon}{2}$$
+
+pour tout naturel $m$ vérifiant $m \ge M$. Choisissons des naturels $m,n$ tels que $n \ge m + 1$ et $m \ge M$. L'additivité finie nous dit que :
+
+$$\sum_{k = 0}^n a_k = \sum_{k = 0}^m a_k + \sum_{k = m + 1}^n a_k$$
+
+c'est-à-dire :
+
+$$S_n = S_m + \sum_{k = m + 1}^n a_k$$
+
+ou :
+
+$$S_n - S_m = \sum_{k = m + 1}^n a_k$$
+
+En prenant la valeur absolue, il vient :
+
+$$\abs{S_n - S_m} = \abs{\sum_{k = m + 1}^n a_k} \le \sum_{k = m + 1}^n \abs{a_k}$$
+
+Les termes $\abs{a_k}$ étant positifs, la suite des $D_i$ définie par :
+
+$$D_i = \sum_{k = m + 1}^i \abs{a_k}$$
+
+pour tout naturel $i$ vérifiant $i \ge m + 1$ est croissante, majorée et converge vers son suprémum. On a donc :
+
+$$\sum_{k = m + 1}^n \abs{a_k} \le \lim_{i \to \infty} D_i = \sum_{k = m + 1}^{+\infty} \abs{a_k}$$
+
+et :
+
+$$\abs{S_m - S_n} \le \sum_{k = m + 1}^{+\infty} \abs{a_k}$$
+
+Comme $m + 1 \strictsuperieur m \ge M$, le terme de droite est majoré par $\epsilon / 2$ et :
+
+$$\abs{S_m - S_n} \le \frac{\epsilon}{2}$$
+
+Choisissons $m \ge M$. Pour tout naturel $n$ vérifiant $n \ge m$, on a soit $n = m$ et $S_n = S_m$, soit $n \ge m + 1$. On en déduit les inégalités :
+
+$$S_n \le \max \accolades{S_m, S_m +  \frac{\epsilon}{2}} = S_m +  \frac{\epsilon}{2}$$
+
+et :
+
+$$S_n \ge \min \accolades{S_m, S_m - \frac{\epsilon}{2}} = S_m - \frac{\epsilon}{2}$$
+
+En passant au suprémum pour les entiers $n$ vérifiant $n \ge m$, on en déduit que :
+
+$$H_m \le S_m + \frac{\epsilon}{2}$$
+
+En passant à l'infimum pour les entiers $n$ vérifiant $n \ge m$, on en déduit que :
+
+$$B_m \ge S_m - \frac{\epsilon}{2}$$
+
+En combinant ces deux inégalités, on obtient :
+
+$$H_m \le S_m + \frac{\epsilon}{2} = \parentheses{S_m - \frac{\epsilon}{2}} + \epsilon \le B_m + \epsilon$$
+
+et a fortiori :
+
+$$\inf_{ \substack{ m \in \setN \\ m \ge M } } H_m \le \sup_{ \substack{ m \in \setN \\ m \ge M } } B_m + \epsilon$$
+
+c'est-à-dire :
+
+$$\sigma \le \lambda + \epsilon$$
+
+Cette relation étant valable pour tout $\epsilon \strictsuperieur 0$, on en déduit que :
+
+$$\sigma \le \lambda$$
+
+Comme on a également $\lambda \le \sigma$, on en conclut que $\lambda = \sigma$. La somme converge donc et :
+
+$$\sum_{k = 0}^{+\infty} a_k = \limsup_{n \to \infty} S_n = \liminf_{n \to \infty} S_n$$
+
+
+** Progression géométrique infinie
+
+Si le réel $a$ vérifie $\abs{a} \strictsuperieur 1$, on voit que $a^{n + 1}$ converge vers $0$ lorsque $n$ tend vers l'infini. On a alors :
+
+$$\sum_{i=0}^{+\infty} a^i = \lim_{n \to \infty} \frac{a^{n + 1} - 1}{a - 1} = \frac{1}{1 - a}$$

@@ -1,0 +1,492 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat 08 : Différentielles - 2
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/commandes-tex.org"
+
+* Différentielles et polynômes
+
+#+TOC: headlines 1 local
+
+\label{chap:diffpoly}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:differ} : Les différentielles
+
+
+** Polynômes
+
+Soit $n \in \setN$. Nous allons analyser la différentiabilité du monôme $\mu : \setR \mapsto \setR$ défini par :
+
+$$\mu : t \mapsto t^n$$
+
+pour tout $t \in \setR$. La formule de factorisation nous donne :
+
+$$s^n - t^n = (s - t) \sum_{i = 0}^{n - 1} s^i \cdot t^{n - 1 - i}$$
+
+On a donc :
+
+$$\frac{s^n - t^n}{s - t} = \sum_{i = 0}^{n - 1} s^i \cdot t^{n - 1 - i}$$
+
+Passant à la limite $s \to t$, on obtient :
+
+$$\lim_{ s \to t} \frac{s^n - t^n}{s - t} = \sum_{i = 0}^{n - 1} t^i \cdot t^{n - 1 - i} = \sum_{i = 0}^{n - 1} t^{n - 1} = n \cdot t^{n - 1}$$
+
+On en conclut que la dérivée existe sur $\setR$ et que :
+
+$$\OD{}{t} (t^n) = \lim_{ s \to t} \frac{s^n - t^n}{s - t} = n \cdot t^{n - 1}$$
+
+La dérivée d'une combinaison linéaire étant identique à la combinaison linéaire des dérivées (voir dérivée d'une somme et la multiplication par une constante), on en conclut que tous les polynômes sont dérivables sur $\setR$.
+
+
+*** Uniformité
+
+Choisissons $\alpha,\beta \in \setR$ avec $\alpha \le \beta$ et analysons la différentiabilité sur l'intervalle $[\alpha,\beta]$. Posons :
+
+$$e(s,t) = \frac{s^n - t^n}{s - t} - \OD{}{t}(t^n)$$
+
+Si $n = 1$, on a :
+
+$$e(s,t) = \frac{s - t}{s - t} - 1 = 0$$
+
+Le monôme de degré $1$ est donc uniformément différentiable. Considérons à présent le cas où $n \ge 2$. Le passage à la limite nous montre que :
+
+$$\OD{}{t} (t^n) = \sum_{i = 0}^{n - 1} t^i \cdot t^{n - 1 - i}$$
+
+En utilisant les propriétés des sommes, on obtient :
+
+\begin{eqnarray*}
+e(s,t) &=& \sum_{i = 0}^{n - 1} s^i \ t^{n - 1 - i} - \sum_{i = 0}^{n - 1} t^i \ t^{n - 1 - i} \\
+&=& \sum_{i = 0}^{n - 1} (s^i - t^i) \ t^{n - 1 - i}
+\end{eqnarray*}
+
+En factorisant tous les $s^i - t^i$, on a alors :
+
+$$e(s,t) = \sum_{i = 0}^{n - 1} t^{n - 1 - i} \ (s - t) \ \sum_{k = 0}^{i - 1} s^k \ t^{i - 1 - k}$$
+
+et comme $s - t$ ne dépend pas de $i$ :
+
+$$e(s,t) = (s - t) \sum_{i = 0}^{n - 1} t^{n - 1 - i} \ \sum_{k = 0}^{i - 1} s^k \ t^{i - 1 - k}$$
+
+Si on pose $M = \max \{ \abs{\alpha} , \abs{\beta} \}$, on a clairement $\abs{s}, \abs{t} \le M$. On peut alors trouver la borne supérieure :
+
+\begin{eqnarray*}
+\abs{e(s,t)} &\le& \abs{s - t} \sum_{i = 0}^{n - 1} M^{n - 1 - i} \ \sum_{k = 0}^{i - 1} M^{i - 1} \\
+&\le& \abs{s - t} \sum_{i = 0}^{n - 1} M^{n - 1 - i} \ i \ M^{i - 1} \\
+&\le& \abs{s - t} \ M^{n - 2} \ \sum_{i = 0}^{n - 1} i \\
+&\le& \unsur{2} \ \abs{s - t} \ M^{n - 2} \ (n - 1) \ n
+\end{eqnarray*}
+
+Fixons à présent $\epsilon \strictsuperieur 0$. Il suffit de prendre :
+
+$$\abs{s - t} \le \delta \le \frac{ 2 \epsilon}{ M^{n - 2} \cdot (n - 1) \cdot n }$$
+
+pour avoir :
+
+$$\abs{e(s,t)} \le \frac{ M^{n - 2} \cdot (n - 1) \cdot n \cdot \delta }{2} \le \epsilon$$
+
+Comme on a :
+
+$$\mu(s) - \mu(t) - \partial \mu(t) = s^n - t^n - n \cdot t^{n - 1} = e(s,t) \cdot (s - t)$$
+
+on dispose de la borne supérieure :
+
+$$\abs{\mu(s) - \mu(t) - \partial \mu(t)} \le \abs{e(s,t)} \cdot \abs{s - t} \le \epsilon \cdot \abs{s - t}$$
+
+Comme le choix de $\delta$ ne dépend ni de $s$ ni de $t$, le monôme $\mu$ est uniformément différentiable sur $[\alpha,\beta]$.
+
+On généralise aisément à un polynôme quelconque :
+
+$$p(x) = \sum_{i = 0}^n a_i \cdot x^i$$
+
+en constatant que :
+
+$$\abs{p(s) - p(t) - \partial p(t) \cdot (s - t)} \le \abs{s - t} \sum_{i = 0}^n \abs{a_i} \cdot \abs{e_i(s,t)}$$
+
+où $e_i$ est l'erreur obtenue avec le monôme de degré $i$. Mais comme on peut trouver des $\delta_k$ tels que :
+
+$$\abs{e_i(s,t)} \le \frac{\epsilon}{\sum_j \abs{a_j}}$$
+
+il suffit de choisir $\delta = \min \{ \delta_0, \delta_1, ..., \delta_n \}$ pour avoir :
+
+$$\abs{p(s) - p(t) - \partial p(t) \cdot (s - t)} \le \abs{s - t} \cdot \epsilon \cdot \frac{ \sum_i \abs{a_i} }{ \sum_j \abs{a_j} } = \abs{s - t} \cdot \epsilon$$
+
+Tout polynôme est uniformément différentiable sur des intervalles de la forme $[\alpha,\beta]$. Cette généralisation montre aussi que toute combinaison linéaire de fonctions uniformément différentiables est uniformément différentiable.
+
+
+* Dérivées des puissances
+
+#+TOC: headlines 1 local
+
+
+** Introduction
+
+Nous allons évaluer les dérivées des fonctions $f : x \mapsto x^\alpha$ où $x,\alpha \in \setR$.
+
+
+** L'inverse multiplicatif
+
+Commençons par :
+
+#+BEGIN_CENTER
+\(
+x \cdot y = 1 \\
+y = \unsur{x} = x^{-1}
+\)
+#+END_CENTER
+
+On en déduit que :
+
+$$x \cdot dy + y \cdot dx = d(1) = 0$$
+
+ce qui nous donne :
+
+$$\OD{}{x}\left( \unsur{x} \right) = \OD{y}{x} = -\frac{y}{x} = -\frac{1}{x^2}$$
+
+
+** Puissances négatives
+
+Considérons la relation :
+
+$$y = x^{-n}$$
+
+où $n\in\setN$. On définit la variable intermédiaire $z$ telle que :
+
+#+BEGIN_CENTER
+\(
+z = x^{-1} \\
+y = z^n
+\)
+#+END_CENTER
+
+On en déduit :
+
+\begin{eqnarray*}
+\OD{y}{x} = \OD{y}{z} \cdot \OD{z}{x} &=& n \cdot z^{n - 1} \cdot \left( -\unsur{x^2} \right) \\
+&=& - n \cdot x^{1 - n} \cdot x^{-2} \\
+&=& (-n) \cdot x^{-n - 1}
+\end{eqnarray*}
+
+
+** Racines
+
+Toujours pour $n \in \setN$, considérons la relation :
+
+$$y = x^n \qquad \Leftrigfhtarrow\qquad x = y^{1/n}$$
+
+Posons $\alpha = 1/n$. On a :
+
+$$\OD{y}{x} = n \cdot x^{n - 1} = n \cdot y \cdot y^{-\alpha}$$
+
+Donc :
+
+$$\OD{x}{y} = \alpha \cdot y^{\alpha-1}$$
+
+
+** Puissances fractionnaires
+
+Choisissons à présent :
+
+$$y = x^{m/n}$$
+
+où $m\in\setZ$ et $n\in\setN$. Définissons la variable intermédiaire :
+
+$$z = x^m$$
+
+On a alors :
+
+$$y = z^{1/n}$$
+
+Posons $\alpha = m/n$. La dérivée s'écrit :
+
+\begin{eqnarray*}
+\OD{y}{x} = \OD{y}{z} \cdot \OD{z}{x} &=& \unsur{n} \cdot z^{\unsur{n} - 1} \cdot m \cdot x^{m - 1} \\
+&=& \alpha \cdot x^{\alpha - m} \cdot x^{m - 1} \\
+&=& \alpha \cdot x^{\alpha - 1}
+\end{eqnarray*}
+
+On a donc :
+
+$$\OD{}{x}\left( x^\alpha \right) = \alpha \cdot x^{\alpha-1}$$
+
+
+** Puissances réelles
+
+Par passage à la limite, on obtient :
+
+$$\OD{}{x}\left( x^\alpha \right) = \alpha \cdot x^{\alpha-1}$$
+
+pour tout $\alpha \in \setR$.
+
+
+* Différentielles et matrices
+
+#+TOC: headlines 1 local
+
+\label{chap:diffmatr}
+
+
+** Applications linéaires
+
+Soit $A \in \matrice(\setR,m,n)$. Considérons la fonction $\mathcal{A} : \setR^m \times \setR^n \mapsto \setR$ définie par :
+
+$$\mathcal{A}(x) = A \cdot x$$
+
+En terme de composantes, on a :
+
+$$\mathcal{A}_i(x) = \sum_j A_{ij} \cdot x_j$$
+
+Les dérivées s'écrivent :
+
+$$\deriveepartielle{\mathcal{A}_i}{x_k}(x) = A_{ik}$$
+
+On a donc :
+
+$$\deriveepartielle{}{x}(A \cdot x) = A$$
+
+
+** Formes linéaires
+
+Soit $u \in \setR^n$. Considérons la forme linéaire $\varphi : \setR^n \mapsto \setR$ définie par :
+
+$$\varphi(x) = x^\dual \cdot u$$
+
+En terme de composantes, on a :
+
+$$\varphi(x) = \sum_i x_i \cdot u_i$$
+
+Les dérivées s'écrivent :
+
+$$\deriveepartielle{\varphi}{x_k}(x) = u_i$$
+
+On a donc :
+
+$$\deriveepartielle{}{x}(x^\dual \cdot u) = u$$
+
+Comme $u^\dual \cdot x = x^\dual \cdot u$, on a aussi :
+
+$$\deriveepartielle{}{x}(u^\dual \cdot x) = u$$
+
+
+** Formes bilinéaires
+
+Soit à présent $A \in \matrice(\setR,m,n)$. Considérons la forme bilinéaire $\vartheta : \setR^m \times \setR^n \mapsto \setR$ définie par :
+
+$$\vartheta(x,y) = x^\dual \cdot A \cdot y$$
+
+En terme de composantes, on a :
+
+$$\vartheta(x,y) = \sum_{i,j} x_i \cdot A_{ij} \cdot y_j$$
+
+Les dérivées s'écrivent :
+
+#+BEGIN_CENTER
+\(
+\deriveepartielle{\vartheta}{x_k}(x,y) = \sum_j A_{kj} \cdot y_j \\ \\
+\deriveepartielle{\vartheta}{y_k}(x,y) = \sum_i x_i \cdot A_{ik}
+\)
+#+END_CENTER
+
+On a donc :
+
+#+BEGIN_CENTER
+\(
+\deriveepartielle{}{x}(x^\dual \cdot A \cdot y) = A \cdot y \\ \\
+\deriveepartielle{}{y}(x^\dual \cdot A \cdot y) = A^\dual \cdot x
+\)
+#+END_CENTER
+
+Les dérivées secondes s'en déduisent alors :
+
+#+BEGIN_CENTER
+\(
+\dfdxdy{}{x}{x}(x^\dual \cdot A \cdot y) = 0 \\ \\
+\dfdxdy{}{y}{y}(x^\dual \cdot A \cdot y) = 0 \\ \\
+\dfdxdy{}{y}{x}(x^\dual \cdot A \cdot y) = A
+\)
+#+END_CENTER
+
+
+** Formes quadratiques
+
+Soit à présent $A \in \matrice(\setR,n,n)$. Considérons la forme quadratique $\mathcal{Q} : \setR^m \times \setR^n \mapsto \setR$ définie par :
+
+$$\mathcal{Q}(x) = x^\dual \cdot A \cdot x$$
+
+En terme de composantes, on a :
+
+$$\mathcal{Q}(x) = \sum_{i,j} x_i \cdot A_{ij} \cdot x_j$$
+
+Les dérivées s'écrivent :
+
+\begin{eqnarray*}
+\deriveepartielle{\mathcal{Q}}{x_k}(x) &=& \sum_j A_{kj} \cdot x_j + \sum_i x_i \cdot A_{ik} \\
+&=& \sum_i (A_{ki} + A_{ik}) \cdot x_i
+\end{eqnarray*}
+
+On a donc :
+
+$$\deriveepartielle{}{x}(x^\dual \cdot A \cdot x) = (A + A^\dual) \cdot x$$
+
+La dérivée seconde est alors immédiate :
+
+$$\dfdxdy{}{x}{x}(x^\dual \cdot A \cdot x) = A + A^\dual$$
+
+Un cas fréquent est celui d'une matrice $H$ hermitienne ($H^\dual = H$). On a alors :
+
+$$\deriveepartielle{}{x}(x^\dual \cdot H \cdot x) = 2 \cdot H \cdot x$$
+
+et :
+
+$$\dfdxdy{}{x}{x}(x^\dual \cdot H \cdot x) = 2 \cdot H$$
+
+
+** Produit matriciel
+
+Soient les fonctions $A : \setR \mapsto \matrice(\setR,m,n)$ et $B : \setR \mapsto \matrice(\setR,n,p)$ qui, à chaque réel $t$, associent des matrices de composantes réelles. Nous allons tenter de trouver une expression de la dérivée du produit matriciel $A \cdot B$. Les propriétés des différentielles nous permettent d'écrire :
+
+$$\partial \sum_{k = 1}^n A_{ik}(t) \cdot B_{kj}(t) = \sum_{k = 1}^n \partial A_{ik}(t) \cdot B_{kj}(t) + \sum_{k=1}^n A_{ik}(t) \cdot \partial B_{kj}(t)$$
+
+On a donc :
+
+$$\partial (A \cdot B) = \partial A \cdot B + A \cdot \partial B$$
+
+ou, symboliquement :
+
+$$d(A \cdot B) = dA \cdot B + A \cdot dB$$
+
+
+** Matrice inverse
+
+Considérons le cas où $A$ est carrée ($m = n$). En dérivant la relation $A \cdot A^{-1} = I$, on obtient :
+
+$$0 = dI = d(A \cdot A^{-1}) = dA \cdot A^{-1} + A \cdot dA^{-1}$$
+
+et donc :
+
+$$d(A^{-1}) = - A^{-1} \cdot dA \cdot A^{-1}$$
+
+
+* Résolution d'équations
+
+#+TOC: headlines 1 local
+
+\label{chap:resolu}
+
+
+** Introduction
+
+Soit une fonction $F : \setR^n \mapsto \setR^n$ et l'espace des solutions :
+
+$$S = \{ s \in \setR^n : F(s) = 0 \} = \noyau F$$
+
+Nous allons tenter d'obtenir itérativement une estimation d'un $s \in S$. 0n part d'un certain $x_0 \in \setR^n$ et on essaie à chaque itération :
+
+$$x_{k + 1} = I(x_k) = x_k + \Delta_k$$
+
+d'améliorer la qualité de notre estimation, c'est à dire de rapprocher $F(x_{k + 1})$ de zéro. On espère que pour $K$ assez grand, on aura :
+
+$$F(x_K) \approx \lim_{k \to \infty} F(x_k) = 0$$
+
+A moins que l'on ait déjà une vague idée d'une région $X \subseteq \setR^n$ contenant une solution $s \in S$, on choisit en général $x_0 = 0$.
+
+
+** Newton-Raphson
+
+On demande à chaque étape que le développement du premier ordre autour de $x_k$ s'annule en $x_{k + 1} = x_k + \Delta_k$. On impose donc :
+
+$$F(x_{k + 1}) \approx F(x_k) + \partial F(x_k) \cdot \Delta_k \approx 0$$
+
+On est amenés à résoudre le système :
+
+$$\partial F(x_k) \cdot \Delta_k = - F(x_k)$$
+
+Si la matrice $\partial F(x_k)$ est inversible, on a :
+
+$$\Delta_k = - \left[\partial F(x_k)\right]^{-1} \cdot F(x_k)$$
+
+et :
+
+$$x_{k + 1} = x_k - \left[\partial F(x_k)\right]^{-1} \cdot F(x_k)$$
+
+
+** Banach
+
+On voit que la condition $F(s) = 0$ est équivalente à $F(s) + s = s$. On définit donc la fonction $f : \setR^n \to \setR^n$ par :
+
+$$f(x) = F(x) + x$$
+
+pour tout $x \in \setR^n$, et on cherche un $s$ tel que $f(s) = F(s) + s = s$.
+Si $f$ est contractante, on applique le théorème de Banach en itérant simplement par :
+
+$$x_{k + 1} = f(x_k) = f^{k + 1}(x_0)$$
+
+Pour $K$ assez grand, on a alors :
+
+$$x_K \approx \lim_{k \to \infty} x_k = s$$
+
+
+** Méthode hybride d'Aitken
+
+Supposons à présent que $F,f : \setR \to \setR$ avec $f(x) = F(x) + x$ pour tout $x \in \setR$. L'idée est d'utiliser simultanément les deux approches $F(s) = 0$ et $f(s) = F(s) + s = s$. Soit :
+
+$$F'(x) = \OD{F}{x}(x)$$
+
+Supposons qu'au bout de $k$ itérations on ait obtenu $x_k$ comme approximation de la solution $s$. On commence par effectuer deux $f$-itérations en partant de $x_k$ :
+
+\begin{eqnarray*}
+u_0 &=& x_k \\
+u_1 &=& f(u_0) \\
+u_2 &=& f(u_1)
+\end{eqnarray*}
+
+Les valeurs de $F$ s'écrivent alors :
+
+#+BEGIN_CENTER
+\(
+F(u_0) = f(u_0) - u_0 = u_1 - u_0 \\
+F(u_1) = f(u_1) - u_1 = u_2 - u_1
+\)
+#+END_CENTER
+
+On se sert ensuite du développement :
+
+$$F(u_0) \approx F(u_1) + F'(u_1) \cdot (u_0 - u_1)$$
+
+pour approximer $F'$ :
+
+$$F'(u_1) \approx \frac{F(u_0) - F(u_1)}{u_0 - u_1} = \frac{F(u_1) - F(u_0)}{u_1 - u_0}$$
+
+On a donc :
+
+$$F'(u_1) \approx \frac{(u_2 - u1) - (u_1 - u_0)}{u_1 - u_0} = \frac{(u_2 - 2 u_1 + u_0)}{u_1 - u_0}$$
+
+On applique ensuite l'itération de Newton-Raphson :
+
+$$x_{k + 1} = x_{k} - \frac{F(x_k)}{F'(x_k)}$$
+
+en remplaçant la dérivée $F'$ par son approximation :
+
+$$x_{k+1} = x_k - \frac{(u_1 - u_0)^2}{u_2 - 2 u_1 + u_0}$$
+
+On espère que la suite des $x_k$ ainsi définie converge plus vite vers la solution $s$ que la suite des $f^k(x_0)$.

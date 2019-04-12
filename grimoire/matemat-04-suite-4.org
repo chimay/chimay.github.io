@@ -1,0 +1,983 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat 04 : Suites - 4
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/commandes-tex.org"
+
+* Problème de la racine
+
+#+TOC: headlines 1 local
+
+\label{chap:problemeDeLaRacine}
+
+
+** Introduction
+
+Nous allons tenter de déterminer la racine de deux, c'est-à-dire
+chercher un nombre noté :
+
+$$x = \sqrt{2}$$
+
+tel que :
+
+$$x^2 = \parentheses{\sqrt{2}}^2 = 2$$
+
+
+** Solution rationnelle ?
+
+Nous allons chercher une solution à ce problème sous la forme d'un rationnel
+$x \in \setQ$. Soit :
+
+$$x = \frac{i}{j}$$
+
+avec $i,j \in \setZ$ et $j \ne 0$. On a :
+
+$$x^2 = \frac{i^2}{j^2} = \frac{(-i)^2}{(-j)^2} = \frac{(-i)^2}{j^2} = \frac{i^2}{(-j)^2}$$
+
+On peut donc se restreindre aux entiers positifs, autrement dit
+aux naturels. Si $i = 0$, on a forcément :
+
+$$\frac{i^2}{j^2} = 0 \ne 2$$
+
+ce qui ne résout pas notre problème. Supposons à présent que
+$i \ne 0$ et posons :
+
+$$k = \pgcd(i,j)$$
+
+On a alors $k \ne 0$ et les quotients :
+
+$$a = i \diventiere k$$
+
+$$b = j \diventiere k$$
+
+vérifiant les divisions exactes :
+
+$$i = a \cdot k$$
+$$j = b \cdot k$$
+
+Si nous voulons résoudre le problème, il faut donc avoir :
+
+$$\parentheses{\frac{a}{b}}^2 = \frac{a^2}{b^2} = \frac{a^2 \cdot k^2}{b^2 \cdot k^2} = \frac{i^2}{j^2} = 2$$
+
+c'est-à-dire :
+
+$$a^2 = 2 \ b^2$$
+
+On a donc :
+
+$$a^2 \diventiere 2 = b^2$$
+
+et :
+
+$$a^2 \modulo 2 = 0$$
+
+
+*** Lemme
+
+Soit un naturel $m \in \setN$ vérifiant :
+
+$$m^2 \modulo 2 = 0$$
+
+Posons :
+
+$$n = m \diventiere 2$$
+$$r = m \modulo 2$$
+
+Le modulo $r \in \setN$ vérifie :
+
+$$0 \le r \le 2 - 1 = 1$$
+
+autrement dit $r \in \{0,1\}$. Si on suppose que $r = 1$, on a :
+
+$$m = 2 \ n + 1$$
+
+Développons le carré :
+
+$$m^2 = (2 \ n + 1)^2 = 4 \ n^2 + 4 \ n + 1 = 4 \ (n^2 + n) + 1$$
+
+On aurait alors :
+
+$$m^2 \diventiere 2 = 2 \ (n^2 + n)$$
+
+et :
+
+$$m^2 \modulo 2 = 1$$
+
+contrairement à l'hypothèse. On en conclut que $r = 0$,
+la division entière de $m$ par $2$ est exacte :
+
+$$m \modulo 2 = 0$$
+
+
+*** Modulo nul
+
+Le naturel $a$ vérifiant :
+
+$$a^2 \modulo 2 = 0$$
+
+on a également :
+
+$$a \modulo 2 = 0$$
+
+Si on pose :
+
+$$n = a \diventiere 2$$
+
+on a l'expression de la division exacte :
+
+$$a = 2 \ n$$
+
+L'équation à résoudre devient alors :
+
+$$a^2 = 4 \ n^2 = 2 \ b^2$$
+
+On en déduit que :
+
+$$b^2 = 2 \ n^2$$
+
+vérifie :
+
+$$b^2 \diventiere 2 = n^2$$
+
+et :
+
+$$b^2 \modulo 2 = 0$$
+
+On a donc aussi :
+
+$$b \modulo 2 = 0$$
+
+Posons $p = b \diventiere 2$. On a :
+
+$$a = 2 \ n$$
+$$b = 2 \ p$$
+
+et :
+
+$$i = 2 \ n \cdot k = n \cdot (2 \ k)$$
+$$j = 2 \ p \cdot k = p \cdot (2 \ k)$$
+
+Le naturel $t = 2 \ k \strictsuperieur k$ vérifie donc :
+
+$$i \modulo t = j \modulo t = 0$$
+
+ce qui est contraire à l'hypothèse de supremum de $k = \pgcd(i,j)$.
+On ne peut donc pas trouver de rationnel $x$ vérifiant :
+
+$$x^2 = 2$$
+
+
+** Suite inférieure
+
+On ne peut pas trouver de solution exacte à l'équation $x^2 = 2$ dans
+l'ensemble des rationnels, mais on peut l'approcher autant qu'on le
+souhaite. Soit les suites de naturels $n : k \mapsto n_k$ et $M : k \mapsto M_k$
+définies par :
+
+$$n_k = 10^k$$
+
+$$M_k = \sup \accolades{p \in \setN : \frac{p^2}{n_k^2} \le 2}$$
+
+pour tout $k \in \setN$. On définit aussi les rationnels associés :
+
+$$x_k = \frac{M_k}{n_k}$$
+
+et les erreurs :
+
+$$E_k = 2 - x_k^2$$
+
+On a :
+
+$$n_0 = 1 \qquad M_0 = 1 \qquad x_0 = 1 \qquad E_0 = 1$$
+$$n_1 = 10 \qquad M_1 = 14 \qquad x_1 = 1,4 \qquad E_1 = 0,04$$
+$$n_2 = 100 \qquad M_2 = 141 \qquad x_2 = 1,41 \qquad E_2 = 0,0119$$
+
+et ainsi de suite.
+
+
+*** Maximum
+
+Soit :
+
+$$A_k = \accolades{p \in \setN : \frac{p^2}{n_k^2} \le 2}$$
+
+Pour tout $p \in \setN$ vérifiant $p \strictsuperieur 2 \ n_k$, on a :
+
+$$\frac{p^2}{n_k^2} \strictsuperieur \frac{2^2 \ n_k^2}{n_k^2} = \frac{4 \ n_k^2}{n_k^2} = 4 \strictsuperieur 2$$
+
+On en conclut que :
+
+$$A_k \subseteq \{ 0, 1, ..., 2 \ n_k - 1, 2 \ n_k \}$$
+
+L'ensemble $A_k$ contient donc un nombre fini d'éléments. Comme l'ordre
+usuel sur $\setN$ est total, on en conclut que $A_k$ admet un maximum
+identique au suprémum. La suite des $M_k$ est donc bien définie :
+
+$$M_k = \max A_k = \sup A_k$$
+
+
+*** Majoration
+
+L'inclusion nous donne l'inégalité des maxima :
+
+$$\max A_k \le \max \{ 0, 1, ..., 2 \ n_k \} = 2 \ n_k$$
+
+On en déduit que :
+
+$$M_k \le 2 \ n_k$$
+
+En divisant cette inégalité par $n_k \strictsuperieur 0$, on obtient une
+borne constante pour les rationnels associés :
+
+$$x_k = \frac{M_k}{n_k} \le 2$$
+
+La suite des $x_k$ est majorée.
+
+
+*** Suite croissante
+
+Le maximum appartenant à l'ensemble, on a :
+
+$$\frac{M_k^2}{n_k^2} \le 2$$
+
+et :
+
+$$\frac{(10 \ M_k)^2}{n_{k+1}^2} = \frac{(10 \ M_k)^2}{(10 \ n_k)^2} = \frac{100 \ M_k^2}{100 \ n_k^2} = \frac{M_k^2}{n_k^2} \le 2$$
+
+On en déduit que :
+
+$$10 \ M_k \in \accolades{p \in \setN : \frac{p^2}{n_{k+1}^2} \le 2}$$
+
+On conclut de ce résultat et du caractère de maximum de $M_{k+1}$ que :
+
+$$M_{k+1} \ge 10 \ M_k$$
+
+et :
+
+$$x_{k+1} = \frac{M_{k+1}}{n_{k+1}} \ge \frac{10 \ M_k}{n_{k+1}} = \frac{10 \ M_k}{10 \ n_k} = \frac{M_k}{n_k} = x_k$$
+
+On en conclut que :
+
+$$x_0 \le x_1 \le x_2 \le ...$$
+
+On a donc $x_i \ge x_j$ pour tout $i,j \in \setN$ vérifiant $i \ge j$,
+la suite des $x_k$ est croissante.
+
+
+*** Cadre
+
+Comme $M_k$ est le maximum de $A_k$, on a :
+
+$$x_k^2 = \frac{M_k^2}{n_k^2} \le 2$$
+
+et :
+
+$$\parentheses{\frac{M_k + 1}{n_k}}^2 \strictsuperieur 2$$
+
+On a :
+
+$$\parentheses{\frac{M_k + 1}{n_k}}^2 = \parentheses{x_k + \frac{1}{n_k}}^2$$
+
+En développant le binôme, on arrive à :
+
+$$\parentheses{\frac{M_k + 1}{n_k}}^2 = x_k^2 + \frac{2 \ x_k}{n_k} + \frac{1}{n_k^2}$$
+
+On a donc l'inégalité :
+
+$$x_k^2 + \frac{2 \ x_k}{n_k} + \frac{1}{n_k^2} \strictsuperieur 2$$
+
+qui nous donne la borne inférieure :
+
+$$x_k^2 \strictsuperieur 2 - \parentheses{\frac{2 \ x_k}{n_k} + \frac{1}{n_k^2}}$$
+
+Posons :
+
+$$\Delta_k =  \frac{2 \ x_k}{n_k} + \frac{1}{n_k^2}$$
+
+En divisant l'inégalité :
+
+$$1 \le n_k$$
+
+par $n_k^2 \strictsuperieur 0$, on obtient :
+
+$$\frac{1}{n_k^2} \le \frac{1}{n_k}$$
+
+On a donc :
+
+$$\Delta_k \le \frac{2 \ x_k}{n_k} + \frac{1}{n_k} = \frac{2 \ x_k + 1}{n_k}$$
+
+Comme $x_k \le 2$, on a :
+
+$$\Delta_k \le \frac{2 \cdot 2 + 1}{n_k} = \frac{5}{n_k}$$
+
+On a finalement la borne inférieure :
+
+$$x_k^2 \strictsuperieur 2 - \Delta_k \ge 2 - \frac{5}{n_k}$$
+
+Posons :
+
+$$\alpha_k = \frac{5}{n_k}$$
+
+On a l'encadrement :
+
+$$2 - \alpha_k \strictinferieur x_k^2 \le 2$$
+
+
+*** Bornes d'une différence
+
+Soit $i,j \in \setN$ tels que $i \ge j$. On dispose des bornes :
+
+$$2 - \alpha_i \strictinferieur x_i^2 \le 2$$
+$$2 - \alpha_j \strictinferieur x_j^2 \le 2$$
+
+En évaluant la différence de :
+
+$$x_i^2 \le 2$$
+
+$$x_j^2 \strictsuperieur 2 - \alpha_j$$
+
+on arrive à la majoration :
+
+$$x_i^2 - x_j^2 \le 2 - (2 - \alpha_j) = \alpha_j$$
+
+Comme la suite est croissante, on a $x_i \ge x_j$. Comme la fonction
+$f : x \mapsto x^2$ est croissante sur l'ensemble des rationnels
+positifs, on a également :
+
+$$x_i^2 \ge x_j^2$$
+
+ou :
+
+$$x_i^2 - x_j^2 \ge 0$$
+
+On a donc finalement :
+
+$$\abs{x_i^2 - x_j^2} = x_i^2 - x_j^2 \le \alpha_j$$
+
+
+*** Factorisation
+
+On a la factorisation :
+
+$$x_i^2 - x_j^2 = (x_i - x_j) \cdot (x_i + x_j)$$
+
+Comme la suite est croissante, on sait que :
+
+$$x_i,x_j \ge x_0 = 1$$
+
+Leur somme vérifie l'inégalité :
+
+$$x_i + x_j \ge 1 + 1 = 2$$
+
+La différence des carrés est donc minorée par :
+
+$$x_i^2 - x_j^2 = (x_i - x_j) \cdot (x_i + x_j) \ge (x_i - x_j) \cdot 2$$
+
+En divisant par $2$, on obtient :
+
+$$x_i - x_j \le \frac{1}{2} \ \parentheses{x_i^2 - x_j^2}$$
+
+Comme la suite est croissante, on a $x_i \ge x_j$ et :
+
+$$x_i - x_j \ge 0$$
+
+Donc :
+
+$$\abs{x_i - x_j} = x_i - x_j$$
+
+Comme la fonction $f : x \mapsto x^2$ est croissante sur l'ensemble
+des rationnels positifs, on a également :
+
+$$x_i^2 \ge x_j^2$$
+
+ou :
+
+$$x_i^2 - x_j^2 \ge 0$$
+
+Donc :
+
+$$\abs{x_i^2 - x_j^2} = x_i^2 - x_j^2$$
+
+On a donc :
+
+$$\abs{x_i - x_j} \le \frac{1}{2} \ \abs{x_i^2 - x_j^2} \le \frac{\alpha_j}{2}$$
+
+
+*** Suite de Cauchy
+
+Soit $\epsilon \strictsuperieur 0$. Comme :
+
+$$\lim_{k \to \infty} \alpha_k = \lim_{k \to \infty} \frac{5}{n_k} = \lim_{k \to \infty} \frac{5}{10^k} = 0$$
+
+on peut trouver un naturel $K$ tel que :
+
+$$\abs{\alpha_k} = \abs{\alpha_k - 0} \le \epsilon$$
+
+pour tout naturel $k$ vérifiant $k \ge K$. On note que :
+
+$$\alpha_k = \frac{5}{10^k} \le \frac{5}{10^K} = \alpha_K$$
+
+Si $i,j \in \setN$ vérifient $i,j \ge K$, on a donc :
+
+$$\abs{x_i - x_j} \le \frac{1}{2} \ \max \{ \alpha_i, \alpha_j \} \le \alpha_K \le \epsilon$$
+
+La suite des $x_k$ est de Cauchy.
+
+
+*** Erreur
+
+On déduit du cadre de $x_k$ que :
+
+$$-\alpha_k = (2 - \alpha_k) - 2 \strictinferieur x_k^2 - 2$$
+
+ou :
+
+$$E_k = 2 - x_k^2 \strictinferieur \alpha_k$$
+
+Comme on a également $x_k^2 \le 2$ par définition des $M_k$, on a
+aussi $E_k \ge 0$ et :
+
+$$\abs{E_k - 0} = \abs{E_k} = E_k \le \alpha_k$$
+
+La suite des $\alpha_k$ convergeant vers zéro, on en déduit que :
+
+$$\lim_{k \to \infty} E_k = 0$$
+
+
+*** Convergence
+
+Soit $\epsilon \strictsuperieur 0$. L'erreur convergeant vers zéro,
+on peut trouver un $K \in \setN$ tel que :
+
+$$\distance(x_k^2,2) = \abs{x_k^2 - 2} =  \abs{E_k} = \abs{E_k - 0} \le \epsilon$$
+
+pour tout naturel $k$ vérifiant $k \ge K$. On en déduit que :
+
+$$\lim_{k \to \infty} x_k^2 = 2$$
+
+
+*** Supremum
+
+Soit l'ensemble :
+
+$$X = \accolades{x_k^2 : k \in \setN}$$
+
+On sait déjà que :
+
+$$x_k^2 = \frac{M_k^2}{n_k^2} \le 2$$
+
+pour tout $k \in \setN$. On en conclut que :
+
+$$X \le 2$$
+
+Pour tout rationnel $u \ge 2 \ge X$, on a :
+
+$$u \in \major X$$
+
+On en déduit que :
+
+$$\{ u \in \setQ : u \ge 2 \} \subseteq \major X$$
+
+Soit un rationnel $v \strictinferieur 2$. Posons :
+
+$$\delta = 2 - v \strictsuperieur 0$$
+
+On choisit un rationnel $\epsilon$ vérifiant :
+
+$$0 \strictinferieur \epsilon \strictinferieur \delta$$
+
+Comme la suite $k \mapsto x_k^2$ converge vers $2$, on peut
+trouver un naturel $K$ tel que :
+
+$$\abs{x_k^2 - 2} = 2 - x_k^2 \le \epsilon$$
+
+pour tout naturel $k$ vérifiant $k \ge K$. On a alors :
+
+$$x_k^2 \ge 2 - \epsilon \strictsuperieur 2 - \delta = v$$
+
+Donc :
+
+$$v \notin \major X$$
+
+On a donc :
+
+$$\major X = \{ u \in \setQ : u \ge 2 \}$$
+
+et :
+
+$$\sup \accolades{x_k^2 : k \in \setN} = \min \{ u \in \setQ : u \ge 2 \} = 2$$
+
+
+** Suite supérieure
+
+Soit les suites de naturels $n : k \mapsto n_k$ et $m : k \mapsto m_k$
+définies par :
+
+$$n_k = 10^k$$
+
+$$m_k = \inf \accolades{p \in \setN : \frac{p^2}{n_k^2} \ge 2}$$
+
+pour tout $k \in \setN$. On définit aussi les rationnels associés :
+
+$$y_k = \frac{m_k}{n_k}$$
+
+et les erreurs :
+
+$$e_k = y_k^2 - 2$$
+
+On a :
+
+$$n_0 = 1 \qquad m_0 = 2 \qquad y_0 = 2 \qquad e_0 = 2$$
+$$n_1 = 10 \qquad m_1 = 15 \qquad y_1 = 1,5 \qquad e_1 = 0,25$$
+$$n_2 = 100 \qquad m_2 = 142 \qquad y_2 = 1,42 \qquad e_2 = 0,0164$$
+
+et ainsi de suite.
+
+
+*** Minimum
+
+Soit les ensembles :
+
+$$A_k = \accolades{p \in \setN : \frac{p^2}{n_k^2} \le 2}$$
+
+$$B_k = \accolades{p \in \setN : \frac{p^2}{n_k^2} \ge 2}$$
+
+Le problème de la racine de deux n'admettant pas de solution dans $\setQ$,
+on ne peut trouver de naturel $p$ tel que :
+
+$$\frac{p^2}{n_k^2} = 2$$
+
+Pour tout $p \in \setN$, on a donc soit :
+
+$$\frac{p^2}{n_k^2} \strictinferieur 2$$
+
+et $p \in A_k$, soit :
+
+$$\frac{p^2}{n_k^2} \strictsuperieur 2$$
+
+et $p \in B_k$. On en conclut que :
+
+$$A_k \cup B_k = \setN$$
+
+Si on pouvait trouver un $p \in A_k \cap B_k$, on aurait :
+
+$$2 \le \frac{p^2}{n_k^2} \le 2$$
+
+et donc :
+
+$$\frac{p^2}{n_k^2} = 2$$
+
+ce qui est impossible. On en conclut que :
+
+$$A_k \cap B_k = \emptyset$$
+
+Si $p \in \setN \setminus A_k$, on a $p \in B_k$ et vice versa. Donc :
+
+$$B_k = \setN \setminus A_k$$
+
+Soit $p \in A_k$. Pour tout $u \in \setN$ vérifiant $u \le p$, on a :
+
+$$\frac{u^2}{n_k^2} \le \frac{p^2}{n_k^2} \le 2$$
+
+On en conclut que $u \in A_k$. L'ensemble $A_k$ possédant un maximum :
+
+$$M_k = \max A_k$$
+
+il est donc de la forme :
+
+$$A_k = \{ 0, 1, ..., M_k - 1, M_k \}$$
+
+On en conclut que $B_k$ est de la forme :
+
+$$B_k = \setN \setminus A_k = \{ M_k + 1, M_k + 2, ... \} = \{ p \in \setN : p \ge M_k + 1 \}$$
+
+On en conclut que le minimum de $B_k$ existe et qu'il s'identifie à l'infimum. Les
+nombres $m_k$ sont donc bien définis et :
+
+$$m_k = \inf B_k = \min B_k = M_k + 1$$
+
+
+*** Minoration
+
+Comme $m_k = M_k + 1$, on a :
+
+$$1 = x_0 \le x_k = \frac{M_k}{n_k} \le \frac{M_k + 1}{n_k} = \frac{m_k}{n_k} = y_k$$
+
+La suite des $y_k$ est minorée.
+
+
+*** Suite décroissante
+
+Le minimum appartenant à l'ensemble, on a :
+
+$$\frac{m_k^2}{n_k^2} \ge 2$$
+
+et :
+
+$$\frac{(10 \ m_k)^2}{n_{k+1}^2} = \frac{(10 \ m_k)^2}{(10 \ n_k)^2} = \frac{100 \ m_k^2}{100 \ n_k^2} = \frac{m_k^2}{n_k^2} \ge 2$$
+
+On en déduit que :
+
+$$10 \ m_k \in \accolades{p \in \setN : \frac{p^2}{n_{k+1}^2} \ge 2}$$
+
+On conclut de ce résultat et du caractère de minimum de $m_{k+1}$ que :
+
+$$m_{k+1} \le 10 \ m_k$$
+
+et :
+
+$$y_{k+1} = \frac{m_{k+1}}{n_{k+1}} \le \frac{10 \ m_k}{n_{k+1}} = \frac{10 \ m_k}{10 \ n_k} = \frac{m_k}{n_k} = y_k$$
+
+On en conclut que :
+
+$$y_0 \ge y_1 \ge y_2 \ge ...$$
+
+On a donc $y_i \le y_j$ pour tout $i,j \in \setN$ vérifiant $i \ge j$,
+la suite des $y_k$ est décroissante.
+
+
+*** Cadre
+
+Comme $m_k$ est le minimum de $B_k$, on a :
+
+$$y_k^2 = \frac{m_k^2}{n_k^2} \ge 2$$
+
+et :
+
+$$\parentheses{\frac{m_k - 1}{n_k}}^2 \strictinferieur 2$$
+
+On a :
+
+$$\parentheses{\frac{m_k - 1}{n_k}}^2 = \parentheses{y_k - \frac{1}{n_k}}^2$$
+
+En développant le binôme, on arrive à :
+
+$$\parentheses{\frac{m_k - 1}{n_k}}^2 = y_k^2 - \frac{2 \ y_k}{n_k} + \frac{1}{n_k^2}$$
+
+On a donc l'inégalité :
+
+$$y_k^2 - \frac{2 \ y_k}{n_k} + \frac{1}{n_k^2} \strictinferieur 2$$
+
+qui nous donne la borne inférieure :
+
+$$y_k^2 \strictinferieur 2 + \parentheses{\frac{2 \ y_k}{n_k} - \frac{1}{n_k^2}}$$
+
+Posons :
+
+$$\delta_k =  \frac{2 \ y_k}{n_k} - \frac{1}{n_k^2}$$
+
+Comme :
+
+$$\frac{1}{n_k^2} \strictsuperieur 0$$
+
+on a :
+
+$$\delta_k \le \frac{2 \ y_k}{n_k}$$
+
+Comme $y_k \le y_0 = 2$, on a :
+
+$$\delta_k \le \frac{2 \cdot 2}{n_k} = \frac{4}{n_k}$$
+
+On a finalement la borne supérieure :
+
+$$y_k^2 \strictinferieur 2 + \delta_k \le 2 + \frac{4}{n_k}$$
+
+Posons :
+
+$$\gamma_k = \frac{4}{n_k}$$
+
+On a l'encadrement :
+
+$$2 \le y_k^2 \strictinferieur 2 + \gamma_k$$
+
+
+*** Bornes d'une différence
+
+Soit $i,j \in \setN$ tels que $i \le j$. On dispose des bornes :
+
+$$2 \le  y_i^2 \strictinferieur 2 + \gamma_i$$
+$$2 \le  y_j^2 \strictinferieur 2 + \gamma_j$$
+
+En évaluant la différence de :
+
+$$y_i^2 \strictinferieur 2 + \gamma_i$$
+
+$$y_j^2 \ge 2$$
+
+on arrive à la majoration :
+
+$$y_i^2 - y_j^2 \le 2 + \gamma_i - 2 = \gamma_i$$
+
+Comme la suite est croissante, on a $y_i \ge y_j$. Comme la fonction
+$f : x \mapsto x^2$ est croissante sur l'ensemble des rationnels
+positifs, on a également :
+
+$$y_i^2 \ge y_j^2$$
+
+ou :
+
+$$y_i^2 - y_j^2 \ge 0$$
+
+On a donc finalement :
+
+$$\abs{y_i^2 - y_j^2} = y_i^2 - y_j^2 \le \gamma_i$$
+
+
+*** Factorisation
+
+On a la factorisation :
+
+$$y_i^2 - y_j^2 = (y_i - y_j) \cdot (y_i + y_j)$$
+
+Comme :
+
+$$y_i,y_j \ge 1$$
+
+leur somme vérifie l'inégalité :
+
+$$y_i + y_j \ge 1 + 1 = 2$$
+
+La différence des carrés est donc minorée par :
+
+$$y_i^2 - y_j^2 = (y_i - y_j) \cdot (y_i + y_j) \ge (y_i - y_j) \cdot 2$$
+
+En divisant par $2$, on obtient :
+
+$$y_i - y_j \le \frac{1}{2} \ \parentheses{y_i^2 - y_j^2}$$
+
+Comme la suite est croissante, on a $y_i \ge y_j$ et :
+
+$$y_i - y_j \ge 0$$
+
+Donc :
+
+$$\abs{y_i - y_j} = y_i - y_j$$
+
+Comme la fonction $f : x \mapsto x^2$ est croissante sur l'ensemble
+des rationnels positifs, on a également :
+
+$$y_i^2 \ge y_j^2$$
+
+ou :
+
+$$y_i^2 - y_j^2 \ge 0$$
+
+Donc :
+
+$$\abs{y_i^2 - y_j^2} = y_i^2 - y_j^2$$
+
+On a donc :
+
+$$\abs{y_i - y_j} \le \frac{1}{2} \ \abs{y_i^2 - y_j^2} \le \frac{\gamma_i}{2}$$
+
+
+*** Suite de Cauchy
+
+Soit $\epsilon \strictsuperieur 0$. Comme :
+
+$$\lim_{k \to \infty} \gamma_k = \lim_{k \to \infty} \frac{4}{n_k} = \lim_{k \to \infty} \frac{4}{10^k} = 0$$
+
+on peut trouver un naturel $K$ tel que :
+
+$$\abs{\gamma_k} = \abs{\gamma_k - 0} \le \epsilon$$
+
+pour tout naturel $k$ vérifiant $k \ge K$. On note que :
+
+$$\gamma_k = \frac{4}{10^k} \le \frac{4}{10^K} = \gamma_K$$
+
+Si $i,j \in \setN$ vérifient $i,j \ge K$, on a donc :
+
+$$\abs{y_i - y_j} \le \frac{1}{2} \ \max \{ \gamma_i, \gamma_j \} \le \gamma_K \le \epsilon$$
+
+La suite des $y_k$ est de Cauchy.
+
+
+*** Erreur
+
+On déduit du cadre de $y_k$ que :
+
+$$e_k = y_k^2 - 2 \strictinferieur \gamma_k$$
+
+Comme on a également $y_k^2 \ge 2$ par définition des $m_k$, on a
+aussi $e_k \ge 0$ et :
+
+$$\abs{e_k - 0} = \abs{e_k} = e_k \le \gamma_k$$
+
+La suite des $\gamma_k$ convergeant vers zéro, on en déduit que :
+
+$$\lim_{k \to \infty} e_k = 0$$
+
+
+*** Convergence
+
+Soit $\epsilon \strictsuperieur 0$. L'erreur convergeant vers zéro,
+on peut trouver un $K \in \setN$ tel que :
+
+$$\distance(y_k^2,2) = \abs{y_k^2 - 2} =  \abs{e_k} = \abs{e_k - 0} \le \epsilon$$
+
+pour tout naturel $k$ vérifiant $k \ge K$. On en déduit que :
+
+$$\lim_{k \to \infty} y_k^2 = 2$$
+
+
+*** Infimum
+
+Soit l'ensemble :
+
+$$Y = \accolades{Y_k^2 : k \in \setN}$$
+
+On sait déjà que :
+
+$$y_k^2 = \frac{m_k^2}{n_k^2} \ge 2$$
+
+pour tout $k \in \setN$. On en conclut que :
+
+$$Y \ge 2$$
+
+Pour tout rationnel $u \le 2 \le Y$, on a :
+
+$$u \in \minor Y$$
+
+On en déduit que :
+
+$$\{ u \in \setQ : u \le 2 \} \subseteq \minor Y$$
+
+Soit un rationnel $v \strictsuperieur 2$. Posons :
+
+$$\delta = v - 2 \strictsuperieur 0$$
+
+On choisit un rationnel $\epsilon$ vérifiant :
+
+$$0 \strictinferieur \epsilon \strictinferieur \delta$$
+
+Comme la suite $k \mapsto y_k^2$ converge vers $2$, on peut
+trouver un naturel $K$ tel que :
+
+$$\abs{y_k^2 - 2} = y_k^2 - 2 \le \epsilon$$
+
+pour tout naturel $k$ vérifiant $k \ge K$. On a alors :
+
+$$y_k^2 \le 2 + \epsilon \strictinferieur 2 + \delta = v$$
+
+Donc :
+
+$$v \notin \minor Y$$
+
+On a donc :
+
+$$\minor Y = \{ u \in \setQ : u \le 2 \}$$
+
+et :
+
+$$\inf \accolades{y_k^2 : k \in \setN} = \max \{ u \in \setQ : u \le 2 \} = 2$$
+
+
+** Équivalence
+
+On sait que :
+
+$$x_k = \frac{M_k}{n_k} \le \frac{M_k + 1}{n_k} = \frac{m_k}{n_k} = y_k$$
+
+pour tout $k \in \setN$. Donc :
+
+$$y_k - x_k \ge 0$$
+
+et :
+
+$$\abs{y_k - x_k} = y_k - x_k$$
+
+On a aussi $x_k^2 \le y_k^2$ et :
+
+$$\abs{y_k^2 - x_k^2} = y_k^2 - x_k^2$$
+
+En soustrayant les inégalités :
+
+$$y_k^2 \le 2 + \gamma_k$$
+$$x_k^2 \ge 2 - \alpha_k$$
+
+on obtient :
+
+$$y_k^2 - x_k^2 \le (2 + \gamma_k) - (2 - \alpha_k) = \gamma_k + \alpha_k$$
+
+Posons :
+
+$$\varpi_k = \gamma_k + \alpha_k = \frac{4}{n_k} + \frac{5}{n_k} = \frac{9}{n_k}$$
+
+On a :
+
+$$\abs{y_k^2 - x_k^2} \le \varpi_k$$
+
+Comme $y_k \ge x_k \ge x_0 = 1$, on a :
+
+$$y_k + x_k \ge 1 + 1 = 2$$
+
+La factorisation :
+
+$$y_k^2 - x_k^2 = (y_k - x_k) \cdot (y_k + x_k) \ge (y_k - x_k) \cdot 2$$
+
+nous donne la borne :
+
+$$\abs{y_k - x_k} \le \frac{\abs{y_k^2 - x_k^2}}{2} \le \frac{\varpi_k}{2}$$
+
+Comme :
+
+$$\lim_{k \to \infty} \varpi_k = \lim_{k \to \infty} \frac{9}{n_k} = 0$$
+
+on en déduit que :
+
+$$\lim_{k \to \infty} \abs{y_k - x_k} = 0$$
+
+et :
+
+$$\lim_{k \to \infty} (x_k - y_k) = 0$$
+
+
+** Conclusion
+
+La racine de deux n'existe pas dans l'ensemble des rationnels, mais on peut
+trouver des suites de rationnels de Cauchy, croissante et majorée :
+
+$$1 = x_0 \le x_1 \le ... \le x_k \le ... \le 2$$
+
+ou décroissante et minorée :
+
+$$2 = y_0 \ge y_1 \ge ... \ge y_k \ge ... \ge 1$$
+
+dont les carrés convergent vers $2$ :
+
+$$\lim_{k \to \infty} x_k^2 = \lim_{k \to \infty} y_k^2 = 2$$
+
+On a également les propriétés extrémales :
+
+$$\sup \accolades{x_k^2 : k \in \setN} = \inf \accolades{y_k^2 : k \in \setN} = 2$$
+
+et l'équivalence :
+
+$$\lim_{k \to \infty} (x_k - y_k) = 0$$
+
+On aimerait en déduire que les suites convergent et que :
+
+$$\sqrt{2} = \lim_{k \to \infty} x_k = \lim_{k \to \infty} y_k = \sup \accolades{x_k : k \in \setN} = \inf \accolades{y_k : k \in \setN}$$
+
+Malheureusement, ces limites et extrema n'existent pas dans l'ensemble
+des rationnels. Nous sommes donc amenés à associer au nombre $\sqrt{2}$
+des ensembles associés à ces suites. La généralisation de ces propriétés
+nous mène à la construction des nombres réels.

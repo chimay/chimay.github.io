@@ -1,0 +1,2459 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Ordina 08 : Contrôle de version
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index. html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+* Concepts
+
+#+TOC: headlines 1 local
+
+
+** Ensemble différentiel
+
+Un *ensemble différentiel* est un groupe de modifications (ajouts,
+suppressions, etc) permettant de reproduire à volonté les
+modifications effectuées pour obtenir une version d'un objet à partir
+d'une autre. Cet objet peut être un fichier, plusieurs fichiers, un
+répertoire, etc.
+
+Un *fichier différentiel*, ou *patch*, est un fichier contenant un
+ensemble différentiel.
+
+
+** Système de contrôle de version
+
+Un *système de contrôle de version* (Version Control System ou VCS en
+anglais, ou encore Source Code Management ou SCM) enregistre
+l'historique des versions d'un projet dans un dépôt. Cet historique
+permet entre-autres de revenir à une version antérieure. Un système de
+contrôle de version permet également de fusionner les modifications
+parallèles qui se produisent lorsque plusieurs personnes travaillent
+simultanément sur le même projet.
+
+On utilise souvent le terme de *révision* à la place
+de version.
+
+L'enregistrement d'une révision est appelée commit ou record
+en anglais.
+
+
+** Généalogie des révisions
+
+
+*** Parents et enfants
+
+Supposons que nous effectuions un ensemble de modifications sur la
+révision P et que cela nous mène à la révision E. On dit alors que P
+est un parent de E ou que E est un enfant de P.
+
+
+*** Ancêtres
+
+Si deux révisions A et B peuvent être reliées par une chaîne de
+révisions parent-enfant et que A est antérieure à B, on dit que A est
+un ancêtre de B.
+
+
+*** Branches
+
+Une *branche* est une variante d'un projet disposant de son propre
+historique de versions. Il est donc possible de gérer plusieurs
+branches se développant en parallèle. Chaque branche peut être issue
+d'une autre branche, ou de la variante originelle du projet. Autrement
+dit, chaque branche peut elle-même générer une autre branche, ce qui
+donne une structure arborescente au dépôt.
+
+
+**** Tronc
+
+On nomme *tronc*, *branche principale* ou *branche maître* la branche
+racine du projet.
+
+
+**** Tête
+
+Une *tête*, ou révision de tête, est la version la plus récente d'une
+branche.
+
+/Suggestion :/ pourquoi pas le synonyme *feuille*, pour rester dans la
+logique thématique de l'arbre ?
+
+
+*** Fusion
+
+L'opération de *fusion* (merge en anglais) est l'opération inverse de
+la création de branche : elle consiste à réunir deux branches ayant un
+ancêtre commun en fusionnant leurs modifications depuis leur scission.
+
+
+**** Intégrations d'autres révisions
+
+La fusion peut être utilisée pour intégrer seulement certaines des
+modifications enregistrées dans d'autres révisions. On parle alors de
+*cueillette de cerise* ou de cherry-picking en anglais.
+
+
+*** Dépôts, branches et révisions
+
+La référence à une révision peut se faire schématiquement par :
+
+#+BEGIN_EXAMPLE
+branche/numéroDeVersionDansLaBranche
+#+END_EXAMPLE
+
+Lorsqu'il existe plusieurs dépôts contenant le projet et que chacun
+contient des branches qui lui sont propres, on peut compléter cette
+référence par :
+
+#+BEGIN_EXAMPLE
+dépôt/branche/numéroDeVersionDansLaBranche
+#+END_EXAMPLE
+
+
+* Fichiers différentiels
+
+#+TOC: headlines 1 local
+
+
+** Deux fichiers
+
+Un fichier différentiel, ou patch en anglais, est un fichier contenant
+les différences entre deux fichiers. On crée un patch avec la commande
+diff. Exemple :
+
+#+BEGIN_EXAMPLE
+diff -u /avant/ /après/ > /delta/
+#+END_EXAMPLE
+
+Ce fichier permet de transformer n'importe quelle copie de /avant/ en
+/après/. Il suffit de se placer dans le répertoire le contenant et de
+faire :
+
+#+BEGIN_EXAMPLE
+patch < /delta/
+#+END_EXAMPLE
+
+On peut spécifier le nom du fichier auquel on applique le patch :
+
+#+BEGIN_EXAMPLE
+patch /avant/ /delta/
+#+END_EXAMPLE
+
+
+*** Répertoires
+
+L'option -r permet de générer un fichier différentiel comparant deux
+répertoires :
+
+#+BEGIN_EXAMPLE
+diff -u -r /avant/ /après/ > /delta/
+#+END_EXAMPLE
+
+Pour appliquer le patch, il suffit de se rendre dans le répertoire
+auquel on souhaite l'appliquer, puis :
+
+#+BEGIN_EXAMPLE
+patch < /delta/
+#+END_EXAMPLE
+
+
+*** Annulation
+
+L'option -R permet d'annuler les modifications d'un patch :
+
+#+BEGIN_EXAMPLE
+patch -R < /delta/
+#+END_EXAMPLE
+
+
+*** Chemins
+
+Il est possible que le répertoire dans lequel on souhaite appliquer le
+patch soit différent de celui dans lequel il a été créé. Comme les
+chemins stockés dans le patch sont absolus, il faut parfois les
+raccourcir pour en faire des chemins relatifs, sans quoi le patch
+s'appliquera aux mauvais fichiers, voire à des fichiers qui n'existent
+pas. L'application d'un patch où les chemins sont raccourcis de /N/
+répertoire depuis la racine s'effectue via la commande :
+
+#+BEGIN_EXAMPLE
+patch -p/N/ < /delta/
+#+END_EXAMPLE
+
+
+*** Simulation
+
+On peut simuler l'application du patch :
+
+#+BEGIN_EXAMPLE
+patch --dry-run < /delta/
+#+END_EXAMPLE
+
+
+** Fusion de trois fichiers
+
+
+*** Merge
+
+Il est possible d'inclure les modifications transformant un fichier
+/départ/ en un fichier /arrivée/ dans un autre fichier /fusion/ :
+
+#+BEGIN_EXAMPLE
+merge /fusion/ /départ/ /arrivée/
+#+END_EXAMPLE
+
+
+*** Diff3
+
+La commande *diff3* ressemble à *merge*, mais permet de sortir le
+résultat sur la sortie standard plutôt que de modifier un des
+fichiers :
+
+#+BEGIN_EXAMPLE
+diff -m /fusion/ /départ/ /arrivée/ > /fusionné/
+#+END_EXAMPLE
+
+
+* Rcs
+
+#+TOC: headlines 1 local
+
+Rcs est un système de contrôle de version. Il enregistre l'historique
+des versions successives d'un ou de plusieurs fichiers sous forme
+d'ensembles différentiels contenant les modifications nécessaires pour
+passer d'une version à la suivante.
+
+| ci /fichier/    | Enregistre la version d'un fichier                              |
+|                 | (provoque la suppression du fichier original                    |
+|                 | ou de la copie de travail,                                      |
+|                 | seul le fichier versionné subsiste)                             |
+| co /fichier/    | Produit une copie de travail  de la dernière version du fichier |
+| ci -u /fichier/ | Enregistre la version  et produit une copie de travail          |
+
+
+*** Verrous
+
+Les verrous permet d'éviter que deux utilisateurs n'éditent le même
+fichier au même moment.
+
+| ci -l /fichier/  | Enregistre la version, produit une copie de travail  et verrouille le fichier |
+| co -l /fichier/  | Produit une copie de travail  et verrouille le fichier                        |
+| rcs -l /fichier/ | Verrouille le fichier                                                         |
+| rcs -L /fichier/ | Active le verrouillage obligatoire                                            |
+| rcs -U /fichier/ | Désactive le verrouillage obligatoire                                         |
+
+
+*** Révisions
+
+La convention de notation est la suivante :
+
+#+BEGIN_EXAMPLE
+Version.Niveau
+#+END_EXAMPLE
+
+Le niveau est incrémenté automatiquement à chaque nouvelle révision.
+Par contre, un changement de version doit être explicitement signalé.
+Les révisions de la première version s'écrivent donc  :
+
+#+BEGIN_EXAMPLE
+1.1 — 1.2 — 1.3 — ...
+#+END_EXAMPLE
+
+
+**** Branches
+
+Dans le cas d'une branche particulière issue de Version.Niveau, on a la notation :
+
+#+BEGIN_EXAMPLE
+Version.Niveau.Branche.NiveauDansBranche
+#+END_EXAMPLE
+
+Les révisions de la première branche de la version 2.4 s'écrivent donc :
+
+#+BEGIN_EXAMPLE
+2.4.1.1 — 2.4.1.2 — 2.4.1.3 — ...
+#+END_EXAMPLE
+
+| rcs -b/Révision/|Modifie la branche par défaut|
+
+
+**** Labels
+
+| rcs -n/Label/:/NoRévision/ | Crée un label correspondant à une révision            |
+| ci -n/Label/ /fichier/     | Crée un label correspondant  à la version enregistrée |
+
+
+**** Identification
+
+| -r/NuméroRévision/ | Révision d'après son numéro |
+| -r/Label/          | Révision d'après un label   |
+| -d/Date/           | Révision d'après la date    |
+
+| ci -r/Révision/ /fichier/ | Enregistre la version d'un fichier  sous une révision donnée |
+| co -r/Révision/ /fichier/ | Produit une copie de travail  d'une révision particulière    |
+
+
+*** Fusion
+
+| rcsmerge -r/Départ/ -r/Arrivée/ /fichier/ | Inclut les modifications réalisées  entre deux révisions dans le fichier |
+
+
+*** Informations
+
+| rlog /fichier/ | Journal d'un fichier |
+| rcsdiff        | Différences          |
+
+
+* Cvs
+
+#+TOC: headlines 1 local
+
+
+** Généralités
+
+Cvs est un système de contrôle de version centralisé, c'est-à-dire un
+VCS où l'historique est enregistrée dans un dépôt central, commun à
+tous les utilisateurs. Il enregistre l'historique des versions
+successives d'un projet sous forme d'ensembles différentiels contenant
+les modifications nécessaires pour passer d'une version à la suivante.
+Les modifications réalisées sur les copies de travail des
+contributeurs sont fusionnées dans le dépôt central.
+
+Notons que Cvs se base sur Rcs pour la gestion individuelle de chaque
+fichier d'un projet.
+
+| cvs --help-commands        | Affiche la liste des sous-commandes cvs |
+| cvs --help /sous-commande/ | Affiche l'aide d'une sous-commande      |
+
+
+** Dépôt
+
+Le répertoire par défaut du dépôt cvs peut être défini via la variable
+d'environnement $CVSROOT :
+
+#+BEGIN_EXAMPLE
+export CVSROOT=/répertoireDépôt/
+#+END_EXAMPLE
+
+On peut ensuite initialiser le dépôt :
+
+#+BEGIN_EXAMPLE
+cvs init
+#+END_EXAMPLE
+
+On peut aussi spécifier le répertoire dans la commande :
+
+#+BEGIN_EXAMPLE
+cvs -d /répertoireDépôt/ init
+#+END_EXAMPLE
+
+
+*** Méthodes d'accès
+
+Le shell permettant les accès à distance utilisé par cvs est le
+contenu de la variable d'environnement CVS_RSH. Pour utiliser ssh, on
+place la ligne :
+
+#+BEGIN_EXAMPLE
+export CVS_RSH=ssh
+#+END_EXAMPLE
+
+dans le zshrc, zshenv, ou autre fichier d'initialisation de votre
+shell. Pour un accès local, le contenu de CVSROOT est de la forme :
+
+#+BEGIN_EXAMPLE
+export CVSROOT=:local://répertoireDépôt/
+#+END_EXAMPLE
+
+où le :local: est optionnel. Pour un accès distant, on a la directive
+:ext: permettant d'utiliser le CVS_RSH :
+
+#+BEGIN_EXAMPLE
+export CVSROOT=:ext:/utilisateur/@/machine/://répertoireDépôt/
+#+END_EXAMPLE
+
+
+** Importation
+
+La sous-commande import permet d'importer les fichiers du répertoire
+courant dans le dépôt central. On lui fournit le nom du projet,
+l'auteur et un label :
+
+#+BEGIN_EXAMPLE
+cvs import /projet/ /auteur/ /label/
+#+END_EXAMPLE
+
+Cvs lance alors un éditeur vous permettant de noter un message
+d'information relatif à l'importation. On peut éventuellement placer
+le projet ainsi créer dans un groupe de projets :
+
+#+BEGIN_EXAMPLE
+cvs import /groupe///projet/ /auteur/ /label/
+#+END_EXAMPLE
+
+On peut également préciser le répertoire du dépôt :
+
+#+BEGIN_EXAMPLE
+cvs -d /répertoireDépôt/ import /.../
+#+END_EXAMPLE
+
+
+** Fichiers
+
+| cvs add    | Ajoute un nouveau fichier ou répertoire au dépôt |
+| cvs remove | Enlève un fichier ou répertoire au dépôt         |
+
+
+** Flux
+
+Commandes à effectuer dans un répertoire contenant une copie de travail.
+
+| cvs co  cvs checkout  cvs get | Effectue une copie de travail du dépôt  dans le répertoire courant |
+| cvs up  cvs update            | Met à jour la copie de travail  par rapport au dépôt               |
+| cvs ci  cvs commit            | Enregistre les modifications de la copie de travail                |
+|                               | dans le dépôt central et les associe à une nouvelle révision       |
+
+*Remarque :* on utilise parfois le
+terme de checkin comme synonyme de commit, par symétrie
+avec le checkout.
+
+
+** Révisions
+
+Il existe plusieurs notions de versions dans cvs : chaque fichier
+possède plusieurs versions, et le projet peut également posséder
+plusieurs versions.
+
+
+*** Labels
+
+Commandes à effectuer dans un répertoire de travail.
+
+| cvs tag /label/            | Définit un label                       |
+| cvs rtag /label/ -D /date/ | Définit un label d'après la date       |
+| cvs up -r /label/          | Récupère une révision d'après le label |
+| cvs up -D /date/           | Récupère une révision d'après la date  |
+
+
+*** Branches
+
+| cvs tag -b /branche/            | Définit une branche                                           |
+| cvs rtag -b /branche/ -D /date/ | Définit une branche d'après une date                          |
+| cvs up -r /branche/             | Peuple la copie de travail avec  l'arborescence d'une branche |
+
+
+** Fusion
+
+| cvs up -j /branche/          | Fusionne une branche avec la copie de travail                                       |
+| cvs up -j /avant/ -j /après/ | Fusionne les modifications entre deux états  d'une branche avec la copie de travail |
+
+
+*** Annulation
+
+Pour annuler une modification, il suffit de fusionner
+de la révision la plus récente à la plus ancienne :
+
+#+BEGIN_EXAMPLE
+cvs up -j /après/ -j /avant/
+#+END_EXAMPLE
+
+
+** Informations
+
+Commandes à effectuer dans un répertoire de travail.
+
+| cvs status  | Affiche le statut de la copie de travail  par rapport au dépôt central |
+| cvs history | Résumé                                                                 |
+| cvs log     | Affiche les journeaux                                                  |
+| cvs diff    | Différences entre la copie de travail et le dépôt                      |
+
+
+** Communication
+
+| cvs edit /fichier/          | Informe les autres utilisateurs  qu'on édite un fichier                 |
+| cvs unedit /fichier/        | Informe les autres utilisateurs  qu'on a terminé d'éditer un fichier    |
+| cvs editors                 | Liste des fichiers  en cours d'édition                                  |
+| cvs watch add /fichiers/    | Demande à recevoir les informations  d'édition sur les fichiers         |
+| cvs watch remove /fichiers/ | Ne demande plus à recevoir les informations  d'édition sur les fichiers |
+| cvs watchers                | Liste des fichiers où l'information  d'édition est demandée             |
+
+
+** Exportation
+
+Exporte une révision contenue dans le dépôt :
+
+#+BEGIN_EXAMPLE
+cvs export -r /révision/ /nom/
+#+END_EXAMPLE
+
+
+** Administration
+
+| cvs admin|Accès aux commandes d'administration|
+
+
+* Subversion - svn
+
+#+TOC: headlines 1 local
+
+
+
+** Généralités
+
+Subversion est un système de contrôle de version centralisé.
+
+| svn h svn help                                     | Aide                              |
+| svn h /sous-commande/ svn help /...../             | Aide sur une sous-commande de svn |
+| svnadmin create --fs-type fsfs /répertoireDuDépôt/ | Création d'un dépôt               |
+
+
+** Urls
+
+Soit un protocole /proto/. L'url d'un dépôt est de la forme :
+
+#+BEGIN_EXAMPLE
+/proto/:///cheminDuDépôt/
+#+END_EXAMPLE
+
+Un répertoire du projet est désigné par :
+
+#+BEGIN_EXAMPLE
+/proto/:///cheminDuDépôt///cheminInterneDuProjet/
+#+END_EXAMPLE
+
+Un fichier du projet est désigné par :
+
+#+BEGIN_EXAMPLE
+/proto/:///cheminDuDépôt///cheminInterneDuProjet///fichier/
+#+END_EXAMPLE
+
+
+*** Protocoles
+
+Pour un accès
+à un dépôt local, on utilise :
+
+#+BEGIN_EXAMPLE
+file:////cheminAbsolu/
+#+END_EXAMPLE
+
+Pour un accès à un dépôt distant, on utilise
+la communication via un tunnel ssh :
+
+#+BEGIN_EXAMPLE
+svn+ssh:///utilisateur/@/machine///chemin/
+#+END_EXAMPLE
+
+ou le serveur svn, s'il est lancé :
+
+#+BEGIN_EXAMPLE
+svn:///utilisateur/@/machine///chemin/
+#+END_EXAMPLE
+
+
+** Import - Export
+
+| svn import /répertoire/ /proto/:///dépôt/ | Importation d'un répertoire dans un dépôt             |
+| svn export /proto/:///dépôt/ /répertoire/ | Exporte le contenu du dépôt sans les méta-données svn |
+
+
+** Révisions
+
+Les révisions sont des versions successives de l'arborescence
+du projet.
+
+| -r /N/     | Option permettant d'opérer   sur une révision particulière            |
+| -r /M/:/N/ | Option permettant d'opérer   sur une plage de révisions particulières |
+
+
+*** Spéciales
+
+| -r HEAD      | Dernière révision du dépôt                                  |
+| -r BASE      | Révision de la dernière mise à jour  de la copie de travail |
+| -r COMMITTED | Commit juste avant BASE                                     |
+| -r PREV      | Juste avant COMMITTED                                       |
+
+
+*** Date et heure
+
+| -r { "/date/ /heure/" }                          | Révision d'après la date et l'heure               |
+| -r { /date/ }                                    | Révision d'après la date                          |
+| -r { /heure/ }                                   | Révision d'après l'heure                          |
+| -r { "/date1/ /heure1/" }:{ "/date2/ /heure2/" } | Révisions d'après une plage  de dates et d'heures |
+
+
+*** Référence
+
+Au fil des révisions, il peut arriver que le même nom soit porté par
+des fichiers différents : on renomme ou supprime le premier et un
+autre apparaît à sa place par exemple. Le nom du fichier ne suffit
+donc plus à le caractériser, il faut également indiquer une révision
+de référence afin de le distinguer de ses homonymes. La notation
+générique est :
+
+#+BEGIN_EXAMPLE
+/fichier/@/Révision/
+#+END_EXAMPLE
+
+On retrouve également les notations :
+
+| /fichier/@/HEAD/             | Fichier présent dans la  dernière révision du dépôt                     |
+| /fichier/@/BASE/             | Fichier présent lors de la dernière  mise à jour de la copie de travail |
+| /fichier/@{"/date/ /heure/"} | Fichier présent à une date  et heure donnée                             |
+
+
+**** Url
+
+En y ajoutant la référence à une version, l'url vers un répertoire
+du projet devient :
+
+#+BEGIN_EXAMPLE
+/proto/:///cheminDuDépôt///cheminInterne/@/Révision/
+#+END_EXAMPLE
+
+Vers un fichier, on a :
+
+#+BEGIN_EXAMPLE
+/proto/:///cheminDuDépôt///cheminInterne///fichier/@/Révision/
+#+END_EXAMPLE
+
+
+**** Par défaut
+
+Par défaut, on a :
+
+#+BEGIN_EXAMPLE
+/fichier/ = /fichier/@BASE
+#+END_EXAMPLE
+
+pour une copie de travail, et :
+
+#+BEGIN_EXAMPLE
+/fichier/ = /fichier/@HEAD
+#+END_EXAMPLE
+
+pour un dépôt.
+
+
+** Opérations sur les fichiers
+
+
+*** Intéractions de la copie de travail avec le dépôt
+
+Commandes à effectuer dans un répertoire de travail.
+
+| svn co /proto/:///dépôt/ svn checkout /...../ | Effectue une copie de travail                |
+|                                               | d'un dépôt dans le répertoire courant        |
+| svn up  svn update                            | Met à jour la copie de travail               |
+|                                               | par rapport au dépôt                         |
+| svn ci  svn commit                            | Enregistre les modifications                 |
+|                                               | dans le dépôt et crée une  nouvelle révision |
+
+La validation des modifications lance un éditeur pour écrire les
+commentaires associés. On peut aussi écrire les commentaires au fur et
+à mesure, les sauver dans un fichier /commentaires/ et valider par :
+
+#+BEGIN_EXAMPLE
+svn commit -F /commentaires/
+#+END_EXAMPLE
+
+Un commit nécessite que les fichiers modifiés sur la copie de travail
+soient à jour par rapport au dépôt. Par contre, nul besoin que le
+projet entier soit à jour.
+
+
+**** Modifier l'url source
+
+La commande switch permet de changer l'url source
+de la copie de travail :
+
+#+BEGIN_EXAMPLE
+svn switch /nouvelleUrlSource/
+#+END_EXAMPLE
+
+On a aussi la version courte :
+
+#+BEGIN_EXAMPLE
+svn sw /nouvelleUrlSource/
+#+END_EXAMPLE
+
+
+*** Système de fichier
+
+Ces commandes s'effectuent généralement dans un répertoire de travail.
+Les modifications ne seront validées dans le dépôt qu'après un *svn
+commit*. On peut aussi spécifier une url
+*protocole://dépôt/répertoire* en argument. Dans ce dernier cas, les
+modifications sont immédiates.
+
+| svn add   | Ajoute un fichier dans le dépôt |
+| svn mkdir | Crée un répertoire              |
+| svn mv    | Déplace ou renomme un fichier   |
+| svn cp    | Copie un fichier                |
+| svn rm    | Supprime un fichier du dépôt    |
+
+
+*** Informations
+
+| svn ls                   | Liste les fichiers et répertoires                          |
+| svn cat -r /N/ /fichier/ | Affiche le contenu d'un fichier lors d'une révision        |
+| svn diff                 | Affiche les différences entre les fichiers modifiés        |
+|                          | de la copie de travail et leur état lors du dernier update |
+| svn diff -r /M/:/N/      | Affiche les différences entre deux révisions               |
+
+Pour préciser une révision de référence /R/, on utilise
+bien entendu la notation :
+
+#+BEGIN_EXAMPLE
+svn cat -r /N/ /fichier/@/R/
+#+END_EXAMPLE
+
+Si le fichier n'existe pas dans la copie de travail actuelle, il faut
+recourir à l'url du dépôt :
+
+#+BEGIN_EXAMPLE
+svn cat -r /N/ /proto/:///dépôt///chemin///fichier/@/R/
+#+END_EXAMPLE
+
+
+**** Par défaut
+
+Si /N/ n'est pas mentionné, il est égal à /R/
+par défaut. Ainsi :
+
+#+BEGIN_EXAMPLE
+svn cat /fichier/@/R/
+#+END_EXAMPLE
+
+est équivalent à :
+
+#+BEGIN_EXAMPLE
+svn cat -r /R/ /fichier/@/R/
+#+END_EXAMPLE
+
+
+*** Profondeur
+
+L'option --depth permet de régler le nombre de niveaux de répertoires
+sur lesquels une action agit. Elle est infinie par défaut. Les valeurs
+possibles sont :
+
+| --depth empty     | Juste le répertoire, sans ses fichiers  ni ses sous-répertoires       |
+| --depth file      | Juste le répertoire et ses fichiers                                   |
+| --depth immediate | Juste le répertoire, ses fichiers                                     |
+|                   | et ses sous-répertoires, mais pas  le contenu de ses sous-répertoires |
+| --depth infinity  | Récursif                                                              |
+
+
+*** Restaurer
+
+| svn cleanup|Après un crash, termine les opérations en cours|
+
+
+** Informations
+
+Commandes à effectuer dans un répertoire de travail.
+
+| svn info               | Informations                                                                          |
+| svn log                | Affiche les journeaux des modifications                                               |
+| svn status             | Statuts des modifications de la copie de travail  par rapport au dépôt correspondant  |
+| svn status -v          | Statuts avec détails                                                                  |
+| svn blame /fichier/ -g | Affiche le contenu d'un fichier en ajoutant  sur chaque ligne l'auteur et la révision |
+
+
+** Fusion
+
+La commande merge permet d'appliquer à la copie de travail les
+changements effectués dans une url de référence depuis le dernier
+merge :
+
+#+BEGIN_EXAMPLE
+svn merge /urlDépôt///répertoireDeRéférence/
+#+END_EXAMPLE
+
+Faites bien attention à ne pas confondre cette url de référence dont
+on reproduit les modifications avec l'url source de la copie de
+travail : les deux peuvent être identiques mais ce n'est en général
+pas le cas. Une fusion est en général effectuée entre un update et un
+commit.
+
+
+*** Révisions
+
+Il est possible de limiter une fusion aux modifications d'une
+révision :
+
+#+BEGIN_EXAMPLE
+svn merge -r /N/ /urlDépôt///répertoireDeRéférence/
+#+END_EXAMPLE
+
+ou d'une plage de révisions :
+
+#+BEGIN_EXAMPLE
+svn merge -r /M/:/N/ /urlDépôt///répertoireDeRéférence/
+#+END_EXAMPLE
+
+
+*** Comparaisons
+
+Il est possible de comparer deux url de références et d'appliquer les
+différences à la copie de travail :
+
+#+BEGIN_EXAMPLE
+svn merge /url1/ /url2/ /répertoireCopieDeTravail/
+#+END_EXAMPLE
+
+
+*** Ancêtres
+
+La commande merge compare les fichiers par rapport à leurs ancêtres /
+successeurs dans l'historique en suivant les variations dues aux
+opérations d'édition, de copie, de suppression, déplacement ou autres
+opérations réalisées sur les fichiers ou répertoires. C'est très
+pratique la plupart du temps, mais il arrive que l'on souhaite
+appliquer les différences entre deux arborescences importées : il n'y
+a alors aucune relation ancestrale entre les deux arborescences et la
+fusion se contente de remplacer l'une par l'autre, ce qui n'est pas
+l'effet souhaité. L'option --ignore-ancestry ne compare plus en
+utilisant l'historique mais simplement en comparant les fichiers et
+répertoires de mêmes noms dans les arborescences :
+
+#+BEGIN_EXAMPLE
+svn merge /url1/ /url2/ /copieDeTravail/ --ignore-ancestry
+#+END_EXAMPLE
+
+
+**** Diff
+
+La commande diff se comporte à l'inverse de la commande merge : par
+défaut, elle n'utilise pas l'historique. Si on veut qu'elle l'utilise,
+il faut lui passer l'option --notice-ancestry :
+
+#+BEGIN_EXAMPLE
+svn diff --notice-ancestry /...../
+#+END_EXAMPLE
+
+
+** Annulation
+
+La commande revert annule les modifications effectuées sur /fichier/
+depuis le dernier update :
+
+#+BEGIN_EXAMPLE
+svn revert /fichier/
+#+END_EXAMPLE
+
+
+*** Anciennes modifications
+
+En utilisant un merge sur l'url source de la copie de travail, on peut
+annuler les modifications ayant eu lieu entre les révisions /M/ et
+/N/, avec /M/ précédant /N/. Il suffit pour cela d'utiliser la plage
+de révisions inversée /N/:/M/ :
+
+#+BEGIN_EXAMPLE
+svn merge -r /N/:/M/ /urlSource/
+#+END_EXAMPLE
+
+Ces révisions resteront dans l'historique, mais les
+modifications correspondantes ne figureront plus dans
+le dépôt à partir du prochain commit.
+
+
+*** Anciens fichiers
+
+Pour restaurer un fichier ou un dossier qui a été supprimé, il suffit
+de le copier dans le répertoire adéquat de la copie de travail en
+précisant la révision dans l'url :
+
+#+BEGIN_EXAMPLE
+svn cp /urlSource///fichier/@/Révision/ /répertoire//
+#+END_EXAMPLE
+
+Le commit suivant validera la restauration dans le dépôt.
+
+
+*** Revenir à une ancienne version
+
+Pour revenir à une ancienne version, il suffit de faire une copie de
+l'url de l'ancienne version vers l'url courante :
+
+#+BEGIN_EXAMPLE
+svn cp /urlSource///fichier/@/Révision/ /urlSource///fichier//
+#+END_EXAMPLE
+
+Si l'url de destination existe déjà, il faut la supprimer avant de
+faire la copie :
+
+#+BEGIN_EXAMPLE
+svn rm /urlSource///fichier//
+#+END_EXAMPLE
+
+
+** Propriétés
+
+
+*** Fichiers
+
+| svn propset /propriété/ /valeur/ /fichier/           | Définit une propriété  associée à un fichier                        |
+| svn propset /propriété/ -F /fichierValeur/ /fichier/ | Définit une propriété   d'après le contenu d'un fichier             |
+| svn propedit /propriété/ /fichier/                   | Édite une propriété  dans l'éditeur par défaut                      |
+| svn proplist /fichier/                               | Liste les noms des propriétés  associée à un fichier                |
+| svn proplist -v /fichier/                            | Liste les noms et les valeurs  des propriétés associée à un fichier |
+| svn propget /propriété/ /fichier/                    | Donne la valeur d'une propriété                                     |
+| svn propdel /propriété/ /fichier/                    | Supprime une propriété                                              |
+
+
+*** Révisions
+
+| svn propset /propriété/ /valeur/ -r /révision/ --revprop | Définit une propriété  associée à une révision                      |
+| svn propedit /propriété/ -r /révision/ --revprop         | Édite une propriété  dans l'éditeur par défaut                      |
+| svn proplist -r /révision/ --revprop                     | Liste les noms des propriétés  associée à un fichier                |
+| svn proplist -v -r /révision/ --revprop                  | Liste les noms et les valeurs  des propriétés associée à un fichier |
+| svn propget /propriété/ -r /révision/ --revprop          | Donne la valeur d'une propriété                                     |
+| svn propdel /propriété/ -r /révision/ --revprop          | Supprime une propriété                                              |
+
+
+** Conflits
+
+Un conflit apparaît lorsque plusieurs contributeurs ont modifié chacun
+de leur coté la même partie d'un fichier. Lorsqu'une telle situation
+apparaît, svn s'en rend compte lors de l'update et propose plusieurs
+actions possible : voir les différences, accepter la version du dépôt,
+maintenir sa version de travail, éditer le fichier, postposer la
+décision. Lorsqu'on postpose, les fichiers suivant sont disponible :
+
+| /fichier/                  | Le fichier contenant les fusions et les conflits |
+| /fichier/.mine             | Copie de travail juste avant l'update            |
+| /fichier/.r/NuméroAncien/  | Ancienne copie de travail juste avant l'update   |
+| /fichier/.r/NuméroNouveau/ | Nouvelle version du dépôt                        |
+
+Après avoir éventuellement examiné ces fichiers, on peut éditer
+/fichier/ pour résoudre les conflits. Lorsque tout est réparé, on
+l'indique à svn :
+
+#+BEGIN_EXAMPLE
+svn resolve --accept working /fichier/
+#+END_EXAMPLE
+
+qui considère alors le conflit comme résolu. Comme autres possibilités
+de résolution, on peut accepter la version du dépôt :
+
+#+BEGIN_EXAMPLE
+svn resolve --accept theirs-full /fichier/
+#+END_EXAMPLE
+
+ou conserver sa version de travail :
+
+#+BEGIN_EXAMPLE
+svn resolve --accept mine-full /fichier/
+#+END_EXAMPLE
+
+Après la résolution du conflit, les fichiers :
+
+#+BEGIN_EXAMPLE
+/fichier/.mine
+/fichier/.r/NuméroAncien/
+/fichier/.r/NuméroNouveau/
+#+END_EXAMPLE
+
+sont automatiquement effacés et le commit devient possible.
+
+
+** Verrous
+
+Habituellement, il n'est pas nécessaire de signaler aux autres
+contributeurs du projet que l'on modifie un fichier : il est fort
+probable qu'ils sont en train d'en modifier d'autres, ou une partie
+différente du même fichier. La fusion des modifications est alors
+automatique lors des update et commit, subversion utilisant un outil
+interne fonctionnant comme diff3. Il arrive cependant que l'on
+envisage de modifier un fichier en profondeur, ou que l'on opère sur
+une image ou autre fichier multimédia ou binaire. Les fusions
+deviennent alors difficiles sinon impossibles. Il est alors
+souhaitable de poser un verrou sur le fichier concerné afin
+d'interdire toute modification de la part des autres contributeurs.
+Dès que la modification est terminée, il suffit de valider les
+changements ou de déverrouiller explicitement le fichier.
+
+| svn lock /fichier/   | Verrouille un fichier                                                     |
+| svn unlock /fichier/ | Déverrouille un fichier                                                   |
+| svn:needs-lock       | Propriété marquant un fichier  comme devant être verrouillé avant édition |
+
+
+** Listes de modifications
+
+| svn changelist /liste/ /fichiers/ | Définit une liste de modifications  ou ajoute des fichiers à la liste |
+| svn changelist --remove /fichier/ | Enlève un fichier de sa liste de modifications                        |
+| --changelist /liste/              | Option limitant une action aux fichiers  d'une liste de modifications |
+
+Le contenu des listes est affiché par svn status.
+L'option --changelist permet de renommer une liste :
+
+#+BEGIN_EXAMPLE
+svn changelist /nomAprès/ --changelist /nomAvant/
+#+END_EXAMPLE
+
+ou de l'effacer :
+
+#+BEGIN_EXAMPLE
+svn changelist --remove --changelist /liste/
+#+END_EXAMPLE
+
+Les listes de modifications sont particulièrement
+utiles pour limiter un commit à certains fichiers :
+
+#+BEGIN_EXAMPLE
+svn commit --changelist /liste/
+#+END_EXAMPLE
+
+Cette action efface la liste en question. Si on veut
+conserver la liste, on dispose de l'option --keep-changelists :
+
+#+BEGIN_EXAMPLE
+svn commit --keep-changelists --changelist /liste/
+#+END_EXAMPLE
+
+
+** Branches
+
+Nous prenons comme cas d'école la structure suivante
+de répertoires internes au projet :
+
+| tronc      | Ligne principale du projet                    |
+| branches   | Variantes du projet                           |
+| labels     | Configurations particulières du projet        |
+| exterieurs | Autres projets dont dépend  le projet courant |
+
+
+*** Création d'une branche
+
+La création d'une branche se fait tout simplement
+en créant une copie de la ligne principale du projet :
+
+#+BEGIN_EXAMPLE
+svn cp /urlDépôt//tronc /urlDépôt//branches//UneBranche/
+#+END_EXAMPLE
+
+
+*** Obtenir une branche
+
+Il suffit d'utiliser la commande checkout :
+
+#+BEGIN_EXAMPLE
+svn checkout /urlDépôt//branches//UneBranche/
+#+END_EXAMPLE
+
+On peut aussi utiliser la commande switch pour
+changer de branche :
+
+#+BEGIN_EXAMPLE
+svn switch /urlDépôt//branches//AutreBranche/
+#+END_EXAMPLE
+
+
+*** Fusion
+
+La fusion est souvent utilisée pour maintenir une branche
+à jour par rapport à la ligne principale du projet :
+
+#+BEGIN_EXAMPLE
+cd /répertoireCopieDeTravail//branches//UneBranche/
+svn update
+svn merge /urlDépôt//tronc
+#+END_EXAMPLE
+
+
+**** Informations
+
+La commande mergeinfo donne des informations sur les changements
+appliqués par merge :
+
+#+BEGIN_EXAMPLE
+svn mergeinfo /urlDépôt//tronc
+#+END_EXAMPLE
+
+ainsi que sur ceux qui pourraient être appliqués :
+
+#+BEGIN_EXAMPLE
+svn merge /urlDépôt//tronc --dry-run
+#+END_EXAMPLE
+
+
+**** Réintégration
+
+Une fois le travail sur la branche fini, il est possible
+de réintégrer les changements dans la ligne principale du projet :
+
+#+BEGIN_EXAMPLE
+cd /répertoireCopieDeTravail//tronc
+svn update
+svn merge --reintegrate /urlDépôt//branches//UneBranche/
+svn commit
+#+END_EXAMPLE
+
+
+*** Suppression
+
+Si la branche n'est plus utile, on peut la supprimer du dépôt :
+
+#+BEGIN_EXAMPLE
+svn rm /urlDépôt//branches//UneBranche/
+#+END_EXAMPLE
+
+
+** Labels
+
+La création d'un label est semblable à la création d'une branche :
+
+#+BEGIN_EXAMPLE
+svn cp /urlDépôt//tronc /urlDépôt//labels//UnLabel/
+#+END_EXAMPLE
+
+On peut aussi créer un label à partir d'une copie de travail
+contenue dans /répertoire/ :
+
+#+BEGIN_EXAMPLE
+svn cp /répertoire/ /urlDépôt//labels//UnLabel/
+#+END_EXAMPLE
+
+
+** Mots-clé
+
+Pour activer l'expansion des mots-clé sur un fichier, on fait :
+
+#+BEGIN_EXAMPLE
+svn propset svn:keywords "/mots-clé/" /fichier/
+#+END_EXAMPLE
+
+où les mots-clé possibles sont :
+
+| Date   | Date de dernière modification                 |
+| Rev    | Dernière révision où le fichier a été modifié |
+| Author | Auteur de la dernière modification            |
+| URL    | Url du fichier dans le dépôt                  |
+| Id     | Synthèse des informations                     |
+
+Il ne reste plus qu'à insérer les mots-clé désirés entouré de $
+dans le fichier :
+
+| $Date$   | Date de dernière modification                 |
+| $Rev$    | Dernière révision où le fichier a été modifié |
+| $Author$ | Auteur de la dernière modification            |
+| $URL$    | Url du fichier dans le dépôt                  |
+| $Id$     | Synthèse des informations                     |
+
+et les valeurs seront mises à jour à chaque commit.
+
+
+** Administration
+
+
+*** Informations
+
+| svnlook uuid /dépôt/|Affiche l'identifiant du dépôt|
+
+
+*** Serveur
+
+On peut lancer le serveur qui répond aux réquêtes
+svn:// avec la commande :
+
+#+BEGIN_EXAMPLE
+svnserve -d -r /racineDesDépôtsSvn/
+#+END_EXAMPLE
+
+
+*** Connexions
+
+| svnadmin lstxns /dépôt/ | Liste des transactions non propagées  |
+| svnadmin rmtxns /dépôt/ | Supprime une transaction non propagée |
+
+
+*** Copies
+
+| svnadmin hotcopy /dépôtSource/ /dépôtCible/       | Copie à chaud d'un dépôt                                                        |
+| svnadmin dump /dépôt/ > /dump/                    | Sauvegarde de la base de donnée                                                 |
+| svnadmin load /dépôt/ < /dump/                    | Chargement d'une base de données                                                |
+| svndumpfilter include /motif/ < /dump/ > /filtré/ | Inclut certains répertoires correspondant au motif  dans un fichier dump filtré |
+| svndumpfilter exclude /motif/ < /dump/ > /filtré/ | Exclut certains répertoires correspondant au motif  dans un fichier dump filtré |
+
+
+*** Miroir
+
+| svnsync init /urlMiroir/ /urlDépôt/ | Initialisation d'un miroir                 |
+| svnsync sync /urlMiroir/            | Synchronisation du miroir avec le dépôt    |
+| svnsync copy-revprops /urlMiroir/   | Synchronisation des propriétés de révision |
+
+Supposons que le dépôt source et le miroir sont sur des machines
+différentes. On effectue l'initialisation sur la machine qui hébergera
+le miroir comme suit :
+
+#+BEGIN_EXAMPLE
+svnsync init file:////miroir/ svn+ssh:///dépôt/
+#+END_EXAMPLE
+
+Le dépôt miroir doit exister et être vide.
+
+
+* Darcs
+
+#+TOC: headlines 1 local
+
+
+** Généralités
+
+Darcs est un système de gestion de version spécialisé dans la
+manipulation de patchs. Il tient compte des dépendances entre patchs,
+de l'ordre dans lequel ils doivent être appliqués, etc. Les patchs
+sont stockés dans un sous-répertoire _patch à la racine du projet.
+
+| darcs help                 | Aide                    |
+| darcs help /sous-commande/ | Aide d'une sous-command |
+
+
+** Depôts
+
+| darcs initialize        | Initialise le dépôt courant                      |
+| darcs get /source/      | Copie un dépôt source dans le répertoire courant |
+| darcs put /destination/ | Copie le dépôt courant vers la destination       |
+
+
+** Fichiers
+
+| darcs add /fichiers/ | Ajoute des fichiers |
+
+
+** Informations
+
+| darcs whatsnew | Affiche les modifications |
+
+
+** Flux
+
+La sous-commande record permet d'enregistrer les
+modifications courantes dans un patch :
+
+#+BEGIN_EXAMPLE
+darcs record
+#+END_EXAMPLE
+
+Elle affiche chaque modification et demande s'il
+faut l'intégrer au patch. L'option -a lui demande de les
+intégrer toutes :
+
+#+BEGIN_EXAMPLE
+darcs record -a
+#+END_EXAMPLE
+
+
+*** Inter-dépôts
+
+| darcs pull /source/|Intègre les patchs d'un autre dépôt et les applique|
+|  darcs push /destination/|Intègre les patchs de ce dépôt  dans le dépôt destination et les applique|
+
+
+* Quilt
+
+#+TOC: headlines 1 local
+
+
+** Généralités
+
+Quilt est un gestionnaire de piles de patchs.
+
+| quilt -h                 | Aide                     |
+| quilt /sous-commande/ -h | Aide d'une sous-commande |
+
+
+** Fichiers
+
+| quilt add /fichiers/    | Ajoute des fichiers                                 |
+| quilt remove /fichiers/ | Enlève des fichiers                                 |
+| quilt files             | Liste des fichiers impliqués  dans le patch courant |
+
+
+** Pile
+
+| quilt top  | Affiche le nom du patch au sommet de la pile                                                  |
+| quilt push | Applique le patch courant  et l'ajoute au sommet de la pile                                   |
+| quilt pop  | Annule l'application du patch 		au sommet de la pile  et le supprime de la pile |
+
+
+** Patchs
+
+|  quilt new /patch/|Crée un nouveau patch et l'ajoute  au sommet de la pile|
+
+| quilt refresh            | Rafraîchit le patch courant  par rapport aux modifications de l'arborescence |
+| quilt import /patch/     | Importe un patch                                                             |
+| quilt fork /destination/ | Copie le patch courant                                                       |
+| quilt graph              | Dépendances entre patchs                                                     |
+
+
+* Mercurial - hg
+
+#+TOC: headlines 1 local
+
+
+** Généralités
+
+Par opposition à un système de contrôle de version dont le
+fonctionnement repose sur un dépôt central recueillant toutes les
+modifications, il existe des systèmes distribués où chaque
+arborescence de travail est couplée avec un dépôt local, ce qui donne
+plus d'autonomie aux utilisateurs.
+
+Mercurial est un système de contrôle de version distribué. Il retient
+l'historique des versions sous forme d'ensembles différentiels tout
+comme cvs, mais il stocke également régulièrement l'arborescence
+complète du projet. Les ensembles différentiels étant beaucoup plus
+petits que le projet complet, cette technique permet de conserver une
+taille réduite à l'historique tout en permettant d'accéder rapidement
+à n'importe quelle révision : il suffit de partir de la version
+complète la plus proche et d'appliquer les quelques ensembles
+différentiels qui la séparent de la version désirée.
+
+Le dépôt est stocké dans le répertoire .hg, à la racine
+de l'arborescence associée.
+
+| man hg                  | Page de manuel           |
+| hg help                 | Aide                     |
+| hg help /sous-commande/ | Aide d'une sous-commande |
+
+
+** Dépôts
+
+| hg init  | Crée un dépôt dans le répertoire courant |
+| hg clone | Crée une copie du dépôt                  |
+
+
+** Réseau
+
+| hg serve | Lance le serveur 		sur le port 8000 par défaut  Contient une interface web |
+
+
+** Révisions
+
+| -r /N/          | Révision d'après l'identifiant |
+| -r -/N/         | /N/ révisions antérieures      |
+| -d /date/       | Révision d'après la date       |
+| -d </date/      | Révisions avant la date        |
+| -d >/date/      | Révisions après la date        |
+| -d "/A/ to /B/" | Révisions entre deux dates     |
+
+
+*** Labels
+
+| hg tag /label/ | Définit un label à la révision courante |
+| -r /label/     | Révision d'après un label               |
+| tip            | Label de la révision la plus récente    |
+
+
+** Opérations sur les fichiers
+
+| hg add       | Ajoute des fichiers au contrôle de version |
+| hg copy      | Copie des fichiers                         |
+| hg rename    | Renomme / Déplace des fichiers             |
+| hg remove    | Supprime des fichiers                      |
+| hg addremove | Ajoute et supprime des fichiers            |
+
+
+** Flux
+
+| hg pull   | Intègre les modifications d'une autre dépôt  dans le dépôt local                                |
+| hg update | Met à jour l'arborescence d'après le dépôt local                                                |
+| hg commit | Enregistre les modifications 		dans le dépôt local et crée  une nouvelle révision |
+| hg push   | Publie les modifications du dépôt local  dans un autre dépôt                                    |
+
+
+*** Simulations
+
+| hg incoming | Simule un pull |
+| hg outgoing | Simule un push |
+
+
+** Informations
+
+Les révisions, ou ensembles de modifications, forment un
+graphe. Chaque révision, sauf la racine, survient
+directement après une  ou plusieurs autres révisions dont
+elle dépend et peut être suivie d'une ou plusieurs autres.
+Si la modification B suit directement la modification A,
+on dit que B est un enfant de A et que A est un parent de B.
+
+| hg tip     | Information sur la plus récente révision      |
+| hg parents | Révisions parentes                            |
+| hg status  | Statut de l'arborescence par rapport au dépôt |
+| hg log     | Journal des modifications                     |
+| hg diff    | Différences par rapport au dernier commit     |
+
+
+** Branches
+
+Un dépôt peut contenir plusieurs variantes d'un même projet.
+On nomme branche une telle variante.
+
+| hg branch /branche/ | Définit une branche                                           |
+| hg branch           | Branche courante                                              |
+| hg branches         | Liste les branches                                            |
+| hg update /branche/ | Peuple la copie de travail avec  l'arborescence d'une branche |
+
+
+** Fusion
+
+Après un pull, un dépôt peut contenir deux chaînes de révisions
+concurrentes, typiquement la chaîne locale et celle provenant de
+l'autre dépôt. Il y a alors également deux révisions de tête ne
+comportant pas d'enfant. La fusion opère une réunification des chaînes
+en créant une révision dont les parents sont les révisions de têtes
+des chaînes parallèles. Cette nouvelle modification devient alors la
+plus récente.
+
+Il est aussi possible de fusionner la branche courante
+avec une branche donnée.
+
+Une fusion est validée au prochain commit.
+
+| hg heads           | Affiche les dernières révisions de tête              |
+| hg merge           | Fusion des chaînes de révisions                      |
+| hg merge /branche/ | Fusionne la branche courante  avec la branche donnée |
+
+
+*** Conflits
+
+| hg resolve     | Réessaie de résoudre les conflits |
+| hg resolve -ma | Marque les conflits comme résolu  |
+
+
+** Annulations
+
+| hg revert          | Annule les modifications  depuis le dernier commit              |
+| hg rollback        | Annule le dernier commit                                        |
+| hg backout         | Inverse une modification                                        |
+| hg backout --merge | Inverse une modification et fusionne  avec la révision courante |
+
+
+** Divers
+
+| hg bisect|Recherche dichotomique d'erreurs dans les révisions|
+
+
+** Extensions
+
+
+*** Enregistrements
+
+La gestion des enregistrements sélectifs à la mode
+*darcs record* peut être activée
+en insérant :
+
+#+BEGIN_EXAMPLE
+[extensions]
+/.../
+hgext.record =
+#+END_EXAMPLE
+
+dans le fichier *~/.hgrc*.
+
+
+*** Piles de patchs
+
+Une gestion des piles de patchs semblable à celle
+de quilt peut être activée en insérant :
+
+#+BEGIN_EXAMPLE
+[extensions]
+/.../
+hgext.mq =
+#+END_EXAMPLE
+
+dans le fichier *~/.hgrc*.
+
+
+**** Dépôt
+
+| hg qinit | Initialise un dépôt de piles de patchs              |
+| hg qsave | Effectue une copie de sauvagarde du dépôt de patchs |
+
+
+**** Fin
+
+| hg qfinish /révision/ | Termine une pile de patchs                         |
+| hg qfinish tip        | Termine la pile de patchs  de la révision courante |
+| hg qfinish -a         | Termine tous les patchs appliqués                  |
+
+
+**** Révisions
+
+| hg qrestore /révision/|Restaure la pile de patchs associée à une révision|
+
+
+**** Pile
+
+| hg qpop          | Annule les modifications  du patch au sommet de la pile                 |
+| hg qpush         | Applique à nouveau le patch annulé  le plus bas dans la pile            |
+| hg qpop /patch/  | Annule les modifications jusqu'à  atteindre un patch donné              |
+| hg qpush /patch/ | Applique à nouveau les patchs annulés  jusqu'à atteindre un patch donné |
+| hg qpop -a       | Annule tous les patchs                                                  |
+| hg qpush -a      | Applique tous les patchs                                                |
+| hg qgoto /patch/ | Dépile jusqu'à ce que  le patch donné soit atteint                      |
+
+
+**** Informations
+
+| hg qseries|Liste des patchs|
+|  hg applied|Liste des patchs appliqués  (ou non annulés)|
+| hg unapplied|Liste des patchs non appliqués|
+
+
+**** Patchs
+
+| -g                 | Option générant des patch au format git,  extension plus complète du format diff                           |
+| hg qnew /patch/    | Crée un nouveau patch de travail  au sommet de la pile                                                     |
+| hg qrefresh        | Sauve dans le patch courant 		les modifications de l'arborescence  depuis le patch antérieur |
+| hg qrecord         | Enregistre intéractivement les modifications  dans un patch                                                |
+| hg qdelete /patch/ | Supprime un patch non appliqué                                                                             |
+
+Le nom d'un patch est généralement de la forme :
+
+#+BEGIN_EXAMPLE
+/description/.patch
+#+END_EXAMPLE
+
+
+**** Fusion
+
+| hg qfold /patchs/ | Fusionne plusieurs patchs non appliqués  en un et les applique au patch courant |
+| hg push -m -a     | Fusionne les modifications des patchs  avec l'arborescence de travail           |
+
+
+**** Sélections
+
+Il est possible de sélectionner les patchs par
+mots-clé. On applique un mot-clé positif à un
+patch par :
+
+#+BEGIN_EXAMPLE
+hg qguard /patch/ +/mot-clé/
+#+END_EXAMPLE
+
+On applique un mot-clé négatif à un patch par :
+
+#+BEGIN_EXAMPLE
+hg qguard /patch/ -/mot-clé/
+#+END_EXAMPLE
+
+La commande :
+
+#+BEGIN_EXAMPLE
+hg qselect /mot-clé/
+#+END_EXAMPLE
+
+sélectionne un mot-clé, ce qui sélectionne implicitement les patchs
+possédant le mot-clé positif +/mot-clé/ et désélectionne les patchs
+possédant le mot-clé négatif -/mot-clé/. Lors de la commande :
+
+#+BEGIN_EXAMPLE
+hg qpush -a
+#+END_EXAMPLE
+
+les patchs sont appliqués comme suit :
+
+  - tous les patchs sans mot-clé sont appliqués
+
+  - tous les patchs contenant un mot-clé négatif correspondant à un
+    mot-clé sélectionné ne sont pas appliqués
+
+  - tous les patchs contenant un mot-clé positif correspondant à un
+    mot-clé sélectionné sont appliqués
+
+  - tous les patchs contenant des mots-clés, mais dont aucun ne
+    correspond à un mot clé sélectionné ne sont pas appliqués
+
+Pour appliquer les patchs ainsi filtrés, on lance :
+
+#+BEGIN_EXAMPLE
+hg qselect /mot-clé/
+hg qpop -a
+hg qpush -a
+#+END_EXAMPLE
+
+
+**** Importation
+
+| hg qimport /fichier/  | Importe un patch                             |
+| hg qimport -r /M/:/N/ | Importe un patch d'après plusieurs révisions |
+
+
+**** Versions
+
+| hg qinit -c | Initialise un dépôt de piles de patchs  sous contrôle de version |
+| hg qcommit  | Enregistre les modifications des patchs  dans le dépôt de patchs |
+
+
+* Git
+
+#+TOC: headlines 1 local
+
+
+** Généralités
+
+| man git                  | Page de manuel                    |
+| man gittutorial          | Tutoriel                          |
+| git help                 | Aide                              |
+| git help /sous-commande/ | Aide relative à une sous-commande |
+
+
+** Dépôts
+
+| git init           | Initialise un dépôt               |
+| git clone /source/ | Copie un dépôt                    |
+| git gc             | Compresse un dépôt                |
+| git fsck           | Vérifie la consistance d'un dépôt |
+| git repack         | Optimise un dépôt                 |
+| git prune          | Abandonne les objets inutiles     |
+
+
+*** Modules
+
+Un méta-dépôt est un dépôt qui en contient plusieurs autres. Chaque
+sous-dépôt est placé dans un sous-répertoire appelé module. La
+commande submodule ajoute des modules au méta-dépôt :
+
+#+BEGIN_EXAMPLE
+git submodule add /urlModule/ /répertoireModule/
+#+END_EXAMPLE
+
+On a généralement la structure :
+
+#+BEGIN_EXAMPLE
+méta-dépôt/module-1
+méta-dépôt/module-2
+...
+#+END_EXAMPLE
+
+
+*** Urls
+
+| http:// | Protocole http    |
+| ssh://  | Protocole ssh     |
+| git://  | Protocole interne |
+
+La syntaxe complète pour ssh est :
+
+#+BEGIN_EXAMPLE
+ssh:///utilisateur/@/machine//~/utilisateur///dépôt/
+#+END_EXAMPLE
+
+où /dépôt/ est le chemin relatif par rapport
+au répertoire personnel de l'utilisateur.
+
+
+** Révisions
+
+| /révision/^1   | premier parent direct d'une révision                  |
+| /révision/^2   | second parent direct d'une révision  lorsqu'il existe |
+| /révision/^    | /révision/^/1/                                        |
+| /révision/~/N/ | Équivaut à /N/ opérations ^ :  /révision/^^/.../^     |
+| /révision/@/N/ | /N/<sup>ième</sup> ancêtre d'une révision             |
+
+
+*** Labels
+
+| git tag /label/ | Définit un label pour la révision courante |
+
+
+*** Plages
+
+| /R-1/../R-2/ | Révisions /R-1/ à /R-2/ |
+| /R/..        | Depuis la révision /R/  |
+
+
+*** Particulières
+
+| HEAD | Révision de tête de la branche courante |
+
+
+*** Exclusions
+
+| ^/révision/ | Exclut une révision |
+
+
+** Labels
+
+| git tag /label/ | Définit un label à la révision courante |
+
+
+** Fichiers
+
+| git add /fichiers/ | Ajoute des fichiers          |
+| git add .          | Ajoute le répertoire courant |
+| git rm /fichiers/  | Supprime des fichiers        |
+
+
+** Branches
+
+| git branch              | Liste des branches                                          |
+| git branch /branche/    | Crée une nouvelle branche à partir  de la révision courante |
+| git branch -d /branche/ | Supprime une branche                                        |
+| git checkout /branche/  | Peuple l'arborescence avec une branche                      |
+
+On peut également créer une branche à partir
+de n'importe quel révision source, identifiée
+par son label, le nom de la branche, ou autre :
+
+#+BEGIN_EXAMPLE
+git branch /branche/ /source/
+#+END_EXAMPLE
+
+
+*** Branches distantes
+
+On peut suivre l'évolution des branches distantes avec la commande :
+
+#+BEGIN_EXAMPLE
+git remote add /groupeBranches/ /source/
+#+END_EXAMPLE
+
+Si le dépôt est une copie d'un dépôt d'origine,
+toutes les branches de ce dépôt sont automatiquement
+suivies dans le groupe origin. La liste des branches
+distantes suivies est donnée par :
+
+#+BEGIN_EXAMPLE
+git branch -r
+#+END_EXAMPLE
+
+| git remote rm /groupe/|Efface un groupe de branches distantes|
+
+
+*** Déplacement
+
+La commande rebase permet de déplacer le point d'attache
+de la branche courante sur la branche dont elle est issue.
+La révision destination est en argument :
+
+#+BEGIN_EXAMPLE
+git rebase /révision/
+#+END_EXAMPLE
+
+
+** Références
+
+| refs/tags//label/               | Nom complet d'un label                        |
+| refs/heads//branche/            | Nom complet d'une tête de branche             |
+| refs/remotes//groupe///branche/ | Nom complet d'une branche distante            |
+| refs/remotes/origin//branche/   | Nom complet d'une branche  du dépôt d'origine |
+
+
+** Flux
+
+| git checkout           | Copie de travail                                        |
+| git fetch /groupe/     | Met à jour toutes les branches  distantes du groupe     |
+| git push /destination/ | Met à jour un dépôt distant  par rapport au dépôt local |
+
+
+*** Enregistrement
+
+La plupart des VCS détectent automatiquement
+les modifications faites depuis l'enregistrement
+précédent et l'intégrent au commit suivant. Dans
+le cas de git, il faut explicitement ajouter les
+fichiers modifiés que l'on souhaite intégrer dans
+le commit par :
+
+#+BEGIN_EXAMPLE
+git add /fichiers/
+#+END_EXAMPLE
+
+Seuls ces fichiers seront intégres au commit :
+
+#+BEGIN_EXAMPLE
+git commit
+#+END_EXAMPLE
+
+Si l'on souhaite intégrer tous les fichiers
+modifiés sans passer par un git add, on peut faire :
+
+#+BEGIN_EXAMPLE
+git commit -a
+#+END_EXAMPLE
+
+pour prendre en compte toutes les modifications
+
+
+*** Modules
+
+Une fois copié, un dépôt contenant plusieurs modules
+se met à jour par :
+
+#+BEGIN_EXAMPLE
+git submodule init
+#+END_EXAMPLE
+
+pour initialiser la configuration, puis :
+
+#+BEGIN_EXAMPLE
+git submodule update
+#+END_EXAMPLE
+
+
+*** Révisions
+
+| FETCH_HEAD | Révision de tête de la dernière branche  mise à jour par fetch |
+
+
+** Informations
+
+| git status                    | Statuts de l'arborescence par rapport au dépôt   |
+| git log                       | Journal des commits                              |
+| git shortlog                  | Journal résumé des commits                       |
+| git show                      | Détails du dernier commit                        |
+| git diff /R-1/../R-2/         | Différences entre deux révisions                 |
+| git format-patch /R-1/../R-2/ | Patchs entre deux révisions                      |
+| git merge-base /R-1/../R-2/   | Point commun le plus proche entre deux révisions |
+
+
+** Fusion
+
+|  git merge /branche/|Fusionne la branche courante  avec une branche locale ou distante|
+|  git pull /groupe/ /branche/|git fetch /groupe/  git merge /groupe///branche/|
+
+
+*** Cueillette
+
+On peut intégrer les modifications d'autres révisions via
+la commande :
+
+#+BEGIN_EXAMPLE
+git cherry-pick /révision/
+#+END_EXAMPLE
+
+
+** Exportation
+
+La commande archive crée une archive contenant
+le projet :
+
+#+BEGIN_EXAMPLE
+git archive --format=/format/ --prefix=/projet// /révision/
+#+END_EXAMPLE
+
+Le format peut être :
+
+#+BEGIN_EXAMPLE
+tar
+zip
+#+END_EXAMPLE
+
+
+** Annulation
+
+| git revert /révision/ | Annule les effets d'une révision |
+
+
+** Sauvegarde
+
+| git stash save | Sauvegarde des modifications                       |
+| git stash pop  | Restaure les dernières modifications mises de coté |
+| git stash list | Liste des sauvegardes                              |
+
+
+** Divers
+
+
+*** Recherche d'erreurs
+
+| git bisect                 | Recherche dichotomique d'erreurs dans les révisions |
+| git bisect start           | Démarre la recherche                                |
+| git bisect good /révision/ | Signale une révision comme correcte                 |
+| git bisect bad /révision/  | Signale une révision comme incorrecte               |
+| git bisect reset           | Termine la recherche                                |
+
+
+* Bazaar - bzr
+
+#+TOC: headlines 1 local
+
+
+
+** Généralités
+
+| man bzr                  | Page de manuel                     |
+| bzr help                 | Aide générique                     |
+| bzr help /sous-commande/ | Aide d'une sous-commande           |
+| bzr shell                | Démarre le shell interne de bazaar |
+
+
+** Dépôts
+
+| bzr init /répertoire/      | Crée un dépôt dans le répertoire                                  |
+| bzr init                   | Crée un dépôt dans le répertoire courant                          |
+| bzr init-repo /répertoire/ | Crée un dépôt prêt à recevoir  un groupe de variantes d'un projet |
+
+
+*** Dispositions
+
+On peut utiliser la même disposition que dans mercurial et git, où
+l'historique des révisions est inclue à la racine de l'arborescence du
+projet :
+
+#+BEGIN_EXAMPLE
+bzr init /répertoire/
+#+END_EXAMPLE
+
+Si l'on souhaite partager un dépôt entre plusieurs branches, une
+disposition alternative consiste à créer un dépôt partagé dans le
+répertoire parent, et à créer ensuite les branches. En supposant que
+les répertoires existent, cela donne :
+
+#+BEGIN_EXAMPLE
+bzr init-repo /dépôt/
+bzr init /dépôt///branche-1/
+bzr init /dépôt///branche-2/
+...
+#+END_EXAMPLE
+
+C'est la principale différence entre bazaar et les autres
+VCS distribués : là où mercurial utilise des variantes, des
+branches internes, bazaar utilise des grappes de branches
+partageant le même dépôt.
+
+
+*** Copies
+
+La copie d'une branche se fait via :
+
+#+BEGIN_EXAMPLE
+bzr branch /source/ /destination/
+#+END_EXAMPLE
+
+Lorsque la destination est le répertoire courant,
+on peut l'omettre :
+
+#+BEGIN_EXAMPLE
+bzr branch /source/
+#+END_EXAMPLE
+
+On peut également copier une branche en basant son historique
+sur la branche d'origine via l'option --stacked, ce qui permet
+d'économiser de l'espace disque et constitue une alternative au
+dépôt partagé :
+
+#+BEGIN_EXAMPLE
+bzr branch --stacked /source/ /destination/
+#+END_EXAMPLE
+
+
+*** Urls
+
+| file://                       | Protocole du système de fichier  (par défaut)          |
+| sftp://                       | Protocole ssh/sftp                                     |
+| http://                       | Protocole http (web)                                   |
+| ftp://                        | Protocole ftp                                          |
+| bzr serve --directory=/dépôt/ | Lance le serveur bzr                                   |
+| bzr://                        | Protocole interne de bazaar                            |
+| bzr+ssh://                    | Bazaar dans un tunnel ssh  (pas besoin du serveur bzr) |
+
+
+** Révisions
+
+| -r /N/               | Révision d'après le numéro                 |
+| -r -/N/              | /N/ révisions antérieures                  |
+| -r date:/date/       | Révision d'après la date                   |
+| -r date:/dateHeure/  | Révision d'après la date et l'heure        |
+| -r ancestor:/parent/ | Dernière révision commune entre            |
+|                      | la branche courante et une branche parente |
+|                      | dont elle dérive                           |
+| -r branch:/branche/  | Dernière révision d'une autre branche      |
+
+
+*** Labels
+
+| bzr tag /label/ | Définit un label à la révision courante |
+| -r tag:/label/  | Révision d'après le label               |
+
+
+*** Plages
+
+| -r /N/..    | Révisions à partir de la révision /N/ |
+| -r /M/../N/ | Révisions /M/ à /N/                   |
+
+
+** Fichiers et répertoires
+
+| bzr ls                 | Liste des fichiers                                           |
+| bzr add /fichiers/     | Ajoute des fichiers ou répertoires  au contrôle de version   |
+| bzr remove /fichiers/  | Supprime des fichiers ou répertoires  du contrôle de version |
+| bzr mv /avant/ /après/ | Renomme / Déplace des fichiers                               |
+
+
+** Flux
+
+| bzr pull   | Intègre les modifications d'une autre branche  dans le dépôt local                              |
+| bzr update | Met à jour l'arborescence d'après le dépôt local                                                |
+| bzr commit | Enregistre les modifications 		dans le dépôt local et crée  une nouvelle révision |
+| bzr push   | Publie les modifications du dépôt local  dans le dépôt d'une autre branche                      |
+
+
+** Informations
+
+| bzr info | Information sur la branche |
+
+| bzr log                  | Affiche les journeaux des modifications                                               |
+| bzr status               | Statuts des modifications  par rapport au dernier commit                              |
+| bzr diff                 | Affiche les modifications                                                             |
+| bzr diff -r /N/..        | Affiche les modifications  par rapport à une ancienne révision                        |
+| bzr diff -r /M/../N/     | Affiche les différences entre deux révisions                                          |
+| bzr cat -r /N/ /fichier/ | Affiche le contenu d'une ancienne  révision d'un fichier                              |
+| bzr annotate /fichier/   | Affiche le contenu d'un fichier en ajoutant  sur chaque ligne l'auteur et la révision |
+
+
+** Annulation
+
+| bzr revert           | Annule les modifications depuis  le dernier commit                 |
+| bzr revert /fichier/ | Annule les modifications dans le fichier  depuis le dernier commit |
+| bzr revert -r /N/    | Revient à une ancienne révision                                    |
+| bzr uncommit         | Annule le dernier commit                                           |
+| bzr uncommit -r -/N/ | Annule les /N/ derniers commit                                     |
+
+
+** Sauvegarde
+
+| bzr shelve   | Met de coté certaines modifications      |
+| bzr unshelve | Restaure les modifications mises de coté |
+
+
+** Fusion
+
+| bzr merge /branche/ | Incorpore les changements d'une autre branche  (validé au prochain commit)  |
+| bzr merge           | Incorpore les changements de la branche  dont la branche courante est issue |
+
+
+*** Conflits
+
+| bzr remerge --/algo/ /fichier/ | Tente de fusionner avec un autre algorithme |
+| bzr resolve                    | Marque les éventuels conflits comme résolu  |
+
+
+*** Cueillette
+
+| bzr merge -r /N/      | Fusionne avec les changements  d'une ancienne révision                                   |
+| bzr merge -r /M/../N/ | Fusionne avec les changements 		survenus entre deux révisions  (/M/ < /N/) |
+| bzr merge -r /N/../M/ | Inverse les changements 		survenus entre deux révisions  (/M/ < /N/)       |
+
+
+*** Directive
+
+| bzr send -o /différences/ | Crée un fichier différentiel     |
+| bzr merge /différences/   | Applique un fichier différentiel |
+
+
+** Copies de travail
+
+Une branche n'effectue par défaut que des commits locaux, mais on peut
+la lier à un dépôt distant (par exemple un dépôt central) avec lequel
+elle partage alors ses commits. On dit alors que la branche est une
+copie de travail de la branche correspondante du dépôt distant.
+
+| bzr bind /brancheDistante/ | Transforme une branche locale en                                             |
+|                            | copie de travail en la liant à une  branche distante d'un dépôt distant      |
+| bzr unbind                 | Transforme une copie de travail  en simple branche indépendante              |
+| bzr bind                   | Lie la branche locale à la dernière  branche distante auquel elle a été liée |
+| bzr checkout /branche/     | Effectue une copie de travail  dans le répertoire courant                    |
+| bzr commit --local         | Effectue un commit local,  sans le partager avec le dépôt                    |
+| bzr switch /branche/       | Modifie la branche de la copie de travail                                    |
+
+
+** Import - Export
+
+| bzr add                           | Ajoute tous les fichiers et répertoires  du répertoire courant au contrôle de version |
+| bzr export /répertoire/           | Exportation dans un répertoire                                                        |
+| bzr export /archive/.tar          | Exportation dans une archive                                                          |
+| bzr export /archive/.tar.gz       |                                                                                       |
+|   bzr export /archive/.tar.bz2    |                                                                                       |
+| bzr export /archive/.zip</td>     |                                                                                       |
+
+
+
+** Procédure
+
+
+*** Mode local
+
+Création :
+
+#+BEGIN_EXAMPLE
+cd ...racine
+mkdir -p dépôt/branche
+bzr init-repo dépôt
+bzr init dépôt/branche
+#+END_EXAMPLE
+
+Importation :
+
+#+BEGIN_EXAMPLE
+cd dépôt/branche
+cp -R ...projet/* .
+bzr add
+bzr commit
+#+END_EXAMPLE
+
+Travail :
+
+#+BEGIN_EXAMPLE
+...
+bzr commit
+#+END_EXAMPLE
+
+
+*** Mode intéractif entre dépôts locaux
+
+Copie de l'autre branche :
+
+#+BEGIN_EXAMPLE
+bzr init-repo dépôt
+cd dépôt
+bzr branch ...racineAutreDépôt/dépôt/branche
+cd branche
+#+END_EXAMPLE
+
+Fusion avec les modifications de l'autre dépôt :
+
+#+BEGIN_EXAMPLE
+bzr merge ...racineAutreDépôt/dépôt/branche
+(bzr remerge --algo fichier)
+(bzr resolve)
+bzr commit
+#+END_EXAMPLE
+
+
+*** Mode centralisé
+
+La création du dépôt central est analogue à celle d'un dépôt local. Vu
+que les copies de travail sont destinées à être distantes, on indique
+à bazaar via l'option --no-trees que le dépôt central ne contiendra
+pas de copie de travail locale :
+
+#+BEGIN_EXAMPLE
+cd ...racineCentrale
+mkdir -p dépôt/branche
+bzr init-repo --no-trees dépôt
+bzr init dépôt/branche
+#+END_EXAMPLE
+
+Création d'une copie de travail :
+
+#+BEGIN_EXAMPLE
+cd ...racineLocale
+mkdir -p dépôt
+bzr init-repo dépôt
+cd dépôt
+bzr checkout ...racineCentrale/dépôt/branche
+#+END_EXAMPLE
+
+Importation :
+
+#+BEGIN_EXAMPLE
+cd ...racineLocale/dépôt/branche
+cp -R ...projet/* .
+bzr add
+bzr commit
+#+END_EXAMPLE
+
+Travail :
+
+#+BEGIN_EXAMPLE
+...
+bzr update
+bzr commit
+#+END_EXAMPLE
+
+Travail déconnecté :
+
+bzr unbind
+...
+bzr commit
+...
+bzr bind
+
+
+*** Mode distribué
+
+Branche miroir :
+
+#+BEGIN_EXAMPLE
+cd ...racine
+mkdir dépôt
+bzr init-repo dépôt
+cd dépôt
+bzr branch ...racineSource/dépôt/branche miroir
+#+END_EXAMPLE
+
+Branche de travail :
+
+#+BEGIN_EXAMPLE
+cd ...racine/dépôt
+bzr branch miroir travail
+#+END_EXAMPLE
+
+Mise à jour du miroir :
+
+#+BEGIN_EXAMPLE
+cd ...racine/dépôt/miroir
+bzr pull
+#+END_EXAMPLE
+
+Mise à jour d'une branche de travail par rapport au miroir :
+
+#+BEGIN_EXAMPLE
+cd ...racine/dépôt/travail
+bzr merge
+#+END_EXAMPLE
+
+Intégration des modifications d'une branche de travail :
+
+#+BEGIN_EXAMPLE
+cd ...racine/dépôt/miroir
+bzr pull
+bzr merge ../travail
+(bzr resolve)
+bzr commit
+bzr push
+#+END_EXAMPLE
+
+Si le miroir est une copie de travail obtenue par un checkout
+au lieu d'un branch, il suffit de faire :
+
+#+BEGIN_EXAMPLE
+cd ...racine/dépôt/miroir
+bzr update
+bzr merge ../travail
+(bzr resolve)
+bzr commit
+#+END_EXAMPLE
+
+
+* Arch - tla
+
+#+TOC: headlines 1 local
+
+
+** Généralités
+
+| tla help               | Aide                            |
+| tla /sous-commande/ -h | Aide courte d'une sous-commande |
+| tla /sous-commande/ -H | Aide longue d'une sous-commande |
+| tla my-id /nom/        | Définit le nom de l'utilisateur |
+
+
+** Dépôt
+
+On commence par créer une archive arch avec la commande :
+
+#+BEGIN_EXAMPLE
+tla make-archive /courriel/--/nomArchive/ /répertoire/
+#+END_EXAMPLE
+
+On définit l'archive par défaut par :
+
+#+BEGIN_EXAMPLE
+tla my-default-archive /courriel/--/nomArchive/
+#+END_EXAMPLE
+
+On définit un projet par :
+
+#+BEGIN_EXAMPLE
+tla archive-setup /projet/--/branche/--/version/
+#+END_EXAMPLE
+
+On indique que le répertoire courant correspond à un projet par :
+
+#+BEGIN_EXAMPLE
+tla init-tree /projet/--/branche/--/version/
+#+END_EXAMPLE
+
+On modifie la version du répertoire par :
+
+#+BEGIN_EXAMPLE
+tla set-tree-version /projet/--/branche/--/version/
+#+END_EXAMPLE
+
+
+** Révisions
+
+Arch définit une révision comme étant une sous-version
+d'une branche particulière d'un projet. La référence à
+une révision se fait par :
+
+#+BEGIN_EXAMPLE
+/projet/--/branche/--/version/--/révision/
+#+END_EXAMPLE
+
+On peut préciser le nom de l'archive :
+
+#+BEGIN_EXAMPLE
+/courriel/--/archive///projet/--/branche/--/version/--/révision/
+#+END_EXAMPLE
+
+
+** Informations
+
+| tla categories                               | Liste des projets de l'archive par défaut      |
+| tla branches /projet/                        | Liste des branches d'un projet                 |
+| tla versions /projet/--/branche/             | Liste des versions d'une branche               |
+| tla revisions /projet/--/branche/--/version/ | Liste des révisions d'une version              |
+| tla revisions                                | Liste des révisions de la version courante     |
+| tla logs                                     | Journeaux des modifications                    |
+| tla changes                                  | Modifications depuis le dernier enregistrement |
+
+
+** Fichiers
+
+| tla add /fichier/ | Ajoute un fichier au dépôt                   |
+| tla rm /fichier/  | Supprime un fichier du dépôt                 |
+| tla mv /A/ /B/    | Renomme ou déplace un fichier  dans le dépôt |
+
+
+** Flux
+
+| tla get /révision/  | Effectue une copie d'une révision        |
+| tla update          | Met à jour une copie de travail          |
+| tla make-log        | Crée un fichier journal pour la révision |
+| vim $(tla make-log) | Crée et édite le fichier journal         |
+| tla commit          | Enregistre les modifications             |
+
+
+** Patchs
+
+| tla mkpatch /avant/ /après/ /patch/ | Crée un patch     |
+| tla dopatch /patch/                 | Applique un patch |
+
+
+*** Cueillette
+
+| tla replay /révisions/ | Applique les modifications des révisions  à la copie de travail |
+
+
+** Sauvegarde
+
+| tla undo | Met de coté certaines modifications      |
+| tla redo | Restaure les modifications mises de coté |
+
+
+** Import - Export
+
+|  tla import|Importe le répertoire courant  dans l'archive par défaut|
+
+
+* Comparatif
+
+#+TOC: headlines 1 local
+
+| Rcs      | Cvs                        | Svn                   |
+|----------+----------------------------+-----------------------|
+| rcs      | cvs --help-commands        | svn h                 |
+| man rcs  | man cvs                    | svn help              |
+|          | cvs --help /sous-commande/ | svn h /sous-commande/ |
+|          | cvs admin                  | svnadmin              |
+|          |                            | svnserve              |
+|          |                            | svnadmin create       |
+|          | cvs import                 | svn import            |
+| co       | cvs co                     | svn co                |
+|          | cvs checkout               | svn checkout          |
+|          | cvs get                    |                       |
+|          | cvs up                     | svn up                |
+|          | cvs update                 | svn update            |
+| ci       | cvs ci                     | svn ci                |
+|          | cvs commit                 | svn commit            |
+|          |                            | svn revert            |
+|          |                            |                       |
+|          | cvs add                    | svn add               |
+|          | cvs ls                     | svn ls                |
+|          |                            | svn cp                |
+|          |                            | svn mv                |
+|          | cvs remove                 | svn rm                |
+|          |                            |                       |
+|          | cvs st                     | svn st                |
+|          | cvs status                 | svn status            |
+| rlog     | cvs log                    | svn log               |
+| rcs2log  | cvs history                |                       |
+|          |                            | svn info              |
+| rcsdiff  | cvs di                     | svn di                |
+|          | cvs diff                   | svn diff              |
+|          |                            | svn cat               |
+|          | cvs annotate               | svn annotate          |
+|          |                            | svn blame             |
+|          | cvs tag                    |                       |
+|          | cvs tag -b                 |                       |
+| rcsmerge | cvs up -j                  | svn merge             |
+| rcs -l   |                            | svn lock              |
+| co -l    |                            |                       |
+| ci       |                            | svn unlock            |
+|          | cvs watch                  |                       |
+|          | cvs edit                   |                       |
+|          | cvs export                 | svn export            |
+|          |                            |                       |
+
+| Bzr                | Hg                | GIt                |
+|--------------------+-------------------+--------------------|
+| bzr help           | hg help           | git help           |
+| bzr help /sousCom/ | hg help /sousCom/ | git help /sousCom/ |
+| bzr serve          | hg serve          |                    |
+| bzr init-repo      |                   |                    |
+| bzr init           | hg init           | git init           |
+| bzr branch         | hg clone          | git clone          |
+| bzr co             | hg co             | git checkout       |
+| bzr pull           | hg pull           | git fetch          |
+| bzr up             | hg up             |                    |
+| bzr ci             | hg ci             | git commit         |
+| bzr push           | hg push           | git push           |
+| bzr revert         | hg revert         | git revert         |
+| bzr add            | hg add            | git add            |
+| bzr ls             |                   |                    |
+|                    | hg cp             | git copy           |
+| bzr mv             | hg mv             | git mv             |
+| bzr rm             | hg rm             | git rm             |
+| bzr st             | hg st             | git status         |
+| bzr log            | hg log            | git log            |
+| bzr info           |                   |                    |
+| bzr di             | hg di             | git diff           |
+| bzr cat            | hg cat            |                    |
+|                    | hg grep           |                    |
+| bzr annotate       | hg annotate       | git annotate       |
+| bzr heads          | hg heads          |                    |
+|                    | hg tip            |                    |
+|                    | hg incoming       |                    |
+|                    | hg outgoing       |                    |
+| bzr merge          | hg merge          | git merge          |
+|                    | hg backout        |                    |
+| bzr tag            | hg tag            | git tag            |
+| bzr tags           | hg tags           |                    |
+| bzr branch         | hg branch         | git branch         |
+| bzr branches       | hg branches       |                    |
+|                    |                   | git rebase         |
+|                    |                   |                    |
+| bzr bind           |                   | git branch --track |
+| bzr unbind         |                   |                    |
+| bzr shelve         |                   |                    |
+| bzr unshelve       |                   |                    |
+|                    |                   | git stash save     |
+|                    |                   | git stash pop      |
+| bzr export         | hg archive        |                    |

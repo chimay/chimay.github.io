@@ -1,0 +1,174 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat 10 : Optimisation - 9
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/commandes-tex.org"
+
+* Algorithmes d'optimisation contrainte
+
+#+TOC: headlines 1 local
+
+\label{chap:algocont}
+
+
+** Introduction
+
+Nous allons présenter des algorithmes permettant de résoudre approximativement des problèmes de minimisation d'une fonction $\varphi$ sur un ensemble $\Omega \subseteq \setR^n$. Ces algorithmes partent d'un point initial $x_0 \in \Omega$ et itèrent schématiquement comme suit :
+
+$$x_{k + 1} = I(x_k) = x_k + p_k$$
+
+pour un certain $p_k \in \setR^n$. On espère bien entendu que la suite converge et que :
+
+$$x_N \approx \lim_{k \to \infty} x_k = \arg\min_{x \in \Omega} \varphi(x)$$
+
+pour $N$ assez grand. Nous adoptons les notations :
+
+$$J = \partial \varphi$$
+
+pour le gradient, de taille $(n,1)$ et :
+
+$$H = \partial^2 \varphi$$
+
+pour la hessienne, de taille $(n,n)$. On note également :
+
+$$\Phi_k = \Phi(x_k)$$
+
+pour toute fonction $\Phi$ (par exemple, $\Phi \in \{\varphi,J,H\}$).
+
+
+** Contraintes linéaires
+
+Nous considérons le cas de contraintes linéaires :
+
+$$\Omega = \{ x \in \setR^n : A \cdot x = b \}$$
+
+où $A$ est une matrice de taille $(m,n)$ et $b$ un vecteur de taille $(m,1)$. On choisit généralement $x_0 = 0$. L'itération $k$ part d'un $x_k$ satisfaisant les contraintes :
+
+$$A \cdot x_k = b$$
+
+Si on veut que $x_{k + 1} = x_k + s_k \in \Omega$, il est nécessaire et suffisant que $A \cdot (x_k + s_k) = b$, ou que :
+
+$$A \cdot s_k = A \cdot (x_k + s_k) - A \cdot x_k = b - b = 0$$
+
+On doit donc avoir $s_k \in \noyau A$. Soit les $u_i \in \setR^m$, $v_i \in \setR^n$ et $\sigma_i \in \setR$ constituant la décomposition en valeurs singulières de $A$. On forme une matrice à partir des vecteurs de base de $\noyau A$ :
+
+$$V = [v_{r + 1} \ ... \ v_n]$$
+
+On a alors :
+
+$$s_k = \sum_{i = r + 1}^n p_{k,i} \cdot v_i = V \cdot p_k$$
+
+où $p_k = [p_{k, r + 1} ... p_{k,n}]^\dual$.
+
+
+*** Newton  projeté
+
+Il s'agit de l'adaptation de la méthode de Newton :
+
+$$x_{k + 1} = x_k + V \cdot p_k$$
+
+On minimise le développement d'ordre deux :
+
+$$\varphi_{k+1} \approx \varphi_k + J_k^\dual \cdot V \cdot p_k + \unsur{2} \cdot p_k^\dual \cdot V^\dual \cdot H_k \cdot V \cdot p_k$$
+
+L'annulation du gradient par rapport à $p_k$ nous donne :
+
+$$V^\dual \cdot J_k + V^\dual \cdot H_k \cdot V \cdot p_k = 0$$
+
+et donc :
+
+$$p_k = - (V^\dual \cdot H_k \cdot V)^{-1} \cdot V^\dual \cdot J_k$$
+
+
+** Contraintes d'inégalité
+
+Examinons à présent le cas où :
+
+$$\Omega = \{ x \in \setR^n : \omega(x) \le 0 \}$$
+
+Nous laissons à présent tomber le $k$ des itérations, afin d'alléger
+les notations.
+
+
+*** Méthodes de penalité
+
+La méthode de pénalité consiste à ajouter une fonction positive à $\varphi$ lorsque $x$ sort de $\Omega$. Si l'on augmente la valeur de la fonction pénalité, on rapproche alors le minimum global de $\Omega$. La solution à notre problème contraint devrait donc être approchée en faisant tendre l'amplitude de la pénalité vers l'infini. Soit la fonction $\varpi : \setR^n \mapsto \setR^m$ définie par :
+
+$$\varpi_i(x) = \max\{\omega_i(x),0\}$$
+
+On a par construction $\varpi(x) = 0$ pour tout $x \in \Omega$ et $\varpi(x) \strictsuperieur 0$ pour tout $x \notin \Omega$. On ajoute la somme des carrés $\varpi(x)^\dual \cdot \varpi(x) = \sum_i \varpi_i(x)^2$ multipliée par un paramètre réel $k \ge 0$ à la fonction objectif pour obtenir l'objectif modifié :
+
+$$\psi_k(x) = \varphi(x) + k \cdot \varpi(x)^\dual \cdot \varpi(x)$$
+
+On utilise ensuite un algorithme de minimisation libre pour évaluer le minimum global :
+
+$$\mu(k) = \arg\min_{x \in \setR^n} \psi_k(x)$$
+
+On espère que $\mu$ converge à l'infini et que :
+
+$$\lim_{k \to \infty} \mu(k) = \arg\min_{x \in \Omega} \varphi(x)$$
+
+Il suffit dans ce cas de choisir $k$ assez grand pour obtenir une estimation de la solution du problème contraint.
+
+
+* Réseaux de neurones
+
+#+TOC: headlines 1 local
+
+
+** Définition
+
+Commençons par la description d'un neurone $i$ de fonction caractéristique
+$\sigma$. La relation entre les entrées $x_j$ et la sortie $y_i$ s'écrit :
+
+$$y_i = \sigma\left( \sum_j ( w_{ij} \ x_j ) + b_i \right)$$
+
+Un réseau de neurones est composé de neurones reliés entres eux (la sortie d'un neurone peut servir d'entrée à un autre).
+
+La fonction caractéristique est généralement l'une de celles
+décrites ci-dessous :
+
+#+BEGIN_CENTER
+\(
+\sigma(x) = \mt{sign}(x) \\
+\sigma(x) = \tanh(x) \\
+\sigma(x) = \exp(-x^2) \\
+\sigma(x) = x \exp(-x^2)
+\)
+#+END_CENTER
+
+
+** Perceptron à une couche
+
+Le perceptron monocouche est composé d'une rangée de neurones reliant les
+entrées $x_i$ aux sorties $y_i$ (le perceptron multicouche est composé de monocouches assemblées
+l'une à la suite de l'autre). La relation entrées-sorties s'écrit :
+
+$$y_i = P_{\theta}(x) = c + \sum_j v_j \ \sigma\left( \sum_k ( w_{jk} \ x_k ) + b_j \right)$$
+
+On écrit $y_i = P_{\theta}(x)$ pour mettre en évidence l'influence des paramètres du résau $\theta = (v,w,b,c)$ sur la sortie $y$.
+
+
+** Entrainement
+
+Les réseaux de neurones sont principalement utilisés afin de calquer le comportement d'un système difficille à modéliser par d'autres méthodes. On dispose d'un certain nombre de vecteurs $y^{(n)}\in\setR^M$, $x^{(n)}\in\setR^{N}$, où $n=1,...,K$. On aimerait bien trouver le vecteur des paramètres, $\theta$, qui correspond le mieux à cette série d'entrées-sorties. On va alors entrainer le réseau de neurones défini par $y=R_{\theta}(x)$  en  utilisant une méthode d'optimisation non linéaire afin d'obtenir la solution de
+
+$$\theta^* = \arg\min_{\theta} \sum_n \norme{ y^{(n)} - R_{\theta}\left( x^{(n)} \right) }^2$$

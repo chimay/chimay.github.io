@@ -1,0 +1,475 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat 07 : Intégrales - 5
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/commandes-tex.org"
+
+* Additivité généralisée
+
+#+TOC: headlines 1 local
+
+\label{chap:fubini}
+
+
+** Dépendances
+
+  - Chapitre \ref{chap:fonction} : Les fonctions
+  - Chapitre \ref{chap:mesure} : Les mesures
+
+
+** Introduction
+
+
+*** Mesure induite
+
+Soit les ensembles $\Omega$ et $\Psi$, les tribus $\mathcal{T} \subseteq \sousens(\Omega)$ et $\mathcal{U} \subseteq \sousens(\Psi)$ et les mesures $\mu : \mathcal{T} \mapsto \setR$ et $\nu : \mathcal{U} \mapsto \setR$.
+
+On considère un ensemble $X \subseteq \Psi$ mesurable pour $\nu$ et paramétrant la collection $\mathcal{C} = \{ P(x) \in \sousens(\Omega) : x \in X \}$ formant une partition de $\Omega$. Nous supposons également que chaque ensemble-élément de $\mathcal{C}$ est mesurable pour $\mu$. Choisissons un sous-ensemble quelconque $A \subseteq \Omega$. Posons $A(x) = P(x) \cap A$ et :
+
+$$\mathcal{P}(A) = \{ A(x) : x \in X \} = \{ P(x) \cap A : x \in X \}$$
+
+On a :
+
+$$\bigcup_{x \in X} A(x) = A \cap \bigcup_{x \in X} P(x) = A \cap \Omega = A$$
+
+Si $x,y \in X$ vérifient $x \ne y$, on a aussi :
+
+$$A(x) \cap A(y) = P(x) \cap P(y) \cap A = \emptyset$$
+
+On en déduit que $\mathcal{P}(A)$ forme une partition de $A$. Soit la collection $\mathcal{M}$ des sous-ensembles $A$ de $\Omega$ tels que la fonction $x \mapsto \mu(A(x))$ soit mesurable. Si $\mathcal{M}$ forme une tribu, on peut définir une mesure $\sigma : \mathcal{M} \mapsto \setR$ par la relation :
+
+$$\sigma(A) = \int_X \mu(A(x)) \ d\nu(x)$$
+
+
+*** Validité
+
+Par positivité de $\mu$ et de l'intégrale, on a clairement $\sigma \ge 0$. L'ensemble vide étant de mesure nulle au sens de $\mu$, on a :
+
+\begin{eqnarray*}
+\sigma(\emptyset) &=& \int_X \mu(\emptyset \cap P(x)) \ d\nu(x) \\
+&=& \int_X \mu(\emptyset) \ d\nu(x) \\
+&=& \int_X 0 \ d\nu(x) \\
+&=& 0
+\end{eqnarray*}
+
+Soit $A,B \subseteq \Omega$ avec $A \cap B = \emptyset$. On a :
+
+\begin{eqnarray*}
+A(x) \cup B(x) &=& (A \cap P(x)) \cup (B \cap P(x)) \\
+&=& (A \cup B) \cap P(x) \\
+&=& (A \cup B)(x)
+\end{eqnarray*}
+
+Par additivité de $\mu$ et linéarité de l'intégrale, on a :
+
+\begin{eqnarray*}
+\sigma(A \cup B) &=& \int_X \mu((A \cup B)(x)) \ d\nu(x) \\
+&=& \int_X \mu(A(x) \cup B(x)) \ d\nu(x) \\
+&=& \int_X [\mu(A(x)) + \mu(B(x))] \ d\nu(x) \\
+&=& \int_X \mu(A(x)) \ d\nu(x) + \int_X \mu(B(x)) \ d\nu(x) \\
+&=& \sigma(A) + \sigma(B)
+\end{eqnarray*}
+
+La fonction $\sigma$ est donc également additive et représente bien une mesure.
+
+
+** Notation
+
+Soit une fonction $f : A \mapsto \setR$ et la fonction $I : X \mapsto \setR$ définie par :
+
+$$I(x) = \int_{A(x)} f(y) \ d\mu(y)$$
+
+pour tout $x \in X$. On note dans la suite :
+
+$$\int_X \int_{A(x)} f(y) \ d\mu(y) \ d\nu(x) = \int_X I(x) \ d\nu(x)$$
+
+ou encore :
+
+$$\int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y) = \int_X I(x) \ d\nu(x)$$
+
+
+*** Fonctions étagées
+
+Soit une fonction étagée $w : A \mapsto \setR$. On dispose d'une partition $\{A_1,...,A_n\}$ de $A$ et de réels $w_i$ tels que :
+
+$$w = \sum_i w_i \cdot \indicatrice_{A_i}$$
+
+Evaluons son intégrale :
+
+\begin{eqnarray*}
+\int_A w(z) \ d\sigma(z) &=& \sum_i w_i \cdot \sigma(A_i) \\
+&=& \sum_i w_i \int_X \mu(A_i(x)) \ d\nu(x) \\
+&=& \int_X \sum_i w_i \cdot \mu(A_i(x)) \ d\nu(x) \\
+&=& \int_X \left[ \int_{A(x)} w(y) \ d\mu(y) \right] \ d\nu(x)
+\end{eqnarray*}
+
+On a donc :
+
+$$\int_A w(z) \ d\sigma(z) = \int_X \ d\nu(x) \int_{A(x)} w(y) \ d\mu(y)$$
+
+pour toute fonction étagée.
+
+
+*** Ordre
+
+Soit les fonctions mesurables $f,g$ vérifiant $f \essinferieur g$ au sens de la mesure $\sigma$. Soit :
+
+$$N = \{ z \in A : f(z) \strictsuperieur g(z) \}$$
+
+Comme $N \subseteq A$, on a $N = N \cap A$ et :
+
+\begin{eqnarray*}
+N(x) = N \cap P(x) &=& N \cap A \cap P(x) \\
+&=& N \cap A(x) \\
+&=& \{ z \in A(x) : f(z) \strictsuperieur g(z) \}
+\end{eqnarray*}
+
+La mesure de $N$ étant $\sigma$-nulle, on a :
+
+$$\sigma(N) = \int_X \mu(N(x)) \ d\nu(x) = 0$$
+
+Comme $\mu$ est positive, elle est essentiellement positive. On en conclut que la fonction $x \mapsto \mu(N(x))$ est essentiellement nulle sur $X$ (au sens de la mesure $\nu$). L'ensemble :
+
+$$Z = \{ x \in X : \mu(N(x)) \strictsuperieur 0 \}$$
+
+vérifie $\nu(Z) = 0$. Le sous-ensemble :
+
+$$E = X \setminus Z = \{ x \in X : \mu(N(x)) = 0 \}$$
+
+est donc $\nu$-essentiel dans $X$. Soit les fonctions $F,G : X \mapsto \setR$ définies par :
+
+#+BEGIN_CENTER
+\(
+F(x) = \int_{A(x)} f(y) \ d\mu(y) \\ \\
+G(x) = \int_{A(x)} g(y) \ d\mu(y)
+\)
+#+END_CENTER
+
+Pour tout $x \in E$, on a $\mu(N(x)) = 0$. Le sous-ensemble :
+
+$$C(x) = A(x) \setminus N(x) = \{ y \in A(x) : f(y) \le g(y) \}$$
+
+est donc $\mu$-essentiel dans $A(x)$. On a donc $w \essinferieur f$ au sens de $\mu$ sur $A(x)$ et :
+
+$$F(x) = \int_{A(x)} f(y) \ d\mu(y) \le \int_{A(x)} g(y) \ d\mu(y) = G(x)$$
+
+On a donc $F \le G$ sur $E$ qui est un sous-ensemble essentiel de $X$. Donc, $F \essinferieur G$ au sens de $\nu$ sur $X$ et :
+
+$$\int_X F(x) \ d\nu(x) \le \int_X G(x) \ d\nu(x)$$
+
+Autrement dit :
+
+$$\int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y) \le \int_X \ d\nu(x) \int_{A(x)} g(y) \ d\mu(y)$$
+
+
+*** Positives majorées
+
+Soit une fonction intégrable $f : A \mapsto \setR$ essentiellement positive et majorée au sens de $\sigma$ :
+
+$$\supessentiel_{x \in A}^\sigma f(x) \strictinferieur +\infty$$
+
+Soit un réel $\epsilon \strictsuperieur 0$.
+
+  - Le supremum étant dans l'adhérence, on peut trouver une fonction étagée $w$ essentiellement inférieure à $f$ au sens de $\sigma$ et telle que :
+
+$$\int_A f(z) \ d\sigma(z) - \epsilon \le \int_A w(z) \ d\sigma(z)$$
+
+On a aussi :
+
+\begin{eqnarray*}
+\int_A w(x) \ d\sigma(x) &=& \int_X \ d\nu(x) \int_{A(x)} w(y) \ d\mu(y) \\
+&\le& \int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y)
+\end{eqnarray*}
+
+d'où finalement :
+
+$$\int_A f(x) \ d\sigma(x) - \epsilon \le \int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y)$$
+
+Comme cette relation est valable pour tout $\epsilon \strictsuperieur 0$, on doit avoir :
+
+$$\int_A f(x) \ d\sigma(x) \le \int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y)$$
+
+  - Comme $f$ est essentiellement majorée, on peut trouver une fonction étagée $w$ essentiellement inférieure à $f$ au sens de $\sigma$ et telle que :
+
+$$\supessentiel_{x \in A}^\sigma [f(x) - w(x)] \le \epsilon$$
+
+On a donc $f \essinferieur w + \epsilon$ au sens de $\sigma$ et :
+
+$$\int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y) \le \int_X \ d\nu(x) \int_{A(x)} [w(y) + \epsilon] \ d\mu(y)$$
+
+On voit que :
+
+\begin{eqnarray*}
+\int_X \ d\nu(x) \int_{A(x)} [w(y) + \epsilon] \ d\mu(y) &=& \int_X \ d\nu(x) \left[ \int_{A(x)} w(y) \ d\mu(y) + \epsilon \cdot \mu(A(x)) \right] \\
+&=& \int_X \ d\nu(x) \int_{A(x)} w(y) \ d\mu(y) + \epsilon \cdot \int_X \mu(A(x)) \ d\nu(x) \\
+&=& \int_X \ d\nu(x) \int_{A(x)} w(y) \ d\mu(y) + \epsilon \cdot \sigma(A)
+\end{eqnarray*}
+
+Or :
+
+$$\int_X \ d\nu(x) \int_{A(x)} w(y) \ d\mu(y) = \int_A w(z) \ d\sigma(z) \le \int_A f(z) \ d\sigma(z)$$
+
+par définition du supremum. Rassemblant tous ces résultats, il vient :
+
+$$\int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y) \le \int_A f(z) \ d\sigma(z) + \epsilon \cdot \sigma(A)$$
+
+Cette inégalité devant être satisfaite pour tout $\epsilon \strictsuperieur 0$, on en conclut que :
+
+$$\int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y) \le \int_A f(z) \ d\sigma(z)$$
+
+
+L'intégrale double $\int_X \int_{A(x)}$ devant être simultanément supérieure et inférieure à l'intégrale $\int_A$, on a :
+
+$$\int_A f(z) \ d\sigma(z) = \int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y)$$
+
+
+*** Positives
+
+Posons :
+
+#+BEGIN_CENTER
+\(
+C(\alpha) = \{ x \in A : f(x) \le \alpha \} \\
+Z(\alpha) = \{ x \in A : f(x) \strictsuperieur \alpha \}
+\)
+#+END_CENTER
+
+et :
+
+#+BEGIN_CENTER
+\(
+C(\alpha,x) = C(\alpha) \cap A(x) = \{ x \in A(x) : f(x) \le \alpha \} \\
+Z(\alpha,x) = A(x) \setminus C(\alpha) = \{ x \in A(x) : f(x) \strictsuperieur \alpha \}
+\)
+#+END_CENTER
+
+Comme $f$ est essentiellement majorée sur $C(\alpha)$, on a :
+
+$$\int_{C(\alpha)} f(z) \ d\sigma(z) = \int_X \ d\nu(x) \int_{C(\alpha,x)} f(y) \ d\mu(y)$$
+
+Les propriétés de $Z(\alpha) = A \setminus C(\alpha)$ nous montrent que :
+
+$$\lim_{\alpha \to +\infty} \int_{C(\alpha)} f(z) \ d\sigma(z) = \int_A f(z) \ d\sigma(z)$$
+
+On obtient bien entendu le même résultat en se restreignant aux entiers $n \in \setN$ :
+
+$$\lim_{n \to \infty} \int_{C(n)} f(z) \ d\sigma(z) = \int_A f(z) \ d\sigma(z)$$
+
+Comme $Z(\alpha,x)$ vérifie les mêmes propriétés, on a :
+
+$$\lim_{n \to \infty} \int_{C(n,x)} f(y) \ d\mu(y) = \int_{A(x)} f(y) \ d\mu(y)$$
+
+Pour tout $n \in \setN$, posons :
+
+$$u_n(x) = \int_{C(n,x)} f(y) \ d\mu(y)$$
+
+Il s'agit d'une suite de fonctions positives. Comme l'inégalité $m \le n$ implique $C(m,x) \subseteq C(n,x)$, on a $u_m \le u_n$. La suite est donc croissante et converge vers :
+
+$$\lim_{n \to \infty} u_n(x) = \int_{A(x)} f(y) \ d\mu(y)$$
+
+La convergence monotone nous montre alors que :
+
+\begin{eqnarray*}
+\lim_{n \to \infty} \int_X u_n(x) \ d\nu(x) &=& \int_X \lim_{n \to \infty} u_n(x) \ d\nu(x) \\
+&=& \int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y)
+\end{eqnarray*}
+
+D'un autre coté, on a :
+
+\begin{eqnarray*}
+\lim_{n \to \infty} \int_X u_n(x) \ d\nu(x) &=& \lim_{n \to \infty} \int_X \ d\nu(x) \int_{C(n,x)} f(y) \ d\mu(y) \\
+&=& \lim_{n \to \infty} \int_{C(n)} f(z) \ d\sigma(z) \\
+&=& \int_A f(z) \ d\sigma(z)
+\end{eqnarray*}
+
+On en conclut finalement que :
+
+$$\int_A f(z) \ d\sigma(z) = \int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y)$$
+
+
+*** Signe quelconque
+
+Soit une fonction intégrable $f : A \mapsto \setR$ et sa décomposition en fonctions positives $f = f^+ - f^-$. On a :
+
+\begin{eqnarray*}
+\int_A f(z) \ d\sigma(z) &=& \int_A f^+(z) \ d\sigma(z) - \int_A f^-(z) \ d\sigma(z) \\
+&=& \int_X \ d\nu(x) \int_{A(x)} f^+(y) \ d\mu(y) - \int_X \ d\nu(x) \int_{A(x)} f^-(y) \ d\mu(y) \\
+&=& \int_X \left[ \int_{A(x)} f^+(y) \ d\mu(y) - \int_{A(x)} f^-(y) \ d\mu(y) \right] \ d\nu(x) \\
+&=& \int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y)
+\end{eqnarray*}
+
+
+** Fubini
+
+Sur $\setR^2$, la mesure de Lebesgue, que nous notons ici $\sigma$, est basée sur des ensembles de la forme :
+
+$$P = [a,b] \times [c,d]$$
+
+où $a,b,c,d \in \setR$ et $a \le b$, $c \le d$. Si $\mu$ est la mesure de Lebesgue sur $\setR$, on a alors :
+
+$$\sigma(P) = (\mu \otimes \mu)([a,b] \times [c,d]) = \mu([a,b]) \cdot \mu([c,d]) = (b - a) \cdot (d - c)$$
+
+Considérons le partionnement formé des segments $[(x,c),(x,d)]$ pour tous les $x$ compris
+entre $a$ et $b$ :
+
+$$\mathcal{P} = \{ [(x,c),(x,d)] : x \in [a,b] \}$$
+
+Comme :
+
+$$[(x,c),(x,d)] = \{ (x,y) : y \in [c,d] \}$$
+
+on définit la mesure $\mu$ d'un tel segment par extension de la mesure de Lebesgue :
+
+$$\mu([(x,c),(x,d)]) = d - c$$
+
+La mesure $\sigma_x$ qui en découle s'évalue :
+
+$$\sigma_x(A) = \int_a^b (d - c) dx = (d - c) \int_a^b dx = (d - c) \cdot (b - a)$$
+
+Considérons le partionnement alternatif :
+
+$$\mathcal{Q} = \{ [(a,y),(b,y)] : y \in [c,d] \}$$
+
+Comme :
+
+$$[(a,y),(b,y)] = \{ (x,y) : x \in [a,b] \}$$
+
+on définit la mesure $\mu$ d'un tel segment par extension de la mesure de Lebesgue :
+
+$$\mu([(a,y),(b,y)]) = b - a$$
+
+La mesure $\sigma_y$ qui en découle s'évalue :
+
+$$\sigma_y(A) = \int_c^d (b - a) dy = (b - a) \int_c^d dy = (b - a) \cdot (d - c)$$
+
+On en conclut que $\sigma_x = \sigma_y = \sigma$. Si $f$ est une fonction intégrable sur $A = [\alpha,\beta] \times [\gamma,\delta] \subseteq \setR^2$, on a alors :
+
+$$\int_A f(x,y) \ d\sigma(x,y) = \int_\alpha^\beta dx \int_\gamma^\delta f(x,y) \ dy = \int_\gamma^\delta dy \int_\alpha^\beta f(x,y) \ dx$$
+
+On note souvent $d\sigma(x,y) = dx \ dy$ et :
+
+$$\int_A f(x,y) \ dx \ dy = \int_\alpha^\beta dx \int_\gamma^\delta f(x,y) \ dy = \int_\gamma^\delta dy \int_\alpha^\beta f(x,y) \ dx$$
+
+
+*** Dimension $n$
+
+Soit $A = [a_1,b_1] \times [a_2,b_2] ... \times [a_n,b_n] \subseteq \setR^n$. On a :
+
+$$\int_A f(x) \ dx = \int_{a_1}^{b_1} dx_1 \ ... \int_{a_n}^{b_n} dx_n \ f(x_1,...x_n)$$
+
+où $dx$ correspond à la mesure de Lebesgue $\sigma = \mu \otimes ... \otimes \mu$.
+
+
+** Produit cartésien
+
+On peut généraliser Fubini dans certaines conditions. On a alors :
+
+$$\int_{A \times B} f(x,y) \ d\mu(x) \ d\nu(y) = \int_B d\nu(y) \ \int_A f(x,y) \ d\mu(x)$$
+
+et symétriquement :
+
+$$\int_{A \times B} f(x,y) \ d\mu(x) \ d\nu(y) = \int_A \ d\mu(x) \int_B f(x,y) \ d\nu(y)$$
+
+
+** Domaine régulier
+
+Soit les réels $a,b$ et les fonctions $S,I : [a,b] \mapsto \setR$ permettant de définir l'ensemble :
+
+$$A = \{ (x,y) \in [a,b] \times \setR : I(x) \le y \le S(x) \}$$
+
+Posons :
+
+$$A(x) = \{ (x,y) : I(x) \le y \le S(x) \}$$
+
+On voit que $A(x) \cap A(z) = \emptyset$ si $x \ne z$ et que :
+
+$$A = \bigcup_{x \in [a,b]} A(x)$$
+
+On a donc :
+
+$$\int_A f(x,y) \ d\sigma(x,y) = \int_a^b d\nu(x) \ \int_{I(x)}^{S(x)} f(x,y) \ d\mu(y)$$
+
+
+** Lemme du triangle
+
+Un petit lemme intéressant permettant de permuter l'intégration de deux
+variables. Soit le triangle $\Delta$ :
+
+$$\Delta = \{ (s,t) \in \setR^2 : 0 \le s,t \le T, \quad s \ge t \}$$
+
+On peut redéfinir cet ensemble de deux manières équivalentes :
+
+#+BEGIN_CENTER
+\(
+\Delta = \{ (s,t) \in \setR^2 : 0 \le s \le T, \quad 0 \le t \le s \} \\
+\Delta = \{ (s,t) \in \setR^2 : 0 \le t \le T, \quad t \le s \le T \}
+\)
+#+END_CENTER
+
+On a donc :
+
+$$\int_\Delta f(x) \ dx = \int_0^T \ ds \int_0^s f(s,t) \ dt = \int_0^T \ dt \int_t^T f(s,t) \ ds$$
+
+
+*** Cas particulier
+
+En particulier, si la fonction à intégrer ne dépend que de $t$, on a :
+
+$$\int_0^T \ ds \int_0^s u(t) \ dt = \int_0^T u(t) \ dt \int_t^T  \ ds = \int_0^T (T - t) \cdot u(t) \ dt$$
+
+
+* Sommes et intégrales
+
+#+TOC: headlines 1 local
+
+
+** Introduction
+
+Soit une fonction décroissante $f : \setR \mapsto \setR$. Choisissons $k \in \setZ$. Comme $f(k)$ maximise $f$ sur $[k,k+1]$, l'intégrale vérifie :
+
+$$\int_k^{k + 1} f(x) \ dx \le \int_k^{k + 1} f(k) \ dx= f(k) \cdot 1$$
+
+Comme $f(k)$ minimise $f$ sur $[k-1,k]$, l'intégrale vérifie :
+
+$$f(k) = f(k) \cdot 1 = \int_{k - 1}^k f(k) \ dx \le \int_{k - 1}^k f(x) \ dx$$
+
+On en déduit l'encadrement :
+
+$$\int_k^{k + 1} f(x) \ dx \le f(k) \le \int_{k - 1}^k f(x) \ dx$$
+
+Soit $m, n \in \setZ$. On a :
+
+$$\sum_{k = m}^n \int_k^{k + 1} f(x) \ dx = \int_m^{n + 1} f(x) \ dx$$
+
+et :
+
+$$\sum_{k = m}^n \int_{k - 1}^k f(x) \ dx = \int_{m - 1}^n f(x) \ dx$$
+
+En sommant les inégalités sur $k \in \setZ[m,n]$, on obtient :
+
+$$\int_m^{n + 1} f(x) \ dx \le \sum_{k = m}^n f(k) \le \int_{m - 1}^n f(x) \ dx$$
+
+
+** Sommes infinies
+
+Sous réserve de convergence des sommes et des intégrales, on a :
+
+$$\int_0^{+\infty} f(x) \ dx \le \sum_{k = 0}^{+\infty} f(k) \le \int_{-1}^{+\infty} f(x) \ dx$$

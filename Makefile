@@ -25,10 +25,9 @@ include Makefile.inc
 
 # All, Install, Clean, Wipe {{{1
 
-#all: $(SUBDIRS) $(FICHIERS_HTML) $(FICHIERS_EPUB)
-all: $(SUBDIRS) $(FICHIERS_HTML)
+all: $(SUBDIRS) $(FICHIERS_HTML) $(FICHIERS_EPUB)
 
-install: sync
+install: sync-html
 
 clean: $(CLEAN_SUBDIRS)
 	rm -f *~

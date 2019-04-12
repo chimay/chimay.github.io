@@ -16,10 +16,9 @@ include ../Makefile.inc
 
 # All, Install, Clean, Wipe {{{1
 
-#all: $(FICHIERS_HTML) $(FICHIERS_EPUB)
-all: $(FICHIERS_HTML)
+all: $(FICHIERS_HTML) $(FICHIERS_EPUB)
 
-install: sync
+install: sync-html
 
 clean:
 	rm -f *~

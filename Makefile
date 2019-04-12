@@ -27,7 +27,7 @@ include Makefile.inc
 
 all: $(SUBDIRS) $(FICHIERS_HTML) $(FICHIERS_EPUB)
 
-install: sync-html
+install: sync
 
 clean: $(CLEAN_SUBDIRS)
 	rm -f *~

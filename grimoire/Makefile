@@ -18,7 +18,7 @@ include ../Makefile.inc
 
 all: $(FICHIERS_HTML) $(FICHIERS_EPUB)
 
-install: sync-html
+install: sync
 
 clean:
 	rm -f *~

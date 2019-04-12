@@ -1,0 +1,1402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<!-- 2019-04-12 ven 19:15 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Eclats de vers : Matemat 10 : Optimisation - 7</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="chimay" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Eclats de vers : Matemat 10 : Optimisation - 7</h1>
+<p>
+<a href="index.html">Index des Grimoires</a>
+</p>
+
+<p>
+<a href="file:///home/david/racine/site/orgmode/index.html">Retour à l’accueil</a>
+</p>
+
+<div id="table-of-contents">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgdb53cb1">1. Espaces de Hilbert</a></li>
+</ul>
+</div>
+</div>
+
+<p>
+\( \newcommand{\parentheses}[1]{\left(#1\right)}
+\newcommand{\crochets}[1]{\left[#1\right]}
+\newcommand{\accolades}[1]{\left\{#1\right\}}
+\newcommand{\ensemble}[1]{\left\{#1\right\}}
+\newcommand{\identite}{\mathrm{Id}}
+\newcommand{\indicatrice}{\boldsymbol{\delta}}
+\newcommand{\dirac}{\delta}
+\newcommand{\moinsun}{{-1}}
+\newcommand{\inverse}{\ddagger}
+\newcommand{\pinverse}{\dagger}
+\newcommand{\topologie}{\mathfrak{T}}
+\newcommand{\ferme}{\mathfrak{F}}
+\newcommand{\img}{\mathbf{i}}
+\newcommand{\binome}[2]{
+\left\{ \begin{array}{c}
+#1 \\
+#2 \\
+\end{array} \right\}
+}
+\newcommand{\canonique}{\mathfrak{c}}
+\newcommand{\tenseuridentite}{\boldsymbol{\mathcal{I}}}
+\newcommand{\permutation}{\boldsymbol{\epsilon}}
+\newcommand{\matriceZero}{\mathfrak{0}}
+\newcommand{\matriceUn}{\mathfrak{1}}
+\newcommand{\christoffel}[2]{
+\left\{ \begin{array}{c}
+#1 \\
+#2 \\
+\end{array} \right\}
+}
+\newcommand{\lagrangien}{\mathfrak{L}}
+\newcommand{\sousens}{\mathfrak{P}}
+\newcommand{\partition}{\mathrm{Partition}}
+\newcommand{\tribu}{\mathrm{Tribu}}
+\newcommand{\topologies}{\mathrm{Topo}}
+\newcommand{\setB}{\mathbb{B}}
+\newcommand{\setN}{\mathbb{N}}
+\newcommand{\setZ}{\mathbb{Z}}
+\newcommand{\setQ}{\mathbb{Q}}
+\newcommand{\setR}{\mathbb{R}}
+\newcommand{\setC}{\mathbb{C}}
+\newcommand{\corps}{\mathbb{K}}
+\newcommand{\boule}{\mathfrak{B}}
+\newcommand{\intervalleouvert}[2]{\relax \ ] #1 , #2 [ \ \relax}
+\newcommand{\intervallesemiouvertgauche}[2]{\relax \ ] #1 , #2 ]}
+\newcommand{\intervallesemiouvertdroite}[2]{[ #1 , #2 [ \ \relax}
+\newcommand{\fonction}{\mathbb{F}}
+\newcommand{\bijection}{\mathrm{Bij}}
+\newcommand{\polynome}{\mathrm{Poly}}
+\newcommand{\lineaire}{\mathrm{Lin}}
+\newcommand{\continue}{\mathrm{Cont}}
+\newcommand{\homeomorphisme}{\mathrm{Hom}}
+\newcommand{\etagee}{\mathrm{Etagee}}
+\newcommand{\lebesgue}{\mathrm{Leb}}
+\newcommand{\lipschitz}{\mathrm{Lip}}
+\newcommand{\suitek}{\mathrm{Suite}}
+\newcommand{\matrice}{\mathbb{M}}
+\newcommand{\krylov}{\mathrm{Krylov}}
+\newcommand{\tenseur}{\mathbb{T}}
+\newcommand{\essentiel}{\mathfrak{E}}
+\newcommand{\relation}{\mathrm{Rel}}
+\newcommand{\strictinferieur}{\ < \ }
+\newcommand{\strictsuperieur}{\ > \ }
+\newcommand{\ensinferieur}{\eqslantless}
+\newcommand{\enssuperieur}{\eqslantgtr}
+\newcommand{\esssuperieur}{\gtrsim}
+\newcommand{\essinferieur}{\lesssim}
+\newcommand{\essegal}{\eqsim}
+\newcommand{\union}{\ \cup \ }
+\newcommand{\intersection}{\ \cap \ }
+\newcommand{\opera}{\divideontimes}
+\newcommand{\autreaddition}{\boxplus}
+\newcommand{\autremultiplication}{\circledast}
+\newcommand{\commutateur}[2]{\left[ #1 , #2 \right]}
+\newcommand{\convolution}{\circledcirc}
+\newcommand{\correlation}{\ \natural \ }
+\newcommand{\diventiere}{\div}
+\newcommand{\modulo}{\bmod}
+\newcommand{\pgcd}{pgcd}
+\newcommand{\ppcm}{ppcm}
+\newcommand{\scalaire}[2]{\left\langle #1 \left|\right\relax #2 \right\rangle}
+\newcommand{\braket}[3]{\left\langle #1 \right| #2 \left| #3 \right\rangle}
+\newcommand{\orthogonal}{\bot}
+\newcommand{\forme}[2]{\left\langle #1 , #2 \right\rangle}
+\newcommand{\biforme}[3]{\left\langle #1 , #2 , #3 \right\rangle}
+\newcommand{\contraction}[3]{\left\langle #1 \odot #3 \right\rangle_{#2}}
+\newcommand{\dblecont}[5]{\left\langle #1 \right| #3 \left| #5 \right\rangle_{#2,#4}}
+\newcommand{\major}{major}
+\newcommand{\minor}{minor}
+\newcommand{\maxim}{maxim}
+\newcommand{\minim}{minim}
+\newcommand{\argument}{arg}
+\newcommand{\argmin}{arg\ min}
+\newcommand{\argmax}{arg\ max}
+\newcommand{\supessentiel}{ess\ sup}
+\newcommand{\infessentiel}{ess\ inf}
+\newcommand{\dual}{\star}
+\newcommand{\distance}{\mathfrak{dist}}
+\newcommand{\norme}[1]{\left\| #1 \right\|}
+\newcommand{\normetrois}[1]{\left|\left\| #1 \right\|\right|}
+\newcommand{\adh}{adh}
+\newcommand{\interieur}{int}
+\newcommand{\frontiere}{\partial}
+\newcommand{\image}{im}
+\newcommand{\domaine}{dom}
+\newcommand{\noyau}{ker}
+\newcommand{\support}{supp}
+\newcommand{\signe}{sign}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\unsur}[1]{\frac{1}{#1}}
+\newcommand{\arrondisup}[1]{\lceil #1 \rceil}
+\newcommand{\arrondiinf}[1]{\lfloor #1 \rfloor}
+\newcommand{\conjugue}{conj}
+\newcommand{\conjaccent}[1]{\overline{#1}}
+\newcommand{\division}{division}
+\newcommand{\difference}{\boldsymbol{\Delta}}
+\newcommand{\differentielle}[2]{\mathfrak{D}^{#1}_{#2}}
+\newcommand{\OD}[2]{\frac{d #1}{d #2}}
+\newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
+\newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
+\newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
+\newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
+\newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\gradient}{\mathbf{\nabla}}
+\newcommand{\combilin}[1]{\mathrm{span}\{ #1 \}}
+\newcommand{\trace}{tr}
+\newcommand{\proba}{\mathbb{P}}
+\newcommand{\probaof}[1]{\mathbb{P}\left[#1\right]}
+\newcommand{\esperof}[1]{\mathbb{E}\left[#1\right]}
+\newcommand{\cov}[2]{\mathrm{cov} \left( #1 , #2 \right) }
+\newcommand{\var}[1]{\mathrm{var} \left( #1 \right) }
+\newcommand{\rand}{\mathrm{rand}}
+\newcommand{\variation}[1]{\left\langle #1 \right\rangle}
+\newcommand{\composante}{comp}
+\newcommand{\bloc}{bloc}
+\newcommand{\ligne}{ligne}
+\newcommand{\colonne}{colonne}
+\newcommand{\diagonale}{diag}
+\newcommand{\matelementaire}{\mathrm{Elem}}
+\newcommand{\matpermutation}{permut}
+\newcommand{\matunitaire}{\mathrm{Unitaire}}
+\newcommand{\gaussjordan}{\mathrm{GaussJordan}}
+\newcommand{\householder}{\mathrm{Householder}}
+\newcommand{\rang}{rang}
+\newcommand{\schur}{\mathrm{Schur}}
+\newcommand{\singuliere}{\mathrm{DVS}}
+\newcommand{\convexe}{\mathrm{Convexe}}
+\newcommand{\petito}[1]{o\left(#1\right)}
+\newcommand{\grando}[1]{O\left(#1\right)} \)
+</p>
+
+<div id="outline-container-orgdb53cb1" class="outline-2">
+<h2 id="orgdb53cb1"><span class="section-number-2">1</span> Espaces de Hilbert</h2>
+<div class="outline-text-2" id="text-1">
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgd00c6c5">1.1. Définition</a></li>
+<li><a href="#org12b625a">1.2. Utilisation</a></li>
+<li><a href="#org7891ab8">1.3. Complétude du noyau</a></li>
+<li><a href="#orgaf02118">1.4. Complétude de l'image</a></li>
+<li><a href="#orgef3e7a3">1.5. Complétude de l'espace orthogonal</a></li>
+<li><a href="#orgdbe58d3">1.6. Théorème de projection</a></li>
+<li><a href="#orgdc480f5">1.7. Application projective</a></li>
+<li><a href="#org5ac415b">1.8. Orthogonalité</a></li>
+<li><a href="#org12f6f77">1.9. Identité locale</a></li>
+<li><a href="#orgfae2d93">1.10. Invariance</a></li>
+<li><a href="#org4243bef">1.11. Somme directe</a></li>
+<li><a href="#org575c5af">1.12. Biorthogonal</a></li>
+<li><a href="#org5636fdf">1.13. Théorème de représentation de Riesz</a></li>
+<li><a href="#org151d1bf">1.14. Extension aux formes bilinéaires</a></li>
+<li><a href="#orgb1ff0f1">1.15. Application adjointe</a></li>
+<li><a href="#orga0ef801">1.16. Théorème de Lax-Milgram</a></li>
+<li><a href="#org62c1094">1.17. Suite orthonormée</a></li>
+<li><a href="#orgee2d328">1.18. Inégalité de Bessel</a></li>
+<li><a href="#orge3accab">1.19. Base hilbertienne</a></li>
+<li><a href="#orgbbc1676">1.20. Egalité de Parseval</a></li>
+<li><a href="#orgcb5d84d">1.21. Produit scalaire</a></li>
+</ul>
+</div>
+
+<p>
+\label{chap:hilbert}
+</p>
+</div>
+
+
+<div id="outline-container-orgd00c6c5" class="outline-3">
+<h3 id="orgd00c6c5"><span class="section-number-3">1.1</span> Définition</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Un espace de Hilbert \(H\) est un espace de Banach dont la distance découle d'un produit scalaire \(\scalaire{}{}\) défini sur \(H\) :
+</p>
+
+<p>
+\[\distance(u,v) = \norme{u - v} = \sqrt{\scalaire{u - v}{u - v}}\]
+</p>
+
+<p>
+Dans la suite, nous considérons un espace de Hilbert \(H\) sur \(\corps\).
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org12b625a" class="outline-3">
+<h3 id="org12b625a"><span class="section-number-3">1.2</span> Utilisation</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Les espaces de Hilbert permettent de généraliser en dimension infinie nombre de résultats valables en dimension finie. Parmi eux, les espaces fonctionnels sont très utilisés. Ils permettent entre-autres de relier la solution de certaines équations différentielles à des problèmes de minimisation.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org7891ab8" class="outline-3">
+<h3 id="org7891ab8"><span class="section-number-3">1.3</span> Complétude du noyau</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Soit \(\varphi \in H^\dual\) et une suite de Cauchy \(\{x_1,x_2,...\} \subseteq \noyau \varphi \subseteq H\). L'espace \(H\) étant complet, cette suite converge vers \(x \in H\). Par continuité de \(\varphi\), on a :
+</p>
+
+<p>
+\[\forme{\varphi}{x} = \lim_{n \to \infty} \forme{\varphi}{x_n} = 0\]
+</p>
+
+<p>
+On en conclut que \(x \in \noyau \varphi\). L'espace vectoriel \(\noyau \varphi\) est donc complet.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgaf02118" class="outline-3">
+<h3 id="orgaf02118"><span class="section-number-3">1.4</span> Complétude de l'image</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Soit l'application linéaire continue \(A : H \mapsto H\) et une suite de Cauchy \(\{y_1,y_2,...\} \subseteq \image A \subseteq H\). L'espace \(H\) étant complet, cette suite converge vers \(y \in H\). Comme les \(y_i \in \image A\), on peut trouver des \(x_i \in H\) tels que \(A(x_i) = y_i\). Par continuité de \(A\), on a :
+</p>
+
+<p>
+\[y = \lim_{n \to \infty} y_n = \lim_{n \to \infty} A(x_n) = A(x) \in \image A\]
+</p>
+
+<p>
+On en conclut que \(y \in \image A\). L'espace vectoriel \(\image A\) est donc complet.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgef3e7a3" class="outline-3">
+<h3 id="orgef3e7a3"><span class="section-number-3">1.5</span> Complétude de l'espace orthogonal</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+Soit \(V \subseteq H\). Considérons une suite de Cauchy \(\{x_1,x_2,...\} \subseteq V^\orthogonal \subseteq H\). Comme \(H\) est complet, cette suite est convergente vers \(x \in H\). Choisissons \(z \in V\). On a :
+</p>
+
+<p>
+\[\scalaire{x - x_n}{z} = \scalaire{x}{z} - \scalaire{x_n}{z} = \scalaire{x}{z}\]
+</p>
+
+<p>
+On en déduit que :
+</p>
+
+<p>
+\[\abs{\scalaire{x}{z}} = \abs{\scalaire{x - x_n}{z}} \le \norme{x - x_n} \cdot \norme{z}\]
+</p>
+
+<p>
+Comme cette relation doit être valable pour tout \(n\) et que \(\norme{x - x_n}\) converge vers \(0\), on en déduit que :
+</p>
+
+<p>
+\[\scalaire{x}{z} = 0\]
+</p>
+
+<p>
+c'est-à-dire \(x \in V^\orthogonal\). On en conclut que \(V^\orthogonal\) est un espace complet.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgdbe58d3" class="outline-3">
+<h3 id="orgdbe58d3"><span class="section-number-3">1.6</span> Théorème de projection</h3>
+<div class="outline-text-3" id="text-1-6">
+\begin{theoreme}
+Soit $V \subseteq H$ un sous-espace vectoriel complet. Pour tout $x \in H$, il existe un unique $u \in V$ vérifiant :
+
+\norme{$$x - u} = \inf_{z \in V} \norme{x - z} = \distance(x,V)$$
+\end{theoreme}
+
+\begin{demonstration}
+
+Soit $x \in H$ et :
+
+$$D = \{ \norme{x - z} : z \in V \} \subseteq \setR$$
+
+L'ensemble $D$ est inclu dans $\setR$ et minoré puisque $0 \le D$. On en conclut que l'infimum $\lambda = \inf D$ existe. On a par définition $\distance(x,V) = \lambda$. Comme $D \subseteq \setR$, on a $\lambda \in \adh D$ et la distance au sens des réels est nulle :
+
+$$\distance(\lambda,D) = \inf_{r \in D} \abs{\lambda - r} = 0$$
+
+On peut donc contruire une suite de $z_n \in V$ tels que :
+
+$$\lim_{n \to \infty} \norme{x - z_n} = \lambda$$
+
+Choisissons $\epsilon \strictsuperieur 0$ et $m,n \in \setN$ tels que :
+
+$$\max\{\norme{x - z_m} , \norme{x - z_n} \} \le \lambda + \epsilon$$
+
+et appliquons l'égalité du parallèlogramme à :
+
+#+BEGIN_CENTER
+\(
+v = x - z_m \\
+w = x - z_n
+\)
+#+END_CENTER
+
+On a alors :
+
+#+BEGIN_CENTER
+\(
+v + w = 2 x - (z_m + z_n) \\
+v - w = z_n - z_m
+\)
+#+END_CENTER
+
+et donc :
+
+$$\norme{2 x - (z_m + z_n)}^2 + \norme{z_n - z_m}^2 = 2 \left( \norme{x - z_m}^2 + \norme{x - z_m}^2 \right)$$
+
+Comme :
+
+$$\norme{2 x - (z_m + z_n)}^2 = \norme{2 \left(x - \frac{z_m + z_n}{2}\right)}^2 = 4 \norme{x - \frac{z_m + z_n}{2}}^2$$
+
+on peut réécrire ce résultat sous la forme :
+
+$$\norme{z_n - z_m}^2 + 4 \norme{x - \frac{z_m + z_n}{2}}^2 = 2 \left( \norme{x - z_m}^2 + \norme{x - z_m}^2 \right)$$
+
+et donc :
+
+$$\norme{z_n - z_m}^2 = 2 \left( \norme{x - z_m}^2 + \norme{x - z_m}^2 \right) - 4 \norme{x - \frac{z_m + z_n}{2}}^2$$
+
+Comme $V$ est un espace vectoriel, on a $(z_m + z_n)/2 \in V$. Donc, par définition de l'infimum :
+
+$$\norme{x - \frac{z_m + z_n}{2}} \ge \lambda$$
+
+On a aussi :
+
+$$\norme{x - z_m}^2 + \norme{x - z_m}^2 \le 2 (\lambda + \epsilon)^2$$
+
+On en déduit que :
+
+$$\norme{z_n - z_m}^2 \le 4 (\lambda + \epsilon)^2 - 4 \lambda^2 = 8 \lambda \cdot \epsilon + 4 \epsilon^2$$
+
+ce qui montre que les $z_n$ forment une suite de Cauchy. L'espace $V$ étant complet, cette suite converge vers un certain $u \in V$. On a alors :
+
+$$\norme{x - u} = \lim_{n \to \infty} \norme{x - z_n} = \lambda = \distance(x,V)$$
+
+Nous avons donc prouvé l'existence d'un vecteur $u \in V$ minimisant la distance à $x$. Supposons à présent que $u,v \in V$ vérifient :
+
+$$\norme{x - u} = \norme{x - v} = \lambda$$
+
+Appliquons le parallélogramme à $u - x$ et $x - v$. On a :
+
+#+BEGIN_CENTER
+\(
+(u - x) + (x - v) = u - v \\
+(u - x) - (x - v) = u + v - 2 x
+\)
+#+END_CENTER
+
+et :
+
+\begin{eqnarray*}
+\norme{u - v}^2 + \norme{u + v - 2 x}^2 &=& 2 ( \norme{u - x}^2 + \norme{x - v}^2 ) \\
+&=& 2 (\lambda^2 + \lambda^2) = 4 \lambda^2
+\end{eqnarray*}
+
+On en conclut que :
+
+\begin{eqnarray*}
+\norme{u - v}^2 &=& 4 \lambda^2 - \norme{u + v - 2 x}^2 \\
+&=& 4 \lambda^2 - 4 \norme{\frac{u + v}{2} - x}^2
+\end{eqnarray*}
+
+Mais comme $(u + v)/2 \in V$, on a :
+
+$$\norme{\frac{u + v}{2} - x}^2 \ge \lambda^2$$
+
+et :
+
+$$0 \le \norme{u - v}^2 \le 4 \lambda^2 - 4 \lambda^2 = 0$$
+
+Donc, $\norme{u - v} = 0$ et $u = v$, ce qui prouve l'unicité de la solution optimale.
+
+\end{demonstration}
+</div>
+</div>
+
+
+<div id="outline-container-orgdc480f5" class="outline-3">
+<h3 id="orgdc480f5"><span class="section-number-3">1.7</span> Application projective</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+On peut donc définir l'application de projection \(P : H \mapsto V\) par :
+</p>
+
+<p>
+\[\norme{x - P(x)} = \inf_{z \in V} \norme{x - z}\]
+</p>
+
+<p>
+ou :
+</p>
+
+<p>
+\[P(x) = \argument_H\inf_{z \in V} \norme{x - z}\]
+</p>
+
+<p>
+Comme \(P(x) \in V\), cela revient à :
+</p>
+
+<p>
+\[P(x) = \arg\min_{z \in V} \norme{x - z}\]
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org5ac415b" class="outline-3">
+<h3 id="org5ac415b"><span class="section-number-3">1.8</span> Orthogonalité</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+Soit \(x \in H\) et \(u = P(x)\). L'écart \(e = x - u\) possède-t-il les mêmes propriétés d'orthogonalité qu'en dimension finie ? Soit \(\alpha \in \corps\) et \(v \in V\). On a \(u + \alpha \cdot v \in V\) et donc :
+</p>
+
+<p>
+\[\norme{x - u}^2 = \norme{e}^2 \le \norme{x - u - \alpha \cdot v}^2 = \norme{e - \alpha \cdot v}^2\]
+</p>
+
+<p>
+En développant ce dernier membre, on obtient :
+</p>
+
+<p>
+\[\norme{e}^2 \le \norme{e}^2 - 2 \Re(\alpha \cdot \scalaire{e}{v}) + \abs{\alpha}^2 \cdot \norme{v}^2\]
+</p>
+
+<p>
+On en déduit que :
+</p>
+
+<p>
+\[\abs{\alpha}^2 \cdot \norme{v}^2 - 2 \Re(\alpha \cdot \scalaire{e}{v}) \ge 0\]
+</p>
+
+<p>
+Utilisant la définition du produit complexe, il vient :
+</p>
+
+<p>
+\[\abs{\alpha}^2 \cdot \norme{v}^2 - 2 \Re(\alpha) \cdot \Re(\scalaire{e}{v}) + 2 \Im(\alpha) \cdot \Im(\scalaire{e}{v}) \ge 0\]
+</p>
+
+<p>
+Choisissons \(\alpha = \gamma \in \setR\), avec \(\gamma \strictsuperieur 0\). On a \(\Re(\alpha) = \gamma\), \(\Im(\alpha) = 0\) et \(\abs{\alpha}^2 = \gamma^2\). Donc :
+</p>
+
+<p>
+\[\gamma^2 \cdot \norme{v}^2 - 2 \gamma \cdot \Re(\scalaire{e}{v}) \ge 0\]
+</p>
+
+<p>
+Si nous divisons par \(\gamma\) et que nous faisons passer le second terme dans le second membre, il vient :
+</p>
+
+<p>
+\[2 \Re(\scalaire{e}{v}) \le \gamma \cdot \norme{v}^2\]
+</p>
+
+<p>
+Comme ce doit être valable pour tout \(\gamma\) strictement positif, on en conclut que \(\Re(\scalaire{e}{v}) \le 0\). Recommençons le même procédée avec \(\alpha = - \gamma \strictinferieur 0\). On a :
+</p>
+
+<p>
+\[\gamma^2 \cdot \norme{v}^2 + 2 \gamma \cdot \Re(\scalaire{e}{v}) \ge 0\]
+</p>
+
+<p>
+et :
+</p>
+
+<p>
+\[2 \Re(\scalaire{e}{v}) \ge - \gamma \cdot \norme{v}^2\]
+</p>
+
+<p>
+Comme ce doit être valable pour tout \(\delta = - \gamma\) strictement négatif, on en conclut que \(\Re(\scalaire{e}{v}) \ge 0\). D'où finalement \(\Re(\scalaire{e}{v}) = 0\).
+</p>
+
+<p>
+Choisissons à présent \(\alpha = \img \gamma\), où le réel \(\gamma \strictsuperieur 0\) et où \(\img = \sqrt{-1}\). On a \(\Re(\alpha) = 0\), \(\Im(\alpha) = \gamma\) et \(\abs{\alpha}^2 = \gamma^2\). Donc :
+</p>
+
+<p>
+\[\gamma^2 \cdot \norme{v}^2 + 2 \gamma \cdot \Im(\scalaire{e}{v}) \ge 0\]
+</p>
+
+<p>
+On en déduit que :
+</p>
+
+<p>
+\[2 \Im(\scalaire{e}{v}) \ge - \gamma \cdot \norme{v}^2\]
+</p>
+
+<p>
+Comme ce doit être valable pour tout \(\delta = - \gamma\) strictement négatif, on en conclut que \(\Im(\scalaire{e}{v}) \ge 0\). Recommençons le même procédée avec \(\alpha = - \img \gamma\), avec \(\gamma \strictsuperieur 0\). On a :
+</p>
+
+<p>
+\[\gamma^2 \cdot \norme{v}^2 - 2 \gamma \cdot \Im(\scalaire{e}{v}) \ge 0\]
+</p>
+
+<p>
+et :
+</p>
+
+<p>
+\[2 \Im(\scalaire{e}{v}) \le \gamma \cdot \norme{v}^2\]
+</p>
+
+<p>
+Comme ce doit être valable pour tout \(\gamma\) strictement positif, on en conclut que \(\Im(\scalaire{e}{v}) \le 0\). D'où finalement \(\Im(\scalaire{e}{v}) = 0\). Ce produit scalaire ayant des parties réelles et imaginaires nulles, il est nul :
+</p>
+
+<p>
+\[\scalaire{e}{v} = 0\]
+</p>
+
+<p>
+Cette relation d'orthogonalité étant valable pour tout \(v \in V\), on en conclut que \(e \in V^\orthogonal\).
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org12f6f77" class="outline-3">
+<h3 id="org12f6f77"><span class="section-number-3">1.9</span> Identité locale</h3>
+<div class="outline-text-3" id="text-1-9">
+<p>
+Soit \(v \in V\). Il est clair que le choix \(u = v\) minimise la distance \(\norme{v - u} \ge 0\) sur \(u \in V\) puisque \(\norme{v - v} = 0\). Par unicité de la solution optimale, on en déduit que \(P(v) = v\) pour tout \(v \in V\).
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgfae2d93" class="outline-3">
+<h3 id="orgfae2d93"><span class="section-number-3">1.10</span> Invariance</h3>
+<div class="outline-text-3" id="text-1-10">
+<p>
+Comme \(v = P(x) \in V\) pour tout \(x \in H\), on a :
+</p>
+
+<p>
+\[P^2(x) = P \circ P(x) = P(v) = v = P(x)\]
+</p>
+
+<p>
+d'où \(P^2 = P\).
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org4243bef" class="outline-3">
+<h3 id="org4243bef"><span class="section-number-3">1.11</span> Somme directe</h3>
+<div class="outline-text-3" id="text-1-11">
+<p>
+On peut donc exprimer tout \(x \in H\) comme une somme :
+</p>
+
+<p>
+\[x = u + e\]
+</p>
+
+<p>
+où \(u = P(x) \in V\) et \(e = x - P(x) \in V^\orthogonal\). Nous allons voir que cette décomposition est unique. Soit \(x \in H\) et les vecteurs \(u,v \in V\) et \(y,z \in V^\orthogonal\) tels que :
+</p>
+
+<p>
+\[x = u + y = v + z\]
+</p>
+
+<p>
+On a :
+</p>
+
+<p>
+\[0 = \norme{x - x}^2 = \norme{u + y - v - z}^2 = \norme{(u - v) + (y - z)}^2\]
+</p>
+
+<p>
+Comme \(u - v \in V\) et \(y - z \in V^\orthogonal\), on a \(\scalaire{u - v}{y - z} = 0\). On peut donc appliquer le théorème de Pythagore. On obtient :
+</p>
+
+<p>
+\[0 = \norme{(u - v) + (y - z)}^2 = \norme{u - v}^2 + \norme{y - z}^2\]
+</p>
+
+<p>
+ce qui n'est possible que si \(\norme{u - v} = \norme{y - z} = 0\), c'est-à-dire \(u = v\) et \(y = z\), ce qui prouve l'unicité de la décomposition. L'espace \(H\) est donc la somme directe de \(V\) et de \(V^\orthogonal\) :
+</p>
+
+<p>
+\[H = V \bigoplus V^\orthogonal\]
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org575c5af" class="outline-3">
+<h3 id="org575c5af"><span class="section-number-3">1.12</span> Biorthogonal</h3>
+<div class="outline-text-3" id="text-1-12">
+<ul class="org-ul">
+<li>Soit \(x \in V\). Pour tout \(z \in V^\orthogonal\), on a :</li>
+</ul>
+
+<p>
+\[\scalaire{x}{z} = 0\]
+</p>
+
+<p>
+Donc \(x \in (V^\orthogonal)^\orthogonal\) et \(V \subseteq (V^\orthogonal)^\orthogonal\).
+</p>
+
+<ul class="org-ul">
+<li>Soit \(x \in (V^\orthogonal)^\orthogonal \subseteq H\). On pose \(u = P(x) \in V\) et \(v = x - P(x) \in V^\orthogonal\). On a donc \(x = u + v\). Par définition de \((V^\orthogonal)^\orthogonal\), on a :</li>
+</ul>
+
+<p>
+\[\scalaire{x}{z} = 0\]
+</p>
+
+<p>
+pour tout \(z \in V^\orthogonal\). Comme \(u \in V\), on a aussi \(\scalaire{u}{z} = 0\) et finalement :
+</p>
+
+<p>
+\[0 = \scalaire{x}{z} = \scalaire{u}{z} + \scalaire{v}{z} = \scalaire{v}{z}\]
+</p>
+
+<p>
+Si on choisit \(z = v\), cela donne \(\scalaire{v}{v} = 0\), d'où \(v = 0\) et \(x = u \in V\). On en conclut que \((V^\orthogonal)^\orthogonal \subseteq V\).
+</p>
+
+
+<p>
+On conclut de ces deux inclusions que :
+</p>
+
+<p>
+\[(V^\orthogonal)^\orthogonal = V\]
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org5636fdf" class="outline-3">
+<h3 id="org5636fdf"><span class="section-number-3">1.13</span> Théorème de représentation de Riesz</h3>
+<div class="outline-text-3" id="text-1-13">
+<p>
+Nous allons à présent établir une équivalence entre les formes linéaires de \(H^\dual\) et le produit scalaire sur \(H\).
+</p>
+
+\begin{theoreme}
+Pour toute forme linéaire $\varphi \in H^\dual$, il existe un et un seul $u \in H$ tel que :
+
+$$\forme{\varphi}{x} = \scalaire{u}{x}$$
+
+pour tout $x \in H$. On dit que $u$ représente $\varphi$ sur $H$.
+\end{theoreme}
+
+\begin{demonstration}
+
+Soit le noyau :
+
+$$N = \noyau \varphi = \{ x \in H : \forme{\varphi}{x} = 0 \}$$
+
+  - Si $N = H$, il suffit de choisir $u = 0$. On a alors :
+
+$$\forme{\varphi}{x} = 0 = \scalaire{0}{x} = \scalaire{u}{x}$$
+
+pour tout $x \in H$. Pour prouver l'unicité, si on a aussi $v \in H$ représente également $\varphi$, le choix $x = v$ nous donne :
+
+$$\forme{\varphi}{v} = 0 = \scalaire{v}{v}$$
+
+ce qui implique que $v = 0$.
+
+  - Dans le cas contraire, on a $H \setminus N \ne \emptyset$. Comme $N$ est complet, on peut lui appliquer les résultats relatifs aux projections, dont la somme directe $H = N \bigoplus N^\orthogonal$. Choisissons $a \in H \setminus N$. On a $\forme{\varphi}{a} \ne 0$ et une unique décomposition $a = b + c$, où $b \in N$ et $c \in N^\orthogonal$. On a donc par définition $\forme{\varphi}{b} = 0$ et :
+
+$$0 \ne \forme{\varphi}{a} = \forme{\varphi}{b} + \forme{\varphi}{c} = \forme{\varphi}{c}$$
+
+En partant de vecteurs de la forme $\gamma \cdot c$, où $\gamma \in \corps$, on peut obtenir la valeur de $\varphi$ en n'importe quel $x \in H$ :
+
+$$\forme{\varphi}{\gamma \cdot c} = \gamma \cdot \forme{\varphi}{c} = \forme{\varphi}{x}$$
+
+Il suffit donc de choisir :
+
+$$\gamma = \frac{ \forme{\varphi}{x} }{ \forme{\varphi}{c} }$$
+
+Considérons un $x \in H$ quelconque et sa décomposition unique $x = y + z$, où $y \in N$ et $z \in N^\orthogonal$. Si :
+
+$$w = \frac{ \forme{\varphi}{x} }{ \forme{\varphi}{c} } \cdot c$$
+
+on a $\forme{\varphi}{w} = \forme{\varphi}{x}$. Posons $v = x - w$. On a alors :
+
+$$\forme{\varphi}{v} = \forme{\varphi}{x} - \forme{\varphi}{w} = 0$$
+
+On en déduit que $v \in N$. Comme on a aussi $w \in N^\orthogonal$ et $x = v + w$, on conclut par unicité de la décomposition que $v = y$ et $w = z$. Pour tout $u \in H$, on a :
+
+$$\scalaire{u}{x} = \scalaire{u}{v} + \scalaire{u}{w}$$
+
+Par analogie avec $\forme{\varphi}{v} = 0$, on voudrait bien que $\scalaire{u}{v} = 0$. Pour cela, il suffit de choisir $u \in N^\orthogonal$, par exemple $u = \lambda \cdot c$ pour un certain $\lambda \in \corps$. Si on veut que $u$ représente $\varphi$, il faut en particulier que $\scalaire{u}{c} = \forme{\varphi}{c}$, c'est-à-dire :
+
+$$\scalaire{\lambda \cdot c}{c} = \conjaccent{\lambda} \cdot \scalaire{c}{c} = \forme{\varphi}{c}$$
+
+d'où :
+
+$$\lambda = \frac{ \conjaccent{\forme{\varphi}{c}} }{ \scalaire{c}{c} }$$
+
+et :
+
+$$u = \frac{ \conjaccent{\forme{\varphi}{c}} }{ \scalaire{c}{c} } \cdot c$$
+
+Soit $x \in H$. On a la décomposition :
+
+$$x = \frac{ \forme{\varphi}{x} }{ \forme{\varphi}{c} } \cdot c + v$$
+
+où $v \in N$. Donc :
+
+\begin{eqnarray*}
+\scalaire{u}{x} &=& \frac{ \forme{\varphi}{x} }{ \forme{\varphi}{c} } \cdot \frac{ \forme{\varphi}{c} }{ \scalaire{c}{c} } \cdot \scalaire{c}{c} + \scalaire{u}{v} \\
+&=& \forme{\varphi}{x}
+\end{eqnarray*}
+
+Nous avons prouvé l'existence d'un $u \in H$ représentant $\varphi$. Pour l'unicité, si $u$ et $p$ représentent $\varphi$, on a :
+
+$$\scalaire{u - p}{x} = \scalaire{u}{x} - \scalaire{p}{x} = \forme{\varphi}{x} - \forme{\varphi}{x} = 0$$
+
+pour tout $x \in H$, et en particulier pour $x = u - p$, d'où :
+
+$$\norme{u - p}^2 = \scalaire{u - p}{u - p} = 0$$
+
+ce qui implique $u - p = 0$ et donc $u = p$.
+
+\end{demonstration}
+</div>
+</div>
+
+
+<div id="outline-container-org151d1bf" class="outline-3">
+<h3 id="org151d1bf"><span class="section-number-3">1.14</span> Extension aux formes bilinéaires</h3>
+<div class="outline-text-3" id="text-1-14">
+\begin{theoreme}
+Si $\vartheta : H \times H \mapsto \corps$ est une forme bilinéaire de norme finie sur $H$, il existe une unique application linéaire et continue $A : H \mapsto H$ telle que :
+
+$$\biforme{u}{\vartheta}{v} = \scalaire{A(u)}{v}$$
+
+pour tout $u,v \in H$.
+\end{theoreme}
+
+\begin{demonstration}
+Pour tout $u \in H$, on définit la forme linéaire $\varphi_u : H \mapsto \corps$ par :
+
+$$\forme{\varphi_u}{x} = \biforme{u}{\vartheta}{x}$$
+
+pour tout $x \in H$. Pour $u \in H$ fixé, $\varphi_u$ est continue car :
+
+$$\norme{\forme{\varphi_u}{x}} = \norme{\biforme{u}{\vartheta}{x}} \le \norme{\vartheta}_\lineaire \cdot \norme{u} \cdot \norme{x}$$
+
+d'où $\norme{\varphi_u} \le {\vartheta}_\lineaire \cdot \norme{u} \strictinferieur +\infty$. On peut donc trouver un unique représentant $A(u) \in H$ tel que :
+
+$$\scalaire{A(u)}{x} = \forme{\varphi_u}{x} = \biforme{u}{\vartheta}{x}$$
+
+pour tout $x \in H$, ce qui définit l'application $A : u \in H \mapsto A(u) \in H$. Cette application est linéaire car :
+
+\begin{eqnarray*}
+\scalaire{A(\alpha \cdot u + \beta \cdot v)}{x} &=& \biforme{\alpha \cdot u + \beta \cdot v}{\vartheta}{x} \\
+&=& \alpha \cdot \biforme{u}{\vartheta}{x} + \beta \cdot \biforme{v}{\vartheta}{x} \\
+&=& \alpha \cdot \scalaire{A(u)}{x} + \beta \cdot \scalaire{A(v)}{x}
+\end{eqnarray*}
+
+pour tout $u,v,x \in H$ et $\alpha,\beta \in \corps$. Elle est également continue car :
+
+$$\norme{A(u)}^2 = \scalaire{A(u)}{A(u)} = \biforme{u}{\vartheta}{A(u)} \le \norme{\vartheta}_\lineaire \cdot \norme{u} \cdot \norme{A(u)}$$
+
+On a donc soit $A = 0$ et a fortiori $A$ continue, soit :
+
+\norme{$$A(u)} \le \norme{\vartheta}_\lineaire \cdot \norme{u} \strictinferieur +\infty$$
+\end{demonstration}
+</div>
+</div>
+
+
+<div id="outline-container-orgb1ff0f1" class="outline-3">
+<h3 id="orgb1ff0f1"><span class="section-number-3">1.15</span> Application adjointe</h3>
+<div class="outline-text-3" id="text-1-15">
+\begin{theoreme}
+Soit une application $A : H \mapsto H$ linéaire et continue. Il existe une unique application $A^\dual : H \mapsto H$ telle que :
+
+$$\scalaire{A^\dual(v)}{u} = \scalaire{v}{A(u)}$$
+
+pour tout $(u,v) \in H^2$.
+\end{theoreme}
+
+\begin{demonstration}
+Choisissons $v \in H$. L'application $\varphi_v : u \mapsto \scalaire{v}{A(u)}$ est une forme linéaire. Elle est continue car :
+
+$$\abs{\forme{\varphi_v}{u}} = \abs{\scalaire{v}{A(u)}} \le \norme{v} \cdot \norme{A(u)} \le \norme{v} \cdot \norme{A} \cdot \norme{u}$$
+
+On a donc :
+
+$$\abs{\varphi_v} \le \norme{A} \cdot \norme{v}$$
+
+Le théorème de Riesz nous dit qu'il existe un unique $A^\dual(v) \in H$ tel que :
+
+$$\scalaire{A^\dual(v)}{u} = \forme{\varphi_v}{u} = \scalaire{v}{A(u)}$$
+
+pour tout $u \in H$. Comme ce résultat est également valable quel que soit $v \in H$, nous avons défini l'application $A^\dual : H \mapsto H$ demandée.
+\end{demonstration}
+</div>
+</div>
+
+
+<div id="outline-container-orga0ef801" class="outline-3">
+<h3 id="orga0ef801"><span class="section-number-3">1.16</span> Théorème de Lax-Milgram</h3>
+<div class="outline-text-3" id="text-1-16">
+\begin{theoreme}
+Soit une forme bilinéaire $\vartheta : H \times H \mapsto \corps$ de norme finie. Nous supposons qu'il existe un réel $\varrho \strictsuperieur 0$ tel que :
+
+$$\biforme{u}{\vartheta}{u} \ge \varrho \cdot \norme{u}^2$$
+
+pour tout $u \in H$. On dit que $\vartheta$ est coercive. Soit une forme linéaire et continue $\varphi : H \mapsto \corps$. Nous allons montrer qu'il existe un unique $s \in H$ tel que :
+
+$$\biforme{s}{\vartheta}{v} = \forme{\varphi}{v}$$
+
+pour tout $v \in H$.
+
+\end{theoreme}
+
+\begin{demonstration}
+
+En appliquant le théorème de Riesz, on peut trouver un unique $f \in H$ qui représente $\varphi$ sur $H$ :
+
+$$\forme{\varphi}{v} = \scalaire{f}{v}$$
+
+pour tout $v \in H$. On dispose aussi d'une application linéaire continue $A$ telle que :
+
+$$\biforme{u}{\vartheta}{v} = \scalaire{A(u)}{v}$$
+
+pour tout $u,v \in H$. Pour tout $s$ vérifiant la condition du théorème, on doit donc avoir :
+
+$$\scalaire{f}{v} = \forme{\varphi}{v} = \biforme{s}{\vartheta}{v} = \scalaire{A(s)}{v}$$
+
+et donc $\scalaire{f}{v} = \scalaire{A(s)}{v}$ pour tout $v \in H$. Par linéarité, on
+en déduit que :
+
+$$\scalaire{f - A(s)}{v} = 0$$
+
+Le cas particulier $v = f - A(s)$ nous donne :
+
+$$\scalaire{f - A(s)}{f - A(s)} = \norme{f - A(s)}^2 = 0$$
+
+On en déduit que $f - A(s) = 0$, autrement dit $A(s) = f$.
+
+On sait que l'image $V = \image A \subseteq H$ est un espace complet. On a dès lors la somme directe $H = V \bigoplus V^\orthogonal$. Soit $u \in V^\orthogonal$. On a $\scalaire{A(x)}{u} = 0$ pour tout $x \in H$. Le choix $x = u$ combiné avec la coercivité de $\vartheta$ nous donne :
+
+$$0 \le \varrho \cdot \norme{u}^2 \le \biforme{u}{\vartheta}{u} = \scalaire{A(u)}{u} = 0$$
+
+Divisant alors par $\varrho$ strictement positif, on obtient $\norme{u}^2 = 0$, ce qui n'est possible que si $u = 0$. On en déduit que $V^\orthogonal = \{0\}$. Pour tout $x \in H$, on a donc la décomposition $x = y + 0 = y$ avec $y \in V$. On en déduit que $H = V = \image A$. Donc $f \in \image A$, ce qui prouve l'existence d'au moins un $s \in H$ tel que $A(s) = f$.
+
+D'un autre coté, si $s,t \in H$ vérifient $A(s) = A(t) = f$, on a $A(s - t) = A(s) - A(t) = f - f = 0$. Donc :
+
+$$0 \le \varrho \cdot \norme{s - t}^2 \le \biforme{s - t}{\vartheta}{s - t} = \scalaire{A(s - t)}{s - t} = \scalaire{0}{s - t} = 0$$
+
+ce qui implique que $\norme{s - t}^2 = 0$, d'où $s = t$. La solution $s$ est donc unique.
+
+\end{demonstration}
+</div>
+
+
+<div id="outline-container-org82a98bf" class="outline-4">
+<h4 id="org82a98bf"><span class="section-number-4">1.16.1</span> Inverse</h4>
+<div class="outline-text-4" id="text-1-16-1">
+<p>
+Nous avons également prouvé que pour tout \(v \in H\), il existe un unique \(u \in H\) vérifiant \(A(u) = v\). L'application \(A\) est donc inversible et \(A^{-1}(v) = u\).
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org62c1094" class="outline-3">
+<h3 id="org62c1094"><span class="section-number-3">1.17</span> Suite orthonormée</h3>
+<div class="outline-text-3" id="text-1-17">
+<p>
+Si une suite \(\{ u_i \in H : i \in \setN\}\) vérifie :
+</p>
+
+<p>
+\[\scalaire{u_i}{u_j} = \delta_{ij}\]
+</p>
+
+<p>
+pour tout \(i,j \in \setN\), on dit qu'elle est orthonormée. Dans la suite, nous considérons une suite \(\{ u_i \in H : i \in \setN\}\) orthonormée.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgee2d328" class="outline-3">
+<h3 id="orgee2d328"><span class="section-number-3">1.18</span> Inégalité de Bessel</h3>
+<div class="outline-text-3" id="text-1-18">
+<p>
+Soit \(x \in H\) et une suite orthonormée \(\{ u_i \in H : i \in \setN\}\). Par analogie avec les projections sur des espaces de dimension finie, on pose (sous réserve de convergence) :
+</p>
+
+<p>
+\[p = \sum_{i = 1}^{+\infty} \scalaire{u_i}{x} \cdot u_i\]
+</p>
+
+<p>
+Soit \(e = x - p\). On a :
+</p>
+
+\begin{eqnarray*}
+\scalaire{u_k}{e} &=& \scalaire{u_k}{x} - \sum_i \scalaire{u_i}{x} \scalaire{u_k}{u_i} \\
+&=& \scalaire{u_k}{x} - \sum_i \scalaire{u_i}{x} \delta_{ik} \\
+&=& \scalaire{u_k}{x} - \scalaire{u_k}{x} \\
+&=& 0
+\end{eqnarray*}
+
+<p>
+On en conclut que :
+</p>
+
+<p>
+\[\scalaire{p}{e} = \sum_i \scalaire{x}{u_i} \cdot \scalaire{u_i}{e} = 0\]
+</p>
+
+<p>
+On a donc :
+</p>
+
+<p>
+\[\norme{x}^2 = \norme{p + e}^2 = \norme{p}^2 + \norme{e}^2\]
+</p>
+
+<p>
+d'où :
+</p>
+
+<p>
+\[\norme{x}^2 - \norme{p}^2 = \norme{e}^2 \ge 0\]
+</p>
+
+<p>
+Par orthonormalité, la norme de \(p\) vérifie :
+</p>
+
+<p>
+\[\norme{p}^2 = \sum_i \abs{\scalaire{u_i}{x}}^2\]
+</p>
+
+<p>
+d'où :
+</p>
+
+<p>
+\[\norme{x}^2 - \sum_i \abs{\scalaire{u_i}{x}}^2 \ge 0\]
+</p>
+
+<p>
+c'est-à-dire :
+</p>
+
+<p>
+\[\sum_i \abs{\scalaire{u_i}{x}}^2 \le \norme{x}^2\]
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orge3accab" class="outline-3">
+<h3 id="orge3accab"><span class="section-number-3">1.19</span> Base hilbertienne</h3>
+<div class="outline-text-3" id="text-1-19">
+<p>
+Si, pour tout \(x \in H\), la suite des projections finies :
+</p>
+
+<p>
+\[p_n = \sum_{i = 1}^n \scalaire{u_i}{x} \cdot u_i\]
+</p>
+
+<p>
+converge vers \(x\) :
+</p>
+
+<p>
+\[x = \lim_{n \to \infty} \sum_{i = 1}^n \scalaire{u_i}{x} \cdot u_i\]
+</p>
+
+<p>
+au sens de la distance dérivant du produit scalaire, on dit que les \(u_i\) forment une base de Hilbert (ou une base hilbertienne) de \(H\). On a alors :
+</p>
+
+<p>
+\[x = \sum_{i = 1}^{+\infty} \scalaire{u_i}{x} \cdot u_i\]
+</p>
+
+<p>
+Les scalaires :
+</p>
+
+<p>
+\[x_i = \scalaire{u_i}{x}\]
+</p>
+
+<p>
+sont appelés les coordonnées de \(x\) par rapport aux \(u_i\). Dans la suite, nous considérons une suite \(\{ u_i \in H : i \in \setN \}\) formant une base hilbertienne de \(H\).
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgbbc1676" class="outline-3">
+<h3 id="orgbbc1676"><span class="section-number-3">1.20</span> Egalité de Parseval</h3>
+<div class="outline-text-3" id="text-1-20">
+<p>
+Soit \(x \in H\) et  \(\epsilon \strictsuperieur 0\). On peut trouver un \(n \in \setN\) tel que :
+</p>
+
+<p>
+\[D = \norme{x - \sum_{i = 1}^n \scalaire{u_i}{x} \cdot u_i} \le \epsilon\]
+</p>
+
+<p>
+Mais les propriétés des projections nous disent que :
+</p>
+
+<p>
+\[0 \le D^2 = \norme{x}^2 - \sum_{i = 1}^n \abs{\scalaire{u_i}{x}}^2\]
+</p>
+
+<p>
+et donc :
+</p>
+
+<p>
+\[0 \le \norme{x}^2 - \sum_{i = 1}^n \abs{\scalaire{u_i}{x}}^2 \le \epsilon^2\]
+</p>
+
+<p>
+En faisant tendre \(n \to \infty\), on a \(\epsilon \to 0\) et donc :
+</p>
+
+<p>
+\[0 \le \norme{x}^2 - \sum_{i = 1}^{+\infty} \abs{\scalaire{u_i}{x}}^2 \le 0\]
+</p>
+
+<p>
+c'est-à-dire :
+</p>
+
+<p>
+\[\norme{x}^2 = \sum_{i = 1}^{+\infty} \abs{\scalaire{u_i}{x}}^2\]
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgcb5d84d" class="outline-3">
+<h3 id="orgcb5d84d"><span class="section-number-3">1.21</span> Produit scalaire</h3>
+<div class="outline-text-3" id="text-1-21">
+<p>
+Soit \(x,y \in E\). On a :
+</p>
+
+<div class="org-center">
+<p>
+\(
+x = \sum_{i = 1}^{+\infty} x_i \cdot u_i \\
+y = \sum_{i = 1}^{+\infty} y_i \cdot u_i
+\)
+</p>
+</div>
+
+<p>
+où \(x_i = \scalaire{u_i}{x}\) et \(y_i = \scalaire{u_i}{y}\). Par orthonormalité, leur produit scalaire s'écrit :
+</p>
+
+<p>
+\[\scalaire{x}{y} = \lim_{n \to \infty} \sum_{i = 1}^n \conjaccent{x}_i \cdot y_i\]
+</p>
+
+<p>
+On a donc :
+</p>
+
+<p>
+\[\scalaire{x}{y} = \sum_{i = 1}^{+\infty} \conjaccent{x}_i \cdot y_i\]
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Auteur: chimay</p>
+<p class="date">Created: 2019-04-12 ven 19:15</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

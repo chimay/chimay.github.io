@@ -1,0 +1,1765 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<!-- 2019-04-12 ven 18:57 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Eclats de vers : Matemat 10 : Optimisation - 2</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="chimay" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Eclats de vers : Matemat 10 : Optimisation - 2</h1>
+<p>
+<a href="index.html">Index des Grimoires</a>
+</p>
+
+<p>
+<a href="file:///home/david/racine/site/orgmode/index.html">Retour à l’accueil</a>
+</p>
+
+<div id="table-of-contents">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgcffc03b">1. Projections</a></li>
+<li><a href="#org1cdc738">2. Algorithmes d'optimisation libre</a></li>
+</ul>
+</div>
+</div>
+
+<p>
+\( \newcommand{\parentheses}[1]{\left(#1\right)}
+\newcommand{\crochets}[1]{\left[#1\right]}
+\newcommand{\accolades}[1]{\left\{#1\right\}}
+\newcommand{\ensemble}[1]{\left\{#1\right\}}
+\newcommand{\identite}{\mathrm{Id}}
+\newcommand{\indicatrice}{\boldsymbol{\delta}}
+\newcommand{\dirac}{\delta}
+\newcommand{\moinsun}{{-1}}
+\newcommand{\inverse}{\ddagger}
+\newcommand{\pinverse}{\dagger}
+\newcommand{\topologie}{\mathfrak{T}}
+\newcommand{\ferme}{\mathfrak{F}}
+\newcommand{\img}{\mathbf{i}}
+\newcommand{\binome}[2]{
+\left\{ \begin{array}{c}
+#1 \\
+#2 \\
+\end{array} \right\}
+}
+\newcommand{\canonique}{\mathfrak{c}}
+\newcommand{\tenseuridentite}{\boldsymbol{\mathcal{I}}}
+\newcommand{\permutation}{\boldsymbol{\epsilon}}
+\newcommand{\matriceZero}{\mathfrak{0}}
+\newcommand{\matriceUn}{\mathfrak{1}}
+\newcommand{\christoffel}[2]{
+\left\{ \begin{array}{c}
+#1 \\
+#2 \\
+\end{array} \right\}
+}
+\newcommand{\lagrangien}{\mathfrak{L}}
+\newcommand{\sousens}{\mathfrak{P}}
+\newcommand{\partition}{\mathrm{Partition}}
+\newcommand{\tribu}{\mathrm{Tribu}}
+\newcommand{\topologies}{\mathrm{Topo}}
+\newcommand{\setB}{\mathbb{B}}
+\newcommand{\setN}{\mathbb{N}}
+\newcommand{\setZ}{\mathbb{Z}}
+\newcommand{\setQ}{\mathbb{Q}}
+\newcommand{\setR}{\mathbb{R}}
+\newcommand{\setC}{\mathbb{C}}
+\newcommand{\corps}{\mathbb{K}}
+\newcommand{\boule}{\mathfrak{B}}
+\newcommand{\intervalleouvert}[2]{\relax \ ] #1 , #2 [ \ \relax}
+\newcommand{\intervallesemiouvertgauche}[2]{\relax \ ] #1 , #2 ]}
+\newcommand{\intervallesemiouvertdroite}[2]{[ #1 , #2 [ \ \relax}
+\newcommand{\fonction}{\mathbb{F}}
+\newcommand{\bijection}{\mathrm{Bij}}
+\newcommand{\polynome}{\mathrm{Poly}}
+\newcommand{\lineaire}{\mathrm{Lin}}
+\newcommand{\continue}{\mathrm{Cont}}
+\newcommand{\homeomorphisme}{\mathrm{Hom}}
+\newcommand{\etagee}{\mathrm{Etagee}}
+\newcommand{\lebesgue}{\mathrm{Leb}}
+\newcommand{\lipschitz}{\mathrm{Lip}}
+\newcommand{\suitek}{\mathrm{Suite}}
+\newcommand{\matrice}{\mathbb{M}}
+\newcommand{\krylov}{\mathrm{Krylov}}
+\newcommand{\tenseur}{\mathbb{T}}
+\newcommand{\essentiel}{\mathfrak{E}}
+\newcommand{\relation}{\mathrm{Rel}}
+\newcommand{\strictinferieur}{\ < \ }
+\newcommand{\strictsuperieur}{\ > \ }
+\newcommand{\ensinferieur}{\eqslantless}
+\newcommand{\enssuperieur}{\eqslantgtr}
+\newcommand{\esssuperieur}{\gtrsim}
+\newcommand{\essinferieur}{\lesssim}
+\newcommand{\essegal}{\eqsim}
+\newcommand{\union}{\ \cup \ }
+\newcommand{\intersection}{\ \cap \ }
+\newcommand{\opera}{\divideontimes}
+\newcommand{\autreaddition}{\boxplus}
+\newcommand{\autremultiplication}{\circledast}
+\newcommand{\commutateur}[2]{\left[ #1 , #2 \right]}
+\newcommand{\convolution}{\circledcirc}
+\newcommand{\correlation}{\ \natural \ }
+\newcommand{\diventiere}{\div}
+\newcommand{\modulo}{\bmod}
+\newcommand{\pgcd}{pgcd}
+\newcommand{\ppcm}{ppcm}
+\newcommand{\scalaire}[2]{\left\langle #1 \left|\right\relax #2 \right\rangle}
+\newcommand{\braket}[3]{\left\langle #1 \right| #2 \left| #3 \right\rangle}
+\newcommand{\orthogonal}{\bot}
+\newcommand{\forme}[2]{\left\langle #1 , #2 \right\rangle}
+\newcommand{\biforme}[3]{\left\langle #1 , #2 , #3 \right\rangle}
+\newcommand{\contraction}[3]{\left\langle #1 \odot #3 \right\rangle_{#2}}
+\newcommand{\dblecont}[5]{\left\langle #1 \right| #3 \left| #5 \right\rangle_{#2,#4}}
+\newcommand{\major}{major}
+\newcommand{\minor}{minor}
+\newcommand{\maxim}{maxim}
+\newcommand{\minim}{minim}
+\newcommand{\argument}{arg}
+\newcommand{\argmin}{arg\ min}
+\newcommand{\argmax}{arg\ max}
+\newcommand{\supessentiel}{ess\ sup}
+\newcommand{\infessentiel}{ess\ inf}
+\newcommand{\dual}{\star}
+\newcommand{\distance}{\mathfrak{dist}}
+\newcommand{\norme}[1]{\left\| #1 \right\|}
+\newcommand{\normetrois}[1]{\left|\left\| #1 \right\|\right|}
+\newcommand{\adh}{adh}
+\newcommand{\interieur}{int}
+\newcommand{\frontiere}{\partial}
+\newcommand{\image}{im}
+\newcommand{\domaine}{dom}
+\newcommand{\noyau}{ker}
+\newcommand{\support}{supp}
+\newcommand{\signe}{sign}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\unsur}[1]{\frac{1}{#1}}
+\newcommand{\arrondisup}[1]{\lceil #1 \rceil}
+\newcommand{\arrondiinf}[1]{\lfloor #1 \rfloor}
+\newcommand{\conjugue}{conj}
+\newcommand{\conjaccent}[1]{\overline{#1}}
+\newcommand{\division}{division}
+\newcommand{\difference}{\boldsymbol{\Delta}}
+\newcommand{\differentielle}[2]{\mathfrak{D}^{#1}_{#2}}
+\newcommand{\OD}[2]{\frac{d #1}{d #2}}
+\newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
+\newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
+\newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
+\newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
+\newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\gradient}{\mathbf{\nabla}}
+\newcommand{\combilin}[1]{\mathrm{span}\{ #1 \}}
+\newcommand{\trace}{tr}
+\newcommand{\proba}{\mathbb{P}}
+\newcommand{\probaof}[1]{\mathbb{P}\left[#1\right]}
+\newcommand{\esperof}[1]{\mathbb{E}\left[#1\right]}
+\newcommand{\cov}[2]{\mathrm{cov} \left( #1 , #2 \right) }
+\newcommand{\var}[1]{\mathrm{var} \left( #1 \right) }
+\newcommand{\rand}{\mathrm{rand}}
+\newcommand{\variation}[1]{\left\langle #1 \right\rangle}
+\newcommand{\composante}{comp}
+\newcommand{\bloc}{bloc}
+\newcommand{\ligne}{ligne}
+\newcommand{\colonne}{colonne}
+\newcommand{\diagonale}{diag}
+\newcommand{\matelementaire}{\mathrm{Elem}}
+\newcommand{\matpermutation}{permut}
+\newcommand{\matunitaire}{\mathrm{Unitaire}}
+\newcommand{\gaussjordan}{\mathrm{GaussJordan}}
+\newcommand{\householder}{\mathrm{Householder}}
+\newcommand{\rang}{rang}
+\newcommand{\schur}{\mathrm{Schur}}
+\newcommand{\singuliere}{\mathrm{DVS}}
+\newcommand{\convexe}{\mathrm{Convexe}}
+\newcommand{\petito}[1]{o\left(#1\right)}
+\newcommand{\grando}[1]{O\left(#1\right)} \)
+</p>
+
+<div id="outline-container-orgcffc03b" class="outline-2">
+<h2 id="orgcffc03b"><span class="section-number-2">1</span> Projections</h2>
+<div class="outline-text-2" id="text-1">
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org99eaa5b">1.1. Minimisation de l'écart</a></li>
+<li><a href="#orgbb8faa4">1.2. Théorème de Pythagore</a></li>
+<li><a href="#org1d0b847">1.3. Carré de la distance</a></li>
+<li><a href="#orgcda82ff">1.4. Cauchy-Schwartz</a></li>
+<li><a href="#org4b29800">1.5. Propriétés extrémales</a></li>
+<li><a href="#org285017a">1.6. Sous-espace vectoriel</a></li>
+<li><a href="#orga2108ef">1.7. Tenseur de projection</a></li>
+<li><a href="#org888d6f2">1.8. Gram-Schmidt</a></li>
+<li><a href="#orgd8ebc99">1.9. Représentation matricielle</a></li>
+<li><a href="#org9ca17ca">1.10. Factorisation</a></li>
+<li><a href="#org7ae42aa">1.11. Vecteurs $A$-orthogonaux</a></li>
+</ul>
+</div>
+
+<p>
+\label{chap:project}
+</p>
+</div>
+
+
+<div id="outline-container-org99eaa5b" class="outline-3">
+<h3 id="org99eaa5b"><span class="section-number-3">1.1</span> Minimisation de l'écart</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Soit un espace vectoriel \(E\) sur \(\setR\) et des vecteurs \(x,y \in E\), où \(x \ne 0\). La projection de \(y\) sur \(x\) est le vecteur :
+</p>
+
+<p>
+\[p \in \combilin{x} = \{ \gamma \cdot x : \gamma \in \setR \}\]
+</p>
+
+<p>
+qui minimise sur \(\combilin{x}\) la norme usuelle \(\norme{e} = \sqrt{ \scalaire{e}{e} }\) de l'écart \(e\) séparant \(y\) de \(p\). Afin de trouver le \(\lambda \in \setR\) minimisant cet écart, on utilise la fonction \(\mathcal{E} : \setR \mapsto \setR\) définie par :
+</p>
+
+<p>
+\[\mathcal{E}(\gamma) = \scalaire{y - \gamma \cdot x}{y - \gamma \cdot x} = \scalaire{y}{y} - 2 \cdot \gamma \cdot \scalaire{x}{y} + \gamma^2 \cdot \scalaire{x}{x}\]
+</p>
+
+<p>
+pour tout \(\gamma \in \setR\). Nous imposons l'annulation de la dérivée en un certain \(\gamma = \lambda\) qui minimise potentiellement l'écart :
+</p>
+
+<p>
+\[\partial \mathcal{E}(\lambda) = - 2 \cdot \scalaire{x}{y} + 2 \cdot \lambda \cdot \scalaire{x}{x} = 0\]
+</p>
+
+<p>
+ce qui nous donne :
+</p>
+
+<p>
+\[\lambda = \frac{\scalaire{x}{y}}{\scalaire{x}{x}}\]
+</p>
+</div>
+
+
+<div id="outline-container-orgd0cbb05" class="outline-4">
+<h4 id="orgd0cbb05"><span class="section-number-4">1.1.1</span> Produit scalaire complexe</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+Nous nous plaçons à présent dans le cas plus général où \(E\) est un espace vectoriel sur \(\setC\). Le \(\lambda\) défini plus haut devient donc un complexe. Nous allons déterminer s'il minimise la fonction \(\mathcal{E} : \setC \mapsto \setR\) définie par :
+</p>
+
+<p>
+\[\mathcal{E}(\gamma) = \norme{y - \gamma \cdot x}^2\]
+</p>
+
+<p>
+pour tout \(\gamma \in \setC\). Considérons le vecteur d'écart :
+</p>
+
+<p>
+\[e = y - \lambda \cdot x\]
+</p>
+
+<p>
+On voit qu'il vérifie la propriété :
+</p>
+
+<p>
+\[\scalaire{x}{e} = \scalaire{x}{y} - \lambda \cdot \scalaire{x}{x} = 0\]
+</p>
+
+<p>
+On a donc aussi :
+</p>
+
+<p>
+\[\scalaire{e}{x} = \conjugue \scalaire{x}{e} = 0\]
+</p>
+
+<p>
+On dit que le vecteur d'écart est orthogonal à \(x\). Soit l'écart \(\delta = \gamma - \lambda\). On a alors \(\gamma = \lambda + \delta\) et :
+</p>
+
+<p>
+\[y - \gamma \cdot x = y - \lambda \cdot x - \delta \cdot x = e - \delta \cdot x\]
+</p>
+
+<p>
+En utilisant les propriétés du produit scalaire, on en déduit :
+</p>
+
+\begin{eqnarray*}
+\mathcal{E}(\gamma) &=& \scalaire{e - \delta \cdot x}{e - \delta \cdot x} \\
+&=& \scalaire{e}{e} - \delta \cdot \scalaire{e}{x} - \conjaccent{\delta} \cdot \scalaire{x}{e} + \abs{\delta}^2 \cdot \scalaire{x}{x} \\
+&=& \scalaire{e}{e} + \abs{\delta}^2 \cdot \scalaire{x}{x}
+\end{eqnarray*}
+
+<p>
+Comme \(\abs{\delta}^2 \cdot \scalaire{x}{x}\) est un réel \(\ge 0\), on a finalement :
+</p>
+
+<p>
+\[\mathcal{E}(\gamma) \ge \scalaire{e}{e} = \mathcal{E}(\lambda)\]
+</p>
+
+<p>
+Notre paramètre \(\lambda\) ainsi défini minimise donc bien \(\mathcal{E}\) sur \(\setC\). De plus, si \(\delta \ne 0\) on a \(\abs{\delta}^2 \strictsuperieur 0\) et
+\(\mathcal{E}(\gamma) \strictsuperieur \scalaire{e}{e}\), ce qui prouve que :
+</p>
+
+<p>
+\[\lambda = \arg\min_{\gamma \in \setC} \mathcal{E}(\gamma)\]
+</p>
+
+<p>
+est l'unique complexe à minimiser \(\mathcal{E}\). La racine carrée étant une fonction monotone strictement croissante sur \(\setR\), la norme \(\norme{e} = \sqrt{\mathcal{E}(\lambda)}\) est donc également minimisée et la projection s'écrit :
+</p>
+
+<p>
+\[p = \lambda \cdot x = \frac{ \scalaire{x}{y} }{ \scalaire{x}{x} } \cdot x\]
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgbb8faa4" class="outline-3">
+<h3 id="orgbb8faa4"><span class="section-number-3">1.2</span> Théorème de Pythagore</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Calculons à présent la norme de \(y\) en partant de la relation :
+</p>
+
+<p>
+\[y = p + e\]
+</p>
+
+<p>
+On déduit de la propriété d'orthogonalité que :
+</p>
+
+<p>
+\[\scalaire{p}{e} = \lambda \cdot \scalaire{x}{e} = 0\]
+</p>
+
+<p>
+On peut donc appliquer le théorème de pythagore, qui nous dit que :
+</p>
+
+<p>
+\[\norme{y}^2 = \norme{p + e}^2 = \norme{p}^2 + \norme{e}^2\]
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org1d0b847" class="outline-3">
+<h3 id="org1d0b847"><span class="section-number-3">1.3</span> Carré de la distance</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Si :
+</p>
+
+<p>
+\[D = \min_{\gamma \in \setC} \norme{y - \gamma \cdot x}\]
+</p>
+
+<p>
+on a donc :
+</p>
+
+<p>
+\[D^2 = \norme{y - \lambda \cdot x}^2 = \norme{e}^2 = \norme{y}^2 - \norme{p}^2\]
+</p>
+
+<p>
+et finalement :
+</p>
+
+<p>
+\[D^2 = \norme{y}^2 - \abs{\lambda}^2 \cdot \norme{x}^2\]
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgcda82ff" class="outline-3">
+<h3 id="orgcda82ff"><span class="section-number-3">1.4</span> Cauchy-Schwartz</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Par positivité du produit scalaire, on a bien évidemment :
+</p>
+
+<p>
+\[\norme{e}^2 = \scalaire{e}{e} \ge 0\]
+</p>
+
+<p>
+Le théorème de Pythagore implique donc que :
+</p>
+
+<p>
+\[\scalaire{p}{p} = \norme{p}^2 \le \norme{y}^2 = \scalaire{y}{y}\]
+</p>
+
+<p>
+En substituant \(p = \lambda \cdot x\), on obtient :
+</p>
+
+<p>
+\[\conjaccent \lambda \cdot \lambda \cdot \scalaire{x}{x} \le \scalaire{y}{y}\]
+</p>
+
+<p>
+Mais comme :
+</p>
+
+<p>
+\[\conjaccent{\lambda} = \conjugue \frac{ \scalaire{x}{y} }{ \scalaire{x}{x} } = \frac{ \scalaire{y}{x} }{ \scalaire{x}{x} }\]
+</p>
+
+<p>
+on a :
+</p>
+
+<p>
+\[\frac{ \scalaire{y}{x} }{ \scalaire{x}{x} } \cdot \frac{ \scalaire{x}{y} }{ \scalaire{x}{x} } \cdot \scalaire{x}{x} \le \scalaire{y}{y}\]
+</p>
+
+<p>
+En simplifiant et en multipliant par la norme carrée de \(x\), on a finalement :
+</p>
+
+<p>
+\[\scalaire{y}{x} \cdot \scalaire{x}{y} \le \scalaire{x}{x} \cdot \scalaire{y}{y}\]
+</p>
+
+<p>
+relation dont la racine nous donne l'inégalité de Cauchy-Schwartz :
+</p>
+
+<p>
+\[\abs{ \scalaire{x}{y} } \le \norme{x} \cdot \norme{y}\]
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org4b29800" class="outline-3">
+<h3 id="org4b29800"><span class="section-number-3">1.5</span> Propriétés extrémales</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+L'égalité :
+</p>
+
+<p>
+\[\norme{p}^2 = \norme{y}^2\]
+</p>
+
+<p>
+n'est atteinte que lorsque \(\norme{e}^2 = 0\), c'est-à-dire \(e = 0\) et \(y = \lambda \cdot x\) pour un certain \(\lambda \in \setC\). Ce constat nous amène aux problèmes d'optimisations suivants. Soit un vecteur \(c \ne 0\) fixé et :
+</p>
+
+<p>
+\[d = \norme{c} = \sqrt{ \scalaire{c}{c} }\]
+</p>
+
+<p>
+On cherche à maximiser ou à minimiser :
+</p>
+
+<p>
+\[\varphi(x) = \scalaire{c}{x}\]
+</p>
+
+<p>
+sur l'ensemble \(B = \boule(0,r) = \{ x : \norme{x} \le r \}\). L'inégalité de Cauchy-Schwartz nous dit que :
+</p>
+
+<p>
+\[- d \cdot r \le - \norme{c} \cdot \norme{x} \le \scalaire{c}{x} \le \norme{c} \cdot \norme{x} \le d \cdot r\]
+</p>
+
+<p>
+Nous allons chercher nos solutions sous la forme \(x = \alpha \cdot c\), pour un certain \(\alpha \in \setC\). On a alors :
+</p>
+
+<p>
+\[\norme{\alpha \cdot c} = \abs{\alpha} \cdot \norme{c} = \abs{\alpha} \cdot d \le r\]
+</p>
+
+<p>
+et donc \(\abs{\alpha} \le r / d\). Si on choisit \(\alpha = r / d\), on a :
+</p>
+
+<p>
+\[\scalaire{c}{x} = \frac{r}{d} \cdot \scalaire{c}{c} = \frac{r}{d} \cdot d^2 = d \cdot r\]
+</p>
+
+<p>
+La borne supérieure est atteinte. La fonction \(\varphi\) est donc maximisée :
+</p>
+
+<p>
+\[\eta = \frac{r}{d} \cdot c \in \arg\max_{x \in B} \scalaire{c}{x}\]
+</p>
+
+<p>
+Si on choisit \(\alpha = - r / d\), on a :
+</p>
+
+<p>
+\[\scalaire{c}{x} = - \frac{r}{d} \cdot \scalaire{c}{c} = - d \cdot r\]
+</p>
+
+<p>
+La borne inférieure est atteinte. La fonction \(\varphi\) est donc minimisée :
+</p>
+
+<p>
+\[\theta = - \frac{r}{d} \cdot c \in \arg\min_{x \in B} \scalaire{c}{x}\]
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org285017a" class="outline-3">
+<h3 id="org285017a"><span class="section-number-3">1.6</span> Sous-espace vectoriel</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+Soit l'espace vectoriel \(E\) sur \(\setR\) et un sous-espace vectoriel \(U \subseteq E\) possédant une base orthonormée \((u_1,...,u_n)\). La projection d'un vecteur quelconque \(z \in E\) sur \(U\) est le vecteur \(p \in U\) qui minimise la norme de l'écart entre \(z\) et \(p\). On cherche donc le \(\lambda = (\lambda_1,...,\lambda_n) \in \setR^n\) qui minimise la fonction \(\mathcal{E} : \setR^n \mapsto \setR\) définie par :
+</p>
+
+<p>
+\[\mathcal{E}(\gamma) = \norme{z - \sum_{i = 1}^n \gamma_i \cdot u_i}^2\]
+</p>
+
+<p>
+pour tout \(\gamma = (\gamma_1,...,\gamma_n) \in \setR^n\). En utilisant \(\scalaire{u_i}{u_j} = \indicatrice_{ij}\), on obtient :
+</p>
+
+\begin{eqnarray*}
+\mathcal{E}(\gamma) &=& \scalaire{z}{z} - 2 \sum_i \gamma_i \cdot \scalaire{u_i}{z} + \sum_{i,j} \gamma_i \cdot \gamma_j \cdot \scalaire{u_i}{u_j} \\
+&=& \scalaire{z}{z} - 2 \sum_i \gamma_i \cdot \scalaire{u_i}{z} + \sum_i \gamma_i^2
+\end{eqnarray*}
+
+<p>
+Imposant \(\partial_k \mathcal{E}(\lambda_1,...,\lambda_n) = 0\), on obtient les \(n\) équations :
+</p>
+
+<p>
+\[-2 \lambda_k \cdot \scalaire{u_k}{z} + 2 \lambda_k = 0\]
+</p>
+
+<p>
+On en déduit que le choix :
+</p>
+
+<p>
+\[\lambda = (\lambda_1,...,\lambda_n) = (\scalaire{u_1}{z},...,\scalaire{u_n}{z})\]
+</p>
+
+<p>
+minimise potentiellement \(\mathcal{E}\). Notre projection potentielle de \(z\) sur \(U\) est donc donnée par :
+</p>
+
+<p>
+\[p = \sum_i \scalaire{u_i}{z} \cdot u_i\]
+</p>
+</div>
+
+
+<div id="outline-container-orgb1b3fdf" class="outline-4">
+<h4 id="orgb1b3fdf"><span class="section-number-4">1.6.1</span> Produit scalaire complexe</h4>
+<div class="outline-text-4" id="text-1-6-1">
+<p>
+Nous nous plaçons à présent dans le cas plus général où \(E\) est un espace vectoriel sur \(\setC\). Le \(\lambda\) défini plus haut devient donc un élément de \(\setC^n\). Nous allons déterminer s'il minimise la fonction \(\mathcal{E} : \setC^n \mapsto \setR\) définie par :
+</p>
+
+<p>
+\[\mathcal{E}(\gamma) = \norme{z - \sum_{i = 1}^n \gamma_i \cdot u_i}^2\]
+</p>
+
+<p>
+pour tout \(\gamma = (\gamma_1,...,\gamma_n) \in \setC^n\). Choisissons \(x \in U\). On a alors :
+</p>
+
+<p>
+\[x = \sum_i x_i \cdot u_i\]
+</p>
+
+<p>
+où \(x_i = \scalaire{u_i}{z}\). Considérons le vecteur d'écart :
+</p>
+
+<p>
+\[e = z - p\]
+</p>
+
+<p>
+On a alors :
+</p>
+
+\begin{eqnarray*}
+\scalaire{x}{e} &=& \sum_i \conjaccent{x_i} \cdot \scalaire{u_i}{z - p} \\
+&=& \sum_i \conjaccent{x_i} \cdot \scalaire{u_i}{z} - \sum_{i,j} \conjaccent{x_i} \cdot \scalaire{u_i}{u_j} \cdot \lambda_j \\
+&=& \sum_i \scalaire{x}{u_i} \cdot \scalaire{u_i}{z} - \sum_i \scalaire{x}{u_i} \cdot \scalaire{u_i}{z} = 0
+\end{eqnarray*}
+
+<p>
+Le vecteur d'écart est donc orthogonal à tous les \(x \in U\). On a également :
+</p>
+
+<p>
+\[\scalaire{e}{x} = \conjugue \scalaire{x}{e} = 0\]
+</p>
+
+<p>
+Soit l'écart \(\delta = \gamma - \lambda\). On a alors \(\gamma = \lambda + \delta\). Posons :
+</p>
+
+<div class="org-center">
+<p>
+\(
+g = \sum_i \gamma_i \cdot u_i \\
+p = \sum_i \lambda_i \cdot u_i \\
+\Delta = \sum_i \delta_i \cdot u_i
+\)
+</p>
+</div>
+
+<p>
+On a alors \(z - g = z - p - \Delta = e - \Delta\) et :
+</p>
+
+\begin{eqnarray*}
+\mathcal{E}(\gamma) &=& \scalaire{e - \Delta}{e - \Delta} \\
+&=& \scalaire{e}{e} - \scalaire{e}{\Delta} - \scalaire{\Delta}{e} + \scalaire{\Delta}{\Delta}
+\end{eqnarray*}
+
+<p>
+Comme \(\Delta \in U\), ses produits scalaires avec \(e\) s'annulent par orthogonalité et on a finalement :
+</p>
+
+<p>
+\[\mathcal{E}(\gamma) = \scalaire{e}{e} + \scalaire{\Delta}{\Delta} \ge \scalaire{e}{e} = \mathcal{E}(\lambda)\]
+</p>
+
+<p>
+Les scalaires \(\lambda_k\) minimisent donc bien la norme de l'écart sur \(U\).
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orge96d4f4" class="outline-4">
+<h4 id="orge96d4f4"><span class="section-number-4">1.6.2</span> Théorème de Pythagore</h4>
+<div class="outline-text-4" id="text-1-6-2">
+<p>
+On a \(z = p + e\). Comme \(p\) est un vecteur de \(U\), on a \(\scalaire{p}{e} = \scalaire{e}{p} = 0\). Le théorème de Pythagore est donc applicable :
+</p>
+
+<p>
+\[\norme{z}^2 = \norme{p}^2 + \norme{e}^2\]
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org1420ce8" class="outline-4">
+<h4 id="org1420ce8"><span class="section-number-4">1.6.3</span> Carré de la distance</h4>
+<div class="outline-text-4" id="text-1-6-3">
+<p>
+Soit :
+</p>
+
+<p>
+\[D = \min \{ \norme{z - v} : v \in U \}\]
+</p>
+
+<p>
+Par orthonormalité, on a :
+</p>
+
+<p>
+\[\norme{p}^2 = \sum_{i,j} \conjugue(\scalaire{u_i}{z}) \cdot \scalaire{u_j}{z} \cdot \scalaire{u_i}{u_j} = \sum_i \abs{\scalaire{u_i}{z}}^2\]
+</p>
+
+<p>
+et donc :
+</p>
+
+<p>
+\[D^2 = \norme{z}^2 - \norme{p}^2 = \norme{z}^2 - \sum_i \abs{\scalaire{u_i}{z}}^2\]
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orga2108ef" class="outline-3">
+<h3 id="orga2108ef"><span class="section-number-3">1.7</span> Tenseur de projection</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+On peut réécrire la projection de \(z\) sur \(U\) sous la forme :
+</p>
+
+<p>
+\[p = \sum_i u_i \cdot \scalaire{u_i}{z}\]
+</p>
+
+<p>
+Cette expression ressemble à la contraction d'ordre \(1\) d'un tenseur d'ordre \(2\). Effectivement, si on pose :
+</p>
+
+<p>
+\[\mathcal{P} = \sum_i u_i \otimes u_i\]
+</p>
+
+<p>
+on a alors :
+</p>
+
+<p>
+\[p = \mathcal{P} \cdot z = \contraction{\mathcal{P} }{1}{z}\]
+</p>
+</div>
+
+
+<div id="outline-container-orgca49cc2" class="outline-4">
+<h4 id="orgca49cc2"><span class="section-number-4">1.7.1</span> Identité locale</h4>
+<div class="outline-text-4" id="text-1-7-1">
+<p>
+Pour tout \(y \in U\), on a :
+</p>
+
+<p>
+\[y = \sum_i \scalaire{u_i}{y} \cdot u_i\]
+</p>
+
+<p>
+et :
+</p>
+
+<p>
+\[\mathcal{P} \cdot y = \sum_i u_i \cdot \scalaire{u_i}{y}\]
+</p>
+
+<p>
+Ces deux expressions étant identiques, on a \(\mathcal{P} \cdot y = y\). Le tenseur de projection correspond donc localement (sur \(U\)) au tenseur identité.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orga2a5262" class="outline-4">
+<h4 id="orga2a5262"><span class="section-number-4">1.7.2</span> Invariance</h4>
+<div class="outline-text-4" id="text-1-7-2">
+<p>
+Pour tout \(z \in E\), on a \(y = \mathcal{P} \cdot z \in U\). On en conclut que :
+</p>
+
+<p>
+\[\mathcal{P} \cdot z = y = \mathcal{P} \cdot y = \mathcal{P} \cdot (\mathcal{P} \cdot z)\]
+</p>
+
+<p>
+Donc \(\mathcal{P} = \mathcal{P} \cdot \mathcal{P}\).
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org0c0859d" class="outline-4">
+<h4 id="org0c0859d"><span class="section-number-4">1.7.3</span> Complémentaire</h4>
+<div class="outline-text-4" id="text-1-7-3">
+<p>
+Soit \((u_1,...,u_n)\) une base orthonormée de \(E\). On voit que le tenseur identité :
+</p>
+
+<p>
+\[\tenseuridentite = \sum_{i = 1}^n u_i \otimes u_i\]
+</p>
+
+<p>
+est le tenseur de projection de \(E\) dans lui-même. On considère le tenseur de projection sur \(\combilin{u_1,...,u_m}\), où \(m \le n\) :
+</p>
+
+<p>
+\[\mathcal{P} = \sum_{i = 1}^m u_i \otimes u_i\]
+</p>
+
+<p>
+Le tenseur complémentaire est défini par :
+</p>
+
+<p>
+\[\mathcal{Q} = \tenseuridentite - \mathcal{P} = \sum_{i = 1}^n u_i \otimes u_i - \sum_{i = 1}^m u_i \otimes u_i = \sum_{i = m + 1}^n u_i \otimes u_i\]
+</p>
+
+<p>
+Il s'agit donc d'un tenseur de projection sur l'espace complémentaire \(\combilin{u_{m + 1},...,u_n}\). Il est lié à l'écart de projection car \(e = z - p = \mathcal{Q} \cdot z\). On remarque l'orthogonalité :
+</p>
+
+<p>
+\[\mathcal{Q} \cdot \mathcal{P} = (\tenseuridentite - \mathcal{P}) \cdot \mathcal{P} = \mathcal{P} - \mathcal{P} \cdot \mathcal{P} = 0\]
+</p>
+
+<p>
+De même :
+</p>
+
+<p>
+\[\mathcal{P} \cdot \mathcal{Q} = \mathcal{P} \cdot \mathcal{P} - \mathcal{P} = 0\]
+</p>
+
+<p>
+On a aussi sans surprise :
+</p>
+
+<p>
+\[\mathcal{Q} \cdot \mathcal{Q} = \mathcal{Q} - \mathcal{Q} \cdot \mathcal{P} =  \mathcal{Q}\]
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org888d6f2" class="outline-3">
+<h3 id="org888d6f2"><span class="section-number-3">1.8</span> Gram-Schmidt</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+Nous allons construire une suite de vecteurs orthonormaux \((u_1,u_2,...u_n)\) à partir d'une suite \((a_1,a_2,...,a_n)\) de vecteurs linéairement indépendants de \(E\). L'indépendance linéaire nous garantit que \(a_1 \ne 0\). On peut donc normaliser pour obtenir le premier vecteur de la série :
+</p>
+
+<p>
+\[u_1 = \frac{a_1}{ \norme{a_1} }\]
+</p>
+
+<p>
+On a alors :
+</p>
+
+<p>
+\[\scalaire{u_1}{u_1} = \frac{ \scalaire{a_1}{a_1} }{ \norme{a_1}^2 } = \frac{ \scalaire{a_1}{a_1} }{ \scalaire{a_1}{a_1} } = 1\]
+</p>
+
+<p>
+Nous projetons \(a_2\) sur \(u_1\) en utilisant le tenseur \(\mathcal{P}_1 = u_1 \otimes u_1\) et nous évaluons l'écart :
+</p>
+
+<p>
+\[e_2 = (\tenseuridentite - \mathcal{P}_1) \cdot a_2 = a_2 - u_1 \cdot \scalaire{u_1}{a_2}\]
+</p>
+
+<p>
+Les propriétés d'orthogonalité de l'écart nous assurent alors que \(\scalaire{u_1}{e_2} = 0\). L'indépendance linéaire nous garantit que \(e_2 \ne 0\). On peut donc normaliser en utilisant \(u_2 = e_2 / \norme{e_2}\). On a alors clairement \(\scalaire{u_2}{u_2} = 1\) et \(\scalaire{u_1}{u_2} = 0\).
+</p>
+
+<p>
+Supposons à présent avoir trouvé la suite orthonormée \((u_1,u_2,...,u_k)\), où \(k \le n - 1\). Nous projetons \(a_{k + 1}\) sur l'espace vectoriel \(U_k = \combilin{u_1,u_2,...,u_k}\) en utilisant le tenseur :
+</p>
+
+<p>
+\[\mathcal{P}_k = \sum_{i = 1}^k u_i \otimes u_i\]
+</p>
+
+<p>
+et nous évaluons l'écart :
+</p>
+
+<p>
+\[e_{k + 1} = (\tenseuridentite - \mathcal{P}_k) \cdot a_{k + 1} = a_{k + 1} - \sum_{i = 1}^k u_i \cdot \scalaire{u_i}{a_{k + 1} }\]
+</p>
+
+<p>
+Les propriétés d'orthogonalité de l'écart nous assurent alors que \(\scalaire{u_j}{e_{k + 1} } = 0\) pour tout \(j \in \{1,2,...,k\}\). L'indépendance linéaire nous garantit que \(e_{k + 1} \ne 0\). On peut donc normaliser en utilisant :
+</p>
+
+<p>
+\[u_{k + 1} = \frac{e_{k + 1} }{ \norme{ e_{k + 1} } }\]
+</p>
+
+<p>
+On a alors clairement \(\scalaire{u_j }{u_{k + 1} } = \indicatrice_{j, k + 1}\).
+</p>
+
+<p>
+Nous disposons donc à la fin du processus d'une suite de vecteurs \((u_1,u_2,...,u_n)\) orthonormée :
+</p>
+
+<p>
+\[\scalaire{u_i}{u_j} = \indicatrice_{ij}\]
+</p>
+
+<p>
+Ce procédé est appelé processus d'orthogonalisation de Gram-Schmidt.
+</p>
+</div>
+
+
+<div id="outline-container-orgbaa8188" class="outline-4">
+<h4 id="orgbaa8188"><span class="section-number-4">1.8.1</span> Remarque</h4>
+<div class="outline-text-4" id="text-1-8-1">
+<p>
+Dans le cas où l'indépendance linéaire n'est pas garantie, il est toujours possible d'adapter l'algorithme en enlevant dynamiquement de la liste des \(a_k\) les vecteurs donnant un écart de projection nul. On se retrouve alors à la fin du processus avec une suite orthonormée \((u_1,...,u_m)\), où \(m \le n\).
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgd8ebc99" class="outline-3">
+<h3 id="orgd8ebc99"><span class="section-number-3">1.9</span> Représentation matricielle</h3>
+<div class="outline-text-3" id="text-1-9">
+<p>
+Soient \(u_1,u_2,...,u_m \in \matrice(\corps,n,1)\) des vecteurs matriciels orthonormés pour le produit scalaire usuel :
+</p>
+
+<p>
+\[u_i^\dual \cdot u_j = \indicatrice_{ij}\]
+</p>
+
+<p>
+La matrice de projection associée au tenseur de projection sur \(U = \combilin{u_1,...,u_m}\) s'écrit :
+</p>
+
+<p>
+\[P = \sum_{k = 1}^m u_k \otimes u_k = \sum_{k = 1}^m u_k \cdot u_k^\dual\]
+</p>
+
+<p>
+Il s'agit donc d'une matrice de taille \((n,n)\). Elle permet de projeter tout vecteur matriciel \(z \in \matrice(\corps,n,1)\) sur \(U\) :
+</p>
+
+<p>
+\[P \cdot z = \sum_{k = 1}^m u_k \cdot u_k^\dual \cdot z = \sum_{k = 1}^m u_k \cdot \scalaire{u_k}{z}\]
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org9ca17ca" class="outline-3">
+<h3 id="org9ca17ca"><span class="section-number-3">1.10</span> Factorisation</h3>
+<div class="outline-text-3" id="text-1-10">
+<p>
+En terme de composantes, si \(u_k = ( u_{kj} )_j\) et si \(P = ( p_{ij} )_{i,j}\), on a :
+</p>
+
+<p>
+\[p_{ij} = \sum_{k = 1}^m u_{ki} \cdot \conjaccent{u}_{kj}\]
+</p>
+
+<p>
+expression qui ressemble furieusement à un produit matriciel. Soit la matrice \(U\) de taille \((n,m)\) rassemblant les \(m\) vecteurs \(u_k\) :
+</p>
+
+<p>
+\[U = [u_1 \ u_2 \ \hdots \ u_m]\]
+</p>
+
+<p>
+On a alors :
+</p>
+
+\begin{eqnarray*}
+\composante_{ik} U &=& u_{ki} \\
+\composante_{kj} U^\dual &=& \conjugue \composante_{jk} U = \conjaccent{u}_{kj}
+\end{eqnarray*}
+
+<p>
+Le produit ci-dessus peut donc s'écrire :
+</p>
+
+<p>
+\[p_{ij} = \sum_{k = 1}^m b_{ik} \cdot c_{kj}\]
+</p>
+
+<p>
+où \(b_{ik} = \composante_{ik} U\) et \(c_{kj} = \composante_{kj} U^\dual\). On a donc finalement :
+</p>
+
+<p>
+\[P = U \cdot U^\dual\]
+</p>
+</div>
+
+
+<div id="outline-container-orgf9706d6" class="outline-4">
+<h4 id="orgf9706d6"><span class="section-number-4">1.10.1</span> Propriétés</h4>
+<div class="outline-text-4" id="text-1-10-1">
+<p>
+Comme les \(u_k\) sont orthonormaux, on a :
+</p>
+
+<p>
+\[\composante_{ij} (U^\dual \cdot U) = u_i^\dual \cdot u_j = \scalaire{u_i}{u_j} = \indicatrice_{ij}\]
+</p>
+
+<p>
+On a donc \(U^\dual \cdot U = I\), la matrice identité de taille \((m,m)\). On a également, comme attendu :
+</p>
+
+<p>
+\[P^2 = U \cdot U^\dual \cdot U \cdot U^\dual = U \cdot I \cdot U^\dual = U \cdot U^\dual = P\]
+</p>
+
+<p>
+Si on pose \(Q = I - P\), on a aussi :
+</p>
+
+<p>
+\[P \cdot Q = Q \cdot P = P - P^2 = 0\]
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org41b7214" class="outline-4">
+<h4 id="org41b7214"><span class="section-number-4">1.10.2</span> Cas particulier</h4>
+<div class="outline-text-4" id="text-1-10-2">
+<p>
+Les \(m\) vecteurs \(u_i\) étant linéairement indépendants dans \(\corps^n\) qui est de dimension \(n\), on doit forcément avoir \(m \le n\). Dans le cas où \(m = n\), on a de plus \(U^\dual = U^{-1}\) et :
+</p>
+
+<p>
+\[\sum_{i = 1}^n u_i \otimes u_i = P = U \cdot U^{-1} = I\]
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org7ae42aa" class="outline-3">
+<h3 id="org7ae42aa"><span class="section-number-3">1.11</span> Vecteurs $A$-orthogonaux</h3>
+<div class="outline-text-3" id="text-1-11">
+<p>
+Soit une matrice de produit scalaire \(A \in \matrice(\corps,n,n)\). On peut utiliser le procédé de Gram-Schmidt pour construire une base de vecteurs orthogonaux pour le produit scalaire :
+</p>
+
+<p>
+\[\scalaire{x}{y} = x^\dual \cdot A \cdot y\]
+</p>
+
+<p>
+On part d'une suite \((a_1,a_2,...,a_n)\) de vecteurs matriciels linéairement indépendants de \(\corps^n\) (typiquement la base canonique). On commence par normaliser \(a_1\) :
+</p>
+
+<p>
+\[u_1 = \frac{a_1}{ \sqrt{a_1^\dual \cdot A \cdot a_1} }\]
+</p>
+
+<p>
+et on construit étape après étape la suite des \(u_i\). Supposons être arrivé à la suite \((u_1,u_2,...,u_k)\) vérifiant \(\scalaire{u_i}{u_j} = u_i^\dual \cdot A \cdot u_j = \indicatrice_{ij}\), où \(k \le n - 1\). Nous projetons \(a_{k + 1}\) sur l'espace vectoriel \(\combilin{u_1,u_2,...,u_k}\) et nous évaluons l'écart :
+</p>
+
+\begin{eqnarray*}
+e_{k + 1} &=& a_{k + 1} - \sum_{i = 1}^k u_i \cdot \scalaire{u_i}{ a_{k + 1} } \\
+&=& a_{k + 1} - \sum_{i = 1}^k u_i \cdot u_i^\dual \cdot A \cdot a_{k + 1}
+\end{eqnarray*}
+
+<p>
+Ensuite, nous normalisons le résultat :
+</p>
+
+<p>
+\[u_{k + 1} = \frac{e_{k + 1} }{ \sqrt{e_{k + 1}^\dual \cdot A \cdot e_{k + 1} } }\]
+</p>
+
+<p>
+Nous disposons donc à la fin du processus d'une suite de vecteurs \((u_1,u_2,...,u_n)\) orthonormée :
+</p>
+
+<p>
+\[\scalaire{u_i}{u_j} = u_i^\dual \cdot A \cdot u_j = \indicatrice_{ij}\]
+</p>
+
+<p>
+On dit que la suite des \(u_i\) est $A$-orthonormée. Si on définit la famille de matrices :
+</p>
+
+<p>
+\[U_m = [u_1 \ u_2 \ ... \ u_m]\]
+</p>
+
+<p>
+pour tout \(m \le n\), on peut réecrire l'orthogonalité comme suit :
+</p>
+
+<p>
+\[U_m^\dual \cdot A \cdot U_m = I_m\]
+</p>
+
+<p>
+On note aussi \(U = U_n\).
+</p>
+</div>
+
+
+<div id="outline-container-org2ee92b5" class="outline-4">
+<h4 id="org2ee92b5"><span class="section-number-4">1.11.1</span> Complément orthogonal</h4>
+<div class="outline-text-4" id="text-1-11-1">
+<p>
+Si les vecteurs orthonormaux \((u_1,...,u_p)\), où \(p \le n\), sont donnés, on peut simplement commencer le processus à \(k = p\) pour complèter la suite de vecteurs jusqu'à \(k = n\). On obtient alors la suite orthonormée \((u_1,...,u_p,u_{p + 1},...,u_n)\). On dit que \((u_{p + 1},...,u_n)\) est le complément orthogonal de \((u_1,...,u_p)\).
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org5014851" class="outline-4">
+<h4 id="org5014851"><span class="section-number-4">1.11.2</span> Orthogonalité usuelle</h4>
+<div class="outline-text-4" id="text-1-11-2">
+<p>
+Dans le cas où l'on choisit \(A = I\), cette méthode offre un moyen d'obtenir (ou de compléter) une suite de vecteurs \(u_i\) tels que \(u_i^\dual \cdot u_j = \indicatrice_{ij}\) et des matrices \(U_m\) correspondantes telles que \(U_m^\dual \cdot U_m = I_m\). Comme \(U = U_n\) est carrée, on a de plus :
+</p>
+
+<p>
+\[U^{-1} = U^\dual\]
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org67c4151" class="outline-4">
+<h4 id="org67c4151"><span class="section-number-4">1.11.3</span> Systèmes linéaires</h4>
+<div class="outline-text-4" id="text-1-11-3">
+<p>
+Lorsqu'on dispose de \(n\) vecteurs $A$-orthonormés, il est facile de résoudre le système linéaire \(A \cdot x = y\). Les \(u_i\) forment alors une base de \(\corps^n\) et on peut trouver des scalaires \(x_i \in \corps\) tels que :
+</p>
+
+<p>
+\[x = \sum_{i = 1}^n x_i \cdot u_i\]
+</p>
+
+<p>
+En prenant le produit scalaire de \(x\) avec \(u_k\), on obtient :
+</p>
+
+<p>
+\[u_k^\dual \cdot A \cdot x = \sum_{i = 1}^n (u_k^\dual \cdot A \cdot u_i) \cdot x_i = x_k\]
+</p>
+
+<p>
+On voit donc apparaître une expression analogue à celle d'une projection usuelle :
+</p>
+
+<p>
+\[x = \sum_{i = 1}^n u_i \cdot (u_i^\dual \cdot A \cdot x) = \sum_{i = 1}^n u_i \cdot u_i^\dual \cdot y\]
+</p>
+
+<p>
+Attention, analogue n'est pas identique, les \(u_i\) ne sont en général pas orthonormés pour le produit scalaire usuel.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org1cdc738" class="outline-2">
+<h2 id="org1cdc738"><span class="section-number-2">2</span> Algorithmes d'optimisation libre</h2>
+<div class="outline-text-2" id="text-2">
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgbc0d691">2.1. Introduction</a></li>
+<li><a href="#org8a17896">2.2. Minimum dans une direction</a></li>
+<li><a href="#orgfcca280">2.3. Méthode de la plus grande descente</a></li>
+<li><a href="#org4d59fd4">2.4. Newton</a></li>
+<li><a href="#org232b15a">2.5. Gradients conjugués</a></li>
+<li><a href="#orgbf498f8">2.6. Moindres carrés</a></li>
+<li><a href="#orgaa2919c">2.7. Levenberg-Marquardt</a></li>
+</ul>
+</div>
+
+<p>
+\label{chap:algoptim}
+</p>
+</div>
+
+
+<div id="outline-container-orgbc0d691" class="outline-3">
+<h3 id="orgbc0d691"><span class="section-number-3">2.1</span> Introduction</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Nous allons présenter des algorithmes permettant de résoudre approximativement des problèmes de minimisation d'une fonction \(\varphi\) sur \(\setR^n\). Ces algorithmes partent d'un point initial \(x_0 \in \Omega\) et itèrent schématiquement comme suit :
+</p>
+
+<p>
+\[x_{k + 1} = I(x_k) = x_k + p_k\]
+</p>
+
+<p>
+pour un certain \(p_k \in \setR^n\). On espère bien entendu que la suite converge et que :
+</p>
+
+<p>
+\[x_N \approx \lim_{k \to \infty} x_k = \arg\min_{x \in \Omega} \varphi(x)\]
+</p>
+
+<p>
+pour \(N\) assez grand. Nous adoptons les notations :
+</p>
+
+<p>
+\[J = (\partial \varphi)^\dual\]
+</p>
+
+<p>
+pour le gradient, de taille \((n,1)\), et :
+</p>
+
+<p>
+\[H = \partial^2 \varphi\]
+</p>
+
+<p>
+pour la hessienne, de taille \((n,n)\). On note également :
+</p>
+
+<p>
+\[\Phi_k = \Phi(x_k)\]
+</p>
+
+<p>
+pour toute fonction \(\Phi\) (par exemple, \(\Phi \in \{\varphi,J,H\}\)).
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org8a17896" class="outline-3">
+<h3 id="org8a17896"><span class="section-number-3">2.2</span> Minimum dans une direction</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Soit l'itération :
+</p>
+
+<p>
+\[x_{k+1} = x_k - \alpha_k \cdot p_k\]
+</p>
+
+<p>
+où \(\alpha_k \in \setR\) et \(p_k \in \setR^n\). On choisit généralement le paramètre \(\alpha_k\) de façon à minimiser le développement d'ordre deux :
+</p>
+
+<p>
+\[\varphi_{k + 1} \approx \varphi_k - \alpha_k \cdot J_k^\dual \cdot p_k + \frac{\alpha_k^2}{2} \cdot p_k^\dual \cdot H_k \cdot p_k\]
+</p>
+
+<p>
+En imposant l'annulation de la dérivée de ce développement par rapport à \(\alpha_k\), on en déduit que :
+</p>
+
+<p>
+\[- J_k^\dual \cdot p_k + \alpha_k \cdot p_k^\dual \cdot H_k \cdot p_k = 0\]
+</p>
+
+<p>
+La valeur optimale de \(\alpha_k\) s'écrit :
+</p>
+
+<p>
+\[\alpha_k = \frac{J_k^\dual \cdot p_k}{p_k^\dual \cdot H_k \cdot p_k}\]
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgfcca280" class="outline-3">
+<h3 id="orgfcca280"><span class="section-number-3">2.3</span> Méthode de la plus grande descente</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+La méthode de la plus grande pente consiste à partir à chaque itération
+du point \(x^{(k)}\) et à suivre la direction \(\delta_k\) où \(\varphi\)
+descend le plus rapidement dans le voisinage immédiat. En première approximation, si :
+</p>
+
+<p>
+\[x_{k + 1} = x_k + \alpha_k \cdot \delta_k\]
+</p>
+
+<p>
+pour un certain \(\alpha_k \in \setR\), on a :
+</p>
+
+<p>
+\[\varphi_{k+1} \approx \varphi_k + \alpha_k \cdot J_k^\dual \cdot \delta_k\]
+</p>
+
+<p>
+Nous choisissons le vecteur \(\delta_k\) qui minimise \(J_k^\dual \cdot \delta_k = \scalaire{J_k}{\delta_k}\) sur \(\boule(0,\norme{J_k})\), c'est-à-dire :
+</p>
+
+<p>
+\[\delta_k = - J_k\]
+</p>
+
+<p>
+On a alors :
+</p>
+
+<p>
+\[x_{k + 1} = x_k - \alpha_k \cdot J_k\]
+</p>
+
+<p>
+La valeur optimale de \(\alpha_k\) s'écrit donc :
+</p>
+
+<p>
+\[\alpha_k = \frac{J_k^\dual \cdot J_k}{J_k^\dual \cdot H_k \cdot J_k}\]
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org4d59fd4" class="outline-3">
+<h3 id="org4d59fd4"><span class="section-number-3">2.4</span> Newton</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+Il s'agit ici d'optimiser le pas \(s_k\) :
+</p>
+
+<p>
+\[x_{k + 1} = x_k + s_k\]
+</p>
+
+<p>
+pour minimiser le développement :
+</p>
+
+<p>
+\[\varphi_{k+1} \approx \varphi_k + J_k^\dual \cdot s_k + \unsur{2} \cdot s_k^\dual \cdot H_k \cdot s_k\]
+</p>
+
+<p>
+Mais comme \(H = H^\dual\), l'annulation du gradient par rappord à \(s_k\) nous donne :
+</p>
+
+<p>
+\[J_k + H_k \cdot s_k \approx 0\]
+</p>
+
+<p>
+On en déduit la valeur optimale :
+</p>
+
+<p>
+\[s_k = - H_k^{-1} \cdot J_k\]
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org232b15a" class="outline-3">
+<h3 id="org232b15a"><span class="section-number-3">2.5</span> Gradients conjugués</h3>
+<div class="outline-text-3" id="text-2-5">
+<p>
+Soit l'itération :
+</p>
+
+<p>
+\[x_{k + 1} = x_k - \alpha_k \cdot p_k\]
+</p>
+
+<p>
+où \(\alpha_k \in \setR\) et \(p_k \in \setR^n\). On a comme d'habitude :
+</p>
+
+<p>
+\[\alpha_k = \frac{J_k^\dual \cdot p_k}{p_k^\dual \cdot H_k \cdot p_k}\]
+</p>
+
+<p>
+Lorsque \(k = 0\), on prend le gradient comme direction :
+</p>
+
+<p>
+\[p_0 = J_0\]
+</p>
+
+<p>
+Pour \(k \ge 1\), on choisit \(p_k\) comme combinaison linéaire du gradient \(J_k\) et du pas précédent \(p_{k - 1}\) :
+</p>
+
+<p>
+\[p_k = J_k - \beta_k \cdot p_{k-1}\]
+</p>
+
+<p>
+où \(\beta_k \in \setR\). L'idée des gradients conjugué est de construire une suite de \(p_k\) orthogonaux entre-eux afin de minimiser la fonction dans toutes les directions. Au bout de \(n\) itérations, on espère avoir construit une base de \(\setR^n\) et être très proche du minimum global. En fait, nous n'allons pas vérifier que toutes les directions sont orthogonales, mais seulement que deux directions successives le sont. On demande donc l'orthogonalité au sens du produit scalaire défini par \(H\) :
+</p>
+
+<p>
+\[p_k^\dual \cdot H_k \cdot p_{k - 1} = J_k^\dual \cdot H_k \cdot p_{k - 1} - \beta_k \cdot p_{k - 1}^\dual \cdot H_k \cdot p_{k - 1} = 0\]
+</p>
+
+<p>
+On en déduit la valeur de \(\beta_k\) :
+</p>
+
+<p>
+\[\beta_k = \frac{J_k^\dual \cdot H_k \cdot p_{k - 1}}{p_{k - 1}^\dual \cdot H_k \cdot p_{k - 1}}\]
+</p>
+
+<p>
+Nous allons à présent obtenir une valeur approximative de \(\beta_k\) en fonction des variations du gradient. Le développement d'ordre un de \(J\) s'écrit :
+</p>
+
+<p>
+\[J_k - J_{k - 1} \approx H_k \cdot (x_k - x_{k - 1}) = - \alpha_k \cdot H_k \cdot p_{k - 1}\]
+</p>
+
+<p>
+On en déduit que :
+</p>
+
+<p>
+\[\beta_k \approx \frac{J_k^\dual \cdot (J_k - J_{k - 1})}{p_{k - 1}^\dual \cdot (J_k - J_{k - 1})}\]
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgbf498f8" class="outline-3">
+<h3 id="orgbf498f8"><span class="section-number-3">2.6</span> Moindres carrés</h3>
+<div class="outline-text-3" id="text-2-6">
+<p>
+Soit la fonction \(f : \setR^n \mapsto \setR^m\). On cherce à minimiser la fonction \(\varphi = f^\dual \cdot f / 2\). Le problème de minimisation s'écrit alors :
+</p>
+
+<p>
+\[\arg\min_x \unsur{2} f(x)^\dual \cdot f(x)\]
+</p>
+
+<p>
+Dans ce cas, si on définit :
+</p>
+
+<p>
+\[D = \partial f\]
+</p>
+
+<p>
+le gradient s'écrit :
+</p>
+
+<p>
+\[J = D^\dual \cdot f\]
+</p>
+
+<p>
+Si on suppose que les dérivées secondes de \(f\) sont négligeables par rapport
+aux dérivées premières, on a :
+</p>
+
+<p>
+\[H \approx D^\dual \cdot D\]
+</p>
+
+<p>
+La méthode de Newton devient dans ce cas :
+</p>
+
+<p>
+\[x_{k+1} = x_k + s_k\]
+</p>
+
+<p>
+avec :
+</p>
+
+<p>
+\[s_k = -[D_k^\dual \cdot D_k]^{-1} \cdot D_k^\dual \cdot f_k\]
+</p>
+</div>
+
+
+<div id="outline-container-org53cc1c6" class="outline-4">
+<h4 id="org53cc1c6"><span class="section-number-4">2.6.1</span> Zéros</h4>
+<div class="outline-text-4" id="text-2-6-1">
+<p>
+Si \(S = \noyau f \ne \emptyset\), soit \(\gamma \in S\). On a alors :
+</p>
+
+<p>
+\[0 \le \min \unsur{2} f(x)^\dual \cdot f(x) \le  \unsur{2} f(\gamma)^\dual \cdot f(\gamma) = 0\]
+</p>
+
+<p>
+On en déduit que tout \(x \in \setR^n\) minimisant \(\varphi\) vérifiera \(f(x) = 0\). La méthode de minimisation nous fournit donc une approximation d'un tel \(x\).
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgaa2919c" class="outline-3">
+<h3 id="orgaa2919c"><span class="section-number-3">2.7</span> Levenberg-Marquardt</h3>
+<div class="outline-text-3" id="text-2-7">
+<p>
+C'est une variante de la méthode des moindres carrés, utile dans les cas où
+\(D_k^\dual \cdot D_k\) est numériquement proche d'une matrice non inversible. On
+ajoute alors la matrice identité multipliée par un scalaire \(\lambda\)
+sur la diagonale :
+</p>
+
+<p>
+\[s_k = -[D_k^\dual \cdot D_k+ \lambda_k \cdot I]^{-1} \cdot D_k^\dual \cdot f_k\]
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Auteur: chimay</p>
+<p class="date">Created: 2019-04-12 ven 18:57</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -14,8 +14,8 @@ RACINE_EPUB = $(HOME)/racine/site/epub
 
 ECHO = echo
 
-EMACS = /usr/local/bin/emacs
-#EMACS = /usr/bin/emacs
+#EMACS = /usr/local/bin/emacs
+EMACS = /usr/bin/emacs
 
 MAKE = /usr/bin/make
 

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-04-12 ven 18:58 -->
+<!-- 2019-05-07 mar 08:20 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 10 : Optimisation</title>
@@ -265,18 +265,18 @@ for the JavaScript code in this tag.
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org8593ad4">1. Optimisation libre</a></li>
-<li><a href="#org366fa5d">2. Projections</a></li>
-<li><a href="#orgb961aac">3. Algorithmes d'optimisation libre</a></li>
-<li><a href="#org309ee9a">4. Solveurs itératifs</a></li>
-<li><a href="#org0aa8783">5. Optimisation sous contrainte</a></li>
-<li><a href="#org16001c9">6. Valeurs propres</a></li>
-<li><a href="#orga9043ca">7. Valeurs singulières</a></li>
-<li><a href="#org0554a45">8. Espaces de Hilbert</a></li>
-<li><a href="#org0d3b8e4">9. Théorie spectrale</a></li>
-<li><a href="#orgf5c974a">10. Calcul variationnel</a></li>
-<li><a href="#orgc76c81b">11. Algorithmes d'optimisation contrainte</a></li>
-<li><a href="#org119001a">12. Réseaux de neurones</a></li>
+<li><a href="#orgd1addbc">1. Optimisation libre</a></li>
+<li><a href="#org8677323">2. Projections</a></li>
+<li><a href="#org800acdf">3. Algorithmes d'optimisation libre</a></li>
+<li><a href="#org8b570dd">4. Solveurs itératifs</a></li>
+<li><a href="#org4241d26">5. Optimisation sous contrainte</a></li>
+<li><a href="#org90cd6c2">6. Valeurs propres</a></li>
+<li><a href="#org575af2c">7. Valeurs singulières</a></li>
+<li><a href="#orgbff7a3b">8. Espaces de Hilbert</a></li>
+<li><a href="#org6212f90">9. Théorie spectrale</a></li>
+<li><a href="#orgdbdcf00">10. Calcul variationnel</a></li>
+<li><a href="#org1693bbb">11. Algorithmes d'optimisation contrainte</a></li>
+<li><a href="#org2639068">12. Réseaux de neurones</a></li>
 </ul>
 </div>
 </div>
@@ -362,7 +362,8 @@ for the JavaScript code in this tag.
 \newcommand{\modulo}{\bmod}
 \newcommand{\pgcd}{pgcd}
 \newcommand{\ppcm}{ppcm}
-\newcommand{\scalaire}[2]{\left\langle #1 \left|\right\relax #2 \right\rangle}
+\newcommand{\produitscalaire}[2]{\left\langle #1 \left|\right\relax #2 \right\rangle}
+\newcommand{\scalaire}[2]{\left\langle #1 \| #2 \right\rangle}
 \newcommand{\braket}[3]{\left\langle #1 \right| #2 \left| #3 \right\rangle}
 \newcommand{\orthogonal}{\bot}
 \newcommand{\forme}[2]{\left\langle #1 , #2 \right\rangle}
@@ -434,22 +435,22 @@ for the JavaScript code in this tag.
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
 
-<div id="outline-container-org8593ad4" class="outline-2">
-<h2 id="org8593ad4"><span class="section-number-2">1</span> Optimisation libre</h2>
+<div id="outline-container-orgd1addbc" class="outline-2">
+<h2 id="orgd1addbc"><span class="section-number-2">1</span> Optimisation libre</h2>
 <div class="outline-text-2" id="text-1">
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org63446e8">1.1. Minimum</a></li>
-<li><a href="#org26b130f">1.2. Maximum</a></li>
-<li><a href="#org658eba0">1.3. Equivalence</a></li>
-<li><a href="#orgf476512">1.4. Dérivées ordinaires</a></li>
-<li><a href="#org6ccdaa9">1.5. Point de selle</a></li>
-<li><a href="#org3730127">1.6. Convexité</a></li>
-<li><a href="#org5656a52">1.7. Convexité stricte</a></li>
-<li><a href="#org5a367fe">1.8. Concavité</a></li>
-<li><a href="#org5668778">1.9. Concavité stricte</a></li>
-<li><a href="#orgdaf423a">1.10. Equation du second degré</a></li>
-<li><a href="#orgf3d146c">1.11. Moindres-carrés</a></li>
+<li><a href="#org879c1bf">1.1. Minimum</a></li>
+<li><a href="#org5a01a47">1.2. Maximum</a></li>
+<li><a href="#org2b6aaa2">1.3. Equivalence</a></li>
+<li><a href="#org83b766e">1.4. Dérivées ordinaires</a></li>
+<li><a href="#org0284601">1.5. Point de selle</a></li>
+<li><a href="#org2238e9d">1.6. Convexité</a></li>
+<li><a href="#org6a6411a">1.7. Convexité stricte</a></li>
+<li><a href="#org85f2c0e">1.8. Concavité</a></li>
+<li><a href="#org30c93ac">1.9. Concavité stricte</a></li>
+<li><a href="#orged4a7fb">1.10. Equation du second degré</a></li>
+<li><a href="#orgf6f02aa">1.11. Moindres-carrés</a></li>
 </ul>
 </div>
 
@@ -459,8 +460,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-org63446e8" class="outline-3">
-<h3 id="org63446e8"><span class="section-number-3">1.1</span> Minimum</h3>
+<div id="outline-container-org879c1bf" class="outline-3">
+<h3 id="org879c1bf"><span class="section-number-3">1.1</span> Minimum</h3>
 <div class="outline-text-3" id="text-1-1">
 \begin{theoreme}
 
@@ -579,8 +580,8 @@ Comme ce résultat est valable quel que soit \(h \in \setR^n\), on en conclut qu
 
 
 
-<div id="outline-container-org26b130f" class="outline-3">
-<h3 id="org26b130f"><span class="section-number-3">1.2</span> Maximum</h3>
+<div id="outline-container-org5a01a47" class="outline-3">
+<h3 id="org5a01a47"><span class="section-number-3">1.2</span> Maximum</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Un raisonnement analogue nous montre que :
@@ -606,8 +607,8 @@ pour tout $\Delta \in \setR^n$ vérifiant $\norme{\Delta} \le \delta$. A l'inver
 </div>
 
 
-<div id="outline-container-org658eba0" class="outline-3">
-<h3 id="org658eba0"><span class="section-number-3">1.3</span> Equivalence</h3>
+<div id="outline-container-org2b6aaa2" class="outline-3">
+<h3 id="org2b6aaa2"><span class="section-number-3">1.3</span> Equivalence</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 En pratique, on peut toujours se ramener à un problème de minimisation.
@@ -625,8 +626,8 @@ Nous nous restreindrons donc dans la suite aux problèmes de minimisation.
 </div>
 
 
-<div id="outline-container-orgf476512" class="outline-3">
-<h3 id="orgf476512"><span class="section-number-3">1.4</span> Dérivées ordinaires</h3>
+<div id="outline-container-org83b766e" class="outline-3">
+<h3 id="org83b766e"><span class="section-number-3">1.4</span> Dérivées ordinaires</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Pour des fonctions \(f: \setR \mapsto \setR\), les conditions
@@ -662,8 +663,8 @@ pour un maximum.
 </div>
 
 
-<div id="outline-container-org6ccdaa9" class="outline-3">
-<h3 id="org6ccdaa9"><span class="section-number-3">1.5</span> Point de selle</h3>
+<div id="outline-container-org0284601" class="outline-3">
+<h3 id="org0284601"><span class="section-number-3">1.5</span> Point de selle</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Soit une fonction \(\lagrangien : \setR^n \times \setR^m \mapsto \setR\). Un point de selle \((\gamma,\lambda) \in \setR^n \times \setR^m\) est un couple d'élément qui minimise \(\lagrangien(x,y)\) par rapport à \(x\) et qui la maximise par rapport à \(y\). On aura alors :
@@ -676,8 +677,8 @@ Soit une fonction \(\lagrangien : \setR^n \times \setR^m \mapsto \setR\). Un poi
 </div>
 
 
-<div id="outline-container-org3730127" class="outline-3">
-<h3 id="org3730127"><span class="section-number-3">1.6</span> Convexité</h3>
+<div id="outline-container-org2238e9d" class="outline-3">
+<h3 id="org2238e9d"><span class="section-number-3">1.6</span> Convexité</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 Soit l'ensemble :
@@ -697,8 +698,8 @@ Une fonction \(\varphi : \setR^n \mapsto \setR)\) est dite convexe si pour tout 
 </div>
 
 
-<div id="outline-container-orgc9ff724" class="outline-4">
-<h4 id="orgc9ff724"><span class="section-number-4">1.6.1</span> Formulation équivalente</h4>
+<div id="outline-container-orgb5a591a" class="outline-4">
+<h4 id="orgb5a591a"><span class="section-number-4">1.6.1</span> Formulation équivalente</h4>
 <div class="outline-text-4" id="text-1-6-1">
 <p>
 En substituant \(s = 1 - t\), on obtient :
@@ -719,8 +720,8 @@ ou :
 </div>
 
 
-<div id="outline-container-org2420a79" class="outline-4">
-<h4 id="org2420a79"><span class="section-number-4">1.6.2</span> Différentielle</h4>
+<div id="outline-container-orgb90f972" class="outline-4">
+<h4 id="orgb90f972"><span class="section-number-4">1.6.2</span> Différentielle</h4>
 <div class="outline-text-4" id="text-1-6-2">
 <p>
 Si \(\varphi\) est différentiable, on peut écrire par définition :
@@ -757,8 +758,8 @@ En termes matriciels, cela se réécrit :
 </div>
 
 
-<div id="outline-container-orgd79b07d" class="outline-4">
-<h4 id="orgd79b07d"><span class="section-number-4">1.6.3</span> Hessienne</h4>
+<div id="outline-container-org2e52e21" class="outline-4">
+<h4 id="org2e52e21"><span class="section-number-4">1.6.3</span> Hessienne</h4>
 <div class="outline-text-4" id="text-1-6-3">
 <p>
 Supposons à présent que la fonction convexe \(\varphi : \setR^n \mapsto \setR\) soit deux fois continûment différentiable. Soit \(u,v \in \setR^n\). Posons \(\Delta = v - u\). On considère le développement d'ordre deux :
@@ -815,8 +816,8 @@ Comme ce doit être valable pour tout \(\delta \in \setR^n\), la Hessienne est d
 </div>
 
 
-<div id="outline-container-org8a27b5b" class="outline-4">
-<h4 id="org8a27b5b"><span class="section-number-4">1.6.4</span> Globalité</h4>
+<div id="outline-container-orgcd8c34d" class="outline-4">
+<h4 id="orgcd8c34d"><span class="section-number-4">1.6.4</span> Globalité</h4>
 <div class="outline-text-4" id="text-1-6-4">
 <p>
 Considérons le minimum global :
@@ -853,8 +854,8 @@ Attention toutefois, cela ne prouve aucunement que le point minimisant \(\varphi
 </div>
 
 
-<div id="outline-container-orga1ad52f" class="outline-4">
-<h4 id="orga1ad52f"><span class="section-number-4">1.6.5</span> Corollaire</h4>
+<div id="outline-container-org427f23b" class="outline-4">
+<h4 id="org427f23b"><span class="section-number-4">1.6.5</span> Corollaire</h4>
 <div class="outline-text-4" id="text-1-6-5">
 <p>
 Un corollaire important de ces résultats est que si \(\varphi\) est convexe et deux fois différentiable et que l'on trouve un point \(x\) tel que \(\partial \varphi(x) = 0\), ce point minimise localement \(\varphi\) car la Hessienne est définie positive. Le réel \(\varphi(x)\) est donc également le minimum global de \(\varphi\).
@@ -864,8 +865,8 @@ Un corollaire important de ces résultats est que si \(\varphi\) est convexe et 
 </div>
 
 
-<div id="outline-container-org5656a52" class="outline-3">
-<h3 id="org5656a52"><span class="section-number-3">1.7</span> Convexité stricte</h3>
+<div id="outline-container-org6a6411a" class="outline-3">
+<h3 id="org6a6411a"><span class="section-number-3">1.7</span> Convexité stricte</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 Une fonction \(\varphi : \setR^n \mapsto \setR)\) est dite strictement convexe si pour tout \(u, v \in \setR^n\) tels que \(u \ne v\) et tout \((s,t) \in L \setminus \{ (1,0),(0,1) \}\), on a :
@@ -877,17 +878,17 @@ Une fonction \(\varphi : \setR^n \mapsto \setR)\) est dite strictement convexe s
 </div>
 
 
-<div id="outline-container-org2fb3b93" class="outline-4">
-<h4 id="org2fb3b93"><span class="section-number-4">1.7.1</span> Minima</h4>
+<div id="outline-container-org0bc3442" class="outline-4">
+<h4 id="org0bc3442"><span class="section-number-4">1.7.1</span> Minima</h4>
 <div class="outline-text-4" id="text-1-7-1">
 <p>
 Supposons qu'il existe deux \(u,v \in \setR^n\) distincts (\(u \ne v\)) tels que \(\varphi(u) = \varphi(v)\) soit le minimum global de \(\varphi\). On a alors :
 </p>
 
-\begin{eqnarray*}
+\begin{align}
 \varphi(s \cdot u + t \cdot v) &\strictinferieur& s \cdot \varphi(u) + t \cdot \varphi(v) \\
 &\strictinferieur& (s + t) \cdot \varphi(u) = \varphi(u)
-\end{eqnarray*}
+\end{align}
 
 <p>
 ce qui n'est pas possible puisque \(\varphi(u)\) est minimum global. Il existe donc au plus un seul \(u \in \setR^n\) minimisant globalement \(\varphi\) :
@@ -901,8 +902,8 @@ ce qui n'est pas possible puisque \(\varphi(u)\) est minimum global. Il existe d
 </div>
 
 
-<div id="outline-container-org5a367fe" class="outline-3">
-<h3 id="org5a367fe"><span class="section-number-3">1.8</span> Concavité</h3>
+<div id="outline-container-org85f2c0e" class="outline-3">
+<h3 id="org85f2c0e"><span class="section-number-3">1.8</span> Concavité</h3>
 <div class="outline-text-3" id="text-1-8">
 <p>
 Une fonction \(\psi : \setR^n \mapsto \setR\) est dite concave si pour tout \(u, v \in \setR^n\) et \((s,t) \in L\), on a :
@@ -919,8 +920,8 @@ On voit que si \(\psi\) est concave, \(\varphi = -\psi\) est convexe. L'équival
 </div>
 
 
-<div id="outline-container-org5668778" class="outline-3">
-<h3 id="org5668778"><span class="section-number-3">1.9</span> Concavité stricte</h3>
+<div id="outline-container-org30c93ac" class="outline-3">
+<h3 id="org30c93ac"><span class="section-number-3">1.9</span> Concavité stricte</h3>
 <div class="outline-text-3" id="text-1-9">
 <p>
 Une fonction \(\psi : \setR^n \mapsto \setR\) est dite strictement concave si pour tout \(u, v \in \setR^n\) tels que \(u \ne v\) et tout \((s,t) \in L \setminus \{ (1,0),(0,1) \}\), on a :
@@ -937,8 +938,8 @@ On voit que si \(\psi\) est strictement concave, \(\varphi = -\psi\) est stricte
 </div>
 
 
-<div id="outline-container-orgdaf423a" class="outline-3">
-<h3 id="orgdaf423a"><span class="section-number-3">1.10</span> Equation du second degré</h3>
+<div id="outline-container-orged4a7fb" class="outline-3">
+<h3 id="orged4a7fb"><span class="section-number-3">1.10</span> Equation du second degré</h3>
 <div class="outline-text-3" id="text-1-10">
 <p>
 Soit \(a,b,c \in \setR\) avec \(a \ne 0\). Soit le polynôme du second degré, ou polynôme de degré \(2\) défini par :
@@ -990,8 +991,8 @@ Par contre, si \(a \strictinferieur 0\), la dérivée seconde est toujours néga
 </div>
 
 
-<div id="outline-container-orgbe5d6a2" class="outline-4">
-<h4 id="orgbe5d6a2"><span class="section-number-4">1.10.1</span> Racines</h4>
+<div id="outline-container-org180c4bd" class="outline-4">
+<h4 id="org180c4bd"><span class="section-number-4">1.10.1</span> Racines</h4>
 <div class="outline-text-4" id="text-1-10-1">
 <p>
 Intéressons-nous à présent à l'écart par rapport à \(\gamma\) :
@@ -1021,10 +1022,10 @@ et :
 En injectant ces relations dans la définition du polynôme, on obtient :
 </p>
 
-\begin{eqnarray*}
-p(\gamma + \delta) &=& a \cdot \delta^2 - b \cdot \delta + \frac{b^2}{4 \cdot a} + b \cdot \delta - \frac{b^2}{2 \cdot a} + c \\
-&=& a \cdot \delta^2 - \frac{b^2}{4 \cdot a} + c
-\end{eqnarray*}
+\begin{align}
+p(\gamma + \delta) &= a \cdot \delta^2 - b \cdot \delta + \frac{b^2}{4 \cdot a} + b \cdot \delta - \frac{b^2}{2 \cdot a} + c \\
+&= a \cdot \delta^2 - \frac{b^2}{4 \cdot a} + c
+\end{align}
 
 <p>
 Cette expression nous permet d'obtenir les racines d'un polynôme du second degré. La condition :
@@ -1076,8 +1077,8 @@ telles que \(p(x_+) = p(x_-) = 0\).
 </div>
 
 
-<div id="outline-container-orgf3d146c" class="outline-3">
-<h3 id="orgf3d146c"><span class="section-number-3">1.11</span> Moindres-carrés</h3>
+<div id="outline-container-orgf6f02aa" class="outline-3">
+<h3 id="orgf6f02aa"><span class="section-number-3">1.11</span> Moindres-carrés</h3>
 <div class="outline-text-3" id="text-1-11">
 <p>
 Soit la matrice \(A \in \matrice(\setR,m,n)\) et le vecteur matriciel \(b \in \matrice(\setR,m,1)\). On aimerait trouver le \(\xi \in \matrice(\setR^n,n,1)\) qui minimise la norme de l'erreur \(e\) définie par :
@@ -1129,8 +1130,8 @@ Si \(A^\dual \cdot A\) est inversible, on en déduit que :
 </div>
 
 
-<div id="outline-container-orgc97aa6c" class="outline-4">
-<h4 id="orgc97aa6c"><span class="section-number-4">1.11.1</span> Orthogonalité</h4>
+<div id="outline-container-org0b13057" class="outline-4">
+<h4 id="org0b13057"><span class="section-number-4">1.11.1</span> Orthogonalité</h4>
 <div class="outline-text-4" id="text-1-11-1">
 <p>
 Considérons la partition en colonne \(A = [c_1 \ ... \ c_n]\). On a alors :
@@ -1168,8 +1169,8 @@ nous dit donc que les colonnes de \(A\) sont orthogonales au vecteur \(r = A \cd
 </div>
 
 
-<div id="outline-container-org79560e7" class="outline-4">
-<h4 id="org79560e7"><span class="section-number-4">1.11.2</span> Approximation de fonctions</h4>
+<div id="outline-container-orge093ee3" class="outline-4">
+<h4 id="orge093ee3"><span class="section-number-4">1.11.2</span> Approximation de fonctions</h4>
 <div class="outline-text-4" id="text-1-11-2">
 <p>
 On désire obtenir une approximation \(w\) d'une fonction \(u\) dont on connaît les valeurs aux points \(x_1,...,x_m\) en minimisant l'erreur :
@@ -1191,11 +1192,11 @@ On choisit alors les fonctions \(\varphi_1(x),...,\varphi_n(x)\), où \(n \le m\
 En utilisant les matrices :
 </p>
 
-\begin{eqnarray*}
-A &=& [\varphi_j(x_i)]_{i,j} \\
-a &=& [a_1 \ a_2 \ ... \ a_m]^T \\
-b &=& [u(x_1) \ u(x_2) \ ... \ u(x_n)]^T
-\end{eqnarray*}
+\begin{align}
+A &= [\varphi_j(x_i)]_{i,j} \\
+a &= [a_1 \ a_2 \ ... \ a_m]^T \\
+b &= [u(x_1) \ u(x_2) \ ... \ u(x_n)]^T
+\end{align}
 
 <p>
 on peut réécrire le problème de minimisation comme suit :
@@ -1218,22 +1219,22 @@ La solution est donc :
 </div>
 
 
-<div id="outline-container-org366fa5d" class="outline-2">
-<h2 id="org366fa5d"><span class="section-number-2">2</span> Projections</h2>
+<div id="outline-container-org8677323" class="outline-2">
+<h2 id="org8677323"><span class="section-number-2">2</span> Projections</h2>
 <div class="outline-text-2" id="text-2">
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org08ba68a">2.1. Minimisation de l'écart</a></li>
-<li><a href="#orga9805ca">2.2. Théorème de Pythagore</a></li>
-<li><a href="#org3499401">2.3. Carré de la distance</a></li>
-<li><a href="#org8a6a3ed">2.4. Cauchy-Schwartz</a></li>
-<li><a href="#org07bc044">2.5. Propriétés extrémales</a></li>
-<li><a href="#org38dc0ba">2.6. Sous-espace vectoriel</a></li>
-<li><a href="#org76020fd">2.7. Tenseur de projection</a></li>
-<li><a href="#orgade3079">2.8. Gram-Schmidt</a></li>
-<li><a href="#orgdaad809">2.9. Représentation matricielle</a></li>
-<li><a href="#org14aed4e">2.10. Factorisation</a></li>
-<li><a href="#org704f1e8">2.11. Vecteurs $A$-orthogonaux</a></li>
+<li><a href="#org94634aa">2.1. Minimisation de l'écart</a></li>
+<li><a href="#org980c8ba">2.2. Théorème de Pythagore</a></li>
+<li><a href="#orgeef2a44">2.3. Carré de la distance</a></li>
+<li><a href="#org01ed34b">2.4. Cauchy-Schwartz</a></li>
+<li><a href="#org305d373">2.5. Propriétés extrémales</a></li>
+<li><a href="#orgd26a298">2.6. Sous-espace vectoriel</a></li>
+<li><a href="#org227e6fe">2.7. Tenseur de projection</a></li>
+<li><a href="#orge329f75">2.8. Gram-Schmidt</a></li>
+<li><a href="#orgdc3e894">2.9. Représentation matricielle</a></li>
+<li><a href="#org01b2fdb">2.10. Factorisation</a></li>
+<li><a href="#org999d2bb">2.11. Vecteurs $A$-orthogonaux</a></li>
 </ul>
 </div>
 
@@ -1243,8 +1244,8 @@ La solution est donc :
 </div>
 
 
-<div id="outline-container-org08ba68a" class="outline-3">
-<h3 id="org08ba68a"><span class="section-number-3">2.1</span> Minimisation de l'écart</h3>
+<div id="outline-container-org94634aa" class="outline-3">
+<h3 id="org94634aa"><span class="section-number-3">2.1</span> Minimisation de l'écart</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Soit un espace vectoriel \(E\) sur \(\setR\) et des vecteurs \(x,y \in E\), où \(x \ne 0\). La projection de \(y\) sur \(x\) est le vecteur :
@@ -1280,8 +1281,8 @@ ce qui nous donne :
 </div>
 
 
-<div id="outline-container-orgd51d71e" class="outline-4">
-<h4 id="orgd51d71e"><span class="section-number-4">2.1.1</span> Produit scalaire complexe</h4>
+<div id="outline-container-orgfca67b0" class="outline-4">
+<h4 id="orgfca67b0"><span class="section-number-4">2.1.1</span> Produit scalaire complexe</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <p>
 Nous nous plaçons à présent dans le cas plus général où \(E\) est un espace vectoriel sur \(\setC\). Le \(\lambda\) défini plus haut devient donc un complexe. Nous allons déterminer s'il minimise la fonction \(\mathcal{E} : \setC \mapsto \setR\) définie par :
@@ -1327,11 +1328,11 @@ On dit que le vecteur d'écart est orthogonal à \(x\). Soit l'écart \(\delta =
 En utilisant les propriétés du produit scalaire, on en déduit :
 </p>
 
-\begin{eqnarray*}
-\mathcal{E}(\gamma) &=& \scalaire{e - \delta \cdot x}{e - \delta \cdot x} \\
-&=& \scalaire{e}{e} - \delta \cdot \scalaire{e}{x} - \conjaccent{\delta} \cdot \scalaire{x}{e} + \abs{\delta}^2 \cdot \scalaire{x}{x} \\
-&=& \scalaire{e}{e} + \abs{\delta}^2 \cdot \scalaire{x}{x}
-\end{eqnarray*}
+\begin{align}
+\mathcal{E}(\gamma) &= \scalaire{e - \delta \cdot x}{e - \delta \cdot x} \\
+&= \scalaire{e}{e} - \delta \cdot \scalaire{e}{x} - \conjaccent{\delta} \cdot \scalaire{x}{e} + \abs{\delta}^2 \cdot \scalaire{x}{x} \\
+&= \scalaire{e}{e} + \abs{\delta}^2 \cdot \scalaire{x}{x}
+\end{align}
 
 <p>
 Comme \(\abs{\delta}^2 \cdot \scalaire{x}{x}\) est un réel \(\ge 0\), on a finalement :
@@ -1362,8 +1363,8 @@ est l'unique complexe à minimiser \(\mathcal{E}\). La racine carrée étant une
 </div>
 
 
-<div id="outline-container-orga9805ca" class="outline-3">
-<h3 id="orga9805ca"><span class="section-number-3">2.2</span> Théorème de Pythagore</h3>
+<div id="outline-container-org980c8ba" class="outline-3">
+<h3 id="org980c8ba"><span class="section-number-3">2.2</span> Théorème de Pythagore</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Calculons à présent la norme de \(y\) en partant de la relation :
@@ -1392,8 +1393,8 @@ On peut donc appliquer le théorème de pythagore, qui nous dit que :
 </div>
 
 
-<div id="outline-container-org3499401" class="outline-3">
-<h3 id="org3499401"><span class="section-number-3">2.3</span> Carré de la distance</h3>
+<div id="outline-container-orgeef2a44" class="outline-3">
+<h3 id="orgeef2a44"><span class="section-number-3">2.3</span> Carré de la distance</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Si :
@@ -1422,8 +1423,8 @@ et finalement :
 </div>
 
 
-<div id="outline-container-org8a6a3ed" class="outline-3">
-<h3 id="org8a6a3ed"><span class="section-number-3">2.4</span> Cauchy-Schwartz</h3>
+<div id="outline-container-org01ed34b" class="outline-3">
+<h3 id="org01ed34b"><span class="section-number-3">2.4</span> Cauchy-Schwartz</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Par positivité du produit scalaire, on a bien évidemment :
@@ -1484,8 +1485,8 @@ relation dont la racine nous donne l'inégalité de Cauchy-Schwartz :
 </div>
 
 
-<div id="outline-container-org07bc044" class="outline-3">
-<h3 id="org07bc044"><span class="section-number-3">2.5</span> Propriétés extrémales</h3>
+<div id="outline-container-org305d373" class="outline-3">
+<h3 id="org305d373"><span class="section-number-3">2.5</span> Propriétés extrémales</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 L'égalité :
@@ -1562,8 +1563,8 @@ La borne inférieure est atteinte. La fonction \(\varphi\) est donc minimisée 
 </div>
 
 
-<div id="outline-container-org38dc0ba" class="outline-3">
-<h3 id="org38dc0ba"><span class="section-number-3">2.6</span> Sous-espace vectoriel</h3>
+<div id="outline-container-orgd26a298" class="outline-3">
+<h3 id="orgd26a298"><span class="section-number-3">2.6</span> Sous-espace vectoriel</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 Soit l'espace vectoriel \(E\) sur \(\setR\) et un sous-espace vectoriel \(U \subseteq E\) possédant une base orthonormée \((u_1,...,u_n)\). La projection d'un vecteur quelconque \(z \in E\) sur \(U\) est le vecteur \(p \in U\) qui minimise la norme de l'écart entre \(z\) et \(p\). On cherche donc le \(\lambda = (\lambda_1,...,\lambda_n) \in \setR^n\) qui minimise la fonction \(\mathcal{E} : \setR^n \mapsto \setR\) définie par :
@@ -1577,10 +1578,10 @@ Soit l'espace vectoriel \(E\) sur \(\setR\) et un sous-espace vectoriel \(U \sub
 pour tout \(\gamma = (\gamma_1,...,\gamma_n) \in \setR^n\). En utilisant \(\scalaire{u_i}{u_j} = \indicatrice_{ij}\), on obtient :
 </p>
 
-\begin{eqnarray*}
-\mathcal{E}(\gamma) &=& \scalaire{z}{z} - 2 \sum_i \gamma_i \cdot \scalaire{u_i}{z} + \sum_{i,j} \gamma_i \cdot \gamma_j \cdot \scalaire{u_i}{u_j} \\
-&=& \scalaire{z}{z} - 2 \sum_i \gamma_i \cdot \scalaire{u_i}{z} + \sum_i \gamma_i^2
-\end{eqnarray*}
+\begin{align}
+\mathcal{E}(\gamma) &= \scalaire{z}{z} - 2 \sum_i \gamma_i \cdot \scalaire{u_i}{z} + \sum_{i,j} \gamma_i \cdot \gamma_j \cdot \scalaire{u_i}{u_j} \\
+&= \scalaire{z}{z} - 2 \sum_i \gamma_i \cdot \scalaire{u_i}{z} + \sum_i \gamma_i^2
+\end{align}
 
 <p>
 Imposant \(\partial_k \mathcal{E}(\lambda_1,...,\lambda_n) = 0\), on obtient les \(n\) équations :
@@ -1608,8 +1609,8 @@ minimise potentiellement \(\mathcal{E}\). Notre projection potentielle de \(z\) 
 </div>
 
 
-<div id="outline-container-org9805221" class="outline-4">
-<h4 id="org9805221"><span class="section-number-4">2.6.1</span> Produit scalaire complexe</h4>
+<div id="outline-container-orgbddb9a4" class="outline-4">
+<h4 id="orgbddb9a4"><span class="section-number-4">2.6.1</span> Produit scalaire complexe</h4>
 <div class="outline-text-4" id="text-2-6-1">
 <p>
 Nous nous plaçons à présent dans le cas plus général où \(E\) est un espace vectoriel sur \(\setC\). Le \(\lambda\) défini plus haut devient donc un élément de \(\setC^n\). Nous allons déterminer s'il minimise la fonction \(\mathcal{E} : \setC^n \mapsto \setR\) définie par :
@@ -1639,11 +1640,11 @@ où \(x_i = \scalaire{u_i}{z}\). Considérons le vecteur d'écart :
 On a alors :
 </p>
 
-\begin{eqnarray*}
-\scalaire{x}{e} &=& \sum_i \conjaccent{x_i} \cdot \scalaire{u_i}{z - p} \\
-&=& \sum_i \conjaccent{x_i} \cdot \scalaire{u_i}{z} - \sum_{i,j} \conjaccent{x_i} \cdot \scalaire{u_i}{u_j} \cdot \lambda_j \\
-&=& \sum_i \scalaire{x}{u_i} \cdot \scalaire{u_i}{z} - \sum_i \scalaire{x}{u_i} \cdot \scalaire{u_i}{z} = 0
-\end{eqnarray*}
+\begin{align}
+\scalaire{x}{e} &= \sum_i \conjaccent{x_i} \cdot \scalaire{u_i}{z - p} \\
+&= \sum_i \conjaccent{x_i} \cdot \scalaire{u_i}{z} - \sum_{i,j} \conjaccent{x_i} \cdot \scalaire{u_i}{u_j} \cdot \lambda_j \\
+&= \sum_i \scalaire{x}{u_i} \cdot \scalaire{u_i}{z} - \sum_i \scalaire{x}{u_i} \cdot \scalaire{u_i}{z} = 0
+\end{align}
 
 <p>
 Le vecteur d'écart est donc orthogonal à tous les \(x \in U\). On a également :
@@ -1671,10 +1672,10 @@ p = \sum_i \lambda_i \cdot u_i \\
 On a alors \(z - g = z - p - \Delta = e - \Delta\) et :
 </p>
 
-\begin{eqnarray*}
-\mathcal{E}(\gamma) &=& \scalaire{e - \Delta}{e - \Delta} \\
-&=& \scalaire{e}{e} - \scalaire{e}{\Delta} - \scalaire{\Delta}{e} + \scalaire{\Delta}{\Delta}
-\end{eqnarray*}
+\begin{align}
+\mathcal{E}(\gamma) &= \scalaire{e - \Delta}{e - \Delta} \\
+&= \scalaire{e}{e} - \scalaire{e}{\Delta} - \scalaire{\Delta}{e} + \scalaire{\Delta}{\Delta}
+\end{align}
 
 <p>
 Comme \(\Delta \in U\), ses produits scalaires avec \(e\) s'annulent par orthogonalité et on a finalement :
@@ -1691,8 +1692,8 @@ Les scalaires \(\lambda_k\) minimisent donc bien la norme de l'écart sur \(U\).
 </div>
 
 
-<div id="outline-container-org352796d" class="outline-4">
-<h4 id="org352796d"><span class="section-number-4">2.6.2</span> Théorème de Pythagore</h4>
+<div id="outline-container-org8e9c08b" class="outline-4">
+<h4 id="org8e9c08b"><span class="section-number-4">2.6.2</span> Théorème de Pythagore</h4>
 <div class="outline-text-4" id="text-2-6-2">
 <p>
 On a \(z = p + e\). Comme \(p\) est un vecteur de \(U\), on a \(\scalaire{p}{e} = \scalaire{e}{p} = 0\). Le théorème de Pythagore est donc applicable :
@@ -1705,8 +1706,8 @@ On a \(z = p + e\). Comme \(p\) est un vecteur de \(U\), on a \(\scalaire{p}{e} 
 </div>
 
 
-<div id="outline-container-org5f5cfb5" class="outline-4">
-<h4 id="org5f5cfb5"><span class="section-number-4">2.6.3</span> Carré de la distance</h4>
+<div id="outline-container-org450388d" class="outline-4">
+<h4 id="org450388d"><span class="section-number-4">2.6.3</span> Carré de la distance</h4>
 <div class="outline-text-4" id="text-2-6-3">
 <p>
 Soit :
@@ -1736,8 +1737,8 @@ et donc :
 </div>
 
 
-<div id="outline-container-org76020fd" class="outline-3">
-<h3 id="org76020fd"><span class="section-number-3">2.7</span> Tenseur de projection</h3>
+<div id="outline-container-org227e6fe" class="outline-3">
+<h3 id="org227e6fe"><span class="section-number-3">2.7</span> Tenseur de projection</h3>
 <div class="outline-text-3" id="text-2-7">
 <p>
 On peut réécrire la projection de \(z\) sur \(U\) sous la forme :
@@ -1765,8 +1766,8 @@ on a alors :
 </div>
 
 
-<div id="outline-container-org82230c3" class="outline-4">
-<h4 id="org82230c3"><span class="section-number-4">2.7.1</span> Identité locale</h4>
+<div id="outline-container-orgd17f042" class="outline-4">
+<h4 id="orgd17f042"><span class="section-number-4">2.7.1</span> Identité locale</h4>
 <div class="outline-text-4" id="text-2-7-1">
 <p>
 Pour tout \(y \in U\), on a :
@@ -1791,8 +1792,8 @@ Ces deux expressions étant identiques, on a \(\mathcal{P} \cdot y = y\). Le ten
 </div>
 
 
-<div id="outline-container-org6ebb906" class="outline-4">
-<h4 id="org6ebb906"><span class="section-number-4">2.7.2</span> Invariance</h4>
+<div id="outline-container-orgdee3e5f" class="outline-4">
+<h4 id="orgdee3e5f"><span class="section-number-4">2.7.2</span> Invariance</h4>
 <div class="outline-text-4" id="text-2-7-2">
 <p>
 Pour tout \(z \in E\), on a \(y = \mathcal{P} \cdot z \in U\). On en conclut que :
@@ -1809,8 +1810,8 @@ Donc \(\mathcal{P} = \mathcal{P} \cdot \mathcal{P}\).
 </div>
 
 
-<div id="outline-container-org2811835" class="outline-4">
-<h4 id="org2811835"><span class="section-number-4">2.7.3</span> Complémentaire</h4>
+<div id="outline-container-orgceee748" class="outline-4">
+<h4 id="orgceee748"><span class="section-number-4">2.7.3</span> Complémentaire</h4>
 <div class="outline-text-4" id="text-2-7-3">
 <p>
 Soit \((u_1,...,u_n)\) une base orthonormée de \(E\). On voit que le tenseur identité :
@@ -1864,8 +1865,8 @@ On a aussi sans surprise :
 </div>
 
 
-<div id="outline-container-orgade3079" class="outline-3">
-<h3 id="orgade3079"><span class="section-number-3">2.8</span> Gram-Schmidt</h3>
+<div id="outline-container-orge329f75" class="outline-3">
+<h3 id="orge329f75"><span class="section-number-3">2.8</span> Gram-Schmidt</h3>
 <div class="outline-text-3" id="text-2-8">
 <p>
 Nous allons construire une suite de vecteurs orthonormaux \((u_1,u_2,...u_n)\) à partir d'une suite \((a_1,a_2,...,a_n)\) de vecteurs linéairement indépendants de \(E\). L'indépendance linéaire nous garantit que \(a_1 \ne 0\). On peut donc normaliser pour obtenir le premier vecteur de la série :
@@ -1937,8 +1938,8 @@ Ce procédé est appelé processus d'orthogonalisation de Gram-Schmidt.
 </div>
 
 
-<div id="outline-container-org3d156aa" class="outline-4">
-<h4 id="org3d156aa"><span class="section-number-4">2.8.1</span> Remarque</h4>
+<div id="outline-container-orgceecd6f" class="outline-4">
+<h4 id="orgceecd6f"><span class="section-number-4">2.8.1</span> Remarque</h4>
 <div class="outline-text-4" id="text-2-8-1">
 <p>
 Dans le cas où l'indépendance linéaire n'est pas garantie, il est toujours possible d'adapter l'algorithme en enlevant dynamiquement de la liste des \(a_k\) les vecteurs donnant un écart de projection nul. On se retrouve alors à la fin du processus avec une suite orthonormée \((u_1,...,u_m)\), où \(m \le n\).
@@ -1948,8 +1949,8 @@ Dans le cas où l'indépendance linéaire n'est pas garantie, il est toujours po
 </div>
 
 
-<div id="outline-container-orgdaad809" class="outline-3">
-<h3 id="orgdaad809"><span class="section-number-3">2.9</span> Représentation matricielle</h3>
+<div id="outline-container-orgdc3e894" class="outline-3">
+<h3 id="orgdc3e894"><span class="section-number-3">2.9</span> Représentation matricielle</h3>
 <div class="outline-text-3" id="text-2-9">
 <p>
 Soient \(u_1,u_2,...,u_m \in \matrice(\corps,n,1)\) des vecteurs matriciels orthonormés pour le produit scalaire usuel :
@@ -1978,8 +1979,8 @@ Il s'agit donc d'une matrice de taille \((n,n)\). Elle permet de projeter tout v
 </div>
 
 
-<div id="outline-container-org14aed4e" class="outline-3">
-<h3 id="org14aed4e"><span class="section-number-3">2.10</span> Factorisation</h3>
+<div id="outline-container-org01b2fdb" class="outline-3">
+<h3 id="org01b2fdb"><span class="section-number-3">2.10</span> Factorisation</h3>
 <div class="outline-text-3" id="text-2-10">
 <p>
 En terme de composantes, si \(u_k = ( u_{kj} )_j\) et si \(P = ( p_{ij} )_{i,j}\), on a :
@@ -2001,10 +2002,10 @@ expression qui ressemble furieusement à un produit matriciel. Soit la matrice \
 On a alors :
 </p>
 
-\begin{eqnarray*}
-\composante_{ik} U &=& u_{ki} \\
-\composante_{kj} U^\dual &=& \conjugue \composante_{jk} U = \conjaccent{u}_{kj}
-\end{eqnarray*}
+\begin{align}
+\composante_{ik} U &= u_{ki} \\
+\composante_{kj} U^\dual &= \conjugue \composante_{jk} U = \conjaccent{u}_{kj}
+\end{align}
 
 <p>
 Le produit ci-dessus peut donc s'écrire :
@@ -2024,8 +2025,8 @@ où \(b_{ik} = \composante_{ik} U\) et \(c_{kj} = \composante_{kj} U^\dual\). On
 </div>
 
 
-<div id="outline-container-org2771a1c" class="outline-4">
-<h4 id="org2771a1c"><span class="section-number-4">2.10.1</span> Propriétés</h4>
+<div id="outline-container-org880333f" class="outline-4">
+<h4 id="org880333f"><span class="section-number-4">2.10.1</span> Propriétés</h4>
 <div class="outline-text-4" id="text-2-10-1">
 <p>
 Comme les \(u_k\) sont orthonormaux, on a :
@@ -2054,8 +2055,8 @@ Si on pose \(Q = I - P\), on a aussi :
 </div>
 
 
-<div id="outline-container-org46522a3" class="outline-4">
-<h4 id="org46522a3"><span class="section-number-4">2.10.2</span> Cas particulier</h4>
+<div id="outline-container-orge1de710" class="outline-4">
+<h4 id="orge1de710"><span class="section-number-4">2.10.2</span> Cas particulier</h4>
 <div class="outline-text-4" id="text-2-10-2">
 <p>
 Les \(m\) vecteurs \(u_i\) étant linéairement indépendants dans \(\corps^n\) qui est de dimension \(n\), on doit forcément avoir \(m \le n\). Dans le cas où \(m = n\), on a de plus \(U^\dual = U^{-1}\) et :
@@ -2069,8 +2070,8 @@ Les \(m\) vecteurs \(u_i\) étant linéairement indépendants dans \(\corps^n\) 
 </div>
 
 
-<div id="outline-container-org704f1e8" class="outline-3">
-<h3 id="org704f1e8"><span class="section-number-3">2.11</span> Vecteurs $A$-orthogonaux</h3>
+<div id="outline-container-org999d2bb" class="outline-3">
+<h3 id="org999d2bb"><span class="section-number-3">2.11</span> Vecteurs $A$-orthogonaux</h3>
 <div class="outline-text-3" id="text-2-11">
 <p>
 Soit une matrice de produit scalaire \(A \in \matrice(\corps,n,n)\). On peut utiliser le procédé de Gram-Schmidt pour construire une base de vecteurs orthogonaux pour le produit scalaire :
@@ -2092,10 +2093,10 @@ On part d'une suite \((a_1,a_2,...,a_n)\) de vecteurs matriciels linéairement i
 et on construit étape après étape la suite des \(u_i\). Supposons être arrivé à la suite \((u_1,u_2,...,u_k)\) vérifiant \(\scalaire{u_i}{u_j} = u_i^\dual \cdot A \cdot u_j = \indicatrice_{ij}\), où \(k \le n - 1\). Nous projetons \(a_{k + 1}\) sur l'espace vectoriel \(\combilin{u_1,u_2,...,u_k}\) et nous évaluons l'écart :
 </p>
 
-\begin{eqnarray*}
-e_{k + 1} &=& a_{k + 1} - \sum_{i = 1}^k u_i \cdot \scalaire{u_i}{ a_{k + 1} } \\
-&=& a_{k + 1} - \sum_{i = 1}^k u_i \cdot u_i^\dual \cdot A \cdot a_{k + 1}
-\end{eqnarray*}
+\begin{align}
+e_{k + 1} &= a_{k + 1} - \sum_{i = 1}^k u_i \cdot \scalaire{u_i}{ a_{k + 1} } \\
+&= a_{k + 1} - \sum_{i = 1}^k u_i \cdot u_i^\dual \cdot A \cdot a_{k + 1}
+\end{align}
 
 <p>
 Ensuite, nous normalisons le résultat :
@@ -2135,8 +2136,8 @@ On note aussi \(U = U_n\).
 </div>
 
 
-<div id="outline-container-orga71ceaa" class="outline-4">
-<h4 id="orga71ceaa"><span class="section-number-4">2.11.1</span> Complément orthogonal</h4>
+<div id="outline-container-org15258b3" class="outline-4">
+<h4 id="org15258b3"><span class="section-number-4">2.11.1</span> Complément orthogonal</h4>
 <div class="outline-text-4" id="text-2-11-1">
 <p>
 Si les vecteurs orthonormaux \((u_1,...,u_p)\), où \(p \le n\), sont donnés, on peut simplement commencer le processus à \(k = p\) pour complèter la suite de vecteurs jusqu'à \(k = n\). On obtient alors la suite orthonormée \((u_1,...,u_p,u_{p + 1},...,u_n)\). On dit que \((u_{p + 1},...,u_n)\) est le complément orthogonal de \((u_1,...,u_p)\).
@@ -2145,8 +2146,8 @@ Si les vecteurs orthonormaux \((u_1,...,u_p)\), où \(p \le n\), sont donnés, o
 </div>
 
 
-<div id="outline-container-org3a0d8e5" class="outline-4">
-<h4 id="org3a0d8e5"><span class="section-number-4">2.11.2</span> Orthogonalité usuelle</h4>
+<div id="outline-container-orgda74be0" class="outline-4">
+<h4 id="orgda74be0"><span class="section-number-4">2.11.2</span> Orthogonalité usuelle</h4>
 <div class="outline-text-4" id="text-2-11-2">
 <p>
 Dans le cas où l'on choisit \(A = I\), cette méthode offre un moyen d'obtenir (ou de compléter) une suite de vecteurs \(u_i\) tels que \(u_i^\dual \cdot u_j = \indicatrice_{ij}\) et des matrices \(U_m\) correspondantes telles que \(U_m^\dual \cdot U_m = I_m\). Comme \(U = U_n\) est carrée, on a de plus :
@@ -2159,8 +2160,8 @@ Dans le cas où l'on choisit \(A = I\), cette méthode offre un moyen d'obtenir 
 </div>
 
 
-<div id="outline-container-org8a3b8b1" class="outline-4">
-<h4 id="org8a3b8b1"><span class="section-number-4">2.11.3</span> Systèmes linéaires</h4>
+<div id="outline-container-org5c112a3" class="outline-4">
+<h4 id="org5c112a3"><span class="section-number-4">2.11.3</span> Systèmes linéaires</h4>
 <div class="outline-text-4" id="text-2-11-3">
 <p>
 Lorsqu'on dispose de \(n\) vecteurs $A$-orthonormés, il est facile de résoudre le système linéaire \(A \cdot x = y\). Les \(u_i\) forment alors une base de \(\corps^n\) et on peut trouver des scalaires \(x_i \in \corps\) tels que :
@@ -2195,18 +2196,18 @@ Attention, analogue n'est pas identique, les \(u_i\) ne sont en général pas or
 </div>
 
 
-<div id="outline-container-orgb961aac" class="outline-2">
-<h2 id="orgb961aac"><span class="section-number-2">3</span> Algorithmes d'optimisation libre</h2>
+<div id="outline-container-org800acdf" class="outline-2">
+<h2 id="org800acdf"><span class="section-number-2">3</span> Algorithmes d'optimisation libre</h2>
 <div class="outline-text-2" id="text-3">
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org8071edc">3.1. Introduction</a></li>
-<li><a href="#org1171128">3.2. Minimum dans une direction</a></li>
-<li><a href="#orgc394123">3.3. Méthode de la plus grande descente</a></li>
-<li><a href="#orgc5dcfaf">3.4. Newton</a></li>
-<li><a href="#orgf3d13c2">3.5. Gradients conjugués</a></li>
-<li><a href="#orgc9ccfc8">3.6. Moindres carrés</a></li>
-<li><a href="#org82d7b34">3.7. Levenberg-Marquardt</a></li>
+<li><a href="#orgfbea4f4">3.1. Introduction</a></li>
+<li><a href="#org8b9dd3c">3.2. Minimum dans une direction</a></li>
+<li><a href="#org28abfd8">3.3. Méthode de la plus grande descente</a></li>
+<li><a href="#org4cb3525">3.4. Newton</a></li>
+<li><a href="#org0f7cde7">3.5. Gradients conjugués</a></li>
+<li><a href="#org5bcf9c6">3.6. Moindres carrés</a></li>
+<li><a href="#org010c857">3.7. Levenberg-Marquardt</a></li>
 </ul>
 </div>
 
@@ -2216,8 +2217,8 @@ Attention, analogue n'est pas identique, les \(u_i\) ne sont en général pas or
 </div>
 
 
-<div id="outline-container-org8071edc" class="outline-3">
-<h3 id="org8071edc"><span class="section-number-3">3.1</span> Introduction</h3>
+<div id="outline-container-orgfbea4f4" class="outline-3">
+<h3 id="orgfbea4f4"><span class="section-number-3">3.1</span> Introduction</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Nous allons présenter des algorithmes permettant de résoudre approximativement des problèmes de minimisation d'une fonction \(\varphi\) sur \(\setR^n\). Ces algorithmes partent d'un point initial \(x_0 \in \Omega\) et itèrent schématiquement comme suit :
@@ -2266,8 +2267,8 @@ pour toute fonction \(\Phi\) (par exemple, \(\Phi \in \{\varphi,J,H\}\)).
 </div>
 
 
-<div id="outline-container-org1171128" class="outline-3">
-<h3 id="org1171128"><span class="section-number-3">3.2</span> Minimum dans une direction</h3>
+<div id="outline-container-org8b9dd3c" class="outline-3">
+<h3 id="org8b9dd3c"><span class="section-number-3">3.2</span> Minimum dans une direction</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Soit l'itération :
@@ -2304,8 +2305,8 @@ La valeur optimale de \(\alpha_k\) s'écrit :
 </div>
 
 
-<div id="outline-container-orgc394123" class="outline-3">
-<h3 id="orgc394123"><span class="section-number-3">3.3</span> Méthode de la plus grande descente</h3>
+<div id="outline-container-org28abfd8" class="outline-3">
+<h3 id="org28abfd8"><span class="section-number-3">3.3</span> Méthode de la plus grande descente</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 La méthode de la plus grande pente consiste à partir à chaque itération
@@ -2352,8 +2353,8 @@ La valeur optimale de \(\alpha_k\) s'écrit donc :
 </div>
 
 
-<div id="outline-container-orgc5dcfaf" class="outline-3">
-<h3 id="orgc5dcfaf"><span class="section-number-3">3.4</span> Newton</h3>
+<div id="outline-container-org4cb3525" class="outline-3">
+<h3 id="org4cb3525"><span class="section-number-3">3.4</span> Newton</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 Il s'agit ici d'optimiser le pas \(s_k\) :
@@ -2390,8 +2391,8 @@ On en déduit la valeur optimale :
 </div>
 
 
-<div id="outline-container-orgf3d13c2" class="outline-3">
-<h3 id="orgf3d13c2"><span class="section-number-3">3.5</span> Gradients conjugués</h3>
+<div id="outline-container-org0f7cde7" class="outline-3">
+<h3 id="org0f7cde7"><span class="section-number-3">3.5</span> Gradients conjugués</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 Soit l'itération :
@@ -2460,8 +2461,8 @@ On en déduit que :
 </div>
 
 
-<div id="outline-container-orgc9ccfc8" class="outline-3">
-<h3 id="orgc9ccfc8"><span class="section-number-3">3.6</span> Moindres carrés</h3>
+<div id="outline-container-org5bcf9c6" class="outline-3">
+<h3 id="org5bcf9c6"><span class="section-number-3">3.6</span> Moindres carrés</h3>
 <div class="outline-text-3" id="text-3-6">
 <p>
 Soit la fonction \(f : \setR^n \mapsto \setR^m\). On cherce à minimiser la fonction \(\varphi = f^\dual \cdot f / 2\). Le problème de minimisation s'écrit alors :
@@ -2514,8 +2515,8 @@ avec :
 </div>
 
 
-<div id="outline-container-org8fa0573" class="outline-4">
-<h4 id="org8fa0573"><span class="section-number-4">3.6.1</span> Zéros</h4>
+<div id="outline-container-org3930332" class="outline-4">
+<h4 id="org3930332"><span class="section-number-4">3.6.1</span> Zéros</h4>
 <div class="outline-text-4" id="text-3-6-1">
 <p>
 Si \(S = \noyau f \ne \emptyset\), soit \(\gamma \in S\). On a alors :
@@ -2533,8 +2534,8 @@ On en déduit que tout \(x \in \setR^n\) minimisant \(\varphi\) vérifiera \(f(x
 </div>
 
 
-<div id="outline-container-org82d7b34" class="outline-3">
-<h3 id="org82d7b34"><span class="section-number-3">3.7</span> Levenberg-Marquardt</h3>
+<div id="outline-container-org010c857" class="outline-3">
+<h3 id="org010c857"><span class="section-number-3">3.7</span> Levenberg-Marquardt</h3>
 <div class="outline-text-3" id="text-3-7">
 <p>
 C'est une variante de la méthode des moindres carrés, utile dans les cas où
@@ -2551,18 +2552,18 @@ sur la diagonale :
 </div>
 
 
-<div id="outline-container-org309ee9a" class="outline-2">
-<h2 id="org309ee9a"><span class="section-number-2">4</span> Solveurs itératifs</h2>
+<div id="outline-container-org8b570dd" class="outline-2">
+<h2 id="org8b570dd"><span class="section-number-2">4</span> Solveurs itératifs</h2>
 <div class="outline-text-2" id="text-4">
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org570a003">4.1. Dépendances</a></li>
-<li><a href="#org68f9379">4.2. Méthodes itératives</a></li>
-<li><a href="#orgea3ad2d">4.3. Résolution par minimisation</a></li>
-<li><a href="#org81f0c92">4.4. Espaces de Krylov</a></li>
-<li><a href="#org46ea487">4.5. Méthode de projection</a></li>
-<li><a href="#org9cf3265">4.6. Minimisation du résidu</a></li>
-<li><a href="#org69ca099">4.7. Gradients biconjugués</a></li>
+<li><a href="#orge1321fb">4.1. Dépendances</a></li>
+<li><a href="#org49e1eaf">4.2. Méthodes itératives</a></li>
+<li><a href="#org95f1f58">4.3. Résolution par minimisation</a></li>
+<li><a href="#orgb432359">4.4. Espaces de Krylov</a></li>
+<li><a href="#orged7f231">4.5. Méthode de projection</a></li>
+<li><a href="#org752378a">4.6. Minimisation du résidu</a></li>
+<li><a href="#orgf0d0318">4.7. Gradients biconjugués</a></li>
 </ul>
 </div>
 
@@ -2572,8 +2573,8 @@ sur la diagonale :
 </div>
 
 
-<div id="outline-container-org570a003" class="outline-3">
-<h3 id="org570a003"><span class="section-number-3">4.1</span> Dépendances</h3>
+<div id="outline-container-orge1321fb" class="outline-3">
+<h3 id="orge1321fb"><span class="section-number-3">4.1</span> Dépendances</h3>
 <div class="outline-text-3" id="text-4-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:matrice} : Les matrices</li>
@@ -2582,8 +2583,8 @@ sur la diagonale :
 </div>
 
 
-<div id="outline-container-org68f9379" class="outline-3">
-<h3 id="org68f9379"><span class="section-number-3">4.2</span> Méthodes itératives</h3>
+<div id="outline-container-org49e1eaf" class="outline-3">
+<h3 id="org49e1eaf"><span class="section-number-3">4.2</span> Méthodes itératives</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Il s'agit de résoudre itérativement (et approximativement) en \(x\) un système linéaire \(A \cdot x = b\), où \(A\) est une matrice et \(b\) un vecteur. L'itération générique s'écrit :
@@ -2600,8 +2601,8 @@ et on espère que la suite des \(x_k \in \setR^n\) converge vers la solution. On
 </div>
 
 
-<div id="outline-container-orgea3ad2d" class="outline-3">
-<h3 id="orgea3ad2d"><span class="section-number-3">4.3</span> Résolution par minimisation</h3>
+<div id="outline-container-org95f1f58" class="outline-3">
+<h3 id="org95f1f58"><span class="section-number-3">4.3</span> Résolution par minimisation</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 Soit une matrice \(H\) de taille \((n,n)\) hermitienne (\(H = H^\dual\)) et définie positive :
@@ -2657,8 +2658,8 @@ pour un \(\alpha_k \in \setR\) bien choisi. On peut aussi utiliser un autre algo
 </div>
 
 
-<div id="outline-container-org9588444" class="outline-4">
-<h4 id="org9588444"><span class="section-number-4">4.3.1</span> Résidu</h4>
+<div id="outline-container-org5357d05" class="outline-4">
+<h4 id="org5357d05"><span class="section-number-4">4.3.1</span> Résidu</h4>
 <div class="outline-text-4" id="text-4-3-1">
 <p>
 On remarque que la direction de la descente est donné par le résidu :
@@ -2671,8 +2672,8 @@ On remarque que la direction de la descente est donné par le résidu :
 </div>
 
 
-<div id="outline-container-org9cd044f" class="outline-4">
-<h4 id="org9cd044f"><span class="section-number-4">4.3.2</span> Newton</h4>
+<div id="outline-container-orgafd3b0f" class="outline-4">
+<h4 id="orgafd3b0f"><span class="section-number-4">4.3.2</span> Newton</h4>
 <div class="outline-text-4" id="text-4-3-2">
 <p>
 On pourrait bien entendu résoudre par la méthode de Newton, mais cela reviendrait alors à inverser la matrice \(H\) directement, ce que l'on cherche précisément à éviter ici.
@@ -2681,8 +2682,8 @@ On pourrait bien entendu résoudre par la méthode de Newton, mais cela reviendr
 </div>
 
 
-<div id="outline-container-org48dd689" class="outline-4">
-<h4 id="org48dd689"><span class="section-number-4">4.3.3</span> Généralisation</h4>
+<div id="outline-container-org4c51848" class="outline-4">
+<h4 id="org4c51848"><span class="section-number-4">4.3.3</span> Généralisation</h4>
 <div class="outline-text-4" id="text-4-3-3">
 <p>
 Soit la matrice \(A\) de taille \((N,n)\), où \(N \ge n\), et \(y \in \setR^N\). Considérons le système général :
@@ -2753,8 +2754,8 @@ que l'on peut de nouveau résoudre itérativement en utilisant par exemple la m�
 </div>
 
 
-<div id="outline-container-org81f0c92" class="outline-3">
-<h3 id="org81f0c92"><span class="section-number-3">4.4</span> Espaces de Krylov</h3>
+<div id="outline-container-orgb432359" class="outline-3">
+<h3 id="orgb432359"><span class="section-number-3">4.4</span> Espaces de Krylov</h3>
 <div class="outline-text-3" id="text-4-4">
 <p>
 Les espaces de Krylov sont des espaces de vecteurs engendrés par les puissances de la matrice \(A\) appliquées à un vecteur initial \(u\) :
@@ -2779,8 +2780,8 @@ pour certains \(\alpha_i \in \corps\). Il s'agit donc de polynômes matriciels a
 </div>
 
 
-<div id="outline-container-org46ea487" class="outline-3">
-<h3 id="org46ea487"><span class="section-number-3">4.5</span> Méthode de projection</h3>
+<div id="outline-container-orged7f231" class="outline-3">
+<h3 id="orged7f231"><span class="section-number-3">4.5</span> Méthode de projection</h3>
 <div class="outline-text-3" id="text-4-5">
 <p>
 Soit la matrice \(A\) de taille \((n,n)\), le vecteur \(b \in \setR^n\) et le système \(A \cdot x = b\) à résoudre en \(x \in \setR^n\). On choisit \(m \le n\) beaucoup plus petit que \(n\) et les vecteurs \((v_1,...,v_m)\) de \(\setR^n\). Nous allons tenter de minimiser l'erreur en \(x_{k + 1}\) produite par l'itération générique suivante :
@@ -2794,10 +2795,10 @@ Soit la matrice \(A\) de taille \((n,n)\), le vecteur \(b \in \setR^n\) et le sy
 où les \(y_i \in \setR\). Posons :
 </p>
 
-\begin{eqnarray*}
-V &=& [v_1 \ ... \ v_m] \\
-y &=& [y_1 \ ... \ y_m]^\dual
-\end{eqnarray*}
+\begin{align}
+V &= [v_1 \ ... \ v_m] \\
+y &= [y_1 \ ... \ y_m]^\dual
+\end{align}
 
 <p>
 On peut réécrire l'itération sous la forme :
@@ -2869,8 +2870,8 @@ Comme \(V\) et \(W\) sont de taille \((n,m)\), la matrice \(W^\dual \cdot A \cdo
 </div>
 
 
-<div id="outline-container-orgddf75b2" class="outline-4">
-<h4 id="orgddf75b2"><span class="section-number-4">4.5.1</span> Orthonormés</h4>
+<div id="outline-container-org8ddcfbc" class="outline-4">
+<h4 id="org8ddcfbc"><span class="section-number-4">4.5.1</span> Orthonormés</h4>
 <div class="outline-text-4" id="text-4-5-1">
 <p>
 Si On choisit \(V = W\) et si les vecteurs \(v_i = w_i\) sont $A$-orthonormés, on a simplement :
@@ -2891,8 +2892,8 @@ et :
 </div>
 
 
-<div id="outline-container-org9dfd4e5" class="outline-4">
-<h4 id="org9dfd4e5"><span class="section-number-4">4.5.2</span> Krylov</h4>
+<div id="outline-container-org265fd1a" class="outline-4">
+<h4 id="org265fd1a"><span class="section-number-4">4.5.2</span> Krylov</h4>
 <div class="outline-text-4" id="text-4-5-2">
 <p>
 On peut par exemple choisir des vecteurs de base de \(\krylov_m(A,r_k)\) pour former les colonnes des matrices \(V\) et \(W\). On peut aussi utiliser aussi des vecteurs de base de \(\krylov_m(A^\dual,r_k)\).
@@ -2902,8 +2903,8 @@ On peut par exemple choisir des vecteurs de base de \(\krylov_m(A,r_k)\) pour fo
 </div>
 
 
-<div id="outline-container-org9cf3265" class="outline-3">
-<h3 id="org9cf3265"><span class="section-number-3">4.6</span> Minimisation du résidu</h3>
+<div id="outline-container-org752378a" class="outline-3">
+<h3 id="org752378a"><span class="section-number-3">4.6</span> Minimisation du résidu</h3>
 <div class="outline-text-3" id="text-4-6">
 <p>
 On tente de minimiser la norme quadratique du résidu :
@@ -2924,8 +2925,8 @@ La condition d'annulation de la dérivée par rapport à \(y\) nous donne la val
 </div>
 
 
-<div id="outline-container-org69ca099" class="outline-3">
-<h3 id="org69ca099"><span class="section-number-3">4.7</span> Gradients biconjugués</h3>
+<div id="outline-container-orgf0d0318" class="outline-3">
+<h3 id="orgf0d0318"><span class="section-number-3">4.7</span> Gradients biconjugués</h3>
 <div class="outline-text-3" id="text-4-7">
 <p>
 Soit la matrice \(A\) de taille \((n,n)\) et les vecteurs \(b,c \in \corps^n\). Les gradients biconjugués permettent d'obtenir simultanément les deux solutions \(x,y \in \corps^n\) telles que :
@@ -2992,30 +2993,30 @@ des pas successifs :
 On voit que :
 </p>
 
-\begin{eqnarray*}
-r_{k + 1} &=& b - A \cdot x_{k + 1} \\
-&=& b - A \cdot x_k - \alpha_k\cdot A\cdot p_k \\
-&=& r_k - \alpha_k \cdot A \cdot p_k \\
-s_{k + 1} &=& c - A^\dual \cdot y_{k + 1} \\
-&=& c - A^\dual \cdot y_k - \gamma_k \cdot A^\dual \cdot q_k \\
-&=& s_k - \gamma_k \cdot A^\dual \cdot q_k
-\end{eqnarray*}
+\begin{align}
+r_{k + 1} &= b - A \cdot x_{k + 1} \\
+&= b - A \cdot x_k - \alpha_k\cdot A\cdot p_k \\
+&= r_k - \alpha_k \cdot A \cdot p_k \\
+s_{k + 1} &= c - A^\dual \cdot y_{k + 1} \\
+&= c - A^\dual \cdot y_k - \gamma_k \cdot A^\dual \cdot q_k \\
+&= s_k - \gamma_k \cdot A^\dual \cdot q_k
+\end{align}
 
 <p>
 Les conditions d'orthogonalité nous donnent donc les valeurs des coefficients
 </p>
 
-\begin{eqnarray*}
+\begin{align}
 \alpha_k = \frac{s_k^\dual \cdot r_k}{s_k^\dual \cdot A \cdot p_k} \ \ && \ \
 \gamma_k = \frac{r_k^\dual \cdot s_k}{r_k^\dual \cdot A^\dual \cdot q_k} \\ \\
 \beta_k = - \frac{ q_k^\dual \cdot A \cdot r_{k + 1} }{q_k^\dual \cdot A \cdot p_k} \ \ && \ \
 \delta_k = - \frac{ p_k^\dual \cdot A^\dual \cdot s_{k + 1} }{p_k^\dual \cdot A^\dual \cdot  q_k}
-\end{eqnarray*}
+\end{align}
 </div>
 
 
-<div id="outline-container-org60d0086" class="outline-4">
-<h4 id="org60d0086"><span class="section-number-4">4.7.1</span> Simplification des coefficients</h4>
+<div id="outline-container-orgdbc7ead" class="outline-4">
+<h4 id="orgdbc7ead"><span class="section-number-4">4.7.1</span> Simplification des coefficients</h4>
 <div class="outline-text-4" id="text-4-7-1">
 <p>
 Il existe un procédé plus rapide pour évaluer les coefficients. En prenant le dual des relations entre les résidus successifs, on obtient \((s_k - s_{k + 1})^\dual = \conjaccent{\gamma_k} \cdot q_k^\dual \cdot A\). Donc :
@@ -3029,10 +3030,10 @@ Il existe un procédé plus rapide pour évaluer les coefficients. En prenant le
 et :
 </p>
 
-\begin{eqnarray*}
-q_k^\dual \cdot A \cdot p_k &=& q_k^\dual \cdot A \cdot r_k - \beta_k \cdot q_k^\dual \cdot A \cdot p_{k - 1} = q_k^\dual \cdot A \cdot r_k \\
-&=&  \unsur{\conjaccent{\gamma_k}} \cdot (s_k - s_{k + 1})^\dual \cdot r_k = \unsur{\conjaccent{\gamma_k}} \cdot s_k^\dual \cdot r_k
-\end{eqnarray*}
+\begin{align}
+q_k^\dual \cdot A \cdot p_k &= q_k^\dual \cdot A \cdot r_k - \beta_k \cdot q_k^\dual \cdot A \cdot p_{k - 1} = q_k^\dual \cdot A \cdot r_k \\
+&=  \unsur{\conjaccent{\gamma_k}} \cdot (s_k - s_{k + 1})^\dual \cdot r_k = \unsur{\conjaccent{\gamma_k}} \cdot s_k^\dual \cdot r_k
+\end{align}
 
 <p>
 On en conclut que :
@@ -3055,26 +3056,26 @@ D'un autre coté, \((r_k - r_{k + 1})^\dual = \conjaccent{\alpha_k} \cdot p_k^\d
 </div>
 
 
-<div id="outline-container-org0aa8783" class="outline-2">
-<h2 id="org0aa8783"><span class="section-number-2">5</span> Optimisation sous contrainte</h2>
+<div id="outline-container-org4241d26" class="outline-2">
+<h2 id="org4241d26"><span class="section-number-2">5</span> Optimisation sous contrainte</h2>
 <div class="outline-text-2" id="text-5">
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org79a19cb">5.1. Introduction</a></li>
-<li><a href="#org870cfd3">5.2. Problème de minimisation sous contrainte</a></li>
-<li><a href="#org583bcea">5.3. Convexité</a></li>
-<li><a href="#orgc833ed2">5.4. Frontière</a></li>
-<li><a href="#org02056b1">5.5. Pénalité</a></li>
-<li><a href="#org4b353cc">5.6. Lagrangien</a></li>
-<li><a href="#org5a1b642">5.7. Conditions de Kuhn-Tucker</a></li>
-<li><a href="#orga013dfd">5.8. Point de selle</a></li>
-<li><a href="#org59577f6">5.9. Solution</a></li>
-<li><a href="#org8996f54">5.10. Problème de maximisation sous contrainte</a></li>
-<li><a href="#org50de0dd">5.11. Contraintes d'égalité</a></li>
-<li><a href="#org533cd3d">5.12. Récapitulation</a></li>
-<li><a href="#org52ce5e8">5.13. Découplage</a></li>
-<li><a href="#orga179cfd">5.14. Dualité en optimisation linéaire</a></li>
-<li><a href="#org9bd935a">5.15. Minimisation de la norme sous contraintes linéaires</a></li>
+<li><a href="#orge66c8f9">5.1. Introduction</a></li>
+<li><a href="#org0ebfee8">5.2. Problème de minimisation sous contrainte</a></li>
+<li><a href="#org0b05718">5.3. Convexité</a></li>
+<li><a href="#org73e29e4">5.4. Frontière</a></li>
+<li><a href="#org850b49f">5.5. Pénalité</a></li>
+<li><a href="#org70c9902">5.6. Lagrangien</a></li>
+<li><a href="#orgd58e445">5.7. Conditions de Kuhn-Tucker</a></li>
+<li><a href="#org48178d0">5.8. Point de selle</a></li>
+<li><a href="#org70b2d81">5.9. Solution</a></li>
+<li><a href="#org1eb577e">5.10. Problème de maximisation sous contrainte</a></li>
+<li><a href="#org46f6695">5.11. Contraintes d'égalité</a></li>
+<li><a href="#org24f11b7">5.12. Récapitulation</a></li>
+<li><a href="#orgc3bed77">5.13. Découplage</a></li>
+<li><a href="#org92cca7d">5.14. Dualité en optimisation linéaire</a></li>
+<li><a href="#org4e5263a">5.15. Minimisation de la norme sous contraintes linéaires</a></li>
 </ul>
 </div>
 
@@ -3084,8 +3085,8 @@ D'un autre coté, \((r_k - r_{k + 1})^\dual = \conjaccent{\alpha_k} \cdot p_k^\d
 </div>
 
 
-<div id="outline-container-org79a19cb" class="outline-3">
-<h3 id="org79a19cb"><span class="section-number-3">5.1</span> Introduction</h3>
+<div id="outline-container-orge66c8f9" class="outline-3">
+<h3 id="orge66c8f9"><span class="section-number-3">5.1</span> Introduction</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 Ce chapitre traite de la résolution numérique de problèmes d'optimisation sous contraintes, ainsi que de leurs fondements théoriques. Les applications de ces méthodes sont nombreuses : maximisation du profit sous contrainte de ne pas dépasser un certain budget, maximiser la solidité d'une structure sans dépasser un certain poids, &#x2026;
@@ -3094,8 +3095,8 @@ Ce chapitre traite de la résolution numérique de problèmes d'optimisation sou
 </div>
 
 
-<div id="outline-container-org870cfd3" class="outline-3">
-<h3 id="org870cfd3"><span class="section-number-3">5.2</span> Problème de minimisation sous contrainte</h3>
+<div id="outline-container-org0ebfee8" class="outline-3">
+<h3 id="org0ebfee8"><span class="section-number-3">5.2</span> Problème de minimisation sous contrainte</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 Soit les fonctions convexes et et deux fois continument différentiables \(\omega_1,\omega_2,...,\omega_m : \setR^n \mapsto \setR\) et la fonction \(\omega : \setR^n \mapsto \setR^m\) définie par :
@@ -3117,12 +3118,12 @@ pour tout \(x \in \setR^n\). On considère l'ensemble associé :
 Par définition de l'ordre partiel sur \(\setR^m\), tout \(x \in \Omega\) doit donc vérifier les \(m\) contraintes :
 </p>
 
-\begin{eqnarray*}
-\omega_1(x) &\le& 0 \\
-\omega_2(x) &\le& 0 \\
+\begin{align}
+\omega_1(x) &\le 0 \\
+\omega_2(x) &\le 0 \\
 \dots & & \\
-\omega_m(x) &\le& 0
-\end{eqnarray*}
+\omega_m(x) &\le 0
+\end{align}
 
 <p>
 Nous considérons le problème général suivant : trouver un \(\gamma \in \Omega\) qui minimise la fonction convexe et et deux fois continument différentiable \(\varphi : \setR^n \mapsto \setR\) sur \(\Omega\) :
@@ -3146,8 +3147,8 @@ et \(m\) contraintes correspondant aux \(\omega_i\). On dit que \(\varphi\) est 
 </div>
 
 
-<div id="outline-container-orgf0c43d4" class="outline-4">
-<h4 id="orgf0c43d4"><span class="section-number-4">5.2.1</span> Lien avec la minimisation libre</h4>
+<div id="outline-container-orgd4cddc0" class="outline-4">
+<h4 id="orgd4cddc0"><span class="section-number-4">5.2.1</span> Lien avec la minimisation libre</h4>
 <div class="outline-text-4" id="text-5-2-1">
 <p>
 Il est important de se rendre compte que si \(\xi\) est la solution de :
@@ -3173,8 +3174,8 @@ mais rien ne nous dit que \(\xi\) respecte les contraintes exigées ! On ne peut
 </div>
 
 
-<div id="outline-container-org583bcea" class="outline-3">
-<h3 id="org583bcea"><span class="section-number-3">5.3</span> Convexité</h3>
+<div id="outline-container-org0b05718" class="outline-3">
+<h3 id="org0b05718"><span class="section-number-3">5.3</span> Convexité</h3>
 <div class="outline-text-3" id="text-5-3">
 <p>
 Soit \(u,v \in \Omega\) et \(s,t \in \setR\) tels que \(s,t \ge 0\) et \(s + t = 1\). On a alors par convexité des \(\omega_i\) :
@@ -3191,8 +3192,8 @@ On en conclut que \(w = s \cdot u + t \cdot v \in \Omega\). On a donc \(\convexe
 </div>
 
 
-<div id="outline-container-orgc833ed2" class="outline-3">
-<h3 id="orgc833ed2"><span class="section-number-3">5.4</span> Frontière</h3>
+<div id="outline-container-org73e29e4" class="outline-3">
+<h3 id="org73e29e4"><span class="section-number-3">5.4</span> Frontière</h3>
 <div class="outline-text-3" id="text-5-4">
 <p>
 Soit \(x \in \frontiere \Omega\). Comme \(x \in \adh \Omega\), on a \(\distance(x,\Omega) = 0\). On peut donc construire une suite \(u_n \in \Omega\) convergeant vers \(x\). La continuité des \(\omega_i\) et la définition de \(\Omega\) nous disent que :
@@ -3217,17 +3218,17 @@ Ces deux inégalités nous disent que, pour tout \(x \in \frontiere \Omega\), il
 </div>
 
 
-<div id="outline-container-org02056b1" class="outline-3">
-<h3 id="org02056b1"><span class="section-number-3">5.5</span> Pénalité</h3>
+<div id="outline-container-org850b49f" class="outline-3">
+<h3 id="org850b49f"><span class="section-number-3">5.5</span> Pénalité</h3>
 <div class="outline-text-3" id="text-5-5">
 <p>
 L'idée est de laisser l'objectif inchangé sur \(\Omega\) mais de l'augmenter suffisamment en dehors pour que le minimum sur \(\Omega\) soit également le minimum global. On utilise une fonction \(p\) convexe et différentiable vérifiant :
 </p>
 
-\begin{eqnarray*}
-p(x) &=& 0 \text{ pour tout } x \in \Omega \\
+\begin{align}
+p(x) &= 0 \text{ pour tout } x \in \Omega \\
 p(x) &\strictsuperieur& 0 \text{ pour tout } x \in \setR^n \setminus \Omega
-\end{eqnarray*}
+\end{align}
 
 <p>
 et on construit donc un nouvel objectif \(\psi\) par :
@@ -3284,8 +3285,8 @@ pour obtenir une solution à notre problème. De par les propriétés des foncti
 </div>
 
 
-<div id="outline-container-org4b353cc" class="outline-3">
-<h3 id="org4b353cc"><span class="section-number-3">5.6</span> Lagrangien</h3>
+<div id="outline-container-org70c9902" class="outline-3">
+<h3 id="org70c9902"><span class="section-number-3">5.6</span> Lagrangien</h3>
 <div class="outline-text-3" id="text-5-6">
 <p>
 Par définition de \(\Omega\), on peut trouver au moins un \(\omega_i(x) \strictsuperieur 0\) pour tout \(x \notin \Omega\). Il est donc possible de s'en servir pour former un terme de pénalité. Comme chaque \(\omega_i\) est convexe, \(y_i \cdot \omega_i\) le sera aussi pour tout \(y_i \in \setR\) tel que \(y_i \ge 0\) (si \(y_i\) était strictement négatif, on aurait \(y_i \cdot \omega_i\) concave). Posons :
@@ -3314,8 +3315,8 @@ pour tout \(x \in \setR^n\) et tout \(y = (y_1,...,y_m) \in \mathcal{P}\). On di
 </div>
 
 
-<div id="outline-container-org5a1b642" class="outline-3">
-<h3 id="org5a1b642"><span class="section-number-3">5.7</span> Conditions de Kuhn-Tucker</h3>
+<div id="outline-container-orgd58e445" class="outline-3">
+<h3 id="orgd58e445"><span class="section-number-3">5.7</span> Conditions de Kuhn-Tucker</h3>
 <div class="outline-text-3" id="text-5-7">
 <p>
 Nous allons à présent essayer de caractériser un choix \(y = \lambda\) tel que \(\gamma\) minimise globalement \(\lagrangien(x,\lambda)\) :
@@ -3402,8 +3403,8 @@ sont appellées conditions de Kuhn-Tucker.
 </div>
 
 
-<div id="outline-container-orga013dfd" class="outline-3">
-<h3 id="orga013dfd"><span class="section-number-3">5.8</span> Point de selle</h3>
+<div id="outline-container-org48178d0" class="outline-3">
+<h3 id="org48178d0"><span class="section-number-3">5.8</span> Point de selle</h3>
 <div class="outline-text-3" id="text-5-8">
 <p>
 Supposons que \((\gamma,\lambda) \in \Omega \times \mathcal{P}\) vérifie les conditions de Kuhn-Tucker. Choisissons \(x \in \setR^n\) et \(y \in \mathcal{P}\). L'annulation du gradient (\(\partial_x \lagrangien(\gamma,\lambda) = 0\)) et la convexité du lagrangien par rapport à la variable \(x\) nous assurent que :
@@ -3431,8 +3432,8 @@ On voit que \(\lambda\) maximise le lagrangien par rapport à la variable \(y\).
 </div>
 
 
-<div id="outline-container-org22fdaea" class="outline-4">
-<h4 id="org22fdaea"><span class="section-number-4">5.8.1</span> Réciproque</h4>
+<div id="outline-container-org223296e" class="outline-4">
+<h4 id="org223296e"><span class="section-number-4">5.8.1</span> Réciproque</h4>
 <div class="outline-text-4" id="text-5-8-1">
 <p>
 Nous venons de voir que les conditions de Kuhn-Tucker remplies sur \(\Omega \times \mathcal{P}\) nous offraient un point de selle sur \(\setR^n \times \mathcal{P}\). Nous allons voir que la réciproque est également vraie. Supposons que \((\gamma,\lambda) \in \setR^n \times \mathcal{P}\) soit un point de selle du lagrangien :
@@ -3556,8 +3557,8 @@ les propriétés des fonctions dérivables nous imposent que \(\partial_x \lagra
 </div>
 
 
-<div id="outline-container-org59577f6" class="outline-3">
-<h3 id="org59577f6"><span class="section-number-3">5.9</span> Solution</h3>
+<div id="outline-container-org70b2d81" class="outline-3">
+<h3 id="org70b2d81"><span class="section-number-3">5.9</span> Solution</h3>
 <div class="outline-text-3" id="text-5-9">
 <p>
 Supposons que \((\gamma,\lambda)\) soit un point de selle du lagrangien. Choisissons \(x \in \Omega\). On a \(\omega(x) \le 0\) et \(\lambda^\dual \cdot \omega(x) \le 0\). On en déduit que :
@@ -3581,8 +3582,8 @@ ce qui prouve que \(\gamma\) minimise \(\varphi\) sur \(\Omega\). La solution du
 </div>
 
 
-<div id="outline-container-orgbefe1c7" class="outline-4">
-<h4 id="orgbefe1c7"><span class="section-number-4">5.9.1</span> Généralisation</h4>
+<div id="outline-container-org1e57e93" class="outline-4">
+<h4 id="org1e57e93"><span class="section-number-4">5.9.1</span> Généralisation</h4>
 <div class="outline-text-4" id="text-5-9-1">
 <p>
 Remarquons que nous n'avons pas utilisé la convexité de \(\varphi\) ou de \(\omega\) pour démontrer que \(\gamma\) est bien la solution de notre problème. On peut donc appliquer la technique du point de selle du lagrangien à une classe de fonctions beaucoup plus générale.
@@ -3601,8 +3602,8 @@ Attention, si \(\varphi\) et/ou \(\omega\) ne sont plus supposées convexes, le 
 </div>
 
 
-<div id="outline-container-org8996f54" class="outline-3">
-<h3 id="org8996f54"><span class="section-number-3">5.10</span> Problème de maximisation sous contrainte</h3>
+<div id="outline-container-org1eb577e" class="outline-3">
+<h3 id="org1eb577e"><span class="section-number-3">5.10</span> Problème de maximisation sous contrainte</h3>
 <div class="outline-text-3" id="text-5-10">
 <p>
 Soit les fonctions {\em concaves} et deux fois continument différentiables \(\vartheta_1,\vartheta_2,...,\vartheta_m : \setR^n \mapsto \setR\) et la fonction \(\vartheta : \setR^n \mapsto \setR^m\) définie par :
@@ -3646,8 +3647,8 @@ où :
 </div>
 
 
-<div id="outline-container-org9ab2a64" class="outline-4">
-<h4 id="org9ab2a64"><span class="section-number-4">5.10.1</span> Lagrangien</h4>
+<div id="outline-container-org50af9bf" class="outline-4">
+<h4 id="org50af9bf"><span class="section-number-4">5.10.1</span> Lagrangien</h4>
 <div class="outline-text-4" id="text-5-10-1">
 <p>
 On sait que maximiser \(\psi\) revient à minimiser \(-\psi\). Comme \(-\psi\) et \(-\vartheta\) sont convexes, on peut utiliser le lagrangien défini par :
@@ -3688,8 +3689,8 @@ Il s'agit du lagrangien natif du problème de maximisation. Il est maximisé par
 </div>
 
 
-<div id="outline-container-orgda88c42" class="outline-4">
-<h4 id="orgda88c42"><span class="section-number-4">5.10.2</span> Kuhn-Tucker</h4>
+<div id="outline-container-org21ba5e4" class="outline-4">
+<h4 id="org21ba5e4"><span class="section-number-4">5.10.2</span> Kuhn-Tucker</h4>
 <div class="outline-text-4" id="text-5-10-2">
 <p>
 Les conditions de Kuhn-Tucker associées à \(\lagrangien_{\min}\) s'écrivent :
@@ -3727,8 +3728,8 @@ Elles sont équivalentes aux conditions analogues associées à \(\lagrangien_{\
 </div>
 
 
-<div id="outline-container-org50de0dd" class="outline-3">
-<h3 id="org50de0dd"><span class="section-number-3">5.11</span> Contraintes d'égalité</h3>
+<div id="outline-container-org46f6695" class="outline-3">
+<h3 id="org46f6695"><span class="section-number-3">5.11</span> Contraintes d'égalité</h3>
 <div class="outline-text-3" id="text-5-11">
 <p>
 Soit les fonctions deux fois continument différentiables \(\varrho_1,\varrho_2,...,\varrho_m : \setR^n \mapsto \setR\) et la fonction \(\varrho : \setR^n \mapsto \setR^m\) définie par :
@@ -3756,8 +3757,8 @@ Nous considérons le problème général suivant : trouver un \(\gamma \in \Phi
 </div>
 
 
-<div id="outline-container-org58a804d" class="outline-4">
-<h4 id="org58a804d"><span class="section-number-4">5.11.1</span> Lagrangien</h4>
+<div id="outline-container-orga31b085" class="outline-4">
+<h4 id="orga31b085"><span class="section-number-4">5.11.1</span> Lagrangien</h4>
 <div class="outline-text-4" id="text-5-11-1">
 <p>
 On peut réécrire l'ensemble \(\Phi\) sous la forme :
@@ -3798,8 +3799,8 @@ pour tout \((x,u) \in \setR^n \times \setR^m\).
 </div>
 
 
-<div id="outline-container-org2a18ef0" class="outline-4">
-<h4 id="org2a18ef0"><span class="section-number-4">5.11.2</span> Kuhn-Tucker</h4>
+<div id="outline-container-org8fe0fdf" class="outline-4">
+<h4 id="org8fe0fdf"><span class="section-number-4">5.11.2</span> Kuhn-Tucker</h4>
 <div class="outline-text-4" id="text-5-11-2">
 <p>
 Comme on veut que \(\gamma\) minimise \(\lagrangien\) par rapport à la variable \(x\) sur \(\setR^n\), on impose \(\partial_x \lagrangien(\gamma,\lambda) = 0\). On doit avoir aussi \(\varrho(x) = 0\). Mais comme \(\partial_u \lagrangien(x,u) = \varrho(x)\), on se retrouve finalement avec les conditions nécessaires de Kuhn-Tucker :
@@ -3817,8 +3818,8 @@ Comme on veut que \(\gamma\) minimise \(\lagrangien\) par rapport à la variable
 </div>
 
 
-<div id="outline-container-org9688ec0" class="outline-4">
-<h4 id="org9688ec0"><span class="section-number-4">5.11.3</span> Point de selle</h4>
+<div id="outline-container-org2d54050" class="outline-4">
+<h4 id="org2d54050"><span class="section-number-4">5.11.3</span> Point de selle</h4>
 <div class="outline-text-4" id="text-5-11-3">
 <p>
 Nous allons montrer que tout point de selle est solution du problème de minimisation. Soit \((\gamma,\lambda)\) tel que :
@@ -3880,8 +3881,8 @@ Le \(\gamma\) issu du point de selle est donc bien la solution de notre problèm
 </div>
 
 
-<div id="outline-container-org533cd3d" class="outline-3">
-<h3 id="org533cd3d"><span class="section-number-3">5.12</span> Récapitulation</h3>
+<div id="outline-container-org24f11b7" class="outline-3">
+<h3 id="org24f11b7"><span class="section-number-3">5.12</span> Récapitulation</h3>
 <div class="outline-text-3" id="text-5-12">
 <p>
 Considérons l'ensemble :
@@ -3893,8 +3894,8 @@ Considérons l'ensemble :
 </div>
 
 
-<div id="outline-container-orgf8e726d" class="outline-4">
-<h4 id="orgf8e726d"><span class="section-number-4">5.12.1</span> Minimisation</h4>
+<div id="outline-container-org6d24f8e" class="outline-4">
+<h4 id="org6d24f8e"><span class="section-number-4">5.12.1</span> Minimisation</h4>
 <div class="outline-text-4" id="text-5-12-1">
 <p>
 Si on veut minimiser \(\varphi\) sur \(\Omega\), on utilisera le lagrangien défini par :
@@ -3932,8 +3933,8 @@ Les conditions de Kuhn-Tucker s'écriront :
 </div>
 
 
-<div id="outline-container-org83d021c" class="outline-4">
-<h4 id="org83d021c"><span class="section-number-4">5.12.2</span> Maximisation</h4>
+<div id="outline-container-org965f5e6" class="outline-4">
+<h4 id="org965f5e6"><span class="section-number-4">5.12.2</span> Maximisation</h4>
 <div class="outline-text-4" id="text-5-12-2">
 <p>
 Si on veut maximiser \(\psi\) sur \(\Omega\), on utilisera le lagrangien défini par :
@@ -3971,19 +3972,19 @@ Les conditions de Kuhn-Tucker s'écriront :
 </div>
 
 
-<div id="outline-container-orgebadabf" class="outline-4">
-<h4 id="orgebadabf"><span class="section-number-4">5.12.3</span> Equivalence</h4>
+<div id="outline-container-org5f64e51" class="outline-4">
+<h4 id="org5f64e51"><span class="section-number-4">5.12.3</span> Equivalence</h4>
 <div class="outline-text-4" id="text-5-12-3">
 <p>
 On exprime parfois ces problèmes en utilisant des contraintes équivalentes. Si on pose \(s = - \omega(x)\), on a \(s \ge 0\). De même, on pose \(t = \vartheta(x) \ge 0\). On définit alors \(\Gamma\) comme l'ensemble des \((x,s,t)\) vérifiant les conditions :
 </p>
 
-\begin{eqnarray*}
-s,t &\ge& 0 \\
-s + \omega(x) &=& 0 \\
-t - \vartheta(x) &=& 0 \\
-\varrho(x) &=& 0
-\end{eqnarray*}
+\begin{align}
+s,t &\ge 0 \\
+s + \omega(x) &= 0 \\
+t - \vartheta(x) &= 0 \\
+\varrho(x) &= 0
+\end{align}
 
 <p>
 Et on minimise \(\varphi(x)\) (ou on maximise \(\psi(x)\)) sur les \((x,s,t) \in \Gamma\).
@@ -3993,12 +3994,12 @@ Et on minimise \(\varphi(x)\) (ou on maximise \(\psi(x)\)) sur les \((x,s,t) \in
 </div>
 
 
-<div id="outline-container-org52ce5e8" class="outline-3">
-<h3 id="org52ce5e8"><span class="section-number-3">5.13</span> Découplage</h3>
+<div id="outline-container-orgc3bed77" class="outline-3">
+<h3 id="orgc3bed77"><span class="section-number-3">5.13</span> Découplage</h3>
 <div class="outline-text-3" id="text-5-13">
 </div>
-<div id="outline-container-orgf58e503" class="outline-4">
-<h4 id="orgf58e503"><span class="section-number-4">5.13.1</span> Minimisation</h4>
+<div id="outline-container-orgd0f41b9" class="outline-4">
+<h4 id="orgd0f41b9"><span class="section-number-4">5.13.1</span> Minimisation</h4>
 <div class="outline-text-4" id="text-5-13-1">
 <p>
 Soit le problème de minimisation :
@@ -4071,8 +4072,8 @@ pour tout \((x,y) \ge 0\). La différence est qu'on ne fait plus apparaître exp
 </div>
 
 
-<div id="outline-container-orgacbba24" class="outline-4">
-<h4 id="orgacbba24"><span class="section-number-4">5.13.2</span> Maximisation</h4>
+<div id="outline-container-org6bfc14e" class="outline-4">
+<h4 id="org6bfc14e"><span class="section-number-4">5.13.2</span> Maximisation</h4>
 <div class="outline-text-4" id="text-5-13-2">
 <p>
 Soit le problème de minimisation :
@@ -4146,12 +4147,12 @@ pour tout \((x,y) \ge 0\).
 </div>
 
 
-<div id="outline-container-orga179cfd" class="outline-3">
-<h3 id="orga179cfd"><span class="section-number-3">5.14</span> Dualité en optimisation linéaire</h3>
+<div id="outline-container-org92cca7d" class="outline-3">
+<h3 id="org92cca7d"><span class="section-number-3">5.14</span> Dualité en optimisation linéaire</h3>
 <div class="outline-text-3" id="text-5-14">
 </div>
-<div id="outline-container-org0e254e6" class="outline-4">
-<h4 id="org0e254e6"><span class="section-number-4">5.14.1</span> Problème primal</h4>
+<div id="outline-container-org6485263" class="outline-4">
+<h4 id="org6485263"><span class="section-number-4">5.14.1</span> Problème primal</h4>
 <div class="outline-text-4" id="text-5-14-1">
 <p>
 Soit une matrice réelle \(A\) de taille \((m,n)\), l'ensemble :
@@ -4172,8 +4173,8 @@ et le vecteur \(c \in \setR^n\). Nous nous intéressons au problème de maximisa
 </div>
 
 
-<div id="outline-container-orgcdeb0d1" class="outline-4">
-<h4 id="orgcdeb0d1"><span class="section-number-4">5.14.2</span> Lagrangien</h4>
+<div id="outline-container-org71ec573" class="outline-4">
+<h4 id="org71ec573"><span class="section-number-4">5.14.2</span> Lagrangien</h4>
 <div class="outline-text-4" id="text-5-14-2">
 <p>
 La contrainte \(A \cdot x \le b\) est équivalente à :
@@ -4187,10 +4188,10 @@ La contrainte \(A \cdot x \le b\) est équivalente à :
 On introduit donc le lagrangien :
 </p>
 
-\begin{eqnarray*}
-\lagrangien(x,y) &=& c^\dual \cdot x + y^\dual \cdot (b - A \cdot x) \\
-&=& c^\dual \cdot x + y^\dual \cdot b - y^\dual \cdot A \cdot x
-\end{eqnarray*}
+\begin{align}
+\lagrangien(x,y) &= c^\dual \cdot x + y^\dual \cdot (b - A \cdot x) \\
+&= c^\dual \cdot x + y^\dual \cdot b - y^\dual \cdot A \cdot x
+\end{align}
 
 <p>
 défini pour tout \((x,y) \ge 0\).
@@ -4199,27 +4200,27 @@ défini pour tout \((x,y) \ge 0\).
 </div>
 
 
-<div id="outline-container-org8d5e5f1" class="outline-4">
-<h4 id="org8d5e5f1"><span class="section-number-4">5.14.3</span> Dualité</h4>
+<div id="outline-container-org61e2a5a" class="outline-4">
+<h4 id="org61e2a5a"><span class="section-number-4">5.14.3</span> Dualité</h4>
 <div class="outline-text-4" id="text-5-14-3">
 <p>
 Comme on travaille dans les réels, on a par symétrie du produit scalaire :
 </p>
 
-\begin{eqnarray*}
-c^\dual \cdot x &=& x^\dual \cdot c \\
-y^\dual \cdot b &=& b^\dual \cdot y \\
-y^\dual \cdot A \cdot x &=& (A \cdot x)^\dual \cdot y = x^\dual \cdot A^\dual \cdot y
-\end{eqnarray*}
+\begin{align}
+c^\dual \cdot x &= x^\dual \cdot c \\
+y^\dual \cdot b &= b^\dual \cdot y \\
+y^\dual \cdot A \cdot x &= (A \cdot x)^\dual \cdot y = x^\dual \cdot A^\dual \cdot y
+\end{align}
 
 <p>
 Le lagrangien du problème primal peut donc se réécrire :
 </p>
 
-\begin{eqnarray*}
-\lagrangien(x,y) &=& x^\dual \cdot c + b^\dual \cdot y - x^\dual \cdot A^\dual \cdot y \\
-&=& b^\dual \cdot y + x^\dual \cdot (c - A^\dual \cdot y)
-\end{eqnarray*}
+\begin{align}
+\lagrangien(x,y) &= x^\dual \cdot c + b^\dual \cdot y - x^\dual \cdot A^\dual \cdot y \\
+&= b^\dual \cdot y + x^\dual \cdot (c - A^\dual \cdot y)
+\end{align}
 
 <p>
 On voit que la fonction duale définie par :
@@ -4278,8 +4279,8 @@ Le problème primal est donc équivalent au problème dual suivant.
 </div>
 
 
-<div id="outline-container-org5e371cf" class="outline-4">
-<h4 id="org5e371cf"><span class="section-number-4">5.14.4</span> Problème dual</h4>
+<div id="outline-container-org054eadc" class="outline-4">
+<h4 id="org054eadc"><span class="section-number-4">5.14.4</span> Problème dual</h4>
 <div class="outline-text-4" id="text-5-14-4">
 <p>
 Trouver :
@@ -4300,8 +4301,8 @@ où :
 </div>
 
 
-<div id="outline-container-org9b51757" class="outline-4">
-<h4 id="org9b51757"><span class="section-number-4">5.14.5</span> Valeurs extrémales</h4>
+<div id="outline-container-org7669e2c" class="outline-4">
+<h4 id="org7669e2c"><span class="section-number-4">5.14.5</span> Valeurs extrémales</h4>
 <div class="outline-text-4" id="text-5-14-5">
 <p>
 Les conditions de Khun-Tucker des problèmes primal et dual impliquent :
@@ -4356,8 +4357,8 @@ Le maximum de \(x \mapsto c^\dual \cdot x\) sur \(\Theta\) est donc égal au min
 </div>
 
 
-<div id="outline-container-org819f688" class="outline-4">
-<h4 id="org819f688"><span class="section-number-4">5.14.6</span> Bornes</h4>
+<div id="outline-container-orga0419e5" class="outline-4">
+<h4 id="orga0419e5"><span class="section-number-4">5.14.6</span> Bornes</h4>
 <div class="outline-text-4" id="text-5-14-6">
 <p>
 Par définition des maxima et minima, on a :
@@ -4374,8 +4375,8 @@ pour tout \(x \in \Theta\) et \(y \in \Omega\). Si les deux valeurs \(c^\dual \c
 </div>
 
 
-<div id="outline-container-org930dc2c" class="outline-4">
-<h4 id="org930dc2c"><span class="section-number-4">5.14.7</span> Attention</h4>
+<div id="outline-container-org11ee946" class="outline-4">
+<h4 id="org11ee946"><span class="section-number-4">5.14.7</span> Attention</h4>
 <div class="outline-text-4" id="text-5-14-7">
 <p>
 Ne pas confondre la notion de dualité \(\max - \min\) avec la dualité au sens des applications linéaires.
@@ -4385,8 +4386,8 @@ Ne pas confondre la notion de dualité \(\max - \min\) avec la dualité au sens 
 </div>
 
 
-<div id="outline-container-org9bd935a" class="outline-3">
-<h3 id="org9bd935a"><span class="section-number-3">5.15</span> Minimisation de la norme sous contraintes linéaires</h3>
+<div id="outline-container-org4e5263a" class="outline-3">
+<h3 id="org4e5263a"><span class="section-number-3">5.15</span> Minimisation de la norme sous contraintes linéaires</h3>
 <div class="outline-text-3" id="text-5-15">
 <p>
 Soit la matrice \(A \in \matrice(\setR,m,n)\), le vecteur colonne \(b \in \matrice(\setR,m,1)\) et l'ensemble :
@@ -4453,23 +4454,23 @@ et :
 </div>
 
 
-<div id="outline-container-org16001c9" class="outline-2">
-<h2 id="org16001c9"><span class="section-number-2">6</span> Valeurs propres</h2>
+<div id="outline-container-org90cd6c2" class="outline-2">
+<h2 id="org90cd6c2"><span class="section-number-2">6</span> Valeurs propres</h2>
 <div class="outline-text-2" id="text-6">
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgcce96dd">6.1. Minimisation d'une forme quadratique avec norme contrainte</a></li>
-<li><a href="#orgaabb759">6.2. Application linéaire</a></li>
-<li><a href="#orgaac43ac">6.3. Opérateurs auto-adjoints</a></li>
-<li><a href="#orgb8df6d7">6.4. Représentation tensorielle</a></li>
-<li><a href="#orgc385d24">6.5. Inverse</a></li>
-<li><a href="#org22938bc">6.6. Représentation matricielle</a></li>
-<li><a href="#org9508886">6.7. Invariance</a></li>
-<li><a href="#orga7ca572">6.8. Matrices triangulaires</a></li>
-<li><a href="#orgd6ebdd1">6.9. Forme de Schur</a></li>
-<li><a href="#org3d01984">6.10. Algorithme \(Q R\)</a></li>
-<li><a href="#org3e5cfe4">6.11. Matrices hermitiennes</a></li>
-<li><a href="#org51fcfca">6.12. Théorème de Courant-Fisher</a></li>
+<li><a href="#org55bd9ea">6.1. Minimisation d'une forme quadratique avec norme contrainte</a></li>
+<li><a href="#org76ff8e2">6.2. Application linéaire</a></li>
+<li><a href="#org9ca6c0f">6.3. Opérateurs auto-adjoints</a></li>
+<li><a href="#org78c08ae">6.4. Représentation tensorielle</a></li>
+<li><a href="#org88ee280">6.5. Inverse</a></li>
+<li><a href="#orgc1e8c0d">6.6. Représentation matricielle</a></li>
+<li><a href="#org12a12c5">6.7. Invariance</a></li>
+<li><a href="#org770c796">6.8. Matrices triangulaires</a></li>
+<li><a href="#orga76fa0b">6.9. Forme de Schur</a></li>
+<li><a href="#org57a6bc5">6.10. Algorithme \(Q R\)</a></li>
+<li><a href="#org24589c9">6.11. Matrices hermitiennes</a></li>
+<li><a href="#org7d3db26">6.12. Théorème de Courant-Fisher</a></li>
 </ul>
 </div>
 
@@ -4479,8 +4480,8 @@ et :
 </div>
 
 
-<div id="outline-container-orgcce96dd" class="outline-3">
-<h3 id="orgcce96dd"><span class="section-number-3">6.1</span> Minimisation d'une forme quadratique avec norme contrainte</h3>
+<div id="outline-container-org55bd9ea" class="outline-3">
+<h3 id="org55bd9ea"><span class="section-number-3">6.1</span> Minimisation d'une forme quadratique avec norme contrainte</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 Soit un réel \(R \ne 0\), la matrice \(H \in \matrice(\setR,m,n)\) hermitienne et définie positive, et l'ensemble :
@@ -4541,8 +4542,8 @@ pour un certain \(\lambda \in \setR\). Nous allons généraliser cette propriét
 </div>
 
 
-<div id="outline-container-orgca124d4" class="outline-4">
-<h4 id="orgca124d4"><span class="section-number-4">6.1.1</span> Norme unité</h4>
+<div id="outline-container-orgb69ea73" class="outline-4">
+<h4 id="orgb69ea73"><span class="section-number-4">6.1.1</span> Norme unité</h4>
 <div class="outline-text-4" id="text-6-1-1">
 <p>
 Un cas particulier souvent utilisé est celui où \(R = 1\).
@@ -4552,8 +4553,8 @@ Un cas particulier souvent utilisé est celui où \(R = 1\).
 </div>
 
 
-<div id="outline-container-orgaabb759" class="outline-3">
-<h3 id="orgaabb759"><span class="section-number-3">6.2</span> Application linéaire</h3>
+<div id="outline-container-org76ff8e2" class="outline-3">
+<h3 id="org76ff8e2"><span class="section-number-3">6.2</span> Application linéaire</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 Soit l'espace vectoriel \(E\) sur \(\corps\) et une application linéaire \(A : E \mapsto E\). Si le couple \((u,\lambda) \in (E \setminus \{0\}) \times \corps\) vérifie :
@@ -4569,8 +4570,8 @@ On dit que \(u\) est vecteur propre de \(A\) correspondant à la valeur propre \
 </div>
 
 
-<div id="outline-container-org3cec1fe" class="outline-4">
-<h4 id="org3cec1fe"><span class="section-number-4">6.2.1</span> Rapport de Rayleigh</h4>
+<div id="outline-container-org509e142" class="outline-4">
+<h4 id="org509e142"><span class="section-number-4">6.2.1</span> Rapport de Rayleigh</h4>
 <div class="outline-text-4" id="text-6-2-1">
 <p>
 En prenant le produit scalaire de \(u\) avec la relation \(A(u) = \lambda \cdot u\), on obtient :
@@ -4603,8 +4604,8 @@ pou tout vecteur non nul \(v \in E\).
 </div>
 
 
-<div id="outline-container-org3228c88" class="outline-4">
-<h4 id="org3228c88"><span class="section-number-4">6.2.2</span> Définie positive</h4>
+<div id="outline-container-orgd091eec" class="outline-4">
+<h4 id="orgd091eec"><span class="section-number-4">6.2.2</span> Définie positive</h4>
 <div class="outline-text-4" id="text-6-2-2">
 <p>
 Si \(A\) est définie positive, toute valeur propre \(\lambda = R(u) \ge 0\) est un réel positif.
@@ -4613,8 +4614,8 @@ Si \(A\) est définie positive, toute valeur propre \(\lambda = R(u) \ge 0\) est
 </div>
 
 
-<div id="outline-container-org9299407" class="outline-4">
-<h4 id="org9299407"><span class="section-number-4">6.2.3</span> Formulation équivalente</h4>
+<div id="outline-container-org546b03b" class="outline-4">
+<h4 id="org546b03b"><span class="section-number-4">6.2.3</span> Formulation équivalente</h4>
 <div class="outline-text-4" id="text-6-2-3">
 <p>
 On voit qu'il est équivalent de chercher un scalaire \(\lambda\) et un vecteur \(u \ne 0\) tel que :
@@ -4628,8 +4629,8 @@ On voit qu'il est équivalent de chercher un scalaire \(\lambda\) et un vecteur 
 </div>
 
 
-<div id="outline-container-orgaac43ac" class="outline-3">
-<h3 id="orgaac43ac"><span class="section-number-3">6.3</span> Opérateurs auto-adjoints</h3>
+<div id="outline-container-org9ca6c0f" class="outline-3">
+<h3 id="org9ca6c0f"><span class="section-number-3">6.3</span> Opérateurs auto-adjoints</h3>
 <div class="outline-text-3" id="text-6-3">
 <p>
 Si l'application linéaire \(A\) est auto-adjointe (\(A^\dual = A\)), ses valeurs et vecteurs propres possèdent d'importantes propriétés. Soit \(u \in E\) et \(\lambda \in \setC\) tels que \(A(u) = \lambda \cdot u\) et \(\scalaire{u}{u} = 1\). On a alors :
@@ -4645,8 +4646,8 @@ La valeur propre doit donc être réelle.
 </div>
 
 
-<div id="outline-container-orgff1a995" class="outline-4">
-<h4 id="orgff1a995"><span class="section-number-4">6.3.1</span> Orthonormalité</h4>
+<div id="outline-container-orgb2de652" class="outline-4">
+<h4 id="orgb2de652"><span class="section-number-4">6.3.1</span> Orthonormalité</h4>
 <div class="outline-text-4" id="text-6-3-1">
 <p>
 Soit la suite de vecteurs propres \(u_i \in \Omega\) et de valeurs propres \(\lambda_i \in \setR\). On a :
@@ -4684,8 +4685,8 @@ Si toutes les valeurs propres sont distinctes, les vecteurs propres forment une 
 </div>
 
 
-<div id="outline-container-orgf582f71" class="outline-4">
-<h4 id="orgf582f71"><span class="section-number-4">6.3.2</span> Orthogonalité par rapport à l'application linéaire</h4>
+<div id="outline-container-org9258ae5" class="outline-4">
+<h4 id="org9258ae5"><span class="section-number-4">6.3.2</span> Orthogonalité par rapport à l'application linéaire</h4>
 <div class="outline-text-4" id="text-6-3-2">
 <p>
 Si les vecteurs propres \(u_i \in \Omega\) sont orthonormés, on a :
@@ -4699,8 +4700,8 @@ Si les vecteurs propres \(u_i \in \Omega\) sont orthonormés, on a :
 </div>
 
 
-<div id="outline-container-orgb8df6d7" class="outline-3">
-<h3 id="orgb8df6d7"><span class="section-number-3">6.4</span> Représentation tensorielle</h3>
+<div id="outline-container-org78c08ae" class="outline-3">
+<h3 id="org78c08ae"><span class="section-number-3">6.4</span> Représentation tensorielle</h3>
 <div class="outline-text-3" id="text-6-4">
 <p>
 Supposons que la suite de vecteurs propres \((u_1,...,u_n)\) soit orthonormée. Pour tout \(x \in \combilin{u_1,...,u_n}\), on a alors :
@@ -4714,10 +4715,10 @@ Supposons que la suite de vecteurs propres \((u_1,...,u_n)\) soit orthonormée. 
 et :
 </p>
 
-\begin{eqnarray*}
-A(x) &=& \sum_i \scalaire{u_i}{x} \cdot A(u_i) \\
-&=& \sum_i \lambda_i \cdot \scalaire{u_i}{x} \cdot u_i
-\end{eqnarray*}
+\begin{align}
+A(x) &= \sum_i \scalaire{u_i}{x} \cdot A(u_i) \\
+&= \sum_i \lambda_i \cdot \scalaire{u_i}{x} \cdot u_i
+\end{align}
 
 <p>
 On peut donc représenter \(A\) sur \(\combilin{u_1,...,u_n}\) par le tenseur associé :
@@ -4738,8 +4739,8 @@ de sorte que :
 </div>
 
 
-<div id="outline-container-orgc385d24" class="outline-3">
-<h3 id="orgc385d24"><span class="section-number-3">6.5</span> Inverse</h3>
+<div id="outline-container-org88ee280" class="outline-3">
+<h3 id="org88ee280"><span class="section-number-3">6.5</span> Inverse</h3>
 <div class="outline-text-3" id="text-6-5">
 <p>
 Supposons que les vecteurs propres \(u_i\) forment une base orthonormée de \(E\), et que les valeurs propres correspondantes \(\lambda_i\) soient non nulles. Si \(x,y \in E\) sont tels que \(A(x) = \mathcal{A} \cdot x = y\), on a :
@@ -4784,8 +4785,8 @@ on a :
 </div>
 
 
-<div id="outline-container-org22938bc" class="outline-3">
-<h3 id="org22938bc"><span class="section-number-3">6.6</span> Représentation matricielle</h3>
+<div id="outline-container-orgc1e8c0d" class="outline-3">
+<h3 id="orgc1e8c0d"><span class="section-number-3">6.6</span> Représentation matricielle</h3>
 <div class="outline-text-3" id="text-6-6">
 <p>
 On dit que \(\lambda \in \corps\) est la valeur propre de la matrice \(A \in \matrice(\corps,n,n)\) correspondant au vecteur propre non nul \(u \in \corps^n\) si ils sont valeurs et vecteurs propres de l'application linéaire sous-jacente :
@@ -4797,8 +4798,8 @@ On dit que \(\lambda \in \corps\) est la valeur propre de la matrice \(A \in \ma
 </div>
 
 
-<div id="outline-container-org29a1450" class="outline-4">
-<h4 id="org29a1450"><span class="section-number-4">6.6.1</span> Formulation équivalente</h4>
+<div id="outline-container-org8c14183" class="outline-4">
+<h4 id="org8c14183"><span class="section-number-4">6.6.1</span> Formulation équivalente</h4>
 <div class="outline-text-4" id="text-6-6-1">
 <p>
 On voit qu'il est équivalent de chercher un scalaire \(\lambda\) et un vecteur \(u \ne 0\) tel que :
@@ -4811,8 +4812,8 @@ On voit qu'il est équivalent de chercher un scalaire \(\lambda\) et un vecteur 
 </div>
 
 
-<div id="outline-container-org57b443e" class="outline-4">
-<h4 id="org57b443e"><span class="section-number-4">6.6.2</span> Rapport de Rayleigh</h4>
+<div id="outline-container-orgf24c0ab" class="outline-4">
+<h4 id="orgf24c0ab"><span class="section-number-4">6.6.2</span> Rapport de Rayleigh</h4>
 <div class="outline-text-4" id="text-6-6-2">
 <p>
 On peut évaluer \(\lambda\) à partir de \(u\) en multipliant l'équation ci-dessus à gauche par \(u^\dual\). On obtient alors :
@@ -4834,8 +4835,8 @@ et le rapport de Rayleigh en \(u\) s'en suit :
 </div>
 
 
-<div id="outline-container-org9508886" class="outline-3">
-<h3 id="org9508886"><span class="section-number-3">6.7</span> Invariance</h3>
+<div id="outline-container-org12a12c5" class="outline-3">
+<h3 id="org12a12c5"><span class="section-number-3">6.7</span> Invariance</h3>
 <div class="outline-text-3" id="text-6-7">
 <p>
 Soit la valeur propre \(\lambda\) de \(A\) et le vecteur propre correspondant \(u \ne 0\). On a :
@@ -4884,8 +4885,8 @@ On dit que les valeurs propres sont des invariants sous transformation linéaire
 </div>
 
 
-<div id="outline-container-orga7ca572" class="outline-3">
-<h3 id="orga7ca572"><span class="section-number-3">6.8</span> Matrices triangulaires</h3>
+<div id="outline-container-org770c796" class="outline-3">
+<h3 id="org770c796"><span class="section-number-3">6.8</span> Matrices triangulaires</h3>
 <div class="outline-text-3" id="text-6-8">
 <p>
 Nous allons démontrer par récurrence sur la taille \(n\) d'une matrice triangulaire supérieure \(T\) que les composantes diagonales sont des valeurs propres de \(T\).
@@ -4969,8 +4970,8 @@ v \\ \mu
 où \(v \in \corps^{n - 1}\) et \(\mu \in \setC\). Si on choisit \(v = u_i^{(n-1)}\) pour \(i \in \{1,2,...,n-1\}\) et \(\mu = 0\), on a :
 </p>
 
-\begin{eqnarray*}
-T \cdot u &=&
+\begin{align}
+T \cdot u &=
 \begin{Matrix}{cc}
 T^{(n-1)} & z \\
 0 & \lambda_n
@@ -4979,7 +4980,7 @@ T^{(n-1)} & z \\
 \begin{Matrix}{c}
 u_i^{(n-1)} \\ 0
 \end{Matrix} \\
-&=&
+&=
 \begin{Matrix}{c}
 T^{(n-1)} \cdot u_i^{(n-1)} \\
 0
@@ -4988,12 +4989,12 @@ T^{(n-1)} \cdot u_i^{(n-1)} \\
 \begin{Matrix}{c}
 \lambda_i \cdot u_i^{(n-1)} \\ 0
 \end{Matrix} \\
-&=& \lambda_i \cdot
+&= \lambda_i \cdot
 \begin{Matrix}{c}
 u_i \\ 0
 \end{Matrix}
 = \lambda_i \cdot u
-\end{eqnarray*}
+\end{align}
 
 <p>
 Les valeurs propres de \(T^{(n-1)}\) sont donc également valeurs propres de \(T\). Il nous reste à examiner le cas de \(\lambda_n\). Posons :
@@ -5046,8 +5047,8 @@ Il suffit donc que \(u \ne 0\) vérifie \(A \cdot u = 0\). Mais comme \(A\) est 
 
 
 
-<div id="outline-container-orgd6ebdd1" class="outline-3">
-<h3 id="orgd6ebdd1"><span class="section-number-3">6.9</span> Forme de Schur</h3>
+<div id="outline-container-orga76fa0b" class="outline-3">
+<h3 id="orga76fa0b"><span class="section-number-3">6.9</span> Forme de Schur</h3>
 <div class="outline-text-3" id="text-6-9">
 <p>
 Soit une matrice carrée \(A\) de taille \((n,n)\). On choisit la valeur propre \(\lambda_1\) la plus grande de \(A\) et on évaluer un vecteur propre non nul correspondant \(u_1\) en résolvant le système :
@@ -5069,37 +5070,37 @@ On construit alors le complément orthogonal \((u_2, ..., u_n)\) tel que \((u_1,
 On a bien sur \(U_1^{-1} = U_1^\dual\) et :
 </p>
 
-\begin{eqnarray*}
-A \cdot U_1 &=&
+\begin{align}
+A \cdot U_1 &=
 \begin{Matrix}{cccc}
 A \cdot u_1 & A \cdot u_2 & \hdots & A \cdot u_n
 \end{Matrix} \\
-&=&
+&=
 \begin{Matrix}{cccc}
 \lambda_1 \cdot u_1 & A \cdot u_2 & \hdots & A \cdot u_n
 \end{Matrix}
-\end{eqnarray*}
+\end{align}
 
 <p>
 En multipliant à gauche par la duale, on obtient :
 </p>
 
-\begin{eqnarray*}
-U_1^\dual \cdot A \cdot U_1 &=&
+\begin{align}
+U_1^\dual \cdot A \cdot U_1 &=
 \begin{Matrix}{cccc}
 (\lambda_1 \cdot u_1^\dual \cdot u_1) & (u_1^\dual \cdot A \cdot u_2) & \hdots & (u_1^\dual \cdot A \cdot u_n) \\
 (\lambda_1 \cdot u_2^\dual \cdot u_1) & (u_2^\dual \cdot A \cdot u_2) & \hdots & (u_2^\dual \cdot A \cdot u_n) \\
 \vdots & \vdots & \vdots & \vdots \\
 (\lambda_1 \cdot u_n^\dual \cdot u_1) & (u_n^\dual \cdot A \cdot u_2) & \hdots & (u_n^\dual \cdot A \cdot u_n)
 \end{Matrix} \\
-&=&
+&=
 \begin{Matrix}{cccc}
 \lambda_1 & (u_1^\dual \cdot A \cdot u_2) & \hdots & (u_1^\dual \cdot A \cdot u_n) \\
 0 & (u_2^\dual \cdot A \cdot u_2) & \hdots & (u_2^\dual \cdot A \cdot u_n) \\
 \vdots & \vdots & \vdots & \vdots \\
 0 & (u_n^\dual \cdot A \cdot u_2) & \hdots & (u_n^\dual \cdot A \cdot u_n)
 \end{Matrix} \\
-\end{eqnarray*}
+\end{align}
 
 <p>
 ou, plus schématiquement :
@@ -5226,8 +5227,8 @@ On appelle cette décomposition la forme de Schur et on la note :
 </div>
 
 
-<div id="outline-container-orgcb42eeb" class="outline-4">
-<h4 id="orgcb42eeb"><span class="section-number-4">6.9.1</span> Valeurs propres</h4>
+<div id="outline-container-orgec2efaa" class="outline-4">
+<h4 id="orgec2efaa"><span class="section-number-4">6.9.1</span> Valeurs propres</h4>
 <div class="outline-text-4" id="text-6-9-1">
 <p>
 La matrice \(T\) étant triangulaire supérieure, ses éléments diagonaux sont des valeurs propres de \(T\). Par invariance sous transformation, on voit aussi que les valeurs propres de :
@@ -5244,8 +5245,8 @@ sont égales aux valeurs propres de \(T\). La décomposition de Schur d'une matr
 </div>
 
 
-<div id="outline-container-org351cbf7" class="outline-4">
-<h4 id="org351cbf7"><span class="section-number-4">6.9.2</span> Ordre</h4>
+<div id="outline-container-orgd9ad7b3" class="outline-4">
+<h4 id="orgd9ad7b3"><span class="section-number-4">6.9.2</span> Ordre</h4>
 <div class="outline-text-4" id="text-6-9-2">
 <p>
 Nous allons montrer par récurrence sur la taille de \(A\) que les valeurs propres sont triées par ordre décroissant. Si \(n = 1\), il n'y a rien à montrer. Supposons à présent que le résultat soit vrai pour \(n - 1\). Soit :
@@ -5306,8 +5307,8 @@ Les valeurs propres de \(A^{(n - 1)}\) sont donc également les valeurs propres 
 </div>
 
 
-<div id="outline-container-org3d01984" class="outline-3">
-<h3 id="org3d01984"><span class="section-number-3">6.10</span> Algorithme \(Q R\)</h3>
+<div id="outline-container-org57a6bc5" class="outline-3">
+<h3 id="org57a6bc5"><span class="section-number-3">6.10</span> Algorithme \(Q R\)</h3>
 <div class="outline-text-3" id="text-6-10">
 <p>
 Le but est d'évaluer les valeurs propres d'une matrice \(A\). Pour cela, on tente d'obtenir une approximation de la forme de Schur. Il s'agit d'un algorithme itératif qui part de :
@@ -5401,8 +5402,8 @@ pour \(N\) suffisamment grand. Par invariance sous transformation réversible, l
 </div>
 
 
-<div id="outline-container-org3e5cfe4" class="outline-3">
-<h3 id="org3e5cfe4"><span class="section-number-3">6.11</span> Matrices hermitiennes</h3>
+<div id="outline-container-org24589c9" class="outline-3">
+<h3 id="org24589c9"><span class="section-number-3">6.11</span> Matrices hermitiennes</h3>
 <div class="outline-text-3" id="text-6-11">
 <p>
 Si \(A\) est hermitienne (\(A = A^\dual)\), la forme de Schur \((T,U) = \schur(A)\) implique que :
@@ -5447,8 +5448,8 @@ Les vecteurs propres sont donc donnés par les colonnes de \(U\). Comme \(U^\dua
 </div>
 
 
-<div id="outline-container-org51fcfca" class="outline-3">
-<h3 id="org51fcfca"><span class="section-number-3">6.12</span> Théorème de Courant-Fisher</h3>
+<div id="outline-container-org7d3db26" class="outline-3">
+<h3 id="org7d3db26"><span class="section-number-3">6.12</span> Théorème de Courant-Fisher</h3>
 <div class="outline-text-3" id="text-6-12">
 <p>
 Soit une matrice hermitienne \(A\) et sa forme de Schur :
@@ -5462,10 +5463,10 @@ Soit une matrice hermitienne \(A\) et sa forme de Schur :
 Nous posons :
 </p>
 
-\begin{eqnarray*}
-\lambda_i &=& \composante_{ii} \Lambda \\
-u_i &=& \colonne_i U
-\end{eqnarray*}
+\begin{align}
+\lambda_i &= \composante_{ii} \Lambda \\
+u_i &= \colonne_i U
+\end{align}
 
 <p>
 pour les valeurs propres et vecteurs propres correspondants. Les valeurs propres étant triées par ordre décroissant, on a :
@@ -5495,10 +5496,10 @@ pour tout \(x \in \setC^n \setminus \{0\}\). Choisissons un tel \(x\). Comme les
 où \(a_i = \scalaire{u_i}{x}\) par orthonormalité. Le rapport s'écrit alors :
 </p>
 
-\begin{eqnarray*}
-R(x) &=& \frac{ \sum_{i,j = 1}^n \conjaccent{a}_i \cdot a_j \cdot u_i^\dual \cdot A \cdot u_j }{ \sum_{i,j = 1}^n \conjaccent{a}_i \cdot a_j \cdot u_i^\dual \cdot u_j} \\ \\
-&=& \frac{ \sum_{i = 1}^n \abs{a_i}^2 \cdot \lambda_i }{ \sum_{j = 1}^n \abs{a_j}^2 }
-\end{eqnarray*}
+\begin{align}
+R(x) &= \frac{ \sum_{i,j = 1}^n \conjaccent{a}_i \cdot a_j \cdot u_i^\dual \cdot A \cdot u_j }{ \sum_{i,j = 1}^n \conjaccent{a}_i \cdot a_j \cdot u_i^\dual \cdot u_j} \\ \\
+&= \frac{ \sum_{i = 1}^n \abs{a_i}^2 \cdot \lambda_i }{ \sum_{j = 1}^n \abs{a_j}^2 }
+\end{align}
 
 <p>
 Posons :
@@ -5526,17 +5527,17 @@ On a alors :
 </div>
 
 
-<div id="outline-container-orga4c2e6d" class="outline-4">
-<h4 id="orga4c2e6d"><span class="section-number-4">6.12.1</span> Propriétés extrémales</h4>
+<div id="outline-container-orge572ab6" class="outline-4">
+<h4 id="orge572ab6"><span class="section-number-4">6.12.1</span> Propriétés extrémales</h4>
 <div class="outline-text-4" id="text-6-12-1">
 <p>
 Nous allons analyser les extrema du rapport de Rayleigh sur les ensembles :
 </p>
 
-\begin{eqnarray*}
-\mathcal{P}_m &=& \combilin{u_1,u_2,...,u_m} \setminus \{0\} \\
-\mathcal{Q}_m &=& \mathcal{P}_{m - 1}^\orthogonal \setminus \{0\}
-\end{eqnarray*}
+\begin{align}
+\mathcal{P}_m &= \combilin{u_1,u_2,...,u_m} \setminus \{0\} \\
+\mathcal{Q}_m &= \mathcal{P}_{m - 1}^\orthogonal \setminus \{0\}
+\end{align}
 
 <ul class="org-ul">
 <li>Si \(x \in \mathcal{P}_m\), les seules coordonnées non nulles sont \(a_1,...,a_m\). Il en va donc de même des \(w_i\) et :</li>
@@ -5550,11 +5551,11 @@ Nous allons analyser les extrema du rapport de Rayleigh sur les ensembles :
 On voit aussi que :
 </p>
 
-\begin{eqnarray*}
-1 = \sum_{i = 1}^n w_i &=& \sum_{i = 1}^m w_i + \sum_{i = m + 1}^n w_i \\
-&=& \sum_{i = 1}^m w_i + 0 \\
-&=& \sum_{i = 1}^m w_i
-\end{eqnarray*}
+\begin{align}
+1 = \sum_{i = 1}^n w_i &= \sum_{i = 1}^m w_i + \sum_{i = m + 1}^n w_i \\
+&= \sum_{i = 1}^m w_i + 0 \\
+&= \sum_{i = 1}^m w_i
+\end{align}
 
 <p>
 Les valeurs propres étant ordonnées par ordre décroissant, on a donc :
@@ -5648,8 +5649,8 @@ et que \(u_m\) est solution du problème de maximisation :
 
 
 
-<div id="outline-container-org8de8519" class="outline-4">
-<h4 id="org8de8519"><span class="section-number-4">6.12.2</span> Minimax</h4>
+<div id="outline-container-org2509579" class="outline-4">
+<h4 id="org2509579"><span class="section-number-4">6.12.2</span> Minimax</h4>
 <div class="outline-text-4" id="text-6-12-2">
 <p>
 Soit \(m \in \setN\) et la collection d'espaces vectoriels de dimension \(m\) générés par des bases orthonormées :
@@ -5663,10 +5664,10 @@ Soit \(m \in \setN\) et la collection d'espaces vectoriels de dimension \(m\) g�
 On définit des collections associées par :
 </p>
 
-\begin{eqnarray*}
-\mathcal{V}_m &=& \{ X \setminus \{0\} : X \in \mathcal{D}_m \} \\
-\mathcal{W}_m &=& \{ X^\orthogonal \setminus \{0\} : X \in \mathcal{D}_{m - 1} \}
-\end{eqnarray*}
+\begin{align}
+\mathcal{V}_m &= \{ X \setminus \{0\} : X \in \mathcal{D}_m \} \\
+\mathcal{W}_m &= \{ X^\orthogonal \setminus \{0\} : X \in \mathcal{D}_{m - 1} \}
+\end{align}
 
 <ul class="org-ul">
 <li>Soit \(X \in \mathcal{V}_m\) et la suite \((v_1,...,v_m)\) formant une base orthonormée de \(X\). Il est équivalent d'imposer la contrainte \(x \in X \cap \mathcal{Q}_m\), ou d'imposer simultanément que \(x \ne 0\) s'écrive :</li>
@@ -5768,8 +5769,8 @@ L'espace \(Y\) produit donc un maximum supérieur ou égal à \(\lambda_m\). Le 
 
 
 
-<div id="outline-container-orgf7cc1f5" class="outline-4">
-<h4 id="orgf7cc1f5"><span class="section-number-4">6.12.3</span> Remarque</h4>
+<div id="outline-container-orga330af0" class="outline-4">
+<h4 id="orga330af0"><span class="section-number-4">6.12.3</span> Remarque</h4>
 <div class="outline-text-4" id="text-6-12-3">
 <p>
 Si les valeurs propres étaient ordonnées par ordre croissant :
@@ -5790,8 +5791,8 @@ on aurait bien entendu :
 </div>
 
 
-<div id="outline-container-orgc1b5427" class="outline-4">
-<h4 id="orgc1b5427"><span class="section-number-4">6.12.4</span> Résolution numérique</h4>
+<div id="outline-container-orgb934be6" class="outline-4">
+<h4 id="orgb934be6"><span class="section-number-4">6.12.4</span> Résolution numérique</h4>
 <div class="outline-text-4" id="text-6-12-4">
 <p>
 Les propriétés extrémales nous offrent un moyen d'obtenir numériquement des approximations des valeurs et vecteurs propres d'une matrice hermitienne.
@@ -5799,8 +5800,8 @@ Les propriétés extrémales nous offrent un moyen d'obtenir numériquement des 
 </div>
 
 
-<div id="outline-container-orgb4d645b" class="outline-5">
-<h5 id="orgb4d645b"><span class="section-number-5">6.12.4.1</span> Valeur propre maximale</h5>
+<div id="outline-container-orgdba50d2" class="outline-5">
+<h5 id="orgdba50d2"><span class="section-number-5">6.12.4.1</span> Valeur propre maximale</h5>
 <div class="outline-text-5" id="text-6-12-4-1">
 <p>
 Nous allons nous servir d'un algorithme d'optimisation pour obtenir le maximum \(\lambda_1\) de \(R\) sur \(\mathcal{Q}_1 = \setR^n\). A titre d'exemple, nous choisissons « la plus grande montée », qui n'est rien d'autre que l'opposé de la plus grande descente. On part d'un vecteur \(x \ne 0\) et on considère l'itération \(k\) :
@@ -5841,8 +5842,8 @@ On peut aussi utiliser un autre algorithme de minimisation libre pour construire
 </div>
 
 
-<div id="outline-container-orgc123d13" class="outline-5">
-<h5 id="orgc123d13"><span class="section-number-5">6.12.4.2</span> Autres valeurs propres</h5>
+<div id="outline-container-org293b9ea" class="outline-5">
+<h5 id="org293b9ea"><span class="section-number-5">6.12.4.2</span> Autres valeurs propres</h5>
 <div class="outline-text-5" id="text-6-12-4-2">
 <p>
 Supposons que l'on ait déjà obtenu une bonne approximation de \((\lambda_1,...,\lambda_{m - 1})\) et de \((u_1,...,u_{m - 1})\). Si on veut que \(x \in \mathcal{Q}_m\), il faut et il suffit d'imposer que :
@@ -5906,22 +5907,22 @@ où :
 </div>
 
 
-<div id="outline-container-orga9043ca" class="outline-2">
-<h2 id="orga9043ca"><span class="section-number-2">7</span> Valeurs singulières</h2>
+<div id="outline-container-org575af2c" class="outline-2">
+<h2 id="org575af2c"><span class="section-number-2">7</span> Valeurs singulières</h2>
 <div class="outline-text-2" id="text-7">
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgfc7bc92">7.1. Décomposition en valeurs singulières</a></li>
-<li><a href="#orgfbbbe01">7.2. Représentation tensorielle</a></li>
-<li><a href="#org05538fb">7.3. Dualité</a></li>
-<li><a href="#org1430f5e">7.4. Inverse</a></li>
-<li><a href="#org42c23f9">7.5. Pseudo-inverse</a></li>
-<li><a href="#org0c8a473">7.6. Représentation matricielle</a></li>
-<li><a href="#org8dbf741">7.7. Pseudo-inverse</a></li>
-<li><a href="#org339e5dc">7.8. Systèmes linéaires</a></li>
-<li><a href="#org9d564ac">7.9. Image et noyau</a></li>
-<li><a href="#orgee5171c">7.10. Normes</a></li>
-<li><a href="#org6f5b370">7.11. Fonctions de matrices</a></li>
+<li><a href="#org5d415d9">7.1. Décomposition en valeurs singulières</a></li>
+<li><a href="#org12b4d12">7.2. Représentation tensorielle</a></li>
+<li><a href="#org776b7b5">7.3. Dualité</a></li>
+<li><a href="#org99b31da">7.4. Inverse</a></li>
+<li><a href="#org1f5e459">7.5. Pseudo-inverse</a></li>
+<li><a href="#org0e7b46a">7.6. Représentation matricielle</a></li>
+<li><a href="#orgb5c7e7f">7.7. Pseudo-inverse</a></li>
+<li><a href="#orgb9d4b4e">7.8. Systèmes linéaires</a></li>
+<li><a href="#orgeb38925">7.9. Image et noyau</a></li>
+<li><a href="#orgeb27a58">7.10. Normes</a></li>
+<li><a href="#org9739a11">7.11. Fonctions de matrices</a></li>
 </ul>
 </div>
 
@@ -5931,8 +5932,8 @@ où :
 </div>
 
 
-<div id="outline-container-orgfc7bc92" class="outline-3">
-<h3 id="orgfc7bc92"><span class="section-number-3">7.1</span> Décomposition en valeurs singulières</h3>
+<div id="outline-container-org5d415d9" class="outline-3">
+<h3 id="org5d415d9"><span class="section-number-3">7.1</span> Décomposition en valeurs singulières</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 Soit les espaces vectoriels \(E\) et \(F\) et une application linéaire \(A : E \mapsto F\) admettant un dual \(A^\dual : F \mapsto E\). Les applications \(A^\dual \circ A\) et \(A \circ A^\dual\) étant auto-adjointes, il y a fort à parier que leurs valeurs et vecteurs propres possèdent d'importantes propriétés.
@@ -6039,16 +6040,16 @@ Pour tout \(x \in \combilin{v_1,...,v_r}\), on a :
 et :
 </p>
 
-\begin{eqnarray*}
-A(x) &=& \sum_{i = 1}^r \scalaire{v_i}{x} \cdot A(v_i) \\
-&=& \sum_{i = 1}^r \scalaire{v_i}{x} \cdot \sigma_i \cdot u_i
-\end{eqnarray*}
+\begin{align}
+A(x) &= \sum_{i = 1}^r \scalaire{v_i}{x} \cdot A(v_i) \\
+&= \sum_{i = 1}^r \scalaire{v_i}{x} \cdot \sigma_i \cdot u_i
+\end{align}
 </div>
 </div>
 
 
-<div id="outline-container-orgfbbbe01" class="outline-3">
-<h3 id="orgfbbbe01"><span class="section-number-3">7.2</span> Représentation tensorielle</h3>
+<div id="outline-container-org12b4d12" class="outline-3">
+<h3 id="org12b4d12"><span class="section-number-3">7.2</span> Représentation tensorielle</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 On conclut de ce qui précède que \(A\) peut être représentée sur \(\combilin{v_1,...,v_n}\) par le tenseur associé :
@@ -6073,8 +6074,8 @@ On appelle une telle représentation une décomposition en valeurs singulières.
 </div>
 
 
-<div id="outline-container-org05538fb" class="outline-3">
-<h3 id="org05538fb"><span class="section-number-3">7.3</span> Dualité</h3>
+<div id="outline-container-org776b7b5" class="outline-3">
+<h3 id="org776b7b5"><span class="section-number-3">7.3</span> Dualité</h3>
 <div class="outline-text-3" id="text-7-3">
 <p>
 Le tenseur dual est donc :
@@ -6086,26 +6087,26 @@ Le tenseur dual est donc :
 </div>
 
 
-<div id="outline-container-org0939bb3" class="outline-4">
-<h4 id="org0939bb3"><span class="section-number-4">7.3.1</span> Propriétés</h4>
+<div id="outline-container-org46b1a9b" class="outline-4">
+<h4 id="org46b1a9b"><span class="section-number-4">7.3.1</span> Propriétés</h4>
 <div class="outline-text-4" id="text-7-3-1">
 <p>
 On retrouve sans surprise les représentation de :
 </p>
 
-\begin{eqnarray*}
-\mathcal{A}^\dual \cdot \mathcal{A} &=& \sum_{i,j = 1}^r \sigma_i \cdot \sigma_j \cdot \scalaire{u_i}{u_j} \cdot v_i \otimes v_j \\
-&=& \sum_{i = 1}^r \sigma_i^2 \cdot v_i \otimes v_i
-\end{eqnarray*}
+\begin{align}
+\mathcal{A}^\dual \cdot \mathcal{A} &= \sum_{i,j = 1}^r \sigma_i \cdot \sigma_j \cdot \scalaire{u_i}{u_j} \cdot v_i \otimes v_j \\
+&= \sum_{i = 1}^r \sigma_i^2 \cdot v_i \otimes v_i
+\end{align}
 
 <p>
 et de :
 </p>
 
-\begin{eqnarray*}
-\mathcal{A} \cdot \mathcal{A}^\dual &=& \sum_{i,j = 1}^r \sigma_i \cdot \sigma_j \cdot \scalaire{v_i}{v_j} \cdot u_i \otimes u_j \\
-&=& \sum_{i = 1}^r \sigma_i^2 \cdot u_i \otimes u_i
-\end{eqnarray*}
+\begin{align}
+\mathcal{A} \cdot \mathcal{A}^\dual &= \sum_{i,j = 1}^r \sigma_i \cdot \sigma_j \cdot \scalaire{v_i}{v_j} \cdot u_i \otimes u_j \\
+&= \sum_{i = 1}^r \sigma_i^2 \cdot u_i \otimes u_i
+\end{align}
 
 <p>
 en fonction de leurs valeurs et vecteurs propres.
@@ -6115,8 +6116,8 @@ en fonction de leurs valeurs et vecteurs propres.
 </div>
 
 
-<div id="outline-container-org1430f5e" class="outline-3">
-<h3 id="org1430f5e"><span class="section-number-3">7.4</span> Inverse</h3>
+<div id="outline-container-org99b31da" class="outline-3">
+<h3 id="org99b31da"><span class="section-number-3">7.4</span> Inverse</h3>
 <div class="outline-text-3" id="text-7-4">
 <p>
 Supposons que \((v_1,...,v_r)\) forme une base de \(E\) et que \((u_1,...u_r)\) forme une base de \(F\). Soit \(x \in E\) et \(y \in F\) tels que \(y = A(x) = \mathcal{A} \cdot x\). On a :
@@ -6161,8 +6162,8 @@ on a :
 </div>
 
 
-<div id="outline-container-org42c23f9" class="outline-3">
-<h3 id="org42c23f9"><span class="section-number-3">7.5</span> Pseudo-inverse</h3>
+<div id="outline-container-org1f5e459" class="outline-3">
+<h3 id="org1f5e459"><span class="section-number-3">7.5</span> Pseudo-inverse</h3>
 <div class="outline-text-3" id="text-7-5">
 <p>
 Nous ne supposons à présent plus que les suites de vecteurs \((u_1,...,u_r)\) et \((v_1,...,v_r)\) forment des bases de \(E\) et \(F\), mais nous définissons malgré tout par analogie le tenseur pseudo-inverse de \(A\) par :
@@ -6182,26 +6183,26 @@ Le pseudo-inverse \(A^\pinverse\) de l'application linéaire correspondante \(A\
 </div>
 
 
-<div id="outline-container-orgc780346" class="outline-4">
-<h4 id="orgc780346"><span class="section-number-4">7.5.1</span> Tenseurs de projections</h4>
+<div id="outline-container-orgf1ec475" class="outline-4">
+<h4 id="orgf1ec475"><span class="section-number-4">7.5.1</span> Tenseurs de projections</h4>
 <div class="outline-text-4" id="text-7-5-1">
 <p>
 On voit que :
 </p>
 
-\begin{eqnarray*}
-\mathcal{A}^\pinverse \cdot \mathcal{A} &=& \sum_{i,j = 1}^r \unsur{\sigma_i} \cdot \sigma_j \cdot \scalaire{u_i}{u_j} \cdot v_i \otimes v_j \\
-&=& \sum_{i = 1}^r v_i \otimes v_i
-\end{eqnarray*}
+\begin{align}
+\mathcal{A}^\pinverse \cdot \mathcal{A} &= \sum_{i,j = 1}^r \unsur{\sigma_i} \cdot \sigma_j \cdot \scalaire{u_i}{u_j} \cdot v_i \otimes v_j \\
+&= \sum_{i = 1}^r v_i \otimes v_i
+\end{align}
 
 <p>
 correspond au tenseur de projection sur \(\combilin{v_1,...,v_r}\). De même :
 </p>
 
-\begin{eqnarray*}
-\mathcal{A} \cdot \mathcal{A}^\pinverse &=& \sum_{i,j = 1}^r \sigma_i \cdot \unsur{\sigma_j} \cdot \scalaire{v_i}{v_j} \cdot u_i \otimes u_j \\
-&=& \sum_{i = 1}^r u_i \otimes u_i
-\end{eqnarray*}
+\begin{align}
+\mathcal{A} \cdot \mathcal{A}^\pinverse &= \sum_{i,j = 1}^r \sigma_i \cdot \unsur{\sigma_j} \cdot \scalaire{v_i}{v_j} \cdot u_i \otimes u_j \\
+&= \sum_{i = 1}^r u_i \otimes u_i
+\end{align}
 
 <p>
 correspond au tenseur de projection sur \(\combilin{u_1,...,u_r}\).
@@ -6210,8 +6211,8 @@ correspond au tenseur de projection sur \(\combilin{u_1,...,u_r}\).
 </div>
 
 
-<div id="outline-container-org5c1d66b" class="outline-4">
-<h4 id="org5c1d66b"><span class="section-number-4">7.5.2</span> Dualité</h4>
+<div id="outline-container-org8cbee69" class="outline-4">
+<h4 id="org8cbee69"><span class="section-number-4">7.5.2</span> Dualité</h4>
 <div class="outline-text-4" id="text-7-5-2">
 <p>
 On a clairement :
@@ -6229,34 +6230,34 @@ On a clairement :
 </div>
 
 
-<div id="outline-container-org72960cf" class="outline-4">
-<h4 id="org72960cf"><span class="section-number-4">7.5.3</span> Produits</h4>
+<div id="outline-container-orge23e36a" class="outline-4">
+<h4 id="orge23e36a"><span class="section-number-4">7.5.3</span> Produits</h4>
 <div class="outline-text-4" id="text-7-5-3">
 <p>
 On déduit des résultats ci-dessus que :
 </p>
 
-\begin{eqnarray*}
-\mathcal{A} \cdot \mathcal{A}^\pinverse \cdot \mathcal{A} &=& \sum_{i,j = 1}^r \sigma_i \cdot \scalaire{v_i}{v_j} \cdot u_i \otimes v_j \\
-&=& \sum_{i = 1}^r \sigma_i \cdot u_i \otimes v_i \\
-&=& \mathcal{A}
-\end{eqnarray*}
+\begin{align}
+\mathcal{A} \cdot \mathcal{A}^\pinverse \cdot \mathcal{A} &= \sum_{i,j = 1}^r \sigma_i \cdot \scalaire{v_i}{v_j} \cdot u_i \otimes v_j \\
+&= \sum_{i = 1}^r \sigma_i \cdot u_i \otimes v_i \\
+&= \mathcal{A}
+\end{align}
 
 <p>
 et :
 </p>
 
-\begin{eqnarray*}
-\mathcal{A}^\pinverse \cdot \mathcal{A} \cdot \mathcal{A}^\pinverse &=& \sum_{i,j = 1}^r \unsur{\sigma_i} \cdot \scalaire{u_i}{u_j} \cdot v_i \otimes u_j \\
-&=& \sum_{i = 1}^r \unsur{\sigma_i} \cdot v_i \otimes u_i \\
-&=& \mathcal{A}^\pinverse
-\end{eqnarray*}
+\begin{align}
+\mathcal{A}^\pinverse \cdot \mathcal{A} \cdot \mathcal{A}^\pinverse &= \sum_{i,j = 1}^r \unsur{\sigma_i} \cdot \scalaire{u_i}{u_j} \cdot v_i \otimes u_j \\
+&= \sum_{i = 1}^r \unsur{\sigma_i} \cdot v_i \otimes u_i \\
+&= \mathcal{A}^\pinverse
+\end{align}
 </div>
 </div>
 
 
-<div id="outline-container-org9ed0c17" class="outline-4">
-<h4 id="org9ed0c17"><span class="section-number-4">7.5.4</span> Orthogonalité</h4>
+<div id="outline-container-org144730c" class="outline-4">
+<h4 id="org144730c"><span class="section-number-4">7.5.4</span> Orthogonalité</h4>
 <div class="outline-text-4" id="text-7-5-4">
 <p>
 Soit le tenseur identité \(\tenseuridentite\). On déduit de ce qui précède les propriétés d'orthogonalité :
@@ -6275,8 +6276,8 @@ Soit le tenseur identité \(\tenseuridentite\). On déduit de ce qui précède l
 </div>
 
 
-<div id="outline-container-org0c8a473" class="outline-3">
-<h3 id="org0c8a473"><span class="section-number-3">7.6</span> Représentation matricielle</h3>
+<div id="outline-container-org0e7b46a" class="outline-3">
+<h3 id="org0e7b46a"><span class="section-number-3">7.6</span> Représentation matricielle</h3>
 <div class="outline-text-3" id="text-7-6">
 <p>
 Soit une matrice \(A \in \matrice(\corps,m,n)\) et \(p = \min \{ m , n \}\). L'algorithme de décomposition en valeurs singulières est très simple. On évalue :
@@ -6352,8 +6353,8 @@ On note alors :
 </div>
 
 
-<div id="outline-container-org8dbf741" class="outline-3">
-<h3 id="org8dbf741"><span class="section-number-3">7.7</span> Pseudo-inverse</h3>
+<div id="outline-container-orgb5c7e7f" class="outline-3">
+<h3 id="orgb5c7e7f"><span class="section-number-3">7.7</span> Pseudo-inverse</h3>
 <div class="outline-text-3" id="text-7-7">
 <p>
 Le pseudo-inverse est donné par :
@@ -6382,12 +6383,12 @@ et :
 </div>
 
 
-<div id="outline-container-org339e5dc" class="outline-3">
-<h3 id="org339e5dc"><span class="section-number-3">7.8</span> Systèmes linéaires</h3>
+<div id="outline-container-orgb9d4b4e" class="outline-3">
+<h3 id="orgb9d4b4e"><span class="section-number-3">7.8</span> Systèmes linéaires</h3>
 <div class="outline-text-3" id="text-7-8">
 </div>
-<div id="outline-container-orgf646a01" class="outline-4">
-<h4 id="orgf646a01"><span class="section-number-4">7.8.1</span> Moindres carrés</h4>
+<div id="outline-container-org13ec1a0" class="outline-4">
+<h4 id="org13ec1a0"><span class="section-number-4">7.8.1</span> Moindres carrés</h4>
 <div class="outline-text-4" id="text-7-8-1">
 <p>
 Soit la matrice \(A \in \matrice(\corps,m,n)\), le vecteur matriciel \(b \in \corps^m\) et l'erreur produite par \(x \in \corps^n\) :
@@ -6560,8 +6561,8 @@ et donc \(\mathcal{E}(z) \strictsuperieur \mathcal{E}(x)\).
 </div>
 
 
-<div id="outline-container-org541a36f" class="outline-4">
-<h4 id="org541a36f"><span class="section-number-4">7.8.2</span> Projection</h4>
+<div id="outline-container-org84058d1" class="outline-4">
+<h4 id="org84058d1"><span class="section-number-4">7.8.2</span> Projection</h4>
 <div class="outline-text-4" id="text-7-8-2">
 <p>
 On peut réécrire \(\Gamma\) sous la forme :
@@ -6606,8 +6607,8 @@ On a donc en définitive des vecteurs optimaux de la forme :
 </div>
 
 
-<div id="outline-container-orgb9d5432" class="outline-4">
-<h4 id="orgb9d5432"><span class="section-number-4">7.8.3</span> Solutions</h4>
+<div id="outline-container-org3b409e1" class="outline-4">
+<h4 id="org3b409e1"><span class="section-number-4">7.8.3</span> Solutions</h4>
 <div class="outline-text-4" id="text-7-8-3">
 <p>
 Soit l'espace des solutions :
@@ -6628,17 +6629,17 @@ Inversément, si \(S \ne \emptyset\), on conclut que \(\scalaire{u_{r + 1}}{b} =
 </div>
 
 
-<div id="outline-container-org02635e2" class="outline-4">
-<h4 id="org02635e2"><span class="section-number-4">7.8.4</span> Norme contrainte</h4>
+<div id="outline-container-org4d34d8c" class="outline-4">
+<h4 id="org4d34d8c"><span class="section-number-4">7.8.4</span> Norme contrainte</h4>
 <div class="outline-text-4" id="text-7-8-4">
 <p>
 Supposons que \(S \ne \emptyset\). Soit \(x \in \Gamma = S\), que l'on écrit sous la forme :
 </p>
 
-\begin{eqnarray*}
-x &=& A^\pinverse \cdot b + \sum_{i = r + 1}^n x_i \cdot v_i \\
-&=& \sum_{i = 1}^r \unsur{\sigma_i} \cdot v_i \cdot \scalaire{u_i}{b} + \sum_{i = r + 1}^n x_i \cdot v_i \\
-\end{eqnarray*}
+\begin{align}
+x &= A^\pinverse \cdot b + \sum_{i = r + 1}^n x_i \cdot v_i \\
+&= \sum_{i = 1}^r \unsur{\sigma_i} \cdot v_i \cdot \scalaire{u_i}{b} + \sum_{i = r + 1}^n x_i \cdot v_i \\
+\end{align}
 
 <p>
 Par orthonormalité des \(v_i\), on a :
@@ -6667,8 +6668,8 @@ On en conclut que le choix \(x = A^\pinverse \cdot b\) minimise la norme de \(x\
 </div>
 
 
-<div id="outline-container-org89a95cd" class="outline-4">
-<h4 id="org89a95cd"><span class="section-number-4">7.8.5</span> Lien avec les résultats précédents</h4>
+<div id="outline-container-orge580181" class="outline-4">
+<h4 id="orge580181"><span class="section-number-4">7.8.5</span> Lien avec les résultats précédents</h4>
 <div class="outline-text-4" id="text-7-8-5">
 <ul class="org-ul">
 <li>On a montré précédemment en dérivant les expressions matricielles que le choix :</li>
@@ -6690,10 +6691,10 @@ minimise également l'erreur \(\mathcal{E}\) sur \(\setR^n\) lorsque l'inverse d
 et :
 </p>
 
-\begin{eqnarray*}
-(A^\dual \cdot A)^{-1} \cdot A^\dual &=& \sum_{i,j = 1}^r \frac{\sigma_j}{\sigma_i^2} \cdot \scalaire{v_i}{v_j} \cdot v_i \otimes u_j \\
-&=& \sum_{i = 1}^r \unsur{\sigma_i} \cdot v_i \otimes u_i = A^\pinverse
-\end{eqnarray*}
+\begin{align}
+(A^\dual \cdot A)^{-1} \cdot A^\dual &= \sum_{i,j = 1}^r \frac{\sigma_j}{\sigma_i^2} \cdot \scalaire{v_i}{v_j} \cdot v_i \otimes u_j \\
+&= \sum_{i = 1}^r \unsur{\sigma_i} \cdot v_i \otimes u_i = A^\pinverse
+\end{align}
 
 <ul class="org-ul">
 <li>On a vu aussi en utilisant les multiplicateurs de lagrange que le choix :</li>
@@ -6715,17 +6716,17 @@ minimise également la norme de \(x\) sur \(S\) lorsque l'inverse de \(A \cdot A
 et :
 </p>
 
-\begin{eqnarray*}
-A^\dual \cdot (A \cdot A^\dual)^{-1} &=& \sum_{i,j = 1}^r \frac{\sigma_i}{\sigma_j^2} \cdot \scalaire{u_i}{u_j} \cdot v_i \otimes u_j \\
-&=& \sum_{i = 1}^r \unsur{\sigma_i} \cdot v_i \otimes u_i = A^\pinverse
-\end{eqnarray*}
+\begin{align}
+A^\dual \cdot (A \cdot A^\dual)^{-1} &= \sum_{i,j = 1}^r \frac{\sigma_i}{\sigma_j^2} \cdot \scalaire{u_i}{u_j} \cdot v_i \otimes u_j \\
+&= \sum_{i = 1}^r \unsur{\sigma_i} \cdot v_i \otimes u_i = A^\pinverse
+\end{align}
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-org9d564ac" class="outline-3">
-<h3 id="org9d564ac"><span class="section-number-3">7.9</span> Image et noyau</h3>
+<div id="outline-container-orgeb38925" class="outline-3">
+<h3 id="orgeb38925"><span class="section-number-3">7.9</span> Image et noyau</h3>
 <div class="outline-text-3" id="text-7-9">
 <p>
 Tout vecteur \(b = A \cdot x = \sum_{i = 1}^r \sigma_i \cdot \scalaire{v_i}{x} \cdot u_i\) est exprimé comme une combinaison linéaire des \((u_1,...,u_r)\). On en conclut que \(\image A \subseteq \combilin{u_1,...,u_r}\). Réciproquement, si \(b \in \combilin{u_1,...,u_r}\), on a \(\scalaire{u_{r + 1}}{b} = \scalaire{u_m}{b} = 0\) et l'espace des solutions \(\{ x \in \setC^n : A \cdot x = b\}\) n'est pas vide. On en conclut que \(\combilin{u_1,...,u_r} \subseteq \image A\). D'où finalement :
@@ -6746,8 +6747,8 @@ Tout vecteur \(z \in \combilin{v_{r + 1},...,v_n}\) vérifie \(\scalaire{v_1}{z}
 </div>
 
 
-<div id="outline-container-orgee5171c" class="outline-3">
-<h3 id="orgee5171c"><span class="section-number-3">7.10</span> Normes</h3>
+<div id="outline-container-orgeb27a58" class="outline-3">
+<h3 id="orgeb27a58"><span class="section-number-3">7.10</span> Normes</h3>
 <div class="outline-text-3" id="text-7-10">
 <p>
 La décomposition en valeurs singulières permet d'évaluer facilement
@@ -6769,8 +6770,8 @@ ainsi que la norme de Frobénius :
 </div>
 
 
-<div id="outline-container-org6f5b370" class="outline-3">
-<h3 id="org6f5b370"><span class="section-number-3">7.11</span> Fonctions de matrices</h3>
+<div id="outline-container-org9739a11" class="outline-3">
+<h3 id="org9739a11"><span class="section-number-3">7.11</span> Fonctions de matrices</h3>
 <div class="outline-text-3" id="text-7-11">
 <p>
 La décomposition en valeurs singulières permet d'étendre la définition
@@ -6793,32 +6794,32 @@ On définit alors :
 </div>
 
 
-<div id="outline-container-org0554a45" class="outline-2">
-<h2 id="org0554a45"><span class="section-number-2">8</span> Espaces de Hilbert</h2>
+<div id="outline-container-orgbff7a3b" class="outline-2">
+<h2 id="orgbff7a3b"><span class="section-number-2">8</span> Espaces de Hilbert</h2>
 <div class="outline-text-2" id="text-8">
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orge551990">8.1. Définition</a></li>
-<li><a href="#org462d9ca">8.2. Utilisation</a></li>
-<li><a href="#org761b867">8.3. Complétude du noyau</a></li>
-<li><a href="#orgad4ad69">8.4. Complétude de l'image</a></li>
-<li><a href="#org2189bf5">8.5. Complétude de l'espace orthogonal</a></li>
-<li><a href="#org72073fe">8.6. Théorème de projection</a></li>
-<li><a href="#org743fa55">8.7. Application projective</a></li>
-<li><a href="#orgea79f18">8.8. Orthogonalité</a></li>
-<li><a href="#org5066076">8.9. Identité locale</a></li>
-<li><a href="#org9c8fee6">8.10. Invariance</a></li>
-<li><a href="#org228771c">8.11. Somme directe</a></li>
-<li><a href="#org1e1a21f">8.12. Biorthogonal</a></li>
-<li><a href="#org6d39a08">8.13. Théorème de représentation de Riesz</a></li>
-<li><a href="#org868e99e">8.14. Extension aux formes bilinéaires</a></li>
-<li><a href="#orgbe7db1c">8.15. Application adjointe</a></li>
-<li><a href="#org6615372">8.16. Théorème de Lax-Milgram</a></li>
-<li><a href="#org010b4f0">8.17. Suite orthonormée</a></li>
-<li><a href="#org56f2730">8.18. Inégalité de Bessel</a></li>
-<li><a href="#org3d08b5e">8.19. Base hilbertienne</a></li>
-<li><a href="#orgdd26e0d">8.20. Egalité de Parseval</a></li>
-<li><a href="#orgd3b807f">8.21. Produit scalaire</a></li>
+<li><a href="#org95e825f">8.1. Définition</a></li>
+<li><a href="#orgdad646a">8.2. Utilisation</a></li>
+<li><a href="#org8d63a29">8.3. Complétude du noyau</a></li>
+<li><a href="#org50a41a7">8.4. Complétude de l'image</a></li>
+<li><a href="#orge633196">8.5. Complétude de l'espace orthogonal</a></li>
+<li><a href="#org3ad1961">8.6. Théorème de projection</a></li>
+<li><a href="#orgd89912d">8.7. Application projective</a></li>
+<li><a href="#orgcc2d532">8.8. Orthogonalité</a></li>
+<li><a href="#org92e2867">8.9. Identité locale</a></li>
+<li><a href="#org4b9815a">8.10. Invariance</a></li>
+<li><a href="#orgb7de77e">8.11. Somme directe</a></li>
+<li><a href="#orgf695b78">8.12. Biorthogonal</a></li>
+<li><a href="#org5397598">8.13. Théorème de représentation de Riesz</a></li>
+<li><a href="#org7a3675a">8.14. Extension aux formes bilinéaires</a></li>
+<li><a href="#org9f323e1">8.15. Application adjointe</a></li>
+<li><a href="#orgc7fdc1b">8.16. Théorème de Lax-Milgram</a></li>
+<li><a href="#org6cb58d2">8.17. Suite orthonormée</a></li>
+<li><a href="#org7a5a94f">8.18. Inégalité de Bessel</a></li>
+<li><a href="#orgdc69d93">8.19. Base hilbertienne</a></li>
+<li><a href="#org7fd0767">8.20. Egalité de Parseval</a></li>
+<li><a href="#org3426e88">8.21. Produit scalaire</a></li>
 </ul>
 </div>
 
@@ -6828,8 +6829,8 @@ On définit alors :
 </div>
 
 
-<div id="outline-container-orge551990" class="outline-3">
-<h3 id="orge551990"><span class="section-number-3">8.1</span> Définition</h3>
+<div id="outline-container-org95e825f" class="outline-3">
+<h3 id="org95e825f"><span class="section-number-3">8.1</span> Définition</h3>
 <div class="outline-text-3" id="text-8-1">
 <p>
 Un espace de Hilbert \(H\) est un espace de Banach dont la distance découle d'un produit scalaire \(\scalaire{}{}\) défini sur \(H\) :
@@ -6846,8 +6847,8 @@ Dans la suite, nous considérons un espace de Hilbert \(H\) sur \(\corps\).
 </div>
 
 
-<div id="outline-container-org462d9ca" class="outline-3">
-<h3 id="org462d9ca"><span class="section-number-3">8.2</span> Utilisation</h3>
+<div id="outline-container-orgdad646a" class="outline-3">
+<h3 id="orgdad646a"><span class="section-number-3">8.2</span> Utilisation</h3>
 <div class="outline-text-3" id="text-8-2">
 <p>
 Les espaces de Hilbert permettent de généraliser en dimension infinie nombre de résultats valables en dimension finie. Parmi eux, les espaces fonctionnels sont très utilisés. Ils permettent entre-autres de relier la solution de certaines équations différentielles à des problèmes de minimisation.
@@ -6856,8 +6857,8 @@ Les espaces de Hilbert permettent de généraliser en dimension infinie nombre d
 </div>
 
 
-<div id="outline-container-org761b867" class="outline-3">
-<h3 id="org761b867"><span class="section-number-3">8.3</span> Complétude du noyau</h3>
+<div id="outline-container-org8d63a29" class="outline-3">
+<h3 id="org8d63a29"><span class="section-number-3">8.3</span> Complétude du noyau</h3>
 <div class="outline-text-3" id="text-8-3">
 <p>
 Soit \(\varphi \in H^\dual\) et une suite de Cauchy \(\{x_1,x_2,...\} \subseteq \noyau \varphi \subseteq H\). L'espace \(H\) étant complet, cette suite converge vers \(x \in H\). Par continuité de \(\varphi\), on a :
@@ -6874,8 +6875,8 @@ On en conclut que \(x \in \noyau \varphi\). L'espace vectoriel \(\noyau \varphi\
 </div>
 
 
-<div id="outline-container-orgad4ad69" class="outline-3">
-<h3 id="orgad4ad69"><span class="section-number-3">8.4</span> Complétude de l'image</h3>
+<div id="outline-container-org50a41a7" class="outline-3">
+<h3 id="org50a41a7"><span class="section-number-3">8.4</span> Complétude de l'image</h3>
 <div class="outline-text-3" id="text-8-4">
 <p>
 Soit l'application linéaire continue \(A : H \mapsto H\) et une suite de Cauchy \(\{y_1,y_2,...\} \subseteq \image A \subseteq H\). L'espace \(H\) étant complet, cette suite converge vers \(y \in H\). Comme les \(y_i \in \image A\), on peut trouver des \(x_i \in H\) tels que \(A(x_i) = y_i\). Par continuité de \(A\), on a :
@@ -6892,8 +6893,8 @@ On en conclut que \(y \in \image A\). L'espace vectoriel \(\image A\) est donc c
 </div>
 
 
-<div id="outline-container-org2189bf5" class="outline-3">
-<h3 id="org2189bf5"><span class="section-number-3">8.5</span> Complétude de l'espace orthogonal</h3>
+<div id="outline-container-orge633196" class="outline-3">
+<h3 id="orge633196"><span class="section-number-3">8.5</span> Complétude de l'espace orthogonal</h3>
 <div class="outline-text-3" id="text-8-5">
 <p>
 Soit \(V \subseteq H\). Considérons une suite de Cauchy \(\{x_1,x_2,...\} \subseteq V^\orthogonal \subseteq H\). Comme \(H\) est complet, cette suite est convergente vers \(x \in H\). Choisissons \(z \in V\). On a :
@@ -6926,8 +6927,8 @@ c'est-à-dire \(x \in V^\orthogonal\). On en conclut que \(V^\orthogonal\) est u
 </div>
 
 
-<div id="outline-container-org72073fe" class="outline-3">
-<h3 id="org72073fe"><span class="section-number-3">8.6</span> Théorème de projection</h3>
+<div id="outline-container-org3ad1961" class="outline-3">
+<h3 id="org3ad1961"><span class="section-number-3">8.6</span> Théorème de projection</h3>
 <div class="outline-text-3" id="text-8-6">
 \begin{theoreme}
 Soit $V \subseteq H$ un sous-espace vectoriel complet. Pour tout $x \in H$, il existe un unique $u \in V$ vérifiant :
@@ -7018,17 +7019,17 @@ Appliquons le parallélogramme à $u - x$ et $x - v$. On a :
 
 et :
 
-\begin{eqnarray*}
-\norme{u - v}^2 + \norme{u + v - 2 x}^2 &=& 2 ( \norme{u - x}^2 + \norme{x - v}^2 ) \\
-&=& 2 (\lambda^2 + \lambda^2) = 4 \lambda^2
-\end{eqnarray*}
+\begin{align}
+\norme{u - v}^2 + \norme{u + v - 2 x}^2 &= 2 ( \norme{u - x}^2 + \norme{x - v}^2 ) \\
+&= 2 (\lambda^2 + \lambda^2) = 4 \lambda^2
+\end{align}
 
 On en conclut que :
 
-\begin{eqnarray*}
-\norme{u - v}^2 &=& 4 \lambda^2 - \norme{u + v - 2 x}^2 \\
-&=& 4 \lambda^2 - 4 \norme{\frac{u + v}{2} - x}^2
-\end{eqnarray*}
+\begin{align}
+\norme{u - v}^2 &= 4 \lambda^2 - \norme{u + v - 2 x}^2 \\
+&= 4 \lambda^2 - 4 \norme{\frac{u + v}{2} - x}^2
+\end{align}
 
 Mais comme $(u + v)/2 \in V$, on a :
 
@@ -7045,8 +7046,8 @@ Donc, $\norme{u - v} = 0$ et $u = v$, ce qui prouve l'unicité de la solution op
 </div>
 
 
-<div id="outline-container-org743fa55" class="outline-3">
-<h3 id="org743fa55"><span class="section-number-3">8.7</span> Application projective</h3>
+<div id="outline-container-orgd89912d" class="outline-3">
+<h3 id="orgd89912d"><span class="section-number-3">8.7</span> Application projective</h3>
 <div class="outline-text-3" id="text-8-7">
 <p>
 On peut donc définir l'application de projection \(P : H \mapsto V\) par :
@@ -7075,8 +7076,8 @@ Comme \(P(x) \in V\), cela revient à :
 </div>
 
 
-<div id="outline-container-orgea79f18" class="outline-3">
-<h3 id="orgea79f18"><span class="section-number-3">8.8</span> Orthogonalité</h3>
+<div id="outline-container-orgcc2d532" class="outline-3">
+<h3 id="orgcc2d532"><span class="section-number-3">8.8</span> Orthogonalité</h3>
 <div class="outline-text-3" id="text-8-8">
 <p>
 Soit \(x \in H\) et \(u = P(x)\). L'écart \(e = x - u\) possède-t-il les mêmes propriétés d'orthogonalité qu'en dimension finie ? Soit \(\alpha \in \corps\) et \(v \in V\). On a \(u + \alpha \cdot v \in V\) et donc :
@@ -7193,8 +7194,8 @@ Cette relation d'orthogonalité étant valable pour tout \(v \in V\), on en conc
 </div>
 
 
-<div id="outline-container-org5066076" class="outline-3">
-<h3 id="org5066076"><span class="section-number-3">8.9</span> Identité locale</h3>
+<div id="outline-container-org92e2867" class="outline-3">
+<h3 id="org92e2867"><span class="section-number-3">8.9</span> Identité locale</h3>
 <div class="outline-text-3" id="text-8-9">
 <p>
 Soit \(v \in V\). Il est clair que le choix \(u = v\) minimise la distance \(\norme{v - u} \ge 0\) sur \(u \in V\) puisque \(\norme{v - v} = 0\). Par unicité de la solution optimale, on en déduit que \(P(v) = v\) pour tout \(v \in V\).
@@ -7203,8 +7204,8 @@ Soit \(v \in V\). Il est clair que le choix \(u = v\) minimise la distance \(\no
 </div>
 
 
-<div id="outline-container-org9c8fee6" class="outline-3">
-<h3 id="org9c8fee6"><span class="section-number-3">8.10</span> Invariance</h3>
+<div id="outline-container-org4b9815a" class="outline-3">
+<h3 id="org4b9815a"><span class="section-number-3">8.10</span> Invariance</h3>
 <div class="outline-text-3" id="text-8-10">
 <p>
 Comme \(v = P(x) \in V\) pour tout \(x \in H\), on a :
@@ -7221,8 +7222,8 @@ d'où \(P^2 = P\).
 </div>
 
 
-<div id="outline-container-org228771c" class="outline-3">
-<h3 id="org228771c"><span class="section-number-3">8.11</span> Somme directe</h3>
+<div id="outline-container-orgb7de77e" class="outline-3">
+<h3 id="orgb7de77e"><span class="section-number-3">8.11</span> Somme directe</h3>
 <div class="outline-text-3" id="text-8-11">
 <p>
 On peut donc exprimer tout \(x \in H\) comme une somme :
@@ -7267,8 +7268,8 @@ ce qui n'est possible que si \(\norme{u - v} = \norme{y - z} = 0\), c'est-à-dir
 </div>
 
 
-<div id="outline-container-org1e1a21f" class="outline-3">
-<h3 id="org1e1a21f"><span class="section-number-3">8.12</span> Biorthogonal</h3>
+<div id="outline-container-orgf695b78" class="outline-3">
+<h3 id="orgf695b78"><span class="section-number-3">8.12</span> Biorthogonal</h3>
 <div class="outline-text-3" id="text-8-12">
 <ul class="org-ul">
 <li>Soit \(x \in V\). Pour tout \(z \in V^\orthogonal\), on a :</li>
@@ -7314,8 +7315,8 @@ On conclut de ces deux inclusions que :
 </div>
 
 
-<div id="outline-container-org6d39a08" class="outline-3">
-<h3 id="org6d39a08"><span class="section-number-3">8.13</span> Théorème de représentation de Riesz</h3>
+<div id="outline-container-org5397598" class="outline-3">
+<h3 id="org5397598"><span class="section-number-3">8.13</span> Théorème de représentation de Riesz</h3>
 <div class="outline-text-3" id="text-8-13">
 <p>
 Nous allons à présent établir une équivalence entre les formes linéaires de \(H^\dual\) et le produit scalaire sur \(H\).
@@ -7387,10 +7388,10 @@ $$x = \frac{ \forme{\varphi}{x} }{ \forme{\varphi}{c} } \cdot c + v$$
 
 où $v \in N$. Donc :
 
-\begin{eqnarray*}
-\scalaire{u}{x} &=& \frac{ \forme{\varphi}{x} }{ \forme{\varphi}{c} } \cdot \frac{ \forme{\varphi}{c} }{ \scalaire{c}{c} } \cdot \scalaire{c}{c} + \scalaire{u}{v} \\
-&=& \forme{\varphi}{x}
-\end{eqnarray*}
+\begin{align}
+\scalaire{u}{x} &= \frac{ \forme{\varphi}{x} }{ \forme{\varphi}{c} } \cdot \frac{ \forme{\varphi}{c} }{ \scalaire{c}{c} } \cdot \scalaire{c}{c} + \scalaire{u}{v} \\
+&= \forme{\varphi}{x}
+\end{align}
 
 Nous avons prouvé l'existence d'un $u \in H$ représentant $\varphi$. Pour l'unicité, si $u$ et $p$ représentent $\varphi$, on a :
 
@@ -7407,8 +7408,8 @@ ce qui implique $u - p = 0$ et donc $u = p$.
 </div>
 
 
-<div id="outline-container-org868e99e" class="outline-3">
-<h3 id="org868e99e"><span class="section-number-3">8.14</span> Extension aux formes bilinéaires</h3>
+<div id="outline-container-org7a3675a" class="outline-3">
+<h3 id="org7a3675a"><span class="section-number-3">8.14</span> Extension aux formes bilinéaires</h3>
 <div class="outline-text-3" id="text-8-14">
 \begin{theoreme}
 Si $\vartheta : H \times H \mapsto \corps$ est une forme bilinéaire de norme finie sur $H$, il existe une unique application linéaire et continue $A : H \mapsto H$ telle que :
@@ -7433,11 +7434,11 @@ $$\scalaire{A(u)}{x} = \forme{\varphi_u}{x} = \biforme{u}{\vartheta}{x}$$
 
 pour tout $x \in H$, ce qui définit l'application $A : u \in H \mapsto A(u) \in H$. Cette application est linéaire car :
 
-\begin{eqnarray*}
-\scalaire{A(\alpha \cdot u + \beta \cdot v)}{x} &=& \biforme{\alpha \cdot u + \beta \cdot v}{\vartheta}{x} \\
-&=& \alpha \cdot \biforme{u}{\vartheta}{x} + \beta \cdot \biforme{v}{\vartheta}{x} \\
-&=& \alpha \cdot \scalaire{A(u)}{x} + \beta \cdot \scalaire{A(v)}{x}
-\end{eqnarray*}
+\begin{align}
+\scalaire{A(\alpha \cdot u + \beta \cdot v)}{x} &= \biforme{\alpha \cdot u + \beta \cdot v}{\vartheta}{x} \\
+&= \alpha \cdot \biforme{u}{\vartheta}{x} + \beta \cdot \biforme{v}{\vartheta}{x} \\
+&= \alpha \cdot \scalaire{A(u)}{x} + \beta \cdot \scalaire{A(v)}{x}
+\end{align}
 
 pour tout $u,v,x \in H$ et $\alpha,\beta \in \corps$. Elle est également continue car :
 
@@ -7451,8 +7452,8 @@ On a donc soit $A = 0$ et a fortiori $A$ continue, soit :
 </div>
 
 
-<div id="outline-container-orgbe7db1c" class="outline-3">
-<h3 id="orgbe7db1c"><span class="section-number-3">8.15</span> Application adjointe</h3>
+<div id="outline-container-org9f323e1" class="outline-3">
+<h3 id="org9f323e1"><span class="section-number-3">8.15</span> Application adjointe</h3>
 <div class="outline-text-3" id="text-8-15">
 \begin{theoreme}
 Soit une application $A : H \mapsto H$ linéaire et continue. Il existe une unique application $A^\dual : H \mapsto H$ telle que :
@@ -7481,8 +7482,8 @@ pour tout $u \in H$. Comme ce résultat est également valable quel que soit $v 
 </div>
 
 
-<div id="outline-container-org6615372" class="outline-3">
-<h3 id="org6615372"><span class="section-number-3">8.16</span> Théorème de Lax-Milgram</h3>
+<div id="outline-container-orgc7fdc1b" class="outline-3">
+<h3 id="orgc7fdc1b"><span class="section-number-3">8.16</span> Théorème de Lax-Milgram</h3>
 <div class="outline-text-3" id="text-8-16">
 \begin{theoreme}
 Soit une forme bilinéaire $\vartheta : H \times H \mapsto \corps$ de norme finie. Nous supposons qu'il existe un réel $\varrho \strictsuperieur 0$ tel que :
@@ -7538,8 +7539,8 @@ ce qui implique que $\norme{s - t}^2 = 0$, d'où $s = t$. La solution $s$ est do
 </div>
 
 
-<div id="outline-container-orge322f88" class="outline-4">
-<h4 id="orge322f88"><span class="section-number-4">8.16.1</span> Inverse</h4>
+<div id="outline-container-org56dba3f" class="outline-4">
+<h4 id="org56dba3f"><span class="section-number-4">8.16.1</span> Inverse</h4>
 <div class="outline-text-4" id="text-8-16-1">
 <p>
 Nous avons également prouvé que pour tout \(v \in H\), il existe un unique \(u \in H\) vérifiant \(A(u) = v\). L'application \(A\) est donc inversible et \(A^{-1}(v) = u\).
@@ -7549,8 +7550,8 @@ Nous avons également prouvé que pour tout \(v \in H\), il existe un unique \(u
 </div>
 
 
-<div id="outline-container-org010b4f0" class="outline-3">
-<h3 id="org010b4f0"><span class="section-number-3">8.17</span> Suite orthonormée</h3>
+<div id="outline-container-org6cb58d2" class="outline-3">
+<h3 id="org6cb58d2"><span class="section-number-3">8.17</span> Suite orthonormée</h3>
 <div class="outline-text-3" id="text-8-17">
 <p>
 Si une suite \(\{ u_i \in H : i \in \setN\}\) vérifie :
@@ -7567,8 +7568,8 @@ pour tout \(i,j \in \setN\), on dit qu'elle est orthonormée. Dans la suite, nou
 </div>
 
 
-<div id="outline-container-org56f2730" class="outline-3">
-<h3 id="org56f2730"><span class="section-number-3">8.18</span> Inégalité de Bessel</h3>
+<div id="outline-container-org7a5a94f" class="outline-3">
+<h3 id="org7a5a94f"><span class="section-number-3">8.18</span> Inégalité de Bessel</h3>
 <div class="outline-text-3" id="text-8-18">
 <p>
 Soit \(x \in H\) et une suite orthonormée \(\{ u_i \in H : i \in \setN\}\). Par analogie avec les projections sur des espaces de dimension finie, on pose (sous réserve de convergence) :
@@ -7582,12 +7583,12 @@ Soit \(x \in H\) et une suite orthonormée \(\{ u_i \in H : i \in \setN\}\). Par
 Soit \(e = x - p\). On a :
 </p>
 
-\begin{eqnarray*}
-\scalaire{u_k}{e} &=& \scalaire{u_k}{x} - \sum_i \scalaire{u_i}{x} \scalaire{u_k}{u_i} \\
-&=& \scalaire{u_k}{x} - \sum_i \scalaire{u_i}{x} \delta_{ik} \\
-&=& \scalaire{u_k}{x} - \scalaire{u_k}{x} \\
-&=& 0
-\end{eqnarray*}
+\begin{align}
+\scalaire{u_k}{e} &= \scalaire{u_k}{x} - \sum_i \scalaire{u_i}{x} \scalaire{u_k}{u_i} \\
+&= \scalaire{u_k}{x} - \sum_i \scalaire{u_i}{x} \delta_{ik} \\
+&= \scalaire{u_k}{x} - \scalaire{u_k}{x} \\
+&= 0
+\end{align}
 
 <p>
 On en conclut que :
@@ -7640,8 +7641,8 @@ c'est-à-dire :
 </div>
 
 
-<div id="outline-container-org3d08b5e" class="outline-3">
-<h3 id="org3d08b5e"><span class="section-number-3">8.19</span> Base hilbertienne</h3>
+<div id="outline-container-orgdc69d93" class="outline-3">
+<h3 id="orgdc69d93"><span class="section-number-3">8.19</span> Base hilbertienne</h3>
 <div class="outline-text-3" id="text-8-19">
 <p>
 Si, pour tout \(x \in H\), la suite des projections finies :
@@ -7682,8 +7683,8 @@ sont appelés les coordonnées de \(x\) par rapport aux \(u_i\). Dans la suite, 
 </div>
 
 
-<div id="outline-container-orgdd26e0d" class="outline-3">
-<h3 id="orgdd26e0d"><span class="section-number-3">8.20</span> Egalité de Parseval</h3>
+<div id="outline-container-org7fd0767" class="outline-3">
+<h3 id="org7fd0767"><span class="section-number-3">8.20</span> Egalité de Parseval</h3>
 <div class="outline-text-3" id="text-8-20">
 <p>
 Soit \(x \in H\) et  \(\epsilon \strictsuperieur 0\). On peut trouver un \(n \in \setN\) tel que :
@@ -7728,8 +7729,8 @@ c'est-à-dire :
 </div>
 
 
-<div id="outline-container-orgd3b807f" class="outline-3">
-<h3 id="orgd3b807f"><span class="section-number-3">8.21</span> Produit scalaire</h3>
+<div id="outline-container-org3426e88" class="outline-3">
+<h3 id="org3426e88"><span class="section-number-3">8.21</span> Produit scalaire</h3>
 <div class="outline-text-3" id="text-8-21">
 <p>
 Soit \(x,y \in E\). On a :
@@ -7764,14 +7765,14 @@ On a donc :
 </div>
 
 
-<div id="outline-container-org0d3b8e4" class="outline-2">
-<h2 id="org0d3b8e4"><span class="section-number-2">9</span> Théorie spectrale</h2>
+<div id="outline-container-org6212f90" class="outline-2">
+<h2 id="org6212f90"><span class="section-number-2">9</span> Théorie spectrale</h2>
 <div class="outline-text-2" id="text-9">
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orge8af01a">9.1. Progression géométrique</a></li>
-<li><a href="#orgd2eaf58">9.2. Convergence</a></li>
-<li><a href="#orga9a162b">9.3. Exponentielle</a></li>
+<li><a href="#orgfa119fa">9.1. Progression géométrique</a></li>
+<li><a href="#orgaaa7a84">9.2. Convergence</a></li>
+<li><a href="#org55fcacf">9.3. Exponentielle</a></li>
 </ul>
 </div>
 
@@ -7781,17 +7782,17 @@ On a donc :
 </div>
 
 
-<div id="outline-container-orge8af01a" class="outline-3">
-<h3 id="orge8af01a"><span class="section-number-3">9.1</span> Progression géométrique</h3>
+<div id="outline-container-orgfa119fa" class="outline-3">
+<h3 id="orgfa119fa"><span class="section-number-3">9.1</span> Progression géométrique</h3>
 <div class="outline-text-3" id="text-9-1">
 <p>
 Soit un espace de Hilbert \(H\) et une application linéaire \(A : H \mapsto H\). On voit que :
 </p>
 
-\begin{eqnarray*}
-\sum_{k = 0}^n A^k &=& \identite + A + A^2 + ... + A^n \\
-A \circ \sum_{k = 0}^n A^k &=& A + A^2 + A^3 + ... + A^{n + 1}
-\end{eqnarray*}
+\begin{align}
+\sum_{k = 0}^n A^k &= \identite + A + A^2 + ... + A^n \\
+A \circ \sum_{k = 0}^n A^k &= A + A^2 + A^3 + ... + A^{n + 1}
+\end{align}
 
 <p>
 En soustrayant ces deux équations, on obtient :
@@ -7811,8 +7812,8 @@ On montre de même que :
 </div>
 
 
-<div id="outline-container-orgc2d0475" class="outline-4">
-<h4 id="orgc2d0475"><span class="section-number-4">9.1.1</span> Infinie</h4>
+<div id="outline-container-org20955f9" class="outline-4">
+<h4 id="org20955f9"><span class="section-number-4">9.1.1</span> Infinie</h4>
 <div class="outline-text-4" id="text-9-1-1">
 <p>
 Si \(\norme{A} \strictinferieur 1\), on a \(\norme{A^n} \le \norme{A}^n \to 0\) lorsque \(n \to \infty\) et donc \(A^n \to 0\). On en déduit que :
@@ -7842,8 +7843,8 @@ On en déduit que :
 </div>
 
 
-<div id="outline-container-orgd2eaf58" class="outline-3">
-<h3 id="orgd2eaf58"><span class="section-number-3">9.2</span> Convergence</h3>
+<div id="outline-container-orgaaa7a84" class="outline-3">
+<h3 id="orgaaa7a84"><span class="section-number-3">9.2</span> Convergence</h3>
 <div class="outline-text-3" id="text-9-2">
 <p>
 Soit une application linéaire continue \(A : H \mapsto H\). Choisissons \(\lambda \in \setC\) tel que \(\norme{A} \strictinferieur \abs{\lambda}\). On a :
@@ -7935,8 +7936,8 @@ qui converge vers \(0\) lorsque \(n \to \infty\). La suite des \(u_n\) est donc 
 </div>
 
 
-<div id="outline-container-org5c2b674" class="outline-4">
-<h4 id="org5c2b674"><span class="section-number-4">9.2.1</span> Continuité</h4>
+<div id="outline-container-org0f68c30" class="outline-4">
+<h4 id="org0f68c30"><span class="section-number-4">9.2.1</span> Continuité</h4>
 <div class="outline-text-4" id="text-9-2-1">
 <p>
 Cette application est de norme finie et donc continue car pour tout \(n \in \setN\) :
@@ -7965,8 +7966,8 @@ d'où :
 </div>
 
 
-<div id="outline-container-org1668ef9" class="outline-4">
-<h4 id="org1668ef9"><span class="section-number-4">9.2.2</span> Inverse</h4>
+<div id="outline-container-org12e7554" class="outline-4">
+<h4 id="org12e7554"><span class="section-number-4">9.2.2</span> Inverse</h4>
 <div class="outline-text-4" id="text-9-2-2">
 <p>
 Comme l'application \(B = A / \lambda\) vérifie \(\norme{B} \strictinferieur 1\), on a :
@@ -7993,8 +7994,8 @@ et donc :
 </div>
 
 
-<div id="outline-container-orga9a162b" class="outline-3">
-<h3 id="orga9a162b"><span class="section-number-3">9.3</span> Exponentielle</h3>
+<div id="outline-container-org55fcacf" class="outline-3">
+<h3 id="org55fcacf"><span class="section-number-3">9.3</span> Exponentielle</h3>
 <div class="outline-text-3" id="text-9-3">
 <p>
 Soit une application linéaire continue \(A : H \mapsto H\). Sous réserve de convergence, on définit l'opérateur \(\exp(A)\) associé par :
@@ -8020,16 +8021,16 @@ pour tout \(u \in H\).
 </div>
 
 
-<div id="outline-container-orgf5c974a" class="outline-2">
-<h2 id="orgf5c974a"><span class="section-number-2">10</span> Calcul variationnel</h2>
+<div id="outline-container-orgdbdcf00" class="outline-2">
+<h2 id="orgdbdcf00"><span class="section-number-2">10</span> Calcul variationnel</h2>
 <div class="outline-text-2" id="text-10">
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgb5d0408">10.1. Méthode des variations</a></li>
-<li><a href="#org94e8983">10.2. Discrétisation</a></li>
-<li><a href="#org98766eb">10.3. Moindres carrés</a></li>
-<li><a href="#org5b747d0">10.4. Lax-Milgram</a></li>
-<li><a href="#org8e6bc34">10.5. Valeurs propres</a></li>
+<li><a href="#orgc0ab8d8">10.1. Méthode des variations</a></li>
+<li><a href="#org3502c2d">10.2. Discrétisation</a></li>
+<li><a href="#org4682e61">10.3. Moindres carrés</a></li>
+<li><a href="#org66a283e">10.4. Lax-Milgram</a></li>
+<li><a href="#org3f2f064">10.5. Valeurs propres</a></li>
 </ul>
 </div>
 
@@ -8039,8 +8040,8 @@ pour tout \(u \in H\).
 </div>
 
 
-<div id="outline-container-orgb5d0408" class="outline-3">
-<h3 id="orgb5d0408"><span class="section-number-3">10.1</span> Méthode des variations</h3>
+<div id="outline-container-orgc0ab8d8" class="outline-3">
+<h3 id="orgc0ab8d8"><span class="section-number-3">10.1</span> Méthode des variations</h3>
 <div class="outline-text-3" id="text-10-1">
 <p>
 Soit l'espace fonctionnel \(\mathcal{F}\) et la forme \(I : \mathcal{F} \mapsto \setR\). Un problème variationnel consiste à chercher une fonction \(u\) qui minimise \(I\) sur \(\mathcal{F}\) :
@@ -8089,8 +8090,8 @@ Ces équations nous permettent de caractériser la solution \(u\) de notre probl
 </div>
 
 
-<div id="outline-container-org94e8983" class="outline-3">
-<h3 id="org94e8983"><span class="section-number-3">10.2</span> Discrétisation</h3>
+<div id="outline-container-org3502c2d" class="outline-3">
+<h3 id="org3502c2d"><span class="section-number-3">10.2</span> Discrétisation</h3>
 <div class="outline-text-3" id="text-10-2">
 <p>
 Une technique couramment employée pour résoudre les problèmes variationnels
@@ -8112,8 +8113,8 @@ au sens de la distance \(\distance\) définie sur \(\mathcal{F}\). Pour toute pr
 </div>
 
 
-<div id="outline-container-org98766eb" class="outline-3">
-<h3 id="org98766eb"><span class="section-number-3">10.3</span> Moindres carrés</h3>
+<div id="outline-container-org4682e61" class="outline-3">
+<h3 id="org4682e61"><span class="section-number-3">10.3</span> Moindres carrés</h3>
 <div class="outline-text-3" id="text-10-3">
 <p>
 Soit \(f : A \mapsto \setR\) et le sous-ensemble \(\mathcal{F} \subseteq \fonction(A,\setR)\). On cherche la fonction \(u \in \mathcal{F}\) qui se rapproche le plus possible de \(f\) au sens intégral des moindres carrés. On cherche donc le \(u\) qui minimise la fonctionnelle :
@@ -8161,8 +8162,8 @@ pour tout \(v \in F\).
 </div>
 
 
-<div id="outline-container-org580ee7b" class="outline-4">
-<h4 id="org580ee7b"><span class="section-number-4">10.3.1</span> Discrétisation</h4>
+<div id="outline-container-org87ca532" class="outline-4">
+<h4 id="org87ca532"><span class="section-number-4">10.3.1</span> Discrétisation</h4>
 <div class="outline-text-4" id="text-10-3-1">
 <p>
 On résout approximativement ce problème en posant :
@@ -8200,11 +8201,11 @@ ou :
 Définissons les matrices \(A \in \matrice(\setR,n,n)\), \(B \in \matrice(\setR,n,1)\) et \(U \in \matrice(\setR,n,1)\) :
 </p>
 
-\begin{eqnarray*}
-A &=& \left[ \int_A \varphi_i \cdot \varphi_j \ dx \right]_{i,j} \\
-B &=& \left[ \int_A \varphi_i \cdot f \ dx \right]_i \\
-U &=& \left[ U_i \right]_i
-\end{eqnarray*}
+\begin{align}
+A &= \left[ \int_A \varphi_i \cdot \varphi_j \ dx \right]_{i,j} \\
+B &= \left[ \int_A \varphi_i \cdot f \ dx \right]_i \\
+U &= \left[ U_i \right]_i
+\end{align}
 
 <p>
 Le problème peut alors s'exprimer sous forme matricielle :
@@ -8230,8 +8231,8 @@ et nous en déduisons notre approximation \(u_n = \sum_i U_i \cdot \varphi_i\).
 </div>
 
 
-<div id="outline-container-org5b747d0" class="outline-3">
-<h3 id="org5b747d0"><span class="section-number-3">10.4</span> Lax-Milgram</h3>
+<div id="outline-container-org66a283e" class="outline-3">
+<h3 id="org66a283e"><span class="section-number-3">10.4</span> Lax-Milgram</h3>
 <div class="outline-text-3" id="text-10-4">
 <p>
 Soit un espace fonctionnel de Hilbert \(\mathcal{F}\). Nous considérons une forme bilinéaire \(a : \mathcal{F} \times \mathcal{F} \mapsto \setR\), de norme finie, coercive et symétrique :
@@ -8314,12 +8315,12 @@ pour tout \(w \in \mathcal{F}\). Le théorème de Lax-Milgram nous dit qu'il exi
 pour tout \(w \in \mathcal{F}\). Choisissons \(v \in \mathcal{F}\) et posons \(w = v - u\). Comme \(\biforme{u}{a}{w} = \forme{b}{w}\), on a :
 </p>
 
-\begin{eqnarray*}
-I(v) &=& I(u + w) \\
-&=& \unsur{2} \biforme{u}{a}{u} + \biforme{u}{a}{w} + \unsur{2} \cdot \biforme{w}{a}{w} - \forme{b}{u} - \forme{b}{w} \\
-&=& \unsur{2} \biforme{u}{a}{u} + \unsur{2} \cdot \biforme{w}{a}{w} - \forme{b}{u} \\
-&=& I(u) + \unsur{2} \biforme{w}{a}{w} \ge I(u)
-\end{eqnarray*}
+\begin{align}
+I(v) &= I(u + w) \\
+&= \unsur{2} \biforme{u}{a}{u} + \biforme{u}{a}{w} + \unsur{2} \cdot \biforme{w}{a}{w} - \forme{b}{u} - \forme{b}{w} \\
+&= \unsur{2} \biforme{u}{a}{u} + \unsur{2} \cdot \biforme{w}{a}{w} - \forme{b}{u} \\
+&= I(u) + \unsur{2} \biforme{w}{a}{w} \ge I(u)
+\end{align}
 
 <p>
 On a donc :
@@ -8332,8 +8333,8 @@ On a donc :
 
 
 
-<div id="outline-container-orgf28e5ae" class="outline-4">
-<h4 id="orgf28e5ae"><span class="section-number-4">10.4.1</span> Orthogonalité</h4>
+<div id="outline-container-orgd95b705" class="outline-4">
+<h4 id="orgd95b705"><span class="section-number-4">10.4.1</span> Orthogonalité</h4>
 <div class="outline-text-4" id="text-10-4-1">
 <p>
 Soit le sous-espace vectoriel \(\mathcal{G} \subseteq \mathcal{F}\) et :
@@ -8390,8 +8391,8 @@ ce qui prouve que :
 </div>
 
 
-<div id="outline-container-org20c48e5" class="outline-4">
-<h4 id="org20c48e5"><span class="section-number-4">10.4.2</span> Borne inférieure</h4>
+<div id="outline-container-org7568877" class="outline-4">
+<h4 id="org7568877"><span class="section-number-4">10.4.2</span> Borne inférieure</h4>
 <div class="outline-text-4" id="text-10-4-2">
 <p>
 Comme \(a\) est coercive, on peut trouver un réel \(\varrho \strictsuperieur 0\) tel que :
@@ -8489,8 +8490,8 @@ Ce résultat étant valable pour tout \(v \in \mathcal{F}\), on a la borne infé
 </div>
 
 
-<div id="outline-container-orgac4b1d8" class="outline-4">
-<h4 id="orgac4b1d8"><span class="section-number-4">10.4.3</span> Discrétisation</h4>
+<div id="outline-container-org683d1cb" class="outline-4">
+<h4 id="org683d1cb"><span class="section-number-4">10.4.3</span> Discrétisation</h4>
 <div class="outline-text-4" id="text-10-4-3">
 <p>
 Afin de trouver une approximation \(u_n \approx u\), on pose :
@@ -8512,11 +8513,11 @@ où les \(\varphi_i \in \mathcal{F}\) sont connues et où les \(U_i\) sont des r
 Si nous définissons les matrices :
 </p>
 
-\begin{eqnarray*}
-A &=& \left[ \biforme{\varphi_i}{a}{\varphi_j} \right]_{i,j} \\
-B &=& \left[ \forme{b}{\varphi_i} \right]_i \\
-U &=& \left[ U_i \right]_i
-\end{eqnarray*}
+\begin{align}
+A &= \left[ \biforme{\varphi_i}{a}{\varphi_j} \right]_{i,j} \\
+B &= \left[ \forme{b}{\varphi_i} \right]_i \\
+U &= \left[ U_i \right]_i
+\end{align}
 
 <p>
 on peut réécrire \(I(u_n)\) sous forme matricielle :
@@ -8550,8 +8551,8 @@ ce qui nous donne \(U\) et donc \(u_n\).
 </div>
 
 
-<div id="outline-container-org8e6bc34" class="outline-3">
-<h3 id="org8e6bc34"><span class="section-number-3">10.5</span> Valeurs propres</h3>
+<div id="outline-container-org3f2f064" class="outline-3">
+<h3 id="org3f2f064"><span class="section-number-3">10.5</span> Valeurs propres</h3>
 <div class="outline-text-3" id="text-10-5">
 <p>
 Soit un espace vectoriel \(E\) et les formes bilinéaires \(a,b : E \times E \mapsto \setR\). Nous supposons que \(a,b\) sont symétriques et définies positives. Nous allons tenter de minimiser la fonctionnelle :
@@ -8597,10 +8598,10 @@ pour tout \((v,y) \in E \times \setR\). La fonction \(u\) minimisant \(I\) sur \
 pour tout \((v,y) \in E \times \setR\). Nous allons évaluer le minimum sur \(v\) en utilisant la méthode des variations. Soit \(w \in E\) et \(\epsilon \in \setR\). On pose :
 </p>
 
-\begin{eqnarray*}
-J_v(\epsilon) &=& \lagrangien(u + \epsilon \cdot w, \lambda) \\
-&=& \biforme{u + \epsilon \cdot w}{a}{u + \epsilon \cdot w} + \lambda \cdot [ 1 - \biforme{u + \epsilon \cdot w}{b}{u + \epsilon \cdot w} ]
-\end{eqnarray*}
+\begin{align}
+J_v(\epsilon) &= \lagrangien(u + \epsilon \cdot w, \lambda) \\
+&= \biforme{u + \epsilon \cdot w}{a}{u + \epsilon \cdot w} + \lambda \cdot [ 1 - \biforme{u + \epsilon \cdot w}{b}{u + \epsilon \cdot w} ]
+\end{align}
 
 <p>
 Utilisant les propriétés de \(a,b\) et la contrainte \(\biforme{u}{b}{u} = 1\), il vient :
@@ -8653,8 +8654,8 @@ pour tout \(w \in E\). On dit alors que \(\lambda\) est valeur propre de \(a,b\)
 </div>
 
 
-<div id="outline-container-orgd9fe8e6" class="outline-4">
-<h4 id="orgd9fe8e6"><span class="section-number-4">10.5.1</span> Propriétés extrémales</h4>
+<div id="outline-container-org1ff2d09" class="outline-4">
+<h4 id="org1ff2d09"><span class="section-number-4">10.5.1</span> Propriétés extrémales</h4>
 <div class="outline-text-4" id="text-10-5-1">
 <p>
 Si nous choisissons \(w = u\), nous obtenons :
@@ -8675,8 +8676,8 @@ La valeur propre est donc la valeur minimale de \(I\) sur \(\Omega\) :
 </div>
 
 
-<div id="outline-container-orgdd608ea" class="outline-4">
-<h4 id="orgdd608ea"><span class="section-number-4">10.5.2</span> Rapport de Rayleigh</h4>
+<div id="outline-container-orgd58193a" class="outline-4">
+<h4 id="orgd58193a"><span class="section-number-4">10.5.2</span> Rapport de Rayleigh</h4>
 <div class="outline-text-4" id="text-10-5-2">
 <p>
 Supposons que \(b\) soit strictement définie positive. Posons \(x = \alpha \cdot u\), pour un certain \(\alpha \in \setR\) non nul. On a \(\biforme{x}{a}{x} = \alpha^2 \cdot \biforme{u}{a}{u}\) et \(\biforme{x}{b}{x} = \alpha^2 \cdot \biforme{u}{b}{u} = \alpha^2\). Donc :
@@ -8733,8 +8734,8 @@ Comme \(\Omega \subseteq F\), on en conclut que la réciproque est vraie : si \
 </div>
 
 
-<div id="outline-container-org856d0b7" class="outline-4">
-<h4 id="org856d0b7"><span class="section-number-4">10.5.3</span> Suite de vecteurs propres</h4>
+<div id="outline-container-org868ac5d" class="outline-4">
+<h4 id="org868ac5d"><span class="section-number-4">10.5.3</span> Suite de vecteurs propres</h4>
 <div class="outline-text-4" id="text-10-5-3">
 <p>
 On peut en fait définir une suite de vecteurs et de valeurs propres. Soit \(\Omega_1 = \Omega\) et \(e_1 = u\). On pose récursivement :
@@ -8759,8 +8760,8 @@ On aura alors bien sûr \(\Omega_{n + 1} \subseteq \Omega_n \subseteq ... \Omega
 </div>
 
 
-<div id="outline-container-org609a0b0" class="outline-4">
-<h4 id="org609a0b0"><span class="section-number-4">10.5.4</span> Discrétisation</h4>
+<div id="outline-container-orgfda095b" class="outline-4">
+<h4 id="orgfda095b"><span class="section-number-4">10.5.4</span> Discrétisation</h4>
 <div class="outline-text-4" id="text-10-5-4">
 <p>
 On pose :
@@ -8856,14 +8857,14 @@ U^\dual \cdot U = 1
 </div>
 
 
-<div id="outline-container-orgc76c81b" class="outline-2">
-<h2 id="orgc76c81b"><span class="section-number-2">11</span> Algorithmes d'optimisation contrainte</h2>
+<div id="outline-container-org1693bbb" class="outline-2">
+<h2 id="org1693bbb"><span class="section-number-2">11</span> Algorithmes d'optimisation contrainte</h2>
 <div class="outline-text-2" id="text-11">
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org9a20a9a">11.1. Introduction</a></li>
-<li><a href="#org03b4a54">11.2. Contraintes linéaires</a></li>
-<li><a href="#orga4e3221">11.3. Contraintes d'inégalité</a></li>
+<li><a href="#org5d0775a">11.1. Introduction</a></li>
+<li><a href="#org6f353db">11.2. Contraintes linéaires</a></li>
+<li><a href="#orgf26c6e2">11.3. Contraintes d'inégalité</a></li>
 </ul>
 </div>
 
@@ -8873,8 +8874,8 @@ U^\dual \cdot U = 1
 </div>
 
 
-<div id="outline-container-org9a20a9a" class="outline-3">
-<h3 id="org9a20a9a"><span class="section-number-3">11.1</span> Introduction</h3>
+<div id="outline-container-org5d0775a" class="outline-3">
+<h3 id="org5d0775a"><span class="section-number-3">11.1</span> Introduction</h3>
 <div class="outline-text-3" id="text-11-1">
 <p>
 Nous allons présenter des algorithmes permettant de résoudre approximativement des problèmes de minimisation d'une fonction \(\varphi\) sur un ensemble \(\Omega \subseteq \setR^n\). Ces algorithmes partent d'un point initial \(x_0 \in \Omega\) et itèrent schématiquement comme suit :
@@ -8923,8 +8924,8 @@ pour toute fonction \(\Phi\) (par exemple, \(\Phi \in \{\varphi,J,H\}\)).
 </div>
 
 
-<div id="outline-container-org03b4a54" class="outline-3">
-<h3 id="org03b4a54"><span class="section-number-3">11.2</span> Contraintes linéaires</h3>
+<div id="outline-container-org6f353db" class="outline-3">
+<h3 id="org6f353db"><span class="section-number-3">11.2</span> Contraintes linéaires</h3>
 <div class="outline-text-3" id="text-11-2">
 <p>
 Nous considérons le cas de contraintes linéaires :
@@ -8972,8 +8973,8 @@ où \(p_k = [p_{k, r + 1} ... p_{k,n}]^\dual\).
 </div>
 
 
-<div id="outline-container-orge6d5af7" class="outline-4">
-<h4 id="orge6d5af7"><span class="section-number-4">11.2.1</span> Newton  projeté</h4>
+<div id="outline-container-orged49395" class="outline-4">
+<h4 id="orged49395"><span class="section-number-4">11.2.1</span> Newton  projeté</h4>
 <div class="outline-text-4" id="text-11-2-1">
 <p>
 Il s'agit de l'adaptation de la méthode de Newton :
@@ -9011,8 +9012,8 @@ et donc :
 </div>
 
 
-<div id="outline-container-orga4e3221" class="outline-3">
-<h3 id="orga4e3221"><span class="section-number-3">11.3</span> Contraintes d'inégalité</h3>
+<div id="outline-container-orgf26c6e2" class="outline-3">
+<h3 id="orgf26c6e2"><span class="section-number-3">11.3</span> Contraintes d'inégalité</h3>
 <div class="outline-text-3" id="text-11-3">
 <p>
 Examinons à présent le cas où :
@@ -9029,8 +9030,8 @@ les notations.
 </div>
 
 
-<div id="outline-container-org00fef50" class="outline-4">
-<h4 id="org00fef50"><span class="section-number-4">11.3.1</span> Méthodes de penalité</h4>
+<div id="outline-container-orgd15a446" class="outline-4">
+<h4 id="orgd15a446"><span class="section-number-4">11.3.1</span> Méthodes de penalité</h4>
 <div class="outline-text-4" id="text-11-3-1">
 <p>
 La méthode de pénalité consiste à ajouter une fonction positive à \(\varphi\) lorsque \(x\) sort de \(\Omega\). Si l'on augmente la valeur de la fonction pénalité, on rapproche alors le minimum global de \(\Omega\). La solution à notre problème contraint devrait donc être approchée en faisant tendre l'amplitude de la pénalité vers l'infini. Soit la fonction \(\varpi : \setR^n \mapsto \setR^m\) définie par :
@@ -9073,21 +9074,21 @@ Il suffit dans ce cas de choisir \(k\) assez grand pour obtenir une estimation d
 </div>
 
 
-<div id="outline-container-org119001a" class="outline-2">
-<h2 id="org119001a"><span class="section-number-2">12</span> Réseaux de neurones</h2>
+<div id="outline-container-org2639068" class="outline-2">
+<h2 id="org2639068"><span class="section-number-2">12</span> Réseaux de neurones</h2>
 <div class="outline-text-2" id="text-12">
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orge50f2ae">12.1. Définition</a></li>
-<li><a href="#org4e68d2d">12.2. Perceptron à une couche</a></li>
-<li><a href="#org6cc3727">12.3. Entrainement</a></li>
+<li><a href="#org6d86202">12.1. Définition</a></li>
+<li><a href="#orgea2a903">12.2. Perceptron à une couche</a></li>
+<li><a href="#org8c456c3">12.3. Entrainement</a></li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-orge50f2ae" class="outline-3">
-<h3 id="orge50f2ae"><span class="section-number-3">12.1</span> Définition</h3>
+<div id="outline-container-org6d86202" class="outline-3">
+<h3 id="org6d86202"><span class="section-number-3">12.1</span> Définition</h3>
 <div class="outline-text-3" id="text-12-1">
 <p>
 Commençons par la description d'un neurone \(i\) de fonction caractéristique
@@ -9121,8 +9122,8 @@ décrites ci-dessous :
 </div>
 
 
-<div id="outline-container-org4e68d2d" class="outline-3">
-<h3 id="org4e68d2d"><span class="section-number-3">12.2</span> Perceptron à une couche</h3>
+<div id="outline-container-orgea2a903" class="outline-3">
+<h3 id="orgea2a903"><span class="section-number-3">12.2</span> Perceptron à une couche</h3>
 <div class="outline-text-3" id="text-12-2">
 <p>
 Le perceptron monocouche est composé d'une rangée de neurones reliant les
@@ -9141,8 +9142,8 @@ On écrit \(y_i = P_{\theta}(x)\) pour mettre en évidence l'influence des param
 </div>
 
 
-<div id="outline-container-org6cc3727" class="outline-3">
-<h3 id="org6cc3727"><span class="section-number-3">12.3</span> Entrainement</h3>
+<div id="outline-container-org8c456c3" class="outline-3">
+<h3 id="org8c456c3"><span class="section-number-3">12.3</span> Entrainement</h3>
 <div class="outline-text-3" id="text-12-3">
 <p>
 Les réseaux de neurones sont principalement utilisés afin de calquer le comportement d'un système difficille à modéliser par d'autres méthodes. On dispose d'un certain nombre de vecteurs \(y^{(n)}\in\setR^M\), \(x^{(n)}\in\setR^{N}\), où \(n=1,...,K\). On aimerait bien trouver le vecteur des paramètres, \(\theta\), qui correspond le mieux à cette série d'entrées-sorties. On va alors entrainer le réseau de neurones défini par \(y=R_{\theta}(x)\)  en  utilisant une méthode d'optimisation non linéaire afin d'obtenir la solution de
@@ -9157,7 +9158,7 @@ Les réseaux de neurones sont principalement utilisés afin de calquer le compor
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2019-04-12 ven 18:58</p>
+<p class="date">Created: 2019-05-07 mar 08:20</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-04-12 ven 19:13 -->
+<!-- 2019-05-07 mar 08:19 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 06 : Vecteurs - 8</title>
@@ -265,7 +265,7 @@ for the JavaScript code in this tag.
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org8c479a5">1. Matrices unitaires</a></li>
+<li><a href="#orga1a5204">1. Matrices unitaires</a></li>
 </ul>
 </div>
 </div>
@@ -351,7 +351,8 @@ for the JavaScript code in this tag.
 \newcommand{\modulo}{\bmod}
 \newcommand{\pgcd}{pgcd}
 \newcommand{\ppcm}{ppcm}
-\newcommand{\scalaire}[2]{\left\langle #1 \left|\right\relax #2 \right\rangle}
+\newcommand{\produitscalaire}[2]{\left\langle #1 \left|\right\relax #2 \right\rangle}
+\newcommand{\scalaire}[2]{\left\langle #1 \| #2 \right\rangle}
 \newcommand{\braket}[3]{\left\langle #1 \right| #2 \left| #3 \right\rangle}
 \newcommand{\orthogonal}{\bot}
 \newcommand{\forme}[2]{\left\langle #1 , #2 \right\rangle}
@@ -423,15 +424,15 @@ for the JavaScript code in this tag.
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
 
-<div id="outline-container-org8c479a5" class="outline-2">
-<h2 id="org8c479a5"><span class="section-number-2">1</span> Matrices unitaires</h2>
+<div id="outline-container-orga1a5204" class="outline-2">
+<h2 id="orga1a5204"><span class="section-number-2">1</span> Matrices unitaires</h2>
 <div class="outline-text-2" id="text-1">
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org62172fe">1.1. Conservation du produit scalaire</a></li>
-<li><a href="#org262faec">1.2. Matrices élémentaires unitaires</a></li>
-<li><a href="#org76eb7fb">1.3. Matrices de Householder</a></li>
-<li><a href="#org90588dc">1.4. Décomposition de Householder</a></li>
+<li><a href="#org4507f93">1.1. Conservation du produit scalaire</a></li>
+<li><a href="#org3f1d0c0">1.2. Matrices élémentaires unitaires</a></li>
+<li><a href="#org96c13dd">1.3. Matrices de Householder</a></li>
+<li><a href="#orgf0ec782">1.4. Décomposition de Householder</a></li>
 </ul>
 </div>
 
@@ -441,8 +442,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-org62172fe" class="outline-3">
-<h3 id="org62172fe"><span class="section-number-3">1.1</span> Conservation du produit scalaire</h3>
+<div id="outline-container-org4507f93" class="outline-3">
+<h3 id="org4507f93"><span class="section-number-3">1.1</span> Conservation du produit scalaire</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Les matrices unitaires sont une généralisation des rotations. Or, la propriété essentielle d'une rotation est qu'elle conserve les distances. Comme les distances usuelles découlent des normes usuelles, elles-mêmes dérivées du produit scalaire, on impose que ce soit le produit scalaire qui soit conservé. On veut donc que :
@@ -474,8 +475,8 @@ Si cette condition est vérifiée, on dit que \(U\) est une matrice unitaire.
 </div>
 
 
-<div id="outline-container-orgc4c93a3" class="outline-4">
-<h4 id="orgc4c93a3"><span class="section-number-4">1.1.1</span> Norme</h4>
+<div id="outline-container-org38ca7b5" class="outline-4">
+<h4 id="org38ca7b5"><span class="section-number-4">1.1.1</span> Norme</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 La conservation de la norme usuelle \(\norme{x} = \sqrt{\scalaire{x}{x} }\) découle de celle du produit scalaire. Si \(U\) est unitaire, on a donc \(\norme{U \cdot x} = \norme{x}\).
@@ -485,8 +486,8 @@ La conservation de la norme usuelle \(\norme{x} = \sqrt{\scalaire{x}{x} }\) déc
 </div>
 
 
-<div id="outline-container-org262faec" class="outline-3">
-<h3 id="org262faec"><span class="section-number-3">1.2</span> Matrices élémentaires unitaires</h3>
+<div id="outline-container-org3f1d0c0" class="outline-3">
+<h3 id="org3f1d0c0"><span class="section-number-3">1.2</span> Matrices élémentaires unitaires</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Soit la matrice élémentaire :
@@ -500,10 +501,10 @@ Soit la matrice élémentaire :
 où \(\alpha \in \setR\). Si on veut que \(U\) soit unitaire, il faut que :
 </p>
 
-\begin{eqnarray*}
-I = U^\dual \cdot U &=& (I + \alpha \cdot u \cdot u^\dual) \cdot (I + \alpha \cdot u \cdot u^\dual) \\
-&=& I + [2 \cdot \alpha + \alpha^2 \cdot (u^\dual \cdot u)] \cdot u \cdot u^\dual
-\end{eqnarray*}
+\begin{align}
+I = U^\dual \cdot U &= (I + \alpha \cdot u \cdot u^\dual) \cdot (I + \alpha \cdot u \cdot u^\dual) \\
+&= I + [2 \cdot \alpha + \alpha^2 \cdot (u^\dual \cdot u)] \cdot u \cdot u^\dual
+\end{align}
 
 <p>
 Il suffit donc que \(\alpha\) vérifie la condition :
@@ -547,8 +548,8 @@ On les note :
 </div>
 
 
-<div id="outline-container-orgeb9cc30" class="outline-4">
-<h4 id="orgeb9cc30"><span class="section-number-4">1.2.1</span> Propriétés</h4>
+<div id="outline-container-orgbac36e7" class="outline-4">
+<h4 id="orgbac36e7"><span class="section-number-4">1.2.1</span> Propriétés</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 On a donc \(U^\dual \cdot U = I\). Comme \(U\) est carrée, on a également \(U^{-1} = U^\dual\). On voit également que :
@@ -566,18 +567,18 @@ On en conclut que \(U^{-1} = U\).
 </div>
 
 
-<div id="outline-container-org76eb7fb" class="outline-3">
-<h3 id="org76eb7fb"><span class="section-number-3">1.3</span> Matrices de Householder</h3>
+<div id="outline-container-org96c13dd" class="outline-3">
+<h3 id="org96c13dd"><span class="section-number-3">1.3</span> Matrices de Householder</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Soit deux vecteurs \(x,y \in \corps^n\). On aimerait bien trouver une matrice élémentaire unitaire \(U\) telle que \(U \cdot x \approx y\). Par analogie avec les matrices de transformation élémentaire, on pose \(u = x - y\) et \(U = \matunitaire(u)\). On a alors :
 </p>
 
-\begin{eqnarray*}
-U \cdot x &=& x - \frac{2 u^\dual \cdot x}{u^\dual \cdot u} \cdot u \\ \\
-&=& \frac{ (u^\dual \cdot u^\dual) \cdot x - 2 (u^\dual \cdot x) \cdot x + 2 (u^\dual \cdot x) \cdot y }{u^\dual \cdot u^\dual} \\ \\
-&=& \frac{ (u^\dual \cdot u^\dual - 2 u^\dual \cdot x) \cdot x + 2 (u^\dual \cdot x) \cdot y }{u^\dual \cdot u^\dual}
-\end{eqnarray*}
+\begin{align}
+U \cdot x &= x - \frac{2 u^\dual \cdot x}{u^\dual \cdot u} \cdot u \\ \\
+&= \frac{ (u^\dual \cdot u^\dual) \cdot x - 2 (u^\dual \cdot x) \cdot x + 2 (u^\dual \cdot x) \cdot y }{u^\dual \cdot u^\dual} \\ \\
+&= \frac{ (u^\dual \cdot u^\dual - 2 u^\dual \cdot x) \cdot x + 2 (u^\dual \cdot x) \cdot y }{u^\dual \cdot u^\dual}
+\end{align}
 
 <p>
 Développons le coefficient de \(x\) :
@@ -625,8 +626,8 @@ Le vecteur \(U \cdot x\) est donc identique à \(y\) à un scalaire près.
 </div>
 
 
-<div id="outline-container-org9a77623" class="outline-4">
-<h4 id="org9a77623"><span class="section-number-4">1.3.1</span> Base canonique</h4>
+<div id="outline-container-org3f1adb6" class="outline-4">
+<h4 id="org3f1adb6"><span class="section-number-4">1.3.1</span> Base canonique</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <p>
 Un cas particulier intéressant est celui où \(y\) est proportionnel au \(i^{eme}\) vecteur de la base canonique :
@@ -701,8 +702,8 @@ pour un certain \(\gamma \in \setC\).
 </div>
 
 
-<div id="outline-container-org90588dc" class="outline-3">
-<h3 id="org90588dc"><span class="section-number-3">1.4</span> Décomposition de Householder</h3>
+<div id="outline-container-orgf0ec782" class="outline-3">
+<h3 id="orgf0ec782"><span class="section-number-3">1.4</span> Décomposition de Householder</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Soit une matrice \(A\) de taille \((m,n)\) et le partitionnement en colonnes :
@@ -887,7 +888,7 @@ où \(Q\) est une matrice unitaire et \(R\) une matrice triangulaire supérieure
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2019-04-12 ven 19:13</p>
+<p class="date">Created: 2019-05-07 mar 08:19</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

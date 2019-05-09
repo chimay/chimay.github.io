@@ -396,8 +396,48 @@ le vecteur des coordonnées généralisées. Ces coordonnées sont choisies
 pour que le système respecte naturellement ses contraintes, et on peut
 alors ignorér les forces qui garantissent le respect de ces contraintes.
 
+** Annulation des points
+
+Comme $\mathbf{r}$ dépend de $(\mathbf{q},t)$, on a :
+
+$$\dot{\mathbf{r}} = \sum_i \deriveepartielle{\mathbf{r}}{q_i} \dot{q}_i +
+\deriveepartielle{\mathbf{r}}{t}$$
+
+En dérivant à noveau, on obtient :
+
+$$\ddot{\mathbf{r}} = \sum_i \deriveepartielle{\mathbf{\dot{r}}}{q_i} \dot{q}_i +
+\sum_i \deriveepartielle{\mathbf{r}}{q_i} \ddot{q}_i +
+\deriveepartielle{\mathbf{\dot{r}}}{t}$$
+
+Mais comme $\dot{\mathbf{r}}$ dépend de $(\mathbf{q},
+\dot{\mathbf{q}}, t)$, on a aussi :
+
+$$\ddot{\mathbf{r}} = \sum_i \deriveepartielle{\dot{\mathbf{r}}}{q_i} \dot{q}_i +
+\sum_i \deriveepartielle{\dot{\mathbf{r}}}{\dot{q}_i} \ddot{q}_i +
+\deriveepartielle{\mathbf{\dot{r}}}{t}$$
+
+En égalant les deux équations, on obtient, après annulation des termes
+identiques :
+
+$$\sum_i \deriveepartielle{\dot{\mathbf{r}}}{\dot{q}_i} \ddot{q}_i =
+\sum_i \deriveepartielle{\mathbf{r}}{q_i} \ddot{q}_i$$
+
+ou :
+
+$$\sum_i \deriveepartielle{\dot{\mathbf{r}}}{\dot{q}_i} d\dot{q}_i =
+\sum_i \deriveepartielle{\mathbf{r}}{q_i} d\dot{q}_i$$
+
+Comme cette équation est valable pour toute variation $d\dot{q}_i$, on
+a :
+
+$$\deriveepartielle{\dot{\mathbf{r}}}{\dot{q}_i} = \deriveepartielle{\mathbf{r}}{q_i} $$
+
 
 ** Mécanique Lagrangienne
+
+L’équation de Lagrange devient :
+
+$$\deriveepartielle{\lagrangien}{\mathbf{q}} - \OD{}{t}\deriveepartielle{\lagrangien}{\dot{\mathbf{q}}} = 0$$
 
 Par analogie avec le corps ponctuel, nous appelons *force généralisée*
 la quantité :
@@ -407,10 +447,6 @@ $$\mathbf{F} = \deriveepartielle{\lagrangien}{\mathbf{q}}$$
 et *quantité de mouvement généralisée* la quantité :
 
 $$\mathbf{p} = \deriveepartielle{\lagrangien}{\dot{\mathbf{q}}}$$
-
-L’équation de Lagrange devient :
-
-$$\deriveepartielle{\lagrangien}{\mathbf{q}} - \OD{}{t}\deriveepartielle{\lagrangien}{\dot{\mathbf{q}}} = 0$$
 
 
 ** Mécanique Hamiltonienne
@@ -440,3 +476,71 @@ $$\deriveepartielle{\mathcal{H}}{\mathbf{p}} = \dot{\mathbf{q}}$$
 $$\deriveepartielle{\mathcal{H}}{\mathbf{q}} = - \dot{\mathbf{p}}$$
 
 constitue les équations de Hamilton du corps ponctuel.
+
+
+*** Comparaison Lagrangien et Hamiltonien
+
+$$d\lagrangien =
+\sum_i \left( \deriveepartielle{\lagrangien}{q_i} dq_i +
+\deriveepartielle{\lagrangien}{\dot{q}_i} d\dot{q}_i \right) +
+\deriveepartielle{\lagrangien}{t} dt$$
+
+En utilisant la définition de la quantité de mouvement généralisée, on
+a :
+
+$$d\lagrangien =
+\sum_i \left( \deriveepartielle{\lagrangien}{q_i} dq_i +
+p_i d\dot{q}_i \right) +
+\deriveepartielle{\lagrangien}{t} dt$$
+
+En utilisant la dérivation par parties :
+
+$$d\lagrangien =
+\sum_i \left( \deriveepartielle{\lagrangien}{q_i} dq_i +
+d(p_i \dot{q}_i) - \dot{q}_i dp_i \right) +
+\deriveepartielle{\lagrangien}{t} dt$$
+
+En réarrangeant :
+
+$$d\left(\sum_i d(p_i \dot{q}_i) - \lagrangien \right) =
+\sum_i \left(- \deriveepartielle{\lagrangien}{q_i} dq_i +
+\dot{q}_i dp_i \right) -
+\deriveepartielle{\lagrangien}{t} dt$$
+
+Le membre de gauche représente une variation de l’Hamiltonien :
+
+$$d\mathcal{H} =
+\sum_i \left(- \deriveepartielle{\lagrangien}{q_i} dq_i +
+\dot{q}_i dp_i \right) -
+\deriveepartielle{\lagrangien}{t} dt$$
+
+On compare avec le calcul direct d’une variation de l’Hamiltonien :
+
+$$d\mathcal{H} =
+\sum_i \left(\deriveepartielle{\mathcal{H}}{q_i} dq_i +
+\deriveepartielle{\mathcal{H}}{p_i} dp_i \right) +
+\deriveepartielle{\mathcal{H}}{t} dt$$
+
+On en déduit les équivalences suivantes :
+
+$$\deriveepartielle{\mathcal{H}}{q_i} = - \deriveepartielle{\lagrangien}{q_i}$$
+
+$$\deriveepartielle{\mathcal{H}}{p_i} = \dot{q}_i$$
+
+$$\deriveepartielle{\mathcal{H}}{t} = - \deriveepartielle{\lagrangien}{t}$$
+
+La solution qui nous intéresse vérifie l’équation de Lagrange :
+
+$$\deriveepartielle{\lagrangien}{q_i} = \OD{}{t}\deriveepartielle{\lagrangien}{\dot{q}_i}$$
+
+En utilisant la quantité de mouvement généralisée, nous obtenons :
+
+$$\deriveepartielle{\lagrangien}{q_i} = \dot{p}_i$$
+
+Les équation de Hamilton s’écrivent alors :
+
+$$\deriveepartielle{\mathcal{H}}{q_i} = - \dot{p}_i$$
+
+$$\deriveepartielle{\mathcal{H}}{p_i} = \dot{q}_i$$
+
+$$\deriveepartielle{\mathcal{H}}{t} = - \deriveepartielle{\lagrangien}{t}$$

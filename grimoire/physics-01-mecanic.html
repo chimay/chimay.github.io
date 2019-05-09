@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-05-07 mar 07:46 -->
+<!-- 2019-05-09 jeu 12:43 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Physics 01 : Mécanique</title>
@@ -161,6 +161,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -342,7 +355,8 @@ for the JavaScript code in this tag.
 \newcommand{\modulo}{\bmod}
 \newcommand{\pgcd}{pgcd}
 \newcommand{\ppcm}{ppcm}
-\newcommand{\scalaire}[2]{\left\langle #1 \left|\right\relax #2 \right\rangle}
+\newcommand{\produitscalaire}[2]{\left\langle #1 \left|\right\relax #2 \right\rangle}
+\newcommand{\scalaire}[2]{\left\langle #1 \| #2 \right\rangle}
 \newcommand{\braket}[3]{\left\langle #1 \right| #2 \left| #3 \right\rangle}
 \newcommand{\orthogonal}{\bot}
 \newcommand{\forme}[2]{\left\langle #1 , #2 \right\rangle}
@@ -418,10 +432,10 @@ for the JavaScript code in this tag.
 <h2>Table des matières</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgd514209">1. Notation</a></li>
-<li><a href="#orgb7e35e3">2. Corps ponctuel</a></li>
-<li><a href="#org3265e60">3. <span class="todo TODO">TODO</span> Corps rigide</a></li>
-<li><a href="#org75b4c9c">4. <span class="todo TODO">TODO</span> Système de corps rigides</a></li>
+<li><a href="#org865412b">1. Notation</a></li>
+<li><a href="#org6bd1ccf">2. Corps ponctuel</a></li>
+<li><a href="#orge872791">3. <span class="todo TODO">TODO</span> Corps rigide</a></li>
+<li><a href="#org7a96efa">4. <span class="todo TODO">TODO</span> Système de corps rigides</a></li>
 </ul>
 </div>
 </div>
@@ -507,7 +521,8 @@ for the JavaScript code in this tag.
 \newcommand{\modulo}{\bmod}
 \newcommand{\pgcd}{pgcd}
 \newcommand{\ppcm}{ppcm}
-\newcommand{\scalaire}[2]{\left\langle #1 \left|\right\relax #2 \right\rangle}
+\newcommand{\produitscalaire}[2]{\left\langle #1 \left|\right\relax #2 \right\rangle}
+\newcommand{\scalaire}[2]{\left\langle #1 \| #2 \right\rangle}
 \newcommand{\braket}[3]{\left\langle #1 \right| #2 \left| #3 \right\rangle}
 \newcommand{\orthogonal}{\bot}
 \newcommand{\forme}[2]{\left\langle #1 , #2 \right\rangle}
@@ -579,12 +594,12 @@ for the JavaScript code in this tag.
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
 
-<div id="outline-container-orgd514209" class="outline-2">
-<h2 id="orgd514209"><span class="section-number-2">1</span> Notation</h2>
+<div id="outline-container-org865412b" class="outline-2">
+<h2 id="org865412b"><span class="section-number-2">1</span> Notation</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org9a8b1e2" class="outline-3">
-<h3 id="org9a8b1e2"><span class="section-number-3">1.1</span> Dérivées temporelles</h3>
+<div id="outline-container-org79371c6" class="outline-3">
+<h3 id="org79371c6"><span class="section-number-3">1.1</span> Dérivées temporelles</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Pour une fonction \(x\) dépendant du temps \(t\), nous utilisons la notation :
@@ -609,8 +624,8 @@ pour la dérivée seconde.
 </div>
 
 
-<div id="outline-container-orgf472fff" class="outline-3">
-<h3 id="orgf472fff"><span class="section-number-3">1.2</span> Vecteurs tridimensionnels</h3>
+<div id="outline-container-org89f4414" class="outline-3">
+<h3 id="org89f4414"><span class="section-number-3">1.2</span> Vecteurs tridimensionnels</h3>
 <div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
 <li>Les vecteurs tridimensionnels sont notés en gras</li>
@@ -634,8 +649,8 @@ composantes \(u_i\) et de norme :
 </div>
 
 
-<div id="outline-container-orgb7e35e3" class="outline-2">
-<h2 id="orgb7e35e3"><span class="section-number-2">2</span> Corps ponctuel</h2>
+<div id="outline-container-org6bd1ccf" class="outline-2">
+<h2 id="org6bd1ccf"><span class="section-number-2">2</span> Corps ponctuel</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Dans ce chapitre, nous négligeons les effets mécaniques des dimensions
@@ -644,13 +659,13 @@ du corps dont nous analysons la trajectoire.
 </div>
 
 
-<div id="outline-container-org64a84b4" class="outline-3">
-<h3 id="org64a84b4"><span class="section-number-3">2.1</span> Lois de Newton</h3>
+<div id="outline-container-org73757c9" class="outline-3">
+<h3 id="org73757c9"><span class="section-number-3">2.1</span> Lois de Newton</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Soit la trajectoire \(\mathbf{r} : \setR \mapsto \setR^3\) qui fait
 correspondre, à un instant donné \(t\), la position \(\mathbf{r}(t)\) d’un corps
-dans l'espace tridimensionnel.
+dans l&rsquo;espace tridimensionnel.
 </p>
 
 <p>
@@ -720,8 +735,8 @@ dans la direction opposée</li>
 </div>
 
 
-<div id="outline-container-org05697b2" class="outline-3">
-<h3 id="org05697b2"><span class="section-number-3">2.2</span> Principe fondamental de la dynamique</h3>
+<div id="outline-container-org47e118f" class="outline-3">
+<h3 id="org47e118f"><span class="section-number-3">2.2</span> Principe fondamental de la dynamique</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Comme la masse du corps ne dépend pas du temps, la dérivée de la
@@ -743,12 +758,12 @@ Le principe fondamental de la dynamique devient :
 </div>
 
 
-<div id="outline-container-orgd9465e5" class="outline-3">
-<h3 id="orgd9465e5"><span class="section-number-3">2.3</span> Énergie</h3>
+<div id="outline-container-org6ebbd19" class="outline-3">
+<h3 id="org6ebbd19"><span class="section-number-3">2.3</span> Énergie</h3>
 <div class="outline-text-3" id="text-2-3">
 </div>
-<div id="outline-container-org420b1be" class="outline-4">
-<h4 id="org420b1be"><span class="section-number-4">2.3.1</span> Énergie cinétique</h4>
+<div id="outline-container-org4d984f8" class="outline-4">
+<h4 id="org4d984f8"><span class="section-number-4">2.3.1</span> Énergie cinétique</h4>
 <div class="outline-text-4" id="text-2-3-1">
 <p>
 Si nous effectuons le produit scalaire du principe fondamental de la
@@ -797,8 +812,8 @@ nous avons :
 </div>
 
 
-<div id="outline-container-org8f11c0f" class="outline-4">
-<h4 id="org8f11c0f"><span class="section-number-4">2.3.2</span> Énergie potentielle</h4>
+<div id="outline-container-org0a941e3" class="outline-4">
+<h4 id="org0a941e3"><span class="section-number-4">2.3.2</span> Énergie potentielle</h4>
 <div class="outline-text-4" id="text-2-3-2">
 <p>
 Quand la force appliquée \(\mathbf{F}\) ne dépend que de la position
@@ -837,8 +852,8 @@ La dérivée temporelle de \(U\) s’écrit alors :
 </div>
 
 
-<div id="outline-container-org50b39ed" class="outline-4">
-<h4 id="org50b39ed"><span class="section-number-4">2.3.3</span> Énergie totale</h4>
+<div id="outline-container-org44fdd53" class="outline-4">
+<h4 id="org44fdd53"><span class="section-number-4">2.3.3</span> Énergie totale</h4>
 <div class="outline-text-4" id="text-2-3-3">
 <p>
 Le principe fondamental de la dynamique peut se réécrire en fonction
@@ -877,8 +892,8 @@ est donc constante :
 </div>
 
 
-<div id="outline-container-org2e27fab" class="outline-3">
-<h3 id="org2e27fab"><span class="section-number-3">2.4</span> Mécanique Lagrangienne</h3>
+<div id="outline-container-org8dbd8a2" class="outline-3">
+<h3 id="org8dbd8a2"><span class="section-number-3">2.4</span> Mécanique Lagrangienne</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Nous allons tenter de relier le principe fondamental de la dynamique
@@ -999,24 +1014,186 @@ quantité à minimiser, et la notons :
 \[\mathcal{S} = \int_{t_1}^{t_2} \lagrangien(\mathbf{r}(t),\dot{\mathbf{r}}(t))\ dt\]
 </p>
 </div>
+
+
+<div id="outline-container-org11356e1" class="outline-4">
+<h4 id="org11356e1"><span class="section-number-4">2.4.1</span> Force et quantité de mouvement</h4>
+<div class="outline-text-4" id="text-2-4-1">
+<p>
+Si on connait le Lagrangien, on peut retrouver la force par :
+</p>
+
+<p>
+\[\mathbf{F} = \deriveepartielle{\lagrangien}{\mathbf{r}}\]
+</p>
+
+<p>
+Comme :
+</p>
+
+<p>
+\[\dot{\mathbf{p}} = m \ddot{\mathbf{r}} =
+\OD{}{t}\deriveepartielle{\lagrangien}{\dot{\mathbf{r}}}\]
+</p>
+
+
+<p>
+on retrouve la quantité de mouvement en utilisant :
+</p>
+
+<p>
+\[\mathbf{p} = \deriveepartielle{\lagrangien}{\dot{\mathbf{r}}}\]
+</p>
+</div>
 </div>
 </div>
 
 
-<div id="outline-container-org3265e60" class="outline-2">
-<h2 id="org3265e60"><span class="section-number-2">3</span> <span class="todo TODO">TODO</span> Corps rigide</h2>
+<div id="outline-container-org4d04fa9" class="outline-3">
+<h3 id="org4d04fa9"><span class="section-number-3">2.5</span> Mécanique Hamiltonienne</h3>
+<div class="outline-text-3" id="text-2-5">
+<p>
+Nous notons :
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">\(\mathcal{H}\)</td>
+<td class="org-left">Hamiltonien</td>
+</tr>
+</tbody>
+</table>
+
+
+<p>
+La mécanique Hamiltonienne ajoute le produit de la quantité de
+mouvement par la vitesse au Lagrangien, et utilise la quantité de
+mouvement au lieu de la vitesse :
+</p>
+
+<p>
+\[\mathcal{H}(\mathbf{r}, \mathbf{p}, t) =
+\mathbf{p}\cdot\dot{\mathbf{r}} - \lagrangien(\mathbf{r}, \mathbf{\dot{r}}, t)\]
+</p>
+</div>
+
+
+<div id="outline-container-orgb07a581" class="outline-4">
+<h4 id="orgb07a581"><span class="section-number-4">2.5.1</span> Énergie</h4>
+<div class="outline-text-4" id="text-2-5-1">
+<p>
+Comme :
+</p>
+
+<p>
+\[\mathbf{p}\cdot\dot{\mathbf{r}} = m \dot{r}^2 = 2 T\]
+</p>
+
+<p>
+on a :
+</p>
+
+<p>
+\[\mathcal{H} = 2 T - \lagrangien = 2 T - (T - U) = T + U = E\]
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgfc6fe74" class="outline-4">
+<h4 id="orgfc6fe74"><span class="section-number-4">2.5.2</span> Énergie cinétique et quantité de mouvement</h4>
+<div class="outline-text-4" id="text-2-5-2">
+<p>
+Comme :
+</p>
+
+<p>
+\[\dot{\mathbf{r}} = \frac{\mathbf{p}}{m}\]
+</p>
+
+<p>
+\[\dot{r}^2 = \frac{p^2}{m^2}\]
+</p>
+
+<p>
+on a :
+</p>
+
+<p>
+\[T = \unsur{2} m \dot{r}^2 = \frac{p^2}{2 m}\]
+</p>
+
+<p>
+et :
+</p>
+
+<p>
+\[\mathcal{H} = \frac{p^2}{2 m} + U\]
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orge4acbcb" class="outline-4">
+<h4 id="orge4acbcb"><span class="section-number-4">2.5.3</span> Principe fondamental</h4>
+<div class="outline-text-4" id="text-2-5-3">
+<p>
+On note que :
+</p>
+
+<p>
+\[\deriveepartielle{\mathcal{H}}{\mathbf{p}} = \dot{\mathbf{r}}\]
+</p>
+
+<p>
+\[\deriveepartielle{\mathcal{H}}{\mathbf{r}}
+= - \deriveepartielle{\lagrangien}{\mathbf{r}}
+= -F = - \dot{\mathbf{p}}\]
+</p>
+
+<p>
+L’ensemble :
+</p>
+
+<p>
+\[\deriveepartielle{\mathcal{H}}{\mathbf{p}} = \dot{\mathbf{r}}\]
+</p>
+
+<p>
+\[\deriveepartielle{\mathcal{H}}{\mathbf{r}} = - \dot{\mathbf{p}}\]
+</p>
+
+<p>
+constitue les équations de Hamilton du corps ponctuel.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orge872791" class="outline-2">
+<h2 id="orge872791"><span class="section-number-2">3</span> <span class="todo TODO">TODO</span> Corps rigide</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orgb9c9e79" class="outline-3">
-<h3 id="orgb9c9e79"><span class="section-number-3">3.1</span> <span class="todo TODO">TODO</span> Cinématique</h3>
+<div id="outline-container-orgc128d39" class="outline-3">
+<h3 id="orgc128d39"><span class="section-number-3">3.1</span> <span class="todo TODO">TODO</span> Cinématique</h3>
 </div>
 </div>
 
 
 
 
-<div id="outline-container-org75b4c9c" class="outline-2">
-<h2 id="org75b4c9c"><span class="section-number-2">4</span> <span class="todo TODO">TODO</span> Système de corps rigides</h2>
+<div id="outline-container-org7a96efa" class="outline-2">
+<h2 id="org7a96efa"><span class="section-number-2">4</span> <span class="todo TODO">TODO</span> Système de corps rigides</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Nous considérons un système de \(N\) corps rigides.
@@ -1035,8 +1212,8 @@ du corps \(k\). La force appliquée au corps \(k\) sera notée
 </div>
 
 
-<div id="outline-container-org25268ba" class="outline-3">
-<h3 id="org25268ba"><span class="section-number-3">4.1</span> Principe de d’Alembert</h3>
+<div id="outline-container-org01931b0" class="outline-3">
+<h3 id="org01931b0"><span class="section-number-3">4.1</span> Principe de d’Alembert</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Nous exprimons la force \(\mathbf{F}_k\) appliquée au corps \(k\) comme la somme de
@@ -1097,12 +1274,12 @@ Comme les forces de contraintes sont orthogonales, l’équation devient :
 </div>
 
 
-<div id="outline-container-org3e3a39d" class="outline-3">
-<h3 id="org3e3a39d"><span class="section-number-3">4.2</span> Coordonnées généralisées</h3>
+<div id="outline-container-org5e3ed56" class="outline-3">
+<h3 id="org5e3ed56"><span class="section-number-3">4.2</span> Coordonnées généralisées</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Pour tenir compte des contraintes appliquées au système, on exprime
-les positions \(\mathbf{r}_i\) en fonction des coordonnées généralisée
+les positions \(\mathbf{r}_i\) en fonction des coordonnées généralisées
 \(q_1, q_2, ..., q_n\). On note :
 </p>
 
@@ -1111,44 +1288,101 @@ les positions \(\mathbf{r}_i\) en fonction des coordonnées généralisée
 </p>
 
 <p>
-le vecteur des coorddonnées généralisées.
+le vecteur des coordonnées généralisées. Ces coordonnées sont choisies
+pour que le système respecte naturellement ses contraintes, et on peut
+alors ignorér les forces qui garantissent le respect de ces contraintes.
 </p>
 </div>
 </div>
 
 
-<div id="outline-container-org55f3600" class="outline-3">
-<h3 id="org55f3600"><span class="section-number-3">4.3</span> <span class="todo TODO">TODO</span> Mécanique Lagrangienne</h3>
+<div id="outline-container-org723c376" class="outline-3">
+<h3 id="org723c376"><span class="section-number-3">4.3</span> <span class="todo TODO">TODO</span> Mécanique Lagrangienne</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+Par analogie avec le corps ponctuel, nous appelons <b>force généralisée</b>
+la quantité :
+</p>
+
+<p>
+\[\mathbf{F} = \deriveepartielle{\lagrangien}{\mathbf{q}}\]
+</p>
+
+<p>
+et <b>quantité de mouvement généralisée</b> la quantité :
+</p>
+
+<p>
+\[\mathbf{p} = \deriveepartielle{\lagrangien}{\dot{\mathbf{q}}}\]
+</p>
+
+<p>
+L’équation de Lagrange devient :
+</p>
+
+<p>
+\[\deriveepartielle{\lagrangien}{\mathbf{q}} - \OD{}{t}\deriveepartielle{\lagrangien}{\dot{\mathbf{q}}} = 0\]
+</p>
+</div>
 </div>
 
 
-
-
-<div id="outline-container-orgee014ec" class="outline-3">
-<h3 id="orgee014ec"><span class="section-number-3">4.4</span> <span class="todo TODO">TODO</span> Mécanique Hamiltonienne</h3>
+<div id="outline-container-orgde4435f" class="outline-3">
+<h3 id="orgde4435f"><span class="section-number-3">4.4</span> Mécanique Hamiltonienne</h3>
 <div class="outline-text-3" id="text-4-4">
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<p>
+La mécanique Hamiltonienne ajoute le produit de la quantité de
+mouvement par la vitesse au Lagrangien, et utilise la quantité de
+mouvement au lieu de la vitesse :
+</p>
+
+<p>
+\[\mathcal{H}(\mathbf{r}, \mathbf{p}, t) =
+\sum_i \mathbf{p}_i\cdot\dot{\mathbf{q}}_i - \lagrangien(\mathbf{q}, \mathbf{\dot{q}}, t)\]
+</p>
+</div>
 
 
-<colgroup>
-<col  class="org-left" />
+<div id="outline-container-orgcfdd513" class="outline-4">
+<h4 id="orgcfdd513"><span class="section-number-4">4.4.1</span> Principe fondamental</h4>
+<div class="outline-text-4" id="text-4-4-1">
+<p>
+On note que :
+</p>
 
-<col  class="org-left" />
-</colgroup>
-<tbody>
-<tr>
-<td class="org-left">\(\mathcal{H}\)</td>
-<td class="org-left">Hamiltonien</td>
-</tr>
-</tbody>
-</table>
+<p>
+\[\deriveepartielle{\mathcal{H}}{\mathbf{p}} = \dot{\mathbf{q}}\]
+</p>
+
+<p>
+\[\deriveepartielle{\mathcal{H}}{\mathbf{q}}
+= - \deriveepartielle{\lagrangien}{\mathbf{q}}
+= -F = - \dot{\mathbf{p}}\]
+</p>
+
+<p>
+L’ensemble :
+</p>
+
+<p>
+\[\deriveepartielle{\mathcal{H}}{\mathbf{p}} = \dot{\mathbf{q}}\]
+</p>
+
+<p>
+\[\deriveepartielle{\mathcal{H}}{\mathbf{q}} = - \dot{\mathbf{p}}\]
+</p>
+
+<p>
+constitue les équations de Hamilton du corps ponctuel.
+</p>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2019-05-07 mar 07:46</p>
+<p class="date">Created: 2019-05-09 jeu 12:43</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

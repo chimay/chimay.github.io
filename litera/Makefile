@@ -21,20 +21,20 @@ all: $(FICHIERS_HTML) $(FICHIERS_EPUB)
 install: sync
 
 clean:
-	rm -f *~
+	rm -f ?*~
 
 clean-html:
-	rm -f *.html
-	rm -f *~
+	rm -f ?*.html
+	rm -f ?*~
 
 clean-epub:
-	rm -f *.epub
-	rm -f *~
+	rm -f ?*.epub
+	rm -f ?*~
 
 wipe:
-	rm -f *.html
-	rm -f *.epub
-	rm -f *~
+	rm -f ?*.html
+	rm -f ?*.epub
+	rm -f ?*~
 
 # }}}1
 

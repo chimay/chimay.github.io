@@ -30,20 +30,20 @@ all: $(SUBDIRS) $(FICHIERS_HTML) $(FICHIERS_EPUB)
 install: sync
 
 clean: $(CLEAN_SUBDIRS)
-	rm -f *~
+	rm -f ?*~
 
 clean-html: $(CLEAN_HTML_SUBDIRS)
-	rm -f *.html
-	rm -f *~
+	rm -f ?*.html
+	rm -f ?*~
 
 clean-epub: $(CLEAN_EPUB_SUBDIRS)
-	rm -f *.epub
-	rm -f *~
+	rm -f ?*.epub
+	rm -f ?*~
 
 wipe: $(WIPE_SUBDIRS)
-	rm -f *.html
-	rm -f *.epub
-	rm -f *~
+	rm -f ?*.html
+	rm -f ?*.epub
+	rm -f ?*~
 
 # }}}1
 

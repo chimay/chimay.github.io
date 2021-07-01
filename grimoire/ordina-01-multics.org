@@ -402,21 +402,22 @@ poweroff
 
 ** Types d’interfaces
 
-| Type | Signification            | Traduction                       | Commentaire             |
-|------+--------------------------+----------------------------------+-------------------------|
-| TERM | Terminal                 | Console                          |                         |
-| REPL | Read Eval Print Loop     | Boucle de commandes              | Logiciel intéractif     |
-|      |                          |                                  | en ligne de commande    |
-| SRV  | Server, Service          | Serveur, Service à l’écoute      |                         |
-| CLI  | Command Line Interface   | Ligne de commande                | Logiciel utilisé via    |
-|      |                          |                                  | une ligne de commande   |
-| TUI  | Text User Interface      | Interface texte avec menus,      | Généralement en ncurses |
-|      |                          | boîtes de saisie, etc            |                         |
-| GUI  | Graphical User Interface | Interface graphique avec menus,  |                         |
-|      |                          | boîtes de saisie, etc            |                         |
-| LANG | Language                 | Langage                          |                         |
-| LIB  | Librairie, Bibliothèque  | Ensemble de fonctions            |                         |
-|      |                          | nécessaires à d’autres logiciels |                         |
+| Type | Signification                   | Traduction                       | Commentaire             |
+|------+---------------------------------+----------------------------------+-------------------------|
+| KERN | noyau du système d’exploitation |                                  |                         |
+| TERM | terminal                        | Console                          |                         |
+| REPL | Read Eval Print Loop            | Boucle de commandes              | Logiciel intéractif     |
+|      |                                 |                                  | en ligne de commande    |
+| SRV  | server, service                 | Serveur, Service à l’écoute      |                         |
+| CLI  | Command Line Interface          | Ligne de commande                | Logiciel utilisé via    |
+|      |                                 |                                  | une ligne de commande   |
+| TUI  | Text User Interface             | Interface texte avec menus,      | Généralement en ncurses |
+|      |                                 | boîtes de saisie, etc            |                         |
+| GUI  | Graphical User Interface        | Interface graphique avec menus,  |                         |
+|      |                                 | boîtes de saisie, etc            |                         |
+| LANG | language                        | Langage                          |                         |
+| LIB  | librairie, bibliothèque         | Ensemble de fonctions            |                         |
+|      |                                 | nécessaires à d’autres logiciels |                         |
 
 
 * Boîte à outils
@@ -439,68 +440,80 @@ poweroff
 
 *** Système
 
-| Commande       | Interface | Fonction                                | Paquet ou dépôt        |
-|----------------+-----------+-----------------------------------------+------------------------|
-| archinstall    |           | outil d’installatio, uefi uniquement    | archinstall            |
-|----------------+-----------+-----------------------------------------+------------------------|
-| fdisk          | CLI       | partitionnement du disque               | util-linux             |
-| cfdisk         | TUI       | partitionnement du disque               | util-linux             |
-| sfdisk         | CLI       | version scriptable de fdisk             | util-linux             |
-|----------------+-----------+-----------------------------------------+------------------------|
-| gdisk          | CLI       | partitionnement du disque en GPT        | gptfdisk               |
-| cgdisk         | TUI       | partitionnement du disque en GPT        | gptfdisk               |
-| sgdisk         | CLI       | version scriptable de gdisk             | gptfdisk               |
-|----------------+-----------+-----------------------------------------+------------------------|
-| parted         | CLI       | partitionnement du disque               | parted                 |
-|----------------+-----------+-----------------------------------------+------------------------|
-| hdparm         | CLI       | paramètres du disque                    | hdparm                 |
-| smartctl       | CLI       | santé du disque                         | smartmontools          |
-| wipe           | CLI       | effacement sécurisé de fichiers         | wipe                   |
-|----------------+-----------+-----------------------------------------+------------------------|
-| loadkeys       | CLI       | disposition du clavier en console linux | kbd                    |
-|----------------+-----------+-----------------------------------------+------------------------|
-| brightnessctl  | CLI       | luminosité du matériel                  | brightnessctl          |
-|----------------+-----------+-----------------------------------------+------------------------|
-| grub-mkconfig  | CLI       | grub boot manager, pour BIOS ou UEFI    | grub                   |
-| grub-install   |           |                                         |                        |
-| os-prober      | CLI       | détection des systèmes                  | os-prober              |
-|                |           | d’exploitation                          |                        |
-| efibootmgr     | CLI       | modification des variables UEFI         | efibootmgr             |
-| refind-install | CLI       | refind, boot manager pour UEFI          | redind-efi             |
-|----------------+-----------+-----------------------------------------+------------------------|
-| lsb_release    | CLI       | informations sur la distribution        | lsb-release            |
-|----------------+-----------+-----------------------------------------+------------------------|
-| pacman         | CLI       | gestionnaire de paquet                  | pacman                 |
-| repo-add       | CLI       | crée une base de donnée de paquets      | pacman                 |
-| paclog         | CLI       | filtre pour le log de pacman            | pacutils               |
-| pacreport      | CLI       | résumé des paquets installés            | pacutils               |
-| pacman-mirrors | CLI       | génération du fichiers des miroirs      | manjaro/pacman-mirrors |
-| pacsearch      | CLI       | recherche de paquets                    | pacman-contrib         |
-| updpkgsums     | CLI       | mise à jour des sommes de contrôle      | pacman-contrib         |
-| pkgfile        | CLI       | recherche de fichier dans les paquets   | pkgfile                |
-| asp            | CLI       | obtention des sources d’un paquet       | asp                    |
-|----------------+-----------+-----------------------------------------+------------------------|
-| pamac          | CLI       | gestionnaire de paquet                  | aur/pamac-cli          |
-|----------------+-----------+-----------------------------------------+------------------------|
-| paru           | CLI       | sources et compilation pour AUR         | aur/paru-bin           |
-| yay            | CLI       | sources et compilation pour AUR         | aur/yay                |
-|----------------+-----------+-----------------------------------------+------------------------|
-| downgrade      | CLI       | réinstaller une ancienne version        | aur/downgrade          |
-|                |           | d’un paquet                             |                        |
-| downgrader     | CLI       | réinstaller une ancienne version        | aur/downgrader         |
-|                |           | d’un paquet                             |                        |
-|----------------+-----------+-----------------------------------------+------------------------|
-| snap           | CLI       | paquets livrés avec leurs dépendances   | snapd                  |
-| flatpak        | CLI       | paquets livrés avec leurs dépendances   | flatpak                |
-| ail-cli        | CLI       | paquets livrés avec leurs dépendances   | appimagelauncher       |
-|----------------+-----------+-----------------------------------------+------------------------|
-| bauh           | CLI       | gestion de aur, snap, flatpak           | bauh                   |
-|----------------+-----------+-----------------------------------------+------------------------|
-| handlr         | CLI       | ouverture par le programme par défaut   | aur/handlr             |
-| xdg-mime       | CLI       | programmes par défaut                   | xdg-utils              |
-| xdg-open       | CLI       | ouverture par le programme par défaut   | xdg-utils              |
-|----------------+-----------+-----------------------------------------+------------------------|
-| aconfmgr       | CLI       | gestionnaire de configuration pour arch | aur/aconfmgr-git       |
+| Commande       | Interface | Fonction                                 | Paquet ou dépôt            |
+|----------------+-----------+------------------------------------------+----------------------------|
+| archinstall    |           | outil d’installation, uefi uniquement    | archinstall                |
+|----------------+-----------+------------------------------------------+----------------------------|
+| fdisk          | CLI       | partitionnement du disque                | util-linux                 |
+| cfdisk         | TUI       | partitionnement du disque                | util-linux                 |
+| sfdisk         | CLI       | version scriptable de fdisk              | util-linux                 |
+| wipefs         | CLI       | effacer les système de fichier           | util-linux                 |
+|----------------+-----------+------------------------------------------+----------------------------|
+| gdisk          | CLI       | partitionnement du disque en GPT         | gptfdisk                   |
+| cgdisk         | TUI       | partitionnement du disque en GPT         | gptfdisk                   |
+| sgdisk         | CLI       | version scriptable de gdisk              | gptfdisk                   |
+|----------------+-----------+------------------------------------------+----------------------------|
+| parted         | CLI       | partitionnement du disque                | parted                     |
+|----------------+-----------+------------------------------------------+----------------------------|
+| hdparm         | CLI       | paramètres du disque                     | hdparm                     |
+| smartctl       | CLI       | santé du disque                          | smartmontools              |
+| wipe           | CLI       | effacement sécurisé de fichiers          | wipe                       |
+|----------------+-----------+------------------------------------------+----------------------------|
+| loadkeys       | CLI       | disposition du clavier en console linux  | kbd                        |
+|----------------+-----------+------------------------------------------+----------------------------|
+| brightnessctl  | CLI       | luminosité du matériel                   | brightnessctl              |
+|----------------+-----------+------------------------------------------+----------------------------|
+| grub-mkconfig  | CLI       | grub boot manager, pour BIOS ou UEFI     | grub                       |
+| grub-install   |           |                                          |                            |
+| os-prober      | CLI       | détection des systèmes                   | os-prober                  |
+|                |           | d’exploitation                           |                            |
+| efibootmgr     | CLI       | modification des variables UEFI          | efibootmgr                 |
+| refind-install | CLI       | refind, boot manager pour UEFI           | redind-efi                 |
+|----------------+-----------+------------------------------------------+----------------------------|
+|                | KERN      | noyau linux                              | linux                      |
+|                | KERN      | noyau linux support long terme           | linux-lts                  |
+|                | KERN      | noyau linux zen                          | linux-zen                  |
+|----------------+-----------+------------------------------------------+----------------------------|
+| lsb_release    | CLI       | informations sur la distribution         | lsb-release                |
+|----------------+-----------+------------------------------------------+----------------------------|
+| pacman         | CLI       | gestionnaire de paquet                   | pacman                     |
+| repo-add       | CLI       | crée une base de donnée de paquets       | pacman                     |
+| makepkg        | CLI       | construit un paquet                      | pacman                     |
+|                |           |                                          |                            |
+| pactree        | CLI       | hiérarchie des dépendances entre paquets | pacman-contrib             |
+| pacsearch      | CLI       | recherche de paquets                     | pacman-contrib             |
+| pacdiff        | CLI       | fichiers pacorig, pacnew, pacsave        | pacman-contrib             |
+| updpkgsums     | CLI       | mise à jour des sommes de contrôle       | pacman-contrib             |
+| paclog         | CLI       | filtre pour le log de pacman             | pacutils                   |
+| pacreport      | CLI       | résumé des paquets installés             | pacutils                   |
+| pkgfile        | CLI       | recherche de fichier dans les paquets    | pkgfile                    |
+| asp            | CLI       | obtention des sources d’un paquet        | asp                        |
+| pacman-mirrors | CLI       | génération du fichiers des miroirs       | manjaro/pacman-mirrors     |
+|----------------+-----------+------------------------------------------+----------------------------|
+| pamac          | CLI       | gestionnaire de paquet de manjaro        | aur/pamac-cli              |
+|----------------+-----------+------------------------------------------+----------------------------|
+| paru           | CLI       | sources et compilation pour AUR          | aur/paru-bin               |
+| yay            | CLI       | sources et compilation pour AUR          | aur/yay                    |
+| trizen         | CLI       | sources et compilation pour AUR          | aur/trizen                 |
+|----------------+-----------+------------------------------------------+----------------------------|
+| pacui          | CLI       | pacman & aur                             | github/excalibur1234/pacui |
+|----------------+-----------+------------------------------------------+----------------------------|
+| downgrade      | CLI       | réinstaller une ancienne version         | aur/downgrade              |
+|                |           | d’un paquet                              |                            |
+| downgrader     | CLI       | réinstaller une ancienne version         | aur/downgrader             |
+|                |           | d’un paquet                              |                            |
+|----------------+-----------+------------------------------------------+----------------------------|
+| snap           | CLI       | paquets livrés avec leurs dépendances    | snapd                      |
+| flatpak        | CLI       | paquets livrés avec leurs dépendances    | flatpak                    |
+| ail-cli        | CLI       | paquets livrés avec leurs dépendances    | appimagelauncher           |
+|----------------+-----------+------------------------------------------+----------------------------|
+| bauh           | CLI       | gestion de aur, snap, flatpak            | bauh                       |
+|----------------+-----------+------------------------------------------+----------------------------|
+| handlr         | CLI       | ouverture par le programme par défaut    | aur/handlr                 |
+| xdg-mime       | CLI       | programmes par défaut                    | xdg-utils                  |
+| xdg-open       | CLI       | ouverture par le programme par défaut    | xdg-utils                  |
+|----------------+-----------+------------------------------------------+----------------------------|
+| aconfmgr       | CLI       | gestionnaire de configuration pour arch  | aur/aconfmgr-git           |
 
 
 *** Environnement graphique
@@ -555,6 +568,7 @@ poweroff
 |-----------------+-----------+-----------------------------------------------+------------------------------|
 | notify-send     | CLI       | notification                                  | libnotify                    |
 | dunst           | SRV       | serveur de notification                       | dunst                        |
+| dunstctl        | CLI       | interface pour dunst                          | dunst                        |
 | statnot         | SRV       | serveur de notification                       | aur/statnot                  |
 | twmn            | SRV       | serveur de notification                       | aur/twmn-git                 |
 |-----------------+-----------+-----------------------------------------------+------------------------------|
@@ -597,6 +611,33 @@ poweroff
 | xrandr          | CLI       | multi-écrans                                  |                              |
 | arandr          | GUI       | multi-écrans                                  |                              |
 | lxrandr         | GUI       | multi-écrans                                  |                              |
+
+
+*** Matériel
+
+| Commande     | Interface     | Fonction                             | Paquet ou dépôt |
+|--------------+---------------+--------------------------------------+-----------------|
+| sensors      | CLI           | thermomètres                         | sensors         |
+| thermald     | SRV           | contrôle de la température           | thermald        |
+|--------------+---------------+--------------------------------------+-----------------|
+| cpupower     | SRV, CLI      | contrôle de la fréquence des cpus    | cpupower        |
+| cpupower-gui | SRV, CLI, GUI | contrôle de la fréquence des cpus    | cpupower-gui    |
+|--------------+---------------+--------------------------------------+-----------------|
+| powertop     | CLI           | consommation d’énergie               | powertop        |
+| powerstat    | CLI           | consommation d’énergie               | aur/powerstat   |
+|--------------+---------------+--------------------------------------+-----------------|
+| tlp          | CLI           | économie d’énergie                   | tlp             |
+|--------------+---------------+--------------------------------------+-----------------|
+| hdparm       | CLI           | paramètres du disque                 | hdparm          |
+| smartctl     | CLI           | contrôle des disques smart           | smartmontools   |
+|--------------+---------------+--------------------------------------+-----------------|
+| rfkill       | CLI           | outil de contrôle du wifi, bluetooth | util-linux      |
+|--------------+---------------+--------------------------------------+-----------------|
+|              | LIB           | appels acpi via /proc/acpi/call      | acpi_call       |
+|              | LIB           | appels acpi pour noyau LTS           | acpi_call-lts   |
+|--------------+---------------+--------------------------------------+-----------------|
+|              | LIB           | switch discrete gpu card             | bbswitch        |
+|              | LIB           | switch discrete gpu card             | bbswitch-dkms   |
 
 
 *** Polices de caractères
@@ -693,36 +734,38 @@ poweroff
 
 *** Recherche
 
-| Commande    | Interface | Fonction                              | Paquet ou dépôt     |
-|-------------+-----------+---------------------------------------+---------------------|
-| ls          | CLI       | liste de fichiers                     | coreutils           |
-| ls_extended | CLI       | liste de fichiers avec icônes         | aur/ls_extended     |
-|-------------+-----------+---------------------------------------+---------------------|
-| fzf         | CLI       | recherche & Complétion floue          | fzf                 |
-| sk          | CLI       | recherche & Complétion floue          | skim                |
-| sk-tmux     | CLI       | skim dans un panel tmux               | skim                |
-| fasd        | CLI       | accès rapide aux fichiers &           | fasd                |
-|             |           | répertoires                           |                     |
-| smenu       | CLI       | menu de sélection                     | aur/smenu           |
-|-------------+-----------+---------------------------------------+---------------------|
-| find        | CLI       | trouver des fichiers                  | findutils           |
-| fd          | CLI       | alternative à find, en rust           | fd                  |
-| xargs       | CLI       | appliquer la même commande            | findutils           |
-|             |           | à plusieurs arguments                 |                     |
-|-------------+-----------+---------------------------------------+---------------------|
-| locate      | CLI       | localisation de fichiers              | mlocate             |
-|-------------+-----------+---------------------------------------+---------------------|
-| urlview     | TUI       | gestion des URLs dans le terminal     | aur/urlview         |
-| urlscan     | TUI       | gestion des URLs dans le terminal     | aur/urlscan-git     |
-|-------------+-----------+---------------------------------------+---------------------|
-| grep        | CLI       | recherche dans les fichiers           | grep                |
-| ack         | CLI       | recherche dans les fichiers           | ack                 |
-| ag          | CLI       | recherche dans les fichiers           | the_silver_searcher |
-| rg          | CLI       | alternative à grep/ack/ag, en rust    | ripgrep             |
-|-------------+-----------+---------------------------------------+---------------------|
-| ctags       | CLI       | génération de tags pour (n)vim        | ctags               |
-|-------------+-----------+---------------------------------------+---------------------|
-| tmsu        | CLI       | tags pour fichiers ; file sys virtuel | aur/tmsu-bin        |
+| Commande    | Interface | Fonction                                   | Paquet ou dépôt     |
+|-------------+-----------+--------------------------------------------+---------------------|
+| ls          | CLI       | liste de fichiers                          | coreutils           |
+| ls_extended | CLI       | liste de fichiers avec icônes              | aur/ls_extended     |
+|-------------+-----------+--------------------------------------------+---------------------|
+| fzf         | CLI       | recherche & Complétion floue               | fzf                 |
+| sk          | CLI       | recherche & Complétion floue               | skim                |
+| sk-tmux     | CLI       | skim dans un panel tmux                    | skim                |
+| fasd        | CLI       | accès rapide aux fichiers &                | fasd                |
+|             |           | répertoires                                |                     |
+| smenu       | CLI       | menu de sélection                          | aur/smenu           |
+|-------------+-----------+--------------------------------------------+---------------------|
+| find        | CLI       | trouver des fichiers                       | findutils           |
+| fd          | CLI       | alternative à find, en rust                | fd                  |
+| xargs       | CLI       | appliquer la même commande                 | findutils           |
+|             |           | à plusieurs arguments                      |                     |
+|-------------+-----------+--------------------------------------------+---------------------|
+| which       | CLI       | localisation de binaires                   | which               |
+| whereis     | CLI       | localisation de binaires, sources, manuels | util-linux          |
+| locate      | CLI       | localisation de fichiers                   | mlocate             |
+|-------------+-----------+--------------------------------------------+---------------------|
+| urlview     | TUI       | gestion des URLs dans le terminal          | aur/urlview         |
+| urlscan     | TUI       | gestion des URLs dans le terminal          | aur/urlscan-git     |
+|-------------+-----------+--------------------------------------------+---------------------|
+| grep        | CLI       | recherche dans les fichiers                | grep                |
+| ack         | CLI       | recherche dans les fichiers                | ack                 |
+| ag          | CLI       | recherche dans les fichiers                | the_silver_searcher |
+| rg          | CLI       | alternative à grep/ack/ag, en rust         | ripgrep             |
+|-------------+-----------+--------------------------------------------+---------------------|
+| ctags       | CLI       | génération de tags pour (n)vim             | ctags               |
+|-------------+-----------+--------------------------------------------+---------------------|
+| tmsu        | CLI       | tags pour fichiers ; file sys virtuel      | aur/tmsu-bin        |
 
 
 *** Édition
@@ -775,6 +818,8 @@ poweroff
 | patch    | CLI       | application des différences  | patch           |
 |----------+-----------+------------------------------+-----------------|
 | sccs     | CLI       | source code control system   | aur/sccs        |
+| sccs     | CLI       | source code control system   | aur/cssc        |
+|----------+-----------+------------------------------+-----------------|
 | rcs      | CLI       | revision control system      | rcs             |
 | merge    | CLI       | fusion des modifications     | rcs             |
 |          |           | de 3 fichiers                |                 |
@@ -812,12 +857,14 @@ poweroff
 |           | TUI       | pré-traitement de fichiers pour less | lesspipe          |
 | vimpager  | TUI       | pageur                               | vimpager          |
 |-----------+-----------+--------------------------------------+-------------------|
+| pdfjam    | CLI       | outils pour pdf                      | texlive-core      |
 | pdf*      | CLI       | utilitaires pdf                      | poppler           |
 | pdfinfo   | CLI       | info PDF                             | poppler           |
 | pdftk     | CLI       | outils PDF                           | poppler           |
 | pdfimages | CLI       | extraction d’images d’un PDF         | poppler           |
 | pdftk     | CLI       | outil pour pdf                       | pdftk             |
 | qpdf      | CLI       | transformation pour pdf              | qpdf              |
+| pdftricks | GUI       | outils pour pdf                      | pdftricks         |
 |-----------+-----------+--------------------------------------+-------------------|
 | mupdf     | GUI       | visualisateur PDF                    | mupdf             |
 | zathura   | GUI       | visualisateur de PDF, EPUB vi-like   | zathura           |
@@ -1192,45 +1239,46 @@ poweroff
 
 **** Écriture
 
-| Commande     | Interface | Fonction                             | Paquet ou dépôt      |
-|--------------+-----------+--------------------------------------+----------------------|
-| gvedit       | CLI       | éditeur de diagrammes graphviz       | graphviz             |
-| xdot         | GUI       | visualisateur de diagrammes graphviz | xdot                 |
-|--------------+-----------+--------------------------------------+----------------------|
-| convert      | CLI       | conversion images                    | imagemagick          |
-| posterazor   | GUI       | découpage d’images pour posters      | posterazor           |
-|--------------+-----------+--------------------------------------+----------------------|
-| sox          | CLI       | boîte à outils son                   | sox                  |
-|--------------+-----------+--------------------------------------+----------------------|
-| oggenc       | CLI       | encodage Ogg Vorbis                  | vorbis-tools         |
-| lame         | CLI       | encodage MP3                         | lame                 |
-|--------------+-----------+--------------------------------------+----------------------|
-| mp3split     | CLI       | scission de fichiers audio           | mp3splt              |
-| mp3split-gtk | GUI       | scission de fichiers audio           | mp3splt-gtk          |
-| mp3wrap      | CLI       | fusion de fichiers audio             | mp3wrap              |
-|--------------+-----------+--------------------------------------+----------------------|
-| audiotag     | CLI       | édition de tags                      | aur/audiotag         |
-| beet         | CLI       | édition de tags                      | beets                |
-|--------------+-----------+--------------------------------------+----------------------|
-| cdrecord     | CLI       | gravure de CD, DVD, BluRay           | cdrtools             |
-| cdw          | TUI       | gravure de CD                        | aur/cdw              |
-|--------------+-----------+--------------------------------------+----------------------|
-| ffmpeg       | CLI       | conversion, encodage vidéo           | ffmpeg               |
-| mendoder     | CLI       | conversion, encodage vidéo           | mencoder             |
-|--------------+-----------+--------------------------------------+----------------------|
-| HandBrakeCLI | CLI       | conversion vidéo                     | handbrake-cli        |
-| HandBrake    | GUI       | conversion vidéo                     | handbrake            |
-|--------------+-----------+--------------------------------------+----------------------|
-| dvdbackup    | CLI       | backup de DVD                        | dvdbackup            |
-|              | CLI       | encodage de DVD                      | transcode            |
-|--------------+-----------+--------------------------------------+----------------------|
-| scrot        | CLI       | capture d’écran, screenshot          |                      |
-|--------------+-----------+--------------------------------------+----------------------|
-| byzanz       | CLI       | screencast dans un gif               | byzanz               |
-|              |           | screencast                           | peek                 |
-|              |           | screencast                           | simplescreenrecorder |
-|              |           | screencast                           | aur/obs-studio       |
-| screenkey    | CLI       | affichage des touches utilisées      | aur/screenkey        |
+| Commande             | Interface | Fonction                                          | Paquet ou dépôt          |
+|----------------------+-----------+---------------------------------------------------+--------------------------|
+| gvedit               | CLI       | éditeur de diagrammes graphviz                    | graphviz                 |
+| xdot                 | GUI       | visualisateur de diagrammes graphviz              | xdot                     |
+|----------------------+-----------+---------------------------------------------------+--------------------------|
+| convert              | CLI       | modification & conversion images -> autre fichier | imagemagick              |
+| mogrify              | CLI       | modification & conversion images -> même fichier  | imagemagick              |
+| posterazor           | GUI       | découpage d’images pour posters                   | posterazor               |
+|----------------------+-----------+---------------------------------------------------+--------------------------|
+| sox                  | CLI       | boîte à outils son                                | sox                      |
+|----------------------+-----------+---------------------------------------------------+--------------------------|
+| oggenc               | CLI       | encodage Ogg Vorbis                               | vorbis-tools             |
+| lame                 | CLI       | encodage MP3                                      | lame                     |
+|----------------------+-----------+---------------------------------------------------+--------------------------|
+| mp3split             | CLI       | scission de fichiers audio                        | mp3splt                  |
+| mp3split-gtk         | GUI       | scission de fichiers audio                        | mp3splt-gtk              |
+| mp3wrap              | CLI       | fusion de fichiers audio                          | mp3wrap                  |
+|----------------------+-----------+---------------------------------------------------+--------------------------|
+| audiotag             | CLI       | édition de tags                                   | aur/audiotag             |
+| beet                 | CLI       | édition de tags                                   | beets                    |
+|----------------------+-----------+---------------------------------------------------+--------------------------|
+| cdrecord             | CLI       | gravure de CD, DVD, BluRay                        | cdrtools                 |
+| cdw                  | TUI       | gravure de CD                                     | aur/cdw                  |
+|----------------------+-----------+---------------------------------------------------+--------------------------|
+| ffmpeg               | CLI       | conversion, encodage vidéo                        | ffmpeg                   |
+| mendoder             | CLI       | conversion, encodage vidéo                        | mencoder                 |
+|----------------------+-----------+---------------------------------------------------+--------------------------|
+| HandBrakeCLI         | CLI       | conversion vidéo                                  | handbrake-cli            |
+| HandBrake            | GUI       | conversion vidéo                                  | handbrake                |
+|----------------------+-----------+---------------------------------------------------+--------------------------|
+| dvdbackup            | CLI       | backup de DVD                                     | dvdbackup                |
+|                      | CLI       | encodage de DVD                                   | transcode                |
+|----------------------+-----------+---------------------------------------------------+--------------------------|
+| scrot                | CLI       | capture d’écran, screenshot                       |                          |
+|----------------------+-----------+---------------------------------------------------+--------------------------|
+| byzanz               | CLI       | screencast dans un gif                            | byzanz                   |
+|                      |           | screencast                                        | peek                     |
+|                      |           | screencast                                        | simplescreenrecorder     |
+|                      |           | screencast                                        | aur/obs-studio           |
+| screenkey            | CLI       | affichage des touches utilisées                   | aur/screenkey            |
 
 
 **** Création
@@ -1333,6 +1381,13 @@ spécifiques à Linux Mint.
 | add-apt-repository | CLI       | ajout d’un dépôt                    |                 |
 |                    |           | sert aussi à ajouter un dépôt tiers |                 |
 |                    |           | (PPA : Personal Package Archives)   |                 |
+
+
+*** Réseau
+
+| Commande | Interface | Fonction            | Paquet ou dépôt |
+|----------+-----------+---------------------+-----------------|
+|          | GUI       | échange de fichiers | warpinator      |
 
 
 *** Multimédia

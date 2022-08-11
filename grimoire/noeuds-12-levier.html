@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<!-- 2022-08-11 jeu 22:21 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Eclats de vers : Noeuds 12 : Levier (leverage)</title>
+<meta name="author" content="chimay" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+</style>
+<link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Eclats de vers : Noeuds 12 : Levier (leverage)</h1>
+<p>
+<a href="index.html">Index des Grimoires</a>
+</p>
+
+<p>
+<a href="../index.html">Retour à l’accueil</a>
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgd8e9a82">1. Généralités</a></li>
+<li><a href="#org6a700ed">2. Montages</a></li>
+<li><a href="#orgb964e1e">3. Exemple de noeuds à leviers</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orgd8e9a82" class="outline-2">
+<h2 id="orgd8e9a82"><span class="section-number-2">1.</span> Généralités</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org8eabbdb" class="outline-3">
+<h3 id="org8eabbdb"><span class="section-number-3">1.1.</span> Boucles utilisées</h3>
+<div class="outline-text-3" id="text-1-1">
+</div>
+<div id="outline-container-org56f95f8" class="outline-4">
+<h4 id="org56f95f8"><span class="section-number-4">1.1.1.</span> Boucles à taille fixe</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+Les montages utilisent une ou plusieurs boucles. On choisira de
+préférence une boucle à taille fixe :
+</p>
+
+<ul class="org-ul">
+<li>bowline</li>
+<li>angler’s knot</li>
+<li>double dragon</li>
+<li>alpine butterfly</li>
+<li>farmer’s loop</li>
+<li>fisherman loop</li>
+<li>etc</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orgccc95d2" class="outline-4">
+<h4 id="orgccc95d2"><span class="section-number-4">1.1.2.</span> Prusik</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+On peut aussi utiliser un Prusik :
+</p>
+
+<ol class="org-ol">
+<li>choisir une autre corde <b>C</b>, assez courte et moins épaisse que la
+corde principale <b>T</b></li>
+<li>nouer entre-elles les extrémités de <b>C</b> pour former un cercle</li>
+<li>faire un Prusik avec <b>C</b> autour de la corde principale <b>T</b></li>
+<li>le Prusik sert alors de boucle pour le montage en levier</li>
+</ol>
+
+<p>
+Avantage : à force de tracter, il arrive qu’une boucle arrive en bout
+de course et ne puisse se déplacer plus loin. Si la boucle utilisée
+est celle d’un Prusik, on peut la faire glisser le long de la corde
+principale pour en réinitialiser la position. Il est alors possible de
+continuer à tracter.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org2eb61a6" class="outline-4">
+<h4 id="org2eb61a6"><span class="section-number-4">1.1.3.</span> Boucles serrantes</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<ul class="org-ul">
+<li>un lark’s head</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orga4725c0" class="outline-4">
+<h4 id="orga4725c0"><span class="section-number-4">1.1.4.</span> Boucles hybrides</h4>
+<div class="outline-text-4" id="text-1-1-4">
+<ul class="org-ul">
+<li>un slip knot (suivant le sens du nouage)</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org72cec09" class="outline-3">
+<h3 id="org72cec09"><span class="section-number-3">1.2.</span> Verrouillage automatique</h3>
+<div class="outline-text-3" id="text-1-2">
+</div>
+<div id="outline-container-org668d08a" class="outline-4">
+<h4 id="org668d08a"><span class="section-number-4">1.2.1.</span> Prusik</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<ol class="org-ol">
+<li>choisir une autre corde <b>C</b>, assez courte et moins épaisse que la
+corde principale <b>T</b></li>
+<li>choisir une autre corde <b>D</b></li>
+<li>passer <b>D</b> autour du point d’appui</li>
+<li>nouer les extrémités de <b>D</b> entre-elles</li>
+<li>nouer les extrémités de <b>C</b> entre-elles</li>
+<li>faire un Prusik avec <b>C</b> autour de <b>T</b>
+<ul class="org-ul">
+<li>entre l’objet à tracter et le point d’appui</li>
+<li>près du point d’appui</li>
+</ul></li>
+<li>soit <b>Z</b> la boucle (l’anse) du Prusik</li>
+<li>avec <b>D</b>, faire une boucle <b>Y</b> à taille fixe autour de <b>Z</b>
+<ul class="org-ul">
+<li>assez petite, pour ne pas laisser passer le Prusik au travers</li>
+</ul></li>
+<li>on a alors un Prusik attaché à <b>T</b> et qui est ancré au point
+d’appui, grâce à <b>Y</b></li>
+<li>passer <b>T</b> dans <b>Y</b> au lieu de la passer autour du point d’appui</li>
+<li>le Prusik bloque un retour en arrière des cordes
+<ul class="org-ul">
+<li>il permet donc un mouvement essentiellement unidirectionnel,
+dans le sens souhaité</li>
+</ul></li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org1f9009b" class="outline-4">
+<h4 id="org1f9009b"><span class="section-number-4">1.2.2.</span> Bobine dans la boucle</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<ol class="org-ol">
+<li>faire une bobine de deux tours dans la boucle</li>
+<li>tendre la corde</li>
+<li>elle se verrouille automatiquement</li>
+<li>pour détendre la corde, repasser la partie de travail dans
+l’autre sens dans la boucle</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgb2e48e5" class="outline-3">
+<h3 id="orgb2e48e5"><span class="section-number-3">1.3.</span> Frottement</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Le frottement des cordes dans les boucles peut diminuer le levier
+théorique. Pour diminuer le frottement, on peut utiliser des
+mousquetons comme intermédiaires.
+</p>
+
+<p>
+À chaque boucle utilisée :
+</p>
+
+<ul class="org-ul">
+<li>ouvrir le mousqueton</li>
+<li>le passer dans la boucle</li>
+<li>fermer le mousqueton</li>
+<li>passer la corde dans le mousqueton au lieu de le passer dans la
+boucle</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org6a700ed" class="outline-2">
+<h2 id="org6a700ed"><span class="section-number-2">2.</span> Montages</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org50f9126" class="outline-3">
+<h3 id="org50f9126"><span class="section-number-3">2.1.</span> Levier deux</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Pour réaliser un levier mécanique de facteur 2, on met en place le
+dispositif suivant :
+</p>
+
+<ol class="org-ol">
+<li>attacher l’extrémité <b>E</b> de la corde à l’objet à tracter</li>
+<li>aller avec l’extrémité de travail <b>F</b> jusqu’au point d’appui fixe</li>
+<li>faire un demi-tour avec <b>F</b> autour du point d’appui</li>
+<li>réaliser une boucle <b>B</b> entre <b>E</b> et le point d’appui, près de <b>E</b></li>
+<li>passer <b>F</b> dans <b>B</b></li>
+<li>faire demi-tour avec <b>F</b></li>
+<li>tirer sur <b>F</b> pour tendre la corde et éventuellement tracter
+l’objet</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org421eaf2" class="outline-3">
+<h3 id="org421eaf2"><span class="section-number-3">2.2.</span> Levier quatre</h3>
+<div class="outline-text-3" id="text-2-2">
+</div>
+<div id="outline-container-org8df7192" class="outline-4">
+<h4 id="org8df7192"><span class="section-number-4">2.2.1.</span> Levier deux pour tirer sur un levier deux</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<p>
+Utiliser un dispositif en levier 2 pour tirer sur la corde qui passe
+dans la boucle d’un autre dispositif en levier 2. On peut utiliser le
+même point d’appui pour les deux dispositifs.
+</p>
+
+<ol class="org-ol">
+<li>dispositif <b>I</b> : traction sur l’objet
+<ol class="org-ol">
+<li>attacher l’extrémité <b>E</b> de la corde à l’objet à tracter</li>
+<li>aller avec l’extrémité de travail <b>F</b> jusqu’au point d’appui fixe</li>
+<li>faire un demi-tour avec l’extrémité de travail <b>F</b> autour du
+point d’appui</li>
+<li>réaliser une boucle <b>A</b> entre <b>E</b> et le point d’appui, près de <b>E</b></li>
+<li>passer <b>F</b> dans <b>A</b>
+<ul class="org-ul">
+<li>soit <b>P</b> ce passage</li>
+</ul></li>
+<li>faire demi-tour avec <b>F</b></li>
+</ol></li>
+<li>dispositif <b>II</b> : traction sur <b>A</b>
+<ol class="org-ol">
+<li>aller avec l’extrémité de travail <b>F</b> jusqu’au point d’appui
+<ul class="org-ul">
+<li>le même point d’appui, ou un autre, à côté du premier</li>
+</ul></li>
+<li>faire un demi-tour avec l’extrémité de travail <b>F</b> autour du
+point d’appui
+<ul class="org-ul">
+<li>idéalement dans le même sens de rotation que pour <b>I</b></li>
+</ul></li>
+<li>réaliser une boucle <b>B</b> entre <b>P</b> et le point d’appui, près de <b>P</b></li>
+<li>passer <b>F</b> dans <b>B</b></li>
+<li>faire demi-tour avec <b>F</b></li>
+</ol></li>
+<li>tirer sur <b>F</b> pour tendre la corde et éventuellement tracter
+l’objet</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org51e2b26" class="outline-3">
+<h3 id="org51e2b26"><span class="section-number-3">2.3.</span> Levier huit</h3>
+<div class="outline-text-3" id="text-2-3">
+<ol class="org-ol">
+<li>dispositif en levier deux <b>I</b> : traction sur l’objet</li>
+<li>dispositif <b>II</b> : traction sur la boucle de <b>I</b></li>
+<li>dispositif <b>III</b> : traction sur la boucle de <b>II</b></li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org672df39" class="outline-3">
+<h3 id="org672df39"><span class="section-number-3">2.4.</span> Bobine entre la boucle et le point d’appui</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+Levier : deux fois le nombre de tours.
+</p>
+
+<ol class="org-ol">
+<li>attacher l’extrémité <b>E</b> de la corde à l’objet à tracter</li>
+<li>aller avec l’extrémité de travail <b>F</b> jusqu’au point d’appui fixe</li>
+<li>faire un demi-tour avec <b>F</b> autour du point d’appui</li>
+<li>réaliser une boucle <b>B</b> entre <b>E</b> et le point d’appui, près de <b>E</b></li>
+<li>passer <b>F</b> dans <b>B</b></li>
+<li>réaliser plusieurs tours entre <b>B</b> et le point d’appui, en
+passant à chaque fois
+<ul class="org-ul">
+<li>dans <b>B</b></li>
+<li>autour du point d’appui</li>
+</ul></li>
+<li>faire demi-tour avec <b>F</b>, vers le point d’appui</li>
+<li>tirer sur <b>F</b> pour tendre la corde et éventuellement tracter
+l’objet</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-orge8ec286" class="outline-3">
+<h3 id="orge8ec286"><span class="section-number-3">2.5.</span> First class amateur</h3>
+<div class="outline-text-3" id="text-2-5">
+<p>
+Crédit : chaîne youtube First class amateur.
+</p>
+
+<ol class="org-ol">
+<li>attacher l’extrémité <b>E</b> de la corde à l’objet à tracter</li>
+<li>aller avec l’extrémité de travail <b>F</b> jusqu’au point d’appui fixe</li>
+<li>faire un demi-tour avec <b>F</b> autour du point d’appui</li>
+<li>réaliser une boucle <b>A</b> entre <b>E</b> et le point d’appui, près de <b>E</b></li>
+<li>passer <b>F</b> dans <b>A</b>
+<ul class="org-ul">
+<li>soit <b>P</b> ce passage</li>
+</ul></li>
+<li>faire demi-tour avec <b>F</b></li>
+<li>réaliser une boucle <b>B</b> entre le point d’appui et <b>P</b>, près du
+point d’appui</li>
+<li>passer <b>F</b> dans <b>B</b></li>
+<li>faire demi-tour avec <b>F</b></li>
+<li>repasser <b>F</b> dans la boucle</li>
+<li>faire demi-tour avec <b>F</b></li>
+<li>tirer sur <b>F</b> pour tendre la corde et éventuellement tracter
+l’objet</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgb964e1e" class="outline-2">
+<h2 id="orgb964e1e"><span class="section-number-2">3.</span> Exemple de noeuds à leviers</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org203ab4c" class="outline-3">
+<h3 id="org203ab4c"><span class="section-number-3">3.1.</span> Trucker’s hitch</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+<i>alias</i> : noeud de camionneur
+</p>
+</div>
+
+
+<div id="outline-container-org32b53a3" class="outline-4">
+<h4 id="org32b53a3"><span class="section-number-4">3.1.1.</span> Avec slip knot</h4>
+<div class="outline-text-4" id="text-3-1-1">
+<ol class="org-ol">
+<li>la boucle est l’anse d’un slip knot, côté réglable du côté du
+point d’appui
+<ul class="org-ul">
+<li>le slip knot est alors à taille fixe</li>
+<li>si on place le côté réglable dans l’autre sens, le slip knot se
+serre lorsqu’on tend la corde</li>
+</ul></li>
+<li>tendre la corde</li>
+<li>verrouiller le noeud avec un half hitch autour de la partie
+tendue proche de la partie de travail, et contre la boucle
+<ul class="org-ul">
+<li>pour plus de facilité à dénouer, on peut le réaliser avec une anse</li>
+</ul></li>
+</ol>
+
+<p>
+Remarque : si la boucle se ferme avec la tension, c’est qu’elle est
+mal orientée. La retourner d’un demi-tour et recommencer
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orge75da4d" class="outline-4">
+<h4 id="orge75da4d"><span class="section-number-4">3.1.2.</span> Avec slip knot torsadé</h4>
+<div class="outline-text-4" id="text-3-1-2">
+<ol class="org-ol">
+<li>la boucle est l’anse d’un slip knot torsadé, côté réglable du
+côté du point d’appui</li>
+<li>tendre la corde</li>
+<li>verrouiller le noeud avec un half hitch</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org33cd55e" class="outline-3">
+<h3 id="org33cd55e"><span class="section-number-3">3.2.</span> Truckie’s hitch</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+Avec sheepshank
+</p>
+
+<ol class="org-ol">
+<li>réaliser un sheepshank avec la boucle principale sur un côté
+<ol class="org-ol">
+<li>faire deux boucle <b>B</b> et <b>C</b></li>
+<li>faire une anse <b>A</b> et la passer dans les deux boucles</li>
+<li>tendre la corde</li>
+</ol></li>
+<li>la boucle est située dans le demi-tour effectué dans la corde
+pour réaliser la boucle principale du sheepshank</li>
+<li>verrouiller avec un half hitch</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Auteur: chimay</p>
+<p class="date">Created: 2022-08-11 jeu 22:21</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

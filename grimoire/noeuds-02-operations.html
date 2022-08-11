@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<!-- 2022-08-11 jeu 22:11 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Eclats de vers : Noeuds 02 : Opérations</title>
+<meta name="author" content="chimay" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+</style>
+<link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Eclats de vers : Noeuds 02 : Opérations</h1>
+<p>
+<a href="index.html">Index des Grimoires</a>
+</p>
+
+<p>
+<a href="../index.html">Retour à l’accueil</a>
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org0ffeb39">1. Opérations sur les noeuds</a></li>
+<li><a href="#orgae5b6f1">2. Opérations sur les cordes</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org0ffeb39" class="outline-2">
+<h2 id="org0ffeb39"><span class="section-number-2">1.</span> Opérations sur les noeuds</h2>
+<div class="outline-text-2" id="text-1">
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org9e17e4c">1.1. Opérations élémentaires</a></li>
+<li><a href="#org955a830">1.2. Au milieu de la corde</a></li>
+<li><a href="#org5feb96b">1.3. Boucles</a></li>
+<li><a href="#org2cb097b">1.4. Schémas classiques</a></li>
+<li><a href="#org5ee08b9">1.5. Faux noeuds</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org9e17e4c" class="outline-3">
+<h3 id="org9e17e4c"><span class="section-number-3">1.1.</span> Opérations élémentaires</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>passer une extrémité
+<ul class="org-ul">
+<li>autour d’un morceau de corde</li>
+<li>dans une anse</li>
+<li>dans une boucle</li>
+</ul></li>
+<li>passer un morceau de corde
+<ul class="org-ul">
+<li>dans une anse</li>
+<li>dans une boucle</li>
+<li>au-dessus ou en-dessous d’une boucle, ce qui crée deux régions
+distinctes dans la boucle</li>
+</ul></li>
+<li>passer une anse
+<ul class="org-ul">
+<li>dans une anse</li>
+<li>dans une boucle</li>
+<li>autour d’un morceau de corde</li>
+</ul></li>
+<li>passer une boucle
+<ul class="org-ul">
+<li>dans une anse</li>
+<li>dans une autre boucle</li>
+<li>au-dessus d’une autre boucle</li>
+<li>en-dessous d’une autre boucle</li>
+<li>autour d’un morceau de corde</li>
+<li>autour d’une boucle</li>
+</ul></li>
+<li>faire une doublure, et l’utiliser comme partie de travail</li>
+<li>une extrémité, une anse ou une boucle peut suivre un morceau de
+corde en parallèle</li>
+<li>terminer le noeud avec une anse au lieu de l’extrémité
+<ul class="org-ul">
+<li>permet un dénouage rapide</li>
+</ul></li>
+</ul>
+</div>
+
+
+<div id="outline-container-orgb3cbc56" class="outline-4">
+<h4 id="orgb3cbc56"><span class="section-number-4">1.1.1.</span> Multiplicité</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<ul class="org-ul">
+<li>une extrémité peut être simple ou double (ou multiple)</li>
+<li>un morceau de corde peut être simple ou double (ou multiple)</li>
+<li>une boucle peut être simple ou double (ou multiple)</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org31d49f5" class="outline-4">
+<h4 id="org31d49f5"><span class="section-number-4">1.1.2.</span> Nouvelle boucle</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+La plupart de ces opérations crée au moins une nouvelle boucle, qui
+peut être utilisée par la suite :
+</p>
+
+<ul class="org-ul">
+<li>une extrémité qui vient de passer autour d’un morceau de corde</li>
+<li>une extrémité qui vient de passer dans une boucle</li>
+<li>un morceau de corde qui vient de passer dans une boucle</li>
+<li>une boucle qui vient de passer dans une boucle</li>
+<li>une boucle qui vient de passer au-dessous ou en-dessous d’une autre</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org955a830" class="outline-3">
+<h3 id="org955a830"><span class="section-number-3">1.2.</span> Au milieu de la corde</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Au milieu de la corde, aucune n’extrémité n’est disponible. On peut
+toutefois :
+</p>
+
+<ul class="org-ul">
+<li>créer une extrémité sous forme de doublure en doublant la corde</li>
+<li>faire une boucle en tordant la corde jusqu’à ce qu’une partie en
+croise une autre</li>
+<li>tordre une boucle d’un quart de tour, puis l’étirer en tirant sur
+sa gauche et sa droite, jusqu’à ce que les deux parties de cordes
+soient l’une contre l’autre ; on dispose alors de deux doublures
+(ou anses, ou boucles) :
+<ol class="org-ol">
+<li>la première à gauche du croisement de la boucle</li>
+<li>la seconde à droite du croisement de la boucle</li>
+</ol></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org5feb96b" class="outline-3">
+<h3 id="org5feb96b"><span class="section-number-3">1.3.</span> Boucles</h3>
+<div class="outline-text-3" id="text-1-3">
+</div>
+<div id="outline-container-org0884c73" class="outline-4">
+<h4 id="org0884c73"><span class="section-number-4">1.3.1.</span> Doublure et boucle</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<p>
+Réaliser un noeud avec une doublure crée au moins une boucle.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org53b6693" class="outline-4">
+<h4 id="org53b6693"><span class="section-number-4">1.3.2.</span> Attache de deux extrémités de cordes à partir d’une boucle</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+Un noeud formant une boucle fixe peut être transformé en noeud
+d’attache de deux extrémités situées sur deux cordes distinctes en
+procédant comme suit :
+</p>
+
+<ol class="org-ol">
+<li>nouer les deux extrémités à attacher avec un noeud sommaire <b>S</b></li>
+<li>réaliser la boucle <b>B</b> en s’arrangeant pour que <b>S</b> soit placé au
+milieu de celle-ci</li>
+<li>dénouer <b>S</b></li>
+</ol>
+
+<p>
+Dans certains cas, il est possible de se passer de l’étape 1, en
+imaginant que les deux extrémités sont attachées :
+</p>
+
+<ol class="org-ol">
+<li>commencer le noeud jusqu’au début de la boucle avec la première
+extrémité à attacher comme partie de travail</li>
+<li>terminer le noeud avec la seconde extrémité à attacher comme
+partie de travail</li>
+</ol>
+
+<p>
+On peut ensuite observer comment le noeud <b>B</b> est structuré, pour
+éventuellement en déduire une méthode pour le retracer.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org48139a6" class="outline-4">
+<h4 id="org48139a6"><span class="section-number-4">1.3.3.</span> Boucle à partir d’une attache de deux extrémités de corde</h4>
+<div class="outline-text-4" id="text-1-3-3">
+<p>
+Un noeud d’attache de deux extrémités situées sur deux cordes
+distinctes peut être transformé en noeud formant une boucle fixe en
+procédant comme suit :
+</p>
+
+<ol class="org-ol">
+<li>nouer deux extrémités avec le noeud d’attache <b>A</b></li>
+<li>nouer deux des quatre extrémités disponibles ensemble avec un
+noeud sommaire <b>S</b>
+<ul class="org-ul">
+<li>possibilités
+<ul class="org-ul">
+<li>parties de travail des deux cordes</li>
+<li>parties statiques des deux cordes</li>
+<li>partie de travail d’une corde et partie statique de l’autre</li>
+</ul></li>
+<li>on peut aussi imaginer qu’elles sont nouées</li>
+</ul></li>
+</ol>
+
+<p>
+On peut ensuite suivre la première corde en venant de la partie
+statique et parcourir avec elle le noeud <b>A</b>, pour éventuellement en
+déduire une méthode pour le retracer.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2cb097b" class="outline-3">
+<h3 id="org2cb097b"><span class="section-number-3">1.4.</span> Schémas classiques</h3>
+<div class="outline-text-3" id="text-1-4">
+</div>
+<div id="outline-container-orga5cf3f3" class="outline-4">
+<h4 id="orga5cf3f3"><span class="section-number-4">1.4.1.</span> Alternance</h4>
+<div class="outline-text-4" id="text-1-4-1">
+<p>
+De nombreux noeuds respectent plus ou moins les alternances
+suivantes :
+</p>
+
+<ul class="org-ul">
+<li>ondulatoire : au-dessus &amp; en-dessous d’une partie de corde ou
+d’une boucle</li>
+<li>topologique : intérieur &amp; extérieur à une boucle</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org29c9ac8" class="outline-4">
+<h4 id="org29c9ac8"><span class="section-number-4">1.4.2.</span> Deux boucles &amp; un intermédiaire</h4>
+<div class="outline-text-4" id="text-1-4-2">
+<ul class="org-ul">
+<li>faire deux boucles séparées par un élément intermédiaire <b>I</b>, qui
+peut être
+<ul class="org-ul">
+<li>une troisième boucle</li>
+<li>une partie de corde</li>
+<li>etc</li>
+</ul></li>
+<li>rentrer la première boucle dans la seconde</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orgc463bf4" class="outline-4">
+<h4 id="orgc463bf4"><span class="section-number-4">1.4.3.</span> Dénouage rapide (quick release)</h4>
+<div class="outline-text-4" id="text-1-4-3">
+<p>
+Pour qu’un noeud soit plus facile à dénouer, il suffit souvent de
+remplacer l’extrémité de la corde par une doublure, ou une anse, dans
+la phase finale.
+</p>
+
+<p>
+Pour dénouer, il suffit alors de tirer sur la partie de travail.
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org5ee08b9" class="outline-3">
+<h3 id="org5ee08b9"><span class="section-number-3">1.5.</span> Faux noeuds</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+La plupart des faux noeuds sont dus à une torsion excessive dans la
+corde
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgae5b6f1" class="outline-2">
+<h2 id="orgae5b6f1"><span class="section-number-2">2.</span> Opérations sur les cordes</h2>
+<div class="outline-text-2" id="text-2">
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgb98560a">2.1. Toronner</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orgb98560a" class="outline-3">
+<h3 id="orgb98560a"><span class="section-number-3">2.1.</span> Toronner</h3>
+<div class="outline-text-3" id="text-2-1">
+</div>
+<div id="outline-container-org80435fc" class="outline-4">
+<h4 id="org80435fc"><span class="section-number-4">2.1.1.</span> Introduction</h4>
+<div class="outline-text-4" id="text-2-1-1">
+</div>
+<div id="outline-container-org47fb3ad" class="outline-5">
+<h5 id="org47fb3ad"><span class="section-number-5">2.1.1.1.</span> Sens de torsion interne aux cordes</h5>
+<div class="outline-text-5" id="text-2-1-1-1">
+<p>
+Il faut commencer par tester le sens de torsion interne des cordes.
+On suppose ici qu’une torsion dans le sens anti-horlogique compresse
+la corde, tandis qu’une torsion dans le sens horlogique à tendance à
+la défaire.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org8ae4bda" class="outline-5">
+<h5 id="org8ae4bda"><span class="section-number-5">2.1.1.2.</span> Corde neutre</h5>
+<div class="outline-text-5" id="text-2-1-1-2">
+<p>
+On peut choisir une corde neutre pour servir de centre, et enrouler
+tour à tour les autres cordes autour de la corde neutre.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org354ebc0" class="outline-5">
+<h5 id="org354ebc0"><span class="section-number-5">2.1.1.3.</span> Crochet</h5>
+<div class="outline-text-5" id="text-2-1-1-3">
+<p>
+Si on dispose de suffisamment de cordes, on les utilise.
+</p>
+
+<p>
+Si on ne dispose que de la moitié des cordes nécessaire, on peut :
+</p>
+
+<ul class="org-ul">
+<li>passer chaque corde autour d’un crochet</li>
+<li>la faire glisser jusqu’à obtenir deux demi cordes de longueur égale</li>
+</ul>
+
+<p>
+Dans ce cas, l’ordre des cordes doit être entrecroisé :
+</p>
+
+<ol class="org-ol">
+<li>corde 1, extrémité 1</li>
+<li>corde 1, extrémité 2</li>
+<li>corde 2, extrémité 1</li>
+<li>corde 2, extrémité 2</li>
+<li>&#x2026;</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org3d95624" class="outline-4">
+<h4 id="org3d95624"><span class="section-number-4">2.1.2.</span> Deux cordes</h4>
+<div class="outline-text-4" id="text-2-1-2">
+<p>
+Recommencer jusqu’au bout des deux cordes :
+</p>
+
+<ol class="org-ol">
+<li>tordre la corde de gauche dans le sens anti-horlogique</li>
+<li>faire passer la corde de gauche au-dessus de la corde de
+droite, vers la droite, dans le sens horlogique</li>
+<li>la nouvelle corde de gauche est alors l’ancienne corde de droite</li>
+</ol>
+
+<p>
+Méthode alternative :
+</p>
+
+<ol class="org-ol">
+<li>soit <b>I</b>, <b>II</b> les deux cordes, de gauche à droite</li>
+<li>recommencer jusqu’au bout des cordes
+<ol class="org-ol">
+<li>tordre la corde <b>I</b> dans le sens anti-horlogique</li>
+<li>faire un tour complet avec <b>I</b> autour de <b>II</b>, dans le sens
+horlogique</li>
+<li>tordre la corde <b>II</b> dans le sens anti-horlogique</li>
+<li>faire un tour complet avec <b>II</b> autour de <b>I</b>, dans le sens
+horlogique</li>
+</ol></li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org166180c" class="outline-4">
+<h4 id="org166180c"><span class="section-number-4">2.1.3.</span> Plus de deux cordes</h4>
+<div class="outline-text-4" id="text-2-1-3">
+<p>
+Recommencer jusqu’au bout des cordes :
+</p>
+
+<ol class="org-ol">
+<li>tordre la corde de gauche dans le sens anti-horlogique</li>
+<li>faire passer la corde de gauche au-dessus des autres cordes, vers
+la droite, dans le sens horlogique</li>
+</ol>
+
+<p>
+Méthode alternative :
+</p>
+
+<ol class="org-ol">
+<li>recommencer jusqu’au bout des cordes
+<ol class="org-ol">
+<li>tordre la corde de gauche dans le sens anti-horlogique</li>
+<li>faire un tour complet avec la corde de gauche autour de celle
+de droite, dans le sens horlogique</li>
+<li>tordre la corde de droite dans le sens anti-horlogique</li>
+<li>faire un tour complet avec la corde de droite autour de celle
+de gauche, dans le sens horlogique</li>
+</ol></li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org9c6051d" class="outline-4">
+<h4 id="org9c6051d"><span class="section-number-4">2.1.4.</span> Trois cordes, dont une corde neutre centrale</h4>
+<div class="outline-text-4" id="text-2-1-4">
+<ol class="org-ol">
+<li>soit <b>I</b>, <b>C</b>, <b>II</b> les trois cordes, de gauche à droite</li>
+<li>nous choisissons <b>C</b> comme corde neutre centrale</li>
+<li>recommencer jusqu’au bout des cordes
+<ol class="org-ol">
+<li>tordre la corde <b>I</b> dans le sens anti-horlogique</li>
+<li>faire un tour complet avec <b>I</b> autour des autres cordes, dans
+le sens horlogique</li>
+<li>tordre la corde <b>II</b> dans le sens anti-horlogique</li>
+<li>faire un tour complet avec <b>II</b> autour des autres cordes, dans
+le sens horlogique</li>
+</ol></li>
+<li>chaque corde doit rejoindre sa position initiale dans la série
+de cordes après le tour</li>
+<li>remarquons que la corde neutre <b>C</b> n’effectue pas de passage</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org0986e74" class="outline-4">
+<h4 id="org0986e74"><span class="section-number-4">2.1.5.</span> Quatre cordes, dont une corde neutre centrale</h4>
+<div class="outline-text-4" id="text-2-1-5">
+<ol class="org-ol">
+<li>soit <b>I</b>, <b>II</b>, <b>III</b>, <b>C</b> les quatre cordes, de gauche à droite</li>
+<li>nous choisissons <b>C</b> comme corde neutre centrale</li>
+<li>recommencer jusqu’au bout des cordes
+<ol class="org-ol">
+<li>tordre la corde <b>I</b> dans le sens anti-horlogique</li>
+<li>faire un tour complet avec <b>I</b> autour des autres cordes, dans
+le sens horlogique</li>
+<li>tordre la corde <b>II</b> dans le sens anti-horlogique</li>
+<li>faire un tour complet avec <b>II</b> autour des autres cordes, dans
+le sens horlogique</li>
+<li>tordre la corde <b>III</b> dans le sens anti-horlogique</li>
+<li>faire un tour complet avec <b>III</b> autour des autres cordes, dans
+le sens horlogique</li>
+</ol></li>
+<li>chaque corde doit rejoindre sa position initiale dans la série
+de cordes après le tour</li>
+<li>remarquons que la corde neutre <b>C</b> n’effectue pas de passage</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Auteur: chimay</p>
+<p class="date">Created: 2022-08-11 jeu 22:11</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

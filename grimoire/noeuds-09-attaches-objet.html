@@ -1,0 +1,1812 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<!-- 2022-08-11 jeu 22:21 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Eclats de vers : Noeuds 09 : Attache à un objet (hitch)</title>
+<meta name="author" content="chimay" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+</style>
+<link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Eclats de vers : Noeuds 09 : Attache à un objet (hitch)</h1>
+<p>
+<a href="index.html">Index des Grimoires</a>
+</p>
+
+<p>
+<a href="../index.html">Retour à l’accueil</a>
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org2fe6fd4">1. Introduction</a></li>
+<li><a href="#org1c7d1f8">2. Timber hitch</a></li>
+<li><a href="#org07e7d08">3. A round turn and two half hitches</a></li>
+<li><a href="#orgcd2fb5c">4. Anchor hitch</a></li>
+<li><a href="#orgcb84eb7">5. Clove hitch</a></li>
+<li><a href="#orgc5e372e">6. Constrictor knot</a></li>
+<li><a href="#org8019d32">7. Figure 8 hitch</a></li>
+<li><a href="#org3af410f">8. Ossel hitch</a></li>
+<li><a href="#orgedc641b">9. Lobster Buoy hitch knot</a></li>
+<li><a href="#org73627a9">10. Camel hitch</a></li>
+<li><a href="#org7634533">11. Scaffold hitch</a></li>
+<li><a href="#org28a271c">12. Reinforced ring hitch</a></li>
+<li><a href="#org1a66ee1">13. Pile hitch&#xa0;&#xa0;&#xa0;<span class="tag"><span class="middle_rope">middle_rope</span></span></a></li>
+<li><a href="#org6d72888">14. Quick release</a></li>
+<li><a href="#org87d1dbd">15. Gripping hitch</a></li>
+<li><a href="#orgbf327f6">16. Swing hitch</a></li>
+<li><a href="#orgfa6285c">17. Vibration proof hitch knot&#xa0;&#xa0;&#xa0;<span class="tag"><span class="vibration_proof">vibration_proof</span></span></a></li>
+<li><a href="#org5c94f7b">18. Halter hitch</a></li>
+<li><a href="#orgf9e3a4f">19. Attaches de plusieurs objets (lashing)</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org2fe6fd4" class="outline-2">
+<h2 id="org2fe6fd4"><span class="section-number-2">1.</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Dans ce chapitre, le poste est un objet de forme allongée, auquel on
+souhaite attacher la corde. Le poste peut être :
+</p>
+
+<ul class="org-ul">
+<li>une barre horizontale ou verticale</li>
+<li>un poteau</li>
+<li>un anneau
+<ul class="org-ul">
+<li>certains noeuds nécessitent toutefois l’accès à une extrémité du
+poste et ne marcheront donc pas dans le cas d’un anneau</li>
+</ul></li>
+<li>une planche</li>
+<li>une autre corde
+<ul class="org-ul">
+<li>le noeud sert alors à attacher deux cordes ensemble avec une
+traction perpendiculaire à la première extrémité</li>
+<li>voir aussi la section sur les <a href="noeuds-05-attaches-extremites.html">bend</a> pour les tractions longitudinales</li>
+</ul></li>
+</ul>
+
+<p>
+Généralités :
+</p>
+
+<ul class="org-ul">
+<li>c’est la partie statique de la corde qui supporte en général
+l’essentiel de la traction</li>
+<li>sauf mention contraire, la traction s’effectue perpendiculairement
+au poste</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org1c7d1f8" class="outline-2">
+<h2 id="org1c7d1f8"><span class="section-number-2">2.</span> Timber hitch</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+<i>alias</i> : noeud de bois
+</p>
+
+<p>
+Bobine à l’intérieur de la boucle principale.
+</p>
+
+<p>
+Si le poste est disposé verticalement :
+</p>
+
+<ol class="org-ol">
+<li>faire une boucle <b>B</b> autour du poste, partie de travail au-dessus
+vers la droite</li>
+<li>passer en-dessous de la partie statique, vers la gauche</li>
+<li>faire une bobine de quelques tours autour de la partie gauche de
+<b>B</b>, en partant du croisement de <b>B</b> et en progressant vers le poste</li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org07e7d08" class="outline-2">
+<h2 id="org07e7d08"><span class="section-number-2">3.</span> A round turn and two half hitches</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>placer la corde derrière le poste</li>
+<li>faire une bobine de 2 tours autour du poste, vers la droite, en
+commençant par le haut, vers l’avant, et en terminant devant le
+poste, vers le bas</li>
+<li>faire two half hitches autour de la partie statique et contre la
+bobine, en descendant</li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-orgcd2fb5c" class="outline-2">
+<h2 id="orgcd2fb5c"><span class="section-number-2">4.</span> Anchor hitch</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Bobine de deux tours autour du bord d’une bobine de deux tours.
+</p>
+
+<ol class="org-ol">
+<li>placer la corde à l’avant du poste</li>
+<li>faire une bobine de deux tours <b>B</b> autour du poste</li>
+<li>faire une bobine de deux tours autour du bord avant de <b>B</b></li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-orgcb84eb7" class="outline-2">
+<h2 id="orgcb84eb7"><span class="section-number-2">5.</span> Clove hitch</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+<i>alias</i> : noeud de cabestan
+</p>
+</div>
+
+
+<div id="outline-container-org664635f" class="outline-3">
+<h3 id="org664635f"><span class="section-number-3">5.1.</span> Simple</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+Le clove hitch simple peut se défaire en cas de charge changeante, il
+est conseillé de lui préférer ses variantes plus robustes.
+</p>
+</div>
+
+
+<div id="outline-container-org29bbbbd" class="outline-4">
+<h4 id="org29bbbbd"><span class="section-number-4">5.1.1.</span> Méthode directe</h4>
+<div class="outline-text-4" id="text-5-1-1">
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>placer la corde devant le poste</li>
+<li>effectuer un passage <b>D</b> au-dessus du poste, en diagonale vers
+l’arrière et la droite</li>
+<li>passer derrière le poste, vers le bas</li>
+<li>passer en-dessous du poste, vers l’avant</li>
+<li>passer devant le poste, vers le haut</li>
+<li>effectuer un passage <b>G</b> au-dessus de <b>D</b>, en diagonale vers
+l’arrière et la gauche</li>
+<li>vérifier que <b>D</b> et <b>G</b> forment une croix</li>
+<li>passer derrière le poste, vers le bas</li>
+<li>passer en-dessous du poste, vers l’avant et à gauche de la partie
+statique</li>
+<li>passer entre <b>G</b> et le poste en longeant la gauche de <b>D</b></li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org57f9016" class="outline-4">
+<h4 id="org57f9016"><span class="section-number-4">5.1.2.</span> Méthode des deux boucles&#xa0;&#xa0;&#xa0;<span class="tag"><span class="middle_rope">middle_rope</span></span></h4>
+<div class="outline-text-4" id="text-5-1-2">
+<p>
+Nécessite d’avoir accès à une extrémité du poste.
+</p>
+
+<ol class="org-ol">
+<li>faire une boucle <b>A</b>, au-dessus vers la droite</li>
+<li>faire une boucle <b>B</b> à droite de <b>A</b>, partie de travail au-dessus
+vers la droite</li>
+<li>placer <b>B</b> en-dessous de <b>A</b></li>
+<li>passer <b>A</b> et <b>B</b> autour du poste</li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org9fc32f0" class="outline-3">
+<h3 id="org9fc32f0"><span class="section-number-3">5.2.</span> Spar hitch</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+Clove hitch amélioré.
+</p>
+</div>
+
+
+<div id="outline-container-orgdc9141c" class="outline-4">
+<h4 id="orgdc9141c"><span class="section-number-4">5.2.1.</span> Simple</h4>
+<div class="outline-text-4" id="text-5-2-1">
+</div>
+<div id="outline-container-org078f21f" class="outline-5">
+<h5 id="org078f21f"><span class="section-number-5">5.2.1.1.</span> Méthode directe</h5>
+<div class="outline-text-5" id="text-5-2-1-1">
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>placer la corde devant le poste</li>
+<li>effectuer un passage <b>D</b> au-dessus du poste, en diagonale vers
+l’arrière et la droite</li>
+<li>passer derrière le poste, vers le bas</li>
+<li>passer en-dessous du poste, vers l’avant</li>
+<li>passer devant le poste, vers le haut</li>
+<li>effectuer un passage <b>G</b> au-dessus de <b>D</b>, en diagonale vers
+l’arrière et la gauche</li>
+<li>passer derrière le poste, vers le bas</li>
+<li>passer en-dessous du poste, vers l’avant et à gauche de la partie
+statique</li>
+<li>passer devant la partie statique, vers la droite</li>
+<li>passer devant le poste, vers le haut</li>
+<li>passer au-dessus de <b>G</b>, vers l’arrière</li>
+<li>passer entre <b>D</b> et le poste, vers la gauche</li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org707ed49" class="outline-5">
+<h5 id="org707ed49"><span class="section-number-5">5.2.1.2.</span> Méthode de l’esperluette</h5>
+<div class="outline-text-5" id="text-5-2-1-2">
+<ol class="org-ol">
+<li>faire une esperluette supérieure, vers la droite</li>
+<li>passer de droite à gauche dans la boucle de l’esperluette, contre
+le croisement interne, en entrant par au-dessus</li>
+<li>faire tourner la lentille de l’esperluette autour d’un axe
+gauche - droite, pour l’amener sous la boucle</li>
+<li>passer la boucle et la lentille autour du poste</li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org23656ba" class="outline-4">
+<h4 id="org23656ba"><span class="section-number-4">5.2.2.</span> Bag hitch</h4>
+<div class="outline-text-4" id="text-5-2-2">
+<p>
+Spar hitch avec anse dana la partie finale pour un dénouage facile et
+rapide.
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org9447ef9" class="outline-3">
+<h3 id="org9447ef9"><span class="section-number-3">5.3.</span> Picket line hitch</h3>
+<div class="outline-text-3" id="text-5-3">
+<p>
+<i>alias</i> : ground line hitch
+</p>
+
+<p>
+Clove hitch amélioré.
+</p>
+
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>placer la corde devant le poste</li>
+<li>effectuer un passage <b>D</b> au-dessus du poste, en diagonale vers
+l’arrière et la droite</li>
+<li>passer derrière le poste, vers le bas</li>
+<li>passer en-dessous du poste, vers l’avant</li>
+<li>passer devant le poste, vers le haut</li>
+<li>effectuer un passage <b>G</b> au-dessus de <b>D</b>, en diagonale vers
+l’arrière et la gauche</li>
+<li>passer derrière le poste, vers le bas</li>
+<li>passer en-dessous du poste, vers l’avant et à gauche de la partie
+statique</li>
+<li>passer devant le poste, vers le haut</li>
+<li>passer au-dessus de <b>G</b> en longeant la gauche de <b>D</b></li>
+<li>passer entre <b>D</b> et le poste, vers la droite</li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org4d6af18" class="outline-3">
+<h3 id="org4d6af18"><span class="section-number-3">5.4.</span> Rolling hitch</h3>
+<div class="outline-text-3" id="text-5-4">
+<p>
+Clove hitch avec un tour supplémentaire au départ.
+</p>
+
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>placer la corde devant le poste</li>
+<li>faire une bobine de 2 tours autour du poste, vers la droite, en
+commençant à tourner par le haut, vers l’arrière, et en terminant
+en-dessous du poste, vers l’avant</li>
+<li>passer devant le poste et la partie du noeud déjà réalisée, vers
+le haut et la gauche</li>
+<li>faire un passage <b>P</b> au-dessus du poste, vers l’arrière</li>
+<li>passer derrière le poste, vers le bas</li>
+<li>passer en-dessous du poste, vers l’avant</li>
+<li>passer entre <b>P</b> et le poste, à gauche des tours déjà réalisés,
+vers le haut</li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org679b0a4" class="outline-3">
+<h3 id="org679b0a4"><span class="section-number-3">5.5.</span> Buntline hitch&#xa0;&#xa0;&#xa0;<span class="tag"><span class="derived">derived</span>&#xa0;<span class="vibration_proof">vibration_proof</span></span></h3>
+<div class="outline-text-3" id="text-5-5">
+<p>
+Clove hitch autour de la partie statique d’une boucle.
+</p>
+
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>placer la corde devant le poste</li>
+<li>passer au-dessus du poste, vers arrière et la gauche</li>
+<li>passer derrière le poste, vers le bas</li>
+<li>passer en-dessous du poste, vers l’avant</li>
+<li>effectuer le passage <b>P</b> devant la partie statique, vers la
+droite et le bas, formant ainsi une boucle <b>B</b> autour du poste</li>
+<li>passer derrière la partie statique, vers la gauche</li>
+<li>effectuer le passage <b>R</b> devant la partie statique et devant <b>P</b>,
+vers la droite et le haut</li>
+<li>passer dans <b>B</b>, vers la gauche</li>
+<li>passer entre <b>R</b> et la partie statique</li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org2aa810b" class="outline-3">
+<h3 id="org2aa810b"><span class="section-number-3">5.6.</span> Boom hitch</h3>
+<div class="outline-text-3" id="text-5-6">
+<p>
+Clove hitch doublé en parallèle.
+</p>
+
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>placer la corde devant le poste</li>
+<li>effectuer un passage <b>D</b> au-dessus du poste, en diagonale vers
+l’arrière et la droite</li>
+<li>passer derrière le poste, vers le bas</li>
+<li>passer en-dessous du poste, vers l’avant</li>
+<li>passer devant le poste, vers le haut</li>
+<li>effectuer un passage <b>G</b> au-dessus de <b>D</b>, en diagonale vers
+l’arrière et la gauche</li>
+<li>vérifier que <b>D</b> et <b>G</b> forment une croix</li>
+<li>passer derrière le poste, vers le bas</li>
+<li>passer en-dessous du poste, vers l’avant</li>
+<li>passer devant le poste, vers le haut</li>
+<li>passer au-dessus de <b>G</b> en longeant la gauche de <b>D</b></li>
+<li>faire une deuxième croix en longeant la corde de la première par
+la gauche et en passant au-dessus lors de chaque croisement</li>
+<li>appelons <b>H</b> la diagonale de la deuxième croix allant vers
+l’arrière et la gauche</li>
+<li>appelons <b>E</b> la diagonale de la deuxième croix allant vers
+l’arrière et la droite</li>
+<li>passer derrière le poste, vers le bas</li>
+<li>passer en-dessous du poste, vers l’avant</li>
+<li>passer devant le poste, vers le haut</li>
+<li>passer au-dessus de <b>H</b></li>
+<li>passer entre <b>G</b> et le poste en longeant la gauche de <b>E</b>, à
+gauche de la partie statique</li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgc5e372e" class="outline-2">
+<h2 id="orgc5e372e"><span class="section-number-2">6.</span> Constrictor knot</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Peut être difficile à désserrer. Envisager une variante avec anse dans
+la phase finale, pour un dénouage plus facile.
+</p>
+</div>
+
+
+<div id="outline-container-org327aa8d" class="outline-3">
+<h3 id="org327aa8d"><span class="section-number-3">6.1.</span> Simple</h3>
+<div class="outline-text-3" id="text-6-1">
+</div>
+<div id="outline-container-orged25d7a" class="outline-4">
+<h4 id="orged25d7a"><span class="section-number-4">6.1.1.</span> Méthode directe</h4>
+<div class="outline-text-4" id="text-6-1-1">
+<p>
+Former une croix au-dessus du poste. Passer autour de la partie
+statique et sous la croix.
+</p>
+
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>placer la corde devant le poste</li>
+<li>effectuer un passage <b>D</b> au-dessus du poste, en diagonale vers
+l’arrière et la droite</li>
+<li>passer derrière le poste, vers le bas</li>
+<li>passer en-dessous du poste, vers l’avant</li>
+<li>passer devant le poste, vers le haut</li>
+<li>effectuer un passage <b>G</b> au-dessus de <b>D</b> et du poste, en
+diagonale vers l’arrière et la gauche</li>
+<li>Vérifier que <b>D</b> et <b>G</b> forment une croix</li>
+<li>passer derrière le poste, vers le bas</li>
+<li>passer en-dessous du poste, vers l’avant</li>
+<li>passer devant la partie statique, de gauche à droite</li>
+<li>passer entre <b>G</b> et le poste, à droite de la croix</li>
+<li>passer entre <b>D</b> et le poste, à droite de la croix</li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org4a5ee8b" class="outline-4">
+<h4 id="org4a5ee8b"><span class="section-number-4">6.1.2.</span> Méthode à deux boucles&#xa0;&#xa0;&#xa0;<span class="tag"><span class="middle_rope">middle_rope</span></span></h4>
+<div class="outline-text-4" id="text-6-1-2">
+<p>
+Nécessite d’avoir accès à une extrémité du poste.
+</p>
+
+<ol class="org-ol">
+<li>faire un huitain supérieur, vers la droite, formant ainsi
+<ul class="org-ul">
+<li>une boucle <b>B</b></li>
+<li>une lentille <b>L</b></li>
+</ul></li>
+<li>soit <b>X</b> le croisement interne du huitain</li>
+<li>passer en-dessous de <b>X</b>, de droite à gauche</li>
+<li>faire un demi-tour avec <b>B</b> autour d’un l’axe gauche-droite
+matérialisé par la partie de travail, pour amener <b>B</b> en-dessous
+de <b>L</b></li>
+<li>passer <b>L</b> et <b>B</b> autour du poste</li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgd92361d" class="outline-3">
+<h3 id="orgd92361d"><span class="section-number-3">6.2.</span> Double</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>placer la corde devant le poste</li>
+<li>effectuer un passage <b>D</b> au-dessus du poste, en diagonale vers
+l’arrière et la droite</li>
+<li>passer derrière le poste, vers le bas</li>
+<li>passer en-dessous du poste, vers l’avant</li>
+<li>passer devant le poste, vers le haut</li>
+<li>effectuer un passage <b>G</b> au-dessus de <b>D</b>, en diagonale vers
+l’arrière et la gauche</li>
+<li>vérifier que <b>D</b> et <b>G</b> forment une croix</li>
+<li>passer derrière le poste, vers le bas</li>
+<li>passer en-dessous du poste, vers l’avant et la droite</li>
+<li>effectuer un passage <b>H</b> au-dessus du poste en longeant la
+gauche de <b>G</b></li>
+<li>passer derrière le poste, vers le bas</li>
+<li>passer en-dessous du poste, vers l’avant</li>
+<li>se placer à gauche de la partie statique</li>
+<li>passer devant la partie statique, vers la droite</li>
+<li>passer entre <b>H</b> et le poste, à droite de la croix</li>
+<li>passer entre <b>G</b> et le poste, à droite de la croix</li>
+<li>passer entre <b>D</b> et le poste, à droite de la croix</li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org53f876c" class="outline-3">
+<h3 id="org53f876c"><span class="section-number-3">6.3.</span> Boa</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+Nécessite d’avoir accès à une extrémité du poste.
+</p>
+
+<ol class="org-ol">
+<li>faire une bobine de quelques tours</li>
+<li>tordre la bobine pour qu’elle prenne une forme de 8</li>
+<li>replier la première série de boucles de la bobine sur la seconde
+pour obtenir une double bobine <b>B</b></li>
+<li>passer <b>B</b> autour du poste</li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org8019d32" class="outline-2">
+<h2 id="org8019d32"><span class="section-number-2">7.</span> Figure 8 hitch</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Figure 8 en réalisant la première boucle autour du poste et la seconde
+autour de la partie statique.
+</p>
+
+<p>
+Si le poste est disposé verticalement :
+</p>
+
+<ol class="org-ol">
+<li>faire une boucle <b>B</b> autour du poste, partie de travail au-dessus
+vers la droite</li>
+<li>passer sous la partie statique, vers la gauche, hors de la boucle</li>
+<li>entrer dans la boucle <b>B</b> par le haut à l’avant et ressortir par
+le bas en arrière</li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org3af410f" class="outline-2">
+<h2 id="org3af410f"><span class="section-number-2">8.</span> Ossel hitch</h2>
+<div class="outline-text-2" id="text-8">
+</div>
+<div id="outline-container-org67984bc" class="outline-3">
+<h3 id="org67984bc"><span class="section-number-3">8.1.</span> Simple</h3>
+<div class="outline-text-3" id="text-8-1">
+<p>
+Ossel knot autour du poste. Anse autour de la partie statique.
+</p>
+
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>placer la corde derrière le poste</li>
+<li>passer au-dessus du poste, vers l’avant</li>
+<li>passer devant le poste, vers le bas et la gauche</li>
+<li>passer en-dessous du poste, vers l’arrière</li>
+<li>passer derrière la partie statique, de gauche à droite, formant
+ainsi une boucle <b>B</b> entre la partie statique et la partie de travail</li>
+<li>passer en-dessous du poste, vers l’avant</li>
+<li>passer devant le poste, vers le haut</li>
+<li>passer au-dessus du poste, vers l’arrière</li>
+<li>passer derrière le poste, vers le bas</li>
+<li>le ossel hitch en lui-même est terminé</li>
+<li>phase finale, pour serrer
+<ol class="org-ol">
+<li>passer en-dessous du poste, vers l’avant</li>
+<li>passer dans <b>B</b>, de droite à gauche</li>
+<li>serrer</li>
+</ol></li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-orgb5ca31d" class="outline-3">
+<h3 id="orgb5ca31d"><span class="section-number-3">8.2.</span> Backhand hitch&#xa0;&#xa0;&#xa0;<span class="tag"><span class="derived">derived</span></span></h3>
+<div class="outline-text-3" id="text-8-2">
+<p>
+Ossel hitch avec serrage en two half hitches.
+</p>
+
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>faire un ossel hitch
+<ul class="org-ul">
+<li>soit <b>P</b> le passage autour de la partie statique</li>
+</ul></li>
+<li>faire two half hitches autour de la partie statique et contre
+<b>P</b>, en descendant</li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgedc641b" class="outline-2">
+<h2 id="orgedc641b"><span class="section-number-2">9.</span> Lobster Buoy hitch knot</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+Lark’s head autour de la partie statique d’une boucle.
+</p>
+
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>placer la corde devant le poste</li>
+<li>faire un tour autour du psote, en commençant par au-dessus, vers
+l’arrière et en terminant par en-dessous, vers l’avant</li>
+<li>réaliser un Lark’s head autour de la partie statique</li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org73627a9" class="outline-2">
+<h2 id="org73627a9"><span class="section-number-2">10.</span> Camel hitch</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+Combinaison de bobine, lark’s head et de half hitch.
+</p>
+
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>placer la corde devant le poste</li>
+<li>faire une bobine de 3 tours autour du poste, vers la droite, en
+commençant par le haut, vers l’arrière, et en terminant
+en-dessous, vers l’avant</li>
+<li>lark’s head
+<ol class="org-ol">
+<li>effectuer le passage <b>P</b> devant la partie statique, de droite à
+gauche</li>
+<li>passer en-dessous du poste, vers l’arrière</li>
+<li>passer derrière le poste, vers le haut</li>
+<li>passer au-dessus du poste, vers l’avant</li>
+<li>passer dans l’anse formée par <b>P</b> en longeant la partie statique,
+vers le bas</li>
+</ol></li>
+<li>half hitch
+<ol class="org-ol">
+<li>effectuer le passage <b>R</b> en-dessous de <b>P</b>, vers la gauche</li>
+<li>passer en-dessous du poste, vers l’arrière</li>
+<li>passer derrière le poste, vers le haut</li>
+<li>passer au-dessus du poste, vers l’avant</li>
+<li>passer dans l’anse formée par <b>R</b>, à gauche de <b>P</b>, vers le bas</li>
+</ol></li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org7634533" class="outline-2">
+<h2 id="org7634533"><span class="section-number-2">11.</span> Scaffold hitch</h2>
+<div class="outline-text-2" id="text-11">
+<p>
+Espèce de double ossel hitch symétrique, où les extrémités de la corde
+partent dans des sens opposés.
+</p>
+</div>
+
+
+<div id="outline-container-orgc3b87bd" class="outline-3">
+<h3 id="orgc3b87bd"><span class="section-number-3">11.1.</span> Méthode directe</h3>
+<div class="outline-text-3" id="text-11-1">
+<p>
+Le noeud ne tient que si les deux extrémités sont tendues.
+</p>
+
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>placer la corde derrière le poste</li>
+<li>passer au-dessus du poste, vers l’avant</li>
+<li>passer devant le poste, vers le bas et la gauche</li>
+<li>passer en-dessous du poste, vers l’arrière</li>
+<li>effectuer le passage <b>P</b> derrière la partie statique, de gauche à
+droite</li>
+<li>passer en-dessous du poste, vers l’avant</li>
+<li>passer devant le poste, vers le haut</li>
+<li>passer au-dessus du poste, vers l’arrière</li>
+<li>faire demi-tour vers l’avant, produisant une anse <b>A</b></li>
+<li>passer devant le poste vers le bas</li>
+<li>passer sous le poste, vers l’arrière</li>
+<li>rentrer dans <b>A</b> par le dessous</li>
+<li>serrer en tirant sur les extrémités de la corde dans des sens
+opposés</li>
+</ol>
+
+<p>
+Cas d’un poste mobile : on peut compléter en nouant les extrémités
+pour former une grande boucle et attacher l’ensemble à un objet fixe.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-org54f0461" class="outline-3">
+<h3 id="org54f0461"><span class="section-number-3">11.2.</span> Méthode du S</h3>
+<div class="outline-text-3" id="text-11-2">
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>dessiner une figure <b>S</b> en forme de S en-dessous du poste</li>
+<li>passer l’extrémité libre de gauche au-dessus du poste, puis dans
+l’anse formée à la gauche et l’arrière de <b>S</b>, en entrant par
+au-dessus</li>
+<li>passer l’extrémité libre de droite au-dessus du poste, puis dans
+l’anse formée à la droite et l’avant du <b>S</b>, en entrant par
+au-dessus</li>
+<li>serrer en tirant sur les extrémités de la corde dans des sens
+opposés</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org0e47152" class="outline-3">
+<h3 id="org0e47152"><span class="section-number-3">11.3.</span> Méthode de la bobine</h3>
+<div class="outline-text-3" id="text-11-3">
+<p>
+Nécessite d’avoir accès à une extrémité du poste.
+</p>
+
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>faire une bobine de 3 tours autour du poste, près du bord droit</li>
+<li>placer le tour de gauche entre les deux autres</li>
+<li>passer le nouveau tour de gauche au-dessus des deux autres, puis
+autour de l’extrémité du poste :
+<ol class="org-ol">
+<li>vers le bas, à droite du bord droit du poste</li>
+<li>sous le poste, vers la gauche</li>
+</ol></li>
+<li>serrer en tirant sur les extrémités de la corde dans des sens
+opposés</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org28a271c" class="outline-2">
+<h2 id="org28a271c"><span class="section-number-2">12.</span> Reinforced ring hitch</h2>
+<div class="outline-text-2" id="text-12">
+<p>
+Passer une anse autour du poste, puis utiliser les deux extrémités
+comme partie de travail et faire un half hitch.
+</p>
+
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>placer la corde devant le poste</li>
+<li>passer au-dessus du poste, vers l’arrière</li>
+<li>passer derrière le poste, vers le bas</li>
+<li>tenir les deux extrémités de la corde ensemble</li>
+<li>passer les deux extrémités de la corde derrière le poste, vers
+le haut, formant ainsi un double espace <b>E</b> sous le poste</li>
+<li>passer les deux extrémités de la corde au-dessus du poste, vers
+l’avant</li>
+<li>passer les deux extrémités de la corde dans <b>E</b></li>
+<li>serrer en tirant sur les extrémités</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org1a66ee1" class="outline-2">
+<h2 id="org1a66ee1"><span class="section-number-2">13.</span> Pile hitch&#xa0;&#xa0;&#xa0;<span class="tag"><span class="middle_rope">middle_rope</span></span></h2>
+<div class="outline-text-2" id="text-13">
+<p>
+Nécessite d’avoir accès à une extrémité du poste.
+</p>
+
+<p>
+Si le poste est disposé verticalement, avec son extrémité supérieure
+accessible :
+</p>
+
+<ol class="org-ol">
+<li>faire une anse et s’en servir comme partie de travail</li>
+<li>faire une boucle autour du poste, anse en-dessous</li>
+<li>passer l’anse autour de la partie supérieure du poste</li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org6d72888" class="outline-2">
+<h2 id="org6d72888"><span class="section-number-2">14.</span> Quick release</h2>
+<div class="outline-text-2" id="text-14">
+</div>
+<div id="outline-container-org009dab7" class="outline-3">
+<h3 id="org009dab7"><span class="section-number-3">14.1.</span> Quick release slip knot&#xa0;&#xa0;&#xa0;<span class="tag"><span class="quick_release">quick_release</span></span></h3>
+<div class="outline-text-3" id="text-14-1">
+<p>
+Slip knot à boucle principale autour du poste.
+</p>
+
+<ol class="org-ol">
+<li>faire un slip knot, partie statique du côté réglable</li>
+<li>appelons <b>A</b> l’anse du slip knot</li>
+<li>faire un tour avec la partie de travail autour du poste</li>
+<li>faire une anse <b>B</b> avec la partie de travail</li>
+<li>passer <b>B</b> dans <b>A</b></li>
+<li>serrer <b>A</b> en tirant sur la partie statique</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org671dfe0" class="outline-3">
+<h3 id="org671dfe0"><span class="section-number-3">14.2.</span> Innomiknot quick release</h3>
+<div class="outline-text-3" id="text-14-2">
+<p>
+Combinaison d’ossel hitch et de slip knot torsadé à boucle principale
+autour du poste.
+</p>
+
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>placer la corde derrière le poste</li>
+<li>passer au-dessus du poste, vers l’avant et la droite</li>
+<li>passer devant le poste, vers le bas</li>
+<li>soulever la partie de la corde située au-dessus du poste, pour
+former une anse <b>A</b></li>
+<li>tourner <b>A</b> d’un tour complet autour de l’axe reliant la base de
+<b>A</b> à la voûte de <b>A</b>
+<ul class="org-ul">
+<li>la rotation se fait dans un sens horlogique vu du haut</li>
+</ul></li>
+<li>avec la partie de travail, passer sous le poste, vers l’arrière</li>
+<li>passer derrière la partie statique, de droite à gauche</li>
+<li>passer sous le poste, vers l’avant</li>
+<li>faire une anse <b>B</b></li>
+<li>passer <b>B</b> dans <b>A</b></li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org2baa25f" class="outline-3">
+<h3 id="org2baa25f"><span class="section-number-3">14.3.</span> Highwayman’s hitch&#xa0;&#xa0;&#xa0;<span class="tag"><span class="quick_release">quick_release</span></span></h3>
+<div class="outline-text-3" id="text-14-3">
+<p>
+Une anse dans une anse dans une anse, avec tours autour du poste des
+parties statique et de travail.
+</p>
+
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>faire une anse <b>A</b></li>
+<li>placer la base de <b>A</b> derrière le poste</li>
+<li>faire le tour du poste par le bas puis l’avant avec la partie
+statique</li>
+<li>faire une anse <b>S</b> avec la partie statique et la passer dans <b>A</b></li>
+<li>faire le tour du poste par le bas puis l’avant avec la partie
+de travail</li>
+<li>faire une anse <b>T</b> avec la partie de travail et la passer dans
+<b>S</b></li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org14b0fb6" class="outline-3">
+<h3 id="org14b0fb6"><span class="section-number-3">14.4.</span> Getaway hitch&#xa0;&#xa0;&#xa0;<span class="tag"><span class="quick_release">quick_release</span></span></h3>
+<div class="outline-text-3" id="text-14-4">
+<p>
+Une anse dans une anse, avec ossel hitch autour de la première anse.
+</p>
+
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>faire une anse <b>A</b> et la placer devant le poste, partie de
+travail à droite</li>
+<li>tourner <b>A</b> pour la placer au-dessus du poste</li>
+<li>passer sous le poste, vers l’arrière</li>
+<li>passer derrière le poste, vers le haut</li>
+<li>passer au-dessus de la base de <b>A</b>, de droite à gauche</li>
+<li>passer sous le poste, vers l’avant et à gauche de la partie
+statique</li>
+<li>passer devant le poste, vers le haut</li>
+<li>faire une boucle <b>B</b> et la passer dans <b>A</b></li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org7bd1ffc" class="outline-3">
+<h3 id="org7bd1ffc"><span class="section-number-3">14.5.</span> Painter hitch</h3>
+<div class="outline-text-3" id="text-14-5">
+<p>
+Une anse dans une anse dans une anse qui tourne autour du poste.
+</p>
+
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>faire une anse <b>A</b></li>
+<li>placer <b>A</b> devant le poste, extrémité vers le haut</li>
+<li>passer <b>A</b> au-dessus du poste, vers l’arrière</li>
+<li>passer <b>A</b> derrière le poste, vers le bas</li>
+<li>placer <b>A</b> derrière la partie statique</li>
+<li>faire une anse <b>B</b> avec la partie statique et la passer dans <b>A</b></li>
+<li>tourner <b>B</b> vers la gauche puis l’avant</li>
+<li>faire une anse <b>C</b> avec la partie de travail</li>
+<li>passer <b>C</b> dans <b>B</b></li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-orgdc822e3" class="outline-3">
+<h3 id="orgdc822e3"><span class="section-number-3">14.6.</span> Exploding Mooring hitch</h3>
+<div class="outline-text-3" id="text-14-6">
+<p>
+Partie statique dans une boucle pour former une anse.
+</p>
+
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>placer la corde derrière le poste</li>
+<li>passer au-dessus du poste, vers l’avant</li>
+<li>passer devant le poste, vers le bas</li>
+<li>faire une boucle <b>B</b>, partie de travail derrière vers la droite</li>
+<li>placer <b>B</b> devant la partie statique</li>
+<li>tirer la partie statique dans <b>B</b> pour former une anse <b>A</b></li>
+<li>faire une anse <b>C</b> avec la partie de travail</li>
+<li>passer <b>C</b> dans <b>B</b></li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-orgbb813e8" class="outline-3">
+<h3 id="orgbb813e8"><span class="section-number-3">14.7.</span> Evenk hitch&#xa0;&#xa0;&#xa0;<span class="tag"><span class="quick_release">quick_release</span></span></h3>
+<div class="outline-text-3" id="text-14-7">
+<p>
+<i>alias</i> : siberian hitch
+</p>
+
+<p>
+Noeud en huit avec anse de dénouage rapide autour de la partie
+statique.
+</p>
+
+<ol class="org-ol">
+<li>passer la corde autour du poste</li>
+<li>former un figure 8 en faisant passer la deuxième boucle réalisée
+autour de la partie statique
+<ul class="org-ul">
+<li>terminer le figure 8 en faisant entrer une anse formée avec la
+partie de travail dans la première boucle</li>
+</ul></li>
+<li>serrer</li>
+</ol>
+
+<p>
+Autrement dit, si le poste est disposé verticalement :
+</p>
+
+<ol class="org-ol">
+<li>faire une anse autour du poste, partie de travail à droite</li>
+<li>appelons <b>T</b> la position actuelle de la partie de travail</li>
+<li>faire une boucle <b>B</b>, partie de travail au-dessus vers la gauche</li>
+<li>passer au-dessus de la partie statique, de droite à gauche</li>
+<li>passer en-dessous de la partie statique, de gauche à droite</li>
+<li>passer en-desssous de <b>T</b>, de gauche à droite</li>
+<li>faire une anse et la passer dans <b>B</b></li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org8a3547a" class="outline-3">
+<h3 id="org8a3547a"><span class="section-number-3">14.8.</span> High post hitch</h3>
+<div class="outline-text-3" id="text-14-8">
+<p>
+Deux tours autour d’une boucle pour laisser un espace, puis passer une
+anse dedans.
+</p>
+
+<ol class="org-ol">
+<li>faire une boucle <b>B</b> autour du poste</li>
+<li>faire un tour <b>T</b> autour de <b>B</b>, plus près de son extrémité,
+laissant un espace <b>E</b> entre le croisement de <b>B</b> et <b>T</b></li>
+<li>faire une anse et rentrer avec dans <b>E</b></li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-orgf85c10a" class="outline-3">
+<h3 id="orgf85c10a"><span class="section-number-3">14.9.</span> Manger hitch</h3>
+<div class="outline-text-3" id="text-14-9">
+<p>
+Même idée générale que le high post hitch, avec bobine en plus.
+</p>
+
+<p>
+Si le poste est disposé verticalement :
+</p>
+
+<ol class="org-ol">
+<li>faire une anse autour du poste, partie de travail à droite</li>
+<li>appelons <b>T</b> la position actuelle de la partie de travail</li>
+<li>passer au-dessus de la partie statique, de droite à gauche</li>
+<li>un peu plus près du poste, effectuer le passage <b>P</b> en-dessous de
+la partie statique et de <b>T</b>, de gauche à droite</li>
+<li>appelons <b>B</b> la boucle formée par <b>T</b> et la partie de travail</li>
+<li>faire une bobine de 2 tours autour de la partie statique et de
+<b>T</b>, en progressant vers le poste, en terminant à droite</li>
+<li>faire une anse <b>A</b></li>
+<li>passer <b>A</b> dans <b>B</b></li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org66c7549" class="outline-3">
+<h3 id="org66c7549"><span class="section-number-3">14.10.</span> Tumble hitch</h3>
+<div class="outline-text-3" id="text-14-10">
+<p>
+Une anse dans une anse dans une anse, avec ossel hitch.
+</p>
+
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>faire une anse <b>A</b></li>
+<li>placer <b>A</b> derrière le poste, extrémité vers le haut, partie de
+travail à droite</li>
+<li>faire une anse <b>B</b> avec la partie de travail</li>
+<li>passer <b>B</b> en-dessous du poste, vers l’avant</li>
+<li>passer <b>B</b> devant le poste, vers le haut</li>
+<li>passer <b>B</b> dans <b>A</b></li>
+<li>passer en-dessous du poste, vers l’arrière et la gauche</li>
+<li>passer derrière la partie statique, de gauche à droite</li>
+<li>faire une anse <b>C</b></li>
+<li>passer <b>C</b> en-dessous du poste, vers l’avant</li>
+<li>passer <b>C</b> devant le poste, vers le haut</li>
+<li>passer <b>C</b> dans <b>B</b></li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org87d1dbd" class="outline-2">
+<h2 id="org87d1dbd"><span class="section-number-2">15.</span> Gripping hitch</h2>
+<div class="outline-text-2" id="text-15">
+<p>
+Noeuds anti-glissement : la traction peut s’effectuer parallèlement au
+poste.
+</p>
+</div>
+
+
+<div id="outline-container-orgacfde2a" class="outline-3">
+<h3 id="orgacfde2a"><span class="section-number-3">15.1.</span> Icicle hitch</h3>
+<div class="outline-text-3" id="text-15-1">
+</div>
+<div id="outline-container-org3f7b185" class="outline-4">
+<h4 id="org3f7b185"><span class="section-number-4">15.1.1.</span> Simple</h4>
+<div class="outline-text-4" id="text-15-1-1">
+<p>
+Combinaison de bobine, de croisements et d’un noeud qui ressemble à un
+lark’s head.
+</p>
+
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>placer la corde derrière le poste</li>
+<li>faire une bobine de 4 tours autour du poste, vers la gauche, en
+commençant par le haut, vers l’avant, et en terminant par
+l’avant, vers le bas</li>
+<li>effectuer le passage <b>P</b> derrière la partie statique, de gauche à
+droite</li>
+<li>passer derrière le poste à la droite du noeud, vers le haut</li>
+<li>passer au-dessus du poste, vers l’avant</li>
+<li>effectuer le passage <b>R</b> derrière la partie statique, de droite à
+gauche</li>
+<li>passer devant le poste à la gauche du noeud, vers le haut</li>
+<li>passer au-dessus du poste, vers l’arrière</li>
+<li>revenir à la droite du noeud, le long de la partie statique</li>
+<li>en longeant la partie statique
+<ol class="org-ol">
+<li>passer entre <b>P</b> et le poste</li>
+<li>passer entre <b>R</b> et le poste</li>
+</ol></li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org88cfd6c" class="outline-4">
+<h4 id="org88cfd6c"><span class="section-number-4">15.1.2.</span> Variante</h4>
+<div class="outline-text-4" id="text-15-1-2">
+<p>
+Combinaison de bobine, ossel hitch et clove hitch.
+</p>
+
+<ol class="org-ol">
+<li>passer la corde devant le poste</li>
+<li>faire une bobine de 4 tours autour du poste, vers la droite, en
+commençant par le haut, vers l’arrière, et en terminant
+en-dessous, vers l’avant</li>
+<li>passer devant la partie statique, vers la gauche
+<ul class="org-ul">
+<li>soit <b>E</b> l’espace entre ce passage et la partie statique</li>
+</ul></li>
+<li>passer sous le poste, vers l’arrière</li>
+<li>passer derrière le poste, vers le haut</li>
+<li>croiser la partie statique située devant le poste, formant le
+passage <b>P</b></li>
+<li>passer dans <b>E</b>, vers l’arrière</li>
+<li>passer sous le poste, vers l’arrière</li>
+<li>passer derrière le poste, vers le haut</li>
+<li>passer sous <b>P</b>, à droite de la partie statique</li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgc311fdd" class="outline-3">
+<h3 id="orgc311fdd"><span class="section-number-3">15.2.</span> Pipe hitch</h3>
+<div class="outline-text-3" id="text-15-2">
+<p>
+Combinaison de bobine, ossel hitch et clove hitch.
+</p>
+
+<ol class="org-ol">
+<li>passer la corde devant le poste</li>
+<li>faire une bobine de 4 tours autour du poste, vers la droite, en
+commençant par le haut, vers l’arrière, et en terminant
+en-dessous, vers l’avant</li>
+<li>passer devant la partie statique, vers la gauche
+<ul class="org-ul">
+<li>soit <b>E</b> l’espace entre ce passage et la partie statique</li>
+</ul></li>
+<li>passer devant le poste, vers le haut, un peu à gauche de la
+partie statique</li>
+<li>passer au-dessus du poste, vers l’arrière</li>
+<li>passer derrière le poste, vers le bas</li>
+<li>passer dans <b>E</b></li>
+<li>longer la partie statique par la gauche, devant le poste, vers le
+haut</li>
+<li>ajouter un half hitch à gauche du noeud en tournant dans la même direction</li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-orgb1ba26e" class="outline-3">
+<h3 id="orgb1ba26e"><span class="section-number-3">15.3.</span> Gripping sailor hitch</h3>
+<div class="outline-text-3" id="text-15-3">
+<p>
+Combinaison de bobine, ossel hitch et clove hitch.
+</p>
+
+<ol class="org-ol">
+<li>passer la corde devant le poste</li>
+<li>faire une bobine de 4 tours autour du poste, vers la droite, en
+commençant par le haut, vers l’arrière, et en terminant
+en-dessous, vers l’avant</li>
+<li>passer devant la partie statique, vers la gauche
+<ul class="org-ul">
+<li>soit <b>E</b> l’espace entre ce passage et la partie statique</li>
+</ul></li>
+<li>passer sous le poste, vers l’arrière</li>
+<li>passer derrière le poste, vers le haut</li>
+<li>passer au-dessus du poste, vers l’avant</li>
+<li>passer devant le poste, vers le bas, en croisant la partie
+statique de gauche à droite
+<ul class="org-ul">
+<li>forme le croisement <b>X</b></li>
+</ul></li>
+<li>passer dans <b>E</b>, vers l’arrière</li>
+<li>passer sous le poste, vers l’arrière</li>
+<li>passer derrière le poste, vers le haut</li>
+<li>passer au-dessus du poste, vers l’avant</li>
+<li>passer entre <b>X</b> et le poste, vers le bas</li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgbf327f6" class="outline-2">
+<h2 id="orgbf327f6"><span class="section-number-2">16.</span> Swing hitch</h2>
+<div class="outline-text-2" id="text-16">
+<p>
+Combinaison de clove hitch et ossel hitch.
+</p>
+
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>placer la corde derrière le poste</li>
+<li>clove hitch
+<ol class="org-ol">
+<li>effectuer le passage <b>G</b> au-dessus du poste, en diagonale vers
+l’avant et la gauche</li>
+<li>passer devant le poste, vers le bas</li>
+<li>passer en-dessous du poste, vers l’arrière</li>
+<li>passer derrière le poste, vers le haut</li>
+<li>effectuer le passage <b>D</b> au-dessus de <b>G</b>, en diagonale vers
+l’avant et la droite</li>
+<li>vérifier que <b>G</b> et <b>D</b> forment une croix</li>
+<li>passer devant le poste, vers le bas</li>
+<li>passer en-dessous du poste, vers l’arrière, à droite de la partie
+statique</li>
+<li>passer derrière le poste, vers le haut</li>
+<li>effectuer le passage <b>H</b> entre <b>D</b> et le poste, légèrement à
+droite de <b>G</b>, en diagonale vers l’avant et la gauche</li>
+</ol></li>
+<li>ossel hitch
+<ol class="org-ol">
+<li>passer derrière la partie statique, de droite à gauche</li>
+<li>passer entre <b>D</b> et le poste et entre <b>G</b> et <b>H</b>, vers l’arrière</li>
+</ol></li>
+<li>passer entre <b>G</b> et le poste, vers l’arrière</li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-orgfa6285c" class="outline-2">
+<h2 id="orgfa6285c"><span class="section-number-2">17.</span> Vibration proof hitch knot&#xa0;&#xa0;&#xa0;<span class="tag"><span class="vibration_proof">vibration_proof</span></span></h2>
+<div class="outline-text-2" id="text-17">
+<p>
+Si le poste est disposé horizontalement :
+</p>
+
+<ol class="org-ol">
+<li>placer la corde devant le poste</li>
+<li>effectuer un passage <b>G</b> au-dessus du poste, en diagonale vers
+l’arrière et la gauche</li>
+<li>passer derrière le poste, vers le bas</li>
+<li>passer en-dessous du poste, vers l’avant</li>
+<li>passer devant le poste, vers le haut</li>
+<li>effectuer un passage <b>D</b> au-dessus de <b>G</b>, en diagonale vers
+l’arrière et la droite</li>
+<li>vérifier que <b>G</b> et <b>D</b> forment une croix au-dessus du poste</li>
+<li>passer derrière le poste, vers le bas</li>
+<li>passer en-dessous du poste, vers l’avant, à droite de la partie statique</li>
+<li>passer devant la partie statique, vers la gauche</li>
+<li>passer entre <b>D</b> et le poste, devant la croix vers la droite</li>
+<li>passer au-dessus de la partie statique, vers la droite</li>
+<li>passer au-dessus de la croix, vers l’arrière</li>
+<li>passer entre <b>D</b> et le poste, vers la droite</li>
+<li>serrer</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org5c94f7b" class="outline-2">
+<h2 id="org5c94f7b"><span class="section-number-2">18.</span> Halter hitch</h2>
+<div class="outline-text-2" id="text-18">
+<ol class="org-ol">
+<li>faire un high post hitch</li>
+<li>passer la partie de travail dans l’anse qui a terminé le high
+post hitch</li>
+<li>serrer cette anse</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-orgf9e3a4f" class="outline-2">
+<h2 id="orgf9e3a4f"><span class="section-number-2">19.</span> Attaches de plusieurs objets (lashing)</h2>
+<div class="outline-text-2" id="text-19">
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgd3578ae">19.1. Round lashing</a></li>
+<li><a href="#org7c53fc1">19.2. Shear lashing</a></li>
+<li><a href="#org5c151d1">19.3. Square lashing</a></li>
+<li><a href="#org7be625f">19.4. Diagonal lashing</a></li>
+<li><a href="#org6c90803">19.5. Japanese square lashing</a></li>
+<li><a href="#org170426a">19.6. Transom knot</a></li>
+<li><a href="#org722c0d9">19.7. Tripod lashing</a></li>
+<li><a href="#orgdd47e4f">19.8. Double floor lashing</a></li>
+<li><a href="#org58c4a00">19.9. Ladder lashing</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-orgd3578ae" class="outline-3">
+<h3 id="orgd3578ae"><span class="section-number-3">19.1.</span> Round lashing</h3>
+<div class="outline-text-3" id="text-19-1">
+<p>
+Pour fixer deux bâtons parallèlement.
+</p>
+
+<ol class="org-ol">
+<li>soit <b>i?</b> et <b>II</b> les deux bâtons</li>
+<li>disposer les deux bâtons parallèlement</li>
+<li>faire un clove hitch autour des deux bâtons</li>
+<li>faire une bobine autour des deux bâtons</li>
+<li>terminer par un clove hitch autour des deux bâtons</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org7c53fc1" class="outline-3">
+<h3 id="org7c53fc1"><span class="section-number-3">19.2.</span> Shear lashing</h3>
+<div class="outline-text-3" id="text-19-2">
+<p>
+Pour fixer deux bâtons parallèlement.
+</p>
+
+<ol class="org-ol">
+<li>soit <b>i?</b> et <b>II</b> les deux bâtons</li>
+<li>disposer les deux bâtons parallèlement</li>
+<li>faire un clove hitch autour d’un des deux bâtons</li>
+<li>faire une bobine autour des deux bâtons</li>
+<li>frapping turns : faire quelques tours entre <b>I</b> et <b>II</b></li>
+<li>terminer par un clove hitch autour d’un des deux bâtons</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org5c151d1" class="outline-3">
+<h3 id="org5c151d1"><span class="section-number-3">19.3.</span> Square lashing</h3>
+<div class="outline-text-3" id="text-19-3">
+<p>
+<i>alias</i> : brêlage carré
+</p>
+
+<p>
+Pour fixer deux bâtons perpendiculairement.
+</p>
+
+<ol class="org-ol">
+<li>croiser les deux bâtons perpendiculairement</li>
+<li>soit <b>S</b> le bâton du dessus</li>
+<li>soit <b>I</b> le bâton du dessous</li>
+<li>attacher la corde à <b>I</b>, près de <b>S</b>
+<ul class="org-ul">
+<li>par exemple avec un clove hitch</li>
+</ul></li>
+<li>enrouler la partie courte de la corde autour de la partie longue</li>
+<li>recommencer 2 ou 3 fois
+<ol class="org-ol">
+<li>passer au-dessus de <b>S</b>
+<ul class="org-ul">
+<li>en restant du même côté de <b>I</b></li>
+</ul></li>
+<li>passer en-dessous de <b>I</b></li>
+<li>repasser au-dessus de <b>S</b> dans l’autre sens</li>
+<li>passer en-dessous de <b>I</b>, dans l’autre sens</li>
+</ol></li>
+<li>chaque passage sous <b>I</b> se fait à l’intérieur, près du centre du
+croisement des bâtons</li>
+<li>chaque passage au-dessus de <b>S</b> se fait à l’extérieur</li>
+<li>frapping turns : faire quelques tours autour du croisement des
+bâtons, sous <b>S</b> mais au-dessus de <b>I</b></li>
+<li>faire deux overhand autour d’un des deux bâtons</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org7be625f" class="outline-3">
+<h3 id="org7be625f"><span class="section-number-3">19.4.</span> Diagonal lashing</h3>
+<div class="outline-text-3" id="text-19-4">
+<p>
+Pour fixer deux bâtons perpendiculairement.
+</p>
+
+<p>
+Plus flexible que le square lashing.
+</p>
+
+<ol class="org-ol">
+<li>croiser les deux bâtons perpendiculairement</li>
+<li>soit <b>S</b> le bâton du dessus</li>
+<li>soit <b>I</b> le bâton du dessous</li>
+<li>attacher la corde à <b>I</b>, près de <b>S</b>
+<ul class="org-ul">
+<li>par exemple avec un clove hitch ou un timber hitch</li>
+</ul></li>
+<li>enrouler la partie courte de la corde autour de la partie longue</li>
+<li>recommencer 2 ou 3 fois
+<ol class="org-ol">
+<li>passer au-dessus de <b>S</b> en diagonale
+<ul class="org-ul">
+<li>en passant de l’autre côté de <b>I</b></li>
+</ul></li>
+<li>passer en-dessous de <b>I</b></li>
+<li>repasser au-dessus de <b>S</b> dans l’autre sens, toujours en diagonale</li>
+<li>passer en-dessous de <b>I</b></li>
+</ol></li>
+<li>frapping turns : faire quelques tours autour du croisement des
+bâtons, entre <b>S</b> et <b>I</b></li>
+<li>faire deux overhand autour d’un des deux bâtons</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org6c90803" class="outline-3">
+<h3 id="org6c90803"><span class="section-number-3">19.5.</span> Japanese square lashing</h3>
+<div class="outline-text-3" id="text-19-5">
+<ol class="org-ol">
+<li>enrouler autour des deux bâtons perpendiculaires comme avec le
+square lashing, masi en utilisant une doublure</li>
+<li>séparer les deux extrémités de chaque côté d’un des deux bâtons</li>
+<li>faire des frapping turns avec les deux extrémités</li>
+<li>terminer par un square knot</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org170426a" class="outline-3">
+<h3 id="org170426a"><span class="section-number-3">19.6.</span> Transom knot</h3>
+<div class="outline-text-3" id="text-19-6">
+<p>
+Sorte de constrictor pour deux bâtons perpendiculaires.
+</p>
+
+<ol class="org-ol">
+<li>croiser les deux bâtons perpendiculairement</li>
+<li>soit <b>S</b> le bâton du dessus</li>
+<li>soit <b>I</b> le bâton du dessous</li>
+<li>passer au-dessus de <b>S</b> en diagonale
+<ul class="org-ul">
+<li>en passant de l’autre côté de <b>I</b></li>
+</ul></li>
+<li>passer en-dessous de <b>I</b></li>
+<li>repasser au-dessus de <b>S</b> dans l’autre sens, toujours en diagonale</li>
+<li>passer en-dessous de <b>I</b></li>
+<li>passer au-dessus de la partie statique</li>
+<li>passer sous la croix formée par les deux passages en diagonale</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org722c0d9" class="outline-3">
+<h3 id="org722c0d9"><span class="section-number-3">19.7.</span> Tripod lashing</h3>
+<div class="outline-text-3" id="text-19-7">
+<p>
+Pour fixer trois bâtons.
+</p>
+
+<ol class="org-ol">
+<li>soit <b>I</b>, <b>II</b>, <b>III</b> les trois bâtons</li>
+<li>disposer les trois bâtons parallèlement</li>
+<li>attacher la corde à <b>I</b> par un clove hitch</li>
+<li>enrouler la partie courte de la corde autour de la partie longue</li>
+<li>tisser autour des trois bâtons
+<ul class="org-ul">
+<li>alternativement au-dessus et en-dessous</li>
+<li>arrivé au dernier bâton, repartir dans l’autre sens</li>
+</ul></li>
+<li>frapping turns
+<ol class="org-ol">
+<li>faire quelques tours entre <b>I</b> et <b>II</b></li>
+<li>faire quelques tours entre <b>II</b> et <b>III</b></li>
+</ol></li>
+<li>terminer par un clove hitch autour d’un des bâtons</li>
+<li>les disposer en trois pattes</li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-orgdd47e4f" class="outline-3">
+<h3 id="orgdd47e4f"><span class="section-number-3">19.8.</span> Double floor lashing</h3>
+<div class="outline-text-3" id="text-19-8">
+<p>
+Pour rangée de bâtons
+</p>
+
+<ol class="org-ol">
+<li>disposer deux bâtons parallèlement, écartés et d’avant en arrière
+<ul class="org-ul">
+<li>soit <b>I</b> et <b>II</b> ces deux bâtons de support</li>
+</ul></li>
+<li>disposer les autres bâtons parallèlement, serrés et de gauche à droite</li>
+<li>attacher la corde à <b>I</b>
+<ul class="org-ul">
+<li>par exemple avec un clove hitch ou un timber hitch</li>
+</ul></li>
+<li>enrouler la partie courte de la corde autour de la partie longue</li>
+<li>passer au-dessus du premier bâton de la rangée</li>
+<li>passer sous <b>I</b>, en diagonale</li>
+<li>passer au-dessus du premier bâton de la rangée, de l’autre côté
+de <b>I</b></li>
+<li>passer sous <b>I</b></li>
+<li>utilser le même principe avec les autres bâtons de la rangée</li>
+<li>terminer par un clove hitch</li>
+<li>recommencer de l’autre côté de la rangée avec une autre corde,
+en remplaçant <b>I</b> par <b>II</b></li>
+</ol>
+</div>
+</div>
+
+
+<div id="outline-container-org58c4a00" class="outline-3">
+<h3 id="org58c4a00"><span class="section-number-3">19.9.</span> Ladder lashing</h3>
+<div class="outline-text-3" id="text-19-9">
+<ol class="org-ol">
+<li>nécessite deux cordes</li>
+<li>faire un marlingspike sur la corde de gauche</li>
+<li>passer le bâton dedans</li>
+<li>faire un marlingspike sur la corde de droite</li>
+<li>passer le bâton dedans</li>
+<li>recommencer pour les autres bâtons</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Auteur: chimay</p>
+<p class="date">Created: 2022-08-11 jeu 22:21</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

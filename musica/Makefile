@@ -2,7 +2,8 @@
 
 include ../Makefile.inc
 
-.DEFAULT_GOAL := install
+#.DEFAULT_GOAL := install
+.DEFAULT_GOAL := sync-html
 
 #  {{{  Phony
 
@@ -14,9 +15,10 @@ include ../Makefile.inc
 
 #  }}}
 
-# All, Install, Clean, Wipe {{{1
+# All, install, clean, wipe {{{1
 
-all: $(FICHIERS_HTML) $(FICHIERS_EPUB)
+#all: $(FICHIERS_HTML) $(FICHIERS_EPUB)
+all: $(FICHIERS_HTML) sync-html
 
 install: sync
 

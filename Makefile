@@ -55,6 +55,7 @@ html: $(HTML_SUBDIRS) $(FICHIERS_HTML)
 
 %.html: %.org $(FICHIERS_INCLUDE)
 	$(EMACS) $(EMACS_PRE_FLAGS) $< $(EMACS_POST_FLAGS)
+	remove-max-width-from-org-html-export.zsh
 	@$(ECHO)
 
 #  }}}
@@ -78,7 +79,6 @@ dry-sync-html: html
 	@$(ECHO)
 
 sync-html: html
-	remove-max-width-from-org-html-export.zsh
 	rsync -au --delete \
 		--exclude-from=rsync-html-exclude \
 		-vhi --progress $(RACINE_ORGMODE)/ $(RACINE_HTML)

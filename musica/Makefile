@@ -46,6 +46,7 @@ html: $(FICHIERS_HTML)
 
 %.html: %.org $(FICHIERS_INCLUDE)
 	$(EMACS) $(EMACS_PRE_FLAGS) $< $(EMACS_POST_FLAGS)
+	remove-max-width-from-org-html-export.zsh
 	@$(ECHO)
 
 #  }}}

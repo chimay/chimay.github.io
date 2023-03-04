@@ -1,19 +1,29 @@
 
+% ------------ global variables ------------
+
+global = {
+  \key c \major
+  \numericTimeSignature
+  \time 3/4
+}
+
+diatonicScale = { c d e f g a b }
+
 % ------------ silences ------------
 
 silencePeriod = {
-  \override MultiMeasureRest.staff-position = #0
+  %\override MultiMeasureRest.staff-position = #0
   \repeat unfold 3 { R2. \bar "|" R \bar "||" }
   R \bar "|" R \bar "."
   \break
 }
 
-silencePeriodMinus = {
-  R2.*7
-}
-
 invisibleSilencePeriod = {
   s2.*8
+}
+
+silencePeriodMinus = {
+  R2.*7
 }
 
 invisibleSilencePeriodMinus = {
@@ -42,6 +52,14 @@ droneE = {
 % ------------ arpeggios ------------
 
 % ------------ themes ------------
+
+themeMelody = {
+  r2.   | r2.   \bar "||"
+  s2.   | s2.   \bar "||"
+  s2.   | s2.   \bar "||"
+  s2.   | s2.   \bar "."
+  \break 
+}
 
 % ------------ counterpoints ------------
 

@@ -30,15 +30,9 @@
   }
 }
 
-global = {
-  \key c \major
-  \numericTimeSignature
-  \time 3/4
-}
-
 % ------------ melodies ------------
 
-\include "include/mel.ly"
+\include "include/mel-3.ly"
 
 % ------------ voices ------------
 

@@ -15,6 +15,7 @@
 }
 
 \layout {
+  %\enablePolymeter
   \override Score.BarNumber.break-visibility = ##(#t #t #t)
   \context {
     \Score
@@ -27,15 +28,9 @@
   }
 }
 
-global = {
-  \key c \major
-  \numericTimeSignature
-  \time 3/4
-}
-
 % ------------ melodies ------------
 
-\include "include/mel.ly"
+\include "include/mel-3.ly"
 
 % ------------ voices ------------
 
@@ -267,6 +262,7 @@ instrumentDrums = \new DrumStaff \with {
       \context {
         \Score
         %midiChannelMapping = #'instrument
+        %\enablePolymeter
       }
     }
   }

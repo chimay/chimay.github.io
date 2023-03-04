@@ -15,6 +15,7 @@
 }
 
 \layout {
+  %\enablePolymeter
   \override Score.BarNumber.break-visibility = ##(#t #t #t)
   \context {
     \Score
@@ -27,51 +28,46 @@
   }
 }
 
-global = {
-  \key c \major
-  \numericTimeSignature
-  \time 3/4
-}
-
 % ------------ melodies ------------
 
-\include "include/mel.ly"
+\include "include/mel-3.ly"
+%\include "include/mel-4.ly"
 
 % ------------ voices ------------
 
-voiceFlute = \fixed c'' {
+voiceWoodSoprano = \fixed c'' {
   \global
   \tempo 2. = 50
   % Music follows here.
   c2.
 }
 
-voiceEnglishHorn = \fixed c' {
+voiceWoodAlto = \fixed c' {
   \global
   % Music follows here.
 }
 
-voiceBassoon = \fixed c {
+voiceWoodBass = \fixed c {
   \global
   % Music follows here.
 }
 
-voiceViolin = \fixed c'' {
+voiceStringSoprano = \fixed c'' {
   \global
   % Music follows here.
 }
 
-voiceViola = \fixed c' {
+voiceStringAlto = \fixed c' {
   \global
   % Music follows here.
 }
 
-voiceCello = \fixed c {
+voiceStringTenor = \fixed c {
   \global
   % Music follows here.
 }
 
-voiceContrabass = \fixed c, {
+voiceStringBass = \fixed c, {
   \global
   % Music follows here.
 }
@@ -113,83 +109,47 @@ voiceDrums = \drummode {
 
 % ------------ instruments ------------
 
-instrumentFlute = \new Staff \with {
-  instrumentName = "Flute"
-  shortInstrumentName = "fl"
-  midiInstrument = "flute"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #1.5
-} { \clef french
-    %\override Staff.StaffSymbol.line-count = #7
-    \voiceFlute }
+instrumentWoods = \new GrandStaff \with {
+  instrumentName = \markup \column { 
+    Woods
+    flute \line { en horn } bassoon 
+  }
+  shortInstrumentName =  "wd"
+} <<
+  \new Staff = "right" \with {
+    midiInstrument = "flute"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #1.0
+  } { \clef treble \voiceWoodSoprano }
+  \new Staff = "left" \with {
+    midiInstrument = "english horn"
+    midiMinimumVolume = #1.2
+    midiMaximumVolume = #1.2
+  } { \clef alto \voiceWoodAlto }
+  \new Staff = "feet" \with {
+    midiInstrument = "bassoon"
+    midiMinimumVolume = #1.5
+    midiMaximumVolume = #1.5
+  } { \clef bass \voiceWoodBass }
+>>
 
-instrumentEnglishHorn = \new Staff \with {
-  instrumentName = \markup {
-    \column { English Horn \line { in F } } }
-  shortInstrumentName = \markup \column { en hn }
-  midiInstrument = "english horn"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #1.5
-} {
-    %\override Staff.StaffSymbol.line-count = #7
-    % ---- no transposition, better to compose
-    \clef alto
-    \voiceEnglishHorn
-    % ---- transposed, better to play
-    %\clef soprano
-    %\transposition f
-    %\transpose c g \voiceEnglishHorn
-}
-
-instrumentBassoon = \new Staff \with {
-  instrumentName = "Bassoon"
-  shortInstrumentName = "bsn"
-  midiInstrument = "bassoon"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #1.5
-} { \clef bass
-    %\override Staff.StaffSymbol.line-count = #7
-    \voiceBassoon }
-
-instrumentViolin = \new Staff \with {
-  instrumentName = "Violin"
-  shortInstrumentName = "vn"
-  midiInstrument = "violin"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #1.5
-} { \clef treble
-    %\override Staff.StaffSymbol.line-count = #7
-    \voiceViolin }
-
-instrumentViola = \new Staff \with {
-  instrumentName = "Viola"
-  shortInstrumentName = "va"
-  midiInstrument = "viola"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #1.5
-} { \clef mezzosoprano
-    %\override Staff.StaffSymbol.line-count = #7
-    \voiceViola }
-
-instrumentCello = \new Staff \with {
-  instrumentName = "Cello"
-  shortInstrumentName = "vc"
-  midiInstrument = "cello"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #1.5
-} { \clef varbaritone
-    %\override Staff.StaffSymbol.line-count = #7
-    \voiceCello }
-
-instrumentContrabass = \new Staff \with {
-  instrumentName = "Contrabass"
-  shortInstrumentName = "cb"
-  midiInstrument = "contrabass"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #1.5
-} { \clef bass
-    %\override Staff.StaffSymbol.line-count = #7
-    \voiceContrabass }
+instrumentStrings = \new GrandStaff \with {
+  instrumentName = "Strings"
+  shortInstrumentName = "st"
+} <<
+  \new Staff = "right" \with {
+    midiInstrument = "violin"
+    midiMinimumVolume = #1.5
+    midiMaximumVolume = #1.5
+  } { \clef treble 
+      << \voiceStringSoprano \\ \voiceStringAlto >> }
+  \new Staff = "left" \with {
+    midiInstrument = "cello"
+    midiMinimumVolume = #1.5
+    midiMaximumVolume = #1.5
+  } { \clef bass
+      << \voiceStringTenor \\ \voiceStringBass >> }
+>>
 
 instrumentPiano = \new GrandStaff \with {
   instrumentName = "Piano"
@@ -208,7 +168,7 @@ instrumentPiano = \new GrandStaff \with {
 >>
 
 instrumentHarpsichord = \new GrandStaff \with {
-  instrumentName = "Harpsichord"
+  instrumentName = \markup \column { Harpsi- chord }
   shortInstrumentName = \markup \column { hp cd }
 } <<
   \new Staff = "right" \with {
@@ -281,17 +241,8 @@ instrumentDrums = \new DrumStaff \with {
 \book {
   \score {
     <<
-      \new StaffGroup <<
-        \instrumentFlute
-        \instrumentEnglishHorn
-        \instrumentBassoon
-      >>
-      \new StaffGroup <<
-        \instrumentViolin
-        \instrumentViola
-        \instrumentCello
-        \instrumentContrabass
-      >>
+      \instrumentWoods
+      \instrumentStrings
       \instrumentPiano
       \instrumentHarpsichord
       \new ChoirStaff <<
@@ -307,6 +258,7 @@ instrumentDrums = \new DrumStaff \with {
       \context {
         \Score
         %midiChannelMapping = #'instrument
+        %\enablePolymeter
       }
     }
   }

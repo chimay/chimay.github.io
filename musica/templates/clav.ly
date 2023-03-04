@@ -15,6 +15,7 @@
 }
 
 \layout {
+  %\enablePolymeter
   \override Score.BarNumber.break-visibility = ##(#t #t #t)
   \context {
     \Score
@@ -27,15 +28,9 @@
   }
 }
 
-global = {
-  \key c \major
-  \numericTimeSignature
-  \time 3/4
-}
-
 % ------------ melodies ------------
 
-\include "include/mel.ly"
+\include "include/mel-3.ly"
 
 % ------------ voices ------------
 
@@ -66,22 +61,22 @@ voiceViolaOrganistaLeft = \fixed c {
   % Music follows here.
 }
 
-voiceHarpsichordRight = \fixed c'' {
-  \global
-  % Music follows here.
-}
-
-voiceHarpsichordLeft = \fixed c {
-  \global
-  % Music follows here.
-}
-
 voicePianoRight = \fixed c'' {
   \global
   % Music follows here.
 }
 
 voicePianoLeft = \fixed c {
+  \global
+  % Music follows here.
+}
+
+voiceHarpsichordRight = \fixed c'' {
+  \global
+  % Music follows here.
+}
+
+voiceHarpsichordLeft = \fixed c {
   \global
   % Music follows here.
 }
@@ -108,24 +103,24 @@ instrumentOrgan = \new GrandStaff \with {
   shortInstrumentName =  "org"
 } <<
   \new Staff = "right" \with {
-    midiInstrument = "flute"
+    midiInstrument = "drawbar organ"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #1.0
   } { \clef treble \voiceOrganRight }
   \new Staff = "left" \with {
-    midiInstrument = "english horn"
+    midiInstrument = "drawbar organ"
     midiMinimumVolume = #1.2
     midiMaximumVolume = #1.2
   } { \clef alto \voiceOrganLeft }
   \new Staff = "left" \with {
-    midiInstrument = "bassoon"
+    midiInstrument = "drawbar organ"
     midiMinimumVolume = #1.5
     midiMaximumVolume = #1.5
   } { \clef bass \voiceOrganFeet }
 >>
 
 instrumentViolaOrganista = \new GrandStaff \with {
-  instrumentName = \markup \column { Viola Organista }
+  instrumentName = \markup \column { Viola Orga- nista }
   shortInstrumentName = \markup \column { va org }
 } <<
   \new Staff = "right" \with {
@@ -247,6 +242,7 @@ instrumentDrums = \new DrumStaff \with {
       \context {
         \Score
         %midiChannelMapping = #'instrument
+        %\enablePolymeter
       }
     }
   }

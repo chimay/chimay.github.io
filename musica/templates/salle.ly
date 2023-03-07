@@ -31,8 +31,8 @@
 
 % ------------ melodies ------------
 
-%\include "include/mel-3.ly"
-\include "include/mel-4.ly"
+\include "include/mel-3.ly"
+%\include "include/mel-4.ly"
 
 % ------------ voices ------------
 
@@ -46,7 +46,6 @@ voiceWoodSoprano = \fixed c'' {
 voiceWoodAlto = \fixed c' {
   \global
   % Music follows here.
-  \silencePeriod
 }
 
 voiceWoodBass = \fixed c {
@@ -112,9 +111,9 @@ voiceDrums = \drummode {
 % ------------ instruments ------------
 
 instrumentWoods = \new GrandStaff \with {
-  instrumentName = \markup \column { 
+  instrumentName = \markup \column {
     Woods
-    flute \line { en horn } bassoon 
+    flute \line { en horn } bassoon
   }
   shortInstrumentName =  "wd"
 } <<
@@ -143,7 +142,7 @@ instrumentStrings = \new GrandStaff \with {
     midiInstrument = "violin"
     midiMinimumVolume = #1.5
     midiMaximumVolume = #1.5
-  } { \clef treble 
+  } { \clef treble
       << \voiceStringSoprano \\ \voiceStringAlto >> }
   \new Staff = "left" \with {
     midiInstrument = "cello"

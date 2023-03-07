@@ -39,7 +39,7 @@ voiceSoprano = \fixed c'' {
   \global
   \tempo 2. = 50
   % Music follows here.
-  c2.
+  \themeMelody
 }
 
 voiceMezzo = \fixed c'' {

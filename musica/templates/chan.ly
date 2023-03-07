@@ -132,10 +132,8 @@ instrumentSopranoMezzo = \new Staff \with {
 } { \clef treble
     %\override Staff.StaffSymbol.line-count = #7
     <<
-      \new Voice = soprano
-      \voiceSoprano
-      \new Voice = mezzo
-      \voiceMezzo
+      \new Voice = soprano \voiceSoprano
+      \new Voice = mezzo \voiceMezzo
     >>
 }
 
@@ -148,10 +146,8 @@ instrumentAltoCounter = \new Staff \with {
 } { \clef alto
     %\override Staff.StaffSymbol.line-count = #7
     <<
-      \new Voice = alto
-      \voiceAlto
-      \new Voice = counter
-      \voiceCounter
+      \new Voice = alto \voiceAlto
+      \new Voice = counter \voiceCounter
     >>
 }
 
@@ -164,10 +160,8 @@ instrumentTenorBaritone = \new Staff \with {
 } { \clef varbaritone
     %\override Staff.StaffSymbol.line-count = #7
     <<
-      \new Voice = tenor
-      \voiceTenor
-      \new Voice = barytone
-      \voiceBarytone
+      \new Voice = tenor \voiceTenor
+      \new Voice = barytone \voiceBarytone
     >>
 }
 
@@ -179,8 +173,7 @@ instrumentBass = \new Staff \with {
   midiMaximumVolume = #1.5
 } { \clef bass
     %\override Staff.StaffSymbol.line-count = #7
-    \new Voice = bass
-    \voiceBass
+    \new Voice = bass \voiceBass
 }
 
 % ------------ book ------------

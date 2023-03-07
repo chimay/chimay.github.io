@@ -151,7 +151,7 @@ instrumentAltoCounter = \new Staff \with {
     >>
 }
 
-instrumentTenorBaritone = \new Staff \with {
+instrumentTenorBarytone = \new Staff \with {
   instrumentName = \markup { \column { Tenor Barytone } }
   shortInstrumentName = \markup { \column { T Y } }
   midiInstrument = "cello"
@@ -188,7 +188,7 @@ instrumentBass = \new Staff \with {
         \instrumentAltoCounter
         \new Lyrics \lyricsto "alto" \lyricsAlto
         \new Lyrics \lyricsto "counter" \lyricsCounter
-        \instrumentTenorBaritone
+        \instrumentTenorBarytone
         \new Lyrics \lyricsto "tenor" \lyricsTenor
         \new Lyrics \lyricsto "barytone" \lyricsBarytone
         \instrumentBass

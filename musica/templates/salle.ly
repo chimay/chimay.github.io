@@ -31,8 +31,8 @@
 
 % ------------ melodies ------------
 
-\include "include/mel-3.ly"
-%\include "include/mel-4.ly"
+%\include "include/mel-3.ly"
+\include "include/mel-4.ly"
 
 % ------------ voices ------------
 
@@ -40,12 +40,13 @@ voiceWoodSoprano = \fixed c'' {
   \global
   \tempo 2. = 50
   % Music follows here.
-  c2.
+  \themeMelody
 }
 
 voiceWoodAlto = \fixed c' {
   \global
   % Music follows here.
+  \silencePeriod
 }
 
 voiceWoodBass = \fixed c {

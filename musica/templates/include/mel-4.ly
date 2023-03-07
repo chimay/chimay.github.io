@@ -13,8 +13,8 @@ diatonicScale = { c d e f g a b }
 
 silencePeriod = {
   %\override MultiMeasureRest.staff-position = #0
-  \repeat unfold 3 { R1 \bar "," R \bar "|" }
-  R \bar "," R \bar "||"
+  \repeat unfold 3 { R1 | R \bar "|" }
+  R | R \bar "||"
   \break
 }
 
@@ -54,10 +54,10 @@ droneE = {
 % ------------ themes ------------
 
 themeMelody = {
-  r1   | r1   \bar "||"
-  s1   | s1   \bar "||"
-  s1   | s1   \bar "||"
-  s1   | s1   \bar "."
+  c1   | d1   \bar "|"
+  c1   | d1   \bar "|"
+  c1   | d1   \bar "|"
+  c1   | d1   \bar "||"
   \break 
 }
 

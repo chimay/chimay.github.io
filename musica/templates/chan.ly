@@ -19,6 +19,7 @@
   \override Score.BarNumber.break-visibility = ##(#t #t #t)
   \context {
     \Score
+    measureBarType = #","
     %barNumberVisibility = #(every-nth-bar-number-visible 8)
     barNumberVisibility = #(modulo-bar-number-visible 8 0)
   }
@@ -39,73 +40,85 @@ voiceSoprano = \fixed c'' {
   \tempo 2. = 50
   \voiceOne
   % Music follows here.
-  c2.
+  \themeMelody
 }
 
 voiceMezzo = \fixed c'' {
   \global
   \voiceTwo
   % Music follows here.
+  \fixed c' \themeMelody
 }
 
 voiceAlto = \fixed c' {
   \global
   \voiceOne
   % Music follows here.
+  \themeMelody
 }
 
 voiceCounter = \fixed c' {
   \global
   \voiceTwo
   % Music follows here.
+  \fixed c \themeMelody
 }
 
 voiceTenor = \fixed c {
   \global
   \voiceOne
   % Music follows here.
+  \themeMelody
 }
 
 voiceBarytone = \fixed c {
   \global
   \voiceTwo
   % Music follows here.
+  \themeMelody
 }
 
 voiceBass = \fixed c, {
   \global
   % Music follows here.
+  \themeMelody
 }
 
 % ------------ lyrics ------------
 
 lyricsSoprano = \lyricmode {
   \set vocalName = "S :"
-  un deux trois
+  so -- pra -- no
 }
 
 lyricsMezzo = \lyricmode {
   \set vocalName = "M :"
+  mez -- zo
 }
 
 lyricsAlto = \lyricmode {
   \set vocalName = "A :"
+  al -- to
 }
 
 lyricsCounter = \lyricmode {
   \set vocalName = "C :"
+  coun -- ter
 }
 
 lyricsTenor = \lyricmode {
   \set vocalName = "T :"
+  te -- nor
 }
 
-lyricsBaritone = \lyricmode {
+lyricsBarytone = \lyricmode {
   \set vocalName = "Y :"
+  ba -- ry -- to -- ne
 }
 
 lyricsBass = \lyricmode {
   \set vocalName = "B :"
+  bass line
 }
 
 % ------------ instruments ------------
@@ -132,7 +145,7 @@ instrumentAltoCounter = \new Staff \with {
   midiInstrument = "viola"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #1.5
-} { \clef mezzosoprano
+} { \clef alto
     %\override Staff.StaffSymbol.line-count = #7
     <<
       \new Voice = alto
@@ -143,7 +156,7 @@ instrumentAltoCounter = \new Staff \with {
 }
 
 instrumentTenorBaritone = \new Staff \with {
-  instrumentName = \markup { \column { Tenor Baritone } }
+  instrumentName = \markup { \column { Tenor Barytone } }
   shortInstrumentName = \markup { \column { T Y } }
   midiInstrument = "cello"
   midiMinimumVolume = #1.0
@@ -153,7 +166,7 @@ instrumentTenorBaritone = \new Staff \with {
     <<
       \new Voice = tenor
       \voiceTenor
-      \new Voice = baritone
+      \new Voice = barytone
       \voiceBarytone
     >>
 }
@@ -166,8 +179,8 @@ instrumentBass = \new Staff \with {
   midiMaximumVolume = #1.5
 } { \clef bass
     %\override Staff.StaffSymbol.line-count = #7
+    \new Voice = bass
     \voiceBass
-    \addlyrics \lyricsBass
 }
 
 % ------------ book ------------
@@ -176,40 +189,17 @@ instrumentBass = \new Staff \with {
   \score {
     <<
       \new StaffGroup <<
-        % ---- staves & lyrics structure
         \instrumentSopranoMezzo
-        \new Lyrics = "soprano"
-        \new Lyrics = "mezzo"
+        \new Lyrics \lyricsto "soprano" \lyricsSoprano
+        \new Lyrics \lyricsto "mezzo" \lyricsMezzo
         \instrumentAltoCounter
-        \new Lyrics = "alto"
-        \new Lyrics = "counter"
+        \new Lyrics \lyricsto "alto" \lyricsAlto
+        \new Lyrics \lyricsto "counter" \lyricsCounter
         \instrumentTenorBaritone
-        \new Lyrics = "tenor"
-        \new Lyrics = "baritone"
+        \new Lyrics \lyricsto "tenor" \lyricsTenor
+        \new Lyrics \lyricsto "barytone" \lyricsBarytone
         \instrumentBass
-        \new Lyrics = "bass"
-        % ---- lyrics variables
-        \context Lyrics = "soprano" {
-          \lyricsto "soprano" \lyricsSoprano
-        }
-        \context Lyrics = "mezzo" {
-          \lyricsto "mezzo" \lyricsMezzo
-        }
-        \context Lyrics = "alto" {
-          \lyricsto "alto" \lyricsAlto
-        }
-        \context Lyrics = "counter" {
-          \lyricsto "counter" \lyricsCounter
-        }
-        \context Lyrics = "tenor" {
-          \lyricsto "tenor" \lyricsTenor
-        }
-        \context Lyrics = "baritone" {
-          \lyricsto "baritone" \lyricsBaritone
-        }
-        \context Lyrics = "bass" {
-          \lyricsto "bass" \lyricsBass
-        }
+        \new Lyrics \lyricsto "bass" \lyricsBass
       >>
     >>
     \layout { }

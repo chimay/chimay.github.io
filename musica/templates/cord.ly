@@ -19,6 +19,7 @@
   \override Score.BarNumber.break-visibility = ##(#t #t #t)
   \context {
     \Score
+    measureBarType = #","
     %barNumberVisibility = #(every-nth-bar-number-visible 8)
     barNumberVisibility = #(modulo-bar-number-visible 8 0)
   }
@@ -86,8 +87,8 @@ instrumentViolin = \new Staff \with {
   midiMinimumVolume = #1.0
   midiMaximumVolume = #1.5
 } { \clef treble
-	%\override Staff.StaffSymbol.line-count = #7
-	<< \voiceSoprano \\ \voiceMezzo >> }
+    %\override Staff.StaffSymbol.line-count = #7
+    << \voiceSoprano \\ \voiceMezzo >> }
 
 instrumentViola = \new Staff \with {
   instrumentName = "Viola"
@@ -95,9 +96,9 @@ instrumentViola = \new Staff \with {
   midiInstrument = "viola"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #1.5
-} { \clef mezzosoprano
-  %\override Staff.StaffSymbol.line-count = #7
-  << \voiceAlto \\ \voiceCounter >> }
+} { \clef alto
+    %\override Staff.StaffSymbol.line-count = #7
+    << \voiceAlto \\ \voiceCounter >> }
 
 instrumentCello = \new Staff \with {
   instrumentName = "Cello"
@@ -106,8 +107,8 @@ instrumentCello = \new Staff \with {
   midiMinimumVolume = #1.0
   midiMaximumVolume = #1.5
 } { \clef varbaritone
-  %\override Staff.StaffSymbol.line-count = #7
-  << \voiceTenor \\ \voiceBarytone >> }
+    %\override Staff.StaffSymbol.line-count = #7
+    << \voiceTenor \\ \voiceBarytone >> }
 
 instrumentContrabass = \new Staff \with {
   instrumentName = "Contrabass"
@@ -116,8 +117,8 @@ instrumentContrabass = \new Staff \with {
   midiMinimumVolume = #1.0
   midiMaximumVolume = #1.5
 } { \clef bass
-  %\override Staff.StaffSymbol.line-count = #7
-  \voiceBass }
+    %\override Staff.StaffSymbol.line-count = #7
+    \voiceBass }
 
 % ------------ book ------------
 

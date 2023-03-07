@@ -13,8 +13,8 @@ diatonicScale = { c d e f g a b }
 
 silencePeriod = {
   %\override MultiMeasureRest.staff-position = #0
-  \repeat unfold 3 { R1 \bar "|" R \bar "||" }
-  R \bar "|" R \bar "."
+  \repeat unfold 3 { R1 \bar "," R \bar "|" }
+  R \bar "," R \bar "||"
   \break
 }
 

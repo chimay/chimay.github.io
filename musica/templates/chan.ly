@@ -152,9 +152,9 @@ instrumentTenorBaritone = \new Staff \with {
     %\override Staff.StaffSymbol.line-count = #7
     <<
       \new Voice = tenor
-      \voiceAlto
+      \voiceTenor
       \new Voice = baritone
-      \voiceCounter
+      \voiceBarytone
     >>
 }
 

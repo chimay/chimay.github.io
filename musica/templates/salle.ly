@@ -19,6 +19,7 @@
   \override Score.BarNumber.break-visibility = ##(#t #t #t)
   \context {
     \Score
+    measureBarType = #","
     %barNumberVisibility = #(every-nth-bar-number-visible 8)
     barNumberVisibility = #(modulo-bar-number-visible 8 0)
   }

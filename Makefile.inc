@@ -60,7 +60,7 @@ FICHIERS_INSTALLES_EPUB = $(patsubst %.org,$(REPERTOIRE_HTML)/%.epub,$(wildcard 
 
 #  {{{ Sous-répertoires
 
-SUBDIRS = grimoire litera musica
+SUBDIRS = grimoire litera musica musica/templates musica/templates/include
 
 INSTALL_SUBDIRS = $(SUBDIRS:%=install-%)
 

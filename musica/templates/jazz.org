@@ -1,3 +1,24 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Opus : Musica : Templates
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+INCLUDE: "../../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+TAGS: noexport(n)
+
+* Eclats de vers : Musica : Templates : Jazz
+
+#+begin_src lilypond
+
 % vim: set fdm=indent:
 
 % ------------ headers ------------
@@ -19,7 +40,6 @@
   \override Score.BarNumber.break-visibility = ##(#t #t #t)
   \context {
     \Score
-    measureBarType = #","
     %barNumberVisibility = #(every-nth-bar-number-visible 8)
     barNumberVisibility = #(modulo-bar-number-visible 8 0)
   }
@@ -32,43 +52,42 @@
 % ------------ melodies ------------
 
 \include "include/mel-3.ly"
-%\include "include/mel-4.ly"
 
 % ------------ voices ------------
 
-voiceWoodSoprano = \fixed c'' {
+voiceClarinet = \fixed c' {
   \global
   \tempo 2. = 50
   % Music follows here.
-  \themeMelody
+  c2.
 }
 
-voiceWoodAlto = \fixed c' {
+voiceSaxAlto = \fixed c' {
   \global
   % Music follows here.
 }
 
-voiceWoodBass = \fixed c {
+voiceTrumpet = \fixed c'' {
   \global
   % Music follows here.
 }
 
-voiceStringSoprano = \fixed c'' {
+voiceTrombone = \fixed c {
   \global
   % Music follows here.
 }
 
-voiceStringAlto = \fixed c' {
+voiceOrganRight = \fixed c'' {
   \global
   % Music follows here.
 }
 
-voiceStringTenor = \fixed c {
+voiceOrganLeft = \fixed c' {
   \global
   % Music follows here.
 }
 
-voiceStringBass = \fixed c, {
+voiceOrganFeet = \fixed c {
   \global
   % Music follows here.
 }
@@ -78,17 +97,7 @@ voicePianoRight = \fixed c'' {
   % Music follows here.
 }
 
-voicePianoLeft = \fixed c {
-  \global
-  % Music follows here.
-}
-
-voiceHarpsichordRight = \fixed c'' {
-  \global
-  % Music follows here.
-}
-
-voiceHarpsichordLeft = \fixed c {
+voicePianoLeft = \fixed c' {
   \global
   % Music follows here.
 }
@@ -110,46 +119,71 @@ voiceDrums = \drummode {
 
 % ------------ instruments ------------
 
-instrumentWoods = \new GrandStaff \with {
-  instrumentName = \markup \column {
-    Woods
-    flute \line { en horn } bassoon
-  }
-  shortInstrumentName =  "wd"
-} <<
-  \new Staff = "right" \with {
-    midiInstrument = "flute"
-    midiMinimumVolume = #1.0
-    midiMaximumVolume = #1.0
-  } { \clef treble \voiceWoodSoprano }
-  \new Staff = "left" \with {
-    midiInstrument = "english horn"
-    midiMinimumVolume = #1.2
-    midiMaximumVolume = #1.2
-  } { \clef alto \voiceWoodAlto }
-  \new Staff = "feet" \with {
-    midiInstrument = "bassoon"
-    midiMinimumVolume = #1.5
-    midiMaximumVolume = #1.5
-  } { \clef bass \voiceWoodBass }
->>
+instrumentClarinet = \new Staff \with {
+  instrumentName = \markup {
+    \column { Clarinet \line { in B\flat } } }
+  shortInstrumentName = "cl"
+  midiInstrument = "clarinet"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #1.5
+} { \clef alto
+    %\override Staff.StaffSymbol.line-count = #7
+    % ---- no transposition, better to compose
+    \voiceClarinet
+    % ---- transposed, better to play
+    %\transposition bf
+    %\transpose c d \voiceEnglishHorn
+}
 
-instrumentStrings = \new GrandStaff \with {
-  instrumentName = "Strings"
-  shortInstrumentName = "st"
+instrumentSaxAlto = \new Staff \with {
+  instrumentName = \markup { \column { Alto Saxophone } }
+  shortInstrumentName = "al sax"
+  midiInstrument = "alto sax"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #1.5
+} { \clef mezzosoprano
+    %\override Staff.StaffSymbol.line-count = #7
+    \voiceSaxAlto }
+
+instrumentTrumpet = \new Staff \with {
+  instrumentName = \markup { \column { Trumpet } }
+  shortInstrumentName = "tpt"
+  midiInstrument = "trumpet"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #1.5
+} { \clef treble
+    %\override Staff.StaffSymbol.line-count = #7
+    \voiceTrumpet }
+
+instrumentTrombone = \new Staff \with {
+  instrumentName = \markup { \column { Trombone } }
+  shortInstrumentName = "trm"
+  midiInstrument = "trombone"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #1.5
+} { \clef bass
+    %\override Staff.StaffSymbol.line-count = #7
+    \voiceTrombone }
+
+instrumentOrgan = \new GrandStaff \with {
+  instrumentName = "Organ"
+  shortInstrumentName =  "org"
 } <<
   \new Staff = "right" \with {
-    midiInstrument = "violin"
-    midiMinimumVolume = #1.5
+    midiInstrument = "drawbar organ"
+    midiMinimumVolume = #1.0
     midiMaximumVolume = #1.5
-  } { \clef treble
-      << \voiceStringSoprano \\ \voiceStringAlto >> }
+  } { \clef treble \voiceOrganRight }
   \new Staff = "left" \with {
-    midiInstrument = "cello"
-    midiMinimumVolume = #1.5
+    midiInstrument = "drawbar organ"
+    midiMinimumVolume = #1.0
     midiMaximumVolume = #1.5
-  } { \clef bass
-      << \voiceStringTenor \\ \voiceStringBass >> }
+  } { \clef alto \voiceOrganLeft }
+  \new Staff = "feet" \with {
+    midiInstrument = "drawbar organ"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #1.5
+  } { \clef bass \voiceOrganFeet }
 >>
 
 instrumentPiano = \new GrandStaff \with {
@@ -168,30 +202,14 @@ instrumentPiano = \new GrandStaff \with {
   } { \clef bass \voicePianoLeft }
 >>
 
-instrumentHarpsichord = \new GrandStaff \with {
-  instrumentName = \markup \column { Harpsi- chord }
-  shortInstrumentName = \markup \column { hp cd }
-} <<
-  \new Staff = "right" \with {
-    midiInstrument = "harpsichord"
-    midiMinimumVolume = #1.5
-    midiMaximumVolume = #1.5
-  } { \clef treble \voiceHarpsichordRight }
-  \new Staff = "left" \with {
-    midiInstrument = "harpsichord"
-    midiMinimumVolume = #1.5
-    midiMaximumVolume = #1.5
-  } { \clef bass \voiceHarpsichordLeft }
->>
-
 instrumentGuitar = \new Staff \with {
   instrumentName = "Guitar"
   shortInstrumentName = "gtr"
-  midiInstrument = "acoustic guitar (nylon)"
+  midiInstrument = "acoustic guitar (steel)"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #1.5
-} { \clef alto
-    \override Staff.StaffSymbol.line-count = #7
+} { \clef tenor
+    %\override Staff.StaffSymbol.line-count = #7
     \voiceGuitar }
 
 instrumentTabGuitar = \new TabStaff \with {
@@ -200,7 +218,7 @@ instrumentTabGuitar = \new TabStaff \with {
   % ---- guitar
   stringTunings = \stringTuning <e, a, d g b e'>
   % ---- midi
-  midiInstrument = "acoustic guitar (nylon)"
+  midiInstrument = "acoustic guitar (steel)"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #1.5
 } { \clef tab
@@ -211,7 +229,7 @@ instrumentTabGuitar = \new TabStaff \with {
 instrumentBassGuitar = \new Staff \with {
   instrumentName = \markup { \column { Bass Guitar } }
   shortInstrumentName = "bs gtr"
-  midiInstrument = "acoustic bass"
+  midiInstrument = "electric bass (finger)"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #1.5
 } { \clef subbass
@@ -224,7 +242,7 @@ instrumentTabBassGuitar = \new TabStaff \with {
   % ---- bass guitar
   stringTunings = \stringTuning <e,, a,, d, g,>
   % ---- midi
-  midiInstrument = "acoustic bass"
+  midiInstrument = "electric bass (finger)"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #1.5
 } { \clef tab
@@ -242,10 +260,16 @@ instrumentDrums = \new DrumStaff \with {
 \book {
   \score {
     <<
-      \instrumentWoods
-      \instrumentStrings
+      \new StaffGroup <<
+        \instrumentClarinet
+        \instrumentSaxAlto
+      >>
+      \new StaffGroup <<
+        \instrumentTrumpet
+        \instrumentTrombone
+      >>
+      \instrumentOrgan
       \instrumentPiano
-      \instrumentHarpsichord
       \new ChoirStaff <<
         \instrumentGuitar
         %\instrumentTabGuitar
@@ -267,3 +291,5 @@ instrumentDrums = \new DrumStaff \with {
     system-separator-markup = \slashSeparator
   }
 }
+
+#+end_src

@@ -61,7 +61,7 @@ voiceWoodSoprano = \fixed c'' {
   \global
   \tempo 2. = 50
   % Music follows here.
-  \themeMelody
+  %\themeMelody
 }
 
 voiceWoodAlto = \fixed c' {
@@ -72,6 +72,18 @@ voiceWoodAlto = \fixed c' {
 voiceWoodBass = \fixed c {
   \global
   % Music follows here.
+}
+
+voiceBrassSoprano = \fixed c'' {
+  \global
+  \tempo 2. = 50
+  % Music follows here.
+}
+
+voiceBrassBass = \fixed c {
+  \global
+  % Music follows here.
+  \fixed c, \themeMelody
 }
 
 voiceStringSoprano = \fixed c'' {
@@ -153,6 +165,25 @@ instrumentWoods = \new GrandStaff \with {
     midiMinimumVolume = #1.5
     midiMaximumVolume = #1.5
   } { \clef bass \voiceWoodBass }
+>>
+
+instrumentBrass = \new GrandStaff \with {
+  instrumentName = \markup \column {
+    Brass
+    trumpet \line { fr horn }
+  }
+  shortInstrumentName =  "wd"
+} <<
+  \new Staff = "right" \with {
+    midiInstrument = "trumpet"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #1.0
+  } { \clef treble \voiceBrassSoprano }
+  \new Staff = "left" \with {
+    midiInstrument = "french horn"
+    midiMinimumVolume = #1.5
+    midiMaximumVolume = #1.5
+  } { \clef bass \voiceBrassBass }
 >>
 
 instrumentStrings = \new GrandStaff \with {
@@ -264,6 +295,7 @@ instrumentDrums = \new DrumStaff \with {
   \score {
     <<
       \instrumentWoods
+      \instrumentBrass
       \instrumentStrings
       \instrumentPiano
       \instrumentHarpsichord

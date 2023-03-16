@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-03-16 jeu 19:38 -->
+<!-- 2023-03-16 jeu 19:41 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Eclats de vers : Opus : Musica</title>
+<title>Eclats de vers : Opus : Musica : Templates</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
 <style>
@@ -192,62 +192,340 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+<link rel="stylesheet" type="text/css" href="../../style/defaut.css" />
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Eclats de vers : Opus : Musica</h1>
+<h1 class="title">Eclats de vers : Opus : Musica : Templates</h1>
 <p>
-<a href="../index.html">Retour à l’accueil</a>
+<a href="../../index.html">Retour à l’accueil</a>
 </p>
 
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org1985341">1. Eclats de vers: Opus : Music</a></li>
+<li><a href="#org0009707">1. Eclats de vers : Musica : Templates : Mini chambre</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org1985341" class="outline-2">
-<h2 id="org1985341"><span class="section-number-2">1.</span> Eclats de vers: Opus : Music</h2>
+<div id="outline-container-org0009707" class="outline-2">
+<h2 id="org0009707"><span class="section-number-2">1.</span> Eclats de vers : Musica : Templates : Mini chambre</h2>
 <div class="outline-text-2" id="text-1">
+<p>
+Le résultat :
+</p>
+
+
+<div id="org9563987" class="figure">
+<p><img src="../../image/musica/templates/sejour.png" alt="sejour.png" />
+</p>
 </div>
-<div id="outline-container-org164c159" class="outline-3">
-<h3 id="org164c159"><span class="section-number-3">1.1.</span> Modèles lilypond</h3>
-<div class="outline-text-3" id="text-1-1">
-<p>
-Ensembles et petits orchestres :
-</p>
-
-<ul class="org-ul">
-<li><a href="templates/chan.html">Septuor de chant</a></li>
-<li><a href="templates/cord.html">Septuor de cordes</a></li>
-<li><a href="templates/boudoir.html">Salon : mini chambre</a></li>
-<li><a href="templates/sejour.html">Salon : chambre médian</a></li>
-<li><a href="templates/reception.html">Salle : grand chambre</a></li>
-<li><a href="templates/clav.html">Claviers</a></li>
-<li><a href="templates/jazz.html">Jazz</a></li>
-<li><a href="templates/stoc.html">Divers</a></li>
-</ul>
 
 <p>
-On peut placer les thèmes mélodiques dans des fichiers séparés, inclus
-dans le fichier principal :
+La source :
 </p>
 
-<ul class="org-ul">
-<li><a href="templates/include/mel-3.html">Variables mélodiques, mesure 3/4</a></li>
-<li><a href="templates/include/mel-4.html">Variables mélodiques, mesure 4/4</a></li>
-</ul>
+<div class="org-src-container">
+<pre class="src src-lilypond">% vim: set fdm=indent:
+
+% ------------ headers ------------
+
+%\version "2.24.0"
+
+\language "english"
+
+\header {
+  title = "chambre median"
+  subtitle="subtitle"
+  composer = "composer"
+  poet = "poet"
+  piece = "piece"
+}
+
+\layout {
+  %\enablePolymeter
+  \override Score.BarNumber.break-visibility = ##(#t #t #t)
+  \context {
+    \Score
+    measureBarType = #","
+    %barNumberVisibility = #(every-nth-bar-number-visible 8)
+    barNumberVisibility = #(modulo-bar-number-visible 8 0)
+  }
+  \context {
+    \Staff
+    \RemoveEmptyStaves
+    \consists "Merge_rests_engraver"
+  }
+}
+
+% ------------ melodies ------------
+
+\include "include/mel-3.ly"
+%\include "include/mel-4.ly"
+
+% ------------ voices ------------
+
+voiceWoodSoprano = \fixed c'' {
+  \global
+  \tempo 2. = 50
+  % Music follows here.
+  \themeMelody
+}
+
+voiceWoodAlto = \fixed c' {
+  \global
+  % Music follows here.
+  \themeMelody
+}
+
+voiceWoodTenor = \fixed c' {
+  \global
+  % Music follows here.
+  \themeMelody
+}
+
+voiceWoodBass = \fixed c {
+  \global
+  % Music follows here.
+  \themeMelody
+}
+
+voiceStringSoprano = \fixed c'' {
+  \global
+  % Music follows here.
+  \themeMelody
+}
+
+voiceStringAlto = \fixed c' {
+  \global
+  % Music follows here.
+  \themeMelody
+}
+
+voiceStringTenor = \fixed c {
+  \global
+  % Music follows here.
+  \themeMelody
+}
+
+voiceStringBass = \fixed c, {
+  \global
+  % Music follows here.
+  \themeMelody
+}
+
+voicePianoRight = \fixed c'' {
+  \global
+  % Music follows here.
+  \themeMelody
+}
+
+voicePianoLeft = \fixed c {
+  \global
+  % Music follows here.
+  \themeMelody
+}
+
+voiceHarpsichordRight = \fixed c'' {
+  \global
+  % Music follows here.
+  \themeMelody
+}
+
+voiceHarpsichordLeft = \fixed c {
+  \global
+  % Music follows here.
+  \themeMelody
+}
+
+voiceGuitar = \fixed c {
+  \global
+  % Music follows here.
+  \themeMelody
+}
+
+voiceBassGuitar = \fixed c, {
+  \global
+  % Music follows here.
+  \themeMelody
+}
+
+voiceDrums = \drummode {
+  \global
+  % Music follows here.
+  &lt;&lt; { hhc cymr hhho cymr } \\
+     { bd sn bd sn } &gt;&gt;
+}
+
+% ------------ instruments ------------
+
+instrumentWoods = \new StaffGroup \with {
+  instrumentName = "Woods"
+  shortInstrumentName =  "wd"
+} &lt;&lt;
+  \new Staff = "right" \with {
+    midiInstrument = "english horn"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #1.0
+  } { \clef treble
+      &lt;&lt; \voiceWoodSoprano \\ \voiceWoodAlto &gt;&gt; }
+  \new Staff = "left" \with {
+    midiInstrument = "bassoon"
+    midiMinimumVolume = #1.5
+    midiMaximumVolume = #1.5
+  } { \clef bass
+      &lt;&lt; \voiceWoodTenor \\ \voiceWoodBass &gt;&gt; }
+&gt;&gt;
+
+instrumentStrings = \new GrandStaff \with {
+  instrumentName = "Strings"
+  shortInstrumentName = "st"
+} &lt;&lt;
+  \new Staff = "right" \with {
+    midiInstrument = "violin"
+    midiMinimumVolume = #1.5
+    midiMaximumVolume = #1.5
+  } { \clef treble
+      &lt;&lt; \voiceStringSoprano \\ \voiceStringAlto &gt;&gt; }
+  \new Staff = "left" \with {
+    midiInstrument = "cello"
+    midiMinimumVolume = #1.5
+    midiMaximumVolume = #1.5
+  } { \clef bass
+      &lt;&lt; \voiceStringTenor \\ \voiceStringBass &gt;&gt; }
+&gt;&gt;
+
+instrumentPiano = \new GrandStaff \with {
+  instrumentName = "Piano"
+  shortInstrumentName = "pn"
+} &lt;&lt;
+  \new Staff = "right" \with {
+    midiInstrument = "acoustic grand"
+    midiMinimumVolume = #1.5
+    midiMaximumVolume = #1.9
+  } { \clef treble \voicePianoRight }
+  \new Staff = "left" \with {
+    midiInstrument = "acoustic grand"
+    midiMinimumVolume = #1.5
+    midiMaximumVolume = #1.9
+  } { \clef bass \voicePianoLeft }
+&gt;&gt;
+
+instrumentHarpsichord = \new GrandStaff \with {
+  instrumentName = \markup \column { Harpsi- chord }
+  shortInstrumentName = \markup \column { hp cd }
+} &lt;&lt;
+  \new Staff = "right" \with {
+    midiInstrument = "harpsichord"
+    midiMinimumVolume = #1.5
+    midiMaximumVolume = #1.5
+  } { \clef treble \voiceHarpsichordRight }
+  \new Staff = "left" \with {
+    midiInstrument = "harpsichord"
+    midiMinimumVolume = #1.5
+    midiMaximumVolume = #1.5
+  } { \clef bass \voiceHarpsichordLeft }
+&gt;&gt;
+
+instrumentGuitar = \new Staff \with {
+  instrumentName = "Guitar"
+  shortInstrumentName = "gtr"
+  midiInstrument = "acoustic guitar (nylon)"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #1.5
+} { \clef alto
+    \override Staff.StaffSymbol.line-count = #7
+    \voiceGuitar }
+
+instrumentTabGuitar = \new TabStaff \with {
+  instrumentName = "Guitar"
+  shortInstrumentName = "gtr"
+  % ---- guitar
+  stringTunings = \stringTuning &lt;e, a, d g b e'&gt;
+  % ---- midi
+  midiInstrument = "acoustic guitar (nylon)"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #1.5
+} { \clef tab
+    \tabFullNotation
+    \tabChordRepeats
+    \voiceGuitar }
+
+instrumentBassGuitar = \new Staff \with {
+  instrumentName = \markup { \column { Bass Guitar } }
+  shortInstrumentName = \markup { \column { bs gtr } }
+  midiInstrument = "acoustic bass"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #1.5
+} { \clef subbass
+    %\override Staff.StaffSymbol.line-count = #7
+    \voiceBassGuitar }
+
+instrumentTabBassGuitar = \new TabStaff \with {
+  instrumentName = \markup { \column { Bass Guitar } }
+  shortInstrumentName = \markup { \column { bs gtr } }
+  % ---- bass guitar
+  stringTunings = \stringTuning &lt;e,, a,, d, g,&gt;
+  % ---- midi
+  midiInstrument = "acoustic bass"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #1.5
+} { \clef tab
+    \tabFullNotation
+    \tabChordRepeats
+    \voiceBassGuitar }
+
+instrumentDrums = \new DrumStaff \with {
+  instrumentName = "Drums"
+  shortInstrumentName = "dm"
+} { \clef percussion \voiceDrums }
+
+% ------------ book ------------
+
+\book {
+  \score {
+    &lt;&lt;
+      \instrumentWoods
+      \instrumentStrings
+      \instrumentPiano
+      \instrumentHarpsichord
+      \new ChoirStaff &lt;&lt;
+	\instrumentGuitar
+	%\instrumentTabGuitar
+	\instrumentBassGuitar
+	%\instrumentTabBassGuitar
+      &gt;&gt;
+      \instrumentDrums
+    &gt;&gt;
+    \layout { }
+    \midi {
+      \context {
+	\Score
+	midiChannelMapping = #'instrument
+	%\enablePolymeter
+      }
+    }
+  }
+  \paper {
+    system-separator-markup = \slashSeparator
+  }
+  \markup \column {
+    \vspace #1
+    \line { woods = 2 english horns, 2 bassoons }
+    \line { strings = 2 violins, 2 cellos }
+    \vspace #1
+  }
+}
+</pre>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: chimay</p>
-<p class="date">Created: 2023-03-16 jeu 19:38</p>
+<p class="date">Created: 2023-03-16 jeu 19:41</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

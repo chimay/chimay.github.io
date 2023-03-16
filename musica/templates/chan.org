@@ -17,9 +17,16 @@
 
 * Eclats de vers : Musica : Templates : Septuor de chant
 
+Le résultat :
+
+[[file:../../image/musica/templates/chan.png]]
+
+La source :
+
 #+begin_src lilypond
 
 % vim: set fdm=indent:
+
 
 % ------------ headers ------------
 
@@ -108,43 +115,44 @@ voiceBass = \fixed c, {
 % ------------ lyrics ------------
 
 lyricsSoprano = \lyricmode {
-  \set vocalName = "S :"
+  %\set vocalName = "S :"
   so -- pra -- no
 }
 
 lyricsMezzo = \lyricmode {
-  \set vocalName = "M :"
+  %\set vocalName = "M :"
   mez -- zo
 }
 
 lyricsAlto = \lyricmode {
-  \set vocalName = "A :"
+  %\set vocalName = "A :"
   al -- to
 }
 
 lyricsCounter = \lyricmode {
-  \set vocalName = "C :"
+  %\set vocalName = "C :"
   coun -- ter
 }
 
 lyricsTenor = \lyricmode {
-  \set vocalName = "T :"
+  %\set vocalName = "T :"
   te -- nor
 }
 
 lyricsBarytone = \lyricmode {
-  \set vocalName = "Y :"
+  %\set vocalName = "Y :"
   ba -- ry -- to -- ne
 }
 
 lyricsBass = \lyricmode {
-  \set vocalName = "B :"
+  %\set vocalName = "B :"
   bass line
 }
 
 % ------------ instruments ------------
 
-instrumentSopranoMezzo = \new Staff \with {
+instrumentSopranoMezzo = \new Staff = "SopranoMezzo" 
+\with {
   instrumentName = \markup { \column { Soprano Mezzo } }
   shortInstrumentName = \markup { \column { S M } }
   midiInstrument = "violin"
@@ -153,12 +161,13 @@ instrumentSopranoMezzo = \new Staff \with {
 } { \clef treble
     %\override Staff.StaffSymbol.line-count = #7
     <<
-      \new Voice = soprano \voiceSoprano
-      \new Voice = mezzo \voiceMezzo
+      \new Voice = "soprano" \voiceSoprano
+      \new Voice = "mezzo" \voiceMezzo
     >>
 }
 
-instrumentAltoCounter = \new Staff \with {
+instrumentAltoCounter = \new Staff = "AltoCounter"
+\with {
   instrumentName = \markup { \column { Alto Counter } }
   shortInstrumentName = \markup { \column { A C } }
   midiInstrument = "viola"
@@ -167,12 +176,13 @@ instrumentAltoCounter = \new Staff \with {
 } { \clef alto
     %\override Staff.StaffSymbol.line-count = #7
     <<
-      \new Voice = alto \voiceAlto
-      \new Voice = counter \voiceCounter
+      \new Voice = "alto" \voiceAlto
+      \new Voice = "counter" \voiceCounter
     >>
 }
 
-instrumentTenorBarytone = \new Staff \with {
+instrumentTenorBarytone = \new Staff = "TenorBarytone"
+\with {
   instrumentName = \markup { \column { Tenor Barytone } }
   shortInstrumentName = \markup { \column { T Y } }
   midiInstrument = "cello"
@@ -181,12 +191,13 @@ instrumentTenorBarytone = \new Staff \with {
 } { \clef varbaritone
     %\override Staff.StaffSymbol.line-count = #7
     <<
-      \new Voice = tenor \voiceTenor
-      \new Voice = barytone \voiceBarytone
+      \new Voice = "tenor" \voiceTenor
+      \new Voice = "barytone" \voiceBarytone
     >>
 }
 
-instrumentBass = \new Staff \with {
+instrumentBass = \new Staff = "Bass"
+\with {
   instrumentName = "Bass"
   shortInstrumentName = "B"
   midiInstrument = "contrabass"
@@ -194,7 +205,7 @@ instrumentBass = \new Staff \with {
   midiMaximumVolume = #1.5
 } { \clef bass
     %\override Staff.StaffSymbol.line-count = #7
-    \new Voice = bass \voiceBass
+    \new Voice = "bass" \voiceBass
 }
 
 % ------------ book ------------
@@ -203,17 +214,28 @@ instrumentBass = \new Staff \with {
   \score {
     <<
       \new StaffGroup <<
+        % -- staff 1
         \instrumentSopranoMezzo
-        \new Lyrics \lyricsto "soprano" \lyricsSoprano
-        \new Lyrics \lyricsto "mezzo" \lyricsMezzo
+        \new Lyrics \with { alignAboveContext = "SopranoMezzo" } 
+        \lyricsto "soprano" \lyricsSoprano
+        \new Lyrics \with { alignBelowContext = "SopranoMezzo" } 
+        \lyricsto "mezzo" \lyricsMezzo
+        % -- staff 2
         \instrumentAltoCounter
-        \new Lyrics \lyricsto "alto" \lyricsAlto
-        \new Lyrics \lyricsto "counter" \lyricsCounter
+        \new Lyrics \with { alignAboveContext = "AltoCounter" }
+        \lyricsto "alto" \lyricsAlto
+        \new Lyrics \with { alignBelowContext = "AltoCounter" }
+        \lyricsto "counter" \lyricsCounter
+        % -- staff 3
         \instrumentTenorBarytone
-        \new Lyrics \lyricsto "tenor" \lyricsTenor
-        \new Lyrics \lyricsto "barytone" \lyricsBarytone
+        \new Lyrics \with { alignAboveContext = "TenorBarytone" }
+        \lyricsto "tenor" \lyricsTenor
+        \new Lyrics \with { alignBelowContext = "TenorBarytone" }
+        \lyricsto "barytone" \lyricsBarytone
+        % -- staff 4
         \instrumentBass
-        \new Lyrics \lyricsto "bass" \lyricsBass
+        \new Lyrics \with { alignBelowContext = "Bass" }
+        \lyricsto "bass" \lyricsBass
       >>
     >>
     \layout { }

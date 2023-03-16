@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-03-12 dim 17:40 -->
+<!-- 2023-03-16 jeu 09:52 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Opus : Musica : Templates</title>
@@ -205,17 +205,32 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org5b2aa27">1. Eclats de vers : Musica : Templates : Septuor de chant</a></li>
+<li><a href="#orgcce718c">1. Eclats de vers : Musica : Templates : Septuor de chant</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org5b2aa27" class="outline-2">
-<h2 id="org5b2aa27"><span class="section-number-2">1.</span> Eclats de vers : Musica : Templates : Septuor de chant</h2>
+<div id="outline-container-orgcce718c" class="outline-2">
+<h2 id="orgcce718c"><span class="section-number-2">1.</span> Eclats de vers : Musica : Templates : Septuor de chant</h2>
 <div class="outline-text-2" id="text-1">
+<p>
+Le résultat :
+</p>
+
+
+<div id="orgc2bb4d3" class="figure">
+<p><img src="../../image/musica/templates/chan.png" alt="chan.png" />
+</p>
+</div>
+
+<p>
+La source :
+</p>
+
 <div class="org-src-container">
 <pre class="src src-lilypond">
 % vim: set fdm=indent:
+
 
 % ------------ headers ------------
 
@@ -304,43 +319,44 @@ voiceBass = \fixed c, {
 % ------------ lyrics ------------
 
 lyricsSoprano = \lyricmode {
-  \set vocalName = "S :"
+  %\set vocalName = "S :"
   so -- pra -- no
 }
 
 lyricsMezzo = \lyricmode {
-  \set vocalName = "M :"
+  %\set vocalName = "M :"
   mez -- zo
 }
 
 lyricsAlto = \lyricmode {
-  \set vocalName = "A :"
+  %\set vocalName = "A :"
   al -- to
 }
 
 lyricsCounter = \lyricmode {
-  \set vocalName = "C :"
+  %\set vocalName = "C :"
   coun -- ter
 }
 
 lyricsTenor = \lyricmode {
-  \set vocalName = "T :"
+  %\set vocalName = "T :"
   te -- nor
 }
 
 lyricsBarytone = \lyricmode {
-  \set vocalName = "Y :"
+  %\set vocalName = "Y :"
   ba -- ry -- to -- ne
 }
 
 lyricsBass = \lyricmode {
-  \set vocalName = "B :"
+  %\set vocalName = "B :"
   bass line
 }
 
 % ------------ instruments ------------
 
-instrumentSopranoMezzo = \new Staff \with {
+instrumentSopranoMezzo = \new Staff = "SopranoMezzo" 
+\with {
   instrumentName = \markup { \column { Soprano Mezzo } }
   shortInstrumentName = \markup { \column { S M } }
   midiInstrument = "violin"
@@ -349,12 +365,13 @@ instrumentSopranoMezzo = \new Staff \with {
 } { \clef treble
     %\override Staff.StaffSymbol.line-count = #7
     &lt;&lt;
-      \new Voice = soprano \voiceSoprano
-      \new Voice = mezzo \voiceMezzo
+      \new Voice = "soprano" \voiceSoprano
+      \new Voice = "mezzo" \voiceMezzo
     &gt;&gt;
 }
 
-instrumentAltoCounter = \new Staff \with {
+instrumentAltoCounter = \new Staff = "AltoCounter"
+\with {
   instrumentName = \markup { \column { Alto Counter } }
   shortInstrumentName = \markup { \column { A C } }
   midiInstrument = "viola"
@@ -363,12 +380,13 @@ instrumentAltoCounter = \new Staff \with {
 } { \clef alto
     %\override Staff.StaffSymbol.line-count = #7
     &lt;&lt;
-      \new Voice = alto \voiceAlto
-      \new Voice = counter \voiceCounter
+      \new Voice = "alto" \voiceAlto
+      \new Voice = "counter" \voiceCounter
     &gt;&gt;
 }
 
-instrumentTenorBarytone = \new Staff \with {
+instrumentTenorBarytone = \new Staff = "TenorBarytone"
+\with {
   instrumentName = \markup { \column { Tenor Barytone } }
   shortInstrumentName = \markup { \column { T Y } }
   midiInstrument = "cello"
@@ -377,12 +395,13 @@ instrumentTenorBarytone = \new Staff \with {
 } { \clef varbaritone
     %\override Staff.StaffSymbol.line-count = #7
     &lt;&lt;
-      \new Voice = tenor \voiceTenor
-      \new Voice = barytone \voiceBarytone
+      \new Voice = "tenor" \voiceTenor
+      \new Voice = "barytone" \voiceBarytone
     &gt;&gt;
 }
 
-instrumentBass = \new Staff \with {
+instrumentBass = \new Staff = "Bass"
+\with {
   instrumentName = "Bass"
   shortInstrumentName = "B"
   midiInstrument = "contrabass"
@@ -390,7 +409,7 @@ instrumentBass = \new Staff \with {
   midiMaximumVolume = #1.5
 } { \clef bass
     %\override Staff.StaffSymbol.line-count = #7
-    \new Voice = bass \voiceBass
+    \new Voice = "bass" \voiceBass
 }
 
 % ------------ book ------------
@@ -399,17 +418,28 @@ instrumentBass = \new Staff \with {
   \score {
     &lt;&lt;
       \new StaffGroup &lt;&lt;
+	% -- staff 1
 	\instrumentSopranoMezzo
-	\new Lyrics \lyricsto "soprano" \lyricsSoprano
-	\new Lyrics \lyricsto "mezzo" \lyricsMezzo
+	\new Lyrics \with { alignAboveContext = "SopranoMezzo" } 
+	\lyricsto "soprano" \lyricsSoprano
+	\new Lyrics \with { alignBelowContext = "SopranoMezzo" } 
+	\lyricsto "mezzo" \lyricsMezzo
+	% -- staff 2
 	\instrumentAltoCounter
-	\new Lyrics \lyricsto "alto" \lyricsAlto
-	\new Lyrics \lyricsto "counter" \lyricsCounter
+	\new Lyrics \with { alignAboveContext = "AltoCounter" }
+	\lyricsto "alto" \lyricsAlto
+	\new Lyrics \with { alignBelowContext = "AltoCounter" }
+	\lyricsto "counter" \lyricsCounter
+	% -- staff 3
 	\instrumentTenorBarytone
-	\new Lyrics \lyricsto "tenor" \lyricsTenor
-	\new Lyrics \lyricsto "barytone" \lyricsBarytone
+	\new Lyrics \with { alignAboveContext = "TenorBarytone" }
+	\lyricsto "tenor" \lyricsTenor
+	\new Lyrics \with { alignBelowContext = "TenorBarytone" }
+	\lyricsto "barytone" \lyricsBarytone
+	% -- staff 4
 	\instrumentBass
-	\new Lyrics \lyricsto "bass" \lyricsBass
+	\new Lyrics \with { alignBelowContext = "Bass" }
+	\lyricsto "bass" \lyricsBass
       &gt;&gt;
     &gt;&gt;
     \layout { }
@@ -433,7 +463,7 @@ instrumentBass = \new Staff \with {
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: chimay</p>
-<p class="date">Created: 2023-03-12 dim 17:40</p>
+<p class="date">Created: 2023-03-16 jeu 09:52</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

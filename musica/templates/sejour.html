@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-03-16 jeu 21:25 -->
+<!-- 2023-03-17 ven 12:21 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Opus : Musica : Templates</title>
@@ -205,20 +205,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgd5cfae6">1. Eclats de vers : Musica : Templates : Mini chambre</a></li>
+<li><a href="#org8e15f08">1. Eclats de vers : Musica : Templates : Mini chambre</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgd5cfae6" class="outline-2">
-<h2 id="orgd5cfae6"><span class="section-number-2">1.</span> Eclats de vers : Musica : Templates : Mini chambre</h2>
+<div id="outline-container-org8e15f08" class="outline-2">
+<h2 id="org8e15f08"><span class="section-number-2">1.</span> Eclats de vers : Musica : Templates : Mini chambre</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Le résultat :
 </p>
 
 
-<div id="orgae5c0fd" class="figure">
+<div id="org3ba7f43" class="figure">
 <p><img src="../../image/musica/templates/sejour.png" alt="sejour.png" />
 </p>
 </div>
@@ -352,13 +352,13 @@ voicePianoLeft = \fixed c {
   \themeMelody
 }
 
-voiceHarpsichordRight = \fixed c'' {
+voiceGuitar = \fixed c {
   \global
   % Music follows here.
   \themeMelody
 }
 
-voiceHarpsichordLeft = \fixed c {
+voiceBassGuitar = \fixed c, {
   \global
   % Music follows here.
   \themeMelody
@@ -371,7 +371,7 @@ instrumentWoods = \new GrandStaff \with {
   shortInstrumentName =  "wd"
 } &lt;&lt;
   \new Staff = "right" \with {
-    midiInstrument = "english horn"
+    midiInstrument = "oboe"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #1.0
   } { \clef treble
@@ -436,21 +436,53 @@ instrumentPiano = \new GrandStaff \with {
   } { \clef bass \voicePianoLeft }
 &gt;&gt;
 
-instrumentHarpsichord = \new GrandStaff \with {
-  instrumentName = \markup \column { Harpsi- chord }
-  shortInstrumentName = \markup \column { hp cd }
-} &lt;&lt;
-  \new Staff = "right" \with {
-    midiInstrument = "harpsichord"
-    midiMinimumVolume = #1.5
-    midiMaximumVolume = #1.5
-  } { \clef treble \voiceHarpsichordRight }
-  \new Staff = "left" \with {
-    midiInstrument = "harpsichord"
-    midiMinimumVolume = #1.5
-    midiMaximumVolume = #1.5
-  } { \clef bass \voiceHarpsichordLeft }
-&gt;&gt;
+instrumentGuitar = \new Staff \with {
+  instrumentName = "Guitar"
+  shortInstrumentName = "gtr"
+  midiInstrument = "acoustic guitar (nylon)"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #1.5
+} { \clef alto
+    \override Staff.StaffSymbol.line-count = #7
+    \voiceGuitar }
+
+instrumentTabGuitar = \new TabStaff \with {
+  instrumentName = "Guitar"
+  shortInstrumentName = "gtr"
+  % ---- guitar
+  stringTunings = \stringTuning &lt;e, a, d g b e'&gt;
+  % ---- midi
+  midiInstrument = "acoustic guitar (nylon)"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #1.5
+} { \clef tab
+    \tabFullNotation
+    \tabChordRepeats
+    \voiceGuitar }
+
+instrumentBassGuitar = \new Staff \with {
+  instrumentName = \markup { \column { Bass Guitar } }
+  shortInstrumentName = \markup { \column { bs gtr } }
+  midiInstrument = "acoustic bass"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #1.5
+} { \clef subbass
+    \override Staff.StaffSymbol.line-count = #7
+    \voiceBassGuitar }
+
+instrumentTabBassGuitar = \new TabStaff \with {
+  instrumentName = \markup { \column { Bass Guitar } }
+  shortInstrumentName = \markup { \column { bs gtr } }
+  % ---- bass guitar
+  stringTunings = \stringTuning &lt;e,, a,, d, g,&gt;
+  % ---- midi
+  midiInstrument = "acoustic bass"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #1.5
+} { \clef tab
+    \tabFullNotation
+    \tabChordRepeats
+    \voiceBassGuitar }
 
 % ------------ book ------------
 
@@ -461,7 +493,12 @@ instrumentHarpsichord = \new GrandStaff \with {
       \instrumentBrass
       \instrumentStrings
       \instrumentPiano
-      \instrumentHarpsichord
+      \new ChoirStaff &lt;&lt;
+	\instrumentGuitar
+	%\instrumentTabGuitar
+	\instrumentBassGuitar
+	%\instrumentTabBassGuitar
+      &gt;&gt;
     &gt;&gt;
     \layout { }
     \midi {
@@ -477,7 +514,7 @@ instrumentHarpsichord = \new GrandStaff \with {
   }
   \markup \column {
     \vspace #1
-    \line { woods = 2 english horns, 2 bassoons }
+    \line { woods = 2 oboes, 2 bassoons }
     \line { brass = 2 trumpets, 2 french horns }
     \line { strings = 2 violins, 2 cellos }
     \vspace #1
@@ -490,7 +527,7 @@ instrumentHarpsichord = \new GrandStaff \with {
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: chimay</p>
-<p class="date">Created: 2023-03-16 jeu 21:25</p>
+<p class="date">Created: 2023-03-17 ven 12:21</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

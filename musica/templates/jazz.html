@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-03-21 mar 09:25 -->
+<!-- 2023-03-21 mar 09:34 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Opus : Musica : Templates</title>
@@ -205,20 +205,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org28968a0">1. Eclats de vers : Musica : Templates : Jazz</a></li>
+<li><a href="#org9e842b3">1. Eclats de vers : Musica : Templates : Jazz</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org28968a0" class="outline-2">
-<h2 id="org28968a0"><span class="section-number-2">1.</span> Eclats de vers : Musica : Templates : Jazz</h2>
+<div id="outline-container-org9e842b3" class="outline-2">
+<h2 id="org9e842b3"><span class="section-number-2">1.</span> Eclats de vers : Musica : Templates : Jazz</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Le résultat :
 </p>
 
 
-<div id="org03d7cf2" class="figure">
+<div id="org70a75c2" class="figure">
 <p><img src="../../image/musica/templates/jazz.png" alt="jazz.png" />
 </p>
 </div>
@@ -261,7 +261,7 @@ La source :
 
 % ------------ melodies ------------
 
-\include "include/mel-3.ly"
+\include "include/mel.ly"
 
 % ------------ voices ------------
 
@@ -404,25 +404,21 @@ instrumentKeyboard = \new GrandStaff \with {
   } { \clef bass \voiceKeyboardLeft }
 &gt;&gt;
 
-instrumentGuitar = \new Staff \with {
-  instrumentName = "Guitar"
+instrumentGuitars = \new GrandStaff \with {
+  instrumentName = "Guitars"
   shortInstrumentName = "gtr"
-  midiInstrument = "acoustic guitar (steel)"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #1.5
-} { \clef tenor
-    %\override Staff.StaffSymbol.line-count = #7
-    \voiceGuitar }
-
-instrumentBassGuitar = \new Staff \with {
-  instrumentName = \markup { \column { Bass Guitar } }
-  shortInstrumentName = "bs gtr"
-  midiInstrument = "electric bass (finger)"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #1.5
-} { \clef subbass
-    %\override Staff.StaffSymbol.line-count = #7
-    \voiceBassGuitar }
+} &lt;&lt;
+  \new Staff = "right" \with {
+    midiInstrument = "acoustic guitar (nylon)"
+    midiMinimumVolume = #1.5
+    midiMaximumVolume = #2.0
+  } { \clef tenor \voiceGuitar }
+  \new Staff = "left" \with {
+    midiInstrument = "acoustic bass"
+    midiMinimumVolume = #1.5
+    midiMaximumVolume = #2.0
+  } { \clef subbass \voiceBassGuitar }
+&gt;&gt;
 
 instrumentVibraphone = \new Staff = "right" \with {
   instrumentName = "Vibraphone"
@@ -440,14 +436,20 @@ instrumentDrums = \new DrumStaff \with {
 % ------------ book ------------
 
 \book {
+  \markup \column {
+    \vspace #1
+    \line { woods = clarinet, baritone sax }
+    \line { brass = trumpet, french horn }
+    \line { guitars = guitar, bass guitar }
+    \vspace #1
+  }
   \score {
     &lt;&lt;
       \instrumentWoods
       \instrumentBrass
       \instrumentOrgan
       \instrumentKeyboard
-      \instrumentGuitar
-      \instrumentBassGuitar
+      \instrumentGuitars
       \instrumentVibraphone
       \instrumentDrums
     &gt;&gt;
@@ -463,12 +465,6 @@ instrumentDrums = \new DrumStaff \with {
   \paper {
     system-separator-markup = \slashSeparator
   }
-  \markup \column {
-    \vspace #1
-    \line { woods = clarinet, baritone sax }
-    \line { brass = trumpet, french horn }
-    \vspace #1
-  }
 }
 </pre>
 </div>
@@ -477,7 +473,7 @@ instrumentDrums = \new DrumStaff \with {
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: chimay</p>
-<p class="date">Created: 2023-03-21 mar 09:25</p>
+<p class="date">Created: 2023-03-21 mar 09:34</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

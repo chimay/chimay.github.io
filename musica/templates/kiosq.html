@@ -205,26 +205,26 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org28968a0">1. Eclats de vers : Musica : Templates : Jazz</a></li>
+<li><a href="#org8323f13">1. Eclats de vers : Musica : Templates : Grand chambre</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org28968a0" class="outline-2">
-<h2 id="org28968a0"><span class="section-number-2">1.</span> Eclats de vers : Musica : Templates : Jazz</h2>
+<div id="outline-container-org8323f13" class="outline-2">
+<h2 id="org8323f13"><span class="section-number-2">1.</span> Eclats de vers : Musica : Templates : Grand chambre</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Le résultat :
 </p>
 
 
-<div id="org03d7cf2" class="figure">
-<p><img src="../../image/musica/templates/jazz.png" alt="jazz.png" />
+<div id="org4d66348" class="figure">
+<p><img src="../../image/musica/templates/kiosq.png" alt="kiosq.png" />
 </p>
 </div>
 
 <p>
-La source :
+Le fichier source :
 </p>
 
 <div class="org-src-container">
@@ -237,8 +237,8 @@ La source :
 \language "english"
 
 \header {
-  title = "jazz"
-  subtitle="subtitle"
+  title = "kiosque"
+  subtitle="grand chambre avec quintette à vent"
   composer = "composer"
   poet = "poet"
   %piece = "piece"
@@ -249,6 +249,7 @@ La source :
   \override Score.BarNumber.break-visibility = ##(#t #t #t)
   \context {
     \Score
+    measureBarType = #","
     %barNumberVisibility = #(every-nth-bar-number-visible 8)
     barNumberVisibility = #(modulo-bar-number-visible 8 0)
   }
@@ -272,31 +273,61 @@ voiceWoodSoprano = \fixed c'' {
   \themeMelody
 }
 
+voiceWoodAlto = \fixed c' {
+  \global
+  % Music follows here.
+  \themeMelody
+}
+
+voiceWoodTenor = \fixed c {
+  \global
+  % Music follows here.
+  \themeMelody
+}
+
+voiceWoodBarytone = \fixed c {
+  \global
+  % Music follows here.
+  \themeMelody
+}
+
 voiceWoodBass = \fixed c, {
   \global
   % Music follows here.
   \themeMelody
 }
 
-voiceBrassSoprano = \fixed c'' {
+voiceBrassSoprano = \fixed c' {
   \global
   % Music follows here.
   \themeMelody
 }
 
-voiceBrassBass = \fixed c, {
+voiceBrassBass = \fixed c {
   \global
   % Music follows here.
   \themeMelody
 }
 
-voiceOrganRight = \fixed c'' {
+voiceStringSoprano = \fixed c'' {
   \global
   % Music follows here.
   \themeMelody
 }
 
-voiceOrganLeft = \fixed c {
+voiceStringAlto = \fixed c' {
+  \global
+  % Music follows here.
+  \themeMelody
+}
+
+voiceStringTenor = \fixed c {
+  \global
+  % Music follows here.
+  \themeMelody
+}
+
+voiceStringBass = \fixed c, {
   \global
   % Music follows here.
   \themeMelody
@@ -314,7 +345,7 @@ voiceKeyboardLeft = \fixed c {
   \themeMelody
 }
 
-voiceGuitar = \fixed c {
+voiceGuitar = \fixed c' {
   \global
   % Music follows here.
   \themeMelody
@@ -335,7 +366,7 @@ voiceVibraphone = \fixed c' {
 voiceDrums = \drummode {
   \global
   % Music follows here.
-  bd sn bd sn
+  bd sn
 }
 
 % ------------ instruments ------------
@@ -344,87 +375,88 @@ instrumentWoods = \new GrandStaff \with {
   instrumentName = "Woods"
   shortInstrumentName =  "wd"
 } &lt;&lt;
-  \new Staff = "right" \with {
+  \new Staff = "flute" \with {
+    midiInstrument = "flute"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #1.5
+  } { \clef french \voiceWoodSoprano }
+  \new Staff = "oboe" \with {
+    midiInstrument = "oboe"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #1.5
+  } { \clef treble \voiceWoodAlto }
+  \new Staff = "oboe" \with {
     midiInstrument = "clarinet"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #1.5
-  } { \clef treble \voiceWoodSoprano }
-  \new Staff = "left" \with {
-    midiInstrument = "baritone sax"
+  } { \clef alto \voiceWoodTenor }
+  \new Staff = "bassoon" \with {
+    midiInstrument = "bassoon"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #1.5
   } { \clef bass \voiceWoodBass }
 &gt;&gt;
 
-instrumentBrass = \new GrandStaff \with {
-  instrumentName = "Brass"
-  shortInstrumentName =  "br"
-} &lt;&lt;
-  \new Staff = "right" \with {
-    midiInstrument = "trumpet"
-    midiMinimumVolume = #1.0
-    midiMaximumVolume = #1.5
-  } { \clef treble \voiceBrassSoprano }
-  \new Staff = "left" \with {
-    midiInstrument = "french horn"
-    midiMinimumVolume = #1.0
-    midiMaximumVolume = #1.5
-  } { \clef bass \voiceBrassBass }
-&gt;&gt;
+instrumentHorns = \new Staff = "horns" \with {
+  instrumentName = "Horns"
+  shortInstrumentName = "hn"
+  midiInstrument = "french horn"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #1.5
+} { \clef alto
+    &lt;&lt; \voiceBrassSoprano \\ \voiceBrassBass &gt;&gt; }
 
-instrumentOrgan = \new GrandStaff \with {
-  instrumentName = "Organ"
-  shortInstrumentName =  "org"
+instrumentStrings = \new GrandStaff \with {
+  instrumentName = "Strings"
+  shortInstrumentName = "st"
 } &lt;&lt;
   \new Staff = "right" \with {
-    midiInstrument = "drawbar organ"
+    midiInstrument = "violin"
     midiMinimumVolume = #1.0
-    midiMaximumVolume = #1.0
-  } { \clef treble \voiceOrganRight }
+    midiMaximumVolume = #1.5
+  } { \clef treble
+      &lt;&lt; \voiceStringSoprano \\ \voiceStringAlto &gt;&gt; }
   \new Staff = "left" \with {
-    midiInstrument = "drawbar organ"
+    midiInstrument = "cello"
     midiMinimumVolume = #1.0
-    midiMaximumVolume = #1.0
-  } { \clef bass \voiceOrganLeft }
+    midiMaximumVolume = #1.5
+  } { \clef bass
+      &lt;&lt; \voiceStringTenor \\ \voiceStringBass &gt;&gt; }
 &gt;&gt;
 
 instrumentKeyboard = \new GrandStaff \with {
-  instrumentName = "Piano"
-  shortInstrumentName = "pn"
+  instrumentName = \markup \column { Harpsi- chord }
+  shortInstrumentName = \markup \column { hp cd }
 } &lt;&lt;
   \new Staff = "right" \with {
-    midiInstrument = "acoustic grand"
+    midiInstrument = "harpsichord"
     midiMinimumVolume = #1.5
     midiMaximumVolume = #2.0
   } { \clef treble \voiceKeyboardRight }
   \new Staff = "left" \with {
-    midiInstrument = "acoustic grand"
+    midiInstrument = "harpsichord"
     midiMinimumVolume = #1.5
     midiMaximumVolume = #2.0
   } { \clef bass \voiceKeyboardLeft }
 &gt;&gt;
 
-instrumentGuitar = \new Staff \with {
-  instrumentName = "Guitar"
+instrumentGuitars = \new GrandStaff \with {
+  instrumentName = "Guitars"
   shortInstrumentName = "gtr"
-  midiInstrument = "acoustic guitar (steel)"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #1.5
-} { \clef tenor
-    %\override Staff.StaffSymbol.line-count = #7
-    \voiceGuitar }
+} &lt;&lt;
+  \new Staff = "right" \with {
+    midiInstrument = "acoustic guitar (nylon)"
+    midiMinimumVolume = #1.5
+    midiMaximumVolume = #2.0
+  } { \clef tenor \voiceGuitar }
+  \new Staff = "left" \with {
+    midiInstrument = "acoustic bass"
+    midiMinimumVolume = #1.5
+    midiMaximumVolume = #2.0
+  } { \clef subbass \voiceBassGuitar }
+&gt;&gt;
 
-instrumentBassGuitar = \new Staff \with {
-  instrumentName = \markup { \column { Bass Guitar } }
-  shortInstrumentName = "bs gtr"
-  midiInstrument = "electric bass (finger)"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #1.5
-} { \clef subbass
-    %\override Staff.StaffSymbol.line-count = #7
-    \voiceBassGuitar }
-
-instrumentVibraphone = \new Staff = "right" \with {
+instrumentVibraphone = \new Staff = "vibraphone" \with {
   instrumentName = "Vibraphone"
   shortInstrumentName = "vb"
   midiInstrument = "vibraphone"
@@ -440,14 +472,21 @@ instrumentDrums = \new DrumStaff \with {
 % ------------ book ------------
 
 \book {
+  \markup \column {
+    \vspace #1
+    \line { woods = flute, oboe, clarinet, bassoon }
+    \line { horns = 2 french horns }
+    \line { strings = 2 violins, 2 cellos }
+    \line { guitars = guitar, bass guitar }
+    \vspace #1
+  }
   \score {
     &lt;&lt;
       \instrumentWoods
-      \instrumentBrass
-      \instrumentOrgan
+      \instrumentHorns
+      \instrumentStrings
       \instrumentKeyboard
-      \instrumentGuitar
-      \instrumentBassGuitar
+      \instrumentGuitars
       \instrumentVibraphone
       \instrumentDrums
     &gt;&gt;
@@ -462,12 +501,6 @@ instrumentDrums = \new DrumStaff \with {
   }
   \paper {
     system-separator-markup = \slashSeparator
-  }
-  \markup \column {
-    \vspace #1
-    \line { woods = clarinet, baritone sax }
-    \line { brass = trumpet, french horn }
-    \vspace #1
   }
 }
 </pre>

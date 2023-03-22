@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-03-21 mar 11:01 -->
+<!-- 2023-03-22 mer 10:04 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Opus : Musica : Templates</title>
@@ -205,20 +205,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc739e36">1. Eclats de vers : Musica : Templates : Grand chambre</a></li>
+<li><a href="#org6482b46">1. Eclats de vers : Musica : Templates : Grand chambre</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgc739e36" class="outline-2">
-<h2 id="orgc739e36"><span class="section-number-2">1.</span> Eclats de vers : Musica : Templates : Grand chambre</h2>
+<div id="outline-container-org6482b46" class="outline-2">
+<h2 id="org6482b46"><span class="section-number-2">1.</span> Eclats de vers : Musica : Templates : Grand chambre</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Le résultat :
 </p>
 
 
-<div id="org9fa123a" class="figure">
+<div id="org0b9f0bf" class="figure">
 <p><img src="../../image/musica/templates/kiosq.png" alt="kiosq.png" />
 </p>
 </div>
@@ -238,7 +238,7 @@ Le fichier source :
 
 \header {
   title = "kiosque"
-  subtitle="grand chambre avec quintette à vent"
+  subtitle="grand chambre"
   composer = "composer"
   poet = "poet"
   %piece = "piece"
@@ -266,38 +266,32 @@ Le fichier source :
 
 % ------------ voices ------------
 
-voiceWoodSoprano = \fixed c'' {
+voiceWindSoprano = \fixed c'' {
   \global
   \tempo 2. = 50
   % Music follows here.
   \themeMelody
 }
 
-voiceWoodAlto = \fixed c' {
+voiceWindMezzo = \fixed c' {
   \global
   % Music follows here.
   \themeMelody
 }
 
-voiceWoodTenor = \fixed c' {
+voiceWindAlto = \fixed c' {
   \global
   % Music follows here.
   \themeMelody
 }
 
-voiceWoodBass = \fixed c, {
+voiceWindTenor = \fixed c {
   \global
   % Music follows here.
   \themeMelody
 }
 
-voiceBrassSoprano = \fixed c' {
-  \global
-  % Music follows here.
-  \themeMelody
-}
-
-voiceBrassBass = \fixed c {
+voiceWindBass = \fixed c, {
   \global
   % Music follows here.
   \themeMelody
@@ -365,42 +359,38 @@ voiceDrums = \drummode {
 
 % ------------ instruments ------------
 
-instrumentWoods = \new GrandStaff \with {
-  instrumentName = "Woods"
+instrumentWinds = \new StaffGroup \with {
+  instrumentName = "Winds"
   shortInstrumentName =  "wd"
 } &lt;&lt;
   \new Staff = "flute" \with {
     midiInstrument = "flute"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #1.5
-  } { \clef french \voiceWoodSoprano }
+  } { \clef french \voiceWindSoprano }
   \new Staff = "oboe" \with {
     midiInstrument = "oboe"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #1.5
-  } { \clef treble \voiceWoodAlto }
+  } { \clef treble \voiceWindMezzo }
   \new Staff = "clarinet" \with {
     midiInstrument = "clarinet"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #1.5
-  } { \clef treble \voiceWoodTenor }
+  } { \clef treble \voiceWindAlto }
+  \new Staff = "horns" \with {
+    midiInstrument = "french horn"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #1.5
+  } { \clef alto \voiceWindTenor }
   \new Staff = "bassoon" \with {
     midiInstrument = "bassoon"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #1.5
-  } { \clef bass \voiceWoodBass }
+  } { \clef bass \voiceWindBass }
 &gt;&gt;
 
-instrumentHorns = \new Staff = "horns" \with {
-  instrumentName = "Horns"
-  shortInstrumentName = "hn"
-  midiInstrument = "french horn"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #1.5
-} { \clef alto
-    &lt;&lt; \voiceBrassSoprano \\ \voiceBrassBass &gt;&gt; }
-
-instrumentStrings = \new GrandStaff \with {
+instrumentStrings = \new StaffGroup \with {
   instrumentName = "Strings"
   shortInstrumentName = "st"
 } &lt;&lt;
@@ -434,7 +424,7 @@ instrumentKeyboard = \new GrandStaff \with {
   } { \clef bass \voiceKeyboardLeft }
 &gt;&gt;
 
-instrumentGuitars = \new GrandStaff \with {
+instrumentGuitars = \new StaffGroup \with {
   instrumentName = "Guitars"
   shortInstrumentName = "gtr"
 } &lt;&lt;
@@ -451,7 +441,7 @@ instrumentGuitars = \new GrandStaff \with {
 &gt;&gt;
 
 instrumentVibraphone = \new Staff = "vibraphone" \with {
-  instrumentName = "Vibraphone"
+  instrumentName = \markup \column { Vibra- phone }
   shortInstrumentName = "vb"
   midiInstrument = "vibraphone"
   midiMinimumVolume = #1.0
@@ -468,16 +458,14 @@ instrumentDrums = \new DrumStaff \with {
 \book {
   \markup \column {
     \vspace #1
-    \line { woods = flute, oboe, clarinet, bassoon }
-    \line { horns = 2 french horns }
+    \line { woods = flute, oboe, clarinet, french horn, bassoon }
     \line { strings = 2 violins, 2 cellos }
     \line { guitars = guitar, bass guitar }
     \vspace #1
   }
   \score {
     &lt;&lt;
-      \instrumentWoods
-      \instrumentHorns
+      \instrumentWinds
       \instrumentStrings
       \instrumentKeyboard
       \instrumentGuitars
@@ -504,7 +492,7 @@ instrumentDrums = \new DrumStaff \with {
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: chimay</p>
-<p class="date">Created: 2023-03-21 mar 11:01</p>
+<p class="date">Created: 2023-03-22 mer 10:04</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-03-24 ven 13:28 -->
+<!-- 2023-03-24 ven 13:30 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Eclats de vers : Opus : Musica</title>
+<title>Eclats de vers : Opus : Musica : Templates</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
 <style>
@@ -192,64 +192,322 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+<link rel="stylesheet" type="text/css" href="../../style/defaut.css" />
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Eclats de vers : Opus : Musica</h1>
+<h1 class="title">Eclats de vers : Opus : Musica : Templates</h1>
 <p>
-<a href="../index.html">Retour à l’accueil</a>
+<a href="../../index.html">Retour à l’accueil</a>
 </p>
 
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org06e69bf">1. Eclats de vers: Opus : Music</a></li>
+<li><a href="#org37b4ad9">1. Eclats de vers : Musica : Templates : Grand chambre avec harpe</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org06e69bf" class="outline-2">
-<h2 id="org06e69bf"><span class="section-number-2">1.</span> Eclats de vers: Opus : Music</h2>
+<div id="outline-container-org37b4ad9" class="outline-2">
+<h2 id="org37b4ad9"><span class="section-number-2">1.</span> Eclats de vers : Musica : Templates : Grand chambre avec harpe</h2>
 <div class="outline-text-2" id="text-1">
+<p>
+Le résultat :
+</p>
+
+
+<div id="org0b9b6cd" class="figure">
+<p><img src="../../image/musica/templates/recep.png" alt="recep.png" />
+</p>
 </div>
-<div id="outline-container-orge6f42e5" class="outline-3">
-<h3 id="orge6f42e5"><span class="section-number-3">1.1.</span> Modèles lilypond</h3>
-<div class="outline-text-3" id="text-1-1">
-<p>
-Ensembles et orchestres de chambre :
-</p>
-
-<ul class="org-ul">
-<li><a href="templates/chan.html">Septuor de chant</a></li>
-<li><a href="templates/cord.html">Septuor de cordes</a></li>
-<li><a href="templates/boudoir.html">Boudoir : mini chambre</a></li>
-<li><a href="templates/sejour.html">Séjour : petit chambre</a></li>
-<li><a href="templates/salon.html">Salon : petit chambre avec harpe</a></li>
-<li><a href="templates/kiosq.html">Kiosque : grand chambre</a></li>
-<li><a href="templates/recep.html">Réception : grand chambre avec harpe</a></li>
-<li><a href="templates/clav.html">Claviers</a></li>
-<li><a href="templates/jazz.html">Jazz</a></li>
-<li><a href="templates/stoc.html">Divers</a></li>
-</ul>
 
 <p>
-On peut placer les thèmes mélodiques dans des fichiers séparés, inclus
-dans le fichier principal :
+Le fichier source :
 </p>
 
-<ul class="org-ul">
-<li><a href="templates/include/mel.html">Thèmes mélodiques, mesure 3/4</a></li>
-<li><a href="templates/include/mel-4.html">Thèmes mélodiques, mesure 4/4</a></li>
-</ul>
+<div class="org-src-container">
+<pre class="src src-lilypond">% vim: set fdm=indent:
+
+% ------------ headers ------------
+
+%\version "2.24.0"
+
+\language "english"
+
+\header {
+  title = "réception"
+  subtitle="grand chambre avec harpe"
+  composer = "composer"
+  poet = "poet"
+  %piece = "piece"
+}
+
+\layout {
+  %\enablePolymeter
+  \override Score.BarNumber.break-visibility = ##(#t #t #t)
+  \context {
+    \Score
+    measureBarType = #","
+    %barNumberVisibility = #(every-nth-bar-number-visible 8)
+    barNumberVisibility = #(modulo-bar-number-visible 8 0)
+  }
+  \context {
+    \Staff
+    \RemoveEmptyStaves
+    \consists "Merge_rests_engraver"
+  }
+}
+
+% ------------ melodies ------------
+
+\include "include/mel.ly"
+
+% ------------ voices ------------
+
+voiceWindSoprano = \fixed c'' {
+  \global
+  \tempo 2. = 50
+  % Music follows here.
+  \pickup
+
+}
+
+voiceWindMezzo = \fixed c' {
+  \global
+  % Music follows here.
+  \pickup
+
+}
+
+voiceWindAlto = \fixed c' {
+  \global
+  % Music follows here.
+  \pickup
+
+}
+
+voiceWindTenor = \fixed c {
+  \global
+  % Music follows here.
+  \pickup
+
+}
+
+voiceWindBass = \fixed c, {
+  \global
+  % Music follows here.
+  \pickup
+
+}
+
+voiceStringSoprano = \fixed c'' {
+  \global
+  % Music follows here.
+  \pickup
+
+}
+
+voiceStringAlto = \fixed c' {
+  \global
+  % Music follows here.
+  \pickup
+
+}
+
+voiceStringTenor = \fixed c {
+  \global
+  % Music follows here.
+  \pickup
+
+}
+
+voiceStringBass = \fixed c, {
+  \global
+  % Music follows here.
+  \pickup
+
+}
+
+voiceKeyboardRight = \fixed c'' {
+  \global
+  % Music follows here.
+  \pickup
+
+}
+
+voiceKeyboardLeft = \fixed c {
+  \global
+  % Music follows here.
+  \pickup
+
+}
+
+voiceHarpTreble = \fixed c'' {
+  \global
+  % Music follows here.
+  \pickup
+
+}
+
+voiceHarpBass = \fixed c {
+  \global
+  % Music follows here.
+  \pickup
+
+}
+
+voiceVibraphone = \fixed c' {
+  \global
+  % Music follows here.
+  \pickup
+
+}
+
+voiceDrums = \drummode {
+  \global
+  % Music follows here.
+  \pickupDrums
+
+}
+
+% ------------ instruments ------------
+
+instrumentWinds = \new StaffGroup \with {
+  instrumentName = "Winds"
+  shortInstrumentName =  "wd"
+} &lt;&lt;
+  \new Staff = "flute" \with {
+    midiInstrument = "flute"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #1.5
+  } { \clef french \voiceWindSoprano }
+  \new Staff = "oboe" \with {
+    midiInstrument = "oboe"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #1.5
+  } { \clef treble \voiceWindMezzo }
+  \new Staff = "clarinet" \with {
+    midiInstrument = "clarinet"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #1.5
+  } { \clef treble \voiceWindAlto }
+  \new Staff = "horn" \with {
+    midiInstrument = "french horn"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #1.5
+  } { \clef alto \voiceWindTenor }
+  \new Staff = "bassoon" \with {
+    midiInstrument = "bassoon"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #1.5
+  } { \clef bass \voiceWindBass }
+&gt;&gt;
+
+instrumentStrings = \new StaffGroup \with {
+  instrumentName = "Strings"
+  shortInstrumentName = "st"
+} &lt;&lt;
+  \new Staff = "treble" \with {
+    midiInstrument = "violin"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #1.5
+  } { \clef treble
+      &lt;&lt; \voiceStringSoprano \\ \voiceStringAlto &gt;&gt; }
+  \new Staff = "bass" \with {
+    midiInstrument = "cello"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #1.5
+  } { \clef bass
+      &lt;&lt; \voiceStringTenor \\ \voiceStringBass &gt;&gt; }
+&gt;&gt;
+
+instrumentKeyboard = \new GrandStaff \with {
+  instrumentName = \markup \column { Harpsi- chord }
+  shortInstrumentName = \markup \column { hp cd }
+} &lt;&lt;
+  \new Staff = "treble" \with {
+    midiInstrument = "harpsichord"
+    midiMinimumVolume = #1.5
+    midiMaximumVolume = #2.0
+  } { \clef treble \voiceKeyboardRight }
+  \new Staff = "bass" \with {
+    midiInstrument = "harpsichord"
+    midiMinimumVolume = #1.5
+    midiMaximumVolume = #2.0
+  } { \clef bass \voiceKeyboardLeft }
+&gt;&gt;
+
+instrumentHarp = \new GrandStaff \with {
+  instrumentName = "Harp"
+  shortInstrumentName = "hp"
+} &lt;&lt;
+  \new Staff = "treble" \with {
+    midiInstrument = "orchestral harp"
+    midiMinimumVolume = #1.5
+    midiMaximumVolume = #2.0
+  } { \clef treble \voiceHarpTreble }
+  \new Staff = "bass" \with {
+    midiInstrument = "orchestral harp"
+    midiMinimumVolume = #1.5
+    midiMaximumVolume = #2.0
+  } { \clef bass \voiceHarpBass }
+&gt;&gt;
+
+instrumentVibraphone = \new Staff \with {
+  instrumentName = \markup \column { Vibra- phone }
+  shortInstrumentName = "vb"
+  midiInstrument = "vibraphone"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #1.5
+} { \clef treble \voiceVibraphone }
+
+instrumentDrums = \new DrumStaff \with {
+  instrumentName = "Drums"
+  shortInstrumentName = "dm"
+} { \clef percussion \voiceDrums }
+
+% ------------ book ------------
+
+\book {
+  \markup \column {
+    \vspace #1
+    \line { winds = flute, oboe, clarinet, french horn, bassoon }
+    \line { strings = 2 violins, 2 cellos }
+    \line { guitars = guitar, bass guitar }
+    \vspace #1
+  }
+  \score {
+    &lt;&lt;
+      \instrumentWinds
+      \instrumentStrings
+      \instrumentKeyboard
+      \instrumentHarp
+      \instrumentVibraphone
+      \instrumentDrums
+    &gt;&gt;
+    \layout { }
+    \midi {
+      \context {
+	\Score
+	%midiChannelMapping = #'instrument
+	%\enablePolymeter
+      }
+    }
+  }
+  \paper {
+    system-separator-markup = \slashSeparator
+  }
+}
+</pre>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: chimay</p>
-<p class="date">Created: 2023-03-24 ven 13:28</p>
+<p class="date">Created: 2023-03-24 ven 13:30</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

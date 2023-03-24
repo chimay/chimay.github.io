@@ -44,7 +44,7 @@ wipe:
 
 html: $(FICHIERS_HTML)
 
-%.html: %.org $(FICHIERS_INCLUDE)
+%.html: %.org $(FICHIERS_INCLUDE) ~/racine/musica/lilypond/templates/include/%.ly
 	$(EMACS) $(EMACS_PRE_FLAGS) $< $(EMACS_POST_FLAGS)
 	remove-max-width-from-org-html-export.zsh $(patsubst %.org,%.html,$<)
 	@$(ECHO)

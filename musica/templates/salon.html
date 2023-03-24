@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-03-24 ven 08:42 -->
+<!-- 2023-03-24 ven 08:43 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Opus : Musica : Templates</title>
@@ -205,21 +205,21 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgcec0449">1. Eclats de vers : Musica : Templates : Jazz</a></li>
+<li><a href="#org8a080bf">1. Eclats de vers : Musica : Templates : Mini chambre</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgcec0449" class="outline-2">
-<h2 id="orgcec0449"><span class="section-number-2">1.</span> Eclats de vers : Musica : Templates : Jazz</h2>
+<div id="outline-container-org8a080bf" class="outline-2">
+<h2 id="org8a080bf"><span class="section-number-2">1.</span> Eclats de vers : Musica : Templates : Mini chambre</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Le résultat :
 </p>
 
 
-<div id="org35f3d7c" class="figure">
-<p><img src="../../image/musica/templates/jazz.png" alt="jazz.png" />
+<div id="org228a152" class="figure">
+<p><img src="../../image/musica/templates/salon.png" alt="salon.png" />
 </p>
 </div>
 
@@ -237,8 +237,8 @@ La source :
 \language "english"
 
 \header {
-  title = "jazz"
-  subtitle="subtitle"
+  title = "séjour"
+  subtitle="petit chambre"
   composer = "composer"
   poet = "poet"
   %piece = "piece"
@@ -249,6 +249,7 @@ La source :
   \override Score.BarNumber.break-visibility = ##(#t #t #t)
   \context {
     \Score
+    measureBarType = #","
     %barNumberVisibility = #(every-nth-bar-number-visible 8)
     barNumberVisibility = #(modulo-bar-number-visible 8 0)
   }
@@ -265,7 +266,7 @@ La source :
 
 % ------------ voices ------------
 
-voiceWoodSoprano = \fixed c'' {
+voiceWindSoprano = \fixed c'' {
   \global
   \tempo 2. = 50
   % Music follows here.
@@ -273,35 +274,49 @@ voiceWoodSoprano = \fixed c'' {
 
 }
 
-voiceWoodBass = \fixed c, {
+voiceWindAlto = \fixed c' {
   \global
   % Music follows here.
   \pickup
 
 }
 
-voiceBrassSoprano = \fixed c'' {
+voiceWindTenor = \fixed c {
   \global
   % Music follows here.
   \pickup
 
 }
 
-voiceBrassBass = \fixed c, {
+voiceWindBass = \fixed c, {
   \global
   % Music follows here.
   \pickup
 
 }
 
-voiceOrganRight = \fixed c'' {
+voiceStringSoprano = \fixed c'' {
   \global
   % Music follows here.
   \pickup
 
 }
 
-voiceOrganLeft = \fixed c {
+voiceStringAlto = \fixed c' {
+  \global
+  % Music follows here.
+  \pickup
+
+}
+
+voiceStringTenor = \fixed c {
+  \global
+  % Music follows here.
+  \pickup
+
+}
+
+voiceStringBass = \fixed c, {
   \global
   % Music follows here.
   \pickup
@@ -322,14 +337,14 @@ voiceKeyboardLeft = \fixed c {
 
 }
 
-voiceGuitar = \fixed c {
+voiceHarpTreble = \fixed c'' {
   \global
   % Music follows here.
   \pickup
 
 }
 
-voiceBassGuitar = \fixed c, {
+voiceHarpBass = \fixed c {
   \global
   % Music follows here.
   \pickup
@@ -352,88 +367,76 @@ voiceDrums = \drummode {
 
 % ------------ instruments ------------
 
-instrumentWoods = \new StaffGroup \with {
-  instrumentName = "Woods"
+instrumentWinds = \new StaffGroup \with {
+  instrumentName = "Winds"
   shortInstrumentName =  "wd"
 } &lt;&lt;
   \new Staff = "treble" \with {
-    midiInstrument = "clarinet"
+    midiInstrument = "flute"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #1.5
-  } { \clef treble \voiceWoodSoprano }
+  } { \clef treble
+      &lt;&lt; \voiceWindSoprano \\ \voiceWindAlto &gt;&gt; }
   \new Staff = "bass" \with {
-    midiInstrument = "baritone sax"
+    midiInstrument = "oboe"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #1.5
-  } { \clef bass \voiceWoodBass }
+  } { \clef bass
+      &lt;&lt; \voiceWindTenor \\ \voiceWindBass &gt;&gt; }
 &gt;&gt;
 
-instrumentBrass = \new StaffGroup \with {
-  instrumentName = "Brass"
-  shortInstrumentName =  "br"
+instrumentStrings = \new StaffGroup \with {
+  instrumentName = "Strings"
+  shortInstrumentName = "st"
 } &lt;&lt;
   \new Staff = "treble" \with {
-    midiInstrument = "trumpet"
+    midiInstrument = "violin"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #1.5
-  } { \clef treble \voiceBrassSoprano }
+  } { \clef treble
+      &lt;&lt; \voiceStringSoprano \\ \voiceStringAlto &gt;&gt; }
   \new Staff = "bass" \with {
-    midiInstrument = "french horn"
+    midiInstrument = "cello"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #1.5
-  } { \clef bass \voiceBrassBass }
-&gt;&gt;
-
-instrumentOrgan = \new GrandStaff \with {
-  instrumentName = "Organ"
-  shortInstrumentName =  "org"
-} &lt;&lt;
-  \new Staff = "treble" \with {
-    midiInstrument = "drawbar organ"
-    midiMinimumVolume = #1.0
-    midiMaximumVolume = #1.0
-  } { \clef treble \voiceOrganRight }
-  \new Staff = "bass" \with {
-    midiInstrument = "drawbar organ"
-    midiMinimumVolume = #1.0
-    midiMaximumVolume = #1.0
-  } { \clef bass \voiceOrganLeft }
+  } { \clef bass
+      &lt;&lt; \voiceStringTenor \\ \voiceStringBass &gt;&gt; }
 &gt;&gt;
 
 instrumentKeyboard = \new GrandStaff \with {
-  instrumentName = "Piano"
-  shortInstrumentName = "pn"
+  instrumentName = \markup \column { Harpsi- chord }
+  shortInstrumentName = \markup \column { hp cd }
 } &lt;&lt;
   \new Staff = "treble" \with {
-    midiInstrument = "acoustic grand"
+    midiInstrument = "harpsichord"
     midiMinimumVolume = #1.5
     midiMaximumVolume = #2.0
   } { \clef treble \voiceKeyboardRight }
   \new Staff = "bass" \with {
-    midiInstrument = "acoustic grand"
+    midiInstrument = "harpsichord"
     midiMinimumVolume = #1.5
     midiMaximumVolume = #2.0
   } { \clef bass \voiceKeyboardLeft }
 &gt;&gt;
 
-instrumentGuitars = \new StaffGroup \with {
-  instrumentName = "Guitars"
-  shortInstrumentName = "gtr"
+instrumentHarp = \new GrandStaff \with {
+  instrumentName = "Harp"
+  shortInstrumentName = "hp"
 } &lt;&lt;
   \new Staff = "treble" \with {
-    midiInstrument = "acoustic guitar (nylon)"
+    midiInstrument = "orchestral harp"
     midiMinimumVolume = #1.5
     midiMaximumVolume = #2.0
-  } { \clef tenor \voiceGuitar }
+  } { \clef treble \voiceHarpTreble }
   \new Staff = "bass" \with {
-    midiInstrument = "acoustic bass"
+    midiInstrument = "orchestral harp"
     midiMinimumVolume = #1.5
     midiMaximumVolume = #2.0
-  } { \clef subbass \voiceBassGuitar }
+  } { \clef bass \voiceHarpBass }
 &gt;&gt;
 
-instrumentVibraphone = \new Staff = "treble" \with {
-  instrumentName = "Vibraphone"
+instrumentVibraphone = \new Staff = "vibraphone" \with {
+  instrumentName = \markup \column { Vibra- phone }
   shortInstrumentName = "vb"
   midiInstrument = "vibraphone"
   midiMinimumVolume = #1.0
@@ -450,18 +453,17 @@ instrumentDrums = \new DrumStaff \with {
 \book {
   \markup \column {
     \vspace #1
-    \line { woods = clarinet, baritone sax }
-    \line { brass = trumpet, french horn }
+    \line { winds = 2 flutes, 2 bassoons }
+    \line { strings = 2 violins, 2 cellos }
     \line { guitars = guitar, bass guitar }
     \vspace #1
   }
   \score {
     &lt;&lt;
-      \instrumentWoods
-      \instrumentBrass
-      \instrumentOrgan
+      \instrumentWinds
+      \instrumentStrings
       \instrumentKeyboard
-      \instrumentGuitars
+      \instrumentHarp
       \instrumentVibraphone
       \instrumentDrums
     &gt;&gt;
@@ -485,7 +487,7 @@ instrumentDrums = \new DrumStaff \with {
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: chimay</p>
-<p class="date">Created: 2023-03-24 ven 08:42</p>
+<p class="date">Created: 2023-03-24 ven 08:43</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

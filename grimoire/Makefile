@@ -43,24 +43,44 @@ epub: $(EPUB_SUBDIRS) $(EPUB_FILES)
 
 #  }}}
 
-# all, install, clean, wipe {{{1
+# all, install {{{1
 
 all: sync-html
 
 install: sync-html
 
-clean:
+# }}}1
+
+# clean, wipe {{{1
+
+$(CLEAN_SUBDIRS):
+	$(MAKE) -C ${@:clean-%=%} clean
+	@$(ECHO)
+
+$(CLEAN_HTML_SUBDIRS):
+	$(MAKE) -C ${@:clean-html-%=%} clean-html
+	@$(ECHO)
+
+$(CLEAN_EPUB_SUBDIRS):
+	$(MAKE) -C ${@:clean-epub-%=%} clean-epub
+	@$(ECHO)
+
+$(WIPE_SUBDIRS):
+	$(MAKE) -C ${@:wipe-%=%} wipe
+	@$(ECHO)
+
+clean: $(CLEAN_SUBDIRS)
 	rm -f ?*~
 
-clean-html:
+clean-html: $(CLEAN_HTML_SUBDIRS)
 	rm -f ?*.html
 	rm -f ?*~
 
-clean-epub:
+clean-epub: $(CLEAN_EPUB_SUBDIRS)
 	rm -f ?*.epub
 	rm -f ?*~
 
-wipe:
+wipe: $(WIPE_SUBDIRS)
 	rm -f ?*.html
 	rm -f ?*.epub
 	rm -f ?*~

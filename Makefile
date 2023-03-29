@@ -86,42 +86,26 @@ sync: sync-html sync-epub
 
 all: sync-html
 
-install: sync
+install: sync-html
 
 # }}}1
 
 # clean, wipe {{{1
 
 $(CLEAN_SUBDIRS):
-	@$(ECHO) "============ [$@] ============"
-	@$(ECHO)
 	$(MAKE) -C ${@:clean-%=%} clean
-	@$(ECHO)
-	@$(ECHO) "============ <$@> ============"
 	@$(ECHO)
 
 $(CLEAN_HTML_SUBDIRS):
-	@$(ECHO) "============ [$@] ============"
-	@$(ECHO)
 	$(MAKE) -C ${@:clean-html-%=%} clean-html
-	@$(ECHO)
-	@$(ECHO) "============ <$@> ============"
 	@$(ECHO)
 
 $(CLEAN_EPUB_SUBDIRS):
-	@$(ECHO) "============ [$@] ============"
-	@$(ECHO)
 	$(MAKE) -C ${@:clean-epub-%=%} clean-epub
-	@$(ECHO)
-	@$(ECHO) "============ <$@> ============"
 	@$(ECHO)
 
 $(WIPE_SUBDIRS):
-	@$(ECHO) "============ [$@] ============"
-	@$(ECHO)
 	$(MAKE) -C ${@:wipe-%=%} wipe
-	@$(ECHO)
-	@$(ECHO) "============ <$@> ============"
 	@$(ECHO)
 
 clean: $(CLEAN_SUBDIRS)

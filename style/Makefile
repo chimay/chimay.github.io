@@ -28,6 +28,38 @@ epub:
 
 #  }}}
 
+# sync -> html dir {{{1
+
+dry-sync-html: html
+	$(DRY_RSYNC) $(CUR_DIR)/ $(HTML_DIR)
+	@$(ECHO)
+
+sync-html: html
+	$(RSYNC) $(CUR_DIR)/ $(HTML_DIR)
+	@$(ECHO)
+
+# }}}1
+
+# sync -> epub dir {{{1
+
+dry-sync-epub: epub
+	$(DRY_RSYNC) $(CUR_DIR)/ $(EPUB_DIR)
+	@$(ECHO)
+
+sync-epub: epub
+	$(SYNC) $(CUR_DIR)/ $(EPUB_DIR)
+	@$(ECHO)
+
+# }}}1
+
+# {{{ sync all
+
+dry-sync: dry-sync-html dry-sync-epub
+
+sync: sync-html sync-epub
+
+# }}}
+
 # all, install {{{1
 
 all: sync-html

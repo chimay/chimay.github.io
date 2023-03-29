@@ -53,7 +53,7 @@ epub: $(EPUB_SUBDIRS) $(EPUB_FILES)
 # sync -> html dir {{{1
 
 dry-sync-html: html
-	$(DRY_SYNC) $(ROOT_ORGMODE)/ $(ROOT_HTML)
+	$(DRY_RSYNC) $(ROOT_ORGMODE)/ $(ROOT_HTML)
 	@$(ECHO)
 
 sync-html: html
@@ -65,7 +65,7 @@ sync-html: html
 # sync -> epub dir {{{1
 
 dry-sync-epub: epub
-	$(DRY_SYNC) $(ROOT_ORGMODE)/ $(ROOT_EPUB)
+	$(DRY_RSYNC) $(ROOT_ORGMODE)/ $(ROOT_EPUB)
 	@$(ECHO)
 
 sync-epub: epub

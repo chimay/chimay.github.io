@@ -8,6 +8,18 @@ ROOT_EPUB    = $(HOME)/racine/site/epub
 
 #  }}}
 
+#  {{{ subdirs
+
+SUBDIRS            = $(wildcard */)
+HTML_SUBDIRS       = $(SUBDIRS:%=html-%)
+EPUB_SUBDIRS       = $(SUBDIRS:%=epub-%)
+CLEAN_SUBDIRS      = $(SUBDIRS:%=clean-%)
+CLEAN_HTML_SUBDIRS = $(SUBDIRS:%=clean-html-%)
+CLEAN_EPUB_SUBDIRS = $(SUBDIRS:%=clean-epub-%)
+WIPE_SUBDIRS       = $(SUBDIRS:%=wipe-%)
+
+#  }}}
+
 #  {{{ programs & options
 
 ECHO  = echo
@@ -37,19 +49,5 @@ HTML_FILES = $(patsubst %.org,%.html,$(wildcard *.org))
 EPUB_FILES = $(patsubst %.org,%.epub,$(wildcard *.org))
 CSS_FILES  = $(HTML)/style/defaut.css
 INC_FILES  = $(wildcard $($(ROOT_ORGMODE)/include/*))
-
-#  }}}
-
-#  {{{ subdirs
-
-SUBDIRS = $(wildcard */)
-
-HTML_SUBDIRS = $(SUBDIRS:%=html-%)
-EPUB_SUBDIRS = $(SUBDIRS:%=epub-%)
-
-CLEAN_SUBDIRS      = $(SUBDIRS:%=clean-%)
-CLEAN_HTML_SUBDIRS = $(SUBDIRS:%=clean-html-%)
-CLEAN_EPUB_SUBDIRS = $(SUBDIRS:%=clean-epub-%)
-WIPE_SUBDIRS       = $(SUBDIRS:%=wipe-%)
 
 #  }}}

@@ -2,25 +2,84 @@
 
 include ../Makefile.inc
 
-#.DEFAULT_GOAL := install
 .DEFAULT_GOAL := sync-html
 
-#  {{{  Phony
-
-.PHONY: all install
-.PHONY: clean clean-html clean-epub wipe
+#  {{{  phony
 
 .PHONY: html
 .PHONY: epub
 
+.PHONY: all install
+.PHONY: clean clean-html clean-epub wipe
+
 #  }}}
 
-# All, Install, Clean, Wipe {{{1
+#  {{{  org -> html
 
-#all: $(FICHIERS_HTML) $(FICHIERS_EPUB)
-all: $(FICHIERS_HTML) sync-html
+$(HTML_SUBDIRS):
+	$(MAKE) -C ${@:html-%=%} html
+	@$(ECHO)
 
-install: sync
+%.html: %.org $(INC_FILES)
+	$(EMACS) $(EMACS_PRE_FLAGS) $< $(EMACS_POST_FLAGS)
+	remove-max-width-from-org-html-export.zsh $(patsubst %.org,%.html,$<)
+	@$(ECHO)
+
+html: $(HTML_SUBDIRS) $(HTML_FILES)
+
+#  }}}
+
+#  {{{  org -> epub
+
+$(EPUB_SUBDIRS):
+	$(MAKE) -C ${@:epub-%=%} epub
+	@$(ECHO)
+
+%.epub: %.org $(INC_FILES)
+	pandoc -t epub $< -o $(<:.org=.epub) 2> pandoc.log
+	@$(ECHO)
+
+epub: $(EPUB_SUBDIRS) $(EPUB_FILES)
+
+#  }}}
+
+# sync -> html dir {{{1
+
+dry-sync-html: html
+	$(DRY_RSYNC) $(CUR_DIR)/ $(HTML_DIR)
+	@$(ECHO)
+
+sync-html: html
+	$(RSYNC) $(CUR_DIR)/ $(HTML_DIR)
+	@$(ECHO)
+
+# }}}1
+
+# sync -> epub dir {{{1
+
+dry-sync-epub: epub
+	$(DRY_RSYNC) $(CUR_DIR)/ $(EPUB_DIR)
+	@$(ECHO)
+
+sync-epub: epub
+	$(RSYNC) $(CUR_DIR)/ $(EPUB_DIR)
+	@$(ECHO)
+
+# }}}1
+
+# {{{ sync all
+
+dry-sync: dry-sync-html dry-sync-epub
+
+sync: sync-html sync-epub
+
+# }}}
+
+# all, install, clean, wipe {{{1
+
+all: sync-html
+
+install: sync-html
 
 clean:
 	rm -f ?*~
@@ -39,64 +98,3 @@ wipe:
 	rm -f ?*~
 
 # }}}1
-
-#  {{{  Org -> Html
-
-html: $(FICHIERS_HTML)
-
-%.html: %.org $(FICHIERS_INCLUDE)
-	$(EMACS) $(EMACS_PRE_FLAGS) $< $(EMACS_POST_FLAGS)
-	remove-max-width-from-org-html-export.zsh $(patsubst %.org,%.html,$<)
-	@$(ECHO)
-
-#  }}}
-
-#  {{{  Org -> Epub
-
-epub: $(FICHIERS_EPUB)
-
-%.epub: %.org $(FICHIERS_INCLUDE)
-	pandoc -t epub $< -o $(<:.org=.epub) 2> pandoc.log
-	@$(ECHO)
-
-#  }}}
-
-# Sync -> html dir {{{1
-
-dry-sync-html: html
-	rsync -n -au --delete \
-		--exclude-from=../rsync-html-exclude \
-		-vhi --progress $(REPERTOIRE_COURANT)/ $(REPERTOIRE_HTML)
-	@$(ECHO)
-
-sync-html: html
-	rsync -au --delete \
-		--exclude-from=../rsync-html-exclude \
-		-vhi --progress $(REPERTOIRE_COURANT)/ $(REPERTOIRE_HTML)
-	@$(ECHO)
-
-# }}}1
-
-# Sync -> epub dir {{{1
-
-dry-sync-epub: epub
-	rsync -n -au --delete \
-		--exclude-from=../rsync-epub-exclude \
-		-vhi --progress $(REPERTOIRE_COURANT)/ $(REPERTOIRE_EPUB)
-	@$(ECHO)
-
-sync-epub: epub
-	rsync -au --delete \
-		--exclude-from=../rsync-epub-exclude \
-		-vhi --progress $(REPERTOIRE_COURANT)/ $(REPERTOIRE_EPUB)
-	@$(ECHO)
-
-# }}}1
-
-# {{{ Sync all
-
-dry-sync: dry-sync-html dry-sync-epub
-
-sync: sync-html sync-epub
-
-# }}}

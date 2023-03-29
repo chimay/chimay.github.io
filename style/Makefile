@@ -6,40 +6,25 @@ include ../Makefile.inc
 
 #  {{{  phony
 
-.PHONY: all install
-.PHONY: clean clean-html clean-epub wipe
-
 .PHONY: html
 .PHONY: epub
+
+.PHONY: all install
+.PHONY: clean clean-html clean-epub wipe
 
 #  }}}
 
 #  {{{  org -> html
 
-$(HTML_SUBDIRS):
-	$(MAKE) -C ${@:html-%=%} html
-	@$(ECHO)
-
-%.html: %.org $(INC_FILES)
-	$(EMACS) $(EMACS_PRE_FLAGS) $< $(EMACS_POST_FLAGS)
-	remove-max-width-from-org-html-export.zsh $(patsubst %.org,%.html,$<)
-	@$(ECHO)
-
-html: $(HTML_SUBDIRS) $(HTML_FILES)
+html:
+	@$(ECHO) nothing to do
 
 #  }}}
 
 #  {{{  org -> epub
 
-$(EPUB_SUBDIRS):
-	$(MAKE) -C ${@:epub-%=%} epub
-	@$(ECHO)
-
-%.epub: %.org $(INC_FILES)
-	pandoc -t epub $< -o $(<:.org=.epub) 2> pandoc.log
-	@$(ECHO)
-
-epub: $(EPUB_SUBDIRS) $(EPUB_FILES)
+epub:
+	@$(ECHO) nothing to do
 
 #  }}}
 
@@ -77,10 +62,9 @@ sync: sync-html sync-epub
 
 # all, install, clean, wipe {{{1
 
-#all: $(HTML_FILES) $(EPUB_FILES)
-all: $(HTML_FILES) sync-html
+all: sync-html
 
-install: sync
+install: sync-html
 
 clean:
 	rm -f ?*~

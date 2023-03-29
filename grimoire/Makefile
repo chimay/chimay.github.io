@@ -10,6 +10,10 @@ include ../Makefile.inc
 .PHONY: epub
 
 .PHONY: all install
+
+.PHONY: $(HTML_SUBDIRS) $(EPUB_SUBDIRS)
+.PHONY: $(CLEAN_SUBDIRS) $(CLEAN_HTML_SUBDIRS) $(CLEAN_EPUB_SUBDIRS) $(WIPE_SUBDIRS)
+
 .PHONY: clean clean-html clean-epub wipe
 
 #  }}}

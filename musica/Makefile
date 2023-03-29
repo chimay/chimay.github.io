@@ -9,6 +9,10 @@ include ../Makefile.inc
 .PHONY: html
 .PHONY: epub
 
+.PHONY: dry-sync-html sync-html
+.PHONY: dry-sync-epub sync-epub
+.PHONY: dry-sync sync
+
 .PHONY: all install
 
 .PHONY: $(HTML_SUBDIRS) $(EPUB_SUBDIRS)

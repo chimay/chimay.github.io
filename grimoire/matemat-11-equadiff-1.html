@@ -3,14 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-10-01 mar 12:34 -->
+<!-- 2023-04-02 dim 13:25 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 11 : Équations différentielles - 1</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="chimay" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -31,8 +30,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -40,22 +40,22 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
+    overflow: auto;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -161,6 +161,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -177,56 +190,9 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         displayAlign: "center",
@@ -247,11 +213,10 @@ for the JavaScript code in this tag.
              }
 });
 </script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Eclats de vers : Matemat 11 : Équations différentielles - 1</h1>
 <p>
 <a href="index.html">Index des Grimoires</a>
@@ -261,13 +226,13 @@ for the JavaScript code in this tag.
 <a href="../index.html">Retour à l’accueil</a>
 </p>
 
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table des matières</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orged3ada0">1. Equations différentielles ordinaires</a></li>
-<li><a href="#org940b7cd">2. Exponentielle</a></li>
-<li><a href="#org0cbefee">3. Logarithme</a></li>
+<li><a href="#org7db53c0">1. Equations différentielles ordinaires</a></li>
+<li><a href="#org39c99fb">2. Exponentielle</a></li>
+<li><a href="#orgc491629">3. Logarithme</a></li>
 </ul>
 </div>
 </div>
@@ -426,18 +391,20 @@ for the JavaScript code in this tag.
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
 
-<div id="outline-container-orged3ada0" class="outline-2">
-<h2 id="orged3ada0"><span class="section-number-2">1</span> Equations différentielles ordinaires</h2>
+<div id="outline-container-org7db53c0" class="outline-2">
+<h2 id="org7db53c0"><span class="section-number-2">1.</span> Equations différentielles ordinaires</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org5d6a196">1.1. Fonctions Lipschitziennes</a></li>
-<li><a href="#org5e2cfff">1.2. Problème différentiel d'ordre un</a></li>
-<li><a href="#orgf8f347d">1.3. Problème différentiel d'ordre quelconque</a></li>
-<li><a href="#org0d3861e">1.4. Problème aux limites</a></li>
-<li><a href="#orgcbc43ae">1.5. Sturm-Liouville</a></li>
-<li><a href="#org8956870">1.6. Séparation des variables</a></li>
-<li><a href="#org2bd2d05">1.7. Dérivées des fonctions usuelles</a></li>
+<li><a href="#orga118c6a">1.1. Fonctions Lipschitziennes</a></li>
+<li><a href="#org36a3ed0">1.2. Problème différentiel d'ordre un</a></li>
+<li><a href="#org11d7a75">1.3. Problème différentiel d'ordre quelconque</a></li>
+<li><a href="#org7820009">1.4. Problème aux limites</a></li>
+<li><a href="#org1af964e">1.5. Équation d'Euler - Lagrange</a></li>
+<li><a href="#orga7814d1">1.6. Euler-Lagrange avec contraintes</a></li>
+<li><a href="#orgc9d0c22">1.7. Sturm-Liouville</a></li>
+<li><a href="#orgb240c97">1.8. Séparation des variables</a></li>
+<li><a href="#org6932cbe">1.9. Dérivées des fonctions usuelles</a></li>
 </ul>
 </div>
 
@@ -447,8 +414,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-org5d6a196" class="outline-3">
-<h3 id="org5d6a196"><span class="section-number-3">1.1</span> Fonctions Lipschitziennes</h3>
+<div id="outline-container-orga118c6a" class="outline-3">
+<h3 id="orga118c6a"><span class="section-number-3">1.1.</span> Fonctions Lipschitziennes</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Les fonctions Lipschitziennes sont des fonctions à variations bornées :
@@ -461,8 +428,8 @@ Les fonctions Lipschitziennes sont des fonctions à variations bornées :
 </div>
 
 
-<div id="outline-container-org5e2cfff" class="outline-3">
-<h3 id="org5e2cfff"><span class="section-number-3">1.2</span> Problème différentiel d'ordre un</h3>
+<div id="outline-container-org36a3ed0" class="outline-3">
+<h3 id="org36a3ed0"><span class="section-number-3">1.2.</span> Problème différentiel d'ordre un</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Soit \(f\in\lipschitz( \setR \times \setR^n , \setR)\), et l'application \(A\) définie par :
@@ -556,8 +523,8 @@ est unique, on en conclut que la solution du problème différentiel l'est aussi
 </div>
 
 
-<div id="outline-container-org8853144" class="outline-4">
-<h4 id="org8853144"><span class="section-number-4">1.2.1</span> Convergence</h4>
+<div id="outline-container-org26b2b4e" class="outline-4">
+<h4 id="org26b2b4e"><span class="section-number-4">1.2.1.</span> Convergence</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 La série des \(u^{(n)}\) définie par :
@@ -578,8 +545,8 @@ converge au sens de la distance \(\sup\) définie ci-dessus vers la solution de 
 </div>
 
 
-<div id="outline-container-org0926f71" class="outline-4">
-<h4 id="org0926f71"><span class="section-number-4">1.2.2</span> Notation</h4>
+<div id="outline-container-org3f29266" class="outline-4">
+<h4 id="org3f29266"><span class="section-number-4">1.2.2.</span> Notation</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 Pour toute fonction :
@@ -619,8 +586,8 @@ u''(t) = \OOD{u}{t}(t)
 </div>
 
 
-<div id="outline-container-orgf8f347d" class="outline-3">
-<h3 id="orgf8f347d"><span class="section-number-3">1.3</span> Problème différentiel d'ordre quelconque</h3>
+<div id="outline-container-org11d7a75" class="outline-3">
+<h3 id="org11d7a75"><span class="section-number-3">1.3.</span> Problème différentiel d'ordre quelconque</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Soit les fonctions :
@@ -698,8 +665,8 @@ Comme il existe une et une seule solution \(v\) au problème d'ordre un associé
 </div>
 
 
-<div id="outline-container-org0d3861e" class="outline-3">
-<h3 id="org0d3861e"><span class="section-number-3">1.4</span> Problème aux limites</h3>
+<div id="outline-container-org7820009" class="outline-3">
+<h3 id="org7820009"><span class="section-number-3">1.4.</span> Problème aux limites</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Soit la fonctionnelle \(I : \continue^2([a,b],\setR) \mapsto \setR\). Nous allons tenter de minimiser \(I\) sur l'ensemble :
@@ -754,11 +721,12 @@ pour tout \(w \in \mathcal{W}\) et tout \(\epsilon \in \setR\). Si \(u\) minimis
 soit satisfaite pour tout \(w\in\mathcal{W}\).
 </p>
 </div>
+</div>
 
 
-<div id="outline-container-org095255d" class="outline-4">
-<h4 id="org095255d"><span class="section-number-4">1.4.1</span> Équation d'Euler - Lagrange</h4>
-<div class="outline-text-4" id="text-1-4-1">
+<div id="outline-container-org1af964e" class="outline-3">
+<h3 id="org1af964e"><span class="section-number-3">1.5.</span> Équation d'Euler - Lagrange</h3>
+<div class="outline-text-3" id="text-1-5">
 <p>
 Un exemple typique de fonctionnelle \(I\) est définie pour tout \(u \in \continue^2([a,b],\setR)\) par :
 </p>
@@ -878,9 +846,9 @@ L’équation d’Euler - Lagrange devient alors :
 </div>
 
 
-<div id="outline-container-org2d99450" class="outline-4">
-<h4 id="org2d99450"><span class="section-number-4">1.4.2</span> Euler-Lagrange avec contraintes</h4>
-<div class="outline-text-4" id="text-1-4-2">
+<div id="outline-container-orga7814d1" class="outline-3">
+<h3 id="orga7814d1"><span class="section-number-3">1.6.</span> Euler-Lagrange avec contraintes</h3>
+<div class="outline-text-3" id="text-1-6">
 <p>
 Nous tentons cette fois de minimiser :
 </p>
@@ -1044,12 +1012,11 @@ où les dérivées de \(f\) et des \(g_i\) sont bien entendu évaluées en
 </p>
 </div>
 </div>
-</div>
 
 
-<div id="outline-container-orgcbc43ae" class="outline-3">
-<h3 id="orgcbc43ae"><span class="section-number-3">1.5</span> Sturm-Liouville</h3>
-<div class="outline-text-3" id="text-1-5">
+<div id="outline-container-orgc9d0c22" class="outline-3">
+<h3 id="orgc9d0c22"><span class="section-number-3">1.7.</span> Sturm-Liouville</h3>
+<div class="outline-text-3" id="text-1-7">
 <p>
 Nous considérons à présent une application importante du théorème
 de Lax-milgram. Soit l'espace :
@@ -1169,9 +1136,9 @@ minimise sur \(F\) la fonctionnelle \(I\) définie pour toute fonction \(v \in \
 </div>
 
 
-<div id="outline-container-org8956870" class="outline-3">
-<h3 id="org8956870"><span class="section-number-3">1.6</span> Séparation des variables</h3>
-<div class="outline-text-3" id="text-1-6">
+<div id="outline-container-orgb240c97" class="outline-3">
+<h3 id="orgb240c97"><span class="section-number-3">1.8.</span> Séparation des variables</h3>
+<div class="outline-text-3" id="text-1-8">
 <p>
 Soit les fonctions :
 </p>
@@ -1216,13 +1183,13 @@ En intégrant les deux membres, il vient :
 </div>
 
 
-<div id="outline-container-org2bd2d05" class="outline-3">
-<h3 id="org2bd2d05"><span class="section-number-3">1.7</span> Dérivées des fonctions usuelles</h3>
-<div class="outline-text-3" id="text-1-7">
+<div id="outline-container-org6932cbe" class="outline-3">
+<h3 id="org6932cbe"><span class="section-number-3">1.9.</span> Dérivées des fonctions usuelles</h3>
+<div class="outline-text-3" id="text-1-9">
 </div>
-<div id="outline-container-orgc6e143b" class="outline-4">
-<h4 id="orgc6e143b"><span class="section-number-4">1.7.1</span> Arcsinus</h4>
-<div class="outline-text-4" id="text-1-7-1">
+<div id="outline-container-org2dce8c5" class="outline-4">
+<h4 id="org2dce8c5"><span class="section-number-4">1.9.1.</span> Arcsinus</h4>
+<div class="outline-text-4" id="text-1-9-1">
 <p>
 AFAIRE : ARRANGER LA FIN DU CHAPITRE
 </p>
@@ -1269,9 +1236,9 @@ on a 
 </div>
 
 
-<div id="outline-container-org6061faa" class="outline-4">
-<h4 id="org6061faa"><span class="section-number-4">1.7.2</span> Table</h4>
-<div class="outline-text-4" id="text-1-7-2">
+<div id="outline-container-org210652d" class="outline-4">
+<h4 id="org210652d"><span class="section-number-4">1.9.2.</span> Table</h4>
+<div class="outline-text-4" id="text-1-9-2">
 <div class="org-center">
 <p>
 \(
@@ -1303,9 +1270,9 @@ on a 
 </div>
 
 
-<div id="outline-container-orgf975a7f" class="outline-4">
-<h4 id="orgf975a7f"><span class="section-number-4">1.7.3</span> Fonctions usuelles</h4>
-<div class="outline-text-4" id="text-1-7-3">
+<div id="outline-container-orgba43b81" class="outline-4">
+<h4 id="orgba43b81"><span class="section-number-4">1.9.3.</span> Fonctions usuelles</h4>
+<div class="outline-text-4" id="text-1-9-3">
 <p>
 Le théorème fondamental appliqué aux dérivées des fonctions usuelles du chapitre \ref{chap:differ}
 nous permet d'obtenir les résultats suivants :
@@ -1325,26 +1292,26 @@ nous permet d'obtenir les résultats suivants :
 </div>
 
 
-<div id="outline-container-org940b7cd" class="outline-2">
-<h2 id="org940b7cd"><span class="section-number-2">2</span> Exponentielle</h2>
+<div id="outline-container-org39c99fb" class="outline-2">
+<h2 id="org39c99fb"><span class="section-number-2">2.</span> Exponentielle</h2>
 <div class="outline-text-2" id="text-2">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org21d8152">2.1. Dépendances</a></li>
-<li><a href="#orga00b791">2.2. Introduction</a></li>
-<li><a href="#orgcd3ebd9">2.3. Développement de Taylor</a></li>
-<li><a href="#orgb4e7ca9">2.4. Additivité</a></li>
-<li><a href="#orgbeb6be6">2.5. Miroir</a></li>
-<li><a href="#org2d51f4e">2.6. Limites</a></li>
-<li><a href="#orge9e3ddd">2.7. Image</a></li>
-<li><a href="#org8a50cbc">2.8. Intégrale</a></li>
+<li><a href="#orgf03638f">2.1. Dépendances</a></li>
+<li><a href="#orgc7c62f2">2.2. Introduction</a></li>
+<li><a href="#org3115766">2.3. Développement de Taylor</a></li>
+<li><a href="#org25263cf">2.4. Additivité</a></li>
+<li><a href="#org0c63abf">2.5. Miroir</a></li>
+<li><a href="#org6aff39c">2.6. Limites</a></li>
+<li><a href="#orgea656dc">2.7. Image</a></li>
+<li><a href="#org2fc6d14">2.8. Intégrale</a></li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-org21d8152" class="outline-3">
-<h3 id="org21d8152"><span class="section-number-3">2.1</span> Dépendances</h3>
+<div id="outline-container-orgf03638f" class="outline-3">
+<h3 id="orgf03638f"><span class="section-number-3">2.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:edo} : Équations différentielles ordinaires</li>
@@ -1354,8 +1321,8 @@ nous permet d'obtenir les résultats suivants :
 
 
 
-<div id="outline-container-orga00b791" class="outline-3">
-<h3 id="orga00b791"><span class="section-number-3">2.2</span> Introduction</h3>
+<div id="outline-container-orgc7c62f2" class="outline-3">
+<h3 id="orgc7c62f2"><span class="section-number-3">2.2.</span> Introduction</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 L'exponentielle est définie comme l'unique solution \(\exp : \setR \mapsto \setR\) du problème différentiel :
@@ -1369,8 +1336,8 @@ L'exponentielle est définie comme l'unique solution \(\exp : \setR \mapsto \set
 </div>
 
 
-<div id="outline-container-orgcd3ebd9" class="outline-3">
-<h3 id="orgcd3ebd9"><span class="section-number-3">2.3</span> Développement de Taylor</h3>
+<div id="outline-container-org3115766" class="outline-3">
+<h3 id="org3115766"><span class="section-number-3">2.3.</span> Développement de Taylor</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 On a :
@@ -1399,8 +1366,8 @@ Le développement de Taylor autour de \(0\) s'écrit donc :
 </div>
 
 
-<div id="outline-container-orgb4e7ca9" class="outline-3">
-<h3 id="orgb4e7ca9"><span class="section-number-3">2.4</span> Additivité</h3>
+<div id="outline-container-org25263cf" class="outline-3">
+<h3 id="org25263cf"><span class="section-number-3">2.4.</span> Additivité</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Soit \(t \in \setR\). On remarque que les applications \(f,g : \setR \mapsto \setR\) définies par :
@@ -1449,8 +1416,8 @@ on en déduit que :
 </div>
 
 
-<div id="outline-container-orgbeb6be6" class="outline-3">
-<h3 id="orgbeb6be6"><span class="section-number-3">2.5</span> Miroir</h3>
+<div id="outline-container-org0c63abf" class="outline-3">
+<h3 id="org0c63abf"><span class="section-number-3">2.5.</span> Miroir</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 On déduit de l'additivité que :
@@ -1471,8 +1438,8 @@ pour tout \(t \in \setR\). On en conclut que :
 </div>
 
 
-<div id="outline-container-org2d51f4e" class="outline-3">
-<h3 id="org2d51f4e"><span class="section-number-3">2.6</span> Limites</h3>
+<div id="outline-container-org6aff39c" class="outline-3">
+<h3 id="org6aff39c"><span class="section-number-3">2.6.</span> Limites</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 On a :
@@ -1501,8 +1468,8 @@ En utilisant le changement de variable \(t = -s\), on obtient la limite à l'inf
 </div>
 
 
-<div id="outline-container-orge9e3ddd" class="outline-3">
-<h3 id="orge9e3ddd"><span class="section-number-3">2.7</span> Image</h3>
+<div id="outline-container-orgea656dc" class="outline-3">
+<h3 id="orgea656dc"><span class="section-number-3">2.7.</span> Image</h3>
 <div class="outline-text-3" id="text-2-7">
 <p>
 Si \(t \ge 0\) il est clair que \(\exp(t) \strictsuperieur 0\) puisqu'il s'agit d'une somme infinie de termes strictement positifs. Si \(s \le 0\), on a \(t = - s \ge 0\) et :
@@ -1546,8 +1513,8 @@ on a :
 </div>
 
 
-<div id="outline-container-orgb6fa81a" class="outline-4">
-<h4 id="orgb6fa81a"><span class="section-number-4">2.7.1</span> Réels positifs</h4>
+<div id="outline-container-orgcd53dde" class="outline-4">
+<h4 id="orgcd53dde"><span class="section-number-4">2.7.1.</span> Réels positifs</h4>
 <div class="outline-text-4" id="text-2-7-1">
 <p>
 Comme la fonction \(\exp\) est continue et croît avec \(t\) sur \(\setR^+\) de :
@@ -1576,8 +1543,8 @@ on a :
 </div>
 
 
-<div id="outline-container-orgcdf6c3c" class="outline-4">
-<h4 id="orgcdf6c3c"><span class="section-number-4">2.7.2</span> Réels négatifs</h4>
+<div id="outline-container-orgeb191b4" class="outline-4">
+<h4 id="orgeb191b4"><span class="section-number-4">2.7.2.</span> Réels négatifs</h4>
 <div class="outline-text-4" id="text-2-7-2">
 <p>
 Comme la fonction \(\exp\) est continue et croît avec \(s\) sur \(\setR^-\) de :
@@ -1607,8 +1574,8 @@ on a :
 </div>
 
 
-<div id="outline-container-org8a50cbc" class="outline-3">
-<h3 id="org8a50cbc"><span class="section-number-3">2.8</span> Intégrale</h3>
+<div id="outline-container-org2fc6d14" class="outline-3">
+<h3 id="org2fc6d14"><span class="section-number-3">2.8.</span> Intégrale</h3>
 <div class="outline-text-3" id="text-2-8">
 <p>
 Comme la fonction \(\exp\) est une primitive d'elle-même, on a :
@@ -1642,20 +1609,20 @@ Les autres intégrales à bornes infinies sont infinies :
 </div>
 
 
-<div id="outline-container-org0cbefee" class="outline-2">
-<h2 id="org0cbefee"><span class="section-number-2">3</span> Logarithme</h2>
+<div id="outline-container-orgc491629" class="outline-2">
+<h2 id="orgc491629"><span class="section-number-2">3.</span> Logarithme</h2>
 <div class="outline-text-2" id="text-3">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb3bd7fc">3.1. Introduction</a></li>
-<li><a href="#org3e56388">3.2. Valeurs particulières</a></li>
-<li><a href="#orgd384deb">3.3. Dérivée</a></li>
-<li><a href="#orga15aa38">3.4. Développement de Taylor</a></li>
-<li><a href="#orge2f2002">3.5. Additivité</a></li>
-<li><a href="#orgaaf9ac3">3.6. Miroir</a></li>
-<li><a href="#org3ab6fc6">3.7. Soustraction</a></li>
-<li><a href="#org925851d">3.8. Intégrale de \(x \mapsto 1/x\)</a></li>
-<li><a href="#orge1e90cc">3.9. Gaussienne</a></li>
+<li><a href="#orgded28cb">3.1. Introduction</a></li>
+<li><a href="#orgf8924ce">3.2. Valeurs particulières</a></li>
+<li><a href="#org9c3cd5a">3.3. Dérivée</a></li>
+<li><a href="#orga478337">3.4. Développement de Taylor</a></li>
+<li><a href="#orge8bc09c">3.5. Additivité</a></li>
+<li><a href="#org229a8f8">3.6. Miroir</a></li>
+<li><a href="#org9446e11">3.7. Soustraction</a></li>
+<li><a href="#org3fa9454">3.8. Intégrale de \(x \mapsto 1/x\)</a></li>
+<li><a href="#org868500c">3.9. Gaussienne</a></li>
 </ul>
 </div>
 
@@ -1665,8 +1632,8 @@ Les autres intégrales à bornes infinies sont infinies :
 </div>
 
 
-<div id="outline-container-orgb3bd7fc" class="outline-3">
-<h3 id="orgb3bd7fc"><span class="section-number-3">3.1</span> Introduction</h3>
+<div id="outline-container-orgded28cb" class="outline-3">
+<h3 id="orgded28cb"><span class="section-number-3">3.1.</span> Introduction</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 La fonction \(\exp : \setR \mapsto \setR^+ \setminus \{ 0 \}\) étant strictement croissante et d'image égale à \(\setR^+ \setminus \{ 0 \}\), elle est inversible. On définit le logarithme :
@@ -1695,8 +1662,8 @@ Pour tout \(x,y \in \setR\) tels que \(y = \exp(x) \strictsuperieur 0\), on a do
 </div>
 
 
-<div id="outline-container-org3e56388" class="outline-3">
-<h3 id="org3e56388"><span class="section-number-3">3.2</span> Valeurs particulières</h3>
+<div id="outline-container-orgf8924ce" class="outline-3">
+<h3 id="orgf8924ce"><span class="section-number-3">3.2.</span> Valeurs particulières</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Le cas particulier \(x = 0\) et \(y = \exp(0) = 1\) nous montre que :
@@ -1709,8 +1676,8 @@ Le cas particulier \(x = 0\) et \(y = \exp(0) = 1\) nous montre que :
 </div>
 
 
-<div id="outline-container-orgd384deb" class="outline-3">
-<h3 id="orgd384deb"><span class="section-number-3">3.3</span> Dérivée</h3>
+<div id="outline-container-org9c3cd5a" class="outline-3">
+<h3 id="org9c3cd5a"><span class="section-number-3">3.3.</span> Dérivée</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Soit les réels \(x,y\) tels que :
@@ -1755,8 +1722,8 @@ c'est-à-dire :
 </div>
 
 
-<div id="outline-container-orga15aa38" class="outline-3">
-<h3 id="orga15aa38"><span class="section-number-3">3.4</span> Développement de Taylor</h3>
+<div id="outline-container-orga478337" class="outline-3">
+<h3 id="orga478337"><span class="section-number-3">3.4.</span> Développement de Taylor</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 Soit la fonction \(u : \setR \mapsto \setR\) définie par :
@@ -1881,8 +1848,8 @@ En posant \(x = 1 + t\), on obtient la forme équivalente :
 </div>
 
 
-<div id="outline-container-orge2f2002" class="outline-3">
-<h3 id="orge2f2002"><span class="section-number-3">3.5</span> Additivité</h3>
+<div id="outline-container-orge8bc09c" class="outline-3">
+<h3 id="orge8bc09c"><span class="section-number-3">3.5.</span> Additivité</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 Soit \(a, b \in \setR\). En utilisant l'additivité de l'exponentielle, on obtient :
@@ -1903,8 +1870,8 @@ En prenant le logarithme de cette égalité, on en déduit que :
 </div>
 
 
-<div id="outline-container-orgaaf9ac3" class="outline-3">
-<h3 id="orgaaf9ac3"><span class="section-number-3">3.6</span> Miroir</h3>
+<div id="outline-container-org229a8f8" class="outline-3">
+<h3 id="org229a8f8"><span class="section-number-3">3.6.</span> Miroir</h3>
 <div class="outline-text-3" id="text-3-6">
 <p>
 Soit \(a \in \setR\). On a :
@@ -1925,8 +1892,8 @@ On en conclut que :
 </div>
 
 
-<div id="outline-container-org3ab6fc6" class="outline-3">
-<h3 id="org3ab6fc6"><span class="section-number-3">3.7</span> Soustraction</h3>
+<div id="outline-container-org9446e11" class="outline-3">
+<h3 id="org9446e11"><span class="section-number-3">3.7.</span> Soustraction</h3>
 <div class="outline-text-3" id="text-3-7">
 <p>
 Soit les réels \(a, b\). On a :
@@ -1939,8 +1906,8 @@ Soit les réels \(a, b\). On a :
 </div>
 
 
-<div id="outline-container-org925851d" class="outline-3">
-<h3 id="org925851d"><span class="section-number-3">3.8</span> Intégrale de \(x \mapsto 1/x\)</h3>
+<div id="outline-container-org3fa9454" class="outline-3">
+<h3 id="org3fa9454"><span class="section-number-3">3.8.</span> Intégrale de \(x \mapsto 1/x\)</h3>
 <div class="outline-text-3" id="text-3-8">
 <p>
 Comme \(\ln\) est une primitive de la fonction :
@@ -1961,8 +1928,8 @@ On a :
 </div>
 
 
-<div id="outline-container-orge1e90cc" class="outline-3">
-<h3 id="orge1e90cc"><span class="section-number-3">3.9</span> Gaussienne</h3>
+<div id="outline-container-org868500c" class="outline-3">
+<h3 id="org868500c"><span class="section-number-3">3.9.</span> Gaussienne</h3>
 <div class="outline-text-3" id="text-3-9">
 <p>
 Soit les réels \(\gamma\) et \(u_0\). Nous cherchons la fonction \(u : \setR \mapsto \setR\) solution du problème différentiel :
@@ -2022,8 +1989,8 @@ Une fonction de cette forme est appelée gaussienne.
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2019-10-01 mar 12:34</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2023-04-02 dim 13:25</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>

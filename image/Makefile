@@ -6,6 +6,8 @@ include ../Makefile.inc
 
 #  {{{  phony
 
+.PHONY: debug
+
 .PHONY: html
 .PHONY: epub
 
@@ -13,6 +15,13 @@ include ../Makefile.inc
 .PHONY: clean clean-html clean-epub wipe
 
 #  }}}
+
+# debug {{{1
+
+debug:
+	@echo $(SUBDIRS)
+
+# }}}1
 
 #  {{{  org -> html
 

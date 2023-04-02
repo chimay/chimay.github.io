@@ -6,6 +6,8 @@ include Makefile.inc
 
 #  {{{  phony
 
+.PHONY: debug
+
 .PHONY: html
 .PHONY: epub
 
@@ -21,6 +23,13 @@ include Makefile.inc
 .PHONY: clean clean-html clean-epub wipe
 
 #  }}}
+
+# debug {{{1
+
+debug:
+	@echo $(SUBDIRS)
+
+# }}}1
 
 #  {{{  org -> html
 
@@ -54,11 +63,11 @@ epub: $(EPUB_SUBDIRS) $(EPUB_FILES)
 # sync -> html dir {{{1
 
 dry-sync-html: html
-	$(DRY_RSYNC) $(ROOT_ORGMODE)/ $(ROOT_HTML)
+	$(DRY_RSYNC) $(ROOT_GENERIC)/ $(ROOT_HTML)
 	@$(ECHO)
 
 sync-html: html
-	$(RSYNC) $(ROOT_ORGMODE)/ $(ROOT_HTML)
+	$(RSYNC) $(ROOT_GENERIC)/ $(ROOT_HTML)
 	@$(ECHO)
 
 # }}}1
@@ -66,11 +75,11 @@ sync-html: html
 # sync -> epub dir {{{1
 
 dry-sync-epub: epub
-	$(DRY_RSYNC) $(ROOT_ORGMODE)/ $(ROOT_EPUB)
+	$(DRY_RSYNC) $(ROOT_GENERIC)/ $(ROOT_EPUB)
 	@$(ECHO)
 
 sync-epub: epub
-	$(SYNC) $(ROOT_ORGMODE)/ $(ROOT_EPUB)
+	$(SYNC) $(ROOT_GENERIC)/ $(ROOT_EPUB)
 	@$(ECHO)
 
 # }}}1

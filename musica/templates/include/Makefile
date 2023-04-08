@@ -37,7 +37,7 @@ $(HTML_SUBDIRS):
 	$(MAKE) -C ${@:html-%=%} html
 	@$(ECHO)
 
-%.html: %.org $(INC_FILES)
+%.html: %.org $(INC_FILES) $(LY_MEL_FILES)
 	$(EMACS) $(EMACS_PRE_FLAGS) $< $(EMACS_POST_FLAGS)
 	remove-max-width-from-org-html-export.zsh $(patsubst %.org,%.html,$<)
 	@$(ECHO)

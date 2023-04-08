@@ -28,6 +28,7 @@ include Makefile.inc
 
 debug:
 	@echo $(SUBDIRS)
+	@echo $(LY_MEL_FILES)
 
 # }}}1
 

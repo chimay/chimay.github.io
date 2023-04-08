@@ -35,6 +35,10 @@ EPUB_FILES = $(patsubst %.org,%.epub,$(wildcard *.org))
 CSS_FILES  = $(wildcard $(ROOT_GENERIC)/style/*.css)
 INC_FILES  = $(wildcard $(ROOT_GENERIC)/include/*.org)
 
+# files in ~/racine/musica/lilypond/templates
+
+LY_MEL_FILES = $(wildcard ~/racine/musica/lilypond/templates/include/mel*.ly)
+
 #  }}}
 
 #  {{{ programs & options

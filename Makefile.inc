@@ -46,8 +46,8 @@ LY_MEL_FILES = $(wildcard ~/racine/musica/lilypond/templates/include/mel*.ly)
 ECHO  = echo
 
 EMACS            = /usr/bin/emacs
-EMACS_PRE_FLAGS  = --batch --file
-EMACS_POST_FLAGS = -f org-html-export-to-html --kill 2> emacs.log
+EMACS_PRE_FLAGS  =
+EMACS_POST_FLAGS = --batch -f org-html-export-to-html --kill 2> emacs.log
 
 DRY_RSYNC = rsync -n -au --delete --exclude-from=./rsync-html-exclude -vhi --progress
 RSYNC     = rsync -au --delete --exclude-from=./rsync-html-exclude -vhi --progress

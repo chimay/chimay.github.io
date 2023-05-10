@@ -3,14 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-10-01 mar 12:33 -->
+<!-- 2023-05-10 mer 16:46 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 12 : Analyse complexe</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="chimay" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -31,8 +30,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -40,22 +40,22 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
+    overflow: auto;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -161,6 +161,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -177,56 +190,9 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         displayAlign: "center",
@@ -247,11 +213,10 @@ for the JavaScript code in this tag.
              }
 });
 </script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Eclats de vers : Matemat 12 : Analyse complexe</h1>
 <p>
 <a href="index.html">Index des Grimoires</a>
@@ -261,15 +226,15 @@ for the JavaScript code in this tag.
 <a href="../index.html">Retour à l’accueil</a>
 </p>
 
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table des matières</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org141b200">1. Exponentielle complexe</a></li>
-<li><a href="#org31886d1">2. Dérivation et intégration dans le plan complexe</a></li>
-<li><a href="#orgf78b1cc">3. Polynômes et exponentielles</a></li>
-<li><a href="#orgaf8935d">4. Analyse de Fourier</a></li>
-<li><a href="#org0ee2f4c">5. Ondelettes</a></li>
+<li><a href="#org7b4e632">1. Exponentielle complexe</a></li>
+<li><a href="#org22fea63">2. Dérivation et intégration dans le plan complexe</a></li>
+<li><a href="#org5990e08">3. Polynômes et exponentielles</a></li>
+<li><a href="#org5830a41">4. Analyse de Fourier</a></li>
+<li><a href="#org6661f5c">5. Ondelettes</a></li>
 </ul>
 </div>
 </div>
@@ -428,15 +393,15 @@ for the JavaScript code in this tag.
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
 
-<div id="outline-container-org141b200" class="outline-2">
-<h2 id="org141b200"><span class="section-number-2">1</span> Exponentielle complexe</h2>
+<div id="outline-container-org7b4e632" class="outline-2">
+<h2 id="org7b4e632"><span class="section-number-2">1.</span> Exponentielle complexe</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org348f554">1.1. Dépendances</a></li>
-<li><a href="#orgb28395f">1.2. Introduction</a></li>
-<li><a href="#org40c2b59">1.3. Additivité</a></li>
-<li><a href="#orgac4fd86">1.4. Lien avec les fonctions trigonométriques</a></li>
+<li><a href="#org79d604b">1.1. Dépendances</a></li>
+<li><a href="#org687f6dd">1.2. Introduction</a></li>
+<li><a href="#org0b8035b">1.3. Additivité</a></li>
+<li><a href="#orgf186914">1.4. Lien avec les fonctions trigonométriques</a></li>
 </ul>
 </div>
 
@@ -446,8 +411,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-org348f554" class="outline-3">
-<h3 id="org348f554"><span class="section-number-3">1.1</span> Dépendances</h3>
+<div id="outline-container-org79d604b" class="outline-3">
+<h3 id="org79d604b"><span class="section-number-3">1.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:complexe} : Les complexes</li>
@@ -457,8 +422,8 @@ for the JavaScript code in this tag.
 
 
 
-<div id="outline-container-orgb28395f" class="outline-3">
-<h3 id="orgb28395f"><span class="section-number-3">1.2</span> Introduction</h3>
+<div id="outline-container-org687f6dd" class="outline-3">
+<h3 id="org687f6dd"><span class="section-number-3">1.2.</span> Introduction</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 AFAIRE : ARRANGER LE CHAPITRE
@@ -496,8 +461,8 @@ On a donc simplement :
 </div>
 
 
-<div id="outline-container-org40c2b59" class="outline-3">
-<h3 id="org40c2b59"><span class="section-number-3">1.3</span> Additivité</h3>
+<div id="outline-container-org0b8035b" class="outline-3">
+<h3 id="org0b8035b"><span class="section-number-3">1.3.</span> Additivité</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Comme les fonctions :
@@ -546,8 +511,8 @@ la propriété d'additivité des exponentielles :
 </div>
 
 
-<div id="outline-container-orgac4fd86" class="outline-3">
-<h3 id="orgac4fd86"><span class="section-number-3">1.4</span> Lien avec les fonctions trigonométriques</h3>
+<div id="outline-container-orgf186914" class="outline-3">
+<h3 id="orgf186914"><span class="section-number-3">1.4.</span> Lien avec les fonctions trigonométriques</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Considérons maintenant le cas particulier où \(u(t) = \exp(\img t)\) :
@@ -844,15 +809,15 @@ ce qui donne, tous calculs faits :
 </div>
 
 
-<div id="outline-container-org31886d1" class="outline-2">
-<h2 id="org31886d1"><span class="section-number-2">2</span> Dérivation et intégration dans le plan complexe</h2>
+<div id="outline-container-org22fea63" class="outline-2">
+<h2 id="org22fea63"><span class="section-number-2">2.</span> Dérivation et intégration dans le plan complexe</h2>
 <div class="outline-text-2" id="text-2">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org8028a2e">2.1. Dépendances</a></li>
-<li><a href="#orge3f5cca">2.2. Dérivées</a></li>
-<li><a href="#orgcc7060f">2.3. Extension de l'intégrale au plan complexe</a></li>
-<li><a href="#org7258f5a">2.4. Intégrale de ligne</a></li>
+<li><a href="#org56b333a">2.1. Dépendances</a></li>
+<li><a href="#orga54b26f">2.2. Dérivées</a></li>
+<li><a href="#orgd940780">2.3. Extension de l'intégrale au plan complexe</a></li>
+<li><a href="#orgd4d8c6a">2.4. Intégrale de ligne</a></li>
 </ul>
 </div>
 
@@ -862,8 +827,8 @@ ce qui donne, tous calculs faits :
 </div>
 
 
-<div id="outline-container-org8028a2e" class="outline-3">
-<h3 id="org8028a2e"><span class="section-number-3">2.1</span> Dépendances</h3>
+<div id="outline-container-org56b333a" class="outline-3">
+<h3 id="org56b333a"><span class="section-number-3">2.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:differ} : Les différentielles</li>
@@ -873,8 +838,8 @@ ce qui donne, tous calculs faits :
 </div>
 
 
-<div id="outline-container-orge3f5cca" class="outline-3">
-<h3 id="orge3f5cca"><span class="section-number-3">2.2</span> Dérivées</h3>
+<div id="outline-container-orga54b26f" class="outline-3">
+<h3 id="orga54b26f"><span class="section-number-3">2.2.</span> Dérivées</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 On définit la dérivée d'une fonction \(f : \setC \mapsto \setC\)
@@ -958,8 +923,8 @@ Les puissances de \(z\) sont dérivables. On vérifie que :
 </div>
 
 
-<div id="outline-container-orgcc7060f" class="outline-3">
-<h3 id="orgcc7060f"><span class="section-number-3">2.3</span> Extension de l'intégrale au plan complexe</h3>
+<div id="outline-container-orgd940780" class="outline-3">
+<h3 id="orgd940780"><span class="section-number-3">2.3.</span> Extension de l'intégrale au plan complexe</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Soit une fonction \(f : A \mapsto \setC\). Comme
@@ -981,8 +946,8 @@ leur intégrale est bien définie. On définit alors l'intégrale de \(f\) par 
 </div>
 
 
-<div id="outline-container-org7258f5a" class="outline-3">
-<h3 id="org7258f5a"><span class="section-number-3">2.4</span> Intégrale de ligne</h3>
+<div id="outline-container-orgd4d8c6a" class="outline-3">
+<h3 id="orgd4d8c6a"><span class="section-number-3">2.4.</span> Intégrale de ligne</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Soit une fonction \(\gamma : [a,b] \mapsto \setC\) et la courbe :
@@ -1020,8 +985,8 @@ de fonctions \(\setR^2 \mapsto \setR\).
 </div>
 
 
-<div id="outline-container-org2d51a36" class="outline-4">
-<h4 id="org2d51a36"><span class="section-number-4">2.4.1</span> Théorème fondamental</h4>
+<div id="outline-container-orga73ebf7" class="outline-4">
+<h4 id="orga73ebf7"><span class="section-number-4">2.4.1.</span> Théorème fondamental</h4>
 <div class="outline-text-4" id="text-2-4-1">
 <p>
 Soit une fonction analytique \(F : \setC \mapsto \setC\). La dérivée
@@ -1043,8 +1008,8 @@ On en déduit, en appliquant le théorème fondamental que :
 </div>
 
 
-<div id="outline-container-orgcf64a41" class="outline-4">
-<h4 id="orgcf64a41"><span class="section-number-4">2.4.2</span> Contour fermé</h4>
+<div id="outline-container-org6b08c35" class="outline-4">
+<h4 id="org6b08c35"><span class="section-number-4">2.4.2.</span> Contour fermé</h4>
 <div class="outline-text-4" id="text-2-4-2">
 <p>
 Dans la suite, lorsque \(l\) est une courbe fermée et est donc la frontière d'un
@@ -1100,8 +1065,8 @@ Les termes du membre de droite s'annulent donc et :
 </div>
 
 
-<div id="outline-container-orge89cffe" class="outline-4">
-<h4 id="orge89cffe"><span class="section-number-4">2.4.3</span> Cercle</h4>
+<div id="outline-container-org6700318" class="outline-4">
+<h4 id="org6700318"><span class="section-number-4">2.4.3.</span> Cercle</h4>
 <div class="outline-text-4" id="text-2-4-3">
 <p>
 Soit \(C\) le cercle de centre \(a\) et de rayon \(R\) :
@@ -1175,8 +1140,8 @@ on obtient le même résultat pour toute courbe fermée entourant \(a\) :
 </div>
 
 
-<div id="outline-container-orga97609d" class="outline-4">
-<h4 id="orga97609d"><span class="section-number-4">2.4.4</span> Théorème de Cauchy</h4>
+<div id="outline-container-orgb2cecfb" class="outline-4">
+<h4 id="orgb2cecfb"><span class="section-number-4">2.4.4.</span> Théorème de Cauchy</h4>
 <div class="outline-text-4" id="text-2-4-4">
 <p>
 Si \(f\) est analytique, la fonction
@@ -1239,8 +1204,8 @@ En dérivant \(k\) fois cette dernière relation par rapport à \(a\), on obtien
 </div>
 
 
-<div id="outline-container-org3abdd8f" class="outline-4">
-<h4 id="org3abdd8f"><span class="section-number-4">2.4.5</span> Séries de Laurent</h4>
+<div id="outline-container-org0af48f3" class="outline-4">
+<h4 id="org0af48f3"><span class="section-number-4">2.4.5.</span> Séries de Laurent</h4>
 <div class="outline-text-4" id="text-2-4-5">
 <p>
 Supposons que \(f\) puisse s'écrire comme une combinaison linéaire de puissances
@@ -1271,8 +1236,8 @@ Mais nous avons vu que seule l'intégrale de \((z-a)^{-1}\) ne s'annule pas. On 
 </div>
 
 
-<div id="outline-container-org71d80c1" class="outline-4">
-<h4 id="org71d80c1"><span class="section-number-4">2.4.6</span> Théorème des résidus</h4>
+<div id="outline-container-org5d7078c" class="outline-4">
+<h4 id="org5d7078c"><span class="section-number-4">2.4.6.</span> Théorème des résidus</h4>
 <div class="outline-text-4" id="text-2-4-6">
 <p>
 Considérons le cas où :
@@ -1311,14 +1276,14 @@ Mais comme \(a_{-1}\) n'est rien d'autre, à un facteur \(2\pi\img\) près, que 
 </div>
 
 
-<div id="outline-container-orgf78b1cc" class="outline-2">
-<h2 id="orgf78b1cc"><span class="section-number-2">3</span> Polynômes et exponentielles</h2>
+<div id="outline-container-org5990e08" class="outline-2">
+<h2 id="org5990e08"><span class="section-number-2">3.</span> Polynômes et exponentielles</h2>
 <div class="outline-text-2" id="text-3">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org9a69504">3.1. Chebyshev</a></li>
-<li><a href="#orgf0fc9f1">3.2. Hermite</a></li>
-<li><a href="#org944aeab">3.3. Laguerre</a></li>
+<li><a href="#orgace0662">3.1. Chebyshev</a></li>
+<li><a href="#org4134231">3.2. Hermite</a></li>
+<li><a href="#org5b73d98">3.3. Laguerre</a></li>
 </ul>
 </div>
 
@@ -1328,8 +1293,8 @@ Mais comme \(a_{-1}\) n'est rien d'autre, à un facteur \(2\pi\img\) près, que 
 </div>
 
 
-<div id="outline-container-org9a69504" class="outline-3">
-<h3 id="org9a69504"><span class="section-number-3">3.1</span> Chebyshev</h3>
+<div id="outline-container-orgace0662" class="outline-3">
+<h3 id="orgace0662"><span class="section-number-3">3.1.</span> Chebyshev</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Les polynômes de Chebyshev \(T_n\) sont défini par :
@@ -1514,8 +1479,8 @@ pour tout \(m,n\in\setN\).
 </div>
 
 
-<div id="outline-container-orgf0fc9f1" class="outline-3">
-<h3 id="orgf0fc9f1"><span class="section-number-3">3.2</span> Hermite</h3>
+<div id="outline-container-org4134231" class="outline-3">
+<h3 id="org4134231"><span class="section-number-3">3.2.</span> Hermite</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Les polynômes de Hermite sont orthogonaux pour le produit scalaire :
@@ -1542,8 +1507,8 @@ H_{n+1}(x) = 2 x H_n(x) - 2 n H_{n-1}(x) \\
 </div>
 
 
-<div id="outline-container-org944aeab" class="outline-3">
-<h3 id="org944aeab"><span class="section-number-3">3.3</span> Laguerre</h3>
+<div id="outline-container-org5b73d98" class="outline-3">
+<h3 id="org5b73d98"><span class="section-number-3">3.3.</span> Laguerre</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Les polynômes de Laguerre sont orthogonaux pour le produit scalaire :
@@ -1571,15 +1536,15 @@ L_1(x) = 1-x \\
 </div>
 
 
-<div id="outline-container-orgaf8935d" class="outline-2">
-<h2 id="orgaf8935d"><span class="section-number-2">4</span> Analyse de Fourier</h2>
+<div id="outline-container-org5830a41" class="outline-2">
+<h2 id="org5830a41"><span class="section-number-2">4.</span> Analyse de Fourier</h2>
 <div class="outline-text-2" id="text-4">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org514888b">4.1. Séries de Fourier</a></li>
-<li><a href="#orgd20e05e">4.2. Transformeée de Fourier discrète</a></li>
-<li><a href="#org58afa95">4.3. Transformeée de Fourier</a></li>
-<li><a href="#orgce33cac">4.4. Transformeée de Fourier</a></li>
+<li><a href="#org9b0d9b3">4.1. Séries de Fourier</a></li>
+<li><a href="#orgce6d9b6">4.2. Transformeée de Fourier discrète</a></li>
+<li><a href="#orgca47af1">4.3. Transformeée de Fourier</a></li>
+<li><a href="#org63b6566">4.4. Transformeée de Fourier</a></li>
 </ul>
 </div>
 
@@ -1589,8 +1554,8 @@ L_1(x) = 1-x \\
 </div>
 
 
-<div id="outline-container-org514888b" class="outline-3">
-<h3 id="org514888b"><span class="section-number-3">4.1</span> Séries de Fourier</h3>
+<div id="outline-container-org9b0d9b3" class="outline-3">
+<h3 id="org9b0d9b3"><span class="section-number-3">4.1.</span> Séries de Fourier</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 ARRANGER LE CHAPITRE
@@ -1752,8 +1717,8 @@ Utilisant à nouveau les propriétés des bases orthonormées, on a :
 </div>
 
 
-<div id="outline-container-orgd20e05e" class="outline-3">
-<h3 id="orgd20e05e"><span class="section-number-3">4.2</span> Transformeée de Fourier discrète</h3>
+<div id="outline-container-orgce6d9b6" class="outline-3">
+<h3 id="orgce6d9b6"><span class="section-number-3">4.2.</span> Transformeée de Fourier discrète</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Dans le cas où :
@@ -1870,8 +1835,8 @@ U_n = \unsur{N} \sum_{k=0}^{N-1} u_k \exp\left(-\frac{2 \pi \img k n}{N}\right)
 </div>
 
 
-<div id="outline-container-org58afa95" class="outline-3">
-<h3 id="org58afa95"><span class="section-number-3">4.3</span> Transformeée de Fourier</h3>
+<div id="outline-container-orgca47af1" class="outline-3">
+<h3 id="orgca47af1"><span class="section-number-3">4.3.</span> Transformeée de Fourier</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 On peut présenter le résultat précédent sous une autre forme. On peut poser :
@@ -1964,8 +1929,8 @@ u(x) = \mathcal{F}^{-1}(U)(x) = \int\limits_{-\infty}^{+\infty} U(y) \exp(2\pi\i
 </div>
 
 
-<div id="outline-container-org629ffdc" class="outline-4">
-<h4 id="org629ffdc"><span class="section-number-4">4.3.1</span> Delta de Dirac</h4>
+<div id="outline-container-orgd34413d" class="outline-4">
+<h4 id="orgd34413d"><span class="section-number-4">4.3.1.</span> Delta de Dirac</h4>
 <div class="outline-text-4" id="text-4-3-1">
 <p>
 On déduit des relations ci dessus que :
@@ -2014,8 +1979,8 @@ Inversément, on a :
 </div>
 
 
-<div id="outline-container-org03d65fa" class="outline-4">
-<h4 id="org03d65fa"><span class="section-number-4">4.3.2</span> Produit scalaire</h4>
+<div id="outline-container-org539aef0" class="outline-4">
+<h4 id="org539aef0"><span class="section-number-4">4.3.2.</span> Produit scalaire</h4>
 <div class="outline-text-4" id="text-4-3-2">
 <p>
 Considérons à présent le produit scalaire :
@@ -2066,8 +2031,8 @@ le produit scalaire :
 </div>
 
 
-<div id="outline-container-orgfe19a8a" class="outline-4">
-<h4 id="orgfe19a8a"><span class="section-number-4">4.3.3</span> Convolution</h4>
+<div id="outline-container-org2c39135" class="outline-4">
+<h4 id="org2c39135"><span class="section-number-4">4.3.3.</span> Convolution</h4>
 <div class="outline-text-4" id="text-4-3-3">
 <p>
 La transformeèe d'un produit de convolution s'écrit :
@@ -2121,8 +2086,8 @@ c'est-à-dire :
 </div>
 
 
-<div id="outline-container-orgf68a958" class="outline-4">
-<h4 id="orgf68a958"><span class="section-number-4">4.3.4</span> Dérivées</h4>
+<div id="outline-container-org1fb8db1" class="outline-4">
+<h4 id="org1fb8db1"><span class="section-number-4">4.3.4.</span> Dérivées</h4>
 <div class="outline-text-4" id="text-4-3-4">
 <p>
 Soit \(u\) une fonction qui s'annule à l'infini. La transformeée de Fourier
@@ -2167,8 +2132,8 @@ et finalement :
 </div>
 
 
-<div id="outline-container-orgb9d646c" class="outline-4">
-<h4 id="orgb9d646c"><span class="section-number-4">4.3.5</span> Déphasage</h4>
+<div id="outline-container-org84e791f" class="outline-4">
+<h4 id="org84e791f"><span class="section-number-4">4.3.5.</span> Déphasage</h4>
 <div class="outline-text-4" id="text-4-3-5">
 <p>
 Considérons l'opérateur de translation :
@@ -2204,8 +2169,8 @@ Mais comme \(dx = d(x-a)\), on en déduit que :
 </div>
 
 
-<div id="outline-container-orgcc3f10b" class="outline-4">
-<h4 id="orgcc3f10b"><span class="section-number-4">4.3.6</span> Dilatation</h4>
+<div id="outline-container-org616a369" class="outline-4">
+<h4 id="org616a369"><span class="section-number-4">4.3.6.</span> Dilatation</h4>
 <div class="outline-text-4" id="text-4-3-6">
 <p>
 Soit \(d_a\) l'opérateur de dilatation :
@@ -2258,8 +2223,8 @@ c'est-à-dire :
 </div>
 
 
-<div id="outline-container-org15287cc" class="outline-4">
-<h4 id="org15287cc"><span class="section-number-4">4.3.7</span> Gaussienne</h4>
+<div id="outline-container-org53dae4e" class="outline-4">
+<h4 id="org53dae4e"><span class="section-number-4">4.3.7.</span> Gaussienne</h4>
 <div class="outline-text-4" id="text-4-3-7">
 <p>
 Définissons la gaussienne \(G\) :
@@ -2316,8 +2281,8 @@ La transformeée de Fourier laisse \(G\) inchangée.
 </div>
 
 
-<div id="outline-container-orgce33cac" class="outline-3">
-<h3 id="orgce33cac"><span class="section-number-3">4.4</span> Transformeée de Fourier</h3>
+<div id="outline-container-org63b6566" class="outline-3">
+<h3 id="org63b6566"><span class="section-number-3">4.4.</span> Transformeée de Fourier</h3>
 <div class="outline-text-3" id="text-4-4">
 <p>
 La transformeée de Fourier (voir chapitre \ref{chap:fourier}) est définie par :
@@ -2352,17 +2317,17 @@ et donc :
 </div>
 
 
-<div id="outline-container-org0ee2f4c" class="outline-2">
-<h2 id="org0ee2f4c"><span class="section-number-2">5</span> Ondelettes</h2>
+<div id="outline-container-org6661f5c" class="outline-2">
+<h2 id="org6661f5c"><span class="section-number-2">5.</span> Ondelettes</h2>
 <div class="outline-text-2" id="text-5">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org08177aa">5.1. Introduction</a></li>
-<li><a href="#org46ccdf7">5.2. Définition</a></li>
-<li><a href="#org9ac9932">5.3. Construction</a></li>
-<li><a href="#org675a8ed">5.4. Propriétés</a></li>
-<li><a href="#org7c5674b">5.5. Niveaux</a></li>
-<li><a href="#orgc51357a">5.6. Développement en série et algorithme de Mallat</a></li>
+<li><a href="#org90fe28b">5.1. Introduction</a></li>
+<li><a href="#orgcbe18ce">5.2. Définition</a></li>
+<li><a href="#org256deab">5.3. Construction</a></li>
+<li><a href="#orgf0955b0">5.4. Propriétés</a></li>
+<li><a href="#org70e70cb">5.5. Niveaux</a></li>
+<li><a href="#org554f6e2">5.6. Développement en série et algorithme de Mallat</a></li>
 </ul>
 </div>
 
@@ -2385,8 +2350,8 @@ où les coefficients les plus négligeables sont ignorés.
 </div>
 
 
-<div id="outline-container-org08177aa" class="outline-3">
-<h3 id="org08177aa"><span class="section-number-3">5.1</span> Introduction</h3>
+<div id="outline-container-org90fe28b" class="outline-3">
+<h3 id="org90fe28b"><span class="section-number-3">5.1.</span> Introduction</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 AFAIRE : ARRANGER LE CHAPITRE
@@ -2464,8 +2429,8 @@ en plus fin lorsque \(j\) augmente. On dit que les ondelettes ont une influence 
 </div>
 
 
-<div id="outline-container-org46ccdf7" class="outline-3">
-<h3 id="org46ccdf7"><span class="section-number-3">5.2</span> Définition</h3>
+<div id="outline-container-orgcbe18ce" class="outline-3">
+<h3 id="orgcbe18ce"><span class="section-number-3">5.2.</span> Définition</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 Nous allons construire un système d'ondelettes générique à partir des coefficients :
@@ -2546,8 +2511,8 @@ Dans la suite, nous utilisons le produit scalaire :
 
 
 
-<div id="outline-container-org9ac9932" class="outline-3">
-<h3 id="org9ac9932"><span class="section-number-3">5.3</span> Construction</h3>
+<div id="outline-container-org256deab" class="outline-3">
+<h3 id="org256deab"><span class="section-number-3">5.3.</span> Construction</h3>
 <div class="outline-text-3" id="text-5-3">
 <p>
 La fonction d'échelle s'obtient en partant de :
@@ -2599,8 +2564,8 @@ Le système d'ondelettes est définit finalement par :
 
 
 
-<div id="outline-container-org675a8ed" class="outline-3">
-<h3 id="org675a8ed"><span class="section-number-3">5.4</span> Propriétés</h3>
+<div id="outline-container-orgf0955b0" class="outline-3">
+<h3 id="orgf0955b0"><span class="section-number-3">5.4.</span> Propriétés</h3>
 <div class="outline-text-3" id="text-5-4">
 <p>
 Les propriétés des \(a^i_k\) permettent de montrer, par récurrence sur \(n\), que :
@@ -2703,8 +2668,8 @@ et la propriété de partition de l'unité est démontréé en passant à la lim
 </div>
 
 
-<div id="outline-container-org7c5674b" class="outline-3">
-<h3 id="org7c5674b"><span class="section-number-3">5.5</span> Niveaux</h3>
+<div id="outline-container-org70e70cb" class="outline-3">
+<h3 id="org70e70cb"><span class="section-number-3">5.5.</span> Niveaux</h3>
 <div class="outline-text-3" id="text-5-5">
 <p>
 On définit la fonction d'échelle et les ondelettes du niveau \(j \in \setN\) comme étant les
@@ -2742,12 +2707,12 @@ entres échelles voisines :
 
 
 
-<div id="outline-container-orgc51357a" class="outline-3">
-<h3 id="orgc51357a"><span class="section-number-3">5.6</span> Développement en série et algorithme de Mallat</h3>
+<div id="outline-container-org554f6e2" class="outline-3">
+<h3 id="org554f6e2"><span class="section-number-3">5.6.</span> Développement en série et algorithme de Mallat</h3>
 <div class="outline-text-3" id="text-5-6">
 </div>
-<div id="outline-container-org6404243" class="outline-4">
-<h4 id="org6404243"><span class="section-number-4">5.6.1</span> Convergence</h4>
+<div id="outline-container-org2ee4ac7" class="outline-4">
+<h4 id="org2ee4ac7"><span class="section-number-4">5.6.1.</span> Convergence</h4>
 <div class="outline-text-4" id="text-5-6-1">
 <p>
 Commençons par remarquer que :
@@ -2916,8 +2881,8 @@ qui tend bien vers 0 lorsque \(j\) tend vers l'infini.
 </div>
 
 
-<div id="outline-container-org685a75c" class="outline-4">
-<h4 id="org685a75c"><span class="section-number-4">5.6.2</span> Algorithme de Mallat</h4>
+<div id="outline-container-orgd68f179" class="outline-4">
+<h4 id="orgd68f179"><span class="section-number-4">5.6.2.</span> Algorithme de Mallat</h4>
 <div class="outline-text-4" id="text-5-6-2">
 <p>
 Considérons à présent l'approximation suivante :
@@ -3072,8 +3037,8 @@ on écrit :
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2019-10-01 mar 12:33</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2023-05-10 mer 16:46</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>

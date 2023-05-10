@@ -3,14 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-10-01 mar 12:33 -->
+<!-- 2023-05-10 mer 16:43 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 05 : Nombres composés - 1</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="chimay" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -31,8 +30,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -40,22 +40,22 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
+    overflow: auto;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -161,6 +161,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -177,56 +190,9 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         displayAlign: "center",
@@ -247,11 +213,10 @@ for the JavaScript code in this tag.
              }
 });
 </script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Eclats de vers : Matemat 05 : Nombres composés - 1</h1>
 <p>
 <a href="index.html">Index des Grimoires</a>
@@ -261,13 +226,13 @@ for the JavaScript code in this tag.
 <a href="../index.html">Retour à l’accueil</a>
 </p>
 
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table des matières</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org04b8f6d">1. Complexes</a></li>
-<li><a href="#org811a60c">2. Intervalles de réels</a></li>
-<li><a href="#org38ff6b4">3. Dimension \(n\)</a></li>
+<li><a href="#org9de0404">1. Complexes</a></li>
+<li><a href="#orgb1b7ae2">2. Intervalles de réels</a></li>
+<li><a href="#org2e48b1b">3. Dimension \(n\)</a></li>
 </ul>
 </div>
 </div>
@@ -426,27 +391,27 @@ for the JavaScript code in this tag.
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
 
-<div id="outline-container-org04b8f6d" class="outline-2">
-<h2 id="org04b8f6d"><span class="section-number-2">1</span> Complexes</h2>
+<div id="outline-container-org9de0404" class="outline-2">
+<h2 id="org9de0404"><span class="section-number-2">1.</span> Complexes</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org411af9a">1.1. Dépendances</a></li>
-<li><a href="#orgecf9676">1.2. Nombre imaginaire</a></li>
-<li><a href="#org421e829">1.3. Définition</a></li>
-<li><a href="#orga910859">1.4. Parties réelles et imaginaires</a></li>
-<li><a href="#org23cbf29">1.5. Complexe conjugué</a></li>
-<li><a href="#orge6b5180">1.6. Addition</a></li>
-<li><a href="#orgc11dc7a">1.7. Soustraction</a></li>
-<li><a href="#org7a5f047">1.8. Multiplication</a></li>
-<li><a href="#org7967b58">1.9. Module</a></li>
-<li><a href="#orgae978de">1.10. Inverse</a></li>
-<li><a href="#orgb0ebee8">1.11. Division</a></li>
-<li><a href="#org548d9ad">1.12. Obtention des parties réelles et imaginaires</a></li>
-<li><a href="#org0e0a927">1.13. Puissance</a></li>
-<li><a href="#orgee959c7">1.14. Ordre partiel</a></li>
-<li><a href="#org3827bd4">1.15. Ordre total</a></li>
-<li><a href="#org585de01">1.16. Inclusion</a></li>
+<li><a href="#org261b3ef">1.1. Dépendances</a></li>
+<li><a href="#org9681d84">1.2. Nombre imaginaire</a></li>
+<li><a href="#orgd67c862">1.3. Définition</a></li>
+<li><a href="#org0d5b94e">1.4. Parties réelles et imaginaires</a></li>
+<li><a href="#org35ce171">1.5. Complexe conjugué</a></li>
+<li><a href="#org44d8934">1.6. Addition</a></li>
+<li><a href="#orgee7aa08">1.7. Soustraction</a></li>
+<li><a href="#orgafd7f98">1.8. Multiplication</a></li>
+<li><a href="#org513e455">1.9. Module</a></li>
+<li><a href="#org8a2700c">1.10. Inverse</a></li>
+<li><a href="#org66eaba7">1.11. Division</a></li>
+<li><a href="#org9aab01f">1.12. Obtention des parties réelles et imaginaires</a></li>
+<li><a href="#org7dca876">1.13. Puissance</a></li>
+<li><a href="#org77ff6d1">1.14. Ordre partiel</a></li>
+<li><a href="#org8a1d26d">1.15. Ordre total</a></li>
+<li><a href="#org4b2d026">1.16. Inclusion</a></li>
 </ul>
 </div>
 
@@ -456,8 +421,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-org411af9a" class="outline-3">
-<h3 id="org411af9a"><span class="section-number-3">1.1</span> Dépendances</h3>
+<div id="outline-container-org261b3ef" class="outline-3">
+<h3 id="org261b3ef"><span class="section-number-3">1.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:naturels} : Les nombres naturels</li>
@@ -469,8 +434,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-orgecf9676" class="outline-3">
-<h3 id="orgecf9676"><span class="section-number-3">1.2</span> Nombre imaginaire</h3>
+<div id="outline-container-org9681d84" class="outline-3">
+<h3 id="org9681d84"><span class="section-number-3">1.2.</span> Nombre imaginaire</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Nous avons vu que le carré d'un nombre positif est forcément positif. Par conséquent, on ne peut pas trouver de \(x \in \setR\) tel que :
@@ -514,8 +479,8 @@ On a par conséquent :
 </div>
 
 
-<div id="outline-container-org0c56ba1" class="outline-4">
-<h4 id="org0c56ba1"><span class="section-number-4">1.2.1</span> Notation</h4>
+<div id="outline-container-orgdfcc360" class="outline-4">
+<h4 id="orgdfcc360"><span class="section-number-4">1.2.1.</span> Notation</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 On note aussi :
@@ -528,8 +493,8 @@ On note aussi :
 </div>
 
 
-<div id="outline-container-orgda823af" class="outline-4">
-<h4 id="orgda823af"><span class="section-number-4">1.2.2</span> Remarque</h4>
+<div id="outline-container-org34f88a3" class="outline-4">
+<h4 id="org34f88a3"><span class="section-number-4">1.2.2.</span> Remarque</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 Attention à ne pas confondre les variables « \(i\) » avec le nombre imaginaire « \(\img\) ».
@@ -539,8 +504,8 @@ Attention à ne pas confondre les variables « \(i\) » avec le nombre imagina
 </div>
 
 
-<div id="outline-container-org421e829" class="outline-3">
-<h3 id="org421e829"><span class="section-number-3">1.3</span> Définition</h3>
+<div id="outline-container-orgd67c862" class="outline-3">
+<h3 id="orgd67c862"><span class="section-number-3">1.3.</span> Définition</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Nous allons à présent nous intéresser aux propriétés algébriques des couples nombre réel - nombre imaginaire. Pour tout \((a, b) \in \setR^2\), nous introduisons la notation complexe :
@@ -561,8 +526,8 @@ L'ensemble des nombres complexes est simplement l'ensemble des couples réel -�
 </div>
 
 
-<div id="outline-container-orga910859" class="outline-3">
-<h3 id="orga910859"><span class="section-number-3">1.4</span> Parties réelles et imaginaires</h3>
+<div id="outline-container-org0d5b94e" class="outline-3">
+<h3 id="org0d5b94e"><span class="section-number-3">1.4.</span> Parties réelles et imaginaires</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Soit \(z \in \setC\) et \(a,b \in \setR\) tels que :
@@ -599,8 +564,8 @@ On a donc :
 </div>
 
 
-<div id="outline-container-org23cbf29" class="outline-3">
-<h3 id="org23cbf29"><span class="section-number-3">1.5</span> Complexe conjugué</h3>
+<div id="outline-container-org35ce171" class="outline-3">
+<h3 id="org35ce171"><span class="section-number-3">1.5.</span> Complexe conjugué</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Soit \(z \in \setC\) et \(a,b \in \setR\) tels que :
@@ -633,8 +598,8 @@ On a donc :
 </div>
 
 
-<div id="outline-container-org7b328a5" class="outline-4">
-<h4 id="org7b328a5"><span class="section-number-4">1.5.1</span> Conjugué carré</h4>
+<div id="outline-container-orgcf291e8" class="outline-4">
+<h4 id="orgcf291e8"><span class="section-number-4">1.5.1.</span> Conjugué carré</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <p>
 Il est clair d'après la définition que :
@@ -648,8 +613,8 @@ Il est clair d'après la définition que :
 </div>
 
 
-<div id="outline-container-orge6b5180" class="outline-3">
-<h3 id="orge6b5180"><span class="section-number-3">1.6</span> Addition</h3>
+<div id="outline-container-org44d8934" class="outline-3">
+<h3 id="org44d8934"><span class="section-number-3">1.6.</span> Addition</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 Soient \(x,y \in \setC\) et \(a,b,c,d \in \setR\) tels que :
@@ -675,8 +640,8 @@ Comme nous désirons conserver les propriétés de commutativité et d'associati
 </div>
 
 
-<div id="outline-container-orgc11dc7a" class="outline-3">
-<h3 id="orgc11dc7a"><span class="section-number-3">1.7</span> Soustraction</h3>
+<div id="outline-container-orgee7aa08" class="outline-3">
+<h3 id="orgee7aa08"><span class="section-number-3">1.7.</span> Soustraction</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 Soient \(x,y \in \setC\) et \(a,b,c,d \in \setR\) tels que :
@@ -702,8 +667,8 @@ Comme nous souhaitons conserver les propriétés de la soustraction, on a simple
 </div>
 
 
-<div id="outline-container-org7a5f047" class="outline-3">
-<h3 id="org7a5f047"><span class="section-number-3">1.8</span> Multiplication</h3>
+<div id="outline-container-orgafd7f98" class="outline-3">
+<h3 id="orgafd7f98"><span class="section-number-3">1.8.</span> Multiplication</h3>
 <div class="outline-text-3" id="text-1-8">
 <p>
 Soient \(x,y \in \setC\) et \(a,b,c,d \in \setR\) tels que :
@@ -757,8 +722,8 @@ On a donc :
 </div>
 
 
-<div id="outline-container-orge593b84" class="outline-4">
-<h4 id="orge593b84"><span class="section-number-4">1.8.1</span> Mixte</h4>
+<div id="outline-container-orgda207d0" class="outline-4">
+<h4 id="orgda207d0"><span class="section-number-4">1.8.1.</span> Mixte</h4>
 <div class="outline-text-4" id="text-1-8-1">
 <p>
 On en déduit le cas particulier suivant :
@@ -770,8 +735,8 @@ On en déduit le cas particulier suivant :
 </div>
 </div>
 
-<div id="outline-container-orgb6b7585" class="outline-4">
-<h4 id="orgb6b7585"><span class="section-number-4">1.8.2</span> Multiplication par \(\img\)</h4>
+<div id="outline-container-org720e765" class="outline-4">
+<h4 id="org720e765"><span class="section-number-4">1.8.2.</span> Multiplication par \(\img\)</h4>
 <div class="outline-text-4" id="text-1-8-2">
 <p>
 Soit \(z \in \setC\) et \(a,b \in \setR\) tels que :
@@ -805,8 +770,8 @@ on a :
 </div>
 
 
-<div id="outline-container-org9bb0d56" class="outline-4">
-<h4 id="org9bb0d56"><span class="section-number-4">1.8.3</span> Conjugué</h4>
+<div id="outline-container-org0b4e785" class="outline-4">
+<h4 id="org0b4e785"><span class="section-number-4">1.8.3.</span> Conjugué</h4>
 <div class="outline-text-4" id="text-1-8-3">
 <p>
 On a :
@@ -820,8 +785,8 @@ On a :
 </div>
 
 
-<div id="outline-container-org7967b58" class="outline-3">
-<h3 id="org7967b58"><span class="section-number-3">1.9</span> Module</h3>
+<div id="outline-container-org513e455" class="outline-3">
+<h3 id="org513e455"><span class="section-number-3">1.9.</span> Module</h3>
 <div class="outline-text-3" id="text-1-9">
 <p>
 Soit \(z \in \setC\) et \(a,b \in \setR\) tels que :
@@ -845,8 +810,8 @@ On voit que le module est un réel positif. Dans le cas d'un réel, le module s'
 </div>
 
 
-<div id="outline-container-org274b007" class="outline-4">
-<h4 id="org274b007"><span class="section-number-4">1.9.1</span> Conjugué</h4>
+<div id="outline-container-orgfa3565d" class="outline-4">
+<h4 id="orgfa3565d"><span class="section-number-4">1.9.1.</span> Conjugué</h4>
 <div class="outline-text-4" id="text-1-9-1">
 <p>
 On voit que :
@@ -868,8 +833,8 @@ c'est-à-dire :
 </div>
 
 
-<div id="outline-container-orgae978de" class="outline-3">
-<h3 id="orgae978de"><span class="section-number-3">1.10</span> Inverse</h3>
+<div id="outline-container-org8a2700c" class="outline-3">
+<h3 id="org8a2700c"><span class="section-number-3">1.10.</span> Inverse</h3>
 <div class="outline-text-3" id="text-1-10">
 <p>
 Soit \(z \in \setC\) et \(a,b \in \setR\) tels que :
@@ -904,8 +869,8 @@ Nous pouvons donc évaluer l'inverse d'un nombre complexe :
 </p>
 </div>
 
-<div id="outline-container-org642c137" class="outline-4">
-<h4 id="org642c137"><span class="section-number-4">1.10.1</span> Inverse de \(\img\)</h4>
+<div id="outline-container-orgba0df4a" class="outline-4">
+<h4 id="orgba0df4a"><span class="section-number-4">1.10.1.</span> Inverse de \(\img\)</h4>
 <div class="outline-text-4" id="text-1-10-1">
 <p>
 On a en particulier :
@@ -919,8 +884,8 @@ On a en particulier :
 </div>
 
 
-<div id="outline-container-orgb0ebee8" class="outline-3">
-<h3 id="orgb0ebee8"><span class="section-number-3">1.11</span> Division</h3>
+<div id="outline-container-org66eaba7" class="outline-3">
+<h3 id="org66eaba7"><span class="section-number-3">1.11.</span> Division</h3>
 <div class="outline-text-3" id="text-1-11">
 <p>
 Soient \(x,y \in \setC\) et \(a,b,c,d \in \setR\) tels que :
@@ -962,8 +927,8 @@ ou encore :
 </div>
 
 
-<div id="outline-container-org548d9ad" class="outline-3">
-<h3 id="org548d9ad"><span class="section-number-3">1.12</span> Obtention des parties réelles et imaginaires</h3>
+<div id="outline-container-org9aab01f" class="outline-3">
+<h3 id="org9aab01f"><span class="section-number-3">1.12.</span> Obtention des parties réelles et imaginaires</h3>
 <div class="outline-text-3" id="text-1-12">
 <p>
 Soit \(z \in \setC\) et \(a,b \in \setR\) tels que :
@@ -1007,8 +972,8 @@ ce qui permet d'obtenir une expression de la partie imaginaire :
 </div>
 
 
-<div id="outline-container-orgf7b2ca9" class="outline-4">
-<h4 id="orgf7b2ca9"><span class="section-number-4">1.12.1</span> Cas particuliers</h4>
+<div id="outline-container-org090ea15" class="outline-4">
+<h4 id="org090ea15"><span class="section-number-4">1.12.1.</span> Cas particuliers</h4>
 <div class="outline-text-4" id="text-1-12-1">
 <p>
 On en déduit directement que si \(z = \conjaccent{z}\), on a \(\Im(z) = 0\) et \(z\in\setR\). Par contre, si \(z = -\conjaccent{z}\), on a \(\Re(z) = 0\) et \(z\) est purement imaginaire.
@@ -1018,8 +983,8 @@ On en déduit directement que si \(z = \conjaccent{z}\), on a \(\Im(z) = 0\) et 
 </div>
 
 
-<div id="outline-container-org0e0a927" class="outline-3">
-<h3 id="org0e0a927"><span class="section-number-3">1.13</span> Puissance</h3>
+<div id="outline-container-org7dca876" class="outline-3">
+<h3 id="org7dca876"><span class="section-number-3">1.13.</span> Puissance</h3>
 <div class="outline-text-3" id="text-1-13">
 <p>
 Soit \(n \in \setN\) avec \(n \ne 0\), \(z \in \setC\) et \(a,b \in \setR\) tels que :
@@ -1044,8 +1009,8 @@ z^n = z \cdot z^{n-1}
 </div>
 
 
-<div id="outline-container-orgd104723" class="outline-4">
-<h4 id="orgd104723"><span class="section-number-4">1.13.1</span> Négatives</h4>
+<div id="outline-container-orga05af61" class="outline-4">
+<h4 id="orga05af61"><span class="section-number-4">1.13.1.</span> Négatives</h4>
 <div class="outline-text-4" id="text-1-13-1">
 <p>
 Les puissances négatives sont données par :
@@ -1058,8 +1023,8 @@ Les puissances négatives sont données par :
 </div>
 
 
-<div id="outline-container-org5278cfc" class="outline-4">
-<h4 id="org5278cfc"><span class="section-number-4">1.13.2</span> Racines</h4>
+<div id="outline-container-org6399423" class="outline-4">
+<h4 id="org6399423"><span class="section-number-4">1.13.2.</span> Racines</h4>
 <div class="outline-text-4" id="text-1-13-2">
 <p>
 La \(n^{ième}\) racine \(x \in \setC\) de \(z\) est définie par :
@@ -1080,8 +1045,8 @@ On a alors :
 </div>
 
 
-<div id="outline-container-org9c4678e" class="outline-4">
-<h4 id="org9c4678e"><span class="section-number-4">1.13.3</span> Fractionnaires</h4>
+<div id="outline-container-org881ee49" class="outline-4">
+<h4 id="org881ee49"><span class="section-number-4">1.13.3.</span> Fractionnaires</h4>
 <div class="outline-text-4" id="text-1-13-3">
 <p>
 Soit \(m \in \setN\). on a simplement :
@@ -1094,8 +1059,8 @@ Soit \(m \in \setN\). on a simplement :
 </div>
 
 
-<div id="outline-container-orgc6a7b24" class="outline-4">
-<h4 id="orgc6a7b24"><span class="section-number-4">1.13.4</span> Réelles</h4>
+<div id="outline-container-org2109d97" class="outline-4">
+<h4 id="org2109d97"><span class="section-number-4">1.13.4.</span> Réelles</h4>
 <div class="outline-text-4" id="text-1-13-4">
 <p>
 Soit \(s \in \setR\) et une suite \(\{ r_i \in \setQ : i \in \setN \}\) qui converge vers \(s\). On définit :
@@ -1109,8 +1074,8 @@ Soit \(s \in \setR\) et une suite \(\{ r_i \in \setQ : i \in \setN \}\) qui conv
 </div>
 
 
-<div id="outline-container-orgee959c7" class="outline-3">
-<h3 id="orgee959c7"><span class="section-number-3">1.14</span> Ordre partiel</h3>
+<div id="outline-container-org77ff6d1" class="outline-3">
+<h3 id="org77ff6d1"><span class="section-number-3">1.14.</span> Ordre partiel</h3>
 <div class="outline-text-3" id="text-1-14">
 <p>
 Soit les complexes \(x,y \in \setC\) et les réels \(a,b,c,d \in \setR\) tels que :
@@ -1141,8 +1106,8 @@ b \le d
 </div>
 
 
-<div id="outline-container-org3827bd4" class="outline-3">
-<h3 id="org3827bd4"><span class="section-number-3">1.15</span> Ordre total</h3>
+<div id="outline-container-org8a1d26d" class="outline-3">
+<h3 id="org8a1d26d"><span class="section-number-3">1.15.</span> Ordre total</h3>
 <div class="outline-text-3" id="text-1-15">
 <p>
 Soit les complexes \(x,y \in \setC\) et les réels \(a,b,c,d \in \setR\) tels que :
@@ -1181,8 +1146,8 @@ b \le d
 </div>
 
 
-<div id="outline-container-org585de01" class="outline-3">
-<h3 id="org585de01"><span class="section-number-3">1.16</span> Inclusion</h3>
+<div id="outline-container-org4b2d026" class="outline-3">
+<h3 id="org4b2d026"><span class="section-number-3">1.16.</span> Inclusion</h3>
 <div class="outline-text-3" id="text-1-16">
 <p>
 Pour tout \(a \in \setR\), on a \(a = a + \img 0 \in \setC\). On considère donc que \(\setR \subseteq \setC\).
@@ -1192,19 +1157,19 @@ Pour tout \(a \in \setR\), on a \(a = a + \img 0 \in \setC\). On considère donc
 </div>
 
 
-<div id="outline-container-org811a60c" class="outline-2">
-<h2 id="org811a60c"><span class="section-number-2">2</span> Intervalles de réels</h2>
+<div id="outline-container-orgb1b7ae2" class="outline-2">
+<h2 id="orgb1b7ae2"><span class="section-number-2">2.</span> Intervalles de réels</h2>
 <div class="outline-text-2" id="text-2">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgbac7472">2.1. Dépendances</a></li>
-<li><a href="#org4175ae1">2.2. Intervalles bornés</a></li>
-<li><a href="#org3728414">2.3. Intervalles non bornés</a></li>
-<li><a href="#orgf76b2ae">2.4. Boules</a></li>
-<li><a href="#org197c40f">2.5. Majorants et minorants</a></li>
-<li><a href="#org57079af">2.6. Maximum et minimum</a></li>
-<li><a href="#org235de43">2.7. Supremum et infimum</a></li>
-<li><a href="#org60e96b0">2.8. Adhérence, intérieur et frontière</a></li>
+<li><a href="#org9e8c6f5">2.1. Dépendances</a></li>
+<li><a href="#orgc9110d1">2.2. Intervalles bornés</a></li>
+<li><a href="#org4905a9b">2.3. Intervalles non bornés</a></li>
+<li><a href="#org9e4ca7d">2.4. Boules</a></li>
+<li><a href="#orgb6424d6">2.5. Majorants et minorants</a></li>
+<li><a href="#org993d006">2.6. Maximum et minimum</a></li>
+<li><a href="#org35f872e">2.7. Supremum et infimum</a></li>
+<li><a href="#org1afbf3e">2.8. Adhérence, intérieur et frontière</a></li>
 </ul>
 </div>
 
@@ -1214,8 +1179,8 @@ Pour tout \(a \in \setR\), on a \(a = a + \img 0 \in \setC\). On considère donc
 </div>
 
 
-<div id="outline-container-orgbac7472" class="outline-3">
-<h3 id="orgbac7472"><span class="section-number-3">2.1</span> Dépendances</h3>
+<div id="outline-container-org9e8c6f5" class="outline-3">
+<h3 id="org9e8c6f5"><span class="section-number-3">2.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:reel} : Les nombres réels</li>
@@ -1224,8 +1189,8 @@ Pour tout \(a \in \setR\), on a \(a = a + \img 0 \in \setC\). On considère donc
 </div>
 
 
-<div id="outline-container-org4175ae1" class="outline-3">
-<h3 id="org4175ae1"><span class="section-number-3">2.2</span> Intervalles bornés</h3>
+<div id="outline-container-orgc9110d1" class="outline-3">
+<h3 id="orgc9110d1"><span class="section-number-3">2.2.</span> Intervalles bornés</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Soit \(a,b \in \setR\) avec \(a \le b\). L'intervalle fermé \([a,b]\) est défini par :
@@ -1262,8 +1227,8 @@ ou à droite :
 </div>
 
 
-<div id="outline-container-org3728414" class="outline-3">
-<h3 id="org3728414"><span class="section-number-3">2.3</span> Intervalles non bornés</h3>
+<div id="outline-container-org4905a9b" class="outline-3">
+<h3 id="org4905a9b"><span class="section-number-3">2.3.</span> Intervalles non bornés</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Soit \(a \in \setR\). Les intervalles non bornés sont des intervalles partant de l'infini négatif ou/et allant jusqu'à l'infini positif :
@@ -1280,8 +1245,8 @@ Soit \(a \in \setR\). Les intervalles non bornés sont des intervalles partant d
 </div>
 
 
-<div id="outline-container-orgf76b2ae" class="outline-3">
-<h3 id="orgf76b2ae"><span class="section-number-3">2.4</span> Boules</h3>
+<div id="outline-container-org9e4ca7d" class="outline-3">
+<h3 id="org9e4ca7d"><span class="section-number-3">2.4.</span> Boules</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Soit \(c,r,x \in \setR\) avec \(r \ge 0\). La condition \(\abs{x - c} \le r\) est équivalente à \(x - c \le r\) et \(-(x - c) = c - x \le r\). On en déduit que :
@@ -1330,8 +1295,8 @@ On en déduit que :
 </div>
 
 
-<div id="outline-container-org197c40f" class="outline-3">
-<h3 id="org197c40f"><span class="section-number-3">2.5</span> Majorants et minorants</h3>
+<div id="outline-container-orgb6424d6" class="outline-3">
+<h3 id="orgb6424d6"><span class="section-number-3">2.5.</span> Majorants et minorants</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 Soit \(a,b \in \setR\) avec \(a \le b\) et \(x \in \setR\).
@@ -1380,8 +1345,8 @@ ainsi que pour les intervalles semi-ouverts.
 </div>
 
 
-<div id="outline-container-org57079af" class="outline-3">
-<h3 id="org57079af"><span class="section-number-3">2.6</span> Maximum et minimum</h3>
+<div id="outline-container-org993d006" class="outline-3">
+<h3 id="org993d006"><span class="section-number-3">2.6.</span> Maximum et minimum</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 Soit \(a,b \in \setR\) avec \(a \le b\). On a clairement :
@@ -1399,8 +1364,8 @@ Les autre types d'intervalles n'admettent ni maximum ni minimum.
 </div>
 
 
-<div id="outline-container-org235de43" class="outline-3">
-<h3 id="org235de43"><span class="section-number-3">2.7</span> Supremum et infimum</h3>
+<div id="outline-container-org35f872e" class="outline-3">
+<h3 id="org35f872e"><span class="section-number-3">2.7.</span> Supremum et infimum</h3>
 <div class="outline-text-3" id="text-2-7">
 <p>
 Dans le cas où le maximum de l'intervalle \(I\) existe, on a \(\sup I = \max I\). Dans les autres cas, on a par exemple :
@@ -1429,8 +1394,8 @@ et le même résultat pour les intervalles semi-ouverts.
 </div>
 
 
-<div id="outline-container-org60e96b0" class="outline-3">
-<h3 id="org60e96b0"><span class="section-number-3">2.8</span> Adhérence, intérieur et frontière</h3>
+<div id="outline-container-org1afbf3e" class="outline-3">
+<h3 id="org1afbf3e"><span class="section-number-3">2.8.</span> Adhérence, intérieur et frontière</h3>
 <div class="outline-text-3" id="text-2-8">
 <p>
 On peut vérifier que :
@@ -1453,21 +1418,21 @@ et ainsi de suite. La frontière est donc simplement :
 </div>
 
 
-<div id="outline-container-org38ff6b4" class="outline-2">
-<h2 id="org38ff6b4"><span class="section-number-2">3</span> Dimension \(n\)</h2>
+<div id="outline-container-org2e48b1b" class="outline-2">
+<h2 id="org2e48b1b"><span class="section-number-2">3.</span> Dimension \(n\)</h2>
 <div class="outline-text-2" id="text-3">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orga7f4780">3.1. Dépendances</a></li>
-<li><a href="#orgcf8bdfd">3.2. Définition</a></li>
-<li><a href="#org520e0b7">3.3. Egalité</a></li>
-<li><a href="#org9168c8d">3.4. Ordre partiel</a></li>
-<li><a href="#orgc9017ad">3.5. Opérations internes</a></li>
-<li><a href="#orga48e7eb">3.6. Multiplication mixte</a></li>
-<li><a href="#org7a7e3fc">3.7. Neutre</a></li>
-<li><a href="#orgfc2acc0">3.8. Lien avec les fonctions</a></li>
-<li><a href="#org1051d63">3.9. Puissance</a></li>
-<li><a href="#org0c71049">3.10. Factorielle</a></li>
+<li><a href="#orgcf100ce">3.1. Dépendances</a></li>
+<li><a href="#org80f876b">3.2. Définition</a></li>
+<li><a href="#orgd2d61a3">3.3. Egalité</a></li>
+<li><a href="#org19e0eca">3.4. Ordre partiel</a></li>
+<li><a href="#org958aa61">3.5. Opérations internes</a></li>
+<li><a href="#orgfcdc4e6">3.6. Multiplication mixte</a></li>
+<li><a href="#org7018ea7">3.7. Neutre</a></li>
+<li><a href="#org3767767">3.8. Lien avec les fonctions</a></li>
+<li><a href="#org5f9a031">3.9. Puissance</a></li>
+<li><a href="#org462d1e0">3.10. Factorielle</a></li>
 </ul>
 </div>
 
@@ -1477,8 +1442,8 @@ et ainsi de suite. La frontière est donc simplement :
 </div>
 
 
-<div id="outline-container-orga7f4780" class="outline-3">
-<h3 id="orga7f4780"><span class="section-number-3">3.1</span> Dépendances</h3>
+<div id="outline-container-orgcf100ce" class="outline-3">
+<h3 id="orgcf100ce"><span class="section-number-3">3.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:naturel} : Les naturels</li>
@@ -1491,8 +1456,8 @@ et ainsi de suite. La frontière est donc simplement :
 </div>
 
 
-<div id="outline-container-orgcf8bdfd" class="outline-3">
-<h3 id="orgcf8bdfd"><span class="section-number-3">3.2</span> Définition</h3>
+<div id="outline-container-org80f876b" class="outline-3">
+<h3 id="org80f876b"><span class="section-number-3">3.2.</span> Définition</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Conformément à la définition de la « puissance » d'un ensemble, \(\setN^n\) est l'ensemble des $n$-tuples :
@@ -1532,8 +1497,8 @@ On dit que les éléments de \(\mathcal{D}\) sont des ensembles de dimension \(n
 </div>
 
 
-<div id="outline-container-org520e0b7" class="outline-3">
-<h3 id="org520e0b7"><span class="section-number-3">3.3</span> Egalité</h3>
+<div id="outline-container-orgd2d61a3" class="outline-3">
+<h3 id="orgd2d61a3"><span class="section-number-3">3.3.</span> Egalité</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Soit l'ensemble \(A^n \in \mathcal{D}\) et \(x,y \in A^n\). On a :
@@ -1559,8 +1524,8 @@ De même, on dit que \(x = 0\) si et seulement si \(x_i = 0\) pour tout \(i \in 
 </div>
 
 
-<div id="outline-container-org9168c8d" class="outline-3">
-<h3 id="org9168c8d"><span class="section-number-3">3.4</span> Ordre partiel</h3>
+<div id="outline-container-org19e0eca" class="outline-3">
+<h3 id="org19e0eca"><span class="section-number-3">3.4.</span> Ordre partiel</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 Soit l'ensemble \(A^n \in \mathcal{D}\) et \(x,y \in A^n\). On a :
@@ -1586,8 +1551,8 @@ On dit que \(x \strictinferieur y\) si et seulement si \(x_i \strictinferieur y_
 </div>
 
 
-<div id="outline-container-orgc9017ad" class="outline-3">
-<h3 id="orgc9017ad"><span class="section-number-3">3.5</span> Opérations internes</h3>
+<div id="outline-container-org958aa61" class="outline-3">
+<h3 id="org958aa61"><span class="section-number-3">3.5.</span> Opérations internes</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 Soit l'ensemble \(A^n \in \mathcal{D}\) et \(x,y \in A^n\). On a :
@@ -1625,8 +1590,8 @@ tandis que la soustraction est donnée par :
 </div>
 
 
-<div id="outline-container-orga48e7eb" class="outline-3">
-<h3 id="orga48e7eb"><span class="section-number-3">3.6</span> Multiplication mixte</h3>
+<div id="outline-container-orgfcdc4e6" class="outline-3">
+<h3 id="orgfcdc4e6"><span class="section-number-3">3.6.</span> Multiplication mixte</h3>
 <div class="outline-text-3" id="text-3-6">
 <p>
 La multiplication mixte \(\cdot : A \times A^n \to A^n\) est définie par :
@@ -1642,8 +1607,8 @@ pour tout \(\alpha \in A\).
 </div>
 
 
-<div id="outline-container-org2612c67" class="outline-4">
-<h4 id="org2612c67"><span class="section-number-4">3.6.1</span> Notations</h4>
+<div id="outline-container-org217d463" class="outline-4">
+<h4 id="org217d463"><span class="section-number-4">3.6.1.</span> Notations</h4>
 <div class="outline-text-4" id="text-3-6-1">
 <p>
 On note bien entendu :
@@ -1673,8 +1638,8 @@ Enfin, le signe de multiplication est souvent omis :
 </div>
 
 
-<div id="outline-container-org7a7e3fc" class="outline-3">
-<h3 id="org7a7e3fc"><span class="section-number-3">3.7</span> Neutre</h3>
+<div id="outline-container-org7018ea7" class="outline-3">
+<h3 id="org7018ea7"><span class="section-number-3">3.7.</span> Neutre</h3>
 <div class="outline-text-3" id="text-3-7">
 <p>
 Soit l'ensemble \(A^n \in \mathcal{D}\). On note :
@@ -1691,8 +1656,8 @@ l'élément \(0 \in A^n\)
 </div>
 
 
-<div id="outline-container-orgfc2acc0" class="outline-3">
-<h3 id="orgfc2acc0"><span class="section-number-3">3.8</span> Lien avec les fonctions</h3>
+<div id="outline-container-org3767767" class="outline-3">
+<h3 id="org3767767"><span class="section-number-3">3.8.</span> Lien avec les fonctions</h3>
 <div class="outline-text-3" id="text-3-8">
 <p>
 On voit clairement que ces relations et opérations sont équivalentes aux mêmes relations et opérations définies sur les fonctions :
@@ -1709,8 +1674,8 @@ associées.
 </div>
 
 
-<div id="outline-container-org1051d63" class="outline-3">
-<h3 id="org1051d63"><span class="section-number-3">3.9</span> Puissance</h3>
+<div id="outline-container-org5f9a031" class="outline-3">
+<h3 id="org5f9a031"><span class="section-number-3">3.9.</span> Puissance</h3>
 <div class="outline-text-3" id="text-3-9">
 <p>
 Soit \(x = (x_1,...x_n) , y = (y_1,...,y_n) \in A^n\). La puissance s'écrit :
@@ -1723,8 +1688,8 @@ Soit \(x = (x_1,...x_n) , y = (y_1,...,y_n) \in A^n\). La puissance s'écrit :
 </div>
 
 
-<div id="outline-container-org0c71049" class="outline-3">
-<h3 id="org0c71049"><span class="section-number-3">3.10</span> Factorielle</h3>
+<div id="outline-container-org462d1e0" class="outline-3">
+<h3 id="org462d1e0"><span class="section-number-3">3.10.</span> Factorielle</h3>
 <div class="outline-text-3" id="text-3-10">
 <p>
 Soit \(m = (m_1,m_2,...,m_n) \in \setN^n\). On définit :
@@ -1739,8 +1704,8 @@ Soit \(m = (m_1,m_2,...,m_n) \in \setN^n\). On définit :
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2019-10-01 mar 12:33</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2023-05-10 mer 16:43</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>

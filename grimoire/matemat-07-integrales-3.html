@@ -3,14 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-10-01 mar 12:33 -->
+<!-- 2023-05-10 mer 16:44 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 07 : Intégrales - 3</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="chimay" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -31,8 +30,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -40,22 +40,22 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
+    overflow: auto;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -161,6 +161,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -177,56 +190,9 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         displayAlign: "center",
@@ -247,11 +213,10 @@ for the JavaScript code in this tag.
              }
 });
 </script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Eclats de vers : Matemat 07 : Intégrales - 3</h1>
 <p>
 <a href="index.html">Index des Grimoires</a>
@@ -261,11 +226,11 @@ for the JavaScript code in this tag.
 <a href="../index.html">Retour à l’accueil</a>
 </p>
 
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table des matières</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgd11cb50">1. Intégrales</a></li>
+<li><a href="#org0e93fd6">1. Intégrales</a></li>
 </ul>
 </div>
 </div>
@@ -424,29 +389,29 @@ for the JavaScript code in this tag.
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
 
-<div id="outline-container-orgd11cb50" class="outline-2">
-<h2 id="orgd11cb50"><span class="section-number-2">1</span> Intégrales</h2>
+<div id="outline-container-org0e93fd6" class="outline-2">
+<h2 id="org0e93fd6"><span class="section-number-2">1.</span> Intégrales</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org497f7f3">1.1. Dépendances</a></li>
-<li><a href="#orgfb92722">1.2. Introduction</a></li>
-<li><a href="#org38c2075">1.3. Signe quelconque</a></li>
-<li><a href="#org18c742a">1.4. Intégrale de Riemann</a></li>
-<li><a href="#org282f9e1">1.5. Fonctions essentiellement positives</a></li>
-<li><a href="#org46fba6a">1.6. Ordre</a></li>
-<li><a href="#org41d38b1">1.7. Valeur moyenne</a></li>
-<li><a href="#org01a1ec5">1.8. Bornes</a></li>
-<li><a href="#orgfc404c0">1.9. Opposé</a></li>
-<li><a href="#org7000805">1.10. Multiplication par une fonction indicatrice</a></li>
-<li><a href="#orgd8caa80">1.11. Additivité</a></li>
-<li><a href="#orgc60d990">1.12. Union</a></li>
-<li><a href="#orgf23f6c5">1.13. Convergence des mesures</a></li>
-<li><a href="#org2868996">1.14. Convergence des intégrales</a></li>
-<li><a href="#orgb012533">1.15. Adhérence</a></li>
-<li><a href="#orgee43b1f">1.16. Multiplication par un réel</a></li>
-<li><a href="#org8ed1cb6">1.17. Addition</a></li>
-<li><a href="#org9128d8b">1.18. Linéarité</a></li>
+<li><a href="#org871b057">1.1. Dépendances</a></li>
+<li><a href="#orgcd053a8">1.2. Introduction</a></li>
+<li><a href="#org1462c73">1.3. Signe quelconque</a></li>
+<li><a href="#orgb88fa67">1.4. Intégrale de Riemann</a></li>
+<li><a href="#orga67a887">1.5. Fonctions essentiellement positives</a></li>
+<li><a href="#org55a3468">1.6. Ordre</a></li>
+<li><a href="#org7f5a92a">1.7. Valeur moyenne</a></li>
+<li><a href="#org26d0e63">1.8. Bornes</a></li>
+<li><a href="#org4833086">1.9. Opposé</a></li>
+<li><a href="#org2691629">1.10. Multiplication par une fonction indicatrice</a></li>
+<li><a href="#orgf50ff93">1.11. Additivité</a></li>
+<li><a href="#org7e04b9f">1.12. Union</a></li>
+<li><a href="#org4da0a1a">1.13. Convergence des mesures</a></li>
+<li><a href="#orgd89664d">1.14. Convergence des intégrales</a></li>
+<li><a href="#org618fc2f">1.15. Adhérence</a></li>
+<li><a href="#org5f1344f">1.16. Multiplication par un réel</a></li>
+<li><a href="#org2d357d6">1.17. Addition</a></li>
+<li><a href="#org55ad0fe">1.18. Linéarité</a></li>
 </ul>
 </div>
 
@@ -456,8 +421,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-org497f7f3" class="outline-3">
-<h3 id="org497f7f3"><span class="section-number-3">1.1</span> Dépendances</h3>
+<div id="outline-container-org871b057" class="outline-3">
+<h3 id="org871b057"><span class="section-number-3">1.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:fonction} : Les fonctions</li>
@@ -467,8 +432,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-orgfb92722" class="outline-3">
-<h3 id="orgfb92722"><span class="section-number-3">1.2</span> Introduction</h3>
+<div id="outline-container-orgcd053a8" class="outline-3">
+<h3 id="orgcd053a8"><span class="section-number-3">1.2.</span> Introduction</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Soit une fonction \(f : A \mapsto \setR\) mesurable et essentiellement positive (\(f \esssuperieur 0\)) :
@@ -533,8 +498,8 @@ On dit alors que \(f\) est intégrable sur \(A\). On le note parfois :
 
 
 
-<div id="outline-container-orgb5e547e" class="outline-4">
-<h4 id="orgb5e547e"><span class="section-number-4">1.2.1</span> Consistance</h4>
+<div id="outline-container-org1d4b0ee" class="outline-4">
+<h4 id="org1d4b0ee"><span class="section-number-4">1.2.1.</span> Consistance</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 Les propriétés extrémales des intégrales des fonctions étagées nous montrent que, dans le cas particulier où \(f \in \etagee(A)\), l'intégrale obtenue par le supremum est identique à l'intégrale au sens des fonctions étagées.
@@ -544,8 +509,8 @@ Les propriétés extrémales des intégrales des fonctions étagées nous montre
 </div>
 
 
-<div id="outline-container-org38c2075" class="outline-3">
-<h3 id="org38c2075"><span class="section-number-3">1.3</span> Signe quelconque</h3>
+<div id="outline-container-org1462c73" class="outline-3">
+<h3 id="org1462c73"><span class="section-number-3">1.3.</span> Signe quelconque</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Soit une fonction mesurable \(f : A \mapsto \setR\). On peut décomposer \(f\) en fonctions positives \(f^+,f^- : A \mapsto \setR\) définies par :
@@ -603,8 +568,8 @@ On dit alors que \(f\) est intégrable.
 </div>
 
 
-<div id="outline-container-org18c742a" class="outline-3">
-<h3 id="org18c742a"><span class="section-number-3">1.4</span> Intégrale de Riemann</h3>
+<div id="outline-container-orgb88fa67" class="outline-3">
+<h3 id="orgb88fa67"><span class="section-number-3">1.4.</span> Intégrale de Riemann</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Soit une fonction \(f\) mesurable et essentiellement positive. Posons :
@@ -637,8 +602,8 @@ on dit que \(f\) est intégrable au sens de Riemann.
 </div>
 
 
-<div id="outline-container-org282f9e1" class="outline-3">
-<h3 id="org282f9e1"><span class="section-number-3">1.5</span> Fonctions essentiellement positives</h3>
+<div id="outline-container-orga67a887" class="outline-3">
+<h3 id="orga67a887"><span class="section-number-3">1.5.</span> Fonctions essentiellement positives</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Soit une fonction \(f\) mesurable et essentiellement positive.
@@ -646,8 +611,8 @@ Soit une fonction \(f\) mesurable et essentiellement positive.
 </div>
 
 
-<div id="outline-container-org368f80a" class="outline-4">
-<h4 id="org368f80a"><span class="section-number-4">1.5.1</span> Signe de l'intégrale</h4>
+<div id="outline-container-org9fce593" class="outline-4">
+<h4 id="org9fce593"><span class="section-number-4">1.5.1.</span> Signe de l'intégrale</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <p>
 Comme la fonction étagée nulle \(0 \in \mathcal{E}_A(f)\), on a :
@@ -664,8 +629,8 @@ par définition du supremum. L'intégrale d'une fonction essentiellement positiv
 </div>
 
 
-<div id="outline-container-org2b4a27c" class="outline-4">
-<h4 id="org2b4a27c"><span class="section-number-4">1.5.2</span> Intégrale nulle</h4>
+<div id="outline-container-org44d9d3a" class="outline-4">
+<h4 id="org44d9d3a"><span class="section-number-4">1.5.2.</span> Intégrale nulle</h4>
 <div class="outline-text-4" id="text-1-5-2">
 <p>
 Supposons que :
@@ -691,12 +656,12 @@ ce qui contredit l'hypothèse. On doit donc avoir \(f \essinferieur \epsilon\) q
 </div>
 
 
-<div id="outline-container-org46fba6a" class="outline-3">
-<h3 id="org46fba6a"><span class="section-number-3">1.6</span> Ordre</h3>
+<div id="outline-container-org55a3468" class="outline-3">
+<h3 id="org55a3468"><span class="section-number-3">1.6.</span> Ordre</h3>
 <div class="outline-text-3" id="text-1-6">
 </div>
-<div id="outline-container-org32a646a" class="outline-4">
-<h4 id="org32a646a"><span class="section-number-4">1.6.1</span> Fonctions positives</h4>
+<div id="outline-container-orga492b03" class="outline-4">
+<h4 id="orga492b03"><span class="section-number-4">1.6.1.</span> Fonctions positives</h4>
 <div class="outline-text-4" id="text-1-6-1">
 <p>
 Soit les fonctions essentiellement positives et intégrables \(f,g : A \to \setR\) telles que \(f \essinferieur g\). Soit \(w \in \mathcal{E}_A(f)\). Comme on a  \(w \essinferieur f\) et \(f \essinferieur g\), on en conclut que \(w \essinferieur g\), c'est-à-dire que \(w \in \mathcal{E}_A(g)\). On a donc \(\mathcal{E}_A(f) \subseteq \mathcal{E}_A(g)\). On en déduit que \(\mathcal{I}_A(f) \subseteq \mathcal{I}_A(g)\), d'où :
@@ -717,8 +682,8 @@ Comme ces supremums sont par définition égaux aux intégrales correspondantes,
 </div>
 
 
-<div id="outline-container-org63c9417" class="outline-4">
-<h4 id="org63c9417"><span class="section-number-4">1.6.2</span> Généralisation</h4>
+<div id="outline-container-org17bc292" class="outline-4">
+<h4 id="org17bc292"><span class="section-number-4">1.6.2.</span> Généralisation</h4>
 <div class="outline-text-4" id="text-1-6-2">
 <p>
 On considère à présent le cas de fonctions \(f,g\) de signe quelconque, toujours avec \(f \essinferieur g\). On définit les fonctions positives :
@@ -754,8 +719,8 @@ L'ordre des intégrales correspond à l'ordre essentiel sur les fonctions.
 </div>
 
 
-<div id="outline-container-org5b5283b" class="outline-4">
-<h4 id="org5b5283b"><span class="section-number-4">1.6.3</span> Egalité</h4>
+<div id="outline-container-orga154c5b" class="outline-4">
+<h4 id="orga154c5b"><span class="section-number-4">1.6.3.</span> Egalité</h4>
 <div class="outline-text-4" id="text-1-6-3">
 <p>
 Soit deux fonctions intégrables \(f,g\) vérifiant \(f \essegal g\). On a \(f \essinferieur g\) et l'intégrale de \(f\) est inférieure à l'intégrale de \(g\). Mais on a aussi \(f \esssuperieur g\) et l'intégrale de \(f\) est supérieure à l'intégrale de \(g\). On en conclut que :
@@ -769,8 +734,8 @@ Soit deux fonctions intégrables \(f,g\) vérifiant \(f \essegal g\). On a \(f \
 </div>
 
 
-<div id="outline-container-org41d38b1" class="outline-3">
-<h3 id="org41d38b1"><span class="section-number-3">1.7</span> Valeur moyenne</h3>
+<div id="outline-container-org7f5a92a" class="outline-3">
+<h3 id="org7f5a92a"><span class="section-number-3">1.7.</span> Valeur moyenne</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 La valeur moyenne d'une fonction \(f\) sur \(A\) est définie par :
@@ -783,8 +748,8 @@ La valeur moyenne d'une fonction \(f\) sur \(A\) est définie par :
 </div>
 
 
-<div id="outline-container-org01a1ec5" class="outline-3">
-<h3 id="org01a1ec5"><span class="section-number-3">1.8</span> Bornes</h3>
+<div id="outline-container-org26d0e63" class="outline-3">
+<h3 id="org26d0e63"><span class="section-number-3">1.8.</span> Bornes</h3>
 <div class="outline-text-3" id="text-1-8">
 <p>
 Soit une fonction intégrable \(f : A \mapsto \setR\).
@@ -833,8 +798,8 @@ En intégrant sur \(A\), il vient :
 
 
 
-<div id="outline-container-org07e6ade" class="outline-4">
-<h4 id="org07e6ade"><span class="section-number-4">1.8.1</span> Corollaires</h4>
+<div id="outline-container-org32ccaee" class="outline-4">
+<h4 id="org32ccaee"><span class="section-number-4">1.8.1.</span> Corollaires</h4>
 <div class="outline-text-4" id="text-1-8-1">
 <p>
 Si \(f\) est essentiellement nulle, les supremum et infimum essentiels s'annulent, et :
@@ -860,8 +825,8 @@ Il en va de même si \(\mu(A) = 0\).
 </div>
 
 
-<div id="outline-container-orgfc404c0" class="outline-3">
-<h3 id="orgfc404c0"><span class="section-number-3">1.9</span> Opposé</h3>
+<div id="outline-container-org4833086" class="outline-3">
+<h3 id="org4833086"><span class="section-number-3">1.9.</span> Opposé</h3>
 <div class="outline-text-3" id="text-1-9">
 <p>
 Soit une fonction intégrable \(f\) et \(g = -f\). On a :
@@ -891,12 +856,12 @@ L'intégrale de la fonction opposée est donc l'opposé de l'intégrale :
 </div>
 
 
-<div id="outline-container-org7000805" class="outline-3">
-<h3 id="org7000805"><span class="section-number-3">1.10</span> Multiplication par une fonction indicatrice</h3>
+<div id="outline-container-org2691629" class="outline-3">
+<h3 id="org2691629"><span class="section-number-3">1.10.</span> Multiplication par une fonction indicatrice</h3>
 <div class="outline-text-3" id="text-1-10">
 </div>
-<div id="outline-container-org17c7a7b" class="outline-4">
-<h4 id="org17c7a7b"><span class="section-number-4">1.10.1</span> Fonctions positives</h4>
+<div id="outline-container-org7feb79c" class="outline-4">
+<h4 id="org7feb79c"><span class="section-number-4">1.10.1.</span> Fonctions positives</h4>
 <div class="outline-text-4" id="text-1-10-1">
 <p>
 Soit une fonction \(f\) essentiellement positive et intégrable sur \(A\) et l'ensemble \(C \in \mathcal{T}\) vérifiant \(C \subseteq A\). Soit le réel \(\epsilon \strictsuperieur 0\).
@@ -1055,8 +1020,8 @@ L'intégrale de \(f\) sur \(C\) étant à la fois inférieure et supérieure à 
 </div>
 
 
-<div id="outline-container-orga25dbd6" class="outline-4">
-<h4 id="orga25dbd6"><span class="section-number-4">1.10.2</span> Généralisation</h4>
+<div id="outline-container-orgf94ec14" class="outline-4">
+<h4 id="orgf94ec14"><span class="section-number-4">1.10.2.</span> Généralisation</h4>
 <div class="outline-text-4" id="text-1-10-2">
 <p>
 Soit une fonction \(f\) mesurable et sa décomposition en fonctions positives \(f = f^+ - f^-\). On voit que :
@@ -1093,12 +1058,12 @@ on en conclut que :
 </div>
 
 
-<div id="outline-container-orgd8caa80" class="outline-3">
-<h3 id="orgd8caa80"><span class="section-number-3">1.11</span> Additivité</h3>
+<div id="outline-container-orgf50ff93" class="outline-3">
+<h3 id="orgf50ff93"><span class="section-number-3">1.11.</span> Additivité</h3>
 <div class="outline-text-3" id="text-1-11">
 </div>
-<div id="outline-container-orgb064437" class="outline-4">
-<h4 id="orgb064437"><span class="section-number-4">1.11.1</span> Fonctions positives</h4>
+<div id="outline-container-org46c5160" class="outline-4">
+<h4 id="org46c5160"><span class="section-number-4">1.11.1.</span> Fonctions positives</h4>
 <div class="outline-text-4" id="text-1-11-1">
 <p>
 Soit deux ensembles \(A\) et \(B\) disjoints (\(A \cap B = \emptyset\)) et une fonction \(f\) essentiellement positive et mesurable sur \(A \cup B\). Comme \(A\) et \(B\) sont disjoints, on a \(\indicatrice[A \cap B] = 0\) et :
@@ -1287,8 +1252,8 @@ L'intégrale sur \(A \cup B\) devant être à la fois supérieure et inférieure
 </div>
 
 
-<div id="outline-container-orgd6601a4" class="outline-4">
-<h4 id="orgd6601a4"><span class="section-number-4">1.11.2</span> Généralisation</h4>
+<div id="outline-container-org3e29f1d" class="outline-4">
+<h4 id="org3e29f1d"><span class="section-number-4">1.11.2.</span> Généralisation</h4>
 <div class="outline-text-4" id="text-1-11-2">
 <p>
 Nous allons étendre le résultat précédent aux fonctions mesurables quelconques. Soit la fonction mesurable \(f\). En utilisant la décomposition en fonctions positives \(f = f^+ - f^-\), on obtient :
@@ -1303,8 +1268,8 @@ Nous allons étendre le résultat précédent aux fonctions mesurables quelconqu
 </div>
 
 
-<div id="outline-container-org3b543e8" class="outline-4">
-<h4 id="org3b543e8"><span class="section-number-4">1.11.3</span> Corollaire</h4>
+<div id="outline-container-org3671712" class="outline-4">
+<h4 id="org3671712"><span class="section-number-4">1.11.3.</span> Corollaire</h4>
 <div class="outline-text-4" id="text-1-11-3">
 <p>
 Si \(C \subseteq A\), les ensembles \(A \setminus C\) et \(C\) sont disjoints et d'union égale à \(A\). On a donc :
@@ -1317,8 +1282,8 @@ Si \(C \subseteq A\), les ensembles \(A \setminus C\) et \(C\) sont disjoints et
 </div>
 
 
-<div id="outline-container-org3361055" class="outline-4">
-<h4 id="org3361055"><span class="section-number-4">1.11.4</span> Invariance</h4>
+<div id="outline-container-orgc3579c0" class="outline-4">
+<h4 id="orgc3579c0"><span class="section-number-4">1.11.4.</span> Invariance</h4>
 <div class="outline-text-4" id="text-1-11-4">
 <p>
 Soit un sous-ensemble essentiel \(C\) de \(A\). On a alors \(C = A \setminus Z\) avec \(Z \subseteq A\) et \(\mu(Z) = 0\). Les ensembles \(C\) et \(Z = A \setminus C\) sont disjoints et d'union égale à \(A\). Comme l'intégrale de \(f\) sur l'ensemble de mesure nulle \(Z\) est nulle, on a :
@@ -1338,8 +1303,8 @@ L'intégrale est invariante lorsqu'on ajoute ou s'abstrait d'un ensemble de mesu
 </div>
 
 
-<div id="outline-container-orgc60d990" class="outline-3">
-<h3 id="orgc60d990"><span class="section-number-3">1.12</span> Union</h3>
+<div id="outline-container-org7e04b9f" class="outline-3">
+<h3 id="org7e04b9f"><span class="section-number-3">1.12.</span> Union</h3>
 <div class="outline-text-3" id="text-1-12">
 <p>
 Soit à présent \(A,B \in \mathcal{T}\) quelconques et une fonction intégrable \(f : A \cup B \mapsto \setR\). Comme \(A \setminus B\) et \(B\) sont disjoints et d'union égale à \(A \cup B\), on a :
@@ -1375,8 +1340,8 @@ En injectant cette relation dans l'expression de l'intégrale sur \(A \cup B\), 
 </div>
 
 
-<div id="outline-container-orge6b16fc" class="outline-4">
-<h4 id="orge6b16fc"><span class="section-number-4">1.12.1</span> Corollaire</h4>
+<div id="outline-container-orgeee5d91" class="outline-4">
+<h4 id="orgeee5d91"><span class="section-number-4">1.12.1.</span> Corollaire</h4>
 <div class="outline-text-4" id="text-1-12-1">
 <p>
 Si l'ensemble \(A \cap B\) vérifie \(\mu(A \cap B) = 0\), l'intégrale correspondante est nulle et :
@@ -1394,8 +1359,8 @@ Il suffit donc d'avoir une intersection de mesure nulle (et pas forcément vide)
 </div>
 
 
-<div id="outline-container-orgf23f6c5" class="outline-3">
-<h3 id="orgf23f6c5"><span class="section-number-3">1.13</span> Convergence des mesures</h3>
+<div id="outline-container-org4da0a1a" class="outline-3">
+<h3 id="org4da0a1a"><span class="section-number-3">1.13.</span> Convergence des mesures</h3>
 <div class="outline-text-3" id="text-1-13">
 <p>
 Soit une fonction \(f : A \mapsto \setR\) essentiellement positive et intégrable. On a :
@@ -1469,8 +1434,8 @@ On en déduit que :
 </div>
 
 
-<div id="outline-container-org2868996" class="outline-3">
-<h3 id="org2868996"><span class="section-number-3">1.14</span> Convergence des intégrales</h3>
+<div id="outline-container-orgd89664d" class="outline-3">
+<h3 id="orgd89664d"><span class="section-number-3">1.14.</span> Convergence des intégrales</h3>
 <div class="outline-text-3" id="text-1-14">
 <p>
 Soit une fonction \(f : A \mapsto \setR\) essentiellement positive et intégrable. On a :
@@ -1611,8 +1576,8 @@ c'est-à-dire :
 </div>
 
 
-<div id="outline-container-org2a43ae0" class="outline-4">
-<h4 id="org2a43ae0"><span class="section-number-4">1.14.1</span> Corollaire</h4>
+<div id="outline-container-org4b119e5" class="outline-4">
+<h4 id="org4b119e5"><span class="section-number-4">1.14.1.</span> Corollaire</h4>
 <div class="outline-text-4" id="text-1-14-1">
 <p>
 On en déduit que :
@@ -1634,8 +1599,8 @@ d'où :
 </div>
 
 
-<div id="outline-container-org1e47f26" class="outline-4">
-<h4 id="org1e47f26"><span class="section-number-4">1.14.2</span> Généralisation</h4>
+<div id="outline-container-org631f89e" class="outline-4">
+<h4 id="org631f89e"><span class="section-number-4">1.14.2.</span> Généralisation</h4>
 <div class="outline-text-4" id="text-1-14-2">
 <p>
 Soit \(f\) est une fonction intégrable de signe quelconque et sa décomposition en fonctions positives \(f = f^+ - f^-\). On a :
@@ -1664,8 +1629,8 @@ On en déduit que :
 </div>
 
 
-<div id="outline-container-orgb012533" class="outline-3">
-<h3 id="orgb012533"><span class="section-number-3">1.15</span> Adhérence</h3>
+<div id="outline-container-org618fc2f" class="outline-3">
+<h3 id="org618fc2f"><span class="section-number-3">1.15.</span> Adhérence</h3>
 <div class="outline-text-3" id="text-1-15">
 <p>
 Soit un ensemble \(A\) vérifiant \(\mu(A) \strictsuperieur 0\) et une fonction \(f : A \mapsto \setR\) mesurable, essentiellement positive et majorée :
@@ -1896,8 +1861,8 @@ pour tout \(m \in \setN\) vérifiant \(m \ge n\). Par conséquent, \(\lambda\) n
 </div>
 
 
-<div id="outline-container-orgee43b1f" class="outline-3">
-<h3 id="orgee43b1f"><span class="section-number-3">1.16</span> Multiplication par un réel</h3>
+<div id="outline-container-org5f1344f" class="outline-3">
+<h3 id="org5f1344f"><span class="section-number-3">1.16.</span> Multiplication par un réel</h3>
 <div class="outline-text-3" id="text-1-16">
 <p>
 Soit une fonction intégrable \(f\) essentiellement positive et le réel \(\lambda \strictsuperieur 0\). Si \(w\) est une fonction étagée, on voit que \(w \le f \Leftrightarrow \lambda \cdot w \le \lambda \cdot f\). On peut donc associer une fonction \(\lambda \cdot w \in \mathcal{E}_A(\lambda \cdot f)\) à toute fonction \(w \in \mathcal{E}_A(f)\), et réciproquement. Par linéarité de l'intégrale des fonctions étagées, on en conclut que :
@@ -1933,12 +1898,12 @@ Nous avons donc prouvé la relation pour tout \(\lambda \in \setR\).
 </div>
 
 
-<div id="outline-container-org8ed1cb6" class="outline-3">
-<h3 id="org8ed1cb6"><span class="section-number-3">1.17</span> Addition</h3>
+<div id="outline-container-org2d357d6" class="outline-3">
+<h3 id="org2d357d6"><span class="section-number-3">1.17.</span> Addition</h3>
 <div class="outline-text-3" id="text-1-17">
 </div>
-<div id="outline-container-orgf48fc45" class="outline-4">
-<h4 id="orgf48fc45"><span class="section-number-4">1.17.1</span> Positives et majorées</h4>
+<div id="outline-container-orgd59a49f" class="outline-4">
+<h4 id="orgd59a49f"><span class="section-number-4">1.17.1.</span> Positives et majorées</h4>
 <div class="outline-text-4" id="text-1-17-1">
 <p>
 Soit deux fonctions \(f,g : A \mapsto \setR\) intégrables, essentiellement positives et majorées :
@@ -2061,8 +2026,8 @@ L'intégrale de \(f + g\) devant être simultanément supérieure et inférieure
 </div>
 
 
-<div id="outline-container-org68e69d7" class="outline-4">
-<h4 id="org68e69d7"><span class="section-number-4">1.17.2</span> Positives</h4>
+<div id="outline-container-org40fd3ae" class="outline-4">
+<h4 id="org40fd3ae"><span class="section-number-4">1.17.2.</span> Positives</h4>
 <div class="outline-text-4" id="text-1-17-2">
 <p>
 Soit deux fonctions \(f,g\) intégrables et essentiellement positives. Posons :
@@ -2174,8 +2139,8 @@ Passant à la limite pour \(\alpha \to +\infty\), on obtient alors :
 </div>
 
 
-<div id="outline-container-org818b337" class="outline-4">
-<h4 id="org818b337"><span class="section-number-4">1.17.3</span> Soustraction</h4>
+<div id="outline-container-org4972a2a" class="outline-4">
+<h4 id="org4972a2a"><span class="section-number-4">1.17.3.</span> Soustraction</h4>
 <div class="outline-text-4" id="text-1-17-3">
 <p>
 Soit \(f,g\) deux fonctions intégrables essentiellement positives vérifiant \(h = f - g \esssuperieur 0\). Comme \(f = g + h\), on a :
@@ -2204,8 +2169,8 @@ c'est-à-dire :
 </div>
 
 
-<div id="outline-container-orge3c13fd" class="outline-4">
-<h4 id="orge3c13fd"><span class="section-number-4">1.17.4</span> Généralisation</h4>
+<div id="outline-container-org9bf01cc" class="outline-4">
+<h4 id="org9bf01cc"><span class="section-number-4">1.17.4.</span> Généralisation</h4>
 <div class="outline-text-4" id="text-1-17-4">
 <p>
 Soit deux fonctions intégrables \(f,g\) et leurs décompositions en fonctions positives \(f = f^+ - f^-\) et \(g = g^+ - g^-\). Posons :
@@ -2281,8 +2246,8 @@ L'intégrale d'une somme est la somme des intégrales.
 </div>
 
 
-<div id="outline-container-org9128d8b" class="outline-3">
-<h3 id="org9128d8b"><span class="section-number-3">1.18</span> Linéarité</h3>
+<div id="outline-container-org55ad0fe" class="outline-3">
+<h3 id="org55ad0fe"><span class="section-number-3">1.18.</span> Linéarité</h3>
 <div class="outline-text-3" id="text-1-18">
 <p>
 Soit les réels \(\alpha,\beta\) et les fonctions intégrables \(f,g : A \mapsto \setR\). On a :
@@ -2302,8 +2267,8 @@ L'intégrale est linéaire.
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2019-10-01 mar 12:33</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2023-05-10 mer 16:44</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>

@@ -3,14 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-10-01 mar 12:34 -->
+<!-- 2023-05-10 mer 16:44 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 07 : Intégrales - 2</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="chimay" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -31,8 +30,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -40,22 +40,22 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
+    overflow: auto;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -161,6 +161,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -177,56 +190,9 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         displayAlign: "center",
@@ -247,11 +213,10 @@ for the JavaScript code in this tag.
              }
 });
 </script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Eclats de vers : Matemat 07 : Intégrales - 2</h1>
 <p>
 <a href="index.html">Index des Grimoires</a>
@@ -261,12 +226,12 @@ for the JavaScript code in this tag.
 <a href="../index.html">Retour à l’accueil</a>
 </p>
 
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table des matières</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org3986cbc">1. Fonctions étagées</a></li>
-<li><a href="#org59a506d">2. Décomposition en fonctions positives</a></li>
+<li><a href="#org602de81">1. Fonctions étagées</a></li>
+<li><a href="#orgadea803">2. Décomposition en fonctions positives</a></li>
 </ul>
 </div>
 </div>
@@ -425,27 +390,27 @@ for the JavaScript code in this tag.
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
 
-<div id="outline-container-org3986cbc" class="outline-2">
-<h2 id="org3986cbc"><span class="section-number-2">1</span> Fonctions étagées</h2>
+<div id="outline-container-org602de81" class="outline-2">
+<h2 id="org602de81"><span class="section-number-2">1.</span> Fonctions étagées</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb23b46a">1.1. Dépendances</a></li>
-<li><a href="#org8e54cd2">1.2. Définition</a></li>
-<li><a href="#org7f389f9">1.3. Mesurabilité</a></li>
-<li><a href="#orgc8b5c51">1.4. Multiplication par une fonction indicatrice</a></li>
-<li><a href="#orge722aec">1.5. Essentialité</a></li>
-<li><a href="#org81dc12a">1.6. Intégrale d'une mesure</a></li>
-<li><a href="#orge93a6a8">1.7. Intégrale d'une constante</a></li>
-<li><a href="#org281b3b0">1.8. Intégrale d'une fonction étagée</a></li>
-<li><a href="#orge7f098b">1.9. Unicité</a></li>
-<li><a href="#orgdc95fa2">1.10. Ordre</a></li>
-<li><a href="#orgd9f49f3">1.11. Encadrement</a></li>
-<li><a href="#orgbb20e60">1.12. Propriétés extrémales</a></li>
-<li><a href="#org91c95bb">1.13. Additivité</a></li>
-<li><a href="#orgbc41709">1.14. Propriétés diverses</a></li>
-<li><a href="#orgb418f93">1.15. Mesure nulle</a></li>
-<li><a href="#org460d701">1.16. Mesurabilité et opérations</a></li>
+<li><a href="#org9f4c1dd">1.1. Dépendances</a></li>
+<li><a href="#org0f04bbd">1.2. Définition</a></li>
+<li><a href="#orgf32e8d5">1.3. Mesurabilité</a></li>
+<li><a href="#org75d624a">1.4. Multiplication par une fonction indicatrice</a></li>
+<li><a href="#org0232992">1.5. Essentialité</a></li>
+<li><a href="#orgdc739e4">1.6. Intégrale d'une mesure</a></li>
+<li><a href="#orgc935b91">1.7. Intégrale d'une constante</a></li>
+<li><a href="#org39a9063">1.8. Intégrale d'une fonction étagée</a></li>
+<li><a href="#org91ff198">1.9. Unicité</a></li>
+<li><a href="#orged0413d">1.10. Ordre</a></li>
+<li><a href="#org7d7d287">1.11. Encadrement</a></li>
+<li><a href="#org3070895">1.12. Propriétés extrémales</a></li>
+<li><a href="#orgea38227">1.13. Additivité</a></li>
+<li><a href="#org1d1a9f3">1.14. Propriétés diverses</a></li>
+<li><a href="#orge6e53b1">1.15. Mesure nulle</a></li>
+<li><a href="#org29784b0">1.16. Mesurabilité et opérations</a></li>
 </ul>
 </div>
 
@@ -455,8 +420,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-orgb23b46a" class="outline-3">
-<h3 id="orgb23b46a"><span class="section-number-3">1.1</span> Dépendances</h3>
+<div id="outline-container-org9f4c1dd" class="outline-3">
+<h3 id="org9f4c1dd"><span class="section-number-3">1.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:fonction} : Les fonctions</li>
@@ -466,8 +431,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-org8e54cd2" class="outline-3">
-<h3 id="org8e54cd2"><span class="section-number-3">1.2</span> Définition</h3>
+<div id="outline-container-org0f04bbd" class="outline-3">
+<h3 id="org0f04bbd"><span class="section-number-3">1.2.</span> Définition</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Soit la mesure \(\mu : \mathcal{T} \mapsto \setR\), l'ensemble \(\Phi \in \mathcal{T}\) et \(A \in \mathcal{T}\) vérifiant \(A \subseteq \Phi\). On dit que la fonction \(w : \Phi \to \setR\) est étagée sur \(A\) si on peut trouver une collection finie \(\{ A_1, ..., A_n \} \subseteq \mathcal{T}\) formant une partition de \(A\) et des réels \(w_i \in \setR\) tels que :
@@ -484,8 +449,8 @@ pour tout \(x \in A\). On note \(\etagee(A)\) l'ensemble des fonctions étagées
 </div>
 
 
-<div id="outline-container-org7f389f9" class="outline-3">
-<h3 id="org7f389f9"><span class="section-number-3">1.3</span> Mesurabilité</h3>
+<div id="outline-container-orgf32e8d5" class="outline-3">
+<h3 id="orgf32e8d5"><span class="section-number-3">1.3.</span> Mesurabilité</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Soit \(a \in \setR\). Comme :
@@ -518,8 +483,8 @@ Les fonctions étagées sont mesurables.
 </div>
 
 
-<div id="outline-container-orgc8b5c51" class="outline-3">
-<h3 id="orgc8b5c51"><span class="section-number-3">1.4</span> Multiplication par une fonction indicatrice</h3>
+<div id="outline-container-org75d624a" class="outline-3">
+<h3 id="org75d624a"><span class="section-number-3">1.4.</span> Multiplication par une fonction indicatrice</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Soit \(B \subseteq A\). On a :
@@ -569,12 +534,12 @@ ce qui montre que \(u\) est une fonction étagée sur \((A \setminus B) \cup B =
 </div>
 
 
-<div id="outline-container-orge722aec" class="outline-3">
-<h3 id="orge722aec"><span class="section-number-3">1.5</span> Essentialité</h3>
+<div id="outline-container-org0232992" class="outline-3">
+<h3 id="org0232992"><span class="section-number-3">1.5.</span> Essentialité</h3>
 <div class="outline-text-3" id="text-1-5">
 </div>
-<div id="outline-container-org9fb2390" class="outline-4">
-<h4 id="org9fb2390"><span class="section-number-4">1.5.1</span> Bornes</h4>
+<div id="outline-container-orgb33659e" class="outline-4">
+<h4 id="orgb33659e"><span class="section-number-4">1.5.1.</span> Bornes</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <p>
 Soit l'ensemble \(M\) rassemblant les indices correspondant aux ensembles de mesure non nulle :
@@ -627,8 +592,8 @@ pour tout \(x \in A \setminus Z\), on a :
 </div>
 
 
-<div id="outline-container-orgc086ac8" class="outline-4">
-<h4 id="orgc086ac8"><span class="section-number-4">1.5.2</span> Extrema</h4>
+<div id="outline-container-org335fa14" class="outline-4">
+<h4 id="org335fa14"><span class="section-number-4">1.5.2.</span> Extrema</h4>
 <div class="outline-text-4" id="text-1-5-2">
 <p>
 Soit :
@@ -721,8 +686,8 @@ Les extrema essentiels d'une fonction étagée existent toujours et sont très s
 </div>
 
 
-<div id="outline-container-org81dc12a" class="outline-3">
-<h3 id="org81dc12a"><span class="section-number-3">1.6</span> Intégrale d'une mesure</h3>
+<div id="outline-container-orgdc739e4" class="outline-3">
+<h3 id="orgdc739e4"><span class="section-number-3">1.6.</span> Intégrale d'une mesure</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 L'intégrale d'une mesure \(\mu : \mathcal{T} \mapsto \setR\) sur \(A \in \mathcal{T}\) est simplement la mesure de \(A\) :
@@ -735,8 +700,8 @@ L'intégrale d'une mesure \(\mu : \mathcal{T} \mapsto \setR\) sur \(A \in \mathc
 </div>
 
 
-<div id="outline-container-orge93a6a8" class="outline-3">
-<h3 id="orge93a6a8"><span class="section-number-3">1.7</span> Intégrale d'une constante</h3>
+<div id="outline-container-orgc935b91" class="outline-3">
+<h3 id="orgc935b91"><span class="section-number-3">1.7.</span> Intégrale d'une constante</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 On étend la définition aux constantes \(c \in \setR\) par linéarité :
@@ -748,8 +713,8 @@ On étend la définition aux constantes \(c \in \setR\) par linéarité :
 </div>
 
 
-<div id="outline-container-org9b39f96" class="outline-4">
-<h4 id="org9b39f96"><span class="section-number-4">1.7.1</span> Fonction nulle</h4>
+<div id="outline-container-org9885827" class="outline-4">
+<h4 id="org9885827"><span class="section-number-4">1.7.1.</span> Fonction nulle</h4>
 <div class="outline-text-4" id="text-1-7-1">
 <p>
 La fonction nulle peut être considérée comme la constante \(0\). On a donc :
@@ -763,8 +728,8 @@ La fonction nulle peut être considérée comme la constante \(0\). On a donc :
 </div>
 
 
-<div id="outline-container-org281b3b0" class="outline-3">
-<h3 id="org281b3b0"><span class="section-number-3">1.8</span> Intégrale d'une fonction étagée</h3>
+<div id="outline-container-org39a9063" class="outline-3">
+<h3 id="org39a9063"><span class="section-number-3">1.8.</span> Intégrale d'une fonction étagée</h3>
 <div class="outline-text-3" id="text-1-8">
 <p>
 Soit un ensemble \(A\) et une fonction \(w \in \etagee(A)\). On peut trouver des \(w_i \in \setR\) et des \(A_i \in \mathcal{T}\) formant une partition de \(A\) et tels que :
@@ -801,8 +766,8 @@ et finalement :
 </div>
 
 
-<div id="outline-container-orge7f098b" class="outline-3">
-<h3 id="orge7f098b"><span class="section-number-3">1.9</span> Unicité</h3>
+<div id="outline-container-org91ff198" class="outline-3">
+<h3 id="org91ff198"><span class="section-number-3">1.9.</span> Unicité</h3>
 <div class="outline-text-3" id="text-1-9">
 <p>
 Nous allons vérifier que, pour une fonction étagée \(w\) donnée, l'intégrale ainsi définie ne dépend pas de la partition utilisée. Soit les collections finies d'ensembles \(A_i \in \mathcal{T}\) et \(B_j \in \mathcal{T}\) telles que \(\{A_1,A_2,...,A_m\}\) et \(\{B_1,B_2,...,B_n\}\) forment deux partitions de \(A\) et telles que l'on puisse trouver des \(a_i,b_j \in \setR\) vérifiant :
@@ -818,8 +783,8 @@ pour tout \(x \in A\).
 </div>
 
 
-<div id="outline-container-orgd764f4d" class="outline-4">
-<h4 id="orgd764f4d"><span class="section-number-4">1.9.1</span> Intersection des partitions</h4>
+<div id="outline-container-org00c087f" class="outline-4">
+<h4 id="org00c087f"><span class="section-number-4">1.9.1.</span> Intersection des partitions</h4>
 <div class="outline-text-4" id="text-1-9-1">
 <p>
 Posons \(P = \{1,...,m\} \times \{1,...,n\}\) et \(C_{ij} = A_i \cup B_j \in \mathcal{T}\) pour tout \((i,j) \in P\). Si \(i \ne k\) ou si \(j \ne l\), on a :
@@ -883,8 +848,8 @@ et :
 </div>
 
 
-<div id="outline-container-org28c121c" class="outline-4">
-<h4 id="org28c121c"><span class="section-number-4">1.9.2</span> Expression alternative</h4>
+<div id="outline-container-org9a59ab5" class="outline-4">
+<h4 id="org9a59ab5"><span class="section-number-4">1.9.2.</span> Expression alternative</h4>
 <div class="outline-text-4" id="text-1-9-2">
 <p>
 Utilisant les propriétés des \(C_{ij}\), la fonction \(w\) peut se réécrire comme suit :
@@ -905,8 +870,8 @@ On en conclut que :
 </div>
 
 
-<div id="outline-container-org57a8543" class="outline-4">
-<h4 id="org57a8543"><span class="section-number-4">1.9.3</span> Implication de l'égalité</h4>
+<div id="outline-container-org3adee8b" class="outline-4">
+<h4 id="org3adee8b"><span class="section-number-4">1.9.3.</span> Implication de l'égalité</h4>
 <div class="outline-text-4" id="text-1-9-3">
 <p>
 Soit un couple \((i,j) \in P\) tel que \(\indicatrice[C_{ij}] \ne 0\), c'est-à-dire \(C_{ij} \ne \emptyset\). Soit \(x \in C_{ij}\). Pour tout \((k,l) \in P \setminus (i,j)\), on a \(C_{kl} \cap C_{ij} = \emptyset\) et donc \(\indicatrice[C_{kl}](x) = 0\). La somme :
@@ -935,8 +900,8 @@ On doit donc avoir \(a_i - b_j = 0\), c'est-à-dire \(a_i = b_j\). On pose :
 </div>
 
 
-<div id="outline-container-org88572a4" class="outline-4">
-<h4 id="org88572a4"><span class="section-number-4">1.9.4</span> Intégrales</h4>
+<div id="outline-container-orgd79b566" class="outline-4">
+<h4 id="orgd79b566"><span class="section-number-4">1.9.4.</span> Intégrales</h4>
 <div class="outline-text-4" id="text-1-9-4">
 <p>
 L'intégrale évaluée sur le découpage des \(A_i\) s'écrit :
@@ -978,8 +943,8 @@ L'intégrale d'une fonction étagée ne dépend donc pas du choix de la partitio
 </div>
 
 
-<div id="outline-container-orgdc95fa2" class="outline-3">
-<h3 id="orgdc95fa2"><span class="section-number-3">1.10</span> Ordre</h3>
+<div id="outline-container-orged0413d" class="outline-3">
+<h3 id="orged0413d"><span class="section-number-3">1.10.</span> Ordre</h3>
 <div class="outline-text-3" id="text-1-10">
 <p>
 Soit les fonctions étagées \(u,v \in \etagee(A)\) vérifiant \(u \essinferieur v\). Soit les partitions \(\{U_1,...,U_m\}\) et \(\{V_1,...,V_n\}\) et les réels \(u_i,v_j\) tels que :
@@ -1045,8 +1010,8 @@ L'intégrale conserve l'ordre essentiel entre fonctions étagées.
 </div>
 
 
-<div id="outline-container-org5219303" class="outline-4">
-<h4 id="org5219303"><span class="section-number-4">1.10.1</span> Signe</h4>
+<div id="outline-container-org33ffa85" class="outline-4">
+<h4 id="org33ffa85"><span class="section-number-4">1.10.1.</span> Signe</h4>
 <div class="outline-text-4" id="text-1-10-1">
 <p>
 Comme la fonction constante \(0\) est un cas particulier de fonction étagée, l'intégrale d'une fonction étagée \(u\) essentiellement supérieure à zéro est positive. De même, l'intégrale d'un fonction étagée \(v\) essentiellement inférieure à zéro est négative.
@@ -1055,8 +1020,8 @@ Comme la fonction constante \(0\) est un cas particulier de fonction étagée, l
 </div>
 
 
-<div id="outline-container-orgf0c5727" class="outline-4">
-<h4 id="orgf0c5727"><span class="section-number-4">1.10.2</span> Egalité</h4>
+<div id="outline-container-org0b3c458" class="outline-4">
+<h4 id="org0b3c458"><span class="section-number-4">1.10.2.</span> Egalité</h4>
 <div class="outline-text-4" id="text-1-10-2">
 <p>
 Soit deux fonctions étagées \(u,v\) essentiellement égales (\(u \essegal v\)). On a \(u \essinferieur v\) et l'intégrale de \(u\) est inférieure à l'intégrale de \(v\). Mais on a aussi \(u \esssuperieur v\) et l'intégrale de \(u\) est supérieure à l'intégrale de \(v\). On en conclut que :
@@ -1070,8 +1035,8 @@ Soit deux fonctions étagées \(u,v\) essentiellement égales (\(u \essegal v\))
 </div>
 
 
-<div id="outline-container-orgd9f49f3" class="outline-3">
-<h3 id="orgd9f49f3"><span class="section-number-3">1.11</span> Encadrement</h3>
+<div id="outline-container-org7d7d287" class="outline-3">
+<h3 id="org7d7d287"><span class="section-number-3">1.11.</span> Encadrement</h3>
 <div class="outline-text-3" id="text-1-11">
 <p>
 Soit \(w \in \etagee(A)\). Comme les constantes sont des cas particuliers de fonctions étagées et que l'on a :
@@ -1092,8 +1057,8 @@ on en conclut en intégrant que :
 </div>
 
 
-<div id="outline-container-orgbb20e60" class="outline-3">
-<h3 id="orgbb20e60"><span class="section-number-3">1.12</span> Propriétés extrémales</h3>
+<div id="outline-container-org3070895" class="outline-3">
+<h3 id="org3070895"><span class="section-number-3">1.12.</span> Propriétés extrémales</h3>
 <div class="outline-text-3" id="text-1-12">
 <p>
 Soit \(w \in \etagee(A)\). Si \(u\) est une fonction étagée vérifiant \(u \essinferieur w\), l'intégrale de \(u\) est inférieure à l'intégrale de \(w\). Par ailleurs, le choix \(u = w \essinferieur w\) reproduit bien entendu l'intégrale de \(w\). On en conclut que :
@@ -1114,8 +1079,8 @@ On aboutit avec un raisonnement analogue à :
 </div>
 
 
-<div id="outline-container-org91c95bb" class="outline-3">
-<h3 id="org91c95bb"><span class="section-number-3">1.13</span> Additivité</h3>
+<div id="outline-container-orgea38227" class="outline-3">
+<h3 id="orgea38227"><span class="section-number-3">1.13.</span> Additivité</h3>
 <div class="outline-text-3" id="text-1-13">
 <p>
 Soit les ensembles \(A\) et \(B\) disjoints :
@@ -1174,8 +1139,8 @@ L'intégrale des fonctions étagées est donc additive sur les ensembles concern
 </div>
 
 
-<div id="outline-container-orgbc41709" class="outline-3">
-<h3 id="orgbc41709"><span class="section-number-3">1.14</span> Propriétés diverses</h3>
+<div id="outline-container-org1d1a9f3" class="outline-3">
+<h3 id="org1d1a9f3"><span class="section-number-3">1.14.</span> Propriétés diverses</h3>
 <div class="outline-text-3" id="text-1-14">
 <p>
 Soit \(u,v \in \etagee(A)\). On peut trouver des \(u_i,v_j \in \setR\) et des \(U_i,V_i \in \mathcal{T}\) tels que \(\{U_1,...,U_n\}\) et \(\{V_1,...,V_m\}\) forment des partitions de \(A\) et vérifiant :
@@ -1231,8 +1196,8 @@ v(x) = \sum_{i,j} v_j \cdot \indicatrice[W_{ij}](x)
 </div>
 
 
-<div id="outline-container-org23acba3" class="outline-4">
-<h4 id="org23acba3"><span class="section-number-4">1.14.1</span> Espace vectoriel</h4>
+<div id="outline-container-org8158bfd" class="outline-4">
+<h4 id="org8158bfd"><span class="section-number-4">1.14.1.</span> Espace vectoriel</h4>
 <div class="outline-text-4" id="text-1-14-1">
 <p>
 Soit \(\alpha,\beta \in \setR\). On voit que la fonction \(w : A \mapsto \setR\) définie par :
@@ -1257,8 +1222,8 @@ Nous venons de montrer que toute combinaison linéaire de fonctions étagées es
 </div>
 
 
-<div id="outline-container-orgf018a20" class="outline-4">
-<h4 id="orgf018a20"><span class="section-number-4">1.14.2</span> Intégrale</h4>
+<div id="outline-container-org264b6c8" class="outline-4">
+<h4 id="org264b6c8"><span class="section-number-4">1.14.2.</span> Intégrale</h4>
 <div class="outline-text-4" id="text-1-14-2">
 <p>
 Evaluons l'intégrale de \(w\). On obtient :
@@ -1286,8 +1251,8 @@ Nous venons de prouver la linéarité de l'intégrale des fonctions étagées.
 </div>
 
 
-<div id="outline-container-orgb62c35d" class="outline-4">
-<h4 id="orgb62c35d"><span class="section-number-4">1.14.3</span> Fonctions max et min</h4>
+<div id="outline-container-orgb37f3d4" class="outline-4">
+<h4 id="orgb37f3d4"><span class="section-number-4">1.14.3.</span> Fonctions max et min</h4>
 <div class="outline-text-4" id="text-1-14-3">
 <p>
 On voit que la fonction :
@@ -1309,8 +1274,8 @@ est également une fonction étagée. Il en va de même pour :
 </div>
 
 
-<div id="outline-container-orgb418f93" class="outline-3">
-<h3 id="orgb418f93"><span class="section-number-3">1.15</span> Mesure nulle</h3>
+<div id="outline-container-orge6e53b1" class="outline-3">
+<h3 id="orge6e53b1"><span class="section-number-3">1.15.</span> Mesure nulle</h3>
 <div class="outline-text-3" id="text-1-15">
 <p>
 Soit un ensemble \(A\) vérifiant \(\mu(A) = 0\) et une fonction \(w\) étagée sur \(A\) définie par :
@@ -1335,8 +1300,8 @@ L'intégrale d'une fonction étagée sur un ensemble de mesure nulle est nulle.
 </div>
 
 
-<div id="outline-container-org460d701" class="outline-3">
-<h3 id="org460d701"><span class="section-number-3">1.16</span> Mesurabilité et opérations</h3>
+<div id="outline-container-org29784b0" class="outline-3">
+<h3 id="org29784b0"><span class="section-number-3">1.16.</span> Mesurabilité et opérations</h3>
 <div class="outline-text-3" id="text-1-16">
 <p>
 Soit la mesure \(\mu : \mathcal{T} \mapsto \setR\), l'ensemble \(A \in \mathcal{T}\), une fonction mesurable \(f : A \mapsto \setR\) et une fonction étagée \(w \in \etagee(A)\). Considérons un choix de \(w_i \in \setR\) et de \(A_i \in \mathcal{T}\) formant une partition de \(A\) et tels que :
@@ -1352,8 +1317,8 @@ pour tout \(x \in A\).
 </div>
 
 
-<div id="outline-container-org5a7d5a5" class="outline-4">
-<h4 id="org5a7d5a5"><span class="section-number-4">1.16.1</span> Addition</h4>
+<div id="outline-container-org74dd141" class="outline-4">
+<h4 id="org74dd141"><span class="section-number-4">1.16.1.</span> Addition</h4>
 <div class="outline-text-4" id="text-1-16-1">
 <p>
 On a clairement :
@@ -1396,8 +1361,8 @@ La fonction \(f + w\) est donc mesurable. Il en va de même pour \(-(f + w) = -f
 </div>
 
 
-<div id="outline-container-orgdc0d466" class="outline-4">
-<h4 id="orgdc0d466"><span class="section-number-4">1.16.2</span> Soustraction</h4>
+<div id="outline-container-org4ac1fb1" class="outline-4">
+<h4 id="org4ac1fb1"><span class="section-number-4">1.16.2.</span> Soustraction</h4>
 <div class="outline-text-4" id="text-1-16-2">
 <p>
 Comme l'opposé d'une fonction étagée est une fonction étagée :
@@ -1416,14 +1381,14 @@ la fonction \(f - w = f + (-w)\) est également mesurable. Il en va de même pou
 </div>
 
 
-<div id="outline-container-org59a506d" class="outline-2">
-<h2 id="org59a506d"><span class="section-number-2">2</span> Décomposition en fonctions positives</h2>
+<div id="outline-container-orgadea803" class="outline-2">
+<h2 id="orgadea803"><span class="section-number-2">2.</span> Décomposition en fonctions positives</h2>
 <div class="outline-text-2" id="text-2">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgde06dbe">2.1. Dépendances</a></li>
-<li><a href="#org45ffffb">2.2. Introduction</a></li>
-<li><a href="#orgde3adb7">2.3. Mesurabilité</a></li>
+<li><a href="#orgb323824">2.1. Dépendances</a></li>
+<li><a href="#org70470da">2.2. Introduction</a></li>
+<li><a href="#org871dd7d">2.3. Mesurabilité</a></li>
 </ul>
 </div>
 
@@ -1433,8 +1398,8 @@ la fonction \(f - w = f + (-w)\) est également mesurable. Il en va de même pou
 </div>
 
 
-<div id="outline-container-orgde06dbe" class="outline-3">
-<h3 id="orgde06dbe"><span class="section-number-3">2.1</span> Dépendances</h3>
+<div id="outline-container-orgb323824" class="outline-3">
+<h3 id="orgb323824"><span class="section-number-3">2.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:ensemble} : Les ensembles</li>
@@ -1445,8 +1410,8 @@ la fonction \(f - w = f + (-w)\) est également mesurable. Il en va de même pou
 </div>
 
 
-<div id="outline-container-org45ffffb" class="outline-3">
-<h3 id="org45ffffb"><span class="section-number-3">2.2</span> Introduction</h3>
+<div id="outline-container-org70470da" class="outline-3">
+<h3 id="org70470da"><span class="section-number-3">2.2.</span> Introduction</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 On considère une fonction mesurable \(f : A \mapsto \setR\) et les fonctions positives associées \(f^+,f^- : A \mapsto \setR\) définies par :
@@ -1460,8 +1425,8 @@ f^-(x) &= \max \{ -f(x) , 0 \} \ge 0
 </div>
 
 
-<div id="outline-container-orgde3adb7" class="outline-3">
-<h3 id="orgde3adb7"><span class="section-number-3">2.3</span> Mesurabilité</h3>
+<div id="outline-container-org871dd7d" class="outline-3">
+<h3 id="org871dd7d"><span class="section-number-3">2.3.</span> Mesurabilité</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 On constate que les ensembles suivant sont dans la tribu :
@@ -1484,8 +1449,8 @@ On a clairement \(A = A^+ \cup A^0 \cup A^-\). On voit que :
 </ul>
 </div>
 
-<div id="outline-container-org9ee3bdd" class="outline-4">
-<h4 id="org9ee3bdd"><span class="section-number-4">2.3.1</span> Conditions \(\strictsuperieur a\)</h4>
+<div id="outline-container-org267689c" class="outline-4">
+<h4 id="org267689c"><span class="section-number-4">2.3.1.</span> Conditions \(\strictsuperieur a\)</h4>
 <div class="outline-text-4" id="text-2-3-1">
 <p>
 Soit un réel \(a \strictinferieur 0\). La condition \(f^+(x) \ge 0 \strictsuperieur a\) implique que \(f^+(x) \strictsuperieur a\). Comme \(f^+\) est positive, cette condition est satisfaite pour tout \(x \in A\). Il en va de même pour \(f^-\). Donc :
@@ -1522,8 +1487,8 @@ La condition \(f^-(x) \strictsuperieur a\) implique que \(f^-(x) \strictsuperieu
 </div>
 </div>
 
-<div id="outline-container-org9446d48" class="outline-4">
-<h4 id="org9446d48"><span class="section-number-4">2.3.2</span> Conditions \(\strictinferieur a\)</h4>
+<div id="outline-container-org7882208" class="outline-4">
+<h4 id="org7882208"><span class="section-number-4">2.3.2.</span> Conditions \(\strictinferieur a\)</h4>
 <div class="outline-text-4" id="text-2-3-2">
 <p>
 Soit un réel \(a \le 0\). Comme \(f^+ \ge 0\), la condition \(f^+(x) \strictinferieur a \le 0\) n'est satisfaite pour aucun \(x \in A\). Il en va de même pour \(f^-\). Donc :
@@ -1584,8 +1549,8 @@ On conclut de ce qui précède que les fonctions \(f^+\) et \(f^-\) sont mesurab
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2019-10-01 mar 12:34</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2023-05-10 mer 16:44</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>

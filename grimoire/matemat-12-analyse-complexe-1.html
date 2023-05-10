@@ -3,14 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-10-01 mar 12:34 -->
+<!-- 2023-05-10 mer 16:45 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 12 : Analyse complexe - 1</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="chimay" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -31,8 +30,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -40,22 +40,22 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
+    overflow: auto;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -161,6 +161,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -177,56 +190,9 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         displayAlign: "center",
@@ -247,11 +213,10 @@ for the JavaScript code in this tag.
              }
 });
 </script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Eclats de vers : Matemat 12 : Analyse complexe - 1</h1>
 <p>
 <a href="index.html">Index des Grimoires</a>
@@ -261,13 +226,13 @@ for the JavaScript code in this tag.
 <a href="../index.html">Retour à l’accueil</a>
 </p>
 
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table des matières</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org00217b4">1. Exponentielle complexe</a></li>
-<li><a href="#orgb64e351">2. Dérivation et intégration dans le plan complexe</a></li>
-<li><a href="#org3fb3e7c">3. Polynômes et exponentielles</a></li>
+<li><a href="#org7a3d51e">1. Exponentielle complexe</a></li>
+<li><a href="#org73fb837">2. Dérivation et intégration dans le plan complexe</a></li>
+<li><a href="#orga855a76">3. Polynômes et exponentielles</a></li>
 </ul>
 </div>
 </div>
@@ -426,15 +391,15 @@ for the JavaScript code in this tag.
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
 
-<div id="outline-container-org00217b4" class="outline-2">
-<h2 id="org00217b4"><span class="section-number-2">1</span> Exponentielle complexe</h2>
+<div id="outline-container-org7a3d51e" class="outline-2">
+<h2 id="org7a3d51e"><span class="section-number-2">1.</span> Exponentielle complexe</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org77fa3b6">1.1. Dépendances</a></li>
-<li><a href="#org46e45cf">1.2. Introduction</a></li>
-<li><a href="#orgc9f8b5a">1.3. Additivité</a></li>
-<li><a href="#orgd891373">1.4. Lien avec les fonctions trigonométriques</a></li>
+<li><a href="#org6013be1">1.1. Dépendances</a></li>
+<li><a href="#org2303992">1.2. Introduction</a></li>
+<li><a href="#org71429fa">1.3. Additivité</a></li>
+<li><a href="#org4da3948">1.4. Lien avec les fonctions trigonométriques</a></li>
 </ul>
 </div>
 
@@ -444,8 +409,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-org77fa3b6" class="outline-3">
-<h3 id="org77fa3b6"><span class="section-number-3">1.1</span> Dépendances</h3>
+<div id="outline-container-org6013be1" class="outline-3">
+<h3 id="org6013be1"><span class="section-number-3">1.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:complexe} : Les complexes</li>
@@ -455,8 +420,8 @@ for the JavaScript code in this tag.
 
 
 
-<div id="outline-container-org46e45cf" class="outline-3">
-<h3 id="org46e45cf"><span class="section-number-3">1.2</span> Introduction</h3>
+<div id="outline-container-org2303992" class="outline-3">
+<h3 id="org2303992"><span class="section-number-3">1.2.</span> Introduction</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 AFAIRE : ARRANGER LE CHAPITRE
@@ -494,8 +459,8 @@ On a donc simplement :
 </div>
 
 
-<div id="outline-container-orgc9f8b5a" class="outline-3">
-<h3 id="orgc9f8b5a"><span class="section-number-3">1.3</span> Additivité</h3>
+<div id="outline-container-org71429fa" class="outline-3">
+<h3 id="org71429fa"><span class="section-number-3">1.3.</span> Additivité</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Comme les fonctions :
@@ -544,8 +509,8 @@ la propriété d'additivité des exponentielles :
 </div>
 
 
-<div id="outline-container-orgd891373" class="outline-3">
-<h3 id="orgd891373"><span class="section-number-3">1.4</span> Lien avec les fonctions trigonométriques</h3>
+<div id="outline-container-org4da3948" class="outline-3">
+<h3 id="org4da3948"><span class="section-number-3">1.4.</span> Lien avec les fonctions trigonométriques</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Considérons maintenant le cas particulier où \(u(t) = \exp(\img t)\) :
@@ -842,15 +807,15 @@ ce qui donne, tous calculs faits :
 </div>
 
 
-<div id="outline-container-orgb64e351" class="outline-2">
-<h2 id="orgb64e351"><span class="section-number-2">2</span> Dérivation et intégration dans le plan complexe</h2>
+<div id="outline-container-org73fb837" class="outline-2">
+<h2 id="org73fb837"><span class="section-number-2">2.</span> Dérivation et intégration dans le plan complexe</h2>
 <div class="outline-text-2" id="text-2">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orga051d9b">2.1. Dépendances</a></li>
-<li><a href="#org82d420f">2.2. Dérivées</a></li>
-<li><a href="#org706c4de">2.3. Extension de l'intégrale au plan complexe</a></li>
-<li><a href="#org71df4b8">2.4. Intégrale de ligne</a></li>
+<li><a href="#org07a31c4">2.1. Dépendances</a></li>
+<li><a href="#orgb987b02">2.2. Dérivées</a></li>
+<li><a href="#org68f5d21">2.3. Extension de l'intégrale au plan complexe</a></li>
+<li><a href="#org56fa44d">2.4. Intégrale de ligne</a></li>
 </ul>
 </div>
 
@@ -860,8 +825,8 @@ ce qui donne, tous calculs faits :
 </div>
 
 
-<div id="outline-container-orga051d9b" class="outline-3">
-<h3 id="orga051d9b"><span class="section-number-3">2.1</span> Dépendances</h3>
+<div id="outline-container-org07a31c4" class="outline-3">
+<h3 id="org07a31c4"><span class="section-number-3">2.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:differ} : Les différentielles</li>
@@ -871,8 +836,8 @@ ce qui donne, tous calculs faits :
 </div>
 
 
-<div id="outline-container-org82d420f" class="outline-3">
-<h3 id="org82d420f"><span class="section-number-3">2.2</span> Dérivées</h3>
+<div id="outline-container-orgb987b02" class="outline-3">
+<h3 id="orgb987b02"><span class="section-number-3">2.2.</span> Dérivées</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 On définit la dérivée d'une fonction \(f : \setC \mapsto \setC\)
@@ -956,8 +921,8 @@ Les puissances de \(z\) sont dérivables. On vérifie que :
 </div>
 
 
-<div id="outline-container-org706c4de" class="outline-3">
-<h3 id="org706c4de"><span class="section-number-3">2.3</span> Extension de l'intégrale au plan complexe</h3>
+<div id="outline-container-org68f5d21" class="outline-3">
+<h3 id="org68f5d21"><span class="section-number-3">2.3.</span> Extension de l'intégrale au plan complexe</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Soit une fonction \(f : A \mapsto \setC\). Comme
@@ -979,8 +944,8 @@ leur intégrale est bien définie. On définit alors l'intégrale de \(f\) par 
 </div>
 
 
-<div id="outline-container-org71df4b8" class="outline-3">
-<h3 id="org71df4b8"><span class="section-number-3">2.4</span> Intégrale de ligne</h3>
+<div id="outline-container-org56fa44d" class="outline-3">
+<h3 id="org56fa44d"><span class="section-number-3">2.4.</span> Intégrale de ligne</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Soit une fonction \(\gamma : [a,b] \mapsto \setC\) et la courbe :
@@ -1018,8 +983,8 @@ de fonctions \(\setR^2 \mapsto \setR\).
 </div>
 
 
-<div id="outline-container-orgbaa1e06" class="outline-4">
-<h4 id="orgbaa1e06"><span class="section-number-4">2.4.1</span> Théorème fondamental</h4>
+<div id="outline-container-org061c608" class="outline-4">
+<h4 id="org061c608"><span class="section-number-4">2.4.1.</span> Théorème fondamental</h4>
 <div class="outline-text-4" id="text-2-4-1">
 <p>
 Soit une fonction analytique \(F : \setC \mapsto \setC\). La dérivée
@@ -1041,8 +1006,8 @@ On en déduit, en appliquant le théorème fondamental que :
 </div>
 
 
-<div id="outline-container-orgc45225c" class="outline-4">
-<h4 id="orgc45225c"><span class="section-number-4">2.4.2</span> Contour fermé</h4>
+<div id="outline-container-orge48f857" class="outline-4">
+<h4 id="orge48f857"><span class="section-number-4">2.4.2.</span> Contour fermé</h4>
 <div class="outline-text-4" id="text-2-4-2">
 <p>
 Dans la suite, lorsque \(l\) est une courbe fermée et est donc la frontière d'un
@@ -1098,8 +1063,8 @@ Les termes du membre de droite s'annulent donc et :
 </div>
 
 
-<div id="outline-container-org8eea73d" class="outline-4">
-<h4 id="org8eea73d"><span class="section-number-4">2.4.3</span> Cercle</h4>
+<div id="outline-container-orgf9308ee" class="outline-4">
+<h4 id="orgf9308ee"><span class="section-number-4">2.4.3.</span> Cercle</h4>
 <div class="outline-text-4" id="text-2-4-3">
 <p>
 Soit \(C\) le cercle de centre \(a\) et de rayon \(R\) :
@@ -1173,8 +1138,8 @@ on obtient le même résultat pour toute courbe fermée entourant \(a\) :
 </div>
 
 
-<div id="outline-container-org4612f70" class="outline-4">
-<h4 id="org4612f70"><span class="section-number-4">2.4.4</span> Théorème de Cauchy</h4>
+<div id="outline-container-org5b1ff48" class="outline-4">
+<h4 id="org5b1ff48"><span class="section-number-4">2.4.4.</span> Théorème de Cauchy</h4>
 <div class="outline-text-4" id="text-2-4-4">
 <p>
 Si \(f\) est analytique, la fonction
@@ -1237,8 +1202,8 @@ En dérivant \(k\) fois cette dernière relation par rapport à \(a\), on obtien
 </div>
 
 
-<div id="outline-container-org65a720a" class="outline-4">
-<h4 id="org65a720a"><span class="section-number-4">2.4.5</span> Séries de Laurent</h4>
+<div id="outline-container-org49b0c16" class="outline-4">
+<h4 id="org49b0c16"><span class="section-number-4">2.4.5.</span> Séries de Laurent</h4>
 <div class="outline-text-4" id="text-2-4-5">
 <p>
 Supposons que \(f\) puisse s'écrire comme une combinaison linéaire de puissances
@@ -1269,8 +1234,8 @@ Mais nous avons vu que seule l'intégrale de \((z-a)^{-1}\) ne s'annule pas. On 
 </div>
 
 
-<div id="outline-container-org73ee6ee" class="outline-4">
-<h4 id="org73ee6ee"><span class="section-number-4">2.4.6</span> Théorème des résidus</h4>
+<div id="outline-container-org8a18494" class="outline-4">
+<h4 id="org8a18494"><span class="section-number-4">2.4.6.</span> Théorème des résidus</h4>
 <div class="outline-text-4" id="text-2-4-6">
 <p>
 Considérons le cas où :
@@ -1309,14 +1274,14 @@ Mais comme \(a_{-1}\) n'est rien d'autre, à un facteur \(2\pi\img\) près, que 
 </div>
 
 
-<div id="outline-container-org3fb3e7c" class="outline-2">
-<h2 id="org3fb3e7c"><span class="section-number-2">3</span> Polynômes et exponentielles</h2>
+<div id="outline-container-orga855a76" class="outline-2">
+<h2 id="orga855a76"><span class="section-number-2">3.</span> Polynômes et exponentielles</h2>
 <div class="outline-text-2" id="text-3">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb29fb96">3.1. Chebyshev</a></li>
-<li><a href="#org76372ee">3.2. Hermite</a></li>
-<li><a href="#org2a6acff">3.3. Laguerre</a></li>
+<li><a href="#org4f99545">3.1. Chebyshev</a></li>
+<li><a href="#org2bef2ec">3.2. Hermite</a></li>
+<li><a href="#orgae74696">3.3. Laguerre</a></li>
 </ul>
 </div>
 
@@ -1326,8 +1291,8 @@ Mais comme \(a_{-1}\) n'est rien d'autre, à un facteur \(2\pi\img\) près, que 
 </div>
 
 
-<div id="outline-container-orgb29fb96" class="outline-3">
-<h3 id="orgb29fb96"><span class="section-number-3">3.1</span> Chebyshev</h3>
+<div id="outline-container-org4f99545" class="outline-3">
+<h3 id="org4f99545"><span class="section-number-3">3.1.</span> Chebyshev</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Les polynômes de Chebyshev \(T_n\) sont défini par :
@@ -1512,8 +1477,8 @@ pour tout \(m,n\in\setN\).
 </div>
 
 
-<div id="outline-container-org76372ee" class="outline-3">
-<h3 id="org76372ee"><span class="section-number-3">3.2</span> Hermite</h3>
+<div id="outline-container-org2bef2ec" class="outline-3">
+<h3 id="org2bef2ec"><span class="section-number-3">3.2.</span> Hermite</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Les polynômes de Hermite sont orthogonaux pour le produit scalaire :
@@ -1540,8 +1505,8 @@ H_{n+1}(x) = 2 x H_n(x) - 2 n H_{n-1}(x) \\
 </div>
 
 
-<div id="outline-container-org2a6acff" class="outline-3">
-<h3 id="org2a6acff"><span class="section-number-3">3.3</span> Laguerre</h3>
+<div id="outline-container-orgae74696" class="outline-3">
+<h3 id="orgae74696"><span class="section-number-3">3.3.</span> Laguerre</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Les polynômes de Laguerre sont orthogonaux pour le produit scalaire :
@@ -1570,8 +1535,8 @@ L_1(x) = 1-x \\
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2019-10-01 mar 12:34</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2023-05-10 mer 16:45</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>

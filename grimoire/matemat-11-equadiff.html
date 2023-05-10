@@ -3,14 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-10-01 mar 12:34 -->
+<!-- 2023-05-10 mer 16:45 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 11 : Équations différentielles</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="chimay" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -31,8 +30,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -40,22 +40,22 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
+    overflow: auto;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -161,6 +161,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -177,56 +190,9 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         displayAlign: "center",
@@ -247,11 +213,10 @@ for the JavaScript code in this tag.
              }
 });
 </script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Eclats de vers : Matemat 11 : Équations différentielles</h1>
 <p>
 <a href="index.html">Index des Grimoires</a>
@@ -261,20 +226,20 @@ for the JavaScript code in this tag.
 <a href="../index.html">Retour à l’accueil</a>
 </p>
 
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table des matières</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org7f0786a">1. Equations différentielles ordinaires</a></li>
-<li><a href="#org67cbb21">2. Exponentielle</a></li>
-<li><a href="#org9dd3b0f">3. Logarithme</a></li>
-<li><a href="#orgb9f7934">4. Fonctions hyperboliques</a></li>
-<li><a href="#orgb0619bf">5. Exponentielle matricielle</a></li>
-<li><a href="#orgf52084c">6. Fonctions trigonométriques</a></li>
-<li><a href="#org0718a28">7. Fonctions trigonométriques inverses</a></li>
-<li><a href="#org26c3f21">8. Equations aux dérivées partielles</a></li>
-<li><a href="#org272678e">9. Algorithmes de résolution d'EDO</a></li>
-<li><a href="#org2eb2b1f">10. Algorithmes de résolution d'EDP</a></li>
+<li><a href="#orgfc1f217">1. Equations différentielles ordinaires</a></li>
+<li><a href="#orgc9ada32">2. Exponentielle</a></li>
+<li><a href="#org2117cb3">3. Logarithme</a></li>
+<li><a href="#org4f5b877">4. Fonctions hyperboliques</a></li>
+<li><a href="#orgb05ff1a">5. Exponentielle matricielle</a></li>
+<li><a href="#orgea83d0b">6. Fonctions trigonométriques</a></li>
+<li><a href="#org5bdad31">7. Fonctions trigonométriques inverses</a></li>
+<li><a href="#orgae13c73">8. Equations aux dérivées partielles</a></li>
+<li><a href="#org2ba8612">9. Algorithmes de résolution d'EDO</a></li>
+<li><a href="#org6f5de29">10. Algorithmes de résolution d'EDP</a></li>
 </ul>
 </div>
 </div>
@@ -433,18 +398,18 @@ for the JavaScript code in this tag.
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
 
-<div id="outline-container-org7f0786a" class="outline-2">
-<h2 id="org7f0786a"><span class="section-number-2">1</span> Equations différentielles ordinaires</h2>
+<div id="outline-container-orgfc1f217" class="outline-2">
+<h2 id="orgfc1f217"><span class="section-number-2">1.</span> Equations différentielles ordinaires</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org3d6fa17">1.1. Fonctions Lipschitziennes</a></li>
-<li><a href="#org0a841fd">1.2. Problème différentiel d'ordre un</a></li>
-<li><a href="#orgf652bff">1.3. Problème différentiel d'ordre quelconque</a></li>
-<li><a href="#orga27843e">1.4. Problème aux limites</a></li>
-<li><a href="#org65e6d99">1.5. Sturm-Liouville</a></li>
-<li><a href="#org6426359">1.6. Séparation des variables</a></li>
-<li><a href="#org78a83fb">1.7. Dérivées des fonctions usuelles</a></li>
+<li><a href="#org69180c0">1.1. Fonctions Lipschitziennes</a></li>
+<li><a href="#org252fd41">1.2. Problème différentiel d'ordre un</a></li>
+<li><a href="#org29f4291">1.3. Problème différentiel d'ordre quelconque</a></li>
+<li><a href="#org96ed0d9">1.4. Problème aux limites</a></li>
+<li><a href="#orgb5c1b71">1.5. Sturm-Liouville</a></li>
+<li><a href="#org51e083e">1.6. Séparation des variables</a></li>
+<li><a href="#org9f2fa83">1.7. Dérivées des fonctions usuelles</a></li>
 </ul>
 </div>
 
@@ -454,8 +419,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-org3d6fa17" class="outline-3">
-<h3 id="org3d6fa17"><span class="section-number-3">1.1</span> Fonctions Lipschitziennes</h3>
+<div id="outline-container-org69180c0" class="outline-3">
+<h3 id="org69180c0"><span class="section-number-3">1.1.</span> Fonctions Lipschitziennes</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Les fonctions Lipschitziennes sont des fonctions à variations bornées :
@@ -468,8 +433,8 @@ Les fonctions Lipschitziennes sont des fonctions à variations bornées :
 </div>
 
 
-<div id="outline-container-org0a841fd" class="outline-3">
-<h3 id="org0a841fd"><span class="section-number-3">1.2</span> Problème différentiel d'ordre un</h3>
+<div id="outline-container-org252fd41" class="outline-3">
+<h3 id="org252fd41"><span class="section-number-3">1.2.</span> Problème différentiel d'ordre un</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Soit \(f\in\lipschitz( \setR \times \setR^n , \setR)\), et l'application \(A\) définie par :
@@ -563,8 +528,8 @@ est unique, on en conclut que la solution du problème différentiel l'est aussi
 </div>
 
 
-<div id="outline-container-org8fd6d4c" class="outline-4">
-<h4 id="org8fd6d4c"><span class="section-number-4">1.2.1</span> Convergence</h4>
+<div id="outline-container-org4bad881" class="outline-4">
+<h4 id="org4bad881"><span class="section-number-4">1.2.1.</span> Convergence</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 La série des \(u^{(n)}\) définie par :
@@ -585,8 +550,8 @@ converge au sens de la distance \(\sup\) définie ci-dessus vers la solution de 
 </div>
 
 
-<div id="outline-container-orgd257015" class="outline-4">
-<h4 id="orgd257015"><span class="section-number-4">1.2.2</span> Notation</h4>
+<div id="outline-container-org71a6d60" class="outline-4">
+<h4 id="org71a6d60"><span class="section-number-4">1.2.2.</span> Notation</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 Pour toute fonction :
@@ -626,8 +591,8 @@ u''(t) = \OOD{u}{t}(t)
 </div>
 
 
-<div id="outline-container-orgf652bff" class="outline-3">
-<h3 id="orgf652bff"><span class="section-number-3">1.3</span> Problème différentiel d'ordre quelconque</h3>
+<div id="outline-container-org29f4291" class="outline-3">
+<h3 id="org29f4291"><span class="section-number-3">1.3.</span> Problème différentiel d'ordre quelconque</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Soit les fonctions :
@@ -705,8 +670,8 @@ Comme il existe une et une seule solution \(v\) au problème d'ordre un associé
 </div>
 
 
-<div id="outline-container-orga27843e" class="outline-3">
-<h3 id="orga27843e"><span class="section-number-3">1.4</span> Problème aux limites</h3>
+<div id="outline-container-org96ed0d9" class="outline-3">
+<h3 id="org96ed0d9"><span class="section-number-3">1.4.</span> Problème aux limites</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Soit la fonctionnelle \(I : \continue^2([a,b],\setR) \mapsto \setR\). Nous allons tenter de minimiser \(I\) sur l'ensemble :
@@ -763,8 +728,8 @@ soit satisfaite pour tout \(w\in\mathcal{W}\).
 </div>
 
 
-<div id="outline-container-orgda306b1" class="outline-4">
-<h4 id="section:eulerLagrange"><a id="orgda306b1"></a><span class="section-number-4">1.4.1</span> Équation d’Euler - Lagrange</h4>
+<div id="outline-container-section:eulerLagrange" class="outline-4">
+<h4 id="section:eulerLagrange"><span class="section-number-4">1.4.1.</span> Équation d’Euler - Lagrange</h4>
 <div class="outline-text-4" id="text-section:eulerLagrange">
 <p>
 Un exemple typique de fonctionnelle \(I\) est définie pour tout \(u \in \continue^2([a,b],\setR)\) par :
@@ -885,8 +850,8 @@ L’équation d’Euler - Lagrange devient alors :
 </div>
 
 
-<div id="outline-container-org025d1a6" class="outline-4">
-<h4 id="org025d1a6"><span class="section-number-4">1.4.2</span> Euler-Lagrange avec contraintes</h4>
+<div id="outline-container-org567c269" class="outline-4">
+<h4 id="org567c269"><span class="section-number-4">1.4.2.</span> Euler-Lagrange avec contraintes</h4>
 <div class="outline-text-4" id="text-1-4-2">
 <p>
 Nous tentons cette fois de minimiser :
@@ -1054,8 +1019,8 @@ où les dérivées de \(f\) et des \(g_i\) sont bien entendu évaluées en
 </div>
 
 
-<div id="outline-container-org65e6d99" class="outline-3">
-<h3 id="org65e6d99"><span class="section-number-3">1.5</span> Sturm-Liouville</h3>
+<div id="outline-container-orgb5c1b71" class="outline-3">
+<h3 id="orgb5c1b71"><span class="section-number-3">1.5.</span> Sturm-Liouville</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Nous considérons à présent une application importante du théorème
@@ -1176,8 +1141,8 @@ minimise sur \(F\) la fonctionnelle \(I\) définie pour toute fonction \(v \in \
 </div>
 
 
-<div id="outline-container-org6426359" class="outline-3">
-<h3 id="org6426359"><span class="section-number-3">1.6</span> Séparation des variables</h3>
+<div id="outline-container-org51e083e" class="outline-3">
+<h3 id="org51e083e"><span class="section-number-3">1.6.</span> Séparation des variables</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 Soit les fonctions :
@@ -1223,12 +1188,12 @@ En intégrant les deux membres, il vient :
 </div>
 
 
-<div id="outline-container-org78a83fb" class="outline-3">
-<h3 id="org78a83fb"><span class="section-number-3">1.7</span> Dérivées des fonctions usuelles</h3>
+<div id="outline-container-org9f2fa83" class="outline-3">
+<h3 id="org9f2fa83"><span class="section-number-3">1.7.</span> Dérivées des fonctions usuelles</h3>
 <div class="outline-text-3" id="text-1-7">
 </div>
-<div id="outline-container-org04bf04f" class="outline-4">
-<h4 id="org04bf04f"><span class="section-number-4">1.7.1</span> Arcsinus</h4>
+<div id="outline-container-orgb2a0633" class="outline-4">
+<h4 id="orgb2a0633"><span class="section-number-4">1.7.1.</span> Arcsinus</h4>
 <div class="outline-text-4" id="text-1-7-1">
 <p>
 AFAIRE : ARRANGER LA FIN DU CHAPITRE
@@ -1276,8 +1241,8 @@ on a 
 </div>
 
 
-<div id="outline-container-org1009801" class="outline-4">
-<h4 id="org1009801"><span class="section-number-4">1.7.2</span> Table</h4>
+<div id="outline-container-org059303e" class="outline-4">
+<h4 id="org059303e"><span class="section-number-4">1.7.2.</span> Table</h4>
 <div class="outline-text-4" id="text-1-7-2">
 <div class="org-center">
 <p>
@@ -1310,8 +1275,8 @@ on a 
 </div>
 
 
-<div id="outline-container-org9e1ddc5" class="outline-4">
-<h4 id="org9e1ddc5"><span class="section-number-4">1.7.3</span> Fonctions usuelles</h4>
+<div id="outline-container-org8d7ef4f" class="outline-4">
+<h4 id="org8d7ef4f"><span class="section-number-4">1.7.3.</span> Fonctions usuelles</h4>
 <div class="outline-text-4" id="text-1-7-3">
 <p>
 Le théorème fondamental appliqué aux dérivées des fonctions usuelles du chapitre \ref{chap:differ}
@@ -1332,26 +1297,26 @@ nous permet d'obtenir les résultats suivants :
 </div>
 
 
-<div id="outline-container-org67cbb21" class="outline-2">
-<h2 id="org67cbb21"><span class="section-number-2">2</span> Exponentielle</h2>
+<div id="outline-container-orgc9ada32" class="outline-2">
+<h2 id="orgc9ada32"><span class="section-number-2">2.</span> Exponentielle</h2>
 <div class="outline-text-2" id="text-2">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2e0ae6e">2.1. Dépendances</a></li>
-<li><a href="#org0ffbfb8">2.2. Introduction</a></li>
-<li><a href="#org817f386">2.3. Développement de Taylor</a></li>
-<li><a href="#org5c5b16e">2.4. Additivité</a></li>
-<li><a href="#orgd0f62a4">2.5. Miroir</a></li>
-<li><a href="#org3ad99cd">2.6. Limites</a></li>
-<li><a href="#org97bd30c">2.7. Image</a></li>
-<li><a href="#org83e31e8">2.8. Intégrale</a></li>
+<li><a href="#orgcce9ca4">2.1. Dépendances</a></li>
+<li><a href="#orgb43962f">2.2. Introduction</a></li>
+<li><a href="#org87eda88">2.3. Développement de Taylor</a></li>
+<li><a href="#org6eda739">2.4. Additivité</a></li>
+<li><a href="#orga9da7f0">2.5. Miroir</a></li>
+<li><a href="#org8ec866d">2.6. Limites</a></li>
+<li><a href="#org24da1f1">2.7. Image</a></li>
+<li><a href="#orgbad895b">2.8. Intégrale</a></li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-org2e0ae6e" class="outline-3">
-<h3 id="org2e0ae6e"><span class="section-number-3">2.1</span> Dépendances</h3>
+<div id="outline-container-orgcce9ca4" class="outline-3">
+<h3 id="orgcce9ca4"><span class="section-number-3">2.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:edo} : Équations différentielles ordinaires</li>
@@ -1361,8 +1326,8 @@ nous permet d'obtenir les résultats suivants :
 
 
 
-<div id="outline-container-org0ffbfb8" class="outline-3">
-<h3 id="org0ffbfb8"><span class="section-number-3">2.2</span> Introduction</h3>
+<div id="outline-container-orgb43962f" class="outline-3">
+<h3 id="orgb43962f"><span class="section-number-3">2.2.</span> Introduction</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 L'exponentielle est définie comme l'unique solution \(\exp : \setR \mapsto \setR\) du problème différentiel :
@@ -1376,8 +1341,8 @@ L'exponentielle est définie comme l'unique solution \(\exp : \setR \mapsto \set
 </div>
 
 
-<div id="outline-container-org817f386" class="outline-3">
-<h3 id="org817f386"><span class="section-number-3">2.3</span> Développement de Taylor</h3>
+<div id="outline-container-org87eda88" class="outline-3">
+<h3 id="org87eda88"><span class="section-number-3">2.3.</span> Développement de Taylor</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 On a :
@@ -1406,8 +1371,8 @@ Le développement de Taylor autour de \(0\) s'écrit donc :
 </div>
 
 
-<div id="outline-container-org5c5b16e" class="outline-3">
-<h3 id="org5c5b16e"><span class="section-number-3">2.4</span> Additivité</h3>
+<div id="outline-container-org6eda739" class="outline-3">
+<h3 id="org6eda739"><span class="section-number-3">2.4.</span> Additivité</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Soit \(t \in \setR\). On remarque que les applications \(f,g : \setR \mapsto \setR\) définies par :
@@ -1456,8 +1421,8 @@ on en déduit que :
 </div>
 
 
-<div id="outline-container-orgd0f62a4" class="outline-3">
-<h3 id="orgd0f62a4"><span class="section-number-3">2.5</span> Miroir</h3>
+<div id="outline-container-orga9da7f0" class="outline-3">
+<h3 id="orga9da7f0"><span class="section-number-3">2.5.</span> Miroir</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 On déduit de l'additivité que :
@@ -1478,8 +1443,8 @@ pour tout \(t \in \setR\). On en conclut que :
 </div>
 
 
-<div id="outline-container-org3ad99cd" class="outline-3">
-<h3 id="org3ad99cd"><span class="section-number-3">2.6</span> Limites</h3>
+<div id="outline-container-org8ec866d" class="outline-3">
+<h3 id="org8ec866d"><span class="section-number-3">2.6.</span> Limites</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 On a :
@@ -1508,8 +1473,8 @@ En utilisant le changement de variable \(t = -s\), on obtient la limite à l'inf
 </div>
 
 
-<div id="outline-container-org97bd30c" class="outline-3">
-<h3 id="org97bd30c"><span class="section-number-3">2.7</span> Image</h3>
+<div id="outline-container-org24da1f1" class="outline-3">
+<h3 id="org24da1f1"><span class="section-number-3">2.7.</span> Image</h3>
 <div class="outline-text-3" id="text-2-7">
 <p>
 Si \(t \ge 0\) il est clair que \(\exp(t) \strictsuperieur 0\) puisqu'il s'agit d'une somme infinie de termes strictement positifs. Si \(s \le 0\), on a \(t = - s \ge 0\) et :
@@ -1553,8 +1518,8 @@ on a :
 </div>
 
 
-<div id="outline-container-org9e28b57" class="outline-4">
-<h4 id="org9e28b57"><span class="section-number-4">2.7.1</span> Réels positifs</h4>
+<div id="outline-container-org03d352c" class="outline-4">
+<h4 id="org03d352c"><span class="section-number-4">2.7.1.</span> Réels positifs</h4>
 <div class="outline-text-4" id="text-2-7-1">
 <p>
 Comme la fonction \(\exp\) est continue et croît avec \(t\) sur \(\setR^+\) de :
@@ -1583,8 +1548,8 @@ on a :
 </div>
 
 
-<div id="outline-container-orgfb6eff7" class="outline-4">
-<h4 id="orgfb6eff7"><span class="section-number-4">2.7.2</span> Réels négatifs</h4>
+<div id="outline-container-org4db68c2" class="outline-4">
+<h4 id="org4db68c2"><span class="section-number-4">2.7.2.</span> Réels négatifs</h4>
 <div class="outline-text-4" id="text-2-7-2">
 <p>
 Comme la fonction \(\exp\) est continue et croît avec \(s\) sur \(\setR^-\) de :
@@ -1614,8 +1579,8 @@ on a :
 </div>
 
 
-<div id="outline-container-org83e31e8" class="outline-3">
-<h3 id="org83e31e8"><span class="section-number-3">2.8</span> Intégrale</h3>
+<div id="outline-container-orgbad895b" class="outline-3">
+<h3 id="orgbad895b"><span class="section-number-3">2.8.</span> Intégrale</h3>
 <div class="outline-text-3" id="text-2-8">
 <p>
 Comme la fonction \(\exp\) est une primitive d'elle-même, on a :
@@ -1649,20 +1614,20 @@ Les autres intégrales à bornes infinies sont infinies :
 </div>
 
 
-<div id="outline-container-org9dd3b0f" class="outline-2">
-<h2 id="org9dd3b0f"><span class="section-number-2">3</span> Logarithme</h2>
+<div id="outline-container-org2117cb3" class="outline-2">
+<h2 id="org2117cb3"><span class="section-number-2">3.</span> Logarithme</h2>
 <div class="outline-text-2" id="text-3">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org1d181f7">3.1. Introduction</a></li>
-<li><a href="#orgaae226b">3.2. Valeurs particulières</a></li>
-<li><a href="#orgb023506">3.3. Dérivée</a></li>
-<li><a href="#org1eb6448">3.4. Développement de Taylor</a></li>
-<li><a href="#orgb8898f9">3.5. Additivité</a></li>
-<li><a href="#org6d6a8b1">3.6. Miroir</a></li>
-<li><a href="#org10d61dd">3.7. Soustraction</a></li>
-<li><a href="#org40ccfb3">3.8. Intégrale de \(x \mapsto 1/x\)</a></li>
-<li><a href="#orga2c3c47">3.9. Gaussienne</a></li>
+<li><a href="#orgc890760">3.1. Introduction</a></li>
+<li><a href="#org501c406">3.2. Valeurs particulières</a></li>
+<li><a href="#orgba17bbd">3.3. Dérivée</a></li>
+<li><a href="#orgb2eee18">3.4. Développement de Taylor</a></li>
+<li><a href="#orgac1d514">3.5. Additivité</a></li>
+<li><a href="#org33422cb">3.6. Miroir</a></li>
+<li><a href="#orgd3be6f5">3.7. Soustraction</a></li>
+<li><a href="#org9e90ca4">3.8. Intégrale de \(x \mapsto 1/x\)</a></li>
+<li><a href="#org904c67b">3.9. Gaussienne</a></li>
 </ul>
 </div>
 
@@ -1672,8 +1637,8 @@ Les autres intégrales à bornes infinies sont infinies :
 </div>
 
 
-<div id="outline-container-org1d181f7" class="outline-3">
-<h3 id="org1d181f7"><span class="section-number-3">3.1</span> Introduction</h3>
+<div id="outline-container-orgc890760" class="outline-3">
+<h3 id="orgc890760"><span class="section-number-3">3.1.</span> Introduction</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 La fonction \(\exp : \setR \mapsto \setR^+ \setminus \{ 0 \}\) étant strictement croissante et d'image égale à \(\setR^+ \setminus \{ 0 \}\), elle est inversible. On définit le logarithme :
@@ -1702,8 +1667,8 @@ Pour tout \(x,y \in \setR\) tels que \(y = \exp(x) \strictsuperieur 0\), on a do
 </div>
 
 
-<div id="outline-container-orgaae226b" class="outline-3">
-<h3 id="orgaae226b"><span class="section-number-3">3.2</span> Valeurs particulières</h3>
+<div id="outline-container-org501c406" class="outline-3">
+<h3 id="org501c406"><span class="section-number-3">3.2.</span> Valeurs particulières</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Le cas particulier \(x = 0\) et \(y = \exp(0) = 1\) nous montre que :
@@ -1716,8 +1681,8 @@ Le cas particulier \(x = 0\) et \(y = \exp(0) = 1\) nous montre que :
 </div>
 
 
-<div id="outline-container-orgb023506" class="outline-3">
-<h3 id="orgb023506"><span class="section-number-3">3.3</span> Dérivée</h3>
+<div id="outline-container-orgba17bbd" class="outline-3">
+<h3 id="orgba17bbd"><span class="section-number-3">3.3.</span> Dérivée</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Soit les réels \(x,y\) tels que :
@@ -1762,8 +1727,8 @@ c'est-à-dire :
 </div>
 
 
-<div id="outline-container-org1eb6448" class="outline-3">
-<h3 id="org1eb6448"><span class="section-number-3">3.4</span> Développement de Taylor</h3>
+<div id="outline-container-orgb2eee18" class="outline-3">
+<h3 id="orgb2eee18"><span class="section-number-3">3.4.</span> Développement de Taylor</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 Soit la fonction \(u : \setR \mapsto \setR\) définie par :
@@ -1888,8 +1853,8 @@ En posant \(x = 1 + t\), on obtient la forme équivalente :
 </div>
 
 
-<div id="outline-container-orgb8898f9" class="outline-3">
-<h3 id="orgb8898f9"><span class="section-number-3">3.5</span> Additivité</h3>
+<div id="outline-container-orgac1d514" class="outline-3">
+<h3 id="orgac1d514"><span class="section-number-3">3.5.</span> Additivité</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 Soit \(a, b \in \setR\). En utilisant l'additivité de l'exponentielle, on obtient :
@@ -1910,8 +1875,8 @@ En prenant le logarithme de cette égalité, on en déduit que :
 </div>
 
 
-<div id="outline-container-org6d6a8b1" class="outline-3">
-<h3 id="org6d6a8b1"><span class="section-number-3">3.6</span> Miroir</h3>
+<div id="outline-container-org33422cb" class="outline-3">
+<h3 id="org33422cb"><span class="section-number-3">3.6.</span> Miroir</h3>
 <div class="outline-text-3" id="text-3-6">
 <p>
 Soit \(a \in \setR\). On a :
@@ -1932,8 +1897,8 @@ On en conclut que :
 </div>
 
 
-<div id="outline-container-org10d61dd" class="outline-3">
-<h3 id="org10d61dd"><span class="section-number-3">3.7</span> Soustraction</h3>
+<div id="outline-container-orgd3be6f5" class="outline-3">
+<h3 id="orgd3be6f5"><span class="section-number-3">3.7.</span> Soustraction</h3>
 <div class="outline-text-3" id="text-3-7">
 <p>
 Soit les réels \(a, b\). On a :
@@ -1946,8 +1911,8 @@ Soit les réels \(a, b\). On a :
 </div>
 
 
-<div id="outline-container-org40ccfb3" class="outline-3">
-<h3 id="org40ccfb3"><span class="section-number-3">3.8</span> Intégrale de \(x \mapsto 1/x\)</h3>
+<div id="outline-container-org9e90ca4" class="outline-3">
+<h3 id="org9e90ca4"><span class="section-number-3">3.8.</span> Intégrale de \(x \mapsto 1/x\)</h3>
 <div class="outline-text-3" id="text-3-8">
 <p>
 Comme \(\ln\) est une primitive de la fonction :
@@ -1968,8 +1933,8 @@ On a :
 </div>
 
 
-<div id="outline-container-orga2c3c47" class="outline-3">
-<h3 id="orga2c3c47"><span class="section-number-3">3.9</span> Gaussienne</h3>
+<div id="outline-container-org904c67b" class="outline-3">
+<h3 id="org904c67b"><span class="section-number-3">3.9.</span> Gaussienne</h3>
 <div class="outline-text-3" id="text-3-9">
 <p>
 Soit les réels \(\gamma\) et \(u_0\). Nous cherchons la fonction \(u : \setR \mapsto \setR\) solution du problème différentiel :
@@ -2028,23 +1993,23 @@ Une fonction de cette forme est appelée gaussienne.
 </div>
 
 
-<div id="outline-container-orgb9f7934" class="outline-2">
-<h2 id="orgb9f7934"><span class="section-number-2">4</span> Fonctions hyperboliques</h2>
+<div id="outline-container-org4f5b877" class="outline-2">
+<h2 id="org4f5b877"><span class="section-number-2">4.</span> Fonctions hyperboliques</h2>
 <div class="outline-text-2" id="text-4">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orge983f0b">4.1. Introduction</a></li>
-<li><a href="#orgfa56754">4.2. Relation fondamentale</a></li>
-<li><a href="#org20d750e">4.3. Dérivées</a></li>
-<li><a href="#orgb776f69">4.4. Intégrales</a></li>
-<li><a href="#org3ad0409">4.5. Tangente</a></li>
+<li><a href="#org95eb5c6">4.1. Introduction</a></li>
+<li><a href="#org6850f46">4.2. Relation fondamentale</a></li>
+<li><a href="#org1d2c980">4.3. Dérivées</a></li>
+<li><a href="#org6c5da42">4.4. Intégrales</a></li>
+<li><a href="#org70c5996">4.5. Tangente</a></li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-orge983f0b" class="outline-3">
-<h3 id="orge983f0b"><span class="section-number-3">4.1</span> Introduction</h3>
+<div id="outline-container-org95eb5c6" class="outline-3">
+<h3 id="org95eb5c6"><span class="section-number-3">4.1.</span> Introduction</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Le cosinus hyperbolique \(\cosh\) est défini comme étant la composante paire de l'exponentielle. On a donc :
@@ -2068,8 +2033,8 @@ pour tout \(x \in \setR\).
 </div>
 
 
-<div id="outline-container-orga146371" class="outline-4">
-<h4 id="orga146371"><span class="section-number-4">4.1.1</span> Décomposition</h4>
+<div id="outline-container-org715a2b8" class="outline-4">
+<h4 id="org715a2b8"><span class="section-number-4">4.1.1.</span> Décomposition</h4>
 <div class="outline-text-4" id="text-4-1-1">
 <p>
 On a :
@@ -2095,8 +2060,8 @@ pour tout réel \(x\).
 </div>
 
 
-<div id="outline-container-orgd370453" class="outline-4">
-<h4 id="orgd370453"><span class="section-number-4">4.1.2</span> Valeurs particulières</h4>
+<div id="outline-container-orgf2c87aa" class="outline-4">
+<h4 id="orgf2c87aa"><span class="section-number-4">4.1.2.</span> Valeurs particulières</h4>
 <div class="outline-text-4" id="text-4-1-2">
 <p>
 On a :
@@ -2118,8 +2083,8 @@ et :
 </div>
 
 
-<div id="outline-container-orgfa56754" class="outline-3">
-<h3 id="orgfa56754"><span class="section-number-3">4.2</span> Relation fondamentale</h3>
+<div id="outline-container-org6850f46" class="outline-3">
+<h3 id="org6850f46"><span class="section-number-3">4.2.</span> Relation fondamentale</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Soit un réel \(x\) et :
@@ -2186,8 +2151,8 @@ On a donc :
 </div>
 
 
-<div id="outline-container-org20d750e" class="outline-3">
-<h3 id="org20d750e"><span class="section-number-3">4.3</span> Dérivées</h3>
+<div id="outline-container-org1d2c980" class="outline-3">
+<h3 id="org1d2c980"><span class="section-number-3">4.3.</span> Dérivées</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 Pour tout réel \(x\), on a :
@@ -2208,8 +2173,8 @@ et :
 </div>
 
 
-<div id="outline-container-orgb776f69" class="outline-3">
-<h3 id="orgb776f69"><span class="section-number-3">4.4</span> Intégrales</h3>
+<div id="outline-container-org6c5da42" class="outline-3">
+<h3 id="org6c5da42"><span class="section-number-3">4.4.</span> Intégrales</h3>
 <div class="outline-text-3" id="text-4-4">
 <p>
 Comme \(\sinh\) est une primitive de \(\cosh\), on a :
@@ -2230,8 +2195,8 @@ Comme \(\cosh\) est une primitive de \(\sinh\), on a :
 </div>
 
 
-<div id="outline-container-org3ad0409" class="outline-3">
-<h3 id="org3ad0409"><span class="section-number-3">4.5</span> Tangente</h3>
+<div id="outline-container-org70c5996" class="outline-3">
+<h3 id="org70c5996"><span class="section-number-3">4.5.</span> Tangente</h3>
 <div class="outline-text-3" id="text-4-5">
 <p>
 La tangente hyperbolique \(\tanh\) est définie par :
@@ -2247,8 +2212,8 @@ pour tout \(x \in \setR\).
 </div>
 
 
-<div id="outline-container-org15ca4d6" class="outline-4">
-<h4 id="org15ca4d6"><span class="section-number-4">4.5.1</span> Dérivée</h4>
+<div id="outline-container-org1b841f6" class="outline-4">
+<h4 id="org1b841f6"><span class="section-number-4">4.5.1.</span> Dérivée</h4>
 <div class="outline-text-4" id="text-4-5-1">
 <p>
 On a :
@@ -2261,8 +2226,8 @@ On a :
 </div>
 
 
-<div id="outline-container-org69891b9" class="outline-4">
-<h4 id="org69891b9"><span class="section-number-4">4.5.2</span> Problème différentiel</h4>
+<div id="outline-container-org3656e42" class="outline-4">
+<h4 id="org3656e42"><span class="section-number-4">4.5.2.</span> Problème différentiel</h4>
 <div class="outline-text-4" id="text-4-5-2">
 <p>
 Comme :
@@ -2290,23 +2255,23 @@ vérifié pour tout \(t \in \setR\).
 </div>
 
 
-<div id="outline-container-orgb0619bf" class="outline-2">
-<h2 id="orgb0619bf"><span class="section-number-2">5</span> Exponentielle matricielle</h2>
+<div id="outline-container-orgb05ff1a" class="outline-2">
+<h2 id="orgb05ff1a"><span class="section-number-2">5.</span> Exponentielle matricielle</h2>
 <div class="outline-text-2" id="text-5">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org22e11c8">5.1. Introduction</a></li>
-<li><a href="#org03b41be">5.2. Matrice nulle</a></li>
-<li><a href="#org325acee">5.3. Développement de Taylor</a></li>
-<li><a href="#orgdd3e451">5.4. Développement en série de l'exponentielle</a></li>
-<li><a href="#orgb084905">5.5. Additivité</a></li>
-<li><a href="#orgff6b71c">5.6. Miroir</a></li>
-<li><a href="#orga9407b3">5.7. Solution vectorielle</a></li>
-<li><a href="#orge5f472f">5.8. Valeurs propres</a></li>
-<li><a href="#org4c81453">5.9. Dérivée</a></li>
-<li><a href="#org48832c9">5.10. Intégrale</a></li>
-<li><a href="#org27938b9">5.11. Systèmes linéaires</a></li>
-<li><a href="#orgbc9fdd1">5.12. Conditions initiales</a></li>
+<li><a href="#org4f91d91">5.1. Introduction</a></li>
+<li><a href="#orgf434ab1">5.2. Matrice nulle</a></li>
+<li><a href="#orgc0f446b">5.3. Développement de Taylor</a></li>
+<li><a href="#org414296c">5.4. Développement en série de l'exponentielle</a></li>
+<li><a href="#orgc6e72b7">5.5. Additivité</a></li>
+<li><a href="#orgef653df">5.6. Miroir</a></li>
+<li><a href="#org6f58304">5.7. Solution vectorielle</a></li>
+<li><a href="#org53727b0">5.8. Valeurs propres</a></li>
+<li><a href="#org51a0e38">5.9. Dérivée</a></li>
+<li><a href="#org4326fbf">5.10. Intégrale</a></li>
+<li><a href="#org2af096a">5.11. Systèmes linéaires</a></li>
+<li><a href="#org84182a9">5.12. Conditions initiales</a></li>
 </ul>
 </div>
 
@@ -2316,8 +2281,8 @@ vérifié pour tout \(t \in \setR\).
 </div>
 
 
-<div id="outline-container-org22e11c8" class="outline-3">
-<h3 id="org22e11c8"><span class="section-number-3">5.1</span> Introduction</h3>
+<div id="outline-container-org4f91d91" class="outline-3">
+<h3 id="org4f91d91"><span class="section-number-3">5.1.</span> Introduction</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 Soit une matrice \(A\in\mathfrak{M}(\setR,n,n)\) et la fonction :
@@ -2351,8 +2316,8 @@ On définit alors l'exponentielle matricielle par :
 </div>
 
 
-<div id="outline-container-org03b41be" class="outline-3">
-<h3 id="org03b41be"><span class="section-number-3">5.2</span> Matrice nulle</h3>
+<div id="outline-container-orgf434ab1" class="outline-3">
+<h3 id="orgf434ab1"><span class="section-number-3">5.2.</span> Matrice nulle</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 Dans le cas où \(A = 0\), on a :
@@ -2381,8 +2346,8 @@ La fonction \(E_0\) est donc constante et vaut \(E_0(t) = E_0(0) = I\) pour tout
 </div>
 
 
-<div id="outline-container-org325acee" class="outline-3">
-<h3 id="org325acee"><span class="section-number-3">5.3</span> Développement de Taylor</h3>
+<div id="outline-container-orgc0f446b" class="outline-3">
+<h3 id="orgc0f446b"><span class="section-number-3">5.3.</span> Développement de Taylor</h3>
 <div class="outline-text-3" id="text-5-3">
 <p>
 Soit la fonction :
@@ -2454,8 +2419,8 @@ La fonction \(t \mapsto \exp(A \cdot t)\) est donc identique à la solution \(E\
 </div>
 
 
-<div id="outline-container-orgdd3e451" class="outline-3">
-<h3 id="orgdd3e451"><span class="section-number-3">5.4</span> Développement en série de l'exponentielle</h3>
+<div id="outline-container-org414296c" class="outline-3">
+<h3 id="org414296c"><span class="section-number-3">5.4.</span> Développement en série de l'exponentielle</h3>
 <div class="outline-text-3" id="text-5-4">
 <p>
 Le cas particulier \(t = 1\) nous donne le développement de l'exponentielle matricielle :
@@ -2467,8 +2432,8 @@ Le cas particulier \(t = 1\) nous donne le développement de l'exponentielle mat
 </div>
 
 
-<div id="outline-container-orge2040cc" class="outline-5">
-<h5 id="orge2040cc"><span class="section-number-5">5.4.0.1</span> Sur \(\setR\)</h5>
+<div id="outline-container-org597b50f" class="outline-5">
+<h5 id="org597b50f"><span class="section-number-5">5.4.0.1.</span> Sur \(\setR\)</h5>
 <div class="outline-text-5" id="text-5-4-0-1">
 <p>
 Quand \(n=1\) et \(A=1\), on retrouve le développement de l'exponentielle usuelle :
@@ -2482,8 +2447,8 @@ Quand \(n=1\) et \(A=1\), on retrouve le développement de l'exponentielle usuel
 </div>
 
 
-<div id="outline-container-orgb084905" class="outline-3">
-<h3 id="orgb084905"><span class="section-number-3">5.5</span> Additivité</h3>
+<div id="outline-container-orgc6e72b7" class="outline-3">
+<h3 id="orgc6e72b7"><span class="section-number-3">5.5.</span> Additivité</h3>
 <div class="outline-text-3" id="text-5-5">
 <p>
 Soit les fonctions \(f, g : \setR \mapsto \setR\) définies par :
@@ -2532,8 +2497,8 @@ on en déduit que :
 </div>
 
 
-<div id="outline-container-orgff6b71c" class="outline-3">
-<h3 id="orgff6b71c"><span class="section-number-3">5.6</span> Miroir</h3>
+<div id="outline-container-orgef653df" class="outline-3">
+<h3 id="orgef653df"><span class="section-number-3">5.6.</span> Miroir</h3>
 <div class="outline-text-3" id="text-5-6">
 <p>
 L'additivité nous dit que :
@@ -2578,8 +2543,8 @@ Le cas particulier \(t = 1\) nous donne :
 </div>
 
 
-<div id="outline-container-orga9407b3" class="outline-3">
-<h3 id="orga9407b3"><span class="section-number-3">5.7</span> Solution vectorielle</h3>
+<div id="outline-container-org6f58304" class="outline-3">
+<h3 id="org6f58304"><span class="section-number-3">5.7.</span> Solution vectorielle</h3>
 <div class="outline-text-3" id="text-5-7">
 <p>
 Soit un vecteur \(x_0 \in \setR^n\) et la fonction \(x : \setR \mapsto \setR^n\) définie par :
@@ -2620,8 +2585,8 @@ x(0) = x_0
 </div>
 
 
-<div id="outline-container-orged1570d" class="outline-5">
-<h5 id="orged1570d"><span class="section-number-5">5.7.0.1</span> Sur \(\setR\)</h5>
+<div id="outline-container-org0314c3b" class="outline-5">
+<h5 id="org0314c3b"><span class="section-number-5">5.7.0.1.</span> Sur \(\setR\)</h5>
 <div class="outline-text-5" id="text-5-7-0-1">
 <p>
 Dans le cas où \(n=1\), et \(A = 1\), on obtient l'exponentielle
@@ -2637,8 +2602,8 @@ u(0) &= 1
 </div>
 
 
-<div id="outline-container-orge5f472f" class="outline-3">
-<h3 id="orge5f472f"><span class="section-number-3">5.8</span> Valeurs propres</h3>
+<div id="outline-container-org53727b0" class="outline-3">
+<h3 id="org53727b0"><span class="section-number-3">5.8.</span> Valeurs propres</h3>
 <div class="outline-text-3" id="text-5-8">
 <p>
 Il existe un lien entre l'exponentielle d'une matrice hermitienne et ses valeurs propres. Soit la fonction \(X : \setR \mapsto \setR^n\) vérifiant l'équation différentielle :
@@ -2796,8 +2761,8 @@ l'exponentielle d'une matrice hermitienne à ses valeurs propres :
 </div>
 
 
-<div id="outline-container-org4c81453" class="outline-3">
-<h3 id="org4c81453"><span class="section-number-3">5.9</span> Dérivée</h3>
+<div id="outline-container-org51a0e38" class="outline-3">
+<h3 id="org51a0e38"><span class="section-number-3">5.9.</span> Dérivée</h3>
 <div class="outline-text-3" id="text-5-9">
 <p>
 AFAIRE : dérivée de u(t) = exp( L(t) ), arranger la fin du chapitre
@@ -2810,8 +2775,8 @@ AFAIRE : dérivée de u(t) = exp( L(t) ), arranger la fin du chapitre
 </div>
 
 
-<div id="outline-container-org48832c9" class="outline-3">
-<h3 id="org48832c9"><span class="section-number-3">5.10</span> Intégrale</h3>
+<div id="outline-container-org4326fbf" class="outline-3">
+<h3 id="org4326fbf"><span class="section-number-3">5.10.</span> Intégrale</h3>
 <div class="outline-text-3" id="text-5-10">
 <p>
 Soit la fonction \(R\) :
@@ -2841,8 +2806,8 @@ On vérifie que :
 </div>
 
 
-<div id="outline-container-org27938b9" class="outline-3">
-<h3 id="org27938b9"><span class="section-number-3">5.11</span> Systèmes linéaires</h3>
+<div id="outline-container-org2af096a" class="outline-3">
+<h3 id="org2af096a"><span class="section-number-3">5.11.</span> Systèmes linéaires</h3>
 <div class="outline-text-3" id="text-5-11">
 <p>
 \label{sec:edo_sys_lin}
@@ -2957,8 +2922,8 @@ La solution est donc donnée par l'intégrale de convolution de \(R\) et \(b\).
 </div>
 
 
-<div id="outline-container-orgbc9fdd1" class="outline-3">
-<h3 id="orgbc9fdd1"><span class="section-number-3">5.12</span> Conditions initiales</h3>
+<div id="outline-container-org84182a9" class="outline-3">
+<h3 id="org84182a9"><span class="section-number-3">5.12.</span> Conditions initiales</h3>
 <div class="outline-text-3" id="text-5-12">
 <p>
 Nous allons à présent étudier ce qu'il se passe lorsqu'on dérive la solution par rapport à la condition initiale \(u_0 = x\). Posons \(u(x,t)\) la solution de :
@@ -3027,34 +2992,34 @@ nous obtenons :
 </div>
 
 
-<div id="outline-container-orgf52084c" class="outline-2">
-<h2 id="orgf52084c"><span class="section-number-2">6</span> Fonctions trigonométriques</h2>
+<div id="outline-container-orgea83d0b" class="outline-2">
+<h2 id="orgea83d0b"><span class="section-number-2">6.</span> Fonctions trigonométriques</h2>
 <div class="outline-text-2" id="text-6">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgbe711e7">6.1. Dépendances</a></li>
-<li><a href="#orgf493fa6">6.2. Introduction</a></li>
-<li><a href="#org825d063">6.3. Angle nul</a></li>
-<li><a href="#orgb3f680c">6.4. Produit scalaire</a></li>
-<li><a href="#org5e9446f">6.5. Différentielle</a></li>
-<li><a href="#org34c0860">6.6. Additivité</a></li>
-<li><a href="#orge47af16">6.7. Dérivées</a></li>
-<li><a href="#org1233e2d">6.8. Équations différentielles</a></li>
-<li><a href="#org3395b23">6.9. Racines</a></li>
-<li><a href="#orga804750">6.10. Périodicité</a></li>
-<li><a href="#org6cedd52">6.11. Angle double</a></li>
-<li><a href="#org1a65830">6.12. Intégrale</a></li>
-<li><a href="#org56d6449">6.13. Tangente</a></li>
-<li><a href="#org4299b52">6.14. Angle entre vecteurs</a></li>
-<li><a href="#orga49e542">6.15. Angles entre espaces</a></li>
-<li><a href="#org8484ae7">6.16. Coordonnées polaires</a></li>
+<li><a href="#orge9949f2">6.1. Dépendances</a></li>
+<li><a href="#org945a065">6.2. Introduction</a></li>
+<li><a href="#org88a7eb2">6.3. Angle nul</a></li>
+<li><a href="#org1ea8922">6.4. Produit scalaire</a></li>
+<li><a href="#orgeec17ce">6.5. Différentielle</a></li>
+<li><a href="#org4902c6c">6.6. Additivité</a></li>
+<li><a href="#org3fb4246">6.7. Dérivées</a></li>
+<li><a href="#orgdd57be2">6.8. Équations différentielles</a></li>
+<li><a href="#org8d62158">6.9. Racines</a></li>
+<li><a href="#orgcf1c705">6.10. Périodicité</a></li>
+<li><a href="#org4d888c5">6.11. Angle double</a></li>
+<li><a href="#org363ea4b">6.12. Intégrale</a></li>
+<li><a href="#org219466b">6.13. Tangente</a></li>
+<li><a href="#orgd133948">6.14. Angle entre vecteurs</a></li>
+<li><a href="#org886e79c">6.15. Angles entre espaces</a></li>
+<li><a href="#org24e6f02">6.16. Coordonnées polaires</a></li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-orgbe711e7" class="outline-3">
-<h3 id="orgbe711e7"><span class="section-number-3">6.1</span> Dépendances</h3>
+<div id="outline-container-orge9949f2" class="outline-3">
+<h3 id="orge9949f2"><span class="section-number-3">6.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-6-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:complexe} : Les complexes</li>
@@ -3064,8 +3029,8 @@ nous obtenons :
 
 
 
-<div id="outline-container-orgf493fa6" class="outline-3">
-<h3 id="orgf493fa6"><span class="section-number-3">6.2</span> Introduction</h3>
+<div id="outline-container-org945a065" class="outline-3">
+<h3 id="org945a065"><span class="section-number-3">6.2.</span> Introduction</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 Les fonctions trigonométriques cosinus (\(\cos\)), sinus (\(\sin\)) et associées peuvent se définir
@@ -3084,8 +3049,8 @@ qui associe à chaque valeur de l'angle de rotation \(\theta \in \setR\) une mat
 </div>
 
 
-<div id="outline-container-org825d063" class="outline-3">
-<h3 id="org825d063"><span class="section-number-3">6.3</span> Angle nul</h3>
+<div id="outline-container-org88a7eb2" class="outline-3">
+<h3 id="org88a7eb2"><span class="section-number-3">6.3.</span> Angle nul</h3>
 <div class="outline-text-3" id="text-6-3">
 <p>
 Il semble logique de demander qu'une rotation d'angle \(0\) d'un vecteur ne modifie pas ce vecteur, c'est-à-dire :
@@ -3098,8 +3063,8 @@ Il semble logique de demander qu'une rotation d'angle \(0\) d'un vecteur ne modi
 </div>
 
 
-<div id="outline-container-orgb3f680c" class="outline-3">
-<h3 id="orgb3f680c"><span class="section-number-3">6.4</span> Produit scalaire</h3>
+<div id="outline-container-org1ea8922" class="outline-3">
+<h3 id="org1ea8922"><span class="section-number-3">6.4.</span> Produit scalaire</h3>
 <div class="outline-text-3" id="text-6-4">
 <p>
 Une rotation doit conserver les angles entre les vecteurs, ainsi que leur norme. Autrement dit, le produit scalaire sur \(\setR^2\) :
@@ -3207,8 +3172,8 @@ avec :
 </div>
 
 
-<div id="outline-container-orgc5e8efc" class="outline-4">
-<h4 id="orgc5e8efc"><span class="section-number-4">6.4.1</span> Relation fondamentale et bornes</h4>
+<div id="outline-container-orgff67368" class="outline-4">
+<h4 id="orgff67368"><span class="section-number-4">6.4.1.</span> Relation fondamentale et bornes</h4>
 <div class="outline-text-4" id="text-6-4-1">
 <p>
 Soit \(x \in \setR\). Comme les fonctions \(\cos\) et \(\sin\) sont à valeurs dans \(\setR\), on a :
@@ -3257,8 +3222,8 @@ On en déduit les bornes :
 </div>
 
 
-<div id="outline-container-org5e9446f" class="outline-3">
-<h3 id="org5e9446f"><span class="section-number-3">6.5</span> Différentielle</h3>
+<div id="outline-container-orgeec17ce" class="outline-3">
+<h3 id="orgeec17ce"><span class="section-number-3">6.5.</span> Différentielle</h3>
 <div class="outline-text-3" id="text-6-5">
 <p>
 Posons \(x = \cos(\theta)\) et \(y = \sin(\theta)\). En différentiant la condition :
@@ -3411,8 +3376,8 @@ ou :
 </div>
 
 
-<div id="outline-container-org34c0860" class="outline-3">
-<h3 id="org34c0860"><span class="section-number-3">6.6</span> Additivité</h3>
+<div id="outline-container-org4902c6c" class="outline-3">
+<h3 id="org4902c6c"><span class="section-number-3">6.6.</span> Additivité</h3>
 <div class="outline-text-3" id="text-6-6">
 <p>
 Une rotation d'angle \(\theta_1\) suivie d'une rotation d'angle \(\theta_2\) doit
@@ -3493,8 +3458,8 @@ les formules suivantes :
 </div>
 
 
-<div id="outline-container-orge47af16" class="outline-3">
-<h3 id="orge47af16"><span class="section-number-3">6.7</span> Dérivées</h3>
+<div id="outline-container-org3fb4246" class="outline-3">
+<h3 id="org3fb4246"><span class="section-number-3">6.7.</span> Dérivées</h3>
 <div class="outline-text-3" id="text-6-7">
 <p>
 La dérivée de la fonction \(\cos\) s'écrit :
@@ -3552,8 +3517,8 @@ On a donc :
 </div>
 
 
-<div id="outline-container-org1233e2d" class="outline-3">
-<h3 id="org1233e2d"><span class="section-number-3">6.8</span> Équations différentielles</h3>
+<div id="outline-container-orgdd57be2" class="outline-3">
+<h3 id="orgdd57be2"><span class="section-number-3">6.8.</span> Équations différentielles</h3>
 <div class="outline-text-3" id="text-6-8">
 <p>
 La dérivée seconde de la fonction \(\cos\) s'écrit :
@@ -3614,8 +3579,8 @@ vérifié pour tout \(t \in \setR\).
 </div>
 
 
-<div id="outline-container-org3395b23" class="outline-3">
-<h3 id="org3395b23"><span class="section-number-3">6.9</span> Racines</h3>
+<div id="outline-container-org8d62158" class="outline-3">
+<h3 id="org8d62158"><span class="section-number-3">6.9.</span> Racines</h3>
 <div class="outline-text-3" id="text-6-9">
 <p>
 Nous allons maintenant nous occuper du problème des éventuelles racines
@@ -3811,8 +3776,8 @@ tel que \(u(\psi) = 0\). Donc :
 </div>
 
 
-<div id="outline-container-orga804750" class="outline-3">
-<h3 id="orga804750"><span class="section-number-3">6.10</span> Périodicité</h3>
+<div id="outline-container-orgcf1c705" class="outline-3">
+<h3 id="orgcf1c705"><span class="section-number-3">6.10.</span> Périodicité</h3>
 <div class="outline-text-3" id="text-6-10">
 <p>
 Nous allons à présent montrer d'importantes propriétés de périodicité des fonctions trigonométriques. Considérons la plus petite racine positive de \(u\) :
@@ -3922,8 +3887,8 @@ u(4\psi) = 1 \qquad v(4\psi) = 0
 </div>
 
 
-<div id="outline-container-org9a0b740" class="outline-4">
-<h4 id="org9a0b740"><span class="section-number-4">6.10.1</span> Extension</h4>
+<div id="outline-container-org8a57a73" class="outline-4">
+<h4 id="org8a57a73"><span class="section-number-4">6.10.1.</span> Extension</h4>
 <div class="outline-text-4" id="text-6-10-1">
 <p>
 Donc \(u(4\psi) = u(0)\) et \(v(4\psi) = v(0)\). On en déduit
@@ -3989,8 +3954,8 @@ pour tout \(k\in\setZ\).
 </div>
 
 
-<div id="outline-container-org6cedd52" class="outline-3">
-<h3 id="org6cedd52"><span class="section-number-3">6.11</span> Angle double</h3>
+<div id="outline-container-org4d888c5" class="outline-3">
+<h3 id="org4d888c5"><span class="section-number-3">6.11.</span> Angle double</h3>
 <div class="outline-text-3" id="text-6-11">
 <p>
 L'additivité nous donne :
@@ -4010,8 +3975,8 @@ On a donc :
 </div>
 
 
-<div id="outline-container-org3e0cb45" class="outline-4">
-<h4 id="org3e0cb45"><span class="section-number-4">6.11.1</span> Alternative</h4>
+<div id="outline-container-orge967129" class="outline-4">
+<h4 id="orge967129"><span class="section-number-4">6.11.1.</span> Alternative</h4>
 <div class="outline-text-4" id="text-6-11-1">
 <p>
 En utilisant :
@@ -4040,8 +4005,8 @@ et :
 </div>
 
 
-<div id="outline-container-org718810b" class="outline-4">
-<h4 id="org718810b"><span class="section-number-4">6.11.2</span> Relations inverses</h4>
+<div id="outline-container-orga80ea7f" class="outline-4">
+<h4 id="orga80ea7f"><span class="section-number-4">6.11.2.</span> Relations inverses</h4>
 <div class="outline-text-4" id="text-6-11-2">
 <p>
 Il est aisé d'inverser ces deux relations, on a :
@@ -4063,8 +4028,8 @@ et :
 </div>
 
 
-<div id="outline-container-org1a65830" class="outline-3">
-<h3 id="org1a65830"><span class="section-number-3">6.12</span> Intégrale</h3>
+<div id="outline-container-org363ea4b" class="outline-3">
+<h3 id="org363ea4b"><span class="section-number-3">6.12.</span> Intégrale</h3>
 <div class="outline-text-3" id="text-6-12">
 <p>
 Comme \(\sin\) est une primitive de \(\cos\), on a :
@@ -4093,8 +4058,8 @@ ou :
 </div>
 
 
-<div id="outline-container-org56d6449" class="outline-3">
-<h3 id="org56d6449"><span class="section-number-3">6.13</span> Tangente</h3>
+<div id="outline-container-org219466b" class="outline-3">
+<h3 id="org219466b"><span class="section-number-3">6.13.</span> Tangente</h3>
 <div class="outline-text-3" id="text-6-13">
 <p>
 La tangente \(\tan\) est définie par :
@@ -4110,8 +4075,8 @@ pour tout \(x \in \setR\).
 </div>
 
 
-<div id="outline-container-org80782f9" class="outline-4">
-<h4 id="org80782f9"><span class="section-number-4">6.13.1</span> Dérivée</h4>
+<div id="outline-container-orgb2c2c71" class="outline-4">
+<h4 id="orgb2c2c71"><span class="section-number-4">6.13.1.</span> Dérivée</h4>
 <div class="outline-text-4" id="text-6-13-1">
 <p>
 On a :
@@ -4124,8 +4089,8 @@ On a :
 </div>
 
 
-<div id="outline-container-org50a0b79" class="outline-4">
-<h4 id="org50a0b79"><span class="section-number-4">6.13.2</span> Problème différentiel</h4>
+<div id="outline-container-orgb343bc3" class="outline-4">
+<h4 id="orgb343bc3"><span class="section-number-4">6.13.2.</span> Problème différentiel</h4>
 <div class="outline-text-4" id="text-6-13-2">
 <p>
 Comme :
@@ -4152,8 +4117,8 @@ vérifié pour tout \(t \in \setR\).
 </div>
 
 
-<div id="outline-container-org4299b52" class="outline-3">
-<h3 id="org4299b52"><span class="section-number-3">6.14</span> Angle entre vecteurs</h3>
+<div id="outline-container-orgd133948" class="outline-3">
+<h3 id="orgd133948"><span class="section-number-3">6.14.</span> Angle entre vecteurs</h3>
 <div class="outline-text-3" id="text-6-14">
 <p>
 Dans le cas où le produit scalaire est réel, on peut trouver un réel
@@ -4171,8 +4136,8 @@ On dit alors que \(\theta\) est l'angle formé par les deux vecteurs \(x\) et \(
 </div>
 
 
-<div id="outline-container-orga49e542" class="outline-3">
-<h3 id="orga49e542"><span class="section-number-3">6.15</span> Angles entre espaces</h3>
+<div id="outline-container-org886e79c" class="outline-3">
+<h3 id="org886e79c"><span class="section-number-3">6.15.</span> Angles entre espaces</h3>
 <div class="outline-text-3" id="text-6-15">
 <p>
 Autre application des valeurs singulières, les angles entres espaces vectoriels
@@ -4216,8 +4181,8 @@ nous donne les cosinus de ces angles.
 </div>
 
 
-<div id="outline-container-org8484ae7" class="outline-3">
-<h3 id="org8484ae7"><span class="section-number-3">6.16</span> Coordonnées polaires</h3>
+<div id="outline-container-org24e6f02" class="outline-3">
+<h3 id="org24e6f02"><span class="section-number-3">6.16.</span> Coordonnées polaires</h3>
 <div class="outline-text-3" id="text-6-16">
 <p>
 AFAIRE : CLARIFIER LA FIN DU CHAPITRE
@@ -4306,8 +4271,8 @@ da = \deriveepartielle{a^R}{R} \cdot e_R \ dR + \left( \deriveepartielle{a^R}{\t
 </div>
 
 
-<div id="outline-container-org0718a28" class="outline-2">
-<h2 id="org0718a28"><span class="section-number-2">7</span> Fonctions trigonométriques inverses</h2>
+<div id="outline-container-org5bdad31" class="outline-2">
+<h2 id="org5bdad31"><span class="section-number-2">7.</span> Fonctions trigonométriques inverses</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Les fonctions trigonométriques ne sont pas inversible. Soit \(y \in \setR\) et \(s \in \setR\) une solution
@@ -4375,13 +4340,13 @@ x \in [-\pi/2,\pi/2]
 </div>
 
 
-<div id="outline-container-org26c3f21" class="outline-2">
-<h2 id="org26c3f21"><span class="section-number-2">8</span> Equations aux dérivées partielles</h2>
+<div id="outline-container-orgae13c73" class="outline-2">
+<h2 id="orgae13c73"><span class="section-number-2">8.</span> Equations aux dérivées partielles</h2>
 <div class="outline-text-2" id="text-8">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf75cbc3">8.1. Courbes caractéristiques</a></li>
-<li><a href="#orgd344058">8.2. Fonction de Green</a></li>
+<li><a href="#org8f252a5">8.1. Courbes caractéristiques</a></li>
+<li><a href="#org1dd30f9">8.2. Fonction de Green</a></li>
 </ul>
 </div>
 
@@ -4391,8 +4356,8 @@ x \in [-\pi/2,\pi/2]
 </div>
 
 
-<div id="outline-container-orgf75cbc3" class="outline-3">
-<h3 id="orgf75cbc3"><span class="section-number-3">8.1</span> Courbes caractéristiques</h3>
+<div id="outline-container-org8f252a5" class="outline-3">
+<h3 id="org8f252a5"><span class="section-number-3">8.1.</span> Courbes caractéristiques</h3>
 <div class="outline-text-3" id="text-8-1">
 <p>
 Soit \(u \in F = \continue^1(\setR^2,\setR)\) et l'équation aux dérivées partielles à résoudre sur \(\Omega\subseteq\setR^2\) :
@@ -4486,8 +4451,8 @@ On dit alors que \(\Gamma\) est une courbe caractéristique de l'équation aux d
 </div>
 
 
-<div id="outline-container-orgd344058" class="outline-3">
-<h3 id="orgd344058"><span class="section-number-3">8.2</span> Fonction de Green</h3>
+<div id="outline-container-org1dd30f9" class="outline-3">
+<h3 id="org1dd30f9"><span class="section-number-3">8.2.</span> Fonction de Green</h3>
 <div class="outline-text-3" id="text-8-2">
 <p>
 Soit un espace fonctionnel \(F \subseteq \Leb^2(\setR^n,\setR)\) et une forme \(\forme{}{} : F^D \times F \mapsto \setR\) à laquelle on associe par abus de notation :
@@ -4575,8 +4540,8 @@ et finalement :
 </div>
 
 
-<div id="outline-container-orgf0d0a0e" class="outline-4">
-<h4 id="orgf0d0a0e"><span class="section-number-4">8.2.1</span> Exemple d'opérateur auto-adjoint</h4>
+<div id="outline-container-org58e93db" class="outline-4">
+<h4 id="org58e93db"><span class="section-number-4">8.2.1.</span> Exemple d'opérateur auto-adjoint</h4>
 <div class="outline-text-4" id="text-8-2-1">
 <p>
 Comme exemple d'opérateur auto-adjoint, citons :
@@ -4591,12 +4556,12 @@ Comme exemple d'opérateur auto-adjoint, citons :
 </div>
 
 
-<div id="outline-container-org272678e" class="outline-2">
-<h2 id="org272678e"><span class="section-number-2">9</span> Algorithmes de résolution d'EDO</h2>
+<div id="outline-container-org2ba8612" class="outline-2">
+<h2 id="org2ba8612"><span class="section-number-2">9.</span> Algorithmes de résolution d'EDO</h2>
 <div class="outline-text-2" id="text-9">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgfccacd6">9.1. Introduction</a></li>
+<li><a href="#org478be2c">9.1. Introduction</a></li>
 </ul>
 </div>
 
@@ -4606,8 +4571,8 @@ Comme exemple d'opérateur auto-adjoint, citons :
 </div>
 
 
-<div id="outline-container-orgfccacd6" class="outline-3">
-<h3 id="orgfccacd6"><span class="section-number-3">9.1</span> Introduction</h3>
+<div id="outline-container-org478be2c" class="outline-3">
+<h3 id="org478be2c"><span class="section-number-3">9.1.</span> Introduction</h3>
 <div class="outline-text-3" id="text-9-1">
 <p>
 AFAIRE : ARRANGER LE CHAPITRE
@@ -4636,8 +4601,8 @@ Pour cela, on choisit \(n\) points \(x_i\), et on tente de progresser en évalua
 </div>
 
 
-<div id="outline-container-orgcad5c30" class="outline-4">
-<h4 id="orgcad5c30"><span class="section-number-4">9.1.1</span> Euler</h4>
+<div id="outline-container-orgc0cd72f" class="outline-4">
+<h4 id="orgc0cd72f"><span class="section-number-4">9.1.1.</span> Euler</h4>
 <div class="outline-text-4" id="text-9-1-1">
 <p>
 On se sert de la formulation intégrale correspondant à l'équation différentielle que l'on veut résoudre :
@@ -4666,8 +4631,8 @@ Cette méthode se nomme Euler explicite.
 </div>
 
 
-<div id="outline-container-orgc2e9471" class="outline-4">
-<h4 id="orgc2e9471"><span class="section-number-4">9.1.2</span> Predicteur - Correcteur</h4>
+<div id="outline-container-org890b802" class="outline-4">
+<h4 id="org890b802"><span class="section-number-4">9.1.2.</span> Predicteur - Correcteur</h4>
 <div class="outline-text-4" id="text-9-1-2">
 <p>
 On part de nouveau de :
@@ -4732,8 +4697,8 @@ L'étape correctrice s'écrit donc :
 </div>
 
 
-<div id="outline-container-org4b60826" class="outline-4">
-<h4 id="org4b60826"><span class="section-number-4">9.1.3</span> Taylor</h4>
+<div id="outline-container-orgad6e95a" class="outline-4">
+<h4 id="orgad6e95a"><span class="section-number-4">9.1.3.</span> Taylor</h4>
 <div class="outline-text-4" id="text-9-1-3">
 <p>
 Partant des dérivées de la fonction \(y(x) = f(x,y(x))\) :
@@ -4760,14 +4725,14 @@ autour de \(x_i\) :
 </div>
 
 
-<div id="outline-container-org2eb2b1f" class="outline-2">
-<h2 id="org2eb2b1f"><span class="section-number-2">10</span> Algorithmes de résolution d'EDP</h2>
+<div id="outline-container-org6f5de29" class="outline-2">
+<h2 id="org6f5de29"><span class="section-number-2">10.</span> Algorithmes de résolution d'EDP</h2>
 <div class="outline-text-2" id="text-10">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org40dc53e">10.1. Résolution par les caractéristiques</a></li>
-<li><a href="#orgaadc7d9">10.2. Différences finies</a></li>
-<li><a href="#orgbc271c6">10.3. Eléments finis</a></li>
+<li><a href="#orge97abf6">10.1. Résolution par les caractéristiques</a></li>
+<li><a href="#org286c6da">10.2. Différences finies</a></li>
+<li><a href="#org8e57306">10.3. Eléments finis</a></li>
 </ul>
 </div>
 
@@ -4777,8 +4742,8 @@ autour de \(x_i\) :
 </div>
 
 
-<div id="outline-container-org40dc53e" class="outline-3">
-<h3 id="org40dc53e"><span class="section-number-3">10.1</span> Résolution par les caractéristiques</h3>
+<div id="outline-container-orge97abf6" class="outline-3">
+<h3 id="orge97abf6"><span class="section-number-3">10.1.</span> Résolution par les caractéristiques</h3>
 <div class="outline-text-3" id="text-10-1">
 <p>
 AFAIRE : ARRANGER LE CHAPITRE
@@ -4827,8 +4792,8 @@ u_{i,k+1} = u_{ik} + h_k \ c(x_{ik},y_{ik},u_{ik})
 </div>
 
 
-<div id="outline-container-orgaadc7d9" class="outline-3">
-<h3 id="orgaadc7d9"><span class="section-number-3">10.2</span> Différences finies</h3>
+<div id="outline-container-org286c6da" class="outline-3">
+<h3 id="org286c6da"><span class="section-number-3">10.2.</span> Différences finies</h3>
 <div class="outline-text-3" id="text-10-2">
 <p>
 On vérifie sur le développement de Taylor de \(u\) que :
@@ -4910,8 +4875,8 @@ et on obtient un système linéaire à résoudre en les \(U_{ij}\).
 </div>
 
 
-<div id="outline-container-orgbc271c6" class="outline-3">
-<h3 id="orgbc271c6"><span class="section-number-3">10.3</span> Eléments finis</h3>
+<div id="outline-container-org8e57306" class="outline-3">
+<h3 id="org8e57306"><span class="section-number-3">10.3.</span> Eléments finis</h3>
 <div class="outline-text-3" id="text-10-3">
 <p>
 \label{sec:elements_finis}
@@ -5014,8 +4979,8 @@ ce qui nous donne une forme approchée \(u\) de la solution exacte.
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2019-10-01 mar 12:34</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2023-05-10 mer 16:45</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>

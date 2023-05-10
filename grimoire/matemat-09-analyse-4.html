@@ -3,14 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-10-01 mar 12:33 -->
+<!-- 2023-05-10 mer 16:45 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 09 : Analyse - 4</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="chimay" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -31,8 +30,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -40,22 +40,22 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
+    overflow: auto;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -161,6 +161,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -177,56 +190,9 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         displayAlign: "center",
@@ -247,11 +213,10 @@ for the JavaScript code in this tag.
              }
 });
 </script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Eclats de vers : Matemat 09 : Analyse - 4</h1>
 <p>
 <a href="index.html">Index des Grimoires</a>
@@ -261,12 +226,12 @@ for the JavaScript code in this tag.
 <a href="../index.html">Retour à l’accueil</a>
 </p>
 
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table des matières</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgcf6e2e9">1. Géométrie différentielle</a></li>
-<li><a href="#org614c124">2. L'espace vectoriel des polynômes</a></li>
+<li><a href="#org59abfca">1. Géométrie différentielle</a></li>
+<li><a href="#org43662c8">2. L'espace vectoriel des polynômes</a></li>
 </ul>
 </div>
 </div>
@@ -425,22 +390,22 @@ for the JavaScript code in this tag.
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
 
-<div id="outline-container-orgcf6e2e9" class="outline-2">
-<h2 id="orgcf6e2e9"><span class="section-number-2">1</span> Géométrie différentielle</h2>
+<div id="outline-container-org59abfca" class="outline-2">
+<h2 id="org59abfca"><span class="section-number-2">1.</span> Géométrie différentielle</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2245e7c">1.1. Dépendances</a></li>
-<li><a href="#orgb300d16">1.2. Indices covariants et contravariants</a></li>
-<li><a href="#org6e2bc64">1.3. Coordonnées curvilignes</a></li>
-<li><a href="#org3f8c868">1.4. Changement de variable</a></li>
-<li><a href="#orgccd982c">1.5. Produit scalaire</a></li>
-<li><a href="#orga775d86">1.6. Dérivées primales d'un vecteur</a></li>
-<li><a href="#org4ad8632">1.7. Dérivées duales d'un vecteur</a></li>
-<li><a href="#orgdd68d79">1.8. Dérivées d'un tenseur</a></li>
-<li><a href="#org7b77f42">1.9. Produit scalaire et symboles de Christoffel</a></li>
-<li><a href="#org873f6c8">1.10. Bases biorthonormées</a></li>
-<li><a href="#org6ed6046">1.11. Dérivées des changements de variable</a></li>
+<li><a href="#org2b8045b">1.1. Dépendances</a></li>
+<li><a href="#orgb26a4b8">1.2. Indices covariants et contravariants</a></li>
+<li><a href="#org885f260">1.3. Coordonnées curvilignes</a></li>
+<li><a href="#org90055a3">1.4. Changement de variable</a></li>
+<li><a href="#org5cdc85a">1.5. Produit scalaire</a></li>
+<li><a href="#org8cdd341">1.6. Dérivées primales d'un vecteur</a></li>
+<li><a href="#orge853868">1.7. Dérivées duales d'un vecteur</a></li>
+<li><a href="#org7440324">1.8. Dérivées d'un tenseur</a></li>
+<li><a href="#orgea098e1">1.9. Produit scalaire et symboles de Christoffel</a></li>
+<li><a href="#org5ab1c10">1.10. Bases biorthonormées</a></li>
+<li><a href="#orgb963f85">1.11. Dérivées des changements de variable</a></li>
 </ul>
 </div>
 
@@ -450,8 +415,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-org2245e7c" class="outline-3">
-<h3 id="org2245e7c"><span class="section-number-3">1.1</span> Dépendances</h3>
+<div id="outline-container-org2b8045b" class="outline-3">
+<h3 id="org2b8045b"><span class="section-number-3">1.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:vecteur} : Les vecteurs</li>
@@ -462,8 +427,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-orgb300d16" class="outline-3">
-<h3 id="orgb300d16"><span class="section-number-3">1.2</span> Indices covariants et contravariants</h3>
+<div id="outline-container-orgb26a4b8" class="outline-3">
+<h3 id="orgb26a4b8"><span class="section-number-3">1.2.</span> Indices covariants et contravariants</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Les indices inférieurs (le \(i\) des vecteurs \(a_i^j\) par exemple) des
@@ -489,8 +454,8 @@ serait notée au besoin par :
 </div>
 
 
-<div id="outline-container-org6e2bc64" class="outline-3">
-<h3 id="org6e2bc64"><span class="section-number-3">1.3</span> Coordonnées curvilignes</h3>
+<div id="outline-container-org885f260" class="outline-3">
+<h3 id="org885f260"><span class="section-number-3">1.3.</span> Coordonnées curvilignes</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Soit l'espace vectoriel \(E = \setR^n\) sur \(\setR\). Les coordonnées curvilignes sont basées sur la notion de position \(r\), exprimée comme une fonction de certains paramètres \(x \in \setR^n\) que nous appelons « coordonnées » de \(r\) :
@@ -535,8 +500,8 @@ Nous supposons que \((e_1, ..., e_n)\) et \((e^1, ..., e^n)\) sont des bases de 
 </div>
 
 
-<div id="outline-container-org7f8e679" class="outline-4">
-<h4 id="org7f8e679"><span class="section-number-4">1.3.1</span> Courbe</h4>
+<div id="outline-container-orgcce824b" class="outline-4">
+<h4 id="orgcce824b"><span class="section-number-4">1.3.1.</span> Courbe</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <p>
 Dans le cas où \(x\) et \(y\) ne dépendent que d'un paramètre \(t \in \setR\), on a :
@@ -554,8 +519,8 @@ On dit alors que la position \(r\) décrit une courbe.
 </div>
 
 
-<div id="outline-container-org3f8c868" class="outline-3">
-<h3 id="org3f8c868"><span class="section-number-3">1.4</span> Changement de variable</h3>
+<div id="outline-container-org90055a3" class="outline-3">
+<h3 id="org90055a3"><span class="section-number-3">1.4.</span> Changement de variable</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Si les fonctions \(\rho\) et \(\sigma\) sont inversibles, on a :
@@ -603,8 +568,8 @@ qui nous permettent de relier les \(e_i\) aux \(e^j\) et inversément.
 </div>
 
 
-<div id="outline-container-orgccd982c" class="outline-3">
-<h3 id="orgccd982c"><span class="section-number-3">1.5</span> Produit scalaire</h3>
+<div id="outline-container-org5cdc85a" class="outline-3">
+<h3 id="org5cdc85a"><span class="section-number-3">1.5.</span> Produit scalaire</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Les produits intérieurs entre vecteurs de base se notent habituellement :
@@ -687,8 +652,8 @@ g^{ij} = \sum_k \deriveepartielle{x_k}{y^i} \ g_k^j = \sum_{k,l} \deriveepartiel
 </div>
 
 
-<div id="outline-container-orga775d86" class="outline-3">
-<h3 id="orga775d86"><span class="section-number-3">1.6</span> Dérivées primales d'un vecteur</h3>
+<div id="outline-container-org8cdd341" class="outline-3">
+<h3 id="org8cdd341"><span class="section-number-3">1.6.</span> Dérivées primales d'un vecteur</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 Nous allons à présent voir comment évolue un vecteur \(a\in E\), que l'on note sous la forme :
@@ -789,8 +754,8 @@ Dans le cas où les coordonnées dépendent d'un paramètre \(t\in\setR\), on a�
 </div>
 
 
-<div id="outline-container-org52927d8" class="outline-4">
-<h4 id="org52927d8"><span class="section-number-4">1.6.1</span> Dérivée seconde et géodésique</h4>
+<div id="outline-container-org5efa31a" class="outline-4">
+<h4 id="org5efa31a"><span class="section-number-4">1.6.1.</span> Dérivée seconde et géodésique</h4>
 <div class="outline-text-4" id="text-1-6-1">
 <p>
 Considérons le cas :
@@ -824,8 +789,8 @@ Les courbes \(x^i = x^i(t)\) vérifiant \(\OOD{r}{t} = 0\) sont appelées des g�
 </div>
 
 
-<div id="outline-container-org4ad8632" class="outline-3">
-<h3 id="org4ad8632"><span class="section-number-3">1.7</span> Dérivées duales d'un vecteur</h3>
+<div id="outline-container-orge853868" class="outline-3">
+<h3 id="orge853868"><span class="section-number-3">1.7.</span> Dérivées duales d'un vecteur</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 Nous allons recommencer le même processus, écrivant cette fois  \(a\in E\) sous la forme :
@@ -864,8 +829,8 @@ Ces nouveaux symboles présentent la symétrie :
 </div>
 
 
-<div id="outline-container-orgdd68d79" class="outline-3">
-<h3 id="orgdd68d79"><span class="section-number-3">1.8</span> Dérivées d'un tenseur</h3>
+<div id="outline-container-org7440324" class="outline-3">
+<h3 id="org7440324"><span class="section-number-3">1.8.</span> Dérivées d'un tenseur</h3>
 <div class="outline-text-3" id="text-1-8">
 <p>
 On étend simplement la notion de dérivée aux tenseurs en appliquant
@@ -904,8 +869,8 @@ qui devient, en introduisant les symboles de Christoffel :
 </div>
 
 
-<div id="outline-container-org7b77f42" class="outline-3">
-<h3 id="org7b77f42"><span class="section-number-3">1.9</span> Produit scalaire et symboles de Christoffel</h3>
+<div id="outline-container-orgea098e1" class="outline-3">
+<h3 id="orgea098e1"><span class="section-number-3">1.9.</span> Produit scalaire et symboles de Christoffel</h3>
 <div class="outline-text-3" id="text-1-9">
 <p>
 Lorsqu'on différentie les \(g_{ij}\), on obtient :
@@ -965,12 +930,12 @@ AFAIRE : LA FIN DU CHAPITRE EST A DÉBROUILLONNER
 </div>
 
 
-<div id="outline-container-org873f6c8" class="outline-3">
-<h3 id="org873f6c8"><span class="section-number-3">1.10</span> Bases biorthonormées</h3>
+<div id="outline-container-org5ab1c10" class="outline-3">
+<h3 id="org5ab1c10"><span class="section-number-3">1.10.</span> Bases biorthonormées</h3>
 <div class="outline-text-3" id="text-1-10">
 </div>
-<div id="outline-container-orga75835f" class="outline-4">
-<h4 id="orga75835f"><span class="section-number-4">1.10.1</span> produit scalaire</h4>
+<div id="outline-container-org4938ca6" class="outline-4">
+<h4 id="org4938ca6"><span class="section-number-4">1.10.1.</span> produit scalaire</h4>
 <div class="outline-text-4" id="text-1-10-1">
 <p>
 Nous considérons tout au long de cette section le cas particulier où les bases
@@ -1007,8 +972,8 @@ On aurait de même :
 </div>
 
 
-<div id="outline-container-org2ed2439" class="outline-4">
-<h4 id="org2ed2439"><span class="section-number-4">1.10.2</span> Coordonnées</h4>
+<div id="outline-container-org959f822" class="outline-4">
+<h4 id="org959f822"><span class="section-number-4">1.10.2.</span> Coordonnées</h4>
 <div class="outline-text-4" id="text-1-10-2">
 <p>
 Les coordonnées d'un tenseur de la forme :
@@ -1031,8 +996,8 @@ en utilisant la contraction double :
 </div>
 
 
-<div id="outline-container-org6ed6046" class="outline-3">
-<h3 id="org6ed6046"><span class="section-number-3">1.11</span> Dérivées des changements de variable</h3>
+<div id="outline-container-orgb963f85" class="outline-3">
+<h3 id="orgb963f85"><span class="section-number-3">1.11.</span> Dérivées des changements de variable</h3>
 <div class="outline-text-3" id="text-1-11">
 <div class="org-center">
 <p>
@@ -1045,8 +1010,8 @@ en utilisant la contraction double :
 </div>
 
 
-<div id="outline-container-orgc42e6aa" class="outline-4">
-<h4 id="orgc42e6aa"><span class="section-number-4">1.11.1</span> Christoffel</h4>
+<div id="outline-container-org36cd800" class="outline-4">
+<h4 id="org36cd800"><span class="section-number-4">1.11.1.</span> Christoffel</h4>
 <div class="outline-text-4" id="text-1-11-1">
 <p>
 Tenant compte de cette identité, l'équation reliant les symboles de Christoffel
@@ -1060,8 +1025,8 @@ aux produits scalaires devient :
 </div>
 
 
-<div id="outline-container-org1b4036b" class="outline-4">
-<h4 id="org1b4036b"><span class="section-number-4">1.11.2</span> Dérivée d'un vecteur</h4>
+<div id="outline-container-org0b09479" class="outline-4">
+<h4 id="org0b09479"><span class="section-number-4">1.11.2.</span> Dérivée d'un vecteur</h4>
 <div class="outline-text-4" id="text-1-11-2">
 <p>
 La relation :
@@ -1105,8 +1070,8 @@ On peut donc réexprimer la dérivée duale comme :
 </div>
 
 
-<div id="outline-container-org2bc7bf0" class="outline-4">
-<h4 id="org2bc7bf0"><span class="section-number-4">1.11.3</span> Gradient</h4>
+<div id="outline-container-org53c6348" class="outline-4">
+<h4 id="org53c6348"><span class="section-number-4">1.11.3.</span> Gradient</h4>
 <div class="outline-text-4" id="text-1-11-3">
 <p>
 On peut également définir le gradient d'un vecteur par :
@@ -1128,8 +1093,8 @@ de telle sorte que l'on ait :
 
 
 
-<div id="outline-container-org6b381ee" class="outline-4">
-<h4 id="org6b381ee"><span class="section-number-4">1.11.4</span> Dérivée d'un tenseur</h4>
+<div id="outline-container-org77f8b36" class="outline-4">
+<h4 id="org77f8b36"><span class="section-number-4">1.11.4.</span> Dérivée d'un tenseur</h4>
 <div class="outline-text-4" id="text-1-11-4">
 <p>
 \[dT = \sum_{i,j,k} e_i \otimes e^j dx^k \left[ \deriveepartielle{T^i_j}{x^k} + \sum_m \christoffel{i}{mk} T^m_j - \sum_m \christoffel{m}{jk} T^i_m \right]\]
@@ -1146,8 +1111,8 @@ On définit alors les coordonnées :
 </div>
 
 
-<div id="outline-container-orgad63d39" class="outline-4">
-<h4 id="orgad63d39"><span class="section-number-4">1.11.5</span> Tenseur de courbure</h4>
+<div id="outline-container-org6559f38" class="outline-4">
+<h4 id="org6559f38"><span class="section-number-4">1.11.5.</span> Tenseur de courbure</h4>
 <div class="outline-text-4" id="text-1-11-5">
 <p>
 Appliquons la formule de dérivation des coordonnées d'un tenseur dans le cas particulier où :
@@ -1212,15 +1177,15 @@ Ce sont les coordonnées du tenseur de courbure de Riemann-Christoffel.
 </div>
 
 
-<div id="outline-container-org614c124" class="outline-2">
-<h2 id="org614c124"><span class="section-number-2">2</span> L'espace vectoriel des polynômes</h2>
+<div id="outline-container-org43662c8" class="outline-2">
+<h2 id="org43662c8"><span class="section-number-2">2.</span> L'espace vectoriel des polynômes</h2>
 <div class="outline-text-2" id="text-2">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4bd6831">2.1. Introduction</a></li>
-<li><a href="#org5076b90">2.2. Polynômes orthogonaux</a></li>
-<li><a href="#org8286c45">2.3. Legendre</a></li>
-<li><a href="#org668b679">2.4. Interpolation</a></li>
+<li><a href="#orgeb05455">2.1. Introduction</a></li>
+<li><a href="#org2ded0c7">2.2. Polynômes orthogonaux</a></li>
+<li><a href="#org3a75590">2.3. Legendre</a></li>
+<li><a href="#orgaeaebff">2.4. Interpolation</a></li>
 </ul>
 </div>
 
@@ -1230,8 +1195,8 @@ Ce sont les coordonnées du tenseur de courbure de Riemann-Christoffel.
 </div>
 
 
-<div id="outline-container-org4bd6831" class="outline-3">
-<h3 id="org4bd6831"><span class="section-number-3">2.1</span> Introduction</h3>
+<div id="outline-container-orgeb05455" class="outline-3">
+<h3 id="orgeb05455"><span class="section-number-3">2.1.</span> Introduction</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 AFAIRE : ARRANGER LE CHAPITRE
@@ -1345,8 +1310,8 @@ et \((\mu_0,\mu_1,...,\mu_n)\) forme bien une base de \(\mathcal{P}_n\).
 </div>
 
 
-<div id="outline-container-org5076b90" class="outline-3">
-<h3 id="org5076b90"><span class="section-number-3">2.2</span> Polynômes orthogonaux</h3>
+<div id="outline-container-org2ded0c7" class="outline-3">
+<h3 id="org2ded0c7"><span class="section-number-3">2.2.</span> Polynômes orthogonaux</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Nous allons à présent voir comment construire des suites de polynômes
@@ -1367,8 +1332,8 @@ ou, lorsque c'est possible :
 </div>
 
 
-<div id="outline-container-org3b7b669" class="outline-4">
-<h4 id="org3b7b669"><span class="section-number-4">2.2.1</span> Récurrence</h4>
+<div id="outline-container-org3d22f19" class="outline-4">
+<h4 id="org3d22f19"><span class="section-number-4">2.2.1.</span> Récurrence</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <p>
 On pourrait bien entendu partir de la suite de la base canonique
@@ -1519,8 +1484,8 @@ ainsi que toute la suite de polynômes.
 </div>
 
 
-<div id="outline-container-orgc16e049" class="outline-4">
-<h4 id="orgc16e049"><span class="section-number-4">2.2.2</span> Approximation</h4>
+<div id="outline-container-org80599e2" class="outline-4">
+<h4 id="org80599e2"><span class="section-number-4">2.2.2.</span> Approximation</h4>
 <div class="outline-text-4" id="text-2-2-2">
 <p>
 Soit une suite de polynômes orthonormaux \((\phi_0,...\phi_n)\)
@@ -1594,8 +1559,8 @@ minimise donc bien l'erreur sur l'ensemble des polynômes de degré \(n\).
 </div>
 
 
-<div id="outline-container-org18f5b3e" class="outline-4">
-<h4 id="org18f5b3e"><span class="section-number-4">2.2.3</span> Intégration de Gauss</h4>
+<div id="outline-container-orgad682d7" class="outline-4">
+<h4 id="orgad682d7"><span class="section-number-4">2.2.3.</span> Intégration de Gauss</h4>
 <div class="outline-text-4" id="text-2-2-3">
 <p>
 Soit une suite de polynômes orthonormaux \((\phi_0,...\phi_n)\)
@@ -1748,8 +1713,8 @@ des polynômes.
 </div>
 
 
-<div id="outline-container-org8286c45" class="outline-3">
-<h3 id="org8286c45"><span class="section-number-3">2.3</span> Legendre</h3>
+<div id="outline-container-org3a75590" class="outline-3">
+<h3 id="org3a75590"><span class="section-number-3">2.3.</span> Legendre</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Les polynômes de Legendre sont orthogonaux pour le produit scalaire :
@@ -1776,8 +1741,8 @@ P_1(x) = x \\
 </div>
 
 
-<div id="outline-container-org668b679" class="outline-3">
-<h3 id="org668b679"><span class="section-number-3">2.4</span> Interpolation</h3>
+<div id="outline-container-orgaeaebff" class="outline-3">
+<h3 id="orgaeaebff"><span class="section-number-3">2.4.</span> Interpolation</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Un problème d'interpolation consiste à trouver les coefficients :
@@ -1854,8 +1819,8 @@ y_i = \OD{f}{x}(x_i)
 </div>
 
 
-<div id="outline-container-org5695726" class="outline-4">
-<h4 id="org5695726"><span class="section-number-4">2.4.1</span> Lagrange</h4>
+<div id="outline-container-org2cb1fe0" class="outline-4">
+<h4 id="org2cb1fe0"><span class="section-number-4">2.4.1.</span> Lagrange</h4>
 <div class="outline-text-4" id="text-2-4-1">
 <p>
 Les polynômes de Lagrange \(\Lambda_i\) sont biorthogonaux aux formes :
@@ -1925,8 +1890,8 @@ pour tout \(i = 1,2,...,n\), il faut et il suffit de prendre :
 </div>
 
 
-<div id="outline-container-org04d0133" class="outline-4">
-<h4 id="org04d0133"><span class="section-number-4">2.4.2</span> Newton</h4>
+<div id="outline-container-org42f5867" class="outline-4">
+<h4 id="org42f5867"><span class="section-number-4">2.4.2.</span> Newton</h4>
 <div class="outline-text-4" id="text-2-4-2">
 <p>
 L'interpolation de Newton utilise des polynômes construit récursivement à partir
@@ -1973,8 +1938,8 @@ satisfait bien aux conditions d'interpolation ci-dessus.
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2019-10-01 mar 12:33</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2023-05-10 mer 16:45</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>

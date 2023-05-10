@@ -3,14 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-10-01 mar 12:32 -->
+<!-- 2023-05-10 mer 16:45 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 09 : Analyse - 3</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="chimay" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -31,8 +30,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -40,22 +40,22 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
+    overflow: auto;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -161,6 +161,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -177,56 +190,9 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         displayAlign: "center",
@@ -247,11 +213,10 @@ for the JavaScript code in this tag.
              }
 });
 </script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Eclats de vers : Matemat 09 : Analyse - 3</h1>
 <p>
 <a href="index.html">Index des Grimoires</a>
@@ -261,13 +226,13 @@ for the JavaScript code in this tag.
 <a href="../index.html">Retour à l’accueil</a>
 </p>
 
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table des matières</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org857960e">1. Symétrie</a></li>
-<li><a href="#org1804621">2. Distributions</a></li>
-<li><a href="#org1b34acd">3. Formes différentielles</a></li>
+<li><a href="#org18b12f5">1. Symétrie</a></li>
+<li><a href="#org9261665">2. Distributions</a></li>
+<li><a href="#org5aa3947">3. Formes différentielles</a></li>
 </ul>
 </div>
 </div>
@@ -426,13 +391,13 @@ for the JavaScript code in this tag.
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
 
-<div id="outline-container-org857960e" class="outline-2">
-<h2 id="org857960e"><span class="section-number-2">1</span> Symétrie</h2>
+<div id="outline-container-org18b12f5" class="outline-2">
+<h2 id="org18b12f5"><span class="section-number-2">1.</span> Symétrie</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf17bab5">1.1. Dérivation par rapport à un paramètre</a></li>
-<li><a href="#orgf95bfb1">1.2. Différences finies</a></li>
+<li><a href="#org587346d">1.1. Dérivation par rapport à un paramètre</a></li>
+<li><a href="#orgae88b6e">1.2. Différences finies</a></li>
 </ul>
 </div>
 
@@ -572,8 +537,8 @@ Nous avons donc prouvé que :
 </div>
 
 
-<div id="outline-container-orga5572d1" class="outline-4">
-<h4 id="orga5572d1"><span class="section-number-4">1.0.1</span> Généralisation</h4>
+<div id="outline-container-org3b19fbf" class="outline-4">
+<h4 id="org3b19fbf"><span class="section-number-4">1.0.1.</span> Généralisation</h4>
 <div class="outline-text-4" id="text-1-0-1">
 <p>
 On peut bien entendu généraliser à une fonction \(f \in \continue^2(\setR^n,\setR)\). On a alors :
@@ -594,8 +559,8 @@ où \(i,j \in \{1,2,...,n\}\). Si \(H = \partial^2 f\), on écrit aussi ce résu
 </div>
 
 
-<div id="outline-container-orgf17bab5" class="outline-3">
-<h3 id="orgf17bab5"><span class="section-number-3">1.1</span> Dérivation par rapport à un paramètre</h3>
+<div id="outline-container-org587346d" class="outline-3">
+<h3 id="org587346d"><span class="section-number-3">1.1.</span> Dérivation par rapport à un paramètre</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Nous allons a présent examiner ce qu'il se passe lorsque les bornes de l'intervalle d'intégration (\(a,b : \setR \mapsto \setR\)) et la fonction à intégrer (\(f : \setR \times \setR \mapsto \setR\)) varient par rapport à un paramètre. Soit la fonction \(I : \setR \mapsto \setR\) définie par :
@@ -672,8 +637,8 @@ pour tout \(\alpha,\beta \in \setR\). Pour un \(t\) fixé quelconque, on peut po
 </div>
 
 
-<div id="outline-container-orgf95bfb1" class="outline-3">
-<h3 id="orgf95bfb1"><span class="section-number-3">1.2</span> Différences finies</h3>
+<div id="outline-container-orgae88b6e" class="outline-3">
+<h3 id="orgae88b6e"><span class="section-number-3">1.2.</span> Différences finies</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Soit une fonction \(f : \setR^2 \mapsto \setR^m\) deux fois continument dérivable. Nous allons voir comment évaluer des approximations des dérivées premières et secondes de \(f\). On note \(\partial_x = \partial_1\) et \(\partial_y = \partial_2\). On choisit les réels \(x,y\) et la variation non nulle \(h \in \setR\).
@@ -681,8 +646,8 @@ Soit une fonction \(f : \setR^2 \mapsto \setR^m\) deux fois continument dérivab
 </div>
 
 
-<div id="outline-container-org65e511c" class="outline-4">
-<h4 id="org65e511c"><span class="section-number-4">1.2.1</span> Dérivées premières</h4>
+<div id="outline-container-orgb28dc1f" class="outline-4">
+<h4 id="orgb28dc1f"><span class="section-number-4">1.2.1.</span> Dérivées premières</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 Soustrayons les développements d'ordre deux :
@@ -724,8 +689,8 @@ L'erreur est en \(o(h) = o(h^2)/h\). En procédant de même avec \(y\), on obtie
 </div>
 
 
-<div id="outline-container-orgd619412" class="outline-4">
-<h4 id="orgd619412"><span class="section-number-4">1.2.2</span> Dérivées secondes</h4>
+<div id="outline-container-orgbb5a0d8" class="outline-4">
+<h4 id="orgbb5a0d8"><span class="section-number-4">1.2.2.</span> Dérivées secondes</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 On additionne cette fois les mêmes développements et on obtient :
@@ -766,8 +731,8 @@ La dernière dérivée seconde s'évalue approximativement par \(\partial_{yx}^2
 </div>
 
 
-<div id="outline-container-org33fcdd3" class="outline-4">
-<h4 id="org33fcdd3"><span class="section-number-4">1.2.3</span> Généralisation</h4>
+<div id="outline-container-orgcf6ae1e" class="outline-4">
+<h4 id="orgcf6ae1e"><span class="section-number-4">1.2.3.</span> Généralisation</h4>
 <div class="outline-text-4" id="text-1-2-3">
 <p>
 Nous allons voir comment généraliser ces résultats aux dérivées \(\partial_{ij}\) d'une fonction \(F : \setR^n \mapsto \setR^m\). Soit \(u \in \setR^n\) et les vecteurs de la base canonique \(\canonique_i \in \setR^n\). On définit les fonctions \(f_{ij} : \setR^n \mapsto \setR^m\) par :
@@ -797,23 +762,23 @@ Il suffit donc d'utiliser les méthodes d'approximations des dérivées de \(f_{
 </div>
 
 
-<div id="outline-container-org1804621" class="outline-2">
-<h2 id="org1804621"><span class="section-number-2">2</span> Distributions</h2>
+<div id="outline-container-org9261665" class="outline-2">
+<h2 id="org9261665"><span class="section-number-2">2.</span> Distributions</h2>
 <div class="outline-text-2" id="text-2">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orga5ca4ba">2.1. Dépendances</a></li>
-<li><a href="#orgdb50421">2.2. Formes et fonctions</a></li>
-<li><a href="#org51749e6">2.3. Formes et mesures</a></li>
-<li><a href="#org5cb99a9">2.4. Fonction et forme bilinéaire</a></li>
-<li><a href="#orgdbd58f7">2.5. Définition</a></li>
-<li><a href="#orgfeddd33">2.6. Delta de Dirac</a></li>
-<li><a href="#orgcb4a0b1">2.7. Dérivée</a></li>
-<li><a href="#org13ee576">2.8. Dilatation</a></li>
-<li><a href="#org43af8cc">2.9. Réflexion</a></li>
-<li><a href="#org130989a">2.10. Translation</a></li>
-<li><a href="#orgddeb1f2">2.11. Convolution</a></li>
-<li><a href="#org90c4218">2.12. Corrélation</a></li>
+<li><a href="#org0924f65">2.1. Dépendances</a></li>
+<li><a href="#orgf54f5b9">2.2. Formes et fonctions</a></li>
+<li><a href="#org81a7ebc">2.3. Formes et mesures</a></li>
+<li><a href="#orgad8e32f">2.4. Fonction et forme bilinéaire</a></li>
+<li><a href="#org3837dc8">2.5. Définition</a></li>
+<li><a href="#orge647da0">2.6. Delta de Dirac</a></li>
+<li><a href="#orga56194e">2.7. Dérivée</a></li>
+<li><a href="#orge828949">2.8. Dilatation</a></li>
+<li><a href="#orgb504180">2.9. Réflexion</a></li>
+<li><a href="#org1448788">2.10. Translation</a></li>
+<li><a href="#org7b4e49d">2.11. Convolution</a></li>
+<li><a href="#org5a38f32">2.12. Corrélation</a></li>
 </ul>
 </div>
 
@@ -823,8 +788,8 @@ Il suffit donc d'utiliser les méthodes d'approximations des dérivées de \(f_{
 </div>
 
 
-<div id="outline-container-orga5ca4ba" class="outline-3">
-<h3 id="orga5ca4ba"><span class="section-number-3">2.1</span> Dépendances</h3>
+<div id="outline-container-org0924f65" class="outline-3">
+<h3 id="org0924f65"><span class="section-number-3">2.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:relation} : Les fonctions</li>
@@ -834,8 +799,8 @@ Il suffit donc d'utiliser les méthodes d'approximations des dérivées de \(f_{
 </div>
 
 
-<div id="outline-container-orgdb50421" class="outline-3">
-<h3 id="orgdb50421"><span class="section-number-3">2.2</span> Formes et fonctions</h3>
+<div id="outline-container-orgf54f5b9" class="outline-3">
+<h3 id="orgf54f5b9"><span class="section-number-3">2.2.</span> Formes et fonctions</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 On peut toujours associer une forme linéaire \(\varphi\) à une fonction intégrable quelconque \(\hat{\varphi}\) en définissant :
@@ -860,8 +825,8 @@ où il ne faut pas perdre de vue que \(\varphi\) n'est pas nécessairement une f
 </div>
 
 
-<div id="outline-container-org51749e6" class="outline-3">
-<h3 id="org51749e6"><span class="section-number-3">2.3</span> Formes et mesures</h3>
+<div id="outline-container-org81a7ebc" class="outline-3">
+<h3 id="org81a7ebc"><span class="section-number-3">2.3.</span> Formes et mesures</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Soit \(u : A \mapsto \setR\). A toute mesure \(\mu\), on peut associer une forme linéaire \(\hat{\mu}\) par :
@@ -887,8 +852,8 @@ Toutefois, rien ne garantit que la fonction \(\mu\) ainsi définie est une mesur
 </div>
 
 
-<div id="outline-container-org5cb99a9" class="outline-3">
-<h3 id="org5cb99a9"><span class="section-number-3">2.4</span> Fonction et forme bilinéaire</h3>
+<div id="outline-container-orgad8e32f" class="outline-3">
+<h3 id="orgad8e32f"><span class="section-number-3">2.4.</span> Fonction et forme bilinéaire</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 A toute fonction \(\hat{K} : A \times B \mapsto F\), on peut associer une forme bilinéaire \(K\) par :
@@ -909,8 +874,8 @@ pour toutes fonctions \(u,v : A \mapsto B\). Inversément, à toute forme bilin�
 </div>
 
 
-<div id="outline-container-orgdbd58f7" class="outline-3">
-<h3 id="orgdbd58f7"><span class="section-number-3">2.5</span> Définition</h3>
+<div id="outline-container-org3837dc8" class="outline-3">
+<h3 id="org3837dc8"><span class="section-number-3">2.5.</span> Définition</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 Nous nous intéressons ici au cas où l'espace vectoriel \(E\) est un ensemble de fonctions intégrables : \(E = \mathcal{F} \subseteq \lebesgue^2(\setR,\setR)\). Les limites à l'infini doivent alors forcément s'annuler
@@ -927,8 +892,8 @@ pour tout \(u \in \mathcal{F}\).
 </div>
 
 
-<div id="outline-container-orgfeddd33" class="outline-3">
-<h3 id="orgfeddd33"><span class="section-number-3">2.6</span> Delta de Dirac</h3>
+<div id="outline-container-orge647da0" class="outline-3">
+<h3 id="orge647da0"><span class="section-number-3">2.6.</span> Delta de Dirac</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 La distribution \(\dirac \in F^\dual\) de Dirac est définie par :
@@ -957,8 +922,8 @@ On remarque que :
 </div>
 
 
-<div id="outline-container-orgcb4a0b1" class="outline-3">
-<h3 id="orgcb4a0b1"><span class="section-number-3">2.7</span> Dérivée</h3>
+<div id="outline-container-orga56194e" class="outline-3">
+<h3 id="orga56194e"><span class="section-number-3">2.7.</span> Dérivée</h3>
 <div class="outline-text-3" id="text-2-7">
 <p>
 En intégrant par parties, on a :
@@ -1000,8 +965,8 @@ pour tout \(v\in F\).
 </div>
 
 
-<div id="outline-container-org7b02850" class="outline-4">
-<h4 id="org7b02850"><span class="section-number-4">2.7.1</span> Échelon</h4>
+<div id="outline-container-org1d911ec" class="outline-4">
+<h4 id="org1d911ec"><span class="section-number-4">2.7.1.</span> Échelon</h4>
 <div class="outline-text-4" id="text-2-7-1">
 <p>
 Comme application, considérons la fonction échelon \(e_+\) :
@@ -1054,8 +1019,8 @@ au sens des distributions.
 </div>
 
 
-<div id="outline-container-org13ee576" class="outline-3">
-<h3 id="org13ee576"><span class="section-number-3">2.8</span> Dilatation</h3>
+<div id="outline-container-orge828949" class="outline-3">
+<h3 id="orge828949"><span class="section-number-3">2.8.</span> Dilatation</h3>
 <div class="outline-text-3" id="text-2-8">
 <p>
 Soit \(d_a\) l'opérateur de dilatation :
@@ -1088,8 +1053,8 @@ On définit donc l'extension de cet opérateur aux distributions par :
 </div>
 
 
-<div id="outline-container-org43af8cc" class="outline-3">
-<h3 id="org43af8cc"><span class="section-number-3">2.9</span> Réflexion</h3>
+<div id="outline-container-orgb504180" class="outline-3">
+<h3 id="orgb504180"><span class="section-number-3">2.9.</span> Réflexion</h3>
 <div class="outline-text-3" id="text-2-9">
 <p>
 L'opérateur de réflexion \(r\) se définit par :
@@ -1120,8 +1085,8 @@ On définit donc l'extension de cet opérateur aux distributions par :
 </div>
 
 
-<div id="outline-container-org130989a" class="outline-3">
-<h3 id="org130989a"><span class="section-number-3">2.10</span> Translation</h3>
+<div id="outline-container-org1448788" class="outline-3">
+<h3 id="org1448788"><span class="section-number-3">2.10.</span> Translation</h3>
 <div class="outline-text-3" id="text-2-10">
 <p>
 L'opérateur de translation \(t_a\) est défini par :
@@ -1150,8 +1115,8 @@ On définit donc les extensions de cet opérateur aux distributions par :
 </div>
 
 
-<div id="outline-container-orgddeb1f2" class="outline-3">
-<h3 id="orgddeb1f2"><span class="section-number-3">2.11</span> Convolution</h3>
+<div id="outline-container-org7b4e49d" class="outline-3">
+<h3 id="org7b4e49d"><span class="section-number-3">2.11.</span> Convolution</h3>
 <div class="outline-text-3" id="text-2-11">
 <p>
 Les intégrales unidimensionnelles permettent de définir l'opérateur de convolution
@@ -1169,8 +1134,8 @@ pour tout \(t \in \setR\).
 </div>
 
 
-<div id="outline-container-org9d1af97" class="outline-4">
-<h4 id="org9d1af97"><span class="section-number-4">2.11.1</span> Dirac</h4>
+<div id="outline-container-org4c7fbdd" class="outline-4">
+<h4 id="org4c7fbdd"><span class="section-number-4">2.11.1.</span> Dirac</h4>
 <div class="outline-text-4" id="text-2-11-1">
 <p>
 En utilisant les résultats ci-dessus, on arrive facilement à :
@@ -1213,8 +1178,8 @@ On peut montrer que ce neutre est unique.
 </div>
 
 
-<div id="outline-container-org90c4218" class="outline-3">
-<h3 id="org90c4218"><span class="section-number-3">2.12</span> Corrélation</h3>
+<div id="outline-container-org5a38f32" class="outline-3">
+<h3 id="org5a38f32"><span class="section-number-3">2.12.</span> Corrélation</h3>
 <div class="outline-text-3" id="text-2-12">
 <p>
 Les intégrales unidimensionnelles permettent de définir l'opérateur de corrélation
@@ -1234,25 +1199,25 @@ pour tout \(t \in \setR\).
 </div>
 
 
-<div id="outline-container-org1b34acd" class="outline-2">
-<h2 id="org1b34acd"><span class="section-number-2">3</span> Formes différentielles</h2>
+<div id="outline-container-org5aa3947" class="outline-2">
+<h2 id="org5aa3947"><span class="section-number-2">3.</span> Formes différentielles</h2>
 <div class="outline-text-2" id="text-3">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org9b4808a">3.1. Dépendances</a></li>
-<li><a href="#org3556f75">3.2. Intégrale d'un tenseur</a></li>
-<li><a href="#org84436a0">3.3. Produit extérieur</a></li>
-<li><a href="#orgf5e80ef">3.4. Tenseur différentiel</a></li>
-<li><a href="#org1b53e67">3.5. Paramétrisation</a></li>
-<li><a href="#org5946e5c">3.6. Changement de variable</a></li>
-<li><a href="#orgfdc1a8a">3.7. Intégrales de ligne vectorielles</a></li>
-<li><a href="#orgc5748b8">3.8. Intégrales de ligne scalaires</a></li>
-<li><a href="#org3ef8eca">3.9. Contour fermé</a></li>
-<li><a href="#orgef5ab47">3.10. Intégrales de surface vectorielles</a></li>
-<li><a href="#orga8c6d65">3.11. Intégrales de surface scalaires</a></li>
-<li><a href="#org5ce63fc">3.12. Intégrale de flux</a></li>
-<li><a href="#org24126a3">3.13. Différentielle</a></li>
-<li><a href="#org2644a18">3.14. Théorème de Stokes</a></li>
+<li><a href="#org2f02bbe">3.1. Dépendances</a></li>
+<li><a href="#org0658559">3.2. Intégrale d'un tenseur</a></li>
+<li><a href="#org590c676">3.3. Produit extérieur</a></li>
+<li><a href="#org29db5f8">3.4. Tenseur différentiel</a></li>
+<li><a href="#org15212d0">3.5. Paramétrisation</a></li>
+<li><a href="#org157bd01">3.6. Changement de variable</a></li>
+<li><a href="#orgf1a9505">3.7. Intégrales de ligne vectorielles</a></li>
+<li><a href="#org34bdb62">3.8. Intégrales de ligne scalaires</a></li>
+<li><a href="#org39b055f">3.9. Contour fermé</a></li>
+<li><a href="#org890ea62">3.10. Intégrales de surface vectorielles</a></li>
+<li><a href="#orgdd364de">3.11. Intégrales de surface scalaires</a></li>
+<li><a href="#orgbf29286">3.12. Intégrale de flux</a></li>
+<li><a href="#org123ee4c">3.13. Différentielle</a></li>
+<li><a href="#org9fb3413">3.14. Théorème de Stokes</a></li>
 </ul>
 </div>
 
@@ -1262,8 +1227,8 @@ pour tout \(t \in \setR\).
 </div>
 
 
-<div id="outline-container-org9b4808a" class="outline-3">
-<h3 id="org9b4808a"><span class="section-number-3">3.1</span> Dépendances</h3>
+<div id="outline-container-org2f02bbe" class="outline-3">
+<h3 id="org2f02bbe"><span class="section-number-3">3.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:differ} : Les différentielles</li>
@@ -1273,8 +1238,8 @@ pour tout \(t \in \setR\).
 </div>
 
 
-<div id="outline-container-org3556f75" class="outline-3">
-<h3 id="org3556f75"><span class="section-number-3">3.2</span> Intégrale d'un tenseur</h3>
+<div id="outline-container-org0658559" class="outline-3">
+<h3 id="org0658559"><span class="section-number-3">3.2.</span> Intégrale d'un tenseur</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Soit \((\canonique_1,\canonique_2,...,\canonique_n)\) la bace canonique de \(\setR^n\) et la fonction tensorielle \(T : A \mapsto \tenseur_m(\setR^n)\) qui, à chaque \(x \in A\) associe un tenseur \(T(x)\) de la forme :
@@ -1303,8 +1268,8 @@ où chaque coordonnée \(I_{ij...p}\) est l'intégrale de la coordonnée corresp
 </div>
 
 
-<div id="outline-container-org84436a0" class="outline-3">
-<h3 id="org84436a0"><span class="section-number-3">3.3</span> Produit extérieur</h3>
+<div id="outline-container-org590c676" class="outline-3">
+<h3 id="org590c676"><span class="section-number-3">3.3.</span> Produit extérieur</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Soit \(d\mu = dx = dx_1 \ ... \ dx_n\) la mesure de Lebesgue sur \(\setR^n\). On sait que \(dx\) représente la mesure de l'élément de volume \([x_1,x_1 + dx_1] \times ... \times [x_n,x_n + dx_N]\). Etant donné que nous avons construit le produit extérieur pour représenter (au signe près) des mesures de surfaces et de volumes, il est tout à fait naturel de le faire intervenir dans une mesure de Lebesgue. Soit la base canonique \((e_1,e_2,...,e_n)\) de \(\setR^n\) et les vecteurs :
@@ -1341,8 +1306,8 @@ Cette constatation nous amène à définir une mesure plus générale. Considér
 </div>
 
 
-<div id="outline-container-orgf5e80ef" class="outline-3">
-<h3 id="orgf5e80ef"><span class="section-number-3">3.4</span> Tenseur différentiel</h3>
+<div id="outline-container-org29db5f8" class="outline-3">
+<h3 id="org29db5f8"><span class="section-number-3">3.4.</span> Tenseur différentiel</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 Il est même possible de définir des tenseurs différentiels \(dU\) en choisissant \(m \le n\) et en posant :
@@ -1359,8 +1324,8 @@ Il est clair que \(dU \in \tenseur_{n - m}(\setR^n)\). On nomme ce type de tense
 </div>
 
 
-<div id="outline-container-org1b53e67" class="outline-3">
-<h3 id="org1b53e67"><span class="section-number-3">3.5</span> Paramétrisation</h3>
+<div id="outline-container-org15212d0" class="outline-3">
+<h3 id="org15212d0"><span class="section-number-3">3.5.</span> Paramétrisation</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 Soit \(m,n \in \setN\) avec \(m \le n\) et la fonction \(\phi : U \subseteq \setR^m \mapsto \setR^n\), dérivable et inversible. Le but est de paramétrer \(x\) sur \(\phi(U)\) par la relation \(x = \phi(u)\) pour tout \(u \in U\). Nous utilisons la base canonique \((e_1,e_2,...,e_m)\) de \(\setR^m\) et nous posons :
@@ -1401,8 +1366,8 @@ Deux cas peuvent alors se présenter.
 </div>
 
 
-<div id="outline-container-orge94736a" class="outline-4">
-<h4 id="orge94736a"><span class="section-number-4">3.5.1</span> Fonction tensorielle</h4>
+<div id="outline-container-org229454e" class="outline-4">
+<h4 id="org229454e"><span class="section-number-4">3.5.1.</span> Fonction tensorielle</h4>
 <div class="outline-text-4" id="text-3-5-1">
 <p>
 On peut évaluer l'intégrale d'une fonction tensorielle \(f : \setR^n \mapsto \tenseur_p(\setR^n)\) en utilisant la contraction maximale avec \(dX\). Comme on a l'équivalence \(x \in \phi(U) \leftrightarrow u \in U\), on a alors :
@@ -1419,8 +1384,8 @@ Dans le cas particulier où \(p = n - m\), on obtiendra un scalaire.
 </div>
 
 
-<div id="outline-container-org001ff77" class="outline-4">
-<h4 id="org001ff77"><span class="section-number-4">3.5.2</span> Fonction scalaire</h4>
+<div id="outline-container-org903ba4f" class="outline-4">
+<h4 id="org903ba4f"><span class="section-number-4">3.5.2.</span> Fonction scalaire</h4>
 <div class="outline-text-4" id="text-3-5-2">
 <p>
 On peut évaluer l'intégrale d'une fonction scalaire \(f : \setR^n \mapsto \setR\) en utilisant la norme de \(dX\). On a alors \(dx = \norme{dX}\) et :
@@ -1433,8 +1398,8 @@ On peut évaluer l'intégrale d'une fonction scalaire \(f : \setR^n \mapsto \set
 </div>
 
 
-<div id="outline-container-orgbf7f265" class="outline-4">
-<h4 id="orgbf7f265"><span class="section-number-4">3.5.3</span> Pavé</h4>
+<div id="outline-container-org6724986" class="outline-4">
+<h4 id="org6724986"><span class="section-number-4">3.5.3.</span> Pavé</h4>
 <div class="outline-text-4" id="text-3-5-3">
 <p>
 Un cas particulier important est celui où \(U = [\alpha_1,\beta_1] \times .. \times [\alpha_m,\beta_m]\) pour certains \(\alpha_i,\beta_i \in \setR\). On a alors :
@@ -1448,8 +1413,8 @@ Un cas particulier important est celui où \(U = [\alpha_1,\beta_1] \times .. \t
 </div>
 
 
-<div id="outline-container-org5946e5c" class="outline-3">
-<h3 id="org5946e5c"><span class="section-number-3">3.6</span> Changement de variable</h3>
+<div id="outline-container-org157bd01" class="outline-3">
+<h3 id="org157bd01"><span class="section-number-3">3.6.</span> Changement de variable</h3>
 <div class="outline-text-3" id="text-3-6">
 <p>
 Nous considérons à présent le cas où \(m = n\). Nous utilisons la base canonique \((e_1,e_2,...,e_n)\) de \(\setR^n\) et nous posons de nouveau :
@@ -1487,8 +1452,8 @@ On voit donc apparaître le déterminant de la Jacobienne de \(\phi\). Comme on 
 </div>
 
 
-<div id="outline-container-org738cdcc" class="outline-4">
-<h4 id="org738cdcc"><span class="section-number-4">3.6.1</span> Pavé</h4>
+<div id="outline-container-org3c7ed6a" class="outline-4">
+<h4 id="org3c7ed6a"><span class="section-number-4">3.6.1.</span> Pavé</h4>
 <div class="outline-text-4" id="text-3-6-1">
 <p>
 Un cas particulier important est celui où \(\phi^{-1}(A) = [\alpha_1,\beta_1] \times .. \times [\alpha_n,\beta_n]\) pour certains \(\alpha_i,\beta_i \in \setR\). On a alors :
@@ -1502,8 +1467,8 @@ Un cas particulier important est celui où \(\phi^{-1}(A) = [\alpha_1,\beta_1] \
 </div>
 
 
-<div id="outline-container-orgfdc1a8a" class="outline-3">
-<h3 id="orgfdc1a8a"><span class="section-number-3">3.7</span> Intégrales de ligne vectorielles</h3>
+<div id="outline-container-orgf1a9505" class="outline-3">
+<h3 id="orgf1a9505"><span class="section-number-3">3.7.</span> Intégrales de ligne vectorielles</h3>
 <div class="outline-text-3" id="text-3-7">
 <p>
 Soit une fonction continue \(\gamma : [a,b] \to \setR^n\) définissant la courbe \(\Lambda = \gamma([a,b])\).  L'intégrale de ligne d'une fonction \(f : \setR^n \mapsto \setR^n\) sur cette courbe est l'intégrale de la contraction d'ordre \(1\) de \(f\) avec \(d\gamma\), qui revient ici au produit scalaire du vecteur \(f(x) \in \Lambda\) par le vecteur \(\partial \gamma(t)\). On a donc :
@@ -1516,8 +1481,8 @@ Soit une fonction continue \(\gamma : [a,b] \to \setR^n\) définissant la courbe
 </div>
 
 
-<div id="outline-container-orgc5748b8" class="outline-3">
-<h3 id="orgc5748b8"><span class="section-number-3">3.8</span> Intégrales de ligne scalaires</h3>
+<div id="outline-container-org34bdb62" class="outline-3">
+<h3 id="org34bdb62"><span class="section-number-3">3.8.</span> Intégrales de ligne scalaires</h3>
 <div class="outline-text-3" id="text-3-8">
 <p>
 Dans le cas d'une fonction \(g : \setR^n \mapsto \setR\), on utilise comme mesure la longueur \(\norme{\partial \gamma(t)}\) de chaque petit segment \(d\Lambda\). On a alors :
@@ -1530,8 +1495,8 @@ Dans le cas d'une fonction \(g : \setR^n \mapsto \setR\), on utilise comme mesur
 </div>
 
 
-<div id="outline-container-org3ef8eca" class="outline-3">
-<h3 id="org3ef8eca"><span class="section-number-3">3.9</span> Contour fermé</h3>
+<div id="outline-container-org39b055f" class="outline-3">
+<h3 id="org39b055f"><span class="section-number-3">3.9.</span> Contour fermé</h3>
 <div class="outline-text-3" id="text-3-9">
 <p>
 Si \(\gamma(a) = \gamma(b)\), on dit que le contour fermé, et on note en général :
@@ -1544,8 +1509,8 @@ Si \(\gamma(a) = \gamma(b)\), on dit que le contour fermé, et on note en géné
 </div>
 
 
-<div id="outline-container-orgef5ab47" class="outline-3">
-<h3 id="orgef5ab47"><span class="section-number-3">3.10</span> Intégrales de surface vectorielles</h3>
+<div id="outline-container-org890ea62" class="outline-3">
+<h3 id="org890ea62"><span class="section-number-3">3.10.</span> Intégrales de surface vectorielles</h3>
 <div class="outline-text-3" id="text-3-10">
 <p>
 Soit \(f : \setR^n \mapsto \setR^n\), \(\sigma : A \subseteq \setR^{n - 1} \mapsto \setR^n\) et la surface \(\Theta = \sigma(A)\). On définit les vecteurs :
@@ -1574,8 +1539,8 @@ qui nous donne un scalaire. Dans le cas particulier où \(n = 3\) et où \(A = [
 </div>
 
 
-<div id="outline-container-orga8c6d65" class="outline-3">
-<h3 id="orga8c6d65"><span class="section-number-3">3.11</span> Intégrales de surface scalaires</h3>
+<div id="outline-container-orgdd364de" class="outline-3">
+<h3 id="orgdd364de"><span class="section-number-3">3.11.</span> Intégrales de surface scalaires</h3>
 <div class="outline-text-3" id="text-3-11">
 <p>
 Soit \(f : \setR^n \mapsto \setR^n\), \(\sigma : A \subseteq \setR^{n - 1} \mapsto \setR^n\) et la surface \(\Theta = \sigma(A)\). On définit les vecteurs :
@@ -1604,8 +1569,8 @@ Dans le cas particulier où \(n = 3\) et où \(A = [U_1,U_2] \times [V_1,V_2]\),
 </div>
 
 
-<div id="outline-container-org5ce63fc" class="outline-3">
-<h3 id="org5ce63fc"><span class="section-number-3">3.12</span> Intégrale de flux</h3>
+<div id="outline-container-orgbf29286" class="outline-3">
+<h3 id="orgbf29286"><span class="section-number-3">3.12.</span> Intégrale de flux</h3>
 <div class="outline-text-3" id="text-3-12">
 <p>
 Soit \(A \subseteq \setR^n\) et la fonction \(a : \setR^n \to \setR\) telle que :
@@ -1642,8 +1607,8 @@ L'intégrale du flux sortant de la fonction \(f : \setR^n \to \setR^n\) est alor
 </div>
 
 
-<div id="outline-container-org24126a3" class="outline-3">
-<h3 id="org24126a3"><span class="section-number-3">3.13</span> Différentielle</h3>
+<div id="outline-container-org123ee4c" class="outline-3">
+<h3 id="org123ee4c"><span class="section-number-3">3.13.</span> Différentielle</h3>
 <div class="outline-text-3" id="text-3-13">
 <p>
 Soit une fonction \(f : \setR^n \mapsto \setR\), les vecteurs infinitésimaux \(\delta_1,...,\delta_{n - 1} \in \setR^n\) et la forme différentielle :
@@ -1689,8 +1654,8 @@ sur la frontière de \(A\) est alors donnée par :
 </div>
 
 
-<div id="outline-container-org2644a18" class="outline-3">
-<h3 id="org2644a18"><span class="section-number-3">3.14</span> Théorème de Stokes</h3>
+<div id="outline-container-org9fb3413" class="outline-3">
+<h3 id="org9fb3413"><span class="section-number-3">3.14.</span> Théorème de Stokes</h3>
 <div class="outline-text-3" id="text-3-14">
 <p>
 Soit \(f,g : \setR^2 \mapsto \setR\) et les vecteurs infinitésimaux :
@@ -1763,8 +1728,8 @@ Mais comme nous somme dans la base canonique, on a \(\delta x \wedge \delta y = 
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2019-10-01 mar 12:32</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2023-05-10 mer 16:45</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>

@@ -3,14 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-10-01 mar 12:33 -->
+<!-- 2023-05-10 mer 16:45 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 10 : Optimisation - 9</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="chimay" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -31,8 +30,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -40,22 +40,22 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
+    overflow: auto;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -161,6 +161,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -177,56 +190,9 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         displayAlign: "center",
@@ -247,11 +213,10 @@ for the JavaScript code in this tag.
              }
 });
 </script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Eclats de vers : Matemat 10 : Optimisation - 9</h1>
 <p>
 <a href="index.html">Index des Grimoires</a>
@@ -261,12 +226,12 @@ for the JavaScript code in this tag.
 <a href="../index.html">Retour à l’accueil</a>
 </p>
 
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table des matières</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgca07bad">1. Algorithmes d'optimisation contrainte</a></li>
-<li><a href="#org0a2b1ad">2. Réseaux de neurones</a></li>
+<li><a href="#org4903517">1. Algorithmes d'optimisation contrainte</a></li>
+<li><a href="#orgf85763e">2. Réseaux de neurones</a></li>
 </ul>
 </div>
 </div>
@@ -425,14 +390,14 @@ for the JavaScript code in this tag.
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
 
-<div id="outline-container-orgca07bad" class="outline-2">
-<h2 id="orgca07bad"><span class="section-number-2">1</span> Algorithmes d'optimisation contrainte</h2>
+<div id="outline-container-org4903517" class="outline-2">
+<h2 id="org4903517"><span class="section-number-2">1.</span> Algorithmes d'optimisation contrainte</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org3879ae6">1.1. Introduction</a></li>
-<li><a href="#orgb37f261">1.2. Contraintes linéaires</a></li>
-<li><a href="#org7449f29">1.3. Contraintes d'inégalité</a></li>
+<li><a href="#org8af6865">1.1. Introduction</a></li>
+<li><a href="#orgbe57616">1.2. Contraintes linéaires</a></li>
+<li><a href="#org96e607b">1.3. Contraintes d'inégalité</a></li>
 </ul>
 </div>
 
@@ -442,8 +407,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-org3879ae6" class="outline-3">
-<h3 id="org3879ae6"><span class="section-number-3">1.1</span> Introduction</h3>
+<div id="outline-container-org8af6865" class="outline-3">
+<h3 id="org8af6865"><span class="section-number-3">1.1.</span> Introduction</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Nous allons présenter des algorithmes permettant de résoudre approximativement des problèmes de minimisation d'une fonction \(\varphi\) sur un ensemble \(\Omega \subseteq \setR^n\). Ces algorithmes partent d'un point initial \(x_0 \in \Omega\) et itèrent schématiquement comme suit :
@@ -492,8 +457,8 @@ pour toute fonction \(\Phi\) (par exemple, \(\Phi \in \{\varphi,J,H\}\)).
 </div>
 
 
-<div id="outline-container-orgb37f261" class="outline-3">
-<h3 id="orgb37f261"><span class="section-number-3">1.2</span> Contraintes linéaires</h3>
+<div id="outline-container-orgbe57616" class="outline-3">
+<h3 id="orgbe57616"><span class="section-number-3">1.2.</span> Contraintes linéaires</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Nous considérons le cas de contraintes linéaires :
@@ -541,8 +506,8 @@ où \(p_k = [p_{k, r + 1} ... p_{k,n}]^\dual\).
 </div>
 
 
-<div id="outline-container-org93222b0" class="outline-4">
-<h4 id="org93222b0"><span class="section-number-4">1.2.1</span> Newton  projeté</h4>
+<div id="outline-container-org7389135" class="outline-4">
+<h4 id="org7389135"><span class="section-number-4">1.2.1.</span> Newton  projeté</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 Il s'agit de l'adaptation de la méthode de Newton :
@@ -580,8 +545,8 @@ et donc :
 </div>
 
 
-<div id="outline-container-org7449f29" class="outline-3">
-<h3 id="org7449f29"><span class="section-number-3">1.3</span> Contraintes d'inégalité</h3>
+<div id="outline-container-org96e607b" class="outline-3">
+<h3 id="org96e607b"><span class="section-number-3">1.3.</span> Contraintes d'inégalité</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Examinons à présent le cas où :
@@ -598,8 +563,8 @@ les notations.
 </div>
 
 
-<div id="outline-container-org7752692" class="outline-4">
-<h4 id="org7752692"><span class="section-number-4">1.3.1</span> Méthodes de penalité</h4>
+<div id="outline-container-org7c58c4e" class="outline-4">
+<h4 id="org7c58c4e"><span class="section-number-4">1.3.1.</span> Méthodes de penalité</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <p>
 La méthode de pénalité consiste à ajouter une fonction positive à \(\varphi\) lorsque \(x\) sort de \(\Omega\). Si l'on augmente la valeur de la fonction pénalité, on rapproche alors le minimum global de \(\Omega\). La solution à notre problème contraint devrait donc être approchée en faisant tendre l'amplitude de la pénalité vers l'infini. Soit la fonction \(\varpi : \setR^n \mapsto \setR^m\) définie par :
@@ -642,21 +607,21 @@ Il suffit dans ce cas de choisir \(k\) assez grand pour obtenir une estimation d
 </div>
 
 
-<div id="outline-container-org0a2b1ad" class="outline-2">
-<h2 id="org0a2b1ad"><span class="section-number-2">2</span> Réseaux de neurones</h2>
+<div id="outline-container-orgf85763e" class="outline-2">
+<h2 id="orgf85763e"><span class="section-number-2">2.</span> Réseaux de neurones</h2>
 <div class="outline-text-2" id="text-2">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org99542cc">2.1. Définition</a></li>
-<li><a href="#org772d175">2.2. Perceptron à une couche</a></li>
-<li><a href="#org67555f9">2.3. Entrainement</a></li>
+<li><a href="#orgda8f444">2.1. Définition</a></li>
+<li><a href="#orgaf20b12">2.2. Perceptron à une couche</a></li>
+<li><a href="#org5638595">2.3. Entrainement</a></li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-org99542cc" class="outline-3">
-<h3 id="org99542cc"><span class="section-number-3">2.1</span> Définition</h3>
+<div id="outline-container-orgda8f444" class="outline-3">
+<h3 id="orgda8f444"><span class="section-number-3">2.1.</span> Définition</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Commençons par la description d'un neurone \(i\) de fonction caractéristique
@@ -690,8 +655,8 @@ décrites ci-dessous :
 </div>
 
 
-<div id="outline-container-org772d175" class="outline-3">
-<h3 id="org772d175"><span class="section-number-3">2.2</span> Perceptron à une couche</h3>
+<div id="outline-container-orgaf20b12" class="outline-3">
+<h3 id="orgaf20b12"><span class="section-number-3">2.2.</span> Perceptron à une couche</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Le perceptron monocouche est composé d'une rangée de neurones reliant les
@@ -710,8 +675,8 @@ On écrit \(y_i = P_{\theta}(x)\) pour mettre en évidence l'influence des param
 </div>
 
 
-<div id="outline-container-org67555f9" class="outline-3">
-<h3 id="org67555f9"><span class="section-number-3">2.3</span> Entrainement</h3>
+<div id="outline-container-org5638595" class="outline-3">
+<h3 id="org5638595"><span class="section-number-3">2.3.</span> Entrainement</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Les réseaux de neurones sont principalement utilisés afin de calquer le comportement d'un système difficille à modéliser par d'autres méthodes. On dispose d'un certain nombre de vecteurs \(y^{(n)}\in\setR^M\), \(x^{(n)}\in\setR^{N}\), où \(n=1,...,K\). On aimerait bien trouver le vecteur des paramètres, \(\theta\), qui correspond le mieux à cette série d'entrées-sorties. On va alors entrainer le réseau de neurones défini par \(y=R_{\theta}(x)\)  en  utilisant une méthode d'optimisation non linéaire afin d'obtenir la solution de
@@ -726,8 +691,8 @@ Les réseaux de neurones sont principalement utilisés afin de calquer le compor
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2019-10-01 mar 12:33</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2023-05-10 mer 16:45</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>

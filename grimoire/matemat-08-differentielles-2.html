@@ -3,14 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-10-01 mar 12:33 -->
+<!-- 2023-05-10 mer 16:44 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 08 : Différentielles - 2</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="chimay" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -31,8 +30,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -40,22 +40,22 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
+    overflow: auto;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -161,6 +161,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -177,56 +190,9 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         displayAlign: "center",
@@ -247,11 +213,10 @@ for the JavaScript code in this tag.
              }
 });
 </script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Eclats de vers : Matemat 08 : Différentielles - 2</h1>
 <p>
 <a href="index.html">Index des Grimoires</a>
@@ -261,14 +226,14 @@ for the JavaScript code in this tag.
 <a href="../index.html">Retour à l’accueil</a>
 </p>
 
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table des matières</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgac8c129">1. Différentielles et polynômes</a></li>
-<li><a href="#org22b5538">2. Dérivées des puissances</a></li>
-<li><a href="#org09a2431">3. Différentielles et matrices</a></li>
-<li><a href="#orga412cc2">4. Résolution d'équations</a></li>
+<li><a href="#org7dae1aa">1. Différentielles et polynômes</a></li>
+<li><a href="#org0f42ba2">2. Dérivées des puissances</a></li>
+<li><a href="#orgfc0f60b">3. Différentielles et matrices</a></li>
+<li><a href="#orgb5c820f">4. Résolution d'équations</a></li>
 </ul>
 </div>
 </div>
@@ -427,13 +392,13 @@ for the JavaScript code in this tag.
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
 
-<div id="outline-container-orgac8c129" class="outline-2">
-<h2 id="orgac8c129"><span class="section-number-2">1</span> Différentielles et polynômes</h2>
+<div id="outline-container-org7dae1aa" class="outline-2">
+<h2 id="org7dae1aa"><span class="section-number-2">1.</span> Différentielles et polynômes</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org9bc4a2f">1.1. Dépendances</a></li>
-<li><a href="#org6fdb35e">1.2. Polynômes</a></li>
+<li><a href="#orge124912">1.1. Dépendances</a></li>
+<li><a href="#orgf8d8401">1.2. Polynômes</a></li>
 </ul>
 </div>
 
@@ -443,8 +408,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-org9bc4a2f" class="outline-3">
-<h3 id="org9bc4a2f"><span class="section-number-3">1.1</span> Dépendances</h3>
+<div id="outline-container-orge124912" class="outline-3">
+<h3 id="orge124912"><span class="section-number-3">1.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:differ} : Les différentielles</li>
@@ -453,8 +418,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-org6fdb35e" class="outline-3">
-<h3 id="org6fdb35e"><span class="section-number-3">1.2</span> Polynômes</h3>
+<div id="outline-container-orgf8d8401" class="outline-3">
+<h3 id="orgf8d8401"><span class="section-number-3">1.2.</span> Polynômes</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Soit \(n \in \setN\). Nous allons analyser la différentiabilité du monôme \(\mu : \setR \mapsto \setR\) défini par :
@@ -502,8 +467,8 @@ La dérivée d'une combinaison linéaire étant identique à la combinaison lin�
 </div>
 
 
-<div id="outline-container-org8cae0aa" class="outline-4">
-<h4 id="org8cae0aa"><span class="section-number-4">1.2.1</span> Uniformité</h4>
+<div id="outline-container-orgc2558cc" class="outline-4">
+<h4 id="orgc2558cc"><span class="section-number-4">1.2.1.</span> Uniformité</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 Choisissons \(\alpha,\beta \in \setR\) avec \(\alpha \le \beta\) et analysons la différentiabilité sur l'intervalle \([\alpha,\beta]\). Posons :
@@ -642,24 +607,24 @@ Tout polynôme est uniformément différentiable sur des intervalles de la forme
 </div>
 
 
-<div id="outline-container-org22b5538" class="outline-2">
-<h2 id="org22b5538"><span class="section-number-2">2</span> Dérivées des puissances</h2>
+<div id="outline-container-org0f42ba2" class="outline-2">
+<h2 id="org0f42ba2"><span class="section-number-2">2.</span> Dérivées des puissances</h2>
 <div class="outline-text-2" id="text-2">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2669fe2">2.1. Introduction</a></li>
-<li><a href="#org189fcac">2.2. L'inverse multiplicatif</a></li>
-<li><a href="#org2a37c60">2.3. Puissances négatives</a></li>
-<li><a href="#orga02aee0">2.4. Racines</a></li>
-<li><a href="#orgdf69471">2.5. Puissances fractionnaires</a></li>
-<li><a href="#org33b78ae">2.6. Puissances réelles</a></li>
+<li><a href="#org322e237">2.1. Introduction</a></li>
+<li><a href="#org7c33335">2.2. L'inverse multiplicatif</a></li>
+<li><a href="#org2fa5a31">2.3. Puissances négatives</a></li>
+<li><a href="#org85c7af2">2.4. Racines</a></li>
+<li><a href="#orgd31bcc8">2.5. Puissances fractionnaires</a></li>
+<li><a href="#org99d3447">2.6. Puissances réelles</a></li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-org2669fe2" class="outline-3">
-<h3 id="org2669fe2"><span class="section-number-3">2.1</span> Introduction</h3>
+<div id="outline-container-org322e237" class="outline-3">
+<h3 id="org322e237"><span class="section-number-3">2.1.</span> Introduction</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Nous allons évaluer les dérivées des fonctions \(f : x \mapsto x^\alpha\) où \(x,\alpha \in \setR\).
@@ -668,8 +633,8 @@ Nous allons évaluer les dérivées des fonctions \(f : x \mapsto x^\alpha\) où
 </div>
 
 
-<div id="outline-container-org189fcac" class="outline-3">
-<h3 id="org189fcac"><span class="section-number-3">2.2</span> L'inverse multiplicatif</h3>
+<div id="outline-container-org7c33335" class="outline-3">
+<h3 id="org7c33335"><span class="section-number-3">2.2.</span> L'inverse multiplicatif</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Commençons par :
@@ -703,8 +668,8 @@ ce qui nous donne :
 </div>
 
 
-<div id="outline-container-org2a37c60" class="outline-3">
-<h3 id="org2a37c60"><span class="section-number-3">2.3</span> Puissances négatives</h3>
+<div id="outline-container-org2fa5a31" class="outline-3">
+<h3 id="org2fa5a31"><span class="section-number-3">2.3.</span> Puissances négatives</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Considérons la relation :
@@ -740,8 +705,8 @@ On en déduit :
 </div>
 
 
-<div id="outline-container-orga02aee0" class="outline-3">
-<h3 id="orga02aee0"><span class="section-number-3">2.4</span> Racines</h3>
+<div id="outline-container-org85c7af2" class="outline-3">
+<h3 id="org85c7af2"><span class="section-number-3">2.4.</span> Racines</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Toujours pour \(n \in \setN\), considérons la relation :
@@ -770,8 +735,8 @@ Donc :
 </div>
 
 
-<div id="outline-container-orgdf69471" class="outline-3">
-<h3 id="orgdf69471"><span class="section-number-3">2.5</span> Puissances fractionnaires</h3>
+<div id="outline-container-orgd31bcc8" class="outline-3">
+<h3 id="orgd31bcc8"><span class="section-number-3">2.5.</span> Puissances fractionnaires</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 Choisissons à présent :
@@ -818,8 +783,8 @@ On a donc :
 </div>
 
 
-<div id="outline-container-org33b78ae" class="outline-3">
-<h3 id="org33b78ae"><span class="section-number-3">2.6</span> Puissances réelles</h3>
+<div id="outline-container-org99d3447" class="outline-3">
+<h3 id="org99d3447"><span class="section-number-3">2.6.</span> Puissances réelles</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 Par passage à la limite, on obtient :
@@ -837,17 +802,17 @@ pour tout \(\alpha \in \setR\).
 </div>
 
 
-<div id="outline-container-org09a2431" class="outline-2">
-<h2 id="org09a2431"><span class="section-number-2">3</span> Différentielles et matrices</h2>
+<div id="outline-container-orgfc0f60b" class="outline-2">
+<h2 id="orgfc0f60b"><span class="section-number-2">3.</span> Différentielles et matrices</h2>
 <div class="outline-text-2" id="text-3">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org57a466f">3.1. Applications linéaires</a></li>
-<li><a href="#orgc05cc9c">3.2. Formes linéaires</a></li>
-<li><a href="#org3327050">3.3. Formes bilinéaires</a></li>
-<li><a href="#org006113f">3.4. Formes quadratiques</a></li>
-<li><a href="#org7c3fc86">3.5. Produit matriciel</a></li>
-<li><a href="#org678890d">3.6. Matrice inverse</a></li>
+<li><a href="#org9463f0a">3.1. Applications linéaires</a></li>
+<li><a href="#orgd5285b8">3.2. Formes linéaires</a></li>
+<li><a href="#org478ca75">3.3. Formes bilinéaires</a></li>
+<li><a href="#org6244fb0">3.4. Formes quadratiques</a></li>
+<li><a href="#org600d9b8">3.5. Produit matriciel</a></li>
+<li><a href="#org8ef25e6">3.6. Matrice inverse</a></li>
 </ul>
 </div>
 
@@ -857,8 +822,8 @@ pour tout \(\alpha \in \setR\).
 </div>
 
 
-<div id="outline-container-org57a466f" class="outline-3">
-<h3 id="org57a466f"><span class="section-number-3">3.1</span> Applications linéaires</h3>
+<div id="outline-container-org9463f0a" class="outline-3">
+<h3 id="org9463f0a"><span class="section-number-3">3.1.</span> Applications linéaires</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Soit \(A \in \matrice(\setR,m,n)\). Considérons la fonction \(\mathcal{A} : \setR^m \times \setR^n \mapsto \setR\) définie par :
@@ -895,8 +860,8 @@ On a donc :
 </div>
 
 
-<div id="outline-container-orgc05cc9c" class="outline-3">
-<h3 id="orgc05cc9c"><span class="section-number-3">3.2</span> Formes linéaires</h3>
+<div id="outline-container-orgd5285b8" class="outline-3">
+<h3 id="orgd5285b8"><span class="section-number-3">3.2.</span> Formes linéaires</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Soit \(u \in \setR^n\). Considérons la forme linéaire \(\varphi : \setR^n \mapsto \setR\) définie par :
@@ -941,8 +906,8 @@ Comme \(u^\dual \cdot x = x^\dual \cdot u\), on a aussi :
 </div>
 
 
-<div id="outline-container-org3327050" class="outline-3">
-<h3 id="org3327050"><span class="section-number-3">3.3</span> Formes bilinéaires</h3>
+<div id="outline-container-org478ca75" class="outline-3">
+<h3 id="org478ca75"><span class="section-number-3">3.3.</span> Formes bilinéaires</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Soit à présent \(A \in \matrice(\setR,m,n)\). Considérons la forme bilinéaire \(\vartheta : \setR^m \times \setR^n \mapsto \setR\) définie par :
@@ -1003,8 +968,8 @@ Les dérivées secondes s'en déduisent alors :
 </div>
 
 
-<div id="outline-container-org006113f" class="outline-3">
-<h3 id="org006113f"><span class="section-number-3">3.4</span> Formes quadratiques</h3>
+<div id="outline-container-org6244fb0" class="outline-3">
+<h3 id="org6244fb0"><span class="section-number-3">3.4.</span> Formes quadratiques</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 Soit à présent \(A \in \matrice(\setR,n,n)\). Considérons la forme quadratique \(\mathcal{Q} : \setR^m \times \setR^n \mapsto \setR\) définie par :
@@ -1066,8 +1031,8 @@ et :
 </div>
 
 
-<div id="outline-container-org7c3fc86" class="outline-3">
-<h3 id="org7c3fc86"><span class="section-number-3">3.5</span> Produit matriciel</h3>
+<div id="outline-container-org600d9b8" class="outline-3">
+<h3 id="org600d9b8"><span class="section-number-3">3.5.</span> Produit matriciel</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 Soient les fonctions \(A : \setR \mapsto \matrice(\setR,m,n)\) et \(B : \setR \mapsto \matrice(\setR,n,p)\) qui, à chaque réel \(t\), associent des matrices de composantes réelles. Nous allons tenter de trouver une expression de la dérivée du produit matriciel \(A \cdot B\). Les propriétés des différentielles nous permettent d'écrire :
@@ -1096,8 +1061,8 @@ ou, symboliquement :
 </div>
 
 
-<div id="outline-container-org678890d" class="outline-3">
-<h3 id="org678890d"><span class="section-number-3">3.6</span> Matrice inverse</h3>
+<div id="outline-container-org8ef25e6" class="outline-3">
+<h3 id="org8ef25e6"><span class="section-number-3">3.6.</span> Matrice inverse</h3>
 <div class="outline-text-3" id="text-3-6">
 <p>
 Considérons le cas où \(A\) est carrée (\(m = n\)). En dérivant la relation \(A \cdot A^{-1} = I\), on obtient :
@@ -1119,15 +1084,15 @@ et donc :
 </div>
 
 
-<div id="outline-container-orga412cc2" class="outline-2">
-<h2 id="orga412cc2"><span class="section-number-2">4</span> Résolution d'équations</h2>
+<div id="outline-container-orgb5c820f" class="outline-2">
+<h2 id="orgb5c820f"><span class="section-number-2">4.</span> Résolution d'équations</h2>
 <div class="outline-text-2" id="text-4">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb8b998f">4.1. Introduction</a></li>
-<li><a href="#org52d7ac9">4.2. Newton-Raphson</a></li>
-<li><a href="#orge1efdad">4.3. Banach</a></li>
-<li><a href="#org65335e8">4.4. Méthode hybride d'Aitken</a></li>
+<li><a href="#org7c56637">4.1. Introduction</a></li>
+<li><a href="#org9734909">4.2. Newton-Raphson</a></li>
+<li><a href="#org97c931c">4.3. Banach</a></li>
+<li><a href="#org7770df6">4.4. Méthode hybride d'Aitken</a></li>
 </ul>
 </div>
 
@@ -1137,8 +1102,8 @@ et donc :
 </div>
 
 
-<div id="outline-container-orgb8b998f" class="outline-3">
-<h3 id="orgb8b998f"><span class="section-number-3">4.1</span> Introduction</h3>
+<div id="outline-container-org7c56637" class="outline-3">
+<h3 id="org7c56637"><span class="section-number-3">4.1.</span> Introduction</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Soit une fonction \(F : \setR^n \mapsto \setR^n\) et l'espace des solutions :
@@ -1171,8 +1136,8 @@ A moins que l'on ait déjà une vague idée d'une région \(X \subseteq \setR^n\
 </div>
 
 
-<div id="outline-container-org52d7ac9" class="outline-3">
-<h3 id="org52d7ac9"><span class="section-number-3">4.2</span> Newton-Raphson</h3>
+<div id="outline-container-org9734909" class="outline-3">
+<h3 id="org9734909"><span class="section-number-3">4.2.</span> Newton-Raphson</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 On demande à chaque étape que le développement du premier ordre autour de \(x_k\) s'annule en \(x_{k + 1} = x_k + \Delta_k\). On impose donc :
@@ -1209,8 +1174,8 @@ et :
 </div>
 
 
-<div id="outline-container-orge1efdad" class="outline-3">
-<h3 id="orge1efdad"><span class="section-number-3">4.3</span> Banach</h3>
+<div id="outline-container-org97c931c" class="outline-3">
+<h3 id="org97c931c"><span class="section-number-3">4.3.</span> Banach</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 On voit que la condition \(F(s) = 0\) est équivalente à \(F(s) + s = s\). On définit donc la fonction \(f : \setR^n \to \setR^n\) par :
@@ -1240,8 +1205,8 @@ Pour \(K\) assez grand, on a alors :
 </div>
 
 
-<div id="outline-container-org65335e8" class="outline-3">
-<h3 id="org65335e8"><span class="section-number-3">4.4</span> Méthode hybride d'Aitken</h3>
+<div id="outline-container-org7770df6" class="outline-3">
+<h3 id="org7770df6"><span class="section-number-3">4.4.</span> Méthode hybride d'Aitken</h3>
 <div class="outline-text-3" id="text-4-4">
 <p>
 Supposons à présent que \(F,f : \setR \to \setR\) avec \(f(x) = F(x) + x\) pour tout \(x \in \setR\). L'idée est d'utiliser simultanément les deux approches \(F(s) = 0\) et \(f(s) = F(s) + s = s\). Soit :
@@ -1323,8 +1288,8 @@ On espère que la suite des \(x_k\) ainsi définie converge plus vite vers la so
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2019-10-01 mar 12:33</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2023-05-10 mer 16:44</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>

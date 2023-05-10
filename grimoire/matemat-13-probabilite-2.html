@@ -3,14 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-10-01 mar 12:32 -->
+<!-- 2023-05-10 mer 16:46 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 13 : Probabilité - 2</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="chimay" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -31,8 +30,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -40,22 +40,22 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
+    overflow: auto;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -161,6 +161,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -177,56 +190,9 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         displayAlign: "center",
@@ -247,11 +213,10 @@ for the JavaScript code in this tag.
              }
 });
 </script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Eclats de vers : Matemat 13 : Probabilité - 2</h1>
 <p>
 <a href="index.html">Index des Grimoires</a>
@@ -261,12 +226,12 @@ for the JavaScript code in this tag.
 <a href="../index.html">Retour à l’accueil</a>
 </p>
 
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table des matières</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org3da728a">1. Statistiques</a></li>
-<li><a href="#org695f53e">2. Calcul stochastique</a></li>
+<li><a href="#org349b163">1. Statistiques</a></li>
+<li><a href="#org7f69fdc">2. Calcul stochastique</a></li>
 </ul>
 </div>
 </div>
@@ -425,19 +390,19 @@ for the JavaScript code in this tag.
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
 
-<div id="outline-container-org3da728a" class="outline-2">
-<h2 id="org3da728a"><span class="section-number-2">1</span> Statistiques</h2>
+<div id="outline-container-org349b163" class="outline-2">
+<h2 id="org349b163"><span class="section-number-2">1.</span> Statistiques</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org6d75fad">1.1. Echantillons</a></li>
-<li><a href="#orgf4db6c1">1.2. L'inégalité de Markov</a></li>
-<li><a href="#orgb7ed84d">1.3. La loi des grands nombres</a></li>
-<li><a href="#org29c5356">1.4. Fréquence et probabilité</a></li>
-<li><a href="#org3986c8c">1.5. Estimateurs non biaisés</a></li>
-<li><a href="#org601559b">1.6. Estimation des espérance et des variances</a></li>
-<li><a href="#org720a626">1.7. Maximum de vraisemblance</a></li>
-<li><a href="#orgde534e6">1.8. Echantillon de densité donnée</a></li>
+<li><a href="#orgd8a331d">1.1. Echantillons</a></li>
+<li><a href="#orgbb72ec0">1.2. L'inégalité de Markov</a></li>
+<li><a href="#org82612b3">1.3. La loi des grands nombres</a></li>
+<li><a href="#orgb1c40ef">1.4. Fréquence et probabilité</a></li>
+<li><a href="#org95df1d5">1.5. Estimateurs non biaisés</a></li>
+<li><a href="#org76293b4">1.6. Estimation des espérance et des variances</a></li>
+<li><a href="#orgf0d745c">1.7. Maximum de vraisemblance</a></li>
+<li><a href="#orgd3580a3">1.8. Echantillon de densité donnée</a></li>
 </ul>
 </div>
 
@@ -447,8 +412,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-org2987583" class="outline-4">
-<h4 id="org2987583"><span class="section-number-4">1.0.1</span> Indépendance</h4>
+<div id="outline-container-org3c92175" class="outline-4">
+<h4 id="org3c92175"><span class="section-number-4">1.0.1.</span> Indépendance</h4>
 <div class="outline-text-4" id="text-1-0-1">
 <p>
 On dit que les variables aléatoires \(X_1\), \(X_2\), &#x2026;, \(X_N\) sont indépendantes si :
@@ -477,8 +442,8 @@ et donc :
 </div>
 
 
-<div id="outline-container-org6d75fad" class="outline-3">
-<h3 id="org6d75fad"><span class="section-number-3">1.1</span> Echantillons</h3>
+<div id="outline-container-orgd8a331d" class="outline-3">
+<h3 id="orgd8a331d"><span class="section-number-3">1.1.</span> Echantillons</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Nous nous intéressons dans la suite de ce chapitre à des échantillons de \(N\) variables aléatoires indépendantes \(X_1,...,X_N\) telles que :
@@ -496,8 +461,8 @@ Nous nous intéressons dans la suite de ce chapitre à des échantillons de \(N\
 </div>
 
 
-<div id="outline-container-orgf4db6c1" class="outline-3">
-<h3 id="orgf4db6c1"><span class="section-number-3">1.2</span> L'inégalité de Markov</h3>
+<div id="outline-container-orgbb72ec0" class="outline-3">
+<h3 id="orgbb72ec0"><span class="section-number-3">1.2.</span> L'inégalité de Markov</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Soit une variable aléatoire \(X\). On définit la variable associée :
@@ -554,8 +519,8 @@ Le cas particulier \(b = \esperof{X}\) nous donne :
 </div>
 
 
-<div id="outline-container-orgb7ed84d" class="outline-3">
-<h3 id="orgb7ed84d"><span class="section-number-3">1.3</span> La loi des grands nombres</h3>
+<div id="outline-container-org82612b3" class="outline-3">
+<h3 id="org82612b3"><span class="section-number-3">1.3.</span> La loi des grands nombres</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Soit la moyenne :
@@ -626,8 +591,8 @@ On en conclut que :
 </div>
 
 
-<div id="outline-container-org29c5356" class="outline-3">
-<h3 id="org29c5356"><span class="section-number-3">1.4</span> Fréquence et probabilité</h3>
+<div id="outline-container-orgb1c40ef" class="outline-3">
+<h3 id="orgb1c40ef"><span class="section-number-3">1.4.</span> Fréquence et probabilité</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Appliquons la loi des grands nombres à la fonction indicatrice \(\indicatrice_A\).
@@ -659,8 +624,8 @@ on en déduit que la fréquence \(n(A) / N\) converge vers la probabilité de \(
 </div>
 
 
-<div id="outline-container-org3986c8c" class="outline-3">
-<h3 id="org3986c8c"><span class="section-number-3">1.5</span> Estimateurs non biaisés</h3>
+<div id="outline-container-org95df1d5" class="outline-3">
+<h3 id="org95df1d5"><span class="section-number-3">1.5.</span> Estimateurs non biaisés</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Soit une fonction \(G : \setR^n \mapsto \setR\) :
@@ -681,8 +646,8 @@ On dit que \(\hat{G} : \setR^n \mapsto \setR\) est un estimateur non biaisé de 
 </div>
 
 
-<div id="outline-container-org601559b" class="outline-3">
-<h3 id="org601559b"><span class="section-number-3">1.6</span> Estimation des espérance et des variances</h3>
+<div id="outline-container-org76293b4" class="outline-3">
+<h3 id="org76293b4"><span class="section-number-3">1.6.</span> Estimation des espérance et des variances</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 Soit :
@@ -790,8 +755,8 @@ est un estimateur non biaisé de la variance :
 </div>
 
 
-<div id="outline-container-org720a626" class="outline-3">
-<h3 id="org720a626"><span class="section-number-3">1.7</span> Maximum de vraisemblance</h3>
+<div id="outline-container-orgf0d745c" class="outline-3">
+<h3 id="orgf0d745c"><span class="section-number-3">1.7.</span> Maximum de vraisemblance</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 Il s'agit de trouver les paramètres \(\hat{\theta}\) (espérance, variance, &#x2026;) qui maximisent la vraisemblance :
@@ -832,8 +797,8 @@ en imposant :
 </div>
 
 
-<div id="outline-container-orgde534e6" class="outline-3">
-<h3 id="orgde534e6"><span class="section-number-3">1.8</span> Echantillon de densité donnée</h3>
+<div id="outline-container-orgd3580a3" class="outline-3">
+<h3 id="orgd3580a3"><span class="section-number-3">1.8.</span> Echantillon de densité donnée</h3>
 <div class="outline-text-3" id="text-1-8">
 <p>
 Il s'agit d'un algorithme permettant de générer \(N\) nombres aléatoires :
@@ -904,19 +869,19 @@ La comparaison de \(y\) et de \(f(x)\) sert donc de filtre à l'algorithme.
 </div>
 
 
-<div id="outline-container-org695f53e" class="outline-2">
-<h2 id="org695f53e"><span class="section-number-2">2</span> Calcul stochastique</h2>
+<div id="outline-container-org7f69fdc" class="outline-2">
+<h2 id="org7f69fdc"><span class="section-number-2">2.</span> Calcul stochastique</h2>
 <div class="outline-text-2" id="text-2">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf6a51bc">2.1. Processus stochastique</a></li>
-<li><a href="#org6dcaa6f">2.2. Intégrale d'Ito</a></li>
-<li><a href="#org1d20834">2.3. Variation quadratique</a></li>
-<li><a href="#org3064852">2.4. Variation conjointe</a></li>
-<li><a href="#org09db922">2.5. Relations variations quadratiques - conjointes</a></li>
-<li><a href="#org00cf16f">2.6. Variation d'ordre quelconque</a></li>
-<li><a href="#org29f678c">2.7. Calcul d'Ito</a></li>
-<li><a href="#org06cd315">2.8. Mouvement Brownien</a></li>
+<li><a href="#org5b21688">2.1. Processus stochastique</a></li>
+<li><a href="#org93fd18c">2.2. Intégrale d'Ito</a></li>
+<li><a href="#orgad132f7">2.3. Variation quadratique</a></li>
+<li><a href="#org5d0af8d">2.4. Variation conjointe</a></li>
+<li><a href="#orgc2d7073">2.5. Relations variations quadratiques - conjointes</a></li>
+<li><a href="#orgda4498c">2.6. Variation d'ordre quelconque</a></li>
+<li><a href="#org535deb9">2.7. Calcul d'Ito</a></li>
+<li><a href="#org6ded972">2.8. Mouvement Brownien</a></li>
 </ul>
 </div>
 
@@ -926,8 +891,8 @@ La comparaison de \(y\) et de \(f(x)\) sert donc de filtre à l'algorithme.
 </div>
 
 
-<div id="outline-container-orgf6a51bc" class="outline-3">
-<h3 id="orgf6a51bc"><span class="section-number-3">2.1</span> Processus stochastique</h3>
+<div id="outline-container-org5b21688" class="outline-3">
+<h3 id="org5b21688"><span class="section-number-3">2.1.</span> Processus stochastique</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Un processus stochastique est une fonction :
@@ -944,8 +909,8 @@ On sous-entend souvent l'événement \(\omega\), et on note \(X(t)=X(t,\omega)\)
 </div>
 
 
-<div id="outline-container-org6dcaa6f" class="outline-3">
-<h3 id="org6dcaa6f"><span class="section-number-3">2.2</span> Intégrale d'Ito</h3>
+<div id="outline-container-org93fd18c" class="outline-3">
+<h3 id="org93fd18c"><span class="section-number-3">2.2.</span> Intégrale d'Ito</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Il s'agit d'une intégrale utilisant un processus stochastique \(X\) comme mesure :
@@ -958,8 +923,8 @@ Il s'agit d'une intégrale utilisant un processus stochastique \(X\) comme mesur
 </div>
 
 
-<div id="outline-container-org1d20834" class="outline-3">
-<h3 id="org1d20834"><span class="section-number-3">2.3</span> Variation quadratique</h3>
+<div id="outline-container-orgad132f7" class="outline-3">
+<h3 id="orgad132f7"><span class="section-number-3">2.3.</span> Variation quadratique</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Soit \(\delta \strictsuperieur 0\) et les \(N\) temps \(t_k = k \cdot \delta\) où \(k = 0,...,\arrondisup{\frac{T}{\delta}}\). On définit la variation quadratique d'une fonction \(f\) :
@@ -988,8 +953,8 @@ Comme \(\delta^2 \to \delta \ ds\), on a :
 </div>
 
 
-<div id="outline-container-org3064852" class="outline-3">
-<h3 id="org3064852"><span class="section-number-3">2.4</span> Variation conjointe</h3>
+<div id="outline-container-org5d0af8d" class="outline-3">
+<h3 id="org5d0af8d"><span class="section-number-3">2.4.</span> Variation conjointe</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Considérons maintenant deux processus stochastiques \(X,Y\). Nous définissons la variation conjointe \(\variation{X,Y}\) :
@@ -1040,8 +1005,8 @@ X(t) Y(t) - X(0) Y(0) &= \int_0^t d(X Y)(s) \\
 </div>
 
 
-<div id="outline-container-org09db922" class="outline-3">
-<h3 id="org09db922"><span class="section-number-3">2.5</span> Relations variations quadratiques - conjointes</h3>
+<div id="outline-container-orgc2d7073" class="outline-3">
+<h3 id="orgc2d7073"><span class="section-number-3">2.5.</span> Relations variations quadratiques - conjointes</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 La définition nous donne directement :
@@ -1070,8 +1035,8 @@ d'où l'on déduit :
 </div>
 
 
-<div id="outline-container-org00cf16f" class="outline-3">
-<h3 id="org00cf16f"><span class="section-number-3">2.6</span> Variation d'ordre quelconque</h3>
+<div id="outline-container-orgda4498c" class="outline-3">
+<h3 id="orgda4498c"><span class="section-number-3">2.6.</span> Variation d'ordre quelconque</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 Soit \(\delta \strictsuperieur 0\) et les temps \(t_k = k \delta\) où \(k = 0,...,\arrondisup{\frac{T}{\delta}}\). On définit la variation d'ordre \(n\) d'une fonction \(f\) :
@@ -1084,8 +1049,8 @@ Soit \(\delta \strictsuperieur 0\) et les temps \(t_k = k \delta\) où \(k = 0,.
 </div>
 
 
-<div id="outline-container-org29f678c" class="outline-3">
-<h3 id="org29f678c"><span class="section-number-3">2.7</span> Calcul d'Ito</h3>
+<div id="outline-container-org535deb9" class="outline-3">
+<h3 id="org535deb9"><span class="section-number-3">2.7.</span> Calcul d'Ito</h3>
 <div class="outline-text-3" id="text-2-7">
 <p>
 Soit une fonction \(F : \setR^n \mapsto \setR\) et \(N\) processus stochastiques \(X_i\) dont les variations d'ordre \(n \ge 3\) s'annulent. Soit \(X=(X_1,...,X_N)\). On peut écrire le développement en série de Taylor d'ordre 2 :
@@ -1126,8 +1091,8 @@ F(X(t)) - F(X(0)) =  \sum_i \int_0^t \deriveepartielle{F}{X_i}(X(s)) \ dX_i(s) +
 </div>
 
 
-<div id="outline-container-org7959030" class="outline-4">
-<h4 id="org7959030"><span class="section-number-4">2.7.1</span> Dérivées ordinaires</h4>
+<div id="outline-container-org766d3ba" class="outline-4">
+<h4 id="org766d3ba"><span class="section-number-4">2.7.1.</span> Dérivées ordinaires</h4>
 <div class="outline-text-4" id="text-2-7-1">
 <p>
 Dans le cas d'une seule variable, on a :
@@ -1154,8 +1119,8 @@ F(X(t)) - F(X(0)) = \sum_i \int_0^t \OD{F}{X}(X(s)) \ dX(s) + \\
 </div>
 
 
-<div id="outline-container-org06cd315" class="outline-3">
-<h3 id="org06cd315"><span class="section-number-3">2.8</span> Mouvement Brownien</h3>
+<div id="outline-container-org6ded972" class="outline-3">
+<h3 id="org6ded972"><span class="section-number-3">2.8.</span> Mouvement Brownien</h3>
 <div class="outline-text-3" id="text-2-8">
 <p>
 Un mouvement brownien est un processus stochastique :
@@ -1204,8 +1169,8 @@ pour tout \(s \strictinferieur t \strictinferieur u\) positifs. On demande aussi
 </div>
 
 
-<div id="outline-container-orge1683fc" class="outline-4">
-<h4 id="orge1683fc"><span class="section-number-4">2.8.1</span> Variation quadratique</h4>
+<div id="outline-container-org2ef37b3" class="outline-4">
+<h4 id="org2ef37b3"><span class="section-number-4">2.8.1.</span> Variation quadratique</h4>
 <div class="outline-text-4" id="text-2-8-1">
 <p>
 Si les mouvements browniens sont continus, ils ne sont pas dérivables. Comme les variations sont normalement distribuées avec une moyenne nulle et une variance \(t - s\), on en déduit (en utilisant par exemple le moment générateur des densités normales) :
@@ -1257,8 +1222,8 @@ Ce que l'on note symboliquement sous forme différentielle par :
 </div>
 
 
-<div id="outline-container-org6c86b93" class="outline-4">
-<h4 id="org6c86b93"><span class="section-number-4">2.8.2</span> Variations d'ordre quelconque</h4>
+<div id="outline-container-orgea4f361" class="outline-4">
+<h4 id="orgea4f361"><span class="section-number-4">2.8.2.</span> Variations d'ordre quelconque</h4>
 <div class="outline-text-4" id="text-2-8-2">
 <p>
 Les variations \(\variation{B}^n\) d'un mouvement brownien s'annulent pour \(n \ge 3\).
@@ -1267,8 +1232,8 @@ Les variations \(\variation{B}^n\) d'un mouvement brownien s'annulent pour \(n \
 </div>
 
 
-<div id="outline-container-org5144e63" class="outline-4">
-<h4 id="org5144e63"><span class="section-number-4">2.8.3</span> Multidimensionnel</h4>
+<div id="outline-container-org23e7915" class="outline-4">
+<h4 id="org23e7915"><span class="section-number-4">2.8.3.</span> Multidimensionnel</h4>
 <div class="outline-text-4" id="text-2-8-3">
 <p>
 Nous définissons un mouvement Brownien de dimension \(n\) comme une collection de \(n\) mouvements Browniens \(B_i\) indépendants et vérifiant :
@@ -1281,8 +1246,8 @@ Nous définissons un mouvement Brownien de dimension \(n\) comme une collection 
 </div>
 
 
-<div id="outline-container-org34d953c" class="outline-4">
-<h4 id="org34d953c"><span class="section-number-4">2.8.4</span> Calul d'Ito</h4>
+<div id="outline-container-org5f4186c" class="outline-4">
+<h4 id="org5f4186c"><span class="section-number-4">2.8.4.</span> Calul d'Ito</h4>
 <div class="outline-text-4" id="text-2-8-4">
 <p>
 Dans le cas de \(N\) mouvement browniens \(B_i\), les équations d'Ito deviennent :
@@ -1316,8 +1281,8 @@ F(X(t)) - F(X(0)) = \sum_i \int_0^t \deriveepartielle{F}{X_i}(X(s)) \ dX_i(s) + 
 </div>
 
 
-<div id="outline-container-orge7a060d" class="outline-4">
-<h4 id="orge7a060d"><span class="section-number-4">2.8.5</span> Dérivée ordinaire</h4>
+<div id="outline-container-org08a3db3" class="outline-4">
+<h4 id="org08a3db3"><span class="section-number-4">2.8.5.</span> Dérivée ordinaire</h4>
 <div class="outline-text-4" id="text-2-8-5">
 <p>
 Le cas particulier unidimensionnel nous donne :
@@ -1361,8 +1326,8 @@ AFAIRE : PROCESSUS DE POISSON
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2019-10-01 mar 12:32</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2023-05-10 mer 16:46</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>

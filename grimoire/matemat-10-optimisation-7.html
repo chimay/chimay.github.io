@@ -3,14 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-10-01 mar 12:33 -->
+<!-- 2023-05-10 mer 16:45 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 10 : Optimisation - 7</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="chimay" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -31,8 +30,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -40,22 +40,22 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
+    overflow: auto;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -161,6 +161,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -177,56 +190,9 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         displayAlign: "center",
@@ -247,11 +213,10 @@ for the JavaScript code in this tag.
              }
 });
 </script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Eclats de vers : Matemat 10 : Optimisation - 7</h1>
 <p>
 <a href="index.html">Index des Grimoires</a>
@@ -261,11 +226,11 @@ for the JavaScript code in this tag.
 <a href="../index.html">Retour à l’accueil</a>
 </p>
 
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table des matières</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org1d872c6">1. Espaces de Hilbert</a></li>
+<li><a href="#org77e2054">1. Espaces de Hilbert</a></li>
 </ul>
 </div>
 </div>
@@ -424,32 +389,32 @@ for the JavaScript code in this tag.
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
 
-<div id="outline-container-org1d872c6" class="outline-2">
-<h2 id="org1d872c6"><span class="section-number-2">1</span> Espaces de Hilbert</h2>
+<div id="outline-container-org77e2054" class="outline-2">
+<h2 id="org77e2054"><span class="section-number-2">1.</span> Espaces de Hilbert</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org943baf3">1.1. Définition</a></li>
-<li><a href="#org56f45ee">1.2. Utilisation</a></li>
-<li><a href="#orgc814ce1">1.3. Complétude du noyau</a></li>
-<li><a href="#org07c6591">1.4. Complétude de l'image</a></li>
-<li><a href="#org8e13a50">1.5. Complétude de l'espace orthogonal</a></li>
-<li><a href="#org712319d">1.6. Théorème de projection</a></li>
-<li><a href="#org9ef6271">1.7. Application projective</a></li>
-<li><a href="#org8e49320">1.8. Orthogonalité</a></li>
-<li><a href="#org46528fc">1.9. Identité locale</a></li>
-<li><a href="#org568e257">1.10. Invariance</a></li>
-<li><a href="#orgfd2e385">1.11. Somme directe</a></li>
-<li><a href="#org7a65be0">1.12. Biorthogonal</a></li>
-<li><a href="#org10ec600">1.13. Théorème de représentation de Riesz</a></li>
-<li><a href="#orgb1edc65">1.14. Extension aux formes bilinéaires</a></li>
-<li><a href="#org1777b65">1.15. Application adjointe</a></li>
-<li><a href="#org72685f0">1.16. Théorème de Lax-Milgram</a></li>
-<li><a href="#org0470b4c">1.17. Suite orthonormée</a></li>
-<li><a href="#org3418f24">1.18. Inégalité de Bessel</a></li>
-<li><a href="#org77bf93a">1.19. Base hilbertienne</a></li>
-<li><a href="#orgecce9da">1.20. Egalité de Parseval</a></li>
-<li><a href="#org5c1bd86">1.21. Produit scalaire</a></li>
+<li><a href="#org53e2d4c">1.1. Définition</a></li>
+<li><a href="#org053a529">1.2. Utilisation</a></li>
+<li><a href="#orge0531f6">1.3. Complétude du noyau</a></li>
+<li><a href="#org680ac3f">1.4. Complétude de l'image</a></li>
+<li><a href="#org904b9f8">1.5. Complétude de l'espace orthogonal</a></li>
+<li><a href="#orgeff2385">1.6. Théorème de projection</a></li>
+<li><a href="#orgb852216">1.7. Application projective</a></li>
+<li><a href="#org93a7c3f">1.8. Orthogonalité</a></li>
+<li><a href="#org2b3e2d8">1.9. Identité locale</a></li>
+<li><a href="#org0fa4283">1.10. Invariance</a></li>
+<li><a href="#org2374054">1.11. Somme directe</a></li>
+<li><a href="#org79a02e9">1.12. Biorthogonal</a></li>
+<li><a href="#orgf742689">1.13. Théorème de représentation de Riesz</a></li>
+<li><a href="#org8d4bcfc">1.14. Extension aux formes bilinéaires</a></li>
+<li><a href="#org46f564e">1.15. Application adjointe</a></li>
+<li><a href="#org7c8e016">1.16. Théorème de Lax-Milgram</a></li>
+<li><a href="#org1c77770">1.17. Suite orthonormée</a></li>
+<li><a href="#org76594db">1.18. Inégalité de Bessel</a></li>
+<li><a href="#org3c445f3">1.19. Base hilbertienne</a></li>
+<li><a href="#org06cdc32">1.20. Egalité de Parseval</a></li>
+<li><a href="#org29daab9">1.21. Produit scalaire</a></li>
 </ul>
 </div>
 
@@ -459,8 +424,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-org943baf3" class="outline-3">
-<h3 id="org943baf3"><span class="section-number-3">1.1</span> Définition</h3>
+<div id="outline-container-org53e2d4c" class="outline-3">
+<h3 id="org53e2d4c"><span class="section-number-3">1.1.</span> Définition</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Un espace de Hilbert \(H\) est un espace de Banach dont la distance découle d'un produit scalaire \(\scalaire{}{}\) défini sur \(H\) :
@@ -477,8 +442,8 @@ Dans la suite, nous considérons un espace de Hilbert \(H\) sur \(\corps\).
 </div>
 
 
-<div id="outline-container-org56f45ee" class="outline-3">
-<h3 id="org56f45ee"><span class="section-number-3">1.2</span> Utilisation</h3>
+<div id="outline-container-org053a529" class="outline-3">
+<h3 id="org053a529"><span class="section-number-3">1.2.</span> Utilisation</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Les espaces de Hilbert permettent de généraliser en dimension infinie nombre de résultats valables en dimension finie. Parmi eux, les espaces fonctionnels sont très utilisés. Ils permettent entre-autres de relier la solution de certaines équations différentielles à des problèmes de minimisation.
@@ -487,8 +452,8 @@ Les espaces de Hilbert permettent de généraliser en dimension infinie nombre d
 </div>
 
 
-<div id="outline-container-orgc814ce1" class="outline-3">
-<h3 id="orgc814ce1"><span class="section-number-3">1.3</span> Complétude du noyau</h3>
+<div id="outline-container-orge0531f6" class="outline-3">
+<h3 id="orge0531f6"><span class="section-number-3">1.3.</span> Complétude du noyau</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Soit \(\varphi \in H^\dual\) et une suite de Cauchy \(\{x_1,x_2,...\} \subseteq \noyau \varphi \subseteq H\). L'espace \(H\) étant complet, cette suite converge vers \(x \in H\). Par continuité de \(\varphi\), on a :
@@ -505,8 +470,8 @@ On en conclut que \(x \in \noyau \varphi\). L'espace vectoriel \(\noyau \varphi\
 </div>
 
 
-<div id="outline-container-org07c6591" class="outline-3">
-<h3 id="org07c6591"><span class="section-number-3">1.4</span> Complétude de l'image</h3>
+<div id="outline-container-org680ac3f" class="outline-3">
+<h3 id="org680ac3f"><span class="section-number-3">1.4.</span> Complétude de l'image</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Soit l'application linéaire continue \(A : H \mapsto H\) et une suite de Cauchy \(\{y_1,y_2,...\} \subseteq \image A \subseteq H\). L'espace \(H\) étant complet, cette suite converge vers \(y \in H\). Comme les \(y_i \in \image A\), on peut trouver des \(x_i \in H\) tels que \(A(x_i) = y_i\). Par continuité de \(A\), on a :
@@ -523,8 +488,8 @@ On en conclut que \(y \in \image A\). L'espace vectoriel \(\image A\) est donc c
 </div>
 
 
-<div id="outline-container-org8e13a50" class="outline-3">
-<h3 id="org8e13a50"><span class="section-number-3">1.5</span> Complétude de l'espace orthogonal</h3>
+<div id="outline-container-org904b9f8" class="outline-3">
+<h3 id="org904b9f8"><span class="section-number-3">1.5.</span> Complétude de l'espace orthogonal</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Soit \(V \subseteq H\). Considérons une suite de Cauchy \(\{x_1,x_2,...\} \subseteq V^\orthogonal \subseteq H\). Comme \(H\) est complet, cette suite est convergente vers \(x \in H\). Choisissons \(z \in V\). On a :
@@ -557,8 +522,8 @@ c'est-à-dire \(x \in V^\orthogonal\). On en conclut que \(V^\orthogonal\) est u
 </div>
 
 
-<div id="outline-container-org712319d" class="outline-3">
-<h3 id="org712319d"><span class="section-number-3">1.6</span> Théorème de projection</h3>
+<div id="outline-container-orgeff2385" class="outline-3">
+<h3 id="orgeff2385"><span class="section-number-3">1.6.</span> Théorème de projection</h3>
 <div class="outline-text-3" id="text-1-6">
 \begin{theoreme}
 Soit $V \subseteq H$ un sous-espace vectoriel complet. Pour tout $x \in H$, il existe un unique $u \in V$ vérifiant :
@@ -676,8 +641,8 @@ Donc, $\norme{u - v} = 0$ et $u = v$, ce qui prouve l'unicité de la solution op
 </div>
 
 
-<div id="outline-container-org9ef6271" class="outline-3">
-<h3 id="org9ef6271"><span class="section-number-3">1.7</span> Application projective</h3>
+<div id="outline-container-orgb852216" class="outline-3">
+<h3 id="orgb852216"><span class="section-number-3">1.7.</span> Application projective</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 On peut donc définir l'application de projection \(P : H \mapsto V\) par :
@@ -706,8 +671,8 @@ Comme \(P(x) \in V\), cela revient à :
 </div>
 
 
-<div id="outline-container-org8e49320" class="outline-3">
-<h3 id="org8e49320"><span class="section-number-3">1.8</span> Orthogonalité</h3>
+<div id="outline-container-org93a7c3f" class="outline-3">
+<h3 id="org93a7c3f"><span class="section-number-3">1.8.</span> Orthogonalité</h3>
 <div class="outline-text-3" id="text-1-8">
 <p>
 Soit \(x \in H\) et \(u = P(x)\). L'écart \(e = x - u\) possède-t-il les mêmes propriétés d'orthogonalité qu'en dimension finie ? Soit \(\alpha \in \corps\) et \(v \in V\). On a \(u + \alpha \cdot v \in V\) et donc :
@@ -824,8 +789,8 @@ Cette relation d'orthogonalité étant valable pour tout \(v \in V\), on en conc
 </div>
 
 
-<div id="outline-container-org46528fc" class="outline-3">
-<h3 id="org46528fc"><span class="section-number-3">1.9</span> Identité locale</h3>
+<div id="outline-container-org2b3e2d8" class="outline-3">
+<h3 id="org2b3e2d8"><span class="section-number-3">1.9.</span> Identité locale</h3>
 <div class="outline-text-3" id="text-1-9">
 <p>
 Soit \(v \in V\). Il est clair que le choix \(u = v\) minimise la distance \(\norme{v - u} \ge 0\) sur \(u \in V\) puisque \(\norme{v - v} = 0\). Par unicité de la solution optimale, on en déduit que \(P(v) = v\) pour tout \(v \in V\).
@@ -834,8 +799,8 @@ Soit \(v \in V\). Il est clair que le choix \(u = v\) minimise la distance \(\no
 </div>
 
 
-<div id="outline-container-org568e257" class="outline-3">
-<h3 id="org568e257"><span class="section-number-3">1.10</span> Invariance</h3>
+<div id="outline-container-org0fa4283" class="outline-3">
+<h3 id="org0fa4283"><span class="section-number-3">1.10.</span> Invariance</h3>
 <div class="outline-text-3" id="text-1-10">
 <p>
 Comme \(v = P(x) \in V\) pour tout \(x \in H\), on a :
@@ -852,8 +817,8 @@ d'où \(P^2 = P\).
 </div>
 
 
-<div id="outline-container-orgfd2e385" class="outline-3">
-<h3 id="orgfd2e385"><span class="section-number-3">1.11</span> Somme directe</h3>
+<div id="outline-container-org2374054" class="outline-3">
+<h3 id="org2374054"><span class="section-number-3">1.11.</span> Somme directe</h3>
 <div class="outline-text-3" id="text-1-11">
 <p>
 On peut donc exprimer tout \(x \in H\) comme une somme :
@@ -898,8 +863,8 @@ ce qui n'est possible que si \(\norme{u - v} = \norme{y - z} = 0\), c'est-à-dir
 </div>
 
 
-<div id="outline-container-org7a65be0" class="outline-3">
-<h3 id="org7a65be0"><span class="section-number-3">1.12</span> Biorthogonal</h3>
+<div id="outline-container-org79a02e9" class="outline-3">
+<h3 id="org79a02e9"><span class="section-number-3">1.12.</span> Biorthogonal</h3>
 <div class="outline-text-3" id="text-1-12">
 <ul class="org-ul">
 <li>Soit \(x \in V\). Pour tout \(z \in V^\orthogonal\), on a :</li>
@@ -945,8 +910,8 @@ On conclut de ces deux inclusions que :
 </div>
 
 
-<div id="outline-container-org10ec600" class="outline-3">
-<h3 id="org10ec600"><span class="section-number-3">1.13</span> Théorème de représentation de Riesz</h3>
+<div id="outline-container-orgf742689" class="outline-3">
+<h3 id="orgf742689"><span class="section-number-3">1.13.</span> Théorème de représentation de Riesz</h3>
 <div class="outline-text-3" id="text-1-13">
 <p>
 Nous allons à présent établir une équivalence entre les formes linéaires de \(H^\dual\) et le produit scalaire sur \(H\).
@@ -1038,8 +1003,8 @@ ce qui implique $u - p = 0$ et donc $u = p$.
 </div>
 
 
-<div id="outline-container-orgb1edc65" class="outline-3">
-<h3 id="orgb1edc65"><span class="section-number-3">1.14</span> Extension aux formes bilinéaires</h3>
+<div id="outline-container-org8d4bcfc" class="outline-3">
+<h3 id="org8d4bcfc"><span class="section-number-3">1.14.</span> Extension aux formes bilinéaires</h3>
 <div class="outline-text-3" id="text-1-14">
 \begin{theoreme}
 Si $\vartheta : H \times H \mapsto \corps$ est une forme bilinéaire de norme finie sur $H$, il existe une unique application linéaire et continue $A : H \mapsto H$ telle que :
@@ -1082,8 +1047,8 @@ On a donc soit $A = 0$ et a fortiori $A$ continue, soit :
 </div>
 
 
-<div id="outline-container-org1777b65" class="outline-3">
-<h3 id="org1777b65"><span class="section-number-3">1.15</span> Application adjointe</h3>
+<div id="outline-container-org46f564e" class="outline-3">
+<h3 id="org46f564e"><span class="section-number-3">1.15.</span> Application adjointe</h3>
 <div class="outline-text-3" id="text-1-15">
 \begin{theoreme}
 Soit une application $A : H \mapsto H$ linéaire et continue. Il existe une unique application $A^\dual : H \mapsto H$ telle que :
@@ -1112,8 +1077,8 @@ pour tout $u \in H$. Comme ce résultat est également valable quel que soit $v 
 </div>
 
 
-<div id="outline-container-org72685f0" class="outline-3">
-<h3 id="org72685f0"><span class="section-number-3">1.16</span> Théorème de Lax-Milgram</h3>
+<div id="outline-container-org7c8e016" class="outline-3">
+<h3 id="org7c8e016"><span class="section-number-3">1.16.</span> Théorème de Lax-Milgram</h3>
 <div class="outline-text-3" id="text-1-16">
 \begin{theoreme}
 Soit une forme bilinéaire $\vartheta : H \times H \mapsto \corps$ de norme finie. Nous supposons qu'il existe un réel $\varrho \strictsuperieur 0$ tel que :
@@ -1169,8 +1134,8 @@ ce qui implique que $\norme{s - t}^2 = 0$, d'où $s = t$. La solution $s$ est do
 </div>
 
 
-<div id="outline-container-orgc024940" class="outline-4">
-<h4 id="orgc024940"><span class="section-number-4">1.16.1</span> Inverse</h4>
+<div id="outline-container-org9756e87" class="outline-4">
+<h4 id="org9756e87"><span class="section-number-4">1.16.1.</span> Inverse</h4>
 <div class="outline-text-4" id="text-1-16-1">
 <p>
 Nous avons également prouvé que pour tout \(v \in H\), il existe un unique \(u \in H\) vérifiant \(A(u) = v\). L'application \(A\) est donc inversible et \(A^{-1}(v) = u\).
@@ -1180,8 +1145,8 @@ Nous avons également prouvé que pour tout \(v \in H\), il existe un unique \(u
 </div>
 
 
-<div id="outline-container-org0470b4c" class="outline-3">
-<h3 id="org0470b4c"><span class="section-number-3">1.17</span> Suite orthonormée</h3>
+<div id="outline-container-org1c77770" class="outline-3">
+<h3 id="org1c77770"><span class="section-number-3">1.17.</span> Suite orthonormée</h3>
 <div class="outline-text-3" id="text-1-17">
 <p>
 Si une suite \(\{ u_i \in H : i \in \setN\}\) vérifie :
@@ -1198,8 +1163,8 @@ pour tout \(i,j \in \setN\), on dit qu'elle est orthonormée. Dans la suite, nou
 </div>
 
 
-<div id="outline-container-org3418f24" class="outline-3">
-<h3 id="org3418f24"><span class="section-number-3">1.18</span> Inégalité de Bessel</h3>
+<div id="outline-container-org76594db" class="outline-3">
+<h3 id="org76594db"><span class="section-number-3">1.18.</span> Inégalité de Bessel</h3>
 <div class="outline-text-3" id="text-1-18">
 <p>
 Soit \(x \in H\) et une suite orthonormée \(\{ u_i \in H : i \in \setN\}\). Par analogie avec les projections sur des espaces de dimension finie, on pose (sous réserve de convergence) :
@@ -1271,8 +1236,8 @@ c'est-à-dire :
 </div>
 
 
-<div id="outline-container-org77bf93a" class="outline-3">
-<h3 id="org77bf93a"><span class="section-number-3">1.19</span> Base hilbertienne</h3>
+<div id="outline-container-org3c445f3" class="outline-3">
+<h3 id="org3c445f3"><span class="section-number-3">1.19.</span> Base hilbertienne</h3>
 <div class="outline-text-3" id="text-1-19">
 <p>
 Si, pour tout \(x \in H\), la suite des projections finies :
@@ -1313,8 +1278,8 @@ sont appelés les coordonnées de \(x\) par rapport aux \(u_i\). Dans la suite, 
 </div>
 
 
-<div id="outline-container-orgecce9da" class="outline-3">
-<h3 id="orgecce9da"><span class="section-number-3">1.20</span> Egalité de Parseval</h3>
+<div id="outline-container-org06cdc32" class="outline-3">
+<h3 id="org06cdc32"><span class="section-number-3">1.20.</span> Egalité de Parseval</h3>
 <div class="outline-text-3" id="text-1-20">
 <p>
 Soit \(x \in H\) et  \(\epsilon \strictsuperieur 0\). On peut trouver un \(n \in \setN\) tel que :
@@ -1359,8 +1324,8 @@ c'est-à-dire :
 </div>
 
 
-<div id="outline-container-org5c1bd86" class="outline-3">
-<h3 id="org5c1bd86"><span class="section-number-3">1.21</span> Produit scalaire</h3>
+<div id="outline-container-org29daab9" class="outline-3">
+<h3 id="org29daab9"><span class="section-number-3">1.21.</span> Produit scalaire</h3>
 <div class="outline-text-3" id="text-1-21">
 <p>
 Soit \(x,y \in E\). On a :
@@ -1396,8 +1361,8 @@ On a donc :
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2019-10-01 mar 12:33</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2023-05-10 mer 16:45</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>

@@ -3,14 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2019-10-01 mar 12:32 -->
+<!-- 2023-05-10 mer 16:45 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 10 : Optimisation - 6</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="chimay" />
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
+<meta name="generator" content="Org Mode" />
+<style>
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -31,8 +30,9 @@
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
   pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
     padding: 8pt;
     font-family: monospace;
     overflow: auto;
@@ -40,22 +40,22 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
-    padding-top: 1.2em;
+    overflow: auto;
   }
   pre.src:before {
     display: none;
     position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
+    top: -8px;
+    right: 12px;
     padding: 3px;
-    border: 1px solid black;
+    color: #555;
+    background-color: #f2f2f299;
   }
-  pre.src:hover:before { display: inline;}
+  pre.src:hover:before { display: inline; margin-top: 14px;}
   /* Languages per Org manual */
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -161,6 +161,19 @@
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
   .inlinetask {
     padding: 10px;
     border: 2px solid gray;
@@ -177,56 +190,9 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
+  .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2019 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
-<!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
-</script>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         displayAlign: "center",
@@ -247,11 +213,10 @@ for the JavaScript code in this tag.
              }
 });
 </script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="content">
+<div id="content" class="content">
 <h1 class="title">Eclats de vers : Matemat 10 : Optimisation - 6</h1>
 <p>
 <a href="index.html">Index des Grimoires</a>
@@ -261,11 +226,11 @@ for the JavaScript code in this tag.
 <a href="../index.html">Retour à l’accueil</a>
 </p>
 
-<div id="table-of-contents">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table des matières</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org0ca6282">1. Valeurs singulières</a></li>
+<li><a href="#orgc5d9c4d">1. Valeurs singulières</a></li>
 </ul>
 </div>
 </div>
@@ -424,22 +389,22 @@ for the JavaScript code in this tag.
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
 
-<div id="outline-container-org0ca6282" class="outline-2">
-<h2 id="org0ca6282"><span class="section-number-2">1</span> Valeurs singulières</h2>
+<div id="outline-container-orgc5d9c4d" class="outline-2">
+<h2 id="orgc5d9c4d"><span class="section-number-2">1.</span> Valeurs singulières</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org27d7bd3">1.1. Décomposition en valeurs singulières</a></li>
-<li><a href="#org9cc7d77">1.2. Représentation tensorielle</a></li>
-<li><a href="#org867e192">1.3. Dualité</a></li>
-<li><a href="#org5642ff8">1.4. Inverse</a></li>
-<li><a href="#orgabdc1fa">1.5. Pseudo-inverse</a></li>
-<li><a href="#org4539fc5">1.6. Représentation matricielle</a></li>
-<li><a href="#org6831d66">1.7. Pseudo-inverse</a></li>
-<li><a href="#org735ce6a">1.8. Systèmes linéaires</a></li>
-<li><a href="#org9c50fd3">1.9. Image et noyau</a></li>
-<li><a href="#orge195a03">1.10. Normes</a></li>
-<li><a href="#orgb8919c7">1.11. Fonctions de matrices</a></li>
+<li><a href="#org4df2659">1.1. Décomposition en valeurs singulières</a></li>
+<li><a href="#org87bb5f4">1.2. Représentation tensorielle</a></li>
+<li><a href="#orgb703505">1.3. Dualité</a></li>
+<li><a href="#org41c1e82">1.4. Inverse</a></li>
+<li><a href="#org11873a6">1.5. Pseudo-inverse</a></li>
+<li><a href="#org2c709c9">1.6. Représentation matricielle</a></li>
+<li><a href="#org28b1839">1.7. Pseudo-inverse</a></li>
+<li><a href="#orgf62b851">1.8. Systèmes linéaires</a></li>
+<li><a href="#orgdd4cd04">1.9. Image et noyau</a></li>
+<li><a href="#org53b8539">1.10. Normes</a></li>
+<li><a href="#orgea2a97a">1.11. Fonctions de matrices</a></li>
 </ul>
 </div>
 
@@ -449,8 +414,8 @@ for the JavaScript code in this tag.
 </div>
 
 
-<div id="outline-container-org27d7bd3" class="outline-3">
-<h3 id="org27d7bd3"><span class="section-number-3">1.1</span> Décomposition en valeurs singulières</h3>
+<div id="outline-container-org4df2659" class="outline-3">
+<h3 id="org4df2659"><span class="section-number-3">1.1.</span> Décomposition en valeurs singulières</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Soit les espaces vectoriels \(E\) et \(F\) et une application linéaire \(A : E \mapsto F\) admettant un dual \(A^\dual : F \mapsto E\). Les applications \(A^\dual \circ A\) et \(A \circ A^\dual\) étant auto-adjointes, il y a fort à parier que leurs valeurs et vecteurs propres possèdent d'importantes propriétés.
@@ -565,8 +530,8 @@ A(x) &= \sum_{i = 1}^r \scalaire{v_i}{x} \cdot A(v_i) \\
 </div>
 
 
-<div id="outline-container-org9cc7d77" class="outline-3">
-<h3 id="org9cc7d77"><span class="section-number-3">1.2</span> Représentation tensorielle</h3>
+<div id="outline-container-org87bb5f4" class="outline-3">
+<h3 id="org87bb5f4"><span class="section-number-3">1.2.</span> Représentation tensorielle</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 On conclut de ce qui précède que \(A\) peut être représentée sur \(\combilin{v_1,...,v_n}\) par le tenseur associé :
@@ -591,8 +556,8 @@ On appelle une telle représentation une décomposition en valeurs singulières.
 </div>
 
 
-<div id="outline-container-org867e192" class="outline-3">
-<h3 id="org867e192"><span class="section-number-3">1.3</span> Dualité</h3>
+<div id="outline-container-orgb703505" class="outline-3">
+<h3 id="orgb703505"><span class="section-number-3">1.3.</span> Dualité</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Le tenseur dual est donc :
@@ -604,8 +569,8 @@ Le tenseur dual est donc :
 </div>
 
 
-<div id="outline-container-orgb866c19" class="outline-4">
-<h4 id="orgb866c19"><span class="section-number-4">1.3.1</span> Propriétés</h4>
+<div id="outline-container-org9eef9bd" class="outline-4">
+<h4 id="org9eef9bd"><span class="section-number-4">1.3.1.</span> Propriétés</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <p>
 On retrouve sans surprise les représentation de :
@@ -633,8 +598,8 @@ en fonction de leurs valeurs et vecteurs propres.
 </div>
 
 
-<div id="outline-container-org5642ff8" class="outline-3">
-<h3 id="org5642ff8"><span class="section-number-3">1.4</span> Inverse</h3>
+<div id="outline-container-org41c1e82" class="outline-3">
+<h3 id="org41c1e82"><span class="section-number-3">1.4.</span> Inverse</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Supposons que \((v_1,...,v_r)\) forme une base de \(E\) et que \((u_1,...u_r)\) forme une base de \(F\). Soit \(x \in E\) et \(y \in F\) tels que \(y = A(x) = \mathcal{A} \cdot x\). On a :
@@ -679,8 +644,8 @@ on a :
 </div>
 
 
-<div id="outline-container-orgabdc1fa" class="outline-3">
-<h3 id="orgabdc1fa"><span class="section-number-3">1.5</span> Pseudo-inverse</h3>
+<div id="outline-container-org11873a6" class="outline-3">
+<h3 id="org11873a6"><span class="section-number-3">1.5.</span> Pseudo-inverse</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Nous ne supposons à présent plus que les suites de vecteurs \((u_1,...,u_r)\) et \((v_1,...,v_r)\) forment des bases de \(E\) et \(F\), mais nous définissons malgré tout par analogie le tenseur pseudo-inverse de \(A\) par :
@@ -700,8 +665,8 @@ Le pseudo-inverse \(A^\pinverse\) de l'application linéaire correspondante \(A\
 </div>
 
 
-<div id="outline-container-org522beb7" class="outline-4">
-<h4 id="org522beb7"><span class="section-number-4">1.5.1</span> Tenseurs de projections</h4>
+<div id="outline-container-org173cbc9" class="outline-4">
+<h4 id="org173cbc9"><span class="section-number-4">1.5.1.</span> Tenseurs de projections</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <p>
 On voit que :
@@ -728,8 +693,8 @@ correspond au tenseur de projection sur \(\combilin{u_1,...,u_r}\).
 </div>
 
 
-<div id="outline-container-org690b7d2" class="outline-4">
-<h4 id="org690b7d2"><span class="section-number-4">1.5.2</span> Dualité</h4>
+<div id="outline-container-orgecc4355" class="outline-4">
+<h4 id="orgecc4355"><span class="section-number-4">1.5.2.</span> Dualité</h4>
 <div class="outline-text-4" id="text-1-5-2">
 <p>
 On a clairement :
@@ -747,8 +712,8 @@ On a clairement :
 </div>
 
 
-<div id="outline-container-org9cb2b50" class="outline-4">
-<h4 id="org9cb2b50"><span class="section-number-4">1.5.3</span> Produits</h4>
+<div id="outline-container-org4ecb94c" class="outline-4">
+<h4 id="org4ecb94c"><span class="section-number-4">1.5.3.</span> Produits</h4>
 <div class="outline-text-4" id="text-1-5-3">
 <p>
 On déduit des résultats ci-dessus que :
@@ -773,8 +738,8 @@ et :
 </div>
 
 
-<div id="outline-container-orgeff3220" class="outline-4">
-<h4 id="orgeff3220"><span class="section-number-4">1.5.4</span> Orthogonalité</h4>
+<div id="outline-container-orgf5d684b" class="outline-4">
+<h4 id="orgf5d684b"><span class="section-number-4">1.5.4.</span> Orthogonalité</h4>
 <div class="outline-text-4" id="text-1-5-4">
 <p>
 Soit le tenseur identité \(\tenseuridentite\). On déduit de ce qui précède les propriétés d'orthogonalité :
@@ -793,8 +758,8 @@ Soit le tenseur identité \(\tenseuridentite\). On déduit de ce qui précède l
 </div>
 
 
-<div id="outline-container-org4539fc5" class="outline-3">
-<h3 id="org4539fc5"><span class="section-number-3">1.6</span> Représentation matricielle</h3>
+<div id="outline-container-org2c709c9" class="outline-3">
+<h3 id="org2c709c9"><span class="section-number-3">1.6.</span> Représentation matricielle</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 Soit une matrice \(A \in \matrice(\corps,m,n)\) et \(p = \min \{ m , n \}\). L'algorithme de décomposition en valeurs singulières est très simple. On évalue :
@@ -870,8 +835,8 @@ On note alors :
 </div>
 
 
-<div id="outline-container-org6831d66" class="outline-3">
-<h3 id="org6831d66"><span class="section-number-3">1.7</span> Pseudo-inverse</h3>
+<div id="outline-container-org28b1839" class="outline-3">
+<h3 id="org28b1839"><span class="section-number-3">1.7.</span> Pseudo-inverse</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 Le pseudo-inverse est donné par :
@@ -900,12 +865,12 @@ et :
 </div>
 
 
-<div id="outline-container-org735ce6a" class="outline-3">
-<h3 id="org735ce6a"><span class="section-number-3">1.8</span> Systèmes linéaires</h3>
+<div id="outline-container-orgf62b851" class="outline-3">
+<h3 id="orgf62b851"><span class="section-number-3">1.8.</span> Systèmes linéaires</h3>
 <div class="outline-text-3" id="text-1-8">
 </div>
-<div id="outline-container-org4622ab1" class="outline-4">
-<h4 id="org4622ab1"><span class="section-number-4">1.8.1</span> Moindres carrés</h4>
+<div id="outline-container-orgfe370d3" class="outline-4">
+<h4 id="orgfe370d3"><span class="section-number-4">1.8.1.</span> Moindres carrés</h4>
 <div class="outline-text-4" id="text-1-8-1">
 <p>
 Soit la matrice \(A \in \matrice(\corps,m,n)\), le vecteur matriciel \(b \in \corps^m\) et l'erreur produite par \(x \in \corps^n\) :
@@ -1078,8 +1043,8 @@ et donc \(\mathcal{E}(z) \strictsuperieur \mathcal{E}(x)\).
 </div>
 
 
-<div id="outline-container-orge49d1b0" class="outline-4">
-<h4 id="orge49d1b0"><span class="section-number-4">1.8.2</span> Projection</h4>
+<div id="outline-container-org04fb51b" class="outline-4">
+<h4 id="org04fb51b"><span class="section-number-4">1.8.2.</span> Projection</h4>
 <div class="outline-text-4" id="text-1-8-2">
 <p>
 On peut réécrire \(\Gamma\) sous la forme :
@@ -1124,8 +1089,8 @@ On a donc en définitive des vecteurs optimaux de la forme :
 </div>
 
 
-<div id="outline-container-orgc22cdd0" class="outline-4">
-<h4 id="orgc22cdd0"><span class="section-number-4">1.8.3</span> Solutions</h4>
+<div id="outline-container-org8e27e29" class="outline-4">
+<h4 id="org8e27e29"><span class="section-number-4">1.8.3.</span> Solutions</h4>
 <div class="outline-text-4" id="text-1-8-3">
 <p>
 Soit l'espace des solutions :
@@ -1146,8 +1111,8 @@ Inversément, si \(S \ne \emptyset\), on conclut que \(\scalaire{u_{r + 1}}{b} =
 </div>
 
 
-<div id="outline-container-orgc19b46a" class="outline-4">
-<h4 id="orgc19b46a"><span class="section-number-4">1.8.4</span> Norme contrainte</h4>
+<div id="outline-container-org25213a9" class="outline-4">
+<h4 id="org25213a9"><span class="section-number-4">1.8.4.</span> Norme contrainte</h4>
 <div class="outline-text-4" id="text-1-8-4">
 <p>
 Supposons que \(S \ne \emptyset\). Soit \(x \in \Gamma = S\), que l'on écrit sous la forme :
@@ -1185,8 +1150,8 @@ On en conclut que le choix \(x = A^\pinverse \cdot b\) minimise la norme de \(x\
 </div>
 
 
-<div id="outline-container-org3a3acd3" class="outline-4">
-<h4 id="org3a3acd3"><span class="section-number-4">1.8.5</span> Lien avec les résultats précédents</h4>
+<div id="outline-container-org059314d" class="outline-4">
+<h4 id="org059314d"><span class="section-number-4">1.8.5.</span> Lien avec les résultats précédents</h4>
 <div class="outline-text-4" id="text-1-8-5">
 <ul class="org-ul">
 <li>On a montré précédemment en dérivant les expressions matricielles que le choix :</li>
@@ -1242,8 +1207,8 @@ A^\dual \cdot (A \cdot A^\dual)^{-1} &= \sum_{i,j = 1}^r \frac{\sigma_i}{\sigma_
 </div>
 
 
-<div id="outline-container-org9c50fd3" class="outline-3">
-<h3 id="org9c50fd3"><span class="section-number-3">1.9</span> Image et noyau</h3>
+<div id="outline-container-orgdd4cd04" class="outline-3">
+<h3 id="orgdd4cd04"><span class="section-number-3">1.9.</span> Image et noyau</h3>
 <div class="outline-text-3" id="text-1-9">
 <p>
 Tout vecteur \(b = A \cdot x = \sum_{i = 1}^r \sigma_i \cdot \scalaire{v_i}{x} \cdot u_i\) est exprimé comme une combinaison linéaire des \((u_1,...,u_r)\). On en conclut que \(\image A \subseteq \combilin{u_1,...,u_r}\). Réciproquement, si \(b \in \combilin{u_1,...,u_r}\), on a \(\scalaire{u_{r + 1}}{b} = \scalaire{u_m}{b} = 0\) et l'espace des solutions \(\{ x \in \setC^n : A \cdot x = b\}\) n'est pas vide. On en conclut que \(\combilin{u_1,...,u_r} \subseteq \image A\). D'où finalement :
@@ -1264,8 +1229,8 @@ Tout vecteur \(z \in \combilin{v_{r + 1},...,v_n}\) vérifie \(\scalaire{v_1}{z}
 </div>
 
 
-<div id="outline-container-orge195a03" class="outline-3">
-<h3 id="orge195a03"><span class="section-number-3">1.10</span> Normes</h3>
+<div id="outline-container-org53b8539" class="outline-3">
+<h3 id="org53b8539"><span class="section-number-3">1.10.</span> Normes</h3>
 <div class="outline-text-3" id="text-1-10">
 <p>
 La décomposition en valeurs singulières permet d'évaluer facilement
@@ -1287,8 +1252,8 @@ ainsi que la norme de Frobénius :
 </div>
 
 
-<div id="outline-container-orgb8919c7" class="outline-3">
-<h3 id="orgb8919c7"><span class="section-number-3">1.11</span> Fonctions de matrices</h3>
+<div id="outline-container-orgea2a97a" class="outline-3">
+<h3 id="orgea2a97a"><span class="section-number-3">1.11.</span> Fonctions de matrices</h3>
 <div class="outline-text-3" id="text-1-11">
 <p>
 La décomposition en valeurs singulières permet d'étendre la définition
@@ -1312,8 +1277,8 @@ On définit alors :
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2019-10-01 mar 12:32</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2023-05-10 mer 16:45</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>

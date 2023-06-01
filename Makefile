@@ -27,7 +27,8 @@ include Makefile.inc
 # debug {{{1
 
 debug:
-	@echo $(SUBDIRS)
+	@echo $(HTML_FILES)
+	@echo $(EPUB_FILES)
 	@echo $(LY_MEL_FILES)
 
 # }}}1

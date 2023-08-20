@@ -20,9 +20,11 @@
 
 #+TOC: headlines 1
 
-* Noyau
+* FreeBSD
 
-** Combinaison magique
+** Noyau (kernel)
+
+*** Combinaison magique
 
 Ctrl-Alt-Esc puis
 
@@ -34,43 +36,114 @@ panic
 
 nécessite noyau compilé avec KDB et DDB
 
-* Système de fichiers
+** Système de base (world)
 
-#+TOC: headlines 1 local
+| Commande        | Interface | Fonction                                        |
+|-----------------+-----------+-------------------------------------------------|
+| bsdinstall      | TUI       | installation                                    |
+| bsdconfig       | TUI       | configuration                                   |
+| freebsd-version | CLI       | version du système                              |
+| freebsd-update  | CLI       | mise à jour kernel & world                      |
 
-| mdconfig | Création de périphériques virtuels associés à un fichier      |
-| glabel   | Permet de donner un nom persistant à un périphérique amovible |
-| gmirror  | Création d'une association de périphériques redondant         |
-| geli     | Permet de chiffrer un système de fichier                      |
-| gshsec   | Permet de partager la clef permettant de déchiffrer           |
-|          | un système de fichier sur plusieurs périphériques             |
+*** Système de fichiers
 
+| Commande | Interface | Fonction                                                      |
+|----------+-----------+---------------------------------------------------------------|
+| gpart    | CLI       | partitionnement du disque                                     |
+| zpool    | CLI       | création de piscine zfs                                       |
+| zfs      | CLI       | gestion du système de fichier zfs                             |
+| mdconfig | CLI       | Création de périphériques virtuels associés à un fichier      |
+| glabel   | CLI       | Permet de donner un nom persistant à un périphérique amovible |
+| gmirror  | CLI       | Création d'une association de périphériques redondant         |
+| geli     | CLI       | Permet de chiffrer un système de fichier                      |
+| gshsec   | CLI       | Permet de partager la clef permettant de déchiffrer           |
+|          |           | un système de fichier sur plusieurs périphériques             |
 
-* Administration
+*** Environnement de démarrage (boot environment)
 
-#+TOC: headlines 1 local
+Disponibles avec ZFS comme système de fichier.
 
+| Commande | Interface | Fonction                               |
+|----------+-----------+----------------------------------------|
+| beadm    | CLI       | gestion des environnement de démarrage |
+| bectl    | CLI       | gestion des environnement de démarrage |
 
-** Noyau
+*** Démarrage & services
 
-| kldload   | Charge un module   |
-| kldunload | Décharge un module |
+| Commande           | Interface | Fonction                                          |
+|--------------------+-----------+---------------------------------------------------|
+| /boot/loader.conf  | FILE      | fichier de configuration du chargeur de démarrage |
+| /sbin/init         | FILE      | processus de démarrage lancé par le noyau         |
+| /etc/rc            | FILE      | script de démarrage                               |
+| /etc/rc.conf       | FILE      | configuration du démarrage                        |
+| /etc/rc.conf.local | FILE      |                                                   |
+| /etc/rc.d          | DIR       | répertoire contenant les scripts permettant       |
+|                    |           | de lancer ou d'arrêter des services               |
+| sysrc              | CLI       | gestion des variables de /etc/rc.conf :           |
+|                    |           | pour le démarrage : activation de services, ...   |
+| service            | CLI       | gestion des services                              |
+| rcorder            | CLI       | gestion des dépendances entre services            |
 
+*** Noyau (kernel)
 
-** Processus
+| Commande         | Interface | Fonction                             |
+|------------------+-----------+--------------------------------------|
+| kldstat          | CLI       | affiche la liste des modules chargés |
+| kldload          | CLI       | charge un module du noyau            |
+| kldunload        | CLI       | décharge un module                   |
+| sysctl           | CLI       | contrôle des paramètres du noyau     |
+| /etc/sysctl.conf | FILE      | Fichier de configuration de /sysctl/ |
 
-| pkill <span class="brun">nom</span> | Permet de terminer un processus de nom |
-|                                     | /nom/ (équivalent de /killall/)        |
+*** Utilisateurs & groupes
 
+| Commande | Interface | Fonction                                |
+|----------+-----------+-----------------------------------------|
+| pw       | CLI       | gestion des utilisateurs & groupes      |
+| adduser  | CLI       | ajoute un utilisateur                   |
+| rmuser   | CLI       | supprime un utilisateur                 |
+| chpass   | CLI       | modifie les paramètres d’un utilisateur |
+| passwd   | CLI       | changement du mot de passe              |
+| cap_mkdb | CLI       | base de données des capacités           |
 
-** Réseau
+*** Paquets
 
+| Commande   | Interface | Fonction                |
+|------------+-----------+-------------------------|
+| pkg-static | CLI       | gestionnaire de paquets |
+| portmaster | CLI       | gestionnaire des ports  |
 
-*** Pare-feu
+*** Processus
 
-| pf           | pare-feu                                  |
-| pfctl        | Contrôle du pare-feu                      |
-| /etc/pf.conf | Fichier de configuration du pare-feu /pf/ |
+| Commande | Interface | Fonction                        |
+|----------+-----------+---------------------------------|
+| pkill    | CLI       | envoie un signal à un processus |
+
+*** Audio
+
+| Commande | Interface | Fonction     |
+|----------+-----------+--------------|
+| mixer    | CLI       | mixer de son |
+
+*** Mode console virtuelle
+
+(Ctrl +) Alt + F1
+
+| Commande   | Interface | Fonction               |
+|------------+-----------+------------------------|
+| kbdmap     |           | disposition du clavier |
+| vidcontrol |           | vidéo                  |
+| vidfont    |           | fonte de caractères    |
+
+*** Réseau
+
+**** Pare-feu
+
+| Commande     | Interface | Fonction                                  |
+|--------------+-----------+-------------------------------------------|
+| pf           | CLI       | pare-feu                                  |
+| /etc/pf.conf | FILE      | Fichier de configuration du pare-feu /pf/ |
+| pfctl        | CLI       | contrôle du pare-feu                      |
+| ipfw         | CLI       | contrôle du pare-feu                      |
 
 Voici quelques exemples de syntaxe pf. Définition de variables,
 interface et réseau local :
@@ -93,44 +166,11 @@ pass in inet proto tcp from $lan to $if port ssh flags S/SA keep state <br />
 pass in inet proto udp from $lan to $if port ssh flags S/SA keep state
 #+END_EXAMPLE
 
-
-** Démarrage
-
-| /boot/loader.conf | fichier de configuration du chargeur de démarrage |
-| /sbin/init        | Processus de démarrage lancé par le noyau         |
-| /etc/rc           | Script de démarrage                               |
-
-
-** Services
-
-| /etc/rc.conf       | Configuration des services lancés au démarrage |
-| /etc/rc.conf.local |                                                |
-| /etc/rc.d          | Répertoire contenant les scripts permettant    |
-|                    | de lancer ou d'arrêter des services            |
-| sysrc              | Modification des variables dans /etc/rc.conf   |
-| service            | Gestion des services                           |
-| rcorder            | Gestion des dépendances entre services         |
-
-
-** Configuration
-
-| sysctl             | Permet de contrôler les options du noyau    |
-| /etc/sysctl.conf   | Fichier de configuration de /sysctl/        |
-
-
-** Cloisonnement
-
-| jail           | Permet d'emprisonner un processus             |
-| /etc/rc.d/jail | dans un sous-système                          |
-| jexec          | Permet d'exécuter un processus dans un /jail/ |
-
-
-* Systeme
+** Systeme
 
 #+TOC: headlines 1 local
 
-
-** Mise à jour
+*** Mise à jour par compilation
 
 Il faut se rendre dans le répertoire des sources du système,
 par exemple :
@@ -157,8 +197,7 @@ mergemaster
 reboot
 #+END_EXAMPLE
 
-
-** Fichiers de configuration
+*** Fichiers de configuration
 
 Pour installer les fichiers de configuration, il faut aller dans :
 
@@ -172,18 +211,24 @@ et lancer :
 make distribution
 #+END_EXAMPLE
 
+*** Cloisonnement
 
-* Paquets
+| jail           | Permet d'emprisonner un processus             |
+| /etc/rc.d/jail | dans un sous-système                          |
+| jexec          | Permet d'exécuter un processus dans un /jail/ |
 
-#+TOC: headlines 1 local
-
-| pkg_add -r | Ajoute un paquet compilé et ses dépendances      |
-| pkg_del    | Supprime un paquet et les paquets dont il dépend |
-
-
-* Ports
+** Paquets
 
 #+TOC: headlines 1 local
+
+*** Compilés
+
+
+| Commande | Interface | Fonction                |
+|----------+-----------+-------------------------|
+| pkg      | CLI       | gestionnaire de paquets |
+
+*** Sources : ports
 
 Les ports constituent une arborescence d'instructions nécessaires
 à la compilation, l'installation ou la désinstallation de logiciels.
@@ -194,61 +239,35 @@ associé au logiciel souhaité. Il s'agit de :
 cd /usr/ports/catégorie/logiciel
 #+END_EXAMPLE
 
-sous FreeBsd et de :
-
-#+BEGIN_EXAMPLE
-cd /usr/pkgsrc/catégorie/logiciel
-#+END_EXAMPLE
-
-sous NetBsd.
-
 On utilise alors la commande « make » suivi de l'action souhaitée :
 
 | make config  | Configuration des options de compilation |
 | make install | Installe                                 |
 | make clean   | Nettoie le répertoire                    |
 
-
-** Options de compilation
+**** Options de compilation
 
 | /etc/make.conf|Fichier de configuration des compilations de port|
 
-
-** Recherche
+**** Recherche
 
 La racine des ports permet de rechercher un logiciel :
 
 cd /usr/ports <br />
 make search key=<span class="rouge">motclef</span>
 
+**** Utilitaires
 
-** Précompilé
+| portsnap       | Installation ou mise à jour de l’arbre des ports |
+| portsearch     | Recherche dans l’arbre des ports                 |
+| portupgrade    | Mise à jour                                      |
+| portinstall    | Installation d'un port                           |
+| portversion    | Ports non à jour                                 |
+| port_deinstall | Suppression                                      |
+| portsclean     | Nettoyage                                        |
+| portaudit      | Mise à jour de sécurité                          |
 
-Le « pkgsrc » de NetBsd permet d'installer des ports précompilés
-via la commande :
-
-make bin-install
-
-
-** Utilitaires
-
-| portsnap    | Installation ou mise à jour de l’arbre des ports |
-| portsearch  | Recherche dans l’arbre des ports                 |
-| portmaster  | Gestion des ports                                |
-| portupgrade | Gestion des ports                                |
-
-
-*** Portupgrade
-
-| portinstall    | Installation d'un port  |
-| portversion    | Ports non à jour        |
-| portupgrade    | Mise à jour             |
-| port_deinstall | Suppression             |
-| portsclean     | Nettoyage               |
-| portaudit      | Mise à jour de sécurité |
-
-
-*** Configuration
+***** Configuration
 
 | /usr/local/etc/pkgtools.conf             | Fichier de configuration de portupgrade            |
 | IGNORE_CATEGORIES=['/port1/', '/port2/'] | Catégories ignorées                                |
@@ -262,7 +281,32 @@ compilation pour certains ports :
 
 #+BEGIN_EXAMPLE
 MAKE_ARGS={ <br />
-'/port1/' =&gt; ['/.../', '/.../'],
-'/port2/' =&gt; ['/.../', '/.../']
+'/port1/' => ['/.../', '/.../'],
+'/port2/' => ['/.../', '/.../']
 }
 #+END_EXAMPLE
+
+* NetBSD
+
+** Paquets
+
+*** Source : pkgsrc
+
+Sous NetBSD, l’arborescence des ports s’appelle *pkgsrc*.
+
+Répertoire associé à un port :
+
+#+BEGIN_EXAMPLE
+cd /usr/pkgsrc/catégorie/logiciel
+#+END_EXAMPLE
+
+*** Compilé
+
+Le « pkgsrc » de NetBsd permet d'installer des ports précompilés
+via la commande :
+
+make bin-install
+
+Il y a aussi l’utilitaire *pkgin*.
+
+* OpenBSd

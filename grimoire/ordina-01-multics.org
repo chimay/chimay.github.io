@@ -26,43 +26,44 @@ Multics est l’ancêtre des systèmes de type Unix.
 
 Les Unix modernes sont :
 
-  - Linux
-    + Arch Linux
-      * Manjaro
-    + Debian
-      * Mint
-      * Ubuntu
-    + Elementary
-    + Slackware
-    + Fedora
-    + Mageia
   - La famille BSD
     + FreeBSD
-      * True OS
+      * GhostBSD
+      * NomadBSD
     + NetBSD
     + OpenBSD
     + DragonflyBSD
+  - Linux
+    + Arch Linux
+      * Artix
+      * Manjaro
+    + Void Linux
+    + Debian
+      * Devuan
+      * Mint
+    + NixOS
+    + Slackware
+    + Fedora
+      * Mageia
   - Illumos
     * OpenIndiana
     * SmartOS
   - etc
 
-
 * Installation
 
+#+TOC: headlines 1 local
 
 ** Ordinateur
 
   - Vérifier si le processeur supporte le 64 bits
-
   - Vérifier si pas de secure boot, ou secure boot désactivable
-
   - Mieux si mode CSM disponible : Compatibility Support Module,
     module de compatibilité BIOS
 
-
 ** Arch Linux
 
+#+TOC: headlines 1 local
 
 *** En mode BIOS - MBR
 
@@ -378,6 +379,7 @@ poweroff
 
 * Glossaire
 
+#+TOC: headlines 1 local
 
 ** Types d’interfaces
 
@@ -404,9 +406,13 @@ poweroff
 | CONFIG | fichiers de configuration     |                                  |                         |
 
 
-* Boîte à outils
+* Logiciels
+
+#+TOC: headlines 1 local
 
 ** Arch Linux
+
+#+TOC: headlines 1 local
 
 *** Documentation
 
@@ -531,6 +537,7 @@ poweroff
 | xdg-open       | CLI       | ouverture par le programme par défaut        | xdg-utils                  |
 | mimeopen       | CLI       | ouverture par mime                           | perl-file-mimeinfo         |
 | mimetype       | CLI       | détermine le type mime                       | perl-file-mimeinfo         |
+| run-mailcap    | CLI       | ouverture par mime                           | aur/run-mailcap            |
 |----------------+-----------+----------------------------------------------+----------------------------|
 | aconfmgr       | CLI       | gestionnaire de configuration pour arch      | aur/aconfmgr-git           |
 
@@ -851,6 +858,7 @@ poweroff
 | cat      | CLI       | affiche le contenu d’un fichier      | coreutils         |
 | bat      | CLI       | alternative à cat, en rust           | bat               |
 | mdcat    | CLI       | affiche un fichier markdown          | mdcat             |
+| glow     | CLI       | affiche un fichier markdown          | glow              |
 |----------+-----------+--------------------------------------+-------------------|
 | less     | TUI       | pageur                               | less              |
 |          | TUI       | pré-traitement de fichiers pour less | lesspipe          |
@@ -992,8 +1000,8 @@ poweroff
 | lazygit         | TUI       | client git                    | lazygit         |
 |-----------------+-----------+-------------------------------+-----------------|
 | hg              | CLI       | contrôle de version           | mercurial       |
+| verco           | TUI       | tui pour hg                   | aur/verco       |
 |-----------------+-----------+-------------------------------+-----------------|
-| bzr             | CLI       | bazaar, contrôle de version   | bzr             |
 | brz             | CLI       | breezy, successeur de bazaar  | brz             |
 |-----------------+-----------+-------------------------------+-----------------|
 | mr              | CLI       | dépôts de versions multiples  | myrepos         |
@@ -1286,17 +1294,17 @@ poweroff
 
 *** Synchronisation
 
-| Commande  | Interface | Fonction                            | Paquet ou dépôt |
-|-----------+-----------+-------------------------------------+-----------------|
-| rsync     | CLI       | synchronisation                     | rsync           |
-|-----------+-----------+-------------------------------------+-----------------|
-| unison    | CLI       | synchronisation bidirectionnelle    | unison          |
-| syncthing | SRV       | synchronisation multidirectionnelle | syncthing       |
-|-----------+-----------+-------------------------------------+-----------------|
-| rsnapshot | CLI       | synchronisation dans le cloud       | rsnapshot       |
-| rclone    | CLI       | synchronisation dans le cloud       | rclone          |
-|-----------+-----------+-------------------------------------+-----------------|
-| zsync     | CLI       | téléchargement de diff via http     | zsync           |
+| Commande     | Interface | Fonction                            | Paquet ou dépôt   |
+|--------------+-----------+-------------------------------------+-------------------|
+| rsync        | CLI       | synchronisation                     | rsync             |
+| unison       | CLI       | synchronisation bidirectionnelle    | unison            |
+| syncthing    | SRV       | synchronisation multidirectionnelle | syncthing         |
+| syncthing-gt | GUI       | synchronisation multidirectionnelle | aur/syncthing-gtk |
+|--------------+-----------+-------------------------------------+-------------------|
+| rsnapshot    | CLI       | synchronisation dans le cloud       | rsnapshot         |
+| rclone       | CLI       | synchronisation dans le cloud       | rclone            |
+|--------------+-----------+-------------------------------------+-------------------|
+| zsync        | CLI       | téléchargement de diff via http     | zsync             |
 
 
 *** Archivage
@@ -1718,13 +1726,59 @@ Nécessaires à d’autres logiciels
 |-------------------+-----------+------------------------------------+----------------------|
 |                   | LIB       | pour clients spotify               | openssl-1.1          |
 
+** Artix
+
+#+TOC: headlines 1 local
+
+*** Introduction
+
+Beaucoup d’outils cités pour Arch Linux restent valables ici, le nom
+des paquet peut varier un peu. Nous détaillons ici les outils
+spécifiques à Artix.
+
+*** Système
+
+| Commande | Interface | Fonction                                 | Paquet ou dépôt         |
+|----------+-----------+------------------------------------------+-------------------------|
+| dinitctl | CLI       | contrôle de dinit (démarrage & services) | dinit                   |
+|          |           | active les dépôts arch linux             | artix-archlinux-support |
+
+** Void Linux
+
+#+TOC: headlines 1 local
+
+*** Introduction
+
+Beaucoup d’outils cités pour Arch Linux restent valables ici, le nom
+des paquet peut varier un peu. Nous détaillons ici les outils
+spécifiques à Void Linux.
+
+*** Documentation
+
+| Commande  | Interface | Fonction      | Paquet ou dépôt |
+|-----------+-----------+---------------+-----------------|
+| void-docs | CLI       | documentation | void-docs       |
+
+*** Système
+
+| Commande     | Interface | Fonction                                 | Paquet ou dépôt |
+|--------------+-----------+------------------------------------------+-----------------|
+| sv           | CLI       | contrôle de runit (démarrage & services) | runit-void      |
+| xbps-query   | CLI       | recherche de paquet                      | xbps            |
+| xbps-install | CLI       | installation de paquet                   | xbps            |
+| xbps-remove  | CLI       | désinstallation de paquet                | xbps            |
+| xlocate      | CLI       | cherche dans quel paquet se trouve       | xtools          |
+|              |           | un fichier                               |                 |
 
 ** Linux Mint
+
+#+TOC: headlines 1 local
+
+*** Introduction
 
 Beaucoup d’outils cités pour Arch Linux restent valables ici, le nom
 des paquet peut varier un peu. Nous détaillons ici les outils
 spécifiques à Linux Mint.
-
 
 *** Système
 
@@ -1753,6 +1807,10 @@ spécifiques à Linux Mint.
 
 
 ** FreeBSD
+
+#+TOC: headlines 1 local
+
+*** Introduction
 
 La plupart des logiciels disponibles pour linux le sont aussi dans pour
 freebsd via pkg ou /usr/ports.
@@ -1801,6 +1859,7 @@ freebsd via pkg ou /usr/ports.
 
 ** Plugins
 
+#+TOC: headlines 1 local
 
 *** Vim & Neovim
 
@@ -1920,6 +1979,7 @@ freebsd via pkg ou /usr/ports.
 | f-droid              | gestionnaire d’applications libres    |
 |                      | voir f-droid.org                      |
 |                      | mieux que le play store               |
+| APKUpdater           | gestionnaire d’apps                   |
 |----------------------+---------------------------------------|
 | kiss launcher        | lanceur d’appplication                |
 |----------------------+---------------------------------------|
@@ -1942,6 +2002,7 @@ freebsd via pkg ou /usr/ports.
 |----------------------+---------------------------------------|
 | SecScanQR            | scan & génération de code QR          |
 | aegis                | mots de passes OTP pour 2FA           |
+| 2FAS Auth            | mots de passes OTP pour 2FA           |
 |----------------------+---------------------------------------|
 | kde connect          | intéraction avec un pc linux          |
 | warpinator           | transfert de fichier avec un pc linux |
@@ -1971,6 +2032,7 @@ freebsd via pkg ou /usr/ports.
 | tide                 | marées                                |
 |----------------------+---------------------------------------|
 | fedilab              | client fediverse                      |
+| kaiteki              | client fediverse                      |
 |----------------------+---------------------------------------|
 | tusky                | client mastodon                       |
 | husky                | client mastodon                       |
@@ -2023,6 +2085,7 @@ freebsd via pkg ou /usr/ports.
 
 * Documentation
 
+#+TOC: headlines 1 local
 
 ** Générique
 
@@ -2136,82 +2199,52 @@ http://karlch.github.io/vimiv/documentation
 
 * Astuces
 
+#+TOC: headlines 1 local
 
 ** TODO Générique
 
   - Binding modes : suites de bindings avec préfixe, ou contextuels
-
   - Filtres de sortie intéractifs
-
   - Complétion
-
 
 ** TODO Less
 
   - & pour filtrer les lignes
-
   - less +/motif fichier : pour ouvrir un fichier directement au
     premier motif rencontré
-
 
 ** TODO Vim                                                        :noexport:
 
   - Ajouter le contenu de vim.snip
-
   - Modes
-
     + Normal
-
     + Insertion
-
     + Ligne de commande Ex
-
   - Objets textes
-
   - Macros
-
   - Substitution dans une arborescence
-
     + :grep
-
     + :cope
-
     + :%s dans le quickfix window (avec quickfix-reflector)
-
     + :w
-
   - argdo
-
   - g/../y A
-
   - cgn puis .
-
 
 ** TODO Neovim                                                     :noexport:
 
   - Comme Vim
-
   - set inccommand=split
-
 
 ** TODO Emacs                                                      :noexport:
 
   - Ajouter le contenu de emacs.snip
-
   - wdired
-
   - wgrep
-
   - org-mode
-
     + arborescence des titres : chapitres, sections, etc
-
       * org-goto
-
 	- option pour afficher les titres de tout niveau
-
     + agenda
-
     + archive
-
     + todo

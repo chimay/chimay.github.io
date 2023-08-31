@@ -406,7 +406,7 @@ poweroff
 | CONFIG | fichiers de configuration     |                                  |                         |
 
 
-* Logiciels
+* Logiciels & paquets
 
 #+TOC: headlines 1 local
 
@@ -490,6 +490,7 @@ poweroff
 | lsb_release    | CLI       | informations sur la distribution             | lsb-release                |
 |----------------+-----------+----------------------------------------------+----------------------------|
 | loadkeys       | CLI       | disposition du clavier en console linux      | kbd                        |
+| setfont        | CLI       | fonte de caractères en mode console          | kbd                        |
 |----------------+-----------+----------------------------------------------+----------------------------|
 | brightnessctl  | CLI       | luminosité du matériel                       | brightnessctl              |
 |----------------+-----------+----------------------------------------------+----------------------------|
@@ -538,6 +539,9 @@ poweroff
 | mimeopen       | CLI       | ouverture par mime                           | perl-file-mimeinfo         |
 | mimetype       | CLI       | détermine le type mime                       | perl-file-mimeinfo         |
 | run-mailcap    | CLI       | ouverture par mime                           | aur/run-mailcap            |
+|----------------+-----------+----------------------------------------------+----------------------------|
+| pkexec         | CLI       | lance un programme avec les privilèges       | polkit                     |
+|                |           | d’un autre utilisateur                       |                            |
 |----------------+-----------+----------------------------------------------+----------------------------|
 | aconfmgr       | CLI       | gestionnaire de configuration pour arch      | aur/aconfmgr-git           |
 
@@ -1309,37 +1313,44 @@ poweroff
 
 *** Archivage
 
-| Commande     | Interface | Fonction                                   | Paquet ou dépôt |
-|--------------+-----------+--------------------------------------------+-----------------|
-| patool       | CLI       | archive & compression                      | pip/patool      |
-| atool        | CLI       | archive & compression                      | atool           |
-| bsdtar       | CLI       | archive & compression                      | libarchive      |
-| arc          | CLI       | archive & compression                      | aur/archiver    |
-|--------------+-----------+--------------------------------------------+-----------------|
-| tar          | CLI       | archive                                    | tar             |
-| cpio         | CLI       | archive                                    | cpio            |
-| shar         | CLI       | archive                                    | sharutils       |
-|--------------+-----------+--------------------------------------------+-----------------|
-| fsarchiver   | CLI       | archive de système de fichier              | fsarchiver      |
-|--------------+-----------+--------------------------------------------+-----------------|
-| xz           | CLI       | compression                                | xz              |
-| gzip         | CLI       | compression                                | gzip            |
-|--------------+-----------+--------------------------------------------+-----------------|
-| zip          | CLI       | archive & compression                      | minizpi         |
-| 7z           | CLI       | archive & compression                      | p7zip           |
-|--------------+-----------+--------------------------------------------+-----------------|
-| fusermount   | CLI       | montage & démontage de systèmes de fichier | fuse2           |
-|              |           | en tant que simple utilisateur avec fuse   |                 |
-| archivemount | CLI       | montage d’archive                          | archivemount    |
-| fuseiso      | CLI       | montage de fichiers iso                    | fuseiso         |
-| fuse-zip     | CLI       | montage d’archive zip                      | fuse-zip        |
-| mounvavfs    | CLI       | montage d’archive, lecture seule           | avfs            |
-| vdfuse       | CLI       | montage de disque virtualbox               | aur/vdfuse      |
-|--------------+-----------+--------------------------------------------+-----------------|
-| borg         | CLI       | gestionnaire de backups                    | borg            |
-| borgmatic    | CLI       | gestionnaire de backups                    | borgmatic       |
-| vorta        | GUI       | gui pour borg                              | aur/vorta       |
-| restic       | CLI       | gestionnaire de backups                    | restic          |
+Backup
+
+| Commande     | Interface | Fonction                                   | Paquet ou dépôt  |
+|--------------+-----------+--------------------------------------------+------------------|
+| patool       | CLI       | archive & compression                      | pip/patool       |
+| atool        | CLI       | archive & compression                      | atool            |
+| bsdtar       | CLI       | archive & compression                      | libarchive       |
+| arc          | CLI       | archive & compression                      | aur/archiver     |
+|--------------+-----------+--------------------------------------------+------------------|
+| tar          | CLI       | archive                                    | tar              |
+| cpio         | CLI       | archive                                    | cpio             |
+| shar         | CLI       | archive                                    | sharutils        |
+|--------------+-----------+--------------------------------------------+------------------|
+| fsarchiver   | CLI       | archive de système de fichier              | fsarchiver       |
+|--------------+-----------+--------------------------------------------+------------------|
+| xz           | CLI       | compression                                | xz               |
+| gzip         | CLI       | compression                                | gzip             |
+|--------------+-----------+--------------------------------------------+------------------|
+| zip          | CLI       | archive & compression                      | minizpi          |
+| 7z           | CLI       | archive & compression                      | p7zip            |
+|--------------+-----------+--------------------------------------------+------------------|
+| fusermount   | CLI       | montage & démontage de systèmes de fichier | fuse2            |
+|              |           | en tant que simple utilisateur avec fuse   |                  |
+| archivemount | CLI       | montage d’archive                          | archivemount     |
+| fuseiso      | CLI       | montage de fichiers iso                    | fuseiso          |
+| fuse-zip     | CLI       | montage d’archive zip                      | fuse-zip         |
+| mounvavfs    | CLI       | montage d’archive, lecture seule           | avfs             |
+| vdfuse       | CLI       | montage de disque virtualbox               | aur/vdfuse       |
+|--------------+-----------+--------------------------------------------+------------------|
+| borg         | CLI       | gestionnaire de backups                    | borg             |
+| borgmatic    | CLI       | gestionnaire de backups                    | borgmatic        |
+| vorta        | GUI       | gui pour borg                              | aur/vorta        |
+| restic       | CLI       | gestionnaire de backups                    | restic           |
+| rsnapshot    | CLI       | gestionnaire de backups, basé sur rsync    | rsnapshot        |
+| rdiff-backup | CLI       | gestionnaire de backups                    | aur/rdiff-backup |
+| duplicity    | CLI       | gestionnaire de backups                    | duplicity        |
+| backintime   | CLI       | gestionnaire de backups                    | backintime       |
+| timeshift    | GUI       | backup & récupération de système           | timeshift        |
 
 
 *** Chiffrement
@@ -1738,10 +1749,11 @@ spécifiques à Artix.
 
 *** Système
 
-| Commande | Interface | Fonction                                 | Paquet ou dépôt         |
-|----------+-----------+------------------------------------------+-------------------------|
-| dinitctl | CLI       | contrôle de dinit (démarrage & services) | dinit                   |
-|          |           | active les dépôts arch linux             | artix-archlinux-support |
+| Commande   | Interface | Fonction                                 | Paquet ou dépôt         |
+|------------+-----------+------------------------------------------+-------------------------|
+| dinitctl   | CLI       | contrôle de dinit (démarrage & services) | dinit                   |
+| dinitcheck | CLI       | vérification des services                | dinit                   |
+|            |           | active les dépôts arch linux             | artix-archlinux-support |
 
 ** Void Linux
 
@@ -1769,6 +1781,16 @@ spécifiques à Void Linux.
 | xbps-remove  | CLI       | désinstallation de paquet                | xbps            |
 | xlocate      | CLI       | cherche dans quel paquet se trouve       | xtools          |
 |              |           | un fichier                               |                 |
+
+** Chimera
+
+#+TOC: headlines 1 local
+
+*** Introduction
+
+Beaucoup d’outils cités pour Arch Linux restent valables ici, le nom
+des paquet peut varier un peu. Nous détaillons ici les outils
+spécifiques à Chimera.
 
 ** Linux Mint
 
@@ -1979,9 +2001,8 @@ freebsd via pkg ou /usr/ports.
 | f-droid              | gestionnaire d’applications libres    |
 |                      | voir f-droid.org                      |
 |                      | mieux que le play store               |
+| neo store            | client f-droid                        |
 | APKUpdater           | gestionnaire d’apps                   |
-|----------------------+---------------------------------------|
-| kiss launcher        | lanceur d’appplication                |
 |----------------------+---------------------------------------|
 | (magisk companion)   | magisk, systemless rooting system     |
 |----------------------+---------------------------------------|
@@ -2017,9 +2038,10 @@ freebsd via pkg ou /usr/ports.
 |----------------------+---------------------------------------|
 | organic maps         | cartes, basé sur openstreetmaps       |
 |----------------------+---------------------------------------|
-| rain                 | météo                                 |
 | omweather            | météo                                 |
 | clima                | météo                                 |
+| rain                 | météo                                 |
+| klara                | météo                                 |
 | weawow               | météo                                 |
 | weather              | météo                                 |
 | accuweather          | météo                                 |

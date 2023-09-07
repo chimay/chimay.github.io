@@ -22,6 +22,8 @@
 
 * Introduction
 
+** Systèmes d’exploitation
+
 Multics est l’ancêtre des systèmes de type Unix.
 
 Les Unix modernes sont :
@@ -49,6 +51,21 @@ Les Unix modernes sont :
     * OpenIndiana
     * SmartOS
   - etc
+
+** Menu du BIOS
+
+Pour accéder au menu du BIOS, c’est souvent l’une de ces touches :
+
+- F2
+
+** Menu de boot
+
+Pour accéder au menu de boot au démarrage, et pouvoir choisir de
+démarrer sur une clé usb, un cd/dvd ou le disque interne, c’est
+souvent l’une de ces touches :
+
+- Escape
+- F7
 
 * Installation
 
@@ -431,6 +448,8 @@ poweroff
 
 | Commande       | Interface | Fonction                                     | Paquet ou dépôt            |
 |----------------+-----------+----------------------------------------------+----------------------------|
+| dmidecode      | CLI       | information sur le BIOS                      | dmidecode                  |
+|----------------+-----------+----------------------------------------------+----------------------------|
 | sha256sum      | CLI       | somme de contrôle                            | coreutils                  |
 | b2sum          | CLI       | somme de contrôle                            | coreutils                  |
 |----------------+-----------+----------------------------------------------+----------------------------|
@@ -454,6 +473,10 @@ poweroff
 |----------------+-----------+----------------------------------------------+----------------------------|
 | parted         | CLI       | partitionnement du disque                    | parted                     |
 | gparted        | GUI       | partitionnement du disque                    | gparted                    |
+|----------------+-----------+----------------------------------------------+----------------------------|
+| clonezilla     | TUI       | clonage de disque et de partition            | clonezilla                 |
+| partimage      |           | clonage de partition                         | partimage                  |
+| partclone      |           | clonage de partition                         | partclone                  |
 |----------------+-----------+----------------------------------------------+----------------------------|
 | hdparm         | CLI       | paramètres du disque                         | hdparm                     |
 | smartctl       | CLI       | santé du disque                              | smartmontools              |
@@ -640,6 +663,7 @@ poweroff
 |                  | SRV       | bluetooth                                     | bluez                        |
 | bluetoothctl     | REPL      | bluetooth                                     | bluez-utils                  |
 | blueman-applet   | GUI       | applet bluetooth                              | blueman                      |
+| bluetuith        | TUI       | gestion bluetooth                             | aur/bluetuith                |
 |------------------+-----------+-----------------------------------------------+------------------------------|
 | xrandr           | CLI       | multi-écrans                                  |                              |
 | arandr           | GUI       | multi-écrans                                  |                              |
@@ -1288,6 +1312,7 @@ poweroff
 |                       |           | en mode union                           |                                 |
 |-----------------------+-----------+-----------------------------------------+---------------------------------|
 | adb                   | CLI       | android debug bridge                    | android-tools                   |
+| fastboot              | CLI       | pour android démarré en mode fastboot   | android-tools                   |
 |                       |           | montage système de fichiers android     | mtpfs                           |
 |                       |           | montage système de fichiers android     | gvfs-mtp                        |
 | android-file-transfer | GUI       | montage système de fichiers android     | android-file-transfer           |
@@ -1337,8 +1362,8 @@ Backup
 | xz           | CLI       | compression                                | xz               |
 | gzip         | CLI       | compression                                | gzip             |
 |--------------+-----------+--------------------------------------------+------------------|
-| zip          | CLI       | archive & compression                      | minizpi          |
 | 7z           | CLI       | archive & compression                      | p7zip            |
+| zip          | CLI       | archive & compression                      | minizip          |
 |--------------+-----------+--------------------------------------------+------------------|
 | fusermount   | CLI       | montage & démontage de systèmes de fichier | fuse2            |
 |              |           | en tant que simple utilisateur avec fuse   |                  |
@@ -1429,46 +1454,47 @@ Backup
 
 *** Bureautique
 
-| Commande              | Interface | Fonction                            | Paquet ou dépôt             |
-|-----------------------+-----------+-------------------------------------+-----------------------------|
-| groff                 | CLI       | système pour rédaction de documents | groff                       |
-|-----------------------+-----------+-------------------------------------+-----------------------------|
-| system-config-printer | GUI       | configuration des imprimantes       | system-config-printer       |
-|-----------------------+-----------+-------------------------------------+-----------------------------|
-|                       |           | système d’impression                | cups                        |
-|                       |           | complément de cups                  | cups-filters                |
-| lpadmin               | CLI       | configuration imprimante            | cups                        |
-| lpoptions             | CLI       | options imprimante                  | cups                        |
-| lpstat                | CLI       | statut des imprimantes              | cups                        |
-| cupsctl               | CLI       | configure /etc/cupsd.con            | cups                        |
-| cupsenable            | CLI       | active imprimante                   | cups                        |
-| cupsdisable           | CLI       | désactive imprimante                | cups                        |
-| cupsaccept            | CLI       | accepte des jobs sur l’imprimante   | cups                        |
-| cupsreject            | CLI       | refuse des jobs sur l’imprimante    | cups                        |
-| lp                    | CLI       | imprime                             | cups                        |
-| lpr                   | CLI       | imprime                             | cups                        |
-| lpq                   | CLI       | file d’attente imprimante           | cups                        |
-| lprm                  | CLI       | supprime un job sur l’imprimante    | cups                        |
-| lpinfo                | CLI       | liste des imprimantes disponibles   | cups                        |
-|-----------------------+-----------+-------------------------------------+-----------------------------|
-|                       |           | pilotes & utilitaires               | hplip                       |
-|                       |           | pour imprimante HP                  |                             |
-|-----------------------+-----------+-------------------------------------+-----------------------------|
-|                       |           | ppds pour modèles d’imprimante      | foomatic-engine             |
-|                       |           |                                     | foomatic-db                 |
-|                       |           |                                     | foomatic-db-ppds            |
-|                       |           |                                     | foomatic-db-nonfree         |
-|                       |           |                                     | foomatic-db-nonfree-ppds    |
-|-----------------------+-----------+-------------------------------------+-----------------------------|
-|                       |           | pilotes d’imprimante                | gutenprint                  |
-|                       |           | pilotes d’imprimante                | foomatic-db-gutenprint-ppds |
-|-----------------------+-----------+-------------------------------------+-----------------------------|
-| simple-scan           | GUI       | scan de documents                   | simple-scan                 |
-| gscan2pdf             | GUI       | scan & manipulation de documents    | gscan2pdf                   |
-| scantailor            | GUI       | scan & manipulation de documents    | scantailor                  |
-|-----------------------+-----------+-------------------------------------+-----------------------------|
-| libreoffice           | GUI       | bureautique                         | libreoffice-fresh           |
-| onlyoffice            | GUI       | bureautique                         | onlyoffice-desktopeditors   |
+| Commande              | Interface | Fonction                              | Paquet ou dépôt             |
+|-----------------------+-----------+---------------------------------------+-----------------------------|
+| groff                 | CLI       | système pour rédaction de documents   | groff                       |
+|-----------------------+-----------+---------------------------------------+-----------------------------|
+| system-config-printer | GUI       | configuration des imprimantes         | system-config-printer       |
+|-----------------------+-----------+---------------------------------------+-----------------------------|
+|                       |           | système d’impression                  | cups                        |
+|                       |           | complément de cups                    | cups-filters                |
+| lpadmin               | CLI       | configuration imprimante              | cups                        |
+| lpoptions             | CLI       | options imprimante                    | cups                        |
+| lpstat                | CLI       | statut des imprimantes                | cups                        |
+| lpinfo                | CLI       | pilotes et périphériques d’impression | cups                        |
+| cupsctl               | CLI       | configure /etc/cupsd.con              | cups                        |
+| cupsenable            | CLI       | active imprimante                     | cups                        |
+| cupsdisable           | CLI       | désactive imprimante                  | cups                        |
+| cupsaccept            | CLI       | accepte des jobs sur l’imprimante     | cups                        |
+| cupsreject            | CLI       | refuse des jobs sur l’imprimante      | cups                        |
+| lp                    | CLI       | imprime                               | cups                        |
+| lpr                   | CLI       | imprime                               | cups                        |
+| lpq                   | CLI       | file d’attente imprimante             | cups                        |
+| lprm                  | CLI       | supprime un job sur l’imprimante      | cups                        |
+| lpinfo                | CLI       | liste des imprimantes disponibles     | cups                        |
+|-----------------------+-----------+---------------------------------------+-----------------------------|
+|                       |           | pilotes & utilitaires                 | hplip                       |
+|                       |           | pour imprimante HP                    |                             |
+|-----------------------+-----------+---------------------------------------+-----------------------------|
+|                       |           | ppds pour modèles d’imprimante        | foomatic-engine             |
+|                       |           |                                       | foomatic-db                 |
+|                       |           |                                       | foomatic-db-ppds            |
+|                       |           |                                       | foomatic-db-nonfree         |
+|                       |           |                                       | foomatic-db-nonfree-ppds    |
+|-----------------------+-----------+---------------------------------------+-----------------------------|
+|                       |           | pilotes d’imprimante                  | gutenprint                  |
+|                       |           | pilotes d’imprimante                  | foomatic-db-gutenprint-ppds |
+|-----------------------+-----------+---------------------------------------+-----------------------------|
+| simple-scan           | GUI       | scan de documents                     | simple-scan                 |
+| gscan2pdf             | GUI       | scan & manipulation de documents      | gscan2pdf                   |
+| scantailor            | GUI       | scan & manipulation de documents      | scantailor                  |
+|-----------------------+-----------+---------------------------------------+-----------------------------|
+| libreoffice           | GUI       | bureautique                           | libreoffice-fresh           |
+| onlyoffice            | GUI       | bureautique                           | onlyoffice-desktopeditors   |
 
 
 *** Multimédia
@@ -1850,6 +1876,7 @@ freebsd via pkg ou /usr/ports.
 | auto-admin | CLI       | script d’administration    | sysutilsauto-admin |
 | gitup      | CLI       | télécharge src, ports, etc | net/gitup          |
 | ezjail     | CLI       | gestion des containers     | sysutils/ezjail    |
+| pot        | CLI       | gestion des containers     | sysutils/pot       |
 
 *** Ports
 
@@ -2031,6 +2058,7 @@ freebsd via pkg ou /usr/ports.
 | total Commander      | gestionnaire de fichiers              |
 |----------------------+---------------------------------------|
 | termux               | terminal & système minimal unix       |
+| multivnc             | bureau à distance avec vnc            |
 | tiny keyboard        | clavier virtuel                       |
 | anysoftkeyboard      | clavier virtuel                       |
 |----------------------+---------------------------------------|

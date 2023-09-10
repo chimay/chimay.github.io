@@ -57,6 +57,12 @@ Les Unix modernes sont :
 Pour accéder au menu du BIOS, c’est souvent l’une de ces touches :
 
 - F2
+- del
+- F1
+- F9
+- F10
+- F11
+- F12
 
 ** Menu de boot
 
@@ -481,6 +487,8 @@ poweroff
 | hdparm         | CLI       | paramètres du disque                         | hdparm                     |
 | smartctl       | CLI       | santé du disque                              | smartmontools              |
 |----------------+-----------+----------------------------------------------+----------------------------|
+| lsblk          | CLI       | liste des périphériques de type bloc         | util-linux                 |
+|                |           | typiquement, des disques & partitions        |                            |
 | mount          | CLI       | montage de partition                         | util-linux                 |
 | fallocate      | CLI       | alloue de l’espace dans un fichier           | util-linux                 |
 | losetup        | CLI       | contrôle de prériphérique boucle             | util-linux                 |
@@ -877,6 +885,8 @@ poweroff
 | vis       | TUI       | éditeur                                 | vis                    |
 |-----------+-----------+-----------------------------------------+------------------------|
 | emacs     | TUI, GUI  | éditeur                                 | emacs                  |
+|-----------+-----------+-----------------------------------------+------------------------|
+| lite-xl   | GUI       | éditeur                                 | aur/lite-xl            |
 
 
 *** Visualisation
@@ -1364,6 +1374,7 @@ Backup
 |--------------+-----------+--------------------------------------------+------------------|
 | 7z           | CLI       | archive & compression                      | p7zip            |
 | zip          | CLI       | archive & compression                      | minizip          |
+| arj          | CLI       | archive & compression                      | arj              |
 |--------------+-----------+--------------------------------------------+------------------|
 | fusermount   | CLI       | montage & démontage de systèmes de fichier | fuse2            |
 |              |           | en tant que simple utilisateur avec fuse   |                  |
@@ -1717,14 +1728,16 @@ Backup
 
 **** Hôte
 
-| Commande | Interface             | Fonction | Paquet ou dépôt              |
-|----------+-----------------------+----------+------------------------------|
-|          | virtualisation        |          | virtualbox                   |
-|          | pour noyau linux      |          | virtualbox-host-dkms         |
-|          | pour noyau linux arch |          | virtualbox-host-modules-arch |
-|          | pour développeur      |          | virtualbox-sdk               |
-|----------+-----------------------+----------+------------------------------|
-|          | virtualisation        |          | qemu                         |
+| Commande   | Interface      | Fonction                     | Paquet ou dépôt              |
+|------------+----------------+------------------------------+------------------------------|
+| Virtualbox | GUI            | virtualisation               | virtualbox                   |
+| VBoxManage | CLI            | gestion de machine virtuelle |                              |
+|            |                | pour noyau linux             | virtualbox-host-dkms         |
+|            |                | pour noyau linux arch        | virtualbox-host-modules-arch |
+|            |                | pour développeur             | virtualbox-sdk               |
+| pcem       |                | émulateur ibm pc             | aur/pcem                     |
+|------------+----------------+------------------------------+------------------------------|
+|            | virtualisation |                              | qemu                         |
 
 
 *** Jeux
@@ -1871,16 +1884,18 @@ freebsd via pkg ou /usr/ports.
 
 *** Administration
 
-| Commande   | Interface | Fonction                   | Paquet ou dépôt    |
-|------------+-----------+----------------------------+--------------------|
-| auto-admin | CLI       | script d’administration    | sysutilsauto-admin |
-| gitup      | CLI       | télécharge src, ports, etc | net/gitup          |
-| ezjail     | CLI       | gestion des containers     | sysutils/ezjail    |
-| pot        | CLI       | gestion des containers     | sysutils/pot       |
+| Commande   | Interface | Fonction                   | catégorie / port     |
+|------------+-----------+----------------------------+----------------------|
+| auto-admin | CLI       | script d’administration    | sysutilsauto-admin   |
+| gitup      | CLI       | télécharge src, ports, etc | net/gitup            |
+| ezjail     | CLI       | gestion des containers     | sysutils/ezjail      |
+| bastille   | CLI       | gestion des containers     | sysutils/bastille    |
+| iocage     | CLI       | gestion des containers     | sysutils/py39-iocage |
+| pot        | CLI       | gestion des containers     | sysutils/pot         |
 
 *** Ports
 
-| Commande    | Interface | Fonction                 | Paquet ou dépôt        |
+| Commande    | Interface | Fonction                 | catégorie / port       |
 |-------------+-----------+--------------------------+------------------------|
 | portsnap    | CLI       | téléchargement des ports | ports-mgmt/portsnap    |
 | portupgrade | CLI       | gestion des ports        | ports-mgmt/portupgrade |
@@ -1889,20 +1904,20 @@ freebsd via pkg ou /usr/ports.
 
 *** Réseau
 
-| Commande   | Interface | Fonction          | Paquet ou dépôt     |
+| Commande   | Interface | Fonction          | catégorie / port    |
 |------------+-----------+-------------------+---------------------|
 | networkmgr | GUI       | gestion du réseau | net-mgmt/networkmgr |
 
 *** Environnement graphique
 
-| Commande          | Interface | Fonction                  | Paquet ou dépôt            |
+| Commande          | Interface | Fonction                  | catégorie / port           |
 |-------------------+-----------+---------------------------+----------------------------|
 | desktop-installer | CLI       | script d’installation     | sysutils/desktop-installer |
 |                   |           | d’environnement graphique |                            |
 
 *** Audio
 
-| Commande | Interface | Fonction                | Paquet ou dépôt       |
+| Commande | Interface | Fonction                | catégorie / port      |
 |----------+-----------+-------------------------+-----------------------|
 | sndiod   | SRV       | structure audio & midi  | audio/sndio           |
 |          |           | multiplexeur audio      | audio/virtual_oss     |
@@ -1915,7 +1930,7 @@ freebsd via pkg ou /usr/ports.
 
 **** Invité
 
-| Commande       | Interface | Fonction                | Paquet ou dépôt                    |
+| Commande       | Interface | Fonction                | catégorie / port                   |
 |----------------+-----------+-------------------------+------------------------------------|
 | VBoxClient     | LIB       | additions               | emulators/virtualbox-ose-additions |
 | VBoxClient-all | LIB       | additions               | emulators/virtualbox-ose-additions |

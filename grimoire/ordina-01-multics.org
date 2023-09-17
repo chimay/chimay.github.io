@@ -499,7 +499,7 @@ poweroff
 | os-prober      | CLI       | détection des systèmes                       | os-prober                  |
 |                |           | d’exploitation                               |                            |
 | efibootmgr     | CLI       | modification des variables UEFI              | efibootmgr                 |
-| refind-install | CLI       | refind, boot manager pour UEFI               | redind-efi                 |
+| refind-install | CLI       | refind, boot manager pour UEFI               | redind                     |
 |----------------+-----------+----------------------------------------------+----------------------------|
 |                | KERN      | noyau linux                                  | linux                      |
 |                | KERN      | noyau linux support long terme               | linux-lts                  |
@@ -980,6 +980,9 @@ poweroff
 |-----------+-----------+----------------------------------+-----------------|
 | caja      | GUI       | gestionnaire de fichiers         | caja            |
 | pcmanfm   | GUI       | gestionnaire de fichiers         | pcmanfm         |
+| thunar    | GUI       | gestionnaire de fichiers         | thunar          |
+|           | LIB       | support nfs pour thunar          | gvfs-nfs        |
+|           | LIB       | support samba pour thunar        | gvfs-smb        |
 | spacefm   | GUI       | gestionnaire de fichiers         | aur/spacefm     |
 | konqueror | GUI       | gestionnaire de fichiers         | konqueror       |
 |           |           | et navigateur                    |                 |
@@ -1004,7 +1007,9 @@ poweroff
 |----------+-----------+---------------------------------------------+----------------------------|
 | which    | CLI       | localisation de binaires                    | which                      |
 | whereis  | CLI       | localisation de binaires, sources, manuels  | util-linux                 |
-| locate   | CLI       | localisation de fichiers                    | mlocate                    |
+| plocate  | CLI       | localisation de fichiers                    | plocate                    |
+| updatedb | CLI       | mise à jour base de données de              | plocate                    |
+|          |           | localisation de fichiers                    |                            |
 |----------+-----------+---------------------------------------------+----------------------------|
 | zoxide   | CLI       | accès rapide aux répertoires                | zoxide                     |
 | zsh-z    | CLI       | accès rapide aux fichiers & répertoires     | github:agkozak/zsh-z       |
@@ -1103,6 +1108,7 @@ poweroff
 | wikipedia2text | CLI       | encyclopédie Wikipedia             | chrisbra/wikipedia2text   |
 | wikicurses     | TUI       | encyclopédie Wikipedia             | wikicurses                |
 | wptranslate    | CLI       | traduction via wikipedia           | pip/wptranslate           |
+| zim            | CLI       |                                    |                           |
 |----------------+-----------+------------------------------------+---------------------------|
 | kiwix-tools    | CLI       | lecture hors ligne de sites        |                           |
 | kiwix-desktop  | GUI       | lecture hors ligne de sites        |                           |
@@ -1183,134 +1189,144 @@ poweroff
 
 *** Réseau
 
-| Commande            | Interface | Fonction                             | Paquet ou dépôt             |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| NetworkManager      | SRV       | réseau                               | networkmanager              |
-| nmtui               | TUI       | connexions réseau                    | networkmanager              |
-| nm-applet           | GUI       | applet pour networkmanager           | network-manager-applet      |
-| avahi-*             | SRV       | implémentation de Zero-Conf          | avahi                       |
-|                     |           | permet la résolution de ordi.local   | nss-mdns                    |
-|                     |           |                                      |                             |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| openvpn             | CLI       | réseau virtuel privé                 | openvpn                     |
-| protonvpn           | GUI       | réseau virtuel privé de proton       | aur/protonvpn               |
-| protonvpn-cli       | CLI       |                                      |                             |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| wihotspot-gui       | GUI       | hotspot wifi                         | aur/linux-wifi-hotspot      |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| mkfifo              | CLI       | création de tube (pipe) nommé        | coreutils                   |
-| socat               | CLI       | communication avec sockets & pipes   | socat                       |
-| netcat              | CLI       | communication à travers réseau       | gnu-netcat                  |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| ssh                 | CLI       | shell à distance                     | openssh                     |
-| sshfs               | CLI       | montage résau via ssh                | sshfs                       |
-| curlftpfs           | CLI       | montage résau via ftp                | curlftpfs                   |
-| mosh                | CLI       | shell mobile, comme ssh mais         | aur/mosh                    |
-|                     |           | supporte les connections             |                             |
-|                     |           | intermittentes                       |                             |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| swk                 | CLI       | mutiples commandes sur hôtes         | pip/swk                     |
-| pssh                | CLI       | mutiples shells à distance           | pip/pssh                    |
-| orgalorg            | CLI       | mutiples shells à distance           | aur/orgalorg                |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| getmail             | CLI       | distribution du courrier             | pip/getmail                 |
-| mbsync              | CLI       | synchronisation de mail via IMAP     | isync                       |
-| procmail            | CLI       | filtrage du courrier                 | procmail                    |
-| formail             | CLI       | formattage de mail                   | procmail                    |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| mail                | CLI, TUI  | lecture & envoi de mail              | s-nail                      |
-| neomutt             | TUI       | lecture & envoi de mail              | neomutt                     |
-| alpine              | TUI       | lecture & envoi de mail, news        | aur/alpine                  |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| abook               | CLI, TUI  | gestionnaire de contacts             | abook                       |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| newsboat            | TUI       | lecteur de flux RSS                  | newsboat                    |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| slrn                | TUI       | lecteur usenet                       | slrn                        |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| toot                | TUI       | client mastodon                      | toot                        |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| lftp                | CLI       | client FTP                           | lftp                        |
-| cbftp               | TUI       | client FTP / FXP                     | aur/cbftp                   |
-| filezilla           | GUI       | client FTP                           | filezilla                   |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| aria2c              | CLI       | client FTP, HTTP, torrent, metalink  | aria2                       |
-| dad, diana          | CLI       | gestion de session aria2             | aur/diana-git               |
-| aria2p              | TUI       | client pour aria2c                   | pip/'aria2p[tui]'           |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| qbittorrent-nox     | CLI       | torrent                              | qbittorrent-nox             |
-| qbittorrent         | GUI       | torrent                              | qbittorrent                 |
-| transmission-cli    | CLI       | torrent                              | transmission-cli            |
-| transmission-daemon | SRV       | serveir transmission                 | transmission-cli            |
-| transmission-remote | CLI       | contrôle à distance de transmission  | transmission-cli            |
-| transmission-gtk    | GUI       | gui pour transmission                | transmission-gtk            |
-| deluged             | SRV       | torrent, serveur deluge              | deluge                      |
-| deluge-console      | TUI       | tui pour deluge                      | deluge                      |
-| deluge-gtk          | GUI       | gui pour deluge                      | deluge-gtk                  |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| httrack             | CLI       | téléchargement de site               | httrack                     |
-| wget                | CLI       | téléchargement de site               | wget                        |
-| curl                | CLI       | téléchargement de site               | curl                        |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| surfraw             | CLI       | lance des recherches web             | surfraw                     |
-| mkelvis             | CLI       | génère un elvi (moteur de recherche) | pip/surfraw-tools           |
-|                     |           | pour surfraw                         |                             |
-| ddgr                | CLI       | lance des recherches duckduckgo      | aur/ddgr                    |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-|                     | SRV       | moteur de recherche décentralisé     | aur/yacy                    |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| readable            | CLI       | filtre l’essentiel d’une page web    | aur/readability-cli         |
-|                     | LIB       | python readability                   | aur/python-readability-lxml |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| edbrowse            | CLI       | navigateur web de style ed           | edbrowse                    |
-| w3m                 | TUI       | navigateur web ncurses vim-like      | w3m                         |
-| elinks              | TUI       | navigateur web ncurses               | elinks                      |
-| lynx                | TUI       | navigateur web ncurses               | lynx                        |
-|                     |           | avec support du protocole gopher     |                             |
-| offpunk             | CLI       | navigateur web http, gemini          | aur/offpunk                 |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| amfora              | TUI       | navigateur protocole gemini          |                             |
-| bombadillo          | TUI       | navigateur gemini, gopher, etc       |                             |
-| lagrange            | GUI       | navigateur gemini                    |                             |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| qutebrowser         | GUI       | navigateur web vim-like              | qutebrowser                 |
-|                     | LIB       | pour certains sites à drm            | chromium-widevine           |
-| nyxt                | GUI       | navigateur web emacs/vim-like        | nyxt                        |
-| neosurf             | GUI       | nevigateur                           | aur/neosurf                 |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| firefox             | GUI       | navigateur web                       | firefox                     |
-| netsurf             | GUI       | navigateur web                       | netsurf                     |
-| min                 | GUI       | navigateur web                       | min                         |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| neocities           | CLI       | client neocities                     | gem/neocities               |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| dino                | GUI       | client XMPP                          | dino                        |
-| gajim               | GUI       | client XMPP                          | gajim                       |
-| psi                 | GUI       | client XMPP                          | psi                         |
-| profanity           | TUI       | client XMPP                          | profanity                   |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| element-desktop     | GUI       | client matrix                        | element-desktop             |
-| neochat             | GUI       | client matrix                        | neochat                     |
-| nheko               | GUI       | client matrix                        | nheko                       |
-| matui               | TUI       | client matrix                        | src/matui                   |
-| gomuks              | TUI       | client matrix                        | aur/gomuks-bin              |
-| mirage              | GUI       | client matrix                        | aur/matrix-mirage           |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| toxic               | TUI       | client tox                           | toxic                       |
-| briar-gtk           | GUI       | client briar, messagerie p2p         | aur/briar-gtk               |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| rocketchat-desktop  | GUI       | client rocket.chat                   | aur/rocketchat-desktop      |
-| signal-desktop      | GUI       | client signal                        | signal-desktop              |
-| tg                  | TUI       | client telegram                      | pip/tg                      |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| irssi               | TUI       | IRC                                  | irssi                       |
-| weechat             | TUI       | IRC                                  | weechat                     |
-| hexchat             | GUI       | IRC                                  | hexchat                     |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| twtxt               | CLI       | microblogging                        | pip/twtxt                   |
-| rainbowstream       | CLI       | client twitter                       | pip/rainbowstream           |
-|---------------------+-----------+--------------------------------------+-----------------------------|
-| wol                 | CLI       | réveille un ordinateur via le réseau | wol                         |
+| Commande            | Interface | Fonction                              | Paquet ou dépôt             |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| NetworkManager      | SRV       | réseau                                | networkmanager              |
+| nmtui               | TUI       | connexions réseau                     | networkmanager              |
+| nm-applet           | GUI       | applet pour networkmanager            | network-manager-applet      |
+| avahi-*             | SRV       | implémentation de Zero-Conf           | avahi                       |
+|                     |           | permet la résolution de ordi.local    | nss-mdns                    |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| drill               | CLI       | résolution de nom de domaine -> ip    | ldns                        |
+| adig                | CLI       | résolution de nom de domaine -> ip    | c-ares                      |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| openvpn             | CLI       | réseau virtuel privé                  | openvpn                     |
+| protonvpn           | GUI       | réseau virtuel privé de proton        | aur/protonvpn               |
+| protonvpn-cli       | CLI       |                                       |                             |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| wihotspot-gui       | GUI       | hotspot wifi                          | aur/linux-wifi-hotspot      |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| mkfifo              | CLI       | création de tube (pipe) nommé         | coreutils                   |
+| socat               | CLI       | communication avec sockets & pipes    | socat                       |
+| netcat              | CLI       | communication à travers réseau        | gnu-netcat                  |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| ssh                 | CLI       | shell à distance                      | openssh                     |
+| sshfs               | CLI       | montage résau via ssh                 | sshfs                       |
+| curlftpfs           | CLI       | montage résau via ftp                 | curlftpfs                   |
+| mosh                | CLI       | shell mobile, comme ssh mais          | aur/mosh                    |
+|                     |           | supporte les connections              |                             |
+|                     |           | intermittentes                        |                             |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| mount.nfs           | CLI       | montage système de fichier réseau nfs | nfs-utils                   |
+| smbpasswd           | CLI       | mot de passe du système de fichier    | samba                       |
+|                     |           | réseau samba                          | samba                       |
+| pdbedit             | CLI       | liste des utilisateurs samba          | samba                       |
+| smbstatus           | CLI       | statut de samba                       | samba                       |
+| smbclient           | CLI       | client samba                          | smbclient                   |
+|                     | SRV       | service web de découverte samba       | aur/wsdd                    |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| swk                 | CLI       | mutiples commandes sur hôtes          | pip/swk                     |
+| pssh                | CLI       | mutiples shells à distance            | pip/pssh                    |
+| orgalorg            | CLI       | mutiples shells à distance            | aur/orgalorg                |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| getmail             | CLI       | distribution du courrier              | pip/getmail                 |
+| mbsync              | CLI       | synchronisation de mail via IMAP      | isync                       |
+| procmail            | CLI       | filtrage du courrier                  | procmail                    |
+| formail             | CLI       | formattage de mail                    | procmail                    |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| mail                | CLI, TUI  | lecture & envoi de mail               | s-nail                      |
+| neomutt             | TUI       | lecture & envoi de mail               | neomutt                     |
+| alpine              | TUI       | lecture & envoi de mail, news         | aur/alpine                  |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| abook               | CLI, TUI  | gestionnaire de contacts              | abook                       |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| newsboat            | TUI       | lecteur de flux RSS                   | newsboat                    |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| slrn                | TUI       | lecteur usenet                        | slrn                        |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| toot                | TUI       | client mastodon                       | toot                        |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| lftp                | CLI       | client FTP                            | lftp                        |
+| cbftp               | TUI       | client FTP / FXP                      | aur/cbftp                   |
+| filezilla           | GUI       | client FTP                            | filezilla                   |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| aria2c              | CLI       | client FTP, HTTP, torrent, metalink   | aria2                       |
+| dad, diana          | CLI       | gestion de session aria2              | aur/diana-git               |
+| aria2p              | TUI       | client pour aria2c                    | pip/'aria2p[tui]'           |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| qbittorrent-nox     | CLI       | torrent                               | qbittorrent-nox             |
+| qbittorrent         | GUI       | torrent                               | qbittorrent                 |
+| transmission-cli    | CLI       | torrent                               | transmission-cli            |
+| transmission-daemon | SRV       | serveir transmission                  | transmission-cli            |
+| transmission-remote | CLI       | contrôle à distance de transmission   | transmission-cli            |
+| transmission-gtk    | GUI       | gui pour transmission                 | transmission-gtk            |
+| deluged             | SRV       | torrent, serveur deluge               | deluge                      |
+| deluge-console      | TUI       | tui pour deluge                       | deluge                      |
+| deluge-gtk          | GUI       | gui pour deluge                       | deluge-gtk                  |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| httrack             | CLI       | téléchargement de site                | httrack                     |
+| wget                | CLI       | téléchargement de site                | wget                        |
+| curl                | CLI       | téléchargement de site                | curl                        |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| surfraw             | CLI       | lance des recherches web              | surfraw                     |
+| mkelvis             | CLI       | génère un elvi (moteur de recherche)  | pip/surfraw-tools           |
+|                     |           | pour surfraw                          |                             |
+| ddgr                | CLI       | lance des recherches duckduckgo       | aur/ddgr                    |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+|                     | SRV       | moteur de recherche décentralisé      | aur/yacy                    |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| readable            | CLI       | filtre l’essentiel d’une page web     | aur/readability-cli         |
+|                     | LIB       | python readability                    | aur/python-readability-lxml |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| edbrowse            | CLI       | navigateur web de style ed            | edbrowse                    |
+| w3m                 | TUI       | navigateur web ncurses vim-like       | w3m                         |
+| elinks              | TUI       | navigateur web ncurses                | elinks                      |
+| lynx                | TUI       | navigateur web ncurses                | lynx                        |
+|                     |           | avec support du protocole gopher      |                             |
+| offpunk             | CLI       | navigateur web http, gemini           | aur/offpunk                 |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| amfora              | TUI       | navigateur protocole gemini           |                             |
+| bombadillo          | TUI       | navigateur gemini, gopher, etc        |                             |
+| lagrange            | GUI       | navigateur gemini                     |                             |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| qutebrowser         | GUI       | navigateur web vim-like               | qutebrowser                 |
+|                     | LIB       | pour certains sites à drm             | chromium-widevine           |
+| nyxt                | GUI       | navigateur web emacs/vim-like         | nyxt                        |
+| neosurf             | GUI       | nevigateur                            | aur/neosurf                 |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| firefox             | GUI       | navigateur web                        | firefox                     |
+| netsurf             | GUI       | navigateur web                        | netsurf                     |
+| min                 | GUI       | navigateur web                        | min                         |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| neocities           | CLI       | client neocities                      | gem/neocities               |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| dino                | GUI       | client XMPP                           | dino                        |
+| gajim               | GUI       | client XMPP                           | gajim                       |
+| psi                 | GUI       | client XMPP                           | psi                         |
+| profanity           | TUI       | client XMPP                           | profanity                   |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| element-desktop     | GUI       | client matrix                         | element-desktop             |
+| neochat             | GUI       | client matrix                         | neochat                     |
+| nheko               | GUI       | client matrix                         | nheko                       |
+| matui               | TUI       | client matrix                         | src/matui                   |
+| gomuks              | TUI       | client matrix                         | aur/gomuks-bin              |
+| mirage              | GUI       | client matrix                         | aur/matrix-mirage           |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| toxic               | TUI       | client tox                            | toxic                       |
+| briar-gtk           | GUI       | client briar, messagerie p2p          | aur/briar-gtk               |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| rocketchat-desktop  | GUI       | client rocket.chat                    | aur/rocketchat-desktop      |
+| signal-desktop      | GUI       | client signal                         | signal-desktop              |
+| tg                  | TUI       | client telegram                       | pip/tg                      |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| irssi               | TUI       | IRC                                   | irssi                       |
+| weechat             | TUI       | IRC                                   | weechat                     |
+| hexchat             | GUI       | IRC                                   | hexchat                     |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| twtxt               | CLI       | microblogging                         | pip/twtxt                   |
+| rainbowstream       | CLI       | client twitter                        | pip/rainbowstream           |
+|---------------------+-----------+---------------------------------------+-----------------------------|
+| wol                 | CLI       | réveille un ordinateur via le réseau  | wol                         |
 
 
 *** Stockage

@@ -29,10 +29,10 @@ Multics est l’ancêtre des systèmes de type Unix.
 Les Unix modernes sont :
 
   - La famille BSD
+    + NetBSD
     + FreeBSD
       * GhostBSD
       * NomadBSD
-    + NetBSD
     + OpenBSD
     + DragonflyBSD
   - Linux
@@ -72,6 +72,14 @@ souvent l’une de ces touches :
 
 - Escape
 - F7
+
+** Shell EFI
+
+Pour accéder au shell EFI, souvent une de ces touches :
+
+- F6
+- F11
+- F12
 
 * Installation
 
@@ -359,6 +367,21 @@ Installation sur la partition ESP :
 refind-install
 #+end_src
 
+La commande ci-dessous précise où se situe la partition efi :
+
+#+begin_src shell
+refind-install --usedefault /dev/sda1
+#+end_src
+
+La commande ci-dessous installe tous les drivers pour systèmes de
+fichiers dans la partition efi. Peut être utile dans certains cas, comme
+un démarrage depuis un périphérique usb, mais peut aussi causer des
+problèmes en cas de démarrage sur disque interne :
+
+#+begin_src shell
+refind-install --alldrivers
+#+end_src
+
 Ensuite, on génère /refind_linux.conf/ :
 
 #+begin_src shell
@@ -414,6 +437,7 @@ poweroff
 |        |                               | boîtes de saisie, etc            |                         |
 | GUI    | Graphical User Interface      | Interface graphique avec menus,  |                         |
 |        |                               | boîtes de saisie, etc            |                         |
+| TRAY   | In a panel tray               |                                  |                         |
 | LANG   | language                      | Langage                          |                         |
 | LIB    | librairie, bibliothèque       | Ensemble de fonctions            |                         |
 |        |                               | nécessaires à d’autres logiciels |                         |
@@ -444,131 +468,131 @@ poweroff
 
 *** Système
 
-| Commande       | Interface | Fonction                                             | Paquet ou dépôt            |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| dmidecode      | CLI       | information sur le BIOS                              | dmidecode                  |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| sha256sum      | CLI       | somme de contrôle                                    | coreutils                  |
-| b2sum          | CLI       | somme de contrôle                                    | coreutils                  |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| archinstall    |           | outil d’installation, uefi uniquement                | archinstall                |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| fdisk          | CLI       | partitionnement du disque                            | util-linux                 |
-| cfdisk         | TUI       | partitionnement du disque                            | util-linux                 |
-| sfdisk         | CLI       | version scriptable de fdisk                          | util-linux                 |
-| wipefs         | CLI       | effacer les système de fichier                       | util-linux                 |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| snapper        | CLI       | snaphots pour btrfs                                  | snapper                    |
-|                | CLI       | hooks pacman pour snapper                            | snap-pac                   |
-| snap-sync      | CLI       | copie snaphot de snapper vers disque externe         | snap-sync                  |
-| snapper-gui    | GUI       | gui pour snapper                                     | snapper-gui                |
-|                | GUI       | gestion des snapshots snappers et                    | btrfs-assistant            |
-|                |           | des sous-volumes de btrfs                            |                            |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| gdisk          | CLI       | partitionnement du disque en GPT                     | gptfdisk                   |
-| cgdisk         | TUI       | partitionnement du disque en GPT                     | gptfdisk                   |
-| sgdisk         | CLI       | version scriptable de gdisk                          | gptfdisk                   |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| parted         | CLI       | partitionnement du disque                            | parted                     |
-| gparted        | GUI       | partitionnement du disque                            | gparted                    |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| clonezilla     | TUI       | clonage de disque et de partition                    | clonezilla                 |
-| partimage      |           | clonage de partition                                 | partimage                  |
-| partclone      |           | clonage de partition                                 | partclone                  |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| hdparm         | CLI       | paramètres du disque                                 | hdparm                     |
-| smartctl       | CLI       | santé du disque                                      | smartmontools              |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| lsblk          | CLI       | liste des périphériques de type bloc                 | util-linux                 |
-|                |           | typiquement, des disques & partitions                |                            |
-| mount          | CLI       | montage de partition                                 | util-linux                 |
-| fallocate      | CLI       | alloue de l’espace dans un fichier                   | util-linux                 |
-| losetup        | CLI       | contrôle de prériphérique boucle                     | util-linux                 |
-|                |           | (par exemple partition dans un fichier)              |                            |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| refind-install | CLI       | refind, boot manager pour UEFI                       | redind                     |
-| efibootmgr     | CLI       | modification des variables UEFI                      | efibootmgr                 |
-|                | CLI       | shell efi : /usr/share/edk2-shell/x64/Shell_Full.efi | edk2-shell                 |
-| grub-mkconfig  | CLI       | grub boot manager, pour BIOS ou UEFI                 | grub                       |
-| grub-install   |           |                                                      |                            |
-| os-prober      | CLI       | détection des systèmes                               | os-prober                  |
-|                |           | d’exploitation                                       |                            |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-|                | KERN      | noyau linux                                          | linux                      |
-|                | KERN      | noyau linux support long terme                       | linux-lts                  |
-|                | KERN      | noyau linux zen                                      | linux-zen                  |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| dd             | CLI       | copie brute de fichier                               |                            |
-| ddgtk          | GUI       | gui pour dd                                          | aur/ddgtk                  |
-| truncate       | CLI       | adapte la taille d’un fichier                        | coreutils                  |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| bootiso        | CLI       | créer une clé usb bootable                           | aur/bootiso                |
-| bootableusb    | CLI       | créer une clé usb bootable                           | aur/bootableusb            |
-| usbmaker       | GUI       | créer une clé usb bootable                           | aur/usbmaker               |
-| unetbootin     | GUI       | créer une clé usb bootable                           | aur/unetbootin             |
-| mintstick      | GUI       | créer une clé usb bootable                           | mintstick                  |
-| ventoy         | CLI       | méta clé usb bootable pouvant contenir               | ventoy                     |
-|                |           | plusieur images/isos d’os                            |                            |
-|                | GUI       | gui pour ventoy                                      | ventoygui                  |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| lsb_release    | CLI       | informations sur la distribution                     | lsb-release                |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| loadkeys       | CLI       | disposition du clavier en console linux              | kbd                        |
-| setfont        | CLI       | fonte de caractères en mode console                  | kbd                        |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| brightnessctl  | CLI       | luminosité du matériel                               | brightnessctl              |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| pacman         | CLI       | gestionnaire de paquet                               | pacman                     |
-| repo-add       | CLI       | crée une base de donnée de paquets                   | pacman                     |
-| makepkg        | CLI       | construit un paquet                                  | pacman                     |
-|                |           |                                                      |                            |
-| pactree        | CLI       | hiérarchie des dépendances entre paquets             | pacman-contrib             |
-| pacsearch      | CLI       | recherche de paquets                                 | pacman-contrib             |
-| pacdiff        | CLI       | fichiers pacorig, pacnew, pacsave                    | pacman-contrib             |
-| updpkgsums     | CLI       | mise à jour des sommes de contrôle                   | pacman-contrib             |
-| paclog         | CLI       | filtre pour le log de pacman                         | pacutils                   |
-| pacreport      | CLI       | résumé des paquets installés                         | pacutils                   |
-| pkgfile        | CLI       | recherche de fichier dans les paquets                | pkgfile                    |
-| pkgctl         | CLI       | obtention des sources d’un paquet                    | devtools                   |
-|                |           | remplacement de abs                                  |                            |
-| reflector      | CLI       | génération du fichiers des miroirs                   | manjaro/pacman-mirrors     |
-| pacman-mirrors | CLI       | génération du fichiers des miroirs                   | manjaro/pacman-mirrors     |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| pamac          | CLI       | gestionnaire de paquet de manjaro                    | aur/pamac-cli              |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| aura           | CLI       | sources et compilation pour AUR / dépôts             | aur/aura-bin               |
-| paru           | CLI       | sources et compilation pour AUR / dépôts             | aur/paru-bin               |
-| yay            | CLI       | sources et compilation pour AUR / dépôts             | aur/yay                    |
-| trizen         | CLI       | sources et compilation pour AUR / dépôts             | aur/trizen                 |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| pacui          | CLI       | pacman & aur                                         | github/excalibur1234/pacui |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| downgrade      | CLI       | réinstaller une ancienne version                     | downgrade                  |
-|                |           | d’un paquet                                          |                            |
-| downgrader     | CLI       | réinstaller une ancienne version                     | aur/downgrader             |
-|                |           | d’un paquet                                          |                            |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| ail-cli        | CLI       | paquets livrés avec leurs dépendances                | aur/appimagelauncher       |
-| flatpak        | CLI       | paquets livrés avec leurs dépendances                | flatpak                    |
-| snap           | CLI       | paquets livrés avec leurs dépendances                | snapd                      |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| bauh           | CLI       | gestion de aur, snap, flatpak                        | bauh                       |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-|                | SRV, CLI  | network time protocol                                | ntp                        |
-| chronyd        | SRV       | network time protocol                                | chrony                     |
-| chronyc        | CLI       | network time protocol                                | chrony                     |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| handlr         | CLI       | ouverture par le programme par défaut                | aur/handlr                 |
-| xdg-mime       | CLI       | programmes par défaut                                | xdg-utils                  |
-| xdg-open       | CLI       | ouverture par le programme par défaut                | xdg-utils                  |
-| mimeopen       | CLI       | ouverture par mime                                   | perl-file-mimeinfo         |
-| mimetype       | CLI       | détermine le type mime                               | perl-file-mimeinfo         |
-| run-mailcap    | CLI       | ouverture par mime                                   | aur/run-mailcap            |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| pkexec         | CLI       | lance un programme avec les privilèges               | polkit                     |
-|                |           | d’un autre utilisateur                               |                            |
-|----------------+-----------+------------------------------------------------------+----------------------------|
-| aconfmgr       | CLI       | gestionnaire de configuration pour arch              | aur/aconfmgr-git           |
+| Commande       | Interface | Fonction                                        | Paquet ou dépôt            |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| dmidecode      | CLI       | information sur le BIOS                         | dmidecode                  |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| sha256sum      | CLI       | somme de contrôle                               | coreutils                  |
+| b2sum          | CLI       | somme de contrôle                               | coreutils                  |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| archinstall    |           | outil d’installation, uefi uniquement           | archinstall                |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| fdisk          | CLI       | partitionnement du disque                       | util-linux                 |
+| cfdisk         | TUI       | partitionnement du disque                       | util-linux                 |
+| sfdisk         | CLI       | version scriptable de fdisk                     | util-linux                 |
+| wipefs         | CLI       | effacer les système de fichier                  | util-linux                 |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| snapper        | CLI       | snaphots pour btrfs                             | snapper                    |
+|                | CLI       | hooks pacman pour snapper                       | snap-pac                   |
+| snap-sync      | CLI       | copie snaphot de snapper vers disque externe    | snap-sync                  |
+| snapper-gui    | GUI       | gui pour snapper                                | snapper-gui                |
+|                | GUI       | gestion des snapshots snappers et               | btrfs-assistant            |
+|                |           | des sous-volumes de btrfs                       |                            |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| gdisk          | CLI       | partitionnement du disque en GPT                | gptfdisk                   |
+| cgdisk         | TUI       | partitionnement du disque en GPT                | gptfdisk                   |
+| sgdisk         | CLI       | version scriptable de gdisk                     | gptfdisk                   |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| parted         | CLI       | partitionnement du disque                       | parted                     |
+| gparted        | GUI       | partitionnement du disque                       | gparted                    |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| clonezilla     | TUI       | clonage de disque et de partition               | clonezilla                 |
+| partimage      |           | clonage de partition                            | partimage                  |
+| partclone      |           | clonage de partition                            | partclone                  |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| hdparm         | CLI       | paramètres du disque                            | hdparm                     |
+| smartctl       | CLI       | santé du disque                                 | smartmontools              |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| lsblk          | CLI       | liste des périphériques de type bloc            | util-linux                 |
+|                |           | typiquement, des disques & partitions           |                            |
+| mount          | CLI       | montage de partition                            | util-linux                 |
+| fallocate      | CLI       | alloue de l’espace dans un fichier              | util-linux                 |
+| losetup        | CLI       | contrôle de prériphérique boucle                | util-linux                 |
+|                |           | (par exemple partition dans un fichier)         |                            |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| refind-install | CLI       | refind, boot manager pour UEFI                  | redind                     |
+| efibootmgr     | CLI       | modification des variables UEFI                 | efibootmgr                 |
+|                | CLI       | shell efi : /usr/share/edk2-shell/x64/Shell.efi | edk2-shell                 |
+| grub-mkconfig  | CLI       | grub boot manager, pour BIOS ou UEFI            | grub                       |
+| grub-install   |           |                                                 |                            |
+| os-prober      | CLI       | détection des systèmes                          | os-prober                  |
+|                |           | d’exploitation                                  |                            |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+|                | KERN      | noyau linux                                     | linux                      |
+|                | KERN      | noyau linux support long terme                  | linux-lts                  |
+|                | KERN      | noyau linux zen                                 | linux-zen                  |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| dd             | CLI       | copie brute de fichier                          |                            |
+| ddgtk          | GUI       | gui pour dd                                     | aur/ddgtk                  |
+| truncate       | CLI       | adapte la taille d’un fichier                   | coreutils                  |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| bootiso        | CLI       | créer une clé usb bootable                      | aur/bootiso                |
+| bootableusb    | CLI       | créer une clé usb bootable                      | aur/bootableusb            |
+| usbmaker       | GUI       | créer une clé usb bootable                      | aur/usbmaker               |
+| unetbootin     | GUI       | créer une clé usb bootable                      | aur/unetbootin             |
+| mintstick      | GUI       | créer une clé usb bootable                      | mintstick                  |
+| ventoy         | CLI       | méta clé usb bootable pouvant contenir          | ventoy                     |
+|                |           | plusieur images/isos d’os                       |                            |
+|                | GUI       | gui pour ventoy                                 | ventoygui                  |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| lsb_release    | CLI       | informations sur la distribution                | lsb-release                |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| loadkeys       | CLI       | disposition du clavier en console linux         | kbd                        |
+| setfont        | CLI       | fonte de caractères en mode console             | kbd                        |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| brightnessctl  | CLI       | luminosité du matériel                          | brightnessctl              |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| pacman         | CLI       | gestionnaire de paquet                          | pacman                     |
+| repo-add       | CLI       | crée une base de donnée de paquets              | pacman                     |
+| makepkg        | CLI       | construit un paquet                             | pacman                     |
+|                |           |                                                 |                            |
+| pactree        | CLI       | hiérarchie des dépendances entre paquets        | pacman-contrib             |
+| pacsearch      | CLI       | recherche de paquets                            | pacman-contrib             |
+| pacdiff        | CLI       | fichiers pacorig, pacnew, pacsave               | pacman-contrib             |
+| updpkgsums     | CLI       | mise à jour des sommes de contrôle              | pacman-contrib             |
+| paclog         | CLI       | filtre pour le log de pacman                    | pacutils                   |
+| pacreport      | CLI       | résumé des paquets installés                    | pacutils                   |
+| pkgfile        | CLI       | recherche de fichier dans les paquets           | pkgfile                    |
+| pkgctl         | CLI       | obtention des sources d’un paquet               | devtools                   |
+|                |           | remplacement de abs                             |                            |
+| reflector      | CLI       | génération du fichiers des miroirs              | manjaro/pacman-mirrors     |
+| pacman-mirrors | CLI       | génération du fichiers des miroirs              | manjaro/pacman-mirrors     |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| pamac          | CLI       | gestionnaire de paquet de manjaro               | aur/pamac-cli              |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| aura           | CLI       | sources et compilation pour AUR / dépôts        | aur/aura-bin               |
+| paru           | CLI       | sources et compilation pour AUR / dépôts        | aur/paru-bin               |
+| yay            | CLI       | sources et compilation pour AUR / dépôts        | aur/yay                    |
+| trizen         | CLI       | sources et compilation pour AUR / dépôts        | aur/trizen                 |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| pacui          | CLI       | pacman & aur                                    | github/excalibur1234/pacui |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| downgrade      | CLI       | réinstaller une ancienne version                | downgrade                  |
+|                |           | d’un paquet                                     |                            |
+| downgrader     | CLI       | réinstaller une ancienne version                | aur/downgrader             |
+|                |           | d’un paquet                                     |                            |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| ail-cli        | CLI       | paquets livrés avec leurs dépendances           | aur/appimagelauncher       |
+| flatpak        | CLI       | paquets livrés avec leurs dépendances           | flatpak                    |
+| snap           | CLI       | paquets livrés avec leurs dépendances           | snapd                      |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| bauh           | CLI       | gestion de aur, snap, flatpak                   | bauh                       |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+|                | SRV, CLI  | network time protocol                           | ntp                        |
+| chronyd        | SRV       | network time protocol                           | chrony                     |
+| chronyc        | CLI       | network time protocol                           | chrony                     |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| handlr         | CLI       | ouverture par le programme par défaut           | aur/handlr                 |
+| xdg-mime       | CLI       | programmes par défaut                           | xdg-utils                  |
+| xdg-open       | CLI       | ouverture par le programme par défaut           | xdg-utils                  |
+| mimeopen       | CLI       | ouverture par mime                              | perl-file-mimeinfo         |
+| mimetype       | CLI       | détermine le type mime                          | perl-file-mimeinfo         |
+| run-mailcap    | CLI       | ouverture par mime                              | aur/run-mailcap            |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| pkexec         | CLI       | lance un programme avec les privilèges          | polkit                     |
+|                |           | d’un autre utilisateur                          |                            |
+|----------------+-----------+-------------------------------------------------+----------------------------|
+| aconfmgr       | CLI       | gestionnaire de configuration pour arch         | aur/aconfmgr-git           |
 
 
 *** Environnement graphique
@@ -1187,7 +1211,7 @@ poweroff
 |---------------------+-----------+---------------------------------------+-----------------------------|
 | NetworkManager      | SRV       | réseau                                | networkmanager              |
 | nmtui               | TUI       | connexions réseau                     | networkmanager              |
-| nm-applet           | GUI       | applet pour networkmanager            | network-manager-applet      |
+| nm-applet           | TRAY      | applet pour networkmanager            | network-manager-applet      |
 | avahi-*             | SRV       | implémentation de Zero-Conf           | avahi                       |
 |                     |           | permet la résolution de ordi.local    | nss-mdns                    |
 |---------------------+-----------+---------------------------------------+-----------------------------|
@@ -1355,6 +1379,8 @@ poweroff
 | simple-mtpfs          | CLI       | montage système de fichiers android     | simple-mtpfs                    |
 |-----------------------+-----------+-----------------------------------------+---------------------------------|
 | kdeconnect-app        | GUI       | transfert de fichiers linux <-> android | kdeconnect                      |
+| kdeconnect-cli        | CLI       | transfert de fichiers linux <-> android | kdeconnect                      |
+| kdeconnect-indicator  | TRAY      | transfert de fichiers linux <-> android | kdeconnect                      |
 | ?                     | GUI       | transfert de fichiers linux <-> android | gnome-shell-extension-gsconnect |
 | warpinator            | GUI       |                                         | warpinator                      |
 
@@ -1747,6 +1773,7 @@ Backup
 
 *** Virtualisation
 
+#+TOC: headlines 1 local
 
 **** Hôte
 
@@ -1760,6 +1787,8 @@ Backup
 | pcem       |                | émulateur ibm pc             | aur/pcem                     |
 |------------+----------------+------------------------------+------------------------------|
 |            | virtualisation |                              | qemu                         |
+|------------+----------------+------------------------------+------------------------------|
+| simh-pdp11 | virtualisation | anciens ordinateurs : pdp11  | simh                         |
 
 
 *** Jeux
@@ -2103,7 +2132,9 @@ freebsd via pkg ou /usr/ports.
 | orgro                | org mode file viewer                  |
 | markor               | éditeur markdown / todo               |
 |----------------------+---------------------------------------|
-| SecScanQR            | scan & génération de code QR          |
+| QR Scanner           | scan & génération de code QR          |
+| Simple QR            | scan & génération de code QR          |
+|----------------------+---------------------------------------|
 | aegis                | mots de passes OTP pour 2FA           |
 | 2FAS Auth            | mots de passes OTP pour 2FA           |
 |----------------------+---------------------------------------|

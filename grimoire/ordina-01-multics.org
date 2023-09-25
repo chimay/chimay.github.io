@@ -1112,6 +1112,7 @@ poweroff
 | Commande | Interface | Fonction                             | Paquet ou dépôt |
 |----------+-----------+--------------------------------------+-----------------|
 | make     | CLI       | construction de projet avec makefile | make            |
+| bmake    | CLI       | make de NetBSD                       | bmake           |
 | cmake    | CLI       | construction de projet               | cmake           |
 | ninja    | CLI       | construction de projet               | ninja           |
 
@@ -1946,38 +1947,114 @@ freebsd via pkg ou /usr/ports.
 
 *** Administration
 
-| Commande   | Interface | Fonction                   | catégorie / port   |
-|------------+-----------+----------------------------+--------------------|
-| auto-admin | CLI       | script d’administration    | sysutilsauto-admin |
-| gitup      | CLI       | télécharge src, ports, etc | net/gitup          |
+| Commande        | Interface | Fonction                                                      | base ou port        |
+|-----------------+-----------+---------------------------------------------------------------+---------------------|
+| bsdinstall      | TUI       | installation                                                  | base                |
+| bsdconfig       | TUI       | configuration                                                 | base                |
+| freebsd-version | CLI       | version du système                                            | base                |
+| freebsd-update  | CLI       | mise à jour kernel & world                                    | base                |
+| gpart           | CLI       | partitionnement du disque                                     | base                |
+| zpool           | CLI       | création de piscine zfs                                       | base                |
+| zfs             | CLI       | gestion du système de fichier zfs                             | base                |
+| mdconfig        | CLI       | Création de périphériques virtuels associés à un fichier      | base                |
+| glabel          | CLI       | Permet de donner un nom persistant à un périphérique amovible | base                |
+| gmirror         | CLI       | Création d'une association de périphériques redondant         | base                |
+| geli            | CLI       | Permet de chiffrer un système de fichier                      | base                |
+| gshsec          | CLI       | Permet de partager la clef permettant de déchiffrer           | base                |
+|                 |           | un système de fichier sur plusieurs périphériques             | base                |
+| bectl           | CLI       | environnements de démarrage zfs                               | base                |
+| sysrc           | CLI       | gestion des variables de /etc/rc.conf :                       | base                |
+|                 |           | pour le démarrage : activation de services, ...               | base                |
+| service         | CLI       | gestion des services                                          | base                |
+| rcorder         | CLI       | gestion des dépendances entre services                        | base                |
+| kldstat         | CLI       | affiche la liste des modules chargés                          | base                |
+| kldload         | CLI       | charge un module du noyau                                     | base                |
+| kldunload       | CLI       | décharge un module                                            | base                |
+| sysctl          | CLI       | contrôle des paramètres du noyau                              | base                |
+| usbconfig       | CLI       | configuration usb                                             | base                |
+| pw              | CLI       | gestion des utilisateurs & groupes                            | base                |
+| adduser         | CLI       | ajoute un utilisateur                                         | base                |
+| rmuser          | CLI       | supprime un utilisateur                                       | base                |
+| chpass          | CLI       | modifie les paramètres d’un utilisateur                       | base                |
+| passwd          | CLI       | changement du mot de passe                                    | base                |
+| cap_mkdb        | CLI       | base de données des capacités                                 | base                |
+| portmaster      | CLI       | gestionnaire des ports                                        | base                |
+| auto-admin      | CLI       | script d’administration                                       | sysutils/auto-admin |
+| gitup           | CLI       | télécharge src, ports, etc                                    | net/gitup           |
 
-*** Containers
+*** Console virtuelle
 
-| Commande | Interface | Fonction               | catégorie / port     |
-|----------+-----------+------------------------+----------------------|
-| ezjail   | CLI       | gestion des containers | sysutils/ezjail      |
-| bastille | CLI       | gestion des containers | sysutils/bastille    |
-| iocage   | CLI       | gestion des containers | sysutils/py39-iocage |
-| pot      | CLI       | gestion des containers | sysutils/pot         |
+| Commande   | Interface | Fonction               | base ou port |
+|------------+-----------+------------------------+--------------|
+| kbdmap     |           | disposition du clavier | base         |
+| vidcontrol |           | vidéo                  | base         |
+| vidfont    |           | fonte de caractères    | base         |
 
-*** Ports
+*** Paquets binaires
 
-| Commande    | Interface | Fonction                 | catégorie / port       |
-|-------------+-----------+--------------------------+------------------------|
-| portsnap    | CLI       | téléchargement des ports | ports-mgmt/portsnap    |
-| portupgrade | CLI       | gestion des ports        | ports-mgmt/portupgrade |
-| synth       | CLI       | compilation de ports     | ports-mgmt/synth       |
-| poudriere   | CLI       | compilation de ports     | ports-mgmt/poudriere   |
+| Commande   | Interface | Fonction                         | base ou port |
+|------------+-----------+----------------------------------+--------------|
+| pkg-static | CLI       | gestionnaire de paquets          | base         |
+| pkg        | CLI       | installation de paquets binaires |              |
+
+*** Recettes de compilation (ports)
+
+| Commande       | Interface | Fonction                         | base ou port           |
+|----------------+-----------+----------------------------------+------------------------|
+| portsnap       | CLI       | installation ou mise à jour de   |                        |
+|                |           | l’arbre des ports                |                        |
+| portsearch     | CLI       | recherche dans l’arbre des ports |                        |
+| portupgrade    | CLI       | mise à jour                      |                        |
+| portinstall    | CLI       | installation d'un port           |                        |
+| portversion    | CLI       | ports non à jour                 |                        |
+| port_deinstall | CLI       | suppression                      |                        |
+| portsclean     | CLI       | nettoyage                        |                        |
+| portaudit      | CLI       | mise à jour de sécurité          |                        |
+| portupgrade    | CLI       | gestion des ports                | ports-mgmt/portupgrade |
+| synth          | CLI       | compilation de ports             | ports-mgmt/synth       |
+| poudriere      | CLI       | compilation de ports             | ports-mgmt/poudriere   |
 
 *** Réseau
 
-| Commande   | Interface | Fonction          | catégorie / port    |
+**** Wifi
+
+| Commande       | Interface | Fonction                               | base ou port |
+|----------------+-----------+----------------------------------------+--------------|
+| ifconfig       | CLI       | configuration des interfaces réseau    | base         |
+| wpa_passphrase | CLI       | demander le mot de passe et générer    | base         |
+|                |           | le contenu de /etc/wpa_supplicant.conf | base         |
+
+**** Pare-feu
+
+| Commande     | Interface | Fonction                                  | base ou port |
+|--------------+-----------+-------------------------------------------+--------------|
+| ipfw         | CLI       | contrôle du pare-feu                      | base         |
+| pf           | CLI       | pare-feu                                  | base         |
+| pfctl        | CLI       | contrôle du pare-feu                      | base         |
+
+*** Containers
+
+| Commande | Interface | Fonction                          | base ou port         |
+|----------+-----------+-----------------------------------+----------------------|
+| jail     | CLI       | permet d'emprisonner un processus |                      |
+|          |           | dans un sous-système              |                      |
+| jexec    | CLI       | permet d'exécuter un processus    |                      |
+|          |           | dans un container                 |                      |
+| jls      | CLI       | liste des jails                   |                      |
+| bastille | CLI       | gestion des containers            | sysutils/bastille    |
+| ezjail   | CLI       | gestion des containers            | sysutils/ezjail      |
+| iocage   | CLI       | gestion des containers            | sysutils/py39-iocage |
+| pot      | CLI       | gestion des containers            | sysutils/pot         |
+
+*** Réseau
+
+| Commande   | Interface | Fonction          | base ou port        |
 |------------+-----------+-------------------+---------------------|
 | networkmgr | GUI       | gestion du réseau | net-mgmt/networkmgr |
 
 *** Environnement graphique
 
-| Commande          | Interface | Fonction                  | catégorie / port           |
+| Commande          | Interface | Fonction                  | base ou port               |
 |-------------------+-----------+---------------------------+----------------------------|
 | desktop-installer | CLI       | script d’installation     | sysutils/desktop-installer |
 |                   |           | d’environnement graphique |                            |
@@ -2002,6 +2079,26 @@ freebsd via pkg ou /usr/ports.
 | VBoxClient     | LIB       | additions               | emulators/virtualbox-ose-additions |
 | VBoxClient-all | LIB       | additions               | emulators/virtualbox-ose-additions |
 |                | LIB       | environnement graphique | x11-drivers/xf86-video-vmware      |
+
+** NetBSD
+
+#+TOC: headlines 1 local
+
+*** Introduction
+
+La plupart des logiciels disponibles pour linux le sont aussi dans pour
+freebsd via pkgin ou pkgsrc, souvent installé dans /usr/pkg.
+
+*** Administration
+
+| Commande | Interface | Fonction | catégorie / port |
+|----------+-----------+----------+------------------|
+
+*** Paquets binaires
+
+| Commande | Interface | Fonction           | catégorie / port |
+|----------+-----------+--------------------+------------------|
+| pkgin    | CLI       | gestion de paquets |                  |
 
 ** Plugins
 

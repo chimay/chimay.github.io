@@ -636,6 +636,10 @@ poweroff
 |                  |           | verrouillage de l’écran pour i3               | i3lock                       |
 |                  | LIB       | librairie python pour contrôler i3            | pip/i3ipc-python             |
 |------------------+-----------+-----------------------------------------------+------------------------------|
+| openbox          | GUI       | gestionnaire de fenêtre                       | openbox                      |
+| obconf           | GUI       | outil de configuration d’openbox              | obconf                       |
+| obmenu-generator | GUI       | génération de menu openbox                    | obmenu-generator             |
+|------------------+-----------+-----------------------------------------------+------------------------------|
 | spectrwm         | GUI       | gestionnaire de fenêtre : pavage              | spectrwm                     |
 |------------------+-----------+-----------------------------------------------+------------------------------|
 | wmctrl           | CLI       | contrôle du gestionnaire de fenêtres          | wmctrl                       |
@@ -780,7 +784,8 @@ poweroff
 
 | Commande     | Interface | Fonction                                     | Paquet ou dépôt       |
 |--------------+-----------+----------------------------------------------+-----------------------|
-| kitty        | TERM      | terminal                                     |                       |
+| kitty        | TERM      | terminal, avec onglets                       | kitty                 |
+| alacritty    | TERM      | terminal, avec onglets                       | alacritty             |
 | xterm        | TERM      | terminal                                     | xterm                 |
 | urxvt        | TERM      | terminal                                     | rxvt-unicode          |
 | urxvtd       | TERM      | serveur de terminaux urxvt                   | rxvt-unicode          |
@@ -796,10 +801,14 @@ poweroff
 | tmux         | TERM      | multiplexeur de terminal                     | tmux                  |
 | zellij       | TERM      | multiplexeur de terminal                     | zellij                |
 | diss         | TERM      | multiplexeur de terminal                     | github/diss           |
-| vlock        | CLI       | verrouillage du terminal                     | kbd                   |
+| screen       | TERM      | multiplexeur de terminal                     | screen                |
 |--------------+-----------+----------------------------------------------+-----------------------|
 | dtach        | CLI       | attacher/détacher d’un processus             | aur/dtach             |
 | abduco       | CLI       | attacher/détacher d’un processus             | abduco                |
+|--------------+-----------+----------------------------------------------+-----------------------|
+| script       | CLI       | journaliser une session de terminal          | util-linux            |
+|--------------+-----------+----------------------------------------------+-----------------------|
+| vlock        | CLI       | verrouillage du terminal                     | kbd                   |
 |--------------+-----------+----------------------------------------------+-----------------------|
 | zsh          | REPL      | shell                                        | zsh                   |
 |              | REPL      | complétions supplémentaires pour zsh         | zsh-completions       |
@@ -1187,40 +1196,44 @@ poweroff
 
 *** Langages de programmation
 
-| Commande   | Interface | Fonction                       | Paquet ou dépôt     |
-|------------+-----------+--------------------------------+---------------------|
-| rust       | LANG      | rust                           | rust                |
-| cargo      | CLI       | gestionnaire de paquets rust   |                     |
-|------------+-----------+--------------------------------+---------------------|
-| perl       | LANG      | perl                           | perl                |
-| cpan       | CLI       | gestionnaires de modules cpan  | perl                |
-| cpanp      | CLI       | cpan plus                      | perl-cpanplus       |
-| cpanm      | CLI       | gestionnaires de modules cpan  | cpanminus           |
-| cpan-get   | CLI       | cpan get                       | cpan/App::CPAN:Get  |
-| sourcepan  | CLI       | cpan : télécharge les sources  | cpan/App::sourcepan |
-|            | LIB       | bundle cpan : fonctionalités   | cpan/Buncle::CPAN   |
-|            |           | supplémentaires                |                     |
-|------------+-----------+--------------------------------+---------------------|
-| python     | LANG      | python                         | python              |
-| pip        | CLI       | gestionnaire de paquets python | python-pip          |
-| pipx       | CLI       | paquets python, env. isolé     | python-pipx         |
-| pip_search | CLI       | recherche de paquet python     | pip/pip_search      |
-| wheel      | LIB       | format de paquet python        | pip/wheel           |
-|------------+-----------+--------------------------------+---------------------|
-| ruby       | LANG      | ruby                           | ruby                |
-| gem        | CLI       | gestionnaire de paquets ruby   | rubygems            |
-|------------+-----------+--------------------------------+---------------------|
-| ocaml      | LANG      | OCaml                          | ocaml               |
-| opam       | LANG      | gestionnaire de paquets OCaml  | opam                |
-|------------+-----------+--------------------------------+---------------------|
-| clisp      | LANG      | common Lisp                    | clisp               |
-|------------+-----------+--------------------------------+---------------------|
-| lua        | LANG      | lua                            | lua                 |
-| luarocks   | CLI       | gestionnaire de paquets lua    | luarocks            |
-|------------+-----------+--------------------------------+---------------------|
-| java       | LANG      | java development kit           | jdk10-openjdk       |
-|            | LANG      | java runtime environment       | jre10-openjdk       |
-| javaws     | LANG      | java web start                 | icedtea-web         |
+| Commande   | Interface | Fonction                          | Paquet ou dépôt     |
+|------------+-----------+-----------------------------------+---------------------|
+| gcc        | CLI       | compilateurs                      | gcc                 |
+| gdb        | CLI       | débugueur                         | gdb                 |
+| objdump    | CLI       | informations sur un fichier objet | binutils            |
+|------------+-----------+-----------------------------------+---------------------|
+| rust       | LANG      | rust                              | rust                |
+| cargo      | CLI       | gestionnaire de paquets rust      |                     |
+|------------+-----------+-----------------------------------+---------------------|
+| perl       | LANG      | perl                              | perl                |
+| cpan       | CLI       | gestionnaires de modules cpan     | perl                |
+| cpanp      | CLI       | cpan plus                         | perl-cpanplus       |
+| cpanm      | CLI       | gestionnaires de modules cpan     | cpanminus           |
+| cpan-get   | CLI       | cpan get                          | cpan/App::CPAN:Get  |
+| sourcepan  | CLI       | cpan : télécharge les sources     | cpan/App::sourcepan |
+|            | LIB       | bundle cpan : fonctionalités      | cpan/Buncle::CPAN   |
+|            |           | supplémentaires                   |                     |
+|------------+-----------+-----------------------------------+---------------------|
+| python     | LANG      | python                            | python              |
+| pip        | CLI       | gestionnaire de paquets python    | python-pip          |
+| pipx       | CLI       | paquets python, env. isolé        | python-pipx         |
+| pip_search | CLI       | recherche de paquet python        | pip/pip_search      |
+| wheel      | LIB       | format de paquet python           | pip/wheel           |
+|------------+-----------+-----------------------------------+---------------------|
+| ruby       | LANG      | ruby                              | ruby                |
+| gem        | CLI       | gestionnaire de paquets ruby      | rubygems            |
+|------------+-----------+-----------------------------------+---------------------|
+| ocaml      | LANG      | OCaml                             | ocaml               |
+| opam       | LANG      | gestionnaire de paquets OCaml     | opam                |
+|------------+-----------+-----------------------------------+---------------------|
+| clisp      | LANG      | common Lisp                       | clisp               |
+|------------+-----------+-----------------------------------+---------------------|
+| lua        | LANG      | lua                               | lua                 |
+| luarocks   | CLI       | gestionnaire de paquets lua       | luarocks            |
+|------------+-----------+-----------------------------------+---------------------|
+| java       | LANG      | java development kit              | jdk10-openjdk       |
+|            | LANG      | java runtime environment          | jre10-openjdk       |
+| javaws     | LANG      | java web start                    | icedtea-web         |
 
 
 *** Réseau
@@ -1358,6 +1371,7 @@ poweroff
 |---------------------+-----------+---------------------------------------+-----------------------------|
 | irssi               | TUI       | IRC                                   | irssi                       |
 | weechat             | TUI       | IRC                                   | weechat                     |
+| quassel             | GUI       | IRC, inspiré par weechat              | quassel-monolithic          |
 | hexchat             | GUI       | IRC                                   | hexchat                     |
 |---------------------+-----------+---------------------------------------+-----------------------------|
 | twtxt               | CLI       | microblogging                         | pip/twtxt                   |
@@ -1385,6 +1399,10 @@ poweroff
 | bashmount             | CLI       | montage / démontage                     | aur/bashmount                   |
 | unionfs               | CLI       | montage de systèmes de fichiers         | unionfs-fuse                    |
 |                       |           | en mode union                           |                                 |
+
+*** Autres systèmes
+
+| Commande              | Interface | Fonction                                | Paquet ou dépôt                 |
 |-----------------------+-----------+-----------------------------------------+---------------------------------|
 | adb                   | CLI       | android debug bridge                    | android-tools                   |
 | fastboot              | CLI       | pour android démarré en mode fastboot   | android-tools                   |
@@ -1402,6 +1420,10 @@ poweroff
 | kdeconnect-indicator  | TRAY      | transfert de fichiers linux <-> android | kdeconnect                      |
 | ?                     | GUI       | transfert de fichiers linux <-> android | gnome-shell-extension-gsconnect |
 | warpinator            | GUI       |                                         | warpinator                      |
+|-----------------------+-----------+-----------------------------------------+---------------------------------|
+| 9base                 |           | outils plan9                            |                                 |
+| plan9port             |           | applications plan9                      |                                 |
+| drawterm              |           | connection à plan9                      | aur/drawterm                    |
 
 *** Synchronisation
 

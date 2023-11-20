@@ -1,12 +1,10 @@
 # vim: set ft=make :
 
-include ../../Makefile.inc
+include ../../../Makefile.inc
 
 .DEFAULT_GOAL := sync-html
 
-.PRECIOUS: ../../image/musica/templates/%.png
-
-#  {{{  phony
+#  phony {{{1
 
 .PHONY: debug
 
@@ -24,39 +22,28 @@ include ../../Makefile.inc
 
 .PHONY: clean clean-html clean-epub wipe
 
-#  }}}
 
 # debug {{{1
 
 debug:
 	@echo $(SUBDIRS)
 
-# }}}1
 
-# ly -> png {{{1
-
-../../image/musica/templates/%.png: ~/racine/musica/lilypond/templates/%.pdf
-	convert $< $@
-	@$(ECHO)
-
-# }}}1
-
-#  {{{  org -> html
+#  org -> html {{{1
 
 $(HTML_SUBDIRS):
 	$(MAKE) -C ${@:html-%=%} html
 	@$(ECHO)
 
-%.html: %.org $(INC_FILES) ../../image/musica/templates/%.png ~/racine/musica/lilypond/templates/%.ly
+%.html: %.org $(INC_FILES) $(LY_MEL_FILES)
 	$(EMACS) $(EMACS_PRE_FLAGS) $< $(EMACS_POST_FLAGS)
 	remove-max-width-from-org-html-export.zsh $(patsubst %.org,%.html,$<)
 	@$(ECHO)
 
 html: $(HTML_SUBDIRS) $(HTML_FILES)
 
-#  }}}
 
-#  {{{  org -> epub
+#  org -> epub {{{1
 
 $(EPUB_SUBDIRS):
 	$(MAKE) -C ${@:epub-%=%} epub
@@ -68,7 +55,6 @@ $(EPUB_SUBDIRS):
 
 epub: $(EPUB_SUBDIRS) $(EPUB_FILES)
 
-#  }}}
 
 # sync -> html dir {{{1
 
@@ -80,7 +66,6 @@ sync-html: html
 	$(RSYNC) $(CUR_DIR)/ $(HTML_DIR)
 	@$(ECHO)
 
-# }}}1
 
 # sync -> epub dir {{{1
 
@@ -92,15 +77,13 @@ sync-epub: epub
 	$(SYNC) $(CUR_DIR)/ $(EPUB_DIR)
 	@$(ECHO)
 
-# }}}1
 
-# {{{ sync all
+#sync all {{{1
 
 dry-sync: dry-sync-html dry-sync-epub
 
 sync: sync-html sync-epub
 
-# }}}
 
 # all, install {{{1
 
@@ -108,7 +91,6 @@ all: sync-html
 
 install: sync-html
 
-# }}}1
 
 # clean, wipe {{{1
 
@@ -144,4 +126,3 @@ wipe: $(WIPE_SUBDIRS)
 	rm -f ?*.epub
 	rm -f ?*~
 
-# }}}1

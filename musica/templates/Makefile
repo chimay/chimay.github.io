@@ -4,6 +4,8 @@ include ../../Makefile.inc
 
 .DEFAULT_GOAL := sync-html
 
+.PRECIOUS: ../../image/musica/templates/%.png
+
 #  {{{  phony
 
 .PHONY: debug
@@ -31,13 +33,21 @@ debug:
 
 # }}}1
 
+# ly -> png {{{1
+
+../../image/musica/templates/%.png: ~/racine/musica/lilypond/templates/%.pdf
+	convert $< $@
+	@$(ECHO)
+
+# }}}1
+
 #  {{{  org -> html
 
 $(HTML_SUBDIRS):
 	$(MAKE) -C ${@:html-%=%} html
 	@$(ECHO)
 
-%.html: %.org $(INC_FILES) ~/racine/musica/lilypond/templates/%.ly
+%.html: %.org $(INC_FILES) ../../image/musica/templates/%.png ~/racine/musica/lilypond/templates/%.ly
 	$(EMACS) $(EMACS_PRE_FLAGS) $< $(EMACS_POST_FLAGS)
 	remove-max-width-from-org-html-export.zsh $(patsubst %.org,%.html,$<)
 	@$(ECHO)

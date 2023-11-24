@@ -22,12 +22,10 @@ include ../Makefile.inc
 
 .PHONY: clean clean-html clean-epub wipe
 
-
 # debug {{{1
 
 debug:
 	@echo $(SUBDIRS)
-
 
 #  org -> html {{{1
 
@@ -42,7 +40,6 @@ $(HTML_SUBDIRS):
 
 html: $(HTML_SUBDIRS) $(HTML_FILES)
 
-
 #  org -> epub {{{1
 
 $(EPUB_SUBDIRS):
@@ -54,7 +51,6 @@ $(EPUB_SUBDIRS):
 	@$(ECHO)
 
 epub: $(EPUB_SUBDIRS) $(EPUB_FILES)
-
 
 # sync -> html dir {{{1
 
@@ -76,7 +72,6 @@ dry-sync-epub: epub
 sync-epub: epub
 	$(SYNC) $(CUR_DIR)/ $(EPUB_DIR)
 	@$(ECHO)
-
 
 #sync all {{{1
 

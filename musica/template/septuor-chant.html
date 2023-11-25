@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-11-24 ven 15:16 -->
+<!-- 2023-11-25 sam 09:00 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Opus : Musica : template</title>
@@ -205,21 +205,21 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgd5d90eb">1. Septuor à cordes</a></li>
+<li><a href="#org1e7a6e9">1. Septuor vocal</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgd5d90eb" class="outline-2">
-<h2 id="orgd5d90eb"><span class="section-number-2">1.</span> Septuor à cordes</h2>
+<div id="outline-container-org1e7a6e9" class="outline-2">
+<h2 id="org1e7a6e9"><span class="section-number-2">1.</span> Septuor vocal</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Le résultat :
 </p>
 
 
-<div id="orgb685149" class="figure">
-<p><img src="../../image/musica/template/cordes-7.png" alt="cordes-7.png" />
+<div id="org5054830" class="figure">
+<p><img src="../../image/musica/template/septuor-chant.png" alt="septuor-chant.png" />
 </p>
 </div>
 
@@ -235,8 +235,8 @@ La source :
 \language "english"
 
 \header { % {{{2
-  title = "septuor à cordes"
-  subtitle="strings"
+  title = "septuor vocal"
+  subtitle="choir"
   composer = "composer"
   poet = "poet"
   %piece = "piece"
@@ -302,6 +302,7 @@ voiceTenor = \fixed c { % {{{2
   \global
   % Music follows here.
   \anacrusis
+
 }
 
 voiceBarytone = \fixed c { % {{{2
@@ -318,47 +319,101 @@ voiceBass = \fixed c, { % {{{2
 
 }
 
+% ------------ lyrics {{{1 ------------
+
+lyricsSoprano = \lyricmode { % {{{2
+  %\set vocalName = "S :"
+  so -- pra -- no
+}
+
+lyricsMezzo = \lyricmode { % {{{2
+  %\set vocalName = "M :"
+  mez -- zo
+}
+
+lyricsAlto = \lyricmode { % {{{2
+  %\set vocalName = "A :"
+  al -- to
+}
+
+lyricsCounter = \lyricmode { % {{{2
+  %\set vocalName = "C :"
+  coun -- ter
+}
+
+lyricsTenor = \lyricmode { % {{{2
+  %\set vocalName = "T :"
+  te -- nor
+}
+
+lyricsBarytone = \lyricmode { % {{{2
+  %\set vocalName = "Y :"
+  ba -- ry -- to -- ne
+}
+
+lyricsBass = \lyricmode { % {{{2
+  %\set vocalName = "B :"
+  bass line
+}
+
 % ------------ instruments {{{1 ------------
 
-instrumentViolin = \new Staff \with { % {{{2
-  instrumentName = "violin"
-  shortInstrumentName = "vn"
+instrumentSopranoMezzo = \new Staff = "SopranoMezzo" % {{{2
+\with {
+  instrumentName = \markup { \column { soprano mezzo } }
+  shortInstrumentName = \markup { \column { S M } }
   midiInstrument = "violin"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #1.5
 } { \clef treble
     %\override Staff.StaffSymbol.line-count = #7
-    &lt;&lt; \voiceSoprano \\ \voiceMezzo &gt;&gt; }
+    &lt;&lt;
+      \new Voice = "soprano" { \voiceOne \voiceSoprano }
+      \new Voice = "mezzo" { \voiceTwo \voiceMezzo }
+    &gt;&gt;
+}
 
-instrumentViola = \new Staff \with { % {{{2
-  instrumentName = "viola"
-  shortInstrumentName = "va"
+instrumentAltoCounter = \new Staff = "AltoCounter" % {{{2
+\with {
+  instrumentName = \markup { \column { alto counter } }
+  shortInstrumentName = \markup { \column { A C } }
   midiInstrument = "viola"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #1.5
 } { \clef alto
     %\override Staff.StaffSymbol.line-count = #7
-    &lt;&lt; \voiceAlto \\ \voiceCounter &gt;&gt; }
+    &lt;&lt;
+      \new Voice = "alto" { \voiceOne \voiceAlto }
+      \new Voice = "counter" { \voiceTwo \voiceCounter }
+    &gt;&gt;
+}
 
-instrumentCello = \new Staff \with { % {{{2
-  instrumentName = "cello"
-  shortInstrumentName = "vc"
+instrumentTenorBarytone = \new Staff = "TenorBarytone" % {{{2
+\with {
+  instrumentName = \markup { \column { tenor barytone } }
+  shortInstrumentName = \markup { \column { T Y } }
   midiInstrument = "cello"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #1.5
 } { \clef varbaritone
     %\override Staff.StaffSymbol.line-count = #7
-    &lt;&lt; \voiceTenor \\ \voiceBarytone &gt;&gt; }
+    &lt;&lt;
+      \new Voice = "tenor" { \voiceOne \voiceTenor }
+      \new Voice = "barytone" { \voiceTwo \voiceBarytone }
+    &gt;&gt;
+}
 
-instrumentContrabass = \new Staff \with { % {{{2
-  instrumentName = \markup \column { contra- bass }
-  shortInstrumentName = "cb"
+instrumentBass = \new Staff = "Bass" % {{{2
+\with {
+  instrumentName = "bass"
+  shortInstrumentName = "B"
   midiInstrument = "contrabass"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #1.5
 } { \clef bass
     %\override Staff.StaffSymbol.line-count = #7
-    \voiceBass }
+    \new Voice = "bass" \voiceBass
+}
 
 % ------------ book {{{1 ------------
 
@@ -366,10 +421,28 @@ instrumentContrabass = \new Staff \with { % {{{2
   \score {
     &lt;&lt;
       \new StaffGroup &lt;&lt;
-        \instrumentViolin
-        \instrumentViola
-        \instrumentCello
-        \instrumentContrabass
+        % -- staff 1
+        \instrumentSopranoMezzo
+        \new Lyrics \with { alignAboveContext = "SopranoMezzo" }
+        \lyricsto "soprano" \lyricsSoprano
+        \new Lyrics \with { alignBelowContext = "SopranoMezzo" }
+        \lyricsto "mezzo" \lyricsMezzo
+        % -- staff 2
+        \instrumentAltoCounter
+        \new Lyrics \with { alignAboveContext = "AltoCounter" }
+        \lyricsto "alto" \lyricsAlto
+        \new Lyrics \with { alignBelowContext = "AltoCounter" }
+        \lyricsto "counter" \lyricsCounter
+        % -- staff 3
+        \instrumentTenorBarytone
+        \new Lyrics \with { alignAboveContext = "TenorBarytone" }
+        \lyricsto "tenor" \lyricsTenor
+        \new Lyrics \with { alignBelowContext = "TenorBarytone" }
+        \lyricsto "barytone" \lyricsBarytone
+        % -- staff 4
+        \instrumentBass
+        \new Lyrics \with { alignBelowContext = "Bass" }
+        \lyricsto "bass" \lyricsBass
       &gt;&gt;
     &gt;&gt;
     \layout { }
@@ -392,7 +465,7 @@ instrumentContrabass = \new Staff \with { % {{{2
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: chimay</p>
-<p class="date">Created: 2023-11-24 ven 15:16</p>
+<p class="date">Created: 2023-11-25 sam 09:00</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

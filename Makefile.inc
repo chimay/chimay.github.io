@@ -35,7 +35,7 @@ INC_FILES  = $(wildcard $(ROOT_GENERIC)/include/*.org)
 
 # files in ~/racine/musica/lilypond/template
 
-LY_MEL_FILES = $(wildcard ~/racine/musica/lilypond/template/include/mel*.ly)
+LY_MEL_FILES = $(wildcard ~/racine/musica/lilypond/template/melody/*.ly)
 
 # programs & options {{{1
 

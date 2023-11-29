@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-11-27 lun 13:33 -->
+<!-- 2023-11-29 mer 14:49 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Opus : Musica : template</title>
@@ -205,20 +205,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4f4eab5">1. Septuor à cordes</a></li>
+<li><a href="#orgda5aad2">1. Septuor à cordes</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org4f4eab5" class="outline-2">
-<h2 id="org4f4eab5"><span class="section-number-2">1.</span> Septuor à cordes</h2>
+<div id="outline-container-orgda5aad2" class="outline-2">
+<h2 id="orgda5aad2"><span class="section-number-2">1.</span> Septuor à cordes</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Le résultat :
 </p>
 
 
-<div id="org7969760" class="figure">
+<div id="orgc6954db" class="figure">
 <p><img src="../../image/musica/template/septuor-cordes.png" alt="septuor-cordes.png" />
 </p>
 </div>
@@ -228,13 +228,15 @@ La source :
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lilypond">% ------------ headers {{{1 ------------
+<pre class="src src-lilypond">% headers {{{1
 
 %\version "2.24.0"
 
 \language "english"
 
-\header { % {{{2
+% header {{{2
+
+\header {
   title = "septuor à cordes"
   subtitle="strings"
   composer = "composer"
@@ -242,7 +244,9 @@ La source :
   %piece = "piece"
 }
 
-\layout { % {{{2
+% layout {{{2
+
+\layout {
   %\enablePolymeter
   \override Score.BarNumber.break-visibility = ##(#t #t #t)
   \context {
@@ -258,69 +262,79 @@ La source :
   }
 }
 
-% ------------ view only the beg/end {{{1 ------------
+% view only the beg/end {{{1
 
 %showFirstLength = R2.*8
 %showLastLength = R2.*8
 
-% ------------ included melodies {{{1 ------------
+% included melodies {{{1
 
 \include "melody/mel.ly"
 
-% ------------ voices {{{1 ------------
+% voices {{{1
 
-voiceSoprano = \fixed c'' { % {{{2
+% Soprano {{{2
+
+voiceSoprano = \fixed c'' {
   \global
   \tempo 2. = 50
   % Music follows here.
   \anacrusis
-
 }
 
-voiceMezzo = \fixed c'' { % {{{2
-  \global
-  % Music follows here.
-  \anacrusis
+% Mezzo {{{2
 
-}
-
-voiceAlto = \fixed c' { % {{{2
-  \global
-  % Music follows here.
-  \anacrusis
-
-}
-
-voiceCounter = \fixed c' { % {{{2
-  \global
-  % Music follows here.
-  \anacrusis
-
-}
-
-voiceTenor = \fixed c { % {{{2
+voiceMezzo = \fixed c'' {
   \global
   % Music follows here.
   \anacrusis
 }
 
-voiceBarytone = \fixed c { % {{{2
+% Alto {{{2
+
+voiceAlto = \fixed c' {
   \global
   % Music follows here.
   \anacrusis
-
 }
 
-voiceBass = \fixed c, { % {{{2
+% Counter {{{2
+
+voiceCounter = \fixed c' {
   \global
   % Music follows here.
   \anacrusis
-
 }
 
-% ------------ instruments {{{1 ------------
+% Tenor {{{2
 
-instrumentViolin = \new Staff \with { % {{{2
+voiceTenor = \fixed c {
+  \global
+  % Music follows here.
+  \anacrusis
+}
+
+% Barytone {{{2
+
+voiceBarytone = \fixed c {
+  \global
+  % Music follows here.
+  \anacrusis
+}
+
+% Bass {{{2
+
+voiceBass = \fixed c, {
+  \global
+  % Music follows here.
+  \anacrusis
+}
+
+% instruments {{{1
+
+% Violin {{{2
+
+instrumentViolin = \new Staff \with {
   instrumentName = "violin"
   shortInstrumentName = "vn"
   midiInstrument = "violin"
@@ -330,7 +344,9 @@ instrumentViolin = \new Staff \with { % {{{2
     %\override Staff.StaffSymbol.line-count = #7
     &lt;&lt; \voiceSoprano \\ \voiceMezzo &gt;&gt; }
 
-instrumentViola = \new Staff \with { % {{{2
+% Viola {{{2
+
+instrumentViola = \new Staff \with {
   instrumentName = "viola"
   shortInstrumentName = "va"
   midiInstrument = "viola"
@@ -340,7 +356,9 @@ instrumentViola = \new Staff \with { % {{{2
     %\override Staff.StaffSymbol.line-count = #7
     &lt;&lt; \voiceAlto \\ \voiceCounter &gt;&gt; }
 
-instrumentCello = \new Staff \with { % {{{2
+% Cello {{{2
+
+instrumentCello = \new Staff \with {
   instrumentName = "cello"
   shortInstrumentName = "vc"
   midiInstrument = "cello"
@@ -350,7 +368,9 @@ instrumentCello = \new Staff \with { % {{{2
     %\override Staff.StaffSymbol.line-count = #7
     &lt;&lt; \voiceTenor \\ \voiceBarytone &gt;&gt; }
 
-instrumentContrabass = \new Staff \with { % {{{2
+% Contrabass {{{2
+
+instrumentContrabass = \new Staff \with {
   instrumentName = \markup \column { contra- bass }
   shortInstrumentName = "cb"
   midiInstrument = "contrabass"
@@ -360,7 +380,7 @@ instrumentContrabass = \new Staff \with { % {{{2
     %\override Staff.StaffSymbol.line-count = #7
     \voiceBass }
 
-% ------------ book {{{1 ------------
+% book {{{1
 
 \book {
   \score {
@@ -392,7 +412,7 @@ instrumentContrabass = \new Staff \with { % {{{2
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: chimay</p>
-<p class="date">Created: 2023-11-27 lun 13:33</p>
+<p class="date">Created: 2023-11-29 mer 14:49</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

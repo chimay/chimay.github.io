@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-11-27 lun 13:33 -->
+<!-- 2023-11-29 mer 14:49 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Opus : Musica : template</title>
@@ -205,20 +205,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2cf20fa">1. Claviers</a></li>
+<li><a href="#org6606b83">1. Claviers</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org2cf20fa" class="outline-2">
-<h2 id="org2cf20fa"><span class="section-number-2">1.</span> Claviers</h2>
+<div id="outline-container-org6606b83" class="outline-2">
+<h2 id="org6606b83"><span class="section-number-2">1.</span> Claviers</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Le résultat :
 </p>
 
 
-<div id="orgff2d8f1" class="figure">
+<div id="org3c7cabe" class="figure">
 <p><img src="../../image/musica/template/clavier.png" alt="clavier.png" />
 </p>
 </div>
@@ -228,13 +228,15 @@ La source :
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lilypond">% ------------ headers {{{1 ------------
+<pre class="src src-lilypond">% headers {{{1
 
 %\version "2.24.0"
 
 \language "english"
 
-\header { % {{{2
+% header {{{2
+
+\header {
   title = "claviers"
   subtitle="subtitle"
   composer = "composer"
@@ -242,11 +244,14 @@ La source :
   %piece = "piece"
 }
 
-\layout { % {{{2
+% layout {{{2
+
+\layout {
   %\enablePolymeter
   \override Score.BarNumber.break-visibility = ##(#t #t #t)
   \context {
     \Score
+    measureBarType = #","
     %barNumberVisibility = #(every-nth-bar-number-visible 8)
     barNumberVisibility = #(modulo-bar-number-visible 8 0)
   }
@@ -257,91 +262,103 @@ La source :
   }
 }
 
-% ------------ view only the beg/end {{{1 ------------
+% view only the beg/end {{{1
 
 %showFirstLength = R2.*1
 %showLastLength = R2.*8
 
-% ------------ included melodies {{{1 ------------
+% included melodies {{{1
 
 \include "melody/mel.ly"
 
-% ------------ voices {{{1 ------------
+% voices {{{1
 
-voiceOrganRight = \fixed c'' { % {{{2
+% OrganRight {{{2
+
+voiceOrganRight = \fixed c'' {
   \global
   \tempo 2. = 50
   % Music follows here.
   \anacrusis
-
 }
 
-voiceOrganLeft = \fixed c { % {{{2
+% OrganLeft {{{2
+
+voiceOrganLeft = \fixed c {
   \global
   % Music follows here.
   \anacrusis
-
 }
 
-voiceViolaOrganistaRight = \fixed c'' { % {{{2
+% ViolaOrganistaRight {{{2
+
+voiceViolaOrganistaRight = \fixed c'' {
   \global
   % Music follows here.
   \anacrusis
-
 }
 
-voiceViolaOrganistaLeft = \fixed c { % {{{2
+% ViolaOrganistaLeft {{{2
+
+voiceViolaOrganistaLeft = \fixed c {
   \global
   % Music follows here.
   \anacrusis
-
 }
 
-voiceHarpsichordRight = \fixed c'' { % {{{2
+% HarpsichordRight {{{2
+
+voiceHarpsichordRight = \fixed c'' {
   \global
   % Music follows here.
   \anacrusis
-
 }
 
-voiceHarpsichordLeft = \fixed c { % {{{2
+% HarpsichordLeft {{{2
+
+voiceHarpsichordLeft = \fixed c {
   \global
   % Music follows here.
   \anacrusis
-
 }
 
-voicePianoRight = \fixed c'' { % {{{2
+% PianoRight {{{2
+
+voicePianoRight = \fixed c'' {
   \global
   % Music follows here.
   \anacrusis
-
 }
 
-voicePianoLeft = \fixed c { % {{{2
+% PianoLeft {{{2
+
+voicePianoLeft = \fixed c {
   \global
   % Music follows here.
   \anacrusis
-
 }
 
-voiceVibraphone = \fixed c' { % {{{2
+% Vibraphone {{{2
+
+voiceVibraphone = \fixed c' {
   \global
   % Music follows here.
   \anacrusis
-
 }
 
-voiceDrums = \drummode { % {{{2
+% Drums {{{2
+
+voiceDrums = \drummode {
   \global
   % Music follows here.
   \anacrusisDrums
-
 }
 
-% ------------ instruments {{{1 ------------
+% instruments {{{1
 
-instrumentOrgan = \new GrandStaff \with { % {{{2
+% Organ {{{2
+
+instrumentOrgan = \new GrandStaff \with {
   instrumentName = "organ"
   shortInstrumentName =  "org"
 } &lt;&lt;
@@ -361,7 +378,9 @@ instrumentOrgan = \new GrandStaff \with { % {{{2
       \voiceOrganLeft }
 &gt;&gt;
 
-instrumentViolaOrganista = \new GrandStaff \with { % {{{2
+% ViolaOrganista {{{2
+
+instrumentViolaOrganista = \new GrandStaff \with {
   instrumentName = \markup \column { viola orga- nista }
   shortInstrumentName = \markup \column { va org }
 } &lt;&lt;
@@ -381,7 +400,9 @@ instrumentViolaOrganista = \new GrandStaff \with { % {{{2
       \voiceViolaOrganistaLeft }
 &gt;&gt;
 
-instrumentHarpsichord = \new GrandStaff \with { % {{{2
+% Harpsichord {{{2
+
+instrumentHarpsichord = \new GrandStaff \with {
   instrumentName = \markup \column { harpsi- chord }
   shortInstrumentName = \markup \column { hp cd }
   connectArpeggios = ##t
@@ -402,7 +423,9 @@ instrumentHarpsichord = \new GrandStaff \with { % {{{2
       \voiceHarpsichordLeft }
 &gt;&gt;
 
-instrumentPiano = \new GrandStaff \with { % {{{2
+% Piano {{{2
+
+instrumentPiano = \new GrandStaff \with {
   instrumentName = "piano"
   shortInstrumentName = "pn"
 } &lt;&lt;
@@ -422,7 +445,9 @@ instrumentPiano = \new GrandStaff \with { % {{{2
       \voicePianoLeft }
 &gt;&gt;
 
-instrumentVibraphone = \new Staff = "vibraphone" \with { % {{{2
+% Vibraphone {{{2
+
+instrumentVibraphone = \new Staff = "vibraphone" \with {
   instrumentName = \markup \column { vibra- phone }
   shortInstrumentName = "vb"
   midiInstrument = "vibraphone"
@@ -430,12 +455,14 @@ instrumentVibraphone = \new Staff = "vibraphone" \with { % {{{2
   midiMaximumVolume = #1.5
 } { \clef treble \voiceVibraphone }
 
-instrumentDrums = \new DrumStaff \with { % {{{2
+% Drums {{{2
+
+instrumentDrums = \new DrumStaff \with {
   instrumentName = "drums"
   shortInstrumentName = "dm"
 } { \clef percussion \voiceDrums }
 
-% ------------ book {{{1 ------------
+% book {{{1
 
 \book {
   \score {
@@ -467,7 +494,7 @@ instrumentDrums = \new DrumStaff \with { % {{{2
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: chimay</p>
-<p class="date">Created: 2023-11-27 lun 13:33</p>
+<p class="date">Created: 2023-11-29 mer 14:49</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

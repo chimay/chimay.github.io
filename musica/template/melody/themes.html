@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-12-07 jeu 12:43 -->
+<!-- 2023-12-12 mar 11:47 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Opus : Musica : template : Include</title>
@@ -205,28 +205,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org530876d">1. Eclats de vers: Opus : Musica : template : Thèmes</a></li>
+<li><a href="#org294c248">1. Eclats de vers: Opus : Musica : template : Thèmes</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org530876d" class="outline-2">
-<h2 id="org530876d"><span class="section-number-2">1.</span> Eclats de vers: Opus : Musica : template : Thèmes</h2>
+<div id="outline-container-org294c248" class="outline-2">
+<h2 id="org294c248"><span class="section-number-2">1.</span> Eclats de vers: Opus : Musica : template : Thèmes</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgfdb7503" class="outline-3">
-<h3 id="orgfdb7503"><span class="section-number-3">1.1.</span> Mesure 3/4, carrure 2 x 4</h3>
+<div id="outline-container-org4192493" class="outline-3">
+<h3 id="org4192493"><span class="section-number-3">1.1.</span> Mesure 3/4, carrure 2 x 4</h3>
 <div class="outline-text-3" id="text-1-1">
 <div class="org-src-container">
-<pre class="src src-lilypond">% abbreviations {{{1
-
-% them = theme
-% cant = cantus firmus
-% cpnt = counterpoint
-% sub  = subject
-% csub = countersubject
-
-% global variables {{{1
+<pre class="src src-lilypond">% global variables {{{1
 
 global = {
   \key c \major
@@ -301,6 +293,8 @@ theme_test = {
   \break
 }
 
+% harmony {{{1
+
 % cantus firmus {{{1
 
 % counterpoints {{{1
@@ -321,19 +315,11 @@ theme_test = {
 </div>
 </div>
 
-<div id="outline-container-org4c844e4" class="outline-3">
-<h3 id="org4c844e4"><span class="section-number-3">1.2.</span> Mesure 4/4, carrure 2 x 4</h3>
+<div id="outline-container-org55de8d4" class="outline-3">
+<h3 id="org55de8d4"><span class="section-number-3">1.2.</span> Mesure 4/4, carrure 2 x 4</h3>
 <div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
-<pre class="src src-lilypond">% abbreviations {{{1
-
-% them = theme
-% cant = cantus firmus
-% cpnt = counterpoint
-% sub  = subject
-% csub = countersubject
-
-% global variables {{{1
+<pre class="src src-lilypond">% global variables {{{1
 
 global = {
   \key c \major
@@ -399,12 +385,14 @@ anacrusisDrums = {
 % themes {{{1
 
 themeMelody = {
-  c1   | d1   \bar "|"
-  c1   | d1   \bar "|"
-  c1   | d1   \bar "|"
-  c1   | d1   \bar "||"
+  c1   | d   \bar "|"
+  c    | d   \bar "|"
+  c    | d   \bar "|"
+  c    | d   \bar "||"
   \break
 }
+
+% harmony {{{1
 
 % cantus firmus {{{1
 
@@ -426,19 +414,110 @@ themeMelody = {
 </div>
 </div>
 
-<div id="outline-container-org5f47c6c" class="outline-3">
-<h3 id="org5f47c6c"><span class="section-number-3">1.3.</span> Mesure 4/4, carrure 3 x 2</h3>
+<div id="outline-container-orgd37b39d" class="outline-3">
+<h3 id="orgd37b39d"><span class="section-number-3">1.3.</span> Mesure 2/4, carrure 2 x 4</h3>
 <div class="outline-text-3" id="text-1-3">
 <div class="org-src-container">
-<pre class="src src-lilypond">% abbreviations {{{1
+<pre class="src src-lilypond">% global variables {{{1
 
-% them = theme
-% cant = cantus firmus
-% cpnt = counterpoint
-% sub  = subject
-% csub = countersubject
+global = {
+  \key c \major
+  \numericTimeSignature
+  \time 2/2
+}
 
-% global variables {{{1
+% silences {{{1
+
+silencePeriod = {
+  %\override MultiMeasureRest.staff-position = #0
+  \repeat unfold 3 { R1 | R \bar "|" }
+  R | R \bar "||"
+  \break
+}
+
+silencePeriodMinus = {
+  R1*7
+}
+
+% invisible silences {{{1
+
+skipPeriod = {
+  s1*8
+  \break
+}
+
+skipPeriodMinus = {
+  s1*7
+}
+
+% drones {{{1
+
+droneC = {
+  \repeat unfold 3 { c1 ~ | c ~ }
+  c ~ | c
+}
+
+droneG = {
+  \transpose c g \droneC
+}
+
+droneE = {
+  \transpose c e \droneC
+}
+
+% anacrusis {{{1
+
+anacrusis = {
+  \partial 2
+  g8 f e d
+}
+
+anacrusisDrums = {
+  \partial 2
+  r2
+}
+
+% intros {{{1
+
+% codas {{{1
+
+% themes {{{1
+
+themeMelody = {
+  c1   | d   \bar "|"
+  c    | d   \bar "|"
+  c    | d   \bar "|"
+  c    | d   \bar "||"
+  \break
+}
+
+% harmony {{{1
+
+% cantus firmus {{{1
+
+% counterpoints {{{1
+
+% subjects {{{1
+
+% countersubjects {{{1
+
+% answers {{{1
+
+% episodes {{{1
+
+% arpeggios {{{1
+
+% drums {{{1
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfacecd4" class="outline-3">
+<h3 id="orgfacecd4"><span class="section-number-3">1.4.</span> Mesure 4/4, carrure 3 x 2</h3>
+<div class="outline-text-3" id="text-1-4">
+<div class="org-src-container">
+<pre class="src src-lilypond">% global variables {{{1
 
 global = {
   \key c \major
@@ -504,10 +583,206 @@ anacrusisDrums = {
 % themes {{{1
 
 themeMelody = {
-  c1 | d1 | e1  \bar "|"
-  c1 | d1 | e1  \bar "||"
+  c1 | d | e  \bar "|"
+  c  | d | e  \bar "||"
   \break
 }
+
+% harmony {{{1
+
+% cantus firmus {{{1
+
+% counterpoints {{{1
+
+% subjects {{{1
+
+% countersubjects {{{1
+
+% answers {{{1
+
+% episodes {{{1
+
+% arpeggios {{{1
+
+% drums {{{1
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc9a4082" class="outline-3">
+<h3 id="orgc9a4082"><span class="section-number-3">1.5.</span> Mesure 2/4, carrure 3 x 2</h3>
+<div class="outline-text-3" id="text-1-5">
+<div class="org-src-container">
+<pre class="src src-lilypond">% global variables {{{1
+
+global = {
+  \key c \major
+  \numericTimeSignature
+  \time 2/2
+}
+
+% silences {{{1
+
+silencePeriod = {
+  %\override MultiMeasureRest.staff-position = #0
+  R1 | R | R \bar "|"
+  R  | R | R \bar "||"
+  \break
+}
+
+silencePeriodMinus = {
+  R1*5
+}
+
+% invisible silences {{{1
+
+skipPeriod = {
+  s1*6
+  \break
+}
+
+skipPeriodMinus = {
+  s1*5
+}
+
+% drones {{{1
+
+droneC = {
+  c1 ~ | c ~ | c ~
+  c ~  | c ~ | c ~
+}
+
+droneG = {
+  \transpose c g \droneC
+}
+
+droneE = {
+  \transpose c e \droneC
+}
+
+% anacrusis {{{1
+
+anacrusis = {
+  \partial 2
+  g8 f e d
+}
+
+anacrusisDrums = {
+  \partial 2
+  r2
+}
+
+% intros {{{1
+
+% codas {{{1
+
+% themes {{{1
+
+themeMelody = {
+  c1 | d | e  \bar "|"
+  c  | d | e  \bar "||"
+  \break
+}
+
+% harmony {{{1
+
+% cantus firmus {{{1
+
+% counterpoints {{{1
+
+% subjects {{{1
+
+% countersubjects {{{1
+
+% answers {{{1
+
+% episodes {{{1
+
+% arpeggios {{{1
+
+% drums {{{1
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org536766e" class="outline-3">
+<h3 id="org536766e"><span class="section-number-3">1.6.</span> Mesure 3/4, carrure 3 x 2</h3>
+<div class="outline-text-3" id="text-1-6">
+<div class="org-src-container">
+<pre class="src src-lilypond">% global variables {{{1
+
+global = {
+  \key c \major
+  \numericTimeSignature
+  \time 3/4
+}
+
+% silences {{{1
+
+silencePeriod = {
+  %\override MultiMeasureRest.staff-position = #0
+  R2. | R | R \bar "|"
+  R   | R | R \bar "||"
+  \break
+}
+
+silencePeriodMinus = {
+  R2.*5
+}
+
+% invisible silences {{{1
+
+skipPeriod = {
+  s2.*6
+  \break
+}
+
+skipPeriodMinus = {
+  s2.*5
+}
+
+% drones {{{1
+
+droneC = {
+  c2. ~ | c ~ | c ~
+  c ~   | c ~ | c ~
+}
+
+droneG = {
+  \transpose c g \droneC
+}
+
+droneE = {
+  \transpose c e \droneC
+}
+
+% anacrusis {{{1
+
+anacrusis = {
+  \partial 2
+  g8 f e d
+}
+
+anacrusisDrums = {
+  \partial 2
+  r2
+}
+
+% intros {{{1
+
+% codas {{{1
+
+% themes {{{1
+
+themeMelody = {
+  c2. | d | e  \bar "|"
+  c   | d | e  \bar "||"
+  \break
+}
+
+% harmony {{{1
 
 % cantus firmus {{{1
 
@@ -532,7 +807,7 @@ themeMelody = {
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: chimay</p>
-<p class="date">Created: 2023-12-07 jeu 12:43</p>
+<p class="date">Created: 2023-12-12 mar 11:47</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

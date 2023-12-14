@@ -1250,6 +1250,12 @@ poweroff
 |            | LANG      | java runtime environment          | jre10-openjdk       |
 | javaws     | LANG      | java web start                    | icedtea-web         |
 
+*** Communication entre processus
+
+| Commande | Interface | Fonction                           | Paquet ou dépôt |
+|----------+-----------+------------------------------------+-----------------|
+| mkfifo   | CLI       | création de tube (pipe) nommé      | coreutils       |
+| socat    | CLI       | communication avec sockets & pipes | socat           |
 
 *** Réseau
 
@@ -1261,6 +1267,10 @@ poweroff
 | avahi-*             | SRV       | implémentation de Zero-Conf           | avahi                           |
 |                     |           | permet la résolution de ordi.local    | nss-mdns                        |
 |---------------------+-----------+---------------------------------------+---------------------------------|
+| netcat              | CLI       | communication à travers réseau        | gnu-netcat                      |
+| trickle             | CLI       | limitation de la bande passante       | trickle                         |
+|                     |           | pour un programme                     |                                 |
+|---------------------+-----------+---------------------------------------+---------------------------------|
 | drill               | CLI       | résolution de nom de domaine -> ip    | ldns                            |
 | adig                | CLI       | résolution de nom de domaine -> ip    | c-ares                          |
 |---------------------+-----------+---------------------------------------+---------------------------------|
@@ -1269,10 +1279,6 @@ poweroff
 | protonvpn-cli       | CLI       |                                       |                                 |
 |---------------------+-----------+---------------------------------------+---------------------------------|
 | wihotspot-gui       | GUI       | hotspot wifi                          | aur/linux-wifi-hotspot          |
-|---------------------+-----------+---------------------------------------+---------------------------------|
-| mkfifo              | CLI       | création de tube (pipe) nommé         | coreutils                       |
-| socat               | CLI       | communication avec sockets & pipes    | socat                           |
-| netcat              | CLI       | communication à travers réseau        | gnu-netcat                      |
 |---------------------+-----------+---------------------------------------+---------------------------------|
 | ssh                 | CLI       | shell à distance                      | openssh                         |
 | sshfs               | CLI       | montage résau via ssh                 | sshfs                           |
@@ -1293,40 +1299,13 @@ poweroff
 | pssh                | CLI       | mutiples shells à distance            | pip/pssh                        |
 | orgalorg            | CLI       | mutiples shells à distance            | aur/orgalorg                    |
 |---------------------+-----------+---------------------------------------+---------------------------------|
-| getmail             | CLI       | distribution du courrier              | pip/getmail                     |
-| fdm                 | CLI       | distribution du courrier              | fdm                             |
-| mbsync              | CLI       | synchronisation de mail via IMAP      | isync                           |
-| procmail            | CLI       | filtrage du courrier                  | procmail                        |
-| formail             | CLI       | formattage de mail                    | procmail                        |
-| maddr               | CLI       | addresses mail                        | aur/mblaze                      |
-|---------------------+-----------+---------------------------------------+---------------------------------|
-| mail                | CLI, REPL | lecture & envoi de mail               | s-nail                          |
-| himalaya            | CLI       | lecture & envoi de mail               | himalaya                        |
-| neomutt             | TUI       | lecture & envoi de mail               | neomutt                         |
-| aerc                | TUI       | lecture & envoi de mail               | aerc                            |
-| alpine              | TUI       | lecture & envoi de mail, news         | aur/alpine                      |
-| meli                | TUI       | lecture & envoi de mail               | aur/meli-git                    |
-|---------------------+-----------+---------------------------------------+---------------------------------|
-| abook               | CLI, TUI  | gestionnaire de contacts              | abook                           |
-|---------------------+-----------+---------------------------------------+---------------------------------|
-| newsboat            | TUI       | lecteur de flux RSS                   | newsboat                        |
-|---------------------+-----------+---------------------------------------+---------------------------------|
-| slrn                | TUI       | lecteur usenet                        | aur/slrn-snapshot               |
-| tin                 | TUI       | lecteur usenet                        | aur/tin                         |
-| xrn                 | TUI       | lecteur usenet                        | aur/xrn                         |
-|---------------------+-----------+---------------------------------------+---------------------------------|
-| toot                | TUI       | client mastodon                       | toot                            |
-| tut                 | TUI       | client mastodon                       | aur/tut-bin                     |
-| servitor            | TUI       | client mastodon et lemmy              | github:bentonedmondson/servitor |
-| neonmodem           | TUI       | client lemmy                          | aur/neonmodem                   |
-|---------------------+-----------+---------------------------------------+---------------------------------|
 | lftp                | CLI       | client FTP                            | lftp                            |
 | ncftp               | CLI       | client FTP                            | ncftp                           |
 | cbftp               | TUI       | client FTP / FXP                      | aur/cbftp                       |
 | filezilla           | GUI       | client FTP                            | filezilla                       |
 |---------------------+-----------+---------------------------------------+---------------------------------|
-| aria2c              | CLI       | client FTP, HTTP, torrent, metalink   | aria2                           |
 | dad, diana          | CLI       | gestion de session aria2              | aur/diana-git                   |
+| aria2c              | CLI       | client FTP, HTTP, torrent, metalink   | aria2                           |
 | aria2p              | TUI       | client pour aria2c                    | pip/'aria2p[tui]'               |
 |---------------------+-----------+---------------------------------------+---------------------------------|
 | transmission-cli    | CLI       | torrent                               | transmission-cli                |
@@ -1343,9 +1322,9 @@ poweroff
 | deluge-gtk          | GUI       | gui pour deluge                       | deluge-gtk                      |
 | rtorrent            | TUI       | torrent                               | rtorrent                        |
 |---------------------+-----------+---------------------------------------+---------------------------------|
+| curl                | CLI       | téléchargement de page(s) web         | curl                            |
+| wget                | CLI       | téléchargement de page(s) web         | wget                            |
 | httrack             | CLI       | téléchargement de site                | httrack                         |
-| wget                | CLI       | téléchargement de site                | wget                            |
-| curl                | CLI       | téléchargement de site                | curl                            |
 |---------------------+-----------+---------------------------------------+---------------------------------|
 | surfraw             | CLI       | lance des recherches web              | surfraw                         |
 | mkelvis             | CLI       | génère un elvi (moteur de recherche)  | pip/surfraw-tools               |
@@ -1381,6 +1360,34 @@ poweroff
 | min                 | GUI       | navigateur web                        | min                             |
 |---------------------+-----------+---------------------------------------+---------------------------------|
 | neocities           | CLI       | client neocities                      | gem/neocities                   |
+|---------------------+-----------+---------------------------------------+---------------------------------|
+| newsboat            | TUI       | lecteur de flux RSS                   | newsboat                        |
+|---------------------+-----------+---------------------------------------+---------------------------------|
+| getmail             | CLI       | distribution du courrier              | pip/getmail                     |
+| fetchmail           | CLI       | distribution du courrier              | fetchmail                       |
+| fdm                 | CLI       | distribution du courrier              | fdm                             |
+| mbsync              | CLI       | synchronisation de mail via IMAP      | isync                           |
+| procmail            | CLI       | filtrage du courrier                  | procmail                        |
+| formail             | CLI       | formattage de mail                    | procmail                        |
+| maddr               | CLI       | addresses mail                        | aur/mblaze                      |
+|---------------------+-----------+---------------------------------------+---------------------------------|
+| mail                | CLI, REPL | lecture & envoi de mail               | s-nail                          |
+| himalaya            | CLI       | lecture & envoi de mail               | himalaya                        |
+| neomutt             | TUI       | lecture & envoi de mail               | neomutt                         |
+| aerc                | TUI       | lecture & envoi de mail               | aerc                            |
+| alpine              | TUI       | lecture & envoi de mail, news         | aur/alpine                      |
+| meli                | TUI       | lecture & envoi de mail               | aur/meli-git                    |
+|---------------------+-----------+---------------------------------------+---------------------------------|
+| abook               | CLI, TUI  | gestionnaire de contacts              | abook                           |
+|---------------------+-----------+---------------------------------------+---------------------------------|
+| slrn                | TUI       | lecteur usenet                        | aur/slrn-snapshot               |
+| tin                 | TUI       | lecteur usenet                        | aur/tin                         |
+| xrn                 | TUI       | lecteur usenet                        | aur/xrn                         |
+|---------------------+-----------+---------------------------------------+---------------------------------|
+| toot                | TUI       | client mastodon                       | toot                            |
+| tut                 | TUI       | client mastodon                       | aur/tut-bin                     |
+| servitor            | TUI       | client mastodon et lemmy              | github:bentonedmondson/servitor |
+| neonmodem           | TUI       | client lemmy                          | aur/neonmodem                   |
 |---------------------+-----------+---------------------------------------+---------------------------------|
 | weechat             | TUI       | IRC                                   | weechat                         |
 | irssi               | TUI       | IRC                                   | irssi                           |

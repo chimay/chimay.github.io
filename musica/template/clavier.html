@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-12-16 sam 14:20 -->
+<!-- 2023-12-18 lun 17:28 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Opus : Musica : template</title>
@@ -205,20 +205,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgedf78fb">1. Claviers</a></li>
+<li><a href="#orgb3246e5">1. Claviers</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgedf78fb" class="outline-2">
-<h2 id="orgedf78fb"><span class="section-number-2">1.</span> Claviers</h2>
+<div id="outline-container-orgb3246e5" class="outline-2">
+<h2 id="orgb3246e5"><span class="section-number-2">1.</span> Claviers</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Le résultat :
 </p>
 
 
-<div id="org738ccbc" class="figure">
+<div id="org80decee" class="figure">
 <p><img src="../../image/musica/template/clavier.png" alt="clavier.png" />
 </p>
 </div>
@@ -228,23 +228,26 @@ La source :
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lilypond">% headers {{{1
+<pre class="src src-lilypond">% vim: set expandtab shiftwidth=2 softtabstop=2:
 
-%\version "2.24.0"
+\version "2.24.3"
 
-\language "english"
+% included files {{{1
 
-% header {{{2
+\include "global/global.glob.ly"
+\include "melody/melody.mld.ly"
+
+% header {{{1
 
 \header {
-  title = "claviers"
+  title = "keyboards"
   subtitle="subtitle"
   composer = "composer"
   poet = "poet"
   %piece = "piece"
 }
 
-% layout {{{2
+% layout {{{1
 
 \layout {
   %\enablePolymeter
@@ -267,28 +270,22 @@ La source :
 %showFirstLength = R2.*1
 %showLastLength = R2.*8
 
-% included melodies {{{1
-
-\include "melody/mel.ly"
-
 % voices {{{1
 
 % organ {{{2
 
 % OrganRight {{{3
 
-voiceOrganRight = \fixed c'' {
-  \global
+voiceOrganRight = \relative c'' {
+  \keytime
   \tempo 2. = 50
-  % Music follows here.
   \anacrusis
 }
 
 % OrganLeft {{{3
 
-voiceOrganLeft = \fixed c {
-  \global
-  % Music follows here.
+voiceOrganLeft = \relative c {
+  \keytime
   \anacrusis
 }
 
@@ -296,17 +293,15 @@ voiceOrganLeft = \fixed c {
 
 % ViolaOrganistaRight {{{3
 
-voiceViolaOrganistaRight = \fixed c'' {
-  \global
-  % Music follows here.
+voiceViolaOrganistaRight = \relative c'' {
+  \keytime
   \anacrusis
 }
 
 % ViolaOrganistaLeft {{{3
 
-voiceViolaOrganistaLeft = \fixed c {
-  \global
-  % Music follows here.
+voiceViolaOrganistaLeft = \relative c {
+  \keytime
   \anacrusis
 }
 
@@ -314,17 +309,15 @@ voiceViolaOrganistaLeft = \fixed c {
 
 % right {{{3
 
-voiceHarpsichordRight = \fixed c'' {
-  \global
-  % Music follows here.
+voiceHarpsichordRight = \relative c'' {
+  \keytime
   \anacrusis
 }
 
 % left {{{3
 
-voiceHarpsichordLeft = \fixed c {
-  \global
-  % Music follows here.
+voiceHarpsichordLeft = \relative c {
+  \keytime
   \anacrusis
 }
 
@@ -332,33 +325,29 @@ voiceHarpsichordLeft = \fixed c {
 
 % right {{{3
 
-voicePianoRight = \fixed c'' {
-  \global
-  % Music follows here.
+voicePianoRight = \relative c'' {
+  \keytime
   \anacrusis
 }
 
 % left {{{3
 
-voicePianoLeft = \fixed c {
-  \global
-  % Music follows here.
+voicePianoLeft = \relative c {
+  \keytime
   \anacrusis
 }
 
 % vibraphone {{{2
 
-voiceVibraphone = \fixed c' {
-  \global
-  % Music follows here.
+voiceVibraphone = \relative c' {
+  \keytime
   \anacrusis
 }
 
 % drums {{{2
 
 voiceDrums = \drummode {
-  \global
-  % Music follows here.
+  \keytime
   \anacrusisDrums
 }
 
@@ -412,7 +401,7 @@ instrumentViolaOrganista = \new GrandStaff \with {
 
 instrumentHarpsichord = \new GrandStaff \with {
   instrumentName = \markup \column { harpsi- chord }
-  shortInstrumentName = \markup \column { hp cd }
+  shortInstrumentName = "hpd"
   connectArpeggios = ##t
 } &lt;&lt;
   \new Staff = "treble" \with {
@@ -435,7 +424,7 @@ instrumentHarpsichord = \new GrandStaff \with {
 
 instrumentPiano = \new GrandStaff \with {
   instrumentName = "piano"
-  shortInstrumentName = "pn"
+  shortInstrumentName = "pf"
 } &lt;&lt;
   \new Staff = "treble" \with {
     midiInstrument = "acoustic grand"
@@ -502,7 +491,7 @@ instrumentDrums = \new DrumStaff \with {
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: chimay</p>
-<p class="date">Created: 2023-12-16 sam 14:20</p>
+<p class="date">Created: 2023-12-18 lun 17:28</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

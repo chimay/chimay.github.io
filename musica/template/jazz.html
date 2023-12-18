@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2023-12-16 sam 14:20 -->
+<!-- 2023-12-18 lun 17:28 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Opus : Musica : template</title>
@@ -205,20 +205,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org54c3b63">1. Jazz</a></li>
+<li><a href="#orgb1e0339">1. Jazz</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org54c3b63" class="outline-2">
-<h2 id="org54c3b63"><span class="section-number-2">1.</span> Jazz</h2>
+<div id="outline-container-orgb1e0339" class="outline-2">
+<h2 id="orgb1e0339"><span class="section-number-2">1.</span> Jazz</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Le résultat :
 </p>
 
 
-<div id="org553a723" class="figure">
+<div id="org2823997" class="figure">
 <p><img src="../../image/musica/template/jazz.png" alt="jazz.png" />
 </p>
 </div>
@@ -228,13 +228,16 @@ La source :
 </p>
 
 <div class="org-src-container">
-<pre class="src src-lilypond">% headers {{{1
+<pre class="src src-lilypond">% vim: set expandtab shiftwidth=2 softtabstop=2:
 
-%\version "2.24.0"
+\version "2.24.3"
 
-\language "english"
+% included files {{{1
 
-% header {{{2
+\include "global/global.glob.ly"
+\include "melody/melody.mld.ly"
+
+% header {{{1
 
 \header {
   title = "jazz"
@@ -244,7 +247,7 @@ La source :
   %piece = "piece"
 }
 
-% layout {{{2
+% layout {{{1
 
 \layout {
   %\enablePolymeter
@@ -266,28 +269,22 @@ La source :
 %showFirstLength = R2.*8
 %showLastLength = R2.*8
 
-% included melodies {{{1
-
-\include "melody/mel.ly"
-
 % voices {{{1
 
 % woods {{{2
 
 % WoodSoprano {{{3
 
-voiceWoodSoprano = \fixed c'' {
-  \global
+voiceWoodSoprano = \relative c'' {
+  \keytime
   \tempo 2. = 50
-  % Music follows here.
   \anacrusis
 }
 
 % WoodBass {{{3
 
-voiceWoodBass = \fixed c, {
-  \global
-  % Music follows here.
+voiceWoodBass = \relative c, {
+  \keytime
   \anacrusis
 }
 
@@ -295,17 +292,15 @@ voiceWoodBass = \fixed c, {
 
 % BrassSoprano {{{3
 
-voiceBrassSoprano = \fixed c'' {
-  \global
-  % Music follows here.
+voiceBrassSoprano = \relative c'' {
+  \keytime
   \anacrusis
 }
 
 % BrassBass {{{3
 
-voiceBrassBass = \fixed c, {
-  \global
-  % Music follows here.
+voiceBrassBass = \relative c, {
+  \keytime
   \anacrusis
 }
 
@@ -313,17 +308,15 @@ voiceBrassBass = \fixed c, {
 
 % OrganRight {{{3
 
-voiceOrganRight = \fixed c'' {
-  \global
-  % Music follows here.
+voiceOrganRight = \relative c'' {
+  \keytime
   \anacrusis
 }
 
 % OrganLeft {{{3
 
-voiceOrganLeft = \fixed c {
-  \global
-  % Music follows here.
+voiceOrganLeft = \relative c {
+  \keytime
   \anacrusis
 }
 
@@ -331,17 +324,15 @@ voiceOrganLeft = \fixed c {
 
 % right {{{3
 
-voiceKeyboardRight = \fixed c'' {
-  \global
-  % Music follows here.
+voiceKeyboardRight = \relative c'' {
+  \keytime
   \anacrusis
 }
 
 % left {{{3
 
-voiceKeyboardLeft = \fixed c {
-  \global
-  % Music follows here.
+voiceKeyboardLeft = \relative c {
+  \keytime
   \anacrusis
 }
 
@@ -349,33 +340,29 @@ voiceKeyboardLeft = \fixed c {
 
 % treble {{{3
 
-voiceLuteTreble = \fixed c' {
-  \global
-  % Music follows here.
+voiceLuteTreble = \relative c' {
+  \keytime
   \anacrusis
 }
 
 % bass {{{3
 
-voiceLuteBass = \fixed c, {
-  \global
-  % Music follows here.
+voiceLuteBass = \relative c, {
+  \keytime
   \anacrusis
 }
 
 % vibraphone {{{2
 
-voiceVibraphone = \fixed c' {
-  \global
-  % Music follows here.
+voiceVibraphone = \relative c' {
+  \keytime
   \anacrusis
 }
 
 % drums {{{2
 
 voiceDrums = \drummode {
-  \global
-  % Music follows here.
+  \keytime
   \anacrusisDrums
 }
 
@@ -385,7 +372,7 @@ voiceDrums = \drummode {
 
 instrumentWoods = \new StaffGroup \with {
   instrumentName = "woods"
-  shortInstrumentName =  "wd"
+  shortInstrumentName =  "ww"
 } &lt;&lt;
   \new Staff = "treble" \with {
     midiInstrument = "clarinet"
@@ -439,7 +426,7 @@ instrumentOrgan = \new GrandStaff \with {
 
 instrumentKeyboard = \new GrandStaff \with {
   instrumentName = "piano"
-  shortInstrumentName = "pn"
+  shortInstrumentName = "pf"
   connectArpeggios = ##t
 } &lt;&lt;
   \new Staff = "treble" \with {
@@ -533,7 +520,7 @@ instrumentDrums = \new DrumStaff \with {
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: chimay</p>
-<p class="date">Created: 2023-12-16 sam 14:20</p>
+<p class="date">Created: 2023-12-18 lun 17:28</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

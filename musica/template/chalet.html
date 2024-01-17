@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-01-17 mer 11:59 -->
+<!-- 2024-01-17 mer 12:58 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Opus : Musica : template</title>
@@ -205,20 +205,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org5c5a5dc">1. Chalet</a></li>
+<li><a href="#org0754bf9">1. Chalet</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org5c5a5dc" class="outline-2">
-<h2 id="org5c5a5dc"><span class="section-number-2">1.</span> Chalet</h2>
+<div id="outline-container-org0754bf9" class="outline-2">
+<h2 id="org0754bf9"><span class="section-number-2">1.</span> Chalet</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Le résultat :
 </p>
 
 
-<div id="org4cc44c7" class="figure">
+<div id="orgedab536" class="figure">
 <p><img src="../../image/musica/template/chalet.png" alt="chalet.png" />
 </p>
 </div>
@@ -272,11 +272,11 @@ Le fichier source :
 
 % voices {{{1
 
-% winds {{{2
+% flutes {{{2
 
 % soprano {{{3
 
-voiceWindSoprano = \relative c'' {
+voiceFluteSoprano = \relative c'' {
   \keytime
   \tempo 2. = 50
   \anacrusis % bar structure 0
@@ -284,21 +284,23 @@ voiceWindSoprano = \relative c'' {
 
 % alto {{{3
 
-voiceWindAlto = \relative c' {
+voiceFluteAlto = \relative c' {
   \keytime
   \anacrusis % bar structure 0
 }
 
-% tenor {{{3
+% organ {{{2
 
-voiceWindTenor = \relative c {
+% right {{{3
+
+voiceOrganRight = \relative c'' {
   \keytime
   \anacrusis % bar structure 0
 }
 
-% bass {{{3
+% left {{{3
 
-voiceWindBass = \relative c, {
+voiceOrganLeft = \relative c {
   \keytime
   \anacrusis % bar structure 0
 }
@@ -349,18 +351,18 @@ voiceHarpsichordLeft = \relative c {
   \anacrusis % bar structure 0
 }
 
-% piano {{{2
+% lutes {{{2
 
-% right {{{3
+% treble {{{3
 
-voicePianoRight = \relative c' {
+voiceLuteTreble = \relative c' {
   \keytime
   \anacrusis % bar structure 0
 }
 
-% left {{{3
+% bass {{{3
 
-voicePianoLeft = \relative c {
+voiceLuteBass = \relative c, {
   \keytime
   \anacrusis % bar structure 0
 }
@@ -381,26 +383,39 @@ voiceDrums = \drummode {
 
 % instruments {{{1
 
-% winds {{{2
+% flutes {{{2
 
-instrumentWinds = \new StaffGroup \with {
-  instrumentName = "winds"
-  shortInstrumentName = "wd"
+instrumentFlutes = \new Staff \with {
+  instrumentName = "flutes"
+  shortInstrumentName = "fls"
+  midiInstrument = "flute"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #1.5
+} { % \clef french
+    \clef treble
+    &lt;&lt; \voiceFluteSoprano \\ \voiceFluteAlto &gt;&gt; }
+
+% organ {{{2
+
+instrumentOrgan = \new GrandStaff \with {
+  instrumentName = "organ"
+  shortInstrumentName = "org"
+  connectArpeggios = ##t
 } &lt;&lt;
   \new Staff = "treble" \with {
-    midiInstrument = "flute"
-    midiMinimumVolume = #1.0
-    midiMaximumVolume = #1.5
-  } { % \clef french
-      \clef treble
-      &lt;&lt; \voiceWindSoprano \\ \voiceWindAlto &gt;&gt; }
+    midiInstrument = "reed organ"
+    midiMinimumVolume = #1.5
+    midiMaximumVolume = #2.0
+  } { \clef treble
+      %\showStaffSwitch
+      \voiceOrganRight }
   \new Staff = "bass" \with {
-    midiInstrument = "bassoon"
-    midiMinimumVolume = #1.0
-    midiMaximumVolume = #1.5
-  } { % \clef varbaritone
-      \clef bass
-      &lt;&lt; \voiceWindTenor \\ \voiceWindBass &gt;&gt; }
+    midiInstrument = "reed organ"
+    midiMinimumVolume = #1.5
+    midiMaximumVolume = #2.0
+  } { \clef bass
+      %\showStaffSwitch
+      \voiceOrganLeft }
 &gt;&gt;
 
 % strings {{{2
@@ -446,27 +461,30 @@ instrumentHarpsichord = \new GrandStaff \with {
       \voiceHarpsichordLeft }
 &gt;&gt;
 
-% piano {{{2
+% lutes {{{2
 
-instrumentPiano = \new GrandStaff \with {
-  instrumentName = "piano"
-  shortInstrumentName = \markup \column { pf }
-  connectArpeggios = ##t
+instrumentLutes = \new StaffGroup \with {
+  instrumentName = "lutes"
+  shortInstrumentName = "lts"
 } &lt;&lt;
   \new Staff = "treble" \with {
-    midiInstrument = "acoustic grand"
+    midiInstrument = "acoustic guitar (nylon)"
     midiMinimumVolume = #1.5
     midiMaximumVolume = #2.0
-  } { \clef treble
-      %\showStaffSwitch
-      \voicePianoRight }
+    % -- 3rd line G clef
+    %clefGlyph = #"clefs.G"
+    %clefPosition = #0
+    %clefTransposition = #0
+    %middleCPosition = #-4
+    %middleCClefPosition = #-4
+  } { \clef soprano
+      \voiceLuteTreble }
   \new Staff = "bass" \with {
-    midiInstrument = "acoustic grand"
+    midiInstrument = "acoustic bass"
     midiMinimumVolume = #1.5
     midiMaximumVolume = #2.0
-  } { \clef bass
-      %\showStaffSwitch
-      \voicePianoLeft }
+  } { \clef subbass
+      \voiceLuteBass }
 &gt;&gt;
 
 % vibraphone {{{2
@@ -491,16 +509,18 @@ instrumentDrums = \new DrumStaff \with {
 \book {
   \markup \column {
     \vspace #1
-    \line { winds = 2 flutes, 2 bassoons }
+    \line { flutes = flute, alto flute }
     \line { strings = 2 violins, 2 cellos }
+    \line { lutes = lute, archlute }
     \vspace #1
   }
   \score {
     &lt;&lt;
-      \instrumentWinds
+      \instrumentFlutes
+      \instrumentOrgan
       \instrumentStrings
       \instrumentHarpsichord
-      \instrumentPiano
+      \instrumentLutes
       \instrumentVibraphone
       \instrumentDrums
     &gt;&gt;
@@ -524,7 +544,7 @@ instrumentDrums = \new DrumStaff \with {
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: chimay</p>
-<p class="date">Created: 2024-01-17 mer 11:59</p>
+<p class="date">Created: 2024-01-17 mer 12:58</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

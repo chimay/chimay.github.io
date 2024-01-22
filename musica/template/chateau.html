@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-01-22 lun 13:16 -->
+<!-- 2024-01-22 lun 17:30 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Opus : Musica : template</title>
@@ -205,20 +205,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgd3dac55">1. Château</a></li>
+<li><a href="#org3b73cec">1. Château</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgd3dac55" class="outline-2">
-<h2 id="orgd3dac55"><span class="section-number-2">1.</span> Château</h2>
+<div id="outline-container-org3b73cec" class="outline-2">
+<h2 id="org3b73cec"><span class="section-number-2">1.</span> Château</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Le résultat :
 </p>
 
 
-<div id="org9b28e64" class="figure">
+<div id="orgb29b8dc" class="figure">
 <p><img src="../../image/musica/template/chateau.png" alt="chateau.png" />
 </p>
 </div>
@@ -285,7 +285,6 @@ désactivés en commentant la ligne correspondante dans la section "book"
 
 voiceFluteSoprano = \relative c'' {
   \keytime
-  \tempo 2. = 50
   \anacrusis % bar structure 0
 }
 
@@ -302,7 +301,6 @@ voiceFluteAlto = \relative c' {
 
 voiceFlutesBassoonsSoprano = \relative c'' {
   \keytime
-  \tempo 2. = 50
   \anacrusis % bar structure 0
 }
 
@@ -333,7 +331,6 @@ voiceFlutesBassoonsBass = \relative c, {
 
 voiceWoodSoprano = \relative c'' {
   \keytime
-  \tempo 2. = 50
   \anacrusis % bar structure 0
 }
 
@@ -358,18 +355,32 @@ voiceWoodBass = \relative c, {
   \anacrusis % bar structure 0
 }
 
-% organ {{{2
+% saxophones {{{2
 
-% right {{{3
+% soprano {{{3
 
-voiceOrganRight = \relative c'' {
+voiceSaxophoneSoprano = \relative c'' {
   \keytime
   \anacrusis % bar structure 0
 }
 
-% left {{{3
+% alto {{{3
 
-voiceOrganLeft = \relative c {
+voiceSaxophoneAlto = \relative c' {
+  \keytime
+  \anacrusis % bar structure 0
+}
+
+% tenor {{{3
+
+voiceSaxophoneTenor = \relative c {
+  \keytime
+  \anacrusis % bar structure 0
+}
+
+% bass {{{3
+
+voiceSaxophoneBass = \relative c, {
   \keytime
   \anacrusis % bar structure 0
 }
@@ -404,6 +415,22 @@ voiceBrassBass = \relative c, {
   \anacrusis % bar structure 0
 }
 
+% organ {{{2
+
+% right {{{3
+
+voiceOrganRight = \relative c'' {
+  \keytime
+  \anacrusis % bar structure 0
+}
+
+% left {{{3
+
+voiceOrganLeft = \relative c {
+  \keytime
+  \anacrusis % bar structure 0
+}
+
 % strings {{{2
 
 % soprano {{{3
@@ -411,6 +438,7 @@ voiceBrassBass = \relative c, {
 voiceStringSoprano = \relative c'' {
   \keytime
   \anacrusis % bar structure 0
+  \tempo 2. = 50
 }
 
 % alto {{{3
@@ -598,6 +626,28 @@ instrumentWoods = \new StaffGroup \with {
        midiMaximumVolume = #1.5
      } { \voiceTwo \voiceWoodBass }
   &gt;&gt;
+&gt;&gt;
+
+% saxophones {{{2
+
+instrumentSaxophones = \new StaffGroup \with {
+  instrumentName = "saxophones"
+  shortInstrumentName = "sax"
+} &lt;&lt;
+  \new Staff = "treble" \with {
+    midiInstrument = "alto sax"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #1.5
+  } { % \clef french
+      \clef treble
+      &lt;&lt; \voiceSaxophoneSoprano \\ \voiceSaxophoneAlto &gt;&gt; }
+  \new Staff = "bass" \with {
+    midiInstrument = "baritone sax"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #1.5
+  } { % \clef varbaritone
+      \clef bass
+      &lt;&lt; \voiceSaxophoneTenor \\ \voiceSaxophoneBass &gt;&gt; }
 &gt;&gt;
 
 % brass {{{2
@@ -807,6 +857,7 @@ instrumentDrums = \new DrumStaff \with {
     %\line { brass = 2 trumpets, 2 french horns }
     \line { strings = 2 violins, 2 cellos }
     \line { lutes = lute, archlute }
+    %\line { guitars = guitar, bass guitar }
     \vspace #1
   }
   \score {
@@ -814,11 +865,12 @@ instrumentDrums = \new DrumStaff \with {
       %\instrumentFlutes
       %\instrumentFlutesBassoons
       \instrumentWoods
+      %\instrumentSaxophones
       \instrumentOrgan
       %\instrumentBrass
       \instrumentStrings
       \instrumentHarpsichord
-      \instrumentPiano
+      %\instrumentPiano
       \instrumentLutes
       %\instrumentGuitars
       \instrumentHarp
@@ -853,7 +905,7 @@ instrumentDrums = \new DrumStaff \with {
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: chimay</p>
-<p class="date">Created: 2024-01-22 lun 13:16</p>
+<p class="date">Created: 2024-01-22 lun 17:30</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-01-22 lun 10:41 -->
+<!-- 2024-01-22 lun 12:27 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Opus : Musica : template</title>
@@ -205,20 +205,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org7ffaecc">1. Château</a></li>
+<li><a href="#org960e335">1. Château</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org7ffaecc" class="outline-2">
-<h2 id="org7ffaecc"><span class="section-number-2">1.</span> Château</h2>
+<div id="outline-container-org960e335" class="outline-2">
+<h2 id="org960e335"><span class="section-number-2">1.</span> Château</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Le résultat :
 </p>
 
 
-<div id="orgd695b3f" class="figure">
+<div id="org8379cfe" class="figure">
 <p><img src="../../image/musica/template/chateau.png" alt="chateau.png" />
 </p>
 </div>
@@ -279,6 +279,23 @@ désactivés en commentant la ligne correspondante dans la section "book"
 
 % voices {{{1
 
+% flutes {{{2
+
+% soprano {{{3
+
+voiceFluteSoprano = \relative c'' {
+  \keytime
+  \tempo 2. = 50
+  \anacrusis % bar structure 0
+}
+
+% alto {{{3
+
+voiceFluteAlto = \relative c' {
+  \keytime
+  \anacrusis % bar structure 0
+}
+
 % winds {{{2
 
 % soprano {{{3
@@ -306,6 +323,37 @@ voiceWindTenor = \relative c {
 % bass {{{3
 
 voiceWindBass = \relative c, {
+  \keytime
+  \anacrusis % bar structure 0
+}
+
+% flutes &amp; bassoons {{{2
+
+% soprano {{{3
+
+voiceFlutesBassoonsSoprano = \relative c'' {
+  \keytime
+  \tempo 2. = 50
+  \anacrusis % bar structure 0
+}
+
+% alto {{{3
+
+voiceFlutesBassoonsAlto = \relative c' {
+  \keytime
+  \anacrusis % bar structure 0
+}
+
+% tenor {{{3
+
+voiceFlutesBassoonsTenor = \relative c {
+  \keytime
+  \anacrusis % bar structure 0
+}
+
+% bass {{{3
+
+voiceFlutesBassoonsBass = \relative c, {
   \keytime
   \anacrusis % bar structure 0
 }
@@ -404,6 +452,22 @@ voiceLuteBass = \relative c, {
   \anacrusis % bar structure 0
 }
 
+% guitars {{{2
+
+% treble {{{3
+
+voiceGuitarTreble = \relative c' {
+  \keytime
+  \anacrusis % bar structure 0
+}
+
+% bass {{{3
+
+voiceGuitarBass = \relative c, {
+  \keytime
+  \anacrusis % bar structure 0
+}
+
 % harp {{{2
 
 % treble {{{3
@@ -435,6 +499,40 @@ voiceDrums = {
 }
 
 % instruments {{{1
+
+% flutes {{{2
+
+instrumentFlutes = \new Staff \with {
+  instrumentName = "flutes"
+  shortInstrumentName = "fls"
+  midiInstrument = "flute"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #1.5
+} { \clef french
+    % \clef treble
+    &lt;&lt; \voiceFluteSoprano \\ \voiceFluteAlto &gt;&gt; }
+
+% flutes &amp; bassoons {{{2
+
+instrumentFlutesBassoons = \new StaffGroup \with {
+  instrumentName = \markup \column { flutes bassoons }
+  shortInstrumentName = \markup \column { fls bns }
+} &lt;&lt;
+  \new Staff = "treble" \with {
+    midiInstrument = "flute"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #1.5
+  } { % \clef french
+      \clef treble
+      &lt;&lt; \voiceFlutesBassoonsSoprano \\ \voiceFlutesBassoonsAlto &gt;&gt; }
+  \new Staff = "bass" \with {
+    midiInstrument = "bassoon"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #1.5
+  } { % \clef varbaritone
+      \clef bass
+      &lt;&lt; \voiceFlutesBassoonsTenor \\ \voiceFlutesBassoonsBass &gt;&gt; }
+&gt;&gt;
 
 % winds {{{2
 
@@ -586,6 +684,32 @@ instrumentLutes = \new StaffGroup \with {
       \voiceLuteBass }
 &gt;&gt;
 
+% guitars {{{2
+
+instrumentGuitars = \new StaffGroup \with {
+  instrumentName = "guitars"
+  shortInstrumentName = "gts"
+} &lt;&lt;
+  \new Staff = "treble" \with {
+    midiInstrument = "acoustic guitar (nylon)"
+    midiMinimumVolume = #1.5
+    midiMaximumVolume = #2.0
+    % 3rd line G clef
+    %clefGlyph = #"clefs.G"
+    %clefPosition = #0
+    %clefTransposition = #0
+    %middleCPosition = #-4
+    %middleCClefPosition = #-4
+  } { \clef soprano
+      \voiceGuitarTreble }
+  \new Staff = "bass" \with {
+    midiInstrument = "acoustic bass"
+    midiMinimumVolume = #1.5
+    midiMaximumVolume = #2.0
+  } { \clef subbass
+      \voiceGuitarBass }
+&gt;&gt;
+
 % harp {{{2
 
 instrumentHarp = \new GrandStaff \with {
@@ -627,6 +751,8 @@ instrumentDrums = \new DrumStaff \with {
 \book {
   \markup \column {
     \vspace #1
+    %\line { flutes = flute, alto flute }
+    %\line { flutes &amp; bassoons = 2 flutes, 2 bassoons }
     \line { winds = flute, oboe, english horn, bassoon }
     \line { strings = 2 violins, 2 cellos }
     \line { lutes = lute, archlute }
@@ -634,12 +760,15 @@ instrumentDrums = \new DrumStaff \with {
   }
   \score {
     &lt;&lt;
+      %\instrumentFlutes
+      %\instrumentFlutesBassoons
       \instrumentWinds
       \instrumentOrgan
       \instrumentStrings
       \instrumentHarpsichord
       \instrumentPiano
       \instrumentLutes
+      %\instrumentGuitars
       \instrumentHarp
       \instrumentVibraphone
       \instrumentDrums
@@ -672,7 +801,7 @@ instrumentDrums = \new DrumStaff \with {
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: chimay</p>
-<p class="date">Created: 2024-01-22 lun 10:41</p>
+<p class="date">Created: 2024-01-22 lun 12:27</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

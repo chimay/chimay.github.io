@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-01-23 mar 13:47 -->
+<!-- 2024-01-24 mer 10:35 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Opus : Musica : template</title>
@@ -205,20 +205,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org01f765a">1. Château</a></li>
+<li><a href="#org341d896">1. Château</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org01f765a" class="outline-2">
-<h2 id="org01f765a"><span class="section-number-2">1.</span> Château</h2>
+<div id="outline-container-org341d896" class="outline-2">
+<h2 id="org341d896"><span class="section-number-2">1.</span> Château</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Le résultat :
 </p>
 
 
-<div id="orgcb62f0b" class="figure">
+<div id="org771d487" class="figure">
 <p><img src="../../image/musica/template/chateau.png" alt="chateau.png" />
 </p>
 </div>
@@ -295,32 +295,18 @@ voiceFluteAlto = \relative c' {
   \anacrusis % bar structure 0
 }
 
-% flutes &amp; bassoons {{{2
-
-% soprano {{{3
-
-voiceFlutesBassoonsSoprano = \relative c'' {
-  \keytime
-  \anacrusis % bar structure 0
-}
-
-% alto {{{3
-
-voiceFlutesBassoonsAlto = \relative c' {
-  \keytime
-  \anacrusis % bar structure 0
-}
+% bassoons {{{2
 
 % tenor {{{3
 
-voiceFlutesBassoonsTenor = \relative c {
+voiceBassoonTenor = \relative c {
   \keytime
   \anacrusis % bar structure 0
 }
 
 % bass {{{3
 
-voiceFlutesBassoonsBass = \relative c, {
+voiceBassoonBass = \relative c, {
   \keytime
   \anacrusis % bar structure 0
 }
@@ -570,27 +556,17 @@ instrumentFlutes = \new Staff \with {
     % \clef treble
     &lt;&lt; \voiceFluteSoprano \\ \voiceFluteAlto &gt;&gt; }
 
-% flutes &amp; bassoons {{{2
+% bassoons {{{2
 
-instrumentFlutesBassoons = \new StaffGroup \with {
-  instrumentName = \markup \column { flutes bassoons }
-  shortInstrumentName = \markup \column { fls bns }
-} &lt;&lt;
-  \new Staff = "treble" \with {
-    midiInstrument = "flute"
-    midiMinimumVolume = #1.0
-    midiMaximumVolume = #1.5
-  } { % \clef french
-      \clef treble
-      &lt;&lt; \voiceFlutesBassoonsSoprano \\ \voiceFlutesBassoonsAlto &gt;&gt; }
-  \new Staff = "bass" \with {
-    midiInstrument = "bassoon"
-    midiMinimumVolume = #1.0
-    midiMaximumVolume = #1.5
-  } { % \clef varbaritone
-      \clef bass
-      &lt;&lt; \voiceFlutesBassoonsTenor \\ \voiceFlutesBassoonsBass &gt;&gt; }
-&gt;&gt;
+instrumentBassoons = \new Staff \with {
+  instrumentName = "bassoons"
+  shortInstrumentName = "bns"
+  midiInstrument = "bassoon"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #1.5
+} { \clef baritone
+    % \clef bass
+    &lt;&lt; \voiceBassoonTenor \\ \voiceBassoonBass &gt;&gt; }
 
 % woods {{{2
 
@@ -851,10 +827,11 @@ instrumentDrums = \new DrumStaff \with {
 % book {{{1
 
 \book {
+  % ---- instruments list, before the score
   \markup \column {
     \vspace #1
     %\line { flutes = flute, alto flute }
-    %\line { flutes &amp; bassoons = 2 flutes, 2 bassoons }
+    %\line { bassoons = 2 bassoons }
     \line { woods = flute, oboe, english horn, bassoon }
     %\line { brass = 2 trumpets, 2 french horns }
     \line { strings = 2 violins, 2 cellos }
@@ -862,14 +839,15 @@ instrumentDrums = \new DrumStaff \with {
     %\line { guitars = guitar, bass guitar }
     \vspace #1
   }
+  % ---- score, with instruments staves
   \score {
     &lt;&lt;
       %\instrumentFlutes
-      %\instrumentFlutesBassoons
+      %\instrumentBassoons
       \instrumentWoods
       %\instrumentSaxophones
       %\instrumentBrass
-      \instrumentOrgan
+      %\instrumentOrgan
       \instrumentStrings
       \instrumentHarpsichord
       %\instrumentPiano
@@ -879,17 +857,21 @@ instrumentDrums = \new DrumStaff \with {
       %\instrumentVibraphone
       %\instrumentDrums
     &gt;&gt;
+    % ---- layout, see beginning of file
     \layout { }
+    % ---- midi
     \midi {
       \context {
         \Score
         %midiChannelMapping = #'voice
         %\enablePolymeter
       }
+      % -- comment this if you don't need distinct instruments on the same staff
       \context {
         \Staff
         \remove "Staff_performer"
       }
+      % -- comment this if you don't need distinct instruments on the same staff
       \context {
         \Voice
         \consists "Staff_performer"
@@ -907,7 +889,7 @@ instrumentDrums = \new DrumStaff \with {
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: chimay</p>
-<p class="date">Created: 2024-01-23 mar 13:47</p>
+<p class="date">Created: 2024-01-24 mer 10:35</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-02-08 jeu 12:44 -->
+<!-- 2024-02-10 sam 15:51 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Opus : Musica : template</title>
@@ -205,20 +205,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org302f3d6">1. Château</a></li>
+<li><a href="#org91b8253">1. Château</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org302f3d6" class="outline-2">
-<h2 id="org302f3d6"><span class="section-number-2">1.</span> Château</h2>
+<div id="outline-container-org91b8253" class="outline-2">
+<h2 id="org91b8253"><span class="section-number-2">1.</span> Château</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Le résultat :
 </p>
 
 
-<div id="org3c457f4" class="figure">
+<div id="org1882388" class="figure">
 <p><img src="../../image/musica/template/chateau.png" alt="chateau.png" />
 </p>
 </div>
@@ -845,25 +845,41 @@ voiceBrassQuintetBass = \relative c, {
   \anacrusis % hypermeasure 0
 }
 
-% organ {{{2
+% positive organ {{{2
 
 % right {{{3
 
-voiceOrganRight = \relative c'' {
+voicePositiveOrganRight = \relative c'' {
   \keytime
   \anacrusis % hypermeasure 0
 }
 
 % left {{{3
 
-voiceOrganLeft = \relative c {
+voicePositiveOrganLeft = \relative c {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% church organ {{{2
+
+% right {{{3
+
+voiceChurchOrganRight = \relative c'' {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% left {{{3
+
+voiceChurchOrganLeft = \relative c {
   \keytime
   \anacrusis % hypermeasure 0
 }
 
 % feet {{{3
 
-voiceOrganFeet = \relative c, {
+voiceChurchOrganFeet = \relative c, {
   \keytime
   \anacrusis % hypermeasure 0
 }
@@ -890,8 +906,8 @@ voiceAccordionLeft = \relative c {
 
 voiceStringQuartetSoprano = \relative c'' {
   \keytime
-  \anacrusis % hypermeasure 0
   \tempo 2. = 50
+  \anacrusis % hypermeasure 0
 }
 
 % alto {{{3
@@ -1792,11 +1808,11 @@ staffBrassQuintetLower = \new Staff = "brassQuintetLower"
 &gt;&gt;
 
 
-% organ {{{2
+% positive organ {{{2
 
 % right {{{3
 
-staffOrganRight = \new Staff = "organRight"
+staffPositiveOrganRight = \new Staff = "positiveOrganRight"
 \with {
   midiInstrument = "reed organ"
   midiMinimumVolume = #1.5
@@ -1804,12 +1820,12 @@ staffOrganRight = \new Staff = "organRight"
 } {
   \clef treble
   %\showStaffSwitch
-  \voiceOrganRight
+  \voicePositiveOrganRight
 }
 
 % left {{{3
 
-staffOrganLeft = \new Staff = "organLeft"
+staffPositiveOrganLeft = \new Staff = "positiveOrganLeft"
 \with {
   midiInstrument = "reed organ"
   midiMinimumVolume = #1.5
@@ -1817,19 +1833,47 @@ staffOrganLeft = \new Staff = "organLeft"
 } {
   \clef bass
   %\showStaffSwitch
-  \voiceOrganLeft
+  \voicePositiveOrganLeft
+}
+
+% church organ {{{2
+
+% right {{{3
+
+staffChurchOrganRight = \new Staff = "churchOrganRight"
+\with {
+  midiInstrument = "reed organ"
+  midiMinimumVolume = #1.5
+  midiMaximumVolume = #2.0
+} {
+  \clef treble
+  %\showStaffSwitch
+  \voiceChurchOrganRight
+}
+
+% left {{{3
+
+staffChurchOrganLeft = \new Staff = "churchOrganLeft"
+\with {
+  midiInstrument = "reed organ"
+  midiMinimumVolume = #1.5
+  midiMaximumVolume = #2.0
+} {
+  \clef bass
+  %\showStaffSwitch
+  \voiceChurchOrganLeft
 }
 
 % feet {{{3
 
-staffOrganFeet = \new Staff = "organFeet"
+staffChurchOrganFeet = \new Staff = "churchOrganFeet"
 \with {
   midiInstrument = "reed organ"
   midiMinimumVolume = #1.5
   midiMaximumVolume = #2.0
 } {
   \clef subbass
-  \voiceOrganFeet
+  \voiceChurchOrganFeet
 }
 
 % accordion {{{2
@@ -2281,7 +2325,7 @@ staffDrums = \new DrumStaff \with {
   \clef percussion \voiceDrums
 }
 
-% staves groups {{{1
+% staff groups {{{1
 
 % choir quartet {{{2
 
@@ -2421,16 +2465,27 @@ groupBrassQuintet = \new StaffGroup
   \staffBrassQuintetLower
 &gt;&gt;
 
-% organ {{{2
+% positive organ {{{2
 
-groupOrgan = \new GrandStaff \with {
+groupPositiveOrgan = \new GrandStaff \with {
   instrumentName = "organ"
   shortInstrumentName = "org"
   connectArpeggios = ##t
 } &lt;&lt;
-  \staffOrganRight
-  \staffOrganLeft
-  \staffOrganFeet
+  \staffPositiveOrganRight
+  \staffPositiveOrganLeft
+&gt;&gt;
+
+% church organ {{{2
+
+groupChurchOrgan = \new GrandStaff \with {
+  instrumentName = "organ"
+  shortInstrumentName = "org"
+  connectArpeggios = ##t
+} &lt;&lt;
+  \staffChurchOrganRight
+  \staffChurchOrganLeft
+  \staffChurchOrganFeet
 &gt;&gt;
 
 % accordion {{{2
@@ -2552,13 +2607,14 @@ groupGuitars = \new StaffGroup
       %\groupChoirSeptet
       %\groupWoodQuartet
       %\groupWoodQuintet
-      %\groupWoodSextet
-      \staffFlutes
+      \groupWoodSextet
+      %\staffFlutes
       %\staffBassoons
       %\groupSaxophoneQuartet
       %\groupBrassQuartet
       %\groupBrassQuintet
-      \groupOrgan
+      %\groupPositiveOrgan
+      \groupChurchOrgan
       %\groupAccordion
       \groupStringQuartet
       %\groupStringQuintet
@@ -2569,7 +2625,7 @@ groupGuitars = \new StaffGroup
       \groupHarp
       %\groupLutes
       %\groupGuitars
-      %\staffVibraphone
+      \staffVibraphone
       %\staffDrums
     &gt;&gt;
     % ---- layout, see beginning of file
@@ -2604,7 +2660,7 @@ groupGuitars = \new StaffGroup
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: chimay</p>
-<p class="date">Created: 2024-02-08 jeu 12:44</p>
+<p class="date">Created: 2024-02-10 sam 15:51</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

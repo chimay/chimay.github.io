@@ -1,0 +1,95 @@
+% vim: set expandtab shiftwidth=2 softtabstop=2
+
+% key & time {{{1
+
+keytime = {
+  \key c \major
+  \numericTimeSignature
+  \time 2/2
+}
+
+% silences {{{1
+
+silencePeriod = {
+  %\override MultiMeasureRest.staff-position = #0
+  \repeat unfold 3 { R1 | R \bar "|" }
+  R | R \bar "||"
+  \break
+}
+
+silencePeriodMinus = {
+  R1*7
+}
+
+% invisible silences {{{1
+
+skipPeriod = {
+  s1*8
+  \break
+}
+
+skipPeriodMinus = {
+  s1*7
+}
+
+% drones {{{1
+
+droneC = {
+  \repeat unfold 3 { c1 ~ | c ~ }
+  c ~ | c
+}
+
+droneG = {
+  \transpose c g \droneC
+}
+
+droneE = {
+  \transpose c e \droneC
+}
+
+% anacrusis {{{1
+
+anacrusis = {
+  \partial 2
+  g8 f e d
+}
+
+anacrusisDrumkit = \drummode {
+  \partial 2
+  r2
+}
+
+% intros {{{1
+
+% codas {{{1
+
+% themes {{{1
+
+themeMelody = {
+  c1   | d   \bar "|"
+  c    | d   \bar "|"
+  c    | d   \bar "|"
+  c    | d   \bar "||"
+  \break
+}
+
+% dual {{{1
+
+% harmony {{{1
+
+% cantus firmus {{{1
+
+% counterpoints {{{1
+
+% subjects {{{1
+
+% countersubjects {{{1
+
+% answers {{{1
+
+% episodes {{{1
+
+% arpeggios {{{1
+
+% drums {{{1
+

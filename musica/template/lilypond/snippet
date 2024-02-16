@@ -1,0 +1,107 @@
+% vim: set expandtab shiftwidth=2 softtabstop=2 ft=lilypond cms=%%s:
+% inspired from lilypond doc, see https://lilypond.org/manuals.html
+
+% convert old version {{{1
+
+shell$ convert-ly old-file.ly
+
+updates the \version statement
+
+% layout {{{1
+
+\layout {
+  % -- multiple measure times
+  %\enablePolymeter
+  % -- visibility : end of line, middle, beginning
+  \override Score.BarNumber.break-visibility = ##(#t #t #t)
+  \context {
+    \Score
+    % -- bar style
+    measureBarType = #","
+    % -- when the bar number is visible
+    %barNumberVisibility = #(every-nth-bar-number-visible 8)
+    barNumberVisibility = #(modulo-bar-number-visible 8 0)
+  }
+  \context {
+    \Staff
+    % -- remove silent staves
+    \RemoveEmptyStaves
+    % -- merge silences of multiple voices
+    \consists "Merge_rests_engraver"
+  }
+}
+
+\book {
+  \markup \column {
+    \vspace #1
+    \line { winds = flute, oboe, english horn, bassoon }
+    \line { strings = 2 violins, 2 cellos }
+    \line { lutes = lute, archlute }
+    \vspace #1
+  }
+  \score {
+    <<
+      ...
+    >>
+    \layout { }
+    \midi {
+      \context {
+        \Score
+        % -- one midi channel per voice
+        %midiChannelMapping = #'voice
+        % -- polymeter for midi ???
+        %\enablePolymeter
+      }
+      % -- one midi channel per voice
+      \context {
+        \Staff
+        \remove "Staff_performer"
+      }
+      \context {
+        \Voice
+        \consists "Staff_performer"
+      }
+    }
+  }
+  % -- separate staves systems with a double slash
+  \paper {
+    system-separator-markup = \slashSeparator
+  }
+}
+% number of lines in a staff {{{1
+
+\override Staff.StaffSymbol.line-count = #7
+
+% voices {{{1
+
+\new Staff \relative {
+  \voices 1,2,4   % Omit Voice three
+  <<  % Voice one
+    { c''2 aes4. bes8 }
+  \\  % Voice two
+    { <ees, c>2 des }
+  \\  % Voice four
+    { aes'2 f4 fes }
+  >>
+}
+
+% modal transposition {{{1
+
+dia = { c d e f g a b }
+ctrsubWaveC = \modalTranspose f c \dia \ctrsubWave
+
+% lyrics {{{1
+
+\addlyrics \lyricsBass
+
+% arpeggios with chordmode {{{1
+
+\chordmode { a,8:1 ~ a,:m3 ~ a,:m ~ a,4.:m3.5.8 }
+
+% display expression result in the terminal {{{1
+
+\displayLilyMusic \transpose c a, { c4 e g a bes }
+
+% char strings {{{1
+
+shortInstrumentName = \markup \column { hp cd }

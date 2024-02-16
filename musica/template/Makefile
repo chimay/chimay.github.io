@@ -81,7 +81,7 @@ sync-epub: epub
 	$(SYNC) $(CUR_DIR)/ $(EPUB_DIR)
 	@$(ECHO)
 
-#sync all {{{1
+# sync all {{{1
 
 dry-sync: dry-sync-html dry-sync-epub
 

@@ -19,5 +19,5 @@ dry-sync-html: $(LY_TMPL_FILES) $(LY_MLD_FILES) $(LY_GLOB_FILES)
 	@$(ECHO)
 
 sync-html: $(LY_TMPL_FILES) $(LY_MLD_FILES) $(LY_GLOB_FILES)
-	$(RSYNC) -n $(CUR_DIR)/ $(HTML_DIR)
+	$(RSYNC) $(CUR_DIR)/ $(HTML_DIR)
 	@$(ECHO)

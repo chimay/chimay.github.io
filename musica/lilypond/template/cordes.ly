@@ -2485,7 +2485,7 @@ groupWoodSextet = \new StaffGroup <<
 
 groupSaxophoneQuartet = \new StaffGroup
 \with {
-  instrumentName = "saxos"
+  instrumentName = \markup \column { saxo- phones }
   shortInstrumentName = "sax"
 } <<
   \staffSaxophoneQuartetUpper
@@ -2597,7 +2597,7 @@ groupHarpsichord = \new GrandStaff
 
 groupPedalHarpsichord = \new GrandStaff
 \with {
-  instrumentName = \markup { \column { pedal harpsichord } }
+  instrumentName = \markup { \column { pedal harpsi- chord } }
   shortInstrumentName = \markup \column { php cd }
   connectArpeggios = ##t
 } <<

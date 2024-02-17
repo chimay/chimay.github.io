@@ -2666,17 +2666,12 @@ groupGuitarTabs = \new StaffGroup
 
 \book {
   % instruments list, before the score {{{2
-  %\markup \column {
-    %\vspace #1
+  \markup \column {
+    \vspace #1
     %\line { woods = flute, oboe, english horn, bassoon }
-    %\line { strings = 2 violins, 2 cellos }
-    %\line { flutes = flute, alto flute }
-    %\line { bassoons = 2 bassoons }
-    %\line { brass = 2 trumpets, 2 french horns }
-    %\line { lutes = lute, archlute }
-    %\line { guitars = guitar, bass guitar }
-    %\vspace #1
-  %}
+    \line { saxophones = soprano, alto, tenor, baritone sax }
+    \vspace #1
+  }
   % score, with instruments as single & group staves {{{2
   \score {
     <<

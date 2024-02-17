@@ -10,8 +10,8 @@
 % header {{{1
 
 \header {
-  title = "cordes"
-  subtitle="strings"
+  title = "quintette à clavier"
+  subtitle="piano quintet"
   composer = "composer"
   poet = "poet"
   %piece = "piece"
@@ -2708,20 +2708,20 @@ groupGuitarTabs = \new StaffGroup
       %\groupAccordion
       % strings {{{3
       % bowed strings {{{4
-      %\groupStringQuartet
+      \groupStringQuartet
       %\groupStringQuintet
       %\groupStringSextet
-      \groupStringSeptet
+      %\groupStringSeptet
       % string keyboards {{{4
       %\groupHarpsichord
-      \groupPedalHarpsichord
+      %\groupPedalHarpsichord
       \groupPiano
       % plucked strings {{{4
-      \groupHarp
+      %\groupHarp
       %\groupLutes
       %\groupLuteTabs
       %\groupGuitars
-      \groupGuitarTabs
+      %\groupGuitarTabs
       % drums {{{3
       %\staffVibraphone
       %\staffDrumkit

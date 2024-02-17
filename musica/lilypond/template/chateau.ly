@@ -2690,10 +2690,10 @@ groupGuitarTabs = \new StaffGroup
       % wood groups {{{5
       %\groupWoodQuartet
       %\groupWoodQuintet
-      \groupWoodSextet
+      %\groupWoodSextet
       % individual woods {{{5
-      %\staffFlutes
-      %\staffOboes
+      \staffFlutes
+      \staffOboes
       %\staffEnglishHorns
       %\staffClarinets
       %\staffBassoons
@@ -2703,15 +2703,15 @@ groupGuitarTabs = \new StaffGroup
       %\groupBrassQuartet
       %\groupBrassQuintet
       % wind keyboards {{{4
-      %\groupPositiveOrgan
+      \groupPositiveOrgan
       %\groupChurchOrgan
       %\groupAccordion
       % strings {{{3
       % bowed strings {{{4
-      \groupStringQuartet
+      %\groupStringQuartet
       %\groupStringQuintet
       %\groupStringSextet
-      %\groupStringSeptet
+      \groupStringSeptet
       % string keyboards {{{4
       %\groupHarpsichord
       \groupPedalHarpsichord
@@ -2721,10 +2721,10 @@ groupGuitarTabs = \new StaffGroup
       %\groupLutes
       %\groupLuteTabs
       %\groupGuitars
-      \groupGuitarTabs
+      %\groupGuitarTabs
       % drums {{{3
-      %\staffVibraphone
-      %\staffDrumkit
+      \staffVibraphone
+      \staffDrumkit
     >>
     % layout, see beginning of file {{{2
     \layout { }

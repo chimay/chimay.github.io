@@ -29,13 +29,6 @@ include ../../Makefile.inc
 debug:
 	@echo $(SUBDIRS)
 
-# pdf -> png {{{1
-
-../../image/musica/template/%.png: ~/racine/musica/lilypond/template/%.pdf
-	make -C ~/racine/musica/lilypond/template install
-	#convert $< $@
-	@$(ECHO)
-
 #  org -> html {{{1
 
 $(HTML_SUBDIRS):

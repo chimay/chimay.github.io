@@ -209,7 +209,7 @@ lyricsChoirSeptetBass = \lyricmode {
   bass line
 }
 
-% voices, hands {{{1
+% voices, instruments, melodies, hands {{{1
 
 % choir quartet {{{2
 

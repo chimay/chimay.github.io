@@ -2678,6 +2678,7 @@ groupGuitarTabs = \new StaffGroup
     %\vspace #1
   %}
   % score, with instruments as single & group staves {{{2
+  % -- comment or uncomment instruments and groups as needed
   \score {
     <<
       % choir {{{3

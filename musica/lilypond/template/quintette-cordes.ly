@@ -1,236 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-<head>
-<!-- 2024-02-17 sam 15:40 -->
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Eclats de vers : Opus : Musica : template</title>
-<meta name="author" content="chimay" />
-<meta name="generator" content="Org Mode" />
-<style>
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #e6e6e6;
-    border-radius: 3px;
-    background-color: #f2f2f2;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    top: -8px;
-    right: 12px;
-    padding: 3px;
-    color: #555;
-    background-color: #f2f2f299;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-authinfo::before { content: 'Authinfo'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { }
-</style>
-<link rel="stylesheet" type="text/css" href="../../style/defaut.css" />
-</head>
-<body>
-<div id="content" class="content">
-<h1 class="title">Eclats de vers : Opus : Musica : template</h1>
-<p>
-<a href="../../index.html">Retour à l’accueil</a>
-</p>
-
-<div id="table-of-contents" role="doc-toc">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents" role="doc-toc">
-<ul>
-<li><a href="#orge0fc4a5">1. Château</a></li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-orge0fc4a5" class="outline-2">
-<h2 id="orge0fc4a5"><span class="section-number-2">1.</span> Château</h2>
-<div class="outline-text-2" id="text-1">
-<p>
-Le résultat :
-</p>
-
-
-<div id="org7e1f080" class="figure">
-<p><img src="../../image/musica/template/chateau.png" alt="chateau.png" />
-</p>
-</div>
-
-<p>
-Ce fichier peut être utilisé pour construire l’orchestre que vous
-souhaitez, en décommentant ou commentant les instruments dans la section
-"book" à la fin du fichier source, que voici :
-</p>
-
-<div class="org-src-container">
-<pre class="src src-lilypond">% vim: set expandtab shiftwidth=2 softtabstop=2:
+% vim: set expandtab shiftwidth=2 softtabstop=2:
 
 \version "2.24.3"
 
@@ -242,8 +10,8 @@ souhaitez, en décommentant ou commentant les instruments dans la section
 % header {{{1
 
 \header {
-  title = "château"
-  subtitle="castle"
+  title = "quintette à cordes"
+  subtitle="string quintet"
   composer = "composer"
   poet = "poet"
   %piece = "piece"
@@ -1232,7 +1000,7 @@ voiceDrumkit = {
 
 % choir quartet {{{2
 
-% soprano &amp; alto {{{3
+% soprano & alto {{{3
 
 staffChoirQuartetSopranoAlto = \new Staff = "choirQuartetSopranoAlto"
 \with {
@@ -1243,17 +1011,17 @@ staffChoirQuartetSopranoAlto = \new Staff = "choirQuartetSopranoAlto"
   midiMaximumVolume = #1.5
 } {
   \clef treble
-  &lt;&lt;
+  <<
     \new Voice = "choirQuartetSoprano" {
       \voiceOne \voiceChoirQuartetSoprano
     }
     \new Voice = "choirQuartetAlto" {
       \voiceTwo \voiceChoirQuartetAlto
     }
-  &gt;&gt;
+  >>
 }
 
-% tenor &amp; bass {{{3
+% tenor & bass {{{3
 
 staffChoirQuartetTenorBass = \new Staff = "choirQuartetTenorBass"
 \with {
@@ -1264,19 +1032,19 @@ staffChoirQuartetTenorBass = \new Staff = "choirQuartetTenorBass"
   midiMaximumVolume = #1.5
 } {
   \clef varbaritone
-  &lt;&lt;
+  <<
     \new Voice = "choirQuartetTenor" {
       \voiceOne \voiceChoirQuartetTenor
     }
     \new Voice = "choirQuartetBass" {
       \voiceTwo \voiceChoirQuartetBass
     }
-  &gt;&gt;
+  >>
 }
 
 % choir quintet {{{2
 
-% soprano &amp; mezzo {{{3
+% soprano & mezzo {{{3
 
 staffChoirQuintetSopranoMezzo = \new Staff = "choirQuintetSopranoMezzo"
 \with {
@@ -1287,14 +1055,14 @@ staffChoirQuintetSopranoMezzo = \new Staff = "choirQuintetSopranoMezzo"
   midiMaximumVolume = #1.5
 } {
   \clef treble
-  &lt;&lt;
+  <<
     \new Voice = "choirQuintetSoprano" {
       \voiceOne \voiceChoirQuintetSoprano
     }
     \new Voice = "choirQuintetMezzo" {
       \voiceTwo \voiceChoirQuintetMezzo
     }
-  &gt;&gt;
+  >>
 }
 
 % alto {{{3
@@ -1311,7 +1079,7 @@ staffChoirQuintetAlto = \new Staff = "choirQuintetAlto"
   \new Voice = "choirQuintetAlto" \voiceChoirQuintetAlto
 }
 
-% tenor &amp; bass {{{3
+% tenor & bass {{{3
 
 staffChoirQuintetTenorBass = \new Staff = "choirQuintetTenorBass"
 \with {
@@ -1322,19 +1090,19 @@ staffChoirQuintetTenorBass = \new Staff = "choirQuintetTenorBass"
   midiMaximumVolume = #1.5
 } {
   \clef varbaritone
-  &lt;&lt;
+  <<
     \new Voice = "choirQuintetTenor" {
       \voiceOne \voiceChoirQuintetTenor
     }
     \new Voice = "choirQuintetBass" {
       \voiceTwo \voiceChoirQuintetBass
     }
-  &gt;&gt;
+  >>
 }
 
 % choir sextet {{{2
 
-% soprano &amp; mezzo {{{3
+% soprano & mezzo {{{3
 
 staffChoirSextetSopranoMezzo = \new Staff = "choirSextetSopranoMezzo"
 \with {
@@ -1345,17 +1113,17 @@ staffChoirSextetSopranoMezzo = \new Staff = "choirSextetSopranoMezzo"
   midiMaximumVolume = #1.5
 } {
   \clef treble
-  &lt;&lt;
+  <<
     \new Voice = "choirSextetSoprano" {
       \voiceOne \voiceChoirSextetSoprano
     }
     \new Voice = "choirSextetMezzo" {
       \voiceTwo \voiceChoirSextetMezzo
     }
-  &gt;&gt;
+  >>
 }
 
-% alto &amp; tenor {{{3
+% alto & tenor {{{3
 
 staffChoirSextetAltoTenor = \new Staff = "choirSextetAltoTenor"
 \with {
@@ -1366,17 +1134,17 @@ staffChoirSextetAltoTenor = \new Staff = "choirSextetAltoTenor"
   midiMaximumVolume = #1.5
 } {
   \clef alto
-  &lt;&lt;
+  <<
     \new Voice = "choirSextetAlto" {
       \voiceOne \voiceChoirSextetAlto
     }
     \new Voice = "choirSextetTenor" {
       \voiceTwo \voiceChoirSextetTenor
     }
-  &gt;&gt;
+  >>
 }
 
-% barytone &amp; bass {{{3
+% barytone & bass {{{3
 
 staffChoirSextetBarytoneBass = \new Staff = "choirSextetBarytoneBass"
 \with {
@@ -1387,19 +1155,19 @@ staffChoirSextetBarytoneBass = \new Staff = "choirSextetBarytoneBass"
   midiMaximumVolume = #1.5
 } {
   \clef varbaritone
-  &lt;&lt;
+  <<
     \new Voice = "choirSextetBarytone" {
       \voiceOne \voiceChoirSextetBarytone
     }
     \new Voice = "choirSextetBass" {
       \voiceTwo \voiceChoirSextetBass
     }
-  &gt;&gt;
+  >>
 }
 
 % choir septet {{{2
 
-% soprano &amp; mezzo {{{3
+% soprano & mezzo {{{3
 
 staffChoirSeptetSopranoMezzo = \new Staff = "choirSeptetSopranoMezzo"
 \with {
@@ -1410,17 +1178,17 @@ staffChoirSeptetSopranoMezzo = \new Staff = "choirSeptetSopranoMezzo"
   midiMaximumVolume = #1.5
 } {
   \clef treble
-  &lt;&lt;
+  <<
     \new Voice = "choirSeptetSoprano" {
       \voiceOne \voiceChoirSeptetSoprano
     }
     \new Voice = "choirSeptetMezzo" {
       \voiceTwo \voiceChoirSeptetMezzo
     }
-  &gt;&gt;
+  >>
 }
 
-% alto &amp; counter {{{3
+% alto & counter {{{3
 
 staffChoirSeptetAltoCounter = \new Staff = "choirSeptetAltoCounter"
 \with {
@@ -1431,17 +1199,17 @@ staffChoirSeptetAltoCounter = \new Staff = "choirSeptetAltoCounter"
   midiMaximumVolume = #1.5
 } {
   \clef alto
-  &lt;&lt;
+  <<
     \new Voice = "choirSeptetAlto" {
       \voiceOne \voiceChoirSeptetAlto
     }
     \new Voice = "choirSeptetCounter" {
       \voiceTwo \voiceChoirSeptetCounter
     }
-  &gt;&gt;
+  >>
 }
 
-% tenor &amp; barytone {{{3
+% tenor & barytone {{{3
 
 staffChoirSeptetTenorBarytone = \new Staff = "choirSeptetTenorBarytone"
 \with {
@@ -1452,14 +1220,14 @@ staffChoirSeptetTenorBarytone = \new Staff = "choirSeptetTenorBarytone"
   midiMaximumVolume = #1.5
 } {
   \clef varbaritone
-  &lt;&lt;
+  <<
     \new Voice = "choirSeptetTenor" {
       \voiceOne \voiceChoirSeptetTenor
     }
     \new Voice = "choirSeptetBarytone" {
       \voiceTwo \voiceChoirSeptetBarytone
     }
-  &gt;&gt;
+  >>
 }
 
 % bass {{{3
@@ -1484,7 +1252,7 @@ staffWoodQuartetUpper = \new Staff = "woodQuartetUpper"
 \with {
   instrumentName = \markup { \column { flute oboe } }
   shortInstrumentName = \markup { \column { fl ob } }
-} &lt;&lt;
+} <<
   % \clef french
   \clef treble
   \new Voice = "woodQuartetSoprano"
@@ -1503,7 +1271,7 @@ staffWoodQuartetUpper = \new Staff = "woodQuartetUpper"
   } {
     \voiceTwo \voiceWoodQuartetAlto
   }
-&gt;&gt;
+>>
 
 % lower {{{3
 
@@ -1511,7 +1279,7 @@ staffWoodQuartetLower = \new Staff = "woodQuartetLower"
 \with {
   instrumentName = \markup { \column { clarinet bassoon } }
   shortInstrumentName = \markup { \column { cl bn } }
-} &lt;&lt;
+} <<
   % \clef varbaritone
   \clef bass
   \new Voice = "woodQuartetTenor"
@@ -1530,7 +1298,7 @@ staffWoodQuartetLower = \new Staff = "woodQuartetLower"
   } {
     \voiceTwo \voiceWoodQuartetBass
   }
-&gt;&gt;
+>>
 
 % wood quintet {{{2
 
@@ -1540,7 +1308,7 @@ staffWoodQuintetUpper = \new Staff = "woodQuintetUpper"
 \with {
   instrumentName = \markup { \column { flute oboe } }
   shortInstrumentName = \markup { \column { fl ob } }
-} &lt;&lt;
+} <<
   % \clef french
   \clef treble
   \new Voice = "woodQuintetSoprano"
@@ -1559,7 +1327,7 @@ staffWoodQuintetUpper = \new Staff = "woodQuintetUpper"
   } {
     \voiceTwo \voiceWoodQuintetMezzo
   }
-&gt;&gt;
+>>
 
 % middle {{{3
 
@@ -1581,7 +1349,7 @@ staffWoodQuintetLower = \new Staff = "woodQuintetLower"
 \with {
   instrumentName = \markup { \column { clarinet bassoon } }
   shortInstrumentName = \markup { \column { cl bn } }
-} &lt;&lt;
+} <<
   % \clef varbaritone
   \clef bass
   \new Voice = "woodQuintetTenor"
@@ -1600,7 +1368,7 @@ staffWoodQuintetLower = \new Staff = "woodQuintetLower"
   } {
     \voiceTwo \voiceWoodQuintetBass
   }
-&gt;&gt;
+>>
 
 % wood sextet {{{2
 
@@ -1610,7 +1378,7 @@ staffWoodSextetUpper = \new Staff = "woodSextetUpper"
 \with {
   instrumentName = "flutes"
   shortInstrumentName = "fls"
-} &lt;&lt;
+} <<
   % \clef french
   \clef treble
   \new Voice = "woodSextetSoprano"
@@ -1629,7 +1397,7 @@ staffWoodSextetUpper = \new Staff = "woodSextetUpper"
   } {
     \voiceTwo \voiceWoodSextetMezzo
   }
-&gt;&gt;
+>>
 
 % middle {{{3
 
@@ -1637,7 +1405,7 @@ staffWoodSextetMiddle = \new Staff = "woodSextetMiddle"
 \with {
   instrumentName = \markup { \column { oboe eng-horn } }
   shortInstrumentName = \markup { \column { ob enhn } }
-} &lt;&lt;
+} <<
   % \clef french
   \clef alto
   \new Voice = "woodSextetAlto"
@@ -1656,7 +1424,7 @@ staffWoodSextetMiddle = \new Staff = "woodSextetMiddle"
   } {
     \voiceTwo \voiceWoodSextetTenor
   }
-&gt;&gt;
+>>
 
 % lower {{{3
 
@@ -1664,7 +1432,7 @@ staffWoodSextetLower = \new Staff = "woodSextetLower"
 \with {
   instrumentName = \markup { \column { clarinet bassoon } }
   shortInstrumentName = \markup { \column { cl bn } }
-} &lt;&lt;
+} <<
   % \clef varbaritone
   \clef bass
   \new Voice = "woodSextetBarytone"
@@ -1683,7 +1451,7 @@ staffWoodSextetLower = \new Staff = "woodSextetLower"
   } {
     \voiceTwo \voiceWoodSextetBass
   }
-&gt;&gt;
+>>
 
 % flutes {{{2
 
@@ -1697,14 +1465,14 @@ staffFlutes = \new Staff
 } {
   \clef french
   %\clef treble
-  &lt;&lt;
+  <<
     \new Voice = "fluteOne" {
       \voiceOne \voiceFluteOne
     }
     \new Voice = "fluteTwo" {
       \voiceTwo \voiceFluteTwo
     }
-  &gt;&gt;
+  >>
 }
 
 % oboes {{{2
@@ -1718,14 +1486,14 @@ staffOboes = \new Staff
   midiMaximumVolume = #1.5
 } {
   \clef soprano
-  &lt;&lt;
+  <<
     \new Voice = "oboeOne" {
       \voiceOne \voiceOboeOne
     }
     \new Voice = "oboeTwo" {
       \voiceTwo \voiceOboeTwo
     }
-  &gt;&gt;
+  >>
 }
 
 % english horns {{{2
@@ -1739,14 +1507,14 @@ staffEnglishHorns = \new Staff
   midiMaximumVolume = #1.5
 } {
   \clef alto
-  &lt;&lt;
+  <<
     \new Voice = "englishHornOne" {
       \voiceOne \voiceEnglishHornOne
     }
     \new Voice = "englishHornTwo" {
       \voiceTwo \voiceEnglishHornTwo
     }
-  &gt;&gt;
+  >>
 }
 
 % clarinets {{{2
@@ -1760,14 +1528,14 @@ staffClarinets = \new Staff
   midiMaximumVolume = #1.5
 } {
   \clef alto
-  &lt;&lt;
+  <<
     \new Voice = "clarinetOne" {
       \voiceOne \voiceClarinetOne
     }
     \new Voice = "clarinetTwo" {
       \voiceTwo \voiceClarinetTwo
     }
-  &gt;&gt;
+  >>
 }
 
 % bassoons {{{2
@@ -1781,14 +1549,14 @@ staffBassoons = \new Staff
   midiMaximumVolume = #1.5
 } {
   \clef bass
-  &lt;&lt;
+  <<
     \new Voice = "bassoonOne" {
       \voiceOne \voiceBassoonOne
     }
     \new Voice = "bassoonTwo" {
       \voiceTwo \voiceBassoonTwo
     }
-  &gt;&gt;
+  >>
 }
 
 % saxophone quartet {{{2
@@ -1803,14 +1571,14 @@ staffSaxophoneQuartetUpper = \new Staff = "saxophoneUpper"
 } {
   % \clef french
   \clef treble
-  &lt;&lt;
+  <<
     \new Voice = "saxophoneQuartetSoprano" {
       \voiceOne \voiceSaxophoneQuartetSoprano
     }
     \new Voice = "saxophoneQuartetAlto" {
       \voiceTwo \voiceSaxophoneQuartetAlto
     }
-  &gt;&gt;
+  >>
 }
 
 % lower {{{3
@@ -1823,14 +1591,14 @@ staffSaxophoneQuartetLower = \new Staff = "saxophoneLower"
 } {
   % \clef varbaritone
   \clef bass
-  &lt;&lt;
+  <<
     \new Voice = "saxophoneQuartetTenor" {
       \voiceOne \voiceSaxophoneQuartetTenor
     }
     \new Voice = "saxophoneQuartetBass" {
       \voiceTwo \voiceSaxophoneQuartetBass
     }
-  &gt;&gt;
+  >>
 }
 
 % brass quartet {{{2
@@ -1846,14 +1614,14 @@ staffBrassQuartetUpper = \new Staff = "brassQuartetUpper"
   midiMaximumVolume = #1.5
 } {
   \clef treble
-  &lt;&lt;
+  <<
     \new Voice = "brassQuartetSoprano" {
       \voiceOne \voiceBrassQuartetSoprano
     }
     \new Voice = "brassQuartetAlto" {
       \voiceTwo \voiceBrassQuartetAlto
     }
-  &gt;&gt;
+  >>
 }
 
 % lower {{{3
@@ -1867,14 +1635,14 @@ staffBrassQuartetLower = \new Staff = "brassQuartetLower"
   midiMaximumVolume = #1.5
 } {
   \clef bass
-  &lt;&lt;
+  <<
     \new Voice = "brassQuartetTenor" {
       \voiceOne \voiceBrassQuartetTenor
     }
     \new Voice = "brassQuartetBass" {
       \voiceTwo \voiceBrassQuartetBass
     }
-  &gt;&gt;
+  >>
 }
 
 % brass quintet {{{2
@@ -1890,14 +1658,14 @@ staffBrassQuintetUpper = \new Staff = "brassQuintetUpper"
   midiMaximumVolume = #1.5
 } {
   \clef treble
-  &lt;&lt;
+  <<
     \new Voice = "brassQuintetSoprano" {
       \voiceOne \voiceBrassQuintetSoprano
     }
     \new Voice = "brassQuintetMezzo" {
       \voiceTwo \voiceBrassQuintetMezzo
     }
-  &gt;&gt;
+  >>
 }
 
 % middle {{{3
@@ -1921,7 +1689,7 @@ staffBrassQuintetLower = \new Staff = "brassQuintetLower"
 \with {
   instrumentName = \markup { \column { trombone tuba } }
   shortInstrumentName = \markup { \column { tbn tba } }
-} &lt;&lt;
+} <<
   % \clef varbaritone
   \clef bass
   \new Voice ="brassQuintetTenor"
@@ -1940,7 +1708,7 @@ staffBrassQuintetLower = \new Staff = "brassQuintetLower"
   } {
     \voiceTwo \voiceBrassQuintetBass
   }
-&gt;&gt;
+>>
 
 
 % positive organ {{{2
@@ -2055,14 +1823,14 @@ staffStringQuartetUpper = \new Staff = "stringQuartetUpper"
 } {
   \clef treble
   %\override Staff.StaffSymbol.line-count = #7
-  &lt;&lt;
+  <<
     \new Voice = "stringQuartetSoprano" {
       \voiceOne \voiceStringQuartetSoprano
     }
     \new Voice = "stringQuartetAlto" {
       \voiceTwo \voiceStringQuartetAlto
     }
-  &gt;&gt;
+  >>
 }
 
 % lower {{{3
@@ -2077,14 +1845,14 @@ staffStringQuartetLower = \new Staff = "stringQuartetLower"
 } {
   \clef bass
   %\override Staff.StaffSymbol.line-count = #7
-  &lt;&lt;
+  <<
     \new Voice = "stringQuartetTenor" {
       \voiceOne \voiceStringQuartetTenor
     }
     \new Voice = "stringQuartetBass" {
       \voiceTwo \voiceStringQuartetBass
     }
-  &gt;&gt;
+  >>
 }
 
 % string quintet {{{2
@@ -2100,14 +1868,14 @@ staffStringQuintetUpper = \new Staff = "stringQuintetUpper"
   midiMaximumVolume = #1.5
 } {
   \clef treble
-  &lt;&lt;
+  <<
     \new Voice = "stringQuintetSoprano" {
       \voiceOne \voiceStringQuintetSoprano
     }
     \new Voice = "stringQuintetMezzo" {
       \voiceTwo \voiceStringQuintetMezzo
     }
-  &gt;&gt;
+  >>
 }
 
 % middle {{{3
@@ -2135,14 +1903,14 @@ staffStringQuintetLower = \new Staff = "stringQuintetLower"
   midiMaximumVolume = #1.5
 } {
   \clef bass
-  &lt;&lt;
+  <<
     \new Voice = "stringQuintetTenor" {
       \voiceOne \voiceStringQuintetTenor
     }
     \new Voice = "stringQuintetBass" {
       \voiceTwo \voiceStringQuintetBass
     }
-  &gt;&gt;
+  >>
 }
 
 % string sextet {{{2
@@ -2158,14 +1926,14 @@ staffStringSextetUpper = \new Staff = "stringSextetUpper"
   midiMaximumVolume = #1.5
 } {
   \clef treble
-  &lt;&lt;
+  <<
     \new Voice = "stringSextetSoprano" {
       \voiceOne \voiceStringSextetSoprano
     }
     \new Voice = "stringSextetMezzo" {
       \voiceTwo \voiceStringSextetMezzo
     }
-  &gt;&gt;
+  >>
 }
 
 % middle {{{3
@@ -2179,14 +1947,14 @@ staffStringSextetMiddle = \new Staff = "stringSextetMiddle"
   midiMaximumVolume = #1.5
 } {
   \clef alto
-  &lt;&lt;
+  <<
     \new Voice = "stringSextetAlto" {
       \voiceOne \voiceStringSextetAlto
     }
     \new Voice = "stringSextetTenor" {
       \voiceTwo \voiceStringSextetTenor
     }
-  &gt;&gt;
+  >>
 }
 
 % lower {{{3
@@ -2200,14 +1968,14 @@ staffStringSextetLower = \new Staff = "stringSextetLower"
   midiMaximumVolume = #1.5
 } {
   \clef bass
-  &lt;&lt;
+  <<
     \new Voice = "stringSextetBarytone" {
       \voiceOne \voiceStringSextetBarytone
     }
     \new Voice = "stringSextetBass" {
       \voiceTwo \voiceStringSextetBass
     }
-  &gt;&gt;
+  >>
 }
 
 % string septet {{{2
@@ -2223,14 +1991,14 @@ staffStringSeptetViolin = \new Staff
   midiMaximumVolume = #1.5
 } {
   \clef treble
-  &lt;&lt;
+  <<
     \new Voice = "stringSeptetSoprano" {
       \voiceOne \voiceStringSeptetSoprano
     }
     \new Voice = "stringSeptetMezzo" {
       \voiceTwo \voiceStringSeptetMezzo
     }
-  &gt;&gt;
+  >>
 }
 
 % viola {{{3
@@ -2244,14 +2012,14 @@ staffStringSeptetViola = \new Staff
   midiMaximumVolume = #1.5
 } {
   \clef alto
-  &lt;&lt;
+  <<
     \new Voice = "stringSeptetAlto" {
       \voiceOne \voiceStringSeptetAlto
     }
     \new Voice = "stringSeptetCounter" {
       \voiceTwo \voiceStringSeptetCounter
     }
-  &gt;&gt;
+  >>
 }
 
 % cello {{{3
@@ -2265,14 +2033,14 @@ staffStringSeptetCello = \new Staff
   midiMaximumVolume = #1.5
 } {
   \clef varbaritone
-  &lt;&lt;
+  <<
     \new Voice = "stringSeptetTenor" {
       \voiceOne \voiceStringSeptetTenor
     }
     \new Voice = "stringSeptetBarytone" {
       \voiceTwo \voiceStringSeptetBarytone
     }
-  &gt;&gt;
+  >>
 }
 
 % contrabass {{{3
@@ -2457,16 +2225,16 @@ staffLuteTabUpper = \new TabStaff = "luteTabUpper"
   tablatureFormat = #fret-letter-tablature-format
   fretLabels = #'("a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l")
   % -- renaissance lute, 6 courses
-  stringTunings = \stringTuning &lt;g, c f a d' g'&gt;
+  stringTunings = \stringTuning <g, c f a d' g'>
   % -- renaissance lute, 8 courses
-  %stringTunings = \stringTuning &lt;g, c f a d' g'&gt;
-  %additionalBassStrings = \stringTuning &lt;e, f,&gt;
+  %stringTunings = \stringTuning <g, c f a d' g'>
+  %additionalBassStrings = \stringTuning <e, f,>
   % -- late renaissance / early baroque lute, 10 courses
-  %stringTunings = \stringTuning &lt;g, c f a d' g'&gt;
-  %additionalBassStrings = \stringTuning &lt;c, d, ef, f,&gt;
+  %stringTunings = \stringTuning <g, c f a d' g'>
+  %additionalBassStrings = \stringTuning <c, d, ef, f,>
   % -- baroque lute, 13 courses
-  %stringTunings = \stringTuning &lt;a, d f a d' f'&gt;
-  %additionalBassStrings = \stringTuning &lt;a,, b,, c, d, e, f, g,&gt;
+  %stringTunings = \stringTuning <a, d f a d' f'>
+  %additionalBassStrings = \stringTuning <a,, b,, c, d, e, f, g,>
   % ---- midi
   midiInstrument = "acoustic guitar (nylon)"
   midiMinimumVolume = #1.0
@@ -2487,11 +2255,11 @@ staffLuteTabLower = \new TabStaff = "luteTabLower"
   tablatureFormat = #fret-letter-tablature-format
   fretLabels = #'("a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l")
   % -- archlute, 14 courses
-  stringTunings = \stringTuning &lt;g, c f a d' g'&gt;
-  additionalBassStrings = \stringTuning &lt;f,, g,, a,, b,, c, d, e, f,&gt;
+  stringTunings = \stringTuning <g, c f a d' g'>
+  additionalBassStrings = \stringTuning <f,, g,, a,, b,, c, d, e, f,>
   % -- theorbo
-  %stringTunings = \stringTuning &lt;a, d g b e a&gt;
-  %additionalBassStrings = \stringTuning &lt;g,, a,, b,, c, d, e, f, g,&gt;
+  %stringTunings = \stringTuning <a, d g b e a>
+  %additionalBassStrings = \stringTuning <g,, a,, b,, c, d, e, f, g,>
   % ---- midi
   midiInstrument = "acoustic bass"
   midiMinimumVolume = #1.0
@@ -2547,7 +2315,7 @@ staffGuitarTabUpper = \new TabStaff = "guitarTabUpper"
   instrumentName = "guitar"
   shortInstrumentName = "gtr"
   % ---- guitar
-  stringTunings = \stringTuning &lt;e, a, d g b e'&gt;
+  stringTunings = \stringTuning <e, a, d g b e'>
   % ---- midi
   midiInstrument = "acoustic guitar (nylon)"
   midiMinimumVolume = #1.0
@@ -2565,7 +2333,7 @@ staffGuitarTabLower = \new TabStaff = "guitarTabLower"
   instrumentName = \markup { \column { bass guitar } }
   shortInstrumentName = "bgtr"
   % ---- bass guitar
-  stringTunings = \stringTuning &lt;e,, a,, d, g,&gt;
+  stringTunings = \stringTuning <e,, a,, d, g,>
   % ---- midi
   midiInstrument = "acoustic bass"
   midiMinimumVolume = #1.0
@@ -2604,25 +2372,25 @@ staffDrumkit = \new DrumStaff
 
 % choir quartet {{{2
 
-groupChoirQuartet = \new ChoirStaff &lt;&lt;
-  % -- staff 1 : soprano &amp; alto
+groupChoirQuartet = \new ChoirStaff <<
+  % -- staff 1 : soprano & alto
   \staffChoirQuartetSopranoAlto
   \new Lyrics \with { alignAboveContext = "choirQuartetSopranoAlto" }
   \lyricsto "choirQuartetSoprano" \lyricsChoirQuartetSoprano
   \new Lyrics \with { alignBelowContext = "choirQuartetSopranoAlto" }
   \lyricsto "choirQuartetAlto" \lyricsChoirQuartetAlto
-  % -- staff 2 : tenor &amp; bass
+  % -- staff 2 : tenor & bass
   \staffChoirQuartetTenorBass
   \new Lyrics \with { alignAboveContext = "choirQuartetTenorBass" }
   \lyricsto "choirQuartetTenor" \lyricsChoirQuartetTenor
   \new Lyrics \with { alignBelowContext = "choirQuartetTenorBass" }
   \lyricsto "choirQuartetBass" \lyricsChoirQuartetBass
-&gt;&gt;
+>>
 
 % choir quintet {{{2
 
-groupChoirQuintet = \new ChoirStaff &lt;&lt;
-  % -- staff 1 : soprano &amp; mezzo
+groupChoirQuintet = \new ChoirStaff <<
+  % -- staff 1 : soprano & mezzo
   \staffChoirQuintetSopranoMezzo
   \new Lyrics \with { alignAboveContext = "choirQuintetSopranoMezzo" }
   \lyricsto "choirQuintetSoprano" \lyricsChoirQuintetSoprano
@@ -2632,53 +2400,53 @@ groupChoirQuintet = \new ChoirStaff &lt;&lt;
   \staffChoirQuintetAlto
   \new Lyrics \with { alignBelowContext = "choirQuintetAlto" }
   \lyricsto "choirQuintetAlto" \lyricsChoirQuintetAlto
-  % -- staff 3 : tenor &amp; bass
+  % -- staff 3 : tenor & bass
   \staffChoirQuintetTenorBass
   \new Lyrics \with { alignAboveContext = "choirQuintetTenorBass" }
   \lyricsto "choirQuintetTenor" \lyricsChoirQuintetTenor
   \new Lyrics \with { alignBelowContext = "choirQuintetTenorBass" }
   \lyricsto "choirQuintetBass" \lyricsChoirQuintetBass
-&gt;&gt;
+>>
 
 % choir sextet {{{2
 
-groupChoirSextet = \new ChoirStaff &lt;&lt;
-  % -- staff 1 : soprano &amp; mezzo
+groupChoirSextet = \new ChoirStaff <<
+  % -- staff 1 : soprano & mezzo
   \staffChoirSextetSopranoMezzo
   \new Lyrics \with { alignAboveContext = "choirSextetSopranoMezzo" }
   \lyricsto "choirSextetSoprano" \lyricsChoirSextetSoprano
   \new Lyrics \with { alignBelowContext = "choirSextetSopranoMezzo" }
   \lyricsto "choirSextetMezzo" \lyricsChoirSextetMezzo
-  % -- staff 2 : alto &amp; tenor
+  % -- staff 2 : alto & tenor
   \staffChoirSextetAltoTenor
   \new Lyrics \with { alignAboveContext = "choirSextetAltoTenor" }
   \lyricsto "choirSextetAlto" \lyricsChoirSextetAlto
   \new Lyrics \with { alignBelowContext = "choirSextetAltoTenor" }
   \lyricsto "choirSextetTenor" \lyricsChoirSextetTenor
-  % -- staff 3 : barytone &amp; bass
+  % -- staff 3 : barytone & bass
   \staffChoirSextetBarytoneBass
   \new Lyrics \with { alignAboveContext = "choirSextetBarytoneBass" }
   \lyricsto "choirSextetBarytone" \lyricsChoirSextetBarytone
   \new Lyrics \with { alignBelowContext = "choirSextetBarytoneBass" }
   \lyricsto "choirSextetBass" \lyricsChoirSextetBass
-&gt;&gt;
+>>
 
 % choir septet {{{2
 
-groupChoirSeptet = \new ChoirStaff &lt;&lt;
-  % -- staff 1 : soprano &amp; mezzo
+groupChoirSeptet = \new ChoirStaff <<
+  % -- staff 1 : soprano & mezzo
   \staffChoirSeptetSopranoMezzo
   \new Lyrics \with { alignAboveContext = "choirSeptetSopranoMezzo" }
   \lyricsto "choirSeptetSoprano" \lyricsChoirSeptetSoprano
   \new Lyrics \with { alignBelowContext = "choirSeptetSopranoMezzo" }
   \lyricsto "choirSeptetMezzo" \lyricsChoirSeptetMezzo
-  % -- staff 2 : alto &amp; counter
+  % -- staff 2 : alto & counter
   \staffChoirSeptetAltoCounter
   \new Lyrics \with { alignAboveContext = "choirSeptetAltoCounter" }
   \lyricsto "choirSeptetAlto" \lyricsChoirSeptetAlto
   \new Lyrics \with { alignBelowContext = "choirSeptetAltoCounter" }
   \lyricsto "choirSeptetCounter" \lyricsChoirSeptetCounter
-  % -- staff 3 : tenor &amp; barytone
+  % -- staff 3 : tenor & barytone
   \staffChoirSeptetTenorBarytone
   \new Lyrics \with { alignAboveContext = "choirSeptetTenorBarytone" }
   \lyricsto "choirSeptetTenor" \lyricsChoirSeptetTenor
@@ -2688,30 +2456,30 @@ groupChoirSeptet = \new ChoirStaff &lt;&lt;
   \staffChoirSeptetBass
   \new Lyrics \with { alignBelowContext = "choirSeptetBass" }
   \lyricsto "choirSeptetBass" \lyricsChoirSeptetBass
-&gt;&gt;
+>>
 
 % wood quartet {{{2
 
-groupWoodQuartet = \new StaffGroup &lt;&lt;
+groupWoodQuartet = \new StaffGroup <<
   \staffWoodQuartetUpper
   \staffWoodQuartetLower
-&gt;&gt;
+>>
 
 % wood quintet {{{2
 
-groupWoodQuintet = \new StaffGroup &lt;&lt;
+groupWoodQuintet = \new StaffGroup <<
   \staffWoodQuintetUpper
   \staffWoodQuintetMiddle
   \staffWoodQuintetLower
-&gt;&gt;
+>>
 
 % wood sextet {{{2
 
-groupWoodSextet = \new StaffGroup &lt;&lt;
+groupWoodSextet = \new StaffGroup <<
   \staffWoodSextetUpper
   \staffWoodSextetMiddle
   \staffWoodSextetLower
-&gt;&gt;
+>>
 
 % saxophone quartet {{{2
 
@@ -2719,27 +2487,27 @@ groupSaxophoneQuartet = \new StaffGroup
 \with {
   instrumentName = "saxos"
   shortInstrumentName = "sax"
-} &lt;&lt;
+} <<
   \staffSaxophoneQuartetUpper
   \staffSaxophoneQuartetLower
-&gt;&gt;
+>>
 
 % brass quartet {{{2
 
 groupBrassQuartet = \new StaffGroup
-&lt;&lt;
+<<
   \staffBrassQuartetUpper
   \staffBrassQuartetLower
-&gt;&gt;
+>>
 
 % brass quintet {{{2
 
 groupBrassQuintet = \new StaffGroup
-&lt;&lt;
+<<
   \staffBrassQuintetUpper
   \staffBrassQuintetMiddle
   \staffBrassQuintetLower
-&gt;&gt;
+>>
 
 % positive organ {{{2
 
@@ -2748,10 +2516,10 @@ groupPositiveOrgan = \new GrandStaff
   instrumentName = \markup { \column { positive organ } }
   shortInstrumentName = \markup { \column { pos org } }
   connectArpeggios = ##t
-} &lt;&lt;
+} <<
   \staffPositiveOrganRight
   \staffPositiveOrganLeft
-&gt;&gt;
+>>
 
 % church organ {{{2
 
@@ -2760,11 +2528,11 @@ groupChurchOrgan = \new GrandStaff
   instrumentName = \markup { \column { church organ } }
   shortInstrumentName = \markup { \column { ch org } }
   connectArpeggios = ##t
-} &lt;&lt;
+} <<
   \staffChurchOrganRight
   \staffChurchOrganLeft
   \staffChurchOrganFeet
-&gt;&gt;
+>>
 
 % accordion {{{2
 
@@ -2772,46 +2540,46 @@ groupAccordion = \new GrandStaff
 \with {
   instrumentName = "accordion"
   shortInstrumentName = "acc"
-} &lt;&lt;
+} <<
   \staffAccordionRight
   \staffAccordionLeft
-&gt;&gt;
+>>
 
 % string quartet {{{2
 
 groupStringQuartet = \new StaffGroup
-&lt;&lt;
+<<
   \staffStringQuartetUpper
   \staffStringQuartetLower
-&gt;&gt;
+>>
 
 % string quintet {{{2
 
 groupStringQuintet = \new StaffGroup
-&lt;&lt;
+<<
   \staffStringQuintetUpper
   \staffStringQuintetMiddle
   \staffStringQuintetLower
-&gt;&gt;
+>>
 
 % string sextet {{{2
 
 groupStringSextet = \new StaffGroup
-&lt;&lt;
+<<
   \staffStringSextetUpper
   \staffStringSextetMiddle
   \staffStringSextetLower
-&gt;&gt;
+>>
 
 % string septet {{{2
 
 groupStringSeptet = \new StaffGroup
-&lt;&lt;
+<<
   \staffStringSeptetViolin
   \staffStringSeptetViola
   \staffStringSeptetCello
   \staffStringSeptetContrabass
-&gt;&gt;
+>>
 
 % harpsichord {{{2
 
@@ -2820,10 +2588,10 @@ groupHarpsichord = \new GrandStaff
   instrumentName = \markup \column { harpsi- chord }
   shortInstrumentName = \markup \column { hp cd }
   connectArpeggios = ##t
-} &lt;&lt;
+} <<
   \staffHarpsichordRight
   \staffHarpsichordLeft
-&gt;&gt;
+>>
 
 % pedal harpsichord {{{2
 
@@ -2832,11 +2600,11 @@ groupPedalHarpsichord = \new GrandStaff
   instrumentName = \markup { \column { pedal harpsichord } }
   shortInstrumentName = \markup \column { php cd }
   connectArpeggios = ##t
-} &lt;&lt;
+} <<
   \staffPedalHarpsichordRight
   \staffPedalHarpsichordLeft
   \staffPedalHarpsichordFeet
-&gt;&gt;
+>>
 
 % piano {{{2
 
@@ -2845,10 +2613,10 @@ groupPiano = \new GrandStaff
   instrumentName = "piano"
   shortInstrumentName = "pn"
   connectArpeggios = ##t
-} &lt;&lt;
+} <<
   \staffPianoRight
   \staffPianoLeft
-&gt;&gt;
+>>
 
 % harp {{{2
 
@@ -2857,42 +2625,42 @@ groupHarp = \new GrandStaff
   instrumentName = "harp"
   shortInstrumentName = "hp"
   connectArpeggios = ##t
-} &lt;&lt;
+} <<
   \staffHarpUpper
   \staffHarpLower
-&gt;&gt;
+>>
 
 % lutes {{{2
 
 groupLutes = \new StaffGroup
-&lt;&lt;
+<<
   \staffLuteUpper
   \staffLuteLower
-&gt;&gt;
+>>
 
 % luteTabs {{{2
 
 groupLuteTabs = \new StaffGroup
-&lt;&lt;
+<<
   \staffLuteTabUpper
   \staffLuteTabLower
-&gt;&gt;
+>>
 
 % guitars {{{2
 
 groupGuitars = \new StaffGroup
-&lt;&lt;
+<<
   \staffGuitarUpper
   \staffGuitarLower
-&gt;&gt;
+>>
 
 % guitarTabs {{{2
 
 groupGuitarTabs = \new StaffGroup
-&lt;&lt;
+<<
   \staffGuitarTabUpper
   \staffGuitarTabLower
-&gt;&gt;
+>>
 
 % book {{{1
 
@@ -2909,10 +2677,9 @@ groupGuitarTabs = \new StaffGroup
     %\line { guitars = guitar, bass guitar }
     %\vspace #1
   %}
-  % score, with instruments as single &amp; group staves {{{2
-  % -- comment or uncomment instruments and groups as needed
+  % score, with instruments as single & group staves {{{2
   \score {
-    &lt;&lt;
+    <<
       % choir {{{3
       %\groupChoirQuartet
       %\groupChoirQuintet
@@ -2925,8 +2692,8 @@ groupGuitarTabs = \new StaffGroup
       %\groupWoodQuintet
       %\groupWoodSextet
       % individual woods {{{5
-      \staffFlutes
-      \staffOboes
+      %\staffFlutes
+      %\staffOboes
       %\staffEnglishHorns
       %\staffClarinets
       %\staffBassoons
@@ -2936,29 +2703,29 @@ groupGuitarTabs = \new StaffGroup
       %\groupBrassQuartet
       %\groupBrassQuintet
       % wind keyboards {{{4
-      \groupPositiveOrgan
+      %\groupPositiveOrgan
       %\groupChurchOrgan
       %\groupAccordion
       % strings {{{3
       % bowed strings {{{4
       %\groupStringQuartet
-      %\groupStringQuintet
+      \groupStringQuintet
       %\groupStringSextet
-      \groupStringSeptet
+      %\groupStringSeptet
       % string keyboards {{{4
       %\groupHarpsichord
-      \groupPedalHarpsichord
+      %\groupPedalHarpsichord
       %\groupPiano
       % plucked strings {{{4
-      \groupHarp
+      %\groupHarp
       %\groupLutes
       %\groupLuteTabs
       %\groupGuitars
       %\groupGuitarTabs
       % drums {{{3
-      \staffVibraphone
-      \staffDrumkit
-    &gt;&gt;
+      %\staffVibraphone
+      %\staffDrumkit
+    >>
     % layout, see beginning of file {{{2
     \layout { }
     % midi {{{2
@@ -2968,31 +2735,19 @@ groupGuitarTabs = \new StaffGroup
         %midiChannelMapping = #'voice
         %\enablePolymeter
       }
-      % -- comment this if you don't need distinct instruments on the same staff
-      \context {
-        \Staff
-        \remove "Staff_performer"
-      }
-      % -- comment this if you don't need distinct instruments on the same staff
-      \context {
-        \Voice
-        \consists "Staff_performer"
-      }
+      % % -- comment this if you don't need distinct instruments on the same staff
+      % \context {
+      %   \Staff
+      %   \remove "Staff_performer"
+      % }
+      % % -- comment this if you don't need distinct instruments on the same staff
+      % \context {
+      %   \Voice
+      %   \consists "Staff_performer"
+      % }
     }
   }
   \paper {
     system-separator-markup = \slashSeparator
   }
 }
-</pre>
-</div>
-</div>
-</div>
-</div>
-<div id="postamble" class="status">
-<p class="author">Author: chimay</p>
-<p class="date">Created: 2024-02-17 sam 15:40</p>
-<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
-</div>
-</body>
-</html>

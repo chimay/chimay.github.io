@@ -11,7 +11,7 @@
 
 \header {
   title = "boudoir"
-  subtitle="boudoir"
+  subtitle="subtitle"
   composer = "composer"
   poet = "poet"
   %piece = "piece"

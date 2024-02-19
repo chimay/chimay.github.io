@@ -2601,7 +2601,7 @@ groupHarpsichord = \new GrandStaff
 groupPedalHarpsichord = \new GrandStaff
 \with {
   instrumentName = \markup { \column { pedal harpsi- chord } }
-  shortInstrumentName = \markup \column { php cd }
+  shortInstrumentName = \markup \column { ped hp cd }
   connectArpeggios = ##t
 } <<
   \staffPedalHarpsichordRight

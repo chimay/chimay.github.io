@@ -677,25 +677,25 @@ voicePositiveOrganLeft = \relative c {
   \anacrusis % hypermeasure 0
 }
 
-% church organ {{{2
+% pedal organ {{{2
 
 % right {{{3
 
-voiceChurchOrganRight = \relative c'' {
+voicePedalOrganRight = \relative c'' {
   \keytime
   \anacrusis % hypermeasure 0
 }
 
 % left {{{3
 
-voiceChurchOrganLeft = \relative c {
+voicePedalOrganLeft = \relative c {
   \keytime
   \anacrusis % hypermeasure 0
 }
 
 % feet {{{3
 
-voiceChurchOrganFeet = \relative c, {
+voicePedalOrganFeet = \relative c, {
   \keytime
   \anacrusis % hypermeasure 0
 }
@@ -1741,11 +1741,11 @@ staffPositiveOrganLeft = \new Staff = "positiveOrganLeft"
   \voicePositiveOrganLeft
 }
 
-% church organ {{{2
+% pedal organ {{{2
 
 % right {{{3
 
-staffChurchOrganRight = \new Staff = "churchOrganRight"
+staffPedalOrganRight = \new Staff = "pedalOrganRight"
 \with {
   midiInstrument = "reed organ"
   midiMinimumVolume = #1.5
@@ -1753,12 +1753,12 @@ staffChurchOrganRight = \new Staff = "churchOrganRight"
 } {
   \clef treble
   %\showStaffSwitch
-  \voiceChurchOrganRight
+  \voicePedalOrganRight
 }
 
 % left {{{3
 
-staffChurchOrganLeft = \new Staff = "churchOrganLeft"
+staffPedalOrganLeft = \new Staff = "pedalOrganLeft"
 \with {
   midiInstrument = "reed organ"
   midiMinimumVolume = #1.5
@@ -1766,19 +1766,19 @@ staffChurchOrganLeft = \new Staff = "churchOrganLeft"
 } {
   \clef bass
   %\showStaffSwitch
-  \voiceChurchOrganLeft
+  \voicePedalOrganLeft
 }
 
 % feet {{{3
 
-staffChurchOrganFeet = \new Staff = "churchOrganFeet"
+staffPedalOrganFeet = \new Staff = "pedalOrganFeet"
 \with {
   midiInstrument = "reed organ"
   midiMinimumVolume = #1.5
   midiMaximumVolume = #2.0
 } {
   \clef subbass
-  \voiceChurchOrganFeet
+  \voicePedalOrganFeet
 }
 
 % accordion {{{2
@@ -2521,17 +2521,17 @@ groupPositiveOrgan = \new GrandStaff
   \staffPositiveOrganLeft
 >>
 
-% church organ {{{2
+% pedal organ {{{2
 
-groupChurchOrgan = \new GrandStaff
+groupPedalOrgan = \new GrandStaff
 \with {
-  instrumentName = \markup { \column { church organ } }
+  instrumentName = \markup { \column { pedal organ } }
   shortInstrumentName = \markup { \column { ch org } }
   connectArpeggios = ##t
 } <<
-  \staffChurchOrganRight
-  \staffChurchOrganLeft
-  \staffChurchOrganFeet
+  \staffPedalOrganRight
+  \staffPedalOrganLeft
+  \staffPedalOrganFeet
 >>
 
 % accordion {{{2
@@ -2699,7 +2699,7 @@ groupGuitarTabs = \new StaffGroup
       %\groupBrassQuintet
       % wind keyboards {{{4
       \groupPositiveOrgan
-      %\groupChurchOrgan
+      %\groupPedalOrgan
       %\groupAccordion
       % strings {{{3
       % bowed strings {{{4

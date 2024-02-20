@@ -1767,6 +1767,7 @@ staffPedalOrganLeft = \new Staff = "pedalOrganLeft"
   midiMaximumVolume = #2.0
 } {
   \clef bass
+  %\clef alto
   %\showStaffSwitch
   \voicePedalOrganLeft
 }
@@ -2112,6 +2113,7 @@ staffPedalHarpsichordLeft = \new Staff = "pedalHarpsichordLeft"
   midiMaximumVolume = #2.0
 } {
   \clef bass
+  %\clef alto
   %\showStaffSwitch
   \voicePedalHarpsichordLeft
 }

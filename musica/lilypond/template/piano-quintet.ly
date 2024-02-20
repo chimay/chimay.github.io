@@ -1340,7 +1340,8 @@ staffWoodQuintetMiddle = \new Staff = "woodQuintetMiddle"
   midiMaximumVolume = #1.5
 }
 {
-  \clef alto \voiceWoodQuintetAlto
+  \clef alto
+  \voiceWoodQuintetAlto
 }
 
 % lower {{{3
@@ -1679,7 +1680,8 @@ staffBrassQuintetMiddle = \new Staff = "brassQuintetMiddle"
   midiMaximumVolume = #1.5
 }
 {
-  \clef alto \voiceBrassQuintetAlto
+  \clef alto
+  \voiceBrassQuintetAlto
 }
 
 
@@ -1765,6 +1767,7 @@ staffPedalOrganLeft = \new Staff = "pedalOrganLeft"
   midiMaximumVolume = #2.0
 } {
   \clef bass
+  %\clef alto
   %\showStaffSwitch
   \voicePedalOrganLeft
 }
@@ -1777,7 +1780,8 @@ staffPedalOrganFeet = \new Staff = "pedalOrganFeet"
   midiMinimumVolume = #1.5
   midiMaximumVolume = #2.0
 } {
-  \clef subbass
+  \clef bass
+  %\clef subbass
   \voicePedalOrganFeet
 }
 
@@ -2109,6 +2113,7 @@ staffPedalHarpsichordLeft = \new Staff = "pedalHarpsichordLeft"
   midiMaximumVolume = #2.0
 } {
   \clef bass
+  %\clef alto
   %\showStaffSwitch
   \voicePedalHarpsichordLeft
 }
@@ -2121,7 +2126,8 @@ staffPedalHarpsichordFeet = \new Staff = "pedalHarpsichordFeet"
   midiMinimumVolume = #1.5
   midiMaximumVolume = #2.0
 } {
-  \clef subbass
+  \clef bass
+  %\clef subbass
   \voicePedalHarpsichordFeet
 }
 
@@ -2163,7 +2169,9 @@ staffHarpUpper = \new Staff = "harpUpper"
   midiMinimumVolume = #1.5
   midiMaximumVolume = #2.0
 } {
-  \clef treble \voiceHarpUpper
+  \clef treble
+  %\clef soprano
+  \voiceHarpUpper
 }
 
 % lower {{{3
@@ -2174,7 +2182,9 @@ staffHarpLower = \new Staff = "harpLower"
   midiMinimumVolume = #1.5
   midiMaximumVolume = #2.0
 } {
-  \clef bass \voiceHarpLower
+  \clef bass
+  %\clef subbass
+  \voiceHarpLower
 }
 
 % lutes {{{2
@@ -2354,7 +2364,8 @@ staffVibraphone = \new Staff
   midiMinimumVolume = #1.0
   midiMaximumVolume = #1.5
 } {
-  \clef treble \voiceVibraphone
+  \clef treble
+  \voiceVibraphone
 }
 
 % drumkit {{{2
@@ -2365,7 +2376,8 @@ staffDrumkit = \new DrumStaff
   shortInstrumentName = "dk"
   \consists "Instrument_name_engraver"
 } {
-  \clef percussion \voiceDrumkit
+  \clef percussion
+  \voiceDrumkit
 }
 
 % staff groups {{{1

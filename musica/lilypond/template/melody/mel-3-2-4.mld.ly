@@ -57,7 +57,7 @@ anacrusis = {
 
 anacrusisDrumkit = \drummode {
   \partial 1
-  r1
+  bd8 sn hh hhc hhho hhp cymc cymr
   \bar "|"
 }
 

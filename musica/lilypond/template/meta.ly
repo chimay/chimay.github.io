@@ -1768,6 +1768,7 @@ staffPedalOrganLeft = \new Staff = "pedalOrganLeft"
 } {
   \clef bass
   %\clef alto
+  %\clef tenor
   %\showStaffSwitch
   \voicePedalOrganLeft
 }
@@ -2114,6 +2115,7 @@ staffPedalHarpsichordLeft = \new Staff = "pedalHarpsichordLeft"
 } {
   \clef bass
   %\clef alto
+  %\clef tenor
   %\showStaffSwitch
   \voicePedalHarpsichordLeft
 }
@@ -2703,7 +2705,7 @@ groupGuitarTabs = \new StaffGroup
       \staffFlutes
       \staffOboes
       %\staffEnglishHorns
-      %\staffClarinets
+      \staffClarinets
       %\staffBassoons
       % saxophones {{{5
       %\groupSaxophoneQuartet
@@ -2729,9 +2731,9 @@ groupGuitarTabs = \new StaffGroup
       %\groupLutes
       %\groupLuteTabs
       %\groupGuitars
-      %\groupGuitarTabs
+      \groupGuitarTabs
       % drums {{{3
-      \staffVibraphone
+      %\staffVibraphone
       \staffDrumkit
     >>
     % layout, see beginning of file {{{2

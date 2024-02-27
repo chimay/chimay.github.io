@@ -56,7 +56,7 @@ anacrusis = {
 
 anacrusisDrumkit = \drummode {
   \partial 2
-  r2
+  hh2
 }
 
 % intros {{{1

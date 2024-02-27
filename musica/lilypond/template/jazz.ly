@@ -2727,10 +2727,10 @@ groupGuitarTabs = \new StaffGroup
       %\groupHarp
       %\groupLutes
       %\groupLuteTabs
-      \groupGuitars
-      %\groupGuitarTabs
+      %\groupGuitars
+      \groupGuitarTabs
       % drums {{{3
-      \staffVibraphone
+      %\staffVibraphone
       \staffDrumkit
     >>
     % layout, see beginning of file {{{2

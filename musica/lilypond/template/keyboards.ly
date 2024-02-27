@@ -2536,7 +2536,7 @@ groupPositiveOrgan = \new GrandStaff
 groupPedalOrgan = \new GrandStaff
 \with {
   instrumentName = \markup { \column { pedal organ } }
-  shortInstrumentName = \markup { \column { ch org } }
+  shortInstrumentName = \markup { \column { ped org } }
   connectArpeggios = ##t
 } <<
   \staffPedalOrganRight

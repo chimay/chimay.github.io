@@ -936,14 +936,14 @@ voicePianoLeft = \relative c {
 
 % harp {{{2
 
-% treble {{{3
+% upper {{{3
 
 voiceHarpUpper = \relative c'' {
   \keytime
   \anacrusis % hypermeasure 0
 }
 
-% bass {{{3
+% lower {{{3
 
 voiceHarpLower = \relative c {
   \keytime
@@ -952,14 +952,14 @@ voiceHarpLower = \relative c {
 
 % lutes {{{2
 
-% treble {{{3
+% upper {{{3
 
 voiceLuteUpper = \relative c' {
   \keytime
   \anacrusis % hypermeasure 0
 }
 
-% bass {{{3
+% lower {{{3
 
 voiceLuteLower = \relative c, {
   \keytime
@@ -968,14 +968,14 @@ voiceLuteLower = \relative c, {
 
 % guitars {{{2
 
-% treble {{{3
+% upper {{{3
 
 voiceGuitarUpper = \relative c' {
   \keytime
   \anacrusis % hypermeasure 0
 }
 
-% bass {{{3
+% lower {{{3
 
 voiceGuitarLower = \relative c, {
   \keytime
@@ -1768,6 +1768,7 @@ staffPedalOrganLeft = \new Staff = "pedalOrganLeft"
 } {
   \clef bass
   %\clef alto
+  %\clef tenor
   %\showStaffSwitch
   \voicePedalOrganLeft
 }
@@ -2114,6 +2115,7 @@ staffPedalHarpsichordLeft = \new Staff = "pedalHarpsichordLeft"
 } {
   \clef bass
   %\clef alto
+  %\clef tenor
   %\showStaffSwitch
   \voicePedalHarpsichordLeft
 }
@@ -2685,6 +2687,7 @@ groupGuitarTabs = \new StaffGroup
     \vspace #1
   }
   % score, with instruments as single & group staves {{{2
+  % -- comment or uncomment instruments and groups as needed
   \score {
     <<
       % choir {{{3

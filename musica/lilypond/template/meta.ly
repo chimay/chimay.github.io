@@ -2713,8 +2713,8 @@ groupGuitarTabs = \new StaffGroup
       %\groupBrassQuartet
       %\groupBrassQuintet
       % wind keyboards {{{4
-      \groupPositiveOrgan
-      %\groupPedalOrgan
+      %\groupPositiveOrgan
+      \groupPedalOrgan
       %\groupAccordion
       % strings {{{3
       % bowed strings {{{4

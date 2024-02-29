@@ -661,18 +661,18 @@ voiceBrassQuintetBass = \relative c, {
   \anacrusis % hypermeasure 0
 }
 
-% positive organ {{{2
+% manual organ {{{2
 
 % right {{{3
 
-voicePositiveOrganRight = \relative c'' {
+voiceManualOrganRight = \relative c'' {
   \keytime
   \anacrusis % hypermeasure 0
 }
 
 % left {{{3
 
-voicePositiveOrganLeft = \relative c {
+voiceManualOrganLeft = \relative c {
   \keytime
   \anacrusis % hypermeasure 0
 }
@@ -1713,11 +1713,11 @@ staffBrassQuintetLower = \new Staff = "brassQuintetLower"
 >>
 
 
-% positive organ {{{2
+% manual organ {{{2
 
 % right {{{3
 
-staffPositiveOrganRight = \new Staff = "positiveOrganRight"
+staffManualOrganRight = \new Staff = "manualOrganRight"
 \with {
   midiInstrument = "reed organ"
   midiMinimumVolume = #1.5
@@ -1726,12 +1726,12 @@ staffPositiveOrganRight = \new Staff = "positiveOrganRight"
   \clef treble
   %\clef soprano
   %\showStaffSwitch
-  \voicePositiveOrganRight
+  \voiceManualOrganRight
 }
 
 % left {{{3
 
-staffPositiveOrganLeft = \new Staff = "positiveOrganLeft"
+staffManualOrganLeft = \new Staff = "manualOrganLeft"
 \with {
   midiInstrument = "reed organ"
   midiMinimumVolume = #1.5
@@ -1740,7 +1740,7 @@ staffPositiveOrganLeft = \new Staff = "positiveOrganLeft"
   \clef bass
   %\clef subbass
   %\showStaffSwitch
-  \voicePositiveOrganLeft
+  \voiceManualOrganLeft
 }
 
 % pedal organ {{{2
@@ -2523,16 +2523,16 @@ groupBrassQuintet = \new StaffGroup
   \staffBrassQuintetLower
 >>
 
-% positive organ {{{2
+% manual organ {{{2
 
-groupPositiveOrgan = \new GrandStaff
+groupManualOrgan = \new GrandStaff
 \with {
-  instrumentName = \markup { \column { positive organ } }
-  shortInstrumentName = \markup { \column { pos org } }
+  instrumentName = \markup { \column { manual organ } }
+  shortInstrumentName = \markup { \column { man org } }
   connectArpeggios = ##t
 } <<
-  \staffPositiveOrganRight
-  \staffPositiveOrganLeft
+  \staffManualOrganRight
+  \staffManualOrganLeft
 >>
 
 % pedal organ {{{2
@@ -2713,7 +2713,7 @@ groupGuitarTabs = \new StaffGroup
       %\groupBrassQuartet
       \groupBrassQuintet
       % wind keyboards {{{4
-      %\groupPositiveOrgan
+      %\groupManualOrgan
       \groupPedalOrgan
       \groupAccordion
       % strings {{{3

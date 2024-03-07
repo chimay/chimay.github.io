@@ -2172,7 +2172,8 @@ staffHarpUpper = \new Staff = "harpUpper"
   midiMaximumVolume = #2.0
 } {
   \clef treble
-  %\clef soprano
+  %\clef alto
+  %\clef tenor
   \voiceHarpUpper
 }
 

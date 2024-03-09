@@ -2978,7 +2978,7 @@ groupLutes = \new StaffGroup
   \staffLuteLower
 >>
 
-% luteTabs {{{3
+% lute tablatures {{{3
 
 groupLuteTabs = \new StaffGroup
 <<
@@ -2994,7 +2994,7 @@ groupGuitars = \new StaffGroup
   \staffGuitarLower
 >>
 
-% guitarTabs {{{3
+% guitar tablatures {{{3
 
 groupGuitarTabs = \new StaffGroup
 <<

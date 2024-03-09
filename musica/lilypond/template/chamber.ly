@@ -2978,7 +2978,7 @@ groupLutes = \new StaffGroup
   \staffLuteLower
 >>
 
-% luteTabs {{{3
+% lute tablatures {{{3
 
 groupLuteTabs = \new StaffGroup
 <<
@@ -2994,7 +2994,7 @@ groupGuitars = \new StaffGroup
   \staffGuitarLower
 >>
 
-% guitarTabs {{{3
+% guitar tablatures {{{3
 
 groupGuitarTabs = \new StaffGroup
 <<
@@ -3069,16 +3069,16 @@ groupGuitarTabs = \new StaffGroup
         %midiChannelMapping = #'voice
         %\enablePolymeter
       }
-      % -- comment this if you don't need distinct instruments on the same staff
-      \context {
-        \Staff
-        \remove "Staff_performer"
-      }
-      % -- comment this if you don't need distinct instruments on the same staff
-      \context {
-        \Voice
-        \consists "Staff_performer"
-      }
+      % % -- comment this if you don't need distinct instruments on the same staff
+      % \context {
+      %   \Staff
+      %   \remove "Staff_performer"
+      % }
+      % % -- comment this if you don't need distinct instruments on the same staff
+      % \context {
+      %   \Voice
+      %   \consists "Staff_performer"
+      % }
     }
   }
   \paper {

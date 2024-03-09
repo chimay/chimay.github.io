@@ -10,7 +10,7 @@
 % header {{{1
 
 \header {
-  title = "winds"
+  title = "vocal quintet"
   subtitle="subtitle"
   composer = "composer"
   poet = "poet"
@@ -3018,26 +3018,26 @@ groupGuitarTabs = \new StaffGroup
     <<
       % choir {{{3
       %\groupChoirQuartet
-      %\groupChoirQuintet
+      \groupChoirQuintet
       %\groupChoirSextet
       %\groupChoirSeptet
       % woods {{{3
       %\groupWoodQuartet
       %\groupWoodQuintet
-      \groupWoodSextet
+      %\groupWoodSextet
       %\staffFlutes
       %\staffOboes
       %\staffEnglishHorns
       %\staffClarinets
       %\staffBassoons
-      \groupSaxophoneQuartet
+      %\groupSaxophoneQuartet
       % brass {{{3
       %\groupBrassQuartet
-      \groupBrassQuintet
+      %\groupBrassQuintet
       % wind keyboards {{{3
       %\groupManualOrgan
-      \groupPedalOrgan
-      \groupAccordion
+      %\groupPedalOrgan
+      %\groupAccordion
       % bowed strings {{{3
       %\groupStringQuartet
       %\groupStringQuartetSymmetric

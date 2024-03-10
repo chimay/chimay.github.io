@@ -10,7 +10,7 @@
 % header {{{1
 
 \header {
-  title = "string quintet"
+  title = "string quartet with contrabass"
   subtitle="subtitle"
   composer = "composer"
   poet = "poet"
@@ -3134,8 +3134,8 @@ groupGuitarTabs = \new StaffGroup
       % bowed strings {{{3
       %\groupStringQuartet
       %\groupStringQuartetSymmetric
-      %\groupStringQuartetContrabass
-      \groupStringQuintet
+      \groupStringQuartetContrabass
+      %\groupStringQuintet
       %\groupStringQuintetSymmetric
       %\groupStringQuintetContrabass
       %\groupStringSextet

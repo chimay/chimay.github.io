@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-03-09 sam 14:55 -->
+<!-- 2024-03-10 dim 11:51 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Opus : Musica : template</title>
@@ -205,20 +205,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc658be7">1. Quintette vocal</a></li>
+<li><a href="#orge1a8d80">1. Quintette vocal</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgc658be7" class="outline-2">
-<h2 id="orgc658be7"><span class="section-number-2">1.</span> Quintette vocal</h2>
+<div id="outline-container-orge1a8d80" class="outline-2">
+<h2 id="orge1a8d80"><span class="section-number-2">1.</span> Quintette vocal</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Le résultat :
 </p>
 
 
-<div id="orgdad4a0f" class="figure">
+<div id="org3b0f337" class="figure">
 <p><img src="../../image/musica/template/vocal-quintet.png" alt="vocal-quintet.png" />
 </p>
 </div>
@@ -1016,6 +1016,37 @@ voiceStringQuartetSymmetricTenor = \relative c {
 % bass {{{4
 
 voiceStringQuartetSymmetricBass = \relative c, {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% string quartet with contrabass {{{3
+
+% soprano {{{4
+
+voiceStringQuartetContrabassSoprano = \relative c'' {
+  \keytime
+  \tempo 2. = 50
+  \anacrusis % hypermeasure 0
+}
+
+% alto {{{4
+
+voiceStringQuartetContrabassAlto = \relative c' {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% tenor {{{4
+
+voiceStringQuartetContrabassTenor = \relative c {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% bass {{{4
+
+voiceStringQuartetContrabassBass = \relative c, {
   \keytime
   \anacrusis % hypermeasure 0
 }
@@ -2237,6 +2268,60 @@ staffStringQuartetSymmetricLower = \new Staff = "stringQuartetSymmetricLower"
   }
 &gt;&gt;
 
+% string quartet with contrabass {{{3
+
+% upper {{{4
+
+staffStringQuartetContrabassUpper = \new Staff = "stringQuartetContrabassUpper"
+\with {
+  instrumentName = \markup { \column { violin viola } }
+  shortInstrumentName = \markup { \column { vn va } }
+} &lt;&lt;
+  \clef treble
+  \new Voice = "stringQuartetContrabassSoprano"
+  \with {
+    midiInstrument = "violin"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #2.0
+  } {
+    \voiceOne \voiceStringQuartetContrabassSoprano
+  }
+  \new Voice = "stringQuartetContrabassAlto"
+  \with {
+    midiInstrument = "viola"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #2.0
+  } {
+    \voiceTwo \voiceStringQuartetContrabassAlto
+  }
+&gt;&gt;
+
+% lower {{{4
+
+staffStringQuartetContrabassLower = \new Staff = "stringQuartetContrabassLower"
+\with {
+  instrumentName = \markup { \column { cello contrabass } }
+  shortInstrumentName = \markup { \column { vc cb } }
+} &lt;&lt;
+  \clef bass
+  \new Voice = "stringQuartetContrabassTenor"
+  \with {
+    midiInstrument = "cello"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #2.0
+  } {
+    \voiceOne \voiceStringQuartetContrabassTenor
+  }
+  \new Voice = "stringQuartetContrabassBass"
+  \with {
+    midiInstrument = "contrabass"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #2.0
+  } {
+    \voiceTwo \voiceStringQuartetContrabassBass
+  }
+&gt;&gt;
+
 % string quintet {{{3
 
 % upper {{{4
@@ -3091,6 +3176,14 @@ groupStringQuartetSymmetric = \new StaffGroup
   \staffStringQuartetSymmetricLower
 &gt;&gt;
 
+% string quartet with contrabass {{{3
+
+groupStringQuartetContrabass = \new StaffGroup
+&lt;&lt;
+  \staffStringQuartetContrabassUpper
+  \staffStringQuartetContrabassLower
+&gt;&gt;
+
 % string quintet {{{3
 
 groupStringQuintet = \new StaffGroup
@@ -3210,7 +3303,7 @@ groupLutes = \new StaffGroup
   \staffLuteLower
 &gt;&gt;
 
-% luteTabs {{{3
+% lute tablatures {{{3
 
 groupLuteTabs = \new StaffGroup
 &lt;&lt;
@@ -3226,7 +3319,7 @@ groupGuitars = \new StaffGroup
   \staffGuitarLower
 &gt;&gt;
 
-% guitarTabs {{{3
+% guitar tablatures {{{3
 
 groupGuitarTabs = \new StaffGroup
 &lt;&lt;
@@ -3273,6 +3366,7 @@ groupGuitarTabs = \new StaffGroup
       % bowed strings {{{3
       %\groupStringQuartet
       %\groupStringQuartetSymmetric
+      %\groupStringQuartetContrabass
       %\groupStringQuintet
       %\groupStringQuintetSymmetric
       %\groupStringQuintetContrabass
@@ -3324,7 +3418,7 @@ groupGuitarTabs = \new StaffGroup
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: chimay</p>
-<p class="date">Created: 2024-03-09 sam 14:55</p>
+<p class="date">Created: 2024-03-10 dim 11:51</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

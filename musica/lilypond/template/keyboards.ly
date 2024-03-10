@@ -10,7 +10,7 @@
 % header {{{1
 
 \header {
-  title = "meta orchestra"
+  title = "keyboards"
   subtitle="subtitle"
   composer = "composer"
   poet = "poet"
@@ -784,6 +784,37 @@ voiceStringQuartetSymmetricTenor = \relative c {
 % bass {{{4
 
 voiceStringQuartetSymmetricBass = \relative c, {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% string quartet with contrabass {{{3
+
+% soprano {{{4
+
+voiceStringQuartetContrabassSoprano = \relative c'' {
+  \keytime
+  \tempo 2. = 50
+  \anacrusis % hypermeasure 0
+}
+
+% alto {{{4
+
+voiceStringQuartetContrabassAlto = \relative c' {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% tenor {{{4
+
+voiceStringQuartetContrabassTenor = \relative c {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% bass {{{4
+
+voiceStringQuartetContrabassBass = \relative c, {
   \keytime
   \anacrusis % hypermeasure 0
 }
@@ -2005,6 +2036,60 @@ staffStringQuartetSymmetricLower = \new Staff = "stringQuartetSymmetricLower"
   }
 >>
 
+% string quartet with contrabass {{{3
+
+% upper {{{4
+
+staffStringQuartetContrabassUpper = \new Staff = "stringQuartetContrabassUpper"
+\with {
+  instrumentName = \markup { \column { violin viola } }
+  shortInstrumentName = \markup { \column { vn va } }
+} <<
+  \clef treble
+  \new Voice = "stringQuartetContrabassSoprano"
+  \with {
+    midiInstrument = "violin"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #2.0
+  } {
+    \voiceOne \voiceStringQuartetContrabassSoprano
+  }
+  \new Voice = "stringQuartetContrabassAlto"
+  \with {
+    midiInstrument = "viola"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #2.0
+  } {
+    \voiceTwo \voiceStringQuartetContrabassAlto
+  }
+>>
+
+% lower {{{4
+
+staffStringQuartetContrabassLower = \new Staff = "stringQuartetContrabassLower"
+\with {
+  instrumentName = \markup { \column { cello contrabass } }
+  shortInstrumentName = \markup { \column { vc cb } }
+} <<
+  \clef bass
+  \new Voice = "stringQuartetContrabassTenor"
+  \with {
+    midiInstrument = "cello"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #2.0
+  } {
+    \voiceOne \voiceStringQuartetContrabassTenor
+  }
+  \new Voice = "stringQuartetContrabassBass"
+  \with {
+    midiInstrument = "contrabass"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #2.0
+  } {
+    \voiceTwo \voiceStringQuartetContrabassBass
+  }
+>>
+
 % string quintet {{{3
 
 % upper {{{4
@@ -2859,6 +2944,14 @@ groupStringQuartetSymmetric = \new StaffGroup
   \staffStringQuartetSymmetricLower
 >>
 
+% string quartet with contrabass {{{3
+
+groupStringQuartetContrabass = \new StaffGroup
+<<
+  \staffStringQuartetContrabassUpper
+  \staffStringQuartetContrabassLower
+>>
+
 % string quintet {{{3
 
 groupStringQuintet = \new StaffGroup
@@ -2978,7 +3071,7 @@ groupLutes = \new StaffGroup
   \staffLuteLower
 >>
 
-% luteTabs {{{3
+% lute tablatures {{{3
 
 groupLuteTabs = \new StaffGroup
 <<
@@ -2994,7 +3087,7 @@ groupGuitars = \new StaffGroup
   \staffGuitarLower
 >>
 
-% guitarTabs {{{3
+% guitar tablatures {{{3
 
 groupGuitarTabs = \new StaffGroup
 <<
@@ -3041,6 +3134,7 @@ groupGuitarTabs = \new StaffGroup
       % bowed strings {{{3
       %\groupStringQuartet
       %\groupStringQuartetSymmetric
+      %\groupStringQuartetContrabass
       %\groupStringQuintet
       %\groupStringQuintetSymmetric
       %\groupStringQuintetContrabass

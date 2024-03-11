@@ -3382,14 +3382,14 @@ groupGuitarTabs = \new StaffGroup
       % one midi channel per voice or staff {{{3
       % -- comment this if you don't need distinct instruments on the same staff
       % -- it will save midi channels (max 16 are available)
-      \context {
-        \Staff
-        \remove "Staff_performer"
-      }
-      \context {
-        \Voice
-        \consists "Staff_performer"
-      }
+      % \context {
+      %   \Staff
+      %   \remove "Staff_performer"
+      % }
+      % \context {
+      %   \Voice
+      %   \consists "Staff_performer"
+      % }
     }
   }
   % paper {{{2

@@ -6,6 +6,7 @@ keytime = {
   \key c \major
   \numericTimeSignature
   \time 2/2
+  \tempo 2. = 50
 }
 
 % silences {{{1

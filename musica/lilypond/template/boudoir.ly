@@ -828,7 +828,6 @@ voiceContrabassTwo = \relative c, {
 
 voiceStringQuartetSoprano = \relative c'' {
   \keytime
-  \tempo 2. = 50
   \anacrusis % hypermeasure 0
 }
 
@@ -859,7 +858,6 @@ voiceStringQuartetBass = \relative c, {
 
 voiceStringQuartetSymmetricSoprano = \relative c'' {
   \keytime
-  \tempo 2. = 50
   \anacrusis % hypermeasure 0
 }
 
@@ -890,7 +888,6 @@ voiceStringQuartetSymmetricBass = \relative c, {
 
 voiceStringQuartetContrabassSoprano = \relative c'' {
   \keytime
-  \tempo 2. = 50
   \anacrusis % hypermeasure 0
 }
 

@@ -34,6 +34,7 @@ debug:
 
 lilypond-template:
 	make -C ~/racine/musica/lilypond/template install
+	git add -f **/*.png
 
 #  org -> html {{{1
 
@@ -47,6 +48,8 @@ $(HTML_SUBDIRS):
 	@$(ECHO)
 
 html: $(HTML_SUBDIRS) $(HTML_FILES)
+	git add -A
+	git add -f **/*.html
 
 #  org -> epub {{{1
 

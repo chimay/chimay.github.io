@@ -5,7 +5,7 @@
 % included files {{{1
 
 \include "global/global.glob.ly"
-\include "melody/melody.mld.ly"
+\include "melody/mel-3-2-4.mld.ly"
 
 % header {{{1
 

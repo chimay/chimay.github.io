@@ -1500,7 +1500,6 @@ staffFlutes = \new Staff
   midiMaximumVolume = #2.0
 } <<
   \clef french
-  %\clef treble
   \new Voice = "fluteOne" {
     \voiceOne \voiceFluteOne
   }
@@ -1519,7 +1518,7 @@ staffOboes = \new Staff
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } <<
-  \clef soprano
+  \clef treble
   \new Voice = "oboeOne" {
     \voiceOne \voiceOboeOne
   }
@@ -1594,7 +1593,6 @@ staffWoodQuartetUpper = \new Staff = "woodQuartetUpper"
   instrumentName = \markup { \column { flute oboe } }
   shortInstrumentName = \markup { \column { fl ob } }
 } <<
-  % \clef french
   \clef treble
   \new Voice = "woodQuartetSoprano"
   \with {
@@ -1621,7 +1619,6 @@ staffWoodQuartetLower = \new Staff = "woodQuartetLower"
   instrumentName = \markup { \column { clarinet bassoon } }
   shortInstrumentName = \markup { \column { cl bn } }
 } <<
-  % \clef varbaritone
   \clef bass
   \new Voice = "woodQuartetTenor"
   \with {
@@ -1650,7 +1647,6 @@ staffWoodQuintetUpper = \new Staff = "woodQuintetUpper"
   instrumentName = \markup { \column { flute oboe } }
   shortInstrumentName = \markup { \column { fl ob } }
 } <<
-  % \clef french
   \clef treble
   \new Voice = "woodQuintetSoprano"
   \with {
@@ -1692,7 +1688,6 @@ staffWoodQuintetLower = \new Staff = "woodQuintetLower"
   instrumentName = \markup { \column { clarinet bassoon } }
   shortInstrumentName = \markup { \column { cl bn } }
 } <<
-  % \clef varbaritone
   \clef bass
   \new Voice = "woodQuintetTenor"
   \with {
@@ -1721,7 +1716,6 @@ staffWoodSextetUpper = \new Staff = "woodSextetUpper"
   instrumentName = "flutes"
   shortInstrumentName = "fls"
 } <<
-  % \clef french
   \clef treble
   \new Voice = "woodSextetSoprano"
   \with {
@@ -1748,7 +1742,6 @@ staffWoodSextetMiddle = \new Staff = "woodSextetMiddle"
   instrumentName = \markup { \column { oboe eng-horn } }
   shortInstrumentName = \markup { \column { ob enhn } }
 } <<
-  % \clef french
   \clef alto
   \new Voice = "woodSextetAlto"
   \with {
@@ -1775,7 +1768,6 @@ staffWoodSextetLower = \new Staff = "woodSextetLower"
   instrumentName = \markup { \column { clarinet bassoon } }
   shortInstrumentName = \markup { \column { cl bn } }
 } <<
-  % \clef varbaritone
   \clef bass
   \new Voice = "woodSextetBarytone"
   \with {
@@ -1805,7 +1797,6 @@ staffSaxophoneQuartetUpper = \new Staff = "saxophoneUpper"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } <<
-  % \clef french
   \clef treble
   \new Voice = "saxophoneQuartetSoprano" {
     \voiceOne \voiceSaxophoneQuartetSoprano
@@ -1823,7 +1814,6 @@ staffSaxophoneQuartetLower = \new Staff = "saxophoneLower"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } <<
-  % \clef varbaritone
   \clef bass
   \new Voice = "saxophoneQuartetTenor" {
     \voiceOne \voiceSaxophoneQuartetTenor
@@ -1943,8 +1933,7 @@ staffBrassQuintetMiddle = \new Staff = "brassQuintetMiddle"
   midiInstrument = "french horn"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
-}
-{
+} {
   \clef alto
   \voiceBrassQuintetAlto
 }
@@ -1957,7 +1946,6 @@ staffBrassQuintetLower = \new Staff = "brassQuintetLower"
   instrumentName = \markup { \column { trombone tuba } }
   shortInstrumentName = \markup { \column { tbn tba } }
 } <<
-  % \clef varbaritone
   \clef bass
   \new Voice ="brassQuintetTenor"
   \with {
@@ -1990,8 +1978,6 @@ staffManualOrganRight = \new Staff = "manualOrganRight"
   midiMaximumVolume = #2.0
 } {
   \clef treble
-  %\clef soprano
-  %\showStaffSwitch
   \voiceManualOrganRight
 }
 
@@ -2004,8 +1990,6 @@ staffManualOrganLeft = \new Staff = "manualOrganLeft"
   midiMaximumVolume = #2.0
 } {
   \clef bass
-  %\clef subbass
-  %\showStaffSwitch
   \voiceManualOrganLeft
 }
 
@@ -2031,8 +2015,8 @@ staffPedalOrganLeft = \new Staff = "pedalOrganLeft"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } {
-  %\clef bass
   \clef alto
+  %\clef bass
   \voicePedalOrganLeft
 }
 
@@ -2060,7 +2044,6 @@ staffAccordionRight = \new Staff = "accordionRight"
   midiMaximumVolume = #2.0
 } {
   \clef treble
-  %\showStaffSwitch
   \voiceAccordionRight
 }
 
@@ -2073,7 +2056,6 @@ staffAccordionLeft = \new Staff = "accordionLeft"
   midiMaximumVolume = #2.0
 } {
   \clef bass
-  %\showStaffSwitch
   \voiceAccordionLeft
 }
 
@@ -2575,7 +2557,7 @@ staffStringSeptetCello = \new Staff
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } <<
-  \clef varbaritone
+  \clef bass
   \new Voice = "stringSeptetTenor" {
     \voiceOne \voiceStringSeptetTenor
   }
@@ -2594,7 +2576,7 @@ staffStringSeptetContrabass = \new Staff
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } {
-  \clef bass
+  \clef subbass
   \voiceStringSeptetBass
 }
 
@@ -2735,7 +2717,6 @@ staffHarpUpper = \new Staff = "harpUpper"
   midiMaximumVolume = #2.0
 } {
   \clef treble
-  %\clef alto
   %\clef tenor
   \voiceHarpUpper
 }
@@ -2771,7 +2752,7 @@ staffLuteUpper = \new Staff = "luteUpper"
   %middleCPosition = #-4
   %middleCClefPosition = #-4
 } {
-  \clef soprano
+  \clef alto
   \voiceLuteUpper
 }
 
@@ -2864,7 +2845,7 @@ staffGuitarUpper = \new Staff = "guitarUpper"
   %middleCPosition = #-4
   %middleCClefPosition = #-4
 } {
-  \clef soprano
+  \clef alto
   \voiceGuitarUpper
 }
 

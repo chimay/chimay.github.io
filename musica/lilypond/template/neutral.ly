@@ -11,7 +11,7 @@
 % header {{{1
 
 \header {
-  title = "chamber orchestra"
+  title = "neutral"
   subtitle="subtitle"
   composer = "composer"
   poet = "poet"
@@ -3662,7 +3662,7 @@ groupHarp = \new GrandStaff
       %\groupChoirSextet
       %\groupChoirSeptet
       % woods {{{3
-      \staffFlutes
+      %\staffFlutes
       %\staffOboes
       %\staffEnglishHorns
       %\staffClarinets
@@ -3682,7 +3682,7 @@ groupHarp = \new GrandStaff
       %\groupBrassQuintet
       % wind keyboards {{{3
       %\groupManualOrgan
-      \groupPedalOrgan
+      %\groupPedalOrgan
       %\groupAccordion
       % bowed strings {{{3
       %\staffViolins
@@ -3690,7 +3690,7 @@ groupHarp = \new GrandStaff
       %\staffCellos
       %\staffContrabasses
       %\groupStringQuartet
-      \groupStringQuartetSymmetric
+      %\groupStringQuartetSymmetric
       %\groupStringQuartetContrabass
       %\groupStringQuintet
       %\groupStringQuintetSymmetric
@@ -3700,10 +3700,10 @@ groupHarp = \new GrandStaff
       % string keyboards {{{3
       %\groupViolaOrganista
       %\groupHarpsichord
-      \groupPedalHarpsichord
+      %\groupPedalHarpsichord
       %\groupPiano
       % plucked strings {{{3
-      \groupHarp
+      %\groupHarp
       %\staffLute
       %\tablatureLute
       %\staffArchlute

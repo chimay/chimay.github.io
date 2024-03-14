@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-03-13 mer 15:27 -->
+<!-- 2024-03-14 jeu 16:17 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Opus : Musica : template</title>
@@ -205,20 +205,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgaeeafe6">1. Jazz</a></li>
+<li><a href="#orgbfedb5e">1. Jazz</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgaeeafe6" class="outline-2">
-<h2 id="orgaeeafe6"><span class="section-number-2">1.</span> Jazz</h2>
+<div id="outline-container-orgbfedb5e" class="outline-2">
+<h2 id="orgbfedb5e"><span class="section-number-2">1.</span> Jazz</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Le résultat :
 </p>
 
 
-<div id="org8469f2d" class="figure">
+<div id="orgd8193ea" class="figure">
 <p><img src="../../image/musica/template/jazz.png" alt="jazz.png" />
 </p>
 </div>
@@ -1021,6 +1021,38 @@ voiceFrenchHornOne = \relative c {
 % two {{{4
 
 voiceFrenchHornTwo = \relative c, {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% trombones {{{3
+
+% one {{{4
+
+voiceTromboneOne = \relative c {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% two {{{4
+
+voiceTromboneTwo = \relative c, {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% tubas {{{3
+
+% one {{{4
+
+voiceTubaOne = \relative c {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% two {{{4
+
+voiceTubaTwo = \relative c, {
   \keytime
   \anacrusis % hypermeasure 0
 }
@@ -2482,6 +2514,44 @@ staffFrenchHorns = \new Staff = "staffFrenchHorns"
   }
 &gt;&gt;
 
+% trombones {{{3
+
+staffTrombones = \new Staff = "staffTrombones"
+\with {
+  instrumentName = "trombones"
+  shortInstrumentName = "tbns"
+  midiInstrument = "trombone"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} &lt;&lt;
+  \clef varbaritone
+  \new Voice = "voiceTromboneOne" {
+    \voiceOne \voiceTromboneOne
+  }
+  \new Voice = "voiceTromboneTwo" {
+    \voiceTwo \voiceTromboneTwo
+  }
+&gt;&gt;
+
+% tubas {{{3
+
+staffTubas = \new Staff = "staffTubas"
+\with {
+  instrumentName = "tubas"
+  shortInstrumentName = "tbas"
+  midiInstrument = "tuba"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} &lt;&lt;
+  \clef subbass
+  \new Voice = "voiceTubaOne" {
+    \voiceOne \voiceTubaOne
+  }
+  \new Voice = "voiceTubaTwo" {
+    \voiceTwo \voiceTubaTwo
+  }
+&gt;&gt;
+
 % brass quartet {{{3
 
 % upper {{{4
@@ -3868,21 +3938,22 @@ groupHarp = \new GrandStaff
 % book {{{1
 
 \book {
-  % instruments list as text before the score {{{2
+  % text before the score {{{2
   %\markup \column {
     %\vspace #1
     %\line { woods = flute, oboe, english horn, bassoon }
     %\line { saxophones = soprano, alto, tenor, baritone sax }
     %\vspace #1
   %}
-  % score, with instruments as single &amp; group staves {{{2
-  % -- comment or uncomment instruments and groups as needed
+  % score {{{2
   \score {
+    % instruments as single &amp; group staves {{{3
+    % -- comment or uncomment instruments and groups as needed
     &lt;&lt;
-      % vocal {{{3
+      % vocal {{{4
       %\staffLyricsVocalSoprano
       %\staffLyricsVocalMezzo
-      %\staffLyricsVocalAlto
+      \staffLyricsVocalAlto
       %\staffLyricsVocalCounter
       %\staffLyricsVocalTenor
       %\staffLyricsVocalBarytone
@@ -3891,7 +3962,7 @@ groupHarp = \new GrandStaff
       %\groupChoirQuintet
       %\groupChoirSextet
       %\groupChoirSeptet
-      % woods {{{3
+      % woods {{{4
       \staffFlutes
       %\staffOboes
       %\staffEnglishHorns
@@ -3904,17 +3975,19 @@ groupHarp = \new GrandStaff
       %\groupWoodQuartet
       %\groupWoodQuintet
       %\groupWoodSextet
-      \groupSaxophoneQuartet
-      % brass {{{3
-      %\staffTrumpets
-      %\staffFrenchHorns
+      %\groupSaxophoneQuartet
+      % brass {{{4
+      \staffTrumpets
+      \staffFrenchHorns
+      \staffTrombones
+      \staffTubas
       %\groupBrassQuartet
-      \groupBrassQuintet
-      % wind keyboards {{{3
+      %\groupBrassQuintet
+      % wind keyboards {{{4
       \groupManualOrgan
       %\groupPedalOrgan
       %\groupAccordion
-      % bowed strings {{{3
+      % bowed strings {{{4
       %\staffViolins
       %\staffViolas
       %\staffCellos
@@ -3927,12 +4000,12 @@ groupHarp = \new GrandStaff
       %\groupStringQuintetContrabass
       %\groupStringSextet
       %\groupStringSeptet
-      % string keyboards {{{3
+      % string keyboards {{{4
       %\groupViolaOrganista
       %\groupHarpsichord
       %\groupPedalHarpsichord
       \groupPiano
-      % plucked strings {{{3
+      % plucked strings {{{4
       %\groupHarp
       %\staffLute
       %\tablatureLute
@@ -3942,35 +4015,39 @@ groupHarp = \new GrandStaff
       \tablatureGuitar
       %\staffBassGuitar
       \tablatureBassGuitar
-      % drums {{{3
+      % drums {{{4
       \staffVibraphone
       \staffDrumkit
+      % end of instruments and groups {{{4
     &gt;&gt;
-    % layout, see beginning of file {{{2
+    % layout, see beginning of file {{{3
     \layout { }
-    % midi {{{2
+    % midi {{{3
     \midi {
+      % polymeter {{{4
       \context {
         \Score
         %\enablePolymeter
       }
-      % one midi channel per voice or staff {{{3
+      % one midi channel per voice or staff {{{4
       % -- comment this if you don't need distinct instruments on the same staff
       % -- it will save midi channels (max 16 are available)
-      \context {
-        \Staff
-        \remove "Staff_performer"
-      }
-      \context {
-        \Voice
-        \consists "Staff_performer"
-      }
+      % \context {
+      %   \Staff
+      %   \remove "Staff_performer"
+      % }
+      % \context {
+      %   \Voice
+      %   \consists "Staff_performer"
+      % }
+      % end score {{{3
     }
   }
   % paper {{{2
   \paper {
     system-separator-markup = \slashSeparator
   }
+  % end book {{{2
 }
 </pre>
 </div>
@@ -3979,7 +4056,7 @@ groupHarp = \new GrandStaff
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: chimay</p>
-<p class="date">Created: 2024-03-13 mer 15:27</p>
+<p class="date">Created: 2024-03-14 jeu 16:17</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

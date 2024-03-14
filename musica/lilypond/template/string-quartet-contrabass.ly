@@ -795,6 +795,38 @@ voiceFrenchHornTwo = \relative c, {
   \anacrusis % hypermeasure 0
 }
 
+% trombones {{{3
+
+% one {{{4
+
+voiceTromboneOne = \relative c {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% two {{{4
+
+voiceTromboneTwo = \relative c, {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% tubas {{{3
+
+% one {{{4
+
+voiceTubaOne = \relative c {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% two {{{4
+
+voiceTubaTwo = \relative c, {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
 % brass quartet {{{3
 
 % soprano {{{4
@@ -2252,6 +2284,44 @@ staffFrenchHorns = \new Staff = "staffFrenchHorns"
   }
 >>
 
+% trombones {{{3
+
+staffTrombones = \new Staff = "staffTrombones"
+\with {
+  instrumentName = "trombones"
+  shortInstrumentName = "tbns"
+  midiInstrument = "trombone"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} <<
+  \clef varbaritone
+  \new Voice = "voiceTromboneOne" {
+    \voiceOne \voiceTromboneOne
+  }
+  \new Voice = "voiceTromboneTwo" {
+    \voiceTwo \voiceTromboneTwo
+  }
+>>
+
+% tubas {{{3
+
+staffTubas = \new Staff = "staffTubas"
+\with {
+  instrumentName = "tubas"
+  shortInstrumentName = "tbas"
+  midiInstrument = "tuba"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} <<
+  \clef subbass
+  \new Voice = "voiceTubaOne" {
+    \voiceOne \voiceTubaOne
+  }
+  \new Voice = "voiceTubaTwo" {
+    \voiceTwo \voiceTubaTwo
+  }
+>>
+
 % brass quartet {{{3
 
 % upper {{{4
@@ -3638,18 +3708,19 @@ groupHarp = \new GrandStaff
 % book {{{1
 
 \book {
-  % instruments list as text before the score {{{2
+  % text before the score {{{2
   %\markup \column {
     %\vspace #1
     %\line { woods = flute, oboe, english horn, bassoon }
     %\line { saxophones = soprano, alto, tenor, baritone sax }
     %\vspace #1
   %}
-  % score, with instruments as single & group staves {{{2
-  % -- comment or uncomment instruments and groups as needed
+  % score {{{2
   \score {
+    % instruments as single & group staves {{{3
+    % -- comment or uncomment instruments and groups as needed
     <<
-      % vocal {{{3
+      % vocal {{{4
       %\staffLyricsVocalSoprano
       %\staffLyricsVocalMezzo
       %\staffLyricsVocalAlto
@@ -3661,7 +3732,7 @@ groupHarp = \new GrandStaff
       %\groupChoirQuintet
       %\groupChoirSextet
       %\groupChoirSeptet
-      % woods {{{3
+      % woods {{{4
       %\staffFlutes
       %\staffOboes
       %\staffEnglishHorns
@@ -3675,16 +3746,18 @@ groupHarp = \new GrandStaff
       %\groupWoodQuintet
       %\groupWoodSextet
       %\groupSaxophoneQuartet
-      % brass {{{3
+      % brass {{{4
       %\staffTrumpets
       %\staffFrenchHorns
+      %\staffTrombones
+      %\staffTubas
       %\groupBrassQuartet
       %\groupBrassQuintet
-      % wind keyboards {{{3
+      % wind keyboards {{{4
       %\groupManualOrgan
       %\groupPedalOrgan
       %\groupAccordion
-      % bowed strings {{{3
+      % bowed strings {{{4
       %\staffViolins
       %\staffViolas
       %\staffCellos
@@ -3697,12 +3770,12 @@ groupHarp = \new GrandStaff
       %\groupStringQuintetContrabass
       %\groupStringSextet
       %\groupStringSeptet
-      % string keyboards {{{3
+      % string keyboards {{{4
       %\groupViolaOrganista
       %\groupHarpsichord
       %\groupPedalHarpsichord
       %\groupPiano
-      % plucked strings {{{3
+      % plucked strings {{{4
       %\groupHarp
       %\staffLute
       %\tablatureLute
@@ -3712,19 +3785,21 @@ groupHarp = \new GrandStaff
       %\tablatureGuitar
       %\staffBassGuitar
       %\tablatureBassGuitar
-      % drums {{{3
+      % drums {{{4
       %\staffVibraphone
       %\staffDrumkit
+      % end of instruments and groups {{{4
     >>
-    % layout, see beginning of file {{{2
+    % layout, see beginning of file {{{3
     \layout { }
-    % midi {{{2
+    % midi {{{3
     \midi {
+      % polymeter {{{4
       \context {
         \Score
         %\enablePolymeter
       }
-      % one midi channel per voice or staff {{{3
+      % one midi channel per voice or staff {{{4
       % -- comment this if you don't need distinct instruments on the same staff
       % -- it will save midi channels (max 16 are available)
       \context {
@@ -3735,10 +3810,12 @@ groupHarp = \new GrandStaff
         \Voice
         \consists "Staff_performer"
       }
+      % end score {{{3
     }
   }
   % paper {{{2
   \paper {
     system-separator-markup = \slashSeparator
   }
+ % end book {{{2
 }

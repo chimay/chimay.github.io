@@ -52,7 +52,7 @@ droneE = {
 
 anacrusis = {
   \partial 2
-  g8 f e d
+  g'8 f e d
 }
 
 anacrusisDrumkit = \drummode {

@@ -1464,7 +1464,7 @@ staffVocalSoprano = \new Staff = "staffVocalSoprano"
 } {
   \clef treble
   \new Voice = "voiceVocalSoprano" {
-    \oneVoice \voiceVocalSoprano
+    \voiceVocalSoprano
   }
 }
 
@@ -1486,7 +1486,7 @@ staffVocalMezzo = \new Staff = "staffVocalMezzo"
 } {
   \clef treble
   \new Voice = "voiceVocalMezzo" {
-    \oneVoice \voiceVocalMezzo
+    \voiceVocalMezzo
   }
 }
 
@@ -1508,7 +1508,7 @@ staffVocalAlto = \new Staff = "staffVocalAlto"
 } {
   \clef alto
   \new Voice = "voiceVocalAlto" {
-    \oneVoice \voiceVocalAlto
+    \voiceVocalAlto
   }
 }
 
@@ -1530,7 +1530,7 @@ staffVocalCounter = \new Staff = "staffVocalCounter"
 } {
   \clef alto
   \new Voice = "voiceVocalCounter" {
-    \oneVoice \voiceVocalCounter
+    \voiceVocalCounter
   }
 }
 
@@ -1552,7 +1552,7 @@ staffVocalTenor = \new Staff = "staffVocalTenor"
 } {
   \clef bass
   \new Voice = "voiceVocalTenor" {
-    \oneVoice \voiceVocalTenor
+    \voiceVocalTenor
   }
 }
 
@@ -1574,7 +1574,7 @@ staffVocalBarytone = \new Staff = "staffVocalBarytone"
 } {
   \clef bass
   \new Voice = "voiceVocalBarytone" {
-    \oneVoice \voiceVocalBarytone
+    \voiceVocalBarytone
   }
 }
 
@@ -1596,7 +1596,7 @@ staffVocalBass = \new Staff = "staffVocalBass"
 } {
   \clef subbass
   \new Voice = "voiceVocalBass" {
-    \oneVoice \voiceVocalBass
+    \voiceVocalBass
   }
 }
 

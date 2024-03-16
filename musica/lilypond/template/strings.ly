@@ -1413,7 +1413,14 @@ voiceLute = \relative c' {
 
 % archlute {{{3
 
-voiceArchlute = \relative c, {
+voiceArchlute = \relative c {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% theorbo {{{3
+
+voiceTheorbo = \relative c, {
   \keytime
   \anacrusis % hypermeasure 0
 }
@@ -3249,12 +3256,12 @@ staffArchlute = \new Staff = "staffArchlute"
 \with {
   instrumentName = "archlute"
   shortInstrumentName = "arlt"
-  midiInstrument = "acoustic bass"
+  midiInstrument = "acoustic guitar (nylon)"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } {
   %\override Staff.StaffSymbol.line-count = #7
-  \clef subbass
+  \clef tenor
   \voiceArchlute
 }
 
@@ -3270,9 +3277,43 @@ tablatureArchlute = \new TabStaff = "tablatureArchlute"
   % -- archlute, 14 courses
   stringTunings = \stringTuning <g, c f a d' g'>
   additionalBassStrings = \stringTuning <f,, g,, a,, b,, c, d, e, f,>
-  % -- theorbo
-  %stringTunings = \stringTuning <a, d g b e a>
-  %additionalBassStrings = \stringTuning <g,, a,, b,, c, d, e, f, g,>
+  % ---- midi
+  midiInstrument = "acoustic guitar (nylon)"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} { \clef tab
+    \tabFullNotation
+    \tabChordRepeats
+    \voiceArchlute
+}
+
+% theorbo {{{3
+
+staffTheorbo = \new Staff = "staffTheorbo"
+\with {
+  instrumentName = "theorbo"
+  shortInstrumentName = "teo"
+  midiInstrument = "acoustic bass"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  %\override Staff.StaffSymbol.line-count = #7
+  \clef bass
+  \voiceTheorbo
+}
+
+% theorbo, tablature {{{3
+
+tablatureTheorbo = \new TabStaff = "tablatureTheorbo"
+\with {
+  instrumentName = "theorbo"
+  shortInstrumentName = "teo"
+  % ---- lute family
+  tablatureFormat = #fret-letter-tablature-format
+  fretLabels = #'("a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l")
+  % -- theorbo, 14 courses
+  stringTunings = \stringTuning <a, d g b e a>
+  additionalBassStrings = \stringTuning <g,, a,, b,, c, d, e, f, g,>
   % ---- midi
   midiInstrument = "acoustic bass"
   midiMinimumVolume = #1.0
@@ -3280,7 +3321,7 @@ tablatureArchlute = \new TabStaff = "tablatureArchlute"
 } { \clef tab
     \tabFullNotation
     \tabChordRepeats
-    \voiceArchlute
+    \voiceTheorbo
 }
 
 % guitar {{{3
@@ -3777,10 +3818,12 @@ groupHarp = \new GrandStaff
       \groupPiano
       % plucked strings {{{4
       \groupHarp
-      %\staffLute
+      \staffLute
       %\tablatureLute
-      %\staffArchlute
+      \staffArchlute
       %\tablatureArchlute
+      \staffTheorbo
+      %\tablatureTheorbo
       %\staffGuitar
       \tablatureGuitar
       %\staffBassGuitar

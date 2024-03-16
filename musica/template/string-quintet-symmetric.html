@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-03-15 ven 17:55 -->
+<!-- 2024-03-16 sam 11:21 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Eclats de vers : Opus : Musica : template</title>
+<title>Eclats de vers : Opus : Musica : Template : Quintette à cordes symétrique</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
 <style>
@@ -196,7 +196,7 @@
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Eclats de vers : Opus : Musica : template</h1>
+<h1 class="title">Eclats de vers : Opus : Musica : Template : Quintette à cordes symétrique</h1>
 <p>
 <a href="../../index.html">Retour à l’accueil</a>
 </p>
@@ -205,20 +205,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgbe7da46">1. Quintette à cordes symétrique</a></li>
+<li><a href="#org0a6c0b1">1. Quintette à cordes symétrique</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgbe7da46" class="outline-2">
-<h2 id="orgbe7da46"><span class="section-number-2">1.</span> Quintette à cordes symétrique</h2>
+<div id="outline-container-org0a6c0b1" class="outline-2">
+<h2 id="org0a6c0b1"><span class="section-number-2">1.</span> Quintette à cordes symétrique</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Le résultat :
 </p>
 
 
-<div id="org35b71ac" class="figure">
+<div id="orgc4c7605" class="figure">
 <p><img src="../../image/musica/template/string-quintet-symmetric.png" alt="string-quintet-symmetric.png" />
 </p>
 </div>
@@ -1643,7 +1643,14 @@ voiceLute = \relative c' {
 
 % archlute {{{3
 
-voiceArchlute = \relative c, {
+voiceArchlute = \relative c {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% theorbo {{{3
+
+voiceTheorbo = \relative c, {
   \keytime
   \anacrusis % hypermeasure 0
 }
@@ -3479,12 +3486,12 @@ staffArchlute = \new Staff = "staffArchlute"
 \with {
   instrumentName = "archlute"
   shortInstrumentName = "arlt"
-  midiInstrument = "acoustic bass"
+  midiInstrument = "acoustic guitar (nylon)"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } {
   %\override Staff.StaffSymbol.line-count = #7
-  \clef subbass
+  \clef tenor
   \voiceArchlute
 }
 
@@ -3500,9 +3507,43 @@ tablatureArchlute = \new TabStaff = "tablatureArchlute"
   % -- archlute, 14 courses
   stringTunings = \stringTuning &lt;g, c f a d' g'&gt;
   additionalBassStrings = \stringTuning &lt;f,, g,, a,, b,, c, d, e, f,&gt;
-  % -- theorbo
-  %stringTunings = \stringTuning &lt;a, d g b e a&gt;
-  %additionalBassStrings = \stringTuning &lt;g,, a,, b,, c, d, e, f, g,&gt;
+  % ---- midi
+  midiInstrument = "acoustic guitar (nylon)"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} { \clef tab
+    \tabFullNotation
+    \tabChordRepeats
+    \voiceArchlute
+}
+
+% theorbo {{{3
+
+staffTheorbo = \new Staff = "staffTheorbo"
+\with {
+  instrumentName = "theorbo"
+  shortInstrumentName = "teo"
+  midiInstrument = "acoustic bass"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  %\override Staff.StaffSymbol.line-count = #7
+  \clef bass
+  \voiceTheorbo
+}
+
+% theorbo, tablature {{{3
+
+tablatureTheorbo = \new TabStaff = "tablatureTheorbo"
+\with {
+  instrumentName = "theorbo"
+  shortInstrumentName = "teo"
+  % ---- lute family
+  tablatureFormat = #fret-letter-tablature-format
+  fretLabels = #'("a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l")
+  % -- theorbo, 14 courses
+  stringTunings = \stringTuning &lt;a, d g b e a&gt;
+  additionalBassStrings = \stringTuning &lt;g,, a,, b,, c, d, e, f, g,&gt;
   % ---- midi
   midiInstrument = "acoustic bass"
   midiMinimumVolume = #1.0
@@ -3510,7 +3551,7 @@ tablatureArchlute = \new TabStaff = "tablatureArchlute"
 } { \clef tab
     \tabFullNotation
     \tabChordRepeats
-    \voiceArchlute
+    \voiceTheorbo
 }
 
 % guitar {{{3
@@ -4011,6 +4052,8 @@ groupHarp = \new GrandStaff
       %\tablatureLute
       %\staffArchlute
       %\tablatureArchlute
+      %\staffTheorbo
+      %\tablatureTheorbo
       %\staffGuitar
       %\tablatureGuitar
       %\staffBassGuitar
@@ -4056,7 +4099,7 @@ groupHarp = \new GrandStaff
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: chimay</p>
-<p class="date">Created: 2024-03-15 ven 17:55</p>
+<p class="date">Created: 2024-03-16 sam 11:21</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -3205,7 +3205,7 @@ staffLute = \new Staff = "staffLute"
 \with {
   instrumentName = "lute"
   shortInstrumentName = "lt"
-  midiInstrument = "acoustic guitar (nylon)"
+  midiInstrument = "acoustic guitar (steel)"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
   % 3rd line G clef
@@ -3241,7 +3241,7 @@ tablatureLute = \new TabStaff = "tablatureLute"
   %stringTunings = \stringTuning <a, d f a d' f'>
   %additionalBassStrings = \stringTuning <a,, b,, c, d, e, f, g,>
   % ---- midi
-  midiInstrument = "acoustic guitar (nylon)"
+  midiInstrument = "acoustic guitar (steel)"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } { \clef tab
@@ -3256,7 +3256,7 @@ staffArchlute = \new Staff = "staffArchlute"
 \with {
   instrumentName = "archlute"
   shortInstrumentName = "arlt"
-  midiInstrument = "acoustic guitar (nylon)"
+  midiInstrument = "acoustic guitar (steel)"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } {
@@ -3278,7 +3278,7 @@ tablatureArchlute = \new TabStaff = "tablatureArchlute"
   stringTunings = \stringTuning <g, c f a d' g'>
   additionalBassStrings = \stringTuning <f,, g,, a,, b,, c, d, e, f,>
   % ---- midi
-  midiInstrument = "acoustic guitar (nylon)"
+  midiInstrument = "acoustic guitar (steel)"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } { \clef tab
@@ -3330,7 +3330,7 @@ staffGuitar = \new Staff = "staffGuitar"
 \with {
   instrumentName = "guitar"
   shortInstrumentName = "gtr"
-  midiInstrument = "acoustic guitar (nylon)"
+  midiInstrument = "acoustic guitar (steel)"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
   % 3rd line G clef
@@ -3354,7 +3354,7 @@ tablatureGuitar = \new TabStaff = "tablatureGuitar"
   % ---- guitar
   stringTunings = \stringTuning <e, a, d g b e'>
   % ---- midi
-  midiInstrument = "acoustic guitar (nylon)"
+  midiInstrument = "acoustic guitar (steel)"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } { \clef tab

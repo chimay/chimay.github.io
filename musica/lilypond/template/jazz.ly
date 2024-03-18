@@ -1370,6 +1370,22 @@ voicePedalHarpsichordFeet = \relative c, {
   \anacrusis % hypermeasure 0
 }
 
+% clavichord {{{3
+
+% right {{{4
+
+voiceClavichordRight = \relative c'' {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% left {{{4
+
+voiceClavichordLeft = \relative c {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
 % piano {{{3
 
 % right {{{4
@@ -1443,7 +1459,55 @@ voiceBassGuitar = \relative c, {
 
 % vibraphone {{{3
 
-voiceVibraphone = \relative c' {
+% right {{{4
+
+voiceVibraphoneRight = \relative c'' {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% left {{{4
+
+voiceVibraphoneLeft = \relative c {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% marimba {{{3
+
+% right {{{4
+
+voiceMarimbaRight = \relative c'' {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% left {{{4
+
+voiceMarimbaLeft = \relative c {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% dulcimer {{{3
+
+voiceDulcimer = \relative c' {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% tubular bells {{{3
+
+% manual {{{4
+
+voiceTubularBellsManual = \relative c'' {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% pedal {{{4
+
+voiceTubularBellsPedal = \relative c {
   \keytime
   \anacrusis % hypermeasure 0
 }
@@ -3141,6 +3205,34 @@ staffPedalHarpsichordFeet = \new Staff = "staffPedalHarpsichordFeet"
   \voicePedalHarpsichordFeet
 }
 
+% clavichord {{{3
+
+% right {{{4
+
+staffClavichordRight = \new Staff = "staffClavichordRight"
+\with {
+  midiInstrument = "clav"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef treble
+  %\showStaffSwitch
+  \voiceClavichordRight
+}
+
+% left {{{4
+
+staffClavichordLeft = \new Staff = "staffClavichordLeft"
+\with {
+  midiInstrument = "clav"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef bass
+  %\showStaffSwitch
+  \voiceClavichordLeft
+}
+
 % piano {{{3
 
 % right {{{4
@@ -3400,16 +3492,94 @@ tablatureBassGuitar = \new TabStaff = "tablatureBassGuitar"
 
 % vibraphone {{{3
 
-staffVibraphone = \new Staff = "staffVibraphone"
+% right {{{4
+
+staffVibraphoneRight = \new Staff = "staffVibraphoneRight"
 \with {
-  instrumentName = \markup \column { vibra- phone }
-  shortInstrumentName = "vb"
   midiInstrument = "vibraphone"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } {
   \clef treble
-  \voiceVibraphone
+  \voiceVibraphoneRight
+}
+
+% left {{{4
+
+staffVibraphoneLeft = \new Staff = "staffVibraphoneLeft"
+\with {
+  midiInstrument = "vibraphone"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef bass
+  \voiceVibraphoneLeft
+}
+
+% marimba {{{3
+
+% right {{{4
+
+staffMarimbaRight = \new Staff = "staffMarimbaRight"
+\with {
+  midiInstrument = "marimba"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef treble
+  \voiceMarimbaRight
+}
+
+% left {{{4
+
+staffMarimbaLeft = \new Staff = "staffMarimbaLeft"
+\with {
+  midiInstrument = "marimba"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef bass
+  \voiceMarimbaLeft
+}
+
+% dulcimer {{{3
+
+staffDulcimer = \new Staff = "staffDulcimer"
+\with {
+  instrumentName = "dulcimer"
+  shortInstrumentName = "dul"
+  midiInstrument = "dulcimer"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef treble
+  \voiceDulcimer
+}
+
+% tubular bells {{{3
+
+% manual {{{4
+
+staffTubularBellsManual = \new Staff = "staffTubularBellsManual"
+\with {
+  midiInstrument = "tubular bells"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef treble
+  \voiceTubularBellsManual
+}
+
+% pedal {{{4
+
+staffTubularBellsPedal = \new Staff = "staffTubularBellsPedal"
+\with {
+  midiInstrument = "tubular bells"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef bass
+  \voiceTubularBellsPedal
 }
 
 % drumkit {{{3
@@ -3720,6 +3890,18 @@ groupPedalHarpsichord = \new GrandStaff
   \staffPedalHarpsichordFeet
 >>
 
+% clavichord {{{3
+
+groupClavichord = \new GrandStaff
+\with {
+  instrumentName = \markup \column { clavi- chord }
+  shortInstrumentName = \markup \column { cl cd }
+  connectArpeggios = ##t
+} <<
+  \staffClavichordRight
+  \staffClavichordLeft
+>>
+
 % piano {{{3
 
 groupPiano = \new GrandStaff
@@ -3744,6 +3926,44 @@ groupHarp = \new GrandStaff
 } <<
   \staffHarpUpper
   \staffHarpLower
+>>
+
+% drums {{{2
+
+% vibraphone {{{3
+
+groupVibraphone = \new GrandStaff
+\with {
+  instrumentName = "vibraphone"
+  shortInstrumentName = "vb"
+  connectArpeggios = ##t
+} <<
+  \staffVibraphoneRight
+  \staffVibraphoneLeft
+>>
+
+% marimba {{{3
+
+groupMarimba = \new GrandStaff
+\with {
+  instrumentName = "marimba"
+  shortInstrumentName = "mar"
+  connectArpeggios = ##t
+} <<
+  \staffMarimbaRight
+  \staffMarimbaLeft
+>>
+
+% tubular bells {{{3
+
+groupTubularBells = \new GrandStaff
+\with {
+  instrumentName = \markup \column { tubular bells }
+  shortInstrumentName = \markup { \column { tub bel } }
+  connectArpeggios = ##t
+} <<
+  \staffTubularBellsManual
+  \staffTubularBellsPedal
 >>
 
 % book {{{1
@@ -3815,6 +4035,7 @@ groupHarp = \new GrandStaff
       %\groupViolaOrganista
       %\groupHarpsichord
       %\groupPedalHarpsichord
+      %\groupClavichord
       \groupPiano
       % plucked strings {{{4
       %\groupHarp
@@ -3829,8 +4050,11 @@ groupHarp = \new GrandStaff
       %\staffBassGuitar
       \tablatureBassGuitar
       % drums {{{4
-      \staffVibraphone
-      \staffDrumkit
+      %\groupVibraphone
+      %\groupMarimba
+      %\staffDulcimer
+      %\groupTubularBells
+      %\staffDrumkit
       % end of instruments and groups {{{4
     >>
     % layout, see beginning of file {{{3

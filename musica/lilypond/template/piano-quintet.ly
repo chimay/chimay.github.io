@@ -474,7 +474,7 @@ voiceChoirSeptetBass = \relative c, {
   \anacrusis % hypermeasure 0
 }
 
-% woods {{{2
+% woodwinds {{{2
 
 % flutes {{{3
 
@@ -620,113 +620,113 @@ voiceBarytoneSaxophoneTwo = \relative c, {
   \anacrusis % hypermeasure 0
 }
 
-% wood quartet {{{3
+% woodwind quartet {{{3
 
 % soprano {{{4
 
-voiceWoodQuartetSoprano = \relative c'' {
+voiceWoodwindQuartetSoprano = \relative c'' {
   \keytime
   \anacrusis % hypermeasure 0
 }
 
 % alto {{{4
 
-voiceWoodQuartetAlto = \relative c' {
+voiceWoodwindQuartetAlto = \relative c' {
   \keytime
   \anacrusis % hypermeasure 0
 }
 
 % tenor {{{4
 
-voiceWoodQuartetTenor = \relative c {
+voiceWoodwindQuartetTenor = \relative c {
   \keytime
   \anacrusis % hypermeasure 0
 }
 
 % bass {{{4
 
-voiceWoodQuartetBass = \relative c, {
+voiceWoodwindQuartetBass = \relative c, {
   \keytime
   \anacrusis % hypermeasure 0
 }
 
-% wood quintet {{{3
+% woodwind quintet {{{3
 
 % soprano {{{4
 
-voiceWoodQuintetSoprano = \relative c'' {
+voiceWoodwindQuintetSoprano = \relative c'' {
   \keytime
   \anacrusis % hypermeasure 0
 }
 
 % mezzo {{{4
 
-voiceWoodQuintetMezzo = \relative c'' {
+voiceWoodwindQuintetMezzo = \relative c'' {
   \keytime
   \anacrusis % hypermeasure 0
 }
 
 % alto {{{4
 
-voiceWoodQuintetAlto = \relative c' {
+voiceWoodwindQuintetAlto = \relative c' {
   \keytime
   \anacrusis % hypermeasure 0
 }
 
 % tenor {{{4
 
-voiceWoodQuintetTenor = \relative c {
+voiceWoodwindQuintetTenor = \relative c {
   \keytime
   \anacrusis % hypermeasure 0
 }
 
 % bass {{{4
 
-voiceWoodQuintetBass = \relative c, {
+voiceWoodwindQuintetBass = \relative c, {
   \keytime
   \anacrusis % hypermeasure 0
 }
 
-% wood sextet {{{3
+% woodwind sextet {{{3
 
 % soprano {{{4
 
-voiceWoodSextetSoprano = \relative c'' {
+voiceWoodwindSextetSoprano = \relative c'' {
   \keytime
   \anacrusis % hypermeasure 0
 }
 
 % mezzo {{{4
 
-voiceWoodSextetMezzo = \relative c'' {
+voiceWoodwindSextetMezzo = \relative c'' {
   \keytime
   \anacrusis % hypermeasure 0
 }
 
 % alto {{{4
 
-voiceWoodSextetAlto = \relative c' {
+voiceWoodwindSextetAlto = \relative c' {
   \keytime
   \anacrusis % hypermeasure 0
 }
 
 % tenor {{{4
 
-voiceWoodSextetTenor = \relative c {
+voiceWoodwindSextetTenor = \relative c {
   \keytime
   \anacrusis % hypermeasure 0
 }
 
 % barytone {{{4
 
-voiceWoodSextetBarytone = \relative c {
+voiceWoodwindSextetBarytone = \relative c {
   \keytime
   \anacrusis % hypermeasure 0
 }
 
 % bass {{{4
 
-voiceWoodSextetBass = \relative c, {
+voiceWoodwindSextetBass = \relative c, {
   \keytime
   \anacrusis % hypermeasure 0
 }
@@ -1313,6 +1313,68 @@ voiceStringSeptetBass = \relative c, {
   \anacrusis % hypermeasure 0
 }
 
+% plucked strings {{{2
+
+% harp {{{3
+
+% upper {{{4
+
+voiceHarpUpper = \relative c'' {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% lower {{{4
+
+voiceHarpLower = \relative c {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% lute {{{3
+
+voiceLute = \relative c' {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% archlute {{{3
+
+voiceArchlute = \relative c {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% theorbo {{{3
+
+voiceTheorbo = \relative c, {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% guitar {{{3
+
+voiceGuitar = \relative c' {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% bass guitar {{{3
+
+voiceBassGuitar = \relative c, {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% hammered strings {{{2
+
+% dulcimer {{{3
+
+voiceDulcimer = \relative c' {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
 % string keyboards {{{2
 
 % viola organista {{{3
@@ -1402,60 +1464,14 @@ voicePianoLeft = \relative c {
   \anacrusis % hypermeasure 0
 }
 
-% plucked strings {{{2
-
-% harp {{{3
-
-% upper {{{4
-
-voiceHarpUpper = \relative c'' {
-  \keytime
-  \anacrusis % hypermeasure 0
-}
-
-% lower {{{4
-
-voiceHarpLower = \relative c {
-  \keytime
-  \anacrusis % hypermeasure 0
-}
-
-% lute {{{3
-
-voiceLute = \relative c' {
-  \keytime
-  \anacrusis % hypermeasure 0
-}
-
-% archlute {{{3
-
-voiceArchlute = \relative c {
-  \keytime
-  \anacrusis % hypermeasure 0
-}
-
-% theorbo {{{3
-
-voiceTheorbo = \relative c, {
-  \keytime
-  \anacrusis % hypermeasure 0
-}
-
-% guitar {{{3
-
-voiceGuitar = \relative c' {
-  \keytime
-  \anacrusis % hypermeasure 0
-}
-
-% bass guitar {{{3
-
-voiceBassGuitar = \relative c, {
-  \keytime
-  \anacrusis % hypermeasure 0
-}
-
 % drums {{{2
+
+% glockenspiel {{{3
+
+voiceGlockenspiel = \relative c'' {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
 
 % vibraphone {{{3
 
@@ -1489,13 +1505,6 @@ voiceMarimbaLeft = \relative c {
   \anacrusis % hypermeasure 0
 }
 
-% dulcimer {{{3
-
-voiceDulcimer = \relative c' {
-  \keytime
-  \anacrusis % hypermeasure 0
-}
-
 % tubular bells {{{3
 
 % manual {{{4
@@ -1519,6 +1528,24 @@ voiceDrumkit = {
   \anacrusisDrumkit % 0
 }
 
+% drums keyboards {{{2
+
+% celesta {{{3
+
+% right {{{4
+
+voiceCelestaRight = \relative c'' {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
+% left {{{4
+
+voiceCelestaLeft = \relative c {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
 % staves {{{1
 
 % vocal {{{2
@@ -1529,7 +1556,7 @@ staffVocalSoprano = \new Staff = "staffVocalSoprano"
 \with {
   instrumentName = "soprano"
   shortInstrumentName = "sop"
-  midiInstrument = "choir aahs"
+  midiInstrument = "voice oohs"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } {
@@ -1551,7 +1578,7 @@ staffVocalMezzo = \new Staff = "staffVocalMezzo"
 \with {
   instrumentName = "mezzo"
   shortInstrumentName = "mez"
-  midiInstrument = "choir aahs"
+  midiInstrument = "voice oohs"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } {
@@ -1573,7 +1600,7 @@ staffVocalAlto = \new Staff = "staffVocalAlto"
 \with {
   instrumentName = "alto"
   shortInstrumentName = "alt"
-  midiInstrument = "choir aahs"
+  midiInstrument = "voice oohs"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } {
@@ -1595,7 +1622,7 @@ staffVocalCounter = \new Staff = "staffVocalCounter"
 \with {
   instrumentName = "counter"
   shortInstrumentName = "cnt"
-  midiInstrument = "choir aahs"
+  midiInstrument = "voice oohs"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } {
@@ -1617,7 +1644,7 @@ staffVocalTenor = \new Staff = "staffVocalTenor"
 \with {
   instrumentName = "tenor"
   shortInstrumentName = "ten"
-  midiInstrument = "choir aahs"
+  midiInstrument = "voice oohs"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } {
@@ -1639,7 +1666,7 @@ staffVocalBarytone = \new Staff = "staffVocalBarytone"
 \with {
   instrumentName = "barytone"
   shortInstrumentName = "bar"
-  midiInstrument = "choir aahs"
+  midiInstrument = "voice oohs"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } {
@@ -1661,7 +1688,7 @@ staffVocalBass = \new Staff = "staffVocalBass"
 \with {
   instrumentName = "bass"
   shortInstrumentName = "bas"
-  midiInstrument = "choir aahs"
+  midiInstrument = "voice oohs"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } {
@@ -1903,7 +1930,7 @@ staffChoirSeptetBass = \new Staff = "staffChoirSeptetBass"
   \new Voice = "voiceChoirSeptetBass" \voiceChoirSeptetBass
 }
 
-% woods {{{2
+% woodwinds {{{2
 
 % flutes {{{3
 
@@ -2076,91 +2103,91 @@ staffBarytoneSaxophones = \new Staff = "staffBarytoneSaxophones"
   }
 >>
 
-% wood quartet {{{3
+% woodwind quartet {{{3
 
 % upper {{{4
 
-staffWoodQuartetUpper = \new Staff = "staffWoodQuartetUpper"
+staffWoodwindQuartetUpper = \new Staff = "staffWoodwindQuartetUpper"
 \with {
   instrumentName = \markup { \column { flute oboe } }
   shortInstrumentName = \markup { \column { fl ob } }
 } <<
   \clef treble
-  \new Voice = "voiceWoodQuartetSoprano"
+  \new Voice = "voiceWoodwindQuartetSoprano"
   \with {
     midiInstrument = "flute"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #2.0
   } {
-    \voiceOne \voiceWoodQuartetSoprano
+    \voiceOne \voiceWoodwindQuartetSoprano
   }
-  \new Voice = "voiceWoodQuartetAlto"
+  \new Voice = "voiceWoodwindQuartetAlto"
   \with {
     midiInstrument = "oboe"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #2.0
   } {
-    \voiceTwo \voiceWoodQuartetAlto
+    \voiceTwo \voiceWoodwindQuartetAlto
   }
 >>
 
 % lower {{{4
 
-staffWoodQuartetLower = \new Staff = "staffWoodQuartetLower"
+staffWoodwindQuartetLower = \new Staff = "staffWoodwindQuartetLower"
 \with {
   instrumentName = \markup { \column { clarinet bassoon } }
   shortInstrumentName = \markup { \column { cl bn } }
 } <<
   \clef bass
-  \new Voice = "voiceWoodQuartetTenor"
+  \new Voice = "voiceWoodwindQuartetTenor"
   \with {
     midiInstrument = "clarinet"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #2.0
   } {
-    \voiceOne \voiceWoodQuartetTenor
+    \voiceOne \voiceWoodwindQuartetTenor
   }
-  \new Voice = "voiceWoodQuartetBass"
+  \new Voice = "voiceWoodwindQuartetBass"
   \with {
     midiInstrument = "bassoon"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #2.0
   } {
-    \voiceTwo \voiceWoodQuartetBass
+    \voiceTwo \voiceWoodwindQuartetBass
   }
 >>
 
-% wood quintet {{{3
+% woodwind quintet {{{3
 
 % upper {{{4
 
-staffWoodQuintetUpper = \new Staff = "staffWoodQuintetUpper"
+staffWoodwindQuintetUpper = \new Staff = "staffWoodwindQuintetUpper"
 \with {
   instrumentName = \markup { \column { flute oboe } }
   shortInstrumentName = \markup { \column { fl ob } }
 } <<
   \clef treble
-  \new Voice = "voiceWoodQuintetSoprano"
+  \new Voice = "voiceWoodwindQuintetSoprano"
   \with {
     midiInstrument = "flute"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #2.0
   } {
-    \voiceOne \voiceWoodQuintetSoprano
+    \voiceOne \voiceWoodwindQuintetSoprano
   }
-  \new Voice = "voiceWoodQuintetMezzo"
+  \new Voice = "voiceWoodwindQuintetMezzo"
   \with {
     midiInstrument = "oboe"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #2.0
   } {
-    \voiceTwo \voiceWoodQuintetMezzo
+    \voiceTwo \voiceWoodwindQuintetMezzo
   }
 >>
 
 % middle {{{4
 
-staffWoodQuintetMiddle = \new Staff = "staffWoodQuintetMiddle"
+staffWoodwindQuintetMiddle = \new Staff = "staffWoodwindQuintetMiddle"
 \with {
   instrumentName = \markup { \column { english horn } }
   shortInstrumentName = \markup { \column { cl bn } }
@@ -2170,112 +2197,112 @@ staffWoodQuintetMiddle = \new Staff = "staffWoodQuintetMiddle"
 }
 {
   \clef alto
-  \voiceWoodQuintetAlto
+  \voiceWoodwindQuintetAlto
 }
 
 % lower {{{4
 
-staffWoodQuintetLower = \new Staff = "staffWoodQuintetLower"
+staffWoodwindQuintetLower = \new Staff = "staffWoodwindQuintetLower"
 \with {
   instrumentName = \markup { \column { clarinet bassoon } }
   shortInstrumentName = \markup { \column { cl bn } }
 } <<
   \clef bass
-  \new Voice = "voiceWoodQuintetTenor"
+  \new Voice = "voiceWoodwindQuintetTenor"
   \with {
     midiInstrument = "clarinet"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #2.0
   } {
-    \voiceOne \voiceWoodQuintetTenor
+    \voiceOne \voiceWoodwindQuintetTenor
   }
-  \new Voice = "voiceWoodQuintetBass"
+  \new Voice = "voiceWoodwindQuintetBass"
   \with {
     midiInstrument = "bassoon"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #2.0
   } {
-    \voiceTwo \voiceWoodQuintetBass
+    \voiceTwo \voiceWoodwindQuintetBass
   }
 >>
 
-% wood sextet {{{3
+% woodwind sextet {{{3
 
 % upper {{{4
 
-staffWoodSextetUpper = \new Staff = "staffWoodSextetUpper"
+staffWoodwindSextetUpper = \new Staff = "staffWoodwindSextetUpper"
 \with {
   instrumentName = "flutes"
   shortInstrumentName = "fls"
 } <<
   \clef treble
-  \new Voice = "voiceWoodSextetSoprano"
+  \new Voice = "voiceWoodwindSextetSoprano"
   \with {
     midiInstrument = "flute"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #2.0
   } {
-    \voiceOne \voiceWoodSextetSoprano
+    \voiceOne \voiceWoodwindSextetSoprano
   }
-  \new Voice = "voiceWoodSextetMezzo"
+  \new Voice = "voiceWoodwindSextetMezzo"
   \with {
     midiInstrument = "flute"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #2.0
   } {
-    \voiceTwo \voiceWoodSextetMezzo
+    \voiceTwo \voiceWoodwindSextetMezzo
   }
 >>
 
 % middle {{{4
 
-staffWoodSextetMiddle = \new Staff = "staffWoodSextetMiddle"
+staffWoodwindSextetMiddle = \new Staff = "staffWoodwindSextetMiddle"
 \with {
   instrumentName = \markup { \column { oboe en-horn } }
   shortInstrumentName = \markup { \column { ob enhn } }
 } <<
   \clef alto
-  \new Voice = "voiceWoodSextetAlto"
+  \new Voice = "voiceWoodwindSextetAlto"
   \with {
     midiInstrument = "oboe"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #2.0
   } {
-    \voiceOne \voiceWoodSextetAlto
+    \voiceOne \voiceWoodwindSextetAlto
   }
-  \new Voice ="woodSextetTenor"
+  \new Voice ="woodwindsextetTenor"
   \with {
     midiInstrument = "english horn"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #2.0
   } {
-    \voiceTwo \voiceWoodSextetTenor
+    \voiceTwo \voiceWoodwindSextetTenor
   }
 >>
 
 % lower {{{4
 
-staffWoodSextetLower = \new Staff = "staffWoodSextetLower"
+staffWoodwindSextetLower = \new Staff = "staffWoodwindSextetLower"
 \with {
   instrumentName = \markup { \column { clarinet bassoon } }
   shortInstrumentName = \markup { \column { cl bn } }
 } <<
   \clef bass
-  \new Voice = "voiceWoodSextetBarytone"
+  \new Voice = "voiceWoodwindSextetBarytone"
   \with {
     midiInstrument = "clarinet"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #2.0
   } {
-    \voiceOne \voiceWoodSextetBarytone
+    \voiceOne \voiceWoodwindSextetBarytone
   }
-  \new Voice = "voiceWoodSextetBass"
+  \new Voice = "voiceWoodwindSextetBass"
   \with {
     midiInstrument = "bassoon"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #2.0
   } {
-    \voiceTwo \voiceWoodSextetBass
+    \voiceTwo \voiceWoodwindSextetBass
   }
 >>
 
@@ -3109,158 +3136,6 @@ staffStringSeptetContrabass = \new Staff = "staffStringSeptetContrabass"
   \voiceStringSeptetBass
 }
 
-% string keyboards {{{2
-
-% viola organista {{{3
-
-% right {{{4
-
-staffViolaOrganistaRight = \new Staff = "staffViolaOrganistaRight"
-\with {
-  midiInstrument = "violin"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #2.0
-} {
-  \clef treble
-  \voiceViolaOrganistaRight
-}
-
-% left {{{4
-
-staffViolaOrganistaLeft = \new Staff = "staffViolaOrganistaLeft"
-\with {
-  midiInstrument = "cello"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #2.0
-} {
-  \clef bass
-  \voiceViolaOrganistaLeft
-}
-
-% harpsichord {{{3
-
-% right {{{4
-
-staffHarpsichordRight = \new Staff = "staffHarpsichordRight"
-\with {
-  midiInstrument = "harpsichord"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #2.0
-} {
-  \clef treble
-  %\showStaffSwitch
-  \voiceHarpsichordRight
-}
-
-% left {{{4
-
-staffHarpsichordLeft = \new Staff = "staffHarpsichordLeft"
-\with {
-  midiInstrument = "harpsichord"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #2.0
-} {
-  \clef bass
-  %\showStaffSwitch
-  \voiceHarpsichordLeft
-}
-
-% pedal harpsichord {{{3
-
-% right {{{4
-
-staffPedalHarpsichordRight = \new Staff = "staffPedalHarpsichordRight"
-\with {
-  midiInstrument = "harpsichord"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #2.0
-} {
-  \clef treble
-  \voicePedalHarpsichordRight
-}
-
-% left {{{4
-
-staffPedalHarpsichordLeft = \new Staff = "staffPedalHarpsichordLeft"
-\with {
-  midiInstrument = "harpsichord"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #2.0
-} {
-  %\clef bass
-  \clef alto
-  \voicePedalHarpsichordLeft
-}
-
-% feet {{{4
-
-staffPedalHarpsichordFeet = \new Staff = "staffPedalHarpsichordFeet"
-\with {
-  midiInstrument = "harpsichord"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #2.0
-} {
-  \clef bass
-  %\clef subbass
-  \voicePedalHarpsichordFeet
-}
-
-% clavichord {{{3
-
-% right {{{4
-
-staffClavichordRight = \new Staff = "staffClavichordRight"
-\with {
-  midiInstrument = "clav"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #2.0
-} {
-  \clef treble
-  %\showStaffSwitch
-  \voiceClavichordRight
-}
-
-% left {{{4
-
-staffClavichordLeft = \new Staff = "staffClavichordLeft"
-\with {
-  midiInstrument = "clav"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #2.0
-} {
-  \clef bass
-  %\showStaffSwitch
-  \voiceClavichordLeft
-}
-
-% piano {{{3
-
-% right {{{4
-
-staffPianoRight = \new Staff = "staffPianoRight"
-\with {
-  midiInstrument = "acoustic grand"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #2.0
-} {
-  \clef treble
-  %\showStaffSwitch
-  \voicePianoRight
-}
-
-% left {{{4
-
-staffPianoLeft = \new Staff = "staffPianoLeft"
-\with {
-  midiInstrument = "acoustic grand"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #2.0
-} {
-  \clef bass
-  %\showStaffSwitch
-  \voicePianoLeft
-}
-
 % plucked strings {{{2
 
 % harp {{{3
@@ -3488,7 +3363,183 @@ tablatureBassGuitar = \new TabStaff = "tablatureBassGuitar"
     \voiceBassGuitar
 }
 
+% hammered strings {{{2
+
+% dulcimer {{{3
+
+staffDulcimer = \new Staff = "staffDulcimer"
+\with {
+  instrumentName = "dulcimer"
+  shortInstrumentName = "dul"
+  midiInstrument = "dulcimer"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef treble
+  \voiceDulcimer
+}
+
+% string keyboards {{{2
+
+% viola organista {{{3
+
+% right {{{4
+
+staffViolaOrganistaRight = \new Staff = "staffViolaOrganistaRight"
+\with {
+  midiInstrument = "violin"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef treble
+  \voiceViolaOrganistaRight
+}
+
+% left {{{4
+
+staffViolaOrganistaLeft = \new Staff = "staffViolaOrganistaLeft"
+\with {
+  midiInstrument = "cello"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef bass
+  \voiceViolaOrganistaLeft
+}
+
+% harpsichord {{{3
+
+% right {{{4
+
+staffHarpsichordRight = \new Staff = "staffHarpsichordRight"
+\with {
+  midiInstrument = "harpsichord"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef treble
+  \voiceHarpsichordRight
+}
+
+% left {{{4
+
+staffHarpsichordLeft = \new Staff = "staffHarpsichordLeft"
+\with {
+  midiInstrument = "harpsichord"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef bass
+  \voiceHarpsichordLeft
+}
+
+% pedal harpsichord {{{3
+
+% right {{{4
+
+staffPedalHarpsichordRight = \new Staff = "staffPedalHarpsichordRight"
+\with {
+  midiInstrument = "harpsichord"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef treble
+  \voicePedalHarpsichordRight
+}
+
+% left {{{4
+
+staffPedalHarpsichordLeft = \new Staff = "staffPedalHarpsichordLeft"
+\with {
+  midiInstrument = "harpsichord"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  %\clef bass
+  \clef alto
+  \voicePedalHarpsichordLeft
+}
+
+% feet {{{4
+
+staffPedalHarpsichordFeet = \new Staff = "staffPedalHarpsichordFeet"
+\with {
+  midiInstrument = "harpsichord"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef bass
+  %\clef subbass
+  \voicePedalHarpsichordFeet
+}
+
+% clavichord {{{3
+
+% right {{{4
+
+staffClavichordRight = \new Staff = "staffClavichordRight"
+\with {
+  midiInstrument = "clav"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef treble
+  \voiceClavichordRight
+}
+
+% left {{{4
+
+staffClavichordLeft = \new Staff = "staffClavichordLeft"
+\with {
+  midiInstrument = "clav"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef bass
+  \voiceClavichordLeft
+}
+
+% piano {{{3
+
+% right {{{4
+
+staffPianoRight = \new Staff = "staffPianoRight"
+\with {
+  midiInstrument = "acoustic grand"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef treble
+  %\showStaffSwitch
+  \voicePianoRight
+}
+
+% left {{{4
+
+staffPianoLeft = \new Staff = "staffPianoLeft"
+\with {
+  midiInstrument = "acoustic grand"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef bass
+  %\showStaffSwitch
+  \voicePianoLeft
+}
+
 % drums {{{2
+
+% glockenspiel {{{3
+
+staffGlockenspiel = \new Staff = "staffGlockenspiel"
+\with {
+  midiInstrument = "glockenspiel"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef treble
+  \voiceGlockenspiel
+}
 
 % vibraphone {{{3
 
@@ -3542,20 +3593,6 @@ staffMarimbaLeft = \new Staff = "staffMarimbaLeft"
   \voiceMarimbaLeft
 }
 
-% dulcimer {{{3
-
-staffDulcimer = \new Staff = "staffDulcimer"
-\with {
-  instrumentName = "dulcimer"
-  shortInstrumentName = "dul"
-  midiInstrument = "dulcimer"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #2.0
-} {
-  \clef treble
-  \voiceDulcimer
-}
-
 % tubular bells {{{3
 
 % manual {{{4
@@ -3592,6 +3629,34 @@ staffDrumkit = \new DrumStaff
 } {
   \clef percussion
   \voiceDrumkit
+}
+
+% drums keyboards {{{2
+
+% celesta {{{3
+
+% right {{{4
+
+staffCelestaRight = \new Staff = "staffCelestaRight"
+\with {
+  midiInstrument = "celesta"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef treble
+  \voiceCelestaRight
+}
+
+% left {{{4
+
+staffCelestaLeft = \new Staff = "staffCelestaLeft"
+\with {
+  midiInstrument = "celesta"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef bass
+  \voiceCelestaLeft
 }
 
 % staff groups {{{1
@@ -3686,29 +3751,29 @@ groupChoirSeptet = \new ChoirStaff <<
   \lyricsto "voiceChoirSeptetBass" \lyricsChoirSeptetBass
 >>
 
-% woods {{{2
+% woodwinds {{{2
 
-% wood quartet {{{3
+% woodwind quartet {{{3
 
-groupWoodQuartet = \new StaffGroup <<
-  \staffWoodQuartetUpper
-  \staffWoodQuartetLower
+groupWoodwindQuartet = \new StaffGroup <<
+  \staffWoodwindQuartetUpper
+  \staffWoodwindQuartetLower
 >>
 
-% wood quintet {{{3
+% woodwind quintet {{{3
 
-groupWoodQuintet = \new StaffGroup <<
-  \staffWoodQuintetUpper
-  \staffWoodQuintetMiddle
-  \staffWoodQuintetLower
+groupWoodwindQuintet = \new StaffGroup <<
+  \staffWoodwindQuintetUpper
+  \staffWoodwindQuintetMiddle
+  \staffWoodwindQuintetLower
 >>
 
-% wood sextet {{{3
+% woodwind sextet {{{3
 
-groupWoodSextet = \new StaffGroup <<
-  \staffWoodSextetUpper
-  \staffWoodSextetMiddle
-  \staffWoodSextetLower
+groupWoodwindSextet = \new StaffGroup <<
+  \staffWoodwindSextetUpper
+  \staffWoodwindSextetMiddle
+  \staffWoodwindSextetLower
 >>
 
 % saxophone quartet {{{3
@@ -3851,6 +3916,22 @@ groupStringSeptet = \new StaffGroup
   \staffStringSeptetContrabass
 >>
 
+% plucked strings {{{2
+
+% harp {{{3
+
+groupHarp = \new GrandStaff
+\with {
+  instrumentName = "harp"
+  shortInstrumentName = "hp"
+  connectArpeggios = ##t
+} <<
+  \staffHarpUpper
+  \staffHarpLower
+>>
+
+% hammered strings {{{2
+
 % string keyboards {{{2
 
 % viola organista {{{3
@@ -3914,20 +3995,6 @@ groupPiano = \new GrandStaff
   \staffPianoLeft
 >>
 
-% plucked strings {{{2
-
-% harp {{{3
-
-groupHarp = \new GrandStaff
-\with {
-  instrumentName = "harp"
-  shortInstrumentName = "hp"
-  connectArpeggios = ##t
-} <<
-  \staffHarpUpper
-  \staffHarpLower
->>
-
 % drums {{{2
 
 % vibraphone {{{3
@@ -3966,13 +4033,27 @@ groupTubularBells = \new GrandStaff
   \staffTubularBellsPedal
 >>
 
+% drums keyboards {{{2
+
+% celesta {{{3
+
+groupCelesta = \new GrandStaff
+\with {
+  instrumentName = "celesta"
+  shortInstrumentName = "cel"
+  connectArpeggios = ##t
+} <<
+  \staffCelestaRight
+  \staffCelestaLeft
+>>
+
 % book {{{1
 
 \book {
   % text before the score {{{2
   %\markup \column {
     %\vspace #1
-    %\line { woods = flute, oboe, english horn, bassoon }
+    %\line { woodwinds = flute, oboe, english horn, bassoon }
     %\line { saxophones = soprano, alto, tenor, baritone sax }
     %\vspace #1
   %}
@@ -3993,7 +4074,7 @@ groupTubularBells = \new GrandStaff
       %\groupChoirQuintet
       %\groupChoirSextet
       %\groupChoirSeptet
-      % woods {{{4
+      % woodwinds {{{4
       %\staffFlutes
       %\staffOboes
       %\staffEnglishHorns
@@ -4003,9 +4084,9 @@ groupTubularBells = \new GrandStaff
       %\staffAltoSaxophones
       %\staffTenorSaxophones
       %\staffBarytoneSaxophones
-      %\groupWoodQuartet
-      %\groupWoodQuintet
-      %\groupWoodSextet
+      %\groupWoodwindQuartet
+      %\groupWoodwindQuintet
+      %\groupWoodwindSextet
       %\groupSaxophoneQuartet
       % brass {{{4
       %\staffTrumpets
@@ -4031,12 +4112,6 @@ groupTubularBells = \new GrandStaff
       %\groupStringQuintetContrabass
       %\groupStringSextet
       %\groupStringSeptet
-      % string keyboards {{{4
-      %\groupViolaOrganista
-      %\groupHarpsichord
-      %\groupPedalHarpsichord
-      %\groupClavichord
-      \groupPiano
       % plucked strings {{{4
       %\groupHarp
       %\staffLute
@@ -4049,12 +4124,22 @@ groupTubularBells = \new GrandStaff
       %\tablatureGuitar
       %\staffBassGuitar
       %\tablatureBassGuitar
+      % hammered strings {{{4
+      %\staffDulcimer
+      % string keyboards {{{4
+      %\groupViolaOrganista
+      %\groupHarpsichord
+      %\groupPedalHarpsichord
+      %\groupClavichord
+      \groupPiano
       % drums {{{4
+      %\staffGlockenspiel
       %\groupVibraphone
       %\groupMarimba
-      %\staffDulcimer
       %\groupTubularBells
       %\staffDrumkit
+      % drums keyboards {{{4
+      %\groupCelesta
       % end of instruments and groups {{{4
     >>
     % layout, see beginning of file {{{3
@@ -4069,14 +4154,14 @@ groupTubularBells = \new GrandStaff
       % one midi channel per voice or staff {{{4
       % -- comment this if you don't need distinct instruments on the same staff
       % -- it will save midi channels (max 16 are available)
-      % \context {
-      %   \Staff
-      %   \remove "Staff_performer"
-      % }
-      % \context {
-      %   \Voice
-      %   \consists "Staff_performer"
-      % }
+      \context {
+        \Staff
+        \remove "Staff_performer"
+      }
+      \context {
+        \Voice
+        \consists "Staff_performer"
+      }
       % end score {{{3
     }
   }
@@ -4084,5 +4169,5 @@ groupTubularBells = \new GrandStaff
   \paper {
     system-separator-markup = \slashSeparator
   }
- % end book {{{2
+  % end book {{{2
 }

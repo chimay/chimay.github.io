@@ -33,7 +33,7 @@ debug:
 # lilypond template {{{1
 
 lilypond-template:
-	make -C ~/racine/musica/lilypond/template install
+	make -k -C ~/racine/musica/lilypond/template install
 	git add -f **/*.png
 
 #  org -> html {{{1

@@ -620,6 +620,13 @@ voiceBarytoneSaxophoneTwo = \relative c, {
   \anacrusis % hypermeasure 0
 }
 
+% bagpipe {{{3
+
+voiceBagpipe = \relative c' {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
 % woodwind quartet {{{3
 
 % soprano {{{4
@@ -2102,6 +2109,20 @@ staffBarytoneSaxophones = \new Staff = "staffBarytoneSaxophones"
     \voiceTwo \voiceBarytoneSaxophoneTwo
   }
 >>
+
+% bagpipe {{{3
+
+staffBagpipe = \new Staff = "staffBagpipe"
+\with {
+  instrumentName = "bagpipe"
+  shortInstrumentName = "bag"
+  midiInstrument = "bagpipe"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef treble
+  \voiceBagpipe
+}
 
 % woodwind quartet {{{3
 
@@ -4084,6 +4105,7 @@ groupCelesta = \new GrandStaff
       %\staffAltoSaxophones
       %\staffTenorSaxophones
       %\staffBarytoneSaxophones
+      \staffBagpipe
       %\groupWoodwindQuartet
       %\groupWoodwindQuintet
       \groupWoodwindSextet

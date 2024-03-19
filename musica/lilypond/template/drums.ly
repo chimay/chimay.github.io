@@ -1373,6 +1373,13 @@ voiceBassGuitar = \relative c, {
   \anacrusis % hypermeasure 0
 }
 
+% sitar {{{3
+
+voiceSitar = \relative c' {
+  \keytime
+  \anacrusis % hypermeasure 0
+}
+
 % hammered strings {{{2
 
 % dulcimer {{{3
@@ -3384,6 +3391,20 @@ tablatureBassGuitar = \new TabStaff = "tablatureBassGuitar"
     \voiceBassGuitar
 }
 
+% sitar {{{3
+
+staffSitar = \new Staff = "staffSitar"
+\with {
+  instrumentName = "sitar"
+  shortInstrumentName = "sit"
+  midiInstrument = "sitar"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef alto
+  \voiceSitar
+}
+
 % hammered strings {{{2
 
 % dulcimer {{{3
@@ -4148,6 +4169,7 @@ groupCelesta = \new GrandStaff
       %\tablatureGuitar
       %\staffBassGuitar
       %\tablatureBassGuitar
+      %\staffSitar
       % hammered strings {{{4
       %\staffDulcimer
       % string keyboards {{{4

@@ -1,8 +1,8 @@
 % vim: set expandtab shiftwidth=2 softtabstop=2
 
-% key & time {{{1
+% key & time & tempo {{{1
 
-keytime = {
+keytimetempo = {
   \key c \major
   \numericTimeSignature
   \time 4/4

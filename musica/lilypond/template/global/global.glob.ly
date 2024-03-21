@@ -4,6 +4,12 @@
 
 \language "english"
 
+%\language "nederlands"
+%\language "deutsch"
+
+%\language "italiano"
+%\language "français"
+
 % scales {{{1
 
 % for \modalTranspose

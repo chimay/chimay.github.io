@@ -3707,7 +3707,7 @@ staffCelestaLeft = \new Staff = "staffCelestaLeft"
 
 % groups {{{1
 
-% staff groups, choir staves, grand staves, piano stavec
+% staff groups, choir staves, grand staves, piano staves
 
 % vocal {{{2
 

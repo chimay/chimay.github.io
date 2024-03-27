@@ -4107,7 +4107,8 @@ groupCelesta = \new GrandStaff
   %}
   % score {{{2
   \score {
-    % instruments as single & group staves {{{3
+    % instruments {{{3
+    % -- as single & group staves
     % -- comment or uncomment instruments and groups as needed
     <<
       % vocal {{{4

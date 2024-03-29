@@ -1324,22 +1324,6 @@ voiceStringSeptetBass = \relative c, {
 
 % plucked strings {{{2
 
-% harp {{{3
-
-% upper {{{4
-
-voiceHarpUpper = \relative c'' {
-  \keytimetempo
-  \anacrusis % hypermeasure 0
-}
-
-% lower {{{4
-
-voiceHarpLower = \relative c {
-  \keytimetempo
-  \anacrusis % hypermeasure 0
-}
-
 % lute {{{3
 
 voiceLute = \relative c' {
@@ -1378,6 +1362,22 @@ voiceBassGuitar = \relative c, {
 % sitar {{{3
 
 voiceSitar = \relative c' {
+  \keytimetempo
+  \anacrusis % hypermeasure 0
+}
+
+% harp {{{3
+
+% upper {{{4
+
+voiceHarpUpper = \relative c'' {
+  \keytimetempo
+  \anacrusis % hypermeasure 0
+}
+
+% lower {{{4
+
+voiceHarpLower = \relative c {
   \keytimetempo
   \anacrusis % hypermeasure 0
 }
@@ -3168,34 +3168,6 @@ staffStringSeptetContrabass = \new Staff = "staffStringSeptetContrabass"
 
 % plucked strings {{{2
 
-% harp {{{3
-
-% upper {{{4
-
-staffHarpUpper = \new Staff = "staffHarpUpper"
-\with {
-  midiInstrument = "orchestral harp"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #2.0
-} {
-  \clef treble
-  %\clef tenor
-  \voiceHarpUpper
-}
-
-% lower {{{4
-
-staffHarpLower = \new Staff = "staffHarpLower"
-\with {
-  midiInstrument = "orchestral harp"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #2.0
-} {
-  \clef bass
-  %\clef subbass
-  \voiceHarpLower
-}
-
 % lute {{{3
 
 staffLute = \new Staff = "staffLute"
@@ -3405,6 +3377,34 @@ staffSitar = \new Staff = "staffSitar"
 } {
   \clef alto
   \voiceSitar
+}
+
+% harp {{{3
+
+% upper {{{4
+
+staffHarpUpper = \new Staff = "staffHarpUpper"
+\with {
+  midiInstrument = "orchestral harp"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef treble
+  %\clef tenor
+  \voiceHarpUpper
+}
+
+% lower {{{4
+
+staffHarpLower = \new Staff = "staffHarpLower"
+\with {
+  midiInstrument = "orchestral harp"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef bass
+  %\clef subbass
+  \voiceHarpLower
 }
 
 % hammered strings {{{2
@@ -4163,7 +4163,6 @@ groupCelesta = \new GrandStaff
       \groupStringSextet
       %\groupStringSeptet
       % plucked strings {{{4
-      %\groupHarp
       %\staffLute
       %\tablatureLute
       %\staffArchlute
@@ -4175,6 +4174,7 @@ groupCelesta = \new GrandStaff
       %\staffBassGuitar
       %\tablatureBassGuitar
       %\staffSitar
+      %\groupHarp
       % hammered strings {{{4
       %\staffDulcimer
       % string keyboards {{{4

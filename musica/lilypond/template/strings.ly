@@ -4174,7 +4174,7 @@ groupCelesta = \new GrandStaff
       %\staffBassGuitar
       \tablatureBassGuitar
       \staffSitar
-      %\groupHarp
+      \groupHarp
       % hammered strings {{{4
       \staffDulcimer
       % string keyboards {{{4

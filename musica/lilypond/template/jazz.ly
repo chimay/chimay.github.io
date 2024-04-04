@@ -960,6 +960,22 @@ voiceAccordionLeft = \relative c {
   \anacrusis % hypermeasure 0
 }
 
+% concertina {{{3
+
+% right {{{4
+
+voiceConcertinaRight = \relative c'' {
+  \keytimetempo
+  \anacrusis % hypermeasure 0
+}
+
+% left {{{4
+
+voiceConcertinaLeft = \relative c {
+  \keytimetempo
+  \anacrusis % hypermeasure 0
+}
+
 % bowed strings {{{2
 
 % violins {{{3
@@ -2646,6 +2662,32 @@ staffAccordionLeft = \new Staff = "staffAccordionLeft"
   \voiceAccordionLeft
 }
 
+% concertina {{{3
+
+% right {{{4
+
+staffConcertinaRight = \new Staff = "staffConcertinaRight"
+\with {
+  midiInstrument = "concertina"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef treble
+  \voiceConcertinaRight
+}
+
+% left {{{4
+
+staffConcertinaLeft = \new Staff = "staffConcertinaLeft"
+\with {
+  midiInstrument = "concertina"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef bass
+  \voiceConcertinaLeft
+}
+
 % bowed strings {{{2
 
 % violins {{{3
@@ -3892,6 +3934,17 @@ groupAccordion = \new GrandStaff
   \staffAccordionLeft
 >>
 
+% concertina {{{3
+
+groupConcertina = \new GrandStaff
+\with {
+  instrumentName = "concertina"
+  shortInstrumentName = "conc"
+} <<
+  \staffConcertinaRight
+  \staffConcertinaLeft
+>>
+
 % bowed strings {{{2
 
 % string quartet {{{3
@@ -4149,6 +4202,7 @@ groupCelesta = \new GrandStaff
       \groupManualOrgan
       %\groupPedalOrgan
       %\groupAccordion
+      %\groupConcertina
       % bowed strings {{{4
       %\staffViolins
       %\staffViolas

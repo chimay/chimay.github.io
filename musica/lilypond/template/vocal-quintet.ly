@@ -1969,7 +1969,7 @@ staffChoirSeptetBass = \new Staff = "staffChoirSeptetBass"
 staffFlutes = \new Staff = "staffFlutes"
 \with {
   instrumentName = "flutes"
-  shortInstrumentName = "fls"
+  shortInstrumentName = "fl"
   midiInstrument = "flute"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -1988,7 +1988,7 @@ staffFlutes = \new Staff = "staffFlutes"
 staffOboes = \new Staff = "staffOboes"
 \with {
   instrumentName = "oboes"
-  shortInstrumentName = "obs"
+  shortInstrumentName = "ob"
   midiInstrument = "oboe"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -2004,10 +2004,10 @@ staffOboes = \new Staff = "staffOboes"
 
 % english horns {{{3
 
-staffEnglishHorns = \new Staff = "staffHorns"
+staffEnglishHorns = \new Staff = "staffEnglishHorns"
 \with {
   instrumentName = \markup { \column { english horns } }
-  shortInstrumentName = "enhns"
+  shortInstrumentName = "enhn"
   midiInstrument = "english horn"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -2026,7 +2026,7 @@ staffEnglishHorns = \new Staff = "staffHorns"
 staffClarinets = \new Staff = "staffClarinets"
 \with {
   instrumentName = "clarinets"
-  shortInstrumentName = "cls"
+  shortInstrumentName = "cl"
   midiInstrument = "clarinet"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -2045,7 +2045,7 @@ staffClarinets = \new Staff = "staffClarinets"
 staffBassoons = \new Staff = "staffBassoons"
 \with {
   instrumentName = "bassoons"
-  shortInstrumentName = "bns"
+  shortInstrumentName = "bn"
   midiInstrument = "bassoon"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -2279,7 +2279,7 @@ staffWoodwindQuintetLower = \new Staff = "staffWoodwindQuintetLower"
 staffWoodwindSextetUpper = \new Staff = "staffWoodwindSextetUpper"
 \with {
   instrumentName = "flutes"
-  shortInstrumentName = "fls"
+  shortInstrumentName = "fl"
 } <<
   \clef treble
   \new Voice = "voiceWoodwindSextetSoprano"
@@ -2395,7 +2395,7 @@ staffSaxophoneQuartetLower = \new Staff = "staffSaxophoneLower"
 staffTrumpets = \new Staff = "staffTrumpets"
 \with {
   instrumentName = "trumpets"
-  shortInstrumentName = "tpts"
+  shortInstrumentName = "tpt"
   midiInstrument = "trumpet"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -2414,7 +2414,7 @@ staffTrumpets = \new Staff = "staffTrumpets"
 staffFrenchHorns = \new Staff = "staffFrenchHorns"
 \with {
   instrumentName = \markup \column { french horns }
-  shortInstrumentName = "hns"
+  shortInstrumentName = "hn"
   midiInstrument = "french horn"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -2433,7 +2433,7 @@ staffFrenchHorns = \new Staff = "staffFrenchHorns"
 staffTrombones = \new Staff = "staffTrombones"
 \with {
   instrumentName = "trombones"
-  shortInstrumentName = "tbns"
+  shortInstrumentName = "tbn"
   midiInstrument = "trombone"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -2452,7 +2452,7 @@ staffTrombones = \new Staff = "staffTrombones"
 staffTubas = \new Staff = "staffTubas"
 \with {
   instrumentName = "tubas"
-  shortInstrumentName = "tbas"
+  shortInstrumentName = "tba"
   midiInstrument = "tuba"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -2492,7 +2492,7 @@ staffBrassQuartetUpper = \new Staff = "staffBrassQuartetUpper"
 staffBrassQuartetLower = \new Staff = "staffBrassQuartetLower"
 \with {
   instrumentName = "fr-horns"
-  shortInstrumentName = "hns"
+  shortInstrumentName = "hn"
   midiInstrument = "french horn"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -2695,7 +2695,7 @@ staffConcertinaLeft = \new Staff = "staffConcertinaLeft"
 staffViolins = \new Staff = "staffViolins"
 \with {
   instrumentName = "violins"
-  shortInstrumentName = "vns"
+  shortInstrumentName = "vn"
   midiInstrument = "violin"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -2714,7 +2714,7 @@ staffViolins = \new Staff = "staffViolins"
 staffViolas = \new Staff = "staffViolas"
 \with {
   instrumentName = "violas"
-  shortInstrumentName = "vas"
+  shortInstrumentName = "va"
   midiInstrument = "viola"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -2733,7 +2733,7 @@ staffViolas = \new Staff = "staffViolas"
 staffCellos = \new Staff = "staffCellos"
 \with {
   instrumentName = "cellos"
-  shortInstrumentName = "vcs"
+  shortInstrumentName = "vc"
   midiInstrument = "cello"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -2752,7 +2752,7 @@ staffCellos = \new Staff = "staffCellos"
 staffContrabasses = \new Staff = "staffContrabasses"
 \with {
   instrumentName = \markup \column { contra- basses }
-  shortInstrumentName = "cbs"
+  shortInstrumentName = "cb"
   midiInstrument = "contrabass"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -2773,7 +2773,7 @@ staffContrabasses = \new Staff = "staffContrabasses"
 staffStringQuartetUpper = \new Staff = "staffStringQuartetUpper"
 \with {
   instrumentName = "violins"
-  shortInstrumentName = "vns"
+  shortInstrumentName = "vn"
   midiInstrument = "violin"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -2820,7 +2820,7 @@ staffStringQuartetLower = \new Staff = "staffStringQuartetLower"
 staffStringQuartetSymmetricUpper = \new Staff = "staffStringQuartetSymmetricUpper"
 \with {
   instrumentName = "violins"
-  shortInstrumentName = "vns"
+  shortInstrumentName = "vn"
   midiInstrument = "violin"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -2839,7 +2839,7 @@ staffStringQuartetSymmetricUpper = \new Staff = "staffStringQuartetSymmetricUppe
 staffStringQuartetSymmetricLower = \new Staff = "staffStringQuartetSymmetricLower"
 \with {
   instrumentName = "cellos"
-  shortInstrumentName = "vcs"
+  shortInstrumentName = "vc"
   midiInstrument = "cello"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -2914,7 +2914,7 @@ staffStringQuartetContrabassLower = \new Staff = "staffStringQuartetContrabassLo
 staffStringQuintetUpper = \new Staff = "staffStringQuintetUpper"
 \with {
   instrumentName = "violins"
-  shortInstrumentName = "vns"
+  shortInstrumentName = "vn"
   midiInstrument = "violin"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -2933,7 +2933,7 @@ staffStringQuintetUpper = \new Staff = "staffStringQuintetUpper"
 staffStringQuintetMiddle = \new Staff = "staffStringQuintetMiddle"
 \with {
   instrumentName = "violas"
-  shortInstrumentName = "vas"
+  shortInstrumentName = "va"
   midiInstrument = "viola"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -2968,7 +2968,7 @@ staffStringQuintetLower = \new Staff = "staffStringQuintetLower"
 staffStringQuintetSymmetricUpper = \new Staff = "staffStringQuintetSymmetricUpper"
 \with {
   instrumentName = "violins"
-  shortInstrumentName = "vns"
+  shortInstrumentName = "vn"
   midiInstrument = "violin"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -3001,7 +3001,7 @@ staffStringQuintetSymmetricMiddle = \new Staff = "staffStringQuintetSymmetricMid
 staffStringQuintetSymmetricLower = \new Staff = "staffStringQuintetSymmetricLower"
 \with {
   instrumentName = "cellos"
-  shortInstrumentName = "vcs"
+  shortInstrumentName = "vc"
   midiInstrument = "cello"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -3022,7 +3022,7 @@ staffStringQuintetSymmetricLower = \new Staff = "staffStringQuintetSymmetricLowe
 staffStringQuintetContrabassUpper = \new Staff = "staffStringQuintetContrabassUpper"
 \with {
   instrumentName = "violins"
-  shortInstrumentName = "vns"
+  shortInstrumentName = "vn"
   midiInstrument = "violin"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -3083,7 +3083,7 @@ staffStringQuintetContrabassLower = \new Staff = "staffStringQuintetContrabassLo
 staffStringSextetUpper = \new Staff = "staffStringSextetUpper"
 \with {
   instrumentName = "violins"
-  shortInstrumentName = "vns"
+  shortInstrumentName = "vn"
   midiInstrument = "violin"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -3102,7 +3102,7 @@ staffStringSextetUpper = \new Staff = "staffStringSextetUpper"
 staffStringSextetMiddle = \new Staff = "staffStringSextetMiddle"
 \with {
   instrumentName = "violas"
-  shortInstrumentName = "vas"
+  shortInstrumentName = "va"
   midiInstrument = "viola"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -3121,7 +3121,7 @@ staffStringSextetMiddle = \new Staff = "staffStringSextetMiddle"
 staffStringSextetLower = \new Staff = "staffStringSextetLower"
 \with {
   instrumentName = "cellos"
-  shortInstrumentName = "vcs"
+  shortInstrumentName = "vc"
   midiInstrument = "cello"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -3142,7 +3142,7 @@ staffStringSextetLower = \new Staff = "staffStringSextetLower"
 staffStringSeptetViolins = \new Staff = "staffStringSeptetViolins"
 \with {
   instrumentName = "violins"
-  shortInstrumentName = "vns"
+  shortInstrumentName = "vn"
   midiInstrument = "violin"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -3161,7 +3161,7 @@ staffStringSeptetViolins = \new Staff = "staffStringSeptetViolins"
 staffStringSeptetViolas = \new Staff = "staffStringSeptetViolas"
 \with {
   instrumentName = "violas"
-  shortInstrumentName = "vas"
+  shortInstrumentName = "va"
   midiInstrument = "viola"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -3180,7 +3180,7 @@ staffStringSeptetViolas = \new Staff = "staffStringSeptetViolas"
 staffStringSeptetCellos = \new Staff = "staffStringSeptetCellos"
 \with {
   instrumentName = "cellos"
-  shortInstrumentName = "vcs"
+  shortInstrumentName = "vc"
   midiInstrument = "cello"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0

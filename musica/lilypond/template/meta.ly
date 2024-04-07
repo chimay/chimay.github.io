@@ -903,6 +903,15 @@ voiceBrassQuintetBass = \relative c, {
   \anacrusis % hypermeasure 0
 }
 
+% free reeds {{{2
+
+% harmonica {{{3
+
+voiceHarmonica = \relative c' {
+  \keytimetempo
+  \anacrusis % hypermeasure 0
+}
+
 % wind keyboards {{{2
 
 % manual organ {{{3
@@ -2568,6 +2577,22 @@ staffBrassQuintetLower = \new Staff = "staffBrassQuintetLower"
   }
 >>
 
+% free reeds {{{2
+
+% harmonica {{{3
+
+staffHarmonica = \new Staff = "staffHarmonica"
+\with {
+  instrumentName = "harmonica"
+  shortInstrumentName = "hca"
+  midiInstrument = "harmonica"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} {
+  \clef alto
+  \voiceHarmonica
+}
+
 % wind keyboards {{{2
 
 % manual organ {{{3
@@ -4191,6 +4216,8 @@ groupCelesta = \new GrandStaff
       %\groupWoodwindQuintet
       %\groupWoodwindSextet
       %\groupSaxophoneQuartet
+      % free reeds {{{4
+      %\staffHarmonica
       % brass {{{4
       \staffTrumpets
       %\staffFrenchHorns

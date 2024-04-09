@@ -2021,7 +2021,7 @@ staffEnglishHorns = \new Staff = "staffEnglishHorns"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } <<
-  \clef alto
+  \clef mezzosoprano
   \new Voice = "voiceEnglishHornOne" {
     \voiceOne \voiceEnglishHornOne
   }
@@ -2040,7 +2040,7 @@ staffClarinets = \new Staff = "staffClarinets"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } <<
-  \clef alto
+  \clef mezzosoprano
   \new Voice = "voiceClarinetOne" {
     \voiceOne \voiceClarinetOne
   }

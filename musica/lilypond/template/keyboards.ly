@@ -510,22 +510,6 @@ voiceOboeTwo = \relative c' {
   \anacrusis % hypermeasure 0
 }
 
-% english horns {{{3
-
-% one {{{4
-
-voiceEnglishHornOne = \relative c' {
-  \keytimetempo
-  \anacrusis % hypermeasure 0
-}
-
-% two {{{4
-
-voiceEnglishHornTwo = \relative c {
-  \keytimetempo
-  \anacrusis % hypermeasure 0
-}
-
 % clarinets {{{3
 
 % one {{{4
@@ -538,6 +522,22 @@ voiceClarinetOne = \relative c' {
 % two {{{4
 
 voiceClarinetTwo = \relative c {
+  \keytimetempo
+  \anacrusis % hypermeasure 0
+}
+
+% english horns {{{3
+
+% one {{{4
+
+voiceEnglishHornOne = \relative c' {
+  \keytimetempo
+  \anacrusis % hypermeasure 0
+}
+
+% two {{{4
+
+voiceEnglishHornTwo = \relative c {
   \keytimetempo
   \anacrusis % hypermeasure 0
 }
@@ -2246,7 +2246,7 @@ staffWoodwindQuintetMiddle = \new Staff = "staffWoodwindQuintetMiddle"
 \with {
   instrumentName = \markup { \column { english horn } }
   shortInstrumentName = \markup { \column { cl bn } }
-  midiInstrument = "english horn"
+  midiInstrument = "clarinet"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 }
@@ -2265,7 +2265,7 @@ staffWoodwindQuintetLower = \new Staff = "staffWoodwindQuintetLower"
   \clef bass
   \new Voice = "voiceWoodwindQuintetTenor"
   \with {
-    midiInstrument = "clarinet"
+    midiInstrument = "english horn"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #2.0
   } {
@@ -2327,7 +2327,7 @@ staffWoodwindSextetMiddle = \new Staff = "staffWoodwindSextetMiddle"
   }
   \new Voice ="woodwindsextetTenor"
   \with {
-    midiInstrument = "english horn"
+    midiInstrument = "clarinet"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #2.0
   } {
@@ -2345,7 +2345,7 @@ staffWoodwindSextetLower = \new Staff = "staffWoodwindSextetLower"
   \clef bass
   \new Voice = "voiceWoodwindSextetBarytone"
   \with {
-    midiInstrument = "clarinet"
+    midiInstrument = "english horn"
     midiMinimumVolume = #1.0
     midiMaximumVolume = #2.0
   } {

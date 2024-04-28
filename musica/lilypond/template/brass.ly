@@ -2011,25 +2011,6 @@ staffOboes = \new Staff = "staffOboes"
   }
 >>
 
-% english horns {{{3
-
-staffEnglishHorns = \new Staff = "staffEnglishHorns"
-\with {
-  instrumentName = \markup { \column { english horns } }
-  shortInstrumentName = "enhn"
-  midiInstrument = "english horn"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #2.0
-} <<
-  \clef mezzosoprano
-  \new Voice = "voiceEnglishHornOne" {
-    \voiceOne \voiceEnglishHornOne
-  }
-  \new Voice = "voiceEnglishHornTwo" {
-    \voiceTwo \voiceEnglishHornTwo
-  }
->>
-
 % clarinets {{{3
 
 staffClarinets = \new Staff = "staffClarinets"
@@ -2046,6 +2027,25 @@ staffClarinets = \new Staff = "staffClarinets"
   }
   \new Voice = "voiceClarinetTwo" {
     \voiceTwo \voiceClarinetTwo
+  }
+>>
+
+% english horns {{{3
+
+staffEnglishHorns = \new Staff = "staffEnglishHorns"
+\with {
+  instrumentName = \markup { \column { english horns } }
+  shortInstrumentName = "enhn"
+  midiInstrument = "english horn"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} <<
+  \clef mezzosoprano
+  \new Voice = "voiceEnglishHornOne" {
+    \voiceOne \voiceEnglishHornOne
+  }
+  \new Voice = "voiceEnglishHornTwo" {
+    \voiceTwo \voiceEnglishHornTwo
   }
 >>
 
@@ -2244,8 +2244,8 @@ staffWoodwindQuintetUpper = \new Staff = "staffWoodwindQuintetUpper"
 
 staffWoodwindQuintetMiddle = \new Staff = "staffWoodwindQuintetMiddle"
 \with {
-  instrumentName = \markup { \column { english horn } }
-  shortInstrumentName = \markup { \column { cl bn } }
+  instrumentName = "clarinet"
+  shortInstrumentName = "cl"
   midiInstrument = "clarinet"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
@@ -2259,8 +2259,8 @@ staffWoodwindQuintetMiddle = \new Staff = "staffWoodwindQuintetMiddle"
 
 staffWoodwindQuintetLower = \new Staff = "staffWoodwindQuintetLower"
 \with {
-  instrumentName = \markup { \column { clarinet bassoon } }
-  shortInstrumentName = \markup { \column { cl bn } }
+  instrumentName = \markup { \column { eng-horn bassoon } }
+  shortInstrumentName = \markup { \column { enhn bn } }
 } <<
   \clef bass
   \new Voice = "voiceWoodwindQuintetTenor"
@@ -2313,8 +2313,8 @@ staffWoodwindSextetUpper = \new Staff = "staffWoodwindSextetUpper"
 
 staffWoodwindSextetMiddle = \new Staff = "staffWoodwindSextetMiddle"
 \with {
-  instrumentName = \markup { \column { oboe en-horn } }
-  shortInstrumentName = \markup { \column { ob enhn } }
+  instrumentName = \markup { \column { oboe clarinet } }
+  shortInstrumentName = \markup { \column { ob cl } }
 } <<
   \clef alto
   \new Voice = "voiceWoodwindSextetAlto"
@@ -2339,8 +2339,8 @@ staffWoodwindSextetMiddle = \new Staff = "staffWoodwindSextetMiddle"
 
 staffWoodwindSextetLower = \new Staff = "staffWoodwindSextetLower"
 \with {
-  instrumentName = \markup { \column { clarinet bassoon } }
-  shortInstrumentName = \markup { \column { cl bn } }
+  instrumentName = \markup { \column { eng-horn bassoon } }
+  shortInstrumentName = \markup { \column { enhn bn } }
 } <<
   \clef bass
   \new Voice = "voiceWoodwindSextetBarytone"

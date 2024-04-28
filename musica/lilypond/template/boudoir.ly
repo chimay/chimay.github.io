@@ -4204,8 +4204,8 @@ groupCelesta = \new GrandStaff
       % woodwinds {{{4
       \staffFlutes
       %\staffOboes
-      %\staffEnglishHorns
       %\staffClarinets
+      %\staffEnglishHorns
       %\staffBassoons
       %\staffSopranoSaxophones
       %\staffAltoSaxophones

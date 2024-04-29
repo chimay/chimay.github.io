@@ -22,6 +22,10 @@ silencePeriodMinus = {
   R2.*7
 }
 
+silencePeriodMinusTwo = {
+  R2.*6
+}
+
 % invisible silences {{{1
 
 skipPeriod = {
@@ -31,6 +35,10 @@ skipPeriod = {
 
 skipPeriodMinus = {
   s2.*7
+}
+
+skipPeriodMinusTwo = {
+  s2.*6
 }
 
 % drones {{{1
@@ -87,6 +95,8 @@ theme_test = {
 }
 
 % dual {{{1
+
+% polyphony {{{1
 
 % harmony {{{1
 

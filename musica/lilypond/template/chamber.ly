@@ -2021,7 +2021,7 @@ staffClarinets = \new Staff = "staffClarinets"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } <<
-  \clef mezzosoprano
+  \clef treble
   \new Voice = "voiceClarinetOne" {
     \voiceOne \voiceClarinetOne
   }
@@ -2040,7 +2040,7 @@ staffEnglishHorns = \new Staff = "staffEnglishHorns"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } <<
-  \clef mezzosoprano
+  \clef treble
   \new Voice = "voiceEnglishHornOne" {
     \voiceOne \voiceEnglishHornOne
   }
@@ -2428,7 +2428,7 @@ staffFrenchHorns = \new Staff = "staffFrenchHorns"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } <<
-  \clef bass
+  \clef treble
   \new Voice = "voiceFrenchHornOne" {
     \voiceOne \voiceFrenchHornOne
   }
@@ -2447,7 +2447,7 @@ staffTrombones = \new Staff = "staffTrombones"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } <<
-  \clef varbaritone
+  \clef bass
   \new Voice = "voiceTromboneOne" {
     \voiceOne \voiceTromboneOne
   }
@@ -2466,7 +2466,7 @@ staffTubas = \new Staff = "staffTubas"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } <<
-  \clef subbass
+  \clef bass
   \new Voice = "voiceTubaOne" {
     \voiceOne \voiceTubaOne
   }

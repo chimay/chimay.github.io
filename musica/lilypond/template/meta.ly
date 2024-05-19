@@ -514,14 +514,14 @@ voiceOboeTwo = \relative c' {
 
 % one {{{4
 
-voiceClarinetOne = \relative c' {
+voiceClarinetOne = \relative c'' {
   \keytimetempo
   \anacrusis % hypermeasure 0
 }
 
 % two {{{4
 
-voiceClarinetTwo = \relative c {
+voiceClarinetTwo = \relative c' {
   \keytimetempo
   \anacrusis % hypermeasure 0
 }
@@ -792,14 +792,14 @@ voiceTrumpetTwo = \relative c' {
 
 % one {{{4
 
-voiceFrenchHornOne = \relative c {
+voiceFrenchHornOne = \relative c'' {
   \keytimetempo
   \anacrusis % hypermeasure 0
 }
 
 % two {{{4
 
-voiceFrenchHornTwo = \relative c, {
+voiceFrenchHornTwo = \relative c' {
   \keytimetempo
   \anacrusis % hypermeasure 0
 }
@@ -4203,8 +4203,8 @@ groupCelesta = \new GrandStaff
       %\groupChoirSeptet
       % woodwinds {{{4
       \staffFlutes
-      %\staffOboes
-      %\staffClarinets
+      \staffOboes
+      \staffClarinets
       %\staffEnglishHorns
       %\staffBassoons
       %\staffSopranoSaxophones
@@ -4220,14 +4220,14 @@ groupCelesta = \new GrandStaff
       %\staffHarmonica
       % brass {{{4
       \staffTrumpets
-      %\staffFrenchHorns
+      \staffFrenchHorns
       %\staffTrombones
       %\staffTubas
       %\groupBrassQuartet
       %\groupBrassQuintet
       % wind keyboards {{{4
-      %\groupManualOrgan
-      \groupPedalOrgan
+      \groupManualOrgan
+      %\groupPedalOrgan
       %\groupAccordion
       %\groupConcertina
       % bowed strings {{{4
@@ -4250,18 +4250,18 @@ groupCelesta = \new GrandStaff
       %\tablatureArchlute
       %\staffTheorbo
       %\tablatureTheorbo
-      %\staffGuitar
-      \tablatureGuitar
+      \staffGuitar
+      %\tablatureGuitar
       %\staffBassGuitar
-      \tablatureBassGuitar
+      %\tablatureBassGuitar
       %\staffSitar
-      %\groupHarp
+      \groupHarp
       % hammered strings {{{4
       %\staffDulcimer
       % string keyboards {{{4
       %\groupViolaOrganista
-      %\groupHarpsichord
-      \groupPedalHarpsichord
+      \groupHarpsichord
+      %\groupPedalHarpsichord
       %\groupClavichord
       %\groupPiano
       % drums {{{4
@@ -4269,9 +4269,9 @@ groupCelesta = \new GrandStaff
       %\groupVibraphone
       %\groupMarimba
       %\groupTubularBells
-      \staffDrumkit
+      %\staffDrumkit
       % drums keyboards {{{4
-      \groupCelesta
+      %\groupCelesta
       % end of instruments and groups {{{4
     >>
     % layout, see beginning of file {{{3

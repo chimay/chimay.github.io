@@ -478,6 +478,22 @@ voiceChoirSeptetBass = \relative c, {
 
 % woodwinds {{{2
 
+% piccolos {{{3
+
+% one {{{4
+
+voicePiccoloOne = \relative c''' {
+  \keytimetempo
+  \anacrusis % hypermeasure 0
+}
+
+% two {{{4
+
+voicePiccoloTwo = \relative c'' {
+  \keytimetempo
+  \anacrusis % hypermeasure 0
+}
+
 % flutes {{{3
 
 % one {{{4
@@ -1972,6 +1988,25 @@ staffChoirSeptetBass = \new Staff = "staffChoirSeptetBass"
 }
 
 % woodwinds {{{2
+
+% piccolos {{{3
+
+staffPiccolos = \new Staff = "staffPiccolos"
+\with {
+  instrumentName = "piccolos"
+  shortInstrumentName = "pc"
+  midiInstrument = "piccolo"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} <<
+  \clef "treble^8"
+  \new Voice = "voicePiccoloOne" {
+    \voiceOne \voicePiccoloOne
+  }
+  \new Voice = "voicePiccoloTwo" {
+    \voiceTwo \voicePiccoloTwo
+  }
+>>
 
 % flutes {{{3
 
@@ -4202,6 +4237,7 @@ groupCelesta = \new GrandStaff
       %\groupChoirSextet
       %\groupChoirSeptet
       % woodwinds {{{4
+      %\staffPiccolos
       \staffFlutes
       \staffOboes
       \staffClarinets
@@ -4222,7 +4258,7 @@ groupCelesta = \new GrandStaff
       %\staffTrumpets
       \staffFrenchHorns
       %\staffTrombones
-      \staffTubas
+      %\staffTubas
       %\groupBrassQuartet
       %\groupBrassQuintet
       % wind keyboards {{{4
@@ -4241,8 +4277,8 @@ groupCelesta = \new GrandStaff
       %\groupStringQuintet
       %\groupStringQuintetSymmetric
       %\groupStringQuintetContrabass
-      \groupStringSextet
-      %\groupStringSeptet
+      %\groupStringSextet
+      \groupStringSeptet
       % plucked strings {{{4
       %\staffLute
       %\tablatureLute

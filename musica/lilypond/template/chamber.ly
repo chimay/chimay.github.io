@@ -478,6 +478,22 @@ voiceChoirSeptetBass = \relative c, {
 
 % woodwinds {{{2
 
+% piccolos {{{3
+
+% one {{{4
+
+voicePiccoloOne = \relative c''' {
+  \keytimetempo
+  \anacrusis % hypermeasure 0
+}
+
+% two {{{4
+
+voicePiccoloTwo = \relative c'' {
+  \keytimetempo
+  \anacrusis % hypermeasure 0
+}
+
 % flutes {{{3
 
 % one {{{4
@@ -514,14 +530,14 @@ voiceOboeTwo = \relative c' {
 
 % one {{{4
 
-voiceClarinetOne = \relative c' {
+voiceClarinetOne = \relative c'' {
   \keytimetempo
   \anacrusis % hypermeasure 0
 }
 
 % two {{{4
 
-voiceClarinetTwo = \relative c {
+voiceClarinetTwo = \relative c' {
   \keytimetempo
   \anacrusis % hypermeasure 0
 }
@@ -792,14 +808,14 @@ voiceTrumpetTwo = \relative c' {
 
 % one {{{4
 
-voiceFrenchHornOne = \relative c {
+voiceFrenchHornOne = \relative c'' {
   \keytimetempo
   \anacrusis % hypermeasure 0
 }
 
 % two {{{4
 
-voiceFrenchHornTwo = \relative c, {
+voiceFrenchHornTwo = \relative c' {
   \keytimetempo
   \anacrusis % hypermeasure 0
 }
@@ -1972,6 +1988,25 @@ staffChoirSeptetBass = \new Staff = "staffChoirSeptetBass"
 }
 
 % woodwinds {{{2
+
+% piccolos {{{3
+
+staffPiccolos = \new Staff = "staffPiccolos"
+\with {
+  instrumentName = "piccolos"
+  shortInstrumentName = "pc"
+  midiInstrument = "piccolo"
+  midiMinimumVolume = #1.0
+  midiMaximumVolume = #2.0
+} <<
+  \clef "treble^8"
+  \new Voice = "voicePiccoloOne" {
+    \voiceOne \voicePiccoloOne
+  }
+  \new Voice = "voicePiccoloTwo" {
+    \voiceTwo \voicePiccoloTwo
+  }
+>>
 
 % flutes {{{3
 
@@ -4202,6 +4237,7 @@ groupCelesta = \new GrandStaff
       %\groupChoirSextet
       %\groupChoirSeptet
       % woodwinds {{{4
+      %\staffPiccolos
       \staffFlutes
       \staffOboes
       %\staffClarinets

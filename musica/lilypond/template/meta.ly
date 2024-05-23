@@ -2056,7 +2056,7 @@ staffClarinets = \new Staff = "staffClarinets"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } <<
-  \clef treble
+  \clef mezzosoprano
   \new Voice = "voiceClarinetOne" {
     \voiceOne \voiceClarinetOne
   }
@@ -2075,7 +2075,7 @@ staffEnglishHorns = \new Staff = "staffEnglishHorns"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } <<
-  \clef treble
+  \clef alto
   \new Voice = "voiceEnglishHornOne" {
     \voiceOne \voiceEnglishHornOne
   }
@@ -4256,7 +4256,7 @@ groupCelesta = \new GrandStaff
       %\staffHarmonica
       % brass {{{4
       %\staffTrumpets
-      \staffFrenchHorns
+      %\staffFrenchHorns
       %\staffTrombones
       %\staffTubas
       %\groupBrassQuartet

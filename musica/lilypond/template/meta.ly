@@ -269,49 +269,49 @@ lyricsChoirSeptetBass = \lyricmode {
 
 voiceVocalSoprano = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % mezzo {{{3
 
 voiceVocalMezzo = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % alto {{{3
 
 voiceVocalAlto = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % counter {{{3
 
 voiceVocalCounter = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % tenor {{{3
 
 voiceVocalTenor = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % barytone {{{3
 
 voiceVocalBarytone = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % bass {{{3
 
 voiceVocalBass = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % choir quartet {{{3
@@ -320,28 +320,28 @@ voiceVocalBass = \relative c, {
 
 voiceChoirQuartetSoprano = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % alto {{{4
 
 voiceChoirQuartetAlto = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % tenor {{{4
 
 voiceChoirQuartetTenor = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % bass {{{4
 
 voiceChoirQuartetBass = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % choir quintet {{{3
@@ -350,35 +350,35 @@ voiceChoirQuartetBass = \relative c, {
 
 voiceChoirQuintetSoprano = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % mezzo {{{4
 
 voiceChoirQuintetMezzo = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % alto {{{4
 
 voiceChoirQuintetAlto = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % tenor {{{4
 
 voiceChoirQuintetTenor = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % bass {{{4
 
 voiceChoirQuintetBass = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % choir sextet {{{3
@@ -387,42 +387,42 @@ voiceChoirQuintetBass = \relative c, {
 
 voiceChoirSextetSoprano = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % mezzo {{{4
 
 voiceChoirSextetMezzo = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % alto {{{4
 
 voiceChoirSextetAlto = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % tenor {{{4
 
 voiceChoirSextetTenor = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % barytone {{{4
 
 voiceChoirSextetBarytone = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % bass {{{4
 
 voiceChoirSextetBass = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % choir septet {{{3
@@ -431,49 +431,49 @@ voiceChoirSextetBass = \relative c, {
 
 voiceChoirSeptetSoprano = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % mezzo {{{4
 
 voiceChoirSeptetMezzo = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % alto {{{4
 
 voiceChoirSeptetAlto = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % counter {{{4
 
 voiceChoirSeptetCounter = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % tenor {{{4
 
 voiceChoirSeptetTenor = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % barytone {{{4
 
 voiceChoirSeptetBarytone = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % bass {{{4
 
 voiceChoirSeptetBass = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % woodwinds {{{2
@@ -484,14 +484,14 @@ voiceChoirSeptetBass = \relative c, {
 
 voicePiccoloOne = \relative c''' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % two {{{4
 
 voicePiccoloTwo = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % flutes {{{3
@@ -500,14 +500,14 @@ voicePiccoloTwo = \relative c'' {
 
 voiceFluteOne = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % two {{{4
 
 voiceFluteTwo = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % oboes {{{3
@@ -516,14 +516,14 @@ voiceFluteTwo = \relative c' {
 
 voiceOboeOne = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % two {{{4
 
 voiceOboeTwo = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % clarinets {{{3
@@ -532,14 +532,14 @@ voiceOboeTwo = \relative c' {
 
 voiceClarinetOne = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % two {{{4
 
 voiceClarinetTwo = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % english horns {{{3
@@ -548,14 +548,14 @@ voiceClarinetTwo = \relative c' {
 
 voiceEnglishHornOne = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % two {{{4
 
 voiceEnglishHornTwo = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % bassoons {{{3
@@ -564,14 +564,14 @@ voiceEnglishHornTwo = \relative c {
 
 voiceBassoonOne = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % two {{{4
 
 voiceBassoonTwo = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % soprano saxophones {{{3
@@ -580,14 +580,14 @@ voiceBassoonTwo = \relative c, {
 
 voiceSopranoSaxophoneOne = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % two {{{4
 
 voiceSopranoSaxophoneTwo = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % alto saxophones {{{3
@@ -596,14 +596,14 @@ voiceSopranoSaxophoneTwo = \relative c' {
 
 voiceAltoSaxophoneOne = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % two {{{4
 
 voiceAltoSaxophoneTwo = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % tenor saxophones {{{3
@@ -612,14 +612,14 @@ voiceAltoSaxophoneTwo = \relative c {
 
 voiceTenorSaxophoneOne = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % two {{{4
 
 voiceTenorSaxophoneTwo = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % barytone saxophones {{{3
@@ -628,21 +628,21 @@ voiceTenorSaxophoneTwo = \relative c {
 
 voiceBarytoneSaxophoneOne = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % two {{{4
 
 voiceBarytoneSaxophoneTwo = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % bagpipe {{{3
 
 voiceBagpipe = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % woodwind quartet {{{3
@@ -651,28 +651,28 @@ voiceBagpipe = \relative c' {
 
 voiceWoodwindQuartetSoprano = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % alto {{{4
 
 voiceWoodwindQuartetAlto = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % tenor {{{4
 
 voiceWoodwindQuartetTenor = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % bass {{{4
 
 voiceWoodwindQuartetBass = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % woodwind quintet {{{3
@@ -681,35 +681,35 @@ voiceWoodwindQuartetBass = \relative c, {
 
 voiceWoodwindQuintetSoprano = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % mezzo {{{4
 
 voiceWoodwindQuintetMezzo = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % alto {{{4
 
 voiceWoodwindQuintetAlto = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % tenor {{{4
 
 voiceWoodwindQuintetTenor = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % bass {{{4
 
 voiceWoodwindQuintetBass = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % woodwind sextet {{{3
@@ -718,42 +718,42 @@ voiceWoodwindQuintetBass = \relative c, {
 
 voiceWoodwindSextetSoprano = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % mezzo {{{4
 
 voiceWoodwindSextetMezzo = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % alto {{{4
 
 voiceWoodwindSextetAlto = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % tenor {{{4
 
 voiceWoodwindSextetTenor = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % barytone {{{4
 
 voiceWoodwindSextetBarytone = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % bass {{{4
 
 voiceWoodwindSextetBass = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % saxophones quartet {{{3
@@ -762,28 +762,28 @@ voiceWoodwindSextetBass = \relative c, {
 
 voiceSaxophoneQuartetSoprano = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % alto {{{4
 
 voiceSaxophoneQuartetAlto = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % tenor {{{4
 
 voiceSaxophoneQuartetTenor = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % bass {{{4
 
 voiceSaxophoneQuartetBass = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % brass {{{2
@@ -794,14 +794,14 @@ voiceSaxophoneQuartetBass = \relative c, {
 
 voiceTrumpetOne = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % two {{{4
 
 voiceTrumpetTwo = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % french horns {{{3
@@ -810,14 +810,14 @@ voiceTrumpetTwo = \relative c' {
 
 voiceFrenchHornOne = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % two {{{4
 
 voiceFrenchHornTwo = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % trombones {{{3
@@ -826,14 +826,14 @@ voiceFrenchHornTwo = \relative c' {
 
 voiceTromboneOne = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % two {{{4
 
 voiceTromboneTwo = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % tubas {{{3
@@ -842,14 +842,14 @@ voiceTromboneTwo = \relative c, {
 
 voiceTubaOne = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % two {{{4
 
 voiceTubaTwo = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % brass quartet {{{3
@@ -858,28 +858,28 @@ voiceTubaTwo = \relative c, {
 
 voiceBrassQuartetSoprano = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % alto {{{4
 
 voiceBrassQuartetAlto = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % tenor {{{4
 
 voiceBrassQuartetTenor = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % bass {{{4
 
 voiceBrassQuartetBass = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % brass quintet {{{3
@@ -888,35 +888,35 @@ voiceBrassQuartetBass = \relative c, {
 
 voiceBrassQuintetSoprano = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % mezzo {{{4
 
 voiceBrassQuintetMezzo = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % alto {{{4
 
 voiceBrassQuintetAlto = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % tenor {{{4
 
 voiceBrassQuintetTenor = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % bass {{{4
 
 voiceBrassQuintetBass = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % free reeds {{{2
@@ -925,7 +925,7 @@ voiceBrassQuintetBass = \relative c, {
 
 voiceHarmonica = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % wind keyboards {{{2
@@ -936,14 +936,14 @@ voiceHarmonica = \relative c' {
 
 voiceManualOrganRight = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % left {{{4
 
 voiceManualOrganLeft = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % pedal organ {{{3
@@ -952,21 +952,21 @@ voiceManualOrganLeft = \relative c {
 
 voicePedalOrganRight = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % left {{{4
 
 voicePedalOrganLeft = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % feet {{{4
 
 voicePedalOrganFeet = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % accordion {{{3
@@ -975,14 +975,14 @@ voicePedalOrganFeet = \relative c, {
 
 voiceAccordionRight = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % left {{{4
 
 voiceAccordionLeft = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % concertina {{{3
@@ -991,14 +991,14 @@ voiceAccordionLeft = \relative c {
 
 voiceConcertinaRight = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % left {{{4
 
 voiceConcertinaLeft = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % bowed strings {{{2
@@ -1009,14 +1009,14 @@ voiceConcertinaLeft = \relative c {
 
 voiceViolinOne = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % two {{{4
 
 voiceViolinTwo = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % violas {{{3
@@ -1025,14 +1025,14 @@ voiceViolinTwo = \relative c' {
 
 voiceViolaOne = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % two {{{4
 
 voiceViolaTwo = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % cellos {{{3
@@ -1041,14 +1041,14 @@ voiceViolaTwo = \relative c {
 
 voiceCelloOne = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % two {{{4
 
 voiceCelloTwo = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % contrabasses {{{3
@@ -1057,14 +1057,14 @@ voiceCelloTwo = \relative c, {
 
 voiceContrabassOne = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % two {{{4
 
 voiceContrabassTwo = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % string quartet {{{3
@@ -1073,28 +1073,28 @@ voiceContrabassTwo = \relative c, {
 
 voiceStringQuartetSoprano = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % alto {{{4
 
 voiceStringQuartetAlto = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % tenor {{{4
 
 voiceStringQuartetTenor = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % bass {{{4
 
 voiceStringQuartetBass = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % string quartet, symmetric {{{3
@@ -1103,28 +1103,28 @@ voiceStringQuartetBass = \relative c, {
 
 voiceStringQuartetSymmetricSoprano = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % alto {{{4
 
 voiceStringQuartetSymmetricAlto = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % tenor {{{4
 
 voiceStringQuartetSymmetricTenor = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % bass {{{4
 
 voiceStringQuartetSymmetricBass = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % string quartet with contrabass {{{3
@@ -1133,28 +1133,28 @@ voiceStringQuartetSymmetricBass = \relative c, {
 
 voiceStringQuartetContrabassSoprano = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % alto {{{4
 
 voiceStringQuartetContrabassAlto = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % tenor {{{4
 
 voiceStringQuartetContrabassTenor = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % bass {{{4
 
 voiceStringQuartetContrabassBass = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % string quintet {{{3
@@ -1163,35 +1163,35 @@ voiceStringQuartetContrabassBass = \relative c, {
 
 voiceStringQuintetSoprano = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % mezzo {{{4
 
 voiceStringQuintetMezzo = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % alto {{{4
 
 voiceStringQuintetAlto = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % tenor {{{4
 
 voiceStringQuintetTenor = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % bass {{{4
 
 voiceStringQuintetBass = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % string quintet, symmetric {{{3
@@ -1200,35 +1200,35 @@ voiceStringQuintetBass = \relative c, {
 
 voiceStringQuintetSymmetricSoprano = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % mezzo {{{4
 
 voiceStringQuintetSymmetricMezzo = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % alto {{{4
 
 voiceStringQuintetSymmetricAlto = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % tenor {{{4
 
 voiceStringQuintetSymmetricTenor = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % bass {{{4
 
 voiceStringQuintetSymmetricBass = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % string quintet with contrabass {{{3
@@ -1237,35 +1237,35 @@ voiceStringQuintetSymmetricBass = \relative c, {
 
 voiceStringQuintetContrabassSoprano = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % mezzo {{{4
 
 voiceStringQuintetContrabassMezzo = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % alto {{{4
 
 voiceStringQuintetContrabassAlto = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % tenor {{{4
 
 voiceStringQuintetContrabassTenor = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % bass {{{4
 
 voiceStringQuintetContrabassBass = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % string sextet {{{3
@@ -1274,42 +1274,42 @@ voiceStringQuintetContrabassBass = \relative c, {
 
 voiceStringSextetSoprano = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % mezzo {{{4
 
 voiceStringSextetMezzo = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % alto {{{4
 
 voiceStringSextetAlto = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % tenor {{{4
 
 voiceStringSextetTenor = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % barytone {{{4
 
 voiceStringSextetBarytone = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % bass {{{4
 
 voiceStringSextetBass = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % string septet {{{3
@@ -1318,49 +1318,49 @@ voiceStringSextetBass = \relative c, {
 
 voiceStringSeptetSoprano = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % mezzo {{{4
 
 voiceStringSeptetMezzo = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % alto {{{4
 
 voiceStringSeptetAlto = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % counter {{{4
 
 voiceStringSeptetCounter = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % tenor {{{4
 
 voiceStringSeptetTenor = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % barytone {{{4
 
 voiceStringSeptetBarytone = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % bass {{{4
 
 voiceStringSeptetBass = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % plucked strings {{{2
@@ -1369,42 +1369,42 @@ voiceStringSeptetBass = \relative c, {
 
 voiceLute = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % archlute {{{3
 
 voiceArchlute = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % theorbo {{{3
 
 voiceTheorbo = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % guitar {{{3
 
 voiceGuitar = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % bass guitar {{{3
 
 voiceBassGuitar = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % sitar {{{3
 
 voiceSitar = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % harp {{{3
@@ -1413,14 +1413,14 @@ voiceSitar = \relative c' {
 
 voiceHarpUpper = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % lower {{{4
 
 voiceHarpLower = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % hammered strings {{{2
@@ -1429,7 +1429,7 @@ voiceHarpLower = \relative c {
 
 voiceDulcimer = \relative c' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % string keyboards {{{2
@@ -1440,14 +1440,14 @@ voiceDulcimer = \relative c' {
 
 voiceViolaOrganistaRight = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % left {{{4
 
 voiceViolaOrganistaLeft = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % harpsichord {{{3
@@ -1456,14 +1456,14 @@ voiceViolaOrganistaLeft = \relative c {
 
 voiceHarpsichordRight = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % left {{{4
 
 voiceHarpsichordLeft = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % pedal harpsichord {{{3
@@ -1472,21 +1472,21 @@ voiceHarpsichordLeft = \relative c {
 
 voicePedalHarpsichordRight = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % left {{{4
 
 voicePedalHarpsichordLeft = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % feet {{{4
 
 voicePedalHarpsichordFeet = \relative c, {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % clavichord {{{3
@@ -1495,14 +1495,14 @@ voicePedalHarpsichordFeet = \relative c, {
 
 voiceClavichordRight = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % left {{{4
 
 voiceClavichordLeft = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % piano {{{3
@@ -1511,14 +1511,14 @@ voiceClavichordLeft = \relative c {
 
 voicePianoRight = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % left {{{4
 
 voicePianoLeft = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % drums {{{2
@@ -1527,7 +1527,7 @@ voicePianoLeft = \relative c {
 
 voiceGlockenspiel = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % vibraphone {{{3
@@ -1536,14 +1536,14 @@ voiceGlockenspiel = \relative c'' {
 
 voiceVibraphoneRight = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % left {{{4
 
 voiceVibraphoneLeft = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % marimba {{{3
@@ -1552,14 +1552,14 @@ voiceVibraphoneLeft = \relative c {
 
 voiceMarimbaRight = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % left {{{4
 
 voiceMarimbaLeft = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % tubular bells {{{3
@@ -1568,14 +1568,14 @@ voiceMarimbaLeft = \relative c {
 
 voiceTubularBellsManual = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % pedal {{{4
 
 voiceTubularBellsPedal = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % drumkit {{{3
@@ -1593,14 +1593,14 @@ voiceDrumkit = {
 
 voiceCelestaRight = \relative c'' {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % left {{{4
 
 voiceCelestaLeft = \relative c {
   \keytimetempo
-  \anacrusis % hypermeasure 0
+  \anacrusis % intro
 }
 
 % staves {{{1
@@ -2056,7 +2056,7 @@ staffClarinets = \new Staff = "staffClarinets"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } <<
-  \clef mezzosoprano
+  \clef "tenor^8"
   \new Voice = "voiceClarinetOne" {
     \voiceOne \voiceClarinetOne
   }
@@ -2075,7 +2075,7 @@ staffEnglishHorns = \new Staff = "staffEnglishHorns"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } <<
-  \clef alto
+  \clef mezzosoprano
   \new Voice = "voiceEnglishHornOne" {
     \voiceOne \voiceEnglishHornOne
   }
@@ -2463,7 +2463,7 @@ staffFrenchHorns = \new Staff = "staffFrenchHorns"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } <<
-  \clef treble
+  \clef mezzosoprano
   \new Voice = "voiceFrenchHornOne" {
     \voiceOne \voiceFrenchHornOne
   }
@@ -4256,7 +4256,7 @@ groupCelesta = \new GrandStaff
       %\staffHarmonica
       % brass {{{4
       %\staffTrumpets
-      %\staffFrenchHorns
+      \staffFrenchHorns
       %\staffTrombones
       %\staffTubas
       %\groupBrassQuartet

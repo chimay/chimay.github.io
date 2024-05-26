@@ -2535,17 +2535,24 @@ staffBrassQuartetUpper = \new Staff = "staffBrassQuartetUpper"
 
 staffBrassQuartetLower = \new Staff = "staffBrassQuartetLower"
 \with {
-  instrumentName = "fr-horns"
-  shortInstrumentName = "hn"
-  midiInstrument = "french horn"
-  midiMinimumVolume = #1.0
-  midiMaximumVolume = #2.0
+  instrumentName = \markup { \column { fr-horn trombone } }
+  shortInstrumentName = \markup { \column { hn tbn } }
 } <<
   \clef bass
-  \new Voice = "voiceBrassQuartetTenor" {
+  \new Voice = "voiceBrassQuartetTenor"
+  \with {
+    midiInstrument = "french horn"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #2.0
+  } {
     \voiceOne \voiceBrassQuartetTenor
   }
-  \new Voice = "voiceBrassQuartetBass" {
+  \new Voice = "voiceBrassQuartetBass"
+  \with {
+    midiInstrument = "trombone"
+    midiMinimumVolume = #1.0
+    midiMaximumVolume = #2.0
+  } {
     \voiceTwo \voiceBrassQuartetBass
   }
 >>

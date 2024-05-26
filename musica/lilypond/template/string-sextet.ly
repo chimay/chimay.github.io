@@ -2444,7 +2444,7 @@ staffTrumpets = \new Staff = "staffTrumpets"
   midiMinimumVolume = #1.0
   midiMaximumVolume = #2.0
 } <<
-  \clef treble
+  \clef "tenor^8"
   \new Voice = "voiceTrumpetOne" {
     \voiceOne \voiceTrumpetOne
   }

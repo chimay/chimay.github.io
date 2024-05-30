@@ -4248,7 +4248,7 @@ groupCelesta = \new GrandStaff
       \staffFlutes
       \staffOboes
       \staffClarinets
-      \staffEnglishHorns
+      %\staffEnglishHorns
       \staffBassoons
       %\staffSopranoSaxophones
       %\staffAltoSaxophones
@@ -4262,7 +4262,7 @@ groupCelesta = \new GrandStaff
       % free reeds {{{4
       %\staffHarmonica
       % brass {{{4
-      %\staffTrumpets
+      \staffTrumpets
       \staffFrenchHorns
       %\staffTrombones
       %\staffTubas

@@ -4247,7 +4247,7 @@ groupCelesta = \new GrandStaff
       %\staffPiccolos
       \staffFlutes
       \staffOboes
-      \staffClarinets
+      %\staffClarinets
       %\staffEnglishHorns
       \staffBassoons
       %\staffSopranoSaxophones
@@ -4262,15 +4262,15 @@ groupCelesta = \new GrandStaff
       % free reeds {{{4
       %\staffHarmonica
       % brass {{{4
-      \staffTrumpets
-      \staffFrenchHorns
+      %\staffTrumpets
+      %\staffFrenchHorns
       %\staffTrombones
       %\staffTubas
       %\groupBrassQuartet
       %\groupBrassQuintet
       % wind keyboards {{{4
-      \groupManualOrgan
-      %\groupPedalOrgan
+      %\groupManualOrgan
+      \groupPedalOrgan
       %\groupAccordion
       %\groupConcertina
       % bowed strings {{{4
@@ -4279,13 +4279,13 @@ groupCelesta = \new GrandStaff
       %\staffCellos
       %\staffContrabasses
       %\groupStringQuartet
-      \groupStringQuartetSymmetric
+      %\groupStringQuartetSymmetric
       %\groupStringQuartetContrabass
       %\groupStringQuintet
       %\groupStringQuintetSymmetric
       %\groupStringQuintetContrabass
       %\groupStringSextet
-      %\groupStringSeptet
+      \groupStringSeptet
       % plucked strings {{{4
       %\staffLute
       %\tablatureLute

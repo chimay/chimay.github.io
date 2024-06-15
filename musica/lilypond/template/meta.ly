@@ -3418,8 +3418,9 @@ staffGuitar = \new Staff = "staffGuitar"
   %middleCPosition = #-4
   %middleCClefPosition = #-4
 } {
-  %\override Staff.StaffSymbol.line-count = #7
-  \clef alto
+  \override Staff.StaffSymbol.line-count = #7
+  \clef tenor
+  %\clef alto
   \voiceGuitar
 }
 
@@ -3969,7 +3970,8 @@ groupBrassQuintet = \new StaffGroup
 
 groupManualOrgan = \new GrandStaff
 \with {
-  instrumentName = \markup { \column { manual organ } }
+  %instrumentName = \markup { \column { manual organ } }
+  instrumentName = "organ"
   shortInstrumentName = \markup { \column { man org } }
   connectArpeggios = ##t
 } <<
@@ -4247,7 +4249,7 @@ groupCelesta = \new GrandStaff
       %\staffPiccolos
       \staffFlutes
       \staffOboes
-      %\staffClarinets
+      \staffClarinets
       %\staffEnglishHorns
       \staffBassoons
       %\staffSopranoSaxophones
@@ -4269,8 +4271,8 @@ groupCelesta = \new GrandStaff
       %\groupBrassQuartet
       %\groupBrassQuintet
       % wind keyboards {{{4
-      %\groupManualOrgan
-      \groupPedalOrgan
+      \groupManualOrgan
+      %\groupPedalOrgan
       %\groupAccordion
       %\groupConcertina
       % bowed strings {{{4

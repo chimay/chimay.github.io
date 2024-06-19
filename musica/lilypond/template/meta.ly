@@ -3971,8 +3971,9 @@ groupBrassQuintet = \new StaffGroup
 groupManualOrgan = \new GrandStaff
 \with {
   %instrumentName = \markup { \column { manual organ } }
+  %shortInstrumentName = \markup { \column { man org } }
   instrumentName = "organ"
-  shortInstrumentName = \markup { \column { man org } }
+  shortInstrumentName = "org"
   connectArpeggios = ##t
 } <<
   \staffManualOrganRight

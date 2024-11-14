@@ -4226,6 +4226,7 @@ groupCelesta = \new GrandStaff
     %\vspace #1
     %\line { woodwinds = flute, oboe, english horn, bassoon }
     %\line { saxophones = soprano, alto, tenor, baritone sax }
+    %\line { organ = reed organ }
     %\vspace #1
   %}
   % score {{{2

@@ -1374,7 +1374,7 @@ voiceLute = \relative c' {
 
 % archlute {{{3
 
-voiceArchlute = \relative c {
+voiceArchlute = \relative c, {
   \keytimetempo
   \anacrusis % intro
 }
@@ -3293,8 +3293,8 @@ staffLute = \new Staff = "staffLute"
   %middleCPosition = #-4
   %middleCClefPosition = #-4
 } {
-  %\override Staff.StaffSymbol.line-count = #7
-  \clef alto
+  \override Staff.StaffSymbol.line-count = #7
+  \clef tenor
   \voiceLute
 }
 
@@ -3339,7 +3339,7 @@ staffArchlute = \new Staff = "staffArchlute"
   midiMaximumVolume = #2.0
 } {
   %\override Staff.StaffSymbol.line-count = #7
-  \clef tenor
+  \clef subbass
   \voiceArchlute
 }
 
@@ -3376,7 +3376,7 @@ staffTheorbo = \new Staff = "staffTheorbo"
   midiMaximumVolume = #2.0
 } {
   %\override Staff.StaffSymbol.line-count = #7
-  \clef bass
+  \clef subbass
   \voiceTheorbo
 }
 
@@ -4251,9 +4251,9 @@ groupCelesta = \new GrandStaff
       %\staffPiccolos
       \staffFlutes
       \staffOboes
-      \staffClarinets
+      %\staffClarinets
       %\staffEnglishHorns
-      \staffBassoons
+      %\staffBassoons
       %\staffSopranoSaxophones
       %\staffAltoSaxophones
       %\staffTenorSaxophones
@@ -4291,13 +4291,13 @@ groupCelesta = \new GrandStaff
       %\groupStringSextet
       \groupStringSeptet
       % plucked strings {{{4
-      %\staffLute
+      \staffLute
       %\tablatureLute
-      %\staffArchlute
+      \staffArchlute
       %\tablatureArchlute
       %\staffTheorbo
       %\tablatureTheorbo
-      \staffGuitar
+      %\staffGuitar
       %\tablatureGuitar
       %\staffBassGuitar
       %\tablatureBassGuitar
@@ -4316,7 +4316,7 @@ groupCelesta = \new GrandStaff
       %\groupVibraphone
       %\groupMarimba
       %\groupTubularBells
-      %\staffDrumkit
+      \staffDrumkit
       % drums keyboards {{{4
       %\groupCelesta
       % end of instruments and groups {{{4

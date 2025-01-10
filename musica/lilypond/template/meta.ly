@@ -4293,9 +4293,9 @@ groupCelesta = \new GrandStaff
       % plucked strings {{{4
       \staffLute
       %\tablatureLute
-      \staffArchlute
+      %\staffArchlute
       %\tablatureArchlute
-      %\staffTheorbo
+      \staffTheorbo
       %\tablatureTheorbo
       %\staffGuitar
       %\tablatureGuitar

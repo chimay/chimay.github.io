@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<!-- 2025-02-21 ven 16:00 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>bookmarks/service</title>
+<meta name="author" content="chimay" />
+<meta name="generator" content="Org Mode" />
+<style>
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">bookmarks/service</h1>
+<p>
+<a href="index.html">Index des Grimoires</a>
+</p>
+
+<p>
+<a href="../index.html">Retour à l’accueil</a>
+</p>
+
+<p>
+<a href="file:///home/david/racine/refer/bookmarks/index.html">index</a>
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org669e908">1. search engine</a></li>
+<li><a href="#org68a83d0">2. archive</a></li>
+<li><a href="#org3dcab13">3. hosting</a></li>
+<li><a href="#orgab00fe6">4. domain</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org669e908" class="outline-2">
+<h2 id="org669e908"><span class="section-number-2">1.</span> search engine</h2>
+<div class="outline-text-2" id="text-1">
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orge939e78">1.1. logiciel libre</a></li>
+<li><a href="#orga68f176">1.2. finder of search engines</a></li>
+<li><a href="#org4d4bb43">1.3. lightweight sites</a></li>
+<li><a href="#orgfd3184c">1.4. manually indexed</a></li>
+<li><a href="#org4905e69">1.5. meta</a></li>
+<li><a href="#orgb35e32c">1.6. basic</a></li>
+<li><a href="#org881cd69">1.7. ethic</a></li>
+<li><a href="#org34fb1a7">1.8. code</a></li>
+<li><a href="#orgbd126dc">1.9. stats</a></li>
+<li><a href="#org8f66b13">1.10. gopher</a></li>
+<li><a href="#org7ce474c">1.11. misc</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge939e78" class="outline-3">
+<h3 id="orge939e78"><span class="section-number-3">1.1.</span> logiciel libre</h3>
+<div class="outline-text-3" id="text-1-1">
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org89a89ef">1.1.1. generic</a></li>
+<li><a href="#org6827c17">1.1.2. meta</a></li>
+<li><a href="#org694f432">1.1.3. distributed</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org89a89ef" class="outline-4">
+<h4 id="org89a89ef"><span class="section-number-4">1.1.1.</span> generic</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<ul class="org-ul">
+<li><a href="https://github.com/benbusby/whoogle-search">https://github.com/benbusby/whoogle-search</a></li>
+<li><a href="https://benbusby.com/projects/whoogle-search/">https://benbusby.com/projects/whoogle-search/</a></li>
+<li><a href="https://search.garudalinux.org/">https://search.garudalinux.org/</a></li>
+<li><a href="https://search.dr460nf1r3.org/">https://search.dr460nf1r3.org/</a></li>
+<li><a href="https://s.tokhmi.xyz/">https://s.tokhmi.xyz/</a></li>
+<li><a href="https://whoogle.lunar.icu/">https://whoogle.lunar.icu/</a></li>
+<li><a href="https://search.rubberverse.xyz/">https://search.rubberverse.xyz/</a></li>
+<li><a href="https://openverse.org/about">https://openverse.org/about</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org6827c17" class="outline-4">
+<h4 id="org6827c17"><span class="section-number-4">1.1.2.</span> meta</h4>
+<div class="outline-text-4" id="text-1-1-2">
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orga340f25">1.1.2.1. searx</a></li>
+<li><a href="#orgd781228">1.1.2.2. spot</a></li>
+<li><a href="#org2dd0379">1.1.2.3. librex</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orga340f25" class="outline-5">
+<h5 id="orga340f25"><span class="section-number-5">1.1.2.1.</span> searx</h5>
+<div class="outline-text-5" id="text-1-1-2-1">
+<ul class="org-ul">
+<li><a href="https://searx.github.io/searx/">https://searx.github.io/searx/</a></li>
+<li><a href="https://github.com/searxng/searxng">https://github.com/searxng/searxng</a></li>
+<li><a href="https://searx.space/">https://searx.space/</a></li>
+<li><a href="https://searx.org/">https://searx.org/</a></li>
+<li><a href="https://searx.bar/">https://searx.bar/</a></li>
+<li><a href="https://searx.tuxcloud.net/">https://searx.tuxcloud.net/</a></li>
+<li><a href="https://northboot.xyz/">https://northboot.xyz/</a></li>
+<li><a href="https://search.disroot.org/">https://search.disroot.org/</a></li>
+<li><a href="https://searx.roflcopter.fr/">https://searx.roflcopter.fr/</a></li>
+<li>gopher://me0w.net/7/searx.dcgi</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd781228" class="outline-5">
+<h5 id="orgd781228"><span class="section-number-5">1.1.2.2.</span> spot</h5>
+<div class="outline-text-5" id="text-1-1-2-2">
+<ul class="org-ul">
+<li><a href="https://gitlab.e.foundation/e/infra/spot">https://gitlab.e.foundation/e/infra/spot</a></li>
+<li><a href="https://spot.ecloud.global/">https://spot.ecloud.global/</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org2dd0379" class="outline-5">
+<h5 id="org2dd0379"><span class="section-number-5">1.1.2.3.</span> librex</h5>
+<div class="outline-text-5" id="text-1-1-2-3">
+<ul class="org-ul">
+<li><a href="https://github.com/hnhx/librex/">https://github.com/hnhx/librex/</a></li>
+<li><a href="https://librex.me/">https://librex.me/</a></li>
+<li><a href="https://femboy.hu/">https://femboy.hu/</a></li>
+<li><a href="https://lx.vern.cc/">https://lx.vern.cc/</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org694f432" class="outline-4">
+<h4 id="org694f432"><span class="section-number-4">1.1.3.</span> distributed</h4>
+<div class="outline-text-4" id="text-1-1-3">
+<ul class="org-ul">
+<li><a href="https://github.com/yacy/yacy_search_server">https://github.com/yacy/yacy_search_server</a></li>
+<li><a href="https://yacy.eskimo.com/">https://yacy.eskimo.com/</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga68f176" class="outline-3">
+<h3 id="orga68f176"><span class="section-number-3">1.2.</span> finder of search engines</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li><a href="https://www.searchenginemap.com/">https://www.searchenginemap.com/</a></li>
+<li><a href="https://www.searchenginefinder.com/">https://www.searchenginefinder.com/</a></li>
+<li><a href="https://www.searchenginecolossus.com/">https://www.searchenginecolossus.com/</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org4d4bb43" class="outline-3">
+<h3 id="org4d4bb43"><span class="section-number-3">1.3.</span> lightweight sites</h3>
+<div class="outline-text-3" id="text-1-3">
+<ul class="org-ul">
+<li><a href="http://frogfind.com/">http://frogfind.com/</a></li>
+<li><a href="https://www.wiby.me/">https://www.wiby.me/</a></li>
+<li><a href="https://searchmysite.net/">https://searchmysite.net/</a></li>
+<li><a href="https://search.marginalia.nu/">https://search.marginalia.nu/</a></li>
+<li><a href="https://infotiger.com/">https://infotiger.com/</a></li>
+<li><a href="https://infotiger.com/addurl">https://infotiger.com/addurl</a></li>
+<li><a href="https://lite.qwant.com/">https://lite.qwant.com/</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgfd3184c" class="outline-3">
+<h3 id="orgfd3184c"><span class="section-number-3">1.4.</span> manually indexed</h3>
+<div class="outline-text-3" id="text-1-4">
+<ul class="org-ul">
+<li><a href="https://curlie.org/">https://curlie.org/</a></li>
+<li><a href="https://dmoztools.net/">dmoz tools</a></li>
+<li><a href="https://www.dmoz-odp.org/">dmoz odp</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org4905e69" class="outline-3">
+<h3 id="org4905e69"><span class="section-number-3">1.5.</span> meta</h3>
+<div class="outline-text-3" id="text-1-5">
+<ul class="org-ul">
+<li><a href="https://metager.org/">https://metager.org/</a></li>
+<li><a href="https://www.qwant.com/">https://www.qwant.com/</a></li>
+<li><a href="https://www.yippy.com">https://www.yippy.com</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb35e32c" class="outline-3">
+<h3 id="orgb35e32c"><span class="section-number-3">1.6.</span> basic</h3>
+<div class="outline-text-3" id="text-1-6">
+<ul class="org-ul">
+<li><a href="https://www.mojeek.com/">https://www.mojeek.com/</a></li>
+<li><a href="https://search.brave.com/">https://search.brave.com/</a></li>
+<li><a href="https://www.alltheinternet.com/">https://www.alltheinternet.com/</a></li>
+<li><a href="https://lookseek.com/">https://lookseek.com/</a></li>
+<li><a href="https://www.alexandria.org/">https://www.alexandria.org/</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org881cd69" class="outline-3">
+<h3 id="org881cd69"><span class="section-number-3">1.7.</span> ethic</h3>
+<div class="outline-text-3" id="text-1-7">
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgf6c0d50">1.7.1. nature</a></li>
+<li><a href="#org5e25b3b">1.7.2. concent creators</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf6c0d50" class="outline-4">
+<h4 id="orgf6c0d50"><span class="section-number-4">1.7.1.</span> nature</h4>
+<div class="outline-text-4" id="text-1-7-1">
+<ul class="org-ul">
+<li><a href="https://www.lilo.org/">https://www.lilo.org/</a></li>
+<li><a href="https://www.ecosia.org/">https://www.ecosia.org/</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org5e25b3b" class="outline-4">
+<h4 id="org5e25b3b"><span class="section-number-4">1.7.2.</span> concent creators</h4>
+<div class="outline-text-4" id="text-1-7-2">
+<ul class="org-ul">
+<li><a href="https://yep.com/">https://yep.com/</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org34fb1a7" class="outline-3">
+<h3 id="org34fb1a7"><span class="section-number-3">1.8.</span> code</h3>
+<div class="outline-text-3" id="text-1-8">
+<ul class="org-ul">
+<li><a href="https://searchcode.com/">https://searchcode.com/</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgbd126dc" class="outline-3">
+<h3 id="orgbd126dc"><span class="section-number-3">1.9.</span> stats</h3>
+<div class="outline-text-3" id="text-1-9">
+<ul class="org-ul">
+<li><a href="https://trends.google.com/trends/explore">https://trends.google.com/trends/explore</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org8f66b13" class="outline-3">
+<h3 id="org8f66b13"><span class="section-number-3">1.10.</span> gopher</h3>
+<div class="outline-text-3" id="text-1-10">
+<ul class="org-ul">
+<li>gopher://gopher.floodgap.com/1</li>
+<li>gopher://gopher.floodgap.com/7/v2/vs</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org7ce474c" class="outline-3">
+<h3 id="org7ce474c"><span class="section-number-3">1.11.</span> misc</h3>
+<div class="outline-text-3" id="text-1-11">
+<ul class="org-ul">
+<li><a href="https://www.dogpile.com/">https://www.dogpile.com/</a></li>
+<li><a href="https://gibiru.com/">https://gibiru.com/</a></li>
+<li><a href="https://swisscows.com/?culture=en">https://swisscows.com/?culture=en</a></li>
+<li><a href="https://freespoke.com">https://freespoke.com</a></li>
+<li><a href="https://www.startpage.com/">https://www.startpage.com/</a></li>
+<li><a href="https://duckduckgo.com/">https://duckduckgo.com/</a></li>
+<li><a href="https://duckduckgo.com/bang">https://duckduckgo.com/bang</a></li>
+<li><a href="https://peekier.com/">https://peekier.com/</a></li>
+<li><a href="http://www.gigablast.com/">http://www.gigablast.com/</a></li>
+<li><a href="https://private.sh/">https://private.sh/</a></li>
+<li><a href="https://www.presearch.org/">https://www.presearch.org/</a></li>
+<li><a href="https://www.discretesearch.com/">https://www.discretesearch.com/</a></li>
+<li><a href="https://www.searchencrypt.com/">https://www.searchencrypt.com/</a></li>
+<li><a href="https://www.oscobo.com/">https://www.oscobo.com/</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org68a83d0" class="outline-2">
+<h2 id="org68a83d0"><span class="section-number-2">2.</span> archive</h2>
+<div class="outline-text-2" id="text-2">
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgfae0c8b">2.1. platform</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgfae0c8b" class="outline-3">
+<h3 id="orgfae0c8b"><span class="section-number-3">2.1.</span> platform</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li><a href="https://archive.org/">https://archive.org/</a></li>
+<li><a href="https://blog.archive.org/">https://blog.archive.org/</a></li>
+<li><a href="https://archive.is/">https://archive.is/</a></li>
+<li><a href="https://archive.ph/">https://archive.ph/</a></li>
+<li><a href="http://ghostarchive.org/">http://ghostarchive.org/</a></li>
+<li><a href="https://wiki.archiveteam.org/">https://wiki.archiveteam.org/</a></li>
+<li><a href="http://www.bitsavers.org/">http://www.bitsavers.org/</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3dcab13" class="outline-2">
+<h2 id="org3dcab13"><span class="section-number-2">3.</span> hosting</h2>
+<div class="outline-text-2" id="text-3">
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgde4ac94">3.1. self</a></li>
+<li><a href="#org97d78de">3.2. mail</a></li>
+<li><a href="#org109978a">3.3. repository</a></li>
+<li><a href="#org96cf6b5">3.4. website</a></li>
+<li><a href="#org37793e9">3.5. file (cloud)</a></li>
+<li><a href="#orgd6d969a">3.6. paste bin</a></li>
+<li><a href="#org533f1c2">3.7. wiki</a></li>
+<li><a href="#org5c8b4ab">3.8. multi</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgde4ac94" class="outline-3">
+<h3 id="orgde4ac94"><span class="section-number-3">3.1.</span> self</h3>
+<div class="outline-text-3" id="text-3-1">
+<ul class="org-ul">
+<li><a href="https://growyourown.services/">https://growyourown.services/</a></li>
+<li><a href="https://yunohost.org/">https://yunohost.org/</a></li>
+<li><a href="https://yunohost.org/en/apps">https://yunohost.org/en/apps</a></li>
+<li><a href="https://freedombox.org/">https://freedombox.org/</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org97d78de" class="outline-3">
+<h3 id="org97d78de"><span class="section-number-3">3.2.</span> mail</h3>
+<div class="outline-text-3" id="text-3-2">
+<ul class="org-ul">
+<li><a href="https://mail.proton.me/">https://mail.proton.me/</a></li>
+<li><a href="https://tuta.com/">https://tuta.com/</a></li>
+<li><a href="https://app.tuta.com/">https://app.tuta.com/</a></li>
+<li><a href="https://murena.io/apps/snappymail/">https://murena.io/apps/snappymail/</a></li>
+<li><a href="https://mail.disroot.org/">https://mail.disroot.org/</a></li>
+<li><a href="https://skiff.com/">https://skiff.com/</a></li>
+<li><a href="https://skiff.com/mail">https://skiff.com/mail</a></li>
+<li><a href="https://app.skiff.com/mail/inbox">https://app.skiff.com/mail/inbox</a></li>
+<li><a href="https://mailfence.com/">https://mailfence.com/</a></li>
+<li><a href="https://mail.google.com/">https://mail.google.com/</a></li>
+<li><a href="https://swisscows.email/en/">https://swisscows.email/en/</a></li>
+<li><a href="https://www.mail.com/">https://www.mail.com/</a></li>
+<li><a href="https://www.gmx.fr/">https://www.gmx.fr/</a></li>
+<li><a href="https://sud-ouest2.org/">https://sud-ouest2.org/</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org109978a" class="outline-3">
+<h3 id="org109978a"><span class="section-number-3">3.3.</span> repository</h3>
+<div class="outline-text-3" id="text-3-3">
+<ul class="org-ul">
+<li><a href="https://bitbucket.org/">https://bitbucket.org/</a></li>
+<li><a href="https://codeberg.org/">https://codeberg.org/</a></li>
+<li><a href="https://framagit.org/public/projects">https://framagit.org/public/projects</a></li>
+<li><a href="https://forge.chapril.org/">https://forge.chapril.org/</a></li>
+<li><a href="https://stackoverflow.com/questions/58622854/cloning-a-bitbucket-repository-via-ssh">https://stackoverflow.com/questions/58622854/cloning-a-bitbucket-repository-via-ssh</a></li>
+<li><a href="https://gitlab.com/">https://gitlab.com/</a></li>
+<li><a href="https://github.com/">https://github.com/</a></li>
+<li><a href="https://sr.ht">https://sr.ht</a></li>
+<li><a href="https://git.mentality.rip/">https://git.mentality.rip/</a></li>
+<li><a href="https://git.disroot.org/">https://git.disroot.org/</a></li>
+<li><a href="https://git.causal.agency/">https://git.causal.agency/</a></li>
+<li><a href="https://rocketgit.com/">https://rocketgit.com/</a></li>
+<li><a href="https://pagure.io/">https://pagure.io/</a></li>
+<li><a href="https://gitgud.io/">https://gitgud.io/</a></li>
+<li><a href="https://lab.frogg.it/">https://lab.frogg.it/</a></li>
+<li><a href="https://git.froggi.es/">https://git.froggi.es/</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org96cf6b5" class="outline-3">
+<h3 id="org96cf6b5"><span class="section-number-3">3.4.</span> website</h3>
+<div class="outline-text-3" id="text-3-4">
+<ul class="org-ul">
+<li><a href="https://neocities.org/">https://neocities.org/</a></li>
+<li><a href="https://neocities.org/dashboard">https://neocities.org/dashboard</a></li>
+<li><a href="https://districts.neocities.org/">https://districts.neocities.org/</a></li>
+<li><a href="https://ichi.city/">https://ichi.city/</a></li>
+<li><a href="https://multiverse.plus/">https://multiverse.plus/</a></li>
+<li><a href="https://www.hotglue.me/">https://www.hotglue.me/</a></li>
+<li><a href="http://geocities.ws/">http://geocities.ws/</a></li>
+<li><a href="https://www.angelfire.lycos.com/">https://www.angelfire.lycos.com/</a></li>
+<li><a href="https://www.tripod.lycos.com/">https://www.tripod.lycos.com/</a></li>
+<li><a href="https://ouvaton.coop/">https://ouvaton.coop/</a></li>
+<li><a href="https://www.netlify.com/">https://www.netlify.com/</a></li>
+<li><a href="https://frantik-web.co.uk/pages/port0.org.php">https://frantik-web.co.uk/pages/port0.org.php</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org37793e9" class="outline-3">
+<h3 id="org37793e9"><span class="section-number-3">3.5.</span> file (cloud)</h3>
+<div class="outline-text-3" id="text-3-5">
+<ul class="org-ul">
+<li><a href="https://cloud.disroot.org/apps/files/">https://cloud.disroot.org/apps/files/</a></li>
+<li><a href="https://cloud.infini.fr/login">https://cloud.infini.fr/login</a></li>
+<li><a href="https://drive.proton.me/">https://drive.proton.me/</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd6d969a" class="outline-3">
+<h3 id="orgd6d969a"><span class="section-number-3">3.6.</span> paste bin</h3>
+<div class="outline-text-3" id="text-3-6">
+<ul class="org-ul">
+<li><a href="http://0x0.st/">http://0x0.st/</a></li>
+<li><a href="https://paste.rs/">https://paste.rs/</a></li>
+<li><a href="https://paste.rs/web">https://paste.rs/web</a></li>
+<li><a href="https://bsd.to/">https://bsd.to/</a></li>
+<li><a href="https://pastebin.com/">https://pastebin.com/</a></li>
+<li><a href="https://termbin.com/">https://termbin.com/</a></li>
+<li><a href="https://paste.sr.ht/">https://paste.sr.ht/</a></li>
+<li><a href="http://paste.debian.net/">http://paste.debian.net/</a></li>
+<li><a href="http://paste.tclhelp.net/">http://paste.tclhelp.net/</a></li>
+<li><a href="https://pastebin.ubuntu.com/">https://pastebin.ubuntu.com/</a></li>
+<li><a href="https://bpa.st/">https://bpa.st/</a></li>
+<li><a href="http://sprunge.us/">http://sprunge.us/</a></li>
+<li><a href="https://bin.infini.fr/">https://bin.infini.fr/</a></li>
+<li><a href="https://clbin.com/">https://clbin.com/</a></li>
+<li><a href="http://ix.io/">http://ix.io/</a></li>
+<li><a href="https://controlc.com/">https://controlc.com/</a></li>
+<li><a href="https://rentry.co/">https://rentry.co/</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org533f1c2" class="outline-3">
+<h3 id="org533f1c2"><span class="section-number-3">3.7.</span> wiki</h3>
+<div class="outline-text-3" id="text-3-7">
+<ul class="org-ul">
+<li><a href="https://colibris-outilslibres.org/">https://colibris-outilslibres.org/</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org5c8b4ab" class="outline-3">
+<h3 id="org5c8b4ab"><span class="section-number-3">3.8.</span> multi</h3>
+<div class="outline-text-3" id="text-3-8">
+<ul class="org-ul">
+<li><a href="https://fr.wikipedia.org/wiki/Collectif_des_h%C3%A9bergeurs_alternatifs,_transparents,_ouverts,_neutres_et_solidaires">https://fr.wikipedia.org/wiki/Collectif_des_h%C3%A9bergeurs_alternatifs,_transparents,_ouverts,_neutres_et_solidaires</a></li>
+<li><a href="https://www.chatons.org/">https://www.chatons.org/</a></li>
+<li><a href="https://entraide.chatons.org/en/">https://entraide.chatons.org/en/</a></li>
+<li><a href="https://www.chapril.org/">https://www.chapril.org/</a></li>
+<li><a href="https://www.infini.fr/">https://www.infini.fr/</a></li>
+<li><a href="https://sans-nuage.fr/fr/">https://sans-nuage.fr/fr/</a></li>
+<li><a href="https://bastet.parinux.org/">https://bastet.parinux.org/</a></li>
+<li><a href="https://ilinux.fr/">https://ilinux.fr/</a></li>
+<li><a href="https://tedomum.net/">https://tedomum.net/</a></li>
+<li><a href="https://tedomum.net/service/">https://tedomum.net/service/</a></li>
+<li><a href="https://tools.immae.eu/">https://tools.immae.eu/</a></li>
+<li><a href="https://disroot.org/">https://disroot.org/</a></li>
+<li><a href="https://user.disroot.org/">https://user.disroot.org/</a></li>
+<li><a href="https://howto.disroot.org/en/tutorials/">https://howto.disroot.org/en/tutorials/</a></li>
+<li><a href="https://apps.disroot.org/">https://apps.disroot.org/</a></li>
+<li><a href="https://riseup.net/">https://riseup.net/</a></li>
+<li><a href="https://www.bee-home.fr/">https://www.bee-home.fr/</a></li>
+<li><a href="https://indiehosters.net/">https://indiehosters.net/</a></li>
+<li><a href="https://www.zaclys.com/">https://www.zaclys.com/</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgab00fe6" class="outline-2">
+<h2 id="orgab00fe6"><span class="section-number-2">4.</span> domain</h2>
+<div class="outline-text-2" id="text-4">
+<div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org669e908">1. search engine</a></li>
+<li><a href="#org68a83d0">2. archive</a></li>
+<li><a href="#org3dcab13">3. hosting</a></li>
+<li><a href="#orgab00fe6">4. domain</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga1301ab" class="outline-3">
+<h3 id="orga1301ab"><span class="section-number-3">4.1.</span> generic</h3>
+<div class="outline-text-3" id="text-4-1">
+<ul class="org-ul">
+<li><a href="http://www.dot.tk/en/index.html?lang=en">http://www.dot.tk/en/index.html?lang=en</a></li>
+<li><a href="https://freedns.afraid.org/">https://freedns.afraid.org/</a></li>
+<li><a href="https://www.gandi.net/en">https://www.gandi.net/en</a></li>
+<li><a href="https://njal.la/">https://njal.la/</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgbfe55ce" class="outline-3">
+<h3 id="orgbfe55ce"><span class="section-number-3">4.2.</span> dynamic dns</h3>
+<div class="outline-text-3" id="text-4-2">
+<ul class="org-ul">
+<li><a href="https://www.maketecheasier.com/best-dynamic-dns-providers/">https://www.maketecheasier.com/best-dynamic-dns-providers/</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Auteur: chimay</p>
+<p class="date">Created: 2025-02-21 ven 16:00</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

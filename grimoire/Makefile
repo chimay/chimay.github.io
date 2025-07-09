@@ -35,7 +35,7 @@ $(HTML_SUBDIRS):
 	@$(ECHO)
 
 ~/racine/refer/bookmarks/%.html: ~/racine/refer/bookmarks/%.org
-	$(MAKE) -C ~/racine/refer/bookmarks $<
+	$(MAKE) -C ~/racine/refer/bookmarks $@
 
 signet-%.html: signet-%.org $(INC_FILES) ~/racine/refer/bookmarks/%.html
 	$(EMACS) $(EMACS_PRE_FLAGS) $< $(EMACS_POST_FLAGS)

@@ -692,6 +692,7 @@ poweroff
 | xbindkeys                 | SRV       | bindings clavier & souris pour Xorg    | xbindkeys                     |
 |---------------------------+-----------+----------------------------------------+-------------------------------|
 | xinput                    | CLI       | configuration souris & clavier         | xorg-xinput                   |
+| synclient                 | CLI       | configuration souris & clavier         | xf86-input-synaptics          |
 | unclutter                 |           | cache la souris inactive               | unclutter                     |
 | xmouseless                | GUI       |                                        |                               |
 | keynav                    | SRV       | grille pour ajuster la souris          | keynav                        |
@@ -763,30 +764,35 @@ poweroff
 
 *** Matériel
 
-| Commande     | Interface     | Fonction                                | Paquet ou dépôt |
-|--------------+---------------+-----------------------------------------+-----------------|
-| sensors      | CLI           | thermomètres                            | sensors         |
-| thermald     | SRV           | contrôle de la température              | thermald        |
-|--------------+---------------+-----------------------------------------+-----------------|
-| cpupower     | SRV, CLI      | contrôle de la fréquence des cpus       | cpupower        |
-| cpupower-gui | SRV, CLI, GUI | contrôle de la fréquence des cpus       | cpupower-gui    |
-|--------------+---------------+-----------------------------------------+-----------------|
-| powertop     | CLI           | consommation d’énergie                  | powertop        |
-| powerstat    | CLI           | consommation d’énergie                  | aur/powerstat   |
-|--------------+---------------+-----------------------------------------+-----------------|
-| tlp          | CLI           | économie d’énergie                      | tlp             |
-|              |               | fait chauffer les processeurs sur shari |                 |
-|--------------+---------------+-----------------------------------------+-----------------|
-| hdparm       | CLI           | paramètres du disque                    | hdparm          |
-| smartctl     | CLI           | contrôle des disques smart              | smartmontools   |
-|--------------+---------------+-----------------------------------------+-----------------|
-| rfkill       | CLI           | outil de contrôle du wifi, bluetooth    | util-linux      |
-|--------------+---------------+-----------------------------------------+-----------------|
-|              | LIB           | appels acpi via /proc/acpi/call         | acpi_call       |
-|              | LIB           | appels acpi pour noyau LTS              | acpi_call-lts   |
-|--------------+---------------+-----------------------------------------+-----------------|
-|              | LIB           | switch discrete gpu card                | bbswitch        |
-|              | LIB           | switch discrete gpu card                | bbswitch-dkms   |
+| Commande     | Interface     | Fonction                             | Paquet ou dépôt |
+|--------------+---------------+--------------------------------------+-----------------|
+| sensors      | CLI           | thermomètres                         | sensors         |
+| thermald     | SRV           | contrôle de la température           | thermald        |
+|--------------+---------------+--------------------------------------+-----------------|
+| cpupower     | SRV, CLI      | contrôle de la fréquence des cpus    | cpupower        |
+| cpupower-gui | SRV, CLI, GUI | contrôle de la fréquence des cpus    | cpupower-gui    |
+|--------------+---------------+--------------------------------------+-----------------|
+| powertop     | CLI           | consommation d’énergie               | powertop        |
+| powerstat    | CLI           | consommation d’énergie               | aur/powerstat   |
+|--------------+---------------+--------------------------------------+-----------------|
+| tlp          | CLI           | économie d’énergie                   | tlp             |
+|              |               | fait chauffer les processeurs        |                 |
+|              |               | sur pc optimus gpu                   |                 |
+|--------------+---------------+--------------------------------------+-----------------|
+| swapon       | CLI           | activation de swap                   | util-linux      |
+|              | SRV           | service systemd pour zram            | zram-generator  |
+| zramctl      | CLI           | contrôle de zram                     | util-linux      |
+|--------------+---------------+--------------------------------------+-----------------|
+| hdparm       | CLI           | paramètres du disque                 | hdparm          |
+| smartctl     | CLI           | contrôle des disques smart           | smartmontools   |
+|--------------+---------------+--------------------------------------+-----------------|
+| rfkill       | CLI           | outil de contrôle du wifi, bluetooth | util-linux      |
+|--------------+---------------+--------------------------------------+-----------------|
+|              | LIB           | appels acpi via /proc/acpi/call      | acpi_call       |
+|              | LIB           | appels acpi pour noyau LTS           | acpi_call-lts   |
+|--------------+---------------+--------------------------------------+-----------------|
+|              | LIB           | switch discrete gpu card             | bbswitch        |
+|              | LIB           | switch discrete gpu card             | bbswitch-dkms   |
 
 *** Polices de caractères
 
@@ -827,6 +833,7 @@ poweroff
 |              | TERM      | extensions perl pour urxvt                | urxvt-perls           |
 | zutty        | TERM      | terminal                                  | zutty                 |
 | st           | TERM      | terminal suckless                         |                       |
+| ghosttty     | TERM      | terminal                                  |                       |
 |--------------+-----------+-------------------------------------------+-----------------------|
 | kitti3       | TERM      | terminal déroulant basé sur kitty         | pip/kitti3            |
 | tdrop        | TERM      | transforme un programme en déroulant      | tdrop                 |
@@ -891,8 +898,8 @@ poweroff
 | pkill      | CLI       | envoie un signal à un/des processus          | procps-ng        |
 | killall    | CLI       | envoie un signal à un/des processus          | psmisc           |
 |------------+-----------+----------------------------------------------+------------------|
-| htop       | TUI       | gestionnaire de tâches                       | aur/htim         |
 | htop       | TUI       | gestionnaire de tâches                       | htop             |
+| btop       | TUI       | gestionnaire de tâches                       | btop             |
 | btm        | TUI       | gestionnaire de tâches                       | bottom           |
 | bpytop     | TUI       | gestionnaire de ressources systeme           | bpytop           |
 | glances    | TUI       | statistiques systèmes                        | glances          |
@@ -1074,12 +1081,12 @@ poweroff
 |-----------+-----------+-----------------------------------+-----------------|
 | mc        | TUI       | gestionnaire de fichiers          | mc              |
 |-----------+-----------+-----------------------------------+-----------------|
-| caja      | GUI       | gestionnaire de fichiers          | caja            |
-| pcmanfm   | GUI       | gestionnaire de fichiers          | pcmanfm         |
-| sunflower | GUI       | gestionnaire de fichiers          | aur/sunflower   |
 | thunar    | GUI       | gestionnaire de fichiers          | thunar          |
 |           | LIB       | support nfs pour thunar           | gvfs-nfs        |
 |           | LIB       | support samba pour thunar         | gvfs-smb        |
+| caja      | GUI       | gestionnaire de fichiers          | caja            |
+| pcmanfm   | GUI       | gestionnaire de fichiers          | pcmanfm         |
+| sunflower | GUI       | gestionnaire de fichiers          | aur/sunflower   |
 | spacefm   | GUI       | gestionnaire de fichiers          | aur/spacefm     |
 | konqueror | GUI       | gestionnaire de fichiers          | konqueror       |
 |           |           | et navigateur                     |                 |

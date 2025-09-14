@@ -2,9 +2,9 @@
 
 # root dir of generic, html, epub {{{1
 
-ROOT_GENERIC := $(HOME)/racine/site/eclats2vers/generic
-ROOT_HTML    := $(HOME)/racine/site/eclats2vers/html
-ROOT_EPUB    := $(HOME)/racine/site/eclats2vers/epub
+ROOT_GENERIC := $(HOME)/racine/public/eclats2vers/generic
+ROOT_HTML    := $(HOME)/racine/public/eclats2vers/html
+ROOT_EPUB    := $(HOME)/racine/public/eclats2vers/epub
 
 # local generic & html dir {{{1
 

@@ -49,7 +49,6 @@ $(HTML_SUBDIRS):
 
 html: $(HTML_SUBDIRS) $(HTML_FILES)
 	git add -A
-	git add -f **/*.html
 
 #  org -> epub {{{1
 

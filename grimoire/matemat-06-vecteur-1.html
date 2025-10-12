@@ -3,13 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2023-05-10 mer 16:43 -->
+<!-- 2025-10-12 dim 15:24 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 06 : Vecteurs - 1</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
-<style>
+<style type="text/css">
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -193,27 +193,38 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 </head>
 <body>
 <div id="content" class="content">
@@ -230,9 +241,9 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf594312">1. Espaces vectoriels</a></li>
-<li><a href="#org2f70ff5">2. Norme</a></li>
-<li><a href="#org22b5714">3. Espaces de Banach</a></li>
+<li><a href="#org72a66c9">1. Espaces vectoriels</a></li>
+<li><a href="#orga530990">2. Norme</a></li>
+<li><a href="#org7262848">3. Espaces de Banach</a></li>
 </ul>
 </div>
 </div>
@@ -360,6 +371,7 @@
 \newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
 \newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
 \newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
 \newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
 \newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
@@ -390,22 +402,21 @@
 \newcommand{\petito}[1]{o\left(#1\right)}
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
-
-<div id="outline-container-orgf594312" class="outline-2">
-<h2 id="orgf594312"><span class="section-number-2">1.</span> Espaces vectoriels</h2>
+<div id="outline-container-org72a66c9" class="outline-2">
+<h2 id="org72a66c9"><span class="section-number-2">1.</span> Espaces vectoriels</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-1" role="doc-toc">
 <ul>
-<li><a href="#orge0eca10">1.1. Dépendances</a></li>
-<li><a href="#org0fcc9cf">1.2. Introduction</a></li>
-<li><a href="#org4b18227">1.3. Définition</a></li>
-<li><a href="#orgec2f752">1.4. Sous-espace</a></li>
-<li><a href="#org31dc18e">1.5. Espace engendré</a></li>
-<li><a href="#orgcfd842b">1.6. Indépendance linéaire</a></li>
-<li><a href="#orgd6df332">1.7. Coordonnées</a></li>
-<li><a href="#org2b30154">1.8. Absence de redondance</a></li>
-<li><a href="#orgc9746d3">1.9. Base canonique sur \(\corps^n\)</a></li>
-<li><a href="#org4c9f6ad">1.10. Représentation matricielle</a></li>
+<li><a href="#orgd48400c">1.1. Dépendances</a></li>
+<li><a href="#org98b30da">1.2. Introduction</a></li>
+<li><a href="#org5a83718">1.3. Définition</a></li>
+<li><a href="#org36a8d85">1.4. Sous-espace</a></li>
+<li><a href="#org8bb5fc5">1.5. Espace engendré</a></li>
+<li><a href="#orgd3d957e">1.6. Indépendance linéaire</a></li>
+<li><a href="#org82855e9">1.7. Coordonnées</a></li>
+<li><a href="#org70682d3">1.8. Absence de redondance</a></li>
+<li><a href="#orgf867eeb">1.9. Base canonique sur \(\corps^n\)</a></li>
+<li><a href="#org49cbc6e">1.10. Représentation matricielle</a></li>
 </ul>
 </div>
 
@@ -413,10 +424,8 @@
 \label{chap:vecteur}
 </p>
 </div>
-
-
-<div id="outline-container-orge0eca10" class="outline-3">
-<h3 id="orge0eca10"><span class="section-number-3">1.1.</span> Dépendances</h3>
+<div id="outline-container-orgd48400c" class="outline-3">
+<h3 id="orgd48400c"><span class="section-number-3">1.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:algebre} : Les structures algébriques</li>
@@ -424,10 +433,8 @@
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-org0fcc9cf" class="outline-3">
-<h3 id="org0fcc9cf"><span class="section-number-3">1.2.</span> Introduction</h3>
+<div id="outline-container-org98b30da" class="outline-3">
+<h3 id="org98b30da"><span class="section-number-3">1.2.</span> Introduction</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Soit un corps \(\corps\), un ensemble quelconque \(A\) et \(n \in \setN\). Le but des espaces vectoriels est de fournir un cadre général aux $n$-tuples de \(\corps^n\) et aux fonctions de \(\corps^A\). Nous avons vu la correspondance \(\corps^n \leftrightarrow \corps^A\) dans le cas particulier où \(A\) possède un nombre fini d'éléments. Mais le lien entre les deux types d'objets ne s'arrête pas là : la comparaison de deux fonctions se base sur le même principe (étendu) que la comparaison de deux $n$-tuples. Nous avons également défini des produits mixtes \(\cdot : \corps \times \corps^n \to \corps^n\) et \(\cdot : \corps \times \corps^A \to \corps^A\) semblables. Les matrices représentant des applications linéaires, nous pouvons également les ajouter dans la liste. Si \(u,v \in E\), avec \(E \in \{ \corps^n , \corps^A , \matrice(\corps,m,n) \}\), on a :
@@ -449,10 +456,8 @@ Soit un corps \(\corps\), un ensemble quelconque \(A\) et \(n \in \setN\). Le bu
 pour tout \(\alpha, \beta \in \corps\). De plus l'addition induite sur \(E\) par l'addition de \(\corps\) transforme \(E\) en groupe commutatif. On ne peut toutefois pas parler de corps pour \(E\), car la multiplication matricielle n'est pas une multiplication induite, et est non commutative.
 </p>
 </div>
-
-
-<div id="outline-container-org1174ea7" class="outline-4">
-<h4 id="org1174ea7"><span class="section-number-4">1.2.1.</span> Attention</h4>
+<div id="outline-container-org1cb6092" class="outline-4">
+<h4 id="org1cb6092"><span class="section-number-4">1.2.1.</span> Attention</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 Ne pas confondre les additions définies sur \(E\) et \(\corps\), ni la multiplication de \(\corps\) avec la multiplication mixte, ni le neutre de \(E\) avec celui de \(\corps\). Lorsqu'il y a un risque d'ambiguité, on parle du vecteur nul \(0 \in E\) et du scalaire nul \(0 \in \corps\).
@@ -460,19 +465,15 @@ Ne pas confondre les additions définies sur \(E\) et \(\corps\), ni la multipli
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org4b18227" class="outline-3">
-<h3 id="org4b18227"><span class="section-number-3">1.3.</span> Définition</h3>
+<div id="outline-container-org5a83718" class="outline-3">
+<h3 id="org5a83718"><span class="section-number-3">1.3.</span> Définition</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Soit un groupe commutatif pour l'addition \(E\), ainsi qu'un corps \(\corps\). Si il existe une opération de multiplication mixte \(\cdot : \corps \times E \mapsto E\) vérifiant les propriétés \ref{eq:mixte} ci-dessus, on dit que \(E\) est un espace vectoriel sur \(\corps\). On nomme alors « vecteurs » les éléments de \(E\) et « scalaires » les éléments de \(\corps\).
 </p>
 </div>
-
-
-<div id="outline-container-orgb38ecbe" class="outline-4">
-<h4 id="orgb38ecbe"><span class="section-number-4">1.3.1.</span> Notation</h4>
+<div id="outline-container-orgca6f09a" class="outline-4">
+<h4 id="orgca6f09a"><span class="section-number-4">1.3.1.</span> Notation</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <p>
 On note aussi :
@@ -499,10 +500,8 @@ Lorsque \(\alpha\) a un inverse dans \(\corps\), on a même les « fractions �
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org0e27520" class="outline-4">
-<h4 id="org0e27520"><span class="section-number-4">1.3.2.</span> Corollaires</h4>
+<div id="outline-container-org55ddc13" class="outline-4">
+<h4 id="org55ddc13"><span class="section-number-4">1.3.2.</span> Corollaires</h4>
 <div class="outline-text-4" id="text-1-3-2">
 <p>
 Les propriétés de la multiplication mixte nous montrent directement que :
@@ -518,10 +517,8 @@ Les propriétés de la multiplication mixte nous montrent directement que :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org7ec8ce7" class="outline-4">
-<h4 id="org7ec8ce7"><span class="section-number-4">1.3.3.</span> Remarque</h4>
+<div id="outline-container-org9a94131" class="outline-4">
+<h4 id="org9a94131"><span class="section-number-4">1.3.3.</span> Remarque</h4>
 <div class="outline-text-4" id="text-1-3-3">
 <p>
 Le corps \(\corps\) est souvent \(\setR\) ou \(\setC\).
@@ -529,10 +526,8 @@ Le corps \(\corps\) est souvent \(\setR\) ou \(\setC\).
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgec2f752" class="outline-3">
-<h3 id="orgec2f752"><span class="section-number-3">1.4.</span> Sous-espace</h3>
+<div id="outline-container-org36a8d85" class="outline-3">
+<h3 id="org36a8d85"><span class="section-number-3">1.4.</span> Sous-espace</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 On dit que \(F \subseteq E\) est un sous-espace vectoriel de \(E\) si \(0 \in F\) et si :
@@ -551,10 +546,8 @@ On vérifie par exemple que \(E\) est un sous-espace vectoriel de lui-même.
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org31dc18e" class="outline-3">
-<h3 id="org31dc18e"><span class="section-number-3">1.5.</span> Espace engendré</h3>
+<div id="outline-container-org8bb5fc5" class="outline-3">
+<h3 id="org8bb5fc5"><span class="section-number-3">1.5.</span> Espace engendré</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 L'espace engendré par les vecteurs \(e_1,e_2,...,e_n \in E\) est l'ensemble des combinaisons linéaires formées à partir des \(e_i\) :
@@ -568,10 +561,8 @@ L'espace engendré par les vecteurs \(e_1,e_2,...,e_n \in E\) est l'ensemble des
 On vérifie que \(\combilin{e_1,...,e_n}\) est un sous-espace vectoriel de \(E\).
 </p>
 </div>
-
-
-<div id="outline-container-org8da8e7e" class="outline-4">
-<h4 id="org8da8e7e"><span class="section-number-4">1.5.1.</span> Remarque</h4>
+<div id="outline-container-org3a21d35" class="outline-4">
+<h4 id="org3a21d35"><span class="section-number-4">1.5.1.</span> Remarque</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <p>
 Les espaces vectoriels ne pouvant pas s'exprimer comme ci-dessus sont dit de dimension infinie.
@@ -579,10 +570,8 @@ Les espaces vectoriels ne pouvant pas s'exprimer comme ci-dessus sont dit de dim
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgcfd842b" class="outline-3">
-<h3 id="orgcfd842b"><span class="section-number-3">1.6.</span> Indépendance linéaire</h3>
+<div id="outline-container-orgd3d957e" class="outline-3">
+<h3 id="orgd3d957e"><span class="section-number-3">1.6.</span> Indépendance linéaire</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 On dit qu'une série de vecteurs \(e_1,...,e_n\) est linéairement
@@ -606,10 +595,8 @@ pour tout \(i \in \{1,2,...,n\}\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgd6df332" class="outline-3">
-<h3 id="orgd6df332"><span class="section-number-3">1.7.</span> Coordonnées</h3>
+<div id="outline-container-org82855e9" class="outline-3">
+<h3 id="org82855e9"><span class="section-number-3">1.7.</span> Coordonnées</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 Soit les vecteurs linéairement indépendants \((e_1,...,e_n)\) et
@@ -653,10 +640,8 @@ pour tout \(i \in \{1,2,...,n\}\).
 On a donc unicité des coefficients scalaire de la combinaison linéaire. On dit que les \(\alpha_i\) sont les coordonnées de \(x\) par rapport aux \((e_1,...,e_n)\).
 </p>
 </div>
-
-
-<div id="outline-container-org43ba474" class="outline-4">
-<h4 id="org43ba474"><span class="section-number-4">1.7.1.</span> Base</h4>
+<div id="outline-container-org73c8a9d" class="outline-4">
+<h4 id="org73c8a9d"><span class="section-number-4">1.7.1.</span> Base</h4>
 <div class="outline-text-4" id="text-1-7-1">
 <p>
 Par contre, l'existence de telles coordonnées n'est pas garantie pour tout \(x \in E\). Ce ne sera le cas que si :
@@ -671,20 +656,16 @@ On dit alors que \((e_1,...,e_n)\) forme une base de \(E\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org2077d06" class="outline-4">
-<h4 id="org2077d06"><span class="section-number-4">1.7.2.</span> Dimension finie</h4>
+<div id="outline-container-orgbb0fc36" class="outline-4">
+<h4 id="orgbb0fc36"><span class="section-number-4">1.7.2.</span> Dimension finie</h4>
 <div class="outline-text-4" id="text-1-7-2">
 <p>
 On dit qu'un espace vectoriel \(E\) est de dimension finie s'il posséde au moins une base de la forme \((e_1,...,e_n)\), où \(n \in \setN\) est fini. Dans le cas où \(E\) {\em ne possède pas} une telle base, il est dit de dimension infinie.
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org15f72b4" class="outline-4">
-<h4 id="org15f72b4"><span class="section-number-4">1.7.3.</span> Equivalence</h4>
+<div id="outline-container-org0f725b1" class="outline-4">
+<h4 id="org0f725b1"><span class="section-number-4">1.7.3.</span> Equivalence</h4>
 <div class="outline-text-4" id="text-1-7-3">
 <p>
 On voit qu'étant donné une base de \(E\), il y a équivalence entre un vecteur \(x \in E\) et un élément \((x_1,x_2,...,x_n) \in \corps^n\) formé par ses coordonnées.
@@ -696,10 +677,8 @@ Nous noterons donc également (et abusivement) \(x = (x_1,x_2,...,x_n)\), mais a
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org2b30154" class="outline-3">
-<h3 id="org2b30154"><span class="section-number-3">1.8.</span> Absence de redondance</h3>
+<div id="outline-container-org70682d3" class="outline-3">
+<h3 id="org70682d3"><span class="section-number-3">1.8.</span> Absence de redondance</h3>
 <div class="outline-text-3" id="text-1-8">
 <p>
 Soit \(e_1,...,e_n \in E\) une suite de vecteurs linéairement indépendants.
@@ -735,9 +714,8 @@ Aucun des vecteurs de la suite n'est donc combinaison des autres. On dit qu'aucu
 </p>
 </div>
 </div>
-
-<div id="outline-container-orgc9746d3" class="outline-3">
-<h3 id="orgc9746d3"><span class="section-number-3">1.9.</span> Base canonique sur \(\corps^n\)</h3>
+<div id="outline-container-orgf867eeb" class="outline-3">
+<h3 id="orgf867eeb"><span class="section-number-3">1.9.</span> Base canonique sur \(\corps^n\)</h3>
 <div class="outline-text-3" id="text-1-9">
 <p>
 Soit \(\corps \in \{ \setR, \setC \}\). On note \(\canonique_i\) l'élément de \(\corps^n\) ayant un \(1\) en \(i^{ème}\) position et des \(0\) partout ailleurs. On a donc :
@@ -759,10 +737,8 @@ On a alors, pour tout \(x = (x_1,...,x_n) \in \corps^n\) :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org4c9f6ad" class="outline-3">
-<h3 id="org4c9f6ad"><span class="section-number-3">1.10.</span> Représentation matricielle</h3>
+<div id="outline-container-org49cbc6e" class="outline-3">
+<h3 id="org49cbc6e"><span class="section-number-3">1.10.</span> Représentation matricielle</h3>
 <div class="outline-text-3" id="text-1-10">
 <p>
 On représente généralement les vecteurs de \(\corps^n\) par des vecteurs lignes ou colonnes. On parle alors de « vecteurs matriciels ». Le \(i^{ème}\) vecteur de la base canonique est défini par le vecteur colonne :
@@ -798,18 +774,16 @@ soit :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org2f70ff5" class="outline-2">
-<h2 id="org2f70ff5"><span class="section-number-2">2.</span> Norme</h2>
+<div id="outline-container-orga530990" class="outline-2">
+<h2 id="orga530990"><span class="section-number-2">2.</span> Norme</h2>
 <div class="outline-text-2" id="text-2">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-2" role="doc-toc">
 <ul>
-<li><a href="#orgaf6f0cf">2.1. Dépendances</a></li>
-<li><a href="#org1107402">2.2. Norme</a></li>
-<li><a href="#org402eace">2.3. Borne inférieure</a></li>
-<li><a href="#org4666dee">2.4. Distance associée</a></li>
-<li><a href="#org68fb51f">2.5. Normalisation</a></li>
+<li><a href="#org77e6c02">2.1. Dépendances</a></li>
+<li><a href="#orge30472d">2.2. Norme</a></li>
+<li><a href="#org67ee7cb">2.3. Borne inférieure</a></li>
+<li><a href="#org18548a6">2.4. Distance associée</a></li>
+<li><a href="#orgdfbf1f5">2.5. Normalisation</a></li>
 </ul>
 </div>
 
@@ -817,10 +791,8 @@ soit :
 \label{chap:norme}
 </p>
 </div>
-
-
-<div id="outline-container-orgaf6f0cf" class="outline-3">
-<h3 id="orgaf6f0cf"><span class="section-number-3">2.1.</span> Dépendances</h3>
+<div id="outline-container-org77e6c02" class="outline-3">
+<h3 id="org77e6c02"><span class="section-number-3">2.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:distance} : Les distances</li>
@@ -828,10 +800,8 @@ soit :
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-org1107402" class="outline-3">
-<h3 id="org1107402"><span class="section-number-3">2.2.</span> Norme</h3>
+<div id="outline-container-orge30472d" class="outline-3">
+<h3 id="orge30472d"><span class="section-number-3">2.2.</span> Norme</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Soit \(S\) un corps muni d'un ordre \(\le\) et \(E\) un espace vectoriel sur \(\corps\). Une norme \(\norme{.} : E \to \setR\) est intuitivement la « grandeur » d'un vecteur \(x \in E\). Cette grandeur correspond à la distance séparant le vecteur nul de \(x\) :
@@ -898,10 +868,8 @@ Par ailleurs, lorsqu'on allonge ou réduit un vecteur \(x\) d'un facteur \(\alph
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org402eace" class="outline-3">
-<h3 id="org402eace"><span class="section-number-3">2.3.</span> Borne inférieure</h3>
+<div id="outline-container-org67ee7cb" class="outline-3">
+<h3 id="org67ee7cb"><span class="section-number-3">2.3.</span> Borne inférieure</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 On déduit de la définition que :
@@ -936,10 +904,8 @@ Mais comme \(\norme{z-x} = \norme{(-1) \cdot (z-x)} = \norme{x-z}\), la proprié
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org4666dee" class="outline-3">
-<h3 id="org4666dee"><span class="section-number-3">2.4.</span> Distance associée</h3>
+<div id="outline-container-org18548a6" class="outline-3">
+<h3 id="org18548a6"><span class="section-number-3">2.4.</span> Distance associée</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 On peut associer une distance \(d\) à une norme \(\norme{.}\) en posant :
@@ -961,10 +927,8 @@ En effet :
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-org68fb51f" class="outline-3">
-<h3 id="org68fb51f"><span class="section-number-3">2.5.</span> Normalisation</h3>
+<div id="outline-container-orgdfbf1f5" class="outline-3">
+<h3 id="orgdfbf1f5"><span class="section-number-3">2.5.</span> Normalisation</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 On peut toujours normaliser un vecteur \(w \ne 0\) pour obtenir un vecteur \(u\) de norme \(1\). Comme \(\norme{w} \ne 0\), on peut écrire :
@@ -984,19 +948,17 @@ On a alors :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org22b5714" class="outline-2">
-<h2 id="org22b5714"><span class="section-number-2">3.</span> Espaces de Banach</h2>
+<div id="outline-container-org7262848" class="outline-2">
+<h2 id="org7262848"><span class="section-number-2">3.</span> Espaces de Banach</h2>
 <div class="outline-text-2" id="text-3">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-3" role="doc-toc">
 <ul>
-<li><a href="#orgd131848">3.1. Définition</a></li>
-<li><a href="#orga9f1d5b">3.2. Application contractante</a></li>
-<li><a href="#orgf4e7a26">3.3. Suite de Cauchy</a></li>
-<li><a href="#org159c4b1">3.4. Point fixe</a></li>
-<li><a href="#org955cf77">3.5. Unicité</a></li>
-<li><a href="#org663dbd0">3.6. Vitesse de convergence</a></li>
+<li><a href="#orgee05be9">3.1. Définition</a></li>
+<li><a href="#org11ea372">3.2. Application contractante</a></li>
+<li><a href="#orga4951bc">3.3. Suite de Cauchy</a></li>
+<li><a href="#org93cdaa1">3.4. Point fixe</a></li>
+<li><a href="#orgd10d385">3.5. Unicité</a></li>
+<li><a href="#org5e6fceb">3.6. Vitesse de convergence</a></li>
 </ul>
 </div>
 
@@ -1004,20 +966,16 @@ On a alors :
 \label{chap:banach}
 </p>
 </div>
-
-
-<div id="outline-container-orgd131848" class="outline-3">
-<h3 id="orgd131848"><span class="section-number-3">3.1.</span> Définition</h3>
+<div id="outline-container-orgee05be9" class="outline-3">
+<h3 id="orgee05be9"><span class="section-number-3">3.1.</span> Définition</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 On dit qu'un espace vectoriel \(X\) est un espace de Banach si il est complet pour la distance issue de la norme \(\distance(x,y) = \norme{x - y}\). Dans la suite, nous considérons un espace de Banach \(X\) sur \(\setR\) ou \(\setC\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orga9f1d5b" class="outline-3">
-<h3 id="orga9f1d5b"><span class="section-number-3">3.2.</span> Application contractante</h3>
+<div id="outline-container-org11ea372" class="outline-3">
+<h3 id="org11ea372"><span class="section-number-3">3.2.</span> Application contractante</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 On dit qu'une application \(A : X \mapsto X\) est contractante s'il existe un \(c \in \intervallesemiouvertdroite{0}{1} \subseteq \setR\) tel que :
@@ -1032,10 +990,8 @@ pour tout \(u,v\in X\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgf4e7a26" class="outline-3">
-<h3 id="orgf4e7a26"><span class="section-number-3">3.3.</span> Suite de Cauchy</h3>
+<div id="outline-container-orga4951bc" class="outline-3">
+<h3 id="orga4951bc"><span class="section-number-3">3.3.</span> Suite de Cauchy</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Soit une application contractante \(A : X \mapsto X\) et \(u_0 \in X\). On définit la suite $u<sub>0,u</sub><sub>1,u</sub><sub>2</sub>,&#x2026;$ par :
@@ -1101,10 +1057,8 @@ On en conclut que la suite des \(u_n\) est de Cauchy.
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org159c4b1" class="outline-3">
-<h3 id="org159c4b1"><span class="section-number-3">3.4.</span> Point fixe</h3>
+<div id="outline-container-org93cdaa1" class="outline-3">
+<h3 id="org93cdaa1"><span class="section-number-3">3.4.</span> Point fixe</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 Comme \(X\) est complet, notre suite \(u_n\) étant de Cauchy converge vers une certaine limite :
@@ -1151,10 +1105,8 @@ L'élément \(p \in X\) est un point fixe de \(A\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org955cf77" class="outline-3">
-<h3 id="org955cf77"><span class="section-number-3">3.5.</span> Unicité</h3>
+<div id="outline-container-orgd10d385" class="outline-3">
+<h3 id="orgd10d385"><span class="section-number-3">3.5.</span> Unicité</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 Si \(p_1\) et \(p_2\) sont deux points fixes, on a :
@@ -1190,10 +1142,8 @@ Le point fixe de \(A\) est unique.
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org663dbd0" class="outline-3">
-<h3 id="org663dbd0"><span class="section-number-3">3.6.</span> Vitesse de convergence</h3>
+<div id="outline-container-org5e6fceb" class="outline-3">
+<h3 id="org5e6fceb"><span class="section-number-3">3.6.</span> Vitesse de convergence</h3>
 <div class="outline-text-3" id="text-3-6">
 <p>
 Nous avons donc montré que la suite des \(u_n\) converge vers l'unique point fixe \(p\) de \(A\), et ce quel que soit \(u_0\). On a même la propriété suivante nous donnant une borne supérieure pour le taux de convergence :
@@ -1208,7 +1158,7 @@ Nous avons donc montré que la suite des \(u_n\) converge vers l'unique point fi
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2023-05-10 mer 16:43</p>
+<p class="date">Created: 2025-10-12 dim 15:24</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

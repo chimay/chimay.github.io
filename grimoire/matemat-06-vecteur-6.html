@@ -3,13 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2023-05-10 mer 16:44 -->
+<!-- 2025-10-12 dim 15:24 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 06 : Vecteurs - 6</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
-<style>
+<style type="text/css">
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -193,27 +193,38 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 </head>
 <body>
 <div id="content" class="content">
@@ -230,8 +241,8 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org1096dbb">1. Produit extérieur</a></li>
-<li><a href="#org09c247f">2. Matrices élémentaires</a></li>
+<li><a href="#org8672c93">1. Produit extérieur</a></li>
+<li><a href="#orgf799ccb">2. Matrices élémentaires</a></li>
 </ul>
 </div>
 </div>
@@ -359,6 +370,7 @@
 \newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
 \newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
 \newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
 \newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
 \newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
@@ -389,19 +401,18 @@
 \newcommand{\petito}[1]{o\left(#1\right)}
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
-
-<div id="outline-container-org1096dbb" class="outline-2">
-<h2 id="org1096dbb"><span class="section-number-2">1.</span> Produit extérieur</h2>
+<div id="outline-container-org8672c93" class="outline-2">
+<h2 id="org8672c93"><span class="section-number-2">1.</span> Produit extérieur</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-1" role="doc-toc">
 <ul>
-<li><a href="#org388eb3e">1.1. Dépendances</a></li>
-<li><a href="#org0f3c27c">1.2. Dimension 2</a></li>
-<li><a href="#orgb702664">1.3. Dimension 3</a></li>
-<li><a href="#orgff70055">1.4. Permutations en dimension \(N\)</a></li>
-<li><a href="#orgcced541">1.5. Tenseur de permutation</a></li>
-<li><a href="#org5c43a79">1.6. Produit extérieur généralisé</a></li>
-<li><a href="#org8d85106">1.7. Déterminant d'une matrice</a></li>
+<li><a href="#orgce55e51">1.1. Dépendances</a></li>
+<li><a href="#orgb71240e">1.2. Dimension 2</a></li>
+<li><a href="#org11fafcf">1.3. Dimension 3</a></li>
+<li><a href="#org5a20b15">1.4. Permutations en dimension \(N\)</a></li>
+<li><a href="#org8f20d11">1.5. Tenseur de permutation</a></li>
+<li><a href="#org3b7c6d4">1.6. Produit extérieur généralisé</a></li>
+<li><a href="#orgc89df45">1.7. Déterminant d'une matrice</a></li>
 </ul>
 </div>
 
@@ -409,10 +420,8 @@
 \label{chap:prdext}
 </p>
 </div>
-
-
-<div id="outline-container-org388eb3e" class="outline-3">
-<h3 id="org388eb3e"><span class="section-number-3">1.1.</span> Dépendances</h3>
+<div id="outline-container-orgce55e51" class="outline-3">
+<h3 id="orgce55e51"><span class="section-number-3">1.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:vecteur} : Les vecteurs</li>
@@ -420,10 +429,8 @@
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-org0f3c27c" class="outline-3">
-<h3 id="org0f3c27c"><span class="section-number-3">1.2.</span> Dimension 2</h3>
+<div id="outline-container-orgb71240e" class="outline-3">
+<h3 id="orgb71240e"><span class="section-number-3">1.2.</span> Dimension 2</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Soit l'espace vectoriel \(E = \combilin{e_1,e_2}\) sur \(S\), où \((e_1,e_2)\) forme est une base orthonormée. Soit \(u,v \in E\). On a :
@@ -507,10 +514,8 @@ Le choix du signe détermine ce que l'on appelle l'orientation de l'espace \(E\)
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgb702664" class="outline-3">
-<h3 id="orgb702664"><span class="section-number-3">1.3.</span> Dimension 3</h3>
+<div id="outline-container-org11fafcf" class="outline-3">
+<h3 id="org11fafcf"><span class="section-number-3">1.3.</span> Dimension 3</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Soit l'espace vectoriel \(E = \combilin{e_1,e_2,e_3}\) sur \(S\), où \((e_1,e_2,e_3)\) forme est une base orthonormée. Soit \(u,v,w \in E\). On a :
@@ -569,10 +574,8 @@ est donné par :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org5971c2a" class="outline-4">
-<h4 id="org5971c2a"><span class="section-number-4">1.3.1.</span> Produit vectoriel</h4>
+<div id="outline-container-org96d3bac" class="outline-4">
+<h4 id="org96d3bac"><span class="section-number-4">1.3.1.</span> Produit vectoriel</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <p>
 On peut également former un vecteur avec l'opérateur \(\wedge\). On pose
@@ -607,10 +610,8 @@ On peut relier le produit extérieur au produit scalaire en constatant que :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgff70055" class="outline-3">
-<h3 id="orgff70055"><span class="section-number-3">1.4.</span> Permutations en dimension \(N\)</h3>
+<div id="outline-container-org5a20b15" class="outline-3">
+<h3 id="org5a20b15"><span class="section-number-3">1.4.</span> Permutations en dimension \(N\)</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Voyons quelles sont les propriétés communes aux \(\permutation_*\) présentés
@@ -655,10 +656,8 @@ Les seuls \(\permutation\) non nuls sont donc ceux dont tous les indices \((i,j,
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgcced541" class="outline-3">
-<h3 id="orgcced541"><span class="section-number-3">1.5.</span> Tenseur de permutation</h3>
+<div id="outline-container-org8f20d11" class="outline-3">
+<h3 id="org8f20d11"><span class="section-number-3">1.5.</span> Tenseur de permutation</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Soit \((e_1,e_2,...,e_N)\) une base orthonormée d'un espace vectoriel \(E\) sur \(S\). Nous définissons le tenseur de permutation \(\mathcal{E} \in \tenseur_N(E)\) par :
@@ -669,10 +668,8 @@ Soit \((e_1,e_2,...,e_N)\) une base orthonormée d'un espace vectoriel \(E\) sur
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org5c43a79" class="outline-3">
-<h3 id="org5c43a79"><span class="section-number-3">1.6.</span> Produit extérieur généralisé</h3>
+<div id="outline-container-org3b7c6d4" class="outline-3">
+<h3 id="org3b7c6d4"><span class="section-number-3">1.6.</span> Produit extérieur généralisé</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 Soit \((e_1,e_2,...,e_N)\) une base orthonormée d'un espace vectoriel \(E\) sur \(\corps\),
@@ -734,10 +731,8 @@ w \wedge (\alpha u + \beta v) = \alpha w \wedge u + \beta w \wedge v
 pour tout \(u,v,w,... \in E\) et \(\alpha,\beta \in S\).
 </p>
 </div>
-
-
-<div id="outline-container-orgaec2dbd" class="outline-4">
-<h4 id="orgaec2dbd"><span class="section-number-4">1.6.1.</span> \(N\) vecteurs</h4>
+<div id="outline-container-org43afdef" class="outline-4">
+<h4 id="org43afdef"><span class="section-number-4">1.6.1.</span> \(N\) vecteurs</h4>
 <div class="outline-text-4" id="text-1-6-1">
 <p>
 Dans le cas où \(M = N\), le produit extérieur est le scalaire :
@@ -757,10 +752,8 @@ On appelle le \(\Delta\) ainsi obtenu le déterminant des \(N\) vecteurs \(u_i\)
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org8d85106" class="outline-3">
-<h3 id="org8d85106"><span class="section-number-3">1.7.</span> Déterminant d'une matrice</h3>
+<div id="outline-container-orgc89df45" class="outline-3">
+<h3 id="orgc89df45"><span class="section-number-3">1.7.</span> Déterminant d'une matrice</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 Soit une matrice \(A \in \matrice(K,N,N)\) :
@@ -793,26 +786,22 @@ a_{N, i_N}
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org09c247f" class="outline-2">
-<h2 id="org09c247f"><span class="section-number-2">2.</span> Matrices élémentaires</h2>
+<div id="outline-container-orgf799ccb" class="outline-2">
+<h2 id="orgf799ccb"><span class="section-number-2">2.</span> Matrices élémentaires</h2>
 <div class="outline-text-2" id="text-2">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-2" role="doc-toc">
 <ul>
-<li><a href="#orga2b66fd">2.1. Dépendances</a></li>
-<li><a href="#org7137de6">2.2. Introduction</a></li>
-<li><a href="#org8436729">2.3. Inverse</a></li>
-<li><a href="#org79f60e9">2.4. Matrices élémentaires de transformation</a></li>
-<li><a href="#orgb75c983">2.5. Matrices élémentaires de permutation</a></li>
-<li><a href="#org8181d1a">2.6. Matrices de permutations</a></li>
+<li><a href="#orgc4ac8ca">2.1. Dépendances</a></li>
+<li><a href="#org270bf7f">2.2. Introduction</a></li>
+<li><a href="#orgbf74e02">2.3. Inverse</a></li>
+<li><a href="#orgd7f9fa3">2.4. Matrices élémentaires de transformation</a></li>
+<li><a href="#org4cb5bc6">2.5. Matrices élémentaires de permutation</a></li>
+<li><a href="#org5dfb43e">2.6. Matrices de permutations</a></li>
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-orga2b66fd" class="outline-3">
-<h3 id="orga2b66fd"><span class="section-number-3">2.1.</span> Dépendances</h3>
+<div id="outline-container-orgc4ac8ca" class="outline-3">
+<h3 id="orgc4ac8ca"><span class="section-number-3">2.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:matrice} : Les matrices</li>
@@ -820,10 +809,8 @@ a_{N, i_N}
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-org7137de6" class="outline-3">
-<h3 id="org7137de6"><span class="section-number-3">2.2.</span> Introduction</h3>
+<div id="outline-container-org270bf7f" class="outline-3">
+<h3 id="org270bf7f"><span class="section-number-3">2.2.</span> Introduction</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Les matrices élémentaires constituent une classe importante de matrice. Elles permettent d'obtenir d'importants résultats utiles tant sur le plan théorique que pour les applications numériques. Une matrice élémentaire de taille \((n,n)\) est déterminée par un scalaire \(\alpha \in \corps\) et le produit tensoriel de deux vecteurs \(u,v \in \corps^n\) :
@@ -834,10 +821,8 @@ Les matrices élémentaires constituent une classe importante de matrice. Elles 
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org8436729" class="outline-3">
-<h3 id="org8436729"><span class="section-number-3">2.3.</span> Inverse</h3>
+<div id="outline-container-orgbf74e02" class="outline-3">
+<h3 id="orgbf74e02"><span class="section-number-3">2.3.</span> Inverse</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Considérons le produit :
@@ -893,19 +878,15 @@ Les matrices élémentaires sont donc très faciles à inverser.
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org79f60e9" class="outline-3">
-<h3 id="org79f60e9"><span class="section-number-3">2.4.</span> Matrices élémentaires de transformation</h3>
+<div id="outline-container-orgd7f9fa3" class="outline-3">
+<h3 id="orgd7f9fa3"><span class="section-number-3">2.4.</span> Matrices élémentaires de transformation</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Nous allons construire une matrice élémentaire qui transforme un vecteur  donné \(x \in \matrice(\corps,n,1)\) non nul en un autre vecteur donné \(y \in \matrice(\corps,n,1)\) de même taille.
 </p>
 </div>
-
-
-<div id="outline-container-orgb01d0ef" class="outline-4">
-<h4 id="orgb01d0ef"><span class="section-number-4">2.4.1.</span> Colonne</h4>
+<div id="outline-container-org82b4961" class="outline-4">
+<h4 id="org82b4961"><span class="section-number-4">2.4.1.</span> Colonne</h4>
 <div class="outline-text-4" id="text-2-4-1">
 <p>
 On cherche une matrice élémentaire \(E_{yx}\) telle que \(E_{yx} \cdot x = y\). L'équation :
@@ -932,10 +913,8 @@ On peut donc choisir par exemple \(u = y - x\) et \(v = x\). On a alors \(\alpha
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgdaa0e01" class="outline-4">
-<h4 id="orgdaa0e01"><span class="section-number-4">2.4.2.</span> Inverse</h4>
+<div id="outline-container-orgb71b596" class="outline-4">
+<h4 id="orgb71b596"><span class="section-number-4">2.4.2.</span> Inverse</h4>
 <div class="outline-text-4" id="text-2-4-2">
 <p>
 Si l'inverse existe, il s'agit d'une matrice élémentaire de paramètre scalaire :
@@ -954,10 +933,8 @@ Sous réserve que \(x^\dual \cdot y \ne 0\), on a donc :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgd5b5998" class="outline-4">
-<h4 id="orgd5b5998"><span class="section-number-4">2.4.3.</span> Ligne</h4>
+<div id="outline-container-orgc55d31d" class="outline-4">
+<h4 id="orgc55d31d"><span class="section-number-4">2.4.3.</span> Ligne</h4>
 <div class="outline-text-4" id="text-2-4-3">
 <p>
 On cherche une matrice élémentaire \(E_{yx}\) telle que \(x^\dual \cdot E_{yx} = y^\dual\). L'équation :
@@ -992,10 +969,8 @@ On peut donc choisir par exemple \(v = y - x\) et \(u = x\). On a alors \(\alpha
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org424f0f4" class="outline-4">
-<h4 id="org424f0f4"><span class="section-number-4">2.4.4.</span> Inverse</h4>
+<div id="outline-container-org7a1aba5" class="outline-4">
+<h4 id="org7a1aba5"><span class="section-number-4">2.4.4.</span> Inverse</h4>
 <div class="outline-text-4" id="text-2-4-4">
 <p>
 Si l'inverse existe, il s'agit d'une matrice élémentaire de paramètre scalaire :
@@ -1015,10 +990,8 @@ Sous réserve que \(y^\dual \cdot x \ne 0\), on a donc :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgb75c983" class="outline-3">
-<h3 id="orgb75c983"><span class="section-number-3">2.5.</span> Matrices élémentaires de permutation</h3>
+<div id="outline-container-org4cb5bc6" class="outline-3">
+<h3 id="org4cb5bc6"><span class="section-number-3">2.5.</span> Matrices élémentaires de permutation</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 Les matrices élémentaires de permutations permettent de permuter deux lignes ou deux colonnes d'une matrice. Soit \(\canonique_1,...,\canonique_n\) les vecteurs de la base canonique de \(\corps^n\). La matrice de permutation élémentaire de taille \((n,n)\) et de paramètres \(i,j\) est définie par :
@@ -1032,10 +1005,8 @@ Les matrices élémentaires de permutations permettent de permuter deux lignes o
 Dans la suite, nous considérons \(A \in \matrice(\corps,m,n)\) et \(P = \matpermutation_{n,i,j}\).
 </p>
 </div>
-
-
-<div id="outline-container-org68437bd" class="outline-4">
-<h4 id="org68437bd"><span class="section-number-4">2.5.1.</span> Permutation des colonnes</h4>
+<div id="outline-container-org2cd0642" class="outline-4">
+<h4 id="org2cd0642"><span class="section-number-4">2.5.1.</span> Permutation des colonnes</h4>
 <div class="outline-text-4" id="text-2-5-1">
 <p>
 Soit les colonnes \(C_i = A \cdot \canonique_i\). On a :
@@ -1050,10 +1021,8 @@ Les colonnes \(i\) et \(j\) de \(A\) sont donc permutées par multiplication à 
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orge9358f0" class="outline-4">
-<h4 id="orge9358f0"><span class="section-number-4">2.5.2.</span> Permutation des lignes</h4>
+<div id="outline-container-org230d93e" class="outline-4">
+<h4 id="org230d93e"><span class="section-number-4">2.5.2.</span> Permutation des lignes</h4>
 <div class="outline-text-4" id="text-2-5-2">
 <p>
 Soit les lignes \(L_i = \canonique_i^\dual \cdot A\). On a :
@@ -1068,10 +1037,8 @@ Les lignes \(i\) et \(j\) de \(A\) sont donc permutées par multiplication à ga
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org853e828" class="outline-4">
-<h4 id="org853e828"><span class="section-number-4">2.5.3.</span> Symétrie</h4>
+<div id="outline-container-org1b82f6a" class="outline-4">
+<h4 id="org1b82f6a"><span class="section-number-4">2.5.3.</span> Symétrie</h4>
 <div class="outline-text-4" id="text-2-5-3">
 <p>
 On constate que la transposée et la duale sont égales à la matrice elle-même :
@@ -1082,10 +1049,8 @@ On constate que la transposée et la duale sont égales à la matrice elle-même
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org2a71363" class="outline-4">
-<h4 id="org2a71363"><span class="section-number-4">2.5.4.</span> Inverse</h4>
+<div id="outline-container-org76d9068" class="outline-4">
+<h4 id="org76d9068"><span class="section-number-4">2.5.4.</span> Inverse</h4>
 <div class="outline-text-4" id="text-2-5-4">
 <p>
 Soit \(\Delta_{ij} = \canonique_i - \canonique_j\) et :
@@ -1129,10 +1094,8 @@ Les matrices de permutations élémentaires sont donc égales à leur propre inv
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org8181d1a" class="outline-3">
-<h3 id="org8181d1a"><span class="section-number-3">2.6.</span> Matrices de permutations</h3>
+<div id="outline-container-org5dfb43e" class="outline-3">
+<h3 id="org5dfb43e"><span class="section-number-3">2.6.</span> Matrices de permutations</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 Une matrice de permutation \(P\) est une matrice de la forme :
@@ -1146,10 +1109,8 @@ Une matrice de permutation \(P\) est une matrice de la forme :
 où les \(P_i\) sont des matrices élémentaires de permutation.
 </p>
 </div>
-
-
-<div id="outline-container-orgf1a9a8c" class="outline-4">
-<h4 id="orgf1a9a8c"><span class="section-number-4">2.6.1.</span> Inverse</h4>
+<div id="outline-container-org77954b6" class="outline-4">
+<h4 id="org77954b6"><span class="section-number-4">2.6.1.</span> Inverse</h4>
 <div class="outline-text-4" id="text-2-6-1">
 <div class="org-center">
 <p>
@@ -1170,7 +1131,7 @@ Donc \(P^\dual = P^{-1}\). Comme \(P^\dual = P^T\), la transposée d'une matrice
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2023-05-10 mer 16:44</p>
+<p class="date">Created: 2025-10-12 dim 15:24</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

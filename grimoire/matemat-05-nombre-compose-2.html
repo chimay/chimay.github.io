@@ -3,13 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2023-05-10 mer 16:43 -->
+<!-- 2025-10-12 dim 15:24 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 05 : Nombres composés - 2</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
-<style>
+<style type="text/css">
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -193,27 +193,38 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 </head>
 <body>
 <div id="content" class="content">
@@ -230,9 +241,9 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orge5cf2c7">1. Matrices</a></li>
-<li><a href="#orgcfd829b">2. Progressions matricielles</a></li>
-<li><a href="#org722166e">3. Polynômes</a></li>
+<li><a href="#org9739da3">1. Matrices</a></li>
+<li><a href="#org8f05b50">2. Progressions matricielles</a></li>
+<li><a href="#org299f538">3. Polynômes</a></li>
 </ul>
 </div>
 </div>
@@ -360,6 +371,7 @@
 \newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
 \newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
 \newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
 \newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
 \newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
@@ -390,28 +402,27 @@
 \newcommand{\petito}[1]{o\left(#1\right)}
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
-
-<div id="outline-container-orge5cf2c7" class="outline-2">
-<h2 id="orge5cf2c7"><span class="section-number-2">1.</span> Matrices</h2>
+<div id="outline-container-org9739da3" class="outline-2">
+<h2 id="org9739da3"><span class="section-number-2">1.</span> Matrices</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-1" role="doc-toc">
 <ul>
-<li><a href="#org7d3aaf2">1.1. Dépendances</a></li>
-<li><a href="#org5c2e0b5">1.2. Définition</a></li>
-<li><a href="#org9a1dae3">1.3. Composantes</a></li>
-<li><a href="#orgc41977a">1.4. Blocs</a></li>
-<li><a href="#org9f95f8a">1.5. Partitionnement en blocs</a></li>
-<li><a href="#org5bd5eb3">1.6. Formes lignes et colonnes</a></li>
-<li><a href="#org68933ee">1.7. Transposée</a></li>
-<li><a href="#org7c695c2">1.8. Vecteurs lignes et colonnes</a></li>
-<li><a href="#org2e06013">1.9. Carrées et rectangulaires</a></li>
-<li><a href="#orgeb5f761">1.10. Matrices diagonales</a></li>
-<li><a href="#org3d2fdd5">1.11. Matrices triangulaires</a></li>
-<li><a href="#org6429743">1.12. Egalité</a></li>
-<li><a href="#orgabde338">1.13. Ordre partiel</a></li>
-<li><a href="#org93c2c1a">1.14. Addition et soustraction</a></li>
-<li><a href="#org2cdc326">1.15. Multiplication mixte</a></li>
-<li><a href="#orgd1bacca">1.16. Conjuguée</a></li>
+<li><a href="#org0603d64">1.1. Dépendances</a></li>
+<li><a href="#orgd10d00b">1.2. Définition</a></li>
+<li><a href="#orgd0c65f2">1.3. Composantes</a></li>
+<li><a href="#orgcca08e8">1.4. Blocs</a></li>
+<li><a href="#orgd44d501">1.5. Partitionnement en blocs</a></li>
+<li><a href="#org83fe23b">1.6. Formes lignes et colonnes</a></li>
+<li><a href="#org0a8df15">1.7. Transposée</a></li>
+<li><a href="#org2d503b1">1.8. Vecteurs lignes et colonnes</a></li>
+<li><a href="#org8ef4618">1.9. Carrées et rectangulaires</a></li>
+<li><a href="#org0ce6bcc">1.10. Matrices diagonales</a></li>
+<li><a href="#org5e95b7c">1.11. Matrices triangulaires</a></li>
+<li><a href="#org6fc6652">1.12. Egalité</a></li>
+<li><a href="#orgf754a34">1.13. Ordre partiel</a></li>
+<li><a href="#orgc5bb5a8">1.14. Addition et soustraction</a></li>
+<li><a href="#orgc93ff7c">1.15. Multiplication mixte</a></li>
+<li><a href="#org1423499">1.16. Conjuguée</a></li>
 </ul>
 </div>
 
@@ -419,10 +430,8 @@
 \label{chap:matrices}
 </p>
 </div>
-
-
-<div id="outline-container-org7d3aaf2" class="outline-3">
-<h3 id="org7d3aaf2"><span class="section-number-3">1.1.</span> Dépendances</h3>
+<div id="outline-container-org0603d64" class="outline-3">
+<h3 id="org0603d64"><span class="section-number-3">1.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:reel} : Les réels</li>
@@ -430,10 +439,8 @@
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-org5c2e0b5" class="outline-3">
-<h3 id="org5c2e0b5"><span class="section-number-3">1.2.</span> Définition</h3>
+<div id="outline-container-orgd10d00b" class="outline-3">
+<h3 id="orgd10d00b"><span class="section-number-3">1.2.</span> Définition</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Les matrices sont des tableaux de réels, de complexes, ou de composantes d'une autre nature appartenant à un corps quelconque. Voici un exemple d'une matrice à \(m\) lignes et \(n\) colonnes :
@@ -472,10 +479,8 @@ On note \(\matrice(\corps,m,n)\) l'ensemble des matrices à \(m\) lignes et \(n\
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org9a1dae3" class="outline-3">
-<h3 id="org9a1dae3"><span class="section-number-3">1.3.</span> Composantes</h3>
+<div id="outline-container-orgd0c65f2" class="outline-3">
+<h3 id="orgd0c65f2"><span class="section-number-3">1.3.</span> Composantes</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Soit \(A = (a_{ij})_{i,j}\). La fonction \(\composante_{ij}\) donne la composante située à la \(i^{ème}\) ligne et à la \(j^{ème}\) colonne :
@@ -486,10 +491,8 @@ Soit \(A = (a_{ij})_{i,j}\). La fonction \(\composante_{ij}\) donne la composant
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgc41977a" class="outline-3">
-<h3 id="orgc41977a"><span class="section-number-3">1.4.</span> Blocs</h3>
+<div id="outline-container-orgcca08e8" class="outline-3">
+<h3 id="orgcca08e8"><span class="section-number-3">1.4.</span> Blocs</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Soit \(A = (a_{ij})_{i,j}\). La fonction \(\bloc_{ijkl}\) donne la sous-matrice située entre la \(i^{ème}\) et la \(j^{ème}\) ligne, ainsi qu'entre la \(k^{ième}\) et la \(l^{ième}\) colonne :
@@ -516,10 +519,8 @@ On appelle bloc une telle sous-matrice.
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org9f95f8a" class="outline-3">
-<h3 id="org9f95f8a"><span class="section-number-3">1.5.</span> Partitionnement en blocs</h3>
+<div id="outline-container-orgd44d501" class="outline-3">
+<h3 id="orgd44d501"><span class="section-number-3">1.5.</span> Partitionnement en blocs</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Il est parfois très utile de partitionner une matrice en blocs, ou de former une matrice plus grande à partir de matrices de tailles plus petites. On note alors :
@@ -555,10 +556,8 @@ où les \(b_{ij},c_{ij},d_{ij},e_{ij}\) sont respectivement les composantes des 
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org5bd5eb3" class="outline-3">
-<h3 id="org5bd5eb3"><span class="section-number-3">1.6.</span> Formes lignes et colonnes</h3>
+<div id="outline-container-org83fe23b" class="outline-3">
+<h3 id="org83fe23b"><span class="section-number-3">1.6.</span> Formes lignes et colonnes</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 On peut exprimer une matrice \(A \in \matrice(\corps,m,n)\) sous la forme de lignes superposées. Soit :
@@ -605,10 +604,8 @@ où les \(c_i \in \matrice(\corps,m,1)\) sont les colonnes de \(A\). On note :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org68933ee" class="outline-3">
-<h3 id="org68933ee"><span class="section-number-3">1.7.</span> Transposée</h3>
+<div id="outline-container-org0a8df15" class="outline-3">
+<h3 id="org0a8df15"><span class="section-number-3">1.7.</span> Transposée</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 Transposer une matrice \(A = (a_{ij})_{i,j} \in \matrice(\corps,m,n)\) consiste à agencer ses lignes en colonnes et vice-versa :
@@ -641,10 +638,8 @@ On a clairement :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org7c695c2" class="outline-3">
-<h3 id="org7c695c2"><span class="section-number-3">1.8.</span> Vecteurs lignes et colonnes</h3>
+<div id="outline-container-org2d503b1" class="outline-3">
+<h3 id="org2d503b1"><span class="section-number-3">1.8.</span> Vecteurs lignes et colonnes</h3>
 <div class="outline-text-3" id="text-1-8">
 <p>
 Les vecteurs ligne sont des matrices ne possédant qu'une seule ligne. Ils sont donc de taille générique \((1,n)\). Les vecteurs colonne sont des matrices ne possédant qu'une seule colonne. Ils sont donc de taille générique \((m,1)\).
@@ -666,9 +661,8 @@ On a aussi :
 \[x_i = \composante_i x\]
 </p>
 </div>
-
-<div id="outline-container-orgd425e49" class="outline-4">
-<h4 id="orgd425e49"><span class="section-number-4">1.8.1.</span> Equivalence avec \(\corps^n\)</h4>
+<div id="outline-container-orga0622c3" class="outline-4">
+<h4 id="orga0622c3"><span class="section-number-4">1.8.1.</span> Equivalence avec \(\corps^n\)</h4>
 <div class="outline-text-4" id="text-1-8-1">
 <p>
 A partir d'un $n$-tuple \((x_1,x_2,...,x_n) \in \corps^n\), on peut former un vecteur ligne \(x \in \matrice(\corps,1,n)\) par :
@@ -705,10 +699,8 @@ On a donc \(\matrice(\corps,1,n),\matrice(\corps,n,1) \equiv \corps^n\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org8ff18d1" class="outline-4">
-<h4 id="org8ff18d1"><span class="section-number-4">1.8.2.</span> Notation</h4>
+<div id="outline-container-orge3e3a6d" class="outline-4">
+<h4 id="orge3e3a6d"><span class="section-number-4">1.8.2.</span> Notation</h4>
 <div class="outline-text-4" id="text-1-8-2">
 <p>
 Sauf mention contraire, nous convenons dans la suite que tout vecteur \(u \in  \corps^n\) sera associé à un vecteur {\em colonne} de même nom \(u \in \matrice(\corps,n,1)\). Si nous voulons utiliser un vecteur {\em ligne}, nous le noterons alors \(u^T\) (ou \(u^\dual\) pour des raisons qui apparaîtront plus loin).
@@ -716,20 +708,16 @@ Sauf mention contraire, nous convenons dans la suite que tout vecteur \(u \in  \
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org2e06013" class="outline-3">
-<h3 id="org2e06013"><span class="section-number-3">1.9.</span> Carrées et rectangulaires</h3>
+<div id="outline-container-org8ef4618" class="outline-3">
+<h3 id="org8ef4618"><span class="section-number-3">1.9.</span> Carrées et rectangulaires</h3>
 <div class="outline-text-3" id="text-1-9">
 <p>
 Les matrices \(A \in \matrice(\corps,n,n)\) ayant même nombre de colonnes et de lignes sont dites « carrées ». Les matrices \(A \in \matrice(\corps,m,n)\) avec \(m \ne n\) sont dites « rectangulaires ». Lorsque \(m \strictinferieur n\), on dit que la matrice est « longue ». Si \(m \strictsuperieur n\), on dit que la matrice est « haute ».
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgeb5f761" class="outline-3">
-<h3 id="orgeb5f761"><span class="section-number-3">1.10.</span> Matrices diagonales</h3>
+<div id="outline-container-org0ce6bcc" class="outline-3">
+<h3 id="org0ce6bcc"><span class="section-number-3">1.10.</span> Matrices diagonales</h3>
 <div class="outline-text-3" id="text-1-10">
 <p>
 Une matrice diagonale contient des composantes nulles partout, à l'exception de la diagonale où aucune contrainte n'est fixée. On peut représenter une matrice diagonale \(D \in \matrice(\corps,m,n)\) par :
@@ -765,10 +753,8 @@ d_i & \text{ si } i = j \in \{1,2,...,p\} \\
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org6ff2d52" class="outline-4">
-<h4 id="org6ff2d52"><span class="section-number-4">1.10.1.</span> Carrée</h4>
+<div id="outline-container-org892f60c" class="outline-4">
+<h4 id="org892f60c"><span class="section-number-4">1.10.1.</span> Carrée</h4>
 <div class="outline-text-4" id="text-1-10-1">
 <p>
 Dans le cas particulier où \(m = n\), on note aussi :
@@ -780,10 +766,8 @@ Dans le cas particulier où \(m = n\), on note aussi :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org3d2fdd5" class="outline-3">
-<h3 id="org3d2fdd5"><span class="section-number-3">1.11.</span> Matrices triangulaires</h3>
+<div id="outline-container-org5e95b7c" class="outline-3">
+<h3 id="org5e95b7c"><span class="section-number-3">1.11.</span> Matrices triangulaires</h3>
 <div class="outline-text-3" id="text-1-11">
 <p>
 Les composantes des matrices triangulaires supérieures ne peuvent être non nulles qu'au-dessus de la diagonale, c'est-à-dire lorsque \(i \le j\). Elles peuvent se représenter par :
@@ -838,10 +822,8 @@ où :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org6429743" class="outline-3">
-<h3 id="org6429743"><span class="section-number-3">1.12.</span> Egalité</h3>
+<div id="outline-container-org6fc6652" class="outline-3">
+<h3 id="org6fc6652"><span class="section-number-3">1.12.</span> Egalité</h3>
 <div class="outline-text-3" id="text-1-12">
 <p>
 Il est clair que deux matrices \(A,B \in \matrice(\corps,m,n)\) :
@@ -869,10 +851,8 @@ pour tout \((i,j) \in \{ 1,2,...,m \} \times \{ 1,2,...,n \}\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgabde338" class="outline-3">
-<h3 id="orgabde338"><span class="section-number-3">1.13.</span> Ordre partiel</h3>
+<div id="outline-container-orgf754a34" class="outline-3">
+<h3 id="orgf754a34"><span class="section-number-3">1.13.</span> Ordre partiel</h3>
 <div class="outline-text-3" id="text-1-13">
 <p>
 Soit les matrices \(A,B \in \matrice(\corps,m,n)\) :
@@ -900,10 +880,8 @@ pour tout \((i,j) \in \{ 1,2,...,m \} \times \{ 1,2,...,n \}\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org93c2c1a" class="outline-3">
-<h3 id="org93c2c1a"><span class="section-number-3">1.14.</span> Addition et soustraction</h3>
+<div id="outline-container-orgc5bb5a8" class="outline-3">
+<h3 id="orgc5bb5a8"><span class="section-number-3">1.14.</span> Addition et soustraction</h3>
 <div class="outline-text-3" id="text-1-14">
 <p>
 Soit les matrices de tailles identiques \(A, B \in \matrice(\corps,m,n)\) :
@@ -939,10 +917,8 @@ On a donc clairement :
 \[A + B = B + A\]
 </p>
 </div>
-
-
-<div id="outline-container-org00ddb26" class="outline-4">
-<h4 id="org00ddb26"><span class="section-number-4">1.14.1.</span> Neutre</h4>
+<div id="outline-container-orga8707b1" class="outline-4">
+<h4 id="orga8707b1"><span class="section-number-4">1.14.1.</span> Neutre</h4>
 <div class="outline-text-4" id="text-1-14-1">
 <p>
 La matrice nulle \(0\) est le neutre pour cette opération :
@@ -966,10 +942,8 @@ de taille \((m,n)\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgc050622" class="outline-4">
-<h4 id="orgc050622"><span class="section-number-4">1.14.2.</span> Opposé</h4>
+<div id="outline-container-org57ce99f" class="outline-4">
+<h4 id="org57ce99f"><span class="section-number-4">1.14.2.</span> Opposé</h4>
 <div class="outline-text-4" id="text-1-14-2">
 <p>
 L'opposé de \(A\), noté \(-A\), est tel que :
@@ -989,10 +963,8 @@ On a donc clairement :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org2cdc326" class="outline-3">
-<h3 id="org2cdc326"><span class="section-number-3">1.15.</span> Multiplication mixte</h3>
+<div id="outline-container-orgc93ff7c" class="outline-3">
+<h3 id="orgc93ff7c"><span class="section-number-3">1.15.</span> Multiplication mixte</h3>
 <div class="outline-text-3" id="text-1-15">
 <p>
 On définit la multiplication mixte \(\cdot : \corps \times \matrice(\corps,m,n) \to \matrice(\corps,m,n)\) par :
@@ -1021,10 +993,8 @@ A \cdot \beta = \beta \cdot A \\
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgd1bacca" class="outline-3">
-<h3 id="orgd1bacca"><span class="section-number-3">1.16.</span> Conjuguée</h3>
+<div id="outline-container-org1423499" class="outline-3">
+<h3 id="org1423499"><span class="section-number-3">1.16.</span> Conjuguée</h3>
 <div class="outline-text-3" id="text-1-16">
 <p>
 La conjuguée d'une matrice \(A = (a_{ij})_{i,j} \in \matrice(\setC,m,n)\) est définie par la conjuguée des composantes :
@@ -1036,14 +1006,12 @@ La conjuguée d'une matrice \(A = (a_{ij})_{i,j} \in \matrice(\setC,m,n)\) est d
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgcfd829b" class="outline-2">
-<h2 id="orgcfd829b"><span class="section-number-2">2.</span> Progressions matricielles</h2>
+<div id="outline-container-org8f05b50" class="outline-2">
+<h2 id="org8f05b50"><span class="section-number-2">2.</span> Progressions matricielles</h2>
 <div class="outline-text-2" id="text-2">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-2" role="doc-toc">
 <ul>
-<li><a href="#orgd0690a0">2.1. Géométrique</a></li>
+<li><a href="#orgca6acae">2.1. Géométrique</a></li>
 </ul>
 </div>
 
@@ -1051,10 +1019,8 @@ La conjuguée d'une matrice \(A = (a_{ij})_{i,j} \in \matrice(\setC,m,n)\) est d
 \label{chap:progressionsMatricielles}
 </p>
 </div>
-
-
-<div id="outline-container-orgd0690a0" class="outline-3">
-<h3 id="orgd0690a0"><span class="section-number-3">2.1.</span> Géométrique</h3>
+<div id="outline-container-orgca6acae" class="outline-3">
+<h3 id="orgca6acae"><span class="section-number-3">2.1.</span> Géométrique</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Soit une matrice carréé \(A \in \matrice(\corps, n, n)\).
@@ -1064,10 +1030,8 @@ Soit une matrice carréé \(A \in \matrice(\corps, n, n)\).
 \[G_N = \sum_{k = 0}^N A^k = I + A + A^2 + ... + A^N\]
 </p>
 </div>
-
-
-<div id="outline-container-orgf024071" class="outline-4">
-<h4 id="orgf024071"><span class="section-number-4">2.1.1.</span> Forme gauche</h4>
+<div id="outline-container-orgd0c695a" class="outline-4">
+<h4 id="orgd0c695a"><span class="section-number-4">2.1.1.</span> Forme gauche</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <p>
 \[G_N = I + A \cdot (I + A + ... + A^N) - A^{N + 1}\]
@@ -1086,10 +1050,8 @@ Soit une matrice carréé \(A \in \matrice(\corps, n, n)\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org60b1f2e" class="outline-4">
-<h4 id="org60b1f2e"><span class="section-number-4">2.1.2.</span> Forme droite</h4>
+<div id="outline-container-org5f2caa5" class="outline-4">
+<h4 id="org5f2caa5"><span class="section-number-4">2.1.2.</span> Forme droite</h4>
 <div class="outline-text-4" id="text-2-1-2">
 <p>
 \[G_N = I + (I + A + ... + A^N) \cdot A - A^{N + 1}\]
@@ -1108,10 +1070,8 @@ Soit une matrice carréé \(A \in \matrice(\corps, n, n)\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org673e074" class="outline-4">
-<h4 id="org673e074"><span class="section-number-4">2.1.3.</span> Inversible</h4>
+<div id="outline-container-org9f80a54" class="outline-4">
+<h4 id="org9f80a54"><span class="section-number-4">2.1.3.</span> Inversible</h4>
 <div class="outline-text-4" id="text-2-1-3">
 <p>
 \[\sum_{k = 0}^N A^k = (I - A)^{-1} \cdot (I - A^{N + 1})\]
@@ -1124,25 +1084,23 @@ Soit une matrice carréé \(A \in \matrice(\corps, n, n)\).
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org722166e" class="outline-2">
-<h2 id="org722166e"><span class="section-number-2">3.</span> Polynômes</h2>
+<div id="outline-container-org299f538" class="outline-2">
+<h2 id="org299f538"><span class="section-number-2">3.</span> Polynômes</h2>
 <div class="outline-text-2" id="text-3">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-3" role="doc-toc">
 <ul>
-<li><a href="#org856f495">3.1. Dépendances</a></li>
-<li><a href="#orgc0b9b5b">3.2. Définition</a></li>
-<li><a href="#org851d533">3.3. Monôme</a></li>
-<li><a href="#orgf8ae4fa">3.4. Racines</a></li>
-<li><a href="#org4b44666">3.5. Factorisation</a></li>
-<li><a href="#orgb07f704">3.6. Binômes canoniques</a></li>
-<li><a href="#orgdfd1452">3.7. Binômes génériques</a></li>
-<li><a href="#org22b3087">3.8. Second degré</a></li>
-<li><a href="#org4215cff">3.9. Symétrie</a></li>
-<li><a href="#orga3fb229">3.10. Cas particuliers</a></li>
-<li><a href="#org486b5a6">3.11. Bernstein</a></li>
-<li><a href="#org2850409">3.12. Division Euclidienne</a></li>
+<li><a href="#org45ee6a5">3.1. Dépendances</a></li>
+<li><a href="#org8ec3ec0">3.2. Définition</a></li>
+<li><a href="#org10078e9">3.3. Monôme</a></li>
+<li><a href="#org086826c">3.4. Racines</a></li>
+<li><a href="#orgeee88c8">3.5. Factorisation</a></li>
+<li><a href="#orgb2bec80">3.6. Binômes canoniques</a></li>
+<li><a href="#org94c4509">3.7. Binômes génériques</a></li>
+<li><a href="#orgf190643">3.8. Second degré</a></li>
+<li><a href="#org6708b50">3.9. Symétrie</a></li>
+<li><a href="#org02a22f9">3.10. Cas particuliers</a></li>
+<li><a href="#org543135a">3.11. Bernstein</a></li>
+<li><a href="#org97834c8">3.12. Division Euclidienne</a></li>
 </ul>
 </div>
 
@@ -1150,10 +1108,8 @@ Soit une matrice carréé \(A \in \matrice(\corps, n, n)\).
 \label{chap:polynomes}
 </p>
 </div>
-
-
-<div id="outline-container-org856f495" class="outline-3">
-<h3 id="org856f495"><span class="section-number-3">3.1.</span> Dépendances</h3>
+<div id="outline-container-org45ee6a5" class="outline-3">
+<h3 id="org45ee6a5"><span class="section-number-3">3.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:reel} : Les réels</li>
@@ -1163,10 +1119,8 @@ Soit une matrice carréé \(A \in \matrice(\corps, n, n)\).
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-orgc0b9b5b" class="outline-3">
-<h3 id="orgc0b9b5b"><span class="section-number-3">3.2.</span> Définition</h3>
+<div id="outline-container-org8ec3ec0" class="outline-3">
+<h3 id="org8ec3ec0"><span class="section-number-3">3.2.</span> Définition</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Soit un corps \(\corps\). On dit qu'une fonction \(p : \corps \mapsto \corps\) est un polynôme de degré \(n\) si on peut trouver des éléments \(a_0,a_1,...a_n \in \corps\) tels que :
@@ -1189,10 +1143,8 @@ Un cas particulier important est celui des polynômes réels :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org851d533" class="outline-3">
-<h3 id="org851d533"><span class="section-number-3">3.3.</span> Monôme</h3>
+<div id="outline-container-org10078e9" class="outline-3">
+<h3 id="org10078e9"><span class="section-number-3">3.3.</span> Monôme</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Un monôme \(\mu_i : \corps \mapsto \corps\) est une fonction de la forme :
@@ -1207,10 +1159,8 @@ pour tout \(x \in \corps\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgf8ae4fa" class="outline-3">
-<h3 id="orgf8ae4fa"><span class="section-number-3">3.4.</span> Racines</h3>
+<div id="outline-container-org086826c" class="outline-3">
+<h3 id="org086826c"><span class="section-number-3">3.4.</span> Racines</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 On dit que \(r\) est une racine du polynôme \(p\) si :
@@ -1317,10 +1267,8 @@ Le polynôme \(q_{n-1}\) possède par conséquent au moins \(m-1 \ge n-1\) racin
 pour tout \(x \in \corps\). Le polynôme \(p_n\) est également nul et la thèse est démontrée.
 </p>
 </div>
-
-
-<div id="outline-container-org4badd7e" class="outline-4">
-<h4 id="org4badd7e"><span class="section-number-4">3.4.1.</span> Egalité</h4>
+<div id="outline-container-org97f9eb2" class="outline-4">
+<h4 id="org97f9eb2"><span class="section-number-4">3.4.1.</span> Egalité</h4>
 <div class="outline-text-4" id="text-3-4-1">
 <p>
 Si deux polynômes \(p_1,p_2 \in \mathcal{P}_n\) sont égaux en \(m + 1 \ge n + 1\) points distincts, alors le polynôme de degré \(n\) :
@@ -1336,10 +1284,8 @@ admet \(m+1\) racines. Il est donc nul et \(p_1 = p_2\).
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org4b44666" class="outline-3">
-<h3 id="org4b44666"><span class="section-number-3">3.5.</span> Factorisation</h3>
+<div id="outline-container-orgeee88c8" class="outline-3">
+<h3 id="orgeee88c8"><span class="section-number-3">3.5.</span> Factorisation</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 Choisissons un polynôme \(p\in\mathcal{P}_n\) qui admet \(n\) racines
@@ -1399,10 +1345,8 @@ on a \(A = a_n\) et :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgb07f704" class="outline-3">
-<h3 id="orgb07f704"><span class="section-number-3">3.6.</span> Binômes canoniques</h3>
+<div id="outline-container-orgb2bec80" class="outline-3">
+<h3 id="orgb2bec80"><span class="section-number-3">3.6.</span> Binômes canoniques</h3>
 <div class="outline-text-3" id="text-3-6">
 <p>
 Le binôme canonique de degré \(n \in \setN\) est une fonction \(b_n : \corps \to \corps\) définie par :
@@ -1521,10 +1465,8 @@ Il est donc facile d'évaluer les coefficients de \(b_n\) à partir des coeffici
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgdfd1452" class="outline-3">
-<h3 id="orgdfd1452"><span class="section-number-3">3.7.</span> Binômes génériques</h3>
+<div id="outline-container-org94c4509" class="outline-3">
+<h3 id="org94c4509"><span class="section-number-3">3.7.</span> Binômes génériques</h3>
 <div class="outline-text-3" id="text-3-7">
 <p>
 Le binôme générique de degré \(n \in \setN\) est une fonction \(B_n : \corps \times \corps
@@ -1552,10 +1494,8 @@ c'est-à-dire :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org22b3087" class="outline-3">
-<h3 id="org22b3087"><span class="section-number-3">3.8.</span> Second degré</h3>
+<div id="outline-container-orgf190643" class="outline-3">
+<h3 id="orgf190643"><span class="section-number-3">3.8.</span> Second degré</h3>
 <div class="outline-text-3" id="text-3-8">
 <p>
 Le binôme du second degré est couramment utilisé :
@@ -1566,10 +1506,8 @@ Le binôme du second degré est couramment utilisé :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org4215cff" class="outline-3">
-<h3 id="org4215cff"><span class="section-number-3">3.9.</span> Symétrie</h3>
+<div id="outline-container-org6708b50" class="outline-3">
+<h3 id="org6708b50"><span class="section-number-3">3.9.</span> Symétrie</h3>
 <div class="outline-text-3" id="text-3-9">
 <p>
 Par commutativité de l'addition, on a \(B_n(x,y) = B_n(y,x)\) et :
@@ -1596,10 +1534,8 @@ On en déduit en égalisant les coefficients de \(x^k\) que :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orga3fb229" class="outline-3">
-<h3 id="orga3fb229"><span class="section-number-3">3.10.</span> Cas particuliers</h3>
+<div id="outline-container-org02a22f9" class="outline-3">
+<h3 id="org02a22f9"><span class="section-number-3">3.10.</span> Cas particuliers</h3>
 <div class="outline-text-3" id="text-3-10">
 <p>
 En considérant le cas particuliers \(x = y = 1\), on constate que :
@@ -1626,10 +1562,8 @@ Lorsque \(y = 1 - x\) on arrive à :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org486b5a6" class="outline-3">
-<h3 id="org486b5a6"><span class="section-number-3">3.11.</span> Bernstein</h3>
+<div id="outline-container-org543135a" class="outline-3">
+<h3 id="org543135a"><span class="section-number-3">3.11.</span> Bernstein</h3>
 <div class="outline-text-3" id="text-3-11">
 <p>
 Soit \(i,n \in \setN\) avec \(i \le n\). Les polynômes de Bernstein \(B_i^n\) sont définis par :
@@ -1680,10 +1614,8 @@ quelle que soit la valeur de \(t \in [0,1]\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org2850409" class="outline-3">
-<h3 id="org2850409"><span class="section-number-3">3.12.</span> Division Euclidienne</h3>
+<div id="outline-container-org97834c8" class="outline-3">
+<h3 id="org97834c8"><span class="section-number-3">3.12.</span> Division Euclidienne</h3>
 <div class="outline-text-3" id="text-3-12">
 <p>
 Soit deux polynomes \(a \in \mathcal{P}_n\) et \(b \in \mathcal{P}_m\)
@@ -1731,7 +1663,7 @@ avec \(p \strictinferieur m \le n\).
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2023-05-10 mer 16:43</p>
+<p class="date">Created: 2025-10-12 dim 15:24</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

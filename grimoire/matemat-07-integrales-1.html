@@ -3,13 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2023-05-10 mer 16:44 -->
+<!-- 2025-10-12 dim 15:24 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 07 : Intégrales - 1</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
-<style>
+<style type="text/css">
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -193,27 +193,38 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 </head>
 <body>
 <div id="content" class="content">
@@ -230,9 +241,9 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4cb01df">1. Mesures</a></li>
-<li><a href="#orge17c1ad">2. Essentialité</a></li>
-<li><a href="#orgb554e00">3. Extrema essentiels</a></li>
+<li><a href="#orged4f6ad">1. Mesures</a></li>
+<li><a href="#org8c44874">2. Essentialité</a></li>
+<li><a href="#org1348302">3. Extrema essentiels</a></li>
 </ul>
 </div>
 </div>
@@ -360,6 +371,7 @@
 \newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
 \newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
 \newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
 \newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
 \newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
@@ -390,21 +402,20 @@
 \newcommand{\petito}[1]{o\left(#1\right)}
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
-
-<div id="outline-container-org4cb01df" class="outline-2">
-<h2 id="org4cb01df"><span class="section-number-2">1.</span> Mesures</h2>
+<div id="outline-container-orged4f6ad" class="outline-2">
+<h2 id="orged4f6ad"><span class="section-number-2">1.</span> Mesures</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-1" role="doc-toc">
 <ul>
-<li><a href="#org8285ecb">1.1. Dépendances</a></li>
-<li><a href="#org91a34af">1.2. Introduction</a></li>
-<li><a href="#orgdea430f">1.3. Lebesgue</a></li>
-<li><a href="#org006b436">1.4. Mesure de Stieltjes</a></li>
-<li><a href="#org160b899">1.5. Dirac</a></li>
-<li><a href="#org1505a4b">1.6. Mesure produit</a></li>
-<li><a href="#orga984d15">1.7. Fonction mesurable</a></li>
-<li><a href="#org987ad55">1.8. Opposé d'une fonction mesurable</a></li>
-<li><a href="#orgc279a91">1.9. Fonctions extrema</a></li>
+<li><a href="#orgdce0812">1.1. Dépendances</a></li>
+<li><a href="#org6c396f9">1.2. Introduction</a></li>
+<li><a href="#org264ae64">1.3. Lebesgue</a></li>
+<li><a href="#org54ab6d5">1.4. Mesure de Stieltjes</a></li>
+<li><a href="#orgf34e732">1.5. Dirac</a></li>
+<li><a href="#org2a5257e">1.6. Mesure produit</a></li>
+<li><a href="#org489a2ad">1.7. Fonction mesurable</a></li>
+<li><a href="#orge2632ef">1.8. Opposé d'une fonction mesurable</a></li>
+<li><a href="#orge031659">1.9. Fonctions extrema</a></li>
 </ul>
 </div>
 
@@ -412,10 +423,8 @@
 \label{chap:mesure}
 </p>
 </div>
-
-
-<div id="outline-container-org8285ecb" class="outline-3">
-<h3 id="org8285ecb"><span class="section-number-3">1.1.</span> Dépendances</h3>
+<div id="outline-container-orgdce0812" class="outline-3">
+<h3 id="orgdce0812"><span class="section-number-3">1.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:ensemble} : Les ensembles</li>
@@ -424,10 +433,8 @@
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-org91a34af" class="outline-3">
-<h3 id="org91a34af"><span class="section-number-3">1.2.</span> Introduction</h3>
+<div id="outline-container-org6c396f9" class="outline-3">
+<h3 id="org6c396f9"><span class="section-number-3">1.2.</span> Introduction</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 L'objectif des mesures est de « mesurer » des ensembles, ou plutôt des sous-ensembles d'un ensemble donné. Soit l'ensemble \(\Omega\) et une tribu de sous-ensembles \(\mathcal{T} \subseteq \sousens(\Omega)\). Une mesure sur \(\mathcal{T}\) est une fonction \(\mu : \mathcal{T} \mapsto \setR\) associant une valeur réelle à chaque ensemble de la tribu. On demande que cette mesure soit positive :
@@ -461,10 +468,8 @@ pour tout \((i,j)\) tels que \(i \ne j\). On exige dans ce cas que la mesure vé
 \[\mu\left( \bigcup_i A_i \right) = \sum_i \mu(A_i)\]
 </p>
 </div>
-
-
-<div id="outline-container-org5d3386f" class="outline-4">
-<h4 id="org5d3386f"><span class="section-number-4">1.2.1.</span> Inclusion</h4>
+<div id="outline-container-org76a9f19" class="outline-4">
+<h4 id="org76a9f19"><span class="section-number-4">1.2.1.</span> Inclusion</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 Soit \(A,B \in \mathcal{T}\) avec \(A \subseteq B\). Comme \(C = B \setminus A\) et \(A\) vérifient \(C \cup A = B\) et \(C \cap A = \emptyset\), on a :
@@ -483,10 +488,8 @@ La mesure d'un ensemble « plus petit » au sens de l'inclusion est donc plus 
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgc5fd8e7" class="outline-4">
-<h4 id="orgc5fd8e7"><span class="section-number-4">1.2.2.</span> Union</h4>
+<div id="outline-container-org67f3085" class="outline-4">
+<h4 id="org67f3085"><span class="section-number-4">1.2.2.</span> Union</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 Soit \(A,B \in \mathcal{T}\). Comme \(A \cup B = (A \setminus B) \cup B\) et \((A \setminus B) \cap B = \emptyset\), on a :
@@ -521,10 +524,8 @@ Puis, par passage à la limite :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgcc4cb0b" class="outline-4">
-<h4 id="orgcc4cb0b"><span class="section-number-4">1.2.3.</span> Appellation</h4>
+<div id="outline-container-org7b1f36f" class="outline-4">
+<h4 id="org7b1f36f"><span class="section-number-4">1.2.3.</span> Appellation</h4>
 <div class="outline-text-4" id="text-1-2-3">
 <p>
 On dit qu'un ensemble \(A\) est mesurable (pour \(\mu\)) si \(A \in \mathcal{T}\). Dans la suite, nous considérons une mesure \(\mu : \mathcal{T} \mapsto \setR\) et un ensemble mesurable \(A \in \mathcal{T}\).
@@ -532,10 +533,8 @@ On dit qu'un ensemble \(A\) est mesurable (pour \(\mu\)) si \(A \in \mathcal{T}\
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgdea430f" class="outline-3">
-<h3 id="orgdea430f"><span class="section-number-3">1.3.</span> Lebesgue</h3>
+<div id="outline-container-org264ae64" class="outline-3">
+<h3 id="org264ae64"><span class="section-number-3">1.3.</span> Lebesgue</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 La mesure de Lebesgue \(\mu_L\) est définie sur la tribu \(\mathcal{T}\) engendrée par les ensembles ouverts de \(\setR\). Elle exprime simplement la longueur d'un intervalle. Pour tout :
@@ -585,10 +584,8 @@ on dit que l'ensemble \(A\) est mesurable au sens de Lebesgue et on définit :
 \[\mu_L(A) = \mu_I(A) = \mu^S(A)\]
 </p>
 </div>
-
-
-<div id="outline-container-org8c57e9e" class="outline-4">
-<h4 id="org8c57e9e"><span class="section-number-4">1.3.1.</span> Mesure nulle</h4>
+<div id="outline-container-orgd8bdac7" class="outline-4">
+<h4 id="orgd8bdac7"><span class="section-number-4">1.3.1.</span> Mesure nulle</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <p>
 Pour tout ensemble \(N\) inclus dans un ensemble \(A \in \mathcal{T}\) de mesure nulle :
@@ -607,10 +604,8 @@ on définit :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org7783311" class="outline-4">
-<h4 id="org7783311"><span class="section-number-4">1.3.2.</span> Singleton</h4>
+<div id="outline-container-orgfd01294" class="outline-4">
+<h4 id="orgfd01294"><span class="section-number-4">1.3.2.</span> Singleton</h4>
 <div class="outline-text-4" id="text-1-3-2">
 <p>
 On voit que les ensembles de la forme \(\{a\} = [a,a]\) sont de mesure nulle :
@@ -647,10 +642,8 @@ et donc :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org006b436" class="outline-3">
-<h3 id="org006b436"><span class="section-number-3">1.4.</span> Mesure de Stieltjes</h3>
+<div id="outline-container-org54ab6d5" class="outline-3">
+<h3 id="org54ab6d5"><span class="section-number-3">1.4.</span> Mesure de Stieltjes</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 On associe à toute fonction croissante \(g : \setR \mapsto \setR\) une mesure de Stieltjes \(\mu_g\). Pour tout :
@@ -676,10 +669,8 @@ Soit \(\mathfrak{J}\) l'ensemble des collections au plus dénombrables d'interva
 \[\mu_g(A) = \inf \accolades{ \sum_{n \in N} \mu_L(I_n) : \{ I_n : n \in N \subseteq \setN \} \in \mathfrak{J} , \ A \subseteq \bigcup_{n \in N} I_n}\]
 </p>
 </div>
-
-
-<div id="outline-container-org09c6bf5" class="outline-4">
-<h4 id="org09c6bf5"><span class="section-number-4">1.4.1.</span> Mesure nulle</h4>
+<div id="outline-container-orgc8c85a9" class="outline-4">
+<h4 id="orgc8c85a9"><span class="section-number-4">1.4.1.</span> Mesure nulle</h4>
 <div class="outline-text-4" id="text-1-4-1">
 <p>
 Pour tout ensemble \(N\) inclus dans un ensemble \(A \in \mathcal{T}\) de mesure nulle :
@@ -699,10 +690,8 @@ on définit :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org160b899" class="outline-3">
-<h3 id="org160b899"><span class="section-number-3">1.5.</span> Dirac</h3>
+<div id="outline-container-orgf34e732" class="outline-3">
+<h3 id="orgf34e732"><span class="section-number-3">1.5.</span> Dirac</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 La mesure de Dirac \(\mu_D^a\) en \(a\) est définie sur \(\sousens(\Omega)\). Il s'agit d'une mesure permettant de détecter si un \(A \subseteq \Omega\) donné contient \(a\). Elle est donc basée sur les fonctions indicatrices :
@@ -723,10 +712,8 @@ La mesure de Dirac \(\mu_D^a\) en \(a\) est définie sur \(\sousens(\Omega)\). I
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org1505a4b" class="outline-3">
-<h3 id="org1505a4b"><span class="section-number-3">1.6.</span> Mesure produit</h3>
+<div id="outline-container-org2a5257e" class="outline-3">
+<h3 id="org2a5257e"><span class="section-number-3">1.6.</span> Mesure produit</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 Soit les tribus \(\mathcal{T}_1\) et \(\mathcal{T}_2\) et la tribu produit :
@@ -744,10 +731,8 @@ A partir de mesures \(\mu : \mathcal{T}_1 \mapsto \setR\) et \(\nu : \mathcal{T}
 \[(\mu \otimes \nu)(A \times B) = \mu(A) \cdot \nu(B)\]
 </p>
 </div>
-
-
-<div id="outline-container-org5a3ee49" class="outline-4">
-<h4 id="org5a3ee49"><span class="section-number-4">1.6.1.</span> Dimension \(n\)</h4>
+<div id="outline-container-orga686c9d" class="outline-4">
+<h4 id="orga686c9d"><span class="section-number-4">1.6.1.</span> Dimension \(n\)</h4>
 <div class="outline-text-4" id="text-1-6-1">
 <p>
 On généralise la mesure de Lebesgue sur \(\setR^n\) par :
@@ -764,10 +749,8 @@ supremum et infimum.
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orga984d15" class="outline-3">
-<h3 id="orga984d15"><span class="section-number-3">1.7.</span> Fonction mesurable</h3>
+<div id="outline-container-org489a2ad" class="outline-3">
+<h3 id="org489a2ad"><span class="section-number-3">1.7.</span> Fonction mesurable</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 On dit qu'une fonction \(f : A \mapsto \setR\) est mesurable (au sens de la tribu \(\mathcal{T}\)) si la relation \(f^{-1}\) vérifie \(f^{-1}(]a,+\infty[) \in \mathcal{T}\) et \(f^{-1}(]-\infty,a[) \in \mathcal{T}\) pour tout \(a \in \setR\). On a donc :
@@ -782,10 +765,8 @@ On dit qu'une fonction \(f : A \mapsto \setR\) est mesurable (au sens de la trib
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org377800b" class="outline-4">
-<h4 id="org377800b"><span class="section-number-4">1.7.1.</span> Corollaires</h4>
+<div id="outline-container-org04b6e6a" class="outline-4">
+<h4 id="org04b6e6a"><span class="section-number-4">1.7.1.</span> Corollaires</h4>
 <div class="outline-text-4" id="text-1-7-1">
 <p>
 On a :
@@ -814,10 +795,8 @@ Les mesures de tous ces ensembles sont donc bien définies pour tout \(a \in \se
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org987ad55" class="outline-3">
-<h3 id="org987ad55"><span class="section-number-3">1.8.</span> Opposé d'une fonction mesurable</h3>
+<div id="outline-container-orge2632ef" class="outline-3">
+<h3 id="orge2632ef"><span class="section-number-3">1.8.</span> Opposé d'une fonction mesurable</h3>
 <div class="outline-text-3" id="text-1-8">
 <p>
 Soit une fonction mesurable \(f : A \mapsto \setR\). On a :
@@ -837,10 +816,8 @@ On en déduit que la fonction opposée \(-f\) est mesurable.
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgc279a91" class="outline-3">
-<h3 id="orgc279a91"><span class="section-number-3">1.9.</span> Fonctions extrema</h3>
+<div id="outline-container-orge031659" class="outline-3">
+<h3 id="orge031659"><span class="section-number-3">1.9.</span> Fonctions extrema</h3>
 <div class="outline-text-3" id="text-1-9">
 <p>
 Soit la suite \(\{ f_n : n \in \setN \}\) de fonctions mesurables. Posons :
@@ -887,25 +864,23 @@ On en conclut que \(\inf_n f_n\) est mesurable.
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orge17c1ad" class="outline-2">
-<h2 id="orge17c1ad"><span class="section-number-2">2.</span> Essentialité</h2>
+<div id="outline-container-org8c44874" class="outline-2">
+<h2 id="org8c44874"><span class="section-number-2">2.</span> Essentialité</h2>
 <div class="outline-text-2" id="text-2">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-2" role="doc-toc">
 <ul>
-<li><a href="#org9b20d81">2.1. Dépendances</a></li>
-<li><a href="#orga90d3db">2.2. Introduction</a></li>
-<li><a href="#orgb06b00c">2.3. Ensembles de mesure nulle</a></li>
-<li><a href="#org392493a">2.4. Mesure d'un sous-ensemble essentiel</a></li>
-<li><a href="#org90a581a">2.5. Convergence de la mesure</a></li>
-<li><a href="#org6ff7ee9">2.6. Convergence étendue</a></li>
-<li><a href="#orge65057d">2.7. Ordre faible</a></li>
-<li><a href="#orgdc8e6b9">2.8. Transitivité</a></li>
-<li><a href="#org200653d">2.9. Conservation sous l'addition</a></li>
-<li><a href="#orgc075b0a">2.10. Conservation sous la soustraction</a></li>
-<li><a href="#org35a3ea2">2.11. Fonctions max et min</a></li>
-<li><a href="#org747daf3">2.12. Egalité</a></li>
+<li><a href="#org64c52c3">2.1. Dépendances</a></li>
+<li><a href="#orgd0ad9c3">2.2. Introduction</a></li>
+<li><a href="#orgecf33dd">2.3. Ensembles de mesure nulle</a></li>
+<li><a href="#org5dbce13">2.4. Mesure d'un sous-ensemble essentiel</a></li>
+<li><a href="#org32f0413">2.5. Convergence de la mesure</a></li>
+<li><a href="#org8371aac">2.6. Convergence étendue</a></li>
+<li><a href="#orgd8de144">2.7. Ordre faible</a></li>
+<li><a href="#org444e5a9">2.8. Transitivité</a></li>
+<li><a href="#orgcb18681">2.9. Conservation sous l'addition</a></li>
+<li><a href="#orga9a3092">2.10. Conservation sous la soustraction</a></li>
+<li><a href="#org90249d1">2.11. Fonctions max et min</a></li>
+<li><a href="#org87915ae">2.12. Egalité</a></li>
 </ul>
 </div>
 
@@ -913,20 +888,16 @@ On en conclut que \(\inf_n f_n\) est mesurable.
 \label{chap:essentialite}
 </p>
 </div>
-
-
-<div id="outline-container-org9b20d81" class="outline-3">
-<h3 id="org9b20d81"><span class="section-number-3">2.1.</span> Dépendances</h3>
+<div id="outline-container-org64c52c3" class="outline-3">
+<h3 id="org64c52c3"><span class="section-number-3">2.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:mesure} : Les mesures</li>
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-orga90d3db" class="outline-3">
-<h3 id="orga90d3db"><span class="section-number-3">2.2.</span> Introduction</h3>
+<div id="outline-container-orgd0ad9c3" class="outline-3">
+<h3 id="orgd0ad9c3"><span class="section-number-3">2.2.</span> Introduction</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Soit la mesure \(\mu : \mathcal{T} \mapsto \setR\) et l'ensemble \(A \in \mathcal{T}\). On a envie de dire que tout sous-ensemble de mesure nulle de \(A\) est « négligeable ». L'essentiel de l'information demeurera donc si on s'abstrait d'un quelconque ensemble \(N \subseteq A\) vérifiant \(N \in \mathcal{T}\) et \(\mu(N) = 0\). Le résultat de cette abstraction, soit \(A \setminus N\), est appelé sous-ensemble essentiel de \(A\). On note :
@@ -941,14 +912,12 @@ l'ensemble des sous-ensembles essentiels de \(A\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgb06b00c" class="outline-3">
-<h3 id="orgb06b00c"><span class="section-number-3">2.3.</span> Ensembles de mesure nulle</h3>
+<div id="outline-container-orgecf33dd" class="outline-3">
+<h3 id="orgecf33dd"><span class="section-number-3">2.3.</span> Ensembles de mesure nulle</h3>
 <div class="outline-text-3" id="text-2-3">
 </div>
-<div id="outline-container-org393bc85" class="outline-4">
-<h4 id="org393bc85"><span class="section-number-4">2.3.1.</span> Inclusion</h4>
+<div id="outline-container-orge46cd04" class="outline-4">
+<h4 id="orge46cd04"><span class="section-number-4">2.3.1.</span> Inclusion</h4>
 <div class="outline-text-4" id="text-2-3-1">
 <p>
 Soit \(A,B \in \mathcal{T}\) avec \(A \subseteq B\) et \(\mu(B) = 0\). On a alors :
@@ -971,10 +940,8 @@ Un ensemble inclus dans un ensemble de mesure nulle est également de mesure nul
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgdbf1683" class="outline-4">
-<h4 id="orgdbf1683"><span class="section-number-4">2.3.2.</span> Union</h4>
+<div id="outline-container-org553f8c8" class="outline-4">
+<h4 id="org553f8c8"><span class="section-number-4">2.3.2.</span> Union</h4>
 <div class="outline-text-4" id="text-2-3-2">
 <p>
 Soit \(A,B \in \mathcal{T}\) avec \(\mu(A) = \mu(B) = 0\). On a alors :
@@ -1010,10 +977,8 @@ On a le même résultat pour les suites infinies :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org392493a" class="outline-3">
-<h3 id="org392493a"><span class="section-number-3">2.4.</span> Mesure d'un sous-ensemble essentiel</h3>
+<div id="outline-container-org5dbce13" class="outline-3">
+<h3 id="org5dbce13"><span class="section-number-3">2.4.</span> Mesure d'un sous-ensemble essentiel</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Soit \(E \in \essentiel(A)\). On peut alors trouver \(Z \in \mathcal{T}\) tel que \(Z \subseteq A\), \(E = A \setminus Z\) et vérifiant \(\mu(Z) = 0\). Comme les ensembles \(E\) et \(Z\) sont disjoints et d'union égale à \(A\), on a :
@@ -1036,10 +1001,8 @@ pour tout sous-ensemble essentiel \(E \in \essentiel(A)\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org90a581a" class="outline-3">
-<h3 id="org90a581a"><span class="section-number-3">2.5.</span> Convergence de la mesure</h3>
+<div id="outline-container-org32f0413" class="outline-3">
+<h3 id="org32f0413"><span class="section-number-3">2.5.</span> Convergence de la mesure</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 Soit une suite d'ensembles \(\{ A_n \in \mathcal{T} : n \in \setN \}\) telle que \(A_m \subseteq A_n\) pour tout naturels \(m,n\) vérifiant \(m \le n\). Posons :
@@ -1123,10 +1086,8 @@ et donc :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org6ff7ee9" class="outline-3">
-<h3 id="org6ff7ee9"><span class="section-number-3">2.6.</span> Convergence étendue</h3>
+<div id="outline-container-org8371aac" class="outline-3">
+<h3 id="org8371aac"><span class="section-number-3">2.6.</span> Convergence étendue</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 Soit une suite d'ensembles \(\{ A_n \in \mathcal{T} : n \in \setN \}\) telle que, pour tout \(n \in \setN\), on puisse trouver un sous-ensemble essentiel \(E_n \subseteq A_n\) vérifiant \(E_n \subseteq A_{n + 1}\). Posons :
@@ -1177,14 +1138,12 @@ Mais comme \(C\) est un sous-ensemble essentiel de \(A\), on a \(\mu(C) = \mu(A)
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orge65057d" class="outline-3">
-<h3 id="orge65057d"><span class="section-number-3">2.7.</span> Ordre faible</h3>
+<div id="outline-container-orgd8de144" class="outline-3">
+<h3 id="orgd8de144"><span class="section-number-3">2.7.</span> Ordre faible</h3>
 <div class="outline-text-3" id="text-2-7">
 </div>
-<div id="outline-container-orgef6e245" class="outline-4">
-<h4 id="orgef6e245"><span class="section-number-4">2.7.1.</span> Infériorité essentielle</h4>
+<div id="outline-container-orga2e0183" class="outline-4">
+<h4 id="orga2e0183"><span class="section-number-4">2.7.1.</span> Infériorité essentielle</h4>
 <div class="outline-text-4" id="text-2-7-1">
 <p>
 Soit deux fonctions \(f,g : A \mapsto \setR\) telles que \(f - g\) soit mesurable.
@@ -1204,10 +1163,8 @@ si on peut trouver un sous-ensemble essentiel \(S\) de \(A\) tel que \(f(x) \le 
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org07d9492" class="outline-4">
-<h4 id="org07d9492"><span class="section-number-4">2.7.2.</span> Supériorité essentielle</h4>
+<div id="outline-container-org3e8089b" class="outline-4">
+<h4 id="org3e8089b"><span class="section-number-4">2.7.2.</span> Supériorité essentielle</h4>
 <div class="outline-text-4" id="text-2-7-2">
 <p>
 Soit deux fonctions \(f,g : A \mapsto \setR\) telles que \(f - g\) soit mesurable.
@@ -1227,10 +1184,8 @@ si on peut trouver un sous-ensemble essentiel \(S\) de \(A\) tel que \(f(x) \ge 
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org2b0fa91" class="outline-4">
-<h4 id="org2b0fa91"><span class="section-number-4">2.7.3.</span> Validité</h4>
+<div id="outline-container-orgdd42248" class="outline-4">
+<h4 id="orgdd42248"><span class="section-number-4">2.7.3.</span> Validité</h4>
 <div class="outline-text-4" id="text-2-7-3">
 <p>
 La définition de \(f \essinferieur g\) revient à imposer que :
@@ -1254,10 +1209,8 @@ Comme \(f - g\) est mesurable, ces notions sont correctement définies.
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgdc8e6b9" class="outline-3">
-<h3 id="orgdc8e6b9"><span class="section-number-3">2.8.</span> Transitivité</h3>
+<div id="outline-container-org444e5a9" class="outline-3">
+<h3 id="org444e5a9"><span class="section-number-3">2.8.</span> Transitivité</h3>
 <div class="outline-text-3" id="text-2-8">
 <p>
 Soit les fonctions \(f,g,h : A \mapsto \setR\) telles que :
@@ -1294,10 +1247,8 @@ on a \(\mu(Z) = \mu(N) = 0\). Comme une union finie d'ensembles de mesure nulle 
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org200653d" class="outline-3">
-<h3 id="org200653d"><span class="section-number-3">2.9.</span> Conservation sous l'addition</h3>
+<div id="outline-container-orgcb18681" class="outline-3">
+<h3 id="orgcb18681"><span class="section-number-3">2.9.</span> Conservation sous l'addition</h3>
 <div class="outline-text-3" id="text-2-9">
 <p>
 Supposons que \(f \essinferieur g\) et que \(u \essinferieur v\). Les ensembles :
@@ -1321,10 +1272,8 @@ sont de mesure nulle. Leur union est donc également de mesure nulle et on a bie
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgc075b0a" class="outline-3">
-<h3 id="orgc075b0a"><span class="section-number-3">2.10.</span> Conservation sous la soustraction</h3>
+<div id="outline-container-orga9a3092" class="outline-3">
+<h3 id="orga9a3092"><span class="section-number-3">2.10.</span> Conservation sous la soustraction</h3>
 <div class="outline-text-3" id="text-2-10">
 <p>
 Supposons que \(f \essinferieur g\) et que \(u \esssuperieur v\). Les ensembles :
@@ -1348,14 +1297,12 @@ sont de mesure nulle. Leur union est donc également de mesure nulle et on a bie
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org35a3ea2" class="outline-3">
-<h3 id="org35a3ea2"><span class="section-number-3">2.11.</span> Fonctions max et min</h3>
+<div id="outline-container-org90249d1" class="outline-3">
+<h3 id="org90249d1"><span class="section-number-3">2.11.</span> Fonctions max et min</h3>
 <div class="outline-text-3" id="text-2-11">
 </div>
-<div id="outline-container-org92c2ff4" class="outline-4">
-<h4 id="org92c2ff4"><span class="section-number-4">2.11.1.</span> Max</h4>
+<div id="outline-container-orgf0c107f" class="outline-4">
+<h4 id="orgf0c107f"><span class="section-number-4">2.11.1.</span> Max</h4>
 <div class="outline-text-4" id="text-2-11-1">
 <p>
 Supposons que \(f,g \essinferieur h\). Les ensembles :
@@ -1379,10 +1326,8 @@ sont de mesure nulle. Leur union est donc également de mesure nulle et on a bie
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgc14f3bd" class="outline-4">
-<h4 id="orgc14f3bd"><span class="section-number-4">2.11.2.</span> Min</h4>
+<div id="outline-container-org1622fca" class="outline-4">
+<h4 id="org1622fca"><span class="section-number-4">2.11.2.</span> Min</h4>
 <div class="outline-text-4" id="text-2-11-2">
 <p>
 Supposons que \(f,g \esssuperieur h\). Les ensembles :
@@ -1407,10 +1352,8 @@ sont de mesure nulle. Leur union est donc également de mesure nulle et on a bie
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org747daf3" class="outline-3">
-<h3 id="org747daf3"><span class="section-number-3">2.12.</span> Egalité</h3>
+<div id="outline-container-org87915ae" class="outline-3">
+<h3 id="org87915ae"><span class="section-number-3">2.12.</span> Egalité</h3>
 <div class="outline-text-3" id="text-2-12">
 <p>
 On dit que \(f\) est essentiellement égale à \(g\), et on le note :
@@ -1447,20 +1390,18 @@ est également de mesure nulle.
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgb554e00" class="outline-2">
-<h2 id="orgb554e00"><span class="section-number-2">3.</span> Extrema essentiels</h2>
+<div id="outline-container-org1348302" class="outline-2">
+<h2 id="org1348302"><span class="section-number-2">3.</span> Extrema essentiels</h2>
 <div class="outline-text-2" id="text-3">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-3" role="doc-toc">
 <ul>
-<li><a href="#org5f6d4c3">3.1. Dépendances</a></li>
-<li><a href="#org890de4c">3.2. Bornes</a></li>
-<li><a href="#orgffe9e31">3.3. Extrema essentiels</a></li>
-<li><a href="#org51c7b80">3.4. Existence et estimation</a></li>
-<li><a href="#org07d49d8">3.5. Intersection</a></li>
-<li><a href="#org6308620">3.6. Ordre</a></li>
-<li><a href="#orgf539aac">3.7. Addition</a></li>
+<li><a href="#org6a92f3b">3.1. Dépendances</a></li>
+<li><a href="#org3500b54">3.2. Bornes</a></li>
+<li><a href="#org332119a">3.3. Extrema essentiels</a></li>
+<li><a href="#org38e0bff">3.4. Existence et estimation</a></li>
+<li><a href="#orgf524033">3.5. Intersection</a></li>
+<li><a href="#orgf4be8cd">3.6. Ordre</a></li>
+<li><a href="#org50cf24e">3.7. Addition</a></li>
 </ul>
 </div>
 
@@ -1468,29 +1409,23 @@ est également de mesure nulle.
 \label{chap:essextr}
 </p>
 </div>
-
-
-<div id="outline-container-org5f6d4c3" class="outline-3">
-<h3 id="org5f6d4c3"><span class="section-number-3">3.1.</span> Dépendances</h3>
+<div id="outline-container-org6a92f3b" class="outline-3">
+<h3 id="org6a92f3b"><span class="section-number-3">3.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:mesure} : Les mesures</li>
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-org890de4c" class="outline-3">
-<h3 id="org890de4c"><span class="section-number-3">3.2.</span> Bornes</h3>
+<div id="outline-container-org3500b54" class="outline-3">
+<h3 id="org3500b54"><span class="section-number-3">3.2.</span> Bornes</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Soit la fonction mesurable \(f : A \mapsto \setR\).
 </p>
 </div>
-
-
-<div id="outline-container-org16be85c" class="outline-4">
-<h4 id="org16be85c"><span class="section-number-4">3.2.1.</span> Supérieure</h4>
+<div id="outline-container-org3bc78ba" class="outline-4">
+<h4 id="org3bc78ba"><span class="section-number-4">3.2.1.</span> Supérieure</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <p>
 On dit que \(f\) est {\em essentiellement} inférieure au réel \(\sigma \in \setR\), et on le note :
@@ -1513,10 +1448,8 @@ On dit aussi que \(f\) est essentiellement majorée par \(\sigma\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org6ecd016" class="outline-4">
-<h4 id="org6ecd016"><span class="section-number-4">3.2.2.</span> Inférieure</h4>
+<div id="outline-container-org2935a3a" class="outline-4">
+<h4 id="org2935a3a"><span class="section-number-4">3.2.2.</span> Inférieure</h4>
 <div class="outline-text-4" id="text-3-2-2">
 <p>
 On dit que \(f\) est {\em essentiellement} supérieure au réel \(\lambda \in \setR\), et on le note :
@@ -1540,10 +1473,8 @@ On dit aussi que \(f\) est essentiellement minorée par \(\lambda\).
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgffe9e31" class="outline-3">
-<h3 id="orgffe9e31"><span class="section-number-3">3.3.</span> Extrema essentiels</h3>
+<div id="outline-container-org332119a" class="outline-3">
+<h3 id="org332119a"><span class="section-number-3">3.3.</span> Extrema essentiels</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Soit une fonction mesurable \(f : A \mapsto \setR\). Pour tout \(\sigma \in \setR\), notons :
@@ -1606,10 +1537,8 @@ Nous disposons donc des bornes :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org6492353" class="outline-4">
-<h4 id="org6492353"><span class="section-number-4">3.3.1.</span> Notation</h4>
+<div id="outline-container-orgbdf5b7f" class="outline-4">
+<h4 id="orgbdf5b7f"><span class="section-number-4">3.3.1.</span> Notation</h4>
 <div class="outline-text-4" id="text-3-3-1">
 <p>
 On note aussi :
@@ -1639,14 +1568,12 @@ Au besoin, la mesure \(\mu\) utilisée est indiquée par :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org51c7b80" class="outline-3">
-<h3 id="org51c7b80"><span class="section-number-3">3.4.</span> Existence et estimation</h3>
+<div id="outline-container-org38e0bff" class="outline-3">
+<h3 id="org38e0bff"><span class="section-number-3">3.4.</span> Existence et estimation</h3>
 <div class="outline-text-3" id="text-3-4">
 </div>
-<div id="outline-container-org46f7285" class="outline-4">
-<h4 id="org46f7285"><span class="section-number-4">3.4.1.</span> Supremum essentiel</h4>
+<div id="outline-container-orge3b0e1f" class="outline-4">
+<h4 id="orge3b0e1f"><span class="section-number-4">3.4.1.</span> Supremum essentiel</h4>
 <div class="outline-text-4" id="text-3-4-1">
 <p>
 Supposons que \(f\) soit essentiellement inférieure (sur \(A\)) à un certain \(\sigma \in \setR\) et que \(f\) soit essentiellement supérieure à un certain \(\lambda \in \setR\) sur un ensemble \(L \subseteq A\) de mesure strictement positive. On a \(\sigma \in \Theta \ne \emptyset\). Pour tout \(\alpha \in \setR\) tel que \(\alpha \ge \sigma\), on a \(\Psi(\alpha) \subseteq \Psi(\sigma)\). Comme \(\mu(\Psi(\sigma)) = 0\), l'ensemble \(\Psi(\alpha)\) est inclus dans un ensemble de mesure nulle. Il est donc lui-même de mesure nulle et \(\alpha \in \Theta\). On en conclut que :
@@ -1713,10 +1640,8 @@ nous montrent que :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org1977d1b" class="outline-4">
-<h4 id="org1977d1b"><span class="section-number-4">3.4.2.</span> Infimum essentiel</h4>
+<div id="outline-container-org8b6dc21" class="outline-4">
+<h4 id="org8b6dc21"><span class="section-number-4">3.4.2.</span> Infimum essentiel</h4>
 <div class="outline-text-4" id="text-3-4-2">
 <p>
 Supposons que \(f\) soit essentiellement supérieure (sur \(A\)) à un certain \(\lambda \in \setR\) et que \(f\) soit essentiellement inférieure à un certain \(\sigma \in \setR\) sur un ensemble \(S \subseteq A\) de mesure strictement positive. On a \(\lambda \in \Lambda \ne \emptyset\). Pour tout \(\alpha \in \setR\) tel que \(\alpha \le \lambda\), on a \(\Gamma(\alpha) \subseteq \Gamma(\lambda)\). Comme \(\mu(\Gamma(\lambda)) = 0\), l'ensemble \(\Gamma(\alpha)\) est inclus dans un ensemble de mesure nulle. Il est donc lui-même de mesure nulle et \(\alpha \in \Lambda\). On en conclut que :
@@ -1784,10 +1709,8 @@ nous montrent que :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org07d49d8" class="outline-3">
-<h3 id="org07d49d8"><span class="section-number-3">3.5.</span> Intersection</h3>
+<div id="outline-container-orgf524033" class="outline-3">
+<h3 id="orgf524033"><span class="section-number-3">3.5.</span> Intersection</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 Supposons que \(A\) soit de mesure strictement positive et que \(\Theta \cap \Lambda \ne \emptyset\). Pour tout \(\alpha \in \setR\), posons :
@@ -1857,10 +1780,8 @@ soit :
 pour un certain \(\alpha \in \setR\).
 </p>
 </div>
-
-
-<div id="outline-container-org289f25f" class="outline-4">
-<h4 id="org289f25f"><span class="section-number-4">3.5.1.</span> Extrema</h4>
+<div id="outline-container-org6d7ac65" class="outline-4">
+<h4 id="org6d7ac65"><span class="section-number-4">3.5.1.</span> Extrema</h4>
 <div class="outline-text-4" id="text-3-5-1">
 <p>
 Supposons que \(f\) soit essentiellement inférieure à \(\sigma\) et essentiellement supérieure à \(\lambda\) sur \(A\) qui est de mesure strictement positive. On en déduit que les supremum et infimum essentiels existent :
@@ -1926,19 +1847,15 @@ Donc \(\alpha,\beta \in \Theta \cap \Lambda\) avec \(\alpha \ne \beta\) ce qui i
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org6308620" class="outline-3">
-<h3 id="org6308620"><span class="section-number-3">3.6.</span> Ordre</h3>
+<div id="outline-container-orgf4be8cd" class="outline-3">
+<h3 id="orgf4be8cd"><span class="section-number-3">3.6.</span> Ordre</h3>
 <div class="outline-text-3" id="text-3-6">
 <p>
 Soit les fonctions \(f,g : A \mapsto \setR\) telles que \(f \essinferieur g\).
 </p>
 </div>
-
-
-<div id="outline-container-orge737736" class="outline-4">
-<h4 id="orge737736"><span class="section-number-4">3.6.1.</span> Supremum essentiel</h4>
+<div id="outline-container-org880a803" class="outline-4">
+<h4 id="org880a803"><span class="section-number-4">3.6.1.</span> Supremum essentiel</h4>
 <div class="outline-text-4" id="text-3-6-1">
 <p>
 On a bien entendu :
@@ -1957,10 +1874,8 @@ On en déduit que :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org870381e" class="outline-4">
-<h4 id="org870381e"><span class="section-number-4">3.6.2.</span> Infimum essentiel</h4>
+<div id="outline-container-orgbf9b2f6" class="outline-4">
+<h4 id="orgbf9b2f6"><span class="section-number-4">3.6.2.</span> Infimum essentiel</h4>
 <div class="outline-text-4" id="text-3-6-2">
 <p>
 On a bien entendu :
@@ -1980,19 +1895,15 @@ On en déduit que :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgf539aac" class="outline-3">
-<h3 id="orgf539aac"><span class="section-number-3">3.7.</span> Addition</h3>
+<div id="outline-container-org50cf24e" class="outline-3">
+<h3 id="org50cf24e"><span class="section-number-3">3.7.</span> Addition</h3>
 <div class="outline-text-3" id="text-3-7">
 <p>
 Soit les fonctions \(f,g : A \mapsto \setR\).
 </p>
 </div>
-
-
-<div id="outline-container-orgae1c33b" class="outline-4">
-<h4 id="orgae1c33b"><span class="section-number-4">3.7.1.</span> Supremum essentiel</h4>
+<div id="outline-container-orgca45d05" class="outline-4">
+<h4 id="orgca45d05"><span class="section-number-4">3.7.1.</span> Supremum essentiel</h4>
 <div class="outline-text-4" id="text-3-7-1">
 <p>
 On sait que :
@@ -2024,10 +1935,8 @@ On en conclut que :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org530be16" class="outline-4">
-<h4 id="org530be16"><span class="section-number-4">3.7.2.</span> Infimum essentiel</h4>
+<div id="outline-container-orgbe6a881" class="outline-4">
+<h4 id="orgbe6a881"><span class="section-number-4">3.7.2.</span> Infimum essentiel</h4>
 <div class="outline-text-4" id="text-3-7-2">
 <p>
 On sait que :
@@ -2064,7 +1973,7 @@ On en conclut que :
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2023-05-10 mer 16:44</p>
+<p class="date">Created: 2025-10-12 dim 15:24</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

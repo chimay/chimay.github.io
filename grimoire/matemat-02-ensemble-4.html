@@ -3,13 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2023-05-10 mer 16:42 -->
+<!-- 2025-10-12 dim 15:23 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 01 : Ensembles - 4</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
-<style>
+<style type="text/css">
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -193,27 +193,38 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 </head>
 <body>
 <div id="content" class="content">
@@ -230,9 +241,9 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org9fedec7">1. Fonctions et ordre</a></li>
-<li><a href="#org0392c5b">2. Bijections</a></li>
-<li><a href="#orgca12bc3">3. Ordre inclusif</a></li>
+<li><a href="#orge19ce99">1. Fonctions et ordre</a></li>
+<li><a href="#org26be85b">2. Bijections</a></li>
+<li><a href="#org3c413ca">3. Ordre inclusif</a></li>
 </ul>
 </div>
 </div>
@@ -360,6 +371,7 @@
 \newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
 \newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
 \newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
 \newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
 \newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
@@ -390,21 +402,20 @@
 \newcommand{\petito}[1]{o\left(#1\right)}
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
-
-<div id="outline-container-org9fedec7" class="outline-2">
-<h2 id="org9fedec7"><span class="section-number-2">1.</span> Fonctions et ordre</h2>
+<div id="outline-container-orge19ce99" class="outline-2">
+<h2 id="orge19ce99"><span class="section-number-2">1.</span> Fonctions et ordre</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-1" role="doc-toc">
 <ul>
-<li><a href="#orgf4dca7b">1.1. Dépendances</a></li>
-<li><a href="#orgeb53b91">1.2. Monotonie</a></li>
-<li><a href="#orgd235b1c">1.3. Ordre entre fonctions</a></li>
-<li><a href="#org051a52d">1.4. Fonctions extrema</a></li>
-<li><a href="#org123b699">1.5. Ordre mixte</a></li>
-<li><a href="#orgf44e575">1.6. Extrema d'une fonction</a></li>
-<li><a href="#org85f854e">1.7. Arguments d'extrema</a></li>
-<li><a href="#orga6611e4">1.8. Extrema locaux</a></li>
-<li><a href="#org01d8384">1.9. Ordre entre fonctions et extrema</a></li>
+<li><a href="#org7b30160">1.1. Dépendances</a></li>
+<li><a href="#org89db382">1.2. Monotonie</a></li>
+<li><a href="#orgaed35e1">1.3. Ordre entre fonctions</a></li>
+<li><a href="#orge5d253d">1.4. Fonctions extrema</a></li>
+<li><a href="#orgddb9dd4">1.5. Ordre mixte</a></li>
+<li><a href="#orgfa338f8">1.6. Extrema d'une fonction</a></li>
+<li><a href="#orgcfe0b17">1.7. Arguments d'extrema</a></li>
+<li><a href="#org6aa37e5">1.8. Extrema locaux</a></li>
+<li><a href="#org21bf71a">1.9. Ordre entre fonctions et extrema</a></li>
 </ul>
 </div>
 
@@ -412,10 +423,8 @@
 \label{chap:fonctionsEtOrdre}
 </p>
 </div>
-
-
-<div id="outline-container-orgf4dca7b" class="outline-3">
-<h3 id="orgf4dca7b"><span class="section-number-3">1.1.</span> Dépendances</h3>
+<div id="outline-container-org7b30160" class="outline-3">
+<h3 id="org7b30160"><span class="section-number-3">1.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:ordres} : Les ordres</li>
@@ -423,14 +432,12 @@
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-orgeb53b91" class="outline-3">
-<h3 id="orgeb53b91"><span class="section-number-3">1.2.</span> Monotonie</h3>
+<div id="outline-container-org89db382" class="outline-3">
+<h3 id="org89db382"><span class="section-number-3">1.2.</span> Monotonie</h3>
 <div class="outline-text-3" id="text-1-2">
 </div>
-<div id="outline-container-org8243440" class="outline-4">
-<h4 id="org8243440"><span class="section-number-4">1.2.1.</span> Croissance</h4>
+<div id="outline-container-orgd1455e1" class="outline-4">
+<h4 id="orgd1455e1"><span class="section-number-4">1.2.1.</span> Croissance</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 On dit qu'une fonction \(f : A \to F\) est croissante si :
@@ -446,10 +453,8 @@ une fonction croissante conserve l'ordre.
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org39b76d4" class="outline-4">
-<h4 id="org39b76d4"><span class="section-number-4">1.2.2.</span> Décroissance</h4>
+<div id="outline-container-orgcb7e5e1" class="outline-4">
+<h4 id="orgcb7e5e1"><span class="section-number-4">1.2.2.</span> Décroissance</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 On dit qu'une fonction \(f : A \to F\) est décroissante si :
@@ -465,10 +470,8 @@ une fonction décroissante inverse l'ordre.
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org430d7a4" class="outline-4">
-<h4 id="org430d7a4"><span class="section-number-4">1.2.3.</span> Stricte</h4>
+<div id="outline-container-org7a4c555" class="outline-4">
+<h4 id="org7a4c555"><span class="section-number-4">1.2.3.</span> Stricte</h4>
 <div class="outline-text-4" id="text-1-2-3">
 <p>
 On dit qu'une fonction \(f : A \to F\) est strictement croissante si :
@@ -496,10 +499,8 @@ pour tout \(x,y \in A\) tels que \(x \strictinferieur y\).
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgd235b1c" class="outline-3">
-<h3 id="orgd235b1c"><span class="section-number-3">1.3.</span> Ordre entre fonctions</h3>
+<div id="outline-container-orgaed35e1" class="outline-3">
+<h3 id="orgaed35e1"><span class="section-number-3">1.3.</span> Ordre entre fonctions</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Soit les fonctions \(f,g \in B^A\). Supposons qu'il existe un ordre défini
@@ -538,10 +539,8 @@ si :
 pour tout \(x \in A\).
 </p>
 </div>
-
-
-<div id="outline-container-org90c6f32" class="outline-4">
-<h4 id="org90c6f32"><span class="section-number-4">1.3.1.</span> Strict</h4>
+<div id="outline-container-orga30196a" class="outline-4">
+<h4 id="orga30196a"><span class="section-number-4">1.3.1.</span> Strict</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <p>
 On note également :
@@ -554,10 +553,8 @@ On note également :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org051a52d" class="outline-3">
-<h3 id="org051a52d"><span class="section-number-3">1.4.</span> Fonctions extrema</h3>
+<div id="outline-container-orge5d253d" class="outline-3">
+<h3 id="orge5d253d"><span class="section-number-3">1.4.</span> Fonctions extrema</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Soit un ensemble de paramètres \(Z\) et la collection paramétrée de fonctions :
@@ -587,10 +584,8 @@ pour tout \(x \in A\). On définit la fonction infimum par :
 pour tout \(x \in A\).
 </p>
 </div>
-
-
-<div id="outline-container-org4bfddd8" class="outline-4">
-<h4 id="org4bfddd8"><span class="section-number-4">1.4.1.</span> Maximum et minimum</h4>
+<div id="outline-container-org0dc9bb2" class="outline-4">
+<h4 id="org0dc9bb2"><span class="section-number-4">1.4.1.</span> Maximum et minimum</h4>
 <div class="outline-text-4" id="text-1-4-1">
 <p>
 Lorsque les maximum et minimum existent, on définit :
@@ -606,10 +601,8 @@ Lorsque les maximum et minimum existent, on définit :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org99a01ca" class="outline-4">
-<h4 id="org99a01ca"><span class="section-number-4">1.4.2.</span> Notation</h4>
+<div id="outline-container-org65966d3" class="outline-4">
+<h4 id="org65966d3"><span class="section-number-4">1.4.2.</span> Notation</h4>
 <div class="outline-text-4" id="text-1-4-2">
 <p>
 On note aussi :
@@ -627,10 +620,8 @@ On note aussi :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgec0ae89" class="outline-4">
-<h4 id="orgec0ae89"><span class="section-number-4">1.4.3.</span> Couples</h4>
+<div id="outline-container-org244987f" class="outline-4">
+<h4 id="org244987f"><span class="section-number-4">1.4.3.</span> Couples</h4>
 <div class="outline-text-4" id="text-1-4-3">
 <p>
 On définit les fonctions \(M = \max\{f,g\}\) et \(m = \min\{f,g\}\) par :
@@ -651,10 +642,8 @@ pour tout \(x \in A\).
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org123b699" class="outline-3">
-<h3 id="org123b699"><span class="section-number-3">1.5.</span> Ordre mixte</h3>
+<div id="outline-container-orgddb9dd4" class="outline-3">
+<h3 id="orgddb9dd4"><span class="section-number-3">1.5.</span> Ordre mixte</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Soit la fonction \(f \in B^A\) et un \(c \in B\). Supposons qu'il existe un ordre défini sur \(B\). On dit que \(f\) est inférieure à \(c\) et on le note :
@@ -692,10 +681,8 @@ si :
 pour tout \(x \in A\).
 </p>
 </div>
-
-
-<div id="outline-container-org67a52d9" class="outline-4">
-<h4 id="org67a52d9"><span class="section-number-4">1.5.1.</span> Strict</h4>
+<div id="outline-container-orgf3ec5bf" class="outline-4">
+<h4 id="orgf3ec5bf"><span class="section-number-4">1.5.1.</span> Strict</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <p>
 On note également :
@@ -707,10 +694,8 @@ On note également :
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-org9b5fbc9" class="outline-4">
-<h4 id="org9b5fbc9"><span class="section-number-4">1.5.2.</span> Fonctions max et min</h4>
+<div id="outline-container-org0098c29" class="outline-4">
+<h4 id="org0098c29"><span class="section-number-4">1.5.2.</span> Fonctions max et min</h4>
 <div class="outline-text-4" id="text-1-5-2">
 <p>
 On définit les fonctions \(\max\{f,c\}\) et \(\min\{f,c\}\) par :
@@ -731,10 +716,8 @@ pour tout \(x \in A\).
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgf44e575" class="outline-3">
-<h3 id="orgf44e575"><span class="section-number-3">1.6.</span> Extrema d'une fonction</h3>
+<div id="outline-container-orgfa338f8" class="outline-3">
+<h3 id="orgfa338f8"><span class="section-number-3">1.6.</span> Extrema d'une fonction</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 Etant donné la fonction \(f : \Omega \mapsto B\) et le sous-ensemble \(A \subseteq \Omega\), on définit les extrema de \(f\) (s'ils existent) par :
@@ -752,14 +735,12 @@ Etant donné la fonction \(f : \Omega \mapsto B\) et le sous-ensemble \(A \subse
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org85f854e" class="outline-3">
-<h3 id="org85f854e"><span class="section-number-3">1.7.</span> Arguments d'extrema</h3>
+<div id="outline-container-orgcfe0b17" class="outline-3">
+<h3 id="orgcfe0b17"><span class="section-number-3">1.7.</span> Arguments d'extrema</h3>
 <div class="outline-text-3" id="text-1-7">
 </div>
-<div id="outline-container-org6a173c5" class="outline-4">
-<h4 id="org6a173c5"><span class="section-number-4">1.7.1.</span> Maximum et minimum</h4>
+<div id="outline-container-orgfffda89" class="outline-4">
+<h4 id="orgfffda89"><span class="section-number-4">1.7.1.</span> Maximum et minimum</h4>
 <div class="outline-text-4" id="text-1-7-1">
 <p>
 L'ensemble des éléments de \(A\) qui maximisent \(f\) sur \(A\) est noté :
@@ -794,10 +775,8 @@ Dans le cas où cet ensemble contient un unique élément, on le note :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org25f223e" class="outline-4">
-<h4 id="org25f223e"><span class="section-number-4">1.7.2.</span> Supremum et infimum</h4>
+<div id="outline-container-org7736bd4" class="outline-4">
+<h4 id="org7736bd4"><span class="section-number-4">1.7.2.</span> Supremum et infimum</h4>
 <div class="outline-text-4" id="text-1-7-2">
 <p>
 L'ensemble des éléments de \(\Omega\) qui produisent une valeur égale au supremum des valeurs de \(f\) sur \(A \subseteq \Omega\) est noté :
@@ -833,10 +812,8 @@ Dans le cas où cet ensemble contient un unique élément, on le note :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orga6611e4" class="outline-3">
-<h3 id="orga6611e4"><span class="section-number-3">1.8.</span> Extrema locaux</h3>
+<div id="outline-container-org6aa37e5" class="outline-3">
+<h3 id="org6aa37e5"><span class="section-number-3">1.8.</span> Extrema locaux</h3>
 <div class="outline-text-3" id="text-1-8">
 <p>
 On dit que \(f\) atteint un minimum local en \(a \in A\) si il existe un voisinage \(U\) de \(x\) tel que :
@@ -859,10 +836,8 @@ pour tout \(x \in U\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org01d8384" class="outline-3">
-<h3 id="org01d8384"><span class="section-number-3">1.9.</span> Ordre entre fonctions et extrema</h3>
+<div id="outline-container-org21bf71a" class="outline-3">
+<h3 id="org21bf71a"><span class="section-number-3">1.9.</span> Ordre entre fonctions et extrema</h3>
 <div class="outline-text-3" id="text-1-9">
 <p>
 Soit les fonctions \(f,g : A \mapsto B\) telles que \(f \le g\). Supposons que \(\sigma \in \major g(A)\). On a \(\sigma \ge g(x) \ge f(x)\) pour tout \(x \in A\), d'où \(\sigma \ge f(x)\) et \(\sigma \in \major f(A)\). On en conclut que \(\major g(A) \subseteq \major f(A)\). Si les minima existent, on a donc :
@@ -898,23 +873,21 @@ c'est-à-dire :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org0392c5b" class="outline-2">
-<h2 id="org0392c5b"><span class="section-number-2">2.</span> Bijections</h2>
+<div id="outline-container-org26be85b" class="outline-2">
+<h2 id="org26be85b"><span class="section-number-2">2.</span> Bijections</h2>
 <div class="outline-text-2" id="text-2">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-2" role="doc-toc">
 <ul>
-<li><a href="#orgeeaab3d">2.1. Dépendances</a></li>
-<li><a href="#org987732b">2.2. Inverse à gauche</a></li>
-<li><a href="#orgb5f0172">2.3. Inverse à droite</a></li>
-<li><a href="#orgab32d4a">2.4. Fonction inverse</a></li>
-<li><a href="#orgba88a07">2.5. Relation</a></li>
-<li><a href="#orga6c4f80">2.6. Inverse d'une composée</a></li>
-<li><a href="#orgbac5c0b">2.7. Puissances négatives</a></li>
-<li><a href="#org2dca7a0">2.8. Inverse d'une puissance</a></li>
-<li><a href="#org680ff96">2.9. Idempotence</a></li>
-<li><a href="#org4f5b6e3">2.10. Inverse des fonctions monotones</a></li>
+<li><a href="#orgd3b7717">2.1. Dépendances</a></li>
+<li><a href="#org08ec82b">2.2. Inverse à gauche</a></li>
+<li><a href="#orgeda04ae">2.3. Inverse à droite</a></li>
+<li><a href="#orgbc45587">2.4. Fonction inverse</a></li>
+<li><a href="#orgd6a1ea2">2.5. Relation</a></li>
+<li><a href="#orgde650f9">2.6. Inverse d'une composée</a></li>
+<li><a href="#org97fae91">2.7. Puissances négatives</a></li>
+<li><a href="#orge541012">2.8. Inverse d'une puissance</a></li>
+<li><a href="#org1e3610a">2.9. Idempotence</a></li>
+<li><a href="#org5608418">2.10. Inverse des fonctions monotones</a></li>
 </ul>
 </div>
 
@@ -922,20 +895,16 @@ c'est-à-dire :
 \label{chap:bijections}
 </p>
 </div>
-
-
-<div id="outline-container-orgeeaab3d" class="outline-3">
-<h3 id="orgeeaab3d"><span class="section-number-3">2.1.</span> Dépendances</h3>
+<div id="outline-container-orgd3b7717" class="outline-3">
+<h3 id="orgd3b7717"><span class="section-number-3">2.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:fonctionsEtOrdre} : Fonctions et ordre</li>
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-org987732b" class="outline-3">
-<h3 id="org987732b"><span class="section-number-3">2.2.</span> Inverse à gauche</h3>
+<div id="outline-container-org08ec82b" class="outline-3">
+<h3 id="org08ec82b"><span class="section-number-3">2.2.</span> Inverse à gauche</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Soit \(f : A \mapsto B\). Si \(l : B \mapsto A\) est une fonction telle que :
@@ -949,10 +918,8 @@ Soit \(f : A \mapsto B\). Si \(l : B \mapsto A\) est une fonction telle que :
 on dit que \(l\) est un inverse à gauche de \(f\).
 </p>
 </div>
-
-
-<div id="outline-container-orgefaeff1" class="outline-4">
-<h4 id="orgefaeff1"><span class="section-number-4">2.2.1.</span> Unicité</h4>
+<div id="outline-container-org413530f" class="outline-4">
+<h4 id="org413530f"><span class="section-number-4">2.2.1.</span> Unicité</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <p>
 Soit \(y \in B\). Si \(f\) admet un inverse à gauche, on peut trouver au plus un seul \(x \in A\) tel que \(f(x) = y\). En effet, supposons que \(x_1, x_2 \in A\) avec \(f(x_1) = f(x_2) = y\). On a :
@@ -976,10 +943,8 @@ ce qui prouve l'unicité de la solution.
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgb5f0172" class="outline-3">
-<h3 id="orgb5f0172"><span class="section-number-3">2.3.</span> Inverse à droite</h3>
+<div id="outline-container-orgeda04ae" class="outline-3">
+<h3 id="orgeda04ae"><span class="section-number-3">2.3.</span> Inverse à droite</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Soit \(f : A \mapsto B\). Si \(r : B \mapsto A\) est une fonction telle que :
@@ -993,10 +958,8 @@ Soit \(f : A \mapsto B\). Si \(r : B \mapsto A\) est une fonction telle que :
 on dit que \(r\) est un inverse à droite de \(f\).
 </p>
 </div>
-
-
-<div id="outline-container-org1101e7f" class="outline-4">
-<h4 id="org1101e7f"><span class="section-number-4">2.3.1.</span> Existence</h4>
+<div id="outline-container-org4e0e4fd" class="outline-4">
+<h4 id="org4e0e4fd"><span class="section-number-4">2.3.1.</span> Existence</h4>
 <div class="outline-text-4" id="text-2-3-1">
 <p>
 Soit \(y \in B\). Si \(f\) admet un inverse à droite \(r\), on peut trouver au moins un \(x \in A\) tel que \(f(x) = y\). En effet, si l'on choisit \(x = r(y)\), on a :
@@ -1012,10 +975,8 @@ ce qui prouve l'existence de la solution.
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgab32d4a" class="outline-3">
-<h3 id="orgab32d4a"><span class="section-number-3">2.4.</span> Fonction inverse</h3>
+<div id="outline-container-orgbc45587" class="outline-3">
+<h3 id="orgbc45587"><span class="section-number-3">2.4.</span> Fonction inverse</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Soit \(f : A \mapsto B\). Supposons que \(f\) admette à la fois un inverse à gauche \(l\) et un inverse à droite \(r\). Ces deux inverses sont dès lors identiques :
@@ -1025,10 +986,8 @@ Soit \(f : A \mapsto B\). Supposons que \(f\) admette à la fois un inverse à g
 \[l = l \circ \identite = l \circ f \circ r = \identite \circ r = r\]
 </p>
 </div>
-
-
-<div id="outline-container-org7ab9d67" class="outline-4">
-<h4 id="org7ab9d67"><span class="section-number-4">2.4.1.</span> Existence et unicité</h4>
+<div id="outline-container-org1ad471d" class="outline-4">
+<h4 id="org1ad471d"><span class="section-number-4">2.4.1.</span> Existence et unicité</h4>
 <div class="outline-text-4" id="text-2-4-1">
 <p>
 Soit \(y \in B\). On déduit des résultats précédents que l'on peut trouver un unique \(x \in A\), donné par \(x = r(y)\), tel que \(f(x) = y\). Nous pouvons dès lors définir la fonction inverse, notée \(f^{-1} : B \mapsto A\), par :
@@ -1055,10 +1014,8 @@ et :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgcbc528c" class="outline-4">
-<h4 id="orgcbc528c"><span class="section-number-4">2.4.2.</span> Bijection</h4>
+<div id="outline-container-orgd0285b7" class="outline-4">
+<h4 id="orgd0285b7"><span class="section-number-4">2.4.2.</span> Bijection</h4>
 <div class="outline-text-4" id="text-2-4-2">
 <p>
 Lorsque \(f\) admet un inverse \(f^{-1}\), on dit que \(f\) est inversible ou que \(f\) est une bijection. On note :
@@ -1074,10 +1031,8 @@ l'ensemble des bijections de \(A\) vers \(B\).
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgba88a07" class="outline-3">
-<h3 id="orgba88a07"><span class="section-number-3">2.5.</span> Relation</h3>
+<div id="outline-container-orgd6a1ea2" class="outline-3">
+<h3 id="orgd6a1ea2"><span class="section-number-3">2.5.</span> Relation</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 Lorsque \(f\) est inversible, l'image inverse de \(y \in B\) se réduit à un ensemble contenant un unique \(x \in A\). Soit \(R\) la relation associée à \(f\). On a :
@@ -1088,10 +1043,8 @@ Lorsque \(f\) est inversible, l'image inverse de \(y \in B\) se réduit à un en
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orga6c4f80" class="outline-3">
-<h3 id="orga6c4f80"><span class="section-number-3">2.6.</span> Inverse d'une composée</h3>
+<div id="outline-container-orgde650f9" class="outline-3">
+<h3 id="orgde650f9"><span class="section-number-3">2.6.</span> Inverse d'une composée</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 Soit \(f \in \bijection(A,B)\) et \(g \in \bijection(B,C)\). Nous allons essayer de trouver une expression de l'inverse \(h\) de la composée de ces deux fonctions. On part de la relation \(h \circ g \circ f = \identite\) et on compose à droite par l'inverse de \(f\) puis l'inverse de \(g\), ce qui nous donne :
@@ -1134,10 +1087,8 @@ On généralise par récurrence à \(n\) fonctions :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgbac5c0b" class="outline-3">
-<h3 id="orgbac5c0b"><span class="section-number-3">2.7.</span> Puissances négatives</h3>
+<div id="outline-container-org97fae91" class="outline-3">
+<h3 id="org97fae91"><span class="section-number-3">2.7.</span> Puissances négatives</h3>
 <div class="outline-text-3" id="text-2-7">
 <p>
 Si \(f\) est inversible, on peut également définir les puissances négatives par :
@@ -1152,10 +1103,8 @@ pour tout \(n \in \setN\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org2dca7a0" class="outline-3">
-<h3 id="org2dca7a0"><span class="section-number-3">2.8.</span> Inverse d'une puissance</h3>
+<div id="outline-container-orge541012" class="outline-3">
+<h3 id="orge541012"><span class="section-number-3">2.8.</span> Inverse d'une puissance</h3>
 <div class="outline-text-3" id="text-2-8">
 <p>
 En considérant le cas particulier de fonctions identiques (\(f_1 = ... = f_n = f\)), l'expression de l'inverse d'une composition de fonctions nous montre que :
@@ -1170,10 +1119,8 @@ L'inverse de la puissance est identique à la puissance de l'inverse.
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org680ff96" class="outline-3">
-<h3 id="org680ff96"><span class="section-number-3">2.9.</span> Idempotence</h3>
+<div id="outline-container-org1e3610a" class="outline-3">
+<h3 id="org1e3610a"><span class="section-number-3">2.9.</span> Idempotence</h3>
 <div class="outline-text-3" id="text-2-9">
 <p>
 On dit que deux ensembles \(A\) et \(B\) sont idempotents si il existe une bijection inversible de \(A\) vers \(B\) :
@@ -1183,10 +1130,8 @@ On dit que deux ensembles \(A\) et \(B\) sont idempotents si il existe une bijec
 \[\bijection(A,B) \ne \emptyset\]
 </p>
 </div>
-
-
-<div id="outline-container-org67d3a0a" class="outline-4">
-<h4 id="org67d3a0a"><span class="section-number-4">2.9.1.</span> Equivalence</h4>
+<div id="outline-container-org71823eb" class="outline-4">
+<h4 id="org71823eb"><span class="section-number-4">2.9.1.</span> Equivalence</h4>
 <div class="outline-text-4" id="text-2-9-1">
 <p>
 Soit les ensembles \(A\) et \(B\). Supposons qu'il existe une bijection \(f \in \bijection(A,B)\). On peut alors définir une équivalence sur \(A \cup B\) en disant que \(x \equiv y\) si \(x \in A\) avec \(y = f(x) \in B\), ou si \(x \in B\) avec \(y = f^{-1}(x) \in A\). Dans les autres cas, \(x\) ne sera pas équivalent à \(y\). Les classes d'quivalences seront donc de la forme :
@@ -1209,10 +1154,8 @@ pour tout \(b \in B\). Il y a donc une « équivalence » entre les éléments
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgc486e7f" class="outline-4">
-<h4 id="orgc486e7f"><span class="section-number-4">2.9.2.</span> Ensembles finis</h4>
+<div id="outline-container-org3663359" class="outline-4">
+<h4 id="org3663359"><span class="section-number-4">2.9.2.</span> Ensembles finis</h4>
 <div class="outline-text-4" id="text-2-9-2">
 <p>
 Dans le cas d'ensembles finis, l'idempotence revient à dire que \(A\) et \(B\) ont le même nombre d'éléments.
@@ -1220,10 +1163,8 @@ Dans le cas d'ensembles finis, l'idempotence revient à dire que \(A\) et \(B\) 
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org4f5b6e3" class="outline-3">
-<h3 id="org4f5b6e3"><span class="section-number-3">2.10.</span> Inverse des fonctions monotones</h3>
+<div id="outline-container-org5608418" class="outline-3">
+<h3 id="org5608418"><span class="section-number-3">2.10.</span> Inverse des fonctions monotones</h3>
 <div class="outline-text-3" id="text-2-10">
 \begin{theoreme}
 
@@ -1249,16 +1190,14 @@ $$f^{-1} = g$$
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgca12bc3" class="outline-2">
-<h2 id="orgca12bc3"><span class="section-number-2">3.</span> Ordre inclusif</h2>
+<div id="outline-container-org3c413ca" class="outline-2">
+<h2 id="org3c413ca"><span class="section-number-2">3.</span> Ordre inclusif</h2>
 <div class="outline-text-2" id="text-3">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-3" role="doc-toc">
 <ul>
-<li><a href="#org7476b83">3.1. Dépendances</a></li>
-<li><a href="#org20b6d57">3.2. Ordre sur les ensembles</a></li>
-<li><a href="#org4917321">3.3. Extrema inclusifs d'une collection</a></li>
+<li><a href="#org2cf6ae7">3.1. Dépendances</a></li>
+<li><a href="#org31d484b">3.2. Ordre sur les ensembles</a></li>
+<li><a href="#org20996d9">3.3. Extrema inclusifs d'une collection</a></li>
 </ul>
 </div>
 
@@ -1266,10 +1205,8 @@ $$f^{-1} = g$$
 \label{chap:ordreInclusif}
 </p>
 </div>
-
-
-<div id="outline-container-org7476b83" class="outline-3">
-<h3 id="org7476b83"><span class="section-number-3">3.1.</span> Dépendances</h3>
+<div id="outline-container-org2cf6ae7" class="outline-3">
+<h3 id="org2cf6ae7"><span class="section-number-3">3.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:collections} : Les collections</li>
@@ -1278,10 +1215,8 @@ $$f^{-1} = g$$
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-org20b6d57" class="outline-3">
-<h3 id="org20b6d57"><span class="section-number-3">3.2.</span> Ordre sur les ensembles</h3>
+<div id="outline-container-org31d484b" class="outline-3">
+<h3 id="org31d484b"><span class="section-number-3">3.2.</span> Ordre sur les ensembles</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Soit l'ensemble \(\Omega\) et l'ensemble de ses sous-ensembles :
@@ -1303,10 +1238,8 @@ On dit que \(A \in \sousens(\Omega)\) est plus petit ou égal à \(B \in \sousen
 On voit qu'il s'agit d'un ordre partiel.
 </p>
 </div>
-
-
-<div id="outline-container-orgb4be867" class="outline-4">
-<h4 id="orgb4be867"><span class="section-number-4">3.2.1.</span> Attention</h4>
+<div id="outline-container-org49caae0" class="outline-4">
+<h4 id="org49caae0"><span class="section-number-4">3.2.1.</span> Attention</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <p>
 Ne pas confondre l'ordre inclusif \(\subseteq\) avec la comparaison d'ensembles \(\ensinferieur\) qui est elle basée sur l'ordre entre les éléments des ensembles concernés.
@@ -1314,10 +1247,8 @@ Ne pas confondre l'ordre inclusif \(\subseteq\) avec la comparaison d'ensembles 
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org4917321" class="outline-3">
-<h3 id="org4917321"><span class="section-number-3">3.3.</span> Extrema inclusifs d'une collection</h3>
+<div id="outline-container-org20996d9" class="outline-3">
+<h3 id="org20996d9"><span class="section-number-3">3.3.</span> Extrema inclusifs d'une collection</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Soit l'ensemble de paramètres \(X\) et la collection paramétrée :
@@ -1327,10 +1258,8 @@ Soit l'ensemble de paramètres \(X\) et la collection paramétrée :
 \[\mathcal{C} = \{ A(x) \in \sousens(\Omega) : x \in X \}\]
 </p>
 </div>
-
-
-<div id="outline-container-orga856164" class="outline-4">
-<h4 id="orga856164"><span class="section-number-4">3.3.1.</span> Majorant</h4>
+<div id="outline-container-orgd805073" class="outline-4">
+<h4 id="orgd805073"><span class="section-number-4">3.3.1.</span> Majorant</h4>
 <div class="outline-text-4" id="text-3-3-1">
 <p>
 Si on veut qu'un ensemble quelconque \(M \subseteq \Omega\) soit un majorant inclusif de \(\mathcal{C}\), il faut que \(A(x) \subseteq M\) pour tout \(x \in X\). Pour cela, il faut et il suffit que \(M\) contienne tous les \(A(x)\). Autrement dit, il faut et il suffit que \(M\) contienne l'union des ensembles-éléments de la collection. On a donc :
@@ -1341,10 +1270,8 @@ Si on veut qu'un ensemble quelconque \(M \subseteq \Omega\) soit un majorant inc
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgb1475a8" class="outline-4">
-<h4 id="orgb1475a8"><span class="section-number-4">3.3.2.</span> Supremum</h4>
+<div id="outline-container-org9412b64" class="outline-4">
+<h4 id="org9412b64"><span class="section-number-4">3.3.2.</span> Supremum</h4>
 <div class="outline-text-4" id="text-3-3-2">
 <p>
 Etudions l'ensemble :
@@ -1379,10 +1306,8 @@ On voit aussi que \(S \subseteq M\) pour tout \(M \in \major_\subseteq \mathcal{
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orge13b38f" class="outline-4">
-<h4 id="orge13b38f"><span class="section-number-4">3.3.3.</span> Minorant</h4>
+<div id="outline-container-org2f4da47" class="outline-4">
+<h4 id="org2f4da47"><span class="section-number-4">3.3.3.</span> Minorant</h4>
 <div class="outline-text-4" id="text-3-3-3">
 <p>
 Si on veut qu'un ensemble quelconque \(L \subseteq \Omega\) soit un minorant inclusif de \(\mathcal{C}\), il faut que \(L \subseteq A(x)\) pour tout \(x \in X\). Pour cela, il faut et il suffit que \(L\) soit contenu dans tous les \(A(x)\). Autrement dit, il faut et il suffit que \(L\) soit contenu dans l'intersection des ensembles-éléments de la collection. On a donc :
@@ -1393,10 +1318,8 @@ Si on veut qu'un ensemble quelconque \(L \subseteq \Omega\) soit un minorant inc
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org7bb4423" class="outline-4">
-<h4 id="org7bb4423"><span class="section-number-4">3.3.4.</span> Infimum</h4>
+<div id="outline-container-org6a5af4a" class="outline-4">
+<h4 id="org6a5af4a"><span class="section-number-4">3.3.4.</span> Infimum</h4>
 <div class="outline-text-4" id="text-3-3-4">
 <p>
 Etudions l'ensemble :
@@ -1431,10 +1354,8 @@ On voit aussi que \(L \subseteq I\) pour tout \(L \in \minor_\subseteq \mathcal{
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orga71c880" class="outline-4">
-<h4 id="orga71c880"><span class="section-number-4">3.3.5.</span> Conclusion</h4>
+<div id="outline-container-orgf24cff6" class="outline-4">
+<h4 id="orgf24cff6"><span class="section-number-4">3.3.5.</span> Conclusion</h4>
 <div class="outline-text-4" id="text-3-3-5">
 <p>
 Le supremum inclusif d'une collection de sous-ensembles de \(\Omega\) existe toujours dans \(\sousens(\Omega)\) et est égal à l'union de tous ces ensembles :
@@ -1458,7 +1379,7 @@ L'infimum inclusif d'une collection de sous-ensembles de \(\Omega\) existe toujo
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2023-05-10 mer 16:42</p>
+<p class="date">Created: 2025-10-12 dim 15:23</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

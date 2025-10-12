@@ -3,13 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2023-05-10 mer 16:45 -->
+<!-- 2025-10-12 dim 15:25 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 10 : Optimisation - 2</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
-<style>
+<style type="text/css">
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -193,27 +193,38 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 </head>
 <body>
 <div id="content" class="content">
@@ -230,8 +241,8 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb9fda60">1. Projections</a></li>
-<li><a href="#org73b942b">2. Algorithmes d'optimisation libre</a></li>
+<li><a href="#org9b1bdc2">1. Projections</a></li>
+<li><a href="#orgae0866f">2. Algorithmes d'optimisation libre</a></li>
 </ul>
 </div>
 </div>
@@ -359,6 +370,7 @@
 \newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
 \newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
 \newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
 \newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
 \newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
@@ -389,23 +401,22 @@
 \newcommand{\petito}[1]{o\left(#1\right)}
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
-
-<div id="outline-container-orgb9fda60" class="outline-2">
-<h2 id="orgb9fda60"><span class="section-number-2">1.</span> Projections</h2>
+<div id="outline-container-org9b1bdc2" class="outline-2">
+<h2 id="org9b1bdc2"><span class="section-number-2">1.</span> Projections</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-1" role="doc-toc">
 <ul>
-<li><a href="#orgee92d0e">1.1. Minimisation de l'écart</a></li>
-<li><a href="#orgb54daea">1.2. Théorème de Pythagore</a></li>
-<li><a href="#org2888254">1.3. Carré de la distance</a></li>
-<li><a href="#orga70d724">1.4. Cauchy-Schwartz</a></li>
-<li><a href="#org93e24b5">1.5. Propriétés extrémales</a></li>
-<li><a href="#org3ac55b8">1.6. Sous-espace vectoriel</a></li>
-<li><a href="#orgfe1b9a2">1.7. Tenseur de projection</a></li>
-<li><a href="#org493a24d">1.8. Gram-Schmidt</a></li>
-<li><a href="#org790c16d">1.9. Représentation matricielle</a></li>
-<li><a href="#org2a063d4">1.10. Factorisation</a></li>
-<li><a href="#org35840e4">1.11. Vecteurs $A$-orthogonaux</a></li>
+<li><a href="#orgd7855af">1.1. Minimisation de l'écart</a></li>
+<li><a href="#org4a5540c">1.2. Théorème de Pythagore</a></li>
+<li><a href="#org0879cb8">1.3. Carré de la distance</a></li>
+<li><a href="#org9a05883">1.4. Cauchy-Schwartz</a></li>
+<li><a href="#org3ffc035">1.5. Propriétés extrémales</a></li>
+<li><a href="#org2bbf336">1.6. Sous-espace vectoriel</a></li>
+<li><a href="#org45bd2e0">1.7. Tenseur de projection</a></li>
+<li><a href="#orgf63f880">1.8. Gram-Schmidt</a></li>
+<li><a href="#orgc8d3c37">1.9. Représentation matricielle</a></li>
+<li><a href="#org02959c2">1.10. Factorisation</a></li>
+<li><a href="#orgc01840c">1.11. Vecteurs $A$-orthogonaux</a></li>
 </ul>
 </div>
 
@@ -413,10 +424,8 @@
 \label{chap:project}
 </p>
 </div>
-
-
-<div id="outline-container-orgee92d0e" class="outline-3">
-<h3 id="orgee92d0e"><span class="section-number-3">1.1.</span> Minimisation de l'écart</h3>
+<div id="outline-container-orgd7855af" class="outline-3">
+<h3 id="orgd7855af"><span class="section-number-3">1.1.</span> Minimisation de l'écart</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Soit un espace vectoriel \(E\) sur \(\setR\) et des vecteurs \(x,y \in E\), où \(x \ne 0\). La projection de \(y\) sur \(x\) est le vecteur :
@@ -450,10 +459,8 @@ ce qui nous donne :
 \[\lambda = \frac{\scalaire{x}{y}}{\scalaire{x}{x}}\]
 </p>
 </div>
-
-
-<div id="outline-container-orgce32e24" class="outline-4">
-<h4 id="orgce32e24"><span class="section-number-4">1.1.1.</span> Produit scalaire complexe</h4>
+<div id="outline-container-orgc077fe8" class="outline-4">
+<h4 id="orgc077fe8"><span class="section-number-4">1.1.1.</span> Produit scalaire complexe</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 Nous nous plaçons à présent dans le cas plus général où \(E\) est un espace vectoriel sur \(\setC\). Le \(\lambda\) défini plus haut devient donc un complexe. Nous allons déterminer s'il minimise la fonction \(\mathcal{E} : \setC \mapsto \setR\) définie par :
@@ -532,10 +539,8 @@ est l'unique complexe à minimiser \(\mathcal{E}\). La racine carrée étant une
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgb54daea" class="outline-3">
-<h3 id="orgb54daea"><span class="section-number-3">1.2.</span> Théorème de Pythagore</h3>
+<div id="outline-container-org4a5540c" class="outline-3">
+<h3 id="org4a5540c"><span class="section-number-3">1.2.</span> Théorème de Pythagore</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Calculons à présent la norme de \(y\) en partant de la relation :
@@ -562,10 +567,8 @@ On peut donc appliquer le théorème de pythagore, qui nous dit que :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org2888254" class="outline-3">
-<h3 id="org2888254"><span class="section-number-3">1.3.</span> Carré de la distance</h3>
+<div id="outline-container-org0879cb8" class="outline-3">
+<h3 id="org0879cb8"><span class="section-number-3">1.3.</span> Carré de la distance</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Si :
@@ -592,10 +595,8 @@ et finalement :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orga70d724" class="outline-3">
-<h3 id="orga70d724"><span class="section-number-3">1.4.</span> Cauchy-Schwartz</h3>
+<div id="outline-container-org9a05883" class="outline-3">
+<h3 id="org9a05883"><span class="section-number-3">1.4.</span> Cauchy-Schwartz</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Par positivité du produit scalaire, on a bien évidemment :
@@ -654,10 +655,8 @@ relation dont la racine nous donne l'inégalité de Cauchy-Schwartz :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org93e24b5" class="outline-3">
-<h3 id="org93e24b5"><span class="section-number-3">1.5.</span> Propriétés extrémales</h3>
+<div id="outline-container-org3ffc035" class="outline-3">
+<h3 id="org3ffc035"><span class="section-number-3">1.5.</span> Propriétés extrémales</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 L'égalité :
@@ -732,10 +731,8 @@ La borne inférieure est atteinte. La fonction \(\varphi\) est donc minimisée 
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org3ac55b8" class="outline-3">
-<h3 id="org3ac55b8"><span class="section-number-3">1.6.</span> Sous-espace vectoriel</h3>
+<div id="outline-container-org2bbf336" class="outline-3">
+<h3 id="org2bbf336"><span class="section-number-3">1.6.</span> Sous-espace vectoriel</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 Soit l'espace vectoriel \(E\) sur \(\setR\) et un sous-espace vectoriel \(U \subseteq E\) possédant une base orthonormée \((u_1,...,u_n)\). La projection d'un vecteur quelconque \(z \in E\) sur \(U\) est le vecteur \(p \in U\) qui minimise la norme de l'écart entre \(z\) et \(p\). On cherche donc le \(\lambda = (\lambda_1,...,\lambda_n) \in \setR^n\) qui minimise la fonction \(\mathcal{E} : \setR^n \mapsto \setR\) définie par :
@@ -778,10 +775,8 @@ minimise potentiellement \(\mathcal{E}\). Notre projection potentielle de \(z\) 
 \[p = \sum_i \scalaire{u_i}{z} \cdot u_i\]
 </p>
 </div>
-
-
-<div id="outline-container-orga15f9e2" class="outline-4">
-<h4 id="orga15f9e2"><span class="section-number-4">1.6.1.</span> Produit scalaire complexe</h4>
+<div id="outline-container-org8e4da60" class="outline-4">
+<h4 id="org8e4da60"><span class="section-number-4">1.6.1.</span> Produit scalaire complexe</h4>
 <div class="outline-text-4" id="text-1-6-1">
 <p>
 Nous nous plaçons à présent dans le cas plus général où \(E\) est un espace vectoriel sur \(\setC\). Le \(\lambda\) défini plus haut devient donc un élément de \(\setC^n\). Nous allons déterminer s'il minimise la fonction \(\mathcal{E} : \setC^n \mapsto \setR\) définie par :
@@ -861,10 +856,8 @@ Les scalaires \(\lambda_k\) minimisent donc bien la norme de l'écart sur \(U\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgcbf4920" class="outline-4">
-<h4 id="orgcbf4920"><span class="section-number-4">1.6.2.</span> Théorème de Pythagore</h4>
+<div id="outline-container-org8cd21eb" class="outline-4">
+<h4 id="org8cd21eb"><span class="section-number-4">1.6.2.</span> Théorème de Pythagore</h4>
 <div class="outline-text-4" id="text-1-6-2">
 <p>
 On a \(z = p + e\). Comme \(p\) est un vecteur de \(U\), on a \(\scalaire{p}{e} = \scalaire{e}{p} = 0\). Le théorème de Pythagore est donc applicable :
@@ -875,10 +868,8 @@ On a \(z = p + e\). Comme \(p\) est un vecteur de \(U\), on a \(\scalaire{p}{e} 
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org0528510" class="outline-4">
-<h4 id="org0528510"><span class="section-number-4">1.6.3.</span> Carré de la distance</h4>
+<div id="outline-container-org3177277" class="outline-4">
+<h4 id="org3177277"><span class="section-number-4">1.6.3.</span> Carré de la distance</h4>
 <div class="outline-text-4" id="text-1-6-3">
 <p>
 Soit :
@@ -906,10 +897,8 @@ et donc :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgfe1b9a2" class="outline-3">
-<h3 id="orgfe1b9a2"><span class="section-number-3">1.7.</span> Tenseur de projection</h3>
+<div id="outline-container-org45bd2e0" class="outline-3">
+<h3 id="org45bd2e0"><span class="section-number-3">1.7.</span> Tenseur de projection</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 On peut réécrire la projection de \(z\) sur \(U\) sous la forme :
@@ -935,10 +924,8 @@ on a alors :
 \[p = \mathcal{P} \cdot z = \contraction{\mathcal{P} }{1}{z}\]
 </p>
 </div>
-
-
-<div id="outline-container-org68d76b5" class="outline-4">
-<h4 id="org68d76b5"><span class="section-number-4">1.7.1.</span> Identité locale</h4>
+<div id="outline-container-org4d6c0f1" class="outline-4">
+<h4 id="org4d6c0f1"><span class="section-number-4">1.7.1.</span> Identité locale</h4>
 <div class="outline-text-4" id="text-1-7-1">
 <p>
 Pour tout \(y \in U\), on a :
@@ -961,10 +948,8 @@ Ces deux expressions étant identiques, on a \(\mathcal{P} \cdot y = y\). Le ten
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org51c2658" class="outline-4">
-<h4 id="org51c2658"><span class="section-number-4">1.7.2.</span> Invariance</h4>
+<div id="outline-container-org24a3472" class="outline-4">
+<h4 id="org24a3472"><span class="section-number-4">1.7.2.</span> Invariance</h4>
 <div class="outline-text-4" id="text-1-7-2">
 <p>
 Pour tout \(z \in E\), on a \(y = \mathcal{P} \cdot z \in U\). On en conclut que :
@@ -979,10 +964,8 @@ Donc \(\mathcal{P} = \mathcal{P} \cdot \mathcal{P}\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org1ce2d98" class="outline-4">
-<h4 id="org1ce2d98"><span class="section-number-4">1.7.3.</span> Complémentaire</h4>
+<div id="outline-container-org63cd5dc" class="outline-4">
+<h4 id="org63cd5dc"><span class="section-number-4">1.7.3.</span> Complémentaire</h4>
 <div class="outline-text-4" id="text-1-7-3">
 <p>
 Soit \((u_1,...,u_n)\) une base orthonormée de \(E\). On voit que le tenseur identité :
@@ -1034,10 +1017,8 @@ On a aussi sans surprise :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org493a24d" class="outline-3">
-<h3 id="org493a24d"><span class="section-number-3">1.8.</span> Gram-Schmidt</h3>
+<div id="outline-container-orgf63f880" class="outline-3">
+<h3 id="orgf63f880"><span class="section-number-3">1.8.</span> Gram-Schmidt</h3>
 <div class="outline-text-3" id="text-1-8">
 <p>
 Nous allons construire une suite de vecteurs orthonormaux \((u_1,u_2,...u_n)\) à partir d'une suite \((a_1,a_2,...,a_n)\) de vecteurs linéairement indépendants de \(E\). L'indépendance linéaire nous garantit que \(a_1 \ne 0\). On peut donc normaliser pour obtenir le premier vecteur de la série :
@@ -1107,10 +1088,8 @@ Nous disposons donc à la fin du processus d'une suite de vecteurs \((u_1,u_2,..
 Ce procédé est appelé processus d'orthogonalisation de Gram-Schmidt.
 </p>
 </div>
-
-
-<div id="outline-container-org2c503d0" class="outline-4">
-<h4 id="org2c503d0"><span class="section-number-4">1.8.1.</span> Remarque</h4>
+<div id="outline-container-org4ffa6e9" class="outline-4">
+<h4 id="org4ffa6e9"><span class="section-number-4">1.8.1.</span> Remarque</h4>
 <div class="outline-text-4" id="text-1-8-1">
 <p>
 Dans le cas où l'indépendance linéaire n'est pas garantie, il est toujours possible d'adapter l'algorithme en enlevant dynamiquement de la liste des \(a_k\) les vecteurs donnant un écart de projection nul. On se retrouve alors à la fin du processus avec une suite orthonormée \((u_1,...,u_m)\), où \(m \le n\).
@@ -1118,10 +1097,8 @@ Dans le cas où l'indépendance linéaire n'est pas garantie, il est toujours po
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org790c16d" class="outline-3">
-<h3 id="org790c16d"><span class="section-number-3">1.9.</span> Représentation matricielle</h3>
+<div id="outline-container-orgc8d3c37" class="outline-3">
+<h3 id="orgc8d3c37"><span class="section-number-3">1.9.</span> Représentation matricielle</h3>
 <div class="outline-text-3" id="text-1-9">
 <p>
 Soient \(u_1,u_2,...,u_m \in \matrice(\corps,n,1)\) des vecteurs matriciels orthonormés pour le produit scalaire usuel :
@@ -1148,10 +1125,8 @@ Il s'agit donc d'une matrice de taille \((n,n)\). Elle permet de projeter tout v
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org2a063d4" class="outline-3">
-<h3 id="org2a063d4"><span class="section-number-3">1.10.</span> Factorisation</h3>
+<div id="outline-container-org02959c2" class="outline-3">
+<h3 id="org02959c2"><span class="section-number-3">1.10.</span> Factorisation</h3>
 <div class="outline-text-3" id="text-1-10">
 <p>
 En terme de composantes, si \(u_k = ( u_{kj} )_j\) et si \(P = ( p_{ij} )_{i,j}\), on a :
@@ -1194,10 +1169,8 @@ où \(b_{ik} = \composante_{ik} U\) et \(c_{kj} = \composante_{kj} U^\dual\). On
 \[P = U \cdot U^\dual\]
 </p>
 </div>
-
-
-<div id="outline-container-org59959ed" class="outline-4">
-<h4 id="org59959ed"><span class="section-number-4">1.10.1.</span> Propriétés</h4>
+<div id="outline-container-org19a6d3f" class="outline-4">
+<h4 id="org19a6d3f"><span class="section-number-4">1.10.1.</span> Propriétés</h4>
 <div class="outline-text-4" id="text-1-10-1">
 <p>
 Comme les \(u_k\) sont orthonormaux, on a :
@@ -1224,10 +1197,8 @@ Si on pose \(Q = I - P\), on a aussi :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org18d03cf" class="outline-4">
-<h4 id="org18d03cf"><span class="section-number-4">1.10.2.</span> Cas particulier</h4>
+<div id="outline-container-orge87eb3b" class="outline-4">
+<h4 id="orge87eb3b"><span class="section-number-4">1.10.2.</span> Cas particulier</h4>
 <div class="outline-text-4" id="text-1-10-2">
 <p>
 Les \(m\) vecteurs \(u_i\) étant linéairement indépendants dans \(\corps^n\) qui est de dimension \(n\), on doit forcément avoir \(m \le n\). Dans le cas où \(m = n\), on a de plus \(U^\dual = U^{-1}\) et :
@@ -1239,10 +1210,8 @@ Les \(m\) vecteurs \(u_i\) étant linéairement indépendants dans \(\corps^n\) 
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org35840e4" class="outline-3">
-<h3 id="org35840e4"><span class="section-number-3">1.11.</span> Vecteurs $A$-orthogonaux</h3>
+<div id="outline-container-orgc01840c" class="outline-3">
+<h3 id="orgc01840c"><span class="section-number-3">1.11.</span> Vecteurs $A$-orthogonaux</h3>
 <div class="outline-text-3" id="text-1-11">
 <p>
 Soit une matrice de produit scalaire \(A \in \matrice(\corps,n,n)\). On peut utiliser le procédé de Gram-Schmidt pour construire une base de vecteurs orthogonaux pour le produit scalaire :
@@ -1305,20 +1274,16 @@ pour tout \(m \le n\), on peut réecrire l'orthogonalité comme suit :
 On note aussi \(U = U_n\).
 </p>
 </div>
-
-
-<div id="outline-container-orgba6287a" class="outline-4">
-<h4 id="orgba6287a"><span class="section-number-4">1.11.1.</span> Complément orthogonal</h4>
+<div id="outline-container-org18a3933" class="outline-4">
+<h4 id="org18a3933"><span class="section-number-4">1.11.1.</span> Complément orthogonal</h4>
 <div class="outline-text-4" id="text-1-11-1">
 <p>
 Si les vecteurs orthonormaux \((u_1,...,u_p)\), où \(p \le n\), sont donnés, on peut simplement commencer le processus à \(k = p\) pour complèter la suite de vecteurs jusqu'à \(k = n\). On obtient alors la suite orthonormée \((u_1,...,u_p,u_{p + 1},...,u_n)\). On dit que \((u_{p + 1},...,u_n)\) est le complément orthogonal de \((u_1,...,u_p)\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org80624ef" class="outline-4">
-<h4 id="org80624ef"><span class="section-number-4">1.11.2.</span> Orthogonalité usuelle</h4>
+<div id="outline-container-org2b21777" class="outline-4">
+<h4 id="org2b21777"><span class="section-number-4">1.11.2.</span> Orthogonalité usuelle</h4>
 <div class="outline-text-4" id="text-1-11-2">
 <p>
 Dans le cas où l'on choisit \(A = I\), cette méthode offre un moyen d'obtenir (ou de compléter) une suite de vecteurs \(u_i\) tels que \(u_i^\dual \cdot u_j = \indicatrice_{ij}\) et des matrices \(U_m\) correspondantes telles que \(U_m^\dual \cdot U_m = I_m\). Comme \(U = U_n\) est carrée, on a de plus :
@@ -1329,10 +1294,8 @@ Dans le cas où l'on choisit \(A = I\), cette méthode offre un moyen d'obtenir 
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org2562216" class="outline-4">
-<h4 id="org2562216"><span class="section-number-4">1.11.3.</span> Systèmes linéaires</h4>
+<div id="outline-container-orgc2f5207" class="outline-4">
+<h4 id="orgc2f5207"><span class="section-number-4">1.11.3.</span> Systèmes linéaires</h4>
 <div class="outline-text-4" id="text-1-11-3">
 <p>
 Lorsqu'on dispose de \(n\) vecteurs $A$-orthonormés, il est facile de résoudre le système linéaire \(A \cdot x = y\). Les \(u_i\) forment alors une base de \(\corps^n\) et on peut trouver des scalaires \(x_i \in \corps\) tels que :
@@ -1365,20 +1328,18 @@ Attention, analogue n'est pas identique, les \(u_i\) ne sont en général pas or
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org73b942b" class="outline-2">
-<h2 id="org73b942b"><span class="section-number-2">2.</span> Algorithmes d'optimisation libre</h2>
+<div id="outline-container-orgae0866f" class="outline-2">
+<h2 id="orgae0866f"><span class="section-number-2">2.</span> Algorithmes d'optimisation libre</h2>
 <div class="outline-text-2" id="text-2">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-2" role="doc-toc">
 <ul>
-<li><a href="#org635c475">2.1. Introduction</a></li>
-<li><a href="#orga4c5635">2.2. Minimum dans une direction</a></li>
-<li><a href="#org2560908">2.3. Méthode de la plus grande descente</a></li>
-<li><a href="#org4eab84c">2.4. Newton</a></li>
-<li><a href="#org4d934a0">2.5. Gradients conjugués</a></li>
-<li><a href="#orged191ad">2.6. Moindres carrés</a></li>
-<li><a href="#orgc506a3e">2.7. Levenberg-Marquardt</a></li>
+<li><a href="#org08cc892">2.1. Introduction</a></li>
+<li><a href="#orgf81c9cf">2.2. Minimum dans une direction</a></li>
+<li><a href="#org259214a">2.3. Méthode de la plus grande descente</a></li>
+<li><a href="#org8c18224">2.4. Newton</a></li>
+<li><a href="#org81cfea5">2.5. Gradients conjugués</a></li>
+<li><a href="#orgfd45646">2.6. Moindres carrés</a></li>
+<li><a href="#org3b9c783">2.7. Levenberg-Marquardt</a></li>
 </ul>
 </div>
 
@@ -1386,10 +1347,8 @@ Attention, analogue n'est pas identique, les \(u_i\) ne sont en général pas or
 \label{chap:algoptim}
 </p>
 </div>
-
-
-<div id="outline-container-org635c475" class="outline-3">
-<h3 id="org635c475"><span class="section-number-3">2.1.</span> Introduction</h3>
+<div id="outline-container-org08cc892" class="outline-3">
+<h3 id="org08cc892"><span class="section-number-3">2.1.</span> Introduction</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Nous allons présenter des algorithmes permettant de résoudre approximativement des problèmes de minimisation d'une fonction \(\varphi\) sur \(\setR^n\). Ces algorithmes partent d'un point initial \(x_0 \in \Omega\) et itèrent schématiquement comme suit :
@@ -1436,10 +1395,8 @@ pour toute fonction \(\Phi\) (par exemple, \(\Phi \in \{\varphi,J,H\}\)).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orga4c5635" class="outline-3">
-<h3 id="orga4c5635"><span class="section-number-3">2.2.</span> Minimum dans une direction</h3>
+<div id="outline-container-orgf81c9cf" class="outline-3">
+<h3 id="orgf81c9cf"><span class="section-number-3">2.2.</span> Minimum dans une direction</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Soit l'itération :
@@ -1474,10 +1431,8 @@ La valeur optimale de \(\alpha_k\) s'écrit :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org2560908" class="outline-3">
-<h3 id="org2560908"><span class="section-number-3">2.3.</span> Méthode de la plus grande descente</h3>
+<div id="outline-container-org259214a" class="outline-3">
+<h3 id="org259214a"><span class="section-number-3">2.3.</span> Méthode de la plus grande descente</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 La méthode de la plus grande pente consiste à partir à chaque itération
@@ -1522,10 +1477,8 @@ La valeur optimale de \(\alpha_k\) s'écrit donc :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org4eab84c" class="outline-3">
-<h3 id="org4eab84c"><span class="section-number-3">2.4.</span> Newton</h3>
+<div id="outline-container-org8c18224" class="outline-3">
+<h3 id="org8c18224"><span class="section-number-3">2.4.</span> Newton</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Il s'agit ici d'optimiser le pas \(s_k\) :
@@ -1560,10 +1513,8 @@ On en déduit la valeur optimale :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org4d934a0" class="outline-3">
-<h3 id="org4d934a0"><span class="section-number-3">2.5.</span> Gradients conjugués</h3>
+<div id="outline-container-org81cfea5" class="outline-3">
+<h3 id="org81cfea5"><span class="section-number-3">2.5.</span> Gradients conjugués</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 Soit l'itération :
@@ -1630,10 +1581,8 @@ On en déduit que :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orged191ad" class="outline-3">
-<h3 id="orged191ad"><span class="section-number-3">2.6.</span> Moindres carrés</h3>
+<div id="outline-container-orgfd45646" class="outline-3">
+<h3 id="orgfd45646"><span class="section-number-3">2.6.</span> Moindres carrés</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 Soit la fonction \(f : \setR^n \mapsto \setR^m\). On cherce à minimiser la fonction \(\varphi = f^\dual \cdot f / 2\). Le problème de minimisation s'écrit alors :
@@ -1684,10 +1633,8 @@ avec :
 \[s_k = -[D_k^\dual \cdot D_k]^{-1} \cdot D_k^\dual \cdot f_k\]
 </p>
 </div>
-
-
-<div id="outline-container-org3750882" class="outline-4">
-<h4 id="org3750882"><span class="section-number-4">2.6.1.</span> Zéros</h4>
+<div id="outline-container-orgef651e4" class="outline-4">
+<h4 id="orgef651e4"><span class="section-number-4">2.6.1.</span> Zéros</h4>
 <div class="outline-text-4" id="text-2-6-1">
 <p>
 Si \(S = \noyau f \ne \emptyset\), soit \(\gamma \in S\). On a alors :
@@ -1703,10 +1650,8 @@ On en déduit que tout \(x \in \setR^n\) minimisant \(\varphi\) vérifiera \(f(x
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgc506a3e" class="outline-3">
-<h3 id="orgc506a3e"><span class="section-number-3">2.7.</span> Levenberg-Marquardt</h3>
+<div id="outline-container-org3b9c783" class="outline-3">
+<h3 id="org3b9c783"><span class="section-number-3">2.7.</span> Levenberg-Marquardt</h3>
 <div class="outline-text-3" id="text-2-7">
 <p>
 C'est une variante de la méthode des moindres carrés, utile dans les cas où
@@ -1724,7 +1669,7 @@ sur la diagonale :
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2023-05-10 mer 16:45</p>
+<p class="date">Created: 2025-10-12 dim 15:25</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

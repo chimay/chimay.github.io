@@ -3,13 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2023-05-10 mer 16:44 -->
+<!-- 2025-10-12 dim 15:25 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 07 : Intégrales - 4</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
-<style>
+<style type="text/css">
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -193,27 +193,38 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 </head>
 <body>
 <div id="content" class="content">
@@ -230,10 +241,10 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4929252">1. Intégrales et mesures</a></li>
-<li><a href="#orgdcf2259">2. Intégrales unidimensionnelles</a></li>
-<li><a href="#org5a43402">3. Les espaces fonctionnels</a></li>
-<li><a href="#org0a5abd6">4. Convergence et intégration</a></li>
+<li><a href="#org6d94b5e">1. Intégrales et mesures</a></li>
+<li><a href="#orgb66b34e">2. Intégrales unidimensionnelles</a></li>
+<li><a href="#org2917914">3. Les espaces fonctionnels</a></li>
+<li><a href="#orgb34bd90">4. Convergence et intégration</a></li>
 </ul>
 </div>
 </div>
@@ -361,6 +372,7 @@
 \newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
 \newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
 \newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
 \newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
 \newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
@@ -391,25 +403,22 @@
 \newcommand{\petito}[1]{o\left(#1\right)}
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
-
-<div id="outline-container-org4929252" class="outline-2">
-<h2 id="org4929252"><span class="section-number-2">1.</span> Intégrales et mesures</h2>
+<div id="outline-container-org6d94b5e" class="outline-2">
+<h2 id="org6d94b5e"><span class="section-number-2">1.</span> Intégrales et mesures</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-1" role="doc-toc">
 <ul>
-<li><a href="#org5da871b">1.1. Addition de mesure</a></li>
-<li><a href="#org7ee76ee">1.2. Mesure de Lebesgue</a></li>
-<li><a href="#orgd0e0b35">1.3. Intégrale de Stieltjes</a></li>
-<li><a href="#orgb6ff3c5">1.4. Mesure pondérée</a></li>
-<li><a href="#orgfa9f355">1.5. Mesure de Dirac</a></li>
-<li><a href="#org56d383c">1.6. Pondérée - Dirac</a></li>
+<li><a href="#org3acf1e6">1.1. Addition de mesure</a></li>
+<li><a href="#org4aa07b2">1.2. Mesure de Lebesgue</a></li>
+<li><a href="#org3c1b458">1.3. Intégrale de Stieltjes</a></li>
+<li><a href="#org436091c">1.4. Mesure pondérée</a></li>
+<li><a href="#orgb96fb1b">1.5. Mesure de Dirac</a></li>
+<li><a href="#org379f833">1.6. Pondérée - Dirac</a></li>
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-org5da871b" class="outline-3">
-<h3 id="org5da871b"><span class="section-number-3">1.1.</span> Addition de mesure</h3>
+<div id="outline-container-org3acf1e6" class="outline-3">
+<h3 id="org3acf1e6"><span class="section-number-3">1.1.</span> Addition de mesure</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Soit les mesures \(\gamma, \lambda\) et la mesure \(\mu\) définie par :
@@ -447,10 +456,8 @@ En passant au suprémum sur toutes les fonctions étagées \(w\) essentiellement
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org7ee76ee" class="outline-3">
-<h3 id="org7ee76ee"><span class="section-number-3">1.2.</span> Mesure de Lebesgue</h3>
+<div id="outline-container-org4aa07b2" class="outline-3">
+<h3 id="org4aa07b2"><span class="section-number-3">1.2.</span> Mesure de Lebesgue</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Soit \(A \subseteq \setR^n\) et \(\mu_L\) la mesure de Lebesgue. On note alors \(d\mu_L(x) = dx\) ou :
@@ -469,10 +476,8 @@ et :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgd0e0b35" class="outline-3">
-<h3 id="orgd0e0b35"><span class="section-number-3">1.3.</span> Intégrale de Stieltjes</h3>
+<div id="outline-container-org3c1b458" class="outline-3">
+<h3 id="org3c1b458"><span class="section-number-3">1.3.</span> Intégrale de Stieltjes</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Soit la fonction croissante \(\gamma : A \mapsto \setR\). L'intégrale de Stieltjes associée à \(\gamma\) se note :
@@ -490,10 +495,8 @@ Elle se définit d'après la mesure de Stieltjes \(\mu_\gamma\) associée à \(\
 \[\int_A f(x) \ d\gamma(x) = \int_A f(x) \ d\mu_\gamma(x)\]
 </p>
 </div>
-
-
-<div id="outline-container-orgb46976a" class="outline-4">
-<h4 id="orgb46976a"><span class="section-number-4">1.3.1.</span> Fonction à variation bornée</h4>
+<div id="outline-container-org2be3df3" class="outline-4">
+<h4 id="org2be3df3"><span class="section-number-4">1.3.1.</span> Fonction à variation bornée</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <p>
 Nous allons étendre la définition à des fonctions non nécessairement croissantes. Soit une fonction \(g : [\alpha,\beta] \mapsto \setR\) et \(S[a,b]\) l'ensemble des suites réelles croissantes inclues dans \([a,b]\) :
@@ -528,10 +531,8 @@ pour tout \(x \in [\alpha,\beta]\). Il est clair que les fonctions \(\sigma, \la
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org356e701" class="outline-4">
-<h4 id="org356e701"><span class="section-number-4">1.3.2.</span> Positivité</h4>
+<div id="outline-container-org4a86868" class="outline-4">
+<h4 id="org4a86868"><span class="section-number-4">1.3.2.</span> Positivité</h4>
 <div class="outline-text-4" id="text-1-3-2">
 <p>
 L'intégrale de Stieltjes d'une fonction essentiellement positive n'est généralement pas positive.
@@ -539,10 +540,8 @@ L'intégrale de Stieltjes d'une fonction essentiellement positive n'est généra
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgb6ff3c5" class="outline-3">
-<h3 id="orgb6ff3c5"><span class="section-number-3">1.4.</span> Mesure pondérée</h3>
+<div id="outline-container-org436091c" class="outline-3">
+<h3 id="org436091c"><span class="section-number-3">1.4.</span> Mesure pondérée</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Soit une fonction essentiellement positive \(\varphi\) telle que la fonction \(\mu\) associée définie par :
@@ -601,10 +600,8 @@ pour toute fonction intégrable \(f : A \to \setR\). On note symboliquement :
 \[d\mu(x) = \varphi(x) \ dx\]
 </p>
 </div>
-
-
-<div id="outline-container-orga1d83ac" class="outline-4">
-<h4 id="orga1d83ac"><span class="section-number-4">1.4.1.</span> Problème inverse</h4>
+<div id="outline-container-org1bea3a0" class="outline-4">
+<h4 id="org1bea3a0"><span class="section-number-4">1.4.1.</span> Problème inverse</h4>
 <div class="outline-text-4" id="text-1-4-1">
 <p>
 Remarquons qu'on ne sait généralement pas faire correspondre une fonction \(\varphi\) à une mesure \(\mu\) donnée.
@@ -612,10 +609,8 @@ Remarquons qu'on ne sait généralement pas faire correspondre une fonction \(\v
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgfa9f355" class="outline-3">
-<h3 id="orgfa9f355"><span class="section-number-3">1.5.</span> Mesure de Dirac</h3>
+<div id="outline-container-orgb96fb1b" class="outline-3">
+<h3 id="orgb96fb1b"><span class="section-number-3">1.5.</span> Mesure de Dirac</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 L'intégrale d'une fonction \(f : \setR \to \setR\) par rapport à une mesure de Dirac \(\mu_D^a\) est fort simple à calculer. En effet :
@@ -674,10 +669,8 @@ On note également :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org56d383c" class="outline-3">
-<h3 id="org56d383c"><span class="section-number-3">1.6.</span> Pondérée - Dirac</h3>
+<div id="outline-container-org379f833" class="outline-3">
+<h3 id="org379f833"><span class="section-number-3">1.6.</span> Pondérée - Dirac</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 Soit une mesure \(\mu\) définie par :
@@ -697,32 +690,26 @@ où les \(\alpha_i \in \setR\). Si les \(x_i\) appartiennent tous à \(A\), l'in
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgdcf2259" class="outline-2">
-<h2 id="orgdcf2259"><span class="section-number-2">2.</span> Intégrales unidimensionnelles</h2>
+<div id="outline-container-orgb66b34e" class="outline-2">
+<h2 id="orgb66b34e"><span class="section-number-2">2.</span> Intégrales unidimensionnelles</h2>
 <div class="outline-text-2" id="text-2">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-2" role="doc-toc">
 <ul>
-<li><a href="#orgd86663e">2.1. Intreduction</a></li>
-<li><a href="#org9522904">2.2. Additivité d'intervalles</a></li>
-<li><a href="#org73089cd">2.3. Valeur moyenne d'une intégrale</a></li>
+<li><a href="#orgbfbfaff">2.1. Intreduction</a></li>
+<li><a href="#org592805c">2.2. Additivité d'intervalles</a></li>
+<li><a href="#orge03b7cc">2.3. Valeur moyenne d'une intégrale</a></li>
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-orgd86663e" class="outline-3">
-<h3 id="orgd86663e"><span class="section-number-3">2.1.</span> Intreduction</h3>
+<div id="outline-container-orgbfbfaff" class="outline-3">
+<h3 id="orgbfbfaff"><span class="section-number-3">2.1.</span> Intreduction</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Soit une fonction \(f : \setR \mapsto \setR\) et \(a,b \in \setR\) tels que \(a \le b\).
 </p>
 </div>
-
-
-<div id="outline-container-orge78d7b2" class="outline-4">
-<h4 id="orge78d7b2"><span class="section-number-4">2.1.1.</span> Intervalle</h4>
+<div id="outline-container-org6abf244" class="outline-4">
+<h4 id="org6abf244"><span class="section-number-4">2.1.1.</span> Intervalle</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <p>
 On définit la notation particulière :
@@ -733,10 +720,8 @@ On définit la notation particulière :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org329f043" class="outline-4">
-<h4 id="org329f043"><span class="section-number-4">2.1.2.</span> Intervalle inversé</h4>
+<div id="outline-container-orgff91079" class="outline-4">
+<h4 id="orgff91079"><span class="section-number-4">2.1.2.</span> Intervalle inversé</h4>
 <div class="outline-text-4" id="text-2-1-2">
 <p>
 On étend la notation à des « intervalles » inversés par :
@@ -747,10 +732,8 @@ On étend la notation à des « intervalles » inversés par :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org64669f7" class="outline-4">
-<h4 id="org64669f7"><span class="section-number-4">2.1.3.</span> Intervalle ouvert</h4>
+<div id="outline-container-org152a5ab" class="outline-4">
+<h4 id="org152a5ab"><span class="section-number-4">2.1.3.</span> Intervalle ouvert</h4>
 <div class="outline-text-4" id="text-2-1-3">
 <p>
 Pour les intervalles ouverts, on considère la limite :
@@ -761,10 +744,8 @@ Pour les intervalles ouverts, on considère la limite :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org0e747fd" class="outline-4">
-<h4 id="org0e747fd"><span class="section-number-4">2.1.4.</span> Infini</h4>
+<div id="outline-container-org1a5a8d6" class="outline-4">
+<h4 id="org1a5a8d6"><span class="section-number-4">2.1.4.</span> Infini</h4>
 <div class="outline-text-4" id="text-2-1-4">
 <p>
 Quand une des bornes de l'intervalle tend vers l'infini, on définit l'intégrale par :
@@ -780,10 +761,8 @@ Quand une des bornes de l'intervalle tend vers l'infini, on définit l'intégral
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orga4b4819" class="outline-4">
-<h4 id="orga4b4819"><span class="section-number-4">2.1.5.</span> Sur l'ensemble des réels</h4>
+<div id="outline-container-org2ca10e4" class="outline-4">
+<h4 id="org2ca10e4"><span class="section-number-4">2.1.5.</span> Sur l'ensemble des réels</h4>
 <div class="outline-text-4" id="text-2-1-5">
 <p>
 Enfin, l'intégrale sur \(\setR\) entier est définie par :
@@ -795,10 +774,8 @@ Enfin, l'intégrale sur \(\setR\) entier est définie par :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org9522904" class="outline-3">
-<h3 id="org9522904"><span class="section-number-3">2.2.</span> Additivité d'intervalles</h3>
+<div id="outline-container-org592805c" class="outline-3">
+<h3 id="org592805c"><span class="section-number-3">2.2.</span> Additivité d'intervalles</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Soit \(a,b,c,\alpha,\beta \in \setR\) avec \(\alpha \le a,b,c \le \beta\). Soit une fonction intégrable \(f : [\alpha,\beta] \mapsto \setR\). Posons :
@@ -865,10 +842,8 @@ On vérifie pareillement, en considérant tous les cas, que \(I(a,b) = I(a,c) + 
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org73089cd" class="outline-3">
-<h3 id="org73089cd"><span class="section-number-3">2.3.</span> Valeur moyenne d'une intégrale</h3>
+<div id="outline-container-orge03b7cc" class="outline-3">
+<h3 id="orge03b7cc"><span class="section-number-3">2.3.</span> Valeur moyenne d'une intégrale</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Soit la fonction intégrable et continue \(f : [a,b] \mapsto \setR\). Pour la mesure de Lebesgue, on a :
@@ -914,27 +889,23 @@ Le théorème des valeurs intermédiaires nous permet alors de trouver un \(c\) 
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org5a43402" class="outline-2">
-<h2 id="org5a43402"><span class="section-number-2">3.</span> Les espaces fonctionnels</h2>
+<div id="outline-container-org2917914" class="outline-2">
+<h2 id="org2917914"><span class="section-number-2">3.</span> Les espaces fonctionnels</h2>
 <div class="outline-text-2" id="text-3">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-3" role="doc-toc">
 <ul>
-<li><a href="#org544c7da">3.1. Dépendances</a></li>
-<li><a href="#orgedf8a04">3.2. Fonctions intégrables</a></li>
-<li><a href="#org0238f74">3.3. Intégrale complexe</a></li>
-<li><a href="#org8c2673b">3.4. Produit scalaire</a></li>
-<li><a href="#org6651f57">3.5. Espaces de Lebesgue</a></li>
-<li><a href="#org48cfa48">3.6. Espace de fonctions essentiellement bornées</a></li>
-<li><a href="#org74efc24">3.7. Noyau</a></li>
+<li><a href="#org23a0327">3.1. Dépendances</a></li>
+<li><a href="#orgbb51879">3.2. Fonctions intégrables</a></li>
+<li><a href="#org10ecab4">3.3. Intégrale complexe</a></li>
+<li><a href="#orgb12cefc">3.4. Produit scalaire</a></li>
+<li><a href="#orgef4ea40">3.5. Espaces de Lebesgue</a></li>
+<li><a href="#orgdce91a1">3.6. Espace de fonctions essentiellement bornées</a></li>
+<li><a href="#orgc587175">3.7. Noyau</a></li>
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-org544c7da" class="outline-3">
-<h3 id="org544c7da"><span class="section-number-3">3.1.</span> Dépendances</h3>
+<div id="outline-container-org23a0327" class="outline-3">
+<h3 id="org23a0327"><span class="section-number-3">3.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:mesure} : Les normes</li>
@@ -943,10 +914,8 @@ Le théorème des valeurs intermédiaires nous permet alors de trouver un \(c\) 
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-orgedf8a04" class="outline-3">
-<h3 id="orgedf8a04"><span class="section-number-3">3.2.</span> Fonctions intégrables</h3>
+<div id="outline-container-orgbb51879" class="outline-3">
+<h3 id="orgbb51879"><span class="section-number-3">3.2.</span> Fonctions intégrables</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Soit une fonction \(f : A \mapsto \setR\) et sa décomposition en fonctions positives \(f = f^+ - f^-\). Soit \(\abs{f} : A \mapsto \setR\) définie par :
@@ -1002,10 +971,8 @@ La fonction \(f\) est donc également intégrable. On en conclut que l'on peut r
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org0238f74" class="outline-3">
-<h3 id="org0238f74"><span class="section-number-3">3.3.</span> Intégrale complexe</h3>
+<div id="outline-container-org10ecab4" class="outline-3">
+<h3 id="org10ecab4"><span class="section-number-3">3.3.</span> Intégrale complexe</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Soit une fonction à valeurs complexes \(u : A \mapsto \setC\). On définit les fonctions à valeurs réelles associées \(v,w : A \mapsto \setR\) par :
@@ -1029,10 +996,8 @@ L'intégrale de la fonction \(u\) est alors définie par :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org8c2673b" class="outline-3">
-<h3 id="org8c2673b"><span class="section-number-3">3.4.</span> Produit scalaire</h3>
+<div id="outline-container-orgb12cefc" class="outline-3">
+<h3 id="orgb12cefc"><span class="section-number-3">3.4.</span> Produit scalaire</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 Par analogie avec le produit scalaire sur \(\corps^n\) :
@@ -1103,10 +1068,8 @@ nommé espace de Lebesgue de degré \(2\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org6651f57" class="outline-3">
-<h3 id="org6651f57"><span class="section-number-3">3.5.</span> Espaces de Lebesgue</h3>
+<div id="outline-container-orgef4ea40" class="outline-3">
+<h3 id="orgef4ea40"><span class="section-number-3">3.5.</span> Espaces de Lebesgue</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 L'espace de Lebesgue de degré \(k\) est l'ensemble des fonctions telles que l'intégrale
@@ -1117,10 +1080,8 @@ de la puissance \(k\) existe (et ne soit donc pas infinie) :
 \[\lebesgue^k(A,B) = \left\{ u \in \setC^A : \int_A \abs{u(x)}^k \ d\mu(x) \strictinferieur +\infty \right\}\]
 </p>
 </div>
-
-
-<div id="outline-container-org2c9b4b8" class="outline-4">
-<h4 id="org2c9b4b8"><span class="section-number-4">3.5.1.</span> Norme</h4>
+<div id="outline-container-orgd01977c" class="outline-4">
+<h4 id="orgd01977c"><span class="section-number-4">3.5.1.</span> Norme</h4>
 <div class="outline-text-4" id="text-3-5-1">
 <p>
 La norme usuelle sur cet espace est définie par :
@@ -1136,10 +1097,8 @@ Il s'agit d'une norme faible.
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org48cfa48" class="outline-3">
-<h3 id="org48cfa48"><span class="section-number-3">3.6.</span> Espace de fonctions essentiellement bornées</h3>
+<div id="outline-container-orgdce91a1" class="outline-3">
+<h3 id="orgdce91a1"><span class="section-number-3">3.6.</span> Espace de fonctions essentiellement bornées</h3>
 <div class="outline-text-3" id="text-3-6">
 <p>
 Par analogie avec la norme « max », on définit l'espace des fonctions essentiellement bornées par :
@@ -1150,10 +1109,8 @@ Par analogie avec la norme « max », on définit l'espace des fonctions essen
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org74efc24" class="outline-3">
-<h3 id="org74efc24"><span class="section-number-3">3.7.</span> Noyau</h3>
+<div id="outline-container-orgc587175" class="outline-3">
+<h3 id="orgc587175"><span class="section-number-3">3.7.</span> Noyau</h3>
 <div class="outline-text-3" id="text-3-7">
 <p>
 On peut généraliser le produit scalaire usuel de \(\lebesgue^2(A,B)\) en généralisant la notion de « matrice de produit scalaire ». On choisit une fonction \(K : A^2 \to B\) appelée « noyau » et on définit le produit scalaire associé :
@@ -1169,17 +1126,15 @@ Ce noyau doit bien entendu respecter certaines propriétés afin de s'assurer qu
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org0a5abd6" class="outline-2">
-<h2 id="org0a5abd6"><span class="section-number-2">4.</span> Convergence et intégration</h2>
+<div id="outline-container-orgb34bd90" class="outline-2">
+<h2 id="orgb34bd90"><span class="section-number-2">4.</span> Convergence et intégration</h2>
 <div class="outline-text-2" id="text-4">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-4" role="doc-toc">
 <ul>
-<li><a href="#orga129add">4.1. Convergence monotone</a></li>
-<li><a href="#orgb740720">4.2. Convergence des sommes</a></li>
-<li><a href="#org4d4d051">4.3. Lemme de Fatou</a></li>
-<li><a href="#org5546215">4.4. Convergence dominée</a></li>
+<li><a href="#org70f698b">4.1. Convergence monotone</a></li>
+<li><a href="#org29b4c66">4.2. Convergence des sommes</a></li>
+<li><a href="#org4ad4ae2">4.3. Lemme de Fatou</a></li>
+<li><a href="#orga3eb2de">4.4. Convergence dominée</a></li>
 </ul>
 </div>
 
@@ -1187,10 +1142,8 @@ Ce noyau doit bien entendu respecter certaines propriétés afin de s'assurer qu
 \label{chap:convint}
 </p>
 </div>
-
-
-<div id="outline-container-orga129add" class="outline-3">
-<h3 id="orga129add"><span class="section-number-3">4.1.</span> Convergence monotone</h3>
+<div id="outline-container-org70f698b" class="outline-3">
+<h3 id="org70f698b"><span class="section-number-3">4.1.</span> Convergence monotone</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Soit une suite de fonctions intégrables :
@@ -1224,10 +1177,8 @@ est bien définie et intégrable :
 \[S = \int_A s(x) \ d\mu(x) \strictinferieur +\infty\]
 </p>
 </div>
-
-
-<div id="outline-container-orgc395985" class="outline-4">
-<h4 id="orgc395985"><span class="section-number-4">4.1.1.</span> Convergence des fonctions</h4>
+<div id="outline-container-org810d28f" class="outline-4">
+<h4 id="org810d28f"><span class="section-number-4">4.1.1.</span> Convergence des fonctions</h4>
 <div class="outline-text-4" id="text-4-1-1">
 <p>
 Pour tout \(n \in \setN\), on a \(u_n \essinferieur u_{n + 1}\) et l'ensemble :
@@ -1262,10 +1213,8 @@ La suite \(\{ u_n(x) : n \in \setN \}\) est donc croissante et majorée par \(s(
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgbc15a0e" class="outline-4">
-<h4 id="orgbc15a0e"><span class="section-number-4">4.1.2.</span> Suite d'intégrales</h4>
+<div id="outline-container-org3851781" class="outline-4">
+<h4 id="org3851781"><span class="section-number-4">4.1.2.</span> Suite d'intégrales</h4>
 <div class="outline-text-4" id="text-4-1-2">
 <p>
 On définit la suite \(\{ I_n : n \in \setN \}\) par :
@@ -1284,10 +1233,8 @@ pour tout \(n \in \setN\). Comme \(u_n\) croît essentiellement avec \(n\), on a
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orge98b81c" class="outline-4">
-<h4 id="orge98b81c"><span class="section-number-4">4.1.3.</span> Fonction étagée</h4>
+<div id="outline-container-org42add8f" class="outline-4">
+<h4 id="org42add8f"><span class="section-number-4">4.1.3.</span> Fonction étagée</h4>
 <div class="outline-text-4" id="text-4-1-3">
 <p>
 Soit le réel \(\epsilon \strictsuperieur 0\). Choisissons \(w \in \mathcal{E}_A(s)\) telle que :
@@ -1346,10 +1293,8 @@ et finalement :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org9d844c4" class="outline-4">
-<h4 id="org9d844c4"><span class="section-number-4">4.1.4.</span> Mesures convergentes</h4>
+<div id="outline-container-orgfcf6ef0" class="outline-4">
+<h4 id="orgfcf6ef0"><span class="section-number-4">4.1.4.</span> Mesures convergentes</h4>
 <div class="outline-text-4" id="text-4-1-4">
 <p>
 Choisissons un réel \(\alpha\) vérifiant \(0 \strictinferieur \alpha \strictinferieur 1\) et posons :
@@ -1427,10 +1372,8 @@ et :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgdf1f325" class="outline-4">
-<h4 id="orgdf1f325"><span class="section-number-4">4.1.5.</span> Convergence des intégrales</h4>
+<div id="outline-container-org6d04590" class="outline-4">
+<h4 id="org6d04590"><span class="section-number-4">4.1.5.</span> Convergence des intégrales</h4>
 <div class="outline-text-4" id="text-4-1-5">
 <p>
 Fixons \(n \in \setN\). Comme \(C_n \subseteq A\), les \(W_n^i = C_n \cap \Psi_i\) forment une partition de \(C_n\) et on a :
@@ -1500,10 +1443,8 @@ Ce résultat devant être satisfait pour tout \(\epsilon \strictsuperieur 0\) et
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgb740720" class="outline-3">
-<h3 id="orgb740720"><span class="section-number-3">4.2.</span> Convergence des sommes</h3>
+<div id="outline-container-org29b4c66" class="outline-3">
+<h3 id="org29b4c66"><span class="section-number-3">4.2.</span> Convergence des sommes</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Soit une suite \(\{ f_n \in \setR^A : n \in \setN \}\) de fonctions intégrables essentiellement positives. Posons :
@@ -1530,10 +1471,8 @@ pour tout \(x \in A\). Si la fonction \(s\) ainsi définie est intégrable, on a
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org4d4d051" class="outline-3">
-<h3 id="org4d4d051"><span class="section-number-3">4.3.</span> Lemme de Fatou</h3>
+<div id="outline-container-org4ad4ae2" class="outline-3">
+<h3 id="org4ad4ae2"><span class="section-number-3">4.3.</span> Lemme de Fatou</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 Soit une suite \(\{ f_n \in \setR^A : n \in \setN \}\) de fonctions intégrables essentiellement positives. Posons :
@@ -1576,10 +1515,8 @@ Rassemblant ces résultats, il vient :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org5546215" class="outline-3">
-<h3 id="org5546215"><span class="section-number-3">4.4.</span> Convergence dominée</h3>
+<div id="outline-container-orga3eb2de" class="outline-3">
+<h3 id="orga3eb2de"><span class="section-number-3">4.4.</span> Convergence dominée</h3>
 <div class="outline-text-3" id="text-4-4">
 <p>
 Soit une suite de fonctions \(\{ f_n : n \in \setN \}\) intégrables sur \(\Omega\). Nous supposons qu'il existe un sous-ensemble essentiel \(A\) de \(\Omega\) et une fonction \(f : A \mapsto \setR\) telle que :
@@ -1735,7 +1672,7 @@ pour autant que \(f\) soit définie sur \(\Omega\).
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2023-05-10 mer 16:44</p>
+<p class="date">Created: 2025-10-12 dim 15:25</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

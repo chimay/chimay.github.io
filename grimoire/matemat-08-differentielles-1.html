@@ -3,13 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2023-05-10 mer 16:44 -->
+<!-- 2025-10-12 dim 15:25 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 08 : Différentielles - 1</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
-<style>
+<style type="text/css">
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -193,27 +193,38 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 </head>
 <body>
 <div id="content" class="content">
@@ -230,8 +241,8 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org9201611">1. Différentielles</a></li>
-<li><a href="#org4ed0286">2. Dérivées</a></li>
+<li><a href="#orgb40e667">1. Différentielles</a></li>
+<li><a href="#org53e95a2">2. Dérivées</a></li>
 </ul>
 </div>
 </div>
@@ -359,6 +370,7 @@
 \newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
 \newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
 \newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
 \newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
 \newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
@@ -389,24 +401,23 @@
 \newcommand{\petito}[1]{o\left(#1\right)}
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
-
-<div id="outline-container-org9201611" class="outline-2">
-<h2 id="org9201611"><span class="section-number-2">1.</span> Différentielles</h2>
+<div id="outline-container-orgb40e667" class="outline-2">
+<h2 id="orgb40e667"><span class="section-number-2">1.</span> Différentielles</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-1" role="doc-toc">
 <ul>
-<li><a href="#orgd70256a">1.1. Dépendances</a></li>
-<li><a href="#orga7eeba4">1.2. Définition</a></li>
-<li><a href="#orgd914df9">1.3. Continuité</a></li>
-<li><a href="#org407f0fd">1.4. Dérivées partielles</a></li>
-<li><a href="#orgc8f18ad">1.5. Dérivées et limites</a></li>
-<li><a href="#orgdbd0356">1.6. Représentation matricielle</a></li>
-<li><a href="#orgf81fc2f">1.7. Dérivées ordinaires</a></li>
-<li><a href="#org5c2b085">1.8. L'application dérivée</a></li>
-<li><a href="#org055e5dc">1.9. Hessienne</a></li>
-<li><a href="#org01d9dff">1.10. Dérivée d'ordre \(k\)</a></li>
-<li><a href="#orgb18452d">1.11. Fonctions à intégrale continue</a></li>
-<li><a href="#org436bd5d">1.12. Différentiabilité uniforme</a></li>
+<li><a href="#org99476c3">1.1. Dépendances</a></li>
+<li><a href="#org11e2a7f">1.2. Définition</a></li>
+<li><a href="#orgfec92ae">1.3. Continuité</a></li>
+<li><a href="#orga0c89a4">1.4. Dérivées partielles</a></li>
+<li><a href="#org9dfda6a">1.5. Dérivées et limites</a></li>
+<li><a href="#orgafb381c">1.6. Représentation matricielle</a></li>
+<li><a href="#orgd416dd3">1.7. Dérivées ordinaires</a></li>
+<li><a href="#org6462488">1.8. L'application dérivée</a></li>
+<li><a href="#orgcad79de">1.9. Hessienne</a></li>
+<li><a href="#orge2db26f">1.10. Dérivée d'ordre \(k\)</a></li>
+<li><a href="#org4533e58">1.11. Fonctions à intégrale continue</a></li>
+<li><a href="#org23f3352">1.12. Différentiabilité uniforme</a></li>
 </ul>
 </div>
 
@@ -414,20 +425,16 @@
 \label{chap:differentielles}
 </p>
 </div>
-
-
-<div id="outline-container-orgd70256a" class="outline-3">
-<h3 id="orgd70256a"><span class="section-number-3">1.1.</span> Dépendances</h3>
+<div id="outline-container-org99476c3" class="outline-3">
+<h3 id="org99476c3"><span class="section-number-3">1.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:lineaire} : Les fonctions linéaires</li>
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-orga7eeba4" class="outline-3">
-<h3 id="orga7eeba4"><span class="section-number-3">1.2.</span> Définition</h3>
+<div id="outline-container-org11e2a7f" class="outline-3">
+<h3 id="org11e2a7f"><span class="section-number-3">1.2.</span> Définition</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Soit les espaces vectoriels \(\Omega, F\) sur \(\corps\).
@@ -482,10 +489,8 @@ Si ces conditions sont vérifiées, on dit que \(f\) est différentiable en \(a\
 \[f(a + h) - f(a) = \differentielle{f}{a}(h) + E(h)\]
 </p>
 </div>
-
-
-<div id="outline-container-org052c286" class="outline-4">
-<h4 id="org052c286"><span class="section-number-4">1.2.1.</span> Notation</h4>
+<div id="outline-container-org73a5b77" class="outline-4">
+<h4 id="org73a5b77"><span class="section-number-4">1.2.1.</span> Notation</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 Tout au long de ce chapitre, nous notons :
@@ -502,10 +507,8 @@ Tout au long de ce chapitre, nous notons :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgd914df9" class="outline-3">
-<h3 id="orgd914df9"><span class="section-number-3">1.3.</span> Continuité</h3>
+<div id="outline-container-orgfec92ae" class="outline-3">
+<h3 id="orgfec92ae"><span class="section-number-3">1.3.</span> Continuité</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Si \(a\) est différentiable en \(a\), elle est forcément continue en \(a\). En effet, la différentielle est bien continue :
@@ -548,10 +551,8 @@ L'expression de \(f(a + h)\) peut donc s'écrire :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org407f0fd" class="outline-3">
-<h3 id="org407f0fd"><span class="section-number-3">1.4.</span> Dérivées partielles</h3>
+<div id="outline-container-orga0c89a4" class="outline-3">
+<h3 id="orga0c89a4"><span class="section-number-3">1.4.</span> Dérivées partielles</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Nous allons à présent voir comment obtenir les composantes de la différentielle dans le cas d'espaces de dimensions finies. Nous disposons donc d'une base \((\varpi_1,...,\varpi_n)\) de \(\Omega\) et d'une base \((\phi_1,...,\phi_m)\) de \(F\). Nous introduisons les composantes \(f_1,...,f_m : \Omega \mapsto F\) de \(f\) telles que :
@@ -617,10 +618,8 @@ pour tout \(i \in \setZ(1,m)\). On nomme \(\Delta_{ij}\) la dérivée partielle 
 \[\partial_j f_i(a) = \deriveepartielle{f_i}{x_j}(a) = \Delta_{ij}\]
 </p>
 </div>
-
-
-<div id="outline-container-orgb6cb37d" class="outline-4">
-<h4 id="orgb6cb37d"><span class="section-number-4">1.4.1.</span> Attention</h4>
+<div id="outline-container-orgaa64b15" class="outline-4">
+<h4 id="orgaa64b15"><span class="section-number-4">1.4.1.</span> Attention</h4>
 <div class="outline-text-4" id="text-1-4-1">
 <p>
 Ne pas confondre la frontière \(\frontiere A\) d'un ensemble \(A\) avec la dérivée \(\partial f\) d'une fonction \(f\).
@@ -628,10 +627,8 @@ Ne pas confondre la frontière \(\frontiere A\) d'un ensemble \(A\) avec la dér
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgc8f18ad" class="outline-3">
-<h3 id="orgc8f18ad"><span class="section-number-3">1.5.</span> Dérivées et limites</h3>
+<div id="outline-container-org9dfda6a" class="outline-3">
+<h3 id="org9dfda6a"><span class="section-number-3">1.5.</span> Dérivées et limites</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Soit \(\lambda \in \corps\). Si l'on choisit \(h = \lambda \ \varpi_j\), on a \(h_k = \lambda \ \indicatrice_{jk}\) et :
@@ -663,10 +660,8 @@ Ce qui montre que la dérivée partielle \(\partial_j f_i\) est la variation de 
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgdbd0356" class="outline-3">
-<h3 id="orgdbd0356"><span class="section-number-3">1.6.</span> Représentation matricielle</h3>
+<div id="outline-container-orgafb381c" class="outline-3">
+<h3 id="orgafb381c"><span class="section-number-3">1.6.</span> Représentation matricielle</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 On associe à la différentielle \(\differentielle{f}{a}\) la matrice Jacobienne \(\partial f(a)\) de \(f\) en \(a\) définie par :
@@ -688,10 +683,8 @@ On peut alors écrire la linéarisation de \(f\) sous forme de produit matriciel
 où \(f,h,E\) sont les vecteurs colonnes associés aux grandeurs du même nom.
 </p>
 </div>
-
-
-<div id="outline-container-org80d6c99" class="outline-4">
-<h4 id="org80d6c99"><span class="section-number-4">1.6.1.</span> Vecteurs associés</h4>
+<div id="outline-container-orgedf75c2" class="outline-4">
+<h4 id="orgedf75c2"><span class="section-number-4">1.6.1.</span> Vecteurs associés</h4>
 <div class="outline-text-4" id="text-1-6-1">
 <p>
 On dispose de \(n\) vecteurs représentant chacun la dérivée des composantes de \(f\) par rapport à la \(j^{ème}\) variable :
@@ -710,10 +703,8 @@ et de \(m\) vecteurs représentant chacun les dérivées de la \(i^{ème}\) comp
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org96862d6" class="outline-4">
-<h4 id="org96862d6"><span class="section-number-4">1.6.2.</span> Notation</h4>
+<div id="outline-container-org9317d23" class="outline-4">
+<h4 id="org9317d23"><span class="section-number-4">1.6.2.</span> Notation</h4>
 <div class="outline-text-4" id="text-1-6-2">
 <p>
 Dans le cas où la variable porte un nom par défaut, comme par exemple :
@@ -731,10 +722,8 @@ on note aussi :
 \[\deriveepartielle{f}{x}(a) = \partial f(a)\]
 </p>
 </div>
-
-
-<div id="outline-container-org9cbe185" class="outline-5">
-<h5 id="org9cbe185"><span class="section-number-5">1.6.2.1.</span> Plusieurs sous-variables</h5>
+<div id="outline-container-org36a1cbb" class="outline-5">
+<h5 id="org36a1cbb"><span class="section-number-5">1.6.2.1.</span> Plusieurs sous-variables</h5>
 <div class="outline-text-5" id="text-1-6-2-1">
 <p>
 Lorsque plusieurs sous variables portent un nom par défaut, comme par exemple :
@@ -765,10 +754,8 @@ pour la Jacobienne par rapport aux variables \(y = (y_1,...,y_t)\)
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org9098b0b" class="outline-5">
-<h5 id="org9098b0b"><span class="section-number-5">1.6.2.2.</span> Symbolique</h5>
+<div id="outline-container-orge8da4ac" class="outline-5">
+<h5 id="orge8da4ac"><span class="section-number-5">1.6.2.2.</span> Symbolique</h5>
 <div class="outline-text-5" id="text-1-6-2-2">
 <p>
 On a aussi les notations symboliques :
@@ -797,10 +784,8 @@ On utilise parfois la transposée de la Jacobienne :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org3981e1d" class="outline-4">
-<h4 id="org3981e1d"><span class="section-number-4">1.6.3.</span> Appellation</h4>
+<div id="outline-container-org2720ce0" class="outline-4">
+<h4 id="org2720ce0"><span class="section-number-4">1.6.3.</span> Appellation</h4>
 <div class="outline-text-4" id="text-1-6-3">
 <p>
 Pour des fonctions du type \(f : \setR^n \mapsto \setR\), la Jacobienne se réduit à un vecteur matriciel. On dit alors que \(\partial f\) est le gradient de \(f\).
@@ -808,10 +793,8 @@ Pour des fonctions du type \(f : \setR^n \mapsto \setR\), la Jacobienne se rédu
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgf81fc2f" class="outline-3">
-<h3 id="orgf81fc2f"><span class="section-number-3">1.7.</span> Dérivées ordinaires</h3>
+<div id="outline-container-orgd416dd3" class="outline-3">
+<h3 id="orgd416dd3"><span class="section-number-3">1.7.</span> Dérivées ordinaires</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 Dans le cas où \(m = n = 1\), il n'y a qu'une dérivée partielle, \(\partial_1 f_1\), que l'on appelle alors dérivée ordinaire. On a les équivalences :
@@ -829,10 +812,8 @@ On peut considérer \(\Omega\) et \(F\) comme équivalents à \(\corps\) et se r
 \[\partial f(a) = \lim_{\lambda \to 0} \frac{f(a + \lambda) - f(a)}{\lambda}\]
 </p>
 </div>
-
-
-<div id="outline-container-orgeb4c0ba" class="outline-4">
-<h4 id="orgeb4c0ba"><span class="section-number-4">1.7.1.</span> Notation</h4>
+<div id="outline-container-org6c0b038" class="outline-4">
+<h4 id="org6c0b038"><span class="section-number-4">1.7.1.</span> Notation</h4>
 <div class="outline-text-4" id="text-1-7-1">
 <p>
 On note aussi :
@@ -859,10 +840,8 @@ et :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgc6ad85c" class="outline-4">
-<h4 id="orgc6ad85c"><span class="section-number-4">1.7.2.</span> Définition équivalente</h4>
+<div id="outline-container-org1e77822" class="outline-4">
+<h4 id="org1e77822"><span class="section-number-4">1.7.2.</span> Définition équivalente</h4>
 <div class="outline-text-4" id="text-1-7-2">
 <p>
 Si on pose \(b = a + \lambda\), on voit que \(\lambda = b - a\) et que la convergence \(h \to 0\) est équivalente à \(b \to a\). On a donc :
@@ -874,10 +853,8 @@ Si on pose \(b = a + \lambda\), on voit que \(\lambda = b - a\) et que la conver
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org5c2b085" class="outline-3">
-<h3 id="org5c2b085"><span class="section-number-3">1.8.</span> L'application dérivée</h3>
+<div id="outline-container-org6462488" class="outline-3">
+<h3 id="org6462488"><span class="section-number-3">1.8.</span> L'application dérivée</h3>
 <div class="outline-text-3" id="text-1-8">
 <p>
 Si \(f\) est différentiable en tout vecteur \(a\) de \(A \subseteq \Omega\), on dit que \(f\) est différentiable sur \(A\). On peut alors définir une application dérivée \(\partial f : A \mapsto \matrice(\corps,m,n)\) définie par :
@@ -892,10 +869,8 @@ pour tout \(a \in A\). Si cette nouvelle application \(\partial f\) est égaleme
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org055e5dc" class="outline-3">
-<h3 id="org055e5dc"><span class="section-number-3">1.9.</span> Hessienne</h3>
+<div id="outline-container-orgcad79de" class="outline-3">
+<h3 id="orgcad79de"><span class="section-number-3">1.9.</span> Hessienne</h3>
 <div class="outline-text-3" id="text-1-9">
 <p>
 Soit \(f : \Omega \mapsto \corps\) avec \(\Omega\) de dimension finie \(n\). Supposons que \(f\) est différentiable sur \(A \subseteq \Omega\). La dimension de \(\corps\) sur \(\corps\) étant \(1\), la Jacobienne \(\partial f(a)\) se réduit à un vecteur matriciel de composantes \(\partial_i f\). Si la dérivée \(\partial f : A \mapsto \corps^n\) est elle-même différentiable, on nomme l'application définie par :
@@ -913,10 +888,8 @@ la dérivée seconde de \(f\). Il s'agit d'une fonction qui transforme un élém
 \[\partial_{ij}^2 f(a) = \partial_i \left( \partial_j f \right)(a)\]
 </p>
 </div>
-
-
-<div id="outline-container-orgf7fa0de" class="outline-4">
-<h4 id="orgf7fa0de"><span class="section-number-4">1.9.1.</span> Notation</h4>
+<div id="outline-container-org21cc767" class="outline-4">
+<h4 id="org21cc767"><span class="section-number-4">1.9.1.</span> Notation</h4>
 <div class="outline-text-4" id="text-1-9-1">
 <p>
 On note aussi :
@@ -943,10 +916,8 @@ En termes matriciels, cela donne :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org142527d" class="outline-4">
-<h4 id="org142527d"><span class="section-number-4">1.9.2.</span> Dérivée ordinaire</h4>
+<div id="outline-container-org391aa49" class="outline-4">
+<h4 id="org391aa49"><span class="section-number-4">1.9.2.</span> Dérivée ordinaire</h4>
 <div class="outline-text-4" id="text-1-9-2">
 <p>
 Dans le cas où la dimension de \(\Omega\) est un \(1\), on peut l'assimiler à \(\corps\), on a alors une fonction \(f : \corps \mapsto \corps\) possédant une seule dérivée seconde, que l'on note :
@@ -957,10 +928,8 @@ Dans le cas où la dimension de \(\Omega\) est un \(1\), on peut l'assimiler à 
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgc4b8f99" class="outline-4">
-<h4 id="orgc4b8f99"><span class="section-number-4">1.9.3.</span> Continuité</h4>
+<div id="outline-container-org68ab96a" class="outline-4">
+<h4 id="org68ab96a"><span class="section-number-4">1.9.3.</span> Continuité</h4>
 <div class="outline-text-4" id="text-1-9-3">
 <p>
 On note \(\continue^2(A,\corps)\) l'ensemble des fonctions dont la dérivée seconde est continue sur \(A\).
@@ -968,10 +937,8 @@ On note \(\continue^2(A,\corps)\) l'ensemble des fonctions dont la dérivée sec
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org01d9dff" class="outline-3">
-<h3 id="org01d9dff"><span class="section-number-3">1.10.</span> Dérivée d'ordre \(k\)</h3>
+<div id="outline-container-orge2db26f" class="outline-3">
+<h3 id="orge2db26f"><span class="section-number-3">1.10.</span> Dérivée d'ordre \(k\)</h3>
 <div class="outline-text-3" id="text-1-10">
 <p>
 Soit \(f : \corps \mapsto \corps\) et \(k \in \setN\). Pour autant que la fonction \(f\) soit suffisamment dérivable, on définit par récurrence la fonction \(\partial^k f : \corps \mapsto \corps\) :
@@ -990,10 +957,8 @@ La dérivée d'ordre \(k\)  de \(f\) est donc la fonction obtenue lorsqu'on appl
 \[\partial^k f = (\partial \circ ... \circ \partial)(f)\]
 </p>
 </div>
-
-
-<div id="outline-container-org397f85d" class="outline-4">
-<h4 id="org397f85d"><span class="section-number-4">1.10.1.</span> Ensembles</h4>
+<div id="outline-container-org8de6878" class="outline-4">
+<h4 id="org8de6878"><span class="section-number-4">1.10.1.</span> Ensembles</h4>
 <div class="outline-text-4" id="text-1-10-1">
 <p>
 On note \(\continue^k(A,\corps)\) l'ensemble des fonctions \(f : A \mapsto \corps\) dont la dérivée d'ordre \(k\) :
@@ -1007,20 +972,16 @@ On note \(\continue^k(A,\corps)\) l'ensemble des fonctions \(f : A \mapsto \corp
 existe et est continue sur \(A\).
 </p>
 </div>
-
-
-<div id="outline-container-orgf8b3b9d" class="outline-5">
-<h5 id="orgf8b3b9d"><span class="section-number-5">1.10.1.1.</span> Infini</h5>
+<div id="outline-container-orgb24a612" class="outline-5">
+<h5 id="orgb24a612"><span class="section-number-5">1.10.1.1.</span> Infini</h5>
 <div class="outline-text-5" id="text-1-10-1-1">
 <p>
 Si la dérivée \(\partial^k f\) existe pour tout \(k \in \setN\), on dit que \(f\) est indéfiniment dérivable. On note \(\continue^\infty(A,\corps)\) l'ensemble des fonctions indéfiniment dérivables.
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org838c25b" class="outline-5">
-<h5 id="org838c25b"><span class="section-number-5">1.10.1.2.</span> Ordre \(0\)</h5>
+<div id="outline-container-org2b21e1e" class="outline-5">
+<h5 id="org2b21e1e"><span class="section-number-5">1.10.1.2.</span> Ordre \(0\)</h5>
 <div class="outline-text-5" id="text-1-10-1-2">
 <p>
 On voit que \(\continue^0 = \continue\).
@@ -1028,20 +989,16 @@ On voit que \(\continue^0 = \continue\).
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgda771dd" class="outline-4">
-<h4 id="orgda771dd"><span class="section-number-4">1.10.2.</span> Homéomorphisme</h4>
+<div id="outline-container-org12b62d8" class="outline-4">
+<h4 id="org12b62d8"><span class="section-number-4">1.10.2.</span> Homéomorphisme</h4>
 <div class="outline-text-4" id="text-1-10-2">
 <p>
 On note \(\homeomorphisme^k(A,\corps)\) l'ensemble des bijections \(f\) de \(\continue^k\) telles que la fonction \(f^{-1}\) soit aussi dans \(\continue^k\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org2852102" class="outline-4">
-<h4 id="org2852102"><span class="section-number-4">1.10.3.</span> Notations</h4>
+<div id="outline-container-orgc3e8371" class="outline-4">
+<h4 id="orgc3e8371"><span class="section-number-4">1.10.3.</span> Notations</h4>
 <div class="outline-text-4" id="text-1-10-3">
 <p>
 Pour \(\alpha = (\alpha_1, \alpha_2, ..., \alpha_n)\), on écrit également :
@@ -1058,10 +1015,8 @@ Pour \(\alpha = (\alpha_1, \alpha_2, ..., \alpha_n)\), on écrit également :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgb18452d" class="outline-3">
-<h3 id="orgb18452d"><span class="section-number-3">1.11.</span> Fonctions à intégrale continue</h3>
+<div id="outline-container-org4533e58" class="outline-3">
+<h3 id="org4533e58"><span class="section-number-3">1.11.</span> Fonctions à intégrale continue</h3>
 <div class="outline-text-3" id="text-1-11">
 <p>
 Soit une fonction \(u : A \mapsto B\). Si la fonction \(v\) définie par :
@@ -1076,10 +1031,8 @@ est continue, on dit que \(u\) est à intégrale continue. On note \(\continue_{
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org436bd5d" class="outline-3">
-<h3 id="org436bd5d"><span class="section-number-3">1.12.</span> Différentiabilité uniforme</h3>
+<div id="outline-container-org23f3352" class="outline-3">
+<h3 id="org23f3352"><span class="section-number-3">1.12.</span> Différentiabilité uniforme</h3>
 <div class="outline-text-3" id="text-1-12">
 <p>
 On dit qu'une fonction \(f\) est uniformément différentiable sur \(A\) si pour tout \(\epsilon \strictsuperieur 0\), on peut trouver un \(\delta \strictsuperieur 0\) tel que :
@@ -1095,23 +1048,21 @@ quel que soit \(s,t \in A\) vérifiant \(\abs{s - t} \le \delta\).
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org4ed0286" class="outline-2">
-<h2 id="org4ed0286"><span class="section-number-2">2.</span> Dérivées</h2>
+<div id="outline-container-org53e95a2" class="outline-2">
+<h2 id="org53e95a2"><span class="section-number-2">2.</span> Dérivées</h2>
 <div class="outline-text-2" id="text-2">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-2" role="doc-toc">
 <ul>
-<li><a href="#org9710d71">2.1. Dépendances</a></li>
-<li><a href="#orgc53b1e4">2.2. Fonction constante</a></li>
-<li><a href="#org579dd5d">2.3. Identité</a></li>
-<li><a href="#orge5d31bc">2.4. Composition de fonctions</a></li>
-<li><a href="#org6d7d891">2.5. Inverse fonctionnel</a></li>
-<li><a href="#orge3892ae">2.6. Addition</a></li>
-<li><a href="#org6820c08">2.7. Produit scalaire</a></li>
-<li><a href="#org64e4979">2.8. Inverse multiplicatif</a></li>
-<li><a href="#orgc368e38">2.9. Fraction</a></li>
-<li><a href="#org1b9152e">2.10. Dérivée d'une limite</a></li>
+<li><a href="#org5bf331a">2.1. Dépendances</a></li>
+<li><a href="#orgdc7c893">2.2. Fonction constante</a></li>
+<li><a href="#org0471693">2.3. Identité</a></li>
+<li><a href="#org26d46cd">2.4. Composition de fonctions</a></li>
+<li><a href="#orge7181cf">2.5. Inverse fonctionnel</a></li>
+<li><a href="#orgca55c9a">2.6. Addition</a></li>
+<li><a href="#org5aeb6ac">2.7. Produit scalaire</a></li>
+<li><a href="#orgbefab7b">2.8. Inverse multiplicatif</a></li>
+<li><a href="#org9e298e7">2.9. Fraction</a></li>
+<li><a href="#orgb053c6b">2.10. Dérivée d'une limite</a></li>
 </ul>
 </div>
 
@@ -1119,20 +1070,16 @@ quel que soit \(s,t \in A\) vérifiant \(\abs{s - t} \le \delta\).
 \label{chap:derivee}
 </p>
 </div>
-
-
-<div id="outline-container-org9710d71" class="outline-3">
-<h3 id="org9710d71"><span class="section-number-3">2.1.</span> Dépendances</h3>
+<div id="outline-container-org5bf331a" class="outline-3">
+<h3 id="org5bf331a"><span class="section-number-3">2.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:differ} : Les différentielles</li>
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-orgc53b1e4" class="outline-3">
-<h3 id="orgc53b1e4"><span class="section-number-3">2.2.</span> Fonction constante</h3>
+<div id="outline-container-orgdc7c893" class="outline-3">
+<h3 id="orgdc7c893"><span class="section-number-3">2.2.</span> Fonction constante</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Si \(f\) est constante, on peut trouver \(c \in F\) tel que :
@@ -1159,10 +1106,8 @@ Par conséquent :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org579dd5d" class="outline-3">
-<h3 id="org579dd5d"><span class="section-number-3">2.3.</span> Identité</h3>
+<div id="outline-container-org0471693" class="outline-3">
+<h3 id="org0471693"><span class="section-number-3">2.3.</span> Identité</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Considérons le cas particulier où \(m = n\) et où \(f = \identite\). Lorsque \(i = j\), nous avons :
@@ -1193,10 +1138,8 @@ La Jacobienne de la fonction identité est la matrice identité.
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orge5d31bc" class="outline-3">
-<h3 id="orge5d31bc"><span class="section-number-3">2.4.</span> Composition de fonctions</h3>
+<div id="outline-container-org26d46cd" class="outline-3">
+<h3 id="org26d46cd"><span class="section-number-3">2.4.</span> Composition de fonctions</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Nous allons nous intéresser à présent au moyen d'obtenir la dérivée d'une composée de fonctions \(f : E \mapsto F\) et \(g : F \mapsto G\). Supposons que \(f\) soit différentiable en \(a\) et que \(g\) soit différentiable en \(b = f(a)\). On a alors :
@@ -1251,10 +1194,8 @@ puisque \(\partial g(f(a))\) ne dépend pas de \(da\). On a donc montré que \(g
 La dérivée d'une composée de fonctions est donc tout simplement le produit des Jacobiennes.
 </p>
 </div>
-
-
-<div id="outline-container-org381025e" class="outline-4">
-<h4 id="org381025e"><span class="section-number-4">2.4.1.</span> Notation</h4>
+<div id="outline-container-org2dd7637" class="outline-4">
+<h4 id="org2dd7637"><span class="section-number-4">2.4.1.</span> Notation</h4>
 <div class="outline-text-4" id="text-2-4-1">
 <p>
 Soit le schéma fonctionnel :
@@ -1295,10 +1236,8 @@ Si \(x,y,z \in \corps\), on a encore :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org6d7d891" class="outline-3">
-<h3 id="org6d7d891"><span class="section-number-3">2.5.</span> Inverse fonctionnel</h3>
+<div id="outline-container-orge7181cf" class="outline-3">
+<h3 id="orge7181cf"><span class="section-number-3">2.5.</span> Inverse fonctionnel</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 En considérant le cas particulier \(g = f^{-1}\), on a \(g \circ f = \identite\). Choisissons un vecteur \(a\) où \(f\) est différentiable et posons \(b = f(a)\). On a :
@@ -1316,10 +1255,8 @@ La jacobienne de l'inverse d'une fonction est donc l'inverse matriciel de sa jac
 \[\partial f^{-1}(b) = \left[ \partial f(a) \right]^{-1}\]
 </p>
 </div>
-
-
-<div id="outline-container-orgc7c038f" class="outline-4">
-<h4 id="orgc7c038f"><span class="section-number-4">2.5.1.</span> Notation</h4>
+<div id="outline-container-org1d05849" class="outline-4">
+<h4 id="org1d05849"><span class="section-number-4">2.5.1.</span> Notation</h4>
 <div class="outline-text-4" id="text-2-5-1">
 <p>
 On note aussi :
@@ -1339,10 +1276,8 @@ ou, pour des fonctions \(y : \corps \mapsto \corps\) :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orge3892ae" class="outline-3">
-<h3 id="orge3892ae"><span class="section-number-3">2.6.</span> Addition</h3>
+<div id="outline-container-orgca55c9a" class="outline-3">
+<h3 id="orgca55c9a"><span class="section-number-3">2.6.</span> Addition</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 Si \(f,g\) sont différentiables en \(a\), on a :
@@ -1396,10 +1331,8 @@ On peut montrer, cette fois en soustrayant les deux équations que :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org6820c08" class="outline-3">
-<h3 id="org6820c08"><span class="section-number-3">2.7.</span> Produit scalaire</h3>
+<div id="outline-container-org5aeb6ac" class="outline-3">
+<h3 id="org5aeb6ac"><span class="section-number-3">2.7.</span> Produit scalaire</h3>
 <div class="outline-text-3" id="text-2-7">
 <p>
 Considérons deux fonctions \(f,g\) différentiables en \(a\) :
@@ -1472,10 +1405,8 @@ La représentation matricielle s'écrit donc :
 \[\partial \scalaire{f}{g}(a) = \left[ \partial g(a) \right]^T \cdot f(a) + \left[ \partial f(a) \right]^T \cdot g(a)\]
 </p>
 </div>
-
-
-<div id="outline-container-org2e3dd46" class="outline-4">
-<h4 id="org2e3dd46"><span class="section-number-4">2.7.1.</span> Dérivée ordinaire</h4>
+<div id="outline-container-org7abeffb" class="outline-4">
+<h4 id="org7abeffb"><span class="section-number-4">2.7.1.</span> Dérivée ordinaire</h4>
 <div class="outline-text-4" id="text-2-7-1">
 <p>
 Dans le cas où \(m = n = 1\), cette expression se simplifie en :
@@ -1486,10 +1417,8 @@ Dans le cas où \(m = n = 1\), cette expression se simplifie en :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgc866749" class="outline-4">
-<h4 id="orgc866749"><span class="section-number-4">2.7.2.</span> Constante</h4>
+<div id="outline-container-org4619559" class="outline-4">
+<h4 id="org4619559"><span class="section-number-4">2.7.2.</span> Constante</h4>
 <div class="outline-text-4" id="text-2-7-2">
 <p>
 Si une des deux fonctions est constante, soit \(g(x) = c\) pour tout \(x\), on a :
@@ -1508,10 +1437,8 @@ et :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgdca72d8" class="outline-4">
-<h4 id="orgdca72d8"><span class="section-number-4">2.7.3.</span> Notation</h4>
+<div id="outline-container-org8a11ece" class="outline-4">
+<h4 id="org8a11ece"><span class="section-number-4">2.7.3.</span> Notation</h4>
 <div class="outline-text-4" id="text-2-7-3">
 <p>
 On note aussi :
@@ -1523,10 +1450,8 @@ On note aussi :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org64e4979" class="outline-3">
-<h3 id="org64e4979"><span class="section-number-3">2.8.</span> Inverse multiplicatif</h3>
+<div id="outline-container-orgbefab7b" class="outline-3">
+<h3 id="orgbefab7b"><span class="section-number-3">2.8.</span> Inverse multiplicatif</h3>
 <div class="outline-text-3" id="text-2-8">
 <p>
 Soit les fonctions \(f,g : \corps \mapsto \corps\) reliées par l'équation :
@@ -1561,10 +1486,8 @@ Mais comme \(f(x) = 1/g(x)\), cela nous donne :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgc368e38" class="outline-3">
-<h3 id="orgc368e38"><span class="section-number-3">2.9.</span> Fraction</h3>
+<div id="outline-container-org9e298e7" class="outline-3">
+<h3 id="org9e298e7"><span class="section-number-3">2.9.</span> Fraction</h3>
 <div class="outline-text-3" id="text-2-9">
 <p>
 En appliquant les résultats précédents, on obtient :
@@ -1583,10 +1506,8 @@ et finalement :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org1b9152e" class="outline-3">
-<h3 id="org1b9152e"><span class="section-number-3">2.10.</span> Dérivée d'une limite</h3>
+<div id="outline-container-orgb053c6b" class="outline-3">
+<h3 id="orgb053c6b"><span class="section-number-3">2.10.</span> Dérivée d'une limite</h3>
 <div class="outline-text-3" id="text-2-10">
 <p>
 Soit la suite de fonctions :
@@ -1619,7 +1540,7 @@ Si la fonction \(f\) est différentiable en \(a \in \setR\), on a :
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2023-05-10 mer 16:44</p>
+<p class="date">Created: 2025-10-12 dim 15:25</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

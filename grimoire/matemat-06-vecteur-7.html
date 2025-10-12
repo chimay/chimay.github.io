@@ -3,13 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2023-05-10 mer 16:44 -->
+<!-- 2025-10-12 dim 15:24 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 06 : Vecteurs - 7</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
-<style>
+<style type="text/css">
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -193,27 +193,38 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 </head>
 <body>
 <div id="content" class="content">
@@ -230,7 +241,7 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orge6a22a1">1. Systèmes linéaires et inverses</a></li>
+<li><a href="#org5313b83">1. Systèmes linéaires et inverses</a></li>
 </ul>
 </div>
 </div>
@@ -358,6 +369,7 @@
 \newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
 \newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
 \newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
 \newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
 \newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
@@ -388,20 +400,19 @@
 \newcommand{\petito}[1]{o\left(#1\right)}
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
-
-<div id="outline-container-orge6a22a1" class="outline-2">
-<h2 id="orge6a22a1"><span class="section-number-2">1.</span> Systèmes linéaires et inverses</h2>
+<div id="outline-container-org5313b83" class="outline-2">
+<h2 id="org5313b83"><span class="section-number-2">1.</span> Systèmes linéaires et inverses</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-1" role="doc-toc">
 <ul>
-<li><a href="#org93f2127">1.1. Gauss-Jordan</a></li>
-<li><a href="#org98f19b3">1.2. Systèmes linéaires</a></li>
-<li><a href="#orgd4b08ca">1.3. Matrices hautes</a></li>
-<li><a href="#org640d892">1.4. Matrices longues</a></li>
-<li><a href="#org07019e5">1.5. Matrices carrées</a></li>
-<li><a href="#org74a60af">1.6. Complément de Schur</a></li>
-<li><a href="#org62a09e8">1.7. Dimension</a></li>
-<li><a href="#org78d7aee">1.8. Indépendance linéaire</a></li>
+<li><a href="#org93f9e1b">1.1. Gauss-Jordan</a></li>
+<li><a href="#org79dcc24">1.2. Systèmes linéaires</a></li>
+<li><a href="#org66cbec4">1.3. Matrices hautes</a></li>
+<li><a href="#org5a3649d">1.4. Matrices longues</a></li>
+<li><a href="#org4c82b8e">1.5. Matrices carrées</a></li>
+<li><a href="#org349ed5c">1.6. Complément de Schur</a></li>
+<li><a href="#org053885a">1.7. Dimension</a></li>
+<li><a href="#org36acbf9">1.8. Indépendance linéaire</a></li>
 </ul>
 </div>
 
@@ -409,10 +420,8 @@
 \label{chap:syslin}
 </p>
 </div>
-
-
-<div id="outline-container-org93f2127" class="outline-3">
-<h3 id="org93f2127"><span class="section-number-3">1.1.</span> Gauss-Jordan</h3>
+<div id="outline-container-org93f9e1b" class="outline-3">
+<h3 id="org93f9e1b"><span class="section-number-3">1.1.</span> Gauss-Jordan</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Nous allons tenter de diagonaliser une matrice \(A \in \matrice(\corps,m,n)\) en une matrice diagonale aussi proche que possible de la matrice identité. Soit les \(\canonique_i\), vecteurs de la base canonique de \(\corps^m\) ou \(\corps^n\) suivant le contexte. Si \(A\) est non nulle, on peut trouver un \(i\) et un \(j\) tels que :
@@ -722,10 +731,8 @@ I_r & 0 \\
 suivant que \(r = p = m = n\), \(r = p = n\), \(r = p = m\) ou \(r \strictinferieur p\).
 </p>
 </div>
-
-
-<div id="outline-container-org99d7d2a" class="outline-4">
-<h4 id="org99d7d2a"><span class="section-number-4">1.1.1.</span> Inverse</h4>
+<div id="outline-container-orgc25c55f" class="outline-4">
+<h4 id="orgc25c55f"><span class="section-number-4">1.1.1.</span> Inverse</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 Les matrices élémentaires de permutation sont inversibles, d'inverse identique à elles-mêmes. On a donc \(P_i^{-1} = P_i\) et \(Q_i^{-1} = Q_i\). Les matrices élémentaires de transformation sont également inversibles. En effet, \(x^\dual \cdot y = x^\dual \cdot \canonique_1 = a \ne 0\). L'inverse de \(E_0\) existe donc et s'écrit :
@@ -769,10 +776,8 @@ Une telle décomposition est appelée décomposition de Gauss-Jordan et notée 
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org16f28c7" class="outline-4">
-<h4 id="org16f28c7"><span class="section-number-4">1.1.2.</span> Rang</h4>
+<div id="outline-container-org9acae29" class="outline-4">
+<h4 id="org9acae29"><span class="section-number-4">1.1.2.</span> Rang</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 Le \(r\) ainsi obtenu est appelé rang de la matrice \(A\). On le note :
@@ -788,10 +793,8 @@ On a par construction \(r \le p\).
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org98f19b3" class="outline-3">
-<h3 id="org98f19b3"><span class="section-number-3">1.2.</span> Systèmes linéaires</h3>
+<div id="outline-container-org79dcc24" class="outline-3">
+<h3 id="org79dcc24"><span class="section-number-3">1.2.</span> Systèmes linéaires</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Nous allons à présent utiliser la décomposition de Gauss-Jordan pour analyser les espaces de solutions :
@@ -838,10 +841,8 @@ Le système linéaire s'écrit alors :
 \[C \cdot z = b\]
 </p>
 </div>
-
-
-<div id="outline-container-org06175c1" class="outline-4">
-<h4 id="org06175c1"><span class="section-number-4">1.2.1.</span> Plein rang, matrice carrée</h4>
+<div id="outline-container-org83cf9a0" class="outline-4">
+<h4 id="org83cf9a0"><span class="section-number-4">1.2.1.</span> Plein rang, matrice carrée</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 Si \(r = m = n\), on a :
@@ -868,10 +869,8 @@ L'équation \(A \cdot x = y\) admet donc pour unique solution \(x \in S(y)\) le 
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org35b2188" class="outline-4">
-<h4 id="org35b2188"><span class="section-number-4">1.2.2.</span> Plein rang, matrice haute</h4>
+<div id="outline-container-org9945053" class="outline-4">
+<h4 id="org9945053"><span class="section-number-4">1.2.2.</span> Plein rang, matrice haute</h4>
 <div class="outline-text-4" id="text-1-2-2">
 <p>
 Si \(r = n \strictinferieur m\), on a :
@@ -980,10 +979,8 @@ où \(b_2 \ne 0\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgfa17f1f" class="outline-4">
-<h4 id="orgfa17f1f"><span class="section-number-4">1.2.3.</span> Plein rang, matrice longue</h4>
+<div id="outline-container-org4a6a856" class="outline-4">
+<h4 id="org4a6a856"><span class="section-number-4">1.2.3.</span> Plein rang, matrice longue</h4>
 <div class="outline-text-4" id="text-1-2-3">
 <p>
 Si \(r = m \strictinferieur n\), on se retrouve alors avec :
@@ -1053,10 +1050,8 @@ L^{-1} \cdot y \\ z_2
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgdd7298d" class="outline-4">
-<h4 id="orgdd7298d"><span class="section-number-4">1.2.4.</span> Rang incomplet</h4>
+<div id="outline-container-orgf648141" class="outline-4">
+<h4 id="orgf648141"><span class="section-number-4">1.2.4.</span> Rang incomplet</h4>
 <div class="outline-text-4" id="text-1-2-4">
 <p>
 Supposons que \(r \strictinferieur p\). On partitionne alors \(z\) en deux vecteurs \(z_1\) et \(z_2\) de tailles \((r,1)\) et \((n - r, 1)\) et \(b\) en deux vecteurs \(b_1\) et \(b_2\) de tailles \((r,1)\) et \((m - r,1)\). Avec ces notations, le produit \(C \cdot z\) s'écrit :
@@ -1170,20 +1165,16 @@ où \(b_2 \ne 0\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org93df39a" class="outline-4">
-<h4 id="org93df39a"><span class="section-number-4">1.2.5.</span> Rang et existence</h4>
+<div id="outline-container-org977cc54" class="outline-4">
+<h4 id="org977cc54"><span class="section-number-4">1.2.5.</span> Rang et existence</h4>
 <div class="outline-text-4" id="text-1-2-5">
 <p>
 On conclut de ce qui précède que si \(r \strictinferieur m\) ou \(r \strictinferieur p\), on peut toujours trouver un \(y\) tel qu'il n'existe pas de solution. Pour qu'il existe au moins une solution du système quel que soit \(y\), il faut donc avoir \(r = m = p\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgecd6720" class="outline-4">
-<h4 id="orgecd6720"><span class="section-number-4">1.2.6.</span> Rang et unicité</h4>
+<div id="outline-container-org6d83f7a" class="outline-4">
+<h4 id="org6d83f7a"><span class="section-number-4">1.2.6.</span> Rang et unicité</h4>
 <div class="outline-text-4" id="text-1-2-6">
 <p>
 On conclut de ce qui précède que si \(r \strictinferieur n\) ou \(r \strictinferieur p\), on peut toujours trouver un \(y\) tel qu'il existe une infinité de solution, et même une infinité de solutions non nulles puisque \(z_2 \ne 0\) peut être quelconque.
@@ -1195,10 +1186,8 @@ Pour qu'il existe au maximum une solution du système quel que soit \(y\), il fa
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgd4b08ca" class="outline-3">
-<h3 id="orgd4b08ca"><span class="section-number-3">1.3.</span> Matrices hautes</h3>
+<div id="outline-container-org66cbec4" class="outline-3">
+<h3 id="org66cbec4"><span class="section-number-3">1.3.</span> Matrices hautes</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Soit une matrice \(A \in \matrice(\corps,m,n)\) strictement haute (\(m \strictsuperieur n\)). Un inverse à droite \(R\) vérifiant \(A \cdot B = I\) ne peut pas exister, car sinon il suffirait de prendre \(x = B \cdot y\) pour avoir :
@@ -1213,10 +1202,8 @@ Le système \(A \cdot x = y\) admettrait toujours au moins une solution, ce qui 
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org640d892" class="outline-3">
-<h3 id="org640d892"><span class="section-number-3">1.4.</span> Matrices longues</h3>
+<div id="outline-container-org5a3649d" class="outline-3">
+<h3 id="org5a3649d"><span class="section-number-3">1.4.</span> Matrices longues</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Soit une matrice \(A \in \matrice(\corps,m,n)\) strictement longue (\(n \strictsuperieur m\)). Un inverse à gauche \(B\) vérifiant \(B \cdot A = I\) ne peut pas exister, car sinon on aurait :
@@ -1231,10 +1218,8 @@ La matrice \(B^\dual\) serait donc un inverse à droite de la matrice \(A^\dual\
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org07019e5" class="outline-3">
-<h3 id="org07019e5"><span class="section-number-3">1.5.</span> Matrices carrées</h3>
+<div id="outline-container-org4c82b8e" class="outline-3">
+<h3 id="org4c82b8e"><span class="section-number-3">1.5.</span> Matrices carrées</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Supposons que \(m = n\) et considérons deux matrices carrées \(A,B \in \matrice(\corps,n,n)\) telles que :
@@ -1262,10 +1247,8 @@ En multipliant à gauche par \(A^{-1}\), il vient simplement \(B - A^{-1} = 0\),
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org74a60af" class="outline-3">
-<h3 id="org74a60af"><span class="section-number-3">1.6.</span> Complément de Schur</h3>
+<div id="outline-container-org349ed5c" class="outline-3">
+<h3 id="org349ed5c"><span class="section-number-3">1.6.</span> Complément de Schur</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 Soit le système suivant :
@@ -1353,10 +1336,8 @@ Si \(A\) est facilement inversible, et si \(D - C \cdot A^{-1} \cdot B\) est de 
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org62a09e8" class="outline-3">
-<h3 id="org62a09e8"><span class="section-number-3">1.7.</span> Dimension</h3>
+<div id="outline-container-org053885a" class="outline-3">
+<h3 id="org053885a"><span class="section-number-3">1.7.</span> Dimension</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 Soit un espace vectoriel \(E\) sur \(\corps\) possédant deux bases \((e_1,e_2,...,e_n)\) et \((f_1,f_2,...,f_m)\). Comme les \(f_i \in E\), on a :
@@ -1406,10 +1387,8 @@ d'où l'on conclut que \(B \cdot A = I_n\). La matrice \(A\) admettant un invers
 \[\dim E = n\]
 </p>
 </div>
-
-
-<div id="outline-container-orgbff0122" class="outline-4">
-<h4 id="orgbff0122"><span class="section-number-4">1.7.1.</span> Corollaire</h4>
+<div id="outline-container-org5d6c5c5" class="outline-4">
+<h4 id="org5d6c5c5"><span class="section-number-4">1.7.1.</span> Corollaire</h4>
 <div class="outline-text-4" id="text-1-7-1">
 <p>
 La base canonique de \(\corps^n\) comptant \(n\) éléments,
@@ -1418,10 +1397,8 @@ on en déduit que \(\corps^n\) est de dimension \(n\).
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org78d7aee" class="outline-3">
-<h3 id="org78d7aee"><span class="section-number-3">1.8.</span> Indépendance linéaire</h3>
+<div id="outline-container-org36acbf9" class="outline-3">
+<h3 id="org36acbf9"><span class="section-number-3">1.8.</span> Indépendance linéaire</h3>
 <div class="outline-text-3" id="text-1-8">
 <p>
 Soit un espace vectoriel \(E\) de dimension \(m\) et une suite de vecteurs linéairement indépendants \((u_1,...,u_n)\) de \(E\). Si \((e_1,...,e_m)\) est une base de \(E\), on peut trouver des coordonnées \(a_{ki} \in \corps\) telles que :
@@ -1488,7 +1465,7 @@ Soit \(r\) le rang de \(A\). On sait déjà que \(r \le \min \{m,n\}\). Examinon
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2023-05-10 mer 16:44</p>
+<p class="date">Created: 2025-10-12 dim 15:24</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

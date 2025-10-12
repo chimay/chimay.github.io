@@ -3,13 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2023-05-10 mer 16:42 -->
+<!-- 2025-10-12 dim 15:23 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 03 : Ensembles - 5</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
-<style>
+<style type="text/css">
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -193,27 +193,38 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 </head>
 <body>
 <div id="content" class="content">
@@ -230,9 +241,9 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org00c6a25">1. Treillis</a></li>
-<li><a href="#org2aff9cf">2. Tribus</a></li>
-<li><a href="#orge850b84">3. Topologies</a></li>
+<li><a href="#orgc02d73b">1. Treillis</a></li>
+<li><a href="#org04d89c3">2. Tribus</a></li>
+<li><a href="#orge8d8928">3. Topologies</a></li>
 </ul>
 </div>
 </div>
@@ -360,6 +371,7 @@
 \newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
 \newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
 \newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
 \newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
 \newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
@@ -390,27 +402,26 @@
 \newcommand{\petito}[1]{o\left(#1\right)}
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
-
-<div id="outline-container-org00c6a25" class="outline-2">
-<h2 id="org00c6a25"><span class="section-number-2">1.</span> Treillis</h2>
+<div id="outline-container-orgc02d73b" class="outline-2">
+<h2 id="orgc02d73b"><span class="section-number-2">1.</span> Treillis</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-1" role="doc-toc">
 <ul>
-<li><a href="#org5cabf87">1.1. Dépendances</a></li>
-<li><a href="#org1a28052">1.2. Définition</a></li>
-<li><a href="#org2bbf86c">1.3. Union généralisée</a></li>
-<li><a href="#org6416bee">1.4. Intersection généralisée</a></li>
-<li><a href="#orgecf1543">1.5. Treillis dual</a></li>
-<li><a href="#org4d6d756">1.6. Éléments nul et universel</a></li>
-<li><a href="#org2da0be9">1.7. Complémentaire</a></li>
-<li><a href="#org414dbea">1.8. Distributivité</a></li>
-<li><a href="#orga5bd7c1">1.9. Booléen</a></li>
-<li><a href="#org01b0e78">1.10. Idempotence</a></li>
-<li><a href="#org9974b3c">1.11. Sous-ensemble fini</a></li>
-<li><a href="#org3693799">1.12. Commutativité</a></li>
-<li><a href="#org66ad54b">1.13. Associativité</a></li>
-<li><a href="#orga644617">1.14. Absorption</a></li>
-<li><a href="#orga6fa570">1.15. Treillis d'ensemble</a></li>
+<li><a href="#orgc5fd316">1.1. Dépendances</a></li>
+<li><a href="#org2cf9923">1.2. Définition</a></li>
+<li><a href="#orgf9280cd">1.3. Union généralisée</a></li>
+<li><a href="#org63fe9e3">1.4. Intersection généralisée</a></li>
+<li><a href="#org161fb29">1.5. Treillis dual</a></li>
+<li><a href="#org2388f36">1.6. Éléments nul et universel</a></li>
+<li><a href="#org1896a6f">1.7. Complémentaire</a></li>
+<li><a href="#org1cedcc6">1.8. Distributivité</a></li>
+<li><a href="#orgd1ddf9f">1.9. Booléen</a></li>
+<li><a href="#orgcf5574c">1.10. Idempotence</a></li>
+<li><a href="#orge5661e5">1.11. Sous-ensemble fini</a></li>
+<li><a href="#org58e660f">1.12. Commutativité</a></li>
+<li><a href="#orgef8a75f">1.13. Associativité</a></li>
+<li><a href="#org71de080">1.14. Absorption</a></li>
+<li><a href="#org627d80f">1.15. Treillis d'ensemble</a></li>
 </ul>
 </div>
 
@@ -418,20 +429,16 @@
 \label{chap:treillis}
 </p>
 </div>
-
-
-<div id="outline-container-org5cabf87" class="outline-3">
-<h3 id="org5cabf87"><span class="section-number-3">1.1.</span> Dépendances</h3>
+<div id="outline-container-orgc5fd316" class="outline-3">
+<h3 id="orgc5fd316"><span class="section-number-3">1.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:ordreInclusif} : L'ordre inclusif</li>
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-org1a28052" class="outline-3">
-<h3 id="org1a28052"><span class="section-number-3">1.2.</span> Définition</h3>
+<div id="outline-container-org2cf9923" class="outline-3">
+<h3 id="org2cf9923"><span class="section-number-3">1.2.</span> Définition</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Soit l'ensemble \(\Omega\) et \(A,B \subseteq \Omega\). Au sens inclusif,
@@ -471,10 +478,8 @@ Dans la suite, nous considérons un treillis \((\mathcal{T},\le)\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org2bbf86c" class="outline-3">
-<h3 id="org2bbf86c"><span class="section-number-3">1.3.</span> Union généralisée</h3>
+<div id="outline-container-orgf9280cd" class="outline-3">
+<h3 id="orgf9280cd"><span class="section-number-3">1.3.</span> Union généralisée</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Soit \(a, b \in \mathcal{T}\). Par analogie avec l'union ensembliste,
@@ -486,10 +491,8 @@ on définit l'opération d'union généralisée \(\sqcup\) par :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org6416bee" class="outline-3">
-<h3 id="org6416bee"><span class="section-number-3">1.4.</span> Intersection généralisée</h3>
+<div id="outline-container-org63fe9e3" class="outline-3">
+<h3 id="org63fe9e3"><span class="section-number-3">1.4.</span> Intersection généralisée</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Soit \(a, b \in \mathcal{T}\). Par analogie avec l'intersection ensembliste,
@@ -501,10 +504,8 @@ on définit l'opération d'intersection généralisée \(\sqcap\) par :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgecf1543" class="outline-3">
-<h3 id="orgecf1543"><span class="section-number-3">1.5.</span> Treillis dual</h3>
+<div id="outline-container-org161fb29" class="outline-3">
+<h3 id="org161fb29"><span class="section-number-3">1.5.</span> Treillis dual</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Le treillis dual de \((\mathcal{T},\le)\) est noté \((\mathcal{T},\le)^\dual\)
@@ -535,10 +536,8 @@ et :
 Le treillis dual est donc également un treillis.
 </p>
 </div>
-
-
-<div id="outline-container-org6269457" class="outline-4">
-<h4 id="org6269457"><span class="section-number-4">1.5.1.</span> Union</h4>
+<div id="outline-container-org28046b9" class="outline-4">
+<h4 id="org28046b9"><span class="section-number-4">1.5.1.</span> Union</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <p>
 Soit \(a,b \in \mathcal{T}\). On définit l'opération \(\sqcup^\dual\) par :
@@ -549,10 +548,8 @@ Soit \(a,b \in \mathcal{T}\). On définit l'opération \(\sqcup^\dual\) par :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgb0d3025" class="outline-4">
-<h4 id="orgb0d3025"><span class="section-number-4">1.5.2.</span> Intersection</h4>
+<div id="outline-container-org7a1acc2" class="outline-4">
+<h4 id="org7a1acc2"><span class="section-number-4">1.5.2.</span> Intersection</h4>
 <div class="outline-text-4" id="text-1-5-2">
 <p>
 Soit \(a,b \in \mathcal{T}\). On définit l'opération \(\sqcap^\dual\) par :
@@ -563,10 +560,8 @@ Soit \(a,b \in \mathcal{T}\). On définit l'opération \(\sqcap^\dual\) par :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org7a60e82" class="outline-4">
-<h4 id="org7a60e82"><span class="section-number-4">1.5.3.</span> Primal</h4>
+<div id="outline-container-orgd0340f2" class="outline-4">
+<h4 id="orgd0340f2"><span class="section-number-4">1.5.3.</span> Primal</h4>
 <div class="outline-text-4" id="text-1-5-3">
 <p>
 Par opposition au treillis dual \((\mathcal{T},\le)^\dual\), le treillis
@@ -575,14 +570,12 @@ Par opposition au treillis dual \((\mathcal{T},\le)^\dual\), le treillis
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org4d6d756" class="outline-3">
-<h3 id="org4d6d756"><span class="section-number-3">1.6.</span> Éléments nul et universel</h3>
+<div id="outline-container-org2388f36" class="outline-3">
+<h3 id="org2388f36"><span class="section-number-3">1.6.</span> Éléments nul et universel</h3>
 <div class="outline-text-3" id="text-1-6">
 </div>
-<div id="outline-container-org4895f00" class="outline-4">
-<h4 id="org4895f00"><span class="section-number-4">1.6.1.</span> Élément nul</h4>
+<div id="outline-container-org15daf96" class="outline-4">
+<h4 id="org15daf96"><span class="section-number-4">1.6.1.</span> Élément nul</h4>
 <div class="outline-text-4" id="text-1-6-1">
 <p>
 Si \(\mathcal{T}\) admet un minimum, on l'appelle élément nul de \(\mathcal{T}\)
@@ -639,10 +632,8 @@ En termes d'opérations, ces résultats s'écrivent :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org39a62b6" class="outline-4">
-<h4 id="org39a62b6"><span class="section-number-4">1.6.2.</span> Élément universel</h4>
+<div id="outline-container-org35b9ee6" class="outline-4">
+<h4 id="org35b9ee6"><span class="section-number-4">1.6.2.</span> Élément universel</h4>
 <div class="outline-text-4" id="text-1-6-2">
 <p>
 Si \(\mathcal{T}\) admet un maximum, on l'appelle élément universel de \(\mathcal{T}\)
@@ -699,10 +690,8 @@ En termes d'opérations, ces résultats s'écrivent :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org8e1a09c" class="outline-4">
-<h4 id="org8e1a09c"><span class="section-number-4">1.6.3.</span> Dualité</h4>
+<div id="outline-container-org3a35b42" class="outline-4">
+<h4 id="org3a35b42"><span class="section-number-4">1.6.3.</span> Dualité</h4>
 <div class="outline-text-4" id="text-1-6-3">
 <p>
 Sous réserve d'existence, on a :
@@ -740,10 +729,8 @@ universel du treillis primal :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org2da0be9" class="outline-3">
-<h3 id="org2da0be9"><span class="section-number-3">1.7.</span> Complémentaire</h3>
+<div id="outline-container-org1896a6f" class="outline-3">
+<h3 id="org1896a6f"><span class="section-number-3">1.7.</span> Complémentaire</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 On dit que \(x^\ddagger \in \mathcal{T}\) est un complémentaire
@@ -758,10 +745,8 @@ de \(x \in \mathcal{T}\) si :
 \[x \sqcap x^\ddagger = 0\]
 </p>
 </div>
-
-
-<div id="outline-container-org4d40f9b" class="outline-4">
-<h4 id="org4d40f9b"><span class="section-number-4">1.7.1.</span> Dualité</h4>
+<div id="outline-container-org82e8204" class="outline-4">
+<h4 id="org82e8204"><span class="section-number-4">1.7.1.</span> Dualité</h4>
 <div class="outline-text-4" id="text-1-7-1">
 <p>
 En termes d'opérations du treillis dual, les conditions de
@@ -783,10 +768,8 @@ de \(x\) au sens du treillis dual.
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org414dbea" class="outline-3">
-<h3 id="org414dbea"><span class="section-number-3">1.8.</span> Distributivité</h3>
+<div id="outline-container-org1cedcc6" class="outline-3">
+<h3 id="org1cedcc6"><span class="section-number-3">1.8.</span> Distributivité</h3>
 <div class="outline-text-3" id="text-1-8">
 <p>
 On dit que \((\mathcal{T},\le)\) est un treillis distributif si :
@@ -805,10 +788,8 @@ pour tout \(a,b,c \in \mathcal{T}\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orga5bd7c1" class="outline-3">
-<h3 id="orga5bd7c1"><span class="section-number-3">1.9.</span> Booléen</h3>
+<div id="outline-container-orgd1ddf9f" class="outline-3">
+<h3 id="orgd1ddf9f"><span class="section-number-3">1.9.</span> Booléen</h3>
 <div class="outline-text-3" id="text-1-9">
 <p>
 Un treillis \((\mathcal{T},\le)\) est dit booléen si et seulement si :
@@ -821,10 +802,8 @@ Un treillis \((\mathcal{T},\le)\) est dit booléen si et seulement si :
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-org01b0e78" class="outline-3">
-<h3 id="org01b0e78"><span class="section-number-3">1.10.</span> Idempotence</h3>
+<div id="outline-container-orgcf5574c" class="outline-3">
+<h3 id="orgcf5574c"><span class="section-number-3">1.10.</span> Idempotence</h3>
 <div class="outline-text-3" id="text-1-10">
 <p>
 Soit \(a \in \mathcal{T}\). On a :
@@ -875,14 +854,12 @@ On en conclut que :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org9974b3c" class="outline-3">
-<h3 id="org9974b3c"><span class="section-number-3">1.11.</span> Sous-ensemble fini</h3>
+<div id="outline-container-orge5661e5" class="outline-3">
+<h3 id="orge5661e5"><span class="section-number-3">1.11.</span> Sous-ensemble fini</h3>
 <div class="outline-text-3" id="text-1-11">
 </div>
-<div id="outline-container-orgfabadac" class="outline-4">
-<h4 id="orgfabadac"><span class="section-number-4">1.11.1.</span> Supremum</h4>
+<div id="outline-container-orgedd13d1" class="outline-4">
+<h4 id="orgedd13d1"><span class="section-number-4">1.11.1.</span> Supremum</h4>
 <div class="outline-text-4" id="text-1-11-1">
 <p>
 Nous allons voir que tout sous-ensemble fini d'un treillis admet un
@@ -1024,10 +1001,8 @@ Si \(A\) compte au moins deux éléments, on a :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org5a25964" class="outline-4">
-<h4 id="org5a25964"><span class="section-number-4">1.11.2.</span> Infimum</h4>
+<div id="outline-container-orgf30ac31" class="outline-4">
+<h4 id="orgf30ac31"><span class="section-number-4">1.11.2.</span> Infimum</h4>
 <div class="outline-text-4" id="text-1-11-2">
 <p>
 Nous allons voir que tout sous-ensemble fini d'un treillis admet un
@@ -1170,10 +1145,8 @@ Si \(A\) compte au moins deux éléments, on a :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org3693799" class="outline-3">
-<h3 id="org3693799"><span class="section-number-3">1.12.</span> Commutativité</h3>
+<div id="outline-container-org58e660f" class="outline-3">
+<h3 id="org58e660f"><span class="section-number-3">1.12.</span> Commutativité</h3>
 <div class="outline-text-3" id="text-1-12">
 <p>
 Soit \(a, b \in \mathcal{T}\). Comme \(\{a,b\} = \{b,a\}\), on a clairement :
@@ -1192,14 +1165,12 @@ et :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org66ad54b" class="outline-3">
-<h3 id="org66ad54b"><span class="section-number-3">1.13.</span> Associativité</h3>
+<div id="outline-container-orgef8a75f" class="outline-3">
+<h3 id="orgef8a75f"><span class="section-number-3">1.13.</span> Associativité</h3>
 <div class="outline-text-3" id="text-1-13">
 </div>
-<div id="outline-container-orgfa571be" class="outline-4">
-<h4 id="orgfa571be"><span class="section-number-4">1.13.1.</span> Union</h4>
+<div id="outline-container-orgcc52482" class="outline-4">
+<h4 id="orgcc52482"><span class="section-number-4">1.13.1.</span> Union</h4>
 <div class="outline-text-4" id="text-1-13-1">
 <p>
 On a :
@@ -1238,10 +1209,8 @@ pour tout \(a_1, a_2, ..., a_n \in \mathcal{T}\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org5614d97" class="outline-4">
-<h4 id="org5614d97"><span class="section-number-4">1.13.2.</span> Intersection</h4>
+<div id="outline-container-orgc7b8549" class="outline-4">
+<h4 id="orgc7b8549"><span class="section-number-4">1.13.2.</span> Intersection</h4>
 <div class="outline-text-4" id="text-1-13-2">
 <p>
 Le treillis dual \((\mathcal{T},\le^\dual)\) étant également un treillis,
@@ -1284,10 +1253,8 @@ pour tout \(a_1, a_2, ..., a_n \in \mathcal{T}\).
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orga644617" class="outline-3">
-<h3 id="orga644617"><span class="section-number-3">1.14.</span> Absorption</h3>
+<div id="outline-container-org71de080" class="outline-3">
+<h3 id="org71de080"><span class="section-number-3">1.14.</span> Absorption</h3>
 <div class="outline-text-3" id="text-1-14">
 <p>
 Soit \(a, b \in \mathcal{T}\). Posons :
@@ -1372,10 +1339,8 @@ treillis primal, ce qui nous donne :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orga6fa570" class="outline-3">
-<h3 id="orga6fa570"><span class="section-number-3">1.15.</span> Treillis d'ensemble</h3>
+<div id="outline-container-org627d80f" class="outline-3">
+<h3 id="org627d80f"><span class="section-number-3">1.15.</span> Treillis d'ensemble</h3>
 <div class="outline-text-3" id="text-1-15">
 <p>
 Une collection \(\mathcal{C}\) de sous-ensembles d'un ensemble de référence
@@ -1411,10 +1376,8 @@ pour tout \(A,B \in \mathcal{C}\). Le couple \((\mathcal{C},\subseteq)\)
 est un cas particulier de treillis.
 </p>
 </div>
-
-
-<div id="outline-container-org68efaaa" class="outline-4">
-<h4 id="org68efaaa"><span class="section-number-4">1.15.1.</span> Élément nul</h4>
+<div id="outline-container-org0730759" class="outline-4">
+<h4 id="org0730759"><span class="section-number-4">1.15.1.</span> Élément nul</h4>
 <div class="outline-text-4" id="text-1-15-1">
 <p>
 Un treillis d'ensembles comporte toujours un élément nul :
@@ -1425,10 +1388,8 @@ Un treillis d'ensembles comporte toujours un élément nul :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgea5540d" class="outline-4">
-<h4 id="orgea5540d"><span class="section-number-4">1.15.2.</span> Élément universel</h4>
+<div id="outline-container-orgb7440f1" class="outline-4">
+<h4 id="orgb7440f1"><span class="section-number-4">1.15.2.</span> Élément universel</h4>
 <div class="outline-text-4" id="text-1-15-2">
 <p>
 Un treillis d'ensembles comporte toujours un élément universel :
@@ -1441,19 +1402,15 @@ Un treillis d'ensembles comporte toujours un élément universel :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org2aff9cf" class="outline-2">
-<h2 id="org2aff9cf"><span class="section-number-2">2.</span> Tribus</h2>
+<div id="outline-container-org04d89c3" class="outline-2">
+<h2 id="org04d89c3"><span class="section-number-2">2.</span> Tribus</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 \label{chap:tribus}
 </p>
 </div>
-
-
-<div id="outline-container-org71b82fc" class="outline-3">
-<h3 id="org71b82fc"><span class="section-number-3">2.1.</span> Dépendances</h3>
+<div id="outline-container-org3d98e6d" class="outline-3">
+<h3 id="org3d98e6d"><span class="section-number-3">2.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:collections} : Les collections</li>
@@ -1461,10 +1418,8 @@ Un treillis d'ensembles comporte toujours un élément universel :
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-org6b61c92" class="outline-3">
-<h3 id="org6b61c92"><span class="section-number-3">2.2.</span> Définition</h3>
+<div id="outline-container-orgd3fcb94" class="outline-3">
+<h3 id="orgd3fcb94"><span class="section-number-3">2.2.</span> Définition</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Soit un ensemble \(\Omega\) et une collection de sous-ensembles
@@ -1495,10 +1450,8 @@ On note \(\tribu(\Omega)\) l'ensemble des tribus sur \(\Omega\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org4b9c3b3" class="outline-3">
-<h3 id="org4b9c3b3"><span class="section-number-3">2.3.</span> Corollaire</h3>
+<div id="outline-container-orge5d1829" class="outline-3">
+<h3 id="orge5d1829"><span class="section-number-3">2.3.</span> Corollaire</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 On conclut directement de la définition que :
@@ -1509,10 +1462,8 @@ On conclut directement de la définition que :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org1f76643" class="outline-3">
-<h3 id="org1f76643"><span class="section-number-3">2.4.</span> Intersection</h3>
+<div id="outline-container-org15161bd" class="outline-3">
+<h3 id="org15161bd"><span class="section-number-3">2.4.</span> Intersection</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Soit les \(A_i \in \mathcal{T}\) et leurs complémentaires :
@@ -1544,10 +1495,8 @@ de \(\mathcal{T}\) est également dans \(\mathcal{T}\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org7c8a33d" class="outline-3">
-<h3 id="org7c8a33d"><span class="section-number-3">2.5.</span> Différence</h3>
+<div id="outline-container-org4507fbf" class="outline-3">
+<h3 id="org4507fbf"><span class="section-number-3">2.5.</span> Différence</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 Soit \(A,B \in \mathcal{T}\), on a
@@ -1558,10 +1507,8 @@ Soit \(A,B \in \mathcal{T}\), on a
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org55dbe94" class="outline-3">
-<h3 id="org55dbe94"><span class="section-number-3">2.6.</span> Tribu engendrée</h3>
+<div id="outline-container-orgf0ac021" class="outline-3">
+<h3 id="orgf0ac021"><span class="section-number-3">2.6.</span> Tribu engendrée</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 Les collections d'ensemble étant des ensembles d'ensembles, on peut également les comparer au moyen de l'inclusion. En ce sens, la tribu engendrée par la collection \(\mathcal{C} \subseteq \sousens(\Omega)\) est la plus petite tribu contenant les éléments de \(\mathcal{C}\). On la note :
@@ -1573,19 +1520,15 @@ Les collections d'ensemble étant des ensembles d'ensembles, on peut également 
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orge850b84" class="outline-2">
-<h2 id="orge850b84"><span class="section-number-2">3.</span> Topologies</h2>
+<div id="outline-container-orge8d8928" class="outline-2">
+<h2 id="orge8d8928"><span class="section-number-2">3.</span> Topologies</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 \label{chap:topologies}
 </p>
 </div>
-
-
-<div id="outline-container-org296169a" class="outline-3">
-<h3 id="org296169a"><span class="section-number-3">3.1.</span> Dépendances</h3>
+<div id="outline-container-org3b7ddf6" class="outline-3">
+<h3 id="org3b7ddf6"><span class="section-number-3">3.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:collections} : Les collections</li>
@@ -1593,10 +1536,8 @@ Les collections d'ensemble étant des ensembles d'ensembles, on peut également 
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-orga1af82f" class="outline-3">
-<h3 id="orga1af82f"><span class="section-number-3">3.2.</span> Définition</h3>
+<div id="outline-container-org2fc84bd" class="outline-3">
+<h3 id="org2fc84bd"><span class="section-number-3">3.2.</span> Définition</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Soit un ensemble \(\Omega\) et une collection de sous-ensembles
@@ -1628,10 +1569,8 @@ On note \(\topologies(\Omega)\) l'ensemble des topologies sur \(\Omega\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org3abaa76" class="outline-3">
-<h3 id="org3abaa76"><span class="section-number-3">3.3.</span> Espace topologique</h3>
+<div id="outline-container-org7e6718b" class="outline-3">
+<h3 id="org7e6718b"><span class="section-number-3">3.3.</span> Espace topologique</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Si \(\topologie\) est une topologie sur \(\Omega\), on dit que le couple
@@ -1639,20 +1578,16 @@ Si \(\topologie\) est une topologie sur \(\Omega\), on dit que le couple
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org7835a4a" class="outline-3">
-<h3 id="org7835a4a"><span class="section-number-3">3.4.</span> Ouvert</h3>
+<div id="outline-container-org017c38a" class="outline-3">
+<h3 id="org017c38a"><span class="section-number-3">3.4.</span> Ouvert</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 On appelle « ouvert » tout ensemble \(U \in \topologie\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgdcc82db" class="outline-3">
-<h3 id="orgdcc82db"><span class="section-number-3">3.5.</span> Fermé</h3>
+<div id="outline-container-org6c159a3" class="outline-3">
+<h3 id="org6c159a3"><span class="section-number-3">3.5.</span> Fermé</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 On appelle « fermé » tout complémentaire d'un ouvert. Si \(F \subseteq \Omega\) est un
@@ -1671,10 +1606,8 @@ pour un certain \(U \in \topologie\). On note la collection des ensembles fermé
 \[\ferme = \{ \Omega \setminus U : U \in \topologie \}\]
 </p>
 </div>
-
-
-<div id="outline-container-org3a7e3aa" class="outline-4">
-<h4 id="org3a7e3aa"><span class="section-number-4">3.5.1.</span> Intersection</h4>
+<div id="outline-container-org22e5446" class="outline-4">
+<h4 id="org22e5446"><span class="section-number-4">3.5.1.</span> Intersection</h4>
 <div class="outline-text-4" id="text-3-5-1">
 <p>
 Soit une collection d'ouverts \(\mathcal{C} \subseteq \topologie\) et la collection de fermés correspondant :
@@ -1705,10 +1638,8 @@ qui est un ouvert. On en conclut qu'une intersection de fermés est un fermé.
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orge07702e" class="outline-4">
-<h4 id="orge07702e"><span class="section-number-4">3.5.2.</span> Union</h4>
+<div id="outline-container-org7447a87" class="outline-4">
+<h4 id="org7447a87"><span class="section-number-4">3.5.2.</span> Union</h4>
 <div class="outline-text-4" id="text-3-5-2">
 <p>
 Soit les ouverts \(U,V \in \topologie\) et les fermés correspondant :
@@ -1737,30 +1668,24 @@ L'ensemble \(U \cap V\) étant un ouvert, on en conclut que l'union de deux ferm
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgdaa4a96" class="outline-3">
-<h3 id="orgdaa4a96"><span class="section-number-3">3.6.</span> Ouverts fermés</h3>
+<div id="outline-container-org3ff3fef" class="outline-3">
+<h3 id="org3ff3fef"><span class="section-number-3">3.6.</span> Ouverts fermés</h3>
 <div class="outline-text-3" id="text-3-6">
 <p>
 On a \(\{\emptyset,\Omega\} \subseteq \topologie \cap \ferme\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org8af9499" class="outline-3">
-<h3 id="org8af9499"><span class="section-number-3">3.7.</span> Voisinage</h3>
+<div id="outline-container-org5d12f15" class="outline-3">
+<h3 id="org5d12f15"><span class="section-number-3">3.7.</span> Voisinage</h3>
 <div class="outline-text-3" id="text-3-7">
 <p>
 On dit que \(V \subseteq \Omega\) est un voisinage de \(x \in \Omega\) si il existe un ouvert \(U \in \topologie\) tel que \(x \in U \subseteq V\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org781a7c4" class="outline-3">
-<h3 id="org781a7c4"><span class="section-number-3">3.8.</span> Adhérence</h3>
+<div id="outline-container-orgd02a7cf" class="outline-3">
+<h3 id="orgd02a7cf"><span class="section-number-3">3.8.</span> Adhérence</h3>
 <div class="outline-text-3" id="text-3-8">
 <p>
 L'adhérence, ou fermeture, d'un ensemble \(A \subseteq \Omega\) est le plus petit (au sens inclusif) ensemble fermé \(F\) contenant \(A\). On la note :
@@ -1771,10 +1696,8 @@ L'adhérence, ou fermeture, d'un ensemble \(A \subseteq \Omega\) est le plus pet
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org0101099" class="outline-3">
-<h3 id="org0101099"><span class="section-number-3">3.9.</span> Intérieur</h3>
+<div id="outline-container-org5448687" class="outline-3">
+<h3 id="org5448687"><span class="section-number-3">3.9.</span> Intérieur</h3>
 <div class="outline-text-3" id="text-3-9">
 <p>
 L'intérieur d'un ensemble \(A \subseteq \Omega\) est le plus grand ensemble ouvert contenu dans \(A\). On le note :
@@ -1785,10 +1708,8 @@ L'intérieur d'un ensemble \(A \subseteq \Omega\) est le plus grand ensemble ouv
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org064f551" class="outline-3">
-<h3 id="org064f551"><span class="section-number-3">3.10.</span> Frontière</h3>
+<div id="outline-container-org7c445eb" class="outline-3">
+<h3 id="org7c445eb"><span class="section-number-3">3.10.</span> Frontière</h3>
 <div class="outline-text-3" id="text-3-10">
 <p>
 La frontière de \(A\) est la différence entre l'adhérence et l'intérieur :
@@ -1799,14 +1720,12 @@ La frontière de \(A\) est la différence entre l'adhérence et l'intérieur :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org7b059dd" class="outline-3">
-<h3 id="org7b059dd"><span class="section-number-3">3.11.</span> Propriétés de l'adhérence et de l'intérieur</h3>
+<div id="outline-container-orgcb27708" class="outline-3">
+<h3 id="orgcb27708"><span class="section-number-3">3.11.</span> Propriétés de l'adhérence et de l'intérieur</h3>
 <div class="outline-text-3" id="text-3-11">
 </div>
-<div id="outline-container-orge48f914" class="outline-4">
-<h4 id="orge48f914"><span class="section-number-4">3.11.1.</span> Inclusions</h4>
+<div id="outline-container-org3f8b4d9" class="outline-4">
+<h4 id="org3f8b4d9"><span class="section-number-4">3.11.1.</span> Inclusions</h4>
 <div class="outline-text-4" id="text-3-11-1">
 <p>
 On a bien entendu :
@@ -1817,20 +1736,16 @@ On a bien entendu :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orge6c8d7f" class="outline-4">
-<h4 id="orge6c8d7f"><span class="section-number-4">3.11.2.</span> Nature</h4>
+<div id="outline-container-org069eb71" class="outline-4">
+<h4 id="org069eb71"><span class="section-number-4">3.11.2.</span> Nature</h4>
 <div class="outline-text-4" id="text-3-11-2">
 <p>
 Une union quelconque d'ouverts étant un ouvert, on a \(\interieur A \in \topologie\). Une intersection quelconque de fermés étant un fermé, on a \(\adh A \in \ferme\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org3a99448" class="outline-4">
-<h4 id="org3a99448"><span class="section-number-4">3.11.3.</span> Complémentaire</h4>
+<div id="outline-container-orgd2fc604" class="outline-4">
+<h4 id="orgd2fc604"><span class="section-number-4">3.11.3.</span> Complémentaire</h4>
 <div class="outline-text-4" id="text-3-11-3">
 <p>
 Les fermés \(F\) contenant \(A\) correspondent aux complémentaires des ouverts \(U = \Omega \setminus F\) inclus dans \(\Omega \setminus A\). Comme \(\bigcap F = \Omega \setminus \bigcup U\), on a :
@@ -1850,10 +1765,8 @@ Les ouverts \(U\) inclus dans \(A\) correspondent aux complémentaires des ferm�
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgab5a811" class="outline-3">
-<h3 id="orgab5a811"><span class="section-number-3">3.12.</span> Hausdorff</h3>
+<div id="outline-container-org3222c11" class="outline-3">
+<h3 id="org3222c11"><span class="section-number-3">3.12.</span> Hausdorff</h3>
 <div class="outline-text-3" id="text-3-12">
 <p>
 On dit que le couple \((\Omega,\topologie)\) est un espace de Haussdorff si,
@@ -1874,10 +1787,8 @@ et :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org57c1388" class="outline-3">
-<h3 id="org57c1388"><span class="section-number-3">3.13.</span> Topologie engendrée</h3>
+<div id="outline-container-orgeab091b" class="outline-3">
+<h3 id="orgeab091b"><span class="section-number-3">3.13.</span> Topologie engendrée</h3>
 <div class="outline-text-3" id="text-3-13">
 <p>
 Les collections d'ensemble étant des ensembles d'ensembles, on peut également les comparer au moyen de l'inclusion. En ce sens, la topologie engendrée par la collection \(\mathcal{C} \subseteq \sousens(\Omega)\) est la plus petite topologie contenant les ensembles-éléments de \(\mathcal{C}\). On la note :
@@ -1892,7 +1803,7 @@ Les collections d'ensemble étant des ensembles d'ensembles, on peut également 
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2023-05-10 mer 16:42</p>
+<p class="date">Created: 2025-10-12 dim 15:23</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

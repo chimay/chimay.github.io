@@ -3,13 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2023-05-10 mer 16:44 -->
+<!-- 2025-10-12 dim 15:25 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 09 : Analyse - 1</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
-<style>
+<style type="text/css">
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -193,27 +193,38 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 </head>
 <body>
 <div id="content" class="content">
@@ -230,8 +241,8 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgedab435">1. Théorème de Rolle</a></li>
-<li><a href="#org45595a4">2. Théorème fondamental</a></li>
+<li><a href="#org67c4d92">1. Théorème de Rolle</a></li>
+<li><a href="#orgd14f18b">2. Théorème fondamental</a></li>
 </ul>
 </div>
 </div>
@@ -359,6 +370,7 @@
 \newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
 \newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
 \newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
 \newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
 \newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
@@ -389,19 +401,18 @@
 \newcommand{\petito}[1]{o\left(#1\right)}
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
-
-<div id="outline-container-orgedab435" class="outline-2">
-<h2 id="orgedab435"><span class="section-number-2">1.</span> Théorème de Rolle</h2>
+<div id="outline-container-org67c4d92" class="outline-2">
+<h2 id="org67c4d92"><span class="section-number-2">1.</span> Théorème de Rolle</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-1" role="doc-toc">
 <ul>
-<li><a href="#orgf95caef">1.1. Dépendances</a></li>
-<li><a href="#org16af3b7">1.2. Extrema locaux</a></li>
-<li><a href="#orgdea9710">1.3. Théorème de Rolle</a></li>
-<li><a href="#org467f240">1.4. Théorème des accroissements finis</a></li>
-<li><a href="#org6b77276">1.5. Théorème de Cauchy</a></li>
-<li><a href="#org1950b01">1.6. Théorème de l'Hospital</a></li>
-<li><a href="#org8b68c92">1.7. Uniformité</a></li>
+<li><a href="#org4d4890d">1.1. Dépendances</a></li>
+<li><a href="#org072debb">1.2. Extrema locaux</a></li>
+<li><a href="#orgf5e1094">1.3. Théorème de Rolle</a></li>
+<li><a href="#orgceabb5c">1.4. Théorème des accroissements finis</a></li>
+<li><a href="#org2569cf4">1.5. Théorème de Cauchy</a></li>
+<li><a href="#orgc5d2d8e">1.6. Théorème de l'Hospital</a></li>
+<li><a href="#orgc1006f1">1.7. Uniformité</a></li>
 </ul>
 </div>
 
@@ -409,10 +420,8 @@
 \label{chap:intediff}
 </p>
 </div>
-
-
-<div id="outline-container-orgf95caef" class="outline-3">
-<h3 id="orgf95caef"><span class="section-number-3">1.1.</span> Dépendances</h3>
+<div id="outline-container-org4d4890d" class="outline-3">
+<h3 id="org4d4890d"><span class="section-number-3">1.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:differ} : Les différentielles</li>
@@ -420,10 +429,8 @@
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-org16af3b7" class="outline-3">
-<h3 id="org16af3b7"><span class="section-number-3">1.2.</span> Extrema locaux</h3>
+<div id="outline-container-org072debb" class="outline-3">
+<h3 id="org072debb"><span class="section-number-3">1.2.</span> Extrema locaux</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Soit \(f : A \mapsto \setR\) avec \(A \subseteq \setR^n\). Supposons que \(f\) soit différentiable et atteigne un minimum local en \(a \in \interieur A\). On a :
@@ -511,10 +518,8 @@ ce qui implique que :
 La différentielle s'annule donc en un minimum local. On montre de la même manière que la différentielle s'annule en un maximum local.
 </p>
 </div>
-
-
-<div id="outline-container-org2fc2d25" class="outline-4">
-<h4 id="org2fc2d25"><span class="section-number-4">1.2.1.</span> La Jacobienne</h4>
+<div id="outline-container-orgc2012e7" class="outline-4">
+<h4 id="orgc2012e7"><span class="section-number-4">1.2.1.</span> La Jacobienne</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 La Jacobienne étant la représentation matricielle de la différentielle, elle s'annule également aux extrema locaux.
@@ -522,10 +527,8 @@ La Jacobienne étant la représentation matricielle de la différentielle, elle 
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgdea9710" class="outline-3">
-<h3 id="orgdea9710"><span class="section-number-3">1.3.</span> Théorème de Rolle</h3>
+<div id="outline-container-orgf5e1094" class="outline-3">
+<h3 id="orgf5e1094"><span class="section-number-3">1.3.</span> Théorème de Rolle</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Soit \(f \in \continue^1([a,b],\setR)\) avec \(f(a) = f(b)\). Comme \(f\) est continue, il existe \(\lambda,\sigma \in [a,b]\) tels que :
@@ -540,10 +543,8 @@ f(\sigma) = \max f([a,b])
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org5d8b2a1" class="outline-4">
-<h4 id="org5d8b2a1"><span class="section-number-4">1.3.1.</span> Configurations</h4>
+<div id="outline-container-org6cf45df" class="outline-4">
+<h4 id="org6cf45df"><span class="section-number-4">1.3.1.</span> Configurations</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <p>
 Plusieurs cas peuvent se présenter :
@@ -623,11 +624,8 @@ La fonction \(f\) est constante et \(\partial f = 0\). On peut donc prendre n'im
 </p>
 </div>
 </div>
-
-
-
-<div id="outline-container-org0aa30cc" class="outline-4">
-<h4 id="org0aa30cc"><span class="section-number-4">1.3.2.</span> Conclusion</h4>
+<div id="outline-container-org67f62fe" class="outline-4">
+<h4 id="org67f62fe"><span class="section-number-4">1.3.2.</span> Conclusion</h4>
 <div class="outline-text-4" id="text-1-3-2">
 <p>
 Dans tous les cas, on a au moins un \(c \in \intervalleouvert{a}{b}\) tel que :
@@ -639,10 +637,8 @@ Dans tous les cas, on a au moins un \(c \in \intervalleouvert{a}{b}\) tel que :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org467f240" class="outline-3">
-<h3 id="org467f240"><span class="section-number-3">1.4.</span> Théorème des accroissements finis</h3>
+<div id="outline-container-orgceabb5c" class="outline-3">
+<h3 id="orgceabb5c"><span class="section-number-3">1.4.</span> Théorème des accroissements finis</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Soit \(f \in \continue^1([a,b],\setR)\) et la fonction \(g\) associée définie par :
@@ -672,10 +668,8 @@ On a donc :
 On vient ainsi de démontrer le théorème des accroissements finis.
 </p>
 </div>
-
-
-<div id="outline-container-org3fd27e6" class="outline-4">
-<h4 id="org3fd27e6"><span class="section-number-4">1.4.1.</span> Dimension \(n\)</h4>
+<div id="outline-container-org51672fd" class="outline-4">
+<h4 id="org51672fd"><span class="section-number-4">1.4.1.</span> Dimension \(n\)</h4>
 <div class="outline-text-4" id="text-1-4-1">
 <p>
 On peut généraliser ce théorème à une fonction \(f \in \continue^1(\setR^m,\setR^n)\). Soit \(u,v \in \setR^m\). On considére le segment \([u,v]\) et la fonction associée \(\phi : [0,1] \mapsto \setR^m\) définie par :
@@ -727,10 +721,8 @@ Ce qui revient à dire qu'il existe un \(w \in [u,v] \subseteq \setR^n\) tel que
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org6b77276" class="outline-3">
-<h3 id="org6b77276"><span class="section-number-3">1.5.</span> Théorème de Cauchy</h3>
+<div id="outline-container-org2569cf4" class="outline-3">
+<h3 id="org2569cf4"><span class="section-number-3">1.5.</span> Théorème de Cauchy</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Le théorème des accroissements finis nous donne un résultat sous la forme
@@ -802,10 +794,8 @@ Si \(\partial f(c) \ne 0\) et \(f(b) \ne f(a)\), on peut le mettre sous la forme
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org1950b01" class="outline-3">
-<h3 id="org1950b01"><span class="section-number-3">1.6.</span> Théorème de l'Hospital</h3>
+<div id="outline-container-orgc5d2d8e" class="outline-3">
+<h3 id="orgc5d2d8e"><span class="section-number-3">1.6.</span> Théorème de l'Hospital</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 Soient \(F,G\) deux fonctions continues sur \(I=[\alpha,\beta]\) et dérivables
@@ -849,10 +839,8 @@ On voit en faisant tendre \(h\) vers \(0\) que les limites, si elles existent, d
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org8b68c92" class="outline-3">
-<h3 id="org8b68c92"><span class="section-number-3">1.7.</span> Uniformité</h3>
+<div id="outline-container-orgc1006f1" class="outline-3">
+<h3 id="orgc1006f1"><span class="section-number-3">1.7.</span> Uniformité</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 Nous allons à présent montrer que toute fonction continument différentiable sur un intervalle de la forme \([\alpha,\beta]\) y est uniformément différentiable.
@@ -910,10 +898,8 @@ On a donc bien :
 pour tout \(s,t \in [\alpha,\beta]\) vérifiant \(\abs{s - t} \le \delta\).
 </p>
 </div>
-
-
-<div id="outline-container-orgb8e4011" class="outline-4">
-<h4 id="orgb8e4011"><span class="section-number-4">1.7.1.</span> Remarque</h4>
+<div id="outline-container-org4e450c2" class="outline-4">
+<h4 id="org4e450c2"><span class="section-number-4">1.7.1.</span> Remarque</h4>
 <div class="outline-text-4" id="text-1-7-1">
 <p>
 Le théorème {\em n'est pas} applicable aux autres types d'intervalles. Cela ne marche pas sur \(]\alpha,\beta[\) par exemple.
@@ -922,21 +908,18 @@ Le théorème {\em n'est pas} applicable aux autres types d'intervalles. Cela ne
 </div>
 </div>
 </div>
-
-
-
-<div id="outline-container-org45595a4" class="outline-2">
-<h2 id="org45595a4"><span class="section-number-2">2.</span> Théorème fondamental</h2>
+<div id="outline-container-orgd14f18b" class="outline-2">
+<h2 id="orgd14f18b"><span class="section-number-2">2.</span> Théorème fondamental</h2>
 <div class="outline-text-2" id="text-2">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-2" role="doc-toc">
 <ul>
-<li><a href="#org6850f89">2.1. Dépendances</a></li>
-<li><a href="#orgb90e4de">2.2. Dérivée de l'intégrale</a></li>
-<li><a href="#org0527afd">2.3. Intégrale de la dérivée</a></li>
-<li><a href="#org89d5f4b">2.4. Polynômes</a></li>
-<li><a href="#org0432c28">2.5. Valeur moyenne</a></li>
-<li><a href="#org12210de">2.6. Intégration par parties</a></li>
-<li><a href="#org10b8191">2.7. Changement de variable</a></li>
+<li><a href="#org0873111">2.1. Dépendances</a></li>
+<li><a href="#orgf2a5a8e">2.2. Dérivée de l'intégrale</a></li>
+<li><a href="#org130613a">2.3. Intégrale de la dérivée</a></li>
+<li><a href="#org9c303cd">2.4. Polynômes</a></li>
+<li><a href="#org87f01ef">2.5. Valeur moyenne</a></li>
+<li><a href="#org57190b3">2.6. Intégration par parties</a></li>
+<li><a href="#org4ab7a61">2.7. Changement de variable</a></li>
 </ul>
 </div>
 
@@ -944,10 +927,8 @@ Le théorème {\em n'est pas} applicable aux autres types d'intervalles. Cela ne
 \label{chap:fonda}
 </p>
 </div>
-
-
-<div id="outline-container-org6850f89" class="outline-3">
-<h3 id="org6850f89"><span class="section-number-3">2.1.</span> Dépendances</h3>
+<div id="outline-container-org0873111" class="outline-3">
+<h3 id="org0873111"><span class="section-number-3">2.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:differ} : Les différentielles</li>
@@ -955,10 +936,8 @@ Le théorème {\em n'est pas} applicable aux autres types d'intervalles. Cela ne
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-orgb90e4de" class="outline-3">
-<h3 id="orgb90e4de"><span class="section-number-3">2.2.</span> Dérivée de l'intégrale</h3>
+<div id="outline-container-orgf2a5a8e" class="outline-3">
+<h3 id="orgf2a5a8e"><span class="section-number-3">2.2.</span> Dérivée de l'intégrale</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 \label{sec:derivee_integrale}
@@ -1118,10 +1097,8 @@ Autrement dit :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org0527afd" class="outline-3">
-<h3 id="org0527afd"><span class="section-number-3">2.3.</span> Intégrale de la dérivée</h3>
+<div id="outline-container-org130613a" class="outline-3">
+<h3 id="org130613a"><span class="section-number-3">2.3.</span> Intégrale de la dérivée</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 \label{sec:integrale_derivee}
@@ -1155,10 +1132,8 @@ Nous utilisons dans la suite la notation abrégée :
 \[\int_x^y = \int_x^y f(s) \ ds\]
 </p>
 </div>
-
-
-<div id="outline-container-org46bcdc6" class="outline-4">
-<h4 id="org46bcdc6"><span class="section-number-4">2.3.1.</span> L'idée</h4>
+<div id="outline-container-orgb2c330b" class="outline-4">
+<h4 id="orgb2c330b"><span class="section-number-4">2.3.1.</span> L'idée</h4>
 <div class="outline-text-4" id="text-2-3-1">
 <p>
 L'idée intuitive est que :
@@ -1177,10 +1152,8 @@ En passant à la limite \(\difference x_i \to 0\), on soupçonne alors le résul
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org384676e" class="outline-4">
-<h4 id="org384676e"><span class="section-number-4">2.3.2.</span> La réalisation</h4>
+<div id="outline-container-org4934335" class="outline-4">
+<h4 id="org4934335"><span class="section-number-4">2.3.2.</span> La réalisation</h4>
 <div class="outline-text-4" id="text-2-3-2">
 <p>
 Fixons \(\epsilon \strictsuperieur 0\). Comme \(f\) est uniformément continue, nous savons qu'il existe \(\vartheta \strictsuperieur 0\) tel que :
@@ -1330,10 +1303,8 @@ On a donc finalement :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org5f345a2" class="outline-4">
-<h4 id="org5f345a2"><span class="section-number-4">2.3.3.</span> Primitive</h4>
+<div id="outline-container-org304b47a" class="outline-4">
+<h4 id="org304b47a"><span class="section-number-4">2.3.3.</span> Primitive</h4>
 <div class="outline-text-4" id="text-2-3-3">
 <p>
 Cette relation permet de calculer l'intégrale d'une fonction continue \(f : t \mapsto f(t)\) lorsqu'on connaît une fonction \(F\) vérifiant :
@@ -1348,10 +1319,8 @@ On appelle « primitive » de \(f\) une telle fonction \(F\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org6e8e4c6" class="outline-4">
-<h4 id="org6e8e4c6"><span class="section-number-4">2.3.4.</span> Notation</h4>
+<div id="outline-container-orgf3a212e" class="outline-4">
+<h4 id="orgf3a212e"><span class="section-number-4">2.3.4.</span> Notation</h4>
 <div class="outline-text-4" id="text-2-3-4">
 <p>
 On note aussi :
@@ -1363,10 +1332,8 @@ On note aussi :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org89d5f4b" class="outline-3">
-<h3 id="org89d5f4b"><span class="section-number-3">2.4.</span> Polynômes</h3>
+<div id="outline-container-org9c303cd" class="outline-3">
+<h3 id="org9c303cd"><span class="section-number-3">2.4.</span> Polynômes</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 On sait que :
@@ -1408,10 +1375,8 @@ On a en particulier :
 \[\int_0^x t^m \ dt = \frac{ x^{m + 1} }{m + 1}\]
 </p>
 </div>
-
-
-<div id="outline-container-orgbb9d43e" class="outline-4">
-<h4 id="orgbb9d43e"><span class="section-number-4">2.4.1.</span> Exemples</h4>
+<div id="outline-container-orgd524b8c" class="outline-4">
+<h4 id="orgd524b8c"><span class="section-number-4">2.4.1.</span> Exemples</h4>
 <div class="outline-text-4" id="text-2-4-1">
 <p>
 \[\int_0^x t \ dt = \frac{ x^2 }{2}\]
@@ -1423,14 +1388,12 @@ On a en particulier :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org0432c28" class="outline-3">
-<h3 id="org0432c28"><span class="section-number-3">2.5.</span> Valeur moyenne</h3>
+<div id="outline-container-org87f01ef" class="outline-3">
+<h3 id="org87f01ef"><span class="section-number-3">2.5.</span> Valeur moyenne</h3>
 <div class="outline-text-3" id="text-2-5">
 </div>
-<div id="outline-container-org430670f" class="outline-4">
-<h4 id="org430670f"><span class="section-number-4">2.5.1.</span> Accroissements finis</h4>
+<div id="outline-container-orga4b4840" class="outline-4">
+<h4 id="orga4b4840"><span class="section-number-4">2.5.1.</span> Accroissements finis</h4>
 <div class="outline-text-4" id="text-2-5-1">
 <p>
 Soit des réels distincts \(a,b\) vérifiant \(a \strictinferieur b\), la fonction \(f \in \continue([a,b],\setR)\) et la fonction \(F : [a,b] \mapsto \setR\) définie par :
@@ -1489,10 +1452,8 @@ On a donc \(F(b) - F(a) = F(b)\) et :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org65a8ccd" class="outline-4">
-<h4 id="org65a8ccd"><span class="section-number-4">2.5.2.</span> Théorème de Cauchy</h4>
+<div id="outline-container-org7e8cd78" class="outline-4">
+<h4 id="org7e8cd78"><span class="section-number-4">2.5.2.</span> Théorème de Cauchy</h4>
 <div class="outline-text-4" id="text-2-5-2">
 <p>
 Soit des réels distincts \(a,b\) vérifiant \(a \strictinferieur b\), les fonctions \(f,g \in \continue([a,b],\setR)\) et les fonction \(F,G : [a,b] \mapsto \setR\) définies par :
@@ -1560,10 +1521,8 @@ Si l'intégrale de \(g\) et \(g(c)\) sont non nuls, on peut mettre cette relatio
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org12210de" class="outline-3">
-<h3 id="org12210de"><span class="section-number-3">2.6.</span> Intégration par parties</h3>
+<div id="outline-container-org57190b3" class="outline-3">
+<h3 id="org57190b3"><span class="section-number-3">2.6.</span> Intégration par parties</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 Soient \(f,g \in \continue^1(\setR,\setR)\). On se rappelle que :
@@ -1589,10 +1548,8 @@ on obtient la formule d'intégration par parties :
 \[\int_a^b f(x) \cdot \partial g(x) \ dx = (f \cdot g)(b) - (f \cdot g)(a) - \int_a^b \partial f(x) \cdot g(x) \ dx\]
 </p>
 </div>
-
-
-<div id="outline-container-org3f3bba9" class="outline-4">
-<h4 id="org3f3bba9"><span class="section-number-4">2.6.1.</span> Stieltjes</h4>
+<div id="outline-container-org6d14ad6" class="outline-4">
+<h4 id="org6d14ad6"><span class="section-number-4">2.6.1.</span> Stieltjes</h4>
 <div class="outline-text-4" id="text-2-6-1">
 <p>
 Le résultat est également valable lorsqu'on utilise les mesures de Stieltjes associées à \(f\) et \(g\) :
@@ -1603,10 +1560,8 @@ Le résultat est également valable lorsqu'on utilise les mesures de Stieltjes a
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org343e7cd" class="outline-4">
-<h4 id="org343e7cd"><span class="section-number-4">2.6.2.</span> Dérivée constante</h4>
+<div id="outline-container-orgd1e4239" class="outline-4">
+<h4 id="orgd1e4239"><span class="section-number-4">2.6.2.</span> Dérivée constante</h4>
 <div class="outline-text-4" id="text-2-6-2">
 <p>
 On considère le cas particulier où \(\partial g = 1\). Une exemple de fonction \(g\) vérifiant cette propriété est simplement \(g = \identite\). On a donc \(g(x) = x\) et :
@@ -1626,19 +1581,15 @@ L'intégration par parties nous donne :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org10b8191" class="outline-3">
-<h3 id="org10b8191"><span class="section-number-3">2.7.</span> Changement de variable</h3>
+<div id="outline-container-org4ab7a61" class="outline-3">
+<h3 id="org4ab7a61"><span class="section-number-3">2.7.</span> Changement de variable</h3>
 <div class="outline-text-3" id="text-2-7">
 <p>
 Considérons une fonction \(f \in \continue(\setR,\setR)\) et un changement de variable \(x = \varphi(s)\) où \(\varphi \in \homeomorphisme^1(\setR,\setR)\). Soit la mesure de lebesgue \(\mu([\alpha,\beta]) = \beta - \alpha\).
 </p>
 </div>
-
-
-<div id="outline-container-org781941a" class="outline-4">
-<h4 id="org781941a"><span class="section-number-4">2.7.1.</span> L'idée</h4>
+<div id="outline-container-org7b3d603" class="outline-4">
+<h4 id="org7b3d603"><span class="section-number-4">2.7.1.</span> L'idée</h4>
 <div class="outline-text-4" id="text-2-7-1">
 <p>
 \[\sum_i f_i \cdot \difference x_i = \sum_i f_i \cdot \frac{\difference x_i}{\difference s_i} \cdot \difference s_i\]
@@ -1653,10 +1604,8 @@ On devrait donc avoir par passage à la limite :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org02124d4" class="outline-4">
-<h4 id="org02124d4"><span class="section-number-4">2.7.2.</span> La réalisation</h4>
+<div id="outline-container-orge0366ac" class="outline-4">
+<h4 id="orge0366ac"><span class="section-number-4">2.7.2.</span> La réalisation</h4>
 <div class="outline-text-4" id="text-2-7-2">
 <p>
 On applique le même procédé qu'à la section \ref{sec:integrale_derivee}. Si \(x\) est proche de \(y\), on a :
@@ -1704,7 +1653,7 @@ sur l'intervalle \([s,t] = [\varphi^{-1}(x),\varphi^{-1}(y)]\). Il ne nous reste
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2023-05-10 mer 16:44</p>
+<p class="date">Created: 2025-10-12 dim 15:25</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

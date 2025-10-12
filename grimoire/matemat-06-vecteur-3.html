@@ -3,13 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2023-05-10 mer 16:44 -->
+<!-- 2025-10-12 dim 15:24 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 06 : Vecteurs - 3</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
-<style>
+<style type="text/css">
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -193,27 +193,38 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 </head>
 <body>
 <div id="content" class="content">
@@ -230,9 +241,9 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org8296eaa">1. Applications linéaires</a></li>
-<li><a href="#org28f574d">2. Géométrie</a></li>
-<li><a href="#org5180276">3. Formes linéaires</a></li>
+<li><a href="#org230e5ec">1. Applications linéaires</a></li>
+<li><a href="#org2aaa8c0">2. Géométrie</a></li>
+<li><a href="#orgf845dbc">3. Formes linéaires</a></li>
 </ul>
 </div>
 </div>
@@ -360,6 +371,7 @@
 \newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
 \newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
 \newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
 \newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
 \newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
@@ -390,30 +402,29 @@
 \newcommand{\petito}[1]{o\left(#1\right)}
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
-
-<div id="outline-container-org8296eaa" class="outline-2">
-<h2 id="org8296eaa"><span class="section-number-2">1.</span> Applications linéaires</h2>
+<div id="outline-container-org230e5ec" class="outline-2">
+<h2 id="org230e5ec"><span class="section-number-2">1.</span> Applications linéaires</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-1" role="doc-toc">
 <ul>
-<li><a href="#org504fdbd">1.1. Dépendances</a></li>
-<li><a href="#org21b14e8">1.2. Définition</a></li>
-<li><a href="#orgeecf9cf">1.3. Identité</a></li>
-<li><a href="#orgc062c1c">1.4. Inverse</a></li>
-<li><a href="#org2e6a74e">1.5. Valeur au vecteur nul</a></li>
-<li><a href="#org3c5fe71">1.6. Norme des applications linéaires</a></li>
-<li><a href="#org162c3d1">1.7. Norme d'une composée</a></li>
-<li><a href="#org2520ab8">1.8. Norme d'une puissance</a></li>
-<li><a href="#org9f0821a">1.9. Continuité</a></li>
-<li><a href="#orgfc2ef17">1.10. $n$-linéarité</a></li>
-<li><a href="#orgdbb710f">1.11. Représentation matricielle</a></li>
-<li><a href="#org3fd5b61">1.12. Produit matriciel</a></li>
-<li><a href="#org0bbc97d">1.13. Blocs</a></li>
-<li><a href="#org907ff0f">1.14. Matrice identité</a></li>
-<li><a href="#orgfd6011a">1.15. Inverse</a></li>
-<li><a href="#org0906242">1.16. Inverse d'un produit</a></li>
-<li><a href="#org574f0df">1.17. Puissance</a></li>
-<li><a href="#org3624999">1.18. Polynômes matriciels</a></li>
+<li><a href="#orgdb7e322">1.1. Dépendances</a></li>
+<li><a href="#orgeab6639">1.2. Définition</a></li>
+<li><a href="#org66b0697">1.3. Identité</a></li>
+<li><a href="#org0df8d3c">1.4. Inverse</a></li>
+<li><a href="#orgb7e135a">1.5. Valeur au vecteur nul</a></li>
+<li><a href="#orgd48a859">1.6. Norme des applications linéaires</a></li>
+<li><a href="#org0d75ce2">1.7. Norme d'une composée</a></li>
+<li><a href="#orge36ad99">1.8. Norme d'une puissance</a></li>
+<li><a href="#org6887e38">1.9. Continuité</a></li>
+<li><a href="#org44d1feb">1.10. $n$-linéarité</a></li>
+<li><a href="#orgb1fee67">1.11. Représentation matricielle</a></li>
+<li><a href="#orgbc31d98">1.12. Produit matriciel</a></li>
+<li><a href="#org6908760">1.13. Blocs</a></li>
+<li><a href="#org278ff7a">1.14. Matrice identité</a></li>
+<li><a href="#org96695f9">1.15. Inverse</a></li>
+<li><a href="#org0b5f427">1.16. Inverse d'un produit</a></li>
+<li><a href="#orgccd01d0">1.17. Puissance</a></li>
+<li><a href="#orga7abade">1.18. Polynômes matriciels</a></li>
 </ul>
 </div>
 
@@ -421,20 +432,16 @@
 \label{chap:lineaire}
 </p>
 </div>
-
-
-<div id="outline-container-org504fdbd" class="outline-3">
-<h3 id="org504fdbd"><span class="section-number-3">1.1.</span> Dépendances</h3>
+<div id="outline-container-orgdb7e322" class="outline-3">
+<h3 id="orgdb7e322"><span class="section-number-3">1.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:fonction} : Les fonctions</li>
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-org21b14e8" class="outline-3">
-<h3 id="org21b14e8"><span class="section-number-3">1.2.</span> Définition</h3>
+<div id="outline-container-orgeab6639" class="outline-3">
+<h3 id="orgeab6639"><span class="section-number-3">1.2.</span> Définition</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Soit les espaces vectoriels \(E\) et \(F\) sur \(\corps\) et la fonction \(f : E \mapsto F\). On dit que \(f\) est linéaire si, pour tout \(x,y \in E\) et \(\alpha, \beta \in \corps\), on a :
@@ -449,20 +456,16 @@ On note \(\lineaire(E,F)\) l'ensemble des fonctions linéaires de \(E\) vers \(F
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgeecf9cf" class="outline-3">
-<h3 id="orgeecf9cf"><span class="section-number-3">1.3.</span> Identité</h3>
+<div id="outline-container-org66b0697" class="outline-3">
+<h3 id="org66b0697"><span class="section-number-3">1.3.</span> Identité</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 L'application identité est clairement linéaire.
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgc062c1c" class="outline-3">
-<h3 id="orgc062c1c"><span class="section-number-3">1.4.</span> Inverse</h3>
+<div id="outline-container-org0df8d3c" class="outline-3">
+<h3 id="org0df8d3c"><span class="section-number-3">1.4.</span> Inverse</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Soit \(u = f(x)\) et \(v = f(y)\). Si l'application inverse existe, on a \(x = f^{-1}(u)\) et \(y = f^{-1}(v)\). En composant à gauche par \(f^{-1}\) la définition de la linéarité, on obtient :
@@ -477,10 +480,8 @@ ce qui montre que l'inverse est également linéaire.
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org2e6a74e" class="outline-3">
-<h3 id="org2e6a74e"><span class="section-number-3">1.5.</span> Valeur au vecteur nul</h3>
+<div id="outline-container-orgb7e135a" class="outline-3">
+<h3 id="orgb7e135a"><span class="section-number-3">1.5.</span> Valeur au vecteur nul</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 Choisissons un \(x \in E\). on voit que :
@@ -495,10 +496,8 @@ La valeur d'une application linéaire s'annule au vecteur nul.
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org3c5fe71" class="outline-3">
-<h3 id="org3c5fe71"><span class="section-number-3">1.6.</span> Norme des applications linéaires</h3>
+<div id="outline-container-orgd48a859" class="outline-3">
+<h3 id="orgd48a859"><span class="section-number-3">1.6.</span> Norme des applications linéaires</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 La norme d'une application linéaire est définie comme étant l'extension maximale qu'elle produit :
@@ -520,10 +519,8 @@ On a donc :
 pour tout \(x \in E \setminus \{ 0 \}\).
 </p>
 </div>
-
-
-<div id="outline-container-org4081d67" class="outline-4">
-<h4 id="org4081d67"><span class="section-number-4">1.6.1.</span> Vérification</h4>
+<div id="outline-container-orgab8e458" class="outline-4">
+<h4 id="orgab8e458"><span class="section-number-4">1.6.1.</span> Vérification</h4>
 <div class="outline-text-4" id="text-1-6-1">
 <p>
 Nous allons vérifier qu'il s'agit bien d'une norme. On a \(\norme{f} \ge 0\) par positivité de la norme sur \(E\) et \(F\). La condition \(\norme{f} = 0\) implique \(\norme{f(x)} = 0\) et donc \(f(x) = 0\) pour tout \(x \ne 0\). Comme \(f\) est linéaire, on a aussi \(f(0) = 0\) et \(f = 0\).
@@ -562,10 +559,8 @@ En passant au supremum, on obtient :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org4cb96a0" class="outline-4">
-<h4 id="org4cb96a0"><span class="section-number-4">1.6.2.</span> Notation</h4>
+<div id="outline-container-org08e8705" class="outline-4">
+<h4 id="org08e8705"><span class="section-number-4">1.6.2.</span> Notation</h4>
 <div class="outline-text-4" id="text-1-6-2">
 <p>
 Lorsqu'il est nécessaire de différentier la norme au sens des applications linéaires d'autres types de normes utilisées, on note :
@@ -576,10 +571,8 @@ Lorsqu'il est nécessaire de différentier la norme au sens des applications lin
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orga4c9777" class="outline-4">
-<h4 id="orga4c9777"><span class="section-number-4">1.6.3.</span> Définition alternative</h4>
+<div id="outline-container-org93f88ec" class="outline-4">
+<h4 id="org93f88ec"><span class="section-number-4">1.6.3.</span> Définition alternative</h4>
 <div class="outline-text-4" id="text-1-6-3">
 <p>
 Soit \(N \in \corps\), avec \(N \strictsuperieur 0\) et :
@@ -666,10 +659,8 @@ On en conclut que les deux supremums sont égaux :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org0d6c64a" class="outline-4">
-<h4 id="org0d6c64a"><span class="section-number-4">1.6.4.</span> Norme unitaire</h4>
+<div id="outline-container-orgb6f9dc6" class="outline-4">
+<h4 id="orgb6f9dc6"><span class="section-number-4">1.6.4.</span> Norme unitaire</h4>
 <div class="outline-text-4" id="text-1-6-4">
 <p>
 Une conséquence importante du résultat ci-dessus est le cas particulier \(N = 1\). On a alors :
@@ -681,10 +672,8 @@ Une conséquence importante du résultat ci-dessus est le cas particulier \(N = 
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org162c3d1" class="outline-3">
-<h3 id="org162c3d1"><span class="section-number-3">1.7.</span> Norme d'une composée</h3>
+<div id="outline-container-org0d75ce2" class="outline-3">
+<h3 id="org0d75ce2"><span class="section-number-3">1.7.</span> Norme d'une composée</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 Soit \(f : E \mapsto F\) et \(g : F \mapsto G\) deux applications linéaires de normes finies. Si \(x \in E\) avec \(x \ne 0\) on a \(f(x) \in F\) et :
@@ -711,10 +700,8 @@ et en passant au supremum sur \(x \ne 0\), on en conclut que :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org2520ab8" class="outline-3">
-<h3 id="org2520ab8"><span class="section-number-3">1.8.</span> Norme d'une puissance</h3>
+<div id="outline-container-orge36ad99" class="outline-3">
+<h3 id="orge36ad99"><span class="section-number-3">1.8.</span> Norme d'une puissance</h3>
 <div class="outline-text-3" id="text-1-8">
 <p>
 On a clairement :
@@ -725,10 +712,8 @@ On a clairement :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org9f0821a" class="outline-3">
-<h3 id="org9f0821a"><span class="section-number-3">1.9.</span> Continuité</h3>
+<div id="outline-container-org6887e38" class="outline-3">
+<h3 id="org6887e38"><span class="section-number-3">1.9.</span> Continuité</h3>
 <div class="outline-text-3" id="text-1-9">
 <p>
 Nous allons montrer que, pour tout \(f \in \lineaire(A,B)\), on a l'équivalence entre l'hypothèse d'une norme de \(f\) finie et l'hypothèse de \(f\) continue.
@@ -767,10 +752,8 @@ La norme est donc finie :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgfc2ef17" class="outline-3">
-<h3 id="orgfc2ef17"><span class="section-number-3">1.10.</span> $n$-linéarité</h3>
+<div id="outline-container-org44d1feb" class="outline-3">
+<h3 id="org44d1feb"><span class="section-number-3">1.10.</span> $n$-linéarité</h3>
 <div class="outline-text-3" id="text-1-10">
 <p>
 On dit que la fonction \(f : E_1 \times ... \times E_n \mapsto F\) est $n$-linéaire si elle est linéaire par rapport à chacune des composantes de son argument, les autres composantes restant inchangées :
@@ -784,10 +767,8 @@ On dit que la fonction \(f : E_1 \times ... \times E_n \mapsto F\) est $n$-liné
 pour tout \(\alpha,\beta \in \corps\) et \(x,y \in E\). On note \(\lineaire_n(E_1,...,E_n,F)\) l'ensemble des fonctions $n$-linéaires de \(E_1 \times ... \times E_n\) vers \(F\).
 </p>
 </div>
-
-
-<div id="outline-container-org5140508" class="outline-4">
-<h4 id="org5140508"><span class="section-number-4">1.10.1.</span> Norme</h4>
+<div id="outline-container-org657f9c0" class="outline-4">
+<h4 id="org657f9c0"><span class="section-number-4">1.10.1.</span> Norme</h4>
 <div class="outline-text-4" id="text-1-10-1">
 <p>
 La norme est définie dans ce cas par :
@@ -810,10 +791,8 @@ pour tout \((x_1,...,x_n) \in E_1 \times ... \times E_n\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgfbd26cb" class="outline-4">
-<h4 id="orgfbd26cb"><span class="section-number-4">1.10.2.</span> Bilinéarité</h4>
+<div id="outline-container-orgfe956e7" class="outline-4">
+<h4 id="orgfe956e7"><span class="section-number-4">1.10.2.</span> Bilinéarité</h4>
 <div class="outline-text-4" id="text-1-10-2">
 <p>
 On dit aussi des fonctions $2$-linéaires qu'elles sont bilinéaires. La norme d'une fonction \(f : E_1 \times E_2 \mapsto F\) bilinéaire est définie par :
@@ -837,10 +816,8 @@ pour tout \((u,v) \in E_1 \times E_2\).
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgdbb710f" class="outline-3">
-<h3 id="orgdbb710f"><span class="section-number-3">1.11.</span> Représentation matricielle</h3>
+<div id="outline-container-orgb1fee67" class="outline-3">
+<h3 id="orgb1fee67"><span class="section-number-3">1.11.</span> Représentation matricielle</h3>
 <div class="outline-text-3" id="text-1-11">
 <p>
 Soit une application linéaire \(\mathcal{A} : E \to F\). Choisissons \(x \in E\) et posons :
@@ -919,10 +896,8 @@ de telle sorte que :
 \[A \cdot x = \mathcal{A}(x)\]
 </p>
 </div>
-
-
-<div id="outline-container-orgd845723" class="outline-4">
-<h4 id="orgd845723"><span class="section-number-4">1.11.1.</span> Norme</h4>
+<div id="outline-container-orgf6991c2" class="outline-4">
+<h4 id="orgf6991c2"><span class="section-number-4">1.11.1.</span> Norme</h4>
 <div class="outline-text-4" id="text-1-11-1">
 <p>
 La norme d'une matrice est la norme de l'application linéaire associée, c'est-à-dire :
@@ -961,10 +936,8 @@ La norme d'une matrice finie (\(m,n \strictinferieur \infty\)) existe toujours.
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org02da27d" class="outline-4">
-<h4 id="org02da27d"><span class="section-number-4">1.11.2.</span> Image</h4>
+<div id="outline-container-org5ceb013" class="outline-4">
+<h4 id="org5ceb013"><span class="section-number-4">1.11.2.</span> Image</h4>
 <div class="outline-text-4" id="text-1-11-2">
 <p>
 L'image d'une matrice est l'image de l'application linéaire associée, c'est-à-dire :
@@ -999,10 +972,8 @@ autrement dit l'image de \(A\) est l'espace vectoriel engendré par ses colonnes
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org304d281" class="outline-4">
-<h4 id="org304d281"><span class="section-number-4">1.11.3.</span> Noyau</h4>
+<div id="outline-container-org516db28" class="outline-4">
+<h4 id="org516db28"><span class="section-number-4">1.11.3.</span> Noyau</h4>
 <div class="outline-text-4" id="text-1-11-3">
 <p>
 Le noyau d'une matrice est le noyau de l'application linéaire associée, c'est-à-dire :
@@ -1014,10 +985,8 @@ Le noyau d'une matrice est le noyau de l'application linéaire associée, c'est-
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org3fd5b61" class="outline-3">
-<h3 id="org3fd5b61"><span class="section-number-3">1.12.</span> Produit matriciel</h3>
+<div id="outline-container-orgbc31d98" class="outline-3">
+<h3 id="orgbc31d98"><span class="section-number-3">1.12.</span> Produit matriciel</h3>
 <div class="outline-text-3" id="text-1-12">
 <p>
 Soit à présent les matrices \(A \in \matrice(\corps,m,n)\) et \(B \in \matrice(\corps,n,p)\) données par :
@@ -1099,10 +1068,8 @@ de colonnes \(n\) de \(A\) et le nombre de lignes de \(B\) soient identiques.
 On voit également que le produit matrice - vecteur défini précédemment en est un cas particulier lorsque \(p = 1\).
 </p>
 </div>
-
-
-<div id="outline-container-orgbc09a43" class="outline-4">
-<h4 id="orgbc09a43"><span class="section-number-4">1.12.1.</span> Notation</h4>
+<div id="outline-container-orgccc442e" class="outline-4">
+<h4 id="orgccc442e"><span class="section-number-4">1.12.1.</span> Notation</h4>
 <div class="outline-text-4" id="text-1-12-1">
 <p>
 En pratique, on laisse souvent tomber le ``\(\cdot\)'' et on note \(A B\)
@@ -1111,20 +1078,16 @@ matrices différentes.
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org51aa215" class="outline-4">
-<h4 id="org51aa215"><span class="section-number-4">1.12.2.</span> Taille</h4>
+<div id="outline-container-orgf3703d6" class="outline-4">
+<h4 id="orgf3703d6"><span class="section-number-4">1.12.2.</span> Taille</h4>
 <div class="outline-text-4" id="text-1-12-2">
 <p>
 Le produit d'une matrice de taille \((m,n)\) par une matrice de taille \((n,p)\) est une matrice de taille \((m,p)\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org34c6d81" class="outline-4">
-<h4 id="org34c6d81"><span class="section-number-4">1.12.3.</span> Lignes et colonnes</h4>
+<div id="outline-container-orgab53ba8" class="outline-4">
+<h4 id="orgab53ba8"><span class="section-number-4">1.12.3.</span> Lignes et colonnes</h4>
 <div class="outline-text-4" id="text-1-12-3">
 <p>
 Si \(x_i^T = \ligne_i(A)\) et \(y_j = \colonne_j(B)\), on voit que :
@@ -1135,10 +1098,8 @@ Si \(x_i^T = \ligne_i(A)\) et \(y_j = \colonne_j(B)\), on voit que :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org7b26ba6" class="outline-4">
-<h4 id="org7b26ba6"><span class="section-number-4">1.12.4.</span> Associativité</h4>
+<div id="outline-container-org403fefe" class="outline-4">
+<h4 id="org403fefe"><span class="section-number-4">1.12.4.</span> Associativité</h4>
 <div class="outline-text-4" id="text-1-12-4">
 <p>
 Soit les matrices \(A \in \matrice(\corps,m,n)\), \(B \in \matrice(\corps,n,p)\) et \(C \in \matrice(\corps,p,q)\) données par :
@@ -1171,10 +1132,8 @@ nous montre que la multiplication entre matrices est associative. On définit :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgedaec76" class="outline-4">
-<h4 id="orgedaec76"><span class="section-number-4">1.12.5.</span> Distributivité</h4>
+<div id="outline-container-orgad14ae6" class="outline-4">
+<h4 id="orgad14ae6"><span class="section-number-4">1.12.5.</span> Distributivité</h4>
 <div class="outline-text-4" id="text-1-12-5">
 <p>
 On a aussi les propriétés de distribution :
@@ -1194,10 +1153,8 @@ où \(A \in \matrice(\corps,m,n)\), \(B,C \in \matrice(\corps,n,p)\) et \(D \in 
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org2411dbf" class="outline-4">
-<h4 id="org2411dbf"><span class="section-number-4">1.12.6.</span> Non commutativité</h4>
+<div id="outline-container-orgaaca32f" class="outline-4">
+<h4 id="orgaaca32f"><span class="section-number-4">1.12.6.</span> Non commutativité</h4>
 <div class="outline-text-4" id="text-1-12-6">
 <p>
 Par contre, on peut trouver des matrices \(A\) et \(B\) telles que :
@@ -1212,10 +1169,8 @@ La multiplication matricielle n'est donc en général pas commutative. D'ailleur
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org8569677" class="outline-4">
-<h4 id="org8569677"><span class="section-number-4">1.12.7.</span> Commutateur</h4>
+<div id="outline-container-orgefecb75" class="outline-4">
+<h4 id="orgefecb75"><span class="section-number-4">1.12.7.</span> Commutateur</h4>
 <div class="outline-text-4" id="text-1-12-7">
 <p>
 La matrice associée au commutateur :
@@ -1234,10 +1189,8 @@ est donnée par le commutateur équivalent :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org4a4d3ad" class="outline-4">
-<h4 id="org4a4d3ad"><span class="section-number-4">1.12.8.</span> Transposée</h4>
+<div id="outline-container-org2964667" class="outline-4">
+<h4 id="org2964667"><span class="section-number-4">1.12.8.</span> Transposée</h4>
 <div class="outline-text-4" id="text-1-12-8">
 <p>
 On vérifie que :
@@ -1249,10 +1202,8 @@ On vérifie que :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org0bbc97d" class="outline-3">
-<h3 id="org0bbc97d"><span class="section-number-3">1.13.</span> Blocs</h3>
+<div id="outline-container-org6908760" class="outline-3">
+<h3 id="org6908760"><span class="section-number-3">1.13.</span> Blocs</h3>
 <div class="outline-text-3" id="text-1-13">
 <p>
 En utilisant l'associativité de l'addition, on peut facilement vérifier que la formule de multiplication reste valable lorsqu'on considère des blocs de matrices au lieu des éléments, à condition de respecter l'ordre de multiplication. Un exemple fréquemment utilisé :
@@ -1283,10 +1234,8 @@ A_{21} \cdot B_{11} +  A_{22} \cdot B_{21} & A_{21} \cdot B_{12} +  A_{22} \cdot
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org86cfaa0" class="outline-4">
-<h4 id="org86cfaa0"><span class="section-number-4">1.13.1.</span> Bloc-diagonale</h4>
+<div id="outline-container-orgbc0b22c" class="outline-4">
+<h4 id="orgbc0b22c"><span class="section-number-4">1.13.1.</span> Bloc-diagonale</h4>
 <div class="outline-text-4" id="text-1-13-1">
 <p>
 Un cas particulier important :
@@ -1319,10 +1268,8 @@ A_1 \cdot B_1 & 0 \\
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org907ff0f" class="outline-3">
-<h3 id="org907ff0f"><span class="section-number-3">1.14.</span> Matrice identité</h3>
+<div id="outline-container-org278ff7a" class="outline-3">
+<h3 id="org278ff7a"><span class="section-number-3">1.14.</span> Matrice identité</h3>
 <div class="outline-text-3" id="text-1-14">
 <p>
 La matrice identité \(I \in \matrice(\corps,n,n)\) correspond à la fonction \(\identité\). On a donc :
@@ -1356,10 +1303,8 @@ On remarque que :
 \[I = [\canonique_1 \ \hdots \ \canonique_n]\]
 </p>
 </div>
-
-
-<div id="outline-container-org3e14385" class="outline-4">
-<h4 id="org3e14385"><span class="section-number-4">1.14.1.</span> Neutre</h4>
+<div id="outline-container-org9eff126" class="outline-4">
+<h4 id="org9eff126"><span class="section-number-4">1.14.1.</span> Neutre</h4>
 <div class="outline-text-4" id="text-1-14-1">
 <p>
 Comme la fonction identité est neutre pour la composition, la matrice unité correspondante \(I \in \matrice(\corps,m,n)\) doit être neutre pour la multiplication avec toutes les matrices de dimensions compatibles. Soit \(A \in \matrice(\corps,m,n)\) et \(B \in \matrice(\corps,n,p)\). On vérifie que l'on a bien :
@@ -1375,10 +1320,8 @@ I \cdot B = B
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org15cf0ec" class="outline-4">
-<h4 id="org15cf0ec"><span class="section-number-4">1.14.2.</span> Notation</h4>
+<div id="outline-container-org1729b5e" class="outline-4">
+<h4 id="org1729b5e"><span class="section-number-4">1.14.2.</span> Notation</h4>
 <div class="outline-text-4" id="text-1-14-2">
 <p>
 On note aussi \(I_n\) pour préciser que \(I\) est de taille \((n,n)\).
@@ -1386,10 +1329,8 @@ On note aussi \(I_n\) pour préciser que \(I\) est de taille \((n,n)\).
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgfd6011a" class="outline-3">
-<h3 id="orgfd6011a"><span class="section-number-3">1.15.</span> Inverse</h3>
+<div id="outline-container-org96695f9" class="outline-3">
+<h3 id="org96695f9"><span class="section-number-3">1.15.</span> Inverse</h3>
 <div class="outline-text-3" id="text-1-15">
 <p>
 Lorsqu'elle existe, la matrice inverse de \(A\), notée \(A^{-1}\), reflète l'application linéaire inverse sous-jacente. Elle est donc l'unique matrice telle que :
@@ -1400,10 +1341,8 @@ Lorsqu'elle existe, la matrice inverse de \(A\), notée \(A^{-1}\), reflète l'a
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org0906242" class="outline-3">
-<h3 id="org0906242"><span class="section-number-3">1.16.</span> Inverse d'un produit</h3>
+<div id="outline-container-org0b5f427" class="outline-3">
+<h3 id="org0b5f427"><span class="section-number-3">1.16.</span> Inverse d'un produit</h3>
 <div class="outline-text-3" id="text-1-16">
 <p>
 Soit \(A\) et \(B\) deux matrices inversibles. Les relations \(C \cdot (A \cdot B) = I\) et \((A \cdot B) \cdot D = I\) nous donnent :
@@ -1421,10 +1360,8 @@ et donc :
 \[(A \cdot B)^{-1} = B^{-1} \cdot A^{-1}\]
 </p>
 </div>
-
-
-<div id="outline-container-orga1f587d" class="outline-4">
-<h4 id="orga1f587d"><span class="section-number-4">1.16.1.</span> Inverse à gauche et à droite</h4>
+<div id="outline-container-org3972720" class="outline-4">
+<h4 id="org3972720"><span class="section-number-4">1.16.1.</span> Inverse à gauche et à droite</h4>
 <div class="outline-text-4" id="text-1-16-1">
 <p>
 On dit que \(L\) est un inverse à gauche de \(A\) si \(L \cdot A = I\). On dit que \(R\) est un inverse à droite de \(A\) si \(A \cdot R = I\).
@@ -1432,10 +1369,8 @@ On dit que \(L\) est un inverse à gauche de \(A\) si \(L \cdot A = I\). On dit 
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org574f0df" class="outline-3">
-<h3 id="org574f0df"><span class="section-number-3">1.17.</span> Puissance</h3>
+<div id="outline-container-orgccd01d0" class="outline-3">
+<h3 id="orgccd01d0"><span class="section-number-3">1.17.</span> Puissance</h3>
 <div class="outline-text-3" id="text-1-17">
 <p>
 Il est possible de multiplier une matrice carrée \(A\) avec elle-même.
@@ -1451,10 +1386,8 @@ A^k = A \cdot A^{k-1}
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org7d9c48e" class="outline-4">
-<h4 id="org7d9c48e"><span class="section-number-4">1.17.1.</span> Négative</h4>
+<div id="outline-container-org987109e" class="outline-4">
+<h4 id="org987109e"><span class="section-number-4">1.17.1.</span> Négative</h4>
 <div class="outline-text-4" id="text-1-17-1">
 <p>
 Si l'inverse \(A^{-1}\) existe, on définit également :
@@ -1466,10 +1399,8 @@ Si l'inverse \(A^{-1}\) existe, on définit également :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org3624999" class="outline-3">
-<h3 id="org3624999"><span class="section-number-3">1.18.</span> Polynômes matriciels</h3>
+<div id="outline-container-orga7abade" class="outline-3">
+<h3 id="orga7abade"><span class="section-number-3">1.18.</span> Polynômes matriciels</h3>
 <div class="outline-text-3" id="text-1-18">
 <p>
 Ici, \(\corps\) n'est plus un corps mais l'anneau des matrices \(X\) de taille \((N,N)\). On dit que \(p : \matrice(\corps,N,N) \mapsto \matrice(\corps,N,N)\) est un polynôme matriciel si il existe \(a_0,...,a_n \in \corps\) tels que :
@@ -1485,24 +1416,20 @@ pour tout \(X \in \matrice(\corps,N,N)\).
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org28f574d" class="outline-2">
-<h2 id="org28f574d"><span class="section-number-2">2.</span> Géométrie</h2>
+<div id="outline-container-org2aaa8c0" class="outline-2">
+<h2 id="org2aaa8c0"><span class="section-number-2">2.</span> Géométrie</h2>
 <div class="outline-text-2" id="text-2">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-2" role="doc-toc">
 <ul>
-<li><a href="#org59c8dce">2.1. Courbe</a></li>
-<li><a href="#org481bb1b">2.2. Segment</a></li>
-<li><a href="#orgc4be5cd">2.3. Enveloppe convexe</a></li>
-<li><a href="#org324e0d8">2.4. Surface</a></li>
+<li><a href="#org2b82973">2.1. Courbe</a></li>
+<li><a href="#orgf439adf">2.2. Segment</a></li>
+<li><a href="#org5797a09">2.3. Enveloppe convexe</a></li>
+<li><a href="#org6550da3">2.4. Surface</a></li>
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-org59c8dce" class="outline-3">
-<h3 id="org59c8dce"><span class="section-number-3">2.1.</span> Courbe</h3>
+<div id="outline-container-org2b82973" class="outline-3">
+<h3 id="org2b82973"><span class="section-number-3">2.1.</span> Courbe</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Une courbe sur un espace vectoriel \(E\) (par exemple \(\setR^n\)) est de la forme :
@@ -1521,10 +1448,8 @@ où \(\lambda : [\alpha,\beta] \mapsto E\) est une fonction continue et où \(\a
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org481bb1b" class="outline-3">
-<h3 id="org481bb1b"><span class="section-number-3">2.2.</span> Segment</h3>
+<div id="outline-container-orgf439adf" class="outline-3">
+<h3 id="orgf439adf"><span class="section-number-3">2.2.</span> Segment</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Les segments sont une généralisation des intervalles. Un segment de \(u \in E\) vers \(v \in E\) est un cas particulier de courbe où \(\lambda : [0,1] \subseteq \setR \mapsto E\) est une fonction linéaire définie par :
@@ -1550,10 +1475,8 @@ pour tout \(s \in [0,1] \subseteq \setR\). On voit que \(\lambda(0) = u\) et que
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org30b6e91" class="outline-4">
-<h4 id="org30b6e91"><span class="section-number-4">2.2.1.</span> Alternative</h4>
+<div id="outline-container-org6701d21" class="outline-4">
+<h4 id="org6701d21"><span class="section-number-4">2.2.1.</span> Alternative</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <p>
 On dispose aussi d'une définition alternative. On utilise :
@@ -1585,10 +1508,8 @@ On a alors \([u,v] = \sigma(L)\). On voit aussi que \(\sigma(1,0) = u\) et \(\si
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgc4be5cd" class="outline-3">
-<h3 id="orgc4be5cd"><span class="section-number-3">2.3.</span> Enveloppe convexe</h3>
+<div id="outline-container-org5797a09" class="outline-3">
+<h3 id="org5797a09"><span class="section-number-3">2.3.</span> Enveloppe convexe</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Soit \(A \subseteq E\) et la collection des segments reliant deux points quelconques de \(A\) :
@@ -1626,20 +1547,16 @@ s \cdot u + t \cdot v \in \convexe(A)
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org8e9e18d" class="outline-4">
-<h4 id="org8e9e18d"><span class="section-number-4">2.3.1.</span> Inclusion</h4>
+<div id="outline-container-org270a25d" class="outline-4">
+<h4 id="org270a25d"><span class="section-number-4">2.3.1.</span> Inclusion</h4>
 <div class="outline-text-4" id="text-2-3-1">
 <p>
 Il suffit de considérer le choix \((s,t) = (1,0)\) pour voir que tout \(u \in A\) appartient à \(\convexe(A)\). On a donc \(A \subseteq \convexe(A)\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org5e56e79" class="outline-4">
-<h4 id="org5e56e79"><span class="section-number-4">2.3.2.</span> Ensemble convexe</h4>
+<div id="outline-container-org9498830" class="outline-4">
+<h4 id="org9498830"><span class="section-number-4">2.3.2.</span> Ensemble convexe</h4>
 <div class="outline-text-4" id="text-2-3-2">
 <p>
 On dit qu'un ensemble \(C \subseteq E\) est convexe si \(\convexe(C) = C\).
@@ -1647,10 +1564,8 @@ On dit qu'un ensemble \(C \subseteq E\) est convexe si \(\convexe(C) = C\).
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org324e0d8" class="outline-3">
-<h3 id="org324e0d8"><span class="section-number-3">2.4.</span> Surface</h3>
+<div id="outline-container-org6550da3" class="outline-3">
+<h3 id="org6550da3"><span class="section-number-3">2.4.</span> Surface</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Une surface de \(E\) est de la forme :
@@ -1670,25 +1585,23 @@ où \(\varphi : [a,b] \times [c,d] \mapsto E\) est une fonction continue et où 
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org5180276" class="outline-2">
-<h2 id="org5180276"><span class="section-number-2">3.</span> Formes linéaires</h2>
+<div id="outline-container-orgf845dbc" class="outline-2">
+<h2 id="orgf845dbc"><span class="section-number-2">3.</span> Formes linéaires</h2>
 <div class="outline-text-2" id="text-3">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-3" role="doc-toc">
 <ul>
-<li><a href="#org59bb034">3.1. Dépendances</a></li>
-<li><a href="#org46670c1">3.2. Définition</a></li>
-<li><a href="#orgd75b048">3.3. Espace dual</a></li>
-<li><a href="#org69802e4">3.4. Notation</a></li>
-<li><a href="#org363bc29">3.5. Linéarité</a></li>
-<li><a href="#orgc736e53">3.6. Biorthonormalité</a></li>
-<li><a href="#org3db84fd">3.7. Similitude</a></li>
-<li><a href="#org467653f">3.8. Espace bidual</a></li>
-<li><a href="#orge33c7d9">3.9. Application duale</a></li>
-<li><a href="#orgec59c21">3.10. Formes bilinéaires</a></li>
-<li><a href="#org81de163">3.11. Formes quadratiques</a></li>
-<li><a href="#orgcd77bf3">3.12. Représentation matricielle</a></li>
+<li><a href="#orga3ad265">3.1. Dépendances</a></li>
+<li><a href="#org089feb3">3.2. Définition</a></li>
+<li><a href="#orgc381a37">3.3. Espace dual</a></li>
+<li><a href="#org4e7de09">3.4. Notation</a></li>
+<li><a href="#org69a6691">3.5. Linéarité</a></li>
+<li><a href="#orgab5fe9c">3.6. Biorthonormalité</a></li>
+<li><a href="#orgea022bd">3.7. Similitude</a></li>
+<li><a href="#orgc36a684">3.8. Espace bidual</a></li>
+<li><a href="#orgb4760f4">3.9. Application duale</a></li>
+<li><a href="#org59c9193">3.10. Formes bilinéaires</a></li>
+<li><a href="#orge55804a">3.11. Formes quadratiques</a></li>
+<li><a href="#org9b270e7">3.12. Représentation matricielle</a></li>
 </ul>
 </div>
 
@@ -1696,10 +1609,8 @@ où \(\varphi : [a,b] \times [c,d] \mapsto E\) est une fonction continue et où 
 \label{chap:forme}
 </p>
 </div>
-
-
-<div id="outline-container-org59bb034" class="outline-3">
-<h3 id="org59bb034"><span class="section-number-3">3.1.</span> Dépendances</h3>
+<div id="outline-container-orga3ad265" class="outline-3">
+<h3 id="orga3ad265"><span class="section-number-3">3.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:relation} : Les fonctions</li>
@@ -1707,10 +1618,8 @@ où \(\varphi : [a,b] \times [c,d] \mapsto E\) est une fonction continue et où 
 </ul>
 </div>
 </div>
-
-
-<div id="outline-container-org46670c1" class="outline-3">
-<h3 id="org46670c1"><span class="section-number-3">3.2.</span> Définition</h3>
+<div id="outline-container-org089feb3" class="outline-3">
+<h3 id="org089feb3"><span class="section-number-3">3.2.</span> Définition</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Soit un espace vectoriel \(E\) sur \(\corps\). Une forme linéaire est une fonction linéaire continue
@@ -1718,10 +1627,8 @@ Soit un espace vectoriel \(E\) sur \(\corps\). Une forme linéaire est une fonct
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgd75b048" class="outline-3">
-<h3 id="orgd75b048"><span class="section-number-3">3.3.</span> Espace dual</h3>
+<div id="outline-container-orgc381a37" class="outline-3">
+<h3 id="orgc381a37"><span class="section-number-3">3.3.</span> Espace dual</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 L'espace dual \(E^\dual\) de \(E\) est l'ensemble des formes linéaires sur \(E\) , autrement dit
@@ -1737,10 +1644,8 @@ Il s'agit d'un espace vectoriel pour les opérations d'addition et de multiplica
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org69802e4" class="outline-3">
-<h3 id="org69802e4"><span class="section-number-3">3.4.</span> Notation</h3>
+<div id="outline-container-org4e7de09" class="outline-3">
+<h3 id="org4e7de09"><span class="section-number-3">3.4.</span> Notation</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 Pour toute forme \(\varphi \in E^\dual\) et tout vecteur \(v \in E\), on note :
@@ -1755,10 +1660,8 @@ ce qui définit implicitement la fonction \(\forme{}{} : E^\dual \times E \mapst
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org363bc29" class="outline-3">
-<h3 id="org363bc29"><span class="section-number-3">3.5.</span> Linéarité</h3>
+<div id="outline-container-org69a6691" class="outline-3">
+<h3 id="org69a6691"><span class="section-number-3">3.5.</span> Linéarité</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 Soit \(\varphi,\psi \in E^\dual\), \(u,v \in E\) et \(\alpha,\beta \in S\). Comme \(\varphi\) est linéaire, on a :
@@ -1781,10 +1684,8 @@ L'application \(\forme{}{}\) est donc bilinéaire.
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgc736e53" class="outline-3">
-<h3 id="orgc736e53"><span class="section-number-3">3.6.</span> Biorthonormalité</h3>
+<div id="outline-container-orgab5fe9c" class="outline-3">
+<h3 id="orgab5fe9c"><span class="section-number-3">3.6.</span> Biorthonormalité</h3>
 <div class="outline-text-3" id="text-3-6">
 <p>
 On dit que les suites \((\Phi_1,...,\Phi_m)\) de \(E^\dual\) et
@@ -1852,10 +1753,8 @@ On a donc en définitive :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org3db84fd" class="outline-3">
-<h3 id="org3db84fd"><span class="section-number-3">3.7.</span> Similitude</h3>
+<div id="outline-container-orgea022bd" class="outline-3">
+<h3 id="orgea022bd"><span class="section-number-3">3.7.</span> Similitude</h3>
 <div class="outline-text-3" id="text-3-7">
 <p>
 On dit que deux fonctions \(u,v \in E\) sont identique au sens des distributions si :
@@ -1882,10 +1781,8 @@ pour tout \(u \in E\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org467653f" class="outline-3">
-<h3 id="org467653f"><span class="section-number-3">3.8.</span> Espace bidual</h3>
+<div id="outline-container-orgc36a684" class="outline-3">
+<h3 id="orgc36a684"><span class="section-number-3">3.8.</span> Espace bidual</h3>
 <div class="outline-text-3" id="text-3-8">
 <p>
 On définit l'espace bidual de \(E\), noté \(E^{\dual \dual}\), par :
@@ -1912,10 +1809,8 @@ qui doit être vérifiée pour tout \(\varphi \in E^\dual\). On a donc :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orge33c7d9" class="outline-3">
-<h3 id="orge33c7d9"><span class="section-number-3">3.9.</span> Application duale</h3>
+<div id="outline-container-orgb4760f4" class="outline-3">
+<h3 id="orgb4760f4"><span class="section-number-3">3.9.</span> Application duale</h3>
 <div class="outline-text-3" id="text-3-9">
 <p>
 Soit les espaces vectoriels \(E\) et \(F\) sur \(\corps\) et une fonction \(A : E \mapsto F\). Le dual de \(A\) au sens des formes, s'il existe, est l'unique fonction \(A^\dual : F^\dual \mapsto E^\dual\) telle que :
@@ -1930,10 +1825,8 @@ pour tout \(u \in E\) et \(\varphi \in F^\dual\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgec59c21" class="outline-3">
-<h3 id="orgec59c21"><span class="section-number-3">3.10.</span> Formes bilinéaires</h3>
+<div id="outline-container-org59c9193" class="outline-3">
+<h3 id="org59c9193"><span class="section-number-3">3.10.</span> Formes bilinéaires</h3>
 <div class="outline-text-3" id="text-3-10">
 <p>
 Soit les espaces vectoriels \(E\) et \(F\) sur \(\corps\). Une forme bilinéaire est une fonction bilinéaire continue \(\vartheta : F \times E \mapsto \corps\). On utilise une notation analogue à celle des formes :
@@ -1961,10 +1854,8 @@ pour tout \(\alpha,\beta \in \corps\), \(u,v \in E\) et \(x,y \in F\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org81de163" class="outline-3">
-<h3 id="org81de163"><span class="section-number-3">3.11.</span> Formes quadratiques</h3>
+<div id="outline-container-orge55804a" class="outline-3">
+<h3 id="orge55804a"><span class="section-number-3">3.11.</span> Formes quadratiques</h3>
 <div class="outline-text-3" id="text-3-11">
 <p>
 Soit la forme bilinéaire $ &thetasym; : E &times; E \mapsto \corps$. Une forme quadratique \(\mathcal{Q} : E \mapsto \corps\) est une fonction de la forme :
@@ -1975,10 +1866,8 @@ Soit la forme bilinéaire $ &thetasym; : E &times; E \mapsto \corps$. Une forme 
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgcd77bf3" class="outline-3">
-<h3 id="orgcd77bf3"><span class="section-number-3">3.12.</span> Représentation matricielle</h3>
+<div id="outline-container-org9b270e7" class="outline-3">
+<h3 id="org9b270e7"><span class="section-number-3">3.12.</span> Représentation matricielle</h3>
 <div class="outline-text-3" id="text-3-12">
 <p>
 On peut représenter toute forme linéaire \(\varphi \in \lineaire(\corps^n,\corps)\) par un vecteur matriciel \(\hat{\varphi} \in \corps^n\). Etant donné la base canonique \((e_1,...,e_n)\) de \(\corps^n\), il suffit de poser :
@@ -2000,10 +1889,8 @@ pour avoir :
 pour tout \(u \in \corps^n\).
 </p>
 </div>
-
-
-<div id="outline-container-org7e689ce" class="outline-4">
-<h4 id="org7e689ce"><span class="section-number-4">3.12.1.</span> Formes bilinéaires</h4>
+<div id="outline-container-org91149b0" class="outline-4">
+<h4 id="org91149b0"><span class="section-number-4">3.12.1.</span> Formes bilinéaires</h4>
 <div class="outline-text-4" id="text-3-12-1">
 <p>
 On peut représenter toute forme bilinéaire \(\vartheta \in \lineaire(\corps^m \times \corps^n,\corps)\) par une matrice \(\Theta \in \matrice(K,m,n)\). Etant donné les bases canoniques \((f_1,...,f_m)\) de \(\corps^m\) et \((e_1,...,e_n)\) de \(\corps^n\), il suffit de poser :
@@ -2031,7 +1918,7 @@ pour tout \(u \in \corps^n\) et tout \(v \in \corps^m\).
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2023-05-10 mer 16:44</p>
+<p class="date">Created: 2025-10-12 dim 15:24</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

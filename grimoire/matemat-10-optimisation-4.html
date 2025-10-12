@@ -3,13 +3,13 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2023-05-10 mer 16:45 -->
+<!-- 2025-10-12 dim 15:25 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 10 : Optimisation - 4</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
-<style>
+<style type="text/css">
   .title  { text-align: center;
              margin-bottom: .2em; }
   .subtitle { text-align: center;
@@ -193,27 +193,38 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        displayAlign: "center",
-        displayIndent: "0em",
-
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
-             }
-});
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
 </head>
 <body>
 <div id="content" class="content">
@@ -230,7 +241,7 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2e5d99e">1. Optimisation sous contrainte</a></li>
+<li><a href="#orgdbedca9">1. Optimisation sous contrainte</a></li>
 </ul>
 </div>
 </div>
@@ -358,6 +369,7 @@
 \newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
 \newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
 \newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
 \newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
 \newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
@@ -388,27 +400,26 @@
 \newcommand{\petito}[1]{o\left(#1\right)}
 \newcommand{\grando}[1]{O\left(#1\right)} \)
 </p>
-
-<div id="outline-container-org2e5d99e" class="outline-2">
-<h2 id="org2e5d99e"><span class="section-number-2">1.</span> Optimisation sous contrainte</h2>
+<div id="outline-container-orgdbedca9" class="outline-2">
+<h2 id="orgdbedca9"><span class="section-number-2">1.</span> Optimisation sous contrainte</h2>
 <div class="outline-text-2" id="text-1">
-<div id="text-table-of-contents" role="doc-toc">
+<div id="text-table-of-contents-1" role="doc-toc">
 <ul>
-<li><a href="#orge88d712">1.1. Introduction</a></li>
-<li><a href="#org0907ee9">1.2. Problème de minimisation sous contrainte</a></li>
-<li><a href="#org5532b7d">1.3. Convexité</a></li>
-<li><a href="#org578547f">1.4. Frontière</a></li>
-<li><a href="#orge417241">1.5. Pénalité</a></li>
-<li><a href="#org7f22b51">1.6. Lagrangien</a></li>
-<li><a href="#org86c3634">1.7. Conditions de Kuhn-Tucker</a></li>
-<li><a href="#org584eb08">1.8. Point de selle</a></li>
-<li><a href="#org02a433c">1.9. Solution</a></li>
-<li><a href="#org74c561c">1.10. Problème de maximisation sous contrainte</a></li>
-<li><a href="#org651d49f">1.11. Contraintes d'égalité</a></li>
-<li><a href="#org3a6e02e">1.12. Récapitulation</a></li>
-<li><a href="#org9680cd8">1.13. Découplage</a></li>
-<li><a href="#orgb3fbe1b">1.14. Dualité en optimisation linéaire</a></li>
-<li><a href="#org07618e5">1.15. Minimisation de la norme sous contraintes linéaires</a></li>
+<li><a href="#orgf9aee9d">1.1. Introduction</a></li>
+<li><a href="#org9c05d32">1.2. Problème de minimisation sous contrainte</a></li>
+<li><a href="#org80ad04b">1.3. Convexité</a></li>
+<li><a href="#orgd93b1f0">1.4. Frontière</a></li>
+<li><a href="#orgafc74b5">1.5. Pénalité</a></li>
+<li><a href="#org0abab28">1.6. Lagrangien</a></li>
+<li><a href="#org12d562d">1.7. Conditions de Kuhn-Tucker</a></li>
+<li><a href="#orgcfd2c19">1.8. Point de selle</a></li>
+<li><a href="#org24a930e">1.9. Solution</a></li>
+<li><a href="#orgba7f98a">1.10. Problème de maximisation sous contrainte</a></li>
+<li><a href="#org2b27f5e">1.11. Contraintes d'égalité</a></li>
+<li><a href="#orgff89f83">1.12. Récapitulation</a></li>
+<li><a href="#org410fe29">1.13. Découplage</a></li>
+<li><a href="#org145fddb">1.14. Dualité en optimisation linéaire</a></li>
+<li><a href="#org5c7f7ad">1.15. Minimisation de la norme sous contraintes linéaires</a></li>
 </ul>
 </div>
 
@@ -416,20 +427,16 @@
 \label{chap:lagrange}
 </p>
 </div>
-
-
-<div id="outline-container-orge88d712" class="outline-3">
-<h3 id="orge88d712"><span class="section-number-3">1.1.</span> Introduction</h3>
+<div id="outline-container-orgf9aee9d" class="outline-3">
+<h3 id="orgf9aee9d"><span class="section-number-3">1.1.</span> Introduction</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Ce chapitre traite de la résolution numérique de problèmes d'optimisation sous contraintes, ainsi que de leurs fondements théoriques. Les applications de ces méthodes sont nombreuses : maximisation du profit sous contrainte de ne pas dépasser un certain budget, maximiser la solidité d'une structure sans dépasser un certain poids, &#x2026;
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org0907ee9" class="outline-3">
-<h3 id="org0907ee9"><span class="section-number-3">1.2.</span> Problème de minimisation sous contrainte</h3>
+<div id="outline-container-org9c05d32" class="outline-3">
+<h3 id="org9c05d32"><span class="section-number-3">1.2.</span> Problème de minimisation sous contrainte</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Soit les fonctions convexes et et deux fois continument différentiables \(\omega_1,\omega_2,...,\omega_m : \setR^n \mapsto \setR\) et la fonction \(\omega : \setR^n \mapsto \setR^m\) définie par :
@@ -478,10 +485,8 @@ Nous avons donc un problème de minimisation à \(n\) paramètres :
 et \(m\) contraintes correspondant aux \(\omega_i\). On dit que \(\varphi\) est la fonction objectif et \(\omega\) la fonction contraignante.
 </p>
 </div>
-
-
-<div id="outline-container-org8731809" class="outline-4">
-<h4 id="org8731809"><span class="section-number-4">1.2.1.</span> Lien avec la minimisation libre</h4>
+<div id="outline-container-org076534a" class="outline-4">
+<h4 id="org076534a"><span class="section-number-4">1.2.1.</span> Lien avec la minimisation libre</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <p>
 Il est important de se rendre compte que si \(\xi\) est la solution de :
@@ -505,10 +510,8 @@ mais rien ne nous dit que \(\xi\) respecte les contraintes exigées ! On ne peut
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org5532b7d" class="outline-3">
-<h3 id="org5532b7d"><span class="section-number-3">1.3.</span> Convexité</h3>
+<div id="outline-container-org80ad04b" class="outline-3">
+<h3 id="org80ad04b"><span class="section-number-3">1.3.</span> Convexité</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Soit \(u,v \in \Omega\) et \(s,t \in \setR\) tels que \(s,t \ge 0\) et \(s + t = 1\). On a alors par convexité des \(\omega_i\) :
@@ -523,10 +526,8 @@ On en conclut que \(w = s \cdot u + t \cdot v \in \Omega\). On a donc \(\convexe
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org578547f" class="outline-3">
-<h3 id="org578547f"><span class="section-number-3">1.4.</span> Frontière</h3>
+<div id="outline-container-orgd93b1f0" class="outline-3">
+<h3 id="orgd93b1f0"><span class="section-number-3">1.4.</span> Frontière</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Soit \(x \in \frontiere \Omega\). Comme \(x \in \adh \Omega\), on a \(\distance(x,\Omega) = 0\). On peut donc construire une suite \(u_n \in \Omega\) convergeant vers \(x\). La continuité des \(\omega_i\) et la définition de \(\Omega\) nous disent que :
@@ -549,10 +550,8 @@ Ces deux inégalités nous disent que, pour tout \(x \in \frontiere \Omega\), il
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orge417241" class="outline-3">
-<h3 id="orge417241"><span class="section-number-3">1.5.</span> Pénalité</h3>
+<div id="outline-container-orgafc74b5" class="outline-3">
+<h3 id="orgafc74b5"><span class="section-number-3">1.5.</span> Pénalité</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 L'idée est de laisser l'objectif inchangé sur \(\Omega\) mais de l'augmenter suffisamment en dehors pour que le minimum sur \(\Omega\) soit également le minimum global. On utilise une fonction \(p\) convexe et différentiable vérifiant :
@@ -616,10 +615,8 @@ pour obtenir une solution à notre problème. De par les propriétés des foncti
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org7f22b51" class="outline-3">
-<h3 id="org7f22b51"><span class="section-number-3">1.6.</span> Lagrangien</h3>
+<div id="outline-container-org0abab28" class="outline-3">
+<h3 id="org0abab28"><span class="section-number-3">1.6.</span> Lagrangien</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 Par définition de \(\Omega\), on peut trouver au moins un \(\omega_i(x) \strictsuperieur 0\) pour tout \(x \notin \Omega\). Il est donc possible de s'en servir pour former un terme de pénalité. Comme chaque \(\omega_i\) est convexe, \(y_i \cdot \omega_i\) le sera aussi pour tout \(y_i \in \setR\) tel que \(y_i \ge 0\) (si \(y_i\) était strictement négatif, on aurait \(y_i \cdot \omega_i\) concave). Posons :
@@ -646,10 +643,8 @@ pour tout \(x \in \setR^n\) et tout \(y = (y_1,...,y_m) \in \mathcal{P}\). On di
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org86c3634" class="outline-3">
-<h3 id="org86c3634"><span class="section-number-3">1.7.</span> Conditions de Kuhn-Tucker</h3>
+<div id="outline-container-org12d562d" class="outline-3">
+<h3 id="org12d562d"><span class="section-number-3">1.7.</span> Conditions de Kuhn-Tucker</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 Nous allons à présent essayer de caractériser un choix \(y = \lambda\) tel que \(\gamma\) minimise globalement \(\lagrangien(x,\lambda)\) :
@@ -734,10 +729,8 @@ sont appellées conditions de Kuhn-Tucker.
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org584eb08" class="outline-3">
-<h3 id="org584eb08"><span class="section-number-3">1.8.</span> Point de selle</h3>
+<div id="outline-container-orgcfd2c19" class="outline-3">
+<h3 id="orgcfd2c19"><span class="section-number-3">1.8.</span> Point de selle</h3>
 <div class="outline-text-3" id="text-1-8">
 <p>
 Supposons que \((\gamma,\lambda) \in \Omega \times \mathcal{P}\) vérifie les conditions de Kuhn-Tucker. Choisissons \(x \in \setR^n\) et \(y \in \mathcal{P}\). L'annulation du gradient (\(\partial_x \lagrangien(\gamma,\lambda) = 0\)) et la convexité du lagrangien par rapport à la variable \(x\) nous assurent que :
@@ -763,10 +756,8 @@ On voit que \(\lambda\) maximise le lagrangien par rapport à la variable \(y\).
 \[\lagrangien(\gamma,y) \le \lagrangien(\gamma,\lambda) \le \lagrangien(x,\lambda)\]
 </p>
 </div>
-
-
-<div id="outline-container-orge247532" class="outline-4">
-<h4 id="orge247532"><span class="section-number-4">1.8.1.</span> Réciproque</h4>
+<div id="outline-container-org9f88657" class="outline-4">
+<h4 id="org9f88657"><span class="section-number-4">1.8.1.</span> Réciproque</h4>
 <div class="outline-text-4" id="text-1-8-1">
 <p>
 Nous venons de voir que les conditions de Kuhn-Tucker remplies sur \(\Omega \times \mathcal{P}\) nous offraient un point de selle sur \(\setR^n \times \mathcal{P}\). Nous allons voir que la réciproque est également vraie. Supposons que \((\gamma,\lambda) \in \setR^n \times \mathcal{P}\) soit un point de selle du lagrangien :
@@ -888,10 +879,8 @@ les propriétés des fonctions dérivables nous imposent que \(\partial_x \lagra
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org02a433c" class="outline-3">
-<h3 id="org02a433c"><span class="section-number-3">1.9.</span> Solution</h3>
+<div id="outline-container-org24a930e" class="outline-3">
+<h3 id="org24a930e"><span class="section-number-3">1.9.</span> Solution</h3>
 <div class="outline-text-3" id="text-1-9">
 <p>
 Supposons que \((\gamma,\lambda)\) soit un point de selle du lagrangien. Choisissons \(x \in \Omega\). On a \(\omega(x) \le 0\) et \(\lambda^\dual \cdot \omega(x) \le 0\). On en déduit que :
@@ -913,10 +902,8 @@ On a donc bien :
 ce qui prouve que \(\gamma\) minimise \(\varphi\) sur \(\Omega\). La solution du problème de point de selle du lagrangien contient donc la solution de notre problème de minimisation sous contrainte.
 </p>
 </div>
-
-
-<div id="outline-container-org511270a" class="outline-4">
-<h4 id="org511270a"><span class="section-number-4">1.9.1.</span> Généralisation</h4>
+<div id="outline-container-org9382d1e" class="outline-4">
+<h4 id="org9382d1e"><span class="section-number-4">1.9.1.</span> Généralisation</h4>
 <div class="outline-text-4" id="text-1-9-1">
 <p>
 Remarquons que nous n'avons pas utilisé la convexité de \(\varphi\) ou de \(\omega\) pour démontrer que \(\gamma\) est bien la solution de notre problème. On peut donc appliquer la technique du point de selle du lagrangien à une classe de fonctions beaucoup plus générale.
@@ -933,10 +920,8 @@ Attention, si \(\varphi\) et/ou \(\omega\) ne sont plus supposées convexes, le 
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org74c561c" class="outline-3">
-<h3 id="org74c561c"><span class="section-number-3">1.10.</span> Problème de maximisation sous contrainte</h3>
+<div id="outline-container-orgba7f98a" class="outline-3">
+<h3 id="orgba7f98a"><span class="section-number-3">1.10.</span> Problème de maximisation sous contrainte</h3>
 <div class="outline-text-3" id="text-1-10">
 <p>
 Soit les fonctions {\em concaves} et deux fois continument différentiables \(\vartheta_1,\vartheta_2,...,\vartheta_m : \setR^n \mapsto \setR\) et la fonction \(\vartheta : \setR^n \mapsto \setR^m\) définie par :
@@ -978,10 +963,8 @@ où :
 \[\Omega = \{ x \in \setR^n : -\vartheta(x) \le 0 \}\]
 </p>
 </div>
-
-
-<div id="outline-container-orgbcedea1" class="outline-4">
-<h4 id="orgbcedea1"><span class="section-number-4">1.10.1.</span> Lagrangien</h4>
+<div id="outline-container-org8e5e99e" class="outline-4">
+<h4 id="org8e5e99e"><span class="section-number-4">1.10.1.</span> Lagrangien</h4>
 <div class="outline-text-4" id="text-1-10-1">
 <p>
 On sait que maximiser \(\psi\) revient à minimiser \(-\psi\). Comme \(-\psi\) et \(-\vartheta\) sont convexes, on peut utiliser le lagrangien défini par :
@@ -1020,10 +1003,8 @@ Il s'agit du lagrangien natif du problème de maximisation. Il est maximisé par
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgb62a895" class="outline-4">
-<h4 id="orgb62a895"><span class="section-number-4">1.10.2.</span> Kuhn-Tucker</h4>
+<div id="outline-container-org4347b4d" class="outline-4">
+<h4 id="org4347b4d"><span class="section-number-4">1.10.2.</span> Kuhn-Tucker</h4>
 <div class="outline-text-4" id="text-1-10-2">
 <p>
 Les conditions de Kuhn-Tucker associées à \(\lagrangien_{\min}\) s'écrivent :
@@ -1059,10 +1040,8 @@ Elles sont équivalentes aux conditions analogues associées à \(\lagrangien_{\
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org651d49f" class="outline-3">
-<h3 id="org651d49f"><span class="section-number-3">1.11.</span> Contraintes d'égalité</h3>
+<div id="outline-container-org2b27f5e" class="outline-3">
+<h3 id="org2b27f5e"><span class="section-number-3">1.11.</span> Contraintes d'égalité</h3>
 <div class="outline-text-3" id="text-1-11">
 <p>
 Soit les fonctions deux fois continument différentiables \(\varrho_1,\varrho_2,...,\varrho_m : \setR^n \mapsto \setR\) et la fonction \(\varrho : \setR^n \mapsto \setR^m\) définie par :
@@ -1088,10 +1067,8 @@ Nous considérons le problème général suivant : trouver un \(\gamma \in \Phi
 \[\gamma \in \arg\min_{x \in \Phi} \varphi(x)\]
 </p>
 </div>
-
-
-<div id="outline-container-org16823a4" class="outline-4">
-<h4 id="org16823a4"><span class="section-number-4">1.11.1.</span> Lagrangien</h4>
+<div id="outline-container-org7c7572e" class="outline-4">
+<h4 id="org7c7572e"><span class="section-number-4">1.11.1.</span> Lagrangien</h4>
 <div class="outline-text-4" id="text-1-11-1">
 <p>
 On peut réécrire l'ensemble \(\Phi\) sous la forme :
@@ -1130,10 +1107,8 @@ pour tout \((x,u) \in \setR^n \times \setR^m\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgb2bdda2" class="outline-4">
-<h4 id="orgb2bdda2"><span class="section-number-4">1.11.2.</span> Kuhn-Tucker</h4>
+<div id="outline-container-org7c18c91" class="outline-4">
+<h4 id="org7c18c91"><span class="section-number-4">1.11.2.</span> Kuhn-Tucker</h4>
 <div class="outline-text-4" id="text-1-11-2">
 <p>
 Comme on veut que \(\gamma\) minimise \(\lagrangien\) par rapport à la variable \(x\) sur \(\setR^n\), on impose \(\partial_x \lagrangien(\gamma,\lambda) = 0\). On doit avoir aussi \(\varrho(x) = 0\). Mais comme \(\partial_u \lagrangien(x,u) = \varrho(x)\), on se retrouve finalement avec les conditions nécessaires de Kuhn-Tucker :
@@ -1149,10 +1124,8 @@ Comme on veut que \(\gamma\) minimise \(\lagrangien\) par rapport à la variable
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org75d9a58" class="outline-4">
-<h4 id="org75d9a58"><span class="section-number-4">1.11.3.</span> Point de selle</h4>
+<div id="outline-container-org3f8c7b2" class="outline-4">
+<h4 id="org3f8c7b2"><span class="section-number-4">1.11.3.</span> Point de selle</h4>
 <div class="outline-text-4" id="text-1-11-3">
 <p>
 Nous allons montrer que tout point de selle est solution du problème de minimisation. Soit \((\gamma,\lambda)\) tel que :
@@ -1212,10 +1185,8 @@ Le \(\gamma\) issu du point de selle est donc bien la solution de notre problèm
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org3a6e02e" class="outline-3">
-<h3 id="org3a6e02e"><span class="section-number-3">1.12.</span> Récapitulation</h3>
+<div id="outline-container-orgff89f83" class="outline-3">
+<h3 id="orgff89f83"><span class="section-number-3">1.12.</span> Récapitulation</h3>
 <div class="outline-text-3" id="text-1-12">
 <p>
 Considérons l'ensemble :
@@ -1225,10 +1196,8 @@ Considérons l'ensemble :
 \[\Omega = \{ x \in \setR^n : \omega(x) \le 0, \ \vartheta(x) \ge 0, \ \varrho(x) = 0 \}\]
 </p>
 </div>
-
-
-<div id="outline-container-org338d6da" class="outline-4">
-<h4 id="org338d6da"><span class="section-number-4">1.12.1.</span> Minimisation</h4>
+<div id="outline-container-org5661c57" class="outline-4">
+<h4 id="org5661c57"><span class="section-number-4">1.12.1.</span> Minimisation</h4>
 <div class="outline-text-4" id="text-1-12-1">
 <p>
 Si on veut minimiser \(\varphi\) sur \(\Omega\), on utilisera le lagrangien défini par :
@@ -1264,10 +1233,8 @@ Les conditions de Kuhn-Tucker s'écriront :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org041f2d2" class="outline-4">
-<h4 id="org041f2d2"><span class="section-number-4">1.12.2.</span> Maximisation</h4>
+<div id="outline-container-org7e6af77" class="outline-4">
+<h4 id="org7e6af77"><span class="section-number-4">1.12.2.</span> Maximisation</h4>
 <div class="outline-text-4" id="text-1-12-2">
 <p>
 Si on veut maximiser \(\psi\) sur \(\Omega\), on utilisera le lagrangien défini par :
@@ -1303,10 +1270,8 @@ Les conditions de Kuhn-Tucker s'écriront :
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org67b5070" class="outline-4">
-<h4 id="org67b5070"><span class="section-number-4">1.12.3.</span> Equivalence</h4>
+<div id="outline-container-org78fbd12" class="outline-4">
+<h4 id="org78fbd12"><span class="section-number-4">1.12.3.</span> Equivalence</h4>
 <div class="outline-text-4" id="text-1-12-3">
 <p>
 On exprime parfois ces problèmes en utilisant des contraintes équivalentes. Si on pose \(s = - \omega(x)\), on a \(s \ge 0\). De même, on pose \(t = \vartheta(x) \ge 0\). On définit alors \(\Gamma\) comme l'ensemble des \((x,s,t)\) vérifiant les conditions :
@@ -1325,14 +1290,12 @@ Et on minimise \(\varphi(x)\) (ou on maximise \(\psi(x)\)) sur les \((x,s,t) \in
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org9680cd8" class="outline-3">
-<h3 id="org9680cd8"><span class="section-number-3">1.13.</span> Découplage</h3>
+<div id="outline-container-org410fe29" class="outline-3">
+<h3 id="org410fe29"><span class="section-number-3">1.13.</span> Découplage</h3>
 <div class="outline-text-3" id="text-1-13">
 </div>
-<div id="outline-container-org93d15b3" class="outline-4">
-<h4 id="org93d15b3"><span class="section-number-4">1.13.1.</span> Minimisation</h4>
+<div id="outline-container-orgb39be44" class="outline-4">
+<h4 id="orgb39be44"><span class="section-number-4">1.13.1.</span> Minimisation</h4>
 <div class="outline-text-4" id="text-1-13-1">
 <p>
 Soit le problème de minimisation :
@@ -1403,10 +1366,8 @@ pour tout \((x,y) \ge 0\). La différence est qu'on ne fait plus apparaître exp
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-orgb5b7a1e" class="outline-4">
-<h4 id="orgb5b7a1e"><span class="section-number-4">1.13.2.</span> Maximisation</h4>
+<div id="outline-container-orgb3d1e5c" class="outline-4">
+<h4 id="orgb3d1e5c"><span class="section-number-4">1.13.2.</span> Maximisation</h4>
 <div class="outline-text-4" id="text-1-13-2">
 <p>
 Soit le problème de minimisation :
@@ -1478,14 +1439,12 @@ pour tout \((x,y) \ge 0\).
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-orgb3fbe1b" class="outline-3">
-<h3 id="orgb3fbe1b"><span class="section-number-3">1.14.</span> Dualité en optimisation linéaire</h3>
+<div id="outline-container-org145fddb" class="outline-3">
+<h3 id="org145fddb"><span class="section-number-3">1.14.</span> Dualité en optimisation linéaire</h3>
 <div class="outline-text-3" id="text-1-14">
 </div>
-<div id="outline-container-org59815ee" class="outline-4">
-<h4 id="org59815ee"><span class="section-number-4">1.14.1.</span> Problème primal</h4>
+<div id="outline-container-org8cd7af1" class="outline-4">
+<h4 id="org8cd7af1"><span class="section-number-4">1.14.1.</span> Problème primal</h4>
 <div class="outline-text-4" id="text-1-14-1">
 <p>
 Soit une matrice réelle \(A\) de taille \((m,n)\), l'ensemble :
@@ -1504,10 +1463,8 @@ et le vecteur \(c \in \setR^n\). Nous nous intéressons au problème de maximisa
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org75d79b9" class="outline-4">
-<h4 id="org75d79b9"><span class="section-number-4">1.14.2.</span> Lagrangien</h4>
+<div id="outline-container-orgda21738" class="outline-4">
+<h4 id="orgda21738"><span class="section-number-4">1.14.2.</span> Lagrangien</h4>
 <div class="outline-text-4" id="text-1-14-2">
 <p>
 La contrainte \(A \cdot x \le b\) est équivalente à :
@@ -1531,10 +1488,8 @@ défini pour tout \((x,y) \ge 0\).
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org0c1dee1" class="outline-4">
-<h4 id="org0c1dee1"><span class="section-number-4">1.14.3.</span> Dualité</h4>
+<div id="outline-container-orgf61fcc2" class="outline-4">
+<h4 id="orgf61fcc2"><span class="section-number-4">1.14.3.</span> Dualité</h4>
 <div class="outline-text-4" id="text-1-14-3">
 <p>
 Comme on travaille dans les réels, on a par symétrie du produit scalaire :
@@ -1610,10 +1565,8 @@ Le problème primal est donc équivalent au problème dual suivant.
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org83cef6e" class="outline-4">
-<h4 id="org83cef6e"><span class="section-number-4">1.14.4.</span> Problème dual</h4>
+<div id="outline-container-orgcd852ff" class="outline-4">
+<h4 id="orgcd852ff"><span class="section-number-4">1.14.4.</span> Problème dual</h4>
 <div class="outline-text-4" id="text-1-14-4">
 <p>
 Trouver :
@@ -1632,10 +1585,8 @@ où :
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org7653c3c" class="outline-4">
-<h4 id="org7653c3c"><span class="section-number-4">1.14.5.</span> Valeurs extrémales</h4>
+<div id="outline-container-org546f892" class="outline-4">
+<h4 id="org546f892"><span class="section-number-4">1.14.5.</span> Valeurs extrémales</h4>
 <div class="outline-text-4" id="text-1-14-5">
 <p>
 Les conditions de Khun-Tucker des problèmes primal et dual impliquent :
@@ -1688,10 +1639,8 @@ Le maximum de \(x \mapsto c^\dual \cdot x\) sur \(\Theta\) est donc égal au min
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org1dae021" class="outline-4">
-<h4 id="org1dae021"><span class="section-number-4">1.14.6.</span> Bornes</h4>
+<div id="outline-container-orge39e0ff" class="outline-4">
+<h4 id="orge39e0ff"><span class="section-number-4">1.14.6.</span> Bornes</h4>
 <div class="outline-text-4" id="text-1-14-6">
 <p>
 Par définition des maxima et minima, on a :
@@ -1706,10 +1655,8 @@ pour tout \(x \in \Theta\) et \(y \in \Omega\). Si les deux valeurs \(c^\dual \c
 </p>
 </div>
 </div>
-
-
-<div id="outline-container-org766f89d" class="outline-4">
-<h4 id="org766f89d"><span class="section-number-4">1.14.7.</span> Attention</h4>
+<div id="outline-container-org1b634d3" class="outline-4">
+<h4 id="org1b634d3"><span class="section-number-4">1.14.7.</span> Attention</h4>
 <div class="outline-text-4" id="text-1-14-7">
 <p>
 Ne pas confondre la notion de dualité \(\max - \min\) avec la dualité au sens des applications linéaires.
@@ -1717,10 +1664,8 @@ Ne pas confondre la notion de dualité \(\max - \min\) avec la dualité au sens 
 </div>
 </div>
 </div>
-
-
-<div id="outline-container-org07618e5" class="outline-3">
-<h3 id="org07618e5"><span class="section-number-3">1.15.</span> Minimisation de la norme sous contraintes linéaires</h3>
+<div id="outline-container-org5c7f7ad" class="outline-3">
+<h3 id="org5c7f7ad"><span class="section-number-3">1.15.</span> Minimisation de la norme sous contraintes linéaires</h3>
 <div class="outline-text-3" id="text-1-15">
 <p>
 Soit la matrice \(A \in \matrice(\setR,m,n)\), le vecteur colonne \(b \in \matrice(\setR,m,1)\) et l'ensemble :
@@ -1788,7 +1733,7 @@ et :
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2023-05-10 mer 16:45</p>
+<p class="date">Created: 2025-10-12 dim 15:25</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

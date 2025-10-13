@@ -24,11 +24,12 @@ WIPE_SUBDIRS       = $(SUBDIRS:%=wipe-%)
 
 # files {{{1
 
-ORG_FILES = $(wildcard *.org)
-HTML_FILES = $(ORG_FILES:.org=.html)
-EPUB_FILES = $(ORG_FILES:.org=.epub)
-CSS_FILES  = $(wildcard $(ROOT_GENERIC)/style/*.css)
-INC_FILES  = $(wildcard $(ROOT_GENERIC)/include/*.org)
+ORG_FILES        =  $(wildcard *.org)
+HTML_FILES       =  $(ORG_FILES:.org=.html)
+EPUB_FILES       =  $(ORG_FILES:.org=.epub)
+CSS_FILES        =  $(wildcard $(ROOT_GENERIC)/style/*.css)
+INC_FILES        =  $(wildcard $(ROOT_GENERIC)/include/*.org)
+INC_LATEX_FILES  =  $(wildcard $(ROOT_GENERIC)/include/latex/*.*)
 
 # HTML_FILES = $(patsubst %.org,%.html,$(wildcard *.org))
 # EPUB_FILES = $(patsubst %.org,%.epub,$(wildcard *.org))

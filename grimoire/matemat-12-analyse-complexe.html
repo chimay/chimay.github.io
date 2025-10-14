@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-10-13 lun 14:39 -->
+<!-- 2025-10-14 mar 15:54 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 12 : Analyse complexe</title>
@@ -193,7 +193,6 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
-<script src="../include/mathjax/mathjax.js"></script>
 <script>
   window.MathJax = {
     tex: {
@@ -242,11 +241,11 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc518af0">1. Exponentielle complexe</a></li>
-<li><a href="#org91f1702">2. Dérivation et intégration dans le plan complexe</a></li>
-<li><a href="#org42cab67">3. Polynômes et exponentielles</a></li>
-<li><a href="#org7d48960">4. Analyse de Fourier</a></li>
-<li><a href="#orgd2c3d98">5. Ondelettes</a></li>
+<li><a href="#orgadb1e58">1. Exponentielle complexe</a></li>
+<li><a href="#org23162f2">2. Dérivation et intégration dans le plan complexe</a></li>
+<li><a href="#orgf54b2b1">3. Polynômes et exponentielles</a></li>
+<li><a href="#org064ff76">4. Analyse de Fourier</a></li>
+<li><a href="#org55906be">5. Ondelettes</a></li>
 </ul>
 </div>
 </div>
@@ -333,14 +332,14 @@
 \newcommand{\modulo}{\bmod}
 \newcommand{\pgcd}{pgcd}
 \newcommand{\ppcm}{ppcm}
-\newcommand{\produitscalaire}[2]{\left\langle #1 \left|\right\relax #2 \right\rangle}
+\newcommand{\produitscalaire}[2]{\left\langle #1 \vert #2 \right\rangle}
 \newcommand{\scalaire}[2]{\left\langle #1 \| #2 \right\rangle}
-\newcommand{\braket}[3]{\left\langle #1 \right| #2 \left| #3 \right\rangle}
+\newcommand{\braket}[3]{\left\langle #1 \vert #2 \\vert 3 \right\rangle}
 \newcommand{\orthogonal}{\bot}
 \newcommand{\forme}[2]{\left\langle #1 , #2 \right\rangle}
 \newcommand{\biforme}[3]{\left\langle #1 , #2 , #3 \right\rangle}
 \newcommand{\contraction}[3]{\left\langle #1 \odot #3 \right\rangle_{#2}}
-\newcommand{\dblecont}[5]{\left\langle #1 \right| #3 \left| #5 \right\rangle_{#2,#4}}
+\newcommand{\dblecont}[5]{\left\langle #1 \vert #3 \vert #5 \right\rangle_{#2,#4}}
 \newcommand{\major}{major}
 \newcommand{\minor}{minor}
 \newcommand{\maxim}{maxim}
@@ -407,15 +406,15 @@
 \newcommand{\grando}[1]{O\left(#1\right)}
 \)
 </p>
-<div id="outline-container-orgc518af0" class="outline-2">
-<h2 id="orgc518af0"><span class="section-number-2">1.</span> Exponentielle complexe</h2>
+<div id="outline-container-orgadb1e58" class="outline-2">
+<h2 id="orgadb1e58"><span class="section-number-2">1.</span> Exponentielle complexe</h2>
 <div class="outline-text-2" id="text-1">
 <div id="text-table-of-contents-1" role="doc-toc">
 <ul>
-<li><a href="#orgc95247f">1.1. Dépendances</a></li>
-<li><a href="#org7b28163">1.2. Introduction</a></li>
-<li><a href="#org28f029b">1.3. Additivité</a></li>
-<li><a href="#org17be636">1.4. Lien avec les fonctions trigonométriques</a></li>
+<li><a href="#org006cf4c">1.1. Dépendances</a></li>
+<li><a href="#org587c581">1.2. Introduction</a></li>
+<li><a href="#org1e9ee8d">1.3. Additivité</a></li>
+<li><a href="#org0d436ca">1.4. Lien avec les fonctions trigonométriques</a></li>
 </ul>
 </div>
 
@@ -423,16 +422,16 @@
 \label{chap:expocomp}
 </p>
 </div>
-<div id="outline-container-orgc95247f" class="outline-3">
-<h3 id="orgc95247f"><span class="section-number-3">1.1.</span> Dépendances</h3>
+<div id="outline-container-org006cf4c" class="outline-3">
+<h3 id="org006cf4c"><span class="section-number-3">1.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:complexe} : Les complexes</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org7b28163" class="outline-3">
-<h3 id="org7b28163"><span class="section-number-3">1.2.</span> Introduction</h3>
+<div id="outline-container-org587c581" class="outline-3">
+<h3 id="org587c581"><span class="section-number-3">1.2.</span> Introduction</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 AFAIRE : ARRANGER LE CHAPITRE
@@ -442,10 +441,22 @@ AFAIRE : ARRANGER LE CHAPITRE
 Considérons l'unique solution \(x\) de l'équation différentielle :
 </p>
 
-\begin{align}
-\OD{x}{t}(t) &=& z \cdot x(t) \\
-x(0) &=& 1
-\end{align}
+<div class="org-center">
+<p>
+
+</p>
+
+<p>
+\(
+\OD{x}{t}(t) = z \cdot x(t) \)
+</p>
+
+<p>
+\(
+x(0) = 1
+\)
+</p>
+</div>
 
 <p>
 où \(z \in \setC\). On définit alors l'exponentielle d'un nombre complexe par :
@@ -464,8 +475,8 @@ On a donc simplement :
 </p>
 </div>
 </div>
-<div id="outline-container-org28f029b" class="outline-3">
-<h3 id="org28f029b"><span class="section-number-3">1.3.</span> Additivité</h3>
+<div id="outline-container-org1e9ee8d" class="outline-3">
+<h3 id="org1e9ee8d"><span class="section-number-3">1.3.</span> Additivité</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Comme les fonctions :
@@ -473,7 +484,11 @@ Comme les fonctions :
 
 <p>
 \(
-s(t) = \exp( (z_1 + z_2) \cdot t ) \\
+s(t) = \exp( (z_1 + z_2) \cdot t ) \)
+</p>
+
+<p>
+\(
 p(t) = \exp(z_1 t) \cdot \exp(z_2 t)
 \)
 </p>
@@ -485,7 +500,11 @@ vérifient la même équation différentielle :
 <div class="org-center">
 <p>
 \(
-\OD{s}{t}(t) = (z_1 + z_2) \ s(t) \\
+\OD{s}{t}(t) = (z_1 + z_2) \ s(t) \)
+</p>
+
+<p>
+\(
 s(0) = 1
 \)
 </p>
@@ -494,7 +513,11 @@ s(0) = 1
 <div class="org-center">
 <p>
 \(
-\OD{p}{t}(t) = z_1 \ p(t) + z_2 \ p(t) = (z_1 + z_2) \ p(t) \\
+\OD{p}{t}(t) = z_1 \ p(t) + z_2 \ p(t) = (z_1 + z_2) \ p(t) \)
+</p>
+
+<p>
+\(
 p(0) = 1
 \)
 </p>
@@ -510,8 +533,8 @@ la propriété d'additivité des exponentielles :
 </p>
 </div>
 </div>
-<div id="outline-container-org17be636" class="outline-3">
-<h3 id="org17be636"><span class="section-number-3">1.4.</span> Lien avec les fonctions trigonométriques</h3>
+<div id="outline-container-org0d436ca" class="outline-3">
+<h3 id="org0d436ca"><span class="section-number-3">1.4.</span> Lien avec les fonctions trigonométriques</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Considérons maintenant le cas particulier où \(u(t) = \exp(\img t)\) :
@@ -520,7 +543,11 @@ Considérons maintenant le cas particulier où \(u(t) = \exp(\img t)\) :
 <div class="org-center">
 <p>
 \(
-\OD{u}{t}(t) = \img u(t) \\
+\OD{u}{t}(t) = \img u(t) \)
+</p>
+
+<p>
+\(
 u(0) = 1
 \)
 </p>
@@ -565,9 +592,21 @@ On en déduit directement que :
 <div class="org-center">
 <p>
 \(
-\exp(\img \pi/2) = \img \\
-\exp(\img \pi) = -1 \\
-\exp(3\pi\img/2) = \img \\
+\exp(\img \pi/2) = \img \)
+</p>
+
+<p>
+\(
+\exp(\img \pi) = -1 \)
+</p>
+
+<p>
+\(
+\exp(3\pi\img/2) = \img \)
+</p>
+
+<p>
+\(
 \exp(2\pi\img) = 1
 \)
 </p>
@@ -600,7 +639,11 @@ De la même façon, si nous prenons \(u(t) = \exp(-i.t)\), nous en déduisons :
 <div class="org-center">
 <p>
 \(
-\frac{d^2 u}{dt^2}(t) = - u(t) \\
+\frac{d^2 u}{dt^2}(t) = - u(t) \)
+</p>
+
+<p>
+\(
 u(0) = 1 \qquad \OD{u}{t}(0) = -i
 \)
 </p>
@@ -621,7 +664,11 @@ En additionnant, puis en soustrayant les relations :
 <div class="org-center">
 <p>
 \(
-\exp( \img u ) = \cos(u) + \img \sin(u) \\
+\exp( \img u ) = \cos(u) + \img \sin(u) \)
+</p>
+
+<p>
+\(
 \exp( - \img u ) = \cos(u) - \img \sin(u)
 \)
 </p>
@@ -634,7 +681,11 @@ on obtient :
 <div class="org-center">
 <p>
 \(
-\cos(u) = \frac{ \exp(\img u) + \exp(-\img u) }{2} \\
+\cos(u) = \frac{ \exp(\img u) + \exp(-\img u) }{2} \)
+</p>
+
+<p>
+\(
 \sin(u) = \frac{ \exp(\img u) - \exp(-\img u) }{2 \img}
 \)
 </p>
@@ -647,7 +698,11 @@ Choisissant un angle \(\theta\in\setR\) tel que :
 <div class="org-center">
 <p>
 \(
-\cos(\theta) = \frac{\Re(z)}{\abs{z}} \\
+\cos(\theta) = \frac{\Re(z)}{\abs{z}} \)
+</p>
+
+<p>
+\(
 \sin(\theta) = \frac{\Im(z)}{\abs{z}}
 \)
 </p>
@@ -705,7 +760,11 @@ du logarithme sur \(\setR\), on définit le logarithme d'un complexe par :
 <div class="org-center">
 <p>
 \(
-\ln(z) = \ln(\abs{z}) + \ln(\exp(\img\arg(z))) \\
+\ln(z) = \ln(\abs{z}) + \ln(\exp(\img\arg(z))) \)
+</p>
+
+<p>
+\(
 \ln(z) = \ln(\abs{z}) + \img\arg(z)
 \)
 </p>
@@ -744,7 +803,11 @@ on retombe sur :
 <div class="org-center">
 <p>
 \(
-( \cos(t) + \img \sin(t) ) ( \cos(t) - \img \sin(t) ) = 1 \\
+( \cos(t) + \img \sin(t) ) ( \cos(t) - \img \sin(t) ) = 1 \)
+</p>
+
+<p>
+\(
 \cos(t)^2 + \sin(t)^2 = 1
 \)
 </p>
@@ -757,8 +820,16 @@ En dérivant la relation reliant l'exponentielle aux fonctions trigonométriques
 <div class="org-center">
 <p>
 \(
-\OD{}{t}( \cos(t) + \img \sin(t) ) = \OD{}{t}\exp(\img t) \\
-\OD{}{t} \cos(t) + \img \OD{}{t}\sin(t) = \img \exp(\img t) \\
+\OD{}{t}( \cos(t) + \img \sin(t) ) = \OD{}{t}\exp(\img t) \)
+</p>
+
+<p>
+\(
+\OD{}{t} \cos(t) + \img \OD{}{t}\sin(t) = \img \exp(\img t) \)
+</p>
+
+<p>
+\(
 \OD{}{t} \cos(t) + \img \OD{}{t}\sin(t) = \img \cos(t) - \sin(t)
 \)
 </p>
@@ -771,7 +842,11 @@ on a bien :
 <div class="org-center">
 <p>
 \(
-\OD{}{t} \cos(t) = -\sin(t) \\
+\OD{}{t} \cos(t) = -\sin(t) \)
+</p>
+
+<p>
+\(
 \OD{}{t}\sin(t) = \cos(t)
 \)
 </p>
@@ -784,8 +859,16 @@ On a aussi :
 <div class="org-center">
 <p>
 \(
-\cos(u+v) + \img \sin(u+v) = \exp\left[ \img ( u + v ) \right] \\
-\cos(u+v) + \img \sin(u+v) = \exp\left[ \img u  \right] \cdot \exp\left[ \img  v \right] \\
+\cos(u+v) + \img \sin(u+v) = \exp\left[ \img ( u + v ) \right] \)
+</p>
+
+<p>
+\(
+\cos(u+v) + \img \sin(u+v) = \exp\left[ \img u  \right] \cdot \exp\left[ \img  v \right] \)
+</p>
+
+<p>
+\(
 \cos(u+v) + \img \sin(u+v) = (\cos(u) + \img \sin(u))(\cos(v) + \img \sin(v))
 \)
 </p>
@@ -798,7 +881,11 @@ ce qui donne, tous calculs faits :
 <div class="org-center">
 <p>
 \(
-\cos(u+v) = \cos(u)\cos(v) - \sin(u)\sin(v) \\
+\cos(u+v) = \cos(u)\cos(v) - \sin(u)\sin(v) \)
+</p>
+
+<p>
+\(
 \sin(u+v) = \sin(u)\cos(v) + \sin(v)\cos(u)
 \)
 </p>
@@ -806,15 +893,15 @@ ce qui donne, tous calculs faits :
 </div>
 </div>
 </div>
-<div id="outline-container-org91f1702" class="outline-2">
-<h2 id="org91f1702"><span class="section-number-2">2.</span> Dérivation et intégration dans le plan complexe</h2>
+<div id="outline-container-org23162f2" class="outline-2">
+<h2 id="org23162f2"><span class="section-number-2">2.</span> Dérivation et intégration dans le plan complexe</h2>
 <div class="outline-text-2" id="text-2">
 <div id="text-table-of-contents-2" role="doc-toc">
 <ul>
-<li><a href="#org5d5bb60">2.1. Dépendances</a></li>
-<li><a href="#orgcbaebaa">2.2. Dérivées</a></li>
-<li><a href="#org10e4a4b">2.3. Extension de l'intégrale au plan complexe</a></li>
-<li><a href="#org90d76b4">2.4. Intégrale de ligne</a></li>
+<li><a href="#org2c27747">2.1. Dépendances</a></li>
+<li><a href="#org04d1753">2.2. Dérivées</a></li>
+<li><a href="#org60342d1">2.3. Extension de l'intégrale au plan complexe</a></li>
+<li><a href="#org598fb74">2.4. Intégrale de ligne</a></li>
 </ul>
 </div>
 
@@ -822,8 +909,8 @@ ce qui donne, tous calculs faits :
 \label{chap:dicplx}
 </p>
 </div>
-<div id="outline-container-org5d5bb60" class="outline-3">
-<h3 id="org5d5bb60"><span class="section-number-3">2.1.</span> Dépendances</h3>
+<div id="outline-container-org2c27747" class="outline-3">
+<h3 id="org2c27747"><span class="section-number-3">2.1.</span> Dépendances</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:differ} : Les différentielles</li>
@@ -831,8 +918,8 @@ ce qui donne, tous calculs faits :
 </ul>
 </div>
 </div>
-<div id="outline-container-orgcbaebaa" class="outline-3">
-<h3 id="orgcbaebaa"><span class="section-number-3">2.2.</span> Dérivées</h3>
+<div id="outline-container-org04d1753" class="outline-3">
+<h3 id="org04d1753"><span class="section-number-3">2.2.</span> Dérivées</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 On définit la dérivée d'une fonction \(f : \setC \mapsto \setC\)
@@ -855,7 +942,11 @@ On définit les fonctions \(u,v : \setR^2 \mapsto \setR\) associées à \(f\) pa
 <div class="org-center">
 <p>
 \(
-u(x,y) = \Re\left(f(x + \img y) \right) \\
+u(x,y) = \Re\left(f(x + \img y) \right) \)
+</p>
+
+<p>
+\(
 v(x,y) = \Im\left(f(x + \img y) \right)
 \)
 </p>
@@ -872,7 +963,11 @@ choisir \(h\) de la forme \(\Delta x\) ou \(\img \Delta y\) avec
 <p>
 \(
 \OD{f}{z}(z) = \lim_{\Delta x \to 0}
-\frac{\PD{u}{x}\Delta x + \img \PD{v}{x}\Delta x}{\Delta x} \\
+\frac{\PD{u}{x}\Delta x + \img \PD{v}{x}\Delta x}{\Delta x} \)
+</p>
+
+<p>
+\(
 \OD{f}{z}(z) = \lim_{\Delta y \to 0}
 \frac{\PD{u}{y}\Delta y + \img \PD{v}{y}\Delta y}{\img \Delta y}
 \)
@@ -886,7 +981,11 @@ et par comparaison :
 <div class="org-center">
 <p>
 \(
-\PD{u}{x} = \PD{v}{y} \\
+\PD{u}{x} = \PD{v}{y} \)
+</p>
+
+<p>
+\(
 \PD{u}{y} = -\PD{v}{x}
 \)
 </p>
@@ -899,7 +998,11 @@ En dérivant de nouveau ces équations, on obtient :
 <div class="org-center">
 <p>
 \(
-\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = 0 \\
+\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = 0 \)
+</p>
+
+<p>
+\(
 \frac{\partial^2 v}{\partial x^2} + \frac{\partial^2 v}{\partial y^2} = 0
 \)
 </p>
@@ -914,8 +1017,8 @@ Les puissances de \(z\) sont dérivables. On vérifie que :
 </p>
 </div>
 </div>
-<div id="outline-container-org10e4a4b" class="outline-3">
-<h3 id="org10e4a4b"><span class="section-number-3">2.3.</span> Extension de l'intégrale au plan complexe</h3>
+<div id="outline-container-org60342d1" class="outline-3">
+<h3 id="org60342d1"><span class="section-number-3">2.3.</span> Extension de l'intégrale au plan complexe</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Soit une fonction \(f : A \mapsto \setC\). Comme
@@ -935,8 +1038,8 @@ leur intégrale est bien définie. On définit alors l'intégrale de \(f\) par 
 </p>
 </div>
 </div>
-<div id="outline-container-org90d76b4" class="outline-3">
-<h3 id="org90d76b4"><span class="section-number-3">2.4.</span> Intégrale de ligne</h3>
+<div id="outline-container-org598fb74" class="outline-3">
+<h3 id="org598fb74"><span class="section-number-3">2.4.</span> Intégrale de ligne</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Soit une fonction \(\gamma : [a,b] \mapsto \setC\) et la courbe :
@@ -961,7 +1064,11 @@ On peut également écrire :
 <div class="org-center">
 <p>
 \(
-\int_l f(z) dz = \int_l (u + \img v)(dx + \img dy) \\
+\int_l f(z) dz = \int_l (u + \img v)(dx + \img dy) \)
+</p>
+
+<p>
+\(
 \int_l f(z) dz = \int_l (u dx - v dy) + \img \int_l (u dy + v dx)
 \)
 </p>
@@ -972,8 +1079,8 @@ où les intégrales des membres de droites sont des intégrales de ligne classiq
 de fonctions \(\setR^2 \mapsto \setR\).
 </p>
 </div>
-<div id="outline-container-org0185349" class="outline-4">
-<h4 id="org0185349"><span class="section-number-4">2.4.1.</span> Théorème fondamental</h4>
+<div id="outline-container-org9fa3b7d" class="outline-4">
+<h4 id="org9fa3b7d"><span class="section-number-4">2.4.1.</span> Théorème fondamental</h4>
 <div class="outline-text-4" id="text-2-4-1">
 <p>
 Soit une fonction analytique \(F : \setC \mapsto \setC\). La dérivée
@@ -993,8 +1100,8 @@ On en déduit, en appliquant le théorème fondamental que :
 </p>
 </div>
 </div>
-<div id="outline-container-org214ee6f" class="outline-4">
-<h4 id="org214ee6f"><span class="section-number-4">2.4.2.</span> Contour fermé</h4>
+<div id="outline-container-orgddfb818" class="outline-4">
+<h4 id="orgddfb818"><span class="section-number-4">2.4.2.</span> Contour fermé</h4>
 <div class="outline-text-4" id="text-2-4-2">
 <p>
 Dans la suite, lorsque \(l\) est une courbe fermée et est donc la frontière d'un
@@ -1020,7 +1127,11 @@ En appliquant le théorème de Stokes, il vient :
 <div class="org-center">
 <p>
 \(
-\oint_l f(z) dz = \int_S (-\PD{v}{x}-\PD{u}{y}) dS + \img \int_S (\PD{u}{x}-\PD{v}{y}) dS \\
+\oint_l f(z) dz = \int_S (-\PD{v}{x}-\PD{u}{y}) dS + \img \int_S (\PD{u}{x}-\PD{v}{y}) dS \)
+</p>
+
+<p>
+\(
 \)
 </p>
 </div>
@@ -1032,7 +1143,11 @@ Mais comme \(f\) est analytique :
 <div class="org-center">
 <p>
 \(
-\PD{u}{x} = \PD{v}{y} \\
+\PD{u}{x} = \PD{v}{y} \)
+</p>
+
+<p>
+\(
 \PD{u}{y} = -\PD{v}{x}
 \)
 </p>
@@ -1048,8 +1163,8 @@ Les termes du membre de droite s'annulent donc et :
 </p>
 </div>
 </div>
-<div id="outline-container-org620c351" class="outline-4">
-<h4 id="org620c351"><span class="section-number-4">2.4.3.</span> Cercle</h4>
+<div id="outline-container-orgd3ddbaa" class="outline-4">
+<h4 id="orgd3ddbaa"><span class="section-number-4">2.4.3.</span> Cercle</h4>
 <div class="outline-text-4" id="text-2-4-3">
 <p>
 Soit \(C\) le cercle de centre \(a\) et de rayon \(R\) :
@@ -1083,7 +1198,11 @@ pour tout \(z\in C\) et \(k \in \setZ\). Donc :
 <p>
 \(
 \oint_C \frac{dz}{(z-a)^k} =
-\int_0^{2\pi} \frac{R \img \exp(\img\theta)}{R^k \exp(\img k\theta)} \\
+\int_0^{2\pi} \frac{R \img \exp(\img\theta)}{R^k \exp(\img k\theta)} \)
+</p>
+
+<p>
+\(
 \oint_C \frac{dz}{(z-a)^k} = \img R^{1-k} \int_0^{2\pi} \exp[\img(1-k)\theta] d\theta
 \)
 </p>
@@ -1121,8 +1240,8 @@ on obtient le même résultat pour toute courbe fermée entourant \(a\) :
 </p>
 </div>
 </div>
-<div id="outline-container-org681fdfa" class="outline-4">
-<h4 id="org681fdfa"><span class="section-number-4">2.4.4.</span> Théorème de Cauchy</h4>
+<div id="outline-container-org7c77359" class="outline-4">
+<h4 id="org7c77359"><span class="section-number-4">2.4.4.</span> Théorème de Cauchy</h4>
 <div class="outline-text-4" id="text-2-4-4">
 <p>
 Si \(f\) est analytique, la fonction
@@ -1183,8 +1302,8 @@ En dérivant \(k\) fois cette dernière relation par rapport à \(a\), on obtien
 </p>
 </div>
 </div>
-<div id="outline-container-orgc7037ce" class="outline-4">
-<h4 id="orgc7037ce"><span class="section-number-4">2.4.5.</span> Séries de Laurent</h4>
+<div id="outline-container-org7dd757b" class="outline-4">
+<h4 id="org7dd757b"><span class="section-number-4">2.4.5.</span> Séries de Laurent</h4>
 <div class="outline-text-4" id="text-2-4-5">
 <p>
 Supposons que \(f\) puisse s'écrire comme une combinaison linéaire de puissances
@@ -1213,8 +1332,8 @@ Mais nous avons vu que seule l'intégrale de \((z-a)^{-1}\) ne s'annule pas. On 
 </p>
 </div>
 </div>
-<div id="outline-container-org720a57c" class="outline-4">
-<h4 id="org720a57c"><span class="section-number-4">2.4.6.</span> Théorème des résidus</h4>
+<div id="outline-container-org389f4ad" class="outline-4">
+<h4 id="org389f4ad"><span class="section-number-4">2.4.6.</span> Théorème des résidus</h4>
 <div class="outline-text-4" id="text-2-4-6">
 <p>
 Considérons le cas où :
@@ -1251,14 +1370,14 @@ Mais comme \(a_{-1}\) n'est rien d'autre, à un facteur \(2\pi\img\) près, que 
 </div>
 </div>
 </div>
-<div id="outline-container-org42cab67" class="outline-2">
-<h2 id="org42cab67"><span class="section-number-2">3.</span> Polynômes et exponentielles</h2>
+<div id="outline-container-orgf54b2b1" class="outline-2">
+<h2 id="orgf54b2b1"><span class="section-number-2">3.</span> Polynômes et exponentielles</h2>
 <div class="outline-text-2" id="text-3">
 <div id="text-table-of-contents-3" role="doc-toc">
 <ul>
-<li><a href="#org0a3807b">3.1. Chebyshev</a></li>
-<li><a href="#org8c88e75">3.2. Hermite</a></li>
-<li><a href="#org9f9ad45">3.3. Laguerre</a></li>
+<li><a href="#org802f98d">3.1. Chebyshev</a></li>
+<li><a href="#orgdbf9879">3.2. Hermite</a></li>
+<li><a href="#org0422af7">3.3. Laguerre</a></li>
 </ul>
 </div>
 
@@ -1266,8 +1385,8 @@ Mais comme \(a_{-1}\) n'est rien d'autre, à un facteur \(2\pi\img\) près, que 
 \label{chap:polyexpo}
 </p>
 </div>
-<div id="outline-container-org0a3807b" class="outline-3">
-<h3 id="org0a3807b"><span class="section-number-3">3.1.</span> Chebyshev</h3>
+<div id="outline-container-org802f98d" class="outline-3">
+<h3 id="org802f98d"><span class="section-number-3">3.1.</span> Chebyshev</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Les polynômes de Chebyshev \(T_n\) sont défini par :
@@ -1276,7 +1395,11 @@ Les polynômes de Chebyshev \(T_n\) sont défini par :
 <div class="org-center">
 <p>
 \(
-T_n : x\mapsto\cos(n \arccos(x) ) \\
+T_n : x\mapsto\cos(n \arccos(x) ) \)
+</p>
+
+<p>
+\(
 T_n(\cos(\theta)) = \cos(n \theta)
 \)
 </p>
@@ -1289,7 +1412,11 @@ Il est clair que :
 <div class="org-center">
 <p>
 \(
-T_0(x) = 1 \\
+T_0(x) = 1 \)
+</p>
+
+<p>
+\(
 T_1(x) = x
 \)
 </p>
@@ -1302,7 +1429,11 @@ Les propriétés des fonctions trigonométriques :
 <div class="org-center">
 <p>
 \(
-\cos[(n+m)\theta]= \cos[n\theta]\cos[m\theta]+\sin[n\theta]\sin[m\theta] \\
+\cos[(n+m)\theta]= \cos[n\theta]\cos[m\theta]+\sin[n\theta]\sin[m\theta] \)
+</p>
+
+<p>
+\(
 \cos[(n-m)\theta]= \cos[n\theta]\cos[m\theta]-\sin[n\theta]\sin[m\theta]
 \)
 </p>
@@ -1366,7 +1497,11 @@ Si \(m, n \ne 0\), on a :
 <p>
 \(
 \int_0^\pi T_m(\cos(\theta)) T_n(\cos(\theta)) d\theta =
-\int_0^\pi \cos(m\theta) \cos(n\theta) d\theta \\
+\int_0^\pi \cos(m\theta) \cos(n\theta) d\theta \)
+</p>
+
+<p>
+\(
 \int_0^\pi T_m(\cos(\theta)) T_n(\cos(\theta)) d\theta =
 \unsur{2} \int_0^\pi \cos[(m+n)\theta] d\theta +
 \unsur{2} \int_0^\pi \cos[(m-n)\theta] d\theta
@@ -1390,8 +1525,16 @@ La première intégrale s'annule donc par périodicité de la fonction
 <div class="org-center">
 <p>
 \(
-\int_0^\pi T_m(\cos(\theta)) T_n(\cos(\theta)) d\theta = \\
-\unsur{2(m+n)} [\sin[(m+n)\pi] - \sin(0)] + \\
+\int_0^\pi T_m(\cos(\theta)) T_n(\cos(\theta)) d\theta = \)
+</p>
+
+<p>
+\(
+\unsur{2(m+n)} [\sin[(m+n)\pi] - \sin(0)] + \)
+</p>
+
+<p>
+\(
 \unsur{2(m-n)} [\sin[(m-n)\pi] - \sin(0)] = 0
 \)
 </p>
@@ -1423,7 +1566,11 @@ Le changement de variable \(x = \cos(\theta)\),
 <div class="org-center">
 <p>
 \(
-dx = -\sin(\theta) d\theta \\
+dx = -\sin(\theta) d\theta \)
+</p>
+
+<p>
+\(
 d\theta = \frac{dx}{\sqrt{1-x^2}}
 \)
 </p>
@@ -1450,8 +1597,8 @@ pour tout \(m,n\in\setN\).
 </p>
 </div>
 </div>
-<div id="outline-container-org8c88e75" class="outline-3">
-<h3 id="org8c88e75"><span class="section-number-3">3.2.</span> Hermite</h3>
+<div id="outline-container-orgdbf9879" class="outline-3">
+<h3 id="orgdbf9879"><span class="section-number-3">3.2.</span> Hermite</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Les polynômes de Hermite sont orthogonaux pour le produit scalaire :
@@ -1468,16 +1615,28 @@ Ils obéissent à la récurrence :
 <div class="org-center">
 <p>
 \(
-H_0(x) = 1 \\
-H_1(x) = 2 x \\
-H_{n+1}(x) = 2 x H_n(x) - 2 n H_{n-1}(x) \\
+H_0(x) = 1 \)
+</p>
+
+<p>
+\(
+H_1(x) = 2 x \)
+</p>
+
+<p>
+\(
+H_{n+1}(x) = 2 x H_n(x) - 2 n H_{n-1}(x) \)
+</p>
+
+<p>
+\(
 \)
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org9f9ad45" class="outline-3">
-<h3 id="org9f9ad45"><span class="section-number-3">3.3.</span> Laguerre</h3>
+<div id="outline-container-org0422af7" class="outline-3">
+<h3 id="org0422af7"><span class="section-number-3">3.3.</span> Laguerre</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Les polynômes de Laguerre sont orthogonaux pour le produit scalaire :
@@ -1494,8 +1653,16 @@ Ils obéissent à la récurrence :
 <div class="org-center">
 <p>
 \(
-L_0(x) = 1 \\
-L_1(x) = 1-x \\
+L_0(x) = 1 \)
+</p>
+
+<p>
+\(
+L_1(x) = 1-x \)
+</p>
+
+<p>
+\(
 (n+1) L_{n+1}(x) = (2 n + 1 - x) L_n(x) - n L_{n-1}(x)
 \)
 </p>
@@ -1503,15 +1670,15 @@ L_1(x) = 1-x \\
 </div>
 </div>
 </div>
-<div id="outline-container-org7d48960" class="outline-2">
-<h2 id="org7d48960"><span class="section-number-2">4.</span> Analyse de Fourier</h2>
+<div id="outline-container-org064ff76" class="outline-2">
+<h2 id="org064ff76"><span class="section-number-2">4.</span> Analyse de Fourier</h2>
 <div class="outline-text-2" id="text-4">
 <div id="text-table-of-contents-4" role="doc-toc">
 <ul>
-<li><a href="#org4f31619">4.1. Séries de Fourier</a></li>
-<li><a href="#org832ea81">4.2. Transformeée de Fourier discrète</a></li>
-<li><a href="#org2dacb07">4.3. Transformeée de Fourier</a></li>
-<li><a href="#org7a4e72e">4.4. Auto-adjoint</a></li>
+<li><a href="#orgd666a7c">4.1. Séries de Fourier</a></li>
+<li><a href="#org0e412a7">4.2. Transformeée de Fourier discrète</a></li>
+<li><a href="#org54ab7ae">4.3. Transformeée de Fourier</a></li>
+<li><a href="#org6757788">4.4. Auto-adjoint</a></li>
 </ul>
 </div>
 
@@ -1519,8 +1686,8 @@ L_1(x) = 1-x \\
 \label{chap:fourier}
 </p>
 </div>
-<div id="outline-container-org4f31619" class="outline-3">
-<h3 id="org4f31619"><span class="section-number-3">4.1.</span> Séries de Fourier</h3>
+<div id="outline-container-orgd666a7c" class="outline-3">
+<h3 id="orgd666a7c"><span class="section-number-3">4.1.</span> Séries de Fourier</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 ARRANGER LE CHAPITRE
@@ -1559,7 +1726,11 @@ Par contre, si \(k\ne 0\), le changement de variable :
 <div class="org-center">
 <p>
 \(
-s = \img k x \\
+s = \img k x \)
+</p>
+
+<p>
+\(
 ds =  \img k dx
 \)
 </p>
@@ -1632,7 +1803,11 @@ où \(k\in\setZ\). Notons que :
 <p>
 \(
 \bar{e}_m e_n =
-\exp\left(-\frac{2\pi\img m x}{T}\right)\exp\left(\frac{2\pi\img n x}{T}\right) \\
+\exp\left(-\frac{2\pi\img m x}{T}\right)\exp\left(\frac{2\pi\img n x}{T}\right) \)
+</p>
+
+<p>
+\(
 \bar{e}_m e_n = \exp\left(\frac{2\pi\img (n-m) x}{T}\right)
 \)
 </p>
@@ -1680,8 +1855,8 @@ Utilisant à nouveau les propriétés des bases orthonormées, on a :
 </p>
 </div>
 </div>
-<div id="outline-container-org832ea81" class="outline-3">
-<h3 id="org832ea81"><span class="section-number-3">4.2.</span> Transformeée de Fourier discrète</h3>
+<div id="outline-container-org0e412a7" class="outline-3">
+<h3 id="org0e412a7"><span class="section-number-3">4.2.</span> Transformeée de Fourier discrète</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Dans le cas où :
@@ -1690,7 +1865,11 @@ Dans le cas où :
 <div class="org-center">
 <p>
 \(
-a = \exp(\img x) \\
+a = \exp(\img x) \)
+</p>
+
+<p>
+\(
 a^k = \exp(\img k x)
 \)
 </p>
@@ -1758,7 +1937,11 @@ où nous supposons que \(N/2 \in\setN\). Multipliant par \(e(k,-m)\) où
 <div class="org-center">
 <p>
 \(
-u_k e(k,-m) = \sum_{n=-N/2}^{N/2-1} U_n e(k,n) e(k,-m) \\
+u_k e(k,-m) = \sum_{n=-N/2}^{N/2-1} U_n e(k,n) e(k,-m) \)
+</p>
+
+<p>
+\(
 u_k e(k,-m) = \sum_{n=-N/2}^{N/2-1} U_n e(k,n-m)
 \)
 </p>
@@ -1788,16 +1971,20 @@ Nous avons donc obtenu une bijection entre les \(u_k\) et les \(U_n\) :
 
 <div class="org-center">
 <p>
-\[
-u_k = \sum_{n=-N/2}^{N/2-1} U_n \exp\left(\frac{2 \pi \img k n}{N}\right) \\
-U_n = \unsur{N} \sum_{k=0}^{N-1} u_k \exp\left(-\frac{2 \pi \img k n}{N}\right)
-\]
+$$
+u<sub>k</sub> = &sum;<sub>n=-N/2</sub><sup>N/2-1</sup> U<sub>n</sub> exp\left(\frac{2 \pi \img k n}{N}\right) \)
+</p>
+
+<p>
+\(
+U<sub>n</sub> = \unsur{N} &sum;<sub>k=0</sub><sup>N-1</sup> u<sub>k</sub> exp\left(-\frac{2 \pi \img k n}{N}\right)
+$$
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org2dacb07" class="outline-3">
-<h3 id="org2dacb07"><span class="section-number-3">4.3.</span> Transformeée de Fourier</h3>
+<div id="outline-container-org54ab7ae" class="outline-3">
+<h3 id="org54ab7ae"><span class="section-number-3">4.3.</span> Transformeée de Fourier</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 On peut présenter le résultat précédent sous une autre forme. On peut poser :
@@ -1806,7 +1993,11 @@ On peut présenter le résultat précédent sous une autre forme. On peut poser�
 <div class="org-center">
 <p>
 \(
-x_k = k\Delta x \\
+x_k = k\Delta x \)
+</p>
+
+<p>
+\(
 y_n = n\Delta y
 \)
 </p>
@@ -1819,7 +2010,11 @@ ainsi que :
 <div class="org-center">
 <p>
 \(
-u_k = u(x_k) \\
+u_k = u(x_k) \)
+</p>
+
+<p>
+\(
 U_n = U(y_n)
 \)
 </p>
@@ -1868,7 +2063,11 @@ l'intervalle \([-\sqrt{N}/2,\sqrt{N}/2]\), qui tend lui-même vers
 <div class="org-center">
 <p>
 \(
-u(x) = \int\limits_{-\infty}^{+\infty} U(y) \exp(2\pi\img x y) dy \\
+u(x) = \int\limits_{-\infty}^{+\infty} U(y) \exp(2\pi\img x y) dy \)
+</p>
+
+<p>
+\(
 U(y) = \int\limits_{-\infty}^{+\infty} u(x) \exp(-2\pi\img x y) dx
 \)
 </p>
@@ -1882,14 +2081,18 @@ son inverse par :
 <div class="org-center">
 <p>
 \(
-U(y) = \mathcal{F}(u)(y) = \int\limits_{-\infty}^{+\infty} u(x) \exp(-2\pi\img x y) dx \\
+U(y) = \mathcal{F}(u)(y) = \int\limits_{-\infty}^{+\infty} u(x) \exp(-2\pi\img x y) dx \)
+</p>
+
+<p>
+\(
 u(x) = \mathcal{F}^{-1}(U)(x) = \int\limits_{-\infty}^{+\infty} U(y) \exp(2\pi\img x y) dy
 \)
 </p>
 </div>
 </div>
-<div id="outline-container-org5d50a63" class="outline-4">
-<h4 id="org5d50a63"><span class="section-number-4">4.3.1.</span> Delta de Dirac</h4>
+<div id="outline-container-orgb897278" class="outline-4">
+<h4 id="orgb897278"><span class="section-number-4">4.3.1.</span> Delta de Dirac</h4>
 <div class="outline-text-4" id="text-4-3-1">
 <p>
 On déduit des relations ci dessus que :
@@ -1899,7 +2102,11 @@ On déduit des relations ci dessus que :
 <p>
 \(
 u(x) = \int\limits_{-\infty}^{+\infty} \exp(2\pi\img x y) dy
-\int\limits_{-\infty}^{+\infty} u(z) \exp(-2\pi\img z y) dz \\
+\int\limits_{-\infty}^{+\infty} u(z) \exp(-2\pi\img z y) dz \)
+</p>
+
+<p>
+\(
 u(x) = \int\limits_{-\infty}^{+\infty} u(z) dz
 \int\limits_{-\infty}^{+\infty} \exp(2\pi\img (x-z) y) dy
 \)
@@ -1936,8 +2143,8 @@ Inversément, on a :
 </p>
 </div>
 </div>
-<div id="outline-container-orge47b03a" class="outline-4">
-<h4 id="orge47b03a"><span class="section-number-4">4.3.2.</span> Produit scalaire</h4>
+<div id="outline-container-orgecc7c2e" class="outline-4">
+<h4 id="orgecc7c2e"><span class="section-number-4">4.3.2.</span> Produit scalaire</h4>
 <div class="outline-text-4" id="text-4-3-2">
 <p>
 Considérons à présent le produit scalaire :
@@ -1956,7 +2163,11 @@ d'orthonormalité, on arrive à :
 <p>
 \(
 \int\limits_{-\infty}^{+\infty} \conjugue\left[\mathcal{F}(u)(y)\right] \mathcal{F}(v)(y) dy =
-\int_{\setR^2} \bar{u}(x) v(z) \exp\left(2\pi\img (x-z) y\right) dx dz \\
+\int_{\setR^2} \bar{u}(x) v(z) \exp\left(2\pi\img (x-z) y\right) dx dz \)
+</p>
+
+<p>
+\(
 \int\limits_{-\infty}^{+\infty} \conjugue\left[\mathcal{F}(u)(y)\right] \mathcal{F}(v)(y) dy =
 \int_{\setR^2} \bar{u}(x) v(z) \delta(x-z) dx dz
 \)
@@ -1986,8 +2197,8 @@ le produit scalaire :
 </p>
 </div>
 </div>
-<div id="outline-container-org5a83c9f" class="outline-4">
-<h4 id="org5a83c9f"><span class="section-number-4">4.3.3.</span> Convolution</h4>
+<div id="outline-container-org90c51eb" class="outline-4">
+<h4 id="org90c51eb"><span class="section-number-4">4.3.3.</span> Convolution</h4>
 <div class="outline-text-4" id="text-4-3-3">
 <p>
 La transformeèe d'un produit de convolution s'écrit :
@@ -2010,7 +2221,11 @@ Considérons le changement de variable :
 <div class="org-center">
 <p>
 \(
-\xi = x - z  \\
+\xi = x - z  \)
+</p>
+
+<p>
+\(
 \eta = z
 \)
 </p>
@@ -2039,8 +2254,8 @@ c'est-à-dire :
 </p>
 </div>
 </div>
-<div id="outline-container-org57aab05" class="outline-4">
-<h4 id="org57aab05"><span class="section-number-4">4.3.4.</span> Dérivées</h4>
+<div id="outline-container-org7fefc26" class="outline-4">
+<h4 id="org7fefc26"><span class="section-number-4">4.3.4.</span> Dérivées</h4>
 <div class="outline-text-4" id="text-4-3-4">
 <p>
 Soit \(u\) une fonction qui s'annule à l'infini. La transformeée de Fourier
@@ -2083,8 +2298,8 @@ et finalement :
 </p>
 </div>
 </div>
-<div id="outline-container-org210c30e" class="outline-4">
-<h4 id="org210c30e"><span class="section-number-4">4.3.5.</span> Déphasage</h4>
+<div id="outline-container-org3dc6005" class="outline-4">
+<h4 id="org3dc6005"><span class="section-number-4">4.3.5.</span> Déphasage</h4>
 <div class="outline-text-4" id="text-4-3-5">
 <p>
 Considérons l'opérateur de translation :
@@ -2102,7 +2317,11 @@ La transformeée de Fourier d'une translatée de la fonction \(u\) s'écrit :
 <p>
 \(
 \mathcal{F}\left[t_a(u)\right](y) =
-\int\limits_{-\infty}^{+\infty} u(x-a) \exp(-2\pi\img x y) dx \\
+\int\limits_{-\infty}^{+\infty} u(x-a) \exp(-2\pi\img x y) dx \)
+</p>
+
+<p>
+\(
 \mathcal{F}\left[t_a(u)\right](y) = \exp(-2\pi\img a y)
 \int\limits_{-\infty}^{+\infty} u(x-a) \exp(-2\pi\img (x-a) y) dx
 \)
@@ -2118,8 +2337,8 @@ Mais comme \(dx = d(x-a)\), on en déduit que :
 </p>
 </div>
 </div>
-<div id="outline-container-orgdd06a39" class="outline-4">
-<h4 id="orgdd06a39"><span class="section-number-4">4.3.6.</span> Dilatation</h4>
+<div id="outline-container-orgd003ee2" class="outline-4">
+<h4 id="orgd003ee2"><span class="section-number-4">4.3.6.</span> Dilatation</h4>
 <div class="outline-text-4" id="text-4-3-6">
 <p>
 Soit \(d_a\) l'opérateur de dilatation :
@@ -2155,7 +2374,11 @@ Considérons le changement de variable \(z = a x\). On a alors :
 \(
 \mathcal{F}\left[d_a(u)\right](y) =
 \unsur{a}\int\limits_{-\infty}^{+\infty} u(z)
-\exp\left(-2\pi\img z \frac{y}{a}\right) dz \\
+\exp\left(-2\pi\img z \frac{y}{a}\right) dz \)
+</p>
+
+<p>
+\(
 \mathcal{F}\left[d_a(u)\right](y) = \unsur{a}\mathcal{F}(u)(y/a)
 \)
 </p>
@@ -2170,8 +2393,8 @@ c'est-à-dire :
 </p>
 </div>
 </div>
-<div id="outline-container-org85d75e1" class="outline-4">
-<h4 id="org85d75e1"><span class="section-number-4">4.3.7.</span> Gaussienne</h4>
+<div id="outline-container-orgf41012d" class="outline-4">
+<h4 id="orgf41012d"><span class="section-number-4">4.3.7.</span> Gaussienne</h4>
 <div class="outline-text-4" id="text-4-3-7">
 <p>
 Définissons la gaussienne \(G\) :
@@ -2226,8 +2449,8 @@ La transformeée de Fourier laisse \(G\) inchangée.
 </div>
 </div>
 </div>
-<div id="outline-container-org7a4e72e" class="outline-3">
-<h3 id="org7a4e72e"><span class="section-number-3">4.4.</span> Auto-adjoint</h3>
+<div id="outline-container-org6757788" class="outline-3">
+<h3 id="org6757788"><span class="section-number-3">4.4.</span> Auto-adjoint</h3>
 <div class="outline-text-3" id="text-4-4">
 <p>
 La transformeée de Fourier (voir chapitre \ref{chap:fourier}) est définie par :
@@ -2244,7 +2467,11 @@ où \(\img = \sqrt{-1}\). On a :
 <div class="org-center">
 <p>
 \(
-\int_{\setR} \mathcal{F}(u)(y) v(y) dy = \int_{\setR} u(x) v(y) \exp(2\pi \img x y) dx dy \\
+\int_{\setR} \mathcal{F}(u)(y) v(y) dy = \int_{\setR} u(x) v(y) \exp(2\pi \img x y) dx dy \)
+</p>
+
+<p>
+\(
 \int_{\setR} \mathcal{F}(u)(y) v(y) dy = \int_{\setR} u(x) \mathcal{F}(v)(x) dx
 \)
 </p>
@@ -2260,17 +2487,17 @@ et donc :
 </div>
 </div>
 </div>
-<div id="outline-container-orgd2c3d98" class="outline-2">
-<h2 id="orgd2c3d98"><span class="section-number-2">5.</span> Ondelettes</h2>
+<div id="outline-container-org55906be" class="outline-2">
+<h2 id="org55906be"><span class="section-number-2">5.</span> Ondelettes</h2>
 <div class="outline-text-2" id="text-5">
 <div id="text-table-of-contents-5" role="doc-toc">
 <ul>
-<li><a href="#org9061268">5.1. Introduction</a></li>
-<li><a href="#org2e5c9f2">5.2. Définition</a></li>
-<li><a href="#orgb60f2d0">5.3. Construction</a></li>
-<li><a href="#org47457cb">5.4. Propriétés</a></li>
-<li><a href="#org70a2576">5.5. Niveaux</a></li>
-<li><a href="#org8cc04ae">5.6. Développement en série et algorithme de Mallat</a></li>
+<li><a href="#orgb033bcb">5.1. Introduction</a></li>
+<li><a href="#orgc7ed460">5.2. Définition</a></li>
+<li><a href="#org2b95e92">5.3. Construction</a></li>
+<li><a href="#orgb05a904">5.4. Propriétés</a></li>
+<li><a href="#org3d128b6">5.5. Niveaux</a></li>
+<li><a href="#orge33a5cf">5.6. Développement en série et algorithme de Mallat</a></li>
 </ul>
 </div>
 
@@ -2291,8 +2518,8 @@ Elles sont fort utilisées en compression de donnée (son, image, &#x2026;)
 où les coefficients les plus négligeables sont ignorés.
 </p>
 </div>
-<div id="outline-container-org9061268" class="outline-3">
-<h3 id="org9061268"><span class="section-number-3">5.1.</span> Introduction</h3>
+<div id="outline-container-orgb033bcb" class="outline-3">
+<h3 id="orgb033bcb"><span class="section-number-3">5.1.</span> Introduction</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 AFAIRE : ARRANGER LE CHAPITRE
@@ -2305,7 +2532,11 @@ Le plus simple est de commencer avec un exemple célèbre : les ondelettes de Ha
 <div class="org-center">
 <p>
 \(
-\varphi(x) = \indicatrice_{[0,1[}(x) \\
+\varphi(x) = \indicatrice_{[0,1[}(x) \)
+</p>
+
+<p>
+\(
 \psi(x) = \indicatrice_{[0,1/2[}(x) - \indicatrice_{[1/2,1[}(x)
 \)
 </p>
@@ -2321,7 +2552,11 @@ d'échelle. Ainsi, on a :
 <div class="org-center">
 <p>
 \(
-\varphi(x) = \varphi(2x) + \varphi(2x-1) = a_0^0 \varphi(2x) + a_1^0 \varphi(2x-1) \\
+\varphi(x) = \varphi(2x) + \varphi(2x-1) = a_0^0 \varphi(2x) + a_1^0 \varphi(2x-1) \)
+</p>
+
+<p>
+\(
 \psi(x) = \varphi(2x) - \varphi(2x-1) = a_0^1 \varphi(2x) + a_1^1 \varphi(2x-1)
 \)
 </p>
@@ -2335,7 +2570,11 @@ En inversant les deux relations ci-dessus, on arrive à :
 <div class="org-center">
 <p>
 \(
-\varphi(2x) = \frac{1}{2} ( \varphi(x) + \psi(x) ) \\
+\varphi(2x) = \frac{1}{2} ( \varphi(x) + \psi(x) ) \)
+</p>
+
+<p>
+\(
 \varphi(2x-1) = \frac{1}{2} ( \varphi(x) - \psi(x) )
 \)
 </p>
@@ -2348,7 +2587,11 @@ Les deux représentations ci-dessous sont donc équivalentes :
 <div class="org-center">
 <p>
 \(
-f(x) = f_1 \varphi(2x) + f_2 \varphi(2x-1) \\
+f(x) = f_1 \varphi(2x) + f_2 \varphi(2x-1) \)
+</p>
+
+<p>
+\(
 f(x) = \frac{f_1+f_2}{2} \varphi(x) + \frac{f_1 - f_2}{2} \psi(x)
 \)
 </p>
@@ -2368,8 +2611,8 @@ en plus fin lorsque \(j\) augmente. On dit que les ondelettes ont une influence 
 </p>
 </div>
 </div>
-<div id="outline-container-org2e5c9f2" class="outline-3">
-<h3 id="org2e5c9f2"><span class="section-number-3">5.2.</span> Définition</h3>
+<div id="outline-container-orgc7ed460" class="outline-3">
+<h3 id="orgc7ed460"><span class="section-number-3">5.2.</span> Définition</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 Nous allons construire un système d'ondelettes générique à partir des coefficients :
@@ -2387,7 +2630,11 @@ nous demandons que ces coefficients vérifient les propriétés de normalisation
 <div class="org-center">
 <p>
 \(
-\sum_k a^0_{p+m k} = 1 \\
+\sum_k a^0_{p+m k} = 1 \)
+</p>
+
+<p>
+\(
 \sum_k a_k^i = m \indicatrice_{i,0}
 \)
 </p>
@@ -2400,7 +2647,11 @@ et d'orthogonalisation suivantes :
 <div class="org-center">
 <p>
 \(
-\sum_k a_{k + m r}^i a_{k + m s}^j = m \indicatrice_{ij} \indicatrice_{rs} \\
+\sum_k a_{k + m r}^i a_{k + m s}^j = m \indicatrice_{ij} \indicatrice_{rs} \)
+</p>
+
+<p>
+\(
 \sum_k\sum_{i=0}^{m-1} a^i_{r+m k} a^i_{s+m k} = m \indicatrice_{rs}
 \)
 </p>
@@ -2432,8 +2683,16 @@ directes suivantes :
 <div class="org-center">
 <p>
 \(
-\sum_k a^0_{p-m k} = 1 \\
-\sum_k\sum_{i=0}^{m-1} a^i_{r-m.k} a^i_{s-m.k} = m \indicatrice_{rs} \\
+\sum_k a^0_{p-m k} = 1 \)
+</p>
+
+<p>
+\(
+\sum_k\sum_{i=0}^{m-1} a^i_{r-m.k} a^i_{s-m.k} = m \indicatrice_{rs} \)
+</p>
+
+<p>
+\(
 \)
 </p>
 </div>
@@ -2447,8 +2706,8 @@ Dans la suite, nous utilisons le produit scalaire :
 </p>
 </div>
 </div>
-<div id="outline-container-orgb60f2d0" class="outline-3">
-<h3 id="orgb60f2d0"><span class="section-number-3">5.3.</span> Construction</h3>
+<div id="outline-container-org2b95e92" class="outline-3">
+<h3 id="org2b95e92"><span class="section-number-3">5.3.</span> Construction</h3>
 <div class="outline-text-3" id="text-5-3">
 <p>
 La fonction d'échelle s'obtient en partant de :
@@ -2490,15 +2749,19 @@ Le système d'ondelettes est définit finalement par :
 <div class="org-center">
 <p>
 \(
-\varphi(x) = \sum_k a_k^0 \varphi(m x - k) \\
+\varphi(x) = \sum_k a_k^0 \varphi(m x - k) \)
+</p>
+
+<p>
+\(
 \psi^i(x) = \sum_k a_k^i \varphi(m x - k)
 \)
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org47457cb" class="outline-3">
-<h3 id="org47457cb"><span class="section-number-3">5.4.</span> Propriétés</h3>
+<div id="outline-container-orgb05a904" class="outline-3">
+<h3 id="orgb05a904"><span class="section-number-3">5.4.</span> Propriétés</h3>
 <div class="outline-text-3" id="text-5-4">
 <p>
 Les propriétés des \(a^i_k\) permettent de montrer, par récurrence sur \(n\), que :
@@ -2507,7 +2770,11 @@ Les propriétés des \(a^i_k\) permettent de montrer, par récurrence sur \(n\),
 <div class="org-center">
 <p>
 \(
-\int_{\setR} \varphi(x) dx = 1 \\
+\int_{\setR} \varphi(x) dx = 1 \)
+</p>
+
+<p>
+\(
 \int_{\setR} \psi^i(x) dx = 0
 \)
 </p>
@@ -2521,7 +2788,11 @@ En effet, on a \(\int_{\setR} \varphi^{(0)} = 1\) et si on suppose que
 <div class="org-center">
 <p>
 \(
-\int_{\setR} \varphi^{(n)}(x) dx = \sum_k a_k^0 \int_{\setR} \varphi^{(n-1)}(m x - k) dx \\
+\int_{\setR} \varphi^{(n)}(x) dx = \sum_k a_k^0 \int_{\setR} \varphi^{(n-1)}(m x - k) dx \)
+</p>
+
+<p>
+\(
 \int_{\setR} \varphi^{(n)}(x) dx = \left( \sum_k a_k^0 \right) \frac{1}{m} \int_{\setR} \varphi^{(n-1)}(\xi) d\xi = 1
 \)
 </p>
@@ -2534,7 +2805,11 @@ Par ailleurs on a :
 <div class="org-center">
 <p>
 \(
-\int_{\setR} \psi^i(x) dx =   \sum_k a_k^i \int_{\setR} \varphi(m x - k) dx \\
+\int_{\setR} \psi^i(x) dx =   \sum_k a_k^i \int_{\setR} \varphi(m x - k) dx \)
+</p>
+
+<p>
+\(
 \int_{\setR} \psi^i(x) dx = \left( \sum_k a_k^i \right) \frac{1}{m} \int_{\setR} \varphi(\xi) d\xi = 0
 \)
 </p>
@@ -2568,7 +2843,11 @@ En effet, il est clair que \(\sum_k \varphi^{(0)}(x-k) = 1\). Partant de l'hypot
 <div class="org-center">
 <p>
 \(
-\sum_k \varphi^{(n)}(x-k) = \sum_k\sum_l a^0_l \varphi^{(n-1)}\left( m (x - k) - l \right) \\
+\sum_k \varphi^{(n)}(x-k) = \sum_k\sum_l a^0_l \varphi^{(n-1)}\left( m (x - k) - l \right) \)
+</p>
+
+<p>
+\(
 \sum_k \varphi^{(n)}(x-k) = \sum_l\sum_k a^0_l \varphi^{(n-1)}(m x - m k - l)
 \)
 </p>
@@ -2599,8 +2878,8 @@ et la propriété de partition de l'unité est démontréé en passant à la lim
 </p>
 </div>
 </div>
-<div id="outline-container-org70a2576" class="outline-3">
-<h3 id="org70a2576"><span class="section-number-3">5.5.</span> Niveaux</h3>
+<div id="outline-container-org3d128b6" class="outline-3">
+<h3 id="org3d128b6"><span class="section-number-3">5.5.</span> Niveaux</h3>
 <div class="outline-text-3" id="text-5-5">
 <p>
 On définit la fonction d'échelle et les ondelettes du niveau \(j \in \setN\) comme étant les
@@ -2610,7 +2889,11 @@ dilatations translatées des fonctions \(\varphi,\psi^i\) :
 <div class="org-center">
 <p>
 \(
-\varphi_{jk}(x) = m^{j/2} \varphi(m^j x - k) \\
+\varphi_{jk}(x) = m^{j/2} \varphi(m^j x - k) \)
+</p>
+
+<p>
+\(
 \psi^i_{jk}(x) = m^{j/2} \psi^i(m^j x - k)
 \)
 </p>
@@ -2628,19 +2911,27 @@ entres échelles voisines :
 <div class="org-center">
 <p>
 \(
-\varphi_{jk} = \frac{1}{\sqrt{m}} \sum_l a^0_l \varphi_{j+1,m k + l} = \frac{1}{\sqrt{m}} \sum_p a^0_{p - m k} \varphi_{j+1,p}\\
-\psi^i_{jk} = \frac{1}{\sqrt{m}} \sum_l a^i_l \varphi_{j+1,m k + l} =  \frac{1}{\sqrt{m}} \sum_p a^i_{p - m k} \varphi_{j+1,p}\\
+\varphi_{jk} = \frac{1}{\sqrt{m}} \sum_l a^0_l \varphi_{j+1,m k + l} = \frac{1}{\sqrt{m}} \sum_p a^0_{p - m k} \varphi_{j+1,p}\)
+</p>
+
+<p>
+\(
+\psi^i_{jk} = \frac{1}{\sqrt{m}} \sum_l a^i_l \varphi_{j+1,m k + l} =  \frac{1}{\sqrt{m}} \sum_p a^i_{p - m k} \varphi_{j+1,p}\)
+</p>
+
+<p>
+\(
 \)
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org8cc04ae" class="outline-3">
-<h3 id="org8cc04ae"><span class="section-number-3">5.6.</span> Développement en série et algorithme de Mallat</h3>
+<div id="outline-container-orge33a5cf" class="outline-3">
+<h3 id="orge33a5cf"><span class="section-number-3">5.6.</span> Développement en série et algorithme de Mallat</h3>
 <div class="outline-text-3" id="text-5-6">
 </div>
-<div id="outline-container-orgce8dd04" class="outline-4">
-<h4 id="orgce8dd04"><span class="section-number-4">5.6.1.</span> Convergence</h4>
+<div id="outline-container-orgc9c12ba" class="outline-4">
+<h4 id="orgc9c12ba"><span class="section-number-4">5.6.1.</span> Convergence</h4>
 <div class="outline-text-4" id="text-5-6-1">
 <p>
 Commençons par remarquer que :
@@ -2734,8 +3025,16 @@ Utilisant un simple changement de variable \(\xi = m^j y - k\), on obtient :
 <div class="org-center">
 <p>
 \(
-\int_{\setR} \varphi_{jk}(y) dy  = \int_{\setR} m^{j/2} \varphi\left( m^j y - k \right) dy \\
-\int_{\setR} \varphi_{jk}(y) dy  = \int_{\setR} m^{j/2} \varphi(\xi) m^{-j} d\xi \\
+\int_{\setR} \varphi_{jk}(y) dy  = \int_{\setR} m^{j/2} \varphi\left( m^j y - k \right) dy \)
+</p>
+
+<p>
+\(
+\int_{\setR} \varphi_{jk}(y) dy  = \int_{\setR} m^{j/2} \varphi(\xi) m^{-j} d\xi \)
+</p>
+
+<p>
+\(
 \int_{\setR} \varphi_{jk}(y) dy  = m^{-j/2} \int_{\setR} \varphi(\xi) d\xi = m^{-j/2}
 \)
 </p>
@@ -2756,7 +3055,11 @@ Donc :
 <div class="org-center">
 <p>
 \(
-\sum_k \varphi_{jk}(x) \int_{\setR} \varphi_{jk}(y) dy = m^{-j/2} \sum_k \varphi_{jk}(x) \\
+\sum_k \varphi_{jk}(x) \int_{\setR} \varphi_{jk}(y) dy = m^{-j/2} \sum_k \varphi_{jk}(x) \)
+</p>
+
+<p>
+\(
 \sum_k \varphi_{jk}(x) \int_{\setR} \varphi_{jk}(y) dy = m^{-j/2} m^{j/2} = 1
 \)
 </p>
@@ -2795,7 +3098,11 @@ Rassemblant tous les résultats ci-dessus, on en déduit que :
 <p>
 \(
 \abs{f(x) - \sum_k\scalaire{f}{\varphi_{jk}}\varphi_{jk}(x)} =
-\abs{\sum_{k \in K_j}\varphi_{jk}(x) \int_{\setR} \left( f(x) - f(y) \right) \varphi_{jk}(y) dy   } \\
+\abs{\sum_{k \in K_j}\varphi_{jk}(x) \int_{\setR} \left( f(x) - f(y) \right) \varphi_{jk}(y) dy   } \)
+</p>
+
+<p>
+\(
 \abs{f(x) - \sum_k\scalaire{f}{\varphi_{jk}}\varphi_{jk}(x)} \le
 2 g M m^{j/2} \epsilon_j \indicatrice_0 m^{-j} M m^{j/2} = 2 g M^2 \indicatrice_0 \epsilon_j
 \)
@@ -2807,8 +3114,8 @@ qui tend bien vers 0 lorsque \(j\) tend vers l'infini.
 </p>
 </div>
 </div>
-<div id="outline-container-org64da3d8" class="outline-4">
-<h4 id="org64da3d8"><span class="section-number-4">5.6.2.</span> Algorithme de Mallat</h4>
+<div id="outline-container-orgcf9641c" class="outline-4">
+<h4 id="orgcf9641c"><span class="section-number-4">5.6.2.</span> Algorithme de Mallat</h4>
 <div class="outline-text-4" id="text-5-6-2">
 <p>
 Considérons à présent l'approximation suivante :
@@ -2833,7 +3140,11 @@ où :
 <div class="org-center">
 <p>
 \(
-c_{jk} = \scalaire{ f  }{ \varphi_{jk}  } \\
+c_{jk} = \scalaire{ f  }{ \varphi_{jk}  } \)
+</p>
+
+<p>
+\(
 d^i_{jk} = \scalaire{ f  }{ \psi^i_{jk}  }
 \)
 </p>
@@ -2847,10 +3158,26 @@ Il suffit pour cela de constater que :
 <p>
 \(
 \sum_k c_{jk} \varphi_{jk} + \sum_k\sum_{i=1}^{m-1} d^i_{jk} \psi^i_{jk} =
-\sum_k \scalaire{ f  }{ \varphi_{jk} } \varphi_{jk} + \sum_k\sum_{i=1}^{m-1} \scalaire{ f  }{ \psi^i_{jk}  } \psi^i_{jk} \\
-= \frac{1}{m}\sum_{p,q}\sum_k \sum_{i=0}^{m-1} \scalaire{ f  }{ \varphi_{j+1,p} } \varphi_{j+1,q} a^i_{p - m k} a^i_{q - m k} \\
-= \sum_{p,q} \scalaire{ f  }{ \varphi_{j+1,p} } \varphi_{j+1,q} \frac{1}{m} \sum_k \sum_{i=0}^{m-1}  a^i_{p - m k} a^i_{q - m k} \\
-= \sum_{p,q} \scalaire{ f  }{ \varphi_{j+1,p} } \varphi_{j+1,q} \indicatrice_{pq} \\
+\sum_k \scalaire{ f  }{ \varphi_{jk} } \varphi_{jk} + \sum_k\sum_{i=1}^{m-1} \scalaire{ f  }{ \psi^i_{jk}  } \psi^i_{jk} \)
+</p>
+
+<p>
+\(
+= \frac{1}{m}\sum_{p,q}\sum_k \sum_{i=0}^{m-1} \scalaire{ f  }{ \varphi_{j+1,p} } \varphi_{j+1,q} a^i_{p - m k} a^i_{q - m k} \)
+</p>
+
+<p>
+\(
+= \sum_{p,q} \scalaire{ f  }{ \varphi_{j+1,p} } \varphi_{j+1,q} \frac{1}{m} \sum_k \sum_{i=0}^{m-1}  a^i_{p - m k} a^i_{q - m k} \)
+</p>
+
+<p>
+\(
+= \sum_{p,q} \scalaire{ f  }{ \varphi_{j+1,p} } \varphi_{j+1,q} \indicatrice_{pq} \)
+</p>
+
+<p>
+\(
 = \sum_p \scalaire{ f  }{ \varphi_{j+1,p} } \varphi_{j+1,p}
 \)
 </p>
@@ -2865,7 +3192,11 @@ La définition des \(c_{jk}\), \(d^i_{jk}\)  combinée aux équations reliant le
 <div class="org-center">
 <p>
 \(
-c_{jk} = \scalaire{ f  }{ \varphi_{jk}  }  =  \frac{1}{\sqrt{m}}\sum_p\scalaire{ f  }{ \varphi_{j+1,p}  } a^0_{p - m k} \\
+c_{jk} = \scalaire{ f  }{ \varphi_{jk}  }  =  \frac{1}{\sqrt{m}}\sum_p\scalaire{ f  }{ \varphi_{j+1,p}  } a^0_{p - m k} \)
+</p>
+
+<p>
+\(
 c_{jk} = \frac{1}{\sqrt{m}}\sum_p c_{j+1,p} a^0_{p-m.k} = \frac{1}{\sqrt{m}}\sum_l c_{j+1,l + m k} a^0_{l}
 \)
 </p>
@@ -2878,7 +3209,11 @@ ainsi que :
 <div class="org-center">
 <p>
 \(
-d^i_{jk} = \scalaire{ f  }{ \psi^i_{jk}  }  =  \frac{1}{\sqrt{m}}\sum_p\scalaire{ f  }{ \varphi_{j+1,p}  } a^i_{p - m k} \\
+d^i_{jk} = \scalaire{ f  }{ \psi^i_{jk}  }  =  \frac{1}{\sqrt{m}}\sum_p\scalaire{ f  }{ \varphi_{j+1,p}  } a^i_{p - m k} \)
+</p>
+
+<p>
+\(
 d^i_{jk} = \frac{1}{\sqrt{m}}\sum_p c_{j+1,p} a^i_{p - m k} = \frac{1}{\sqrt{m}}\sum_l c_{j+1,l + m k} a^i_{l}
 \)
 </p>
@@ -2891,13 +3226,19 @@ La relation inverse s'obtient à partir de :
 <div class="org-center">
 <p>
 \(
-&sum;<sub>p</sub> \scalaire{ f }{ &varphi;<sub>j+1,p</sub> } &varphi;<sub>j+1,p</sub> = &sum;<sub>k</sub> c<sub>jk</sub> &varphi;<sub>jk</sub> + &sum;<sub>k&sum;</sub><sub>i=1</sub><sup>m-1</sup> d<sup>i</sup><sub>jk</sub> &psi;<sup>i</sup><sub>jk</sub> <br />
+\sum_p \scalaire{ f }{ \varphi_{j+1,p} } \varphi_{j+1,p} = \sum_k c_{jk} \varphi_{jk} + \sum_k\sum_{i=1}^{m-1} d^i_{jk} \psi^i_{jk} \)
+</p>
+
+<p>
+\(
 &sum;<sub>p</sub> c<sub>j+1,p</sub> &varphi;<sub>j+1,p</sub> = \frac{1}{\sqrt{m}}&sum;<sub>p</sub> &varphi;<sub>j+1,p</sub> \left[ &sum;<sub>k</sub> c<sub>jk</sub> a<sup>0</sup><sub>p - m k</sub>
 </p>
 <ul class="org-ul">
-<li>&sum;<sub>k&sum;</sub><sub>i=1</sub><sup>m-1</sup> d<sup>i</sup><sub>jk</sub> a<sup>i</sup><sub>p - m k</sub> \right] <br /></li>
+<li>&sum;<sub>k&sum;</sub><sub>i=1</sub><sup>m-1</sup> d<sup>i</sup><sub>jk</sub> a<sup>i</sup><sub>p - m k</sub> \right] \)</li>
 </ul>
+
 <p>
+\(
 \)
 </p>
 </div>
@@ -2909,8 +3250,16 @@ En comparant les coefficients des \(\varphi_{j+1,p}\), et comme cette équation 
 <div class="org-center">
 <p>
 \(
-c_{j+1,p} = \frac{1}{\sqrt{m}}\sum_k c_{jk} a^0_{p-m.k} + \sum_k\sum_{i=1}^{m-1} d^i_{jk} a^i_{p - m k}  \\
-c_{j+1,p} = \frac{1}{\sqrt{m}}\sum_k c_{jk} a^0_{p-m.k} + \sum_k\sum_{i=1}^{m-1} d^i_{jk} a^i_{p - m k}  \\
+c_{j+1,p} = \frac{1}{\sqrt{m}}\sum_k c_{jk} a^0_{p-m.k} + \sum_k\sum_{i=1}^{m-1} d^i_{jk} a^i_{p - m k}  \)
+</p>
+
+<p>
+\(
+c_{j+1,p} = \frac{1}{\sqrt{m}}\sum_k c_{jk} a^0_{p-m.k} + \sum_k\sum_{i=1}^{m-1} d^i_{jk} a^i_{p - m k}  \)
+</p>
+
+<p>
+\(
 \)
 </p>
 </div>
@@ -2963,7 +3312,7 @@ on écrit :
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-10-13 lun 14:39</p>
+<p class="date">Created: 2025-10-14 mar 15:54</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

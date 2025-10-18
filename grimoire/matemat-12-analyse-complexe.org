@@ -98,6 +98,8 @@ $$\exp(z_1 + z_2) = \exp(z_1) \cdot \exp(z_2)$$
 
 ** Lien avec les fonctions trigonométriques
 
+TODO : expliquer mieux avec la linéarité
+
 Considérons maintenant le cas particulier où $u(t) = \exp(\img t)$ :
 
 #+BEGIN_CENTER
@@ -210,16 +212,14 @@ $z$ comme l'unique $\theta$ vérifiant cette propriété et se trouvant
 dans l'intervalle $[0,2\pi)$.
 
 #+BEGIN_CENTER
-\(
-\theta = \arg(z) \quad\Leftrightarrow\quad
+\[ \theta = \arg(z) \quad\Leftrightarrow\quad
 \begin{cases}
 z = \abs{z}\exp(\img\theta) \\
 \theta\in [0,2\pi)
-\end{cases}
-\)
+\end{cases} \]
 #+END_CENTER
 
-Inspiré par relation :
+Inspiré par la relation :
 
 $$z = \abs{z}\exp(\img\arg(z))$$
 
@@ -527,13 +527,11 @@ $$\oint_{\partial S} \frac{dz}{(z-a)^k} = 2 \pi \img \delta_{k,1} \delta_S(a)$$
 Si $f$ est analytique, la fonction
 
 #+BEGIN_CENTER
-\(
-g(z) =
+\[ g(z) =
 \begin{cases}
 \frac{f(z)-f(a)}{z-a} & \mbox{si  } z \ne a \\
 \OD{f}{z}(a) & \mbox{si  } z = a
-\end{cases}
-\)
+\end{cases} \]
 #+END_CENTER
 
 est analytique aussi. On a donc :
@@ -546,7 +544,7 @@ $$\oint_l \frac{f(z)-f(a)}{z-a} dz = \oint_l g(z) dz = 0$$
 
 On en déduit que :
 
-$$f(a) \oint_{\partial S} \frac{1}{z-a} dz  = \oint_{\partial S} \frac{f(z)}{z-a} dz$$
+$$f(a) = \oint_{\partial S} \frac{1}{z-a} dz  = \oint_{\partial S} \frac{f(z)}{z-a} dz$$
 
 ce qui nous donne la valeur de $f(a)$ en fonction d'une intégrale :
 
@@ -781,7 +779,6 @@ L_1(x) = 1-x \)
 
 \label{chap:fourier}
 
-
 ** Séries de Fourier
 
 ARRANGER LE CHAPITRE
@@ -829,13 +826,11 @@ $$t = a + \frac{T}{2\pi} x$$
 ce qui nous donne :
 
 #+BEGIN_CENTER
-\(
-\int_a^{a+T} \exp\left(\frac{2\pi\img k x}{T}\right) dx =
+\[ \int_a^{a+T} \exp\left(\frac{2\pi\img k x}{T}\right) dx =
 \begin{cases}
 T & \mbox{si  } k = 0 \\
 0 & \mbox{si  } k \ne 0
-\end{cases}
-\)
+\end{cases} \]
 #+END_CENTER
 
 Définissons à présent le produit scalaire :
@@ -879,14 +874,13 @@ Utilisant à nouveau les propriétés des bases orthonormées, on a :
 
 $$\scalaire{u}{v} = \sum_{k=-\infty}^{+\infty} \conjugue(\hat{u}_k) \hat{v}_k$$
 
-
 ** Transformeée de Fourier discrète
 
 Dans le cas où :
 
 #+BEGIN_CENTER
 \(
-a = \exp(\img x) \)
+a = \exp(\img x) \ne 1 \)
 
 \(
 a^k = \exp(\img k x)
@@ -902,18 +896,35 @@ devient :
 
 $$\sum_{k=0}^{n} \exp(\img k x) = \frac{1-\exp(\img (n+1) x)}{1-\exp(\img x)}$$
 
-On voit alors que si $(n+1) x$ est un multiple entier de $2\pi$, la somme s'annule
-par périodicité sauf dans le cas où $x$ est un multiple entier de $2\pi$, où elle
-vaut $n+1$. Posant $N = n - 1$ et $x = 2\pi l/N$, on obtient :
+On voit alors que si $(n+1) x$ est un multiple entier de $2\pi$, la
+somme s'annule par périodicité. Il existe toutefois une exception,
+lorsque $x$ est un multiple entier de $2\pi$, auquel cas :
+
+#+begin_center
+\( \exp\left( \img k x \right) = \exp\left( 2 \pi \img k \right) = 1 \)
+#+end_center
+
+et :
+
+#+begin_center
+$$\sum_{k=0}^{n} \exp(\img k x) = \sum_{k=0}^{n} 1 = n + 1 $$
+#+end_center
+
+
+Posant $N = n - 1$ et $x = 2\pi l/N$, on obtient :
+
+#+begin_center
+$$ (n + 1) x = \frac{N 2 \pi l}{N} = 2 \pi l $$
+#+end_center
+
+et :
 
 #+BEGIN_CENTER
-\(
-\sum_{k=0}^{N-1} \exp \left( \frac{2 \pi \img k l}{N} \right) =
+\[ \sum_{k=0}^{N-1} \exp \left( \frac{2 \pi \img k l}{N} \right) =
 \begin{cases}
 N & \mbox{si  } m = l/N \in\setZ \\
 0 & \mbox{si  } m = l/N \notin\setZ
-\end{cases}
-\)
+\end{cases} \]
 #+END_CENTER
 
 pour tout $k,l,m,N \in \setZ$. Dans la suite nous utilisons la notation :
@@ -929,12 +940,10 @@ où nous supposons que $N/2 \in\setN$. Multipliant par $e(k,-m)$ où
 $m \in \{-N/2,...,N/2-1\}$, et utilisant l'additivité des exponentielles, il vient :
 
 #+BEGIN_CENTER
-\(
-u_k e(k,-m) = \sum_{n=-N/2}^{N/2-1} U_n e(k,n) e(k,-m) \)
-
-\(
-u_k e(k,-m) = \sum_{n=-N/2}^{N/2-1} U_n e(k,n-m)
-\)
+\begin{eqnarray*}
+u_k e(k,-m) &=& \sum_{n=-N/2}^{N/2-1} U_n e(k,n) e(k,-m) \\
+            &=& \sum_{n=-N/2}^{N/2-1} U_n e(k,n-m)
+\end{eqnarray*}
 #+END_CENTER
 
 Sommons à présent sur $k$ :
@@ -945,21 +954,27 @@ Mais la somme sur $k$ du membre de droite s'annule sauf lorsque $n-m$
 est multiple entier de $N$. Comme $m,n$ sont dans $\{-N/2,...,N/2-1\}$, le seul
 cas possible est ici $m = n$. On a donc :
 
+#+begin_center
+$$\sum_{k=0}^{N-1} u_k e(k,-m) = U_m N$$
+#+end_center
+
+et :
+
 $$U_m = \unsur{N} \sum_{k=0}^{N-1} u_k e(k,-m)$$
 
 Nous avons donc obtenu une bijection entre les $u_k$ et les $U_n$ :
 
 #+BEGIN_CENTER
-$$
-u_k = \sum_{n=-N/2}^{N/2-1} U_n \exp\left(\frac{2 \pi \img k n}{N}\right) \)
+$$ u_k = \sum_{n=-N/2}^{N/2-1} U_n \exp\left(\frac{2 \pi \img k n}{N}\right) $$
 
-\(
-U_n = \unsur{N} \sum_{k=0}^{N-1} u_k \exp\left(-\frac{2 \pi \img k n}{N}\right)
-$$
+$$ U_n = \unsur{N} \sum_{k=0}^{N-1} u_k \exp\left(-\frac{2 \pi \img k n}{N}\right) $$
 #+END_CENTER
 
-
 ** Transformeée de Fourier
+
+#+TOC: headlines 1 local
+
+*** Heuristique
 
 On peut présenter le résultat précédent sous une autre forme. On peut poser :
 
@@ -972,7 +987,12 @@ y_n = n\Delta y
 \)
 #+END_CENTER
 
-ainsi que :
+avec la condition :
+
+$$\Delta x \Delta y = \frac{1}{N}$$
+
+Avec les fonctions $u,v \in X \subset \fonction(\setR,\setR)$,
+on pose :
 
 #+BEGIN_CENTER
 \(
@@ -983,18 +1003,33 @@ U_n = U(y_n)
 \)
 #+END_CENTER
 
-pour des fonctions $u,v \in X \subset \fonction(\setR,\setR)$. Soit :
+Soit :
 
-$$u(x_k) = \sum_{n=-N/2}^{N/2-1} U(y_n) \exp(2 \pi \img x_k y_n) \Delta y$$
+#+begin_center
+\begin{eqnarray*}
+u(x_k) &=& \sum_{n=-N/2}^{N/2-1} U(y_n) \exp(2 \pi \img x_k y_n) \Delta y \\
+       &=& \sum_{n=-N/2}^{N/2-1} U(y_n) \exp(2 \pi \img k n \Delta x \Delta y) \Delta y \\
+       &=& \sum_{n=-N/2}^{N/2-1} U(y_n) \exp\left( \frac{2 \pi \img k n}{N} \right) \Delta y
+\end{eqnarray*}
+#+end_center
 
-où $k = -N/2 , ... ,N/2 - 1$. Suivant le même procédé que ci-dessus, on aboutit à
-la relation inverse :
+où $k = -N/2 , ... ,N/2 - 1$. Suivant un procédé analogue à la
+transformée de Fourier discière :
+
+#+begin_center
+\begin{eqnarray*}
+\sum_{k=0}^{N-1} u(x_k) \exp( - 2\pi\img k m ) \Delta x
+  &=& \sum_{k=0}^{N-1} \sum_{n=-N/2}^{N/2-1} U(y_n) \exp\left( \frac{2 \pi \img k (n - m)}{N} \right) \Delta x \Delta y \\
+  &=& \sum_{n=-N/2}^{N/2-1} U(y_n) \sum_{k=0}^{N-1} \exp\left( \frac{2 \pi \img k (n - m)}{N} \right) \Delta x \Delta y \\
+  &=& \sum_{n=-N/2}^{N/2-1} U(y_n) \sum_{k=0}^{N-1} \exp\left( \frac{2 \pi \img k (n - m)}{N} \right) \Delta x \Delta y \\
+  &=& U(y_m) N \Delta x \Delta y \\
+  &=& U(y_m)
+\end{eqnarray*}
+#+end_center
+
+on aboutit à la relation inverse :
 
 $$U(y_n) = \sum_{k = -N/2}^{N/2-1} u(x_k) \exp(-2 \pi \img x_k y_n) \Delta x$$
-
-pour autant que :
-
-$$\Delta x \Delta y = \frac{1}{N}$$
 
 Choisissons :
 
@@ -1006,24 +1041,18 @@ l'intervalle $[-\sqrt{N}/2,\sqrt{N}/2]$, qui tend lui-même vers
 $(-\infty,+\infty) = \setR$. On arrive donc aux relations :
 
 #+BEGIN_CENTER
-\(
-u(x) = \int\limits_{-\infty}^{+\infty} U(y) \exp(2\pi\img x y) dy \)
+$$ u(x) = \int\limits_{-\infty}^{+\infty} U(y) \exp(2\pi\img x y) dy $$
 
-\(
-U(y) = \int\limits_{-\infty}^{+\infty} u(x) \exp(-2\pi\img x y) dx
-\)
+$$ U(y) = \int\limits_{-\infty}^{+\infty} u(x) \exp(-2\pi\img x y) dx $$
 #+END_CENTER
 
 On définit alors la transformeée de Fourier $\mathcal{F} : X \mapsto X$ et
 son inverse par :
 
 #+BEGIN_CENTER
-\(
-U(y) = \mathcal{F}(u)(y) = \int\limits_{-\infty}^{+\infty} u(x) \exp(-2\pi\img x y) dx \)
+$$ U(y) = \mathcal{F}(u)(y) = \int\limits_{-\infty}^{+\infty} u(x) \exp(-2\pi\img x y) dx $$
 
-\(
-u(x) = \mathcal{F}^{-1}(U)(x) = \int\limits_{-\infty}^{+\infty} U(y) \exp(2\pi\img x y) dy
-\)
+$$ u(x) = \mathcal{F}^{-1}(U)(x) = \int\limits_{-\infty}^{+\infty} U(y) \exp(2\pi\img x y) dy $$
 #+END_CENTER
 
 

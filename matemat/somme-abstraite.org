@@ -1,0 +1,365 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Sommes abstraites
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:sommesAbstraites}
+
+* Dépendances
+
+  - Chapitre \ref{chap:algebre} : Algèbre
+
+* Introduction
+
+Soit le corps commutatif $\corps$, un ensemble $\Omega$ et la fonction
+$f : \Omega \mapsto \corps$. On note la somme de $f$ sur $X$ par :
+
+$$\sum_{x \in X} f(x)$$
+
+pour tout sous-ensemble $X \subseteq \Omega$. Il s'agit intuitivement
+de la somme des $f(x) \in \corps$ lorsque $x$ parcourt $X$. Nous allons
+voir comment la formaliser.
+
+
+** Notation
+
+Lorsque l'ensemble $X$ est évident d'après le contexte, on convient que :
+
+$$\sum_x f(x) = \sum_{x \in X} f(x)$$
+
+
+* Additivité
+
+Si deux ensembles $X,Y \subseteq \Omega$ ne se chevauchent pas :
+
+$$X \cap Y = \emptyset$$
+
+la somme sur l'union des deux est intuitivement l'addition des sommes
+sur chacun d'entre-eux :
+
+$$\sum_{z \in X \cup Y} f(z) = \sum_{z \in X} f(z) + \sum_{z \in Y} f(z)$$
+
+
+* Ensemble vide
+
+Comme $X = X \cup \emptyset$ et $X \cap \emptyset = \emptyset$,
+on en déduit que :
+
+$$\sum_{x \in X} f(x) = \sum_{x \in X \cup \emptyset} f(x) = \sum_{x \in X} f(x) + \sum_{x \in \emptyset} f(x)$$
+
+La somme sur l'ensemble vide doit donc être le neutre pour l'addition :
+
+$$\sum_{x \in \emptyset} f(x) = 0$$
+
+
+* Singleton
+
+Il semble également logique d'imposer que la somme sur un ensemble
+contenant un seul élément $a \in X$ soit égal à $f(a)$ :
+
+$$\sum_{ x \in \{ a \} } f(x) = f(a)$$
+
+Voilà qui complète les caractéristiques génériques des sommes.
+
+
+* Somme des éléments d'un ensemble
+
+Pour tout $A \subseteq \corps$, on note :
+
+$$\sum_{x \in A} x = \sum_{x \in A} \identite(x)$$
+
+la somme des éléments de $A$.
+
+
+* Algorithme
+
+Soit l'ensemble $X$ non vide, ensemble dont nous voulons évaluer la somme.
+Choisissons un élément $a \in A$ et considérons la décomposition :
+
+$$X = \{ a \} \cup ( X \setminus \{ a \} )$$
+
+Comme l'intersection des deux ensembles du membre de droite est vide :
+
+$$\{ a \} \cap ( X \setminus \{ a \} ) = \emptyset$$
+
+on peut écrire :
+
+$$\sum_{x \in X} f(x) = \sum_{ x \in \{ a \} } f(x) + \sum_{x \in X \setminus \{ a \} } f(x)$$
+
+c'est-à-dire :
+
+$$\sum_{x \in X} f(x) = f(a) + \sum_{x \in X \setminus \{ a \} } f(x)$$
+
+On en déduit un algorithme itératif permettant d'estimer la somme :
+
+$$S \approx \sum_{x \in X} f(x)$$
+
+Nous partons de :
+
+#+BEGIN_CENTER
+\(
+S_0 = 0 \)
+
+\(
+X_0 = X
+\)
+#+END_CENTER
+
+A chaque étape $k \in \setN$, nous choisissons $a_k \in X_k$ et nous
+adaptons notre estimation par :
+
+$$S_{k + 1} = f(a_k) + S_k$$
+
+On retire ensuite $a_k$ de $X_k$ pour éviter de le compter plus d'une
+fois, ce qui nous donne l'ensemble suivant :
+
+$$X_{k + 1} = X_k \setminus \{ a_k \}$$
+
+Cet algorithme va nous permettre de formaliser la définition des sommes.
+
+
+* Ensemble fini
+
+Soit l'ensemble $X$ contenant un nombre fini $N \in \setN$ d'éléments :
+
+$$X = \{ a_1, a_2, ..., a_N \}$$
+
+En appliquant l'algorithme d'évaluation d'une somme, on finit par
+arriver à l'itération $N$ avec :
+
+$$X_N = \emptyset$$
+
+On a simplement :
+
+$$\sum_{x \in X} f(x) = S_N + \sum_{x \in \emptyset} f(x) = S_N + 0 = S_N$$
+
+Comme :
+
+$$S_N = f(a_1) + f(a_2) + ... + f(a_N)$$
+
+on a simplement :
+
+$$\sum_{x \in X} f(x) = f(a_1) + f(a_2) + ... + f(a_N)$$
+
+On note :
+
+$$\sum_{k = 1}^N f(a_k) = f(a_1) + f(a_2) + ... + f(a_N)$$
+
+
+** Numérotation
+
+Les éléments de $X$ peuvent être numérotés différemment. Soit $m, n \in \setZ$ et :
+
+$$X = \{ a_m, a_{m + 1}, ..., a_{n - 1}, a_n \}$$
+
+On a alors :
+
+$$\sum_{x \in X} f(x) = f(a_m) + f(a_{m+1}) + ... + f(a_{n-1}) + f(a_n)$$
+
+On note :
+
+$$\sum_{k = m}^n f(a_k) = f(a_m) + f(a_{m+1}) + ... + f(a_{n-1}) + f(a_n)$$
+
+
+** Extension
+
+Soit un ensemble $X$ dont on peut extraire un sous-ensemble fini de la forme :
+
+$$F = \{ a_m, a_{m + 1}, ..., a_{n - 1}, a_n \} \subseteq X$$
+
+tel que :
+
+$$f(x) = 0$$
+
+pour tout $x \in X \setminus F$. La somme s'écrit alors :
+
+$$\sum_{x \in X} f(x) = \sum_{x \in F} f(x) = \sum_{k = m}^n f(a_k)$$
+
+
+* Ensemble dénombrable
+
+
+** Naturels
+
+Soit :
+
+$$X = \{ a_0, a_1, a_2,... \} = \{ a_k : k \in \setN \}$$
+
+Si la suite $n \mapsto S_n$ définie par :
+
+$$S_n = \sum_{k = 0}^n f(a_k) = f(a_0) + f(a_1) + ... + f(a_n)$$
+
+pour tout $n \in \setN$ converge vers un certain $S \in \corps$, on définit :
+
+$$\sum_{x \in X} f(x) = \lim_{n \to \infty} S_n = S$$
+
+c'est-à-dire :
+
+$$\sum_{x \in X} f(x) = \lim_{n \to \infty} \sum_{k = 0}^n f(a_k)$$
+
+On introduit la notation :
+
+$$\sum_{k = 0}^{+\infty} f(a_k) = \lim_{n \to \infty} \sum_{k = 0}^n f(a_k)$$
+
+
+** Entiers
+
+Soit :
+
+$$X = \{ ...,a_{-2},a_{-1},a_0, a_1, a_2,... \} = \{ a_k : k \in \setZ \}$$
+
+Si la suite des $n \mapsto S_n$ définie par :
+
+$$S_n = \sum_{k = -n}^n f(a_k) = f(a_{-n}) + f(a_{-n+1}) + ... + f(a_{n-1}) + f(a_n)$$
+
+pour tout $n \in \setN$ converge vers un certain $S \in \corps$, on définit :
+
+$$\sum_{x \in X} f(x) = \lim_{n \to \infty} S_n = S$$
+
+On introduit la notation :
+
+$$\sum_{k = -\infty}^{+\infty} f(a_k) = \lim_{n \to \infty} \sum_{k = -n}^{n} f(a_k)$$
+
+
+** Extension
+
+Soit un ensemble $X$ dont on peut extraire un sous-ensemble $D$ de la forme :
+
+$$D = \{a_k : k \in \setN\} \subseteq X$$
+
+ou :
+
+$$D = \{a_k : k \in \setZ\} \subseteq X$$
+
+tel que :
+
+$$f(x) = 0$$
+
+pour tout $x \in X \setminus D$. La somme s'écrit alors :
+
+$$\sum_{x \in X} f(x) = \sum_{x \in D} f(x)$$
+
+
+* Linéarité
+
+Soit les fonctions $f,g : \Omega \mapsto \corps$ et l'ensemble fini $X \subseteq \Omega$. On a clairement :
+
+$$\sum_{x \in X} \Big[ f(x) + g(x) \Big] = \sum_{x \in X} f(x) + \sum_{x \in X} g(x)$$
+
+Comme le produit se distribue sur l'addition, on a également :
+
+$$\sum_{x \in X} \Big[ c \cdot f(x)\Big] = c \cdot \sum_{x \in X} f(x)$$
+
+pour tout $c \in \corps$. La somme sur un ensemble fini est linéaire.
+
+
+* Additivité
+
+Si les ensembles finis $X$ et $Y$ vérifient $X \cap Y = \emptyset$, la commutativité et l'associativité de l'addition nous donnent la propriété d'additivité :
+
+$$\sum_{x \in X \cup Y} f(x) = \sum_{x \in X} f(x) + \sum_{x \in Y} f(x)$$
+
+
+* Additivité généralisée
+
+Soit les ensembles $\Omega$ et $\Lambda$ comportant un nombre fini d'éléments, la fonction $f : \Omega \mapsto \corps$ et la collection d'ensembles :
+
+$$\Theta = \{ X(\lambda) \subseteq \Omega : \lambda \in \Lambda \}$$
+
+où $X : \Lambda \mapsto \sousens(\Omega)$. On définit la fonction $S : \Lambda \mapsto \corps$ représentant les sommes associées par :
+
+$$S(\lambda) = \sum_{x \in X(\lambda)} f(x)$$
+
+On suppose que $\Theta$ forme une partition de $\Omega$. On a alors :
+
+$$X(\lambda) \cap X(\mu) = \emptyset$$
+
+pour tout $\lambda,\mu \in \Lambda$ tels que $\lambda \ne \mu$ et :
+
+$$\Omega = \bigcup_{\lambda \in \Lambda} X(\lambda)$$
+
+Alors, l'associativité et la commutativité de l'addition nous permettent de regrouper les termes de $\Omega$ par sous-ensembles $X(\lambda)$, et on a :
+
+$$\sum_{x \in \Omega} f(x) = \sum_{\lambda \in \Lambda} S(\lambda) = \sum_{\lambda \in \Lambda} \left[ \sum_{x \in X(\lambda)} f(x) \right]$$
+
+
+** Notation
+
+On note aussi :
+
+$$\sum_{\lambda \in \Lambda} \sum_{x \in X(\lambda)} f(x) = \sum_{\lambda \in \Lambda} \left[ \sum_{x \in X(\lambda)} f(x) \right]$$
+
+
+* Produit cartésien
+
+Soit les sous-ensembles $X,Y \subseteq \Omega$ comportant un nombre fini d'éléments et la fonction $f : X \times Y \mapsto \corps$. On définit la fonction $A : X \mapsto \sousens(X \times Y)$ par :
+
+$$A(x) = \{ (x,y) : y \in Y \}$$
+
+pour tout $x \in X$. Les sommes associées s'écrivent :
+
+$$S(x) = \sum_{(\lambda,y) \in A(x)} f(\lambda,y)$$
+
+Comme les éléments de $A(x)$ sont de la forme $(x,y)$, on a forcément $\lambda = x$. Par conséquent, parcourir $A(x)$ revient à parcourir les $y \in Y$ en gardant $\lambda = x$ fixé et on a :
+
+$$S(x) = \sum_{y \in Y} f(x,y)$$
+
+On se rend compte que les ensembles de cette collection ne se chevauchent pas :
+
+$$A(\lambda) \cap A(\mu) = \emptyset$$
+
+pour tout $\lambda, \mu \in X$ tels que $\lambda \ne \mu$. On a aussi :
+
+$$X \times Y = \bigcup_{\lambda \in X} A(\lambda)$$
+
+Nous pouvons par conséquent utiliser l'additivité généralisée, ce qui nous donne :
+
+$$\sum_{(x,y) \in X \times Y} f(x,y) = \sum_{x \in X} S(x)$$
+
+soit, en tenant compte de l'expression de $S(x)$ :
+
+$$\sum_{(x,y) \in X \times Y} f(x,y) = \sum_{x \in X} \sum_{y \in Y} f(x,y)$$
+
+On montre également que :
+
+$$\sum_{(x,y) \in X \times Y} f(x,y) = \sum_{y \in Y} \sum_{x \in X} f(x,y)$$
+
+
+* Somme d'un produit
+
+Soit les fonctions $f,g : \Omega \mapsto \corps$ et les sous-ensembles $X,Y \subseteq \Omega$ comportant un nombre fini d'éléments. On a :
+
+$$\sum_{(x,y) \in X \times Y} f(x) \cdot g(y) = \sum_{x \in X} \sum_{y \in Y} f(x) \cdot g(y)$$
+
+Mais comme la valeur de $f(x)$ ne dépend pas de $y$, on peut appliquer la distributivité du produit sur l'addition pour faire sortir les valeurs de $f$ de la somme sur $y$ et :
+
+$$\sum_{(x,y) \in X \times Y} f(x) \cdot g(y) = \sum_{x \in X} \left[ f(x) \cdot \sum_{y \in Y} g(y) \right]$$
+
+A nouveau, comme la somme de $g$ sur $Y$ ne dépend pas de $x$, on peut la faire sortir et :
+
+$$\sum_{(x,y) \in X \times Y} f(x) \cdot g(y) = \left[ \sum_{y \in Y} g(y) \right] \cdot \left[ \sum_{x \in X} f(x) \right]$$
+
+La multiplication étant commutative, on a également :
+
+$$\sum_{(x,y) \in X \times Y} f(x) \cdot g(y) = \left[ \sum_{x \in X} f(x) \right] \cdot \left[ \sum_{y \in Y} g(y) \right]$$
+
+

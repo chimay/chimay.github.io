@@ -1,0 +1,227 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Progressions
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:progressions}
+
+* Arithmétique
+
+Soit $n \in \setN$. Nous allons tenter d'évaluer la somme :
+
+$$S_n = \sum_{i = 0}^n i = 0 + 1 + 2 + ... + n$$
+
+L'idée est d'exprimer que cette somme est équivalente à :
+
+$$(n - 0) + (n - 1) + ... + (n - n)$$
+
+Si nous posons $j$ tel que $i = n - j$, on voit que l'on a $j = n -i$ et $0 \le j \le n$. Donc :
+
+$$S_n = \sum_{j = 0}^n (n-j)$$
+
+Développons :
+
+$$\sum_{j = 0}^n (n-j) = \sum_{j = 0}^{n} n - \sum_{j = 0}^{n} j$$
+
+Le premier terme du membre de droite peut se réécrire :
+
+$$\sum_{j = 0}^n n = n \cdot \sum_{j = 0}^{n} 1 = n \cdot (n + 1)$$
+
+Pour le second, on a clairement :
+
+$$\sum_{j = 0}^n j = S_n$$
+
+On en conclut que :
+
+$$S_n = n \cdot (n + 1) - S_n$$
+
+c'est-à-dire :
+
+$$2 S_n = n \cdot (n + 1)$$
+
+Divisant par $2$, on obtient le résultat final :
+
+$$\sum_{i = 0}^{n} i = \frac{ n \cdot (n + 1) }{ 2 }$$
+
+
+* Géométrique
+
+Soit $n \in \setN$ et $a \in \corps$. Nous allons rechercher une expression de la somme :
+
+$$G_n = \sum_{i=0}^n a^i = 1 + a + a^2 + ... + a^n$$
+
+Si $a = 1$, on a simplement :
+
+$$G_n = \sum_{i=0}^n a^i = 1 + ... + 1 = n$$
+
+Intéressons-nous à présent au cas où $a \ne 1$. On part du constat que la somme $G_n$ est équivalente à :
+
+$$1 + a \cdot (1 + a + a^2 + ... + a^n) - a^{n+1}$$
+
+On développe en ce sens :
+
+\begin{align}
+G_n &= 1 + \sum_{i = 1}^n a^i \)
+
+\(
+&= 1 + a \cdot \sum_{i = 0}^{n - 1} a^i \)
+
+\(
+&= 1 + a \cdot \sum_{i = 0}^n a^i - a^{n + 1}
+\end{align}
+
+et finalement, on arrive à l'équation implicite :
+
+$$G_n = 1 + a \cdot G_n - a^{n + 1}$$
+
+En soustrayant $a \cdot G_n$ des deux membres, on obtient :
+
+$$(1 - a) \cdot G_n = 1 - a^{n + 1}$$
+
+Comme $a \ne 1$, on en déduit que :
+
+$$\sum_{i = 0}^n a^i = \frac{ 1 - a^{n + 1} }{ 1 - a }$$
+
+
+** Autre forme
+
+En multipliant numérateur et dénominateur par $-1$, on obtient la forme équivalente :
+
+$$\sum_{i = 0}^n a^i = \frac{a^{n + 1} - 1}{a - 1}$$
+
+
+* Factorisation
+
+\label{sec:factorisation_progression_geometrique}
+
+Les progressions géométriques permettent d'obtenir une importante formule de
+factorisation. Soit $a,b \in \corps$ avec $a \ne 0$. Posons :
+
+$$r = \frac{b}{a}$$
+
+On a alors :
+
+$$(1 - r) \cdot \sum_{i = 0}^n r^i = 1 - r^{n + 1}$$
+
+Multipliant par $a^{n + 1}$, on obtient :
+
+$$(a - b) \cdot a^n \cdot \sum_{i = 0}^n \frac{b^i}{a^i} = a^{n + 1} - b^{n + 1}$$
+
+En faisant rentrer le facteur $a^n$ dans la somme, on a en définitive :
+
+$$a^{n + 1} - b^{n + 1} = (a - b) \cdot \sum_{i = 0}^n a^{n - i} \cdot b^i$$
+
+
+** Extension
+
+Si $a = 0$, on a :
+
+$$a^{n + 1} - b^{n + 1} = - b^{n + 1}$$
+
+et :
+
+\begin{align}
+(a - b) \cdot \sum_{i = 0}^n a^{n - i} \cdot b^i &= -b \cdot (0^n + 0^{n -1} \cdot b + ... + 0 \cdot b^{n - 1} + b^n) \)
+
+\(
+&= -b \cdot b^n = - b^{n + 1}
+\end{align}
+
+La formule de factorisation est donc valable pour tout $a,b \in \corps$.
+
+
+** Exemples
+
+Voici quelques exemples d'applications :
+
+\begin{align}
+a^{2} - b^{2} &= (a - b) \cdot (a + b) \)
+
+\(
+a^{3} - b^{3} &= (a - b) \cdot (a^2 + a \cdot b + b^2)
+\end{align}
+
+
+** Symétrie
+
+On a clairement :
+
+$$\sum_{i = 0}^n a^{n - i} \cdot b^i = a^n + a^{n - 1} \cdot b + ... + a \cdot b^{n - 1} + b^n = \sum_{i = 0}^n a^i \cdot b^{n - i}$$
+
+et donc :
+
+$$a^{n + 1} - b^{n + 1} = (a - b) \cdot \sum_{i = 0}^n a^i \cdot b^{n - i}$$
+
+
+* Somme des carrés
+
+Considérons la somme :
+
+$$C_n = \sum_{i = 0}^n i^2 = 1 + 4 + 16 + ... + n^2$$
+
+La progression arythmétique nous dit que :
+
+$$\frac{1}{2} \cdot i \cdot (i+1) = \sum_{j=0}^i j$$
+
+On a par conséquent :
+
+$$\sum_{i = 0}^n \frac{1}{2} \cdot i \cdot (i+1) = \sum_{i = 0}^n \sum_{j = 0}^i j$$
+
+On peut utiliser le lemme du triangle pour inverser les deux sommes du membre de droite :
+
+$$\sum_{i = 0}^n \sum_{j = 0}^i j = \sum_{j = 0}^n \sum_{i = j}^n j$$
+
+Comme $j$ ne dépend pas de $i$, on peut le faire sortir de la somme sur $i$ et le membre de droite devient :
+
+$$\sum_{j = 0}^n \sum_{i = j}^n j = \sum_{j = 0}^n j \sum_{i = j}^n 1 = \sum_{j = 0}^n j \cdot (n - j + 1)$$
+
+En tenant compte de la linéarité des sommes, on a alors :
+
+\begin{align}
+\sum_{j = 0}^n j \cdot (n - j + 1) &= (n + 1) \cdot \sum_{j = 0}^n j - \sum_{j = 0}^n j^2 \)
+
+\(
+&= \frac{1}{2} \cdot n \cdot (n + 1)^2 - C_n
+\end{align}
+
+D'un autre côté, on a :
+
+$$\sum_{i = 0}^n \frac{1}{2} \cdot i \cdot (i+1) = \frac{1}{2} \sum_{i = 0}^n (i^2 + i) = \frac{1}{2} \cdot C_n + \frac{1}{4} \cdot n \cdot (n + 1)$$
+
+En égalisant ces deux expressions, on obtient :
+
+$$\frac{3}{2} \cdot C_n &= \frac{1}{4} \cdot \Big[ 2 \cdot n \cdot (n + 1)^2 - n \cdot (n + 1) \Big]$$
+
+Ou encore :
+
+\begin{align}
+6 \cdot C_n &= ( 2 \cdot n \cdot (n + 1) - n ) \cdot (n + 1) \)
+
+\(
+&= ( 2 \cdot n^2 + n ) \cdot (n + 1)
+\end{align}
+
+On a donc la formule permettant d'évaluer la somme des carrés :
+
+$$\sum_{i = 0}^n i^2 = \frac{ (2 \cdot n^2 + n) \cdot (n + 1) }{ 6 }$$
+
+

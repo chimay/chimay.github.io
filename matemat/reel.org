@@ -1,0 +1,643 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Réels
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:reels}
+
+* Dépendances
+
+  - Chapitre \ref{chap:naturels} : Les nombres naturels
+  - Chapitre \ref{chap:entiers} : Les nombres entiers
+  - Chapitre \ref{chap:rationnels} : Les nombres rationnels
+
+* Suites
+
+On note $\mathfrak{C}^\top$ l'ensemble des suites de Cauchy rationnelles
+croissantes, $\mathfrak{C}^\bot$ l'ensemble des suites de Cauchy rationnelles
+décroissantes et :
+
+$$\mathfrak{C} = \mathfrak{C}^\top \cup \mathfrak{C}^\bot$$
+
+l'ensemble des suites de Cauchy rationnelles monotones.
+
+
+** Équivalence
+
+$$\mathcal{E}^\top(s) = \accolades{t \in \mathfrak{C}^\top : s \equiv t}$$
+
+$$\mathcal{E}^\top(s) = \accolades{t \in \mathfrak{C}^\top : \lim_n (s_n - t_n) = 0}$$
+
+$$\mathcal{E}^\bot(s) = \accolades{t \in \mathfrak{C}^\bot : s \equiv t}$$
+
+$$\mathcal{E}^\bot(s) = \accolades{t \in \mathfrak{C}^\bot : \lim_n (s_n - t_n) = 0}$$
+
+$$\mathcal{E}(s) = \accolades{t \in \mathfrak{C} : s \equiv t}$$
+
+$$\mathcal{E}(s) = \accolades{t \in \mathfrak{C} : \lim_n (s_n - t_n) = 0}$$
+
+
+* Ensembles
+
+$$\lambda(u) = \{ v \in \setQ : v \le u \}$$
+
+$$\theta(u) = \{ v \in \setQ : v \ge u \}$$
+
+$$s : \setN \mapsto \setQ$$
+
+$$s : n \mapsto s_n$$
+
+$$\Lambda(s) = \sup_\subseteq \{ \lambda(s_n) : n \in \setN \}$$
+
+$$\Lambda(s) = \bigcup_{n \in \setN} \lambda(s_n) = \bigcup_{n \in \setN} \{ v \in \setQ : v \le s_n \}$$
+
+$$\Theta(s) = \inf_\subseteq \{ \theta(s_n) : n \in \setN \}$$
+
+$$\Theta(s) = \bigcap_{n \in \setN} \theta(s_n) = \bigcap_{n \in \setN} \{ v \in \setQ : v \ge s_n \}$$
+
+
+* Séparation
+
+On aimerait bien étendre $\setQ$ en construisant un ensemble
+qui contienne la solution $r$ d'équations telles que $r^2 = 2$.
+Notons que si $r^2 = 2$ et que l'on veut garder dans cet ensemble
+étendu les propriétés des rationnels, on doit également avoir
+$(-r)^2 = r^2 = 2$. Il y aurait donc deux solutions. Nous allons
+étudier séparément la solution liée aux rationnels positifs.
+Soit la fonction $f : \setQ \mapsto \setQ$ définie par :
+
+#+BEGIN_CENTER
+\[ f(x) =
+\begin{cases}
+0 & \text{ si } x \le 0 \\
+x^2 & \text{ si } x \strictsuperieur 0
+\end{cases} \]
+#+END_CENTER
+
+pour tout $x \in \setQ$. On part de la constatation que, si la solution de $f(x) = 2$ n'existe pas dans $\setQ$, l'équation « sépare » les rationnels en deux catégories : les $x$ tels que $f(x) \strictinferieur 2$ et les $y$ tels que $f(y) \strictsuperieur 2$. Considérons l'ensemble :
+
+$$R = \{ x \in \setQ : f(x) \strictinferieur 2 \}$$
+
+Plus on augmente la valeur de $x \in R$, plus l'erreur $e = 2 - x^2 \strictsuperieur 0$ diminue. On a par conséquent envie de dire que la solution $r$ est le plus grand des éléments de $R$. Mais comme ni le maximum ni le supremum n'existent au sens de l'ordre $\le$, nous le considérons plutôt au sens de l'inclusion ensembliste $\subseteq$ sur les sous-ensembles de $R$ :
+
+$$r \equiv \sup_\subseteq \sousens(R) = R$$
+
+Nous sommes donc amenés à associer un sous-ensemble $R$ des rationnels à chaque élément $r$ de l'ensemble que nous désirons construire. Mais nous n'allons pas prendre n'importe quel sous-ensemble de $\setQ$ : on désire que les sous-ensembles acceptés vérifie des propriétés analogues à notre $R$ particulier. Or, pour tout $x \in R$, l'ensemble :
+
+$$\Lambda(x) = \{ y \in \setQ : y \strictinferieur x \}$$
+
+est inclus dans $R$. Cette propriété est à la base de la construction des réels.
+
+
+* Définition
+
+On nomme réel tout nombre $r$ associé à un sous-ensemble $R \subseteq \setQ$ tel que :
+
+  - $R \ne \emptyset$
+  - Il existe un $\mu \in \setQ$ tel que $R \le \mu$
+  - Pour tout $x \in R$ et $y \in \setQ$ tel que $y \strictinferieur x$, on a $y \in R$ :
+
+$$\Lambda(x) = \{ y \in \setQ : y \strictinferieur x \} \subseteq R$$
+
+  - Le maximum de $R$ n'existe pas.
+
+On note $\setR$ l'ensemble des réels.
+
+
+** Corollaire
+
+Si le rationnel $x \in \setQ$ n'appartient pas à $R$, on a $y \notin R$ pour tout $y \in \setQ$ vérifiant $y \strictsuperieur x$ (dans le cas contraire, on aurait $x \notin R$ avec $x \strictinferieur y$ et $y \in R$, ce qui contredit la définition des réels).
+
+
+** Notation
+
+Pour tout réel $r$ associé au sous-ensemble de rationnels $R$, on note bien entendu :
+
+$$r = \sup R$$
+
+
+* Inclusions
+
+On peut associer à tout rationnel $x \in \setQ$ un ensemble $\Lambda(x)$. Or, on a clairement $\Lambda(x) \ne \emptyset$ et $\Lambda(x) \le x$. Soit $s \in \Lambda(x)$. On a $\Lambda(s) \subseteq \Lambda(x)$. On peut aussi trouver un $t \in \Lambda(x)$ tel que $s \strictinferieur t \strictinferieur x$. Donc, $s$ ne peut pas être le maximum de $\Lambda(x)$. On en conclut que tout rationnel $x$ correspond au réel associé à $\Lambda(x)$. Les entiers pouvant être considérés comme des cas particuliers de rationnels et les naturels comme des cas particuliers d'entiers, on a donc finalement : $\setN \subseteq \setZ \subseteq \setQ \subseteq \setR$.
+
+
+* Ordre
+
+L'ordre sur les réels découle directement de l'ordre $\subseteq$ sur les ensembles. Soit $r \in \setR$ associé au sous-ensemble $R \subseteq \setQ$ et $s \in \setR$ associé au sous-ensemble $S \subseteq \setQ$. On dit que $r$ est plus petit que $s$ et on le note :
+
+$$r \le s$$
+
+si et seulement si $R$ est inclus dans $S$ :
+
+$$R \subseteq S$$
+
+
+** Totalité
+
+Supposons que pour tout $x \in R$, on ait $x \in S$. On a alors $R \subseteq S$ et $r \le s$ par définition. Inversément, supposons que l'on puisse trouver un $x \in R$ tel que $x \notin S$. Tous les rationnels $z \in \setQ$ tels que $z = x$ ou $z \strictsuperieur x$ vérifient $z \notin S$. Par conséquent, si $y \in S$, on doit avoir $y \strictinferieur x$. Mais, par définition des réels et comme $x \in R$, on doit aussi avoir $y \in R$. On en conclut que $S \subseteq R$, et donc $s \le r$.
+
+Pour tout couple de réels $(r,s) \in \setR^2$, on a donc soit $r \le s$, soit $s \le r$. L'ordre ainsi défini est donc total.
+
+
+** Ordre strict
+
+On a également l'analogue pour l'ordre et l'inclusion stricts :
+
+$$r \strictinferieur s \quad \Leftrightarrow \quad R \subset S$$
+
+Ce qui revient à dire que $r \strictinferieur s$ si et seulement si $r \le s$ et $r \ne s$.
+
+
+* Addition
+
+L'addition de $r \in \setR$ associé à $R$ et de $s \in \setR$ associé à $S$ est définie par :
+
+$$r + s \equiv \{ x + y \in \setQ : x \in R, \ y \in S \}$$
+
+
+* Neutre additif
+
+Soit $0 \in \setQ$ et le sous-ensemble de rationnel correspondant :
+
+$$Z = \{ x \in \setQ : x \strictinferieur 0 \}$$
+
+Soit $r \in \setR$ associé à l'ensemble $R$ et l'ensemble $S = R + Z$ associé à l'addition $r + 0$.
+
+Tout $s \in S$ peut s'écrire sous la forme $s = x + z$, pour un certain $x \in R$ et un certain $z \in Z$. Si $z = 0$, on a bien évidemment $s = x \in R$. Sinon, $z \strictinferieur 0$ et $s \strictinferieur x$, d'où $s \in R$ par définition des réels. On a donc $S \subseteq R$.
+
+Réciproquement, soit un rationnel $x \in R$. Si on avait $y \le x$ pour tout $y \in R$, notre $x$ serait le maximum de $R$, ce qui n'est pas possible par définition des réels. On peut donc trouver un $y \in R$ tel que $x \strictinferieur y$. Le rationnel $d = x - y$ est strictement négatif et appartient donc à $Z$. On en déduit que :
+
+$$x = x - y + y = d + y$$
+
+où $d \in Z$ et $y \in R$. Donc, $x \in S$ et $R \subseteq S$.
+
+La double inclusion nous montre alors que $R = S$, autrement dit que $r + 0 = r$. L'élement neutre pour l'addition, noté $0 \in \setR$, est donc associé à l'ensemble des rationnels strictement négatifs :
+
+$$0 \equiv \{ x \in \setQ : x \strictinferieur 0 \}$$
+
+
+* Positifs et négatifs
+
+On définit les ensembles des réels positifs et négatifs par :
+
+#+BEGIN_CENTER
+\(
+\setR^+ = \{ x \in \setR : x \ge 0 \} \)
+
+\(
+\setR^- = \{ x \in \setR : x \le 0 \}
+\)
+#+END_CENTER
+
+
+* Signe
+
+La fonction signe est définie par :
+
+#+BEGIN_CENTER
+\[ \signe(x) =
+\begin{cases}
+1 & \text{ si } x \ge 0 \\
+-1 & \text{ si } x \strictinferieur 0
+\end{cases} \]
+#+END_CENTER
+
+pour tout $x \in \setR$
+
+
+* Opposé
+
+Soit $r \in \setR$. On aimerait bien trouver l'opposé $-r \in \setR$ tel que :
+
+$$r + (-r) = (-r) + r = 0$$
+
+Si $r \in \setQ$, on a simplement :
+
+$$-r \equiv \Lambda(-r) = \{ x \in \setQ : x \strictinferieur -r \}$$
+
+Si $r \in \setR \setminus \setQ$, on définit l'association :
+
+$$-r \equiv \{ -x : x \in \setQ \setminus R \}$$
+
+ou $R \subseteq \setQ$ est l'ensemble de rationnels associé à $r$.
+
+
+* Soustraction
+
+On définit la soustraction par :
+
+$$r - s = r + (-s)$$
+
+pour tout $r,s \in \setR$.
+
+
+* Valeur absolue
+
+La valeur absolue d'un réel $r \in \setR$ est définie par :
+
+$$\abs{r} = \sup \{ -r , r \}$$
+
+
+** Propriétés
+
+On a clairement $\abs{-r} = \abs{r}$. Si $r \ge 0$, on a $\abs{r} = r \ge 0$. Si $r \strictinferieur 0$, on a $\abs{r} = -r \strictsuperieur 0$. On en conclut que $\abs{r} \ge 0$ pour tout $r \in \setR$. Si $\abs{r} = 0$, on a soit $r = 0$ ou $-r = 0$. On en conclut que $r = 0$. Enfin, choisissons $r,s \in \setR$ :
+
+  - Si $r,s \ge 0$, on a $\abs{r + s} = r + s$.
+  - Si $r \ge 0$ et $s \strictinferieur 0$, on a $\abs{r + s} \le \max\{ \abs{r} , \abs{s} \} \le \abs{r} + \abs{s}$.
+  - Si $r \strictinferieur 0$ et $s \ge 0$, on a $\abs{r + s} \le \max\{ \abs{r} , \abs{s} \} \le \abs{r} + \abs{s}$.
+  - si $r,s \strictinferieur 0$, on a $\abs{r + s} = (-r) + (-s) = \abs{r} + \abs{s}$.
+
+On en conclut que $\abs{r + s} \le \abs{r} + \abs{s}$ pour tout $r,s \in \setR$.
+
+
+* Distance
+
+On définit une distance sur $\setR$ par :
+
+$$\distance(x,y) = \abs{x - y}$$
+
+On a bien $\distance(x,y) \ge 0$. La condition $\distance(x,y) = 0$ implique que $\abs{x - y}$, donc $x - y = 0$ et $x = y$. Enfin :
+
+\begin{align}
+\distance(x,z) &= \abs{x - z} \)
+
+\(
+&\le \abs{x - y} + \abs{y - z} \)
+
+\(
+&\le \distance(x,y) + \distance(y,z)
+\end{align}
+
+
+* Arrondis
+
+L'arrondi inférieur d'un réel $x \in \setR$ associé à $X$ est le plus grand entier dont l'ensemble associé est inclus dans $X$ :
+
+$$\arrondiinf{x} = \sup \{ n \in \setZ, \ \Lambda(n) \subseteq X \}$$
+
+L'arrondi supérieur est le plus petit entier dont l'ensemble associé inclut $X$ :
+
+$$\arrondisup{x} = \inf \{ n \in \setZ, \ X \subseteq \Lambda(n) \}$$
+
+
+** Eloignement
+
+Supposons que :
+
+$$\abs{\arrondiinf{x} - x} \ge 1$$
+
+on aurait :
+
+#+BEGIN_CENTER
+\(
+x - \arrondiinf{x} \ge 1 \)
+
+\(
+x \ge \arrondiinf{x} + 1
+\)
+#+END_CENTER
+
+avec $\arrondiinf{x} + 1$ entier, ce qui contredit l'hypothèse de supremum de l'arrondi inférieur. On déduit l'analogue pour l'arrondi supérieur. On a donc :
+
+$$\max\{ \abs{\arrondisup{x} - x} , \abs{\arrondiinf{x} - x} \} \strictinferieur 1$$
+
+
+* Suites convergentes
+
+Soit $r \in \setR$, l'entier $m \in \setZ$ et le naturel $n \in \setN$ tel que $n \ne 0$. On considère la suite des rationnels $x_n \in \setQ$ définis par :
+
+$$x_n = \frac{m}{2^n}$$
+
+On va tenter de choisir $m$ pour que :
+
+$$\abs{ \frac{m}{2^n} - r} \le \frac{1}{2^n}$$
+
+Cette inégalité est équivalente à :
+
+#+BEGIN_CENTER
+\(
+\frac{m}{2^n} - r \le \frac{1}{2^n} \)
+
+\(
+r - \frac{m}{2^n} \le \frac{1}{2^n}
+\)
+#+END_CENTER
+
+En multipliant par $2^n$, on en déduit que :
+
+$$r \cdot 2^n - 1 \le m \le r \cdot 2^n + 1$$
+
+Il suffit donc de prendre :
+
+$$m \in \{ \arrondisup{r \cdot 2^n} , \arrondiinf{r \cdot 2^n} \}$$
+
+pour satisfaire la contrainte demandée. La suite des $x_n$ converge vers $r$ puisque :
+
+$$\lim_{n \to \infty} \abs{x_n - r} = 0$$
+
+On le note :
+
+$$\lim_{n \to \infty} x_n = r$$
+
+On peut donc également identifier tout réel à une suite de rationnels qui converge vers lui.
+
+
+** Opération
+
+On peut se servir de ce résultat pour étendre une opération $\divideontimes$ définie sur $\setQ$. Soit $r,s \in \setR$ et les suites de rationnels $x_i,y_i \in \setQ$ convergent respectivement vers $r$ et $s$ :
+
+#+BEGIN_CENTER
+\(
+\lim_{n \to \infty} x_n = r \)
+
+\(
+\lim_{n \to \infty} y_n = s
+\)
+#+END_CENTER
+
+On définit alors :
+
+$$r \divideontimes s = \lim_{n \to \infty} \left[ x_n \divideontimes y_n \right]$$
+
+
+* Multiplication
+
+Soit $r,s \in \setR$. et les suites de rationnels $x_n$ et $y_n$ vérifiant :
+
+#+BEGIN_CENTER
+\(
+\lim_{n \to \infty} x_n = r \)
+
+\(
+\lim_{n \to \infty} y_n = s
+\)
+#+END_CENTER
+
+On définit la multiplication par :
+
+$$r \cdot s = \lim_{n \to \infty} x_n \cdot y_n$$
+
+
+* Inverse
+
+L'inverse d'un réel $r \in \setR$ est le réel $r^{-1}$ tel que :
+
+$$r \cdot r^{-1} = r^{-1} \cdot r = 1$$
+
+
+* Division
+
+Soit $r,s \in \setR$ avec $s \ne 0$. On définit la division de $r$ par $s$ par :
+
+$$\frac{r}{s} = r \cdot s^{-1}$$
+
+
+* Puissance
+
+Soit $x \in \setR$ et $n \in \setN$. La puissance de $x$ est comme d'habitude :
+
+#+BEGIN_CENTER
+\(
+x^0 = 1 \)
+
+\(
+x^n = x \cdot x^{n - 1}
+\)
+#+END_CENTER
+
+Les puissances négatives sont données par :
+
+$$x^{-n} = \left( x^{-1} \right)^n$$
+
+Comme l'inverse d'une puissance est la puissance de l'inverse, on a aussi :
+
+$$x^{-n} = \left( x^n \right)^{-1}$$
+
+
+* Racines
+
+Soit $x \in \setR$ et $n \in \setN$. On dit que $z$ est la $n^{ième}$ racine de $x$ si :
+
+$$z^n = x$$
+
+On note alors indifféremment :
+
+$$z = x^{1/n} = \sqrt[n]{x}$$
+
+Un cas particulier important est celui de la racine carrée :
+
+$$\sqrt{x} = \sqrt[2]{x} = x^{1/2}$$
+
+
+* Unicité
+
+
+** Amplitude
+
+Soit $x,y,z \in \setR$ avec $x,y \ge 0$ et $n \in \setN$. Il est clair que si $x \ne y$, on a forcément $x^n \ne y^n$. On en conclut que si $x$ et $y$ sont tels que $x^n = y^n$, on a forcément $x = y$. Les racines sont uniques sur $\setR^+$.
+
+
+** Signe
+
+Soit $x \in \setR$. On a :
+
+$$x^2 = (-x)^2$$
+
+Par conséquent, $x$ et $-x$ sont des racines carrées de $z = x^2$. Pour conserver l'unicité on impose que :
+
+$$\sqrt{z} = \abs{x} \ge 0$$
+
+Il en va de même pour les puissances paires $2 n$, où $n \in \setN$ car :
+
+$$x^{2 n} = \left( x^2 \right)^n = \left( (-x)^2 \right)^n = (-x)^{2 n}$$
+
+Par contre, pour les puissances impaires :
+
+$$x^{2 n + 1} = \left( x^2 \right)^n \cdot x = - \left( (-x)^2 \right)^n \cdot (-x) = - (-x)^{2 n + 1}$$
+
+Le signe n'est pas ambigu. En résumé, on a :
+
+#+BEGIN_CENTER
+\(
+\sqrt[2 n]{ x^{2 n} } = \abs{x} \)
+
+\(
+\sqrt[2 n + 1]{ x^{2 n + 1} } = x
+\)
+#+END_CENTER
+
+
+* Racine d'un produit
+
+Soit $n \in \setN$ et $a,b,x,y \in \setR$ avec :
+
+#+BEGIN_CENTER
+\(
+a^n = x \)
+
+\(
+b^n = y
+\)
+#+END_CENTER
+
+On a :
+
+$$a^n \cdot b^n = a \cdot ... \cdot a \cdot b \cdot ... \cdot b = a \cdot b \cdot ... \cdot a \cdot b = (a \cdot b)^n$$
+
+On en déduit que :
+
+$$\sqrt[n]{a^n \cdot b^n} = a \cdot b$$
+
+c'est-à-dire :
+
+$$\sqrt[n]{x \cdot y} = \sqrt[n]{x} \cdot \sqrt[n]{y} = (x \cdot y)^{1/n} = x^{1/n} \cdot y^{1/n}$$
+
+La racine d'un produit est égale au produit des racines.
+
+
+* Racine d'une racine
+
+Soit $m,n \in \setN$ et $a,b,c \in \setR$ avec :
+
+#+BEGIN_CENTER
+\(
+a^m = b \)
+
+\(
+b^n = c
+\)
+#+END_CENTER
+
+On voit que :
+
+$$a = b^{1/m} = \left( c^{1/n} \right)^{1/m}$$
+
+Mais on aussi :
+
+$$a^{m \cdot n} = \left( a^m \right)^n = b^n = c$$
+
+donc :
+
+$$a = c^{ 1/(m \cdot n) }$$
+
+On en déduit finalement que :
+
+$$\left( c^{1/n} \right)^{1/m} = c^{ 1/(m \cdot n) }$$
+
+
+* Puissances fractionnaires
+
+Soit $x \in \setR$ et $m,n \in \setN$. On définit les puissances fractionnaires par :
+
+#+BEGIN_CENTER
+\(
+x^{m/n} = \left( x^{1/n} \right)^m \)
+
+\(
+x^{-m/n} = \left( x^{1/n} \right)^{-m} = \frac{1}{x^{m/n}}
+\)
+#+END_CENTER
+
+Comme la racine d'un produit est égale au produit des racines, on a aussi :
+
+#+BEGIN_CENTER
+\(
+x^{m/n} = \left( x^m \right)^{1/n} \)
+
+\(
+x^{-m/n} = \left( x^{-m} \right)^{1/n} = \frac{1}{x^{m/n}}
+\)
+#+END_CENTER
+
+
+* Somme en exposant
+
+Soit $a,b \in \setZ$ et $x \in \setR$. Posons :
+
+$$z = x^{ 1/(b \cdot d) }$$
+
+On a alors :
+
+#+BEGIN_CENTER
+\(
+x^{1/b} = z^d \)
+
+\(
+x^{1/d} = z^b
+\)
+#+END_CENTER
+
+On voit que :
+
+$$x^{a/b} \cdot x^{c/d} = \left( z^d \right)^a \cdot \left( z^b \right)^c = z^{a \cdot d} \cdot z^{b \cdot c} = z^{a \cdot d + b \cdot c}$$
+
+c'est-à-dire :
+
+$$x^{a/b} \cdot x^{c/d} = x^{ \frac{a \cdot d + b \cdot c}{b \cdot d} }$$
+
+qui n'est rien d'autre que :
+
+$$x^{a/b} \cdot x^{c/d} = x^{ \frac{a}{b} + \frac{c}{d} }$$
+
+
+* Puissance d'une puissance
+
+Soit $a,b \in \setZ$ et $x \in \setR$. Posons :
+
+$$z = x^{ 1/(b \cdot d) }$$
+
+On constate que :
+
+$$\left( x^{a/b} \right)^{c/d} = \left( z^{a \cdot d} \right)^{c/d} = z^{a \cdot c}$$
+
+qui n'est rien d'autre que :
+
+$$\left( x^{a/b} \right)^{c/d} = x^{ \frac{a \cdot c}{b \cdot d} }$$
+
+
+* Puissance réelle
+
+Soit $x, s \in \setR$ et la suite de rationnels $\{ r_1,r_2,... \}$ convergeant vers $s$ :
+
+$$\lim_{i \to \infty} r_i = s$$
+
+On définit la puissance réelle par :
+
+$$x^s = \lim_{i \to +\infty} x^{r_i}$$
+
+
+** Additivité
+
+Les propriétés des puissances fractionnaires nous montrent que :
+
+#+BEGIN_CENTER
+\(
+x^{r + s} = x^r \cdot x^s \)
+
+\(
+\left( x^r \right)^s = x^{r \cdot s}
+\)
+#+END_CENTER
+
+pour tout $x,r,s \in \setR$.
+
+

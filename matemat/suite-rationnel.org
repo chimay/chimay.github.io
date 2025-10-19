@@ -1,0 +1,205 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Suites de rationnels
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:suitesDeRationnels}
+
+* Dépendances
+
+  - Chapitre \ref{chap:rationnels} : Les rationnels
+  - Chapitre \ref{chap:distances} : Les distances
+  - Chapitre \ref{chap:limites} : Les limites
+
+* Définition
+
+Une suite de rationnels, ou suite rationnelle est une suite $s : \setN \mapsto \setQ$ :
+
+$$s : n \mapsto s_n$$
+
+
+* Distance
+
+On définit une distance sur l'ensemble des rationnels $\setQ$ par :
+
+$$\distance(x,y) = \abs{x - y}$$
+
+pour tout $x,y \in \setQ$. On a bien $\distance(x,y) \ge 0$.
+La condition $\distance(x,y) = 0$ implique que $\abs{x - y}$,
+donc $x - y = 0$ et $x = y$. Enfin :
+
+\begin{align}
+\distance(x,z) &= \abs{x - z} \\
+&\le \abs{x - y} + \abs{y - z} \\
+&\le \distance(x,y) + \distance(y,z)
+\end{align}
+
+* Équivalence
+
+Soit les suites rationnelles $s,t : \setN \mapsto \setQ$ vérifiant $s \equiv t$. On a :
+
+$$\lim_{n \to \infty} \distance(s_n,t_n) = \lim_{n \to \infty} \abs{s_n - t_n} = 0$$
+
+On en déduit que :
+
+$$\lim_{n \to \infty} (s_n - t_n) = 0$$
+
+
+** Réciproque
+
+Supposons que :
+
+$$\lim_{n \to \infty} (s_n - t_n) = 0$$
+
+Choisissons $\epsilon \strictsuperieur 0$ et le naturel $K(\epsilon)$ tel que :
+
+$$\distance(s_n - t_n, 0) \le \epsilon$$
+
+pour tout $k \ge K(\epsilon)$. Par définition de la distance entre rationnels, on a :
+
+$$\distance(s_n - t_n, 0) = \abs{(s_n - t_n) - 0} = \abs{s_n - t_n}$$
+
+on en conclut que :
+
+$$\lim_{n \to \infty} \distance(s_n,t_n) = \lim_{n \to \infty} \abs{s_n - t_n} = 0$$
+
+c'est-à-dire $s \equiv t$ par définition.
+
+
+* Cauchy
+
+
+** Croissante
+
+Soit une suite de Cauchy $u : \setN \mapsto \setQ$ :
+
+$$u : n \mapsto u_n$$
+
+croissante :
+
+$$u_0 \le u_1 \le ... \le u_k \le ...$$
+
+Comme :
+
+$$u_n \ge u_0$$
+
+pour tout $n \in \setN$, on voit que la suite est minorée
+par $u_0$. On peut trouver un naturel $K$ tel que :
+
+$$\distance(u_m,u_n) = \abs{u_m - u_n} \le 1$$
+
+pour tout naturels $m,n \ge K$. Soit $n \in \setN$
+vérifiant $n \ge K$. On a :
+
+$$\abs{u_n - u_K} = u_n - u_K \le 1$$
+
+d'où :
+
+$$u_n \le u_K + 1$$
+
+Pour tout naturel $k \le K$, on a :
+
+$$u_k \le u_n \le u_K + 1$$
+
+En posant :
+
+$$S = u_K + 1$$
+
+on voit que :
+
+$$u_n \le S$$
+
+pour tout $n \in \setN$. Une suite de Cauchy croissante est également majorée.
+
+
+** Décroissante
+
+Soit une suite de Cauchy $u : \setN \mapsto \setQ$ :
+
+$$u : n \mapsto u_n$$
+
+décroissante :
+
+$$u_0 \ge u_1 \ge ... \ge u_k \ge ...$$
+
+Comme :
+
+$$u_n \le u_0$$
+
+pour tout $n \in \setN$, on voit que la suite est majorée
+par $u_0$. On peut trouver un naturel $K$ tel que :
+
+$$\distance(u_m,u_n) = \abs{u_m - u_n} \le 1$$
+
+pour tout naturels $m,n \ge K$. Soit $n \in \setN$
+vérifiant $n \ge K$. On a :
+
+$$\abs{u_n - u_K} = u_K - u_n \le 1$$
+
+d'où :
+
+$$u_n \ge u_K - 1$$
+
+Pour tout naturel $k \le K$, on a :
+
+$$u_k \ge u_n \ge u_K - 1$$
+
+En posant :
+
+$$I = u_K - 1$$
+
+on voit que :
+
+$$u_n \ge I$$
+
+pour tout $n \in \setN$. Une suite de Cauchy décroissante est également minorée.
+
+
+* Suite inverse
+
+Soit un rationnel $I_0$ vérifiant $I_0 \strictsuperieur 0$ et la suite
+$I : \setN \setminus \{ 0 \} \mapsto \setQ$ définie par :
+
+$$I : n \mapsto I_n = \frac{I_0}{n}$$
+
+pour tout naturel $n$ vérifiant $n \ne 0$. Soit $\epsilon \strictsuperieur 0$.
+Comme $I_0$ est strictement positif, on a :
+
+$$\epsilon \cdot \frac{1}{I_0} = \frac{\epsilon}{I_0} \strictsuperieur 0$$
+
+Soit $\epsilon \strictsuperieur 0$. On peut trouver un naturel $n$ tel que :
+
+$$\frac{1}{n} \strictinferieur \frac{\epsilon}{I_0}$$
+
+On a alors :
+
+$$\frac{I_0}{n} \strictinferieur \epsilon$$
+
+et :
+
+$$\distance\left(0,\frac{I_0}{n}\right) = \abs{\frac{I_0}{n} - 0} = \abs{\frac{I_0}{n}} \strictinferieur \epsilon$$
+
+On en déduit que :
+
+$$\lim_{n \to \infty} \frac{I_0}{n} = 0$$
+
+

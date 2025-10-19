@@ -1,0 +1,200 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Distance
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:distances}
+
+* Dépendances
+
+  - Chapitre \ref{chap:algebre} : Les structures algébriques
+  - Chapitre \ref{chap:ordres} : Les ordres
+  - Chapitre \ref{chap:topologies} : Les topologies
+
+* Définition
+
+Afin de généraliser le plus possible la notion de distance au sens usuel, nous allons nous poser la question : quelles sont les caractéristiques fondamentales d'une distance ? Nous en déduirons les propriétés que doit respecter une distance générique.
+
+Soit l'ensemble $\Omega$, un corps $\corps$ et une fonction $\distance : \Omega \times \Omega \to \corps$ représentant une distance entre deux éléments de l'ensemble $\Omega$. Choisissons des éléments quelconques $x,y,z \in \Omega$. Au sens usuel, une distance entre deux objets est clairement positive :
+
+$$\distance(x,y) \ge 0$$
+
+Elle est également symétrique puisqu'on obtient la même distance lorsqu'on intervertit les objets :
+
+$$\distance(x,y) = \distance(y,x)$$
+
+Par ailleurs , la distance entre deux objets identiques doit évidemment
+être nulle :
+
+$$\distance(x,x) = 0$$
+
+On impose également que le seul élément $y$ qui puisse être à distance nulle de $x$ soit l'élément $x$ lui-même :
+
+$$\distance(x,y) = 0 \ \Rightarrow \ x = y$$
+
+Enfin, il est toujours plus court d'aller directement de $x$ à $z$ plutôt que de passer par une étape $y$. On a donc l'inégalité triangulaire :
+
+$$\distance(x,z) \le \distance(x,y) + \distance(y,z)$$
+
+
+** Remarque
+
+Parfois, au lieu d'imposer l'égalité de deux éléments situés à distance nulle l'un de l'autre, on impose juste l'équivalence suivant un critère prédéfini :
+
+$$\distance(x,y) = 0 \ \Rightarrow \ x \equiv y$$
+
+
+* Distance à un ensemble
+
+Quelle est la distance à parcourir d'une ville donnée lorsqu'on désire se rendre dans un certain pays ? On a envie de dire que la distance est parcourue dès que l'on a atteint la frontière du pays en question. Comme on choisit généralement le chemin le plus court pour arriver à destination, on se rend compte que la distance ville - pays est le minimum des distances entre la ville et tous les points appartenant au pays.
+
+Maintenant, remplaçons la ville par un élément $x \in \Omega$ et le pays par un ensemble $A \subseteq \Omega$. On définit simplement la distance de $x$ à $A$ comme étant l'infimum des distances de $x$ à un point quelconque de $A$ :
+
+$$\distance(x,A) = \inf_{a \in A} \distance(x,a) = \inf \{ \distance(x,a) : a \in A \}$$
+
+
+** Inclusion
+
+Si $B \subseteq A$, on en déduit directement que :
+
+$$\distance(a,A) \le \distance(a,B)$$
+
+
+** Notation
+
+On note aussi :
+
+$$\distance(A,a) = \distance(a,A)$$
+
+
+** Self-distance
+
+Soit $a \in A$. Comme $\distance(a,a) = 0$ et que la distance $\distance(a,b) \ge 0$ pour tout $b \in A$, on voit que le choix $b = a$ minimise $\distance(a,b)$ sur $A$. Donc :
+
+$$\distance(a,A) = 0$$
+
+pour tout élément $a \in A$.
+
+
+* Distance inter-ensembles
+
+La distance entre deux ensembles $A$ et $B$ est l'infimum des distances possibles entre les couples $(a,b) \in A \times B$ :
+
+$$\distance(A,B) = \inf \{ \distance(a,b) : (a,b) \in A \times B \}$$
+
+On a bien évidemment :
+
+$$\distance(A,B) = \inf \{ \distance(a,B) : a \in A \} = \inf \{ \distance(A,b) : b \in B \}$$
+
+
+* Boules
+
+Les boules sont la généralisation des disques et des sphères. Or, ce qui caractèrise ces entités, c'est qu'elle incluent des points $x$ vérifiant $\distance(x,c) \le r$, où $c$ est le centre et $r$ le rayon. On définit par conséquent la boule fermée $\boule[c,r]$ par :
+
+$$\boule[c,r] = \{ x \in \Omega : \distance(x,c) \le r \}$$
+
+où $r$ est un réel positif.
+
+Si l'on veut que la distance soit strictement inférieure à $r$, on considérera plutôt la définition de la boule ouverte :
+
+$$\boule(c,r) = \{ x \in \Omega : \distance(x,c) \strictinferieur r \}$$
+
+
+* Topologie métrique
+
+La topologie usuelle définie sur les ensembles munis d'une distance est celle générée par les boules ouvertes, soit les éléments de la collection :
+
+$$\mathcal{B} = \{ \boule(c,r) : c \in \Omega, \ r \in \corps, \  r \strictsuperieur 0 \}$$
+
+La topologie métrique $\topologie$ s'écrit donc :
+
+$$\topologie = \topologies(\mathcal{B},\Omega)$$
+
+Toute union de boules ouvertes est donc un ouvert.
+
+
+* Intérieur
+
+Soit $A \subseteq \Omega$.
+
+  - Soit $x \in \interieur A$. L'élément $x$ appartient donc à un ouvert $U$ contenu dans $A$. Comme $x \in U$, on a $U \ne \emptyset$. On en conclut que $U$ doit être une union de boules ouvertes. On peut donc trouver un $a \in U$ et un $\delta \strictsuperieur 0$ tel que $x \in \boule(a,\delta) \subseteq U$. Comme $d = \distance(a,x) \strictinferieur \delta$, on a $\delta - d \strictsuperieur 0$. Soit $\epsilon = \delta - d$ et $y \in \boule(x,\epsilon)$. On a :
+
+$$\distance(a,y) \le \distance(a,x) + \distance(x,y) \strictinferieur d + \epsilon = \delta$$
+
+Donc $\boule(x,\epsilon) \subseteq \boule(a,\delta) \subseteq U \subseteq A$ et $\distance( x , \Omega \setminus A ) \strictsuperieur 0$.
+
+  - Réciproquement, si $z \in \Omega$ vérifie $d = \distance( x , \Omega \setminus A ) \strictsuperieur 0$, on a $z \in \boule(z,d/2) \subseteq A$. L'élément $z$ appartient donc à un ouvert contenu dans $A$. Il appartient donc à l'union des ouverts inclus dans $A$, c'est-à-dire $z \in \interieur A$.
+
+On conclut de ce qui précède que :
+
+$$\interieur A = \{ x \in \Omega : \distance( x , \Omega \setminus A ) \strictsuperieur 0 \}$$
+
+
+* Adhérence
+
+On voit que :
+
+$$\interieur (\Omega \setminus A) = \{ x \in \Omega : \distance(x,A) \strictsuperieur 0 \}$$
+
+Le complémentaire de cet ensemble est bien sur constitué des $x \in \Omega$ vérifiant $\distance(x,A) = 0$. Or, nous avons vu que ce complémentaire n'est rien d'autre que l'adhérence de $A$ :
+
+$$\adh A = \{ x \in \Omega : \distance(x,A) = 0 \}$$
+
+
+* Adhérence carrée
+
+Soit $x \in \Omega$, $A \subseteq \Omega$ et :
+
+#+BEGIN_CENTER
+\(
+B = \adh A \)
+
+\(
+C = \adh B = \adh \adh A
+\)
+#+END_CENTER
+
+Soit $c \in C$. Pour tout $\epsilon \in \corps$ avec $\epsilon \strictsuperieur 0$, on peut trouver $b \in B$ tel que :
+
+$$\distance(c,b) \le \epsilon$$
+
+et ensuite $a \in A$ tel que :
+
+$$\distance(b,a) \le \epsilon$$
+
+On a donc :
+
+$$\distance(c,a) \le \distance(c,b) + \distance(b,a) \le \epsilon + \epsilon$$
+
+L'infimum est par conséquent nul :
+
+$$\distance(c,A) = \inf_{a \in A} \distance(c,a) = 0$$
+
+On en déduit que $c \in \adh A$. Nous venons de montrer que :
+
+$$\adh \adh A \subseteq \adh A$$
+
+Mais comme l'inverse est également vrai, on a :
+
+$$\adh \adh A = \adh A$$
+
+

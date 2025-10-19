@@ -1,0 +1,334 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Limites doubles
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:limitesDoubles}
+
+* Dépendances
+
+  - Chapitre \ref{chap:limites} : Les limites
+
+* Introduction
+
+Si les ensemble $A, B$ sont munis d'une distance, on définit la distance :
+
+$$\distance^2 : (A \times B) \times (A \times B) \mapsto \corps$$
+
+associée par :
+
+$$\distance^2\big[(x,y), (a,b)\big] = \max \big\{ \distance(x,a), \distance(y,b) \big\}$$
+
+pour tout $(x,y),(a,b) \in A \times B$. La fonction définie est-elle une distance ? On a clairement $\distance^2 \ge 0$ et :
+
+$$\distance^2\big[(x,y), (a,b)\big] = \distance^2\big[(a,b), (x,y)\big]$$
+
+On a aussi :
+
+$$\distance^2\big[(x,y), (x,y)\big] = \max \big\{ \distance(x,x), \distance(y,y) \big\} = \max \{ 0, 0 \} = 0$$
+
+Si :
+
+$$\distance^2\big[(x,y), (a,b)\big] = 0$$
+
+on a forcément :
+
+$$\distance(x,a) = \distance(y,b) = 0$$
+
+Donc $x = a$, $y = b$ et :
+
+$$(x,y) = (a,b)$$
+
+Pour l'inégalité triangulaire, soit $(x,y),(a,b),(c,d) \in A \times B$ et :
+
+$$d = \distance^2\big[(a,b), (c,d)\big] = \max \big\{ \distance(a,c), \distance(b,d) \big\}$$
+
+La distance sur $A$ vérifie :
+
+$$\distance(a,c) \le \distance(a,x) + \distance(x,c)$$
+
+La distance sur $B$ vérifie :
+
+$$\distance(b,d) \le \distance(b,y) + \distance(y,d)$$
+
+On en déduit que :
+
+\begin{align}
+d &\le \max \{ \distance(a,x) + \distance(x,c), \distance(b,y) + \distance(y,d) \} \)
+
+\(
+&\le \max \{ \distance(a,x), \distance(b,y) \} + \max \{ \distance(x,c), \distance(y,d) \} \)
+
+\(
+&\le \distance^2\big[(a,b), (x,y)\big] + \distance^2\big[(x,y), (c,d)\big]
+\end{align}
+
+
+* Limite en un point
+
+Soit un ensemble $F$ et une fonction $f : A \times B \mapsto F$. On choisit un ensemble $U \subseteq A \times B$. On dit que $L$ est la limite de $f$ en $(a,b) \in A \times B$ et on le note :
+
+$$\lim_{ \substack{ (x,y) \to (a,b) \\ (x,y) \in U } } f(x,y) = L$$
+
+si, pour toute précision $\epsilon \strictsuperieur 0$, on peut trouver un $\delta \strictsuperieur 0$ tel que :
+
+$$\distance(f(x,y), L) \le \epsilon$$
+
+pour tout $(x,y) \in U$ vérifiant :
+
+$$\distance^2\big[ (x,y), (a,b) \big] = \max \{ \distance(x,a), \distance(y,b) \} \le \delta$$
+
+
+** Formulation équivalente
+
+La condition :
+
+$$\max \{ \distance(x,a), \distance(y,b) \} \le \delta$$
+
+est équivalente à :
+
+#+BEGIN_CENTER
+\(
+\distance(x,a) \le \delta \)
+
+\(
+\distance(y,b) \le \delta
+\)
+#+END_CENTER
+
+On en conclut que :
+
+$$\lim_{ \substack{ (x,y) \to (a,b) \\ (x,y) \in U } } f(x,y) = L$$
+
+si et seulement si, pour toute précision $\epsilon \strictsuperieur 0$, on peut trouver un $\delta \strictsuperieur 0$ tel que :
+
+$$\distance(f(x,y), L) \le \epsilon$$
+
+pour tout $(x,y) \in U$ vérifiant :
+
+#+BEGIN_CENTER
+\(
+\distance(x,a) \le \delta \)
+
+\(
+\distance(y,b) \le \delta
+\)
+#+END_CENTER
+
+
+** Extension
+
+Supposons que pour toute précision $\epsilon \strictsuperieur 0$ on puisse trouver des $\delta_1, \delta_2 \strictsuperieur 0$ tels que :
+
+$$\distance(f(x,y), L) \le \epsilon$$
+
+pour tout $(x,y) \in U$ vérifiant :
+
+#+BEGIN_CENTER
+\(
+\distance(x,a) \le \delta_1 \)
+
+\(
+\distance(y,b) \le \delta_2
+\)
+#+END_CENTER
+
+En posant :
+
+$$\delta = \min \{ \delta_1, \delta_2 \} \strictsuperieur 0$$
+
+on voit que :
+
+$$\distance(f(x,y), L) \le \epsilon$$
+
+pour tout $(x,y) \in U$ vérifiant :
+
+#+BEGIN_CENTER
+\(
+\distance(x,a) \le \delta \le \delta_1 \)
+
+\(
+\distance(y,b) \le \delta \le \delta_2
+\)
+#+END_CENTER
+
+On en conclut que :
+
+$$\lim_{ \substack{ (x,y) \to (a,b) \\ (x,y) \in U } } f(x,y) = L$$
+
+
+* Limite à l'infini
+
+On suppose que les ensembles $A, B$ sont ordonnés. On dit que $L \in F$ est la limite de $f : A \times B \mapsto F$ à l'infini positif et on le note :
+
+$$\lim_{(x,y) \to +\infty} f(x,y) = L$$
+
+si, pour toute précision $\epsilon \strictsuperieur 0$, on peut trouver des bornes inférieures $(I, J) \in A \times B$ telles que :
+
+$$\distance\big[f(x,y), L\big] \le \epsilon$$
+
+pour tout $(x,y) \in A \times B$ vérifiant :
+
+#+BEGIN_CENTER
+\(
+x \ge I \)
+
+\(
+y \ge J
+\)
+#+END_CENTER
+
+On dit que $L \in F$ est la limite de $f : A \times B \mapsto F$ à l'infini négatif et on le note :
+
+$$\lim_{(x,y) \to -\infty} f(x,y) = L$$
+
+si, pour toute précision $\epsilon \strictsuperieur 0$, on peut trouver des bornes supérieures $(I, J) \in A \times B$ telles que :
+
+$$\distance\big[f(x,y), L\big] \le \epsilon$$
+
+pour tout $(x,y) \in A \times B$ vérifiant :
+
+#+BEGIN_CENTER
+\(
+x \le I \)
+
+\(
+y \le J
+\)
+#+END_CENTER
+
+
+* Dualité
+
+
+** $x$ puis $y$
+
+Supposons que la limite $\lambda(y)$ définie par :
+
+$$\lambda(y) = \lim_{x \to a} f(x,y)$$
+
+existe pour tout $y \in B$ et que :
+
+$$L = \lim_{y \to b} \lambda(y) = \lim_{y \to b} \lim_{x \to a} f(x,y)$$
+
+est bien définie. Nous supposons également que, quelque soit $\epsilon \strictsuperieur 0$, on peut trouver un $\delta \strictsuperieur 0$ tel que :
+
+$$\distance(f(x,y),\lambda(y)) \le \epsilon$$
+
+pour tout $(x,y) \in A \times B$ vérifiant :
+
+$$\distance(x,a) \le \delta$$
+
+Choissons $\epsilon \strictsuperieur 0$. On peut trouver $\delta_1 \strictsuperieur 0$ tel que :
+
+$$\distance(\lambda(y), L) \le \frac{\epsilon}{2}$$
+
+pour tout $(x,y) \in A \times B$ vérifiant :
+
+$$\distance(y,b) \le \delta_1$$
+
+On peut aussi trouver $\delta_2$ tel que :
+
+$$\distance(f(x,y),\lambda(y)) \le \frac{\epsilon}{2}$$
+
+pour tout $(x,y) \in A \times B$ vérifiant :
+
+$$\distance(x,a) \le \delta_2$$
+
+Soit $\delta = \min \{ \delta_1, \delta_2 \}$ et $(x,y) \in A \times B$ vérifiant :
+
+$$\max \{ \distance(x,a), \distance(y,b) \} \le \delta$$
+
+On a alors :
+
+\begin{align}
+\distance(f(x,y),L) &\le \distance(f(x,y),\lambda(y)) + \distance(\lambda(y),L) \)
+
+\(
+&\le \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+\end{align}
+
+On en conclut que :
+
+$$\lim_{(x,y) \to (a,b)} f(x,y) = L$$
+
+autrement dit :
+
+$$\lim_{(x,y) \to (a,b)} f(x,y) = \lim_{y \to b} \lim_{x \to a} f(x,y)$$
+
+
+** $y$ puis $x$
+
+Supposons que la limite $\mu(x)$ définie par :
+
+$$\mu(x) = \lim_{y \to b} f(x,y)$$
+
+existe pour tout $x \in A$ et que :
+
+$$M = \lim_{x \to a} \mu(y) = \lim_{x \to a} \lim_{y \to b} f(x,y)$$
+
+est bien définie. Nous supposons également que, quelque soit $\epsilon \strictsuperieur 0$, on peut trouver un $\delta \strictsuperieur 0$ tel que :
+
+$$\distance(f(x,y),\mu(x)) \le \epsilon$$
+
+pour tout $(x,y) \in A \times B$ vérifiant :
+
+$$\distance(y,b) \le \delta$$
+
+Choissons $\epsilon \strictsuperieur 0$. On peut trouver $\delta_1 \strictsuperieur 0$ tel que :
+
+$$\distance(\mu(x), M) \le \frac{\epsilon}{2}$$
+
+pour tout $(x,y) \in A \times B$ vérifiant :
+
+$$\distance(x,a) \le \delta_1$$
+
+On peut aussi trouver $\delta_2$ tel que :
+
+$$\distance(f(x,y),\mu(x)) \le \frac{\epsilon}{2}$$
+
+pour tout $(x,y) \in A \times B$ vérifiant :
+
+$$\distance(y,b) \le \delta_2$$
+
+Soit $\delta = \min \{ \delta_1, \delta_2 \}$ et $(x,y) \in A \times B$ vérifiant :
+
+$$\max \{ \distance(x,a), \distance(y,b) \} \le \delta$$
+
+On a alors :
+
+\begin{align}
+\distance(f(x,y),M) &\le \distance(f(x,y),\mu(x)) + \distance(\mu(x),M) \)
+
+\(
+&\le \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+\end{align}
+
+On en conclut que :
+
+$$\lim_{(x,y) \to (a,b)} f(x,y) = M$$
+
+autrement dit :
+
+$$\lim_{(x,y) \to (a,b)} f(x,y) = \lim_{x \to a} \lim_{y \to b} f(x,y)$$
+
+

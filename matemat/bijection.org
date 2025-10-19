@@ -1,0 +1,195 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Bijections
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:bijections}
+
+* Dépendances
+
+  - Chapitre \ref{chap:fonctionsEtOrdre} : Fonctions et ordre
+
+* Inverse à gauche
+
+Soit $f : A \mapsto B$. Si $l : B \mapsto A$ est une fonction telle que :
+
+$$l \circ f = \identite$$
+
+on dit que $l$ est un inverse à gauche de $f$.
+
+
+** Unicité
+
+Soit $y \in B$. Si $f$ admet un inverse à gauche, on peut trouver au plus un seul $x \in A$ tel que $f(x) = y$. En effet, supposons que $x_1, x_2 \in A$ avec $f(x_1) = f(x_2) = y$. On a :
+
+$$l(y) = (l \circ f)(x_1) = (l \circ f)(x_2)$$
+
+mais comme $l \circ f = \identite$, et que $\identite(x) = x$ pour tout $x \in A$, on a :
+
+$$l(y) = x_1 = x_2$$
+
+ce qui prouve l'unicité de la solution.
+
+
+* Inverse à droite
+
+Soit $f : A \mapsto B$. Si $r : B \mapsto A$ est une fonction telle que :
+
+$$f \circ r = \identite$$
+
+on dit que $r$ est un inverse à droite de $f$.
+
+
+** Existence
+
+Soit $y \in B$. Si $f$ admet un inverse à droite $r$, on peut trouver au moins un $x \in A$ tel que $f(x) = y$. En effet, si l'on choisit $x = r(y)$, on a :
+
+$$f(x) = (f \circ r)(y) = \identite(y) = y$$
+
+ce qui prouve l'existence de la solution.
+
+
+* Fonction inverse
+
+Soit $f : A \mapsto B$. Supposons que $f$ admette à la fois un inverse à gauche $l$ et un inverse à droite $r$. Ces deux inverses sont dès lors identiques :
+
+$$l = l \circ \identite = l \circ f \circ r = \identite \circ r = r$$
+
+
+** Existence et unicité
+
+Soit $y \in B$. On déduit des résultats précédents que l'on peut trouver un unique $x \in A$, donné par $x = r(y)$, tel que $f(x) = y$. Nous pouvons dès lors définir la fonction inverse, notée $f^{-1} : B \mapsto A$, par :
+
+$$f^{-1}(y) = r(y)$$
+
+pour tout $y \in B$. On a donc :
+
+$$f^{-1} = r = l$$
+
+et :
+
+$$f^{-1} \circ f = f \circ f^{-1} = \identite$$
+
+
+** Bijection
+
+Lorsque $f$ admet un inverse $f^{-1}$, on dit que $f$ est inversible ou que $f$ est une bijection. On note :
+
+$$\bijection(A,B) = \{ f \in B^A : \exists f^{-1} \in A^B \}$$
+
+l'ensemble des bijections de $A$ vers $B$.
+
+
+* Relation
+
+Lorsque $f$ est inversible, l'image inverse de $y \in B$ se réduit à un ensemble contenant un unique $x \in A$. Soit $R$ la relation associée à $f$. On a :
+
+$$R^{-1}(y) = \{ f^{-1}(y) \}$$
+
+
+* Inverse d'une composée
+
+Soit $f \in \bijection(A,B)$ et $g \in \bijection(B,C)$. Nous allons essayer de trouver une expression de l'inverse $h$ de la composée de ces deux fonctions. On part de la relation $h \circ g \circ f = \identite$ et on compose à droite par l'inverse de $f$ puis l'inverse de $g$, ce qui nous donne :
+
+$$h \circ g \circ f \circ f^{-1} \circ g^{-1} = \identite \circ f^{-1} \circ g^{-1} = f^{-1} \circ g^{-1}$$
+
+Mais comme :
+
+$$h \circ g \circ f \circ f^{-1} \circ g^{-1} = h \circ g \circ \identite \circ g^{-1} = h \circ g \circ g^{-1} = h \circ \identite = h$$
+
+on a :
+
+$$h = f^{-1} \circ g^{-1}$$
+
+Partant de la relation $g \circ f \circ h = \identite$ et composant à gauche par l'inverse de $g$ puis par l'inverse de $f$, on arrive au même résultat $h = f^{-1} \circ g^{-1}$. Donc :
+
+$$(g \circ f)^{-1} = f^{-1} \circ g^{-1}$$
+
+On généralise par récurrence à $n$ fonctions :
+
+$$(f_n \circ ... \circ f_2 \circ f_1)^{-1} = f_1^{-1} \circ f_2^{-1} \circ ... \circ f_n^{-1}$$
+
+
+* Puissances négatives
+
+Si $f$ est inversible, on peut également définir les puissances négatives par :
+
+$$f^{-n} = \left( f^{-1} \right)^n = f^{-1} \circ ... \circ f^{-1}$$
+
+pour tout $n \in \setN$.
+
+
+* Inverse d'une puissance
+
+En considérant le cas particulier de fonctions identiques ($f_1 = ... = f_n = f$), l'expression de l'inverse d'une composition de fonctions nous montre que :
+
+$$\left( f^{-1} \right)^n = f^{-n} = \left( f^n \right)^{-1}$$
+
+L'inverse de la puissance est identique à la puissance de l'inverse.
+
+
+* Idempotence
+
+On dit que deux ensembles $A$ et $B$ sont idempotents si il existe une bijection inversible de $A$ vers $B$ :
+
+$$\bijection(A,B) \ne \emptyset$$
+
+
+** Equivalence
+
+Soit les ensembles $A$ et $B$. Supposons qu'il existe une bijection $f \in \bijection(A,B)$. On peut alors définir une équivalence sur $A \cup B$ en disant que $x \equiv y$ si $x \in A$ avec $y = f(x) \in B$, ou si $x \in B$ avec $y = f^{-1}(x) \in A$. Dans les autres cas, $x$ ne sera pas équivalent à $y$. Les classes d'quivalences seront donc de la forme :
+
+$$\mathcal{E}(a) = \{ a , f(a) \}$$
+
+pour tout $a \in A$ et de la forme :
+
+$$\mathcal{E}(b) = \{ b , f^{-1}(b) \}$$
+
+pour tout $b \in B$. Il y a donc une « équivalence » entre les éléments de $A$ et les éléments de $B$. Dans ce cas, on confond souvent les éléments $x$ de $A$ avec les éléments de $\hat{x}$ de $B$, et on note abusivement $x = \hat{x}$.
+
+
+** Ensembles finis
+
+Dans le cas d'ensembles finis, l'idempotence revient à dire que $A$ et $B$ ont le même nombre d'éléments.
+
+
+* Inverse des fonctions monotones
+
+
+** Théorème
+
+Soit la fonction $f : A \mapsto B$ avec $B = f(A)$. Si $f$ est strictement
+croissante (ou décroissante), alors la fonction $f$ est inversible.
+
+** Démonstration
+
+Choisissons $y \in B$ et considérons l'ensemble de solutions :
+
+$$S(y) = \{ x : f(x) = y \}$$
+
+Comme $B = f(A)$, cet ensemble est non vide. Supposons $x_1,x_2 \in S(y)$ avec $x_1 \strictinferieur x_2$. On a alors, soit $f(x_1) \strictinferieur f(x_2)$ (si $f$ est strictement croissante), soit $f(x_1) \strictsuperieur f(x_2)$ (si $f$ est strictement décroissante). Or, par définition de $S(y)$, on doit avoir $f(x_1) = f(x_2) = y$. Il ne peut donc y avoir d'éléments distincts dans $S(y)$, et cet ensemble est de la forme :
+
+$$S(y) = \{ g(y) \}$$
+
+relation qui définit implicitement la fonction $g : B \mapsto A$. On peut trouver un unique $g(y)$ tel que $f(g(y)) = y$. La fonction $f$ est donc inversible et :
+
+$$f^{-1} = g$$

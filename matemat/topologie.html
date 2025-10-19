@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-10-19 dim 11:04 -->
+<!-- 2025-10-19 dim 11:18 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Eclats de vers : Matemat : Bijections</title>
+<title>Eclats de vers : Matemat : Topologies</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
 <style type="text/css">
@@ -228,7 +228,7 @@
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Eclats de vers : Matemat : Bijections</h1>
+<h1 class="title">Eclats de vers : Matemat : Topologies</h1>
 <p>
 <a href="index.html">Index des Grimoires</a>
 </p>
@@ -241,16 +241,19 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org823d970">1. Dépendances</a></li>
-<li><a href="#org1830408">2. Inverse à gauche</a></li>
-<li><a href="#org2b4fb06">3. Inverse à droite</a></li>
-<li><a href="#orge5fb447">4. Fonction inverse</a></li>
-<li><a href="#orge331600">5. Relation</a></li>
-<li><a href="#org0f38891">6. Inverse d'une composée</a></li>
-<li><a href="#orgaa518eb">7. Puissances négatives</a></li>
-<li><a href="#org1348d0f">8. Inverse d'une puissance</a></li>
-<li><a href="#orgd80746d">9. Idempotence</a></li>
-<li><a href="#orgdaa80dc">10. Inverse des fonctions monotones</a></li>
+<li><a href="#org683aec0">1. Dépendances</a></li>
+<li><a href="#org3be2f91">2. Définition</a></li>
+<li><a href="#org7f687a4">3. Espace topologique</a></li>
+<li><a href="#org262dff5">4. Ouvert</a></li>
+<li><a href="#orga310237">5. Fermé</a></li>
+<li><a href="#org9ea5388">6. Ouverts fermés</a></li>
+<li><a href="#org45a59d8">7. Voisinage</a></li>
+<li><a href="#org1411cc2">8. Adhérence</a></li>
+<li><a href="#org60876ed">9. Intérieur</a></li>
+<li><a href="#org886d71d">10. Frontière</a></li>
+<li><a href="#org3ab8756">11. Propriétés de l'adhérence et de l'intérieur</a></li>
+<li><a href="#org344977c">12. Hausdorff</a></li>
+<li><a href="#org4f27b8b">13. Topologie engendrée</a></li>
 </ul>
 </div>
 </div>
@@ -413,116 +416,265 @@
 </p>
 
 <p>
-\label{chap:bijections}
+\label{chap:topologies}
 </p>
-<div id="outline-container-org823d970" class="outline-2">
-<h2 id="org823d970"><span class="section-number-2">1.</span> Dépendances</h2>
+<div id="outline-container-org683aec0" class="outline-2">
+<h2 id="org683aec0"><span class="section-number-2">1.</span> Dépendances</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
-<li>Chapitre \ref{chap:fonctionsEtOrdre} : Fonctions et ordre</li>
+<li>Chapitre \ref{chap:collections} : Les collections</li>
+<li>Chapitre \ref{chap:ordreInclusif} : L'ordre inclusif</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org1830408" class="outline-2">
-<h2 id="org1830408"><span class="section-number-2">2.</span> Inverse à gauche</h2>
+<div id="outline-container-org3be2f91" class="outline-2">
+<h2 id="org3be2f91"><span class="section-number-2">2.</span> Définition</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-Soit \(f : A \mapsto B\). Si \(l : B \mapsto A\) est une fonction telle que :
+Soit un ensemble \(\Omega\) et une collection de sous-ensembles
+\(\topologie \subseteq \sousens(\Omega)\). On dit que \(\topologie\)
+forme une topologie sur \(\Omega\) si et seulement si les conditions
+suivantes sont remplies :
 </p>
 
-<p>
-\[l \circ f = \identite\]
-</p>
+<ul class="org-ul">
+<li>\(\emptyset, \Omega \in \topologie\)</li>
+
+<li>pour toute sous-collection \(\mathcal{C} \subseteq \topologie\),
+l'union des ensembles-éléments de \(\mathcal{C}\) appartient
+également à la topologie :</li>
+</ul>
 
 <p>
-on dit que \(l\) est un inverse à gauche de \(f\).
-</p>
-</div>
-<div id="outline-container-org639f236" class="outline-3">
-<h3 id="org639f236"><span class="section-number-3">2.1.</span> Unicité</h3>
-<div class="outline-text-3" id="text-2-1">
-<p>
-Soit \(y \in B\). Si \(f\) admet un inverse à gauche, on peut trouver au plus un seul \(x \in A\) tel que \(f(x) = y\). En effet, supposons que \(x_1, x_2 \in A\) avec \(f(x_1) = f(x_2) = y\). On a :
+\[\bigcup \mathcal{C} \in \topologie\]
 </p>
 
-<p>
-\[l(y) = (l \circ f)(x_1) = (l \circ f)(x_2)\]
-</p>
+<ul class="org-ul">
+<li>si \(A,B \in \topologie\), leur intersection appartient également à
+la topologie :</li>
+</ul>
 
 <p>
-mais comme \(l \circ f = \identite\), et que \(\identite(x) = x\) pour tout \(x \in A\), on a :
+\[A \cap B \in \topologie\]
 </p>
 
-<p>
-\[l(y) = x_1 = x_2\]
-</p>
 
 <p>
-ce qui prouve l'unicité de la solution.
+On note \(\topologies(\Omega)\) l'ensemble des topologies sur \(\Omega\).
 </p>
 </div>
 </div>
-</div>
-<div id="outline-container-org2b4fb06" class="outline-2">
-<h2 id="org2b4fb06"><span class="section-number-2">3.</span> Inverse à droite</h2>
+<div id="outline-container-org7f687a4" class="outline-2">
+<h2 id="org7f687a4"><span class="section-number-2">3.</span> Espace topologique</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-Soit \(f : A \mapsto B\). Si \(r : B \mapsto A\) est une fonction telle que :
-</p>
-
-<p>
-\[f \circ r = \identite\]
-</p>
-
-<p>
-on dit que \(r\) est un inverse à droite de \(f\).
-</p>
-</div>
-<div id="outline-container-orgc3b5339" class="outline-3">
-<h3 id="orgc3b5339"><span class="section-number-3">3.1.</span> Existence</h3>
-<div class="outline-text-3" id="text-3-1">
-<p>
-Soit \(y \in B\). Si \(f\) admet un inverse à droite \(r\), on peut trouver au moins un \(x \in A\) tel que \(f(x) = y\). En effet, si l'on choisit \(x = r(y)\), on a :
-</p>
-
-<p>
-\[f(x) = (f \circ r)(y) = \identite(y) = y\]
-</p>
-
-<p>
-ce qui prouve l'existence de la solution.
+Si \(\topologie\) est une topologie sur \(\Omega\), on dit que le couple
+\((\Omega,\topologie)\) forme un espace topologique.
 </p>
 </div>
 </div>
-</div>
-<div id="outline-container-orge5fb447" class="outline-2">
-<h2 id="orge5fb447"><span class="section-number-2">4.</span> Fonction inverse</h2>
+<div id="outline-container-org262dff5" class="outline-2">
+<h2 id="org262dff5"><span class="section-number-2">4.</span> Ouvert</h2>
 <div class="outline-text-2" id="text-4">
 <p>
-Soit \(f : A \mapsto B\). Supposons que \(f\) admette à la fois un inverse à gauche \(l\) et un inverse à droite \(r\). Ces deux inverses sont dès lors identiques :
-</p>
-
-<p>
-\[l = l \circ \identite = l \circ f \circ r = \identite \circ r = r\]
+On appelle « ouvert » tout ensemble \(U \in \topologie\).
 </p>
 </div>
-<div id="outline-container-org7db824c" class="outline-3">
-<h3 id="org7db824c"><span class="section-number-3">4.1.</span> Existence et unicité</h3>
-<div class="outline-text-3" id="text-4-1">
+</div>
+<div id="outline-container-orga310237" class="outline-2">
+<h2 id="orga310237"><span class="section-number-2">5.</span> Fermé</h2>
+<div class="outline-text-2" id="text-5">
 <p>
-Soit \(y \in B\). On déduit des résultats précédents que l'on peut trouver un unique \(x \in A\), donné par \(x = r(y)\), tel que \(f(x) = y\). Nous pouvons dès lors définir la fonction inverse, notée \(f^{-1} : B \mapsto A\), par :
+On appelle « fermé » tout complémentaire d'un ouvert. Si \(F \subseteq \Omega\) est un
+fermé, on peut donc écrire :
 </p>
 
 <p>
-\[f^{-1}(y) = r(y)\]
+\[F = \Omega \setminus U\]
 </p>
 
 <p>
-pour tout \(y \in B\). On a donc :
+pour un certain \(U \in \topologie\). On note la collection des ensembles fermés par :
 </p>
 
 <p>
-\[f^{-1} = r = l\]
+\[\ferme = \{ \Omega \setminus U : U \in \topologie \}\]
+</p>
+</div>
+<div id="outline-container-orgfe129fb" class="outline-3">
+<h3 id="orgfe129fb"><span class="section-number-3">5.1.</span> Intersection</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+Soit une collection d'ouverts \(\mathcal{C} \subseteq \topologie\) et la collection de fermés correspondant :
+</p>
+
+<p>
+\[\mathcal{F} = \{ \Omega \setminus U : U \in \mathcal{C} \}\]
+</p>
+
+<p>
+L'intersection de tous ces fermés :
+</p>
+
+<p>
+\[\bigcap \mathcal{F} = \Omega \setminus \bigcup \mathcal{C}\]
+</p>
+
+<p>
+est le complémentaire de l'ensemble :
+</p>
+
+<p>
+\[U = \bigcup \mathcal{C}\]
+</p>
+
+<p>
+qui est un ouvert. On en conclut qu'une intersection de fermés est un fermé.
+</p>
+</div>
+</div>
+<div id="outline-container-org807de2f" class="outline-3">
+<h3 id="org807de2f"><span class="section-number-3">5.2.</span> Union</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+Soit les ouverts \(U,V \in \topologie\) et les fermés correspondant :
+</p>
+
+<div class="org-center">
+<p>
+\(
+F = \Omega \setminus U \)
+</p>
+
+<p>
+\(
+G = \Omega \setminus V
+\)
+</p>
+</div>
+
+<p>
+On a :
+</p>
+
+<p>
+\[F \cup G = \Omega \setminus (U \cap V)\]
+</p>
+
+<p>
+L'ensemble \(U \cap V\) étant un ouvert, on en conclut que l'union de deux fermés est un fermé.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org9ea5388" class="outline-2">
+<h2 id="org9ea5388"><span class="section-number-2">6.</span> Ouverts fermés</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+On a \(\{\emptyset,\Omega\} \subseteq \topologie \cap \ferme\).
+</p>
+</div>
+</div>
+<div id="outline-container-org45a59d8" class="outline-2">
+<h2 id="org45a59d8"><span class="section-number-2">7.</span> Voisinage</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+On dit que \(V \subseteq \Omega\) est un voisinage de \(x \in \Omega\) si il existe un ouvert \(U \in \topologie\) tel que \(x \in U \subseteq V\).
+</p>
+</div>
+</div>
+<div id="outline-container-org1411cc2" class="outline-2">
+<h2 id="org1411cc2"><span class="section-number-2">8.</span> Adhérence</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+L'adhérence, ou fermeture, d'un ensemble \(A \subseteq \Omega\) est le plus petit (au sens inclusif) ensemble fermé \(F\) contenant \(A\). On la note :
+</p>
+
+<p>
+\[\adh A = \inf_\subseteq \{ F \in \ferme : A \subseteq F \} = \bigcap \{ F \in \ferme : A \subseteq F \}\]
+</p>
+</div>
+</div>
+<div id="outline-container-org60876ed" class="outline-2">
+<h2 id="org60876ed"><span class="section-number-2">9.</span> Intérieur</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+L'intérieur d'un ensemble \(A \subseteq \Omega\) est le plus grand ensemble ouvert contenu dans \(A\). On le note :
+</p>
+
+<p>
+\[\interieur A = \sup_\subseteq \{ U \in \topologie : U \subseteq A \} = \bigcup \{ U \in \topologie : U \subseteq A \}\]
+</p>
+</div>
+</div>
+<div id="outline-container-org886d71d" class="outline-2">
+<h2 id="org886d71d"><span class="section-number-2">10.</span> Frontière</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+La frontière de \(A\) est la différence entre l'adhérence et l'intérieur :
+</p>
+
+<p>
+\[\frontiere A = (\adh A) \setminus (\interieur A)\]
+</p>
+</div>
+</div>
+<div id="outline-container-org3ab8756" class="outline-2">
+<h2 id="org3ab8756"><span class="section-number-2">11.</span> Propriétés de l'adhérence et de l'intérieur</h2>
+<div class="outline-text-2" id="text-11">
+</div>
+<div id="outline-container-org20168be" class="outline-3">
+<h3 id="org20168be"><span class="section-number-3">11.1.</span> Inclusions</h3>
+<div class="outline-text-3" id="text-11-1">
+<p>
+On a bien entendu :
+</p>
+
+<p>
+\[\interieur A \subseteq A \subseteq \adh A\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgcaeca42" class="outline-3">
+<h3 id="orgcaeca42"><span class="section-number-3">11.2.</span> Nature</h3>
+<div class="outline-text-3" id="text-11-2">
+<p>
+Une union quelconque d'ouverts étant un ouvert, on a \(\interieur A \in \topologie\). Une intersection quelconque de fermés étant un fermé, on a \(\adh A \in \ferme\).
+</p>
+</div>
+</div>
+<div id="outline-container-orgc240191" class="outline-3">
+<h3 id="orgc240191"><span class="section-number-3">11.3.</span> Complémentaire</h3>
+<div class="outline-text-3" id="text-11-3">
+<p>
+Les fermés \(F\) contenant \(A\) correspondent aux complémentaires des ouverts \(U = \Omega \setminus F\) inclus dans \(\Omega \setminus A\). Comme \(\bigcap F = \Omega \setminus \bigcup U\), on a :
+</p>
+
+<p>
+\[\adh A = \Omega \setminus \interieur (\Omega \setminus A)\]
+</p>
+
+<p>
+Les ouverts \(U\) inclus dans \(A\) correspondent aux complémentaires des fermés \(F = \Omega \setminus U\) contenant \(\Omega \setminus A\). La relation \(\bigcup U = \Omega \setminus \bigcap F\) nous dit que :
+</p>
+
+<p>
+\[\interieur A =  \Omega \setminus \adh (\Omega \setminus A)\]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org344977c" class="outline-2">
+<h2 id="org344977c"><span class="section-number-2">12.</span> Hausdorff</h2>
+<div class="outline-text-2" id="text-12">
+<p>
+On dit que le couple \((\Omega,\topologie)\) est un espace de Haussdorff si,
+pour tout \(x,y \in \Omega\) vérifiant \(x \ne y\), on peut trouver des ouverts
+\(U, V \in \topologie\) tels que :
+</p>
+
+<p>
+\[x \in U, \ y \in V\]
 </p>
 
 <p>
@@ -530,205 +682,26 @@ et :
 </p>
 
 <p>
-\[f^{-1} \circ f = f \circ f^{-1} = \identite\]
+\[U \cap V = \emptyset\]
 </p>
 </div>
 </div>
-<div id="outline-container-orgf6dbc7c" class="outline-3">
-<h3 id="orgf6dbc7c"><span class="section-number-3">4.2.</span> Bijection</h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-org4f27b8b" class="outline-2">
+<h2 id="org4f27b8b"><span class="section-number-2">13.</span> Topologie engendrée</h2>
+<div class="outline-text-2" id="text-13">
 <p>
-Lorsque \(f\) admet un inverse \(f^{-1}\), on dit que \(f\) est inversible ou que \(f\) est une bijection. On note :
+Les collections d'ensemble étant des ensembles d'ensembles, on peut également les comparer au moyen de l'inclusion. En ce sens, la topologie engendrée par la collection \(\mathcal{C} \subseteq \sousens(\Omega)\) est la plus petite topologie contenant les ensembles-éléments de \(\mathcal{C}\). On la note :
 </p>
 
 <p>
-\[\bijection(A,B) = \{ f \in B^A : \exists f^{-1} \in A^B \}\]
+\[\topologies(\mathcal{C},\Omega) = \inf_\subseteq \{ \topologie \in \topologies(\Omega) : \mathcal{C} \subseteq \topologie \}\]
 </p>
-
-<p>
-l'ensemble des bijections de \(A\) vers \(B\).
-</p>
-</div>
-</div>
-</div>
-<div id="outline-container-orge331600" class="outline-2">
-<h2 id="orge331600"><span class="section-number-2">5.</span> Relation</h2>
-<div class="outline-text-2" id="text-5">
-<p>
-Lorsque \(f\) est inversible, l'image inverse de \(y \in B\) se réduit à un ensemble contenant un unique \(x \in A\). Soit \(R\) la relation associée à \(f\). On a :
-</p>
-
-<p>
-\[R^{-1}(y) = \{ f^{-1}(y) \}\]
-</p>
-</div>
-</div>
-<div id="outline-container-org0f38891" class="outline-2">
-<h2 id="org0f38891"><span class="section-number-2">6.</span> Inverse d'une composée</h2>
-<div class="outline-text-2" id="text-6">
-<p>
-Soit \(f \in \bijection(A,B)\) et \(g \in \bijection(B,C)\). Nous allons essayer de trouver une expression de l'inverse \(h\) de la composée de ces deux fonctions. On part de la relation \(h \circ g \circ f = \identite\) et on compose à droite par l'inverse de \(f\) puis l'inverse de \(g\), ce qui nous donne :
-</p>
-
-<p>
-\[h \circ g \circ f \circ f^{-1} \circ g^{-1} = \identite \circ f^{-1} \circ g^{-1} = f^{-1} \circ g^{-1}\]
-</p>
-
-<p>
-Mais comme :
-</p>
-
-<p>
-\[h \circ g \circ f \circ f^{-1} \circ g^{-1} = h \circ g \circ \identite \circ g^{-1} = h \circ g \circ g^{-1} = h \circ \identite = h\]
-</p>
-
-<p>
-on a :
-</p>
-
-<p>
-\[h = f^{-1} \circ g^{-1}\]
-</p>
-
-<p>
-Partant de la relation \(g \circ f \circ h = \identite\) et composant à gauche par l'inverse de \(g\) puis par l'inverse de \(f\), on arrive au même résultat \(h = f^{-1} \circ g^{-1}\). Donc :
-</p>
-
-<p>
-\[(g \circ f)^{-1} = f^{-1} \circ g^{-1}\]
-</p>
-
-<p>
-On généralise par récurrence à \(n\) fonctions :
-</p>
-
-<p>
-\[(f_n \circ ... \circ f_2 \circ f_1)^{-1} = f_1^{-1} \circ f_2^{-1} \circ ... \circ f_n^{-1}\]
-</p>
-</div>
-</div>
-<div id="outline-container-orgaa518eb" class="outline-2">
-<h2 id="orgaa518eb"><span class="section-number-2">7.</span> Puissances négatives</h2>
-<div class="outline-text-2" id="text-7">
-<p>
-Si \(f\) est inversible, on peut également définir les puissances négatives par :
-</p>
-
-<p>
-\[f^{-n} = \left( f^{-1} \right)^n = f^{-1} \circ ... \circ f^{-1}\]
-</p>
-
-<p>
-pour tout \(n \in \setN\).
-</p>
-</div>
-</div>
-<div id="outline-container-org1348d0f" class="outline-2">
-<h2 id="org1348d0f"><span class="section-number-2">8.</span> Inverse d'une puissance</h2>
-<div class="outline-text-2" id="text-8">
-<p>
-En considérant le cas particulier de fonctions identiques (\(f_1 = ... = f_n = f\)), l'expression de l'inverse d'une composition de fonctions nous montre que :
-</p>
-
-<p>
-\[\left( f^{-1} \right)^n = f^{-n} = \left( f^n \right)^{-1}\]
-</p>
-
-<p>
-L'inverse de la puissance est identique à la puissance de l'inverse.
-</p>
-</div>
-</div>
-<div id="outline-container-orgd80746d" class="outline-2">
-<h2 id="orgd80746d"><span class="section-number-2">9.</span> Idempotence</h2>
-<div class="outline-text-2" id="text-9">
-<p>
-On dit que deux ensembles \(A\) et \(B\) sont idempotents si il existe une bijection inversible de \(A\) vers \(B\) :
-</p>
-
-<p>
-\[\bijection(A,B) \ne \emptyset\]
-</p>
-</div>
-<div id="outline-container-org7d94da4" class="outline-3">
-<h3 id="org7d94da4"><span class="section-number-3">9.1.</span> Equivalence</h3>
-<div class="outline-text-3" id="text-9-1">
-<p>
-Soit les ensembles \(A\) et \(B\). Supposons qu'il existe une bijection \(f \in \bijection(A,B)\). On peut alors définir une équivalence sur \(A \cup B\) en disant que \(x \equiv y\) si \(x \in A\) avec \(y = f(x) \in B\), ou si \(x \in B\) avec \(y = f^{-1}(x) \in A\). Dans les autres cas, \(x\) ne sera pas équivalent à \(y\). Les classes d'quivalences seront donc de la forme :
-</p>
-
-<p>
-\[\mathcal{E}(a) = \{ a , f(a) \}\]
-</p>
-
-<p>
-pour tout \(a \in A\) et de la forme :
-</p>
-
-<p>
-\[\mathcal{E}(b) = \{ b , f^{-1}(b) \}\]
-</p>
-
-<p>
-pour tout \(b \in B\). Il y a donc une « équivalence » entre les éléments de \(A\) et les éléments de \(B\). Dans ce cas, on confond souvent les éléments \(x\) de \(A\) avec les éléments de \(\hat{x}\) de \(B\), et on note abusivement \(x = \hat{x}\).
-</p>
-</div>
-</div>
-<div id="outline-container-orgd0f7433" class="outline-3">
-<h3 id="orgd0f7433"><span class="section-number-3">9.2.</span> Ensembles finis</h3>
-<div class="outline-text-3" id="text-9-2">
-<p>
-Dans le cas d'ensembles finis, l'idempotence revient à dire que \(A\) et \(B\) ont le même nombre d'éléments.
-</p>
-</div>
-</div>
-</div>
-<div id="outline-container-orgdaa80dc" class="outline-2">
-<h2 id="orgdaa80dc"><span class="section-number-2">10.</span> Inverse des fonctions monotones</h2>
-<div class="outline-text-2" id="text-10">
-</div>
-<div id="outline-container-org7151ba2" class="outline-3">
-<h3 id="org7151ba2"><span class="section-number-3">10.1.</span> Théorème</h3>
-<div class="outline-text-3" id="text-10-1">
-<p>
-Soit la fonction \(f : A \mapsto B\) avec \(B = f(A)\). Si \(f\) est strictement
-croissante (ou décroissante), alors la fonction \(f\) est inversible.
-</p>
-</div>
-</div>
-<div id="outline-container-orgfb64ae6" class="outline-3">
-<h3 id="orgfb64ae6"><span class="section-number-3">10.2.</span> Démonstration</h3>
-<div class="outline-text-3" id="text-10-2">
-<p>
-Choisissons \(y \in B\) et considérons l'ensemble de solutions :
-</p>
-
-<p>
-\[S(y) = \{ x : f(x) = y \}\]
-</p>
-
-<p>
-Comme \(B = f(A)\), cet ensemble est non vide. Supposons \(x_1,x_2 \in S(y)\) avec \(x_1 \strictinferieur x_2\). On a alors, soit \(f(x_1) \strictinferieur f(x_2)\) (si \(f\) est strictement croissante), soit \(f(x_1) \strictsuperieur f(x_2)\) (si \(f\) est strictement décroissante). Or, par définition de \(S(y)\), on doit avoir \(f(x_1) = f(x_2) = y\). Il ne peut donc y avoir d'éléments distincts dans \(S(y)\), et cet ensemble est de la forme :
-</p>
-
-<p>
-\[S(y) = \{ g(y) \}\]
-</p>
-
-<p>
-relation qui définit implicitement la fonction \(g : B \mapsto A\). On peut trouver un unique \(g(y)\) tel que \(f(g(y)) = y\). La fonction \(f\) est donc inversible et :
-</p>
-
-<p>
-\[f^{-1} = g\]
-</p>
-</div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-10-19 dim 11:04</p>
+<p class="date">Created: 2025-10-19 dim 11:18</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -1,0 +1,190 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Topologies
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:topologies}
+
+* Dépendances
+
+  - Chapitre \ref{chap:collections} : Les collections
+  - Chapitre \ref{chap:ordreInclusif} : L'ordre inclusif
+
+* Définition
+
+Soit un ensemble $\Omega$ et une collection de sous-ensembles
+$\topologie \subseteq \sousens(\Omega)$. On dit que $\topologie$
+forme une topologie sur $\Omega$ si et seulement si les conditions
+suivantes sont remplies :
+
+  - $\emptyset, \Omega \in \topologie$
+
+  - pour toute sous-collection $\mathcal{C} \subseteq \topologie$,
+    l'union des ensembles-éléments de $\mathcal{C}$ appartient
+    également à la topologie :
+
+$$\bigcup \mathcal{C} \in \topologie$$
+
+  - si $A,B \in \topologie$, leur intersection appartient également à
+    la topologie :
+
+$$A \cap B \in \topologie$$
+
+
+On note $\topologies(\Omega)$ l'ensemble des topologies sur $\Omega$.
+
+
+* Espace topologique
+
+Si $\topologie$ est une topologie sur $\Omega$, on dit que le couple
+$(\Omega,\topologie)$ forme un espace topologique.
+
+
+* Ouvert
+
+On appelle « ouvert » tout ensemble $U \in \topologie$.
+
+
+* Fermé
+
+On appelle « fermé » tout complémentaire d'un ouvert. Si $F \subseteq \Omega$ est un
+fermé, on peut donc écrire :
+
+$$F = \Omega \setminus U$$
+
+pour un certain $U \in \topologie$. On note la collection des ensembles fermés par :
+
+$$\ferme = \{ \Omega \setminus U : U \in \topologie \}$$
+
+
+** Intersection
+
+Soit une collection d'ouverts $\mathcal{C} \subseteq \topologie$ et la collection de fermés correspondant :
+
+$$\mathcal{F} = \{ \Omega \setminus U : U \in \mathcal{C} \}$$
+
+L'intersection de tous ces fermés :
+
+$$\bigcap \mathcal{F} = \Omega \setminus \bigcup \mathcal{C}$$
+
+est le complémentaire de l'ensemble :
+
+$$U = \bigcup \mathcal{C}$$
+
+qui est un ouvert. On en conclut qu'une intersection de fermés est un fermé.
+
+
+** Union
+
+Soit les ouverts $U,V \in \topologie$ et les fermés correspondant :
+
+#+BEGIN_CENTER
+\(
+F = \Omega \setminus U \)
+
+\(
+G = \Omega \setminus V
+\)
+#+END_CENTER
+
+On a :
+
+$$F \cup G = \Omega \setminus (U \cap V)$$
+
+L'ensemble $U \cap V$ étant un ouvert, on en conclut que l'union de deux fermés est un fermé.
+
+
+* Ouverts fermés
+
+On a $\{\emptyset,\Omega\} \subseteq \topologie \cap \ferme$.
+
+
+* Voisinage
+
+On dit que $V \subseteq \Omega$ est un voisinage de $x \in \Omega$ si il existe un ouvert $U \in \topologie$ tel que $x \in U \subseteq V$.
+
+
+* Adhérence
+
+L'adhérence, ou fermeture, d'un ensemble $A \subseteq \Omega$ est le plus petit (au sens inclusif) ensemble fermé $F$ contenant $A$. On la note :
+
+$$\adh A = \inf_\subseteq \{ F \in \ferme : A \subseteq F \} = \bigcap \{ F \in \ferme : A \subseteq F \}$$
+
+
+* Intérieur
+
+L'intérieur d'un ensemble $A \subseteq \Omega$ est le plus grand ensemble ouvert contenu dans $A$. On le note :
+
+$$\interieur A = \sup_\subseteq \{ U \in \topologie : U \subseteq A \} = \bigcup \{ U \in \topologie : U \subseteq A \}$$
+
+
+* Frontière
+
+La frontière de $A$ est la différence entre l'adhérence et l'intérieur :
+
+$$\frontiere A = (\adh A) \setminus (\interieur A)$$
+
+
+* Propriétés de l'adhérence et de l'intérieur
+
+
+** Inclusions
+
+On a bien entendu :
+
+$$\interieur A \subseteq A \subseteq \adh A$$
+
+
+** Nature
+
+Une union quelconque d'ouverts étant un ouvert, on a $\interieur A \in \topologie$. Une intersection quelconque de fermés étant un fermé, on a $\adh A \in \ferme$.
+
+
+** Complémentaire
+
+Les fermés $F$ contenant $A$ correspondent aux complémentaires des ouverts $U = \Omega \setminus F$ inclus dans $\Omega \setminus A$. Comme $\bigcap F = \Omega \setminus \bigcup U$, on a :
+
+$$\adh A = \Omega \setminus \interieur (\Omega \setminus A)$$
+
+Les ouverts $U$ inclus dans $A$ correspondent aux complémentaires des fermés $F = \Omega \setminus U$ contenant $\Omega \setminus A$. La relation $\bigcup U = \Omega \setminus \bigcap F$ nous dit que :
+
+$$\interieur A =  \Omega \setminus \adh (\Omega \setminus A)$$
+
+
+* Hausdorff
+
+On dit que le couple $(\Omega,\topologie)$ est un espace de Haussdorff si,
+pour tout $x,y \in \Omega$ vérifiant $x \ne y$, on peut trouver des ouverts
+$U, V \in \topologie$ tels que :
+
+$$x \in U, \ y \in V$$
+
+et :
+
+$$U \cap V = \emptyset$$
+
+
+* Topologie engendrée
+
+Les collections d'ensemble étant des ensembles d'ensembles, on peut également les comparer au moyen de l'inclusion. En ce sens, la topologie engendrée par la collection $\mathcal{C} \subseteq \sousens(\Omega)$ est la plus petite topologie contenant les ensembles-éléments de $\mathcal{C}$. On la note :
+
+$$\topologies(\mathcal{C},\Omega) = \inf_\subseteq \{ \topologie \in \topologies(\Omega) : \mathcal{C} \subseteq \topologie \}$$

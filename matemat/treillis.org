@@ -1,0 +1,563 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Treillis
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:treillis}
+
+* Dépendances
+
+  - Chapitre \ref{chap:ordreInclusif} : L'ordre inclusif
+
+* Définition
+
+Soit l'ensemble $\Omega$ et $A,B \subseteq \Omega$. Au sens inclusif,
+les supremum et infimum de l'ensemble $\{A,B\}$ existent toujours et :
+
+#+BEGIN_CENTER
+\(
+\sup_\subseteq \{ A,B \} = A \cup B \\ \)
+
+\(
+\inf_\subseteq \{ A,B \} = A \cap B
+\)
+#+END_CENTER
+
+Le concept de treillis est une généralisation de cette propriété.
+Soit un ensemble $\mathcal{T}$ sur lequel est défini l'ordre $\le$.
+On dit que le couple $(\mathcal{T},\le)$ est un treillis si, pour
+tout éléments $a,b \in \mathcal{T}$, le supremum et l'infimum de l'ensemble :
+
+$$\{ a,b \}$$
+
+existent :
+
+$$\minor \{ a, b \} \le \inf \{ a, b \} \le \{ a, b \} \le \sup \{ a, b \} \le \major \{ a, b \}$$
+
+Dans la suite, nous considérons un treillis $(\mathcal{T},\le)$.
+
+
+* Union généralisée
+
+Soit $a, b \in \mathcal{T}$. Par analogie avec l'union ensembliste,
+on définit l'opération d'union généralisée $\sqcup$ par :
+
+$$a \sqcup b = \sup \{ a, b \}$$
+
+
+* Intersection généralisée
+
+Soit $a, b \in \mathcal{T}$. Par analogie avec l'intersection ensembliste,
+on définit l'opération d'intersection généralisée $\sqcap$ par :
+
+$$a \sqcap b = \inf \{ a, b \}$$
+
+
+* Treillis dual
+
+Le treillis dual de $(\mathcal{T},\le)$ est noté $(\mathcal{T},\le)^\dual$
+et défini par :
+
+$$(\mathcal{T},\le)^\dual = (\mathcal{T},\le^\dual)$$
+
+où $\le^\dual$ est l'ordre dual de $\le$. On a bien entendu :
+
+$$\sup_{\le^\dual} \{a,b\} = \inf_\le \{a,b\}$$
+
+et :
+
+$$\inf_{\le^\dual} \{a,b\} = \sup_\le \{a,b\}$$
+
+Le treillis dual est donc également un treillis.
+
+
+** Union
+
+Soit $a,b \in \mathcal{T}$. On définit l'opération $\sqcup^\dual$ par :
+
+$$a \sqcup^\dual b = \sup_{\le^\dual} \{a,b\} = \inf_\le \{a,b\} = a \sqcap b$$
+
+
+** Intersection
+
+Soit $a,b \in \mathcal{T}$. On définit l'opération $\sqcap^\dual$ par :
+
+$$a \sqcap^\dual b = \inf_{\le^\dual} \{a,b\} = \sup_\le \{a,b\} = a \sqcup b$$
+
+
+** Primal
+
+Par opposition au treillis dual $(\mathcal{T},\le)^\dual$, le treillis
+$(\mathcal{T},\le)$ est appelé treillis primal.
+
+
+* Éléments nul et universel
+
+
+** Élément nul
+
+Si $\mathcal{T}$ admet un minimum, on l'appelle élément nul de $\mathcal{T}$
+et on le note :
+
+$$0 = \min \mathcal{T}$$
+
+Soit $a \in \mathcal{T}$. Si $x \in \minor \{ 0, a \}$, on a $x \le 0$. Comme
+on a également $0 \le x$, on en conclut que $x = 0$ et que :
+
+$$\minor \{ 0, a \} = \{ 0 \}$$
+
+Donc :
+
+$$\inf \{ 0, a \} = \max \{ 0 \} = 0$$
+
+On a aussi :
+
+$$\{ 0, a \} \le a \le \major \{ 0, a \}$$
+
+d'où l'on déduit :
+
+$$\sup \{ 0, a \} = a$$
+
+En termes d'opérations, ces résultats s'écrivent :
+
+$$0 \sqcap a = 0$$
+
+$$0 \sqcup a = a$$
+
+
+** Élément universel
+
+Si $\mathcal{T}$ admet un maximum, on l'appelle élément universel de $\mathcal{T}$
+et on le note :
+
+$$1 = \max \mathcal{T}$$
+
+Si $x \in \major \{ 1, a \}$, on a $x \ge 1$. Comme
+on a également $1 \ge x$, on en conclut que $x = 1$ et que :
+
+$$\major \{ 1, a \} = \{ 1 \}$$
+
+Donc :
+
+$$\sup \{ 1, a \} = \min \{ 1 \} = 1$$
+
+On a aussi :
+
+$$\{ 1, a \} \ge a \ge \minor \{ 1, a \}$$
+
+d'où l'on déduit :
+
+$$\inf \{ 1, a \} = a$$
+
+En termes d'opérations, ces résultats s'écrivent :
+
+$$1 \sqcup a = 1$$
+
+$$1 \sqcap a = a$$
+
+
+** Dualité
+
+Sous réserve d'existence, on a :
+
+$$0 = \min_\le \mathcal{T} = \max_{\le^\dual} \mathcal{T}$$
+
+L'élément universel du treillis dual est donc égal à l'élément
+nul du treillis primal :
+
+$$1^\dual = 0$$
+
+Sous réserve d'existence, on a :
+
+$$1 = \max_\le \mathcal{T} = \min_{\le^\dual} \mathcal{T}$$
+
+L'élément nul du treillis dual est donc égal à l'élément
+universel du treillis primal :
+
+$$0^\dual = 1$$
+
+
+* Complémentaire
+
+On dit que $x^\ddagger \in \mathcal{T}$ est un complémentaire
+de $x \in \mathcal{T}$ si :
+
+$$x \sqcup x^\ddagger = 1$$
+
+$$x \sqcap x^\ddagger = 0$$
+
+
+** Dualité
+
+En termes d'opérations du treillis dual, les conditions de
+complémentarité s'écrivent :
+
+$$x \sqcap^\dual x^\ddagger = 0^\dual$$
+
+$$x \sqcup^\dual x^\ddagger = 1^\dual$$
+
+On en conclut que $x^\ddagger$ est également le complémentaire
+de $x$ au sens du treillis dual.
+
+
+* Distributivité
+
+On dit que $(\mathcal{T},\le)$ est un treillis distributif si :
+
+$$a \sqcup (b \sqcap c) = (a \sqcup b) \sqcap (a \sqcup c)$$
+
+$$a \sqcap (b \sqcup c) = (a \sqcap b) \sqcup (a \sqcap c)$$
+
+pour tout $a,b,c \in \mathcal{T}$.
+
+
+* Booléen
+
+Un treillis $(\mathcal{T},\le)$ est dit booléen si et seulement si :
+
+  - il comprend un élément nul et un élément universel
+  - il est distributif
+  - chaque élément de $\mathcal{T}$ admet un complémentaire
+
+
+* Idempotence
+
+Soit $a \in \mathcal{T}$. On a :
+
+$$\{a\} \le a \le \major\{a\}$$
+
+donc :
+
+$$a = \sup\{a\}$$
+
+On en conclut que :
+
+$$a \sqcup a = \sup\{a,a\} = \sup\{a\} = a$$
+
+On a :
+
+$$\minor\{a\} \le a \le \{a\}$$
+
+donc :
+
+$$a = \inf\{a\}$$
+
+On en conclut que :
+
+$$a \sqcap a = \inf\{a,a\} = \inf\{a\} = a$$
+
+
+* Sous-ensemble fini
+
+
+** Supremum
+
+Nous allons voir que tout sous-ensemble fini d'un treillis admet un
+supremum. On sait déjà que c'est vrai pour des ensembles comportant
+un ou deux éléments. Supposons à présent que ce soit vrai pour
+les sous-ensembles de maximum $n - 1$ éléments, où $n$ est un
+naturel vérifiant $n \ge 2$. Soit :
+
+$$A = \{ a_1, a_2, ..., a_n \} \subseteq \mathcal{T}$$
+
+Choisissons $i \in \{ 1, 2, ..., n \}$ et posons :
+
+$$x = a_i$$
+
+$$Z = A \setminus \{ x \} = \{ ..., a_{i - 1}, a_{i + 1}, ... \}$$
+
+L'ensemble $Z$ comportant $n - 1$ éléments, il admet un supremum :
+
+$$\mu = \sup Z$$
+
+Posons :
+
+$$\sigma = \sup \{ \mu, x \}$$
+
+On a :
+
+$$\sigma \ge \mu \ge Z$$
+$$\sigma \ge \{ x \}$$
+
+donc :
+
+$$\sigma \ge Z \cup \{ x \} = A$$
+
+et :
+
+$$\sigma \in \major A$$
+
+Choisissons :
+
+$$\varkappa \in \major A$$
+
+On a :
+
+$$\varkappa \ge Z$$
+$$\varkappa \ge \{ x \}$$
+
+La première inégalité nous dit que :
+
+$$\varkappa \in \major Z$$
+
+Le supremum étant le plus petit des majorants, on doit donc avoir :
+
+$$\varkappa \ge \mu$$
+
+Comme on a également :
+
+$$\varkappa \ge x$$
+
+on en conclut que :
+
+$$\varkappa \in \major \{ \mu, x \}$$
+
+Le supremum étant le plus petit des majorants, on doit donc avoir :
+
+$$\varkappa \ge \sigma$$
+
+Nous venons de prouver que :
+
+$$\sigma = \min \major A = \sup A$$
+
+Tout sous-ensemble fini non vide $A \subseteq \mathcal{T}$ possède un supremum.
+Si $A$ compte au moins deux éléments, on a :
+
+$$\sup A = \sup \Big\{ \sup\big(A \setminus \{ x \}\big) , x \Big\}$$
+
+
+** Infimum
+
+Nous allons voir que tout sous-ensemble fini d'un treillis admet un
+infimum. On sait déjà que c'est vrai pour des ensembles comportant
+un ou deux éléments. Supposons à présent que ce soit vrai pour
+les sous-ensembles de maximum $n - 1$ éléments, où $n$ est un
+naturel vérifiant $n \ge 2$. Soit :
+
+$$A = \{ a_1, a_2, ..., a_n \} \subseteq \mathcal{T}$$
+
+Choisissons $i \in \{ 1, 2, ..., n \}$ et posons :
+
+$$x = a_i$$
+
+$$Z = A \setminus \{ x \} = \{ ..., a_{i - 1}, a_{i + 1}, ... \}$$
+
+L'ensemble $Z$ comportant $n - 1$ éléments, il admet un infimum :
+
+$$\gamma = \inf Z$$
+
+Posons :
+
+$$\lambda = \inf \{ \gamma, x \}$$
+
+On a :
+
+$$\lambda \le \gamma \le Z$$
+$$\lambda \le \{ x \}$$
+
+donc :
+
+$$\lambda \le Z \cup \{ x \} = A$$
+
+et :
+
+$$\lambda \in \minor A$$
+
+Choisissons :
+
+$$\vartheta \in \minor A$$
+
+On a :
+
+$$\vartheta \le Z$$
+$$\vartheta \le \{ x \}$$
+
+La première inégalité nous dit que :
+
+$$\vartheta \in \minor Z$$
+
+L'infimum étant le plus grand des minorants, on doit donc avoir :
+
+$$\vartheta \le \gamma$$
+
+Comme on a également :
+
+$$\vartheta \le x$$
+
+on en conclut que :
+
+$$\vartheta \in \minor \{ \gamma, x \}$$
+
+L'infimum étant le plus grand des minorants, on doit donc avoir :
+
+$$\vartheta \le \lambda$$
+
+Nous venons de prouver que :
+
+$$\lambda = \max \minor A = \inf A$$
+
+Tout sous-ensemble fini non vide $A \subseteq \mathcal{T}$ possède un infimum.
+Si $A$ compte au moins deux éléments, on a :
+
+$$\inf A = \inf \Big\{ \inf\big(A \setminus \{ x \}\big) , x \Big\}$$
+
+
+* Commutativité
+
+Soit $a, b \in \mathcal{T}$. Comme $\{a,b\} = \{b,a\}$, on a clairement :
+
+$$a \sqcup b = b \sqcup a$$
+
+et :
+
+$$a \sqcap b = b \sqcap a$$
+
+
+* Associativité
+
+
+** Union
+
+On a :
+
+$$\sup \big\{ a, \sup \{b, c\} \big\} = \sup \{a,b,c\} = \sup \big\{ \sup \{a, b\}, c \big\}$$
+
+En terme d'opération, ce résultat implique l'associativité de l'union généralisée :
+
+$$a \sqcup (b \sqcup c) = (a \sqcup b) \sqcup c$$
+
+On définit donc :
+
+$$a \sqcup b \sqcup c = a \sqcup (b \sqcup c) = (a \sqcup b) \sqcup c$$
+
+Plus généralement, on a :
+
+$$a_1 \sqcup a_2 \sqcup ... \sqcup a_n = \sup \{ a_1, a_2, ..., a_n \}$$
+
+pour tout $a_1, a_2, ..., a_n \in \mathcal{T}$.
+
+
+** Intersection
+
+Le treillis dual $(\mathcal{T},\le^\dual)$ étant également un treillis,
+on a la propriété :
+
+$$a \sqcup^\dual (b \sqcup^\dual c) = (a \sqcup^\dual b) \sqcup^\dual c$$
+
+pour tout $a,b,c \in \mathcal{T}$. Cette relation traduite en terme
+d'opérations du treillis primal nous donne l'associativité de
+l'intersection généralisée :
+
+$$a \sqcap (b \sqcap c) = (a \sqcap b) \sqcap c$$
+
+On définit donc :
+
+$$a \sqcap b \sqcap c = a \sqcap (b \sqcap c) = (a \sqcap b) \sqcap c$$
+
+Plus généralement, on a :
+
+$$a_1 \sqcap a_2 \sqcap ... \sqcap a_n = \inf \{ a_1, a_2, ..., a_n \}$$
+
+pour tout $a_1, a_2, ..., a_n \in \mathcal{T}$.
+
+
+* Absorption
+
+Soit $a, b \in \mathcal{T}$. Posons :
+
+$$\sigma = \sup\{a,b\}$$
+
+Comme $\sigma \ge a$, on a :
+
+$$a \le \{a,\sigma\}$$
+
+Choisissons $\lambda \in \mathcal{T}$ tel que :
+
+$$\lambda \le \{a,\sigma\}$$
+
+on a alors forcément :
+
+$$\lambda \le a$$
+
+d'où l'on conclut que :
+
+$$\minor \{a,\sigma\} \le a \le \{a,\sigma\}$$
+
+L'élément $a$ est donc l'infimum de $\{a,\sigma\}$ :
+
+$$a = \inf \{a,\sigma\}$$
+
+Par définition de $\sigma$, on a donc :
+
+$$a = \inf \{a, \sup \{a, b\} \}$$
+
+Exprimée en terme d'opérations, cette relation devient :
+
+$$a = a \sqcap (a \sqcup b)$$
+
+Cette même propriété étant valable pour le treillis dual,
+on a :
+
+$$a = a \sqcap^\dual (a \sqcup^\dual b)$$
+
+Équation qui peut être réexprimée en termes d'opérations du
+treillis primal, ce qui nous donne :
+
+$$a = a \sqcup (a \sqcap b)$$
+
+
+* Treillis d'ensemble
+
+Une collection $\mathcal{C}$ de sous-ensembles d'un ensemble de référence
+$\Omega$ :
+
+$$\mathcal{C} \subseteq \sousens(\Omega)$$
+
+est un treillis d'ensembles si et seulement si :
+
+$$\emptyset,\Omega \in \mathcal{C}$$
+
+et :
+
+$$A \cup B \in \mathcal{C}$$
+
+$$A \cap B \in \mathcal{C}$$
+
+pour tout $A,B \in \mathcal{C}$. Le couple $(\mathcal{C},\subseteq)$
+est un cas particulier de treillis.
+
+
+** Élément nul
+
+Un treillis d'ensembles comporte toujours un élément nul :
+
+$$\emptyset = \min_{\subseteq} \mathcal{C}$$
+
+
+** Élément universel
+
+Un treillis d'ensembles comporte toujours un élément universel :
+
+$$\Omega = \max_{\subseteq} \mathcal{C}$$
+
+
+

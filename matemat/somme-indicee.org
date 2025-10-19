@@ -1,0 +1,139 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Sommes indicées
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:sommesIndicees}
+
+* Définition
+
+Soit un corps commutatif $\corps$ et l'ensemble d'indices $\mathcal{Z}$.
+Supposons que l'on puisse écrire l'ensemble $A \subseteq \corps$
+sous la forme :
+
+$$A = \{ a_k : k \in \mathcal{Z} \}$$
+
+On associe à $A$ la fonction $\varphi : \mathcal{Z} \mapsto A$ définie par :
+
+$$\varphi(k) = a_k$$
+
+pour tout $k \in \mathcal{Z}$. Pour tout sous-ensemble $I \subseteq \mathcal{Z}$, on définit alors :
+
+$$\sum_{k \in I} a_k = \sum_{k \in I} \varphi(k)$$
+
+sous réserve d'existence de la somme.
+
+
+** Fonction
+
+Soit $f : A \mapsto \corps$. On définit :
+
+$$\sum_{k \in I} f(a_k) = \sum_{k \in I} (f \circ \varphi)(k)$$
+
+
+* Intervalles discrets
+
+Soit $m,n \in \setZ$. Nous définissons l'intervalle discret :
+
+$$\setZ[m,n] = \{ z \in \setZ : m \le z \le n \}$$
+
+Si $\setZ[m,n] \subseteq \mathcal{Z}$, on a simplement :
+
+$$\sum_{k \in \setZ[m,n]} a_k = a_m + a_{m+1} + ... + a_{n-1} + a_n$$
+
+On note aussi :
+
+$$\sum_{k = m}^n a_k = \sum_{k = n}^m a_k = \sum_{k \in \setZ[m,n] } a_k$$
+
+
+* Linéarité
+
+Soit les ensembles :
+
+$$A = \{ a_k : k \in \mathcal{Z} \} \subseteq \corps$$
+$$B = \{ b_k : k \in \mathcal{Z} \} \subseteq \corps$$
+
+et $\alpha, \beta \in \corps$. Si $I \subseteq \mathcal{Z}$ compte un nombre fini d'éléments, on a clairement :
+
+$$\sum_{k \in I} (\alpha \cdot a_{k} + \beta \cdot b_k) = \alpha \cdot \sum_{k \in I} a_k + \beta \cdot \sum_{k \in I} b_k$$
+
+
+* Produit cartésien
+
+Soit les sous-ensembles $I,J \subseteq \setZ$ comportant un nombre fini d'éléments, et :
+
+$$A = \{ a_{ij} \in E : (i,j) \in I \times J \}$$
+
+Il découle directement de la formule des sommes sur les produits cartésiens que :
+
+$$\sum_{(i,j) \in I \times J} a_{ij} = \sum_{i \in I} \sum_{j \in J} a_{ij} = \sum_{j \in J} \sum_{i \in I} a_{ij}$$
+
+
+** Notation
+
+On note :
+
+$$\sum_{i,j = m}^n a_{ij} = \sum_{i = m}^n \sum_{j = m}^n a_{ij}$$
+
+
+* Somme d'un produit
+
+Soit les ensembles :
+
+$$A = \{ a_k : k \in \mathcal{Z} \} \subseteq \corps$$
+$$B = \{ b_k : k \in \mathcal{Z} \} \subseteq \corps$$
+
+et les ensembles $I,J \subseteq \mathcal{Z}$ comportant un nombre fini d'éléments. La somme
+du produit se déduit du résultat analogue des sommes génériques :
+
+$$\sum_{(i,j) \in I \times J} a_i \cdot b_j = \left[ \sum_{i \in I} a_i \right] \cdot \left[ \sum_{j \in J} b_j \right]$$
+
+
+* Lemme du triangle
+
+Soit le triangle discret :
+
+$$\Delta = \{ (i,j) \in \setZ[0,N] \times \setZ[0,N] : \ j \le i \}$$
+
+et un ensemble :
+
+$$A = \{ a_{ij} : (i,j) \in \Delta \}$$
+
+Le triangle $\Delta$ peut être aussi défini par :
+
+$$\Delta = \{ (i,j) \in \setZ^2 : 0 \le i \le N, \quad 0 \le j \le i\}$$
+
+La somme sur $\Delta$ peut donc se réécrire :
+
+$$\sum_{(i,j) \in \Delta} a_{ij} = \sum_{i=0}^N \sum_{j=0}^i a_{ij}$$
+
+Une autre définition alternative de $\Delta$ nous donne :
+
+$$\Delta = \{(i,j) \in \setZ^2 : 0 \le j \le N, \quad j \le i \le N\}$$
+
+On a donc également :
+
+$$\sum_{(i,j)\in\Delta} a_{ij} = \sum_{j=0}^N \sum_{i=j}^N a_{ij}$$
+
+On en déduit une relation permettant d'inverser les sommes :
+
+$$\sum_{i=0}^N \sum_{j=0}^i a_{ij} = \sum_{j=0}^N \sum_{i=j}^N a_{ij} = \sum_{(i,j)\in\Delta} a_{ij}$$

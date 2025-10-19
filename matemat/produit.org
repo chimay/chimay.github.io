@@ -1,0 +1,234 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Produits
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:produits}
+
+* Dépendances
+
+  - Chapitre \ref{chap:reel} : Les réels
+  - Chapitre \ref{chap:complexe} : Les complexes
+  - Chapitre \ref{chap:somme} : Les sommes
+
+
+* Introduction
+
+Soit le corps $\corps$ sur lequel est défini une relation d'ordre total ainsi des opérations d'addition, de multiplication, de soustraction, de division et de puissance similaires à celles de $\setQ$.
+
+Soit un ensemble $\Omega$ et la fonction $f : \Omega \mapsto \corps$. On note le produit de $f$ sur $X$ par :
+
+$$\prod_{x \in X} f(x)$$
+
+pour tout sous-ensemble $X \subseteq \Omega$. Il s'agit intuitivement du produit des $f(x) \in \corps$ lorsque $x$ parcourt $X$. Nous allons voir comment le formaliser.
+
+
+* Multiplicativité finie
+
+Si deux ensembles $X,Y \subseteq \Omega$ ne se chevauchent pas :
+
+$$X \cap Y = \emptyset$$
+
+le produit sur l'union des deux est intuitivement le produit des produits sur chacun d'entre-eux :
+
+$$\prod_{z \in X \cup Y} f(z) = \left[ \prod_{z \in X} f(z) \right] \cdot \left[ \prod_{z \in Y} f(z) \right]$$
+
+
+* Ensemble vide
+
+Comme $X = X \cup \emptyset$ et $X \cap \emptyset = \emptyset$, on en déduit que :
+
+$$\prod_{x \in X} f(x) = \prod_{x \in X \cup \emptyset} f(x) = \prod_{x \in X} f(x) \cdot \prod_{x \in \emptyset} f(x)$$
+
+Le produit sur l'ensemble vide doit donc être le neutre pour la multiplication :
+
+$$\prod_{x \in \emptyset} f(x) = 1$$
+
+
+* Singleton
+
+Il semble également logique d'imposer que le produit sur un ensemble contenant un seul élément $a \in X$ soit égal à $f(a)$ :
+
+$$\prod_{ x \in \{ a \} } f(x) = f(a)$$
+
+Voilà qui complète les caractéristiques génériques des produits.
+
+
+* Algorithme
+
+Soit l'ensemble $X$ non vide, ensemble dont nous voulons évaluer le produit. Choisissons un élément $a \in A$ et considérons la décomposition :
+
+$$X = \{ a \} \cup ( X \setminus \{ a \} )$$
+
+Comme l'intersection des deux ensembles du membre de droite est vide :
+
+$$\{ a \} \cap ( X \setminus \{ a \} ) = \emptyset$$
+
+on peut écrire :
+
+$$\prod_{x \in X} f(x) = \prod_{ x \in \{ a \} } f(x) \cdot \prod_{x \in X \setminus \{ a \} } f(x)$$
+
+c'est-à-dire :
+
+$$\prod_{x \in X} f(x) = f(a) \cdot \prod_{x \in X \setminus \{ a \} } f(x)$$
+
+On en déduit un algorithme itératif permettant d'estimer le produit :
+
+$$S \approx \prod_{x \in X} f(x)$$
+
+Nous partons de :
+
+#+BEGIN_CENTER
+\(
+S_0 = 0 \)
+
+\(
+X_0 = X
+\)
+#+END_CENTER
+
+A chaque étape $k$, nous choisissons $a_k \in X_k$ et nous adaptons notre estimation par :
+
+$$S_{k + 1} = f(a_k) \cdot S_k$$
+
+On retire ensuite $a_k$ de $X_k$ pour éviter de le compter plus d'une fois, ce qui nous donne l'ensemble suivant :
+
+$$X_{k + 1} = X_k \setminus \{ a_k \}$$
+
+
+* Ensemble fini
+
+Soit l'ensemble $X$ contenant un nombre fini $N \in \setN$ d'éléments :
+
+$$X = \{ a_1, a_2, ..., a_N \}$$
+
+En appliquant l'algorithme d'évaluation d'une somme, on finit par arriver à l'itération $N$ avec :
+
+$$X_N = \emptyset$$
+
+On a simplement :
+
+$$\prod_{x \in X} f(x) = S_N \cdot \prod_{x \in \emptyset} f(x) = S_N \cdot 1 = S_N$$
+
+et :
+
+$$\prod_{x \in X} f(x) = S_N = f(a_1) \cdot f(a_2) \cdot ... \cdot f(a_N)$$
+
+On note :
+
+$$\prod_{k = 1}^N f(a_k) = f(a_1) \cdot f(a_2) \cdot ... \cdot f(a_N)$$
+
+
+** Numérotation
+
+Les éléments de $X$ peuvent être numérotés différemment. Soit $m, n \in \setZ$ et :
+
+$$X = \{ a_m, a_{m + 1}, ..., a_{n - 1}, a_n \}$$
+
+On a alors :
+
+$$\prod_{x \in X} f(x) = f(a_m) \cdot f(a_{m+1}) \cdot ... \cdot f(a_{n-1}) \cdot f(a_n)$$
+
+On note :
+
+$$\prod_{k = m}^n f(a_k) = f(a_m) \cdot f(a_{m+1}) \cdot ... \cdot f(a_{n-1}) \cdot f(a_n)$$
+
+
+** Extension
+
+Soit un ensemble $X$ dont on peut extraire un sous-ensemble fini de la forme :
+
+$$F = \{ a_m, a_{m + 1}, ..., a_{n - 1}, a_n \} \subseteq X$$
+
+tel que :
+
+$$f(x) = 1$$
+
+pour tout $x \in X \setminus F$. La somme s'écrit alors :
+
+$$\prod_{x \in X} f(x) = \prod_{x \in F} f(x) = \prod_{k = m}^n f(a_k)$$
+
+
+* Ensemble dénombrable
+
+
+** Naturels
+
+Soit :
+
+$$X = \{ a_0, a_1, a_2,... \} = \{ a_k : k \in \setN \}$$
+
+Si la suite des $\{ S_n : n \in \setN \}$ définie par :
+
+$$S_n = \prod_{k = 0}^n f(a_k) = f(a_0) \cdot f(a_1) \cdot ... \cdot f(a_n)$$
+
+pour tout $n \in \setN$ converge vers un certain $S \in \corps$, on définit :
+
+$$\prod_{x \in X} f(x) = \lim_{n \to \infty} S_n = S$$
+
+c'est-à-dire :
+
+$$\prod_{x \in X} f(x) = \lim_{n \to \infty} \prod_{k = 0}^n f(a_k)$$
+
+On introduit la notation :
+
+$$\prod_{k = 0}^{+\infty} f(a_k) = \lim_{n \to \infty} \prod_{k = 0}^n f(a_k)$$
+
+
+** Entiers
+
+Soit :
+
+$$X = \{ ...,a_{-2},a_{-1},a_0, a_1, a_2,... \} = \{ a_k : k \in \setZ \}$$
+
+Si la suite des $\{ S_n : n \in \setN \}$ définie par :
+
+$$S_n = \prod_{k = -n}^n f(a_k) = f(a_{-n}) \cdot f(a_{-n+1}) \cdot ... \cdot f(a_{n-1}) \cdot f(a_n)$$
+
+pour tout $n \in \setN$ converge vers un certain $S \in \corps$, on définit :
+
+$$\prod_{x \in X} f(x) = \lim_{n \to \infty} S_n = S$$
+
+On introduit la notation :
+
+$$\prod_{k = -\infty}^{+\infty} f(a_k) = \lim_{n \to \infty} \prod_{k = -n}^{n} f(a_k)$$
+
+
+** Extension
+
+Soit un ensemble $X$ dont on peut extraire un sous-ensemble $D$ de la forme :
+
+$$D = \{a_k : k \in \setN\} \subseteq X$$
+
+ou :
+
+$$D = \{a_k : k \in \setZ\} \subseteq X$$
+
+tel que :
+
+$$f(x) = 1$$
+
+pour tout $x \in X \setminus D$. La somme s'écrit alors :
+
+$$\prod_{x \in X} f(x) = \prod_{x \in D} f(x)$$
+
+

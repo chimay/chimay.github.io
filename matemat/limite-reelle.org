@@ -1,0 +1,365 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Limites réelles
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:limitesReelles}
+
+* Fonction croissante
+
+Soit une fonction $f : \setR \mapsto \setR$ croissante et majorée par un certain $M \in \setR$ :
+
+$$F = \{ f(x) \in \setR : x \in \setR \} \le M$$
+
+Comme l'ensemble de réels $F$ est non vide et majoré, on en conclut qu'il admet un supremum inclus dans l'adhérence :
+
+$$S = \sup F \in \adh F$$
+
+Choisissons un réel $\epsilon \strictsuperieur 0$. Comme $\distance(S,F) = 0$, on peut trouver un $\alpha \in \setR$ tel que :
+
+$$\distance(S,f(\alpha)) = \abs{S - f(\alpha)} \le \epsilon$$
+
+Comme $S \ge F$, on a $\abs{S - f(\alpha)} = S - f(\alpha) \le \epsilon$. Soit un $\beta \in \setR$ tel que $\beta \ge \alpha$. La fonction $f$ étant croissante, on a $f(\beta) \ge f(\alpha)$, et donc :
+
+$$\distance(S,f(\beta)) = S - f(\beta) \le S - f(\alpha) \le \epsilon$$
+
+On en déduit que $f(x)$ converge vers le supremum $S$ lorsque $x \to \infty$. Par unicité de la limite, on a :
+
+$$\lim_{x \to +\infty} f(x) = \sup \{ f(x) \in \setR : x \in \setR \}$$
+
+
+* Fonction décroissante
+
+Symétriquement, si $g : \setR \mapsto \setR$ est une fonction décroissante et minorée par un certain $L \in \setR$, l'ensemble non vide :
+
+$$G = \{ g(x) \in \setR : x \in \setR \} \ge L$$
+
+admet un infimum inclut dans l'adhérence :
+
+$$I = \inf G \in \adh G$$
+
+Choisissons un réel $\epsilon \strictsuperieur 0$. Comme $\distance(I,G) = 0$, on peut trouver un $\alpha \in \setR$ tel que :
+
+$$\distance(I,g(\alpha)) = \abs{I - g(\alpha)} \le \epsilon$$
+
+Comme $I \le F$, on a $\abs{I - g(\alpha)} = g(\alpha) - I \le \epsilon$. Soit un $\beta \in \setR$ tel que $\beta \ge \alpha$. La fonction $g$ étant décroissante, on a $g(\beta) \le g(\alpha)$, et donc :
+
+$$\distance(I,g(\beta)) = g(\beta) - I \le g(\alpha) - I \le \epsilon$$
+
+On en déduit que $g(x)$ converge vers le supremum $I$ lorsque $x \to \infty$. Par unicité de la limite, on a :
+
+$$\lim_{x \to +\infty} g(x) = \inf \{ g(x) \in \setR : x \in \setR \}$$
+
+
+* Limites supremum et infimum
+
+Soit une fonction $f : \setR \mapsto \setR$ majorée et minorée. On définit la famille $\{F(x) : x \in \setR \}$ d'ensembles non vides, majorés et minorés par :
+
+$$F(x) = \{f(z) : z \in \setR, \ z \ge x \}$$
+
+
+** Limite supremum
+
+Si $x \ge y$, on a $F(x) \subseteq F(y)$, et donc $\sup F(x) \le \sup F(y)$. On en conclut que la fonction dérivée $d : \setR \mapsto \setR$ définie par :
+
+$$d(x) = \sup \{ f(z) : z \in \setR, \ z \ge x \}$$
+
+pour tout $x \in \setR$ est décroissante et minorée. Elle converge donc vers son infimum :
+
+$$\lim_{x \to +\infty} d(x) = \inf_{x \in \setR} d(x) = \inf_{x \in \setR} \sup \{f(z) : z \in \setR, \ z \ge x \}$$
+
+D'un autre coté, la définition de $d$ implique que :
+
+$$\lim_{x \to +\infty} d(x) = \lim_{x \to +\infty} \sup \{f(z) : z \in \setR, \ z \ge x \} = \limsup_{x \to +\infty} f(x)$$
+
+On en conclut que :
+
+$$\limsup_{x \to +\infty} f(x) = \inf_{x \in \setR} \sup \{f(z) : z \in \setR, \ z \ge x \}$$
+
+
+** Limite infimum
+
+Si $x \ge y$, on a $F(x) \subseteq F(y)$, et donc $\inf F(x) \ge \inf F(y)$. On en conclut que la fonction dérivée $c : \setR \mapsto \setR$ définie par :
+
+$$c(x) = \inf \{ f(z) : z \in \setR, \ z \ge x \}$$
+
+pour tout $x \in \setR$ est croissante et majorée. Elle converge donc vers son supremum :
+
+$$\lim_{x \to +\infty} c(x) = \sup_{x \in \setR} c(x) = \sup_{x \in \setR} \inf \{f(z) : z \in \setR, \ z \ge x \}$$
+
+D'un autre coté, la définition de $c$ implique que :
+
+$$\lim_{x \to +\infty} c(x) = \lim_{x \to +\infty} \inf \{f(z) : z \in \setR, \ z \ge x \} = \liminf_{x \to +\infty} f(x)$$
+
+On en conclut que :
+
+$$\liminf_{x \to +\infty} f(x) = \sup_{x \in \setR} \inf \{f(z) : z \in \setR, \ z \ge x \}$$
+
+
+* Egalité des limites sup et inf
+
+Soit une fonction $f : \setR \mapsto \setR$ majorée et minorée. Posons :
+
+#+BEGIN_CENTER
+\(
+S(x) = \sup \{ f(z) : z \in \setR, \ z \ge x \} \)
+
+\(
+I(x) = \inf \{ f(z) : z \in \setR, \ z \ge x \}
+\)
+#+END_CENTER
+
+et choisissons un réel $\epsilon \strictsuperieur 0$.
+
+
+  - Considérons le cas particulier où les limites sup et inf sont identiques :
+
+$$L = \limsup_{x \to +\infty} f(x) = \liminf_{x \to +\infty} f(x)$$
+
+pour tout $x \in \setR$. Choisissons un $\sigma$ tel que $\abs{S(x) - L} \le \epsilon$ pour tout $x$ vérifiant $x \ge \sigma$ et un $\tau$ tel que $\abs{I(x) - L} \le \epsilon$ pour tout $x$ vérifiant $x \ge \tau$. Posant $M = \max\{\sigma,\tau\}$, il vient :
+
+#+BEGIN_CENTER
+\(
+f(z) \le S(M) \le L + \epsilon \)
+
+\(
+f(z) \ge I(M) \ge L - \epsilon
+\)
+#+END_CENTER
+
+pour tout réel $z$ vérifiant $z \ge M$. On a alors :
+
+$$\abs{f(z) - L} \le \epsilon$$
+
+On en conclut que la limite de $f$ à l'infini existe et que :
+
+$$\lim_{x \to +\infty} f(x) = \limsup_{x \to +\infty} f(x) = \liminf_{x \to +\infty} f(x)$$
+
+  - Inversément, supposons la limite de $f$ à l'infini existe :
+
+$$L = \lim_{x \to +\infty} f(x)$$
+
+Soit un réel $M$ tel que :
+
+$$\abs{f(x) - L} \le \epsilon$$
+
+pour tout réel $x$ vérifiant $x \ge M$. On a alors :
+
+$$L - \epsilon \le f(x) \le L + \epsilon$$
+
+On en déduit que :
+
+#+BEGIN_CENTER
+\(
+S(x) \le L + \epsilon \)
+
+\(
+I(x) \ge L - \epsilon
+\)
+#+END_CENTER
+
+Le supremum étant supérieur à l'infimum, on a finalement :
+
+$$L - \epsilon \le I(x) \le S(x) \le L + \epsilon$$
+
+et donc :
+
+$$\{ \abs{S(x) - L} , \abs{I(x) - L} \} \le \epsilon$$
+
+On en conclut que $S$ et $I$ convergent vers $L$, c'est-à-dire :
+
+$$\limsup_{x \to +\infty} f(x) = \liminf_{x \to +\infty} f(x) = \lim_{x \to +\infty} f(x)$$
+
+
+
+* Ordre et limite
+
+Soit les fonctions $f,g : \setR \mapsto \setR$ vérifiant $f \le g$.
+
+
+** A l'infini
+
+Supposons que les limites à l'infini existent :
+
+#+BEGIN_CENTER
+\(
+\lim_{x \to +\infty} f(x) = b \\ \)
+
+\(
+\lim_{x \to +\infty} g(x) = c
+\)
+#+END_CENTER
+
+Supposons que $b \strictsuperieur c$ et posons $\epsilon = (b - c)/4 \strictsuperieur 0$. On a alors :
+
+$$b = c + 4 \epsilon$$
+
+On peut trouver un réel $F$ tel que :
+
+$$\abs{f(x) - b} \le \epsilon$$
+
+pour tout réel $x$ vérifiant $x \ge F$. De même, on peut trouver un réel $G$ tel que :
+
+$$\abs{g(x) - c} \le \epsilon$$
+
+pour tout réel $x$ vérifiant $x \ge G$. Donc, pour tout réel $x$ vérifiant $x \ge M = \max\{F,G\}$, on a :
+
+$$\{ \ \abs{f(x) - b} , \ \abs{g(x) - c} \ \} \le \epsilon$$
+
+On voit que :
+
+$$b - \epsilon = c + 3 \epsilon \strictsuperieur c + \epsilon$$
+
+On en déduit que :
+
+$$f(x) \ge b - \epsilon \strictsuperieur c + \epsilon \ge g(x)$$
+
+ce qui contredit $f \le g$. Notre hypothèse est donc fausse et $b \le c$, c'est-à-dire :
+
+$$\lim_{x \to +\infty} f(x) \le \lim_{x \to +\infty} g(x)$$
+
+
+** Vers un réel
+
+On montre par un raisonnement analogue que, si les limites de $f,g$ en $a$ existent, on a :
+
+$$\lim_{x \to a} f(x) \le \lim_{x \to a} g(x)$$
+
+
+** Supremum et infimum
+
+Pour tout $x \in \setR$, on a :
+
+$$\lambda(x) = \inf \{ f(z) : z \in \setR, \ z \ge x \} \le \sigma(x) = \sup \{ f(z) : z \in \setR, \ z \ge x \}$$
+
+On en conclut que $\lambda \le \sigma$. Leurs limites à l'infini respectent donc le même ordre. Mais comme ces limites correspondent aux limites infimum et supremum de $f$, on a :
+
+$$\liminf_{x \to +\infty} f(x) \le \limsup_{x \to +\infty} f(x)$$
+
+
+* Ordre et supremum-infimum
+
+Soit les fonctions $f,g : \setR \mapsto \setR$ majorées, minorées et vérifiant $f \le g$. Posons :
+
+$$\Theta(x) = \{ z \in \setR : z \ge x \}$$
+
+pour tout $x \in \setR$.
+
+
+** Supremum
+
+Soit les fonctions $\varphi,\gamma$ définies par :
+
+#+BEGIN_CENTER
+\(
+\varphi(x) = \sup \{ f(z) : z \in \setR, \ z \ge x \} \)
+
+\(
+\gamma(x) = \sup \{ g(z) : z \in \setR, \ z \ge x \}
+\)
+#+END_CENTER
+
+pour tout $x \in \setR$. Quel que soit le réel $x$, on a $f \le g$ sur $\Theta(x)$. On en conclut que :
+
+$$\varphi(x) = \sup f(\Theta(x)) \le \sup g(\Theta(x)) = \gamma(x)$$
+
+ce qui revient à dire que $\varphi \le \gamma$. On doit donc avoir :
+
+$$\lim_{x \to +\infty} \varphi(x) \le \lim_{x \to +\infty} \gamma(x)$$
+
+c'est-à-dire :
+
+$$\limsup_{x \to +\infty} f(x) \le \limsup_{x \to +\infty} g(x)$$
+
+
+** Infimum
+
+Soit les fonctions $\varphi,\gamma$ définies par :
+
+#+BEGIN_CENTER
+\(
+\varphi(x) = \inf \{ f(z) : z \in \setR, \ z \ge x \} \)
+
+\(
+\gamma(x) = \inf \{ g(z) : z \in \setR, \ z \ge x \}
+\)
+#+END_CENTER
+
+pour tout $x \in \setR$. Quel que soit le réel $x$, on a $f \le g$ sur $\Theta(x)$. On en conclut que :
+
+$$\varphi(x) = \inf f(\Theta(x)) \le \inf g(\Theta(x)) = \gamma(x)$$
+
+ce qui revient à dire que $\varphi \le \gamma$. On doit donc avoir :
+
+$$\lim_{x \to +\infty} \varphi(x) \le \lim_{x \to +\infty} \gamma(x)$$
+
+c'est-à-dire :
+
+$$\liminf_{x \to +\infty} f(x) \le \liminf_{x \to +\infty} g(x)$$
+
+
+** Egalité
+
+Supposons que :
+
+$$L = \liminf_{x \to +\infty} f(x) = \limsup_{x \to +\infty} g(x)$$
+
+On a alors :
+
+$$L = \liminf_{x \to +\infty} f(x) \le \limsup_{x \to +\infty} f(x) \le \limsup_{x \to +\infty} g(x) = L$$
+
+Les limites sup et inf de $f$ sont donc toutes deux égales à $L$ et :
+
+$$\lim_{x \to +\infty} f(x) = \liminf_{x \to +\infty} f(x) = \limsup_{x \to +\infty} f(x) = L$$
+
+On a aussi :
+
+$$L = \liminf_{x \to +\infty} f(x) \le \liminf_{x \to +\infty} g(x) \le \limsup_{x \to +\infty} g(x) = L$$
+
+Les limites sup et inf de $g$ sont donc toutes deux égales à $L$ et :
+
+$$\lim_{x \to +\infty} g(x) = \liminf_{x \to +\infty} g(x) = \limsup_{x \to +\infty} g(x) = L$$
+
+On en conclut que les limites de $f$ et $g$ existent et que :
+
+$$\lim_{x \to +\infty} f(x) = \lim_{x \to +\infty} g(x)$$
+
+
+* Cadre
+
+Soit les fonctions $f,S,I : \setR \mapsto \setR$ majorées, minorées et vérifiant $I \le f \le S$. Supposons que :
+
+$$L = \liminf_{x \to +\infty} I(x) = \limsup_{x \to +\infty} S(x)$$
+
+On a alors :
+
+$$L = \liminf_{x \to +\infty} I(x) \le \liminf_{x \to +\infty} f(x) \le \limsup_{x \to +\infty} f(x) \le \limsup_{x \to +\infty} S(x) = L$$
+
+On en déduit que :
+
+$$\liminf_{x \to +\infty} f(x) = \limsup_{x \to +\infty} f(x) = L$$
+
+La limite de $f$ existe donc et :
+
+$$\lim_{x \to +\infty} f(x) = \liminf_{x \to +\infty} I(x) = \limsup_{x \to +\infty} S(x)$$
+
+

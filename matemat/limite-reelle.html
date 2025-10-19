@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-10-19 dim 16:46 -->
+<!-- 2025-10-19 dim 17:00 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Eclats de vers : Matemat : Ordre inclusif</title>
+<title>Eclats de vers : Matemat : Limites réelles</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
 <style type="text/css">
@@ -228,7 +228,7 @@
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Eclats de vers : Matemat : Ordre inclusif</h1>
+<h1 class="title">Eclats de vers : Matemat : Limites réelles</h1>
 <p>
 <a href="index.html">Index des Grimoires</a>
 </p>
@@ -241,9 +241,13 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org577be69">1. Dépendances</a></li>
-<li><a href="#org0879b30">2. Ordre sur les ensembles</a></li>
-<li><a href="#org3e096ca">3. Extrema inclusifs d'une collection</a></li>
+<li><a href="#org4ea4add">1. Fonction croissante</a></li>
+<li><a href="#org911a9f9">2. Fonction décroissante</a></li>
+<li><a href="#org33c33f3">3. Limites supremum et infimum</a></li>
+<li><a href="#orgc84a53b">4. Egalité des limites sup et inf</a></li>
+<li><a href="#orgb91ae77">5. Ordre et limite</a></li>
+<li><a href="#org48deb9b">6. Ordre et supremum-infimum</a></li>
+<li><a href="#org1ed58f4">7. Cadre</a></li>
 </ul>
 </div>
 </div>
@@ -406,182 +410,627 @@
 </p>
 
 <p>
-\label{chap:ordreInclusif}
+\label{chap:limitesReelles}
 </p>
-<div id="outline-container-org577be69" class="outline-2">
-<h2 id="org577be69"><span class="section-number-2">1.</span> Dépendances</h2>
+<div id="outline-container-org4ea4add" class="outline-2">
+<h2 id="org4ea4add"><span class="section-number-2">1.</span> Fonction croissante</h2>
 <div class="outline-text-2" id="text-1">
-<ul class="org-ul">
-<li>Chapitre \ref{chap:collections} : Les collections</li>
-<li>Chapitre \ref{chap:ordres} : Les ordres</li>
-<li>Chapitre \ref{chap:extrema} : Les extrema</li>
-</ul>
+<p>
+Soit une fonction \(f : \setR \mapsto \setR\) croissante et majorée par un certain \(M \in \setR\) :
+</p>
+
+<p>
+\[F = \{ f(x) \in \setR : x \in \setR \} \le M\]
+</p>
+
+<p>
+Comme l'ensemble de réels \(F\) est non vide et majoré, on en conclut qu'il admet un supremum inclus dans l'adhérence :
+</p>
+
+<p>
+\[S = \sup F \in \adh F\]
+</p>
+
+<p>
+Choisissons un réel \(\epsilon \strictsuperieur 0\). Comme \(\distance(S,F) = 0\), on peut trouver un \(\alpha \in \setR\) tel que :
+</p>
+
+<p>
+\[\distance(S,f(\alpha)) = \abs{S - f(\alpha)} \le \epsilon\]
+</p>
+
+<p>
+Comme \(S \ge F\), on a \(\abs{S - f(\alpha)} = S - f(\alpha) \le \epsilon\). Soit un \(\beta \in \setR\) tel que \(\beta \ge \alpha\). La fonction \(f\) étant croissante, on a \(f(\beta) \ge f(\alpha)\), et donc :
+</p>
+
+<p>
+\[\distance(S,f(\beta)) = S - f(\beta) \le S - f(\alpha) \le \epsilon\]
+</p>
+
+<p>
+On en déduit que \(f(x)\) converge vers le supremum \(S\) lorsque \(x \to \infty\). Par unicité de la limite, on a :
+</p>
+
+<p>
+\[\lim_{x \to +\infty} f(x) = \sup \{ f(x) \in \setR : x \in \setR \}\]
+</p>
 </div>
 </div>
-<div id="outline-container-org0879b30" class="outline-2">
-<h2 id="org0879b30"><span class="section-number-2">2.</span> Ordre sur les ensembles</h2>
+<div id="outline-container-org911a9f9" class="outline-2">
+<h2 id="org911a9f9"><span class="section-number-2">2.</span> Fonction décroissante</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-Soit l'ensemble \(\Omega\) et l'ensemble de ses sous-ensembles :
+Symétriquement, si \(g : \setR \mapsto \setR\) est une fonction décroissante et minorée par un certain \(L \in \setR\), l'ensemble non vide :
 </p>
 
 <p>
-\[\sousens(\Omega) = \{ A : A \subseteq \Omega \}\]
+\[G = \{ g(x) \in \setR : x \in \setR \} \ge L\]
 </p>
 
 <p>
-On dit que \(A \in \sousens(\Omega)\) est plus petit ou égal à \(B \in \sousens(\Omega)\) au sens de l'ordre inclusif si et seulement si :
+admet un infimum inclut dans l'adhérence :
 </p>
 
 <p>
-\[A \subseteq B\]
+\[I = \inf G \in \adh G\]
 </p>
 
 <p>
-On voit qu'il s'agit d'un ordre partiel.
+Choisissons un réel \(\epsilon \strictsuperieur 0\). Comme \(\distance(I,G) = 0\), on peut trouver un \(\alpha \in \setR\) tel que :
 </p>
-</div>
-<div id="outline-container-org65822c7" class="outline-3">
-<h3 id="org65822c7"><span class="section-number-3">2.1.</span> Attention</h3>
-<div class="outline-text-3" id="text-2-1">
+
 <p>
-Ne pas confondre l'ordre inclusif \(\subseteq\) avec la comparaison d'ensembles \(\ensinferieur\) qui est elle basée sur l'ordre entre les éléments des ensembles concernés.
+\[\distance(I,g(\alpha)) = \abs{I - g(\alpha)} \le \epsilon\]
+</p>
+
+<p>
+Comme \(I \le F\), on a \(\abs{I - g(\alpha)} = g(\alpha) - I \le \epsilon\). Soit un \(\beta \in \setR\) tel que \(\beta \ge \alpha\). La fonction \(g\) étant décroissante, on a \(g(\beta) \le g(\alpha)\), et donc :
+</p>
+
+<p>
+\[\distance(I,g(\beta)) = g(\beta) - I \le g(\alpha) - I \le \epsilon\]
+</p>
+
+<p>
+On en déduit que \(g(x)\) converge vers le supremum \(I\) lorsque \(x \to \infty\). Par unicité de la limite, on a :
+</p>
+
+<p>
+\[\lim_{x \to +\infty} g(x) = \inf \{ g(x) \in \setR : x \in \setR \}\]
 </p>
 </div>
 </div>
-</div>
-<div id="outline-container-org3e096ca" class="outline-2">
-<h2 id="org3e096ca"><span class="section-number-2">3.</span> Extrema inclusifs d'une collection</h2>
+<div id="outline-container-org33c33f3" class="outline-2">
+<h2 id="org33c33f3"><span class="section-number-2">3.</span> Limites supremum et infimum</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-Soit l'ensemble de paramètres \(X\) et la collection paramétrée :
+Soit une fonction \(f : \setR \mapsto \setR\) majorée et minorée. On définit la famille \(\{F(x) : x \in \setR \}\) d'ensembles non vides, majorés et minorés par :
 </p>
 
 <p>
-\[\mathcal{C} = \{ A(x) \in \sousens(\Omega) : x \in X \}\]
+\[F(x) = \{f(z) : z \in \setR, \ z \ge x \}\]
 </p>
 </div>
-<div id="outline-container-org0407a8c" class="outline-3">
-<h3 id="org0407a8c"><span class="section-number-3">3.1.</span> Majorant</h3>
+<div id="outline-container-org539d5bc" class="outline-3">
+<h3 id="org539d5bc"><span class="section-number-3">3.1.</span> Limite supremum</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
-Si on veut qu'un ensemble quelconque \(M \subseteq \Omega\) soit un majorant inclusif de \(\mathcal{C}\), il faut que \(A(x) \subseteq M\) pour tout \(x \in X\). Pour cela, il faut et il suffit que \(M\) contienne tous les \(A(x)\). Autrement dit, il faut et il suffit que \(M\) contienne l'union des ensembles-éléments de la collection. On a donc :
+Si \(x \ge y\), on a \(F(x) \subseteq F(y)\), et donc \(\sup F(x) \le \sup F(y)\). On en conclut que la fonction dérivée \(d : \setR \mapsto \setR\) définie par :
 </p>
 
 <p>
-\[\major_\subseteq \mathcal{C} = \left\{ M \in \sousens(\Omega) : \bigcup_{x \in X} A(x) \subseteq M \right\}\]
+\[d(x) = \sup \{ f(z) : z \in \setR, \ z \ge x \}\]
+</p>
+
+<p>
+pour tout \(x \in \setR\) est décroissante et minorée. Elle converge donc vers son infimum :
+</p>
+
+<p>
+\[\lim_{x \to +\infty} d(x) = \inf_{x \in \setR} d(x) = \inf_{x \in \setR} \sup \{f(z) : z \in \setR, \ z \ge x \}\]
+</p>
+
+<p>
+D'un autre coté, la définition de \(d\) implique que :
+</p>
+
+<p>
+\[\lim_{x \to +\infty} d(x) = \lim_{x \to +\infty} \sup \{f(z) : z \in \setR, \ z \ge x \} = \limsup_{x \to +\infty} f(x)\]
+</p>
+
+<p>
+On en conclut que :
+</p>
+
+<p>
+\[\limsup_{x \to +\infty} f(x) = \inf_{x \in \setR} \sup \{f(z) : z \in \setR, \ z \ge x \}\]
 </p>
 </div>
 </div>
-<div id="outline-container-orgf164f4f" class="outline-3">
-<h3 id="orgf164f4f"><span class="section-number-3">3.2.</span> Supremum</h3>
+<div id="outline-container-org8fd656c" class="outline-3">
+<h3 id="org8fd656c"><span class="section-number-3">3.2.</span> Limite infimum</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
-Etudions l'ensemble :
+Si \(x \ge y\), on a \(F(x) \subseteq F(y)\), et donc \(\inf F(x) \ge \inf F(y)\). On en conclut que la fonction dérivée \(c : \setR \mapsto \setR\) définie par :
 </p>
 
 <p>
-\[S = \bigcup_{x \in X} A(x) \in \sousens(\Omega)\]
+\[c(x) = \inf \{ f(z) : z \in \setR, \ z \ge x \}\]
 </p>
 
 <p>
-Comme :
+pour tout \(x \in \setR\) est croissante et majorée. Elle converge donc vers son supremum :
 </p>
 
 <p>
-\[\bigcup_{x \in X} A(x) \subseteq S\]
+\[\lim_{x \to +\infty} c(x) = \sup_{x \in \setR} c(x) = \sup_{x \in \setR} \inf \{f(z) : z \in \setR, \ z \ge x \}\]
 </p>
 
 <p>
-on a :
+D'un autre coté, la définition de \(c\) implique que :
 </p>
 
 <p>
-\[S \in \major_\subseteq \mathcal{C}\]
+\[\lim_{x \to +\infty} c(x) = \lim_{x \to +\infty} \inf \{f(z) : z \in \setR, \ z \ge x \} = \liminf_{x \to +\infty} f(x)\]
 </p>
 
 <p>
-On voit aussi que \(S \subseteq M\) pour tout \(M \in \major_\subseteq \mathcal{C}\). On en déduit que :
+On en conclut que :
 </p>
 
 <p>
-\[S = \min_\subseteq \major_\subseteq \mathcal{C} = \sup_\subseteq \mathcal{C}\]
+\[\liminf_{x \to +\infty} f(x) = \sup_{x \in \setR} \inf \{f(z) : z \in \setR, \ z \ge x \}\]
 </p>
 </div>
 </div>
-<div id="outline-container-org3e01bd8" class="outline-3">
-<h3 id="org3e01bd8"><span class="section-number-3">3.3.</span> Minorant</h3>
-<div class="outline-text-3" id="text-3-3">
+</div>
+<div id="outline-container-orgc84a53b" class="outline-2">
+<h2 id="orgc84a53b"><span class="section-number-2">4.</span> Egalité des limites sup et inf</h2>
+<div class="outline-text-2" id="text-4">
 <p>
-Si on veut qu'un ensemble quelconque \(L \subseteq \Omega\) soit un minorant inclusif de \(\mathcal{C}\), il faut que \(L \subseteq A(x)\) pour tout \(x \in X\). Pour cela, il faut et il suffit que \(L\) soit contenu dans tous les \(A(x)\). Autrement dit, il faut et il suffit que \(L\) soit contenu dans l'intersection des ensembles-éléments de la collection. On a donc :
+Soit une fonction \(f : \setR \mapsto \setR\) majorée et minorée. Posons :
+</p>
+
+<div class="org-center">
+<p>
+\(
+S(x) = \sup \{ f(z) : z \in \setR, \ z \ge x \} \)
 </p>
 
 <p>
-\[\minor_\subseteq \mathcal{C} = \left\{ L \in \sousens(\Omega) : L \subseteq \bigcap_{x \in X} A(x) \right\}\]
+\(
+I(x) = \inf \{ f(z) : z \in \setR, \ z \ge x \}
+\)
+</p>
+</div>
+
+<p>
+et choisissons un réel \(\epsilon \strictsuperieur 0\).
+</p>
+
+
+<ul class="org-ul">
+<li>Considérons le cas particulier où les limites sup et inf sont identiques :</li>
+</ul>
+
+<p>
+\[L = \limsup_{x \to +\infty} f(x) = \liminf_{x \to +\infty} f(x)\]
+</p>
+
+<p>
+pour tout \(x \in \setR\). Choisissons un \(\sigma\) tel que \(\abs{S(x) - L} \le \epsilon\) pour tout \(x\) vérifiant \(x \ge \sigma\) et un \(\tau\) tel que \(\abs{I(x) - L} \le \epsilon\) pour tout \(x\) vérifiant \(x \ge \tau\). Posant \(M = \max\{\sigma,\tau\}\), il vient :
+</p>
+
+<div class="org-center">
+<p>
+\(
+f(z) \le S(M) \le L + \epsilon \)
+</p>
+
+<p>
+\(
+f(z) \ge I(M) \ge L - \epsilon
+\)
+</p>
+</div>
+
+<p>
+pour tout réel \(z\) vérifiant \(z \ge M\). On a alors :
+</p>
+
+<p>
+\[\abs{f(z) - L} \le \epsilon\]
+</p>
+
+<p>
+On en conclut que la limite de \(f\) à l'infini existe et que :
+</p>
+
+<p>
+\[\lim_{x \to +\infty} f(x) = \limsup_{x \to +\infty} f(x) = \liminf_{x \to +\infty} f(x)\]
+</p>
+
+<ul class="org-ul">
+<li>Inversément, supposons la limite de \(f\) à l'infini existe :</li>
+</ul>
+
+<p>
+\[L = \lim_{x \to +\infty} f(x)\]
+</p>
+
+<p>
+Soit un réel \(M\) tel que :
+</p>
+
+<p>
+\[\abs{f(x) - L} \le \epsilon\]
+</p>
+
+<p>
+pour tout réel \(x\) vérifiant \(x \ge M\). On a alors :
+</p>
+
+<p>
+\[L - \epsilon \le f(x) \le L + \epsilon\]
+</p>
+
+<p>
+On en déduit que :
+</p>
+
+<div class="org-center">
+<p>
+\(
+S(x) \le L + \epsilon \)
+</p>
+
+<p>
+\(
+I(x) \ge L - \epsilon
+\)
+</p>
+</div>
+
+<p>
+Le supremum étant supérieur à l'infimum, on a finalement :
+</p>
+
+<p>
+\[L - \epsilon \le I(x) \le S(x) \le L + \epsilon\]
+</p>
+
+<p>
+et donc :
+</p>
+
+<p>
+\[\{ \abs{S(x) - L} , \abs{I(x) - L} \} \le \epsilon\]
+</p>
+
+<p>
+On en conclut que \(S\) et \(I\) convergent vers \(L\), c'est-à-dire :
+</p>
+
+<p>
+\[\limsup_{x \to +\infty} f(x) = \liminf_{x \to +\infty} f(x) = \lim_{x \to +\infty} f(x)\]
 </p>
 </div>
 </div>
-<div id="outline-container-org504938a" class="outline-3">
-<h3 id="org504938a"><span class="section-number-3">3.4.</span> Infimum</h3>
-<div class="outline-text-3" id="text-3-4">
+<div id="outline-container-orgb91ae77" class="outline-2">
+<h2 id="orgb91ae77"><span class="section-number-2">5.</span> Ordre et limite</h2>
+<div class="outline-text-2" id="text-5">
 <p>
-Etudions l'ensemble :
+Soit les fonctions \(f,g : \setR \mapsto \setR\) vérifiant \(f \le g\).
+</p>
+</div>
+<div id="outline-container-orga1a92be" class="outline-3">
+<h3 id="orga1a92be"><span class="section-number-3">5.1.</span> A l'infini</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+Supposons que les limites à l'infini existent :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\lim_{x \to +\infty} f(x) = b \\ \)
 </p>
 
 <p>
-\[I = \bigcap_{x \in X} A(x) \in \sousens(\Omega)\]
+\(
+\lim_{x \to +\infty} g(x) = c
+\)
+</p>
+</div>
+
+<p>
+Supposons que \(b \strictsuperieur c\) et posons \(\epsilon = (b - c)/4 \strictsuperieur 0\). On a alors :
 </p>
 
 <p>
-Comme :
+\[b = c + 4 \epsilon\]
 </p>
 
 <p>
-\[I \subseteq \bigcap_{x \in X} A(x)\]
+On peut trouver un réel \(F\) tel que :
 </p>
 
 <p>
-on a :
+\[\abs{f(x) - b} \le \epsilon\]
 </p>
 
 <p>
-\[I \in \minor_\subseteq \mathcal{C}\]
+pour tout réel \(x\) vérifiant \(x \ge F\). De même, on peut trouver un réel \(G\) tel que :
 </p>
 
 <p>
-On voit aussi que \(L \subseteq I\) pour tout \(L \in \minor_\subseteq \mathcal{C}\). On en déduit que :
+\[\abs{g(x) - c} \le \epsilon\]
 </p>
 
 <p>
-\[I = \max_\subseteq \minor_\subseteq \mathcal{C} = \inf_\subseteq \mathcal{C}\]
+pour tout réel \(x\) vérifiant \(x \ge G\). Donc, pour tout réel \(x\) vérifiant \(x \ge M = \max\{F,G\}\), on a :
+</p>
+
+<p>
+\[\{ \ \abs{f(x) - b} , \ \abs{g(x) - c} \ \} \le \epsilon\]
+</p>
+
+<p>
+On voit que :
+</p>
+
+<p>
+\[b - \epsilon = c + 3 \epsilon \strictsuperieur c + \epsilon\]
+</p>
+
+<p>
+On en déduit que :
+</p>
+
+<p>
+\[f(x) \ge b - \epsilon \strictsuperieur c + \epsilon \ge g(x)\]
+</p>
+
+<p>
+ce qui contredit \(f \le g\). Notre hypothèse est donc fausse et \(b \le c\), c'est-à-dire :
+</p>
+
+<p>
+\[\lim_{x \to +\infty} f(x) \le \lim_{x \to +\infty} g(x)\]
 </p>
 </div>
 </div>
-<div id="outline-container-org601e8b1" class="outline-3">
-<h3 id="org601e8b1"><span class="section-number-3">3.5.</span> Conclusion</h3>
-<div class="outline-text-3" id="text-3-5">
+<div id="outline-container-org50898eb" class="outline-3">
+<h3 id="org50898eb"><span class="section-number-3">5.2.</span> Vers un réel</h3>
+<div class="outline-text-3" id="text-5-2">
 <p>
-Le supremum inclusif d'une collection de sous-ensembles de \(\Omega\) existe toujours dans \(\sousens(\Omega)\) et est égal à l'union de tous ces ensembles :
+On montre par un raisonnement analogue que, si les limites de \(f,g\) en \(a\) existent, on a :
 </p>
 
 <p>
-\[\sup_\subseteq \{ A(x) \in \sousens(\Omega) : x \in X \} = \bigcup_{x \in X} A(x)\]
-</p>
-
-<p>
-L'infimum inclusif d'une collection de sous-ensembles de \(\Omega\) existe toujours dans \(\sousens(\Omega)\) et est égal à l'intersection de tous ces ensembles :
-</p>
-
-<p>
-\[\inf_\subseteq \{ A(x) \in \sousens(\Omega) : x \in X \} = \bigcap_{x \in X} A(x)\]
+\[\lim_{x \to a} f(x) \le \lim_{x \to a} g(x)\]
 </p>
 </div>
+</div>
+<div id="outline-container-org6016493" class="outline-3">
+<h3 id="org6016493"><span class="section-number-3">5.3.</span> Supremum et infimum</h3>
+<div class="outline-text-3" id="text-5-3">
+<p>
+Pour tout \(x \in \setR\), on a :
+</p>
+
+<p>
+\[\lambda(x) = \inf \{ f(z) : z \in \setR, \ z \ge x \} \le \sigma(x) = \sup \{ f(z) : z \in \setR, \ z \ge x \}\]
+</p>
+
+<p>
+On en conclut que \(\lambda \le \sigma\). Leurs limites à l'infini respectent donc le même ordre. Mais comme ces limites correspondent aux limites infimum et supremum de \(f\), on a :
+</p>
+
+<p>
+\[\liminf_{x \to +\infty} f(x) \le \limsup_{x \to +\infty} f(x)\]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org48deb9b" class="outline-2">
+<h2 id="org48deb9b"><span class="section-number-2">6.</span> Ordre et supremum-infimum</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Soit les fonctions \(f,g : \setR \mapsto \setR\) majorées, minorées et vérifiant \(f \le g\). Posons :
+</p>
+
+<p>
+\[\Theta(x) = \{ z \in \setR : z \ge x \}\]
+</p>
+
+<p>
+pour tout \(x \in \setR\).
+</p>
+</div>
+<div id="outline-container-orgdaa494b" class="outline-3">
+<h3 id="orgdaa494b"><span class="section-number-3">6.1.</span> Supremum</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+Soit les fonctions \(\varphi,\gamma\) définies par :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\varphi(x) = \sup \{ f(z) : z \in \setR, \ z \ge x \} \)
+</p>
+
+<p>
+\(
+\gamma(x) = \sup \{ g(z) : z \in \setR, \ z \ge x \}
+\)
+</p>
+</div>
+
+<p>
+pour tout \(x \in \setR\). Quel que soit le réel \(x\), on a \(f \le g\) sur \(\Theta(x)\). On en conclut que :
+</p>
+
+<p>
+\[\varphi(x) = \sup f(\Theta(x)) \le \sup g(\Theta(x)) = \gamma(x)\]
+</p>
+
+<p>
+ce qui revient à dire que \(\varphi \le \gamma\). On doit donc avoir :
+</p>
+
+<p>
+\[\lim_{x \to +\infty} \varphi(x) \le \lim_{x \to +\infty} \gamma(x)\]
+</p>
+
+<p>
+c'est-à-dire :
+</p>
+
+<p>
+\[\limsup_{x \to +\infty} f(x) \le \limsup_{x \to +\infty} g(x)\]
+</p>
+</div>
+</div>
+<div id="outline-container-org5a5c98f" class="outline-3">
+<h3 id="org5a5c98f"><span class="section-number-3">6.2.</span> Infimum</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+Soit les fonctions \(\varphi,\gamma\) définies par :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\varphi(x) = \inf \{ f(z) : z \in \setR, \ z \ge x \} \)
+</p>
+
+<p>
+\(
+\gamma(x) = \inf \{ g(z) : z \in \setR, \ z \ge x \}
+\)
+</p>
+</div>
+
+<p>
+pour tout \(x \in \setR\). Quel que soit le réel \(x\), on a \(f \le g\) sur \(\Theta(x)\). On en conclut que :
+</p>
+
+<p>
+\[\varphi(x) = \inf f(\Theta(x)) \le \inf g(\Theta(x)) = \gamma(x)\]
+</p>
+
+<p>
+ce qui revient à dire que \(\varphi \le \gamma\). On doit donc avoir :
+</p>
+
+<p>
+\[\lim_{x \to +\infty} \varphi(x) \le \lim_{x \to +\infty} \gamma(x)\]
+</p>
+
+<p>
+c'est-à-dire :
+</p>
+
+<p>
+\[\liminf_{x \to +\infty} f(x) \le \liminf_{x \to +\infty} g(x)\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgbdf7a09" class="outline-3">
+<h3 id="orgbdf7a09"><span class="section-number-3">6.3.</span> Egalité</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+Supposons que :
+</p>
+
+<p>
+\[L = \liminf_{x \to +\infty} f(x) = \limsup_{x \to +\infty} g(x)\]
+</p>
+
+<p>
+On a alors :
+</p>
+
+<p>
+\[L = \liminf_{x \to +\infty} f(x) \le \limsup_{x \to +\infty} f(x) \le \limsup_{x \to +\infty} g(x) = L\]
+</p>
+
+<p>
+Les limites sup et inf de \(f\) sont donc toutes deux égales à \(L\) et :
+</p>
+
+<p>
+\[\lim_{x \to +\infty} f(x) = \liminf_{x \to +\infty} f(x) = \limsup_{x \to +\infty} f(x) = L\]
+</p>
+
+<p>
+On a aussi :
+</p>
+
+<p>
+\[L = \liminf_{x \to +\infty} f(x) \le \liminf_{x \to +\infty} g(x) \le \limsup_{x \to +\infty} g(x) = L\]
+</p>
+
+<p>
+Les limites sup et inf de \(g\) sont donc toutes deux égales à \(L\) et :
+</p>
+
+<p>
+\[\lim_{x \to +\infty} g(x) = \liminf_{x \to +\infty} g(x) = \limsup_{x \to +\infty} g(x) = L\]
+</p>
+
+<p>
+On en conclut que les limites de \(f\) et \(g\) existent et que :
+</p>
+
+<p>
+\[\lim_{x \to +\infty} f(x) = \lim_{x \to +\infty} g(x)\]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org1ed58f4" class="outline-2">
+<h2 id="org1ed58f4"><span class="section-number-2">7.</span> Cadre</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Soit les fonctions \(f,S,I : \setR \mapsto \setR\) majorées, minorées et vérifiant \(I \le f \le S\). Supposons que :
+</p>
+
+<p>
+\[L = \liminf_{x \to +\infty} I(x) = \limsup_{x \to +\infty} S(x)\]
+</p>
+
+<p>
+On a alors :
+</p>
+
+<p>
+\[L = \liminf_{x \to +\infty} I(x) \le \liminf_{x \to +\infty} f(x) \le \limsup_{x \to +\infty} f(x) \le \limsup_{x \to +\infty} S(x) = L\]
+</p>
+
+<p>
+On en déduit que :
+</p>
+
+<p>
+\[\liminf_{x \to +\infty} f(x) = \limsup_{x \to +\infty} f(x) = L\]
+</p>
+
+<p>
+La limite de \(f\) existe donc et :
+</p>
+
+<p>
+\[\lim_{x \to +\infty} f(x) = \liminf_{x \to +\infty} I(x) = \limsup_{x \to +\infty} S(x)\]
+</p>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-10-19 dim 16:46</p>
+<p class="date">Created: 2025-10-19 dim 17:00</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

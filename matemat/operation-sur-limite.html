@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-10-19 dim 16:46 -->
+<!-- 2025-10-19 dim 16:53 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Eclats de vers : Matemat : Ordre inclusif</title>
+<title>Eclats de vers : Matemat : Opérations sur les limites</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
 <style type="text/css">
@@ -228,7 +228,7 @@
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Eclats de vers : Matemat : Ordre inclusif</h1>
+<h1 class="title">Eclats de vers : Matemat : Opérations sur les limites</h1>
 <p>
 <a href="index.html">Index des Grimoires</a>
 </p>
@@ -241,9 +241,13 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org577be69">1. Dépendances</a></li>
-<li><a href="#org0879b30">2. Ordre sur les ensembles</a></li>
-<li><a href="#org3e096ca">3. Extrema inclusifs d'une collection</a></li>
+<li><a href="#orgbeb9179">1. Introduction</a></li>
+<li><a href="#orgd49b1c4">2. Addition</a></li>
+<li><a href="#org64689f2">3. Opposé</a></li>
+<li><a href="#org10fda2a">4. Soustraction</a></li>
+<li><a href="#orgb9160b9">5. Multiplication</a></li>
+<li><a href="#org646dfb3">6. Inverse multiplicatif</a></li>
+<li><a href="#org7aa85f5">7. Fraction</a></li>
 </ul>
 </div>
 </div>
@@ -406,182 +410,273 @@
 </p>
 
 <p>
-\label{chap:ordreInclusif}
+\label{chap:operationSurLesLimites}
 </p>
-<div id="outline-container-org577be69" class="outline-2">
-<h2 id="org577be69"><span class="section-number-2">1.</span> Dépendances</h2>
+<div id="outline-container-orgbeb9179" class="outline-2">
+<h2 id="orgbeb9179"><span class="section-number-2">1.</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
-<ul class="org-ul">
-<li>Chapitre \ref{chap:collections} : Les collections</li>
-<li>Chapitre \ref{chap:ordres} : Les ordres</li>
-<li>Chapitre \ref{chap:extrema} : Les extrema</li>
-</ul>
+<p>
+Soit les fonction \(f,g : \setR \mapsto \setR\) vérifiant :
+</p>
+
+<div class="org-center">
+<p>
+\(
+F = \lim_{x \to a} f(x) \\ \)
+</p>
+
+<p>
+\(
+G = \lim_{x \to a} g(x)
+\)
+</p>
+</div>
+
+<p>
+où \(F,G \in \setR\). Choisissons un réel \(\epsilon \strictsuperieur 0\). Pour tout \(\gamma \strictsuperieur 0\), on peut trouver un \(\delta(\gamma) \strictsuperieur 0\) tel que :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\distance(f(x),F) = \abs{f(x) - F} \le \gamma \)
+</p>
+
+<p>
+\(
+\distance(g(x),G) = \abs{g(x) - G} \le \gamma
+\)
+</p>
+</div>
+
+<p>
+pour tout \(x \in \setR\) tel que \(\distance(x,a) = \abs{x - a} \le \delta(\gamma)\).
+</p>
 </div>
 </div>
-<div id="outline-container-org0879b30" class="outline-2">
-<h2 id="org0879b30"><span class="section-number-2">2.</span> Ordre sur les ensembles</h2>
+<div id="outline-container-orgd49b1c4" class="outline-2">
+<h2 id="orgd49b1c4"><span class="section-number-2">2.</span> Addition</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-Soit l'ensemble \(\Omega\) et l'ensemble de ses sous-ensembles :
+\[\abs{f(x) + g(x) - (F + G)} \le \abs{f(x) - F} + \abs{g(x) - G} = 2 \gamma\]
 </p>
 
 <p>
-\[\sousens(\Omega) = \{ A : A \subseteq \Omega \}\]
+Il suffit donc de choisir \(\gamma = \epsilon / 2\) pour avoir \(\abs{f(x) + g(x) - (F + G)} \le \epsilon\). On en déduit que la limite de \(f + g\) est \(F + G\), c'est-à-dire :
 </p>
 
 <p>
-On dit que \(A \in \sousens(\Omega)\) est plus petit ou égal à \(B \in \sousens(\Omega)\) au sens de l'ordre inclusif si et seulement si :
-</p>
-
-<p>
-\[A \subseteq B\]
-</p>
-
-<p>
-On voit qu'il s'agit d'un ordre partiel.
+\[\lim_{x \to a} \big[f(x) + g(x)\big] = \lim_{x \to a} f(x) + \lim_{x \to a} g(x)\]
 </p>
 </div>
-<div id="outline-container-org65822c7" class="outline-3">
-<h3 id="org65822c7"><span class="section-number-3">2.1.</span> Attention</h3>
+<div id="outline-container-org84d30a2" class="outline-3">
+<h3 id="org84d30a2"><span class="section-number-3">2.1.</span> Fonction constante</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
-Ne pas confondre l'ordre inclusif \(\subseteq\) avec la comparaison d'ensembles \(\ensinferieur\) qui est elle basée sur l'ordre entre les éléments des ensembles concernés.
+Dans le cas particulier où une des deux fonctions est une constante \(G \in \setR\), soit :
+</p>
+
+<p>
+\[g : x \mapsto G\]
+</p>
+
+<p>
+pour tout \(x \in \setR\), on a :
+</p>
+
+<p>
+\[\lim_{x \to a} g(x) = \lim_{x \to a} G = G\]
+</p>
+
+<p>
+et :
+</p>
+
+<p>
+\[\lim_{x \to a} \big[f(x) + G\big] = \lim_{x \to a} f(x) + G\]
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org3e096ca" class="outline-2">
-<h2 id="org3e096ca"><span class="section-number-2">3.</span> Extrema inclusifs d'une collection</h2>
+<div id="outline-container-org64689f2" class="outline-2">
+<h2 id="org64689f2"><span class="section-number-2">3.</span> Opposé</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-Soit l'ensemble de paramètres \(X\) et la collection paramétrée :
+On a simplement :
 </p>
 
 <p>
-\[\mathcal{C} = \{ A(x) \in \sousens(\Omega) : x \in X \}\]
-</p>
-</div>
-<div id="outline-container-org0407a8c" class="outline-3">
-<h3 id="org0407a8c"><span class="section-number-3">3.1.</span> Majorant</h3>
-<div class="outline-text-3" id="text-3-1">
-<p>
-Si on veut qu'un ensemble quelconque \(M \subseteq \Omega\) soit un majorant inclusif de \(\mathcal{C}\), il faut que \(A(x) \subseteq M\) pour tout \(x \in X\). Pour cela, il faut et il suffit que \(M\) contienne tous les \(A(x)\). Autrement dit, il faut et il suffit que \(M\) contienne l'union des ensembles-éléments de la collection. On a donc :
+\[\abs{\big[-g(x)\big] - (-G)} = \abs{G - g(x)} = \abs{g(x) - G} \le \gamma\]
 </p>
 
 <p>
-\[\major_\subseteq \mathcal{C} = \left\{ M \in \sousens(\Omega) : \bigcup_{x \in X} A(x) \subseteq M \right\}\]
-</p>
-</div>
-</div>
-<div id="outline-container-orgf164f4f" class="outline-3">
-<h3 id="orgf164f4f"><span class="section-number-3">3.2.</span> Supremum</h3>
-<div class="outline-text-3" id="text-3-2">
-<p>
-Etudions l'ensemble :
+Il suffit donc de choisir \(\gamma = \epsilon\) pour avoir \(\abs{(-g(x)) - (-G)} \le \epsilon\). On en déduit que la limite de \(-g\) est \(-G\), c'est-à-dire :
 </p>
 
 <p>
-\[S = \bigcup_{x \in X} A(x) \in \sousens(\Omega)\]
+\[\lim_{x \to a} \big[-g(x)\big] = - \lim_{x \to a} g(x)\]
 </p>
+</div>
+</div>
+<div id="outline-container-org10fda2a" class="outline-2">
+<h2 id="org10fda2a"><span class="section-number-2">4.</span> Soustraction</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+On a :
+</p>
+
+\begin{align}
+\lim_{x \to a} \big[f(x) - g(x)\big] &= \lim_{x \to a} \big[f(x) + \big(-g(x)\big)\big] \\
+&= \lim_{x \to a} f(x) + \lim_{x \to a} \big(-g(x)\big) \\
+&= \lim_{x \to a} f(x) - \lim_{x \to a} g(x)
+\end{align}
+</div>
+</div>
+<div id="outline-container-orgb9160b9" class="outline-2">
+<h2 id="orgb9160b9"><span class="section-number-2">5.</span> Multiplication</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+On voit que :
+</p>
+
+\begin{align}
+\abs{f(x) \cdot g(x) - F \cdot G} &= \abs{f(x) \cdot g(x) - f(x) \cdot G + f(x) \cdot G - F \cdot G} \\
+&= \abs{f(x) \cdot (g(x) - G) + (f(x) - F) \cdot G} \\
+&\le \abs{f(x) \cdot (g(x) - G)} + \abs{(f(x) - F) \cdot G} \\
+&\le \abs{f(x)} \cdot \abs{g(x) - G} + \abs{(f(x) - F)} \cdot \abs{G} \\
+&\le \abs{f(x)} \cdot \gamma + \gamma \cdot \abs{G}
+\end{align}
 
 <p>
 Comme :
 </p>
 
 <p>
-\[\bigcup_{x \in X} A(x) \subseteq S\]
+\[\abs{f(x)} = \abs{f(x) - F + F} \le \abs{f(x) - F} + F \le \gamma + \abs{F}\]
 </p>
 
 <p>
-on a :
+notre borne peut se réécrire :
+</p>
+
+\begin{align}
+\abs{f(x) \cdot g(x) - F \cdot G} &\le (\gamma + \abs{F}) \cdot \gamma + \gamma \cdot \abs{G} \\
+&\le (\gamma + \abs{F} + \abs{G}) \cdot \gamma
+\end{align}
+
+<p>
+Si on choisit \(\gamma = \min\{ 1 , \epsilon / (1 + \abs{F} + \abs{G}) \}\), on a \(\gamma \le 1\) et :
 </p>
 
 <p>
-\[S \in \major_\subseteq \mathcal{C}\]
+\[\abs{f(x) \cdot g(x) - F \cdot G} \le (1 + \abs{F} + \abs{G}) \cdot \gamma \le \epsilon\]
 </p>
 
 <p>
-On voit aussi que \(S \subseteq M\) pour tout \(M \in \major_\subseteq \mathcal{C}\). On en déduit que :
+On en déduit que la limite de \(f \cdot g\) est \(F \cdot G\), c'est-à-dire :
 </p>
 
 <p>
-\[S = \min_\subseteq \major_\subseteq \mathcal{C} = \sup_\subseteq \mathcal{C}\]
+\[\lim_{x \to a} \big[f(x) \cdot g(x)\big] = \left[ \lim_{x \to a} f(x) \right]  \cdot \left[ \lim_{x \to a} g(x) \right]\]
 </p>
 </div>
 </div>
-<div id="outline-container-org3e01bd8" class="outline-3">
-<h3 id="org3e01bd8"><span class="section-number-3">3.3.</span> Minorant</h3>
-<div class="outline-text-3" id="text-3-3">
+<div id="outline-container-org646dfb3" class="outline-2">
+<h2 id="org646dfb3"><span class="section-number-2">6.</span> Inverse multiplicatif</h2>
+<div class="outline-text-2" id="text-6">
 <p>
-Si on veut qu'un ensemble quelconque \(L \subseteq \Omega\) soit un minorant inclusif de \(\mathcal{C}\), il faut que \(L \subseteq A(x)\) pour tout \(x \in X\). Pour cela, il faut et il suffit que \(L\) soit contenu dans tous les \(A(x)\). Autrement dit, il faut et il suffit que \(L\) soit contenu dans l'intersection des ensembles-éléments de la collection. On a donc :
+Supposons que \(G \ne 0\). On a :
+</p>
+
+\begin{align}
+\abs{\frac{1}{g(x)} - \frac{1}{G}} &= \abs{\frac{G - g(x)}{g(x) \cdot \abs{G}}} \\
+&= \frac{ \abs{G - g(x)} }{ \abs{g(x)} \cdot \abs{G} } \\
+&= \frac{ \gamma }{ \abs{g(x)} \cdot \abs{G} }
+\end{align}
+
+<p>
+On voit aussi que :
+</p>
+
+\begin{align}
+\abs{g(x)} = \abs{g(x) - G + G} &= \abs{G - (G - g(x))} \\
+&\ge \abs{G} - \abs{G - g(x)} \\
+&\ge \abs{G} - \gamma
+\end{align}
+
+<p>
+Donc, si \(\gamma \strictinferieur \abs{G}\), on a :
 </p>
 
 <p>
-\[\minor_\subseteq \mathcal{C} = \left\{ L \in \sousens(\Omega) : L \subseteq \bigcap_{x \in X} A(x) \right\}\]
+\[\abs{\frac{1}{g(x)} - \frac{1}{G}} \le \frac{ \gamma }{ (\abs{G} - \gamma) \cdot \abs{G} }\]
+</p>
+
+<p>
+Nous allons voir qu'il est possible de majorer cette expression par \(\epsilon\). En effet, la condition :
+</p>
+
+<p>
+\[\frac{ \gamma }{ (\abs{G} - \gamma) \cdot \abs{G} } \le \epsilon\]
+</p>
+
+<p>
+est équivalente à :
+</p>
+
+<p>
+\[\gamma \le \epsilon \cdot (\abs{G} - \gamma) \cdot \abs{G} = G^2 \cdot \epsilon - \epsilon \cdot \abs{G} \cdot \gamma\]
+</p>
+
+<p>
+ce qui revient à dire que :
+</p>
+
+<p>
+\[(1 + \epsilon \cdot \abs{G}) \cdot \gamma \le G^2 \cdot \epsilon\]
+</p>
+
+<p>
+et enfin :
+</p>
+
+<p>
+\[0 \strictinferieur \gamma \le \frac{G^2 \cdot \epsilon}{1 + \epsilon \cdot \abs{G}}\]
+</p>
+
+<p>
+En imposant également \(\gamma \strictinferieur \abs{G}\), on obtient la condition suffisante :
+</p>
+
+<p>
+\[0 \strictinferieur \gamma \strictinferieur \min\left\{ \abs{G} , \frac{G^2 \cdot \epsilon}{1 + \epsilon \cdot \abs{G}} \right\}\]
+</p>
+
+<p>
+On a alors \(\abs{\frac{1}{g(x)} - \frac{1}{G}} \le \epsilon\). On en conclut que la limite de \(1/g\) est \(1/G\), c'est-à-dire :
+</p>
+
+<p>
+\[\lim_{x \to a} \frac{1}{g(x)} = \frac{1}{\lim_{x \to a} g(x)}\]
 </p>
 </div>
 </div>
-<div id="outline-container-org504938a" class="outline-3">
-<h3 id="org504938a"><span class="section-number-3">3.4.</span> Infimum</h3>
-<div class="outline-text-3" id="text-3-4">
+<div id="outline-container-org7aa85f5" class="outline-2">
+<h2 id="org7aa85f5"><span class="section-number-2">7.</span> Fraction</h2>
+<div class="outline-text-2" id="text-7">
 <p>
-Etudions l'ensemble :
+Toujours sous l'hypothèse que \(G \ne 0\), on a :
 </p>
 
 <p>
-\[I = \bigcap_{x \in X} A(x) \in \sousens(\Omega)\]
+\[\lim_{x \to a} \frac{f(x)}{g(x)} = \left[\lim_{x \to a} f(x)\right] \cdot \left[\lim_{x \to a} \frac{1}{g(x)}\right] = \frac{\lim_{x \to a} f(x)}{\lim_{x \to a} g(x)}\]
 </p>
-
-<p>
-Comme :
-</p>
-
-<p>
-\[I \subseteq \bigcap_{x \in X} A(x)\]
-</p>
-
-<p>
-on a :
-</p>
-
-<p>
-\[I \in \minor_\subseteq \mathcal{C}\]
-</p>
-
-<p>
-On voit aussi que \(L \subseteq I\) pour tout \(L \in \minor_\subseteq \mathcal{C}\). On en déduit que :
-</p>
-
-<p>
-\[I = \max_\subseteq \minor_\subseteq \mathcal{C} = \inf_\subseteq \mathcal{C}\]
-</p>
-</div>
-</div>
-<div id="outline-container-org601e8b1" class="outline-3">
-<h3 id="org601e8b1"><span class="section-number-3">3.5.</span> Conclusion</h3>
-<div class="outline-text-3" id="text-3-5">
-<p>
-Le supremum inclusif d'une collection de sous-ensembles de \(\Omega\) existe toujours dans \(\sousens(\Omega)\) et est égal à l'union de tous ces ensembles :
-</p>
-
-<p>
-\[\sup_\subseteq \{ A(x) \in \sousens(\Omega) : x \in X \} = \bigcup_{x \in X} A(x)\]
-</p>
-
-<p>
-L'infimum inclusif d'une collection de sous-ensembles de \(\Omega\) existe toujours dans \(\sousens(\Omega)\) et est égal à l'intersection de tous ces ensembles :
-</p>
-
-<p>
-\[\inf_\subseteq \{ A(x) \in \sousens(\Omega) : x \in X \} = \bigcap_{x \in X} A(x)\]
-</p>
-</div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-10-19 dim 16:46</p>
+<p class="date">Created: 2025-10-19 dim 16:53</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

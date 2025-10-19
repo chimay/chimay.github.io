@@ -1,0 +1,315 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Sommes réelles
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:sommesReelles}
+
+* Introduction
+
+Nous nous intéressons à des suites de réels $A \subseteq \setR$ de la forme :
+
+$$A = \{ a_k \in \setR : k \in \mathcal{Z} \}$$
+
+
+** Dénombrable
+
+Supposons que $\mathcal{Z} \subseteq \setZ$. Si les sommes partielles convergent, on définit :
+
+$$\sum_{k \in \setN} a_k = \sum_{k = 0}^{+\infty} a_k = \lim_{n \to \infty} \sum_{k = 0}^n a_k$$
+
+dans le cas où $\mathcal{Z} = \setN$ et :
+
+$$\sum_{k \in \setZ} a_k = \sum_{k = -\infty}^{+\infty} a_k = \lim_{n \to \infty} \sum_{k = -n}^n a_k$$
+
+dans le cas où $\mathcal{Z} = \setZ$. On définit aussi :
+
+$$\sum_{k = m}^{+\infty} a_k = \lim_{n \to \infty} \sum_{k = m}^n a_k$$
+
+
+** Quelconque
+
+Pour un ensemble $\mathcal{Z}$ quelconque, on pose :
+
+$$Z^+ = \{ k \in \mathcal{Z} : a_k \ge 0 \}$$
+
+et :
+
+$$Z^- = \{ k \in \mathcal{Z} : a_k \strictinferieur 0 \}$$
+
+Sous réserve d'existence du suprémum, on définit :
+
+$$\sum_{k \in Z^+} a_k = \sup \accolades{ \sum_{k \in I} a_k : I \subseteq Z^+, \ I \ \mathrm{fini} }$$
+
+ainsi que :
+
+$$\sum_{k \in Z^-} a_k = - \sup \accolades{ - \sum_{k \in I} a_k : I \subseteq Z^-, \ I \ \mathrm{fini} }$$
+
+On définit alors la somme par :
+
+$$\sum_{k \in \mathcal{Z}} a_k = \sum_{k \in Z^+} a_k + \sum_{k \in Z^-} a_k$$
+
+
+* Additivité
+
+Soit la suite :
+
+$$A = \{ a_k \in \setR : k \in \setN \}$$
+
+On définit la suite $\{ S_n : n \in \setN \}$ des sommes partielles par :
+
+$$S_n = \sum_{k = 0}^n a_k$$
+
+pour tout $n \in \setN$. Choisissons un $m \in \setN$ vérifiant $m \ge 1$. On définit la suite $\{ D_n : n \in \setN \}$ des sommes partielles commençant en $m$ par :
+
+$$D_n = \sum_{k = m}^n a_k$$
+
+pour tout $n \in \setN$ vérifiant $n \ge m$. Choisissons un naturel $n$ vérifiant $n \ge m$. On a :
+
+$$S_n = \sum_{k = 0}^{m - 1} a_k + \sum_{k = m}^n a_k = S_{m - 1} + D_n$$
+
+Si on pose :
+
+$$E = S_{m - 1}$$
+
+on a :
+
+$$S_n = E + D_n$$
+
+pour tout $n \in \setN$ vérifiant $n \ge m$. Si la limite de la suite des $D_n$ existe, celle des $S_n$ aussi et :
+
+$$\lim_{n \to \infty} S_n = E + \lim_{n \to \infty} D_n$$
+
+Inversément, si la limite des $S_n$ existe, celle des $D_n$ aussi et :
+
+$$\lim_{n \to \infty} D_n = \lim_{n \to \infty} S_n - E$$
+
+On a par définition :
+
+$$\lim_{n \to \infty} S_n = \sum_{k = 0}^{+\infty} a_k$$
+
+et :
+
+$$\lim_{n \to \infty} D_n = \sum_{k = m}^{+\infty} a_k$$
+
+On en conclut que :
+
+$$\sum_{k = 0}^{+\infty} a_k = \sum_{k = 0}^{m - 1} a_k + \sum_{k = m}^{+\infty} a_k$$
+
+
+* Somme résiduelle
+
+Si la somme des $a_k$ converge, l'additivité nous dit que :
+
+$$\sum_{k = m}^{+\infty} a_k = \sum_{k = 0}^{+\infty} a_k - \sum_{k = 0}^{m - 1} a_k$$
+
+En passant à la limite $m \to \infty$, on a :
+
+\begin{align}
+\lim_{m \to \infty} \sum_{k = m}^{+\infty} a_k &= \lim_{m \to \infty} \left[ \sum_{k = 0}^{+\infty} a_k - \sum_{k = 0}^{m - 1} a_k \right] \\
+&= \sum_{k = 0}^{+\infty} a_k - \lim_{m \to \infty} \sum_{k = 0}^{m - 1} a_k \\
+&= \sum_{k = 0}^{+\infty} a_k - \sum_{k = 0}^{+\infty} a_k \\
+&= 0
+\end{align}
+
+La suite des sommes résiduelles $R_m$ définie par :
+
+$$R_m = \sum_{k = m}^{+\infty} a_k$$
+
+pour tout $m \in \setN$ converge donc vers zéro lorsque $m$ tend vers l'infini.
+
+
+* Termes positifs
+
+Soit la suite positive :
+
+$$P = \{ p_k \in \setR : p_k \ge 0, \ k \in \setN \}$$
+
+et la suite des sommes partielles :
+
+$$S_n = \sum_{k = 0}^n p_k$$
+
+Choisissons $m,n \in \setN$ tels que $m \le n$. On a :
+
+$$S_n = \sum_{k = 0}^m p_k + \sum_{k = m + 1}^n p_k = S_m + \sum_{k = m + 1}^n p_k$$
+
+Par positivité, des $p_k$, on a :
+
+$$\sum_{k = m + 1}^n p_k \ge 0$$
+
+et :
+
+$$S_n \ge S_m$$
+
+La suite des $S_n$ est croissante. Si on peut trouver un $M \in \setR$ tel que :
+
+$$S_n \le M$$
+
+pour tout $n \in \setN$, la suite est majorée et converge vers son suprémum :
+
+$$\sum_{k = 0}^{+\infty} p_k = \lim_{n \to \infty} \sum_{k = 0}^n p_k = \sup_{n \in \setN} \sum_{k = 0}^n p_k$$
+
+
+* Convergence absolue
+
+Soit la suite :
+
+$$A = \{ a_k \in \setR : k \in \setN \}$$
+
+La suite dérivée :
+
+$$P = \{ \abs{a_k} \in \setR : k \in \setN \}$$
+
+est positive. Si on peut trouver un $K \in \setR$ tel que :
+
+$$\sum_{k = 0}^n \abs{a_k} \le K$$
+
+pour tout $n \in \setN$, la suite des valeurs absolues converge et :
+
+$$\sum_{k = 0}^{+\infty} \abs{a_k} = \sup_{n \in \setN} \sum_{k = 0}^n \abs{a_k}$$
+
+La suite des sommes résiduelles associées converge donc vers zéro :
+
+$$\lim_{m \to \infty} \sum_{k = m}^{+\infty} \abs{a_k} = 0$$
+
+Comme :
+
+$$-\abs{a_k} \le a_k \le \abs{a_k}$$
+
+on a :
+
+$$-K \le - \sum_{k = 0}^n \abs{a_k} \le \sum_{k = 0}^n a_k \le \sum_{k = 0}^n \abs{a_k} \le K$$
+
+et :
+
+$$-K \le \sum_{k = 0}^n a_k \le K$$
+
+La suite des sommes partielles $S_n$ définies par :
+
+$$S_n =  \sum_{k = 0}^n a_k$$
+
+est donc majorée et minorée. Elle admet par conséquent des limites suprémum :
+
+$$\sigma = \limsup_{n \to \infty} S_n = \inf_{n \in \setN} \sup \{ S_k : k \in \setN, \ k \ge n \}$$
+
+et infimum :
+
+$$\lambda = \liminf_{n \to \infty} S_n = \sup_{n \in \setN} \inf \{ S_k : k \in \setN, \ k \ge n \}$$
+
+La suite des $S_n$ converge-t-elle ? Autrement dit, les limites suprémum et infimum des $S_n$ sont-elles identiques ? On sait déjà que :
+
+$$\lambda \le \sigma$$
+
+Soit la famille de suprémums décroissants définie par :
+
+$$H_m = \sup\{ S_n : n \in \setN, \, n \ge m \}$$
+
+pour tout $m \in \setN$. On a :
+
+$$\sigma = \inf_{m \in \setN} H_m$$
+
+Soit la famille d'infimums croissants définie par :
+
+$$B_m = \inf\{ S_n : n \in \setN, \, n \ge m \}$$
+
+pour tout $m \in \setN$. On a :
+
+$$\lambda = \sup_{m \in \setN} B_m$$
+
+Soit $\epsilon \strictsuperieur 0$. Comme la somme résiduelle converge vers zéro, on peut trouver un naturel $M$ tel que :
+
+$$\sum_{k = m}^{+\infty} \abs{a_k} \le \frac{\epsilon}{2}$$
+
+pour tout naturel $m$ vérifiant $m \ge M$. Choisissons des naturels $m,n$ tels que $n \ge m + 1$ et $m \ge M$. L'additivité finie nous dit que :
+
+$$\sum_{k = 0}^n a_k = \sum_{k = 0}^m a_k + \sum_{k = m + 1}^n a_k$$
+
+c'est-à-dire :
+
+$$S_n = S_m + \sum_{k = m + 1}^n a_k$$
+
+ou :
+
+$$S_n - S_m = \sum_{k = m + 1}^n a_k$$
+
+En prenant la valeur absolue, il vient :
+
+$$\abs{S_n - S_m} = \abs{\sum_{k = m + 1}^n a_k} \le \sum_{k = m + 1}^n \abs{a_k}$$
+
+Les termes $\abs{a_k}$ étant positifs, la suite des $D_i$ définie par :
+
+$$D_i = \sum_{k = m + 1}^i \abs{a_k}$$
+
+pour tout naturel $i$ vérifiant $i \ge m + 1$ est croissante, majorée et converge vers son suprémum. On a donc :
+
+$$\sum_{k = m + 1}^n \abs{a_k} \le \lim_{i \to \infty} D_i = \sum_{k = m + 1}^{+\infty} \abs{a_k}$$
+
+et :
+
+$$\abs{S_m - S_n} \le \sum_{k = m + 1}^{+\infty} \abs{a_k}$$
+
+Comme $m + 1 \strictsuperieur m \ge M$, le terme de droite est majoré par $\epsilon / 2$ et :
+
+$$\abs{S_m - S_n} \le \frac{\epsilon}{2}$$
+
+Choisissons $m \ge M$. Pour tout naturel $n$ vérifiant $n \ge m$, on a soit $n = m$ et $S_n = S_m$, soit $n \ge m + 1$. On en déduit les inégalités :
+
+$$S_n \le \max \accolades{S_m, S_m +  \frac{\epsilon}{2}} = S_m +  \frac{\epsilon}{2}$$
+
+et :
+
+$$S_n \ge \min \accolades{S_m, S_m - \frac{\epsilon}{2}} = S_m - \frac{\epsilon}{2}$$
+
+En passant au suprémum pour les entiers $n$ vérifiant $n \ge m$, on en déduit que :
+
+$$H_m \le S_m + \frac{\epsilon}{2}$$
+
+En passant à l'infimum pour les entiers $n$ vérifiant $n \ge m$, on en déduit que :
+
+$$B_m \ge S_m - \frac{\epsilon}{2}$$
+
+En combinant ces deux inégalités, on obtient :
+
+$$H_m \le S_m + \frac{\epsilon}{2} = \parentheses{S_m - \frac{\epsilon}{2}} + \epsilon \le B_m + \epsilon$$
+
+et a fortiori :
+
+$$\inf_{ \substack{ m \in \setN \\ m \ge M } } H_m \le \sup_{ \substack{ m \in \setN \\ m \ge M } } B_m + \epsilon$$
+
+c'est-à-dire :
+
+$$\sigma \le \lambda + \epsilon$$
+
+Cette relation étant valable pour tout $\epsilon \strictsuperieur 0$, on en déduit que :
+
+$$\sigma \le \lambda$$
+
+Comme on a également $\lambda \le \sigma$, on en conclut que $\lambda = \sigma$. La somme converge donc et :
+
+$$\sum_{k = 0}^{+\infty} a_k = \limsup_{n \to \infty} S_n = \liminf_{n \to \infty} S_n$$
+
+
+* Progression géométrique infinie
+
+Si le réel $a$ vérifie $\abs{a} \strictsuperieur 1$, on voit que $a^{n + 1}$ converge vers $0$ lorsque $n$ tend vers l'infini. On a alors :
+
+$$\sum_{i=0}^{+\infty} a^i = \lim_{n \to \infty} \frac{a^{n + 1} - 1}{a - 1} = \frac{1}{1 - a}$$

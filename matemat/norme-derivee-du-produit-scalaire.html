@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-10-20 lun 17:55 -->
+<!-- 2025-10-20 lun 17:56 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Eclats de vers : Matemat : Bijections</title>
+<title>Eclats de vers : Matemat : Norme dérivée du produit scalaire</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
 <style type="text/css">
@@ -228,7 +228,7 @@
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Eclats de vers : Matemat : Bijections</h1>
+<h1 class="title">Eclats de vers : Matemat : Norme dérivée du produit scalaire</h1>
 <p>
 <a href="index.html">Index des Grimoires</a>
 </p>
@@ -241,16 +241,19 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgd62d4bf">1. Dépendances</a></li>
-<li><a href="#orgc22d1f1">2. Inverse à gauche</a></li>
-<li><a href="#org0a26cc1">3. Inverse à droite</a></li>
-<li><a href="#org1f7aef5">4. Fonction inverse</a></li>
-<li><a href="#orga270702">5. Relation</a></li>
-<li><a href="#org414610d">6. Inverse d'une composée</a></li>
-<li><a href="#org537faa3">7. Puissances négatives</a></li>
-<li><a href="#org6d2d04c">8. Inverse d'une puissance</a></li>
-<li><a href="#org5871af5">9. Idempotence</a></li>
-<li><a href="#org4118f81">10. Inverse des fonctions monotones</a></li>
+<li><a href="#orgadbf9c0">1. Dépendances</a></li>
+<li><a href="#org54b2860">2. Introduction</a></li>
+<li><a href="#org9007971">3. Addition</a></li>
+<li><a href="#orge06e102">4. Théorème de Pythagore</a></li>
+<li><a href="#orge143d3c">5. Egalité du parallélogramme</a></li>
+<li><a href="#org896b7c1">6. Inégalité de Cauchy-Schwartz</a></li>
+<li><a href="#org10eaf7e">7. Norme et inégalité de Minkowski</a></li>
+<li><a href="#orgea06825">8. Distance</a></li>
+<li><a href="#org88e81cc">9. Produit scalaire à partir de la norme</a></li>
+<li><a href="#org55d0224">10. Norme et coordonnées</a></li>
+<li><a href="#orgdab6281">11. Norme sur \(\corps^n\)</a></li>
+<li><a href="#orgeb1d71d">12. Norme sur \(\setC\)</a></li>
+<li><a href="#org67b9f10">13. Représentation matricielle</a></li>
 </ul>
 </div>
 </div>
@@ -424,322 +427,438 @@
 </p>
 
 <p>
-\label{chap:bijections}
+\label{chap:ps}
 </p>
-<div id="outline-container-orgd62d4bf" class="outline-2">
-<h2 id="orgd62d4bf"><span class="section-number-2">1.</span> Dépendances</h2>
+<div id="outline-container-orgadbf9c0" class="outline-2">
+<h2 id="orgadbf9c0"><span class="section-number-2">1.</span> Dépendances</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
-<li>Chapitre \ref{chap:fonctionsEtOrdre} : Fonctions et ordre</li>
+<li>Chapitre \ref{chap:vecteur} : Les espaces vectoriels</li>
+<li>Chapitre \ref{chap:norme} : Les normes</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgc22d1f1" class="outline-2">
-<h2 id="orgc22d1f1"><span class="section-number-2">2.</span> Inverse à gauche</h2>
+<div id="outline-container-org54b2860" class="outline-2">
+<h2 id="org54b2860"><span class="section-number-2">2.</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-Soit \(f : A \mapsto B\). Si \(l : B \mapsto A\) est une fonction telle que :
+Soit un espace vectoriel \(E\) muni du produit scalaire \(\scalaire{}{}\). Nous allons analyser les propriétés de l'application \(\norme{.} : E \mapsto \corps\) associée au produit scalaire et définie par :
 </p>
 
 <p>
-\[l \circ f = \identite\]
+\[\norme{x} = \sqrt{ \scalaire{x}{x} }\]
 </p>
 
 <p>
-on dit que \(l\) est un inverse à gauche de \(f\).
-</p>
-</div>
-<div id="outline-container-org2651133" class="outline-3">
-<h3 id="org2651133"><span class="section-number-3">2.1.</span> Unicité</h3>
-<div class="outline-text-3" id="text-2-1">
-<p>
-Soit \(y \in B\). Si \(f\) admet un inverse à gauche, on peut trouver au plus un seul \(x \in A\) tel que \(f(x) = y\). En effet, supposons que \(x_1, x_2 \in A\) avec \(f(x_1) = f(x_2) = y\). On a :
-</p>
-
-<p>
-\[l(y) = (l \circ f)(x_1) = (l \circ f)(x_2)\]
-</p>
-
-<p>
-mais comme \(l \circ f = \identite\), et que \(\identite(x) = x\) pour tout \(x \in A\), on a :
-</p>
-
-<p>
-\[l(y) = x_1 = x_2\]
-</p>
-
-<p>
-ce qui prouve l'unicité de la solution.
+pour tout \(x \in E\).
 </p>
 </div>
 </div>
-</div>
-<div id="outline-container-org0a26cc1" class="outline-2">
-<h2 id="org0a26cc1"><span class="section-number-2">3.</span> Inverse à droite</h2>
+<div id="outline-container-org9007971" class="outline-2">
+<h2 id="org9007971"><span class="section-number-2">3.</span> Addition</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-Soit \(f : A \mapsto B\). Si \(r : B \mapsto A\) est une fonction telle que :
+Soit \(x,y \in E\) et \(\alpha,\beta \in \setC\). On a :
 </p>
 
-<p>
-\[f \circ r = \identite\]
-</p>
+\begin{align}
+\norme{\alpha \cdot x + \beta \cdot y}^2 &= \scalaire{\alpha \cdot x + \beta \cdot y}{\alpha \cdot x + \beta \cdot y} \)
+
+\(
+&= \conjaccent{\alpha} \cdot \alpha \cdot \scalaire{x}{x} + \conjaccent{\alpha} \cdot \beta \cdot \scalaire{x}{y} + \conjaccent{\beta} \cdot \alpha \cdot \scalaire{y}{x} + \conjaccent{\beta} \cdot \beta \cdot \scalaire{y}{y} \)
+
+\(
+&= \abs{\alpha}^2 \cdot \norme{x}^2 + \conjaccent{\alpha} \cdot \beta \cdot \scalaire{x}{y} + \conjaccent{\beta} \cdot \alpha \cdot \scalaire{y}{x} + \abs{\beta}^2 \cdot \norme{y}^2
+\end{align}
 
 <p>
-on dit que \(r\) est un inverse à droite de \(f\).
-</p>
-</div>
-<div id="outline-container-org2f6e0f7" class="outline-3">
-<h3 id="org2f6e0f7"><span class="section-number-3">3.1.</span> Existence</h3>
-<div class="outline-text-3" id="text-3-1">
-<p>
-Soit \(y \in B\). Si \(f\) admet un inverse à droite \(r\), on peut trouver au moins un \(x \in A\) tel que \(f(x) = y\). En effet, si l'on choisit \(x = r(y)\), on a :
+Dans le cas particulier où \(\beta = 1\), on a :
 </p>
 
-<p>
-\[f(x) = (f \circ r)(y) = \identite(y) = y\]
-</p>
+\begin{align}
+\norme{y + \alpha \cdot x} &= \norme{y}^2 + \alpha \cdot \scalaire{y}{x} + \conjaccent{\alpha} \cdot \scalaire{x}{y} + \abs{\alpha}^2 \cdot \norme{x}^2 \)
 
-<p>
-ce qui prouve l'existence de la solution.
-</p>
+\(
+&= \norme{y}^2 + 2 \Re(\alpha \cdot \scalaire{y}{x}) + \abs{\alpha}^2 \cdot \norme{x}^2
+\end{align}
 </div>
 </div>
-</div>
-<div id="outline-container-org1f7aef5" class="outline-2">
-<h2 id="org1f7aef5"><span class="section-number-2">4.</span> Fonction inverse</h2>
+<div id="outline-container-orge06e102" class="outline-2">
+<h2 id="orge06e102"><span class="section-number-2">4.</span> Théorème de Pythagore</h2>
 <div class="outline-text-2" id="text-4">
 <p>
-Soit \(f : A \mapsto B\). Supposons que \(f\) admette à la fois un inverse à gauche \(l\) et un inverse à droite \(r\). Ces deux inverses sont dès lors identiques :
+Si \(x,y \in E\) sont orthogonaux :
 </p>
 
 <p>
-\[l = l \circ \identite = l \circ f \circ r = \identite \circ r = r\]
-</p>
-</div>
-<div id="outline-container-org6ec9fd9" class="outline-3">
-<h3 id="org6ec9fd9"><span class="section-number-3">4.1.</span> Existence et unicité</h3>
-<div class="outline-text-3" id="text-4-1">
-<p>
-Soit \(y \in B\). On déduit des résultats précédents que l'on peut trouver un unique \(x \in A\), donné par \(x = r(y)\), tel que \(f(x) = y\). Nous pouvons dès lors définir la fonction inverse, notée \(f^{-1} : B \mapsto A\), par :
+\[\scalaire{x}{y} = 0\]
 </p>
 
 <p>
-\[f^{-1}(y) = r(y)\]
+on a également \(\scalaire{y}{x} = \conjugue \scalaire{x}{y} = 0\) et :
+</p>
+
+\begin{align}
+\scalaire{x + y}{x + y} &= \scalaire{x}{x} + \scalaire{x}{y} + \scalaire{y}{x} + \scalaire{y}{y} \)
+
+\(
+&= \scalaire{x}{x} + \scalaire{y}{y}
+\end{align}
+
+<p>
+En exprimant cette relation en terme de \(\norme{.}\), on obtient :
 </p>
 
 <p>
-pour tout \(y \in B\). On a donc :
+\[\norme{x + y}^2 = \norme{x}^2 + \norme{y}^2\]
 </p>
 
 <p>
-\[f^{-1} = r = l\]
-</p>
-
-<p>
-et :
-</p>
-
-<p>
-\[f^{-1} \circ f = f \circ f^{-1} = \identite\]
+résultat connu sous le nom de théorème de Pythagore.
 </p>
 </div>
 </div>
-<div id="outline-container-org8d7a51d" class="outline-3">
-<h3 id="org8d7a51d"><span class="section-number-3">4.2.</span> Bijection</h3>
-<div class="outline-text-3" id="text-4-2">
-<p>
-Lorsque \(f\) admet un inverse \(f^{-1}\), on dit que \(f\) est inversible ou que \(f\) est une bijection. On note :
-</p>
-
-<p>
-\[\bijection(A,B) = \{ f \in B^A : \exists f^{-1} \in A^B \}\]
-</p>
-
-<p>
-l'ensemble des bijections de \(A\) vers \(B\).
-</p>
-</div>
-</div>
-</div>
-<div id="outline-container-orga270702" class="outline-2">
-<h2 id="orga270702"><span class="section-number-2">5.</span> Relation</h2>
+<div id="outline-container-orge143d3c" class="outline-2">
+<h2 id="orge143d3c"><span class="section-number-2">5.</span> Egalité du parallélogramme</h2>
 <div class="outline-text-2" id="text-5">
 <p>
-Lorsque \(f\) est inversible, l'image inverse de \(y \in B\) se réduit à un ensemble contenant un unique \(x \in A\). Soit \(R\) la relation associée à \(f\). On a :
+En additionnant les équations :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\norme{x + y}^2 = \scalaire{x}{x} + \scalaire{x}{y} + \scalaire{y}{x} + \scalaire{y}{y} \)
 </p>
 
 <p>
-\[R^{-1}(y) = \{ f^{-1}(y) \}\]
+\(
+\norme{x - y}^2 = \scalaire{x}{x} - \scalaire{x}{y} - \scalaire{y}{x} + \scalaire{y}{y}
+\)
+</p>
+</div>
+
+<p>
+on obtient :
+</p>
+
+<p>
+\[\norme{x + y}^2 + \norme{x - y}^2 = 2(\scalaire{x}{x} + \scalaire{y}{y}) = 2 (\norme{x}^2 + \norme{y}^2)\]
 </p>
 </div>
 </div>
-<div id="outline-container-org414610d" class="outline-2">
-<h2 id="org414610d"><span class="section-number-2">6.</span> Inverse d'une composée</h2>
+<div id="outline-container-org896b7c1" class="outline-2">
+<h2 id="org896b7c1"><span class="section-number-2">6.</span> Inégalité de Cauchy-Schwartz</h2>
 <div class="outline-text-2" id="text-6">
 <p>
-Soit \(f \in \bijection(A,B)\) et \(g \in \bijection(B,C)\). Nous allons essayer de trouver une expression de l'inverse \(h\) de la composée de ces deux fonctions. On part de la relation \(h \circ g \circ f = \identite\) et on compose à droite par l'inverse de \(f\) puis l'inverse de \(g\), ce qui nous donne :
+Soit \(x,y \in E\) et \(\lambda \in \setC\). On a :
 </p>
 
 <p>
-\[h \circ g \circ f \circ f^{-1} \circ g^{-1} = \identite \circ f^{-1} \circ g^{-1} = f^{-1} \circ g^{-1}\]
+\[\norme{y - \lambda \cdot x}^2 = \scalaire{y}{y} - \lambda \cdot \scalaire{y}{x} - \conjaccent{\lambda} \cdot \scalaire{x}{y} + \conjaccent{\lambda} \cdot \lambda \cdot \scalaire{x}{x} \ge 0\]
 </p>
 
 <p>
-Mais comme :
+Le choix magique de \(\lambda\) (nous verrons d'où il vient en étudiant les projections) est :
 </p>
 
 <p>
-\[h \circ g \circ f \circ f^{-1} \circ g^{-1} = h \circ g \circ \identite \circ g^{-1} = h \circ g \circ g^{-1} = h \circ \identite = h\]
+\[\lambda = \frac{ \scalaire{x}{y} }{ \scalaire{x}{x} }\]
 </p>
 
 <p>
-on a :
+On a alors :
 </p>
 
 <p>
-\[h = f^{-1} \circ g^{-1}\]
+\[\scalaire{y}{y} - \frac{ \scalaire{x}{y} \cdot \scalaire{y}{x} }{ \scalaire{x}{x} } - \frac{ \scalaire{y}{x} \cdot \scalaire{x}{y} }{ \scalaire{x}{x} } +  \frac{ \scalaire{y}{x} \cdot \scalaire{x}{y} }{ \scalaire{x}{x}^2 } \cdot \scalaire{x}{x} \ge 0\]
 </p>
 
 <p>
-Partant de la relation \(g \circ f \circ h = \identite\) et composant à gauche par l'inverse de \(g\) puis par l'inverse de \(f\), on arrive au même résultat \(h = f^{-1} \circ g^{-1}\). Donc :
+En simplifiant les termes, on arrive à :
 </p>
 
 <p>
-\[(g \circ f)^{-1} = f^{-1} \circ g^{-1}\]
+\[\scalaire{y}{y}  - \frac{ \scalaire{x}{y} \cdot \scalaire{y}{x} }{ \scalaire{x}{x} } = \scalaire{y}{y}  - \frac{ \abs{\scalaire{x}{y}}^2 }{ \scalaire{x}{x} } \ge 0\]
 </p>
 
 <p>
-On généralise par récurrence à \(n\) fonctions :
+En faisant passer le second terme dans le second membre et en multipliant par \(\scalaire{x}{x}\), on arrive finalement à :
 </p>
 
 <p>
-\[(f_n \circ ... \circ f_2 \circ f_1)^{-1} = f_1^{-1} \circ f_2^{-1} \circ ... \circ f_n^{-1}\]
+\[\abs{\scalaire{x}{y}}^2 \le \scalaire{x}{x} \cdot \scalaire{y}{y}\]
+</p>
+
+<p>
+En prenant la racine carrée, on obtient une relation connue sous le nom d'inégalite de Cauchy-Schwartz :
+</p>
+
+<p>
+\[\abs{\scalaire{x}{y}} \le \sqrt{\scalaire{x}{x} \cdot \scalaire{y}{y}} = \norme{x} \cdot \norme{y}\]
 </p>
 </div>
 </div>
-<div id="outline-container-org537faa3" class="outline-2">
-<h2 id="org537faa3"><span class="section-number-2">7.</span> Puissances négatives</h2>
+<div id="outline-container-org10eaf7e" class="outline-2">
+<h2 id="org10eaf7e"><span class="section-number-2">7.</span> Norme et inégalité de Minkowski</h2>
 <div class="outline-text-2" id="text-7">
 <p>
-Si \(f\) est inversible, on peut également définir les puissances négatives par :
+Nous allons à présent vérifier que l'application \(\norme{.}\) est bien une norme.
+</p>
+</div>
+<div id="outline-container-orgbd12638" class="outline-3">
+<h3 id="orgbd12638"><span class="section-number-3">7.1.</span> Définie positivité</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+On voit que notre application est strictement définie positive car \(\norme{x} \ge 0\) pour tout \(x \in E\) et :
 </p>
 
 <p>
-\[f^{-n} = \left( f^{-1} \right)^n = f^{-1} \circ ... \circ f^{-1}\]
+\[\norme{x} = 0 \Rightarrow \scalaire{x}{x} = 0 \Rightarrow x = 0\]
+</p>
+</div>
+</div>
+<div id="outline-container-org606ab28" class="outline-3">
+<h3 id="org606ab28"><span class="section-number-3">7.2.</span> Produit mixte</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+La multiplication par un scalaire \(\alpha \in \setC\) nous donne :
 </p>
 
 <p>
-pour tout \(n \in \setN\).
+\[\norme{\alpha \cdot x} = \sqrt{ \abs{\alpha}^2 \cdot \scalaire{x}{x} } = \abs{\alpha} \cdot \sqrt{ \scalaire{x}{x} } = \abs{\alpha} \cdot \norme{x}\]
 </p>
 </div>
 </div>
-<div id="outline-container-org6d2d04c" class="outline-2">
-<h2 id="org6d2d04c"><span class="section-number-2">8.</span> Inverse d'une puissance</h2>
+<div id="outline-container-org3f37827" class="outline-3">
+<h3 id="org3f37827"><span class="section-number-3">7.3.</span> Inégalité de Minkowski</h3>
+<div class="outline-text-3" id="text-7-3">
+<p>
+On a :
+</p>
+
+\begin{align}
+\norme{x + y}^2 &= \scalaire{x}{x} + \scalaire{x}{y} + \scalaire{y}{x} + \scalaire{y}{y} \)
+
+\(
+&= \scalaire{x}{x} + 2 \Re(\scalaire{x}{y}) + \scalaire{y}{y}
+\end{align}
+
+<p>
+Mais comme \(\abs{\Re(\scalaire{x}{y})} \le \abs{\scalaire{x}{y}} \le \norme{x} \cdot \norme{y}\), on a finalement :
+</p>
+
+<p>
+\[\norme{x + y}^2 \le \norme{x}^2 + 2 \norme{x} \cdot \norme{y} + \norme{y}^2 = (\norme{x} + \norme{y})^2\]
+</p>
+
+<p>
+d'où :
+</p>
+
+<p>
+\[\norme{x + y} \le \norme{x} + \norme{y}\]
+</p>
+
+<p>
+Cette troisième et dernière propriété étant vérifiée, l'application \(\norme{.} = \sqrt{\scalaire{}{}}\) est bien une norme.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgea06825" class="outline-2">
+<h2 id="orgea06825"><span class="section-number-2">8.</span> Distance</h2>
 <div class="outline-text-2" id="text-8">
 <p>
-En considérant le cas particulier de fonctions identiques (\(f_1 = ... = f_n = f\)), l'expression de l'inverse d'une composition de fonctions nous montre que :
+On associe une distance à la norme et au produit scalaire par :
 </p>
 
 <p>
-\[\left( f^{-1} \right)^n = f^{-n} = \left( f^n \right)^{-1}\]
+\[\distance(x,y) = \norme{x - y} = \sqrt{\scalaire{x - y}{x - y}}\]
 </p>
 
 <p>
-L'inverse de la puissance est identique à la puissance de l'inverse.
+pour tout \(x,y \in E\).
 </p>
 </div>
 </div>
-<div id="outline-container-org5871af5" class="outline-2">
-<h2 id="org5871af5"><span class="section-number-2">9.</span> Idempotence</h2>
+<div id="outline-container-org88e81cc" class="outline-2">
+<h2 id="org88e81cc"><span class="section-number-2">9.</span> Produit scalaire à partir de la norme</h2>
 <div class="outline-text-2" id="text-9">
 <p>
-On dit que deux ensembles \(A\) et \(B\) sont idempotents si il existe une bijection inversible de \(A\) vers \(B\) :
+En soutrayant les équations :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\norme{x + y}^2 = \scalaire{x}{x} + 2 \Re(\scalaire{x}{y}) + \scalaire{y}{y} \)
 </p>
 
 <p>
-\[\bijection(A,B) \ne \emptyset\]
+\(
+\norme{x - y}^2 = \scalaire{x}{x} - 2 \Re(\scalaire{x}{y}) + \scalaire{y}{y}
+\)
 </p>
 </div>
-<div id="outline-container-org005505c" class="outline-3">
-<h3 id="org005505c"><span class="section-number-3">9.1.</span> Equivalence</h3>
-<div class="outline-text-3" id="text-9-1">
+
 <p>
-Soit les ensembles \(A\) et \(B\). Supposons qu'il existe une bijection \(f \in \bijection(A,B)\). On peut alors définir une équivalence sur \(A \cup B\) en disant que \(x \equiv y\) si \(x \in A\) avec \(y = f(x) \in B\), ou si \(x \in B\) avec \(y = f^{-1}(x) \in A\). Dans les autres cas, \(x\) ne sera pas équivalent à \(y\). Les classes d'quivalences seront donc de la forme :
+on obtient :
 </p>
 
 <p>
-\[\mathcal{E}(a) = \{ a , f(a) \}\]
+\[\norme{x + y}^2 - \norme{x - y}^2 = 4 \Re(\scalaire{x}{y})\]
 </p>
 
 <p>
-pour tout \(a \in A\) et de la forme :
+Comme \(\Re(\img z) = - \Im(z)\), on a aussi :
+</p>
+
+\begin{align}
+\norme{x + \img y}^2 &= \scalaire{x}{x} + 2 \Re(\img \scalaire{x}{y}) + \scalaire{y}{y} \)
+
+\(
+&=  \scalaire{x}{x} - 2 \Im(\scalaire{x}{y}) + \scalaire{y}{y} \)
+
+\(
+\norme{x - \img y}^2 &= \scalaire{x}{x} - 2 \Re(\img \scalaire{x}{y}) + \scalaire{y}{y} \)
+
+\(
+&=  \scalaire{x}{x} + 2 \Im(\scalaire{x}{y}) + \scalaire{y}{y}
+\end{align}
+
+<p>
+En soustrayant ces deux résultats, on a donc :
 </p>
 
 <p>
-\[\mathcal{E}(b) = \{ b , f^{-1}(b) \}\]
+\[\norme{x + \img y}^2 - \norme{x - \img y}^2 = - 4 \Im(\scalaire{x}{y})\]
 </p>
 
 <p>
-pour tout \(b \in B\). Il y a donc une « équivalence » entre les éléments de \(A\) et les éléments de \(B\). Dans ce cas, on confond souvent les éléments \(x\) de \(A\) avec les éléments de \(\hat{x}\) de \(B\), et on note abusivement \(x = \hat{x}\).
+On en conclut que :
 </p>
+
+\begin{align}
+\scalaire{x}{y} &= \Re(\scalaire{x}{y}) + \img \Im(\scalaire{x}{y}) \)
+
+\(
+&= \unsur{4} (\norme{x + y}^2 + \norme{x - y}^2) + \frac{\img}{4} (\norme{x - \img y}^2 - \norme{x + \img y}^2)
+\end{align}
 </div>
 </div>
-<div id="outline-container-org942bbda" class="outline-3">
-<h3 id="org942bbda"><span class="section-number-3">9.2.</span> Ensembles finis</h3>
-<div class="outline-text-3" id="text-9-2">
-<p>
-Dans le cas d'ensembles finis, l'idempotence revient à dire que \(A\) et \(B\) ont le même nombre d'éléments.
-</p>
-</div>
-</div>
-</div>
-<div id="outline-container-org4118f81" class="outline-2">
-<h2 id="org4118f81"><span class="section-number-2">10.</span> Inverse des fonctions monotones</h2>
+<div id="outline-container-org55d0224" class="outline-2">
+<h2 id="org55d0224"><span class="section-number-2">10.</span> Norme et coordonnées</h2>
 <div class="outline-text-2" id="text-10">
+<p>
+Soit \((e_1,...,e_n)\) une base de \(E\) et \(u \in E\). On a :
+</p>
+
+<p>
+\[u = \sum_i u_i \cdot e_i\]
+</p>
+
+<p>
+pour certains \(u_i,v_i \in \corps\). La norme s'écrit alors :
+</p>
+
+<p>
+\[\norme{u} = \sqrt{ \sum_{i,j} \conjaccent{u}_i \cdot \scalaire{e_i}{e_j} \cdot u_j }\]
+</p>
 </div>
-<div id="outline-container-org989dee2" class="outline-3">
-<h3 id="org989dee2"><span class="section-number-3">10.1.</span> Théorème</h3>
+<div id="outline-container-org23fcb18" class="outline-3">
+<h3 id="org23fcb18"><span class="section-number-3">10.1.</span> Base orthonormée</h3>
 <div class="outline-text-3" id="text-10-1">
 <p>
-Soit la fonction \(f : A \mapsto B\) avec \(B = f(A)\). Si \(f\) est strictement
-croissante (ou décroissante), alors la fonction \(f\) est inversible.
+Si la base est orthonormée, les seuls termes ne s'annulant pas sont ceux où \(i = j\), et on a :
+</p>
+
+<p>
+\[\norme{u} = \sqrt{ \sum_i \abs{u_i}^2 }\]
 </p>
 </div>
 </div>
-<div id="outline-container-org4148677" class="outline-3">
-<h3 id="org4148677"><span class="section-number-3">10.2.</span> Démonstration</h3>
-<div class="outline-text-3" id="text-10-2">
+</div>
+<div id="outline-container-orgdab6281" class="outline-2">
+<h2 id="orgdab6281"><span class="section-number-2">11.</span> Norme sur \(\corps^n\)</h2>
+<div class="outline-text-2" id="text-11">
 <p>
-Choisissons \(y \in B\) et considérons l'ensemble de solutions :
+Soit \(\corps \in \{ \setR , \setC \}\). On définit une norme sur \(\corps^n\), dite norme euclidienne, à partir du produit scalaire :
 </p>
 
 <p>
-\[S(y) = \{ x : f(x) = y \}\]
-</p>
-
-<p>
-Comme \(B = f(A)\), cet ensemble est non vide. Supposons \(x_1,x_2 \in S(y)\) avec \(x_1 \strictinferieur x_2\). On a alors, soit \(f(x_1) \strictinferieur f(x_2)\) (si \(f\) est strictement croissante), soit \(f(x_1) \strictsuperieur f(x_2)\) (si \(f\) est strictement décroissante). Or, par définition de \(S(y)\), on doit avoir \(f(x_1) = f(x_2) = y\). Il ne peut donc y avoir d'éléments distincts dans \(S(y)\), et cet ensemble est de la forme :
-</p>
-
-<p>
-\[S(y) = \{ g(y) \}\]
-</p>
-
-<p>
-relation qui définit implicitement la fonction \(g : B \mapsto A\). On peut trouver un unique \(g(y)\) tel que \(f(g(y)) = y\). La fonction \(f\) est donc inversible et :
-</p>
-
-<p>
-\[f^{-1} = g\]
+\[\norme{x} = \sqrt{ \scalaire{x}{x} } = \sqrt{\sum_{i=1}^n \abs{x_i}^2}\]
 </p>
 </div>
+<div id="outline-container-orgc70e8a5" class="outline-3">
+<h3 id="orgc70e8a5"><span class="section-number-3">11.1.</span> Normes \(k\)</h3>
+<div class="outline-text-3" id="text-11-1">
+<p>
+Par extension, on définit une série de normes \(k\) par :
+</p>
+
+<p>
+\[\norme{x}_k = \left( \sum_i \abs{x_i}^k \right)^{1/k}\]
+</p>
+
+<p>
+Lorsque \(k\) devient très grand, il est clair que la contribution du \(\abs{x_i}^k\) le plus grand en valeur absolue devient énorme par rapport aux autres contributions de la norme. On peut vérifier que :
+</p>
+
+<p>
+\[\lim_{k \mapsto +\infty} \norme{x}_k = \max_{i = 1}^n \abs{x_i}\]
+</p>
+
+<p>
+On s'inspire de ce résultat pour définir :
+</p>
+
+<p>
+\[\norme{x}_\infty = \max_{i = 1}^n \abs{x_i}\]
+</p>
+
+<p>
+On nomme \(\norme{.}_\infty\) la norme « max ».
+</p>
+
+<p>
+Attention, une norme \(k\) quelconque ne dérive en général pas d'un produit scalaire et ne possède donc pas les propriétés que nous avons vu pour la norme \(\norme{.} = \norme{.}_2 = \sqrt{\scalaire{}{}}\).
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgeb1d71d" class="outline-2">
+<h2 id="orgeb1d71d"><span class="section-number-2">12.</span> Norme sur \(\setC\)</h2>
+<div class="outline-text-2" id="text-12">
+<p>
+Soit \((a,b) \in \setR^2\) et \(z = a + \img b\). Il est clair que le module :
+</p>
+
+<p>
+\[\abs{z} = \abs{a + \img b} = \sqrt{a^2 + b^2} = \norme{(a,b)}\]
+</p>
+
+<p>
+définit une norme sur \(\setC\).
+</p>
+</div>
+</div>
+<div id="outline-container-org67b9f10" class="outline-2">
+<h2 id="org67b9f10"><span class="section-number-2">13.</span> Représentation matricielle</h2>
+<div class="outline-text-2" id="text-13">
+<p>
+Soit le vecteur matriciel \(x = [x_1 \ ... \ x_n]^T\). Sa norme s'écrit :
+</p>
+
+<p>
+\[\norme{x} = \sqrt{ \scalaire{x}{x} } = \sqrt{\conjaccent{x}^T \cdot x}\]
+</p>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-10-20 lun 17:55</p>
+<p class="date">Created: 2025-10-20 lun 17:56</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

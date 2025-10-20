@@ -1,0 +1,259 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Applications adjointes
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:dualite}
+
+* Dépendances
+
+  - Chapitre \ref{chap:forme} : Les formes linéaires
+  - Chapitre \ref{chap:ps} : Les produits scalaires
+
+* Adjoint au sens des formes linéaires
+
+Soit les espaces vectoriels $E$ et $F$ sur $\corps$ et l'application linéaire
+$A : E \mapsto F$. Si $A^\dual : F^\dual \mapsto E^\dual$ est l'unique fonction de $E^F$ vérifiant :
+
+$$\forme{\varphi}{A(u)} = \forme{A^\dual(\varphi)}{u}$$
+
+pour tout $\varphi \in F^\dual$ et $u \in E$, on dit que $A^\dual$ est l'application duale (ou adjointe) de $A$ au sens des formes linéaires.
+
+* Adjoint au sens du produit scalaire
+
+Soient $E$ et $F$ deux espaces vectoriels munis de produits scalaires et l'application linéaire $A : E \mapsto F$. Si $A^\dual : F \mapsto E$ est l'unique fonction de $E^F$ vérifiant :
+
+$$\scalaire{v}{A(u)} = \scalaire{A^\dual(v)}{u}$$
+
+pour tout $(u,v) \in E \times F$, on dit que $A^\dual$ est l'application duale (ou adjointe) de $A$ au sens du produit scalaire. Nous supposons dans la suite que les applications rencontrées possèdent une application adjointe.
+
+
+** Applications auto-adjointes
+
+Si $E = F$ et $A = A^\dual$, on dit que $A$ est hermitienne ou auto-adjointe.
+
+
+* Identité
+
+Comme :
+
+$$\scalaire{v}{\identite(u)} = \scalaire{\identite(v)}{u} = \scalaire{v}{u}$$
+
+on a bien évidemment $\identite^\dual = \identite$.
+
+
+* Adjoint d'une combinaison linéaire
+
+Soit deux applications linéaires $A,B : E \mapsto F$ et $\alpha,\beta \in \corps$. Si $(u,v) \in E \times F$, on a :
+
+\begin{align}
+\scalaire{(\conjaccent{\alpha} \cdot A^\dual + \conjaccent{\beta} \cdot B^\dual)(v)}{u} &= \alpha \cdot \scalaire{A^\dual(v)}{u} + \beta \cdot \scalaire{B^\dual(v)}{u} \)
+
+\(
+&= \alpha \cdot \scalaire{v}{A(u)} + \beta \cdot \scalaire{v}{A(u)} \)
+
+\(
+&= \scalaire{v}{(\alpha \cdot A + \beta \cdot B)(u)}
+\end{align}
+
+On en conclut que :
+
+$$(\alpha \cdot A + \beta \cdot B)^\dual = \conjaccent{\alpha} \cdot A^\dual + \conjaccent{\beta} \cdot B^\dual$$
+
+L'opérateur $^\dual : A \mapsto A^\dual$ est antilinéaire.
+
+
+* Bidual
+
+On remarque que :
+
+$$\scalaire{u}{A^\dual(v)} = \conjaccent{\scalaire{A^\dual(v)}{u}} = \conjaccent{\scalaire{v}{A(u)}} = \scalaire{A(u)}{v}$$
+
+pour tout $(u,v) \in E \times F$. On a donc :
+
+$$\left( A^\dual \right)^\dual = A$$
+
+
+* Adjoint d'une composée
+
+Soit un troisième espace vectoriel $G$. Si les applications adjointes des applications linéaires $A : E \mapsto F$ et $B : F \mapsto G$ existent, on a :
+
+$$\scalaire{v}{(A \circ B)(u)} = \scalaire{A^\dual(v)}{B(u)} = \scalaire{(B^\dual \circ A^\dual)(v)}{u}$$
+
+pour tout $(u,v) \in E \times G$. On en conclut que :
+
+$$(A \circ B)^\dual = B^\dual \circ A^\dual$$
+
+
+* Construction d'applications auto-adjointes
+
+Nous allons voir que nous pouvons construire deux applications auto-adjointes à partir de n'importe quelle application linéaire $A : E \mapsto F$ admettant une application duale $A^\dual : F \mapsto E$.
+
+  - L'application $A^\dual \circ A : E \mapsto E$ vérifie :
+
+$$\scalaire{A^\dual \circ A(v)}{u} = \scalaire{A(v)}{A(u)} = \scalaire{v}{A^\dual \circ A(u)}$$
+
+pour tout $u,v \in E$. On en déduit que :
+
+$$(A^\dual \circ A)^\dual = A^\dual \circ A$$
+
+  - L'application $A \circ A^\dual : F \mapsto F$ vérifie :
+
+$$\scalaire{A \circ A^\dual(x)}{y} =\scalaire{A^\dual(x)}{A^\dual(y)} = \scalaire{x}{A \circ A^\dual(y)}$$
+
+pour tout $x,y \in F$. On en déduit que :
+
+$$(A \circ A^\dual)^\dual = A \circ A^\dual$$
+
+
+
+* Linéarité de l'adjoint
+
+Soit $u,v \in E$, $x,y \in F$ et $\alpha, \beta \in \corps$. On a :
+
+\begin{align}
+\scalaire{A^\dual(\alpha \cdot x + \beta \cdot y)}{u} &= \scalaire{\alpha \cdot x + \beta \cdot y}{A(u)} \)
+
+\(
+&= \conjaccent{\alpha} \cdot \scalaire{x}{A(u)} + \conjaccent{\beta} \cdot \scalaire{y}{A(u)} \)
+
+\(
+&= \conjaccent{\alpha} \cdot \scalaire{A^\dual(x)}{u} + \conjaccent{\beta} \cdot \scalaire{A^\dual(y)}{u} \)
+
+\(
+&=\scalaire{\alpha \cdot A^\dual(x) + \beta \cdot A^\dual(y)}{u}
+\end{align}
+
+Comme ce doit être valable pour tout $u \in E$, on en conclut que l'application adjointe est linéaire :
+
+$$A^\dual(\alpha \cdot x + \beta \cdot y) = \alpha \cdot A^\dual(x) + \beta \cdot A^\dual(y)$$
+
+
+* Norme de l'adjoint
+
+Soit une application linéaire $A : E \mapsto F$ de norme finie. Si $x \in F$ est un vecteur non nul, on a :
+
+#+BEGIN_CENTER
+\(
+\norme{A^\dual(x)}^2 = \scalaire{A^\dual(x)}{A^\dual(x)} = \scalaire{A \circ A^\dual(x)}{x} \le \norme{A \circ A^\dual(x)} \cdot \norme{x}
+\)
+#+END_CENTER
+
+et donc :
+
+$$\norme{A^\dual(x)}^2 \le \norme{A} \cdot \norme{A^\dual(x)} \cdot \norme{x}$$
+
+Si $\norme{A^\dual(x)} \ne 0$, on peut diviser par $\norme{A^\dual(x)}$. On obtient alors :
+
+$$\norme{A^\dual(x)} \le \norme{A} \cdot \norme{x}$$
+
+Par positivité des normes, on remarque que cette relation est également valable lorsque $\norme{A^\dual(x)} = 0 \le \norme{A} \cdot \norme{x}$. En divisant par la norme de $x$, on obtient :
+
+$$\frac{ \norme{A^\dual(x)} }{ \norme{x} } \le \norme{A}$$
+
+Il ne nous reste plus qu'à passer au supremum sur $x$ pour en conclure que :
+
+$$\norme{A^\dual} \le \norme{A}$$
+
+Mais comme $(A^\dual)^\dual = A$, on a aussi :
+
+$$\norme{A} = \norme{(A^\dual)^\dual} \le \norme{A^\dual}$$
+
+Ces deux inégalités nous montrent que :
+
+$$\norme{A^\dual} = \norme{A}$$
+
+
+* Inverse
+
+Supposons que $A$ soit inversible. On a :
+
+#+BEGIN_CENTER
+\(
+\identite = \identite^\dual = (A^{-1} \circ A)^\dual = A^\dual \circ (A^{-1})^\dual \)
+
+\(
+\identite = \identite^\dual = (A \circ A^{-1})^\dual = (A^{-1})^\dual \circ A^\dual
+\)
+#+END_CENTER
+
+On en conclut que $A^\dual$ est également inversible et que :
+
+$$(A^\dual)^{-1} = (A^{-1})^\dual$$
+
+
+* Noyau et image
+
+Soit l'application linéaire $A : E \mapsto F$. Soit $u \in \noyau A$ et $v \in \image A^\dual$. On peut donc trouver un $x \in F$ tel que $v = A^\dual(x)$. On a :
+
+$$\scalaire{u}{v} = \scalaire{u}{A^\dual(x)} = \scalaire{A(u)}{x} = \scalaire{0}{x} = 0$$
+
+d'où $u \in (\image A^\dual)^\orthogonal$ et $\noyau A \subseteq (\image A^\dual)^\orthogonal$. Inversément, si $u \in (\image A^\dual)^\orthogonal$, on a :
+
+$$\scalaire{A(u)}{x} = \scalaire{u}{A^\dual(x)} = 0$$
+
+pour tout $x \in E$. On en conclut que $A(u) = 0$, c'est-à-dire $u \in \noyau A$. On a donc aussi $(\image A^\dual)^\orthogonal \subseteq \noyau A$. Ces deux inclusions nous montrent finalement que :
+
+$$\noyau A = (\image A^\dual)^\orthogonal$$
+
+Comme le bidual revient à l'application d'origine, on a aussi :
+
+$$\noyau A^\dual = (\image A)^\orthogonal$$
+
+
+* Représentation matricielle
+
+Soit $\corps \in \{ \setR , \setC \}$ et la matrice $A \in \matrice(\corps,m,n)$ représentant l'application linéaire $\mathcal{A} : \corps^n \mapsto \corps^m$. Soit $A^\dual \in \matrice(\corps,n,m)$ représentant $\mathcal{A}^\dual$. On a :
+
+$$\scalaire{y}{ \mathcal{A}(x) } = \conjaccent{y^T} \cdot A \cdot x$$
+
+ainsi que :
+
+$$\scalaire{\mathcal{A}^\dual(y)}{ x } = \big( \conjaccent{A^\dual} \cdot \conjaccent{y} \big)^T \cdot x = \conjaccent{y^T} \cdot \big( \conjaccent{A^\dual} \big)^T \cdot x$$
+
+Les deux produits scalaires devant être égaux par définition de la dualité, on doit clairement avoir :
+
+$$\big( \conjaccent{A^\dual} \big)^T = A$$
+
+c'est-à-dire :
+
+$$A^\dual = \conjaccent{A^T} = \conjugue A^T$$
+
+Ce résultat prouve l'existence et l'unicité de l'adjoint dans le cas d'espaces de dimension finie.
+
+
+** Cas particulier
+
+Dans le cas d'une matrice réelle, on a $\conjaccent{A} = A$ et :
+
+$$A^\dual = A^T$$
+
+
+* Adjoint d'un produit
+
+On peut vérifier que :
+
+$$(A \cdot B)^\dual = B^\dual \cdot A^\dual$$
+
+pour toutes matrices $A \in \matrice(\corps,m,n)$ et $B \in \matrice(\corps,n,p)$ de dimensions compatibles pour la multiplication.
+
+

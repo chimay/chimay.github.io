@@ -1,0 +1,284 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Norme dérivée du produit scalaire
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:ps}
+
+* Dépendances
+
+  - Chapitre \ref{chap:vecteur} : Les espaces vectoriels
+  - Chapitre \ref{chap:norme} : Les normes
+
+* Introduction
+
+Soit un espace vectoriel $E$ muni du produit scalaire $\scalaire{}{}$. Nous allons analyser les propriétés de l'application $\norme{.} : E \mapsto \corps$ associée au produit scalaire et définie par :
+
+$$\norme{x} = \sqrt{ \scalaire{x}{x} }$$
+
+pour tout $x \in E$.
+
+* Addition
+
+Soit $x,y \in E$ et $\alpha,\beta \in \setC$. On a :
+
+\begin{align}
+\norme{\alpha \cdot x + \beta \cdot y}^2 &= \scalaire{\alpha \cdot x + \beta \cdot y}{\alpha \cdot x + \beta \cdot y} \)
+
+\(
+&= \conjaccent{\alpha} \cdot \alpha \cdot \scalaire{x}{x} + \conjaccent{\alpha} \cdot \beta \cdot \scalaire{x}{y} + \conjaccent{\beta} \cdot \alpha \cdot \scalaire{y}{x} + \conjaccent{\beta} \cdot \beta \cdot \scalaire{y}{y} \)
+
+\(
+&= \abs{\alpha}^2 \cdot \norme{x}^2 + \conjaccent{\alpha} \cdot \beta \cdot \scalaire{x}{y} + \conjaccent{\beta} \cdot \alpha \cdot \scalaire{y}{x} + \abs{\beta}^2 \cdot \norme{y}^2
+\end{align}
+
+Dans le cas particulier où $\beta = 1$, on a :
+
+\begin{align}
+\norme{y + \alpha \cdot x} &= \norme{y}^2 + \alpha \cdot \scalaire{y}{x} + \conjaccent{\alpha} \cdot \scalaire{x}{y} + \abs{\alpha}^2 \cdot \norme{x}^2 \)
+
+\(
+&= \norme{y}^2 + 2 \Re(\alpha \cdot \scalaire{y}{x}) + \abs{\alpha}^2 \cdot \norme{x}^2
+\end{align}
+
+
+* Théorème de Pythagore
+
+Si $x,y \in E$ sont orthogonaux :
+
+$$\scalaire{x}{y} = 0$$
+
+on a également $\scalaire{y}{x} = \conjugue \scalaire{x}{y} = 0$ et :
+
+\begin{align}
+\scalaire{x + y}{x + y} &= \scalaire{x}{x} + \scalaire{x}{y} + \scalaire{y}{x} + \scalaire{y}{y} \)
+
+\(
+&= \scalaire{x}{x} + \scalaire{y}{y}
+\end{align}
+
+En exprimant cette relation en terme de $\norme{.}$, on obtient :
+
+$$\norme{x + y}^2 = \norme{x}^2 + \norme{y}^2$$
+
+résultat connu sous le nom de théorème de Pythagore.
+
+
+* Egalité du parallélogramme
+
+En additionnant les équations :
+
+#+BEGIN_CENTER
+\(
+\norme{x + y}^2 = \scalaire{x}{x} + \scalaire{x}{y} + \scalaire{y}{x} + \scalaire{y}{y} \)
+
+\(
+\norme{x - y}^2 = \scalaire{x}{x} - \scalaire{x}{y} - \scalaire{y}{x} + \scalaire{y}{y}
+\)
+#+END_CENTER
+
+on obtient :
+
+$$\norme{x + y}^2 + \norme{x - y}^2 = 2(\scalaire{x}{x} + \scalaire{y}{y}) = 2 (\norme{x}^2 + \norme{y}^2)$$
+
+
+* Inégalité de Cauchy-Schwartz
+
+Soit $x,y \in E$ et $\lambda \in \setC$. On a :
+
+$$\norme{y - \lambda \cdot x}^2 = \scalaire{y}{y} - \lambda \cdot \scalaire{y}{x} - \conjaccent{\lambda} \cdot \scalaire{x}{y} + \conjaccent{\lambda} \cdot \lambda \cdot \scalaire{x}{x} \ge 0$$
+
+Le choix magique de $\lambda$ (nous verrons d'où il vient en étudiant les projections) est :
+
+$$\lambda = \frac{ \scalaire{x}{y} }{ \scalaire{x}{x} }$$
+
+On a alors :
+
+$$\scalaire{y}{y} - \frac{ \scalaire{x}{y} \cdot \scalaire{y}{x} }{ \scalaire{x}{x} } - \frac{ \scalaire{y}{x} \cdot \scalaire{x}{y} }{ \scalaire{x}{x} } +  \frac{ \scalaire{y}{x} \cdot \scalaire{x}{y} }{ \scalaire{x}{x}^2 } \cdot \scalaire{x}{x} \ge 0$$
+
+En simplifiant les termes, on arrive à :
+
+$$\scalaire{y}{y}  - \frac{ \scalaire{x}{y} \cdot \scalaire{y}{x} }{ \scalaire{x}{x} } = \scalaire{y}{y}  - \frac{ \abs{\scalaire{x}{y}}^2 }{ \scalaire{x}{x} } \ge 0$$
+
+En faisant passer le second terme dans le second membre et en multipliant par $\scalaire{x}{x}$, on arrive finalement à :
+
+$$\abs{\scalaire{x}{y}}^2 \le \scalaire{x}{x} \cdot \scalaire{y}{y}$$
+
+En prenant la racine carrée, on obtient une relation connue sous le nom d'inégalite de Cauchy-Schwartz :
+
+$$\abs{\scalaire{x}{y}} \le \sqrt{\scalaire{x}{x} \cdot \scalaire{y}{y}} = \norme{x} \cdot \norme{y}$$
+
+
+* Norme et inégalité de Minkowski
+
+Nous allons à présent vérifier que l'application $\norme{.}$ est bien une norme.
+
+
+** Définie positivité
+
+On voit que notre application est strictement définie positive car $\norme{x} \ge 0$ pour tout $x \in E$ et :
+
+$$\norme{x} = 0 \Rightarrow \scalaire{x}{x} = 0 \Rightarrow x = 0$$
+
+
+** Produit mixte
+
+La multiplication par un scalaire $\alpha \in \setC$ nous donne :
+
+$$\norme{\alpha \cdot x} = \sqrt{ \abs{\alpha}^2 \cdot \scalaire{x}{x} } = \abs{\alpha} \cdot \sqrt{ \scalaire{x}{x} } = \abs{\alpha} \cdot \norme{x}$$
+
+
+** Inégalité de Minkowski
+
+On a :
+
+\begin{align}
+\norme{x + y}^2 &= \scalaire{x}{x} + \scalaire{x}{y} + \scalaire{y}{x} + \scalaire{y}{y} \)
+
+\(
+&= \scalaire{x}{x} + 2 \Re(\scalaire{x}{y}) + \scalaire{y}{y}
+\end{align}
+
+Mais comme $\abs{\Re(\scalaire{x}{y})} \le \abs{\scalaire{x}{y}} \le \norme{x} \cdot \norme{y}$, on a finalement :
+
+$$\norme{x + y}^2 \le \norme{x}^2 + 2 \norme{x} \cdot \norme{y} + \norme{y}^2 = (\norme{x} + \norme{y})^2$$
+
+d'où :
+
+$$\norme{x + y} \le \norme{x} + \norme{y}$$
+
+Cette troisième et dernière propriété étant vérifiée, l'application $\norme{.} = \sqrt{\scalaire{}{}}$ est bien une norme.
+
+
+* Distance
+
+On associe une distance à la norme et au produit scalaire par :
+
+$$\distance(x,y) = \norme{x - y} = \sqrt{\scalaire{x - y}{x - y}}$$
+
+pour tout $x,y \in E$.
+
+
+* Produit scalaire à partir de la norme
+
+En soutrayant les équations :
+
+#+BEGIN_CENTER
+\(
+\norme{x + y}^2 = \scalaire{x}{x} + 2 \Re(\scalaire{x}{y}) + \scalaire{y}{y} \)
+
+\(
+\norme{x - y}^2 = \scalaire{x}{x} - 2 \Re(\scalaire{x}{y}) + \scalaire{y}{y}
+\)
+#+END_CENTER
+
+on obtient :
+
+$$\norme{x + y}^2 - \norme{x - y}^2 = 4 \Re(\scalaire{x}{y})$$
+
+Comme $\Re(\img z) = - \Im(z)$, on a aussi :
+
+\begin{align}
+\norme{x + \img y}^2 &= \scalaire{x}{x} + 2 \Re(\img \scalaire{x}{y}) + \scalaire{y}{y} \)
+
+\(
+&=  \scalaire{x}{x} - 2 \Im(\scalaire{x}{y}) + \scalaire{y}{y} \)
+
+\(
+\norme{x - \img y}^2 &= \scalaire{x}{x} - 2 \Re(\img \scalaire{x}{y}) + \scalaire{y}{y} \)
+
+\(
+&=  \scalaire{x}{x} + 2 \Im(\scalaire{x}{y}) + \scalaire{y}{y}
+\end{align}
+
+En soustrayant ces deux résultats, on a donc :
+
+$$\norme{x + \img y}^2 - \norme{x - \img y}^2 = - 4 \Im(\scalaire{x}{y})$$
+
+On en conclut que :
+
+\begin{align}
+\scalaire{x}{y} &= \Re(\scalaire{x}{y}) + \img \Im(\scalaire{x}{y}) \)
+
+\(
+&= \unsur{4} (\norme{x + y}^2 + \norme{x - y}^2) + \frac{\img}{4} (\norme{x - \img y}^2 - \norme{x + \img y}^2)
+\end{align}
+
+
+* Norme et coordonnées
+
+Soit $(e_1,...,e_n)$ une base de $E$ et $u \in E$. On a :
+
+$$u = \sum_i u_i \cdot e_i$$
+
+pour certains $u_i,v_i \in \corps$. La norme s'écrit alors :
+
+$$\norme{u} = \sqrt{ \sum_{i,j} \conjaccent{u}_i \cdot \scalaire{e_i}{e_j} \cdot u_j }$$
+
+
+** Base orthonormée
+
+Si la base est orthonormée, les seuls termes ne s'annulant pas sont ceux où $i = j$, et on a :
+
+$$\norme{u} = \sqrt{ \sum_i \abs{u_i}^2 }$$
+
+* Norme sur $\corps^n$
+
+Soit $\corps \in \{ \setR , \setC \}$. On définit une norme sur $\corps^n$, dite norme euclidienne, à partir du produit scalaire :
+
+$$\norme{x} = \sqrt{ \scalaire{x}{x} } = \sqrt{\sum_{i=1}^n \abs{x_i}^2}$$
+
+
+** Normes $k$
+
+Par extension, on définit une série de normes $k$ par :
+
+$$\norme{x}_k = \left( \sum_i \abs{x_i}^k \right)^{1/k}$$
+
+Lorsque $k$ devient très grand, il est clair que la contribution du $\abs{x_i}^k$ le plus grand en valeur absolue devient énorme par rapport aux autres contributions de la norme. On peut vérifier que :
+
+$$\lim_{k \mapsto +\infty} \norme{x}_k = \max_{i = 1}^n \abs{x_i}$$
+
+On s'inspire de ce résultat pour définir :
+
+$$\norme{x}_\infty = \max_{i = 1}^n \abs{x_i}$$
+
+On nomme $\norme{.}_\infty$ la norme « max ».
+
+Attention, une norme $k$ quelconque ne dérive en général pas d'un produit scalaire et ne possède donc pas les propriétés que nous avons vu pour la norme $\norme{.} = \norme{.}_2 = \sqrt{\scalaire{}{}}$.
+
+* Norme sur $\setC$
+
+Soit $(a,b) \in \setR^2$ et $z = a + \img b$. Il est clair que le module :
+
+$$\abs{z} = \abs{a + \img b} = \sqrt{a^2 + b^2} = \norme{(a,b)}$$
+
+définit une norme sur $\setC$.
+
+
+* Représentation matricielle
+
+Soit le vecteur matriciel $x = [x_1 \ ... \ x_n]^T$. Sa norme s'écrit :
+
+$$\norme{x} = \sqrt{ \scalaire{x}{x} } = \sqrt{\conjaccent{x}^T \cdot x}$$
+
+

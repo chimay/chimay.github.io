@@ -6,7 +6,7 @@
 <!-- 2025-10-20 lun 17:55 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Eclats de vers : Matemat : Bijections</title>
+<title>Eclats de vers : Matemat : Applications adjointes</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
 <style type="text/css">
@@ -228,7 +228,7 @@
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Eclats de vers : Matemat : Bijections</h1>
+<h1 class="title">Eclats de vers : Matemat : Applications adjointes</h1>
 <p>
 <a href="index.html">Index des Grimoires</a>
 </p>
@@ -241,16 +241,20 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgd62d4bf">1. Dépendances</a></li>
-<li><a href="#orgc22d1f1">2. Inverse à gauche</a></li>
-<li><a href="#org0a26cc1">3. Inverse à droite</a></li>
-<li><a href="#org1f7aef5">4. Fonction inverse</a></li>
-<li><a href="#orga270702">5. Relation</a></li>
-<li><a href="#org414610d">6. Inverse d'une composée</a></li>
-<li><a href="#org537faa3">7. Puissances négatives</a></li>
-<li><a href="#org6d2d04c">8. Inverse d'une puissance</a></li>
-<li><a href="#org5871af5">9. Idempotence</a></li>
-<li><a href="#org4118f81">10. Inverse des fonctions monotones</a></li>
+<li><a href="#org56798c3">1. Dépendances</a></li>
+<li><a href="#orge0e0ca9">2. Adjoint au sens des formes linéaires</a></li>
+<li><a href="#orgc77309b">3. Adjoint au sens du produit scalaire</a></li>
+<li><a href="#org85694bf">4. Identité</a></li>
+<li><a href="#orgcee67cd">5. Adjoint d'une combinaison linéaire</a></li>
+<li><a href="#org3b40b80">6. Bidual</a></li>
+<li><a href="#org5dbf8e0">7. Adjoint d'une composée</a></li>
+<li><a href="#org95f5a4c">8. Construction d'applications auto-adjointes</a></li>
+<li><a href="#org92eb7c5">9. Linéarité de l'adjoint</a></li>
+<li><a href="#org431503b">10. Norme de l'adjoint</a></li>
+<li><a href="#orge4ef753">11. Inverse</a></li>
+<li><a href="#org062bf4f">12. Noyau et image</a></li>
+<li><a href="#orgd1e2199">13. Représentation matricielle</a></li>
+<li><a href="#org8dc603a">14. Adjoint d'un produit</a></li>
 </ul>
 </div>
 </div>
@@ -424,316 +428,408 @@
 </p>
 
 <p>
-\label{chap:bijections}
+\label{chap:dualite}
 </p>
-<div id="outline-container-orgd62d4bf" class="outline-2">
-<h2 id="orgd62d4bf"><span class="section-number-2">1.</span> Dépendances</h2>
+<div id="outline-container-org56798c3" class="outline-2">
+<h2 id="org56798c3"><span class="section-number-2">1.</span> Dépendances</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
-<li>Chapitre \ref{chap:fonctionsEtOrdre} : Fonctions et ordre</li>
+<li>Chapitre \ref{chap:forme} : Les formes linéaires</li>
+<li>Chapitre \ref{chap:ps} : Les produits scalaires</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgc22d1f1" class="outline-2">
-<h2 id="orgc22d1f1"><span class="section-number-2">2.</span> Inverse à gauche</h2>
+<div id="outline-container-orge0e0ca9" class="outline-2">
+<h2 id="orge0e0ca9"><span class="section-number-2">2.</span> Adjoint au sens des formes linéaires</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-Soit \(f : A \mapsto B\). Si \(l : B \mapsto A\) est une fonction telle que :
+Soit les espaces vectoriels \(E\) et \(F\) sur \(\corps\) et l'application linéaire
+\(A : E \mapsto F\). Si \(A^\dual : F^\dual \mapsto E^\dual\) est l'unique fonction de \(E^F\) vérifiant :
 </p>
 
 <p>
-\[l \circ f = \identite\]
+\[\forme{\varphi}{A(u)} = \forme{A^\dual(\varphi)}{u}\]
 </p>
 
 <p>
-on dit que \(l\) est un inverse à gauche de \(f\).
-</p>
-</div>
-<div id="outline-container-org2651133" class="outline-3">
-<h3 id="org2651133"><span class="section-number-3">2.1.</span> Unicité</h3>
-<div class="outline-text-3" id="text-2-1">
-<p>
-Soit \(y \in B\). Si \(f\) admet un inverse à gauche, on peut trouver au plus un seul \(x \in A\) tel que \(f(x) = y\). En effet, supposons que \(x_1, x_2 \in A\) avec \(f(x_1) = f(x_2) = y\). On a :
-</p>
-
-<p>
-\[l(y) = (l \circ f)(x_1) = (l \circ f)(x_2)\]
-</p>
-
-<p>
-mais comme \(l \circ f = \identite\), et que \(\identite(x) = x\) pour tout \(x \in A\), on a :
-</p>
-
-<p>
-\[l(y) = x_1 = x_2\]
-</p>
-
-<p>
-ce qui prouve l'unicité de la solution.
+pour tout \(\varphi \in F^\dual\) et \(u \in E\), on dit que \(A^\dual\) est l'application duale (ou adjointe) de \(A\) au sens des formes linéaires.
 </p>
 </div>
 </div>
-</div>
-<div id="outline-container-org0a26cc1" class="outline-2">
-<h2 id="org0a26cc1"><span class="section-number-2">3.</span> Inverse à droite</h2>
+<div id="outline-container-orgc77309b" class="outline-2">
+<h2 id="orgc77309b"><span class="section-number-2">3.</span> Adjoint au sens du produit scalaire</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-Soit \(f : A \mapsto B\). Si \(r : B \mapsto A\) est une fonction telle que :
+Soient \(E\) et \(F\) deux espaces vectoriels munis de produits scalaires et l'application linéaire \(A : E \mapsto F\). Si \(A^\dual : F \mapsto E\) est l'unique fonction de \(E^F\) vérifiant :
 </p>
 
 <p>
-\[f \circ r = \identite\]
+\[\scalaire{v}{A(u)} = \scalaire{A^\dual(v)}{u}\]
 </p>
 
 <p>
-on dit que \(r\) est un inverse à droite de \(f\).
+pour tout \((u,v) \in E \times F\), on dit que \(A^\dual\) est l'application duale (ou adjointe) de \(A\) au sens du produit scalaire. Nous supposons dans la suite que les applications rencontrées possèdent une application adjointe.
 </p>
 </div>
-<div id="outline-container-org2f6e0f7" class="outline-3">
-<h3 id="org2f6e0f7"><span class="section-number-3">3.1.</span> Existence</h3>
+<div id="outline-container-org73f2969" class="outline-3">
+<h3 id="org73f2969"><span class="section-number-3">3.1.</span> Applications auto-adjointes</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
-Soit \(y \in B\). Si \(f\) admet un inverse à droite \(r\), on peut trouver au moins un \(x \in A\) tel que \(f(x) = y\). En effet, si l'on choisit \(x = r(y)\), on a :
-</p>
-
-<p>
-\[f(x) = (f \circ r)(y) = \identite(y) = y\]
-</p>
-
-<p>
-ce qui prouve l'existence de la solution.
+Si \(E = F\) et \(A = A^\dual\), on dit que \(A\) est hermitienne ou auto-adjointe.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org1f7aef5" class="outline-2">
-<h2 id="org1f7aef5"><span class="section-number-2">4.</span> Fonction inverse</h2>
+<div id="outline-container-org85694bf" class="outline-2">
+<h2 id="org85694bf"><span class="section-number-2">4.</span> Identité</h2>
 <div class="outline-text-2" id="text-4">
 <p>
-Soit \(f : A \mapsto B\). Supposons que \(f\) admette à la fois un inverse à gauche \(l\) et un inverse à droite \(r\). Ces deux inverses sont dès lors identiques :
+Comme :
 </p>
 
 <p>
-\[l = l \circ \identite = l \circ f \circ r = \identite \circ r = r\]
-</p>
-</div>
-<div id="outline-container-org6ec9fd9" class="outline-3">
-<h3 id="org6ec9fd9"><span class="section-number-3">4.1.</span> Existence et unicité</h3>
-<div class="outline-text-3" id="text-4-1">
-<p>
-Soit \(y \in B\). On déduit des résultats précédents que l'on peut trouver un unique \(x \in A\), donné par \(x = r(y)\), tel que \(f(x) = y\). Nous pouvons dès lors définir la fonction inverse, notée \(f^{-1} : B \mapsto A\), par :
+\[\scalaire{v}{\identite(u)} = \scalaire{\identite(v)}{u} = \scalaire{v}{u}\]
 </p>
 
 <p>
-\[f^{-1}(y) = r(y)\]
-</p>
-
-<p>
-pour tout \(y \in B\). On a donc :
-</p>
-
-<p>
-\[f^{-1} = r = l\]
-</p>
-
-<p>
-et :
-</p>
-
-<p>
-\[f^{-1} \circ f = f \circ f^{-1} = \identite\]
+on a bien évidemment \(\identite^\dual = \identite\).
 </p>
 </div>
 </div>
-<div id="outline-container-org8d7a51d" class="outline-3">
-<h3 id="org8d7a51d"><span class="section-number-3">4.2.</span> Bijection</h3>
-<div class="outline-text-3" id="text-4-2">
-<p>
-Lorsque \(f\) admet un inverse \(f^{-1}\), on dit que \(f\) est inversible ou que \(f\) est une bijection. On note :
-</p>
-
-<p>
-\[\bijection(A,B) = \{ f \in B^A : \exists f^{-1} \in A^B \}\]
-</p>
-
-<p>
-l'ensemble des bijections de \(A\) vers \(B\).
-</p>
-</div>
-</div>
-</div>
-<div id="outline-container-orga270702" class="outline-2">
-<h2 id="orga270702"><span class="section-number-2">5.</span> Relation</h2>
+<div id="outline-container-orgcee67cd" class="outline-2">
+<h2 id="orgcee67cd"><span class="section-number-2">5.</span> Adjoint d'une combinaison linéaire</h2>
 <div class="outline-text-2" id="text-5">
 <p>
-Lorsque \(f\) est inversible, l'image inverse de \(y \in B\) se réduit à un ensemble contenant un unique \(x \in A\). Soit \(R\) la relation associée à \(f\). On a :
+Soit deux applications linéaires \(A,B : E \mapsto F\) et \(\alpha,\beta \in \corps\). Si \((u,v) \in E \times F\), on a :
+</p>
+
+\begin{align}
+\scalaire{(\conjaccent{\alpha} \cdot A^\dual + \conjaccent{\beta} \cdot B^\dual)(v)}{u} &= \alpha \cdot \scalaire{A^\dual(v)}{u} + \beta \cdot \scalaire{B^\dual(v)}{u} \)
+
+\(
+&= \alpha \cdot \scalaire{v}{A(u)} + \beta \cdot \scalaire{v}{A(u)} \)
+
+\(
+&= \scalaire{v}{(\alpha \cdot A + \beta \cdot B)(u)}
+\end{align}
+
+<p>
+On en conclut que :
 </p>
 
 <p>
-\[R^{-1}(y) = \{ f^{-1}(y) \}\]
+\[(\alpha \cdot A + \beta \cdot B)^\dual = \conjaccent{\alpha} \cdot A^\dual + \conjaccent{\beta} \cdot B^\dual\]
+</p>
+
+<p>
+L'opérateur \(^\dual : A \mapsto A^\dual\) est antilinéaire.
 </p>
 </div>
 </div>
-<div id="outline-container-org414610d" class="outline-2">
-<h2 id="org414610d"><span class="section-number-2">6.</span> Inverse d'une composée</h2>
+<div id="outline-container-org3b40b80" class="outline-2">
+<h2 id="org3b40b80"><span class="section-number-2">6.</span> Bidual</h2>
 <div class="outline-text-2" id="text-6">
 <p>
-Soit \(f \in \bijection(A,B)\) et \(g \in \bijection(B,C)\). Nous allons essayer de trouver une expression de l'inverse \(h\) de la composée de ces deux fonctions. On part de la relation \(h \circ g \circ f = \identite\) et on compose à droite par l'inverse de \(f\) puis l'inverse de \(g\), ce qui nous donne :
+On remarque que :
 </p>
 
 <p>
-\[h \circ g \circ f \circ f^{-1} \circ g^{-1} = \identite \circ f^{-1} \circ g^{-1} = f^{-1} \circ g^{-1}\]
+\[\scalaire{u}{A^\dual(v)} = \conjaccent{\scalaire{A^\dual(v)}{u}} = \conjaccent{\scalaire{v}{A(u)}} = \scalaire{A(u)}{v}\]
 </p>
 
 <p>
-Mais comme :
+pour tout \((u,v) \in E \times F\). On a donc :
 </p>
 
 <p>
-\[h \circ g \circ f \circ f^{-1} \circ g^{-1} = h \circ g \circ \identite \circ g^{-1} = h \circ g \circ g^{-1} = h \circ \identite = h\]
-</p>
-
-<p>
-on a :
-</p>
-
-<p>
-\[h = f^{-1} \circ g^{-1}\]
-</p>
-
-<p>
-Partant de la relation \(g \circ f \circ h = \identite\) et composant à gauche par l'inverse de \(g\) puis par l'inverse de \(f\), on arrive au même résultat \(h = f^{-1} \circ g^{-1}\). Donc :
-</p>
-
-<p>
-\[(g \circ f)^{-1} = f^{-1} \circ g^{-1}\]
-</p>
-
-<p>
-On généralise par récurrence à \(n\) fonctions :
-</p>
-
-<p>
-\[(f_n \circ ... \circ f_2 \circ f_1)^{-1} = f_1^{-1} \circ f_2^{-1} \circ ... \circ f_n^{-1}\]
+\[\left( A^\dual \right)^\dual = A\]
 </p>
 </div>
 </div>
-<div id="outline-container-org537faa3" class="outline-2">
-<h2 id="org537faa3"><span class="section-number-2">7.</span> Puissances négatives</h2>
+<div id="outline-container-org5dbf8e0" class="outline-2">
+<h2 id="org5dbf8e0"><span class="section-number-2">7.</span> Adjoint d'une composée</h2>
 <div class="outline-text-2" id="text-7">
 <p>
-Si \(f\) est inversible, on peut également définir les puissances négatives par :
+Soit un troisième espace vectoriel \(G\). Si les applications adjointes des applications linéaires \(A : E \mapsto F\) et \(B : F \mapsto G\) existent, on a :
 </p>
 
 <p>
-\[f^{-n} = \left( f^{-1} \right)^n = f^{-1} \circ ... \circ f^{-1}\]
+\[\scalaire{v}{(A \circ B)(u)} = \scalaire{A^\dual(v)}{B(u)} = \scalaire{(B^\dual \circ A^\dual)(v)}{u}\]
 </p>
 
 <p>
-pour tout \(n \in \setN\).
+pour tout \((u,v) \in E \times G\). On en conclut que :
+</p>
+
+<p>
+\[(A \circ B)^\dual = B^\dual \circ A^\dual\]
 </p>
 </div>
 </div>
-<div id="outline-container-org6d2d04c" class="outline-2">
-<h2 id="org6d2d04c"><span class="section-number-2">8.</span> Inverse d'une puissance</h2>
+<div id="outline-container-org95f5a4c" class="outline-2">
+<h2 id="org95f5a4c"><span class="section-number-2">8.</span> Construction d'applications auto-adjointes</h2>
 <div class="outline-text-2" id="text-8">
 <p>
-En considérant le cas particulier de fonctions identiques (\(f_1 = ... = f_n = f\)), l'expression de l'inverse d'une composition de fonctions nous montre que :
+Nous allons voir que nous pouvons construire deux applications auto-adjointes à partir de n'importe quelle application linéaire \(A : E \mapsto F\) admettant une application duale \(A^\dual : F \mapsto E\).
+</p>
+
+<ul class="org-ul">
+<li>L'application \(A^\dual \circ A : E \mapsto E\) vérifie :</li>
+</ul>
+
+<p>
+\[\scalaire{A^\dual \circ A(v)}{u} = \scalaire{A(v)}{A(u)} = \scalaire{v}{A^\dual \circ A(u)}\]
 </p>
 
 <p>
-\[\left( f^{-1} \right)^n = f^{-n} = \left( f^n \right)^{-1}\]
+pour tout \(u,v \in E\). On en déduit que :
 </p>
 
 <p>
-L'inverse de la puissance est identique à la puissance de l'inverse.
+\[(A^\dual \circ A)^\dual = A^\dual \circ A\]
+</p>
+
+<ul class="org-ul">
+<li>L'application \(A \circ A^\dual : F \mapsto F\) vérifie :</li>
+</ul>
+
+<p>
+\[\scalaire{A \circ A^\dual(x)}{y} =\scalaire{A^\dual(x)}{A^\dual(y)} = \scalaire{x}{A \circ A^\dual(y)}\]
+</p>
+
+<p>
+pour tout \(x,y \in F\). On en déduit que :
+</p>
+
+<p>
+\[(A \circ A^\dual)^\dual = A \circ A^\dual\]
 </p>
 </div>
 </div>
-<div id="outline-container-org5871af5" class="outline-2">
-<h2 id="org5871af5"><span class="section-number-2">9.</span> Idempotence</h2>
+<div id="outline-container-org92eb7c5" class="outline-2">
+<h2 id="org92eb7c5"><span class="section-number-2">9.</span> Linéarité de l'adjoint</h2>
 <div class="outline-text-2" id="text-9">
 <p>
-On dit que deux ensembles \(A\) et \(B\) sont idempotents si il existe une bijection inversible de \(A\) vers \(B\) :
+Soit \(u,v \in E\), \(x,y \in F\) et \(\alpha, \beta \in \corps\). On a :
+</p>
+
+\begin{align}
+\scalaire{A^\dual(\alpha \cdot x + \beta \cdot y)}{u} &= \scalaire{\alpha \cdot x + \beta \cdot y}{A(u)} \)
+
+\(
+&= \conjaccent{\alpha} \cdot \scalaire{x}{A(u)} + \conjaccent{\beta} \cdot \scalaire{y}{A(u)} \)
+
+\(
+&= \conjaccent{\alpha} \cdot \scalaire{A^\dual(x)}{u} + \conjaccent{\beta} \cdot \scalaire{A^\dual(y)}{u} \)
+
+\(
+&=\scalaire{\alpha \cdot A^\dual(x) + \beta \cdot A^\dual(y)}{u}
+\end{align}
+
+<p>
+Comme ce doit être valable pour tout \(u \in E\), on en conclut que l'application adjointe est linéaire :
 </p>
 
 <p>
-\[\bijection(A,B) \ne \emptyset\]
-</p>
-</div>
-<div id="outline-container-org005505c" class="outline-3">
-<h3 id="org005505c"><span class="section-number-3">9.1.</span> Equivalence</h3>
-<div class="outline-text-3" id="text-9-1">
-<p>
-Soit les ensembles \(A\) et \(B\). Supposons qu'il existe une bijection \(f \in \bijection(A,B)\). On peut alors définir une équivalence sur \(A \cup B\) en disant que \(x \equiv y\) si \(x \in A\) avec \(y = f(x) \in B\), ou si \(x \in B\) avec \(y = f^{-1}(x) \in A\). Dans les autres cas, \(x\) ne sera pas équivalent à \(y\). Les classes d'quivalences seront donc de la forme :
-</p>
-
-<p>
-\[\mathcal{E}(a) = \{ a , f(a) \}\]
-</p>
-
-<p>
-pour tout \(a \in A\) et de la forme :
-</p>
-
-<p>
-\[\mathcal{E}(b) = \{ b , f^{-1}(b) \}\]
-</p>
-
-<p>
-pour tout \(b \in B\). Il y a donc une « équivalence » entre les éléments de \(A\) et les éléments de \(B\). Dans ce cas, on confond souvent les éléments \(x\) de \(A\) avec les éléments de \(\hat{x}\) de \(B\), et on note abusivement \(x = \hat{x}\).
+\[A^\dual(\alpha \cdot x + \beta \cdot y) = \alpha \cdot A^\dual(x) + \beta \cdot A^\dual(y)\]
 </p>
 </div>
 </div>
-<div id="outline-container-org942bbda" class="outline-3">
-<h3 id="org942bbda"><span class="section-number-3">9.2.</span> Ensembles finis</h3>
-<div class="outline-text-3" id="text-9-2">
-<p>
-Dans le cas d'ensembles finis, l'idempotence revient à dire que \(A\) et \(B\) ont le même nombre d'éléments.
-</p>
-</div>
-</div>
-</div>
-<div id="outline-container-org4118f81" class="outline-2">
-<h2 id="org4118f81"><span class="section-number-2">10.</span> Inverse des fonctions monotones</h2>
+<div id="outline-container-org431503b" class="outline-2">
+<h2 id="org431503b"><span class="section-number-2">10.</span> Norme de l'adjoint</h2>
 <div class="outline-text-2" id="text-10">
-</div>
-<div id="outline-container-org989dee2" class="outline-3">
-<h3 id="org989dee2"><span class="section-number-3">10.1.</span> Théorème</h3>
-<div class="outline-text-3" id="text-10-1">
 <p>
-Soit la fonction \(f : A \mapsto B\) avec \(B = f(A)\). Si \(f\) est strictement
-croissante (ou décroissante), alors la fonction \(f\) est inversible.
-</p>
-</div>
-</div>
-<div id="outline-container-org4148677" class="outline-3">
-<h3 id="org4148677"><span class="section-number-3">10.2.</span> Démonstration</h3>
-<div class="outline-text-3" id="text-10-2">
-<p>
-Choisissons \(y \in B\) et considérons l'ensemble de solutions :
+Soit une application linéaire \(A : E \mapsto F\) de norme finie. Si \(x \in F\) est un vecteur non nul, on a :
 </p>
 
+<div class="org-center">
 <p>
-\[S(y) = \{ x : f(x) = y \}\]
-</p>
-
-<p>
-Comme \(B = f(A)\), cet ensemble est non vide. Supposons \(x_1,x_2 \in S(y)\) avec \(x_1 \strictinferieur x_2\). On a alors, soit \(f(x_1) \strictinferieur f(x_2)\) (si \(f\) est strictement croissante), soit \(f(x_1) \strictsuperieur f(x_2)\) (si \(f\) est strictement décroissante). Or, par définition de \(S(y)\), on doit avoir \(f(x_1) = f(x_2) = y\). Il ne peut donc y avoir d'éléments distincts dans \(S(y)\), et cet ensemble est de la forme :
-</p>
-
-<p>
-\[S(y) = \{ g(y) \}\]
-</p>
-
-<p>
-relation qui définit implicitement la fonction \(g : B \mapsto A\). On peut trouver un unique \(g(y)\) tel que \(f(g(y)) = y\). La fonction \(f\) est donc inversible et :
-</p>
-
-<p>
-\[f^{-1} = g\]
+\(
+\norme{A^\dual(x)}^2 = \scalaire{A^\dual(x)}{A^\dual(x)} = \scalaire{A \circ A^\dual(x)}{x} \le \norme{A \circ A^\dual(x)} \cdot \norme{x}
+\)
 </p>
 </div>
+
+<p>
+et donc :
+</p>
+
+<p>
+\[\norme{A^\dual(x)}^2 \le \norme{A} \cdot \norme{A^\dual(x)} \cdot \norme{x}\]
+</p>
+
+<p>
+Si \(\norme{A^\dual(x)} \ne 0\), on peut diviser par \(\norme{A^\dual(x)}\). On obtient alors :
+</p>
+
+<p>
+\[\norme{A^\dual(x)} \le \norme{A} \cdot \norme{x}\]
+</p>
+
+<p>
+Par positivité des normes, on remarque que cette relation est également valable lorsque \(\norme{A^\dual(x)} = 0 \le \norme{A} \cdot \norme{x}\). En divisant par la norme de \(x\), on obtient :
+</p>
+
+<p>
+\[\frac{ \norme{A^\dual(x)} }{ \norme{x} } \le \norme{A}\]
+</p>
+
+<p>
+Il ne nous reste plus qu'à passer au supremum sur \(x\) pour en conclure que :
+</p>
+
+<p>
+\[\norme{A^\dual} \le \norme{A}\]
+</p>
+
+<p>
+Mais comme \((A^\dual)^\dual = A\), on a aussi :
+</p>
+
+<p>
+\[\norme{A} = \norme{(A^\dual)^\dual} \le \norme{A^\dual}\]
+</p>
+
+<p>
+Ces deux inégalités nous montrent que :
+</p>
+
+<p>
+\[\norme{A^\dual} = \norme{A}\]
+</p>
+</div>
+</div>
+<div id="outline-container-orge4ef753" class="outline-2">
+<h2 id="orge4ef753"><span class="section-number-2">11.</span> Inverse</h2>
+<div class="outline-text-2" id="text-11">
+<p>
+Supposons que \(A\) soit inversible. On a :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\identite = \identite^\dual = (A^{-1} \circ A)^\dual = A^\dual \circ (A^{-1})^\dual \)
+</p>
+
+<p>
+\(
+\identite = \identite^\dual = (A \circ A^{-1})^\dual = (A^{-1})^\dual \circ A^\dual
+\)
+</p>
+</div>
+
+<p>
+On en conclut que \(A^\dual\) est également inversible et que :
+</p>
+
+<p>
+\[(A^\dual)^{-1} = (A^{-1})^\dual\]
+</p>
+</div>
+</div>
+<div id="outline-container-org062bf4f" class="outline-2">
+<h2 id="org062bf4f"><span class="section-number-2">12.</span> Noyau et image</h2>
+<div class="outline-text-2" id="text-12">
+<p>
+Soit l'application linéaire \(A : E \mapsto F\). Soit \(u \in \noyau A\) et \(v \in \image A^\dual\). On peut donc trouver un \(x \in F\) tel que \(v = A^\dual(x)\). On a :
+</p>
+
+<p>
+\[\scalaire{u}{v} = \scalaire{u}{A^\dual(x)} = \scalaire{A(u)}{x} = \scalaire{0}{x} = 0\]
+</p>
+
+<p>
+d'où \(u \in (\image A^\dual)^\orthogonal\) et \(\noyau A \subseteq (\image A^\dual)^\orthogonal\). Inversément, si \(u \in (\image A^\dual)^\orthogonal\), on a :
+</p>
+
+<p>
+\[\scalaire{A(u)}{x} = \scalaire{u}{A^\dual(x)} = 0\]
+</p>
+
+<p>
+pour tout \(x \in E\). On en conclut que \(A(u) = 0\), c'est-à-dire \(u \in \noyau A\). On a donc aussi \((\image A^\dual)^\orthogonal \subseteq \noyau A\). Ces deux inclusions nous montrent finalement que :
+</p>
+
+<p>
+\[\noyau A = (\image A^\dual)^\orthogonal\]
+</p>
+
+<p>
+Comme le bidual revient à l'application d'origine, on a aussi :
+</p>
+
+<p>
+\[\noyau A^\dual = (\image A)^\orthogonal\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgd1e2199" class="outline-2">
+<h2 id="orgd1e2199"><span class="section-number-2">13.</span> Représentation matricielle</h2>
+<div class="outline-text-2" id="text-13">
+<p>
+Soit \(\corps \in \{ \setR , \setC \}\) et la matrice \(A \in \matrice(\corps,m,n)\) représentant l'application linéaire \(\mathcal{A} : \corps^n \mapsto \corps^m\). Soit \(A^\dual \in \matrice(\corps,n,m)\) représentant \(\mathcal{A}^\dual\). On a :
+</p>
+
+<p>
+\[\scalaire{y}{ \mathcal{A}(x) } = \conjaccent{y^T} \cdot A \cdot x\]
+</p>
+
+<p>
+ainsi que :
+</p>
+
+<p>
+\[\scalaire{\mathcal{A}^\dual(y)}{ x } = \big( \conjaccent{A^\dual} \cdot \conjaccent{y} \big)^T \cdot x = \conjaccent{y^T} \cdot \big( \conjaccent{A^\dual} \big)^T \cdot x\]
+</p>
+
+<p>
+Les deux produits scalaires devant être égaux par définition de la dualité, on doit clairement avoir :
+</p>
+
+<p>
+\[\big( \conjaccent{A^\dual} \big)^T = A\]
+</p>
+
+<p>
+c'est-à-dire :
+</p>
+
+<p>
+\[A^\dual = \conjaccent{A^T} = \conjugue A^T\]
+</p>
+
+<p>
+Ce résultat prouve l'existence et l'unicité de l'adjoint dans le cas d'espaces de dimension finie.
+</p>
+</div>
+<div id="outline-container-org9607b77" class="outline-3">
+<h3 id="org9607b77"><span class="section-number-3">13.1.</span> Cas particulier</h3>
+<div class="outline-text-3" id="text-13-1">
+<p>
+Dans le cas d'une matrice réelle, on a \(\conjaccent{A} = A\) et :
+</p>
+
+<p>
+\[A^\dual = A^T\]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org8dc603a" class="outline-2">
+<h2 id="org8dc603a"><span class="section-number-2">14.</span> Adjoint d'un produit</h2>
+<div class="outline-text-2" id="text-14">
+<p>
+On peut vérifier que :
+</p>
+
+<p>
+\[(A \cdot B)^\dual = B^\dual \cdot A^\dual\]
+</p>
+
+<p>
+pour toutes matrices \(A \in \matrice(\corps,m,n)\) et \(B \in \matrice(\corps,n,p)\) de dimensions compatibles pour la multiplication.
+</p>
 </div>
 </div>
 </div>

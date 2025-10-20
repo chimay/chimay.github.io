@@ -1,0 +1,309 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Matrices unitaires
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:unitaire}
+
+* Conservation du produit scalaire
+
+Les matrices unitaires sont une généralisation des rotations. Or, la propriété essentielle d'une rotation est qu'elle conserve les distances. Comme les distances usuelles découlent des normes usuelles, elles-mêmes dérivées du produit scalaire, on impose que ce soit le produit scalaire qui soit conservé. On veut donc que :
+
+$$\scalaire{U \cdot x}{U \cdot y} = x^\dual \cdot U^\dual \cdot U \cdot y = \scalaire{x}{y} = x^\dual \cdot y$$
+
+pour toute matrice unitaire $U$ de taille $(m,n)$ et tout $x,y \in \corps^n$. Comme cette relation doit être valable pour tout $x,y$, elle doit l'être pour les vecteurs de la base canonique :
+
+$$\composante_{ij} U = \canonique_i^\dual \cdot U^\dual \cdot U \cdot \canonique_j = \canonique_i^\dual \cdot \canonique_j = \indicatrice_{ij}$$
+
+On en conclut que :
+
+$$U^\dual \cdot U = I$$
+
+Si cette condition est vérifiée, on dit que $U$ est une matrice unitaire.
+
+
+** Norme
+
+La conservation de la norme usuelle $\norme{x} = \sqrt{\scalaire{x}{x} }$ découle de celle du produit scalaire. Si $U$ est unitaire, on a donc $\norme{U \cdot x} = \norme{x}$.
+
+
+* Matrices élémentaires unitaires
+
+Soit la matrice élémentaire :
+
+$$U = \matelementaire(\alpha,u,u) = I + \alpha \cdot u \cdot u^\dual$$
+
+où $\alpha \in \setR$. Si on veut que $U$ soit unitaire, il faut que :
+
+\begin{align}
+I = U^\dual \cdot U &= (I + \alpha \cdot u \cdot u^\dual) \cdot (I + \alpha \cdot u \cdot u^\dual) \)
+
+\(
+&= I + [2 \cdot \alpha + \alpha^2 \cdot (u^\dual \cdot u)] \cdot u \cdot u^\dual
+\end{align}
+
+Il suffit donc que $\alpha$ vérifie la condition :
+
+$$2 \cdot \alpha + \alpha^2 \cdot (u^\dual \cdot u) = \alpha \cdot [2 + \alpha \cdot (u^\dual \cdot u)] = 0$$
+
+Si on choisit $\alpha = 0$, on a $U = I$ qui est bien une matrice unitaire. Dans le cas où $\alpha \ne 0$, on doit avoir :
+
+$$2 + \alpha \cdot (u^\dual \cdot u) = 0$$
+
+Si $u$ est un vecteur non nul, on aura bien sûr $u^\dual \cdot u \strictsuperieur 0$. Il suffit alors de prendre :
+
+$$\alpha = - \frac{2}{u^\dual \cdot u}$$
+
+On se retrouve donc avec des matrices élémentaires unitaires du type :
+
+$$U = I - \frac{2}{u^\dual \cdot u} \cdot u \cdot u^\dual$$
+
+On les note :
+
+$$\matunitaire(u) = I - \frac{2}{u^\dual \cdot u} \cdot u \cdot u^\dual$$
+
+
+** Propriétés
+
+On a donc $U^\dual \cdot U = I$. Comme $U$ est carrée, on a également $U^{-1} = U^\dual$. On voit également que :
+
+$$U^\dual = I - \frac{2}{u^\dual \cdot u} \cdot u \cdot u^\dual = U$$
+
+On en conclut que $U^{-1} = U$.
+
+
+* Matrices de Householder
+
+Soit deux vecteurs $x,y \in \corps^n$. On aimerait bien trouver une matrice élémentaire unitaire $U$ telle que $U \cdot x \approx y$. Par analogie avec les matrices de transformation élémentaire, on pose $u = x - y$ et $U = \matunitaire(u)$. On a alors :
+
+\begin{align}
+U \cdot x &= x - \frac{2 u^\dual \cdot x}{u^\dual \cdot u} \cdot u \\ \)
+
+\(
+&= \frac{ (u^\dual \cdot u^\dual) \cdot x - 2 (u^\dual \cdot x) \cdot x + 2 (u^\dual \cdot x) \cdot y }{u^\dual \cdot u^\dual} \\ \)
+
+\(
+&= \frac{ (u^\dual \cdot u^\dual - 2 u^\dual \cdot x) \cdot x + 2 (u^\dual \cdot x) \cdot y }{u^\dual \cdot u^\dual}
+\end{align}
+
+Développons le coefficient de $x$ :
+
+$$u^\dual \cdot u^\dual - 2 u^\dual \cdot x = (x^\dual \cdot x - x^\dual \cdot y - y^\dual \cdot x + y^\dual \cdot y) - (2 x^\dual \cdot x - 2 y^\dual \cdot x)$$
+
+Comme il s'agit d'une transformation unitaire, il est logique de demander que le produit scalaire soit conservé. On a donc $x^\dual \cdot x = y^\dual \cdot y$. Si on impose de plus que $x^\dual \cdot y$ soit réel, on a :
+
+$$x^\dual \cdot y = \conjugue(x^\dual \cdot y) = y^\dual \cdot x$$
+
+et :
+
+$$u^\dual \cdot u^\dual - 2 u^\dual \cdot x = (2 x^\dual \cdot x - 2 y^\dual \cdot x) - (2 x^\dual \cdot x - 2 y^\dual \cdot x) = 0$$
+
+On a alors :
+
+$$U \cdot x = \gamma \cdot y$$
+
+où :
+
+$$\gamma = \frac{2 u^\dual \cdot x}{u^\dual \cdot u^\dual} \in \setC$$
+
+Le vecteur $U \cdot x$ est donc identique à $y$ à un scalaire près.
+
+
+** Base canonique
+
+Un cas particulier intéressant est celui où $y$ est proportionnel au $i^{eme}$ vecteur de la base canonique :
+
+$$y = \alpha \cdot \canonique_i$$
+
+avec $\alpha \in \setC$. Si $x_i = \composante_i x$, on a alors :
+
+$$y^\dual \cdot x = \conjaccent{\alpha} \cdot x_i$$
+
+  - Si $x_i = 0$, on a $y^\dual \cdot x = 0 \in \setR$. Il suffit alors de choisir $\alpha$ pour que le produit scalaire soit conservé :
+
+$$y^\dual \cdot y = \abs{\alpha}^2 = x^\dual \cdot x$$
+
+On peut donc prendre :
+
+$$\alpha = \sqrt{x^\dual \cdot x} \in \setR$$
+
+  - Considérons à présent le cas où $x_i \ne 0$. Si on prend $\alpha = \lambda \cdot x_i$ où $\lambda \in \setR$ est quelconque, on a :
+
+$$y^\dual \cdot x = \lambda \cdot \conjaccent{x}_i \cdot x_i = \lambda \cdot \abs{x_i}^2 \in \setR$$
+
+Comme on exige que la norme soit conservée, il faut de plus que :
+
+$$y^\dual \cdot y = \lambda^2 \cdot \abs{x_i}^2 = x^\dual \cdot x$$
+
+On doit donc avoir $\lambda^2 = x^\dual \cdot x / \abs{x_i}^2$ et :
+
+$$\alpha = \lambda \cdot x_i = \sqrt{ \frac{ x^\dual \cdot x }{ \abs{x_i}^2 } } \cdot x_i$$
+
+
+Il ne nous reste alors plus qu'à poser $u = x - \alpha \cdot \canonique_i$ et $U = \matunitaire(u)$ pour obtenir :
+
+$$U \cdot x = \gamma \cdot \canonique_i$$
+
+pour un certain $\gamma \in \setC$.
+
+
+* Décomposition de Householder
+
+Soit une matrice $A$ de taille $(m,n)$ et le partitionnement en colonnes :
+
+$$A = [x \ x_2 \ ... \ x_n]$$
+
+Soit $H_1$ la matrice de Householder qui permet de transformer $x$ en $\gamma \cdot \canonique_1$, pour un certain $\gamma_1 \in \setC$. On a alors :
+
+#+BEGIN_CENTER
+\(
+H_1 \cdot A =
+\begin{Matrix}{cc}
+\gamma_1 & \hdots \)
+
+\(
+0 & A^{(n - 1)}
+\end{Matrix}
+\)
+#+END_CENTER
+
+On peut répéter le même processus avec $A^{(n-1)}$ et la matrice de Householder $H^{(n-1)}$ correspondante. Si on pose alors :
+
+#+BEGIN_CENTER
+\(
+H_2 =
+\begin{Matrix}{cc}
+1 & 0 \)
+
+\(
+0 & H^{(n-1)}
+\end{Matrix}
+=
+\begin{Matrix}{cc}
+I_1 & 0 \)
+
+\(
+0 & H^{(n-1)}
+\end{Matrix}
+\)
+#+END_CENTER
+
+il vient :
+
+#+BEGIN_CENTER
+\(
+H_2 \cdot H_1 \cdot A =
+\begin{Matrix}{ccc}
+\gamma_1 & \hdots & \hdots \)
+
+\(
+0 & \gamma_2 & \hdots \)
+
+\(
+0 & 0 & H^{(n-2)}
+\end{Matrix}
+\)
+#+END_CENTER
+
+On peut répéter le processus $p = \min\{m,n\}$ fois en utilisant à l'étape $k + 1$ :
+
+#+BEGIN_CENTER
+\(
+H_{k + 1} =
+\begin{Matrix}{cc}
+I_k & 0 \)
+
+\(
+0 & H^{(n-k)}
+\end{Matrix}
+\)
+#+END_CENTER
+
+Posons :
+
+$$H = H_p \cdot ... \cdot H_1$$
+
+Si $m \strictinferieur n$, on obtient à la fin du processus :
+
+#+BEGIN_CENTER
+\(
+H \cdot A = R =
+\begin{Matrix}{cccc}
+\gamma_1 & \hdots & \hdots & \hdots \)
+
+\(
+0 & \ddots & \hdots & \hdots \)
+
+\(
+0 & 0 & \gamma_m & \hdots
+\end{Matrix}
+\)
+#+END_CENTER
+
+Si $m = n$, on obtient à la fin du processus :
+
+#+BEGIN_CENTER
+\(
+H \cdot A = R =
+\begin{Matrix}{ccc}
+\gamma_1 & \hdots & \hdots \)
+
+\(
+0 & \ddots & \hdots \)
+
+\(
+0 & 0 & \gamma_m
+\end{Matrix}
+\)
+#+END_CENTER
+
+Si $m \strictsuperieur n$, on obtient à la fin du processus :
+
+#+BEGIN_CENTER
+\(
+H \cdot A = R =
+\begin{Matrix}{ccc}
+\gamma_1 & \hdots & \hdots \)
+
+\(
+0 & \ddots & \hdots \)
+
+\(
+0 & 0 & \gamma_m \)
+
+\(
+0 & 0 & 0
+\end{Matrix}
+\)
+#+END_CENTER
+
+On voit que dans tous les cas la matrice $R$ est triangulaire supérieure. Posons :
+
+$$Q = H^{-1} = H_1 \cdot ... \cdot H_p = H^\dual$$
+
+On a alors la décomposition :
+
+$$A = Q \cdot R$$
+
+où $Q$ est une matrice unitaire et $R$ une matrice triangulaire supérieure. On note cette décomposition :
+
+$$(Q,R) = \householder(A)$$

@@ -1,0 +1,196 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Formes linéaires
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:forme}
+
+* Dépendances
+
+  - Chapitre \ref{chap:relation} : Les fonctions
+  - Chapitre \ref{chap:lineaire} : Les fonctions linéaires
+
+* Définition
+
+Soit un espace vectoriel $E$ sur $\corps$. Une forme linéaire est une fonction linéaire continue
+$\varphi : E \mapsto \corps$.
+
+* Espace dual
+
+L'espace dual $E^\dual$ de $E$ est l'ensemble des formes linéaires sur $E$ , autrement dit
+l'ensemble des fonctions linéaires continues de $E$ vers $\corps$ :
+
+$$E^\dual = \{ \varphi \in \lineaire(E,\corps) : \norme{\varphi}_\lineaire \strictinferieur +\infty \}$$
+
+Il s'agit d'un espace vectoriel pour les opérations d'addition et de multiplication mixte définies sur les fonctions.
+
+
+* Notation
+
+Pour toute forme $\varphi \in E^\dual$ et tout vecteur $v \in E$, on note :
+
+$$\forme{\varphi}{v} = \varphi(v)$$
+
+ce qui définit implicitement la fonction $\forme{}{} : E^\dual \times E \mapsto \corps$.
+
+
+* Linéarité
+
+Soit $\varphi,\psi \in E^\dual$, $u,v \in E$ et $\alpha,\beta \in S$. Comme $\varphi$ est linéaire, on a :
+
+$$\forme{\varphi}{\alpha \cdot u + \beta \cdot v}  = \alpha \cdot \forme{\varphi}{u} + \beta \cdot \forme{\varphi}{v}$$
+
+Symétriquement, la définition des opérations sur les fonctions nous donne également :
+
+$$\forme{\alpha \cdot \varphi + \beta \cdot \psi}{u}  = \alpha \cdot \forme{\varphi}{u} + \beta \cdot \forme{\psi}{u}$$
+
+L'application $\forme{}{}$ est donc bilinéaire.
+
+
+* Biorthonormalité
+
+On dit que les suites $(\Phi_1,...,\Phi_m)$ de $E^\dual$ et
+$(e_1,...,e_n)$ de $E$ sont biorthonormées si :
+
+$$\forme{\Phi_i}{e_j} = \indicatrice_{ij}$$
+
+pour tout $(i,j) \in \setZ(0,m) \times \setZ(0,n)$. De telles suites permettent d'évaluer facilement les coefficients des développements en série du type :
+
+$$\varphi = \sum_{i = 1}^m \alpha_i \cdot \Phi_i$$
+
+où $\alpha_1,...,\alpha_m \in S$. En effet, il suffit d'évaluer :
+
+$$\varphi(e_j) = \forme{\varphi}{e_j} = \sum_{i = 1}^m \alpha_i \cdot \forme{\Phi_i}{e_j} = \sum_{i = 1}^m \alpha_i \cdot \indicatrice_{ij} = \alpha_j$$
+
+pour obtenir les valeurs des $\alpha_j$.
+
+Réciproquement, si :
+
+$$u = \sum_{i = 1}^n \beta_i \cdot e_i$$
+
+avec $\beta_1,...,\beta_n \in S$, on a :
+
+$$\Phi_j(u) = \forme{\Phi_j}{u} = \sum_{i = 1}^n \beta_i \cdot \forme{\Phi_j}{e_i} = \sum_{i = 1}^n \beta_i \cdot \indicatrice_{ij} = \beta_j$$
+
+ce qui nous donne les valeurs des $\beta_j$.
+
+Forts de ces résultats, il est aisé d'évaluer :
+
+$$\forme{\varphi}{u} = \sum_{i,j} \alpha_i \cdot \forme{\Phi_i}{u_j} \cdot \beta_j = \sum_{i,j} \alpha_i \cdot \indicatrice_{ij} \cdot \beta_j = \sum_i \alpha_i \cdot \beta_i$$
+
+On a donc en définitive :
+
+$$\forme{\varphi}{u} = \sum_i \forme{\varphi}{e_i} \cdot \forme{\Phi_i}{u}$$
+
+
+* Similitude
+
+On dit que deux fonctions $u,v \in E$ sont identique au sens des distributions si :
+
+$$\forme{\varphi}{u} = \forme{\varphi}{v}$$
+
+pour tout $\varphi \in E^\dual$.
+
+Symétriquement, les deux formes $\varphi,\psi \in E^\dual$ sont identiques par définition si et seulement si :
+
+$$\forme{\varphi}{u} = \forme{\psi}{u}$$
+
+pour tout $u \in E$.
+
+
+* Espace bidual
+
+On définit l'espace bidual de $E$, noté $E^{\dual \dual}$, par :
+
+$$E^{\dual \dual} = (E^\dual)^\dual$$
+
+On associe à chaque élément $u \in E$ un élément $\hat{u} \in E^{\dual \dual}$ par la condition :
+
+$$\hat{u}(\varphi) = \varphi(u)$$
+
+qui doit être vérifiée pour tout $\varphi \in E^\dual$. On a donc :
+
+$$\forme{\hat{u}}{\varphi} = \forme{\varphi}{u}$$
+
+
+* Application duale
+
+Soit les espaces vectoriels $E$ et $F$ sur $\corps$ et une fonction $A : E \mapsto F$. Le dual de $A$ au sens des formes, s'il existe, est l'unique fonction $A^\dual : F^\dual \mapsto E^\dual$ telle que :
+
+$$\forme{ A^\dual(\varphi) }{u} = \forme{\varphi}{ A(u) }$$
+
+pour tout $u \in E$ et $\varphi \in F^\dual$.
+
+
+* Formes bilinéaires
+
+Soit les espaces vectoriels $E$ et $F$ sur $\corps$. Une forme bilinéaire est une fonction bilinéaire continue $\vartheta : F \times E \mapsto \corps$. On utilise une notation analogue à celle des formes :
+
+$$\biforme{x}{\vartheta}{u} = \vartheta(x,u)$$
+
+pour tout $x \in F$ et $u \in E$. On voit que :
+
+#+BEGIN_CENTER
+\(
+\biforme{\alpha \cdot x + \beta \cdot y}{\vartheta}{u} = \alpha \cdot \biforme{x}{\vartheta}{u} + \beta \cdot \biforme{y}{\vartheta}{u} \)
+
+\(
+\biforme{x}{\vartheta}{\alpha \cdot u + \beta \cdot v} = \alpha \cdot \biforme{x}{\vartheta}{u} + \beta \cdot \biforme{x}{\vartheta}{v}
+\)
+#+END_CENTER
+
+pour tout $\alpha,\beta \in \corps$, $u,v \in E$ et $x,y \in F$.
+
+
+* Formes quadratiques
+
+Soit la forme bilinéaire $ \vartheta : E \times E \mapsto \corps$. Une forme quadratique $\mathcal{Q} : E \mapsto \corps$ est une fonction de la forme :
+
+$$\mathcal{Q}(x) = \biforme{x}{\vartheta}{x}$$
+
+
+* Représentation matricielle
+
+On peut représenter toute forme linéaire $\varphi \in \lineaire(\corps^n,\corps)$ par un vecteur matriciel $\hat{\varphi} \in \corps^n$. Etant donné la base canonique $(e_1,...,e_n)$ de $\corps^n$, il suffit de poser :
+
+$$\hat{\varphi}_i = \forme{\varphi}{e_i}$$
+
+pour avoir :
+
+$$\forme{\varphi}{u} = \hat{\varphi}^T \cdot u$$
+
+pour tout $u \in \corps^n$.
+
+
+** Formes bilinéaires
+
+On peut représenter toute forme bilinéaire $\vartheta \in \lineaire(\corps^m \times \corps^n,\corps)$ par une matrice $\Theta \in \matrice(K,m,n)$. Etant donné les bases canoniques $(f_1,...,f_m)$ de $\corps^m$ et $(e_1,...,e_n)$ de $\corps^n$, il suffit de poser :
+
+$$\composante_{ij} \Theta = \biforme{f_i}{\vartheta}{e_j}$$
+
+pour avoir :
+
+$$\biforme{v}{\vartheta}{u} = v^T \cdot \Theta \cdot u$$
+
+pour tout $u \in \corps^n$ et tout $v \in \corps^m$.
+
+

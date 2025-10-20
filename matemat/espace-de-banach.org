@@ -1,0 +1,138 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Espaces de Banach
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:banach}
+
+* Définition
+
+On dit qu'un espace vectoriel $X$ est un espace de Banach si il est complet pour la distance issue de la norme $\distance(x,y) = \norme{x - y}$. Dans la suite, nous considérons un espace de Banach $X$ sur $\setR$ ou $\setC$.
+
+
+* Application contractante
+
+On dit qu'une application $A : X \mapsto X$ est contractante s'il existe un $c \in \intervallesemiouvertdroite{0}{1} \subseteq \setR$ tel que :
+
+$$\distance\big( A(u) , A(v) \big) \le c \cdot \distance(u,v)$$
+
+pour tout $u,v\in X$.
+
+
+* Suite de Cauchy
+
+Soit une application contractante $A : X \mapsto X$ et $u_0 \in X$. On définit la suite $u_0,u_1,u_2,...$ par :
+
+$$u_n = A(u_{n - 1}) = ... = A^n(u_0)$$
+
+pour tout $n \in \setN$. On a alors :
+
+$$\distance( u_{n + 1} , u_n ) \le c \cdot \distance( u_n , u_{n - 1} ) \le ... \le c^n \cdot \distance( u_1 , u_0 )$$
+
+Soit $m,n \in \setN$. Les propriétés des distances nous permettent d'écrire :
+
+$$\distance( u_{n + m} , u_n ) \le \sum_{i = 0}^{m - 1} \distance( u_{n + i + 1} , u_{n + i} )$$
+
+Mais comme $\distance( u_{n + i + 1} , u_{n + i} ) \le c^{n + i} \cdot \distance( u_1 , u_0 )$, on a :
+
+\begin{align}
+\distance( u_{n + m} , u_n ) &\le \sum_{i = 0}^{m - 1} c^{n + i} \cdot \distance( u_1 , u_0 ) \)
+
+\(
+&\le c^n \cdot \distance( u_1 , u_0 ) \cdot \sum_{i = 0}^{m - 1} c^i \)
+
+\(
+&\le c^n \cdot \frac{1 - c^m}{1-c}
+\end{align}
+
+Finalement, comme $1 - c^m \le 1$ quel que soit $m \in \setN$ on obtient une expression qui ne dépend pas de $m$ :
+
+$$\distance( u_{n + m} , u_n ) \le \frac{c^n}{1 - c} \cdot \distance( u_1 , u_0 )$$
+
+Les éléments de la suite sont donc de plus en plus proche l'un de l'autre
+lorsque $n$ augmente. Soit $\epsilon \strictsuperieur 0$. Comme la suite $c^n$ converge vers $0$ lorsque $n \to \infty$, on peut toujours trouver $N$ tel que :
+
+$$c^N \le \frac{\epsilon \cdot (1 - c)}{\distance( u_1 , u_0 )}$$
+
+Il suffit donc de choisir $i,j \in \setN$ tels que $i,j \ge N$ pour avoir :
+
+$$\distance( u_i , u_j ) = \distance( u_j , u_i ) \le \epsilon$$
+
+On en conclut que la suite des $u_n$ est de Cauchy.
+
+
+* Point fixe
+
+Comme $X$ est complet, notre suite $u_n$ étant de Cauchy converge vers une certaine limite :
+
+$$p = \lim_{n \to \infty} u_n$$
+
+appartenant à $X$. Analysons le comportement de $A(p)$. On a la borne supérieure :
+
+$$\distance\big( A(p) , p \big) \le \distance\big( A(p) , A(u_n) \big) + \distance\big( A(u_n) , u_n \big) + \distance\big( u_n , p \big)$$
+
+On sait déjà que $\distance( u_n , p )$ converge vers $0$ par définition de $p$. On sait aussi que $\distance\big( A(u_n) , u_n \big) = \distance( u_{n + 1} , u_n ) \to 0$. On a également :
+
+$$\distance\big( A(p) , A(u_n) \big) \le c \cdot \distance\big( p , u_n \big)$$
+
+On en conclut que la suite $A(u_n)$ converge vers $A(p)$ :
+
+$$A(p) = \lim_{n \to \infty} A(u_n)$$
+
+Les trois termes de la borne supérieure convergeant chacun vers $0$, cette borne est aussi petite que l'on veut lorsque $n$ est assez grand. On a donc $\distance\big( A(p) , p \big) = 0$ et :
+
+$$A(p) = p$$
+
+L'élément $p \in X$ est un point fixe de $A$.
+
+
+* Unicité
+
+Si $p_1$ et $p_2$ sont deux points fixes, on a :
+
+#+BEGIN_CENTER
+\(
+A(p_1) = p_1 \)
+
+\(
+A(p_2) = p_2
+\)
+#+END_CENTER
+
+et :
+
+$$\distance( p_1 , p_2 ) \le c \cdot \distance\big( A(p_1) , A(p_2) \big) \le c \cdot \distance\left( p_1 , p_2 \right)$$
+
+Comme $c \strictinferieur 1$, ce n'est possible que si $\distance(p_1,p_2) = 0$, c'est-à-dire :
+
+$$p_1 = p_2$$
+
+Le point fixe de $A$ est unique.
+
+
+* Vitesse de convergence
+
+Nous avons donc montré que la suite des $u_n$ converge vers l'unique point fixe $p$ de $A$, et ce quel que soit $u_0$. On a même la propriété suivante nous donnant une borne supérieure pour le taux de convergence :
+
+$$\distance(u_n,p) \le \distance\big(A(u_{n - 1}),A(p)\big) \le c \cdot \distance(u_{n - 1},p) \le ... \le c^n \cdot \distance(u_0,p)$$
+
+

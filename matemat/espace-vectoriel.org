@@ -1,0 +1,267 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Espaces vectoriels
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:vecteur}
+
+* Dépendances
+
+  - Chapitre \ref{chap:algebre} : Les structures algébriques
+  - Chapitre \ref{chap:somme} : Les sommes
+
+* Introduction
+
+Soit un corps $\corps$, un ensemble quelconque $A$ et $n \in \setN$. Le but des espaces vectoriels est de fournir un cadre général aux $n$-tuples de $\corps^n$ et aux fonctions de $\corps^A$. Nous avons vu la correspondance $\corps^n \leftrightarrow \corps^A$ dans le cas particulier où $A$ possède un nombre fini d'éléments. Mais le lien entre les deux types d'objets ne s'arrête pas là : la comparaison de deux fonctions se base sur le même principe (étendu) que la comparaison de deux $n$-tuples. Nous avons également défini des produits mixtes $\cdot : \corps \times \corps^n \to \corps^n$ et $\cdot : \corps \times \corps^A \to \corps^A$ semblables. Les matrices représentant des applications linéaires, nous pouvons également les ajouter dans la liste. Si $u,v \in E$, avec $E \in \{ \corps^n , \corps^A , \matrice(\corps,m,n) \}$, on a :
+
+#+BEGIN_CENTER
+\(
+\label{eq:mixte}
+(\alpha \cdot \beta) \cdot u = \alpha \cdot (\beta \cdot u) \)
+
+\(
+(\alpha + \beta) \cdot x = \alpha \cdot x + \beta \cdot x \)
+
+\(
+\alpha \cdot (u + v) = \alpha \cdot u + \alpha \cdot v \)
+
+\(
+1 \cdot u = 1
+\)
+#+END_CENTER
+
+pour tout $\alpha, \beta \in \corps$. De plus l'addition induite sur $E$ par l'addition de $\corps$ transforme $E$ en groupe commutatif. On ne peut toutefois pas parler de corps pour $E$, car la multiplication matricielle n'est pas une multiplication induite, et est non commutative.
+
+
+** Attention
+
+Ne pas confondre les additions définies sur $E$ et $\corps$, ni la multiplication de $\corps$ avec la multiplication mixte, ni le neutre de $E$ avec celui de $\corps$. Lorsqu'il y a un risque d'ambiguité, on parle du vecteur nul $0 \in E$ et du scalaire nul $0 \in \corps$.
+
+
+* Définition
+
+Soit un groupe commutatif pour l'addition $E$, ainsi qu'un corps $\corps$. Si il existe une opération de multiplication mixte $\cdot : \corps \times E \mapsto E$ vérifiant les propriétés \ref{eq:mixte} ci-dessus, on dit que $E$ est un espace vectoriel sur $\corps$. On nomme alors « vecteurs » les éléments de $E$ et « scalaires » les éléments de $\corps$.
+
+
+** Notation
+
+On note aussi :
+
+#+BEGIN_CENTER
+\(
+x - y = x + (-1) \cdot y \)
+
+\(
+x \cdot \alpha = \alpha \cdot x \)
+
+\(
+\alpha \cdot \beta \cdot x = (\alpha \cdot \beta) \cdot x \)
+
+\(
+\alpha x = \alpha \cdot x \)
+
+\(
+\frac{x}{\alpha} = \alpha^{-1} \cdot x
+\)
+#+END_CENTER
+
+Lorsque $\alpha$ a un inverse dans $\corps$, on a même les « fractions » :
+
+$$\frac{x}{\alpha} = \unsur{\alpha} \cdot x$$
+
+
+** Corollaires
+
+Les propriétés de la multiplication mixte nous montrent directement que :
+
+#+BEGIN_CENTER
+\(
+0 \cdot u = (1 - 1) \cdot u = u - u = 0 \)
+
+\(
+\alpha \cdot 0 = \alpha \cdot (u - u) = \alpha - \alpha = 0
+\)
+#+END_CENTER
+
+
+** Remarque
+
+Le corps $\corps$ est souvent $\setR$ ou $\setC$.
+
+
+* Sous-espace
+
+On dit que $F \subseteq E$ est un sous-espace vectoriel de $E$ si $0 \in F$ et si :
+
+$$z = \alpha \cdot x + \beta \cdot y$$
+
+appartient à $F$ quels que soient les vecteurs $x,y \in F$ et les scalaires $\alpha,\beta \in \corps$.
+
+On vérifie par exemple que $E$ est un sous-espace vectoriel de lui-même.
+
+
+* Espace engendré
+
+L'espace engendré par les vecteurs $e_1,e_2,...,e_n \in E$ est l'ensemble des combinaisons linéaires formées à partir des $e_i$ :
+
+$$\combilin{e_1,...,e_n} = \left\{ \sum_{i=1}^{n} \alpha_i \cdot e_i : \alpha_i \in \corps \right\}$$
+
+On vérifie que $\combilin{e_1,...,e_n}$ est un sous-espace vectoriel de $E$.
+
+
+** Remarque
+
+Les espaces vectoriels ne pouvant pas s'exprimer comme ci-dessus sont dit de dimension infinie.
+
+
+* Indépendance linéaire
+
+On dit qu'une série de vecteurs $e_1,...,e_n$ est linéairement
+indépendante si pour toute suite de scalaires $\alpha_i$, la condition :
+
+$$\sum_{i=1}^{n} \alpha_i \cdot e_i = 0$$
+
+implique que tous les scalaires soient nuls :
+
+$$\alpha_i = 0$$
+
+pour tout $i \in \{1,2,...,n\}$.
+
+
+* Coordonnées
+
+Soit les vecteurs linéairement indépendants $(e_1,...,e_n)$ et
+$x \in \combilin{e_1,...,e_n}$. On peut trouver une suite de scalaire $\alpha_i$ tels que :
+
+$$x = \sum_{i = 1}^n \alpha_i \cdot e_i$$
+
+Supposons que l'on ait également :
+
+$$x = \sum_{i=1}^n \beta_i \cdot e_i$$
+
+pour une autre suite de scalaires $\beta_i$. En soustrayant les deux
+équations, on obtient :
+
+$$\sum_{i=1}^n (\alpha_i - \beta_i) \cdot e_i = 0$$
+
+L'indépendance linéaire des $e_i$ implique alors que $\alpha_i - \beta_i = 0$, c'est-à-dire :
+
+$$\alpha_i = \beta_i$$
+
+pour tout $i \in \{1,2,...,n\}$.
+
+On a donc unicité des coefficients scalaire de la combinaison linéaire. On dit que les $\alpha_i$ sont les coordonnées de $x$ par rapport aux $(e_1,...,e_n)$.
+
+
+** Base
+
+Par contre, l'existence de telles coordonnées n'est pas garantie pour tout $x \in E$. Ce ne sera le cas que si :
+
+$$E \subseteq \combilin{e_1,...,e_n}$$
+
+On dit alors que $(e_1,...,e_n)$ forme une base de $E$.
+
+
+** Dimension finie
+
+On dit qu'un espace vectoriel $E$ est de dimension finie s'il posséde au moins une base de la forme $(e_1,...,e_n)$, où $n \in \setN$ est fini. Dans le cas où $E$ {\em ne possède pas} une telle base, il est dit de dimension infinie.
+
+
+** Equivalence
+
+On voit qu'étant donné une base de $E$, il y a équivalence entre un vecteur $x \in E$ et un élément $(x_1,x_2,...,x_n) \in \corps^n$ formé par ses coordonnées.
+
+Nous noterons donc également (et abusivement) $x = (x_1,x_2,...,x_n)$, mais attention : il ne faut jamais perdre de vue que les $x_i$ dépendent de la base utilisée. Le vecteur $x$ est lui invariant sous changement de base.
+
+
+* Absence de redondance
+
+Soit $e_1,...,e_n \in E$ une suite de vecteurs linéairement indépendants.
+Soit $i \in \{ 1,2,...,n \}$ et :
+
+$$J(i) = \setZ(0,n) \setminus \{ i \}$$
+
+Supposons que le vecteur $e_i$ soit une combinaison des autres vecteurs :
+
+$$e_i = \sum_{ j \in J(i) } \alpha_j \cdot e_j$$
+
+On a donc :
+
+$$e_i - \sum_{ j \in J(i) } \alpha_j \cdot e_j = 0$$
+
+L'hypothèse d'indépendance linéaire voudrait que tous les $\alpha_j$ et le $\alpha_i$ soient nuls. Ce qui n'est manifestement pas le cas puisque $\alpha_i = 1 \ne 0$ !
+
+Aucun des vecteurs de la suite n'est donc combinaison des autres. On dit qu'aucun vecteur n'est redondant dans la suite.
+
+* Base canonique sur $\corps^n$
+
+Soit $\corps \in \{ \setR, \setC \}$. On note $\canonique_i$ l'élément de $\corps^n$ ayant un $1$ en $i^{ème}$ position et des $0$ partout ailleurs. On a donc :
+
+\begin{align}
+\canonique_1 &= (1,0,...,0) \)
+
+\(
+\canonique_2 &= (0,1,0,...,0) \)
+
+\(
+&\vdots& \)
+
+\(
+\canonique_n &= (0,...,0,1)
+\end{align}
+
+On a alors, pour tout $x = (x_1,...,x_n) \in \corps^n$ :
+
+$$x = \sum_{i = 1}^n x_i \cdot \canonique_i$$
+
+
+* Représentation matricielle
+
+On représente généralement les vecteurs de $\corps^n$ par des vecteurs lignes ou colonnes. On parle alors de « vecteurs matriciels ». Le $i^{ème}$ vecteur de la base canonique est défini par le vecteur colonne :
+
+#+BEGIN_CENTER
+\(
+\canonique_i = ( \indicatrice_{ij} )_j =
+\begin{Matrix}{c}
+\vdots \\ 0 \\ 1 \\ 0 \\ \vdots
+\end{Matrix}
+\)
+#+END_CENTER
+
+soit :
+
+#+BEGIN_CENTER
+\(
+\canonique_1 = [1 \ 0 \ \hdots \ 0]^T \)
+
+\(
+\canonique_2 = [0 \ 1 \ \hdots \ 0]^T \)
+
+\(
+\vdots \)
+
+\(
+\canonique_n = [0 \ \hdots \ 0 \ 1]^T
+\)
+#+END_CENTER
+
+

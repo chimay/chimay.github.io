@@ -1,0 +1,110 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Normes
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:norme}
+
+* Dépendances
+
+  - Chapitre \ref{chap:distance} : Les distances
+  - Chapitre \ref{chap:vecteur} : Les espaces vectoriels
+
+* Norme
+
+Soit $S$ un corps muni d'un ordre $\le$ et $E$ un espace vectoriel sur $\corps$. Une norme $\norme{.} : E \to \setR$ est intuitivement la « grandeur » d'un vecteur $x \in E$. Cette grandeur correspond à la distance séparant le vecteur nul de $x$ :
+
+$$\norme{x} \equiv \distance(x,0)$$
+
+Soit $x,y,z \in E$.
+
+Comme $\distance(x,0) \ge 0$, on impose par analogie que :
+
+$$\norme{x} \ge 0$$
+
+De plus, le seul vecteur $x$ de $E$ vérifiant :
+
+$$\norme{x} = 0$$
+
+implique que notre distance équivalente $\distance(x,0) = 0$ soit nulle, ce qui n'est possible que si $x = 0$. Lorsqu'on fait référence à ces conditions, on dit que la norme est strictement définie positive.
+
+Considérons à présent l'inégalité triangulaire :
+
+$$\distance(0 , x + y) \le \distance(0,x) + \distance(x , x + y)$$
+
+Comment faire correspondre $\distance(x , x + y)$ à une norme ? En demandant simplement que notre distance particulière soit invariante sous translation de $x$ :
+
+$$\distance(x , x + y) = \distance(x - x , x + y - x) = \distance(0,y) \equiv \norme{y}$$
+
+On impose donc l'inégalité triangulaire :
+
+$$\norme{x + y} \le \norme{x} + \norme{y}$$
+
+Par ailleurs, lorsqu'on allonge ou réduit un vecteur $x$ d'un facteur $\alpha \in \corps$, la distance parcourue sur $x$ devra être allongée ou réduite par la valeur absolue de $\alpha$ :
+
+$$\norme{\alpha \cdot x} = \abs{\alpha} \cdot \norme{x}$$
+
+
+* Borne inférieure
+
+On déduit de la définition que :
+
+$$\norme{-x} = \norme{(-1) \cdot x} = \abs{-1} \cdot \norme{x} = \norme{x}$$
+
+En posant $z = x + y$, on a :
+
+$$\norme{z} \le \norme{x} + \norme{y} = \norme{x}  + \norme{z-x}$$
+
+c'est-à-dire :
+
+$$\norme{z - x} \ge \norme{z} - \norme{x}$$
+
+Mais comme $\norme{z-x} = \norme{(-1) \cdot (z-x)} = \norme{x-z}$, la propriété vaut également en interchangeant $z$ et $x$, et on obtient :
+
+$$\norme{z - x} \ge \max\{ \norme{z} - \norme{x}, \norme{x} -\norme{z} \}$$
+
+
+* Distance associée
+
+On peut associer une distance $d$ à une norme $\norme{.}$ en posant :
+
+$$\distance(x,y) = \norme{x - y}$$
+
+En effet :
+
+  - $\distance(x,x) = \norme{x - x} = \norme{0} = 0$
+  - si $\distance(x,y) = 0 = \norme{x-y}$, on a forcément $x - y = 0$ et donc $x = y$
+  - $\distance(x,y) = \norme{x-y} = \norme{y-x} = \distance(y,x)$
+  - $\distance(x,y) + \distance(y,z) = \norme{x-y} + \norme{y-z} \ge \norme{x-y+y-z} = \norme{x-z} = \distance(x,z)$
+
+
+* Normalisation
+
+On peut toujours normaliser un vecteur $w \ne 0$ pour obtenir un vecteur $u$ de norme $1$. Comme $\norme{w} \ne 0$, on peut écrire :
+
+$$u = \frac{w}{\norme{w}}$$
+
+On a alors :
+
+$$\norme{u} = \norme{ \frac{w}{\norme{w}} } = \unsur{\norme{w}} \cdot \norme{w} = 1$$
+
+

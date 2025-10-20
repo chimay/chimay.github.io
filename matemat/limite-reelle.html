@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-10-19 dim 17:00 -->
+<!-- 2025-10-20 lun 13:24 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Limites réelles</title>
@@ -241,13 +241,14 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4ea4add">1. Fonction croissante</a></li>
-<li><a href="#org911a9f9">2. Fonction décroissante</a></li>
-<li><a href="#org33c33f3">3. Limites supremum et infimum</a></li>
-<li><a href="#orgc84a53b">4. Egalité des limites sup et inf</a></li>
-<li><a href="#orgb91ae77">5. Ordre et limite</a></li>
-<li><a href="#org48deb9b">6. Ordre et supremum-infimum</a></li>
-<li><a href="#org1ed58f4">7. Cadre</a></li>
+<li><a href="#org3b07a47">1. Opérations</a></li>
+<li><a href="#org0dd0729">2. Fonction croissante</a></li>
+<li><a href="#org457abaf">3. Fonction décroissante</a></li>
+<li><a href="#orgf824f9f">4. Limites supremum et infimum</a></li>
+<li><a href="#orgd6e60ef">5. Egalité des limites sup et inf</a></li>
+<li><a href="#org0515d20">6. Ordre et limite</a></li>
+<li><a href="#org78a992d">7. Ordre et supremum-infimum</a></li>
+<li><a href="#org3e97db1">8. Cadre</a></li>
 </ul>
 </div>
 </div>
@@ -266,7 +267,7 @@
 \newcommand{\pinverse}{\dagger}
 \newcommand{\topologie}{\mathfrak{T}}
 \newcommand{\ferme}{\mathfrak{F}}
-\DeclareMathOperator*{\img}{\mathbf{i}}
+\newcommand{\img}{\mathbf{i}}
 \newcommand{\binome}[2]{
 \left\{ \begin{array}{c}
 #1 \\
@@ -297,7 +298,7 @@
 \newcommand{\setC}{\mathbb{C}}
 \newcommand{\corps}{\mathbb{K}}
 \newcommand{\boule}{\mathfrak{B}}
-\newcommand{\intervalleouvert}[2]{\relax \ ] #1 , #2 [ \ \relax}
+\newcommand{\intervalleouvert}[2]{\left] #1 , #2 \right[}
 \newcommand{\intervallesemiouvertgauche}[2]{ \left] #1 , #2 \right]}
 \newcommand{\intervallesemiouvertdroite}[2]{\left[ #1 , #2 \right[ }
 \newcommand{\fonction}{\mathbb{F}}
@@ -410,11 +411,283 @@
 </p>
 
 <p>
+\(
+\newenvironment{Eqts}
+{ \begin{equation*} \begin{gathered} }
+{ \end{gathered} \end{equation*} }
+\newenvironment{Matrix}
+{\left[ \begin{array}}
+{\end{array} \right]}
+\)
+</p>
+
+<p>
 \label{chap:limitesReelles}
 </p>
-<div id="outline-container-org4ea4add" class="outline-2">
-<h2 id="org4ea4add"><span class="section-number-2">1.</span> Fonction croissante</h2>
+<div id="outline-container-org3b07a47" class="outline-2">
+<h2 id="org3b07a47"><span class="section-number-2">1.</span> Opérations</h2>
 <div class="outline-text-2" id="text-1">
+<p>
+Soit les fonction \(f,g : \setR \mapsto \setR\) vérifiant :
+</p>
+
+<div class="org-center">
+<p>
+\(
+F = \lim_{x \to a} f(x) \\ \)
+</p>
+
+<p>
+\(
+G = \lim_{x \to a} g(x)
+\)
+</p>
+</div>
+
+<p>
+où \(F,G \in \setR\). Choisissons un réel \(\epsilon \strictsuperieur 0\). Pour tout \(\gamma \strictsuperieur 0\), on peut trouver un \(\delta(\gamma) \strictsuperieur 0\) tel que :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\distance(f(x),F) = \abs{f(x) - F} \le \gamma \)
+</p>
+
+<p>
+\(
+\distance(g(x),G) = \abs{g(x) - G} \le \gamma
+\)
+</p>
+</div>
+
+<p>
+pour tout \(x \in \setR\) tel que \(\distance(x,a) = \abs{x - a} \le \delta(\gamma)\).
+</p>
+</div>
+<div id="outline-container-orgc6e9494" class="outline-3">
+<h3 id="orgc6e9494"><span class="section-number-3">1.1.</span> Addition</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+\[\abs{f(x) + g(x) - (F + G)} \le \abs{f(x) - F} + \abs{g(x) - G} = 2 \gamma\]
+</p>
+
+<p>
+Il suffit donc de choisir \(\gamma = \epsilon / 2\) pour avoir \(\abs{f(x) + g(x) - (F + G)} \le \epsilon\). On en déduit que la limite de \(f + g\) est \(F + G\), c'est-à-dire :
+</p>
+
+<p>
+\[\lim_{x \to a} \big[f(x) + g(x)\big] = \lim_{x \to a} f(x) + \lim_{x \to a} g(x)\]
+</p>
+</div>
+<div id="outline-container-orged9249c" class="outline-4">
+<h4 id="orged9249c"><span class="section-number-4">1.1.1.</span> Fonction constante</h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+Dans le cas particulier où une des deux fonctions est une constante \(G \in \setR\), soit :
+</p>
+
+<p>
+\[g : x \mapsto G\]
+</p>
+
+<p>
+pour tout \(x \in \setR\), on a :
+</p>
+
+<p>
+\[\lim_{x \to a} g(x) = \lim_{x \to a} G = G\]
+</p>
+
+<p>
+et :
+</p>
+
+<p>
+\[\lim_{x \to a} \big[f(x) + G\big] = \lim_{x \to a} f(x) + G\]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org0a448c2" class="outline-3">
+<h3 id="org0a448c2"><span class="section-number-3">1.2.</span> Opposé</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+On a simplement :
+</p>
+
+<p>
+\[\abs{\big[-g(x)\big] - (-G)} = \abs{G - g(x)} = \abs{g(x) - G} \le \gamma\]
+</p>
+
+<p>
+Il suffit donc de choisir \(\gamma = \epsilon\) pour avoir \(\abs{(-g(x)) - (-G)} \le \epsilon\). On en déduit que la limite de \(-g\) est \(-G\), c'est-à-dire :
+</p>
+
+<p>
+\[\lim_{x \to a} \big[-g(x)\big] = - \lim_{x \to a} g(x)\]
+</p>
+</div>
+</div>
+<div id="outline-container-org29b4782" class="outline-3">
+<h3 id="org29b4782"><span class="section-number-3">1.3.</span> Soustraction</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+On a :
+</p>
+
+\begin{align}
+\lim_{x \to a} \big[f(x) - g(x)\big] &= \lim_{x \to a} \big[f(x) + \big(-g(x)\big)\big] \\
+&= \lim_{x \to a} f(x) + \lim_{x \to a} \big(-g(x)\big) \\
+&= \lim_{x \to a} f(x) - \lim_{x \to a} g(x)
+\end{align}
+</div>
+</div>
+<div id="outline-container-orgd0e646f" class="outline-3">
+<h3 id="orgd0e646f"><span class="section-number-3">1.4.</span> Multiplication</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+On voit que :
+</p>
+
+\begin{align}
+\abs{f(x) \cdot g(x) - F \cdot G} &= \abs{f(x) \cdot g(x) - f(x) \cdot G + f(x) \cdot G - F \cdot G} \\
+&= \abs{f(x) \cdot (g(x) - G) + (f(x) - F) \cdot G} \\
+&\le \abs{f(x) \cdot (g(x) - G)} + \abs{(f(x) - F) \cdot G} \\
+&\le \abs{f(x)} \cdot \abs{g(x) - G} + \abs{(f(x) - F)} \cdot \abs{G} \\
+&\le \abs{f(x)} \cdot \gamma + \gamma \cdot \abs{G}
+\end{align}
+
+<p>
+Comme :
+</p>
+
+<p>
+\[\abs{f(x)} = \abs{f(x) - F + F} \le \abs{f(x) - F} + F \le \gamma + \abs{F}\]
+</p>
+
+<p>
+notre borne peut se réécrire :
+</p>
+
+\begin{align}
+\abs{f(x) \cdot g(x) - F \cdot G} &\le (\gamma + \abs{F}) \cdot \gamma + \gamma \cdot \abs{G} \\
+&\le (\gamma + \abs{F} + \abs{G}) \cdot \gamma
+\end{align}
+
+<p>
+Si on choisit \(\gamma = \min\{ 1 , \epsilon / (1 + \abs{F} + \abs{G}) \}\), on a \(\gamma \le 1\) et :
+</p>
+
+<p>
+\[\abs{f(x) \cdot g(x) - F \cdot G} \le (1 + \abs{F} + \abs{G}) \cdot \gamma \le \epsilon\]
+</p>
+
+<p>
+On en déduit que la limite de \(f \cdot g\) est \(F \cdot G\), c'est-à-dire :
+</p>
+
+<p>
+\[\lim_{x \to a} \big[f(x) \cdot g(x)\big] = \left[ \lim_{x \to a} f(x) \right]  \cdot \left[ \lim_{x \to a} g(x) \right]\]
+</p>
+</div>
+</div>
+<div id="outline-container-org089a2c6" class="outline-3">
+<h3 id="org089a2c6"><span class="section-number-3">1.5.</span> Inverse multiplicatif</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+Supposons que \(G \ne 0\). On a :
+</p>
+
+\begin{align}
+\abs{\frac{1}{g(x)} - \frac{1}{G}} &= \abs{\frac{G - g(x)}{g(x) \cdot \abs{G}}} \\
+&= \frac{ \abs{G - g(x)} }{ \abs{g(x)} \cdot \abs{G} } \\
+&= \frac{ \gamma }{ \abs{g(x)} \cdot \abs{G} }
+\end{align}
+
+<p>
+On voit aussi que :
+</p>
+
+\begin{align}
+\abs{g(x)} = \abs{g(x) - G + G} &= \abs{G - (G - g(x))} \\
+&\ge \abs{G} - \abs{G - g(x)} \\
+&\ge \abs{G} - \gamma
+\end{align}
+
+<p>
+Donc, si \(\gamma \strictinferieur \abs{G}\), on a :
+</p>
+
+<p>
+\[\abs{\frac{1}{g(x)} - \frac{1}{G}} \le \frac{ \gamma }{ (\abs{G} - \gamma) \cdot \abs{G} }\]
+</p>
+
+<p>
+Nous allons voir qu'il est possible de majorer cette expression par \(\epsilon\). En effet, la condition :
+</p>
+
+<p>
+\[\frac{ \gamma }{ (\abs{G} - \gamma) \cdot \abs{G} } \le \epsilon\]
+</p>
+
+<p>
+est équivalente à :
+</p>
+
+<p>
+\[\gamma \le \epsilon \cdot (\abs{G} - \gamma) \cdot \abs{G} = G^2 \cdot \epsilon - \epsilon \cdot \abs{G} \cdot \gamma\]
+</p>
+
+<p>
+ce qui revient à dire que :
+</p>
+
+<p>
+\[(1 + \epsilon \cdot \abs{G}) \cdot \gamma \le G^2 \cdot \epsilon\]
+</p>
+
+<p>
+et enfin :
+</p>
+
+<p>
+\[0 \strictinferieur \gamma \le \frac{G^2 \cdot \epsilon}{1 + \epsilon \cdot \abs{G}}\]
+</p>
+
+<p>
+En imposant également \(\gamma \strictinferieur \abs{G}\), on obtient la condition suffisante :
+</p>
+
+<p>
+\[0 \strictinferieur \gamma \strictinferieur \min\left\{ \abs{G} , \frac{G^2 \cdot \epsilon}{1 + \epsilon \cdot \abs{G}} \right\}\]
+</p>
+
+<p>
+On a alors \(\abs{\frac{1}{g(x)} - \frac{1}{G}} \le \epsilon\). On en conclut que la limite de \(1/g\) est \(1/G\), c'est-à-dire :
+</p>
+
+<p>
+\[\lim_{x \to a} \frac{1}{g(x)} = \frac{1}{\lim_{x \to a} g(x)}\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgbf7053d" class="outline-3">
+<h3 id="orgbf7053d"><span class="section-number-3">1.6.</span> Fraction</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+Toujours sous l'hypothèse que \(G \ne 0\), on a :
+</p>
+
+<p>
+\[\lim_{x \to a} \frac{f(x)}{g(x)} = \left[\lim_{x \to a} f(x)\right] \cdot \left[\lim_{x \to a} \frac{1}{g(x)}\right] = \frac{\lim_{x \to a} f(x)}{\lim_{x \to a} g(x)}\]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org0dd0729" class="outline-2">
+<h2 id="org0dd0729"><span class="section-number-2">2.</span> Fonction croissante</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 Soit une fonction \(f : \setR \mapsto \setR\) croissante et majorée par un certain \(M \in \setR\) :
 </p>
@@ -456,9 +729,9 @@ On en déduit que \(f(x)\) converge vers le supremum \(S\) lorsque \(x \to \inft
 </p>
 </div>
 </div>
-<div id="outline-container-org911a9f9" class="outline-2">
-<h2 id="org911a9f9"><span class="section-number-2">2.</span> Fonction décroissante</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-org457abaf" class="outline-2">
+<h2 id="org457abaf"><span class="section-number-2">3.</span> Fonction décroissante</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 Symétriquement, si \(g : \setR \mapsto \setR\) est une fonction décroissante et minorée par un certain \(L \in \setR\), l'ensemble non vide :
 </p>
@@ -500,9 +773,9 @@ On en déduit que \(g(x)\) converge vers le supremum \(I\) lorsque \(x \to \inft
 </p>
 </div>
 </div>
-<div id="outline-container-org33c33f3" class="outline-2">
-<h2 id="org33c33f3"><span class="section-number-2">3.</span> Limites supremum et infimum</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-orgf824f9f" class="outline-2">
+<h2 id="orgf824f9f"><span class="section-number-2">4.</span> Limites supremum et infimum</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 Soit une fonction \(f : \setR \mapsto \setR\) majorée et minorée. On définit la famille \(\{F(x) : x \in \setR \}\) d'ensembles non vides, majorés et minorés par :
 </p>
@@ -511,9 +784,9 @@ Soit une fonction \(f : \setR \mapsto \setR\) majorée et minorée. On définit 
 \[F(x) = \{f(z) : z \in \setR, \ z \ge x \}\]
 </p>
 </div>
-<div id="outline-container-org539d5bc" class="outline-3">
-<h3 id="org539d5bc"><span class="section-number-3">3.1.</span> Limite supremum</h3>
-<div class="outline-text-3" id="text-3-1">
+<div id="outline-container-org8f2d59e" class="outline-3">
+<h3 id="org8f2d59e"><span class="section-number-3">4.1.</span> Limite supremum</h3>
+<div class="outline-text-3" id="text-4-1">
 <p>
 Si \(x \ge y\), on a \(F(x) \subseteq F(y)\), et donc \(\sup F(x) \le \sup F(y)\). On en conclut que la fonction dérivée \(d : \setR \mapsto \setR\) définie par :
 </p>
@@ -547,9 +820,9 @@ On en conclut que :
 </p>
 </div>
 </div>
-<div id="outline-container-org8fd656c" class="outline-3">
-<h3 id="org8fd656c"><span class="section-number-3">3.2.</span> Limite infimum</h3>
-<div class="outline-text-3" id="text-3-2">
+<div id="outline-container-org6e5984a" class="outline-3">
+<h3 id="org6e5984a"><span class="section-number-3">4.2.</span> Limite infimum</h3>
+<div class="outline-text-3" id="text-4-2">
 <p>
 Si \(x \ge y\), on a \(F(x) \subseteq F(y)\), et donc \(\inf F(x) \ge \inf F(y)\). On en conclut que la fonction dérivée \(c : \setR \mapsto \setR\) définie par :
 </p>
@@ -584,9 +857,9 @@ On en conclut que :
 </div>
 </div>
 </div>
-<div id="outline-container-orgc84a53b" class="outline-2">
-<h2 id="orgc84a53b"><span class="section-number-2">4.</span> Egalité des limites sup et inf</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-orgd6e60ef" class="outline-2">
+<h2 id="orgd6e60ef"><span class="section-number-2">5.</span> Egalité des limites sup et inf</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 Soit une fonction \(f : \setR \mapsto \setR\) majorée et minorée. Posons :
 </p>
@@ -716,16 +989,16 @@ On en conclut que \(S\) et \(I\) convergent vers \(L\), c'est-à-dire :
 </p>
 </div>
 </div>
-<div id="outline-container-orgb91ae77" class="outline-2">
-<h2 id="orgb91ae77"><span class="section-number-2">5.</span> Ordre et limite</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-org0515d20" class="outline-2">
+<h2 id="org0515d20"><span class="section-number-2">6.</span> Ordre et limite</h2>
+<div class="outline-text-2" id="text-6">
 <p>
 Soit les fonctions \(f,g : \setR \mapsto \setR\) vérifiant \(f \le g\).
 </p>
 </div>
-<div id="outline-container-orga1a92be" class="outline-3">
-<h3 id="orga1a92be"><span class="section-number-3">5.1.</span> A l'infini</h3>
-<div class="outline-text-3" id="text-5-1">
+<div id="outline-container-orgb8f06da" class="outline-3">
+<h3 id="orgb8f06da"><span class="section-number-3">6.1.</span> A l'infini</h3>
+<div class="outline-text-3" id="text-6-1">
 <p>
 Supposons que les limites à l'infini existent :
 </p>
@@ -800,9 +1073,9 @@ ce qui contredit \(f \le g\). Notre hypothèse est donc fausse et \(b \le c\), c
 </p>
 </div>
 </div>
-<div id="outline-container-org50898eb" class="outline-3">
-<h3 id="org50898eb"><span class="section-number-3">5.2.</span> Vers un réel</h3>
-<div class="outline-text-3" id="text-5-2">
+<div id="outline-container-orgf0329d9" class="outline-3">
+<h3 id="orgf0329d9"><span class="section-number-3">6.2.</span> Vers un réel</h3>
+<div class="outline-text-3" id="text-6-2">
 <p>
 On montre par un raisonnement analogue que, si les limites de \(f,g\) en \(a\) existent, on a :
 </p>
@@ -812,9 +1085,9 @@ On montre par un raisonnement analogue que, si les limites de \(f,g\) en \(a\) e
 </p>
 </div>
 </div>
-<div id="outline-container-org6016493" class="outline-3">
-<h3 id="org6016493"><span class="section-number-3">5.3.</span> Supremum et infimum</h3>
-<div class="outline-text-3" id="text-5-3">
+<div id="outline-container-org6ba3572" class="outline-3">
+<h3 id="org6ba3572"><span class="section-number-3">6.3.</span> Supremum et infimum</h3>
+<div class="outline-text-3" id="text-6-3">
 <p>
 Pour tout \(x \in \setR\), on a :
 </p>
@@ -833,9 +1106,9 @@ On en conclut que \(\lambda \le \sigma\). Leurs limites à l'infini respectent d
 </div>
 </div>
 </div>
-<div id="outline-container-org48deb9b" class="outline-2">
-<h2 id="org48deb9b"><span class="section-number-2">6.</span> Ordre et supremum-infimum</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-org78a992d" class="outline-2">
+<h2 id="org78a992d"><span class="section-number-2">7.</span> Ordre et supremum-infimum</h2>
+<div class="outline-text-2" id="text-7">
 <p>
 Soit les fonctions \(f,g : \setR \mapsto \setR\) majorées, minorées et vérifiant \(f \le g\). Posons :
 </p>
@@ -848,9 +1121,9 @@ Soit les fonctions \(f,g : \setR \mapsto \setR\) majorées, minorées et vérifi
 pour tout \(x \in \setR\).
 </p>
 </div>
-<div id="outline-container-orgdaa494b" class="outline-3">
-<h3 id="orgdaa494b"><span class="section-number-3">6.1.</span> Supremum</h3>
-<div class="outline-text-3" id="text-6-1">
+<div id="outline-container-org0fa768a" class="outline-3">
+<h3 id="org0fa768a"><span class="section-number-3">7.1.</span> Supremum</h3>
+<div class="outline-text-3" id="text-7-1">
 <p>
 Soit les fonctions \(\varphi,\gamma\) définies par :
 </p>
@@ -893,9 +1166,9 @@ c'est-à-dire :
 </p>
 </div>
 </div>
-<div id="outline-container-org5a5c98f" class="outline-3">
-<h3 id="org5a5c98f"><span class="section-number-3">6.2.</span> Infimum</h3>
-<div class="outline-text-3" id="text-6-2">
+<div id="outline-container-orgb00641e" class="outline-3">
+<h3 id="orgb00641e"><span class="section-number-3">7.2.</span> Infimum</h3>
+<div class="outline-text-3" id="text-7-2">
 <p>
 Soit les fonctions \(\varphi,\gamma\) définies par :
 </p>
@@ -938,9 +1211,9 @@ c'est-à-dire :
 </p>
 </div>
 </div>
-<div id="outline-container-orgbdf7a09" class="outline-3">
-<h3 id="orgbdf7a09"><span class="section-number-3">6.3.</span> Egalité</h3>
-<div class="outline-text-3" id="text-6-3">
+<div id="outline-container-org79f0b12" class="outline-3">
+<h3 id="org79f0b12"><span class="section-number-3">7.3.</span> Egalité</h3>
+<div class="outline-text-3" id="text-7-3">
 <p>
 Supposons que :
 </p>
@@ -991,9 +1264,9 @@ On en conclut que les limites de \(f\) et \(g\) existent et que :
 </div>
 </div>
 </div>
-<div id="outline-container-org1ed58f4" class="outline-2">
-<h2 id="org1ed58f4"><span class="section-number-2">7.</span> Cadre</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-org3e97db1" class="outline-2">
+<h2 id="org3e97db1"><span class="section-number-2">8.</span> Cadre</h2>
+<div class="outline-text-2" id="text-8">
 <p>
 Soit les fonctions \(f,S,I : \setR \mapsto \setR\) majorées, minorées et vérifiant \(I \le f \le S\). Supposons que :
 </p>
@@ -1030,7 +1303,7 @@ La limite de \(f\) existe donc et :
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-10-19 dim 17:00</p>
+<p class="date">Created: 2025-10-20 lun 13:24</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-10-19 dim 17:06 -->
+<!-- 2025-10-20 lun 13:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat 13 : Probabilité</title>
@@ -241,9 +241,9 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org3b451f6">1. Probabilité</a></li>
-<li><a href="#orgc9fc018">2. Statistiques</a></li>
-<li><a href="#orgd04166a">3. Calcul stochastique</a></li>
+<li><a href="#orgb02eb4e">1. Probabilité</a></li>
+<li><a href="#org890d283">2. Statistiques</a></li>
+<li><a href="#org62ddfa8">3. Calcul stochastique</a></li>
 </ul>
 </div>
 </div>
@@ -262,7 +262,7 @@
 \newcommand{\pinverse}{\dagger}
 \newcommand{\topologie}{\mathfrak{T}}
 \newcommand{\ferme}{\mathfrak{F}}
-\DeclareMathOperator*{\img}{\mathbf{i}}
+\newcommand{\img}{\mathbf{i}}
 \newcommand{\binome}[2]{
 \left\{ \begin{array}{c}
 #1 \\
@@ -293,7 +293,7 @@
 \newcommand{\setC}{\mathbb{C}}
 \newcommand{\corps}{\mathbb{K}}
 \newcommand{\boule}{\mathfrak{B}}
-\newcommand{\intervalleouvert}[2]{\relax \ ] #1 , #2 [ \ \relax}
+\newcommand{\intervalleouvert}[2]{\left] #1 , #2 \right[}
 \newcommand{\intervallesemiouvertgauche}[2]{ \left] #1 , #2 \right]}
 \newcommand{\intervallesemiouvertdroite}[2]{\left[ #1 , #2 \right[ }
 \newcommand{\fonction}{\mathbb{F}}
@@ -404,26 +404,37 @@
 \newcommand{\grando}[1]{O\left(#1\right)}
 \)
 </p>
-<div id="outline-container-org3b451f6" class="outline-2">
-<h2 id="org3b451f6"><span class="section-number-2">1.</span> Probabilité</h2>
+
+<p>
+\(
+\newenvironment{Eqts}
+{ \begin{equation*} \begin{gathered} }
+{ \end{gathered} \end{equation*} }
+\newenvironment{Matrix}
+{\left[ \begin{array}}
+{\end{array} \right]}
+\)
+</p>
+<div id="outline-container-orgb02eb4e" class="outline-2">
+<h2 id="orgb02eb4e"><span class="section-number-2">1.</span> Probabilité</h2>
 <div class="outline-text-2" id="text-1">
 <div id="text-table-of-contents-1" role="doc-toc">
 <ul>
-<li><a href="#org9de4b90">1.1. Probabilité</a></li>
-<li><a href="#org2a37fce">1.2. Variable aléatoire</a></li>
-<li><a href="#orga4a34e0">1.3. Mesure induite</a></li>
-<li><a href="#orga87bd06">1.4. Collection induite</a></li>
-<li><a href="#org1e734eb">1.5. Espérance</a></li>
-<li><a href="#org4e2c6cf">1.6. Espérance et mesure induite</a></li>
-<li><a href="#org9c21a03">1.7. Fonction génératrice des moments</a></li>
-<li><a href="#org06fbdde">1.8. Variance</a></li>
-<li><a href="#orgdb8ad74">1.9. Covariance</a></li>
-<li><a href="#org905abc9">1.10. Variance d'une combinaison linéaire</a></li>
-<li><a href="#org99b7397">1.11. Produit scalaire</a></li>
-<li><a href="#org5f981e9">1.12. Probabilité conditionnelle</a></li>
-<li><a href="#orga78629b">1.13. Espérance conditionnelle à un ensemble</a></li>
-<li><a href="#orgf23efa5">1.14. Espérance conditionnelle à une tribu</a></li>
-<li><a href="#org33e9087">1.15. Ensemble discret</a></li>
+<li><a href="#orgf5ffddd">1.1. Probabilité</a></li>
+<li><a href="#org3f41e2c">1.2. Variable aléatoire</a></li>
+<li><a href="#org6f57bfb">1.3. Mesure induite</a></li>
+<li><a href="#org2318898">1.4. Collection induite</a></li>
+<li><a href="#org87224f0">1.5. Espérance</a></li>
+<li><a href="#org8f0022a">1.6. Espérance et mesure induite</a></li>
+<li><a href="#org8f8049f">1.7. Fonction génératrice des moments</a></li>
+<li><a href="#org945081e">1.8. Variance</a></li>
+<li><a href="#org537da8b">1.9. Covariance</a></li>
+<li><a href="#org0345138">1.10. Variance d'une combinaison linéaire</a></li>
+<li><a href="#org4adb596">1.11. Produit scalaire</a></li>
+<li><a href="#org6baa9ee">1.12. Probabilité conditionnelle</a></li>
+<li><a href="#orgffec9da">1.13. Espérance conditionnelle à un ensemble</a></li>
+<li><a href="#orgcd05122">1.14. Espérance conditionnelle à une tribu</a></li>
+<li><a href="#org0fbfdae">1.15. Ensemble discret</a></li>
 </ul>
 </div>
 
@@ -431,8 +442,8 @@
 \label{chap:proba}
 </p>
 </div>
-<div id="outline-container-org9de4b90" class="outline-3">
-<h3 id="org9de4b90"><span class="section-number-3">1.1.</span> Probabilité</h3>
+<div id="outline-container-orgf5ffddd" class="outline-3">
+<h3 id="orgf5ffddd"><span class="section-number-3">1.1.</span> Probabilité</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Une probabilité \(\proba\) sur un ensemble d'événements \(\Omega\) est une mesure définie sur \(\mathcal{S}=\{ A : A \subseteq \Omega \}\) et à valeurs dans \([0,1]\) :
@@ -495,16 +506,16 @@ La grandeur \(\probaof{\Phi}\) peut s'interpréter comme la probabilité que l'u
 </p>
 </div>
 </div>
-<div id="outline-container-org2a37fce" class="outline-3">
-<h3 id="org2a37fce"><span class="section-number-3">1.2.</span> Variable aléatoire</h3>
+<div id="outline-container-org3f41e2c" class="outline-3">
+<h3 id="org3f41e2c"><span class="section-number-3">1.2.</span> Variable aléatoire</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Une variable aléatoire \(X\) associe une valeur réelle a chaque élément de \(\Omega\). On a donc \(X : \Omega \mapsto \setR\).
 </p>
 </div>
 </div>
-<div id="outline-container-orga4a34e0" class="outline-3">
-<h3 id="orga4a34e0"><span class="section-number-3">1.3.</span> Mesure induite</h3>
+<div id="outline-container-org6f57bfb" class="outline-3">
+<h3 id="org6f57bfb"><span class="section-number-3">1.3.</span> Mesure induite</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Etant donné une variable aléatoire \(X\), on peut définir une mesure induite \(\mathcal{L}_X : \sousens(\setR) \mapsto [0,1]\), qui exprime la probabilité qu'un événement \(\omega \in \Omega\) donne une valeur appartenant à un sous-ensemble \(U \subseteq \setR\) :
@@ -514,8 +525,8 @@ Etant donné une variable aléatoire \(X\), on peut définir une mesure induite 
 \[\mathcal{L}_X(U) = \probaof{X^{-1}(U)} = \probaof{ \{ \omega\in\Omega : X(\omega) \in U \} }\]
 </p>
 </div>
-<div id="outline-container-orgb33bd72" class="outline-4">
-<h4 id="orgb33bd72"><span class="section-number-4">1.3.1.</span> Variables conjointes</h4>
+<div id="outline-container-org68a47f2" class="outline-4">
+<h4 id="org68a47f2"><span class="section-number-4">1.3.1.</span> Variables conjointes</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <p>
 La mesure induite par deux variables aléatoires \(X\) et \(Y\) se définit par :
@@ -548,8 +559,8 @@ On voit clairement que :
 </div>
 </div>
 </div>
-<div id="outline-container-orga87bd06" class="outline-3">
-<h3 id="orga87bd06"><span class="section-number-3">1.4.</span> Collection induite</h3>
+<div id="outline-container-org2318898" class="outline-3">
+<h3 id="org2318898"><span class="section-number-3">1.4.</span> Collection induite</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Soit \(X\) une variable aléatoire et \(U \subseteq \setR\). On définit le sous-ensemble de \(\Omega\) :
@@ -596,8 +607,8 @@ Comme :
 il est clair que l'on a \(\emptyset, \Omega \in \Lambda(X)\) quelle que soit la variable aléatoire \(X\).
 </p>
 </div>
-<div id="outline-container-orgde7661d" class="outline-4">
-<h4 id="orgde7661d"><span class="section-number-4">1.4.1.</span> Fonctions indicatrices</h4>
+<div id="outline-container-orgf8adb60" class="outline-4">
+<h4 id="orgf8adb60"><span class="section-number-4">1.4.1.</span> Fonctions indicatrices</h4>
 <div class="outline-text-4" id="text-1-4-1">
 <p>
 Si \(\Phi \subseteq \Omega\) et \(X = \indicatrice_\Phi\), on a :
@@ -637,8 +648,8 @@ On a donc :
 </div>
 </div>
 </div>
-<div id="outline-container-org1e734eb" class="outline-3">
-<h3 id="org1e734eb"><span class="section-number-3">1.5.</span> Espérance</h3>
+<div id="outline-container-org87224f0" class="outline-3">
+<h3 id="org87224f0"><span class="section-number-3">1.5.</span> Espérance</h3>
 <div class="outline-text-3" id="text-1-5">
 <p>
 L'espérance d'une variable aléatoire \(X\) est simplement une moyenne pondérée par les probablités que \(X\)
@@ -649,8 +660,8 @@ prennent telle ou telle valeur :
 \[\esperof{X} = \int_{\Omega} X(\omega) \ d\proba(\omega)\]
 </p>
 </div>
-<div id="outline-container-org68de2f9" class="outline-4">
-<h4 id="org68de2f9"><span class="section-number-4">1.5.1.</span> Indicatrice</h4>
+<div id="outline-container-org068b286" class="outline-4">
+<h4 id="org068b286"><span class="section-number-4">1.5.1.</span> Indicatrice</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <p>
 Notons que pour tout \(\Phi \subseteq \Omega\), on a :
@@ -672,8 +683,8 @@ et donc :
 </p>
 </div>
 </div>
-<div id="outline-container-org975b2da" class="outline-4">
-<h4 id="org975b2da"><span class="section-number-4">1.5.2.</span> Fonction d'une variable aléatoire</h4>
+<div id="outline-container-org6039349" class="outline-4">
+<h4 id="org6039349"><span class="section-number-4">1.5.2.</span> Fonction d'une variable aléatoire</h4>
 <div class="outline-text-4" id="text-1-5-2">
 <p>
 Pour toute fonction \(G : \setR \mapsto \setR\), on a bien évidemment \(G \circ X : \Omega \mapsto \setR\) et on peut définir :
@@ -684,8 +695,8 @@ Pour toute fonction \(G : \setR \mapsto \setR\), on a bien évidemment \(G \circ
 </p>
 </div>
 </div>
-<div id="outline-container-org63bce07" class="outline-4">
-<h4 id="org63bce07"><span class="section-number-4">1.5.3.</span> Fonction de plusieurs variables aléatoires</h4>
+<div id="outline-container-orgd3cae6d" class="outline-4">
+<h4 id="orgd3cae6d"><span class="section-number-4">1.5.3.</span> Fonction de plusieurs variables aléatoires</h4>
 <div class="outline-text-4" id="text-1-5-3">
 <p>
 De même, si \(X\) et \(Y\) sont deux variables aléatoires, pour toute fonction \(G : \setR^2 \mapsto \setR\), on a évidemment \(G(X,Y) \in \setR\) et on peut définir :
@@ -705,8 +716,8 @@ Le cas particulier \(G(X,Y) = a \ X + b \ Y\), où \(a,b \in \setR\), nous montr
 </div>
 </div>
 </div>
-<div id="outline-container-org4e2c6cf" class="outline-3">
-<h3 id="org4e2c6cf"><span class="section-number-3">1.6.</span> Espérance et mesure induite</h3>
+<div id="outline-container-org8f0022a" class="outline-3">
+<h3 id="org8f0022a"><span class="section-number-3">1.6.</span> Espérance et mesure induite</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 Soit une variable aléatoire \(X\) et la fonction étagée \(G : \setR \mapsto \setR\) définie
@@ -785,8 +796,8 @@ Comme cette expression doit être valable pour toute fonction en escalier, on en
 pour toute fonction intégrable \(G\).
 </p>
 </div>
-<div id="outline-container-orgaa6a5cb" class="outline-4">
-<h4 id="orgaa6a5cb"><span class="section-number-4">1.6.1.</span> Identité</h4>
+<div id="outline-container-orgdb95dea" class="outline-4">
+<h4 id="orgdb95dea"><span class="section-number-4">1.6.1.</span> Identité</h4>
 <div class="outline-text-4" id="text-1-6-1">
 <p>
 Le cas particulier \(G = \identite\) nous donne :
@@ -797,8 +808,8 @@ Le cas particulier \(G = \identite\) nous donne :
 </p>
 </div>
 </div>
-<div id="outline-container-orgb4e5aae" class="outline-4">
-<h4 id="orgb4e5aae"><span class="section-number-4">1.6.2.</span> Densité</h4>
+<div id="outline-container-org3eb9620" class="outline-4">
+<h4 id="org3eb9620"><span class="section-number-4">1.6.2.</span> Densité</h4>
 <div class="outline-text-4" id="text-1-6-2">
 <p>
 Si il existe une fonction \(f_X : \setR \mapsto \setR\) telle que \(d\mathcal{L}_X = f_X \ dx\),
@@ -837,8 +848,8 @@ on obtient la propriété de normalité :
 \[\int_\setR f_X(x) \ dx = 1\]
 </p>
 </div>
-<div id="outline-container-org0952289" class="outline-5">
-<h5 id="org0952289"><span class="section-number-5">1.6.2.1.</span> Variable aléatoire gaussienne</h5>
+<div id="outline-container-orgb2d6dcc" class="outline-5">
+<h5 id="orgb2d6dcc"><span class="section-number-5">1.6.2.1.</span> Variable aléatoire gaussienne</h5>
 <div class="outline-text-5" id="text-1-6-2-1">
 <p>
 Une variable aléatoire est dite normale de paramètres \(\mu\), \(\sigma\) si sa fonction
@@ -851,8 +862,8 @@ densité vérifie :
 </div>
 </div>
 </div>
-<div id="outline-container-org698dcb1" class="outline-4">
-<h4 id="org698dcb1"><span class="section-number-4">1.6.3.</span> Variables conjointes</h4>
+<div id="outline-container-orgfd18b2c" class="outline-4">
+<h4 id="orgfd18b2c"><span class="section-number-4">1.6.3.</span> Variables conjointes</h4>
 <div class="outline-text-4" id="text-1-6-3">
 <p>
 Soit les variables aléatoires \(X, Y\) et la fonction étagée \(G : \setR^2 \mapsto \setR\) définie
@@ -932,8 +943,8 @@ pour toute fonction intégrable \(G\).
 </p>
 </div>
 </div>
-<div id="outline-container-orgb846c7c" class="outline-4">
-<h4 id="orgb846c7c"><span class="section-number-4">1.6.4.</span> Densité conjointe</h4>
+<div id="outline-container-orgf3d4112" class="outline-4">
+<h4 id="orgf3d4112"><span class="section-number-4">1.6.4.</span> Densité conjointe</h4>
 <div class="outline-text-4" id="text-1-6-4">
 <p>
 Si il existe une fonction \(f_{X,Y} : \setR^2 \mapsto \setR\) telle que
@@ -988,8 +999,8 @@ on peut écrire l'espérance de \(Y\) comme :
 \[\esperof{Y} = \int_\setR y \ f_Y(y) \ dy\]
 </p>
 </div>
-<div id="outline-container-orgfa51df2" class="outline-5">
-<h5 id="orgfa51df2"><span class="section-number-5">1.6.4.1.</span> Distribution normale</h5>
+<div id="outline-container-org0dffcfd" class="outline-5">
+<h5 id="org0dffcfd"><span class="section-number-5">1.6.4.1.</span> Distribution normale</h5>
 <div class="outline-text-5" id="text-1-6-4-1">
 <p>
 On dit que les variables aléatoires \(X_1, ..., X_N\) présentent une distribution normale multivariée si il existe :
@@ -1048,8 +1059,8 @@ pour tout \(u \in \setR^N\).
 </div>
 </div>
 </div>
-<div id="outline-container-org9c21a03" class="outline-3">
-<h3 id="org9c21a03"><span class="section-number-3">1.7.</span> Fonction génératrice des moments</h3>
+<div id="outline-container-org8f8049f" class="outline-3">
+<h3 id="org8f8049f"><span class="section-number-3">1.7.</span> Fonction génératrice des moments</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 On définit le moment générateur d'une densité par :
@@ -1076,8 +1087,8 @@ et donc :
 \[\OD{\Psi}{u}(0) = \esperof{X^k \ \exp(0)} = \esperof{X^k}\]
 </p>
 </div>
-<div id="outline-container-org85db394" class="outline-4">
-<h4 id="org85db394"><span class="section-number-4">1.7.1.</span> Variable gaussienne</h4>
+<div id="outline-container-orge3d66de" class="outline-4">
+<h4 id="orge3d66de"><span class="section-number-4">1.7.1.</span> Variable gaussienne</h4>
 <div class="outline-text-4" id="text-1-7-1">
 <p>
 A titre d'exemple, nous calculons le  moment générateur associé à une densité gaussienne :
@@ -1108,8 +1119,8 @@ Comme l'intégrale vaut \(\sqrt{2 \pi} \sigma\), on obtient finalement :
 </div>
 </div>
 </div>
-<div id="outline-container-org06fbdde" class="outline-3">
-<h3 id="org06fbdde"><span class="section-number-3">1.8.</span> Variance</h3>
+<div id="outline-container-org945081e" class="outline-3">
+<h3 id="org945081e"><span class="section-number-3">1.8.</span> Variance</h3>
 <div class="outline-text-3" id="text-1-8">
 <p>
 La variance de \(X\) est la variation carrée moyenne de \(X\) autour de son espérance \(\esperof{X}\) :
@@ -1145,8 +1156,8 @@ soit :
 \[\var{X} = \esperof{X^2} - \esperof{X}^2\]
 </p>
 </div>
-<div id="outline-container-org8259546" class="outline-4">
-<h4 id="org8259546"><span class="section-number-4">1.8.1.</span> Invariance sous translation</h4>
+<div id="outline-container-org246458a" class="outline-4">
+<h4 id="org246458a"><span class="section-number-4">1.8.1.</span> Invariance sous translation</h4>
 <div class="outline-text-4" id="text-1-8-1">
 <p>
 Notons que si \(X,Y\) sont deux variables aléatoires reliées par :
@@ -1186,8 +1197,8 @@ La variance est donc invariante sous translation :
 </div>
 </div>
 </div>
-<div id="outline-container-orgdb8ad74" class="outline-3">
-<h3 id="orgdb8ad74"><span class="section-number-3">1.9.</span> Covariance</h3>
+<div id="outline-container-org537da8b" class="outline-3">
+<h3 id="org537da8b"><span class="section-number-3">1.9.</span> Covariance</h3>
 <div class="outline-text-3" id="text-1-9">
 <p>
 La covariance de deux variables aléatoire \(X,Y\) se définit par :
@@ -1216,8 +1227,8 @@ On voit également que la variance d'une variable aléatoire \(X\) n'est rien d'
 \[\var{X} = \cov{X}{X}\]
 </p>
 </div>
-<div id="outline-container-org2033f00" class="outline-4">
-<h4 id="org2033f00"><span class="section-number-4">1.9.1.</span> Invariance sous translation</h4>
+<div id="outline-container-orgfa0d994" class="outline-4">
+<h4 id="orgfa0d994"><span class="section-number-4">1.9.1.</span> Invariance sous translation</h4>
 <div class="outline-text-4" id="text-1-9-1">
 <p>
 Suivant le même raisonnement que pour la variance, on considère les variables aléatoires \(W,X,Y,Z\) reliées par :
@@ -1263,8 +1274,8 @@ La covariance est donc invariante sous translation :
 </div>
 </div>
 </div>
-<div id="outline-container-org905abc9" class="outline-3">
-<h3 id="org905abc9"><span class="section-number-3">1.10.</span> Variance d'une combinaison linéaire</h3>
+<div id="outline-container-org0345138" class="outline-3">
+<h3 id="org0345138"><span class="section-number-3">1.10.</span> Variance d'une combinaison linéaire</h3>
 <div class="outline-text-3" id="text-1-10">
 <p>
 Nous utilisons la notation :
@@ -1349,8 +1360,8 @@ L'invariance sous translation nous permet alors d'écrire :
 </p>
 </div>
 </div>
-<div id="outline-container-org99b7397" class="outline-3">
-<h3 id="org99b7397"><span class="section-number-3">1.11.</span> Produit scalaire</h3>
+<div id="outline-container-org4adb596" class="outline-3">
+<h3 id="org4adb596"><span class="section-number-3">1.11.</span> Produit scalaire</h3>
 <div class="outline-text-3" id="text-1-11">
 <p>
 Nous allons voir que la covariance est un produit scalaire. Nous utilisons la notation :
@@ -1433,8 +1444,8 @@ est invariante sous translation, on voit que :
 est également un produit scalaire pour toutes variables aléatoires \(X,Y\).
 </p>
 </div>
-<div id="outline-container-org33351b6" class="outline-4">
-<h4 id="org33351b6"><span class="section-number-4">1.11.1.</span> Cauchy-Schwartz</h4>
+<div id="outline-container-org8229982" class="outline-4">
+<h4 id="org8229982"><span class="section-number-4">1.11.1.</span> Cauchy-Schwartz</h4>
 <div class="outline-text-4" id="text-1-11-1">
 <p>
 En appliquant l'inégalité de Cauchy-Schwartz à ce produit scalaire, on obtient :
@@ -1454,8 +1465,8 @@ où, en prenant la racine :
 </div>
 </div>
 </div>
-<div id="outline-container-org5f981e9" class="outline-3">
-<h3 id="org5f981e9"><span class="section-number-3">1.12.</span> Probabilité conditionnelle</h3>
+<div id="outline-container-org6baa9ee" class="outline-3">
+<h3 id="org6baa9ee"><span class="section-number-3">1.12.</span> Probabilité conditionnelle</h3>
 <div class="outline-text-3" id="text-1-12">
 <p>
 \label{sec:proba_cond}
@@ -1551,8 +1562,8 @@ Lorsque \(B = \Omega\), on retrouve d'ailleurs :
 \[\probaof{A | \Omega} = \probaof{A}\]
 </p>
 </div>
-<div id="outline-container-orgf276e3b" class="outline-4">
-<h4 id="orgf276e3b"><span class="section-number-4">1.12.1.</span> Indépendance</h4>
+<div id="outline-container-org10a8bbc" class="outline-4">
+<h4 id="org10a8bbc"><span class="section-number-4">1.12.1.</span> Indépendance</h4>
 <div class="outline-text-4" id="text-1-12-1">
 <p>
 On dit que deux ensembles d'événements \(A\) et \(B\) sont indépendants si :
@@ -1571,8 +1582,8 @@ c'est-à-dire si :
 </p>
 </div>
 </div>
-<div id="outline-container-org8b455f2" class="outline-4">
-<h4 id="org8b455f2"><span class="section-number-4">1.12.2.</span> Application</h4>
+<div id="outline-container-orge58d797" class="outline-4">
+<h4 id="orge58d797"><span class="section-number-4">1.12.2.</span> Application</h4>
 <div class="outline-text-4" id="text-1-12-2">
 <p>
 Une technique fréquemment employée pour évaluer \(\probaof{A}\) est d'utiliser
@@ -1585,8 +1596,8 @@ une partition \(B_1,...,B_n\) de \(\Omega\). Utilisant \(A = A \cup \Omega\), on
 </div>
 </div>
 </div>
-<div id="outline-container-orga78629b" class="outline-3">
-<h3 id="orga78629b"><span class="section-number-3">1.13.</span> Espérance conditionnelle à un ensemble</h3>
+<div id="outline-container-orgffec9da" class="outline-3">
+<h3 id="orgffec9da"><span class="section-number-3">1.13.</span> Espérance conditionnelle à un ensemble</h3>
 <div class="outline-text-3" id="text-1-13">
 <p>
 Soit \(A \subseteq \Omega\). On a vu que :
@@ -1717,8 +1728,8 @@ Comme cette relation doit être valable pour toute variable aléatoire en escali
 \[\esperof{X | B} = \frac{ \int_B X\ \ d\proba }{ \int_B \ d\proba }\]
 </p>
 </div>
-<div id="outline-container-org1fc9c6b" class="outline-4">
-<h4 id="org1fc9c6b"><span class="section-number-4">1.13.1.</span> Densité conditionnelle</h4>
+<div id="outline-container-orgdbf0817" class="outline-4">
+<h4 id="orgdbf0817"><span class="section-number-4">1.13.1.</span> Densité conditionnelle</h4>
 <div class="outline-text-4" id="text-1-13-1">
 <p>
 Soient \(X,Y\) deux variables aléatoires. Un cas particulier important d'espérance conditionnelle est celui où :
@@ -1789,12 +1800,12 @@ on a tout simplement :
 </div>
 </div>
 </div>
-<div id="outline-container-orgf23efa5" class="outline-3">
-<h3 id="orgf23efa5"><span class="section-number-3">1.14.</span> Espérance conditionnelle à une tribu</h3>
+<div id="outline-container-orgcd05122" class="outline-3">
+<h3 id="orgcd05122"><span class="section-number-3">1.14.</span> Espérance conditionnelle à une tribu</h3>
 <div class="outline-text-3" id="text-1-14">
 </div>
-<div id="outline-container-orgc727a72" class="outline-4">
-<h4 id="orgc727a72"><span class="section-number-4">1.14.1.</span> Tribu et espace fonctionnel</h4>
+<div id="outline-container-org3a63904" class="outline-4">
+<h4 id="org3a63904"><span class="section-number-4">1.14.1.</span> Tribu et espace fonctionnel</h4>
 <div class="outline-text-4" id="text-1-14-1">
 <p>
 Soit \(\Gamma \subseteq \sousens(\Omega)\) une collection de sous-ensembles de \(\Omega\) formant une tribu sur \(\Omega\) (voir section \ref{sec:tribu}),
@@ -1810,8 +1821,8 @@ où \(\Lambda(W)\) est la collection induite par \(W\).
 </p>
 </div>
 </div>
-<div id="outline-container-orgf182d62" class="outline-4">
-<h4 id="orgf182d62"><span class="section-number-4">1.14.2.</span> Minimisation</h4>
+<div id="outline-container-org1a96b14" class="outline-4">
+<h4 id="org1a96b14"><span class="section-number-4">1.14.2.</span> Minimisation</h4>
 <div class="outline-text-4" id="text-1-14-2">
 <p>
 L'espérance conditionnelle est construite comme le meilleur estimateur au sens des moindres carrés d'une variable aléatoire \(X\) sur \(\mathcal{F}(\Gamma)\). Soit la fonctionnelle \(I : \mathcal{F}(\Gamma) \mapsto \setR\) représentant l'erreur :
@@ -1858,8 +1869,8 @@ Autrement dit :
 </p>
 </div>
 </div>
-<div id="outline-container-org313af9d" class="outline-4">
-<h4 id="org313af9d"><span class="section-number-4">1.14.3.</span> Unicité</h4>
+<div id="outline-container-orgac24299" class="outline-4">
+<h4 id="orgac24299"><span class="section-number-4">1.14.3.</span> Unicité</h4>
 <div class="outline-text-4" id="text-1-14-3">
 <p>
 Nous supposons dorénavant que \(\mathcal{F}(\Gamma)\) est un espace vectoriel. Soient \(Z_1, Z_2 \in \mathcal{F}(\Gamma)\) des variables aléatoires qui minimisent tous deux la fonctionnelle \(I\). On a :
@@ -1890,8 +1901,8 @@ On en conclut que \(Z_1 = Z_2\) presque partout sur \(\Omega\). L'espérance con
 </p>
 </div>
 </div>
-<div id="outline-container-org4e4cdb2" class="outline-4">
-<h4 id="org4e4cdb2"><span class="section-number-4">1.14.4.</span> Définition</h4>
+<div id="outline-container-org4e31ac9" class="outline-4">
+<h4 id="org4e31ac9"><span class="section-number-4">1.14.4.</span> Définition</h4>
 <div class="outline-text-4" id="text-1-14-4">
 <p>
 Forts de ces résultats, on définit l'espérance de \(X\) conditionnellement à la tribu \(\Gamma\) comme étant :
@@ -1914,8 +1925,8 @@ pour tout \(W \in \mathcal{F}(\Gamma)\).
 </p>
 </div>
 </div>
-<div id="outline-container-orgda1bb77" class="outline-4">
-<h4 id="orgda1bb77"><span class="section-number-4">1.14.5.</span> Fonctions indicatrices</h4>
+<div id="outline-container-org28e324b" class="outline-4">
+<h4 id="org28e324b"><span class="section-number-4">1.14.5.</span> Fonctions indicatrices</h4>
 <div class="outline-text-4" id="text-1-14-5">
 <p>
 Soit un ensemble \(\Phi \in \Gamma\). Les propriétés de \(\Gamma\) nous disent que \(\Omega \setminus \Phi \in \Gamma\). Donc :
@@ -1962,8 +1973,8 @@ c'est-à-dire :
 </p>
 </div>
 </div>
-<div id="outline-container-orgc2654c0" class="outline-4">
-<h4 id="orgc2654c0"><span class="section-number-4">1.14.6.</span> Variable aléatoire dans l'espace fonctionnel</h4>
+<div id="outline-container-org43c811c" class="outline-4">
+<h4 id="org43c811c"><span class="section-number-4">1.14.6.</span> Variable aléatoire dans l'espace fonctionnel</h4>
 <div class="outline-text-4" id="text-1-14-6">
 <p>
 Une conséquence directe de la définition de l'espérance conditionnelle est que si \(Z \in \mathcal{F}(\Gamma)\), on a :
@@ -1990,8 +2001,8 @@ sur \(\mathcal{F}(\Gamma)\) et :
 </p>
 </div>
 </div>
-<div id="outline-container-orgff3756b" class="outline-4">
-<h4 id="orgff3756b"><span class="section-number-4">1.14.7.</span> Tour</h4>
+<div id="outline-container-orga7a8117" class="outline-4">
+<h4 id="orga7a8117"><span class="section-number-4">1.14.7.</span> Tour</h4>
 <div class="outline-text-4" id="text-1-14-7">
 <p>
 Soit la tribu \(\Delta \subseteq \Gamma\) et \(X\) une variable aléatoire et \(W \in \mathcal{F}(\Delta)\). On a :
@@ -2035,8 +2046,8 @@ Comme cette dernière équation est valable pour tout \(W \in \mathcal{F}(\Delta
 </p>
 </div>
 </div>
-<div id="outline-container-orgedc4ddd" class="outline-4">
-<h4 id="orgedc4ddd"><span class="section-number-4">1.14.8.</span> Couple de variables aléatoires</h4>
+<div id="outline-container-orgcc90bea" class="outline-4">
+<h4 id="orgcc90bea"><span class="section-number-4">1.14.8.</span> Couple de variables aléatoires</h4>
 <div class="outline-text-4" id="text-1-14-8">
 <p>
 Etant donné deux variables aléatoires \(X,Y\), on définit :
@@ -2056,8 +2067,8 @@ Comme \(\Gamma = \Lambda(Y)\), l'espace \(\mathcal{F}(\Gamma)\) est l'ensemble d
 </div>
 </div>
 </div>
-<div id="outline-container-org33e9087" class="outline-3">
-<h3 id="org33e9087"><span class="section-number-3">1.15.</span> Ensemble discret</h3>
+<div id="outline-container-org0fbfdae" class="outline-3">
+<h3 id="org0fbfdae"><span class="section-number-3">1.15.</span> Ensemble discret</h3>
 <div class="outline-text-3" id="text-1-15">
 <p>
 Nous allons à présent considérer le cas particulier où l'ensemble des événements peut s'écrire
@@ -2094,19 +2105,19 @@ L'espérance d'une telle variable s'écrit simplement :
 </div>
 </div>
 </div>
-<div id="outline-container-orgc9fc018" class="outline-2">
-<h2 id="orgc9fc018"><span class="section-number-2">2.</span> Statistiques</h2>
+<div id="outline-container-org890d283" class="outline-2">
+<h2 id="org890d283"><span class="section-number-2">2.</span> Statistiques</h2>
 <div class="outline-text-2" id="text-2">
 <div id="text-table-of-contents-2" role="doc-toc">
 <ul>
-<li><a href="#orgafa9f7f">2.1. Echantillons</a></li>
-<li><a href="#org0e0d78a">2.2. L'inégalité de Markov</a></li>
-<li><a href="#org35f48cd">2.3. La loi des grands nombres</a></li>
-<li><a href="#orga9cc5f6">2.4. Fréquence et probabilité</a></li>
-<li><a href="#org46c3606">2.5. Estimateurs non biaisés</a></li>
-<li><a href="#org8147eee">2.6. Estimation des espérance et des variances</a></li>
-<li><a href="#orgcd1eb30">2.7. Maximum de vraisemblance</a></li>
-<li><a href="#org300629c">2.8. Echantillon de densité donnée</a></li>
+<li><a href="#org1309d71">2.1. Echantillons</a></li>
+<li><a href="#orgabaad5c">2.2. L'inégalité de Markov</a></li>
+<li><a href="#org3b6aa60">2.3. La loi des grands nombres</a></li>
+<li><a href="#orgf04cfcd">2.4. Fréquence et probabilité</a></li>
+<li><a href="#org3076b80">2.5. Estimateurs non biaisés</a></li>
+<li><a href="#org8e724d3">2.6. Estimation des espérance et des variances</a></li>
+<li><a href="#org29684f2">2.7. Maximum de vraisemblance</a></li>
+<li><a href="#org5f6a161">2.8. Echantillon de densité donnée</a></li>
 </ul>
 </div>
 
@@ -2114,8 +2125,8 @@ L'espérance d'une telle variable s'écrit simplement :
 \label{chap:stat}
 </p>
 </div>
-<div id="outline-container-org563c8e2" class="outline-4">
-<h4 id="org563c8e2"><span class="section-number-4">2.0.1.</span> Indépendance</h4>
+<div id="outline-container-orgb8ddf10" class="outline-4">
+<h4 id="orgb8ddf10"><span class="section-number-4">2.0.1.</span> Indépendance</h4>
 <div class="outline-text-4" id="text-2-0-1">
 <p>
 On dit que les variables aléatoires \(X_1\), \(X_2\), &#x2026;, \(X_N\) sont indépendantes si :
@@ -2142,8 +2153,8 @@ et donc :
 </p>
 </div>
 </div>
-<div id="outline-container-orgafa9f7f" class="outline-3">
-<h3 id="orgafa9f7f"><span class="section-number-3">2.1.</span> Echantillons</h3>
+<div id="outline-container-org1309d71" class="outline-3">
+<h3 id="org1309d71"><span class="section-number-3">2.1.</span> Echantillons</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Nous nous intéressons dans la suite de ce chapitre à des échantillons de \(N\) variables aléatoires indépendantes \(X_1,...,X_N\) telles que :
@@ -2163,8 +2174,8 @@ Nous nous intéressons dans la suite de ce chapitre à des échantillons de \(N\
 </div>
 </div>
 </div>
-<div id="outline-container-org0e0d78a" class="outline-3">
-<h3 id="org0e0d78a"><span class="section-number-3">2.2.</span> L'inégalité de Markov</h3>
+<div id="outline-container-orgabaad5c" class="outline-3">
+<h3 id="orgabaad5c"><span class="section-number-3">2.2.</span> L'inégalité de Markov</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Soit une variable aléatoire \(X\). On définit la variable associée :
@@ -2227,8 +2238,8 @@ Le cas particulier \(b = \esperof{X}\) nous donne :
 </p>
 </div>
 </div>
-<div id="outline-container-org35f48cd" class="outline-3">
-<h3 id="org35f48cd"><span class="section-number-3">2.3.</span> La loi des grands nombres</h3>
+<div id="outline-container-org3b6aa60" class="outline-3">
+<h3 id="org3b6aa60"><span class="section-number-3">2.3.</span> La loi des grands nombres</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Soit la moyenne :
@@ -2301,8 +2312,8 @@ On en conclut que :
 </p>
 </div>
 </div>
-<div id="outline-container-orga9cc5f6" class="outline-3">
-<h3 id="orga9cc5f6"><span class="section-number-3">2.4.</span> Fréquence et probabilité</h3>
+<div id="outline-container-orgf04cfcd" class="outline-3">
+<h3 id="orgf04cfcd"><span class="section-number-3">2.4.</span> Fréquence et probabilité</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Appliquons la loi des grands nombres à la fonction indicatrice \(\indicatrice_A\).
@@ -2332,8 +2343,8 @@ on en déduit que la fréquence \(n(A) / N\) converge vers la probabilité de \(
 </p>
 </div>
 </div>
-<div id="outline-container-org46c3606" class="outline-3">
-<h3 id="org46c3606"><span class="section-number-3">2.5.</span> Estimateurs non biaisés</h3>
+<div id="outline-container-org3076b80" class="outline-3">
+<h3 id="org3076b80"><span class="section-number-3">2.5.</span> Estimateurs non biaisés</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 Soit une fonction \(G : \setR^n \mapsto \setR\) :
@@ -2352,8 +2363,8 @@ On dit que \(\hat{G} : \setR^n \mapsto \setR\) est un estimateur non biaisé de 
 </p>
 </div>
 </div>
-<div id="outline-container-org8147eee" class="outline-3">
-<h3 id="org8147eee"><span class="section-number-3">2.6.</span> Estimation des espérance et des variances</h3>
+<div id="outline-container-org8e724d3" class="outline-3">
+<h3 id="org8e724d3"><span class="section-number-3">2.6.</span> Estimation des espérance et des variances</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 Soit :
@@ -2469,8 +2480,8 @@ est un estimateur non biaisé de la variance :
 </p>
 </div>
 </div>
-<div id="outline-container-orgcd1eb30" class="outline-3">
-<h3 id="orgcd1eb30"><span class="section-number-3">2.7.</span> Maximum de vraisemblance</h3>
+<div id="outline-container-org29684f2" class="outline-3">
+<h3 id="org29684f2"><span class="section-number-3">2.7.</span> Maximum de vraisemblance</h3>
 <div class="outline-text-3" id="text-2-7">
 <p>
 Il s'agit de trouver les paramètres \(\hat{\theta}\) (espérance, variance, &#x2026;) qui maximisent la vraisemblance :
@@ -2509,8 +2520,8 @@ en imposant :
 </p>
 </div>
 </div>
-<div id="outline-container-org300629c" class="outline-3">
-<h3 id="org300629c"><span class="section-number-3">2.8.</span> Echantillon de densité donnée</h3>
+<div id="outline-container-org5f6a161" class="outline-3">
+<h3 id="org5f6a161"><span class="section-number-3">2.8.</span> Echantillon de densité donnée</h3>
 <div class="outline-text-3" id="text-2-8">
 <p>
 Il s'agit d'un algorithme permettant de générer \(N\) nombres aléatoires :
@@ -2583,19 +2594,19 @@ La comparaison de \(y\) et de \(f(x)\) sert donc de filtre à l'algorithme.
 </div>
 </div>
 </div>
-<div id="outline-container-orgd04166a" class="outline-2">
-<h2 id="orgd04166a"><span class="section-number-2">3.</span> Calcul stochastique</h2>
+<div id="outline-container-org62ddfa8" class="outline-2">
+<h2 id="org62ddfa8"><span class="section-number-2">3.</span> Calcul stochastique</h2>
 <div class="outline-text-2" id="text-3">
 <div id="text-table-of-contents-3" role="doc-toc">
 <ul>
-<li><a href="#org2fa8852">3.1. Processus stochastique</a></li>
-<li><a href="#org55e480a">3.2. Intégrale d'Ito</a></li>
-<li><a href="#orgabc90c4">3.3. Variation quadratique</a></li>
-<li><a href="#org4273d82">3.4. Variation conjointe</a></li>
-<li><a href="#org0f8e19f">3.5. Relations variations quadratiques - conjointes</a></li>
-<li><a href="#org60d14b7">3.6. Variation d'ordre quelconque</a></li>
-<li><a href="#org709581f">3.7. Calcul d'Ito</a></li>
-<li><a href="#org65a62ae">3.8. Mouvement Brownien</a></li>
+<li><a href="#orgc7af571">3.1. Processus stochastique</a></li>
+<li><a href="#org39d9471">3.2. Intégrale d'Ito</a></li>
+<li><a href="#orgc0bea53">3.3. Variation quadratique</a></li>
+<li><a href="#orgababaa5">3.4. Variation conjointe</a></li>
+<li><a href="#org5dadda8">3.5. Relations variations quadratiques - conjointes</a></li>
+<li><a href="#org5e23c97">3.6. Variation d'ordre quelconque</a></li>
+<li><a href="#orgdfd7c8d">3.7. Calcul d'Ito</a></li>
+<li><a href="#orgfb418f9">3.8. Mouvement Brownien</a></li>
 </ul>
 </div>
 
@@ -2603,8 +2614,8 @@ La comparaison de \(y\) et de \(f(x)\) sert donc de filtre à l'algorithme.
 \label{chap:stocha}
 </p>
 </div>
-<div id="outline-container-org2fa8852" class="outline-3">
-<h3 id="org2fa8852"><span class="section-number-3">3.1.</span> Processus stochastique</h3>
+<div id="outline-container-orgc7af571" class="outline-3">
+<h3 id="orgc7af571"><span class="section-number-3">3.1.</span> Processus stochastique</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Un processus stochastique est une fonction :
@@ -2619,8 +2630,8 @@ On sous-entend souvent l'événement \(\omega\), et on note \(X(t)=X(t,\omega)\)
 </p>
 </div>
 </div>
-<div id="outline-container-org55e480a" class="outline-3">
-<h3 id="org55e480a"><span class="section-number-3">3.2.</span> Intégrale d'Ito</h3>
+<div id="outline-container-org39d9471" class="outline-3">
+<h3 id="org39d9471"><span class="section-number-3">3.2.</span> Intégrale d'Ito</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Il s'agit d'une intégrale utilisant un processus stochastique \(X\) comme mesure :
@@ -2631,8 +2642,8 @@ Il s'agit d'une intégrale utilisant un processus stochastique \(X\) comme mesur
 </p>
 </div>
 </div>
-<div id="outline-container-orgabc90c4" class="outline-3">
-<h3 id="orgabc90c4"><span class="section-number-3">3.3.</span> Variation quadratique</h3>
+<div id="outline-container-orgc0bea53" class="outline-3">
+<h3 id="orgc0bea53"><span class="section-number-3">3.3.</span> Variation quadratique</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Soit \(\delta \strictsuperieur 0\) et les \(N\) temps \(t_k = k \cdot \delta\) où \(k = 0,...,\arrondisup{\frac{T}{\delta}}\). On définit la variation quadratique d'une fonction \(f\) :
@@ -2659,8 +2670,8 @@ Comme \(\delta^2 \to \delta \ ds\), on a :
 </p>
 </div>
 </div>
-<div id="outline-container-org4273d82" class="outline-3">
-<h3 id="org4273d82"><span class="section-number-3">3.4.</span> Variation conjointe</h3>
+<div id="outline-container-orgababaa5" class="outline-3">
+<h3 id="orgababaa5"><span class="section-number-3">3.4.</span> Variation conjointe</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 Considérons maintenant deux processus stochastiques \(X,Y\). Nous définissons la variation conjointe \(\variation{X,Y}\) :
@@ -2713,8 +2724,8 @@ X(t) Y(t) - X(0) Y(0) &= \int_0^t d(X Y)(s) \)
 \end{align}
 </div>
 </div>
-<div id="outline-container-org0f8e19f" class="outline-3">
-<h3 id="org0f8e19f"><span class="section-number-3">3.5.</span> Relations variations quadratiques - conjointes</h3>
+<div id="outline-container-org5dadda8" class="outline-3">
+<h3 id="org5dadda8"><span class="section-number-3">3.5.</span> Relations variations quadratiques - conjointes</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 La définition nous donne directement :
@@ -2741,8 +2752,8 @@ d'où l'on déduit :
 </p>
 </div>
 </div>
-<div id="outline-container-org60d14b7" class="outline-3">
-<h3 id="org60d14b7"><span class="section-number-3">3.6.</span> Variation d'ordre quelconque</h3>
+<div id="outline-container-org5e23c97" class="outline-3">
+<h3 id="org5e23c97"><span class="section-number-3">3.6.</span> Variation d'ordre quelconque</h3>
 <div class="outline-text-3" id="text-3-6">
 <p>
 Soit \(\delta \strictsuperieur 0\) et les temps \(t_k = k \delta\) où \(k = 0,...,\arrondisup{\frac{T}{\delta}}\). On définit la variation d'ordre \(n\) d'une fonction \(f\) :
@@ -2753,8 +2764,8 @@ Soit \(\delta \strictsuperieur 0\) et les temps \(t_k = k \delta\) où \(k = 0,.
 </p>
 </div>
 </div>
-<div id="outline-container-org709581f" class="outline-3">
-<h3 id="org709581f"><span class="section-number-3">3.7.</span> Calcul d'Ito</h3>
+<div id="outline-container-orgdfd7c8d" class="outline-3">
+<h3 id="orgdfd7c8d"><span class="section-number-3">3.7.</span> Calcul d'Ito</h3>
 <div class="outline-text-3" id="text-3-7">
 <p>
 Soit une fonction \(F : \setR^n \mapsto \setR\) et \(N\) processus stochastiques \(X_i\) dont les variations d'ordre \(n \ge 3\) s'annulent. Soit \(X=(X_1,...,X_N)\). On peut écrire le développement en série de Taylor d'ordre 2 :
@@ -2797,8 +2808,8 @@ F(X(t)) - F(X(0)) =  \sum_i \int_0^t \deriveepartielle{F}{X_i}(X(s)) \ dX_i(s) +
 </p>
 </div>
 </div>
-<div id="outline-container-org514bfa9" class="outline-4">
-<h4 id="org514bfa9"><span class="section-number-4">3.7.1.</span> Dérivées ordinaires</h4>
+<div id="outline-container-org0c3322c" class="outline-4">
+<h4 id="org0c3322c"><span class="section-number-4">3.7.1.</span> Dérivées ordinaires</h4>
 <div class="outline-text-4" id="text-3-7-1">
 <p>
 Dans le cas d'une seule variable, on a :
@@ -2827,8 +2838,8 @@ F(X(t)) - F(X(0)) = \sum_i \int_0^t \OD{F}{X}(X(s)) \ dX(s) + \)
 </div>
 </div>
 </div>
-<div id="outline-container-org65a62ae" class="outline-3">
-<h3 id="org65a62ae"><span class="section-number-3">3.8.</span> Mouvement Brownien</h3>
+<div id="outline-container-orgfb418f9" class="outline-3">
+<h3 id="orgfb418f9"><span class="section-number-3">3.8.</span> Mouvement Brownien</h3>
 <div class="outline-text-3" id="text-3-8">
 <p>
 Un mouvement brownien est un processus stochastique :
@@ -2879,8 +2890,8 @@ pour tout \(s \strictinferieur t \strictinferieur u\) positifs. On demande aussi
 </p>
 </div>
 </div>
-<div id="outline-container-org2df541d" class="outline-4">
-<h4 id="org2df541d"><span class="section-number-4">3.8.1.</span> Variation quadratique</h4>
+<div id="outline-container-orgc183cc3" class="outline-4">
+<h4 id="orgc183cc3"><span class="section-number-4">3.8.1.</span> Variation quadratique</h4>
 <div class="outline-text-4" id="text-3-8-1">
 <p>
 Si les mouvements browniens sont continus, ils ne sont pas dérivables. Comme les variations sont normalement distribuées avec une moyenne nulle et une variance \(t - s\), on en déduit (en utilisant par exemple le moment générateur des densités normales) :
@@ -2934,16 +2945,16 @@ Ce que l'on note symboliquement sous forme différentielle par :
 </p>
 </div>
 </div>
-<div id="outline-container-orga9620c2" class="outline-4">
-<h4 id="orga9620c2"><span class="section-number-4">3.8.2.</span> Variations d'ordre quelconque</h4>
+<div id="outline-container-org066440d" class="outline-4">
+<h4 id="org066440d"><span class="section-number-4">3.8.2.</span> Variations d'ordre quelconque</h4>
 <div class="outline-text-4" id="text-3-8-2">
 <p>
 Les variations \(\variation{B}^n\) d'un mouvement brownien s'annulent pour \(n \ge 3\).
 </p>
 </div>
 </div>
-<div id="outline-container-orgb653dfe" class="outline-4">
-<h4 id="orgb653dfe"><span class="section-number-4">3.8.3.</span> Multidimensionnel</h4>
+<div id="outline-container-org3502c72" class="outline-4">
+<h4 id="org3502c72"><span class="section-number-4">3.8.3.</span> Multidimensionnel</h4>
 <div class="outline-text-4" id="text-3-8-3">
 <p>
 Nous définissons un mouvement Brownien de dimension \(n\) comme une collection de \(n\) mouvements Browniens \(B_i\) indépendants et vérifiant :
@@ -2954,8 +2965,8 @@ Nous définissons un mouvement Brownien de dimension \(n\) comme une collection 
 </p>
 </div>
 </div>
-<div id="outline-container-org23b6cbb" class="outline-4">
-<h4 id="org23b6cbb"><span class="section-number-4">3.8.4.</span> Calul d'Ito</h4>
+<div id="outline-container-orgdd56353" class="outline-4">
+<h4 id="orgdd56353"><span class="section-number-4">3.8.4.</span> Calul d'Ito</h4>
 <div class="outline-text-4" id="text-3-8-4">
 <p>
 Dans le cas de \(N\) mouvement browniens \(B_i\), les équations d'Ito deviennent :
@@ -2991,8 +3002,8 @@ F(X(t)) - F(X(0)) = \sum_i \int_0^t \deriveepartielle{F}{X_i}(X(s)) \ dX_i(s) + 
 </div>
 </div>
 </div>
-<div id="outline-container-orgb3e30a2" class="outline-4">
-<h4 id="orgb3e30a2"><span class="section-number-4">3.8.5.</span> Dérivée ordinaire</h4>
+<div id="outline-container-org6fa9c9c" class="outline-4">
+<h4 id="org6fa9c9c"><span class="section-number-4">3.8.5.</span> Dérivée ordinaire</h4>
 <div class="outline-text-4" id="text-3-8-5">
 <p>
 Le cas particulier unidimensionnel nous donne :
@@ -3036,7 +3047,7 @@ AFAIRE : PROCESSUS DE POISSON
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-10-19 dim 17:06</p>
+<p class="date">Created: 2025-10-20 lun 13:29</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

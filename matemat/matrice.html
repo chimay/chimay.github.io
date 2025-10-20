@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-10-20 lun 13:25 -->
+<!-- 2025-10-20 lun 13:24 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Eclats de vers : Matemat : Suites de rationnels</title>
+<title>Eclats de vers : Matemat : Matrices</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
 <style type="text/css">
@@ -228,7 +228,7 @@
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Eclats de vers : Matemat : Suites de rationnels</h1>
+<h1 class="title">Eclats de vers : Matemat : Matrices</h1>
 <p>
 <a href="index.html">Index des Grimoires</a>
 </p>
@@ -241,12 +241,22 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org98823ef">1. Dépendances</a></li>
-<li><a href="#orgcde9a9f">2. Définition</a></li>
-<li><a href="#org564d9ca">3. Distance</a></li>
-<li><a href="#org8e77bd1">4. Équivalence</a></li>
-<li><a href="#orgae95a40">5. Cauchy</a></li>
-<li><a href="#org2006476">6. Suite inverse</a></li>
+<li><a href="#orgf9bad98">1. Dépendances</a></li>
+<li><a href="#org441eba6">2. Définition</a></li>
+<li><a href="#orgfdd6f87">3. Composantes</a></li>
+<li><a href="#orgb318bdc">4. Blocs</a></li>
+<li><a href="#orgf0f104a">5. Partitionnement en blocs</a></li>
+<li><a href="#org40dfc41">6. Formes lignes et colonnes</a></li>
+<li><a href="#org2334e75">7. Transposée</a></li>
+<li><a href="#org7edf69f">8. Vecteurs lignes et colonnes</a></li>
+<li><a href="#org0ebd771">9. Carrées et rectangulaires</a></li>
+<li><a href="#org55ae1f1">10. Matrices diagonales</a></li>
+<li><a href="#org586b7f1">11. Matrices triangulaires</a></li>
+<li><a href="#org9cb954c">12. Egalité</a></li>
+<li><a href="#org39788e4">13. Ordre partiel</a></li>
+<li><a href="#orgb50f595">14. Addition et soustraction</a></li>
+<li><a href="#org9a792c9">15. Multiplication mixte</a></li>
+<li><a href="#org8b12c43">16. Conjuguée</a></li>
 </ul>
 </div>
 </div>
@@ -420,341 +430,653 @@
 </p>
 
 <p>
-\label{chap:suitesDeRationnels}
+\label{chap:matrices}
 </p>
-<div id="outline-container-org98823ef" class="outline-2">
-<h2 id="org98823ef"><span class="section-number-2">1.</span> Dépendances</h2>
+<div id="outline-container-orgf9bad98" class="outline-2">
+<h2 id="orgf9bad98"><span class="section-number-2">1.</span> Dépendances</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
-<li>Chapitre \ref{chap:rationnels} : Les rationnels</li>
-<li>Chapitre \ref{chap:distances} : Les distances</li>
-<li>Chapitre \ref{chap:limites} : Les limites</li>
+<li>Chapitre \ref{chap:reel} : Les réels</li>
+<li>Chapitre \ref{chap:complexe} : Les complexes</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgcde9a9f" class="outline-2">
-<h2 id="orgcde9a9f"><span class="section-number-2">2.</span> Définition</h2>
+<div id="outline-container-org441eba6" class="outline-2">
+<h2 id="org441eba6"><span class="section-number-2">2.</span> Définition</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-Une suite de rationnels, ou suite rationnelle est une suite \(s : \setN \mapsto \setQ\) :
+Les matrices sont des tableaux de réels, de complexes, ou de composantes
+d'une autre nature appartenant à un corps quelconque. Voici un exemple
+d'une matrice à \(m\) lignes et \(n\) colonnes :
+</p>
+
+<div class="org-center">
+<p>
+\(
+A = \begin{Matrix}{cccc}
+a_{11} & a_{12} & \ldots & a_{1n} \\
+a_{21} & a_{22} & \ldots & a_{2n} \\
+\vdots &        & \ddots &  \vdots \\
+a_{m1} & a_{m2} & \ldots & a_{mn}
+\end{Matrix}
+\)
+</p>
+</div>
+
+<p>
+où les \(a_{ij}\) appartiennent à un corps \(\corps\). On a également des versions simplifiées de cette notation :
 </p>
 
 <p>
-\[s : n \mapsto s_n\]
+\[A = ( a_{ij} )_{i,j} = [ a_{ij} ]_{i,j}\]
+</p>
+
+<p>
+Par convention, le numéro de ligne passe avant le numéro de colonne à l'extérieur de la parenthèse (ou du crochet).
+</p>
+
+<p>
+On note \(\matrice(\corps,m,n)\) l'ensemble des matrices à \(m\) lignes et \(n\) colonnes. On dit d'une matrice \(A \in \matrice(\corps,m,n)\) qu'elle est de taille \((m,n)\).
 </p>
 </div>
 </div>
-<div id="outline-container-org564d9ca" class="outline-2">
-<h2 id="org564d9ca"><span class="section-number-2">3.</span> Distance</h2>
+<div id="outline-container-orgfdd6f87" class="outline-2">
+<h2 id="orgfdd6f87"><span class="section-number-2">3.</span> Composantes</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-On définit une distance sur l'ensemble des rationnels \(\setQ\) par :
+Soit \(A = (a_{ij})_{i,j}\). La fonction \(\composante_{ij}\) donne la
+composante située à la \(i^{ème}\) ligne et à la \(j^{ème}\) colonne :
 </p>
 
 <p>
-\[\distance(x,y) = \abs{x - y}\]
+\[a_{ij} = \composante_{ij} A\]
 </p>
-
-<p>
-pour tout \(x,y \in \setQ\). On a bien \(\distance(x,y) \ge 0\).
-La condition \(\distance(x,y) = 0\) implique que \(\abs{x - y}\),
-donc \(x - y = 0\) et \(x = y\). Enfin :
-</p>
-
-\begin{align}
-\distance(x,z) &= \abs{x - z} \\
-&\le \abs{x - y} + \abs{y - z} \\
-&\le \distance(x,y) + \distance(y,z)
-\end{align}
 </div>
 </div>
-<div id="outline-container-org8e77bd1" class="outline-2">
-<h2 id="org8e77bd1"><span class="section-number-2">4.</span> Équivalence</h2>
+<div id="outline-container-orgb318bdc" class="outline-2">
+<h2 id="orgb318bdc"><span class="section-number-2">4.</span> Blocs</h2>
 <div class="outline-text-2" id="text-4">
 <p>
-Soit les suites rationnelles \(s,t : \setN \mapsto \setQ\) vérifiant \(s \equiv t\). On a :
+Soit \(A = (a_{ij})_{i,j}\). La fonction \(\bloc_{ijkl}\) donne la sous-matrice située entre la \(i^{ème}\) et la \(j^{ème}\) ligne, ainsi qu'entre la \(k^{ième}\) et la \(l^{ième}\) colonne :
 </p>
 
+<div class="org-center">
 <p>
-\[\lim_{n \to \infty} \distance(s_n,t_n) = \lim_{n \to \infty} \abs{s_n - t_n} = 0\]
-</p>
-
-<p>
-On en déduit que :
-</p>
-
-<p>
-\[\lim_{n \to \infty} (s_n - t_n) = 0\]
+\(
+\bloc_{ijkl} A = \begin{Matrix}{cccc}
+a_{ik} & a_{i,k+1} & \ldots & a_{il} \\
+a_{i+1,k} & a_{i+1,k+1} & \ldots & a_{i+1,l} \\
+\vdots &        & \ddots &  \vdots \\
+a_{jk} & a_{j,k+1} & \ldots & a_{jl}
+\end{Matrix}
+\)
 </p>
 </div>
-<div id="outline-container-orgf90e320" class="outline-3">
-<h3 id="orgf90e320"><span class="section-number-3">4.1.</span> Réciproque</h3>
-<div class="outline-text-3" id="text-4-1">
-<p>
-Supposons que :
-</p>
 
 <p>
-\[\lim_{n \to \infty} (s_n - t_n) = 0\]
-</p>
-
-<p>
-Choisissons \(\epsilon \strictsuperieur 0\) et le naturel \(K(\epsilon)\) tel que :
-</p>
-
-<p>
-\[\distance(s_n - t_n, 0) \le \epsilon\]
-</p>
-
-<p>
-pour tout \(k \ge K(\epsilon)\). Par définition de la distance entre rationnels, on a :
-</p>
-
-<p>
-\[\distance(s_n - t_n, 0) = \abs{(s_n - t_n) - 0} = \abs{s_n - t_n}\]
-</p>
-
-<p>
-on en conclut que :
-</p>
-
-<p>
-\[\lim_{n \to \infty} \distance(s_n,t_n) = \lim_{n \to \infty} \abs{s_n - t_n} = 0\]
-</p>
-
-<p>
-c'est-à-dire \(s \equiv t\) par définition.
+On appelle bloc une telle sous-matrice.
 </p>
 </div>
 </div>
-</div>
-<div id="outline-container-orgae95a40" class="outline-2">
-<h2 id="orgae95a40"><span class="section-number-2">5.</span> Cauchy</h2>
+<div id="outline-container-orgf0f104a" class="outline-2">
+<h2 id="orgf0f104a"><span class="section-number-2">5.</span> Partitionnement en blocs</h2>
 <div class="outline-text-2" id="text-5">
+<p>
+Il est parfois très utile de partitionner une matrice en blocs, ou de former une matrice plus grande à partir de matrices de tailles plus petites. On note alors :
+</p>
+
+<div class="org-center">
+\begin{eqnarray*}
+A &=&
+\begin{Matrix}{cc}
+B & C \\
+D & E
+\end{Matrix} \\
+&=&
+\begin{Matrix}{cccccc}
+b_{11} & \ldots & b_{1n} & c_{11} & \ldots & c_{1p} \\
+\vdots &        & \vdots & \vdots &        & \vdots \\
+b_{m1} & \ldots & b_{mn} & c_{m1} & \ldots & c_{mp} \\
+d_{11} & \ldots & d_{1n} & e_{11} & \ldots & e_{1p} \\
+\vdots &        & \vdots & \vdots &       & \vdots \\
+d_{r1} & \ldots & d_{rn} & e_{r1} & \ldots & e_{rp}
+\end{Matrix}
+\end{eqnarray*}
 </div>
-<div id="outline-container-org14370e5" class="outline-3">
-<h3 id="org14370e5"><span class="section-number-3">5.1.</span> Croissante</h3>
-<div class="outline-text-3" id="text-5-1">
-<p>
-Soit une suite de Cauchy \(u : \setN \mapsto \setQ\) :
-</p>
 
 <p>
-\[u : n \mapsto u_n\]
-</p>
-
-<p>
-croissante :
-</p>
-
-<p>
-\[u_0 \le u_1 \le ... \le u_k \le ...\]
-</p>
-
-<p>
-Comme :
-</p>
-
-<p>
-\[u_n \ge u_0\]
-</p>
-
-<p>
-pour tout \(n \in \setN\), on voit que la suite est minorée
-par \(u_0\). On peut trouver un naturel \(K\) tel que :
-</p>
-
-<p>
-\[\distance(u_m,u_n) = \abs{u_m - u_n} \le 1\]
-</p>
-
-<p>
-pour tout naturels \(m,n \ge K\). Soit \(n \in \setN\)
-vérifiant \(n \ge K\). On a :
-</p>
-
-<p>
-\[\abs{u_n - u_K} = u_n - u_K \le 1\]
-</p>
-
-<p>
-d'où :
-</p>
-
-<p>
-\[u_n \le u_K + 1\]
-</p>
-
-<p>
-Pour tout naturel \(k \le K\), on a :
-</p>
-
-<p>
-\[u_k \le u_n \le u_K + 1\]
-</p>
-
-<p>
-En posant :
-</p>
-
-<p>
-\[S = u_K + 1\]
-</p>
-
-<p>
-on voit que :
-</p>
-
-<p>
-\[u_n \le S\]
-</p>
-
-<p>
-pour tout \(n \in \setN\). Une suite de Cauchy croissante est également majorée.
+où les \(b_{ij},c_{ij},d_{ij},e_{ij}\) sont respectivement les composantes des matrices \(B,C,D,E\). Ces matrices doivent évidemment être de tailles compatibles (nombres de lignes identiques pour \(B\) et \(C\), ainsi que pour \(D\) et \(E\) ; nombres de colonnes identiques pour \(B\) et \(D\), ainsi que pour \(C\) et \(E\)).
 </p>
 </div>
 </div>
-<div id="outline-container-org87a53a5" class="outline-3">
-<h3 id="org87a53a5"><span class="section-number-3">5.2.</span> Décroissante</h3>
-<div class="outline-text-3" id="text-5-2">
-<p>
-Soit une suite de Cauchy \(u : \setN \mapsto \setQ\) :
-</p>
-
-<p>
-\[u : n \mapsto u_n\]
-</p>
-
-<p>
-décroissante :
-</p>
-
-<p>
-\[u_0 \ge u_1 \ge ... \ge u_k \ge ...\]
-</p>
-
-<p>
-Comme :
-</p>
-
-<p>
-\[u_n \le u_0\]
-</p>
-
-<p>
-pour tout \(n \in \setN\), on voit que la suite est majorée
-par \(u_0\). On peut trouver un naturel \(K\) tel que :
-</p>
-
-<p>
-\[\distance(u_m,u_n) = \abs{u_m - u_n} \le 1\]
-</p>
-
-<p>
-pour tout naturels \(m,n \ge K\). Soit \(n \in \setN\)
-vérifiant \(n \ge K\). On a :
-</p>
-
-<p>
-\[\abs{u_n - u_K} = u_K - u_n \le 1\]
-</p>
-
-<p>
-d'où :
-</p>
-
-<p>
-\[u_n \ge u_K - 1\]
-</p>
-
-<p>
-Pour tout naturel \(k \le K\), on a :
-</p>
-
-<p>
-\[u_k \ge u_n \ge u_K - 1\]
-</p>
-
-<p>
-En posant :
-</p>
-
-<p>
-\[I = u_K - 1\]
-</p>
-
-<p>
-on voit que :
-</p>
-
-<p>
-\[u_n \ge I\]
-</p>
-
-<p>
-pour tout \(n \in \setN\). Une suite de Cauchy décroissante est également minorée.
-</p>
-</div>
-</div>
-</div>
-<div id="outline-container-org2006476" class="outline-2">
-<h2 id="org2006476"><span class="section-number-2">6.</span> Suite inverse</h2>
+<div id="outline-container-org40dfc41" class="outline-2">
+<h2 id="org40dfc41"><span class="section-number-2">6.</span> Formes lignes et colonnes</h2>
 <div class="outline-text-2" id="text-6">
 <p>
-Soit un rationnel \(I_0\) vérifiant \(I_0 \strictsuperieur 0\) et la suite
-\(I : \setN \setminus \{ 0 \} \mapsto \setQ\) définie par :
+On peut exprimer une matrice \(A \in \matrice(\corps,m,n)\) sous la forme de lignes superposées. Soit :
+</p>
+
+<div class="org-center">
+<p>
+\(
+A =
+</p>
+\begin{Matrix}{c}
+l_1 \\
+l_2 \\
+\vdots \\
+l_m
+\end{Matrix}
+<p>
+\)
+</p>
+</div>
+
+<p>
+où les \(l_i \in \matrice(\corps,1,n)\) sont les lignes de \(A\). On note :
 </p>
 
 <p>
-\[I : n \mapsto I_n = \frac{I_0}{n}\]
+\[\ligne_i A = l_i\]
 </p>
 
 <p>
-pour tout naturel \(n\) vérifiant \(n \ne 0\). Soit \(\epsilon \strictsuperieur 0\).
-Comme \(I_0\) est strictement positif, on a :
+On peut aussi l'exprimer sous la forme de colonnes juxtaposées. Soit :
 </p>
 
 <p>
-\[\epsilon \cdot \frac{1}{I_0} = \frac{\epsilon}{I_0} \strictsuperieur 0\]
+\[A = [c_1 \ c_2 \ldots \ c_n]\]
 </p>
 
 <p>
-Soit \(\epsilon \strictsuperieur 0\). On peut trouver un naturel \(n\) tel que :
+où les \(c_i \in \matrice(\corps,m,1)\) sont les colonnes de \(A\). On note :
 </p>
 
 <p>
-\[\frac{1}{n} \strictinferieur \frac{\epsilon}{I_0}\]
+\[\colonne_i A = c_i\]
+</p>
+</div>
+</div>
+<div id="outline-container-org2334e75" class="outline-2">
+<h2 id="org2334e75"><span class="section-number-2">7.</span> Transposée</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Transposer une matrice \(A = (a_{ij})_{i,j} \in \matrice(\corps,m,n)\) consiste à agencer ses lignes en colonnes et vice-versa :
+</p>
+
+<div class="org-center">
+<p>
+\(
+A^T = \begin{Matrix}{cccc}
+a_{11} & a_{21} & \ldots & a_{m1} \\
+a_{12} & a_{22} & \ldots & a_{m2} \\
+\vdots &        & \ddots &  \vdots \\
+a_{1n} & a_{2n} & \ldots & a_{mn}
+\end{Matrix} = (a_{ji})_{i,j}
+\)
+</p>
+</div>
+
+<p>
+On voit que la transposée \(A^T \in \matrice(\corps,n,m)\).
 </p>
 
 <p>
-On a alors :
+On a clairement :
 </p>
 
 <p>
-\[\frac{I_0}{n} \strictinferieur \epsilon\]
+\[\big( A^T \big)^T = A\]
+</p>
+</div>
+</div>
+<div id="outline-container-org7edf69f" class="outline-2">
+<h2 id="org7edf69f"><span class="section-number-2">8.</span> Vecteurs lignes et colonnes</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+On peut considérer un vecteur ligne comme une matrice ne possédant
+qu'une seule ligne. Un vecteur ligne est donc de taille générique
+\((1,n)\).
 </p>
 
 <p>
-et :
+De même, on peut considérer un vecteur colonne omme une matrice ne
+possédant qu'une seule colonne. Un vecteur colonne est donc de taille
+générique \((m,1)\).
 </p>
 
 <p>
-\[\distance\left(0,\frac{I_0}{n}\right) = \abs{\frac{I_0}{n} - 0} = \abs{\frac{I_0}{n}} \strictinferieur \epsilon\]
+Les vecteurs <i>colonne</i> sont notés :
 </p>
 
 <p>
-On en déduit que :
+\[x = (x_i)_i\]
 </p>
 
 <p>
-\[\lim_{n \to \infty} \frac{I_0}{n} = 0\]
+On a aussi :
+</p>
+
+<p>
+\[x_i = \composante_i x\]
+</p>
+</div>
+<div id="outline-container-org4479db7" class="outline-3">
+<h3 id="org4479db7"><span class="section-number-3">8.1.</span> Transposée</h3>
+<div class="outline-text-3" id="text-8-1">
+<p>
+Soit le $n$-tuple \(x \in \corps^n\) représenté par le vecteur ligne :
+</p>
+
+<p>
+\[l = [x_1 \ x_2 \ \ldots \ x_n]\]
+</p>
+
+<p>
+et le vecteur colonne :
+</p>
+
+<div class="org-center">
+<p>
+\[ c = \begin{Matrix}{c}
+x_1 \\
+x_2 \\
+\vdots \\
+x_n
+\end{Matrix} \]
+</p>
+</div>
+
+<p>
+On a clairement :
+</p>
+
+<div class="org-center">
+<p>
+\[ \begin{Matrix}{c}
+x_1 \\
+x_2 \\
+\vdots \\
+x_n
+\end{Matrix}^T
+=
+[x_1 \ x_2 \ \ldots \ x_n] \]
+</p>
+</div>
+
+<p>
+et :
+</p>
+
+<div class="org-center">
+<p>
+\[ [x_1 \ x_2 \ \ldots \ x_n]^T =
+\begin{Matrix}{c}
+x_1 \\
+x_2 \\
+\vdots \\
+x_n
+\end{Matrix} \]
+</p>
+</div>
+
+<p>
+autrement dit, le vecteur ligne est la transposée du vecteur colonne :
+</p>
+
+<p>
+\[ l = c^T \]
+</p>
+
+<p>
+et vice versa :
+</p>
+
+<p>
+\[ c = l^T \]
+</p>
+</div>
+</div>
+<div id="outline-container-org31aa3a4" class="outline-3">
+<h3 id="org31aa3a4"><span class="section-number-3">8.2.</span> Équivalence avec \(\corps^n\)</h3>
+<div class="outline-text-3" id="text-8-2">
+<p>
+A partir d'un $n$-tuple \((x_1,x_2,...,x_n) \in \corps^n\), on peut former
+un vecteur ligne \(l \in \matrice(\corps,1,n)\) et un vecteur colonne \(c
+\in \matrice(\corps,n,1)\). Les réciproques étant également vraies,
+on a les équivalences :
+</p>
+
+<div class="org-center">
+<p>
+\(\matrice(\corps,1,n) \equiv \matrice(\corps,n,1) \equiv \corps^n\)
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org0ebd771" class="outline-2">
+<h2 id="org0ebd771"><span class="section-number-2">9.</span> Carrées et rectangulaires</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+Les matrices \(A \in \matrice(\corps,n,n)\) ayant même nombre
+de colonnes et de lignes sont dites « carrées ». Les
+matrices \(A \in \matrice(\corps,m,n)\) avec \(m \ne n\) sont dites
+« rectangulaires ». Lorsque \(m \strictinferieur n\), on dit que la
+matrice est « longue ». Si \(m \strictsuperieur n\), on dit que la
+matrice est « haute ».
+</p>
+</div>
+</div>
+<div id="outline-container-org55ae1f1" class="outline-2">
+<h2 id="org55ae1f1"><span class="section-number-2">10.</span> Matrices diagonales</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+Une matrice diagonale contient des composantes nulles partout, à
+l'exception de la diagonale où aucune contrainte n'est fixée. On peut
+représenter une matrice diagonale \(D \in \matrice(\corps,m,n)\) par :
+</p>
+
+<p>
+\[D = ( d_i \cdot \indicatrice_{ij} )_{i,j}\]
+</p>
+
+<p>
+On peut aussi former une matrice diagonale de taille \((m,n)\) à partir
+d'un vecteur \(d = (d_i)_i\) de taille \((p,1)\), où \(p \le \min \{ m ,
+n \}\). On le note :
+</p>
+
+<p>
+\[D = \diagonale_{m,n}(d) = \diagonale_{m,n}(d_1,...,d_p)\]
+</p>
+
+<p>
+où :
+</p>
+
+<div class="org-center">
+<p>
+\[ \composante_{ij} \diagonale_{m,n}(d_1,...,d_p) =
+\begin{cases}
+d_i & \text{ si } i = j \in \{1,2,...,p\} \\
+0 & \text{ sinon}
+\end{cases} \]
+</p>
+</div>
+</div>
+<div id="outline-container-orgf19b75d" class="outline-3">
+<h3 id="orgf19b75d"><span class="section-number-3">10.1.</span> Carrée</h3>
+<div class="outline-text-3" id="text-10-1">
+<p>
+Dans le cas particulier où \(m = n\), on note aussi :
+</p>
+
+<p>
+\[\diagonale_n(d) = \diagonale_{n,n}(d)\]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org586b7f1" class="outline-2">
+<h2 id="org586b7f1"><span class="section-number-2">11.</span> Matrices triangulaires</h2>
+<div class="outline-text-2" id="text-11">
+<p>
+Les composantes des matrices triangulaires supérieures ne peuvent être non nulles qu'au-dessus de la diagonale, c'est-à-dire lorsque \(i \le j\). Elles peuvent se représenter par :
+</p>
+
+<p>
+\[T = (t_{ij} \cdot \tau^+_{ij})_{i,j}\]
+</p>
+
+<p>
+où :
+</p>
+
+<div class="org-center">
+<p>
+\[ \tau^+_{ij} =
+\begin{cases}
+1 & \mbox{ si } i \le j \\
+0 & \mbox{ si } i \strictsuperieur j
+\end{cases} \]
+</p>
+</div>
+
+<p>
+Les composantes des matrices triangulaires inférieures ne peuvent être non nulles qu'au-dessous de la diagonale, c'est-à-dire lorsque \(i \ge j\). Elles peuvent se représenter par :
+</p>
+
+<p>
+\[T = (t_{ij} \cdot \tau^-_{ij})_{i,j}\]
+</p>
+
+<p>
+où :
+</p>
+
+<div class="org-center">
+<p>
+\[ \tau^-_{ij} =
+\begin{cases}
+1 & \mbox{ si } i \ge j \\
+0 & \mbox{ si } i \strictinferieur j
+\end{cases} \]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org9cb954c" class="outline-2">
+<h2 id="org9cb954c"><span class="section-number-2">12.</span> Egalité</h2>
+<div class="outline-text-2" id="text-12">
+<p>
+Il est clair que deux matrices \(A,B \in \matrice(\corps,m,n)\) :
+</p>
+
+<div class="org-center">
+<p>
+\(
+A = ( a_{ij} )_{i,j} \)
+</p>
+
+<p>
+\(
+B = ( b_{ij} )_{i,j}
+\)
+</p>
+</div>
+
+<p>
+sont égales (\(A = B\)) si tous leurs éléments le sont :
+</p>
+
+<p>
+\[a_{ij} = b_{ij}\]
+</p>
+
+<p>
+pour tout \((i,j) \in \{ 1,2,...,m \} \times \{ 1,2,...,n \}\).
+</p>
+</div>
+</div>
+<div id="outline-container-org39788e4" class="outline-2">
+<h2 id="org39788e4"><span class="section-number-2">13.</span> Ordre partiel</h2>
+<div class="outline-text-2" id="text-13">
+<p>
+Soit les matrices \(A,B \in \matrice(\corps,m,n)\) :
+</p>
+
+<div class="org-center">
+<p>
+\(
+A = ( a_{ij} )_{i,j} \)
+</p>
+
+<p>
+\(
+B = ( b_{ij} )_{i,j}
+\)
+</p>
+</div>
+
+<p>
+On dit que \(A\) est inférieure à \(B\), et on le note \(A \le B\), si :
+</p>
+
+<p>
+\[a_{ij} \le b_{ij}\]
+</p>
+
+<p>
+pour tout \((i,j) \in \{ 1,2,...,m \} \times \{ 1,2,...,n \}\).
+</p>
+</div>
+</div>
+<div id="outline-container-orgb50f595" class="outline-2">
+<h2 id="orgb50f595"><span class="section-number-2">14.</span> Addition et soustraction</h2>
+<div class="outline-text-2" id="text-14">
+<p>
+Soit les matrices de tailles identiques \(A, B \in \matrice(\corps,m,n)\) :
+</p>
+
+<div class="org-center">
+<p>
+\(
+A = (a_{ij})_{i,j} \)
+</p>
+
+<p>
+\(
+B = (b_{ij})_{i,j}
+\)
+</p>
+</div>
+
+<p>
+L'addition et la soustraction des matrices sont simplement définies par l'addition et la soustraction des composantes :
+</p>
+
+<div class="org-center">
+<p>
+\(
+A + B = (a_{ij} + b_{ij})_{i,j} \)
+</p>
+
+<p>
+\(
+A - B = (a_{ij} - b_{ij})_{i,j}
+\)
+</p>
+</div>
+
+<p>
+On a donc clairement :
+</p>
+
+<p>
+\[A + B = B + A\]
+</p>
+</div>
+<div id="outline-container-org15fe274" class="outline-3">
+<h3 id="org15fe274"><span class="section-number-3">14.1.</span> Neutre</h3>
+<div class="outline-text-3" id="text-14-1">
+<p>
+La matrice nulle \(0\) est le neutre pour cette opération :
+</p>
+
+<p>
+\[A + 0 = A\]
+</p>
+
+<p>
+On en déduit que tous ses éléments doivent être nuls :
+</p>
+
+<p>
+\[0 = ( 0 )_{i,j}\]
+</p>
+
+<p>
+On note \(0_{m,n}\) au lieu de \(0\) lorsqu'on veut préciser que \(0\) est
+de taille \((m,n)\).
+</p>
+</div>
+</div>
+<div id="outline-container-org55acac0" class="outline-3">
+<h3 id="org55acac0"><span class="section-number-3">14.2.</span> Opposé</h3>
+<div class="outline-text-3" id="text-14-2">
+<p>
+L'opposé de \(A\), noté \(-A\), est tel que :
+</p>
+
+<p>
+\[A + (-A) = 0\]
+</p>
+
+<p>
+On a donc clairement :
+</p>
+
+<p>
+\[-A = (-a_{ij})_{i,j}\]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org9a792c9" class="outline-2">
+<h2 id="org9a792c9"><span class="section-number-2">15.</span> Multiplication mixte</h2>
+<div class="outline-text-2" id="text-15">
+<p>
+On définit la multiplication mixte \(\cdot : \corps \times \matrice(\corps,m,n) \to \matrice(\corps,m,n)\) par :
+</p>
+
+<p>
+\[\beta \cdot A = (\beta \cdot a_{ij})_{i,j}\]
+</p>
+
+<p>
+où \(\beta \in \corps\) et \(A \in \matrice(\corps,m,n)\).
+</p>
+
+<p>
+Choissons également \(\gamma \in \corps\). On note comme d'habitude :
+</p>
+
+<div class="org-center">
+<p>
+\(
+A \cdot \beta = \beta \cdot A \)
+</p>
+
+<p>
+\(
+\gamma \cdot \beta \cdot A = (\gamma \cdot \beta) \cdot A \)
+</p>
+
+<p>
+\(
+\beta A = \beta \cdot A
+\)
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org8b12c43" class="outline-2">
+<h2 id="org8b12c43"><span class="section-number-2">16.</span> Conjuguée</h2>
+<div class="outline-text-2" id="text-16">
+<p>
+La conjuguée d'une matrice \(A = (a_{ij})_{i,j} \in \matrice(\setC,m,n)\) est définie par la conjuguée des composantes :
+</p>
+
+<p>
+\[\conjugue A = \bar{A} = ( \bar{a}_{ij} )_{i,j} = ( \conjugue a_{ij} )_{i,j}\]
 </p>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-10-20 lun 13:25</p>
+<p class="date">Created: 2025-10-20 lun 13:24</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

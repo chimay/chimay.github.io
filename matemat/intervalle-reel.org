@@ -1,0 +1,169 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Intervalles de réels
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:intervallesDeReels}
+
+* Dépendances
+
+  - Chapitre \ref{chap:reel} : Les nombres réels
+
+* Intervalles bornés
+
+Soit $a,b \in \setR$ avec $a \le b$. L'intervalle fermé $[a,b]$ est défini par :
+
+$$[a,b] = \{ x \in \setR : a \le x \le b \}$$
+
+L'intervalle ouvert $\intervalleouvert{a}{b}$ est défini par :
+
+$$\intervalleouvert{a}{b} \ = \{ x \in \setR : a \strictinferieur x \strictinferieur b \}$$
+
+On recontre aussi les intervalles semi-ouverts à gauche :
+
+$$\intervallesemiouvertgauche{a}{b} = \{ x \in \setR : a \strictinferieur x \le b \}$$
+
+ou à droite :
+
+$$\intervallesemiouvertdroite{a}{b} \ = \{ x \in \setR : a \le x \strictinferieur b \}$$
+
+
+* Intervalles non bornés
+
+Soit $a \in \setR$. Les intervalles non bornés sont des intervalles
+partant de l'infini négatif ou/et allant jusqu'à l'infini positif :
+
+\begin{align}
+\intervallesemiouvertdroite{a}{+\infty} &= \{ x \in \setR : x \ge a \} \\
+\intervalleouvert{a}{+\infty} &= \{ x \in \setR : x \strictsuperieur a \} \\
+\intervallesemiouvertgauche{-\infty}{a} &= \{ x \in \setR : x \le a \} \\
+\intervalleouvert{-\infty}{a} &= \{ x \in \setR : x \strictinferieur a \} \\
+\intervalleouvert{-\infty}{+\infty} &= \setR
+\end{align}
+
+* Boules
+
+Soit $c,r,x \in \setR$ avec $r \ge 0$. La condition $\abs{x - c} \le r$ est équivalente à $x - c \le r$ et $-(x - c) = c - x \le r$. On en déduit que :
+
+#+BEGIN_CENTER
+\(
+x \le c + r \)
+
+\(
+x \ge c - r
+\)
+#+END_CENTER
+
+ce qui revient à dire que $x \in [c - r, c + r]$. Nous obtenons un
+résultat analogue avec les inégalités strictes. On peut donc exprimer
+les boules en terme d'intervalles :
+
+\begin{align}
+\boule[c,r] &= [c - r, c + r] \\
+\boule(c,r) &= \ \intervalleouvert{c - r}{c + r}
+\end{align}
+
+On peut inverser ces relations et exprimer certains intervalles en termes de boules. Soit $a = c - r$ et $b = c + r$. On a alors $a \le b$ et :
+
+#+BEGIN_CENTER
+\(
+a + b = c - r + c + r = 2 c \)
+
+\(
+b - a = c + r - c + r = 2 r
+\)
+#+END_CENTER
+
+On en déduit que :
+
+\begin{align}
+[a,b] &= \boule\left[\frac{a + b}{2},\frac{b - a}{2}\right] \\ \\
+\intervalleouvert{a}{b} &= \boule\left(\frac{a + b}{2},\frac{b - a}{2}\right)
+\end{align}
+
+
+* Majorants et minorants
+
+Soit $a,b \in \setR$ avec $a \le b$ et $x \in \setR$.
+
+Pour que $x \ge [a,b]$, il faut que $x \ge b$. Si $y \in [a,b]$, on aura alors $x \ge b \ge y$ d'où $x \ge y$ par transitivité de l'ordre. On en déduit que :
+
+$$\major [a,b] = \intervallesemiouvertgauche{b}{+\infty}$$
+
+On obtient le même résultat pour l'intervalle ouvert :
+
+$$\major \intervalleouvert{a}{b} = \intervallesemiouvertgauche{b}{+\infty}$$
+
+ainsi que pour les intervalles semi-ouverts.
+
+Pour que $x \le [a,b]$, il faut que $x \le a$. Si $y \in [a,b]$, on aura alors $x \le a \le y$ d'où $x \le y$ par transitivité de l'ordre. On en déduit que :
+
+$$\minor [a,b] = \intervallesemiouvertdroite{-\infty}{a}$$
+
+On obtient le même résultat pour l'intervalle ouvert :
+
+$$\minor \intervalleouvert{a}{b} = \intervallesemiouvertdroite{-\infty}{a}$$
+
+ainsi que pour les intervalles semi-ouverts.
+
+
+* Maximum et minimum
+
+Soit $a,b \in \setR$ avec $a \le b$. On a clairement :
+
+\begin{align}
+\max [a,b] &= \max \intervallesemiouvertgauche{a}{b} = \max \intervallesemiouvertgauche{-\infty}{b} = b \\
+\min [a,b] &= \min \intervallesemiouvertdroite{a}{b} = \min \intervallesemiouvertdroite{a}{+\infty} \ = a
+\end{align}
+
+Les autre types d'intervalles n'admettent ni maximum ni minimum.
+
+
+* Supremum et infimum
+
+Dans le cas où le maximum de l'intervalle $I$ existe, on a $\sup I = \max I$. Dans les autres cas, on a par exemple :
+
+$$\sup \intervalleouvert{a}{b} = \min \major \intervalleouvert{a}{b} = \min [b, +\infty[ \ = b$$
+
+et le même résultat pour les intervalles semi-ouverts.
+
+Dans le cas où le minimum de l'intervalle $I$ existe, on a $\inf I = \min I$. Dans les autres cas, on a par exemple :
+
+$$\inf \intervalleouvert{a}{b} = \max \minor \intervalleouvert{a}{b} = \max \ ]-\infty, a] = a$$
+
+et le même résultat pour les intervalles semi-ouverts.
+
+
+* Adhérence, intérieur et frontière
+
+On peut vérifier que :
+
+\begin{align}
+\adh [a,b] &= \adh \intervalleouvert{a}{b} = [a,b] \\
+\interieur [a,b] &= \interieur \intervalleouvert{a}{b} = \ ]a,b[
+\end{align}
+
+et ainsi de suite. La frontière est donc simplement :
+
+$$\partial [a,b] = \partial \intervalleouvert{a}{b} = \{a,b\}$$
+
+

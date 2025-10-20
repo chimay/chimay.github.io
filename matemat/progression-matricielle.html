@@ -6,7 +6,7 @@
 <!-- 2025-10-20 lun 13:25 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Eclats de vers : Matemat : Suites de rationnels</title>
+<title>Eclats de vers : Matemat : Progressions matricielles</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
 <style type="text/css">
@@ -228,7 +228,7 @@
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Eclats de vers : Matemat : Suites de rationnels</h1>
+<h1 class="title">Eclats de vers : Matemat : Progressions matricielles</h1>
 <p>
 <a href="index.html">Index des Grimoires</a>
 </p>
@@ -241,12 +241,7 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org98823ef">1. Dépendances</a></li>
-<li><a href="#orgcde9a9f">2. Définition</a></li>
-<li><a href="#org564d9ca">3. Distance</a></li>
-<li><a href="#org8e77bd1">4. Équivalence</a></li>
-<li><a href="#orgae95a40">5. Cauchy</a></li>
-<li><a href="#org2006476">6. Suite inverse</a></li>
+<li><a href="#org577ce2d">1. Progression géométrique</a></li>
 </ul>
 </div>
 </div>
@@ -420,335 +415,70 @@
 </p>
 
 <p>
-\label{chap:suitesDeRationnels}
+\label{chap:progressionsMatricielles}
 </p>
-<div id="outline-container-org98823ef" class="outline-2">
-<h2 id="org98823ef"><span class="section-number-2">1.</span> Dépendances</h2>
+<div id="outline-container-org577ce2d" class="outline-2">
+<h2 id="org577ce2d"><span class="section-number-2">1.</span> Progression géométrique</h2>
 <div class="outline-text-2" id="text-1">
-<ul class="org-ul">
-<li>Chapitre \ref{chap:rationnels} : Les rationnels</li>
-<li>Chapitre \ref{chap:distances} : Les distances</li>
-<li>Chapitre \ref{chap:limites} : Les limites</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orgcde9a9f" class="outline-2">
-<h2 id="orgcde9a9f"><span class="section-number-2">2.</span> Définition</h2>
-<div class="outline-text-2" id="text-2">
 <p>
-Une suite de rationnels, ou suite rationnelle est une suite \(s : \setN \mapsto \setQ\) :
+Soit une matrice carréé \(A \in \matrice(\corps, n, n)\).
 </p>
 
 <p>
-\[s : n \mapsto s_n\]
+\[G_N = \sum_{k = 0}^N A^k = I + A + A^2 + ... + A^N\]
 </p>
 </div>
-</div>
-<div id="outline-container-org564d9ca" class="outline-2">
-<h2 id="org564d9ca"><span class="section-number-2">3.</span> Distance</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-orgc553ebb" class="outline-3">
+<h3 id="orgc553ebb"><span class="section-number-3">1.1.</span> Forme gauche</h3>
+<div class="outline-text-3" id="text-1-1">
 <p>
-On définit une distance sur l'ensemble des rationnels \(\setQ\) par :
+\[G_N = I + A \cdot (I + A + ... + A^N) - A^{N + 1}\]
 </p>
 
 <p>
-\[\distance(x,y) = \abs{x - y}\]
+\[G_N = I + A \cdot G_N - A^{N + 1}\]
 </p>
 
 <p>
-pour tout \(x,y \in \setQ\). On a bien \(\distance(x,y) \ge 0\).
-La condition \(\distance(x,y) = 0\) implique que \(\abs{x - y}\),
-donc \(x - y = 0\) et \(x = y\). Enfin :
-</p>
-
-\begin{align}
-\distance(x,z) &= \abs{x - z} \\
-&\le \abs{x - y} + \abs{y - z} \\
-&\le \distance(x,y) + \distance(y,z)
-\end{align}
-</div>
-</div>
-<div id="outline-container-org8e77bd1" class="outline-2">
-<h2 id="org8e77bd1"><span class="section-number-2">4.</span> Équivalence</h2>
-<div class="outline-text-2" id="text-4">
-<p>
-Soit les suites rationnelles \(s,t : \setN \mapsto \setQ\) vérifiant \(s \equiv t\). On a :
+\[(I - A) \cdot G_N = I - A^{N + 1}\]
 </p>
 
 <p>
-\[\lim_{n \to \infty} \distance(s_n,t_n) = \lim_{n \to \infty} \abs{s_n - t_n} = 0\]
-</p>
-
-<p>
-On en déduit que :
-</p>
-
-<p>
-\[\lim_{n \to \infty} (s_n - t_n) = 0\]
-</p>
-</div>
-<div id="outline-container-orgf90e320" class="outline-3">
-<h3 id="orgf90e320"><span class="section-number-3">4.1.</span> Réciproque</h3>
-<div class="outline-text-3" id="text-4-1">
-<p>
-Supposons que :
-</p>
-
-<p>
-\[\lim_{n \to \infty} (s_n - t_n) = 0\]
-</p>
-
-<p>
-Choisissons \(\epsilon \strictsuperieur 0\) et le naturel \(K(\epsilon)\) tel que :
-</p>
-
-<p>
-\[\distance(s_n - t_n, 0) \le \epsilon\]
-</p>
-
-<p>
-pour tout \(k \ge K(\epsilon)\). Par définition de la distance entre rationnels, on a :
-</p>
-
-<p>
-\[\distance(s_n - t_n, 0) = \abs{(s_n - t_n) - 0} = \abs{s_n - t_n}\]
-</p>
-
-<p>
-on en conclut que :
-</p>
-
-<p>
-\[\lim_{n \to \infty} \distance(s_n,t_n) = \lim_{n \to \infty} \abs{s_n - t_n} = 0\]
-</p>
-
-<p>
-c'est-à-dire \(s \equiv t\) par définition.
+\[(I - A) \cdot \sum_{k = 0}^N A^k = I - A^{N + 1}\]
 </p>
 </div>
 </div>
-</div>
-<div id="outline-container-orgae95a40" class="outline-2">
-<h2 id="orgae95a40"><span class="section-number-2">5.</span> Cauchy</h2>
-<div class="outline-text-2" id="text-5">
-</div>
-<div id="outline-container-org14370e5" class="outline-3">
-<h3 id="org14370e5"><span class="section-number-3">5.1.</span> Croissante</h3>
-<div class="outline-text-3" id="text-5-1">
+<div id="outline-container-org048520c" class="outline-3">
+<h3 id="org048520c"><span class="section-number-3">1.2.</span> Forme droite</h3>
+<div class="outline-text-3" id="text-1-2">
 <p>
-Soit une suite de Cauchy \(u : \setN \mapsto \setQ\) :
+\[G_N = I + (I + A + ... + A^N) \cdot A - A^{N + 1}\]
 </p>
 
 <p>
-\[u : n \mapsto u_n\]
+\[G_N = I + G_N \cdot A - A^{N + 1}\]
 </p>
 
 <p>
-croissante :
+\[G_N \cdot (I - A) = I - A^{N + 1}\]
 </p>
 
 <p>
-\[u_0 \le u_1 \le ... \le u_k \le ...\]
-</p>
-
-<p>
-Comme :
-</p>
-
-<p>
-\[u_n \ge u_0\]
-</p>
-
-<p>
-pour tout \(n \in \setN\), on voit que la suite est minorée
-par \(u_0\). On peut trouver un naturel \(K\) tel que :
-</p>
-
-<p>
-\[\distance(u_m,u_n) = \abs{u_m - u_n} \le 1\]
-</p>
-
-<p>
-pour tout naturels \(m,n \ge K\). Soit \(n \in \setN\)
-vérifiant \(n \ge K\). On a :
-</p>
-
-<p>
-\[\abs{u_n - u_K} = u_n - u_K \le 1\]
-</p>
-
-<p>
-d'où :
-</p>
-
-<p>
-\[u_n \le u_K + 1\]
-</p>
-
-<p>
-Pour tout naturel \(k \le K\), on a :
-</p>
-
-<p>
-\[u_k \le u_n \le u_K + 1\]
-</p>
-
-<p>
-En posant :
-</p>
-
-<p>
-\[S = u_K + 1\]
-</p>
-
-<p>
-on voit que :
-</p>
-
-<p>
-\[u_n \le S\]
-</p>
-
-<p>
-pour tout \(n \in \setN\). Une suite de Cauchy croissante est également majorée.
+\[\sum_{k = 0}^N A^k \cdot (I - A) = I - A^{N + 1}\]
 </p>
 </div>
 </div>
-<div id="outline-container-org87a53a5" class="outline-3">
-<h3 id="org87a53a5"><span class="section-number-3">5.2.</span> Décroissante</h3>
-<div class="outline-text-3" id="text-5-2">
+<div id="outline-container-orge0fb9e7" class="outline-3">
+<h3 id="orge0fb9e7"><span class="section-number-3">1.3.</span> Inversible</h3>
+<div class="outline-text-3" id="text-1-3">
 <p>
-Soit une suite de Cauchy \(u : \setN \mapsto \setQ\) :
+\[\sum_{k = 0}^N A^k = (I - A)^{-1} \cdot (I - A^{N + 1})\]
 </p>
 
 <p>
-\[u : n \mapsto u_n\]
-</p>
-
-<p>
-décroissante :
-</p>
-
-<p>
-\[u_0 \ge u_1 \ge ... \ge u_k \ge ...\]
-</p>
-
-<p>
-Comme :
-</p>
-
-<p>
-\[u_n \le u_0\]
-</p>
-
-<p>
-pour tout \(n \in \setN\), on voit que la suite est majorée
-par \(u_0\). On peut trouver un naturel \(K\) tel que :
-</p>
-
-<p>
-\[\distance(u_m,u_n) = \abs{u_m - u_n} \le 1\]
-</p>
-
-<p>
-pour tout naturels \(m,n \ge K\). Soit \(n \in \setN\)
-vérifiant \(n \ge K\). On a :
-</p>
-
-<p>
-\[\abs{u_n - u_K} = u_K - u_n \le 1\]
-</p>
-
-<p>
-d'où :
-</p>
-
-<p>
-\[u_n \ge u_K - 1\]
-</p>
-
-<p>
-Pour tout naturel \(k \le K\), on a :
-</p>
-
-<p>
-\[u_k \ge u_n \ge u_K - 1\]
-</p>
-
-<p>
-En posant :
-</p>
-
-<p>
-\[I = u_K - 1\]
-</p>
-
-<p>
-on voit que :
-</p>
-
-<p>
-\[u_n \ge I\]
-</p>
-
-<p>
-pour tout \(n \in \setN\). Une suite de Cauchy décroissante est également minorée.
+\[\sum_{k = 0}^N A^k = (I - A^{N + 1}) \cdot (I - A)^{-1}\]
 </p>
 </div>
-</div>
-</div>
-<div id="outline-container-org2006476" class="outline-2">
-<h2 id="org2006476"><span class="section-number-2">6.</span> Suite inverse</h2>
-<div class="outline-text-2" id="text-6">
-<p>
-Soit un rationnel \(I_0\) vérifiant \(I_0 \strictsuperieur 0\) et la suite
-\(I : \setN \setminus \{ 0 \} \mapsto \setQ\) définie par :
-</p>
-
-<p>
-\[I : n \mapsto I_n = \frac{I_0}{n}\]
-</p>
-
-<p>
-pour tout naturel \(n\) vérifiant \(n \ne 0\). Soit \(\epsilon \strictsuperieur 0\).
-Comme \(I_0\) est strictement positif, on a :
-</p>
-
-<p>
-\[\epsilon \cdot \frac{1}{I_0} = \frac{\epsilon}{I_0} \strictsuperieur 0\]
-</p>
-
-<p>
-Soit \(\epsilon \strictsuperieur 0\). On peut trouver un naturel \(n\) tel que :
-</p>
-
-<p>
-\[\frac{1}{n} \strictinferieur \frac{\epsilon}{I_0}\]
-</p>
-
-<p>
-On a alors :
-</p>
-
-<p>
-\[\frac{I_0}{n} \strictinferieur \epsilon\]
-</p>
-
-<p>
-et :
-</p>
-
-<p>
-\[\distance\left(0,\frac{I_0}{n}\right) = \abs{\frac{I_0}{n} - 0} = \abs{\frac{I_0}{n}} \strictinferieur \epsilon\]
-</p>
-
-<p>
-On en déduit que :
-</p>
-
-<p>
-\[\lim_{n \to \infty} \frac{I_0}{n} = 0\]
-</p>
 </div>
 </div>
 </div>

@@ -1,0 +1,211 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Matrices élémentaires
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+* Dépendances
+
+  - Chapitre \ref{chap:matrice} : Les matrices
+  - Chapitre \ref{chap:tenseur} : Les tenseurs
+
+* Introduction
+
+Les matrices élémentaires constituent une classe importante de matrice. Elles permettent d'obtenir d'importants résultats utiles tant sur le plan théorique que pour les applications numériques. Une matrice élémentaire de taille $(n,n)$ est déterminée par un scalaire $\alpha \in \corps$ et le produit tensoriel de deux vecteurs $u,v \in \corps^n$ :
+
+$$\matelementaire(\alpha,u,v) = I + \alpha \cdot u \otimes v = I + \alpha \cdot u \cdot v^\dual$$
+
+
+* Inverse
+
+Considérons le produit :
+
+\begin{align}
+\matelementaire(\alpha,u,v) \cdot \matelementaire(\beta,u,v) &= I + (\alpha + \beta) \cdot u \cdot v^\dual + \alpha \cdot \beta \cdot u \cdot v^\dual \cdot u \cdot v^\dual \)
+
+\(
+&= I + [\alpha + \beta + \alpha \cdot \beta \cdot (v^\dual \cdot u)] \cdot u \cdot v^\dual
+\end{align}
+
+On voit que si on peut trouver un scalaire $\beta$ tel que :
+
+$$\alpha + \beta + \alpha \cdot \beta \cdot (v^\dual \cdot u) = 0$$
+
+le produit des deux matrices sera égal à la matrice identité. Ce sera possible si $1 + \alpha \cdot v^\dual \cdot u \ne 0$. On a alors :
+
+$$\beta = - \frac{\alpha}{1 + \alpha \cdot (v^\dual \cdot u)}$$
+
+et :
+
+$$\matelementaire(\alpha,u,v) \cdot \matelementaire(\beta,u,v) = I$$
+
+Par symétrie, il est clair que le produit des deux matrices ne change pas lorsqu'on intervertit $\alpha$ et $\beta$. On a donc aussi :
+
+$$\matelementaire(\beta,u,v) \cdot \matelementaire(\alpha,u,v) = I$$
+
+Ces deux conditions étant remplies, on a :
+
+$$\matelementaire(\beta,u,v) = \matelementaire(\alpha,u,v)^{-1}$$
+
+Les matrices élémentaires sont donc très faciles à inverser.
+
+
+* Matrices élémentaires de transformation
+
+Nous allons construire une matrice élémentaire qui transforme un vecteur  donné $x \in \matrice(\corps,n,1)$ non nul en un autre vecteur donné $y \in \matrice(\corps,n,1)$ de même taille.
+
+
+** Colonne
+
+On cherche une matrice élémentaire $E_{yx}$ telle que $E_{yx} \cdot x = y$. L'équation :
+
+$$(I + \alpha \cdot u \cdot v^\dual) \cdot x = x + \alpha \cdot u \cdot (v^\dual \cdot x) = y$$
+
+nous donne la condition :
+
+$$\alpha \cdot (v^\dual \cdot x) \cdot u = y - x$$
+
+On peut donc choisir par exemple $u = y - x$ et $v = x$. On a alors $\alpha = 1 / (x^\dual \cdot x) \ne 0$ et on se retrouve avec la matrice élémentaire :
+
+$$E_{yx} = I + \unsur{x^\dual \cdot x} \cdot (y - x) \cdot x^\dual$$
+
+
+** Inverse
+
+Si l'inverse existe, il s'agit d'une matrice élémentaire de paramètre scalaire :
+
+$$\beta = - \unsur{x^\dual \cdot x + x^\dual \cdot (y - x)} = - \unsur{x^\dual \cdot y}$$
+
+Sous réserve que $x^\dual \cdot y \ne 0$, on a donc :
+
+$$E_{yx}^{-1} = I - \unsur{x^\dual \cdot y} \cdot (y - x) \cdot x^\dual$$
+
+
+** Ligne
+
+On cherche une matrice élémentaire $E_{yx}$ telle que $x^\dual \cdot E_{yx} = y^\dual$. L'équation :
+
+$$x^\dual \cdot (I + \alpha \cdot u \cdot v^\dual) = x^\dual + \alpha \cdot (x^\dual \cdot u) \cdot v^\dual = y^\dual$$
+
+nous donne la condition :
+
+$$\alpha \cdot (x^\dual \cdot u) \cdot v^\dual = y^\dual - x^\dual$$
+
+ou :
+
+$$\conjaccent{\alpha} \cdot (u^\dual \cdot x) \cdot v = y - x$$
+
+On peut donc choisir par exemple $v = y - x$ et $u = x$. On a alors $\alpha = \conjaccent{\alpha} = 1 / (x^\dual \cdot x) \ne 0$ et on se retrouve avec la matrice élémentaire :
+
+$$E_{yx} = I + \unsur{x^\dual \cdot x} \cdot x \cdot (y - x)^\dual$$
+
+
+** Inverse
+
+Si l'inverse existe, il s'agit d'une matrice élémentaire de paramètre scalaire :
+
+$$\beta = - \unsur{x^\dual \cdot x + (y - x)^\dual \cdot x} = - \unsur{y^\dual \cdot x}$$
+
+Sous réserve que $y^\dual \cdot x \ne 0$, on a donc :
+
+$$E_{yx}^{-1} = I - \unsur{y^\dual \cdot x} \cdot x \cdot (y - x)^\dual$$
+
+
+* Matrices élémentaires de permutation
+
+Les matrices élémentaires de permutations permettent de permuter deux lignes ou deux colonnes d'une matrice. Soit $\canonique_1,...,\canonique_n$ les vecteurs de la base canonique de $\corps^n$. La matrice de permutation élémentaire de taille $(n,n)$ et de paramètres $i,j$ est définie par :
+
+$$\matpermutation_{n,i,j} = I - (\canonique_i - \canonique_j) \cdot (\canonique_i - \canonique_j)^\dual$$
+
+Dans la suite, nous considérons $A \in \matrice(\corps,m,n)$ et $P = \matpermutation_{n,i,j}$.
+
+
+** Permutation des colonnes
+
+Soit les colonnes $C_i = A \cdot \canonique_i$. On a :
+
+$$A \cdot P = A - (C_i \cdot \canonique_i^\dual + C_j \cdot \canonique_j^\dual) + (C_j \cdot \canonique_i^\dual + C_i \cdot \canonique_j^\dual)$$
+
+Les colonnes $i$ et $j$ de $A$ sont donc permutées par multiplication à droite d'une matrice de permutation.
+
+
+** Permutation des lignes
+
+Soit les lignes $L_i = \canonique_i^\dual \cdot A$. On a :
+
+$$P \cdot A = A - (\canonique_i \cdot L_i + \canonique_j \cdot L_j) + (\canonique_j \cdot L_i + \canonique_i \cdot L_j)$$
+
+Les lignes $i$ et $j$ de $A$ sont donc permutées par multiplication à gauche d'une matrice de permutation.
+
+
+** Symétrie
+
+On constate que la transposée et la duale sont égales à la matrice elle-même :
+
+$$\matpermutation_{n,i,j} = \matpermutation_{n,i,j}^T = \matpermutation_{n,i,j}^\dual$$
+
+
+** Inverse
+
+Soit $\Delta_{ij} = \canonique_i - \canonique_j$ et :
+
+$$P = \matpermutation_{n,i,j} = I - \Delta_{ij} \cdot \Delta_{ij}^\dual$$
+
+Le produit de cette matrice avec elle-même s'écrit :
+
+$$P \cdot P = I - 2 \Delta_{ij} \cdot \Delta_{ij}^\dual + \Delta_{ij} \cdot \Delta_{ij}^\dual  \cdot \Delta_{ij} \cdot \Delta_{ij}^\dual$$
+
+Mais comme $\Delta_{ij}^\dual \cdot \Delta_{ij} = 2$, on a :
+
+$$P \cdot P = I - 2 \Delta_{ij} \cdot \Delta_{ij}^\dual + 2 \Delta_{ij} \cdot \Delta_{ij}^\dual$$
+
+Les deux derniers termes s'annihilent et :
+
+$$P \cdot P = I$$
+
+Les matrices de permutations élémentaires sont donc égales à leur propre inverse :
+
+$$\matpermutation_{n,i,j} = \matpermutation_{n,i,j}^{-1}$$
+
+
+* Matrices de permutations
+
+Une matrice de permutation $P$ est une matrice de la forme :
+
+$$P = P_1 \cdot ... \cdot P_n$$
+
+où les $P_i$ sont des matrices élémentaires de permutation.
+
+
+** Inverse
+
+#+BEGIN_CENTER
+\(
+P^\dual \cdot P = P_n \cdot ... \cdot P_1 \cdot P_1 \cdot ... \cdot P_n = I \)
+
+\(
+P \cdot P^\dual = P_1 \cdot ... \cdot P_n \cdot P_n \cdot ... \cdot P_1 = I
+\)
+#+END_CENTER
+
+Donc $P^\dual = P^{-1}$. Comme $P^\dual = P^T$, la transposée d'une matrice de permutation est identique à son inverse. On dit que ces matrices sont orthogonales.
+
+

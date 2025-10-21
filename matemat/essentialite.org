@@ -1,0 +1,330 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Essentialité
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:essentialite}
+
+* Dépendances
+
+  - Chapitre \ref{chap:mesure} : Les mesures
+
+* Introduction
+
+Soit la mesure $\mu : \mathcal{T} \mapsto \setR$ et l'ensemble $A \in \mathcal{T}$. On a envie de dire que tout sous-ensemble de mesure nulle de $A$ est « négligeable ». L'essentiel de l'information demeurera donc si on s'abstrait d'un quelconque ensemble $N \subseteq A$ vérifiant $N \in \mathcal{T}$ et $\mu(N) = 0$. Le résultat de cette abstraction, soit $A \setminus N$, est appelé sous-ensemble essentiel de $A$. On note :
+
+$$\essentiel(A) = \{ A \setminus N : N \subseteq A, \ N \in \mathcal{T}, \ \mu(N) = 0 \}$$
+
+l'ensemble des sous-ensembles essentiels de $A$.
+
+
+* Ensembles de mesure nulle
+
+
+** Inclusion
+
+Soit $A,B \in \mathcal{T}$ avec $A \subseteq B$ et $\mu(B) = 0$. On a alors :
+
+$$0 \le \mu(A) \le \mu(B) = 0$$
+
+On en déduit que :
+
+$$\mu(A) = 0$$
+
+Un ensemble inclus dans un ensemble de mesure nulle est également de mesure nulle.
+
+
+** Union
+
+Soit $A,B \in \mathcal{T}$ avec $\mu(A) = \mu(B) = 0$. On a alors :
+
+$$0 \le \mu(A \cup B) \le \mu(A) + \mu(B) = 0 + 0 = 0$$
+
+On en déduit que :
+
+$$\mu(A \cup B) = 0$$
+
+De même, la mesure d'une union d'une suite finie d'ensembles de mesure nulle est de mesure nulle :
+
+$$\mu\left( \bigcup_{i = 1}^n A_i \right) = 0$$
+
+On a le même résultat pour les suites infinies :
+
+$$\mu\left( \bigcup_{i = 1}^{+\infty} A_i \right) = 0$$
+
+
+* Mesure d'un sous-ensemble essentiel
+
+Soit $E \in \essentiel(A)$. On peut alors trouver $Z \in \mathcal{T}$ tel que $Z \subseteq A$, $E = A \setminus Z$ et vérifiant $\mu(Z) = 0$. Comme les ensembles $E$ et $Z$ sont disjoints et d'union égale à $A$, on a :
+
+$$\mu(A) = \mu(E) + \mu(Z) = \mu(E) + 0 = \mu(E)$$
+
+On a donc :
+
+$$\mu(E) = \mu(A)$$
+
+pour tout sous-ensemble essentiel $E \in \essentiel(A)$.
+
+
+* Convergence de la mesure
+
+Soit une suite d'ensembles $\{ A_n \in \mathcal{T} : n \in \setN \}$ telle que $A_m \subseteq A_n$ pour tout naturels $m,n$ vérifiant $m \le n$. Posons :
+
+$$A = \bigcup_{n \in \setN} A_n \in \mathcal{T}$$
+
+Considérons la suite d'ensemble $\{D_n \subseteq A : n \in \setN \}$ définie par :
+
+\begin{align}
+D_0 &= A_0 \)
+
+\(
+D_n &= A_n \setminus A_{n - 1}
+\end{align}
+
+pour tout $n \ge 1$. Comme $A_{n - 1}, D_n \subseteq A_n$, on a $A_n = A_{n - 1} \cup D_n$. Nous allons montrer par récurrence que :
+
+$$A_n = \bigcup_{k = 0}^n D_k$$
+
+On sait que c'est vrai pour $n = 0$. Supposons que ce soit vrai pour $n - 1$. On a :
+
+$$A_n = D_n \cup A_{n - 1} = D_n \cup \bigcup_{k = 0}^{n - 1} D_k = \bigcup_{k = 0}^n D_k$$
+
+Si $x$ appartient à au moins un des $A_n$, il appartient à au moins un des $D_k$ pour $0 \le k \le n$, et inversément. On en déduit que :
+
+$$A = \bigcup_{n \in \setN} A_n = \bigcup_{k \in \setN} D_k$$
+
+Soit les naturels $i,j$ avec $i \ne j$. Soit $m = \max \{ i, j \}$ et $n = \min \{ i,j \}$. Si $D_i = \emptyset$ ou si $D_j = \emptyset$, on a forcément $D_i \cap D_j = \emptyset$. Sinon, soit $x \in D_m$. On a alors $x \in A_m$ et $x \notin A_{m - 1}$. Comme $i \ne j$, on a $m - 1 \ge n$ et $A_n \subseteq A_{m - 1}$. On en déduit que :
+
+$$x \notin A_n = \bigcup_{k = 0}^n D_k \subseteq A_{m - 1}$$
+
+En particulier, $x$ ne peut pas appartenir à $D_n$. On en conclut que $D_i \cap D_j = D_m \cap D_n = \emptyset$. Les propriétés de la mesure nous disent alors que :
+
+$$\mu(A_n) = \sum_{k = 0}^n \mu(D_k)$$
+
+et que :
+
+$$\mu(A) = \sum_{n \in \setN} \mu(D_n)$$
+
+Par définition de la somme infinie sur $\setN$, on a :
+
+$$\sum_{n \in \setN} \mu(D_n) = \lim_{n \to \infty} \sum_{k = 0}^n \mu(D_k)$$
+
+et donc :
+
+$$\lim_{n \to \infty} \mu(A_n) = \mu(A)$$
+
+
+* Convergence étendue
+
+Soit une suite d'ensembles $\{ A_n \in \mathcal{T} : n \in \setN \}$ telle que, pour tout $n \in \setN$, on puisse trouver un sous-ensemble essentiel $E_n \subseteq A_n$ vérifiant $E_n \subseteq A_{n + 1}$. Posons :
+
+$$A = \bigcup_{n \in \setN} A_n \in \mathcal{T}$$
+
+Pour tout $n \in \setN$, on peut donc trouver un $Z_n \subseteq A_n$ vérifiant $\mu(Z_n) = 0$ et $E_n = A_n \setminus Z_n \subseteq A_{n + 1}$. Notons $Z$ l'union de ces ensembles :
+
+$$Z = \bigcup_{n \in \setN} Z_n$$
+
+et analysons le comportement des $C_n = A_n \setminus Z$. Notons $C$ l'union de ces ensembles. On a :
+
+$$C = \bigcup_{n \in \setN} C_n = \bigcup_{n \in \setN} A_n \setminus Z = A \setminus Z$$
+
+Supposons que $x \in C_n$. On a alors $x \in A_n$ et $x \notin Z_n$, d'où $x \in A_{n + 1}$. Comme $x \notin Z$, on a aussi $x \in A_{n + 1} \setminus Z = C_{n + 1}$. On en conclut que $C_n \subseteq C_{n + 1}$. La récurrence :
+
+$$C_0 \subseteq C_1 \subseteq C_2 \subseteq C_3 \subseteq ...$$
+
+nous montre alors que $C_m \subseteq C_n$ pour tout $m,n \in \setN$ vérifiant $m \le n$. La mesure converge par conséquent vers la mesure de l'union :
+
+$$\lim_{n \to \infty} \mu(C_n) = \mu(C) = \mu(A \setminus Z)$$
+
+Mais comme $C$ est un sous-ensemble essentiel de $A$, on a $\mu(C) = \mu(A)$. Pour la même raison, on a $\mu(C_n) = \mu(A_n)$. On a donc finalement :
+
+$$\lim_{n \to \infty} \mu(A_n) = \mu(A)$$
+
+
+* Ordre faible
+
+
+** Infériorité essentielle
+
+Soit deux fonctions $f,g : A \mapsto \setR$ telles que $f - g$ soit mesurable.
+On dit que $f$ est {\em essentiellement} inférieure à $g$, et on le note :
+
+$$f \essinferieur g$$
+
+si on peut trouver un sous-ensemble essentiel $S$ de $A$ tel que $f(x) \le g(x)$ en tout point $x \in S$. On a donc :
+
+$$\mu(\{ x \in A : f(x) \strictsuperieur g(x) \}) = 0$$
+
+
+** Supériorité essentielle
+
+Soit deux fonctions $f,g : A \mapsto \setR$ telles que $f - g$ soit mesurable.
+On dit que $f$ est {\em essentiellement} supérieure à $g$, et on le note :
+
+$$f \esssuperieur g$$
+
+si on peut trouver un sous-ensemble essentiel $S$ de $A$ tel que $f(x) \ge g(x)$ en tout point $x \in S$. On a donc :
+
+$$\mu(\{ x \in A : f(x) \strictinferieur g(x) \}) = 0$$
+
+
+** Validité
+
+La définition de $f \essinferieur g$ revient à imposer que :
+
+$$\mu(\{ x \in A : f(x) - g(x) \strictsuperieur 0 \}) = 0$$
+
+La définition de $f \esssuperieur g$ revient à imposer que :
+
+$$\mu(\{ x \in A : f(x) - g(x) \strictinferieur 0 \}) = 0$$
+
+Comme $f - g$ est mesurable, ces notions sont correctement définies.
+
+
+* Transitivité
+
+Soit les fonctions $f,g,h : A \mapsto \setR$ telles que :
+
+#+BEGIN_CENTER
+\(
+f \essinferieur g \\ \)
+
+\(
+g \essinferieur h
+\)
+#+END_CENTER
+
+Si on pose :
+
+#+BEGIN_CENTER
+\(
+Z = \{ x \in A : f(x) \strictsuperieur g(x)\} \)
+
+\(
+N = \{ x \in A : g(x) \strictsuperieur h(x)\}
+\)
+#+END_CENTER
+
+on a $\mu(Z) = \mu(N) = 0$. Comme une union finie d'ensembles de mesure nulle est de mesure nulle, on a $\mu(N \cup Z) = 0$. Pour tout $A \setminus (N \cup Z)$, on a $f(x) \le g(x)$ et $g(x) \le h(x)$. On en déduit que $f(x) \le h(x)$. Notre $f$ est donc inférieure à $h$ sur $A$ sauf sur l'ensemble de mesure nulle $N \cup Z$. On en conclut que la fonction étagée $f$ est essentiellement inférieure à $h$ :
+
+$$f \essinferieur h$$
+
+
+* Conservation sous l'addition
+
+Supposons que $f \essinferieur g$ et que $u \essinferieur v$. Les ensembles :
+
+#+BEGIN_CENTER
+\(
+Z = \{ x \in A : f(x) \strictsuperieur g(x)\} \)
+
+\(
+N = \{ x \in A : u(x) \strictsuperieur v(x)\}
+\)
+#+END_CENTER
+
+sont de mesure nulle. Leur union est donc également de mesure nulle et on a bien entendu $f(x) + u(x) \le g(x) + v(x)$ sur $A \setminus (Z \cup N)$ c'est-à-dire sur une sous-ensemble essentiel de $A$. On en conclut que :
+
+$$f + u \essinferieur g + v$$
+
+
+* Conservation sous la soustraction
+
+Supposons que $f \essinferieur g$ et que $u \esssuperieur v$. Les ensembles :
+
+#+BEGIN_CENTER
+\(
+Z = \{ x \in A : f(x) \strictsuperieur g(x)\} \)
+
+\(
+N = \{ x \in A : u(x) \strictinferieur v(x)\}
+\)
+#+END_CENTER
+
+sont de mesure nulle. Leur union est donc également de mesure nulle et on a bien entendu $f(x) - u(x) \le g(x) - v(x)$ sur $A \setminus (Z \cup N)$ c'est-à-dire sur une sous-ensemble essentiel de $A$. On en conclut que :
+
+$$f - u \essinferieur g - v$$
+
+
+* Fonctions max et min
+
+
+** Max
+
+Supposons que $f,g \essinferieur h$. Les ensembles :
+
+#+BEGIN_CENTER
+\(
+Z = \{ x \in A : f(x) \strictsuperieur h(x)\} \)
+
+\(
+N = \{ x \in A : g(x) \strictsuperieur h(x)\}
+\)
+#+END_CENTER
+
+sont de mesure nulle. Leur union est donc également de mesure nulle et on a bien entendu $\max\{f(x) , g(x)\} \le h(x)$ sur $A \setminus (Z \cup N)$ c'est-à-dire sur une sous-ensemble essentiel de $A$. On en conclut que :
+
+$$\max\{f,g\} \essinferieur h$$
+
+
+** Min
+
+Supposons que $f,g \esssuperieur h$. Les ensembles :
+
+#+BEGIN_CENTER
+\(
+Z = \{ x \in A : f(x) \strictinferieur h(x)\} \)
+
+\(
+N = \{ x \in A : g(x) \strictinferieur h(x)\}
+\)
+#+END_CENTER
+
+sont de mesure nulle. Leur union est donc également de mesure nulle et on a bien entendu $\min\{f(x) , g(x)\} \ge h(x)$ sur $A \setminus (Z \cup N)$ c'est-à-dire sur une sous-ensemble essentiel de $A$. On en conclut que :
+
+$$\min\{f,g\} \esssuperieur h$$
+
+
+* Egalité
+
+On dit que $f$ est essentiellement égale à $g$, et on le note :
+
+$$f \essegal g$$
+
+si et seulement si $f \essinferieur g$ et $f \esssuperieur g$. Les ensembles :
+
+#+BEGIN_CENTER
+\(
+Z = \{ x \in A : f(x) \strictinferieur g(x)\} \)
+
+\(
+N = \{ x \in A : f(x) \strictsuperieur g(x)\}
+\)
+#+END_CENTER
+
+sont alors de mesure nulle. Donc, l'ensemble :
+
+$$D = \{ x \in A : f(x) \ne g(x)\} = Z \cup N$$
+
+est également de mesure nulle.
+
+

@@ -1,0 +1,300 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Mesures
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:mesure}
+
+* Dépendances
+
+  - Chapitre \ref{chap:ensemble} : Les ensembles
+  - Chapitre \ref{chap:ordre} : Les ordres et extréma
+  - Chapitre \ref{chap:fonction} : Les fonctions
+
+* Introduction
+
+L'objectif des mesures est de « mesurer » des ensembles, ou plutôt des sous-ensembles d'un ensemble donné. Soit l'ensemble $\Omega$ et une tribu de sous-ensembles $\mathcal{T} \subseteq \sousens(\Omega)$. Une mesure sur $\mathcal{T}$ est une fonction $\mu : \mathcal{T} \mapsto \setR$ associant une valeur réelle à chaque ensemble de la tribu. On demande que cette mesure soit positive :
+
+$$\mu(A) \ge 0$$
+
+pour tout $A \in \mathcal{T}$. Il semble également logique que la mesure d'un ensemble vide soit nulle :
+
+$$\mu(\emptyset) = 0$$
+
+Pour toute suite discrète (finie ou infinie) $\{ A_1,A_2,... \} \subseteq \mathcal{T}$ d'ensembles disjoints deux à deux, on a :
+
+$$A_i \cap A_j = \emptyset$$
+
+pour tout $(i,j)$ tels que $i \ne j$. On exige dans ce cas que la mesure vérifie la propriété d'additivité :
+
+$$\mu\left( \bigcup_i A_i \right) = \sum_i \mu(A_i)$$
+
+
+** Inclusion
+
+Soit $A,B \in \mathcal{T}$ avec $A \subseteq B$. Comme $C = B \setminus A$ et $A$ vérifient $C \cup A = B$ et $C \cap A = \emptyset$, on a :
+
+$$\mu(B) = \mu(C) + \mu(A) \ge \mu(A)$$
+
+La mesure d'un ensemble « plus petit » au sens de l'inclusion est donc plus petite :
+
+$$\mu(A) \le \mu(B)$$
+
+
+** Union
+
+Soit $A,B \in \mathcal{T}$. Comme $A \cup B = (A \setminus B) \cup B$ et $(A \setminus B) \cap B = \emptyset$, on a :
+
+$$\mu(A \cup B) = \mu(A \setminus B) + \mu(B)$$
+
+Comme $A \setminus B \subseteq A$, on a aussi $\mu(A \setminus B) \le \mu(A)$. On en déduit que :
+
+$$\mu(A \cup B) \le \mu(A) + \mu(B)$$
+
+On peut en conclure par récurrence que :
+
+$$\mu\left( \bigcup_{i = 0}^n A_i \right) \le \sum_{i = 0}^n \mu(A_i)$$
+
+Puis, par passage à la limite :
+
+$$\mu\left( \bigcup_{i = 0}^{+\infty} A_i \right) \le \sum_{i = 0}^{+\infty} \mu(A_i)$$
+
+
+** Appellation
+
+On dit qu'un ensemble $A$ est mesurable (pour $\mu$) si $A \in \mathcal{T}$. Dans la suite, nous considérons une mesure $\mu : \mathcal{T} \mapsto \setR$ et un ensemble mesurable $A \in \mathcal{T}$.
+
+
+* Lebesgue
+
+La mesure de Lebesgue $\mu_L$ est définie sur la tribu $\mathcal{T}$ engendrée par les ensembles ouverts de $\setR$. Elle exprime simplement la longueur d'un intervalle. Pour tout :
+
+$$I \in \big\{ \ [a,b], \intervalleouvert{a}{b}, \intervallesemiouvertgauche{a}{b}, \intervallesemiouvertdroite{a}{b} \big\}$$
+
+on a simplement :
+
+$$\mu_L(I) = b - a$$
+
+Soit $\mathfrak{J}$ l'ensemble des collections au plus dénombrables d'intervalles ouverts disjoints. Pour tout $A \in \mathcal{T}$, on définit :
+
+$$\mu_I(A) = \inf \accolades{ \sum_{n \in N} \mu_L(I_n) : \{ I_n : n \in N \subseteq \setN \} \in \mathfrak{J} , \ A \subseteq \bigcup_{n \in N} I_n}$$
+
+et :
+
+$$\mu^S(A) = \sup \accolades{ \sum_{n \in N} \mu_L(I_n) : \{ I_n : n \in N \subseteq \setN \} \in \mathfrak{J} , \ \bigcup_{n \in N} I_n \subseteq A }$$
+
+Si :
+
+$$\mu_I(A) = \mu^S(A)$$
+
+on dit que l'ensemble $A$ est mesurable au sens de Lebesgue et on définit :
+
+$$\mu_L(A) = \mu_I(A) = \mu^S(A)$$
+
+
+** Mesure nulle
+
+Pour tout ensemble $N$ inclus dans un ensemble $A \in \mathcal{T}$ de mesure nulle :
+
+$$\mu_L(A) = 0$$
+
+on définit :
+
+$$\mu_L(N) = 0$$
+
+
+** Singleton
+
+On voit que les ensembles de la forme $\{a\} = [a,a]$ sont de mesure nulle :
+
+$$\mu_L(\{a\}) = a - a = 0$$
+
+On en conclut que pour toute suite discrète de réels $a_1,a_2,...$, on a :
+
+$$\mu_L(\{a_1,a_2,...\}) = \sum_i \mu_L(\{a_i\}) = 0$$
+
+On a aussi :
+
+\begin{align}
+b - a = \mu_L([a,b]) &= \mu_L([a,b] \setminus \{a_1,a_2,...\}) + \mu_L(\{a_1,a_2,...\}) \)
+
+\(
+&= \mu_L([a,b] \setminus \{a_1,a_2,...\}) + 0
+\end{align}
+
+et donc :
+
+$$\mu_L([a,b] \setminus \{a_1,a_2,...\}) = b - a$$
+
+
+* Mesure de Stieltjes
+
+On associe à toute fonction croissante $g : \setR \mapsto \setR$ une mesure de Stieltjes $\mu_g$. Pour tout :
+
+$$I \in \big\{ \ [a,b], \intervalleouvert{a}{b}, \intervallesemiouvertgauche{a}{b}, \intervallesemiouvertdroite{a}{b} \big\}$$
+
+on définit :
+
+$$\mu_g(I) = g(b) - g(a)$$
+
+Soit $\mathfrak{J}$ l'ensemble des collections au plus dénombrables d'intervalles ouverts disjoints. Pour tout $A \in \mathcal{T}$, on définit :
+
+$$\mu_g(A) = \inf \accolades{ \sum_{n \in N} \mu_L(I_n) : \{ I_n : n \in N \subseteq \setN \} \in \mathfrak{J} , \ A \subseteq \bigcup_{n \in N} I_n}$$
+
+
+** Mesure nulle
+
+Pour tout ensemble $N$ inclus dans un ensemble $A \in \mathcal{T}$ de mesure nulle :
+
+$$\mu_g(A) = 0$$
+
+on définit :
+
+$$\mu_g(N) = 0$$
+
+
+* Dirac
+
+La mesure de Dirac $\mu_D^a$ en $a$ est définie sur $\sousens(\Omega)$. Il s'agit d'une mesure permettant de détecter si un $A \subseteq \Omega$ donné contient $a$. Elle est donc basée sur les fonctions indicatrices :
+
+#+BEGIN_CENTER
+\(
+\mu_D^a(A) = \indicatrice_A(a) =
+\begin{cases}
+1 & \mbox{  si  } a \in A \)
+
+\(
+0 & \mbox{  si  } a \notin A
+\end{cases}
+\)
+#+END_CENTER
+
+
+* Mesure produit
+
+Soit les tribus $\mathcal{T}_1$ et $\mathcal{T}_2$ et la tribu produit :
+
+$$\mathcal{P} = \{ A \times B : A \in \mathcal{T}_1, \ B \in \mathcal{T}_2 \}$$
+
+A partir de mesures $\mu : \mathcal{T}_1 \mapsto \setR$ et $\nu : \mathcal{T}_2 \mapsto \setR$, on peut construire une mesure produit $\mu \otimes \nu : \mathcal{P} \mapsto \setR$ par :
+
+$$(\mu \otimes \nu)(A \times B) = \mu(A) \cdot \nu(B)$$
+
+
+** Dimension $n$
+
+On généralise la mesure de Lebesgue sur $\setR^n$ par :
+
+$$\mu_L( \intervalleouvert{a_1}{b_1} \times \intervalleouvert{a_2}{b_2} ... \times \intervalleouvert{a_n}{b_n}) = \prod_{i = 1}^n (b_i - a_i)$$
+
+et l'extension à la tribu engendrée par les ouverts de $\setR^n$ au moyen des
+supremum et infimum.
+
+
+* Fonction mesurable
+
+On dit qu'une fonction $f : A \mapsto \setR$ est mesurable (au sens de la tribu $\mathcal{T}$) si la relation $f^{-1}$ vérifie $f^{-1}(]a,+\infty[) \in \mathcal{T}$ et $f^{-1}(]-\infty,a[) \in \mathcal{T}$ pour tout $a \in \setR$. On a donc :
+
+#+BEGIN_CENTER
+\(
+\{ x \in A : f(x) \strictsuperieur a \} \in \mathcal{T} \)
+
+\(
+\{ x \in A : f(x) \strictinferieur a \} \in \mathcal{T}
+\)
+#+END_CENTER
+
+
+** Corollaires
+
+On a :
+
+#+BEGIN_CENTER
+\(
+\{ x \in A : f(x) \ge a \} = A \setminus \{ x \in A : f(x) \strictinferieur a \} \in \mathcal{T} \)
+
+\(
+\{ x \in A : f(x) \le a \} = A \setminus \{ x \in A : f(x) \strictsuperieur a \} \in \mathcal{T}
+\)
+#+END_CENTER
+
+et :
+
+$$\{ x \in A : f(x) = a \} = \{ x \in A : f(x) \ge a \} \cap \{ x \in A : f(x) \le a \} \in \mathcal{T}$$
+
+Les mesures de tous ces ensembles sont donc bien définies pour tout $a \in \setR$.
+
+
+* Opposé d'une fonction mesurable
+
+Soit une fonction mesurable $f : A \mapsto \setR$. On a :
+
+#+BEGIN_CENTER
+\(
+\{ x \in A : -f(x) \strictsuperieur a \} = \{ x \in A : f(x) \strictinferieur -a \} \in \mathcal{T} \)
+
+\(
+\{ x \in A : -f(x) \strictinferieur a \} = \{ x \in A : f(x) \strictsuperieur -a \} \in \mathcal{T}
+\)
+#+END_CENTER
+
+On en déduit que la fonction opposée $-f$ est mesurable.
+
+
+* Fonctions extrema
+
+Soit la suite $\{ f_n : n \in \setN \}$ de fonctions mesurables. Posons :
+
+#+BEGIN_CENTER
+\(
+S = \sup \{ f_n : n \in \setN \} \)
+
+\(
+I = \inf \{ f_n : n \in \setN \}
+\)
+#+END_CENTER
+
+On a :
+
+#+BEGIN_CENTER
+\(
+\{ x \in A : S(x) \strictsuperieur a \} = \bigcup_n \{ x \in A : f_n(x) \strictsuperieur a \} \in \mathcal{T} \)
+
+\(
+\{ x \in A : S(x) \strictinferieur a \} = \bigcap_n \{ x \in A : f_n(x) \strictinferieur a \} \in \mathcal{T}
+\)
+#+END_CENTER
+
+On en conclut que $\sup_n f_n$ est mesurable. Symétriquement, on a :
+
+#+BEGIN_CENTER
+\(
+\{ x \in A : I(x) \strictsuperieur a \} = \bigcap_n \{ x \in A : f_n(x) \strictsuperieur a \} \in \mathcal{T} \)
+
+\(
+\{ x \in A : I(x) \strictinferieur a \} = \bigcup_n \{ x \in A : f_n(x) \strictinferieur a \} \in \mathcal{T}
+\)
+#+END_CENTER
+
+On en conclut que $\inf_n f_n$ est mesurable.
+
+

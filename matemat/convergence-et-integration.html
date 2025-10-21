@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-10-21 mar 09:53 -->
+<!-- 2025-10-21 mar 10:38 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Eclats de vers : Matemat : Collections</title>
+<title>Eclats de vers : Matemat : Convergence et intégration</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
 <style type="text/css">
@@ -228,7 +228,7 @@
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Eclats de vers : Matemat : Collections</h1>
+<h1 class="title">Eclats de vers : Matemat : Convergence et intégration</h1>
 <p>
 <a href="index.html">Index des Grimoires</a>
 </p>
@@ -236,6 +236,18 @@
 <p>
 <a href="../index.html">Retour à l’accueil</a>
 </p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgdacd68c">1. Convergence monotone</a></li>
+<li><a href="#org4a69f52">2. Convergence des sommes</a></li>
+<li><a href="#orgdf50590">3. Lemme de Fatou</a></li>
+<li><a href="#org4880c92">4. Convergence dominée</a></li>
+</ul>
+</div>
+</div>
 
 <p>
 \(
@@ -404,10 +416,550 @@
 {\end{array} \right]}
 \)
 </p>
+
+<p>
+\label{chap:convint}
+</p>
+<div id="outline-container-orgdacd68c" class="outline-2">
+<h2 id="orgdacd68c"><span class="section-number-2">1.</span> Convergence monotone</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Soit une suite de fonctions intégrables :
+</p>
+
+<p>
+\[\{ u_n \in \setR^A : n \in \setR \}\]
+</p>
+
+<p>
+Nous supposons que \(u_n \esssuperieur 0\) pour tout \(n \in \setN\) et que la suite soit essentiellement croissante :
+</p>
+
+<p>
+\[u_0 \essinferieur u_1 \essinferieur u_2 \essinferieur u_3 \essinferieur ...\]
+</p>
+
+<p>
+Nous supposons également que la fonction :
+</p>
+
+<p>
+\[s = \sup \{ u_n : n \in \setN\}\]
+</p>
+
+<p>
+est bien définie et intégrable :
+</p>
+
+<p>
+\[S = \int_A s(x) \ d\mu(x) \strictinferieur +\infty\]
+</p>
+</div>
+<div id="outline-container-org7350b8f" class="outline-3">
+<h3 id="org7350b8f"><span class="section-number-3">1.1.</span> Convergence des fonctions</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Pour tout \(n \in \setN\), on a \(u_n \essinferieur u_{n + 1}\) et l'ensemble :
+</p>
+
+<p>
+\[Z_n = \{ x \in A : u_n(x) \strictsuperieur u_{n + 1}(x) \}\]
+</p>
+
+<p>
+est de mesure nulle. Il en va donc de même pour leur union :
+</p>
+
+<p>
+\[Z = \bigcup_n Z_n\]
+</p>
+
+<p>
+L'ensemble \(\Phi = A \setminus Z\) est donc un sous-ensemble essentiel de \(A\). Soit \(x \in \Phi\). On a alors :
+</p>
+
+<p>
+\[u_0(x) \le u_1(x) \le u_2(x) \le ...\]
+</p>
+
+<p>
+La suite \(\{ u_n(x) : n \in \setN \}\) est donc croissante et majorée par \(s(x) = \sup_n u_n(x)\). Elle converge dès lors vers son supremum :
+</p>
+
+<p>
+\[\lim_{n \to \infty} u_n(x) = s(x)\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgd68598f" class="outline-3">
+<h3 id="orgd68598f"><span class="section-number-3">1.2.</span> Suite d'intégrales</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+On définit la suite \(\{ I_n : n \in \setN \}\) par :
+</p>
+
+<p>
+\[I_n = \int_A u_n(x) \ d\mu(x)\]
+</p>
+
+<p>
+pour tout \(n \in \setN\). Comme \(u_n\) croît essentiellement avec \(n\), on a \(I_m \le I_n\) pour tout \(m,n \in \setN\) vérifiant \(m \le n\). Comme \(u_n \le s\), on a aussi \(I_n \le S\). On en conclut que la suite des \(I_n\) converge vers son supremum et que :
+</p>
+
+<p>
+\[L = \lim_{n \to \infty} I_n \le S = \int_A s(x) \ d\mu(x)\]
+</p>
+</div>
+</div>
+<div id="outline-container-org2477a98" class="outline-3">
+<h3 id="org2477a98"><span class="section-number-3">1.3.</span> Fonction étagée</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Soit le réel \(\epsilon \strictsuperieur 0\). Choisissons \(w \in \mathcal{E}_A(s)\) telle que :
+</p>
+
+<p>
+\[\int_A s(x) \ d\mu(x) \le \int_A w(x) \ d\mu(x) + \epsilon\]
+</p>
+
+<p>
+Comme \(w \essinferieur s\) l'ensemble :
+</p>
+
+<p>
+\[N = \{ x \in A : w(x) \strictsuperieur s(x) \}\]
+</p>
+
+<p>
+est de mesure nulle. Posons \(\Psi = \Phi \setminus N\). La fonction \(w\) étant étagée, on dispose d'une partition \(\{A_1,...,A_N\}\) de \(A\) et de réels \(w_i\) tels que :
+</p>
+
+<p>
+\[w = \sum_i w_i \cdot \indicatrice[A_i]\]
+</p>
+
+<p>
+Posons \(\Psi_i = A_i \cap \Psi\). Comme \(\Psi \subseteq A\), les \(\Psi_i\) forment une partition de \(\Psi\) et on a :
+</p>
+
+<p>
+\[w \cdot \indicatrice[\Psi] = \sum_i w_i \cdot \indicatrice[A_i] \cdot \indicatrice[\Psi] = \sum_i w_i \cdot \indicatrice[\Psi_i]\]
+</p>
+
+<p>
+On en déduit que :
+</p>
+
+<p>
+\[\int_\Psi w(x) \ d\mu(x) = \int_A w(x) \cdot \indicatrice_\Psi(x) \ d\mu(x) = \sum_i w_i \cdot \mu(\Psi_i)\]
+</p>
+
+<p>
+L'intégrale étant invariante par abstraction d'un ensemble de mesure nulle, on a :
+</p>
+
+<p>
+\[\int_\Psi w(x) \ d\mu(x) = \int_\Phi w(x) \ d\mu(x) = \int_A w(x) \ d\mu(x)\]
+</p>
+
+<p>
+et finalement :
+</p>
+
+<p>
+\[\int_A w(x) \ d\mu(x) = \sum_i w_i \cdot \mu(\Psi_i)\]
+</p>
+</div>
+</div>
+<div id="outline-container-org346ff88" class="outline-3">
+<h3 id="org346ff88"><span class="section-number-3">1.4.</span> Mesures convergentes</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Choisissons un réel \(\alpha\) vérifiant \(0 \strictinferieur \alpha \strictinferieur 1\) et posons :
+</p>
+
+<p>
+\[C_n = \{ x \in \Psi : \alpha \cdot w(x) \le u_n(x) \}\]
+</p>
+
+<p>
+Soit :
+</p>
+
+\begin{align}
+W_n^i &= C_n \cap \Psi_i = \{ x \in \Psi_i : \alpha \cdot w(x) \le u_n(x) \} \)
+
+\(
+X_n^i &= Z_n \cap \Psi_i = \{ x \in \Psi_i : u_n(x) \strictsuperieur u_{n + 1}(x) \}
+\end{align}
+
+<p>
+Comme \(X_n^i \subseteq Z_n\), on a \(\mu(X_n^i) = 0\). Si \(x \in W_n^i \setminus X_n^i\), on a :
+</p>
+
+<p>
+\[\alpha \cdot w(x) \le u_n(x) \le u_{n + 1}(x)\]
+</p>
+
+<p>
+On en déduit que \(x \in W_{n + 1}^i\). Donc \(W_n^i \setminus X_n^i \subseteq W_{n + 1}^i\) et :
+</p>
+
+<p>
+\[\lim_{n \to \infty} \mu(W_n^i) = \mu\left( \bigcup_n W_n^i \right)\]
+</p>
+
+<p>
+Comme les \(W_n^i \subseteq \Psi_i\), il est clair que leur union sur \(n\) est inclue dans \(\Psi_i\). Soit \(x \in \Psi_i\).
+</p>
+
+<ul class="org-ul">
+<li>Si \(s(x) = 0\), on a \(0 \le u_n(x) \le s(x) = 0\) pour tout \(n \in \setN\) et \(u_n(x) = 0\). On a aussi \(w(x) \le s(x) = 0\), d'où \(\alpha \cdot w(x) \le 0 = u_n(x)\) et \(x \in W_n^i\).</li>
+
+<li>Considérons à présent le cas où \(s(x) \strictsuperieur 0\). On se rappelle que \(\Psi_i \subseteq \Psi = \Phi \setminus N\). Donc \(x \notin N\) et on a \(w(x) \le s(x)\). Multipliant cette relation par \(\alpha \strictsuperieur 0\), on obtient \(\alpha \cdot w(x) \le \alpha \cdot s(x)\). Soit le réel :</li>
+</ul>
+
+<p>
+\[\delta = (1 - \alpha) \cdot s(x) \strictsuperieur 0\]
+</p>
+
+<p>
+Sur \(\Psi_i \subseteq \Psi \subseteq \Phi\), la suite des \(\{ u_n(x) : n \in \setN \}\) converge vers \(s(x)\). On peut donc trouver un \(K \in \setN\) tel que \(\abs{u_n(x) - s(x)} \le \delta\) pour tout naturel \(n\) vérifiant \(n \ge K\). On a alors :
+</p>
+
+<p>
+\[u_n(x) \ge s(x) - \delta = s(x) - (1 - \alpha) \cdot s(x) = \alpha \cdot s(x) \ge \alpha \cdot w(x)\]
+</p>
+
+<p>
+Il existe donc un naturel \(n\) tel que \(x \in C_n\), d'où \(x \in C_n \cap \Psi_i = W_n^i\).
+</p>
+
+<p>
+Notre \(x\) appartient donc à l'union sur \(n\) des \(W_n^i\). On en conclut que \(\Psi_i\) est inclu dans l'union sur \(n\) des \(W_n^i\). La réciproque étant également vraie, on a :
+</p>
+
+<p>
+\[\bigcup_n W_n^i = \Psi_i\]
+</p>
+
+<p>
+et :
+</p>
+
+<p>
+\[\lim_{n \to \infty} \mu(W_n^i) = \mu(\Psi_i)\]
+</p>
+</div>
+</div>
+<div id="outline-container-org1239b2e" class="outline-3">
+<h3 id="org1239b2e"><span class="section-number-3">1.5.</span> Convergence des intégrales</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+Fixons \(n \in \setN\). Comme \(C_n \subseteq A\), les \(W_n^i = C_n \cap \Psi_i\) forment une partition de \(C_n\) et on a :
+</p>
+
+<p>
+\[w \cdot \indicatrice[C_n] = \sum_i w_i \cdot \indicatrice[C_n] \cdot \indicatrice[\Psi_i] = \sum_i w_i \cdot \indicatrice[W_n^i]\]
+</p>
+
+<p>
+On en déduit que :
+</p>
+
+<p>
+\[\int_{C_n} w(x) \ d\mu(x) = \int_A w(x) \cdot \indicatrice_{C_n}(x) \ d\mu(x) = \sum_i w_i \cdot \mu(W_n^i)\]
+</p>
+
+<p>
+En passant à la limite sur \(n\), on obtient donc :
+</p>
+
+\begin{align}
+\lim_{n \to \infty} \int_{C_n} w(x) \ d\mu(x) &= \sum_i w_i \cdot \lim_{n \to \infty} \mu(W_n^i) \)
+
+\(
+&= \sum_i w_i \cdot \mu(\Psi_i) \)
+
+\(
+&= \int_A w(x) \ d\mu(x)
+\end{align}
+
+<p>
+Comme \(\alpha \cdot w \le u_n\) sur \(C_n\), on a a fortiori l'infériorité essentielle et :
+</p>
+
+<p>
+\[\int_{C_n} \alpha \cdot w(x) \ d\mu(x) = \alpha \int_{C_n} w(x) \ d\mu(x) \le \int_A u_n(x) \ d\mu(x) = I_n\]
+</p>
+
+<p>
+En passant à la limite sur \(n\) et en multipliant par \(1/\alpha\), on en déduit que :
+</p>
+
+<p>
+\[\int_A w(x) \ d\mu(x) \le \unsur{\alpha} \lim_{n \to \infty} I_n = \frac{L}{\alpha}\]
+</p>
+
+<p>
+Se rappelant la propriété de \(w\) par rapport à \(s\), on a :
+</p>
+
+<p>
+\[\int_A s(x) \ d\mu(x) - \epsilon \le \int_A w(x) \ d\mu(x) \le \frac{L}{\alpha}\]
+</p>
+
+<p>
+Donc :
+</p>
+
+<p>
+\[S - \epsilon = \int_A s(x) \ d\mu(x) - \epsilon \le \frac{L}{\alpha}\]
+</p>
+
+<p>
+Ce résultat devant être satisfait pour tout \(\epsilon \strictsuperieur 0\) et pour tout \(0 \strictsuperieur \alpha \strictsuperieur 1\), on a finalement \(S \le L\). Mais nous avons vu précédemment que \(L \le S\). On en conclut que \(S = L\), c'est-à-dire :
+</p>
+
+<p>
+\[\int_A \lim_{n \to \infty} u_n(x) \ d\mu(x) = \lim_{n \to \infty} \int_A u_n(x) \ d\mu(x)\]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org4a69f52" class="outline-2">
+<h2 id="org4a69f52"><span class="section-number-2">2.</span> Convergence des sommes</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Soit une suite \(\{ f_n \in \setR^A : n \in \setN \}\) de fonctions intégrables essentiellement positives. Posons :
+</p>
+
+<p>
+\[u_n = \sum_{i = 0}^n f_i\]
+</p>
+
+<p>
+On voit que la suite des \(u_n\) est croissante et essentiellement positive. Si la somme converge, on a :
+</p>
+
+<p>
+\[\lim_{n \to \infty} u_n(x) = \sum_{i = 0}^{+\infty} f_i(x) = s(x)\]
+</p>
+
+<p>
+pour tout \(x \in A\). Si la fonction \(s\) ainsi définie est intégrable, on a donc :
+</p>
+
+<p>
+\[\int_A \sum_{i = 0}^{+\infty} f_i(x) \ d\mu(x) = \lim_{n \to \infty} \int_A \sum_{i = 0}^n f_i(x) \ d\mu(x)\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgdf50590" class="outline-2">
+<h2 id="orgdf50590"><span class="section-number-2">3.</span> Lemme de Fatou</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Soit une suite \(\{ f_n \in \setR^A : n \in \setN \}\) de fonctions intégrables essentiellement positives. Posons :
+</p>
+
+<p>
+\[u_n = \inf \{ f_m : m \in \setN, \  m \ge n \}\]
+</p>
+
+<p>
+et supposons que la fonction \(s = \sup_n u_n\) soit bien définie et intégrable. Par construction, la suite des \(u_n\) est croissante et essentiellement positive. On a donc \(\int_A \lim_n u_n = \lim_n \int_A u_n\), c'est-à-dire :
+</p>
+
+<p>
+\[\int_A \liminf_{n \to \infty} f_n(x) \ d\mu(x) = \lim_{n \to \infty} \int_A u_n(x) \ d\mu(x)\]
+</p>
+
+<p>
+Comme la limite des \(U_n = \int_A u_n\) existe, on a \(\liminf_n U_n = \lim_n U_n\) et :
+</p>
+
+<p>
+\[\int_A \liminf_{n \to \infty} f_n(x) \ d\mu(x) = \liminf_{n \to \infty} \int_A u_n(x) \ d\mu(x)\]
+</p>
+
+<p>
+Comme \(u_n \le f_n\), on a \(U_n \le F_n = \int_A f_n\). On en conclut que \(\liminf_n U_n \le \liminf_n F_n\) :
+</p>
+
+<p>
+\[\liminf_{n \to \infty} \int_A u_n(x) \ d\mu(x) \le \liminf_{n \to \infty} \int_A f_n(x) \ d\mu(x)\]
+</p>
+
+<p>
+Rassemblant ces résultats, il vient :
+</p>
+
+<p>
+\[\int_A \liminf_{n \to \infty} f_n(x) \ d\mu(x) \le \liminf_{n \to \infty} \int_A f_n(x) \ d\mu(x)\]
+</p>
+</div>
+</div>
+<div id="outline-container-org4880c92" class="outline-2">
+<h2 id="org4880c92"><span class="section-number-2">4.</span> Convergence dominée</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Soit une suite de fonctions \(\{ f_n : n \in \setN \}\) intégrables sur \(\Omega\). Nous supposons qu'il existe un sous-ensemble essentiel \(A\) de \(\Omega\) et une fonction \(f : A \mapsto \setR\) telle que :
+</p>
+
+<p>
+\[\lim_{n \to \infty} f_n(x) = f(x)\]
+</p>
+
+<p>
+pour tout \(x \in A\). Nous supposons également qu'il existe une fonction intégrable \(\varphi : A \mapsto \setR\) telle que \(\abs{f_n} \le \varphi\) pour tout \(n \in \setN\).
+</p>
+
+<p>
+Soit \(x \in A\). Puisque la suite \(\{ \abs{f_n(x)} : n \in \setN \}\) est inférieure à \(\varphi(x)\), sa limite \(\abs{f(x)}\) vérifie \(\abs{f(x)} \le \varphi(x)\). On a donc \(\abs{f} \le \varphi\) et \(\int_A \abs{f} \le \int_A \varphi \strictinferieur +\infty\), ce qui montre que \(f\) est intégrable. La majoration par \(\varphi\) nous montre également que \(\varphi - \max \{ f_n , -f_n \} \ge 0\), d'où :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\varphi - f_n \ge 0 \)
+</p>
+
+<p>
+\(
+\varphi + f_n \ge 0
+\)
+</p>
+</div>
+
+<p>
+On peut donc appliquer le lemme de Fatou à la suite de fonctions \(\psi_n = \varphi - f_n\). On obtient :
+</p>
+
+<p>
+\[\int_A \liminf_{n \to \infty} [\varphi(x) - f_n(x)] \ d\mu(x) \le \liminf_{n \to \infty} \int_A [\varphi(x) - f_n(x)] \ d\mu(x)\]
+</p>
+
+<p>
+On sait que la fonction \(\varphi\) ne dépend pas de \(n\) et que la limite de \(f_n\) existe. On a donc \(\liminf_n f_n = \limsup_n f_n = \lim f_n\). Comme \(\inf(-X) = -\sup(X)\), on a aussi :
+</p>
+
+<p>
+\[\liminf_n (-f_n) = - \limsup_n f_n = - \lim_n f_n = -f\]
+</p>
+
+<p>
+On en déduit que :
+</p>
+
+<p>
+\[\int_A \liminf_n [\varphi - f_n] = \int_A \varphi - \int_A f\]
+</p>
+
+<p>
+Pour le second membre, on a :
+</p>
+
+<p>
+\[\liminf_n \int_A [\varphi - f_n] = \int_A \varphi + \liminf_n \left[ - \int_A f_n \right] = \int_A \varphi - \limsup_n \int_A f_n\]
+</p>
+
+<p>
+On se retrouve donc avec l'inégalité :
+</p>
+
+<p>
+\[\int_A \varphi - \int_A f \le \int_A \varphi - \limsup_n \int_A f_n\]
+</p>
+
+<p>
+Eliminant l'intégrale de \(\varphi\), il vient :
+</p>
+
+<p>
+\[\int_A f(x) \ d\mu(x) \ge \limsup_{n \to \infty} \int_A f_n(x) \ d\mu(x)\]
+</p>
+
+<p>
+Appliquons à présent le lemme de Fatou à la suite de fonctions \(\omega_n = \varphi + f_n\). On obtient :
+</p>
+
+<p>
+\[\int_A \liminf_{n \to \infty} [\varphi(x) + f_n(x)] \ d\mu(x) \le \liminf_{n \to \infty} \int_A [\varphi(x) + f_n(x)] \ d\mu(x)\]
+</p>
+
+<p>
+Utilisant les mêmes remarques que précédemment et éliminant l'intégrale de \(\varphi\), il vient :
+</p>
+
+<p>
+\[\int_A f(x) \ d\mu(x) \le \liminf_{n \to \infty} \int_A  f_n(x) \ d\mu(x)\]
+</p>
+
+<p>
+Rassemblant ces résultats, on en déduit que :
+</p>
+
+<p>
+\[\limsup_{n \to \infty} \int_A f_n(x) \ d\mu(x) \le \liminf_{n \to \infty} \int_A  f_n(x) \ d\mu(x)\]
+</p>
+
+<p>
+Mais on sait que \(\liminf(X) \le \limsup(X)\). On conclut de ces deux inégalités que :
+</p>
+
+<p>
+\[\limsup_{n \to \infty} \int_A f_n(x) \ d\mu(x) = \liminf_{n \to \infty} \int_A  f_n(x) \ d\mu(x)\]
+</p>
+
+<p>
+La limite de la suite d'intégrales existe donc et :
+</p>
+
+<p>
+\[\lim_{n \to \infty} \int_A f_n(x) \ d\mu(x) = \limsup_{n \to \infty} \int_A f_n(x) \ d\mu(x) = \liminf_{n \to \infty} \int_A  f_n(x) \ d\mu(x)\]
+</p>
+
+<p>
+Les bornes faisant intervenir l'intégrale de \(f\) deviennent :
+</p>
+
+<p>
+\[\lim_{n \to \infty} \int_A f_n(x) \ d\mu(x) \le \int_A f(x) \ d\mu(x) \le \lim_{n \to \infty} \int_A  f_n(x) \ d\mu(x)\]
+</p>
+
+<p>
+d'où :
+</p>
+
+<p>
+\[\int_A f(x) \ d\mu(x) = \lim_{n \to \infty} \int_A f_n(x) \ d\mu(x)\]
+</p>
+
+<p>
+Nous venons de prouver que :
+</p>
+
+<p>
+\[\int_A \lim_{n \to \infty} f_n(x) \ d\mu(x) = \lim_{n \to \infty} \int_A f_n(x) \ d\mu(x)\]
+</p>
+
+<p>
+L'intégrale étant invariante sous abstraction d'un ensemble de mesure nulle, on a même :
+</p>
+
+<p>
+\[\int_\Omega f(x) \ d\mu(x) = \lim_{n \to \infty} \int_\Omega f_n(x) \ d\mu(x)\]
+</p>
+
+<p>
+pour autant que \(f\) soit définie sur \(\Omega\).
+</p>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-10-21 mar 09:53</p>
+<p class="date">Created: 2025-10-21 mar 10:38</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

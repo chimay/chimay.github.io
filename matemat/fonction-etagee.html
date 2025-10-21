@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-10-21 mar 09:53 -->
+<!-- 2025-10-21 mar 10:10 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Eclats de vers : Matemat : Collections</title>
+<title>Eclats de vers : Matemat : Fonctions étagées</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
 <style type="text/css">
@@ -228,7 +228,7 @@
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Eclats de vers : Matemat : Collections</h1>
+<h1 class="title">Eclats de vers : Matemat : Fonctions étagées</h1>
 <p>
 <a href="index.html">Index des Grimoires</a>
 </p>
@@ -236,6 +236,30 @@
 <p>
 <a href="../index.html">Retour à l’accueil</a>
 </p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgb05117d">1. Dépendances</a></li>
+<li><a href="#org624d62a">2. Définition</a></li>
+<li><a href="#orge058e0e">3. Mesurabilité</a></li>
+<li><a href="#org5a99880">4. Multiplication par une fonction indicatrice</a></li>
+<li><a href="#org3762b76">5. Essentialité</a></li>
+<li><a href="#org6e80446">6. Intégrale d'une mesure</a></li>
+<li><a href="#org8dd7b2e">7. Intégrale d'une constante</a></li>
+<li><a href="#org66f6864">8. Intégrale d'une fonction étagée</a></li>
+<li><a href="#orgbea6c17">9. Unicité</a></li>
+<li><a href="#orgbac05b2">10. Ordre</a></li>
+<li><a href="#orgbae427a">11. Encadrement</a></li>
+<li><a href="#orgba1f128">12. Propriétés extrémales</a></li>
+<li><a href="#orgef540da">13. Additivité</a></li>
+<li><a href="#orgd424901">14. Propriétés diverses</a></li>
+<li><a href="#orgcd32e59">15. Mesure nulle</a></li>
+<li><a href="#org43477a1">16. Mesurabilité et opérations</a></li>
+</ul>
+</div>
+</div>
 
 <p>
 \(
@@ -404,10 +428,980 @@
 {\end{array} \right]}
 \)
 </p>
+
+<p>
+\label{chap:etagee}
+</p>
+<div id="outline-container-orgb05117d" class="outline-2">
+<h2 id="orgb05117d"><span class="section-number-2">1.</span> Dépendances</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>Chapitre \ref{chap:fonction} : Les fonctions</li>
+<li>Chapitre \ref{chap:mesure} : Les mesures</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org624d62a" class="outline-2">
+<h2 id="org624d62a"><span class="section-number-2">2.</span> Définition</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Soit la mesure \(\mu : \mathcal{T} \mapsto \setR\), l'ensemble \(\Phi \in \mathcal{T}\) et \(A \in \mathcal{T}\) vérifiant \(A \subseteq \Phi\). On dit que la fonction \(w : \Phi \to \setR\) est étagée sur \(A\) si on peut trouver une collection finie \(\{ A_1, ..., A_n \} \subseteq \mathcal{T}\) formant une partition de \(A\) et des réels \(w_i \in \setR\) tels que :
+</p>
+
+<p>
+\[w(x) = \sum_{i = 1}^n w_i \cdot \indicatrice_{A_i}(x)\]
+</p>
+
+<p>
+pour tout \(x \in A\). On note \(\etagee(A)\) l'ensemble des fonctions étagées sur \(A\).
+</p>
+</div>
+</div>
+<div id="outline-container-orge058e0e" class="outline-2">
+<h2 id="orge058e0e"><span class="section-number-2">3.</span> Mesurabilité</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Soit \(a \in \setR\). Comme :
+</p>
+
+<p>
+\[\{ x \in A : w(x) \strictsuperieur a \} = \bigcup \{ A_i : i \in \{1,...,n\}, \ w_i \strictsuperieur a \}\]
+</p>
+
+<p>
+et que l'union s'opère sur un nombre fini d'ensembles, on a :
+</p>
+
+<p>
+\[\{ x \in A : w(x) \strictsuperieur a \} \in \mathcal{T}\]
+</p>
+
+<p>
+On a aussi :
+</p>
+
+<p>
+\[\{ x \in A : w(x) \strictinferieur a \} = \bigcup \{ A_i : i \in \{1,...,n\}, \ w_i \strictinferieur a \} \in \mathcal{T}\]
+</p>
+
+<p>
+Les fonctions étagées sont mesurables.
+</p>
+</div>
+</div>
+<div id="outline-container-org5a99880" class="outline-2">
+<h2 id="org5a99880"><span class="section-number-2">4.</span> Multiplication par une fonction indicatrice</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Soit \(B \subseteq A\). On a :
+</p>
+
+\begin{align}
+w(x) \cdot \indicatrice_B(x) &= \sum_{i = 1}^n w_i \cdot \indicatrice_{A_i}(x) \cdot \indicatrice_B(x) \)
+
+\(
+&= \sum_{i = 1}^n w_i \cdot \indicatrice[A_i \cap B](x)
+\end{align}
+
+<p>
+Soit \(B_i = A_i \cap B\). La fonction \(u = w \cdot \indicatrice_B\) peut se définir par :
+</p>
+
+<p>
+\[u(x) = w(x) \cdot \indicatrice_B(x) = \sum_{i = 1}^n w_i \cdot \indicatrice_{B_i}(x)\]
+</p>
+
+<p>
+pour tout \(x \in A\). Si \(i \ne j\), on a :
+</p>
+
+<p>
+\[B_i \cap B_j = (A_i \cap B) \cap (A_j \cap B) = (A_i \cap A_j) \cap B = \emptyset\]
+</p>
+
+<p>
+L'union des \(B_i\) nous donne :
+</p>
+
+<p>
+\[\bigcup_i B_i = \bigcup_i (A_i \cap B) = B \cap \bigcup_i A_i = B \cap A = B\]
+</p>
+
+<p>
+On en conclut que les ensembles \(B_i\) forment une partition de \(B\). La fonction \(u\) est donc une fonction étagée sur \(B\). Comme \(u\) est nulle sur \(A \setminus B\), on a même :
+</p>
+
+<p>
+\[u = 0 \cdot \indicatrice[A \setminus B] + \sum_{i = 1}^n w_i \cdot \indicatrice_{B_i}\]
+</p>
+
+<p>
+ce qui montre que \(u\) est une fonction étagée sur \((A \setminus B) \cup B = A\).
+</p>
+</div>
+</div>
+<div id="outline-container-org3762b76" class="outline-2">
+<h2 id="org3762b76"><span class="section-number-2">5.</span> Essentialité</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-orge81f1af" class="outline-3">
+<h3 id="orge81f1af"><span class="section-number-3">5.1.</span> Bornes</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+Soit l'ensemble \(M\) rassemblant les indices correspondant aux ensembles de mesure non nulle :
+</p>
+
+<p>
+\[M = \{ i \in \{1,...,n\} : \mu(A_i) \strictsuperieur 0 \}\]
+</p>
+
+<p>
+et l'ensemble \(N\) rassemblant les indices correspondant aux ensembles de mesure nulle :
+</p>
+
+<p>
+\[N = \{ i \in \{1,...,n\} : \mu(A_i) = 0 \}\]
+</p>
+
+<p>
+Par positivité de la mesure, on a clairement \(M \cup N = \{1,...,n\}\). Comme l'union d'ensembles de mesure nulle est également de mesure nulle, l'ensemble :
+</p>
+
+<p>
+\[Z = \bigcup_{i \in N} A_i\]
+</p>
+
+<p>
+vérifie \(\mu(Z) = 0\). L'ensemble :
+</p>
+
+<p>
+\[A \setminus Z = A \setminus \bigcup_{i \in N} A_i = \bigcup_{i \in M} A_i\]
+</p>
+
+<p>
+est donc un sous-ensemble essentiel de \(A\). Comme :
+</p>
+
+<p>
+\[\min_{i \in M} w_i \le w(x) \in \{ w_i : i \in M \} \le \max_{i \in M} w_i\]
+</p>
+
+<p>
+pour tout \(x \in A \setminus Z\), on a :
+</p>
+
+<p>
+\[\min \{ w_i : i \in M \} \essinferieur w \essinferieur \max \{ w_i : i \in M \}\]
+</p>
+</div>
+</div>
+<div id="outline-container-orge900866" class="outline-3">
+<h3 id="orge900866"><span class="section-number-3">5.2.</span> Extrema</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+Soit :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\alpha = \arg\max_{i \in M} w_i \in M \)
+</p>
+
+<p>
+\(
+\beta = \arg\min_{i \in M} w_i \in M
+\)
+</p>
+</div>
+
+<p>
+On a alors :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\sigma = w_\alpha = \max \{ w_i : i \in M \} \)
+</p>
+
+<p>
+\(
+\lambda = w_\beta = \min \{ w_i : i \in M \}
+\)
+</p>
+</div>
+
+<p>
+Comme \(w \essinferieur \sigma\), on doit avoir :
+</p>
+
+<p>
+\[\supessentiel_{x \in A} w(x) \le \sigma\]
+</p>
+
+<p>
+Mais on a aussi \(w = w_\alpha = \sigma\) sur \(A_\alpha\), et a fortiori \(w \ge \sigma\) sur \(A_\alpha\), avec \(\mu(A_\alpha) \strictsuperieur 0\), ce qui implique :
+</p>
+
+<p>
+\[\supessentiel_{x \in A} w(x) \ge \sigma\]
+</p>
+
+<p>
+Ces deux inégalités nous imposent que :
+</p>
+
+<p>
+\[\supessentiel_{x \in A} w(x) = \sigma\]
+</p>
+
+<p>
+Comme \(w \esssuperieur \lambda\), on a :
+</p>
+
+<p>
+\[\infessentiel_{x \in A} w(x) \ge \lambda\]
+</p>
+
+<p>
+Mais on a aussi \(w = w_\beta =\lambda\) sur \(A_\beta\), et a fortiori \(w \le \lambda\) sur \(A_\beta\), avec \(\mu(A_\beta) \strictsuperieur 0\), ce qui implique :
+</p>
+
+<p>
+\[\infessentiel_{x \in A} w(x) \le \lambda\]
+</p>
+
+<p>
+Ces deux inégalités nous imposent que :
+</p>
+
+<p>
+\[\infessentiel_{x \in A} w(x) = \lambda\]
+</p>
+
+<p>
+Les extrema essentiels d'une fonction étagée existent toujours et sont très simples à évaluer :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\supessentiel_{x \in A} w(x) = \max \{ w_i : i \in \{1,...,n\}, \ \mu(A_i) \strictsuperieur 0 \} \\ \)
+</p>
+
+<p>
+\(
+\infessentiel_{x \in A} w(x) = \min \{ w_i : i \in \{1,...,n\}, \ \mu(A_i) \strictsuperieur 0 \}
+\)
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org6e80446" class="outline-2">
+<h2 id="org6e80446"><span class="section-number-2">6.</span> Intégrale d'une mesure</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+L'intégrale d'une mesure \(\mu : \mathcal{T} \mapsto \setR\) sur \(A \in \mathcal{T}\) est simplement la mesure de \(A\) :
+</p>
+
+<p>
+\[\int_A d\mu(x) = \mu(A)\]
+</p>
+</div>
+</div>
+<div id="outline-container-org8dd7b2e" class="outline-2">
+<h2 id="org8dd7b2e"><span class="section-number-2">7.</span> Intégrale d'une constante</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+On étend la définition aux constantes \(c \in \setR\) par linéarité :
+</p>
+
+<p>
+\[\int_A c \ d\mu(x) = c \cdot \int_A d\mu(x) = c \cdot \mu(A)\]
+</p>
+</div>
+<div id="outline-container-org0c0edb3" class="outline-3">
+<h3 id="org0c0edb3"><span class="section-number-3">7.1.</span> Fonction nulle</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+La fonction nulle peut être considérée comme la constante \(0\). On a donc :
+</p>
+
+<p>
+\[\int_A 0 \ d\mu(x) = 0 \cdot \int_A d\mu(x) = 0\]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org66f6864" class="outline-2">
+<h2 id="org66f6864"><span class="section-number-2">8.</span> Intégrale d'une fonction étagée</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Soit un ensemble \(A\) et une fonction \(w \in \etagee(A)\). On peut trouver des \(w_i \in \setR\) et des \(A_i \in \mathcal{T}\) formant une partition de \(A\) et tels que :
+</p>
+
+<p>
+\[w(x) = \sum_{i = 1}^n w_i \cdot \indicatrice_{A_i}(x)\]
+</p>
+
+<p>
+pour tout \(x \in A\). On étend la définition de l'intégrale en imposant la linéarité :
+</p>
+
+<p>
+\[\int_A w(x) \ d\mu(x) = \sum_{i = 1}^n \int_{A_i} w(x) \ d\mu(x)\]
+</p>
+
+<p>
+La fonction étagée \(w\) étant constante et valant \(w_i\) sur chaque \(A_i\), on a :
+</p>
+
+<p>
+\[\int_{A_i} w(x) \ d\mu(x) = \int_{A_i} w_i \ d\mu(x) = w_i \cdot \mu(A_i)\]
+</p>
+
+<p>
+et finalement :
+</p>
+
+<p>
+\[\int_A w(x) \ d\mu(x) = \sum_{i = 1}^n w_i \cdot \mu(A_i)\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgbea6c17" class="outline-2">
+<h2 id="orgbea6c17"><span class="section-number-2">9.</span> Unicité</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+Nous allons vérifier que, pour une fonction étagée \(w\) donnée, l'intégrale ainsi définie ne dépend pas de la partition utilisée. Soit les collections finies d'ensembles \(A_i \in \mathcal{T}\) et \(B_j \in \mathcal{T}\) telles que \(\{A_1,A_2,...,A_m\}\) et \(\{B_1,B_2,...,B_n\}\) forment deux partitions de \(A\) et telles que l'on puisse trouver des \(a_i,b_j \in \setR\) vérifiant :
+</p>
+
+<p>
+\[w(x) = \sum_{i = 1}^m a_i \cdot \indicatrice[A_i](x) = \sum_{j = 1}^n b_j \cdot \indicatrice[B_j](x)\]
+</p>
+
+<p>
+pour tout \(x \in A\).
+</p>
+</div>
+<div id="outline-container-orgeab2735" class="outline-3">
+<h3 id="orgeab2735"><span class="section-number-3">9.1.</span> Intersection des partitions</h3>
+<div class="outline-text-3" id="text-9-1">
+<p>
+Posons \(P = \{1,...,m\} \times \{1,...,n\}\) et \(C_{ij} = A_i \cup B_j \in \mathcal{T}\) pour tout \((i,j) \in P\). Si \(i \ne k\) ou si \(j \ne l\), on a :
+</p>
+
+<p>
+\[C_{ij} \cap C_{kl} = A_i \cap B_j \cap A_k \cap B_l = (A_i \cap A_k) \cap (B_j \cap B_l) = \emptyset\]
+</p>
+
+<p>
+On voit également que :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\bigcup_j C_{ij} = \bigcup_j (A_i \cap B_j) = A_i \cap \bigcup_j B_j = A_i \cap A = A_i \)
+</p>
+
+<p>
+\(
+\bigcup_i C_{ij} = \bigcup_i (A_i \cap B_j) = B_j \cap \bigcup_i A_i = A \cap B_j = B_j
+\)
+</p>
+</div>
+
+<p>
+Leur union globale sur les \((i,j)\) s'écrit donc :
+</p>
+
+<p>
+\[\bigcup_{i,j} C_{ij} = \bigcup_i A_i = A\]
+</p>
+
+<p>
+Les \(C_{ij}\) forment également une partition de \(A\).
+</p>
+
+<p>
+Nous savons que les \(C_{ij}\) ne se chevauchent pas et que leur union sur \(j\) permet de reformer les \(A_i\). De même, leur union sur \(i\) permet de reformer les \(B_j\). On en conclut que :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\mu(A_i) = \sum_j \mu(C_{ij}) \)
+</p>
+
+<p>
+\(
+\mu(B_j) = \sum_i \mu(C_{ij})
+\)
+</p>
+</div>
+
+<p>
+et :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\indicatrice[A_i] = \sum_j \indicatrice[C_{ij}] \)
+</p>
+
+<p>
+\(
+\indicatrice[B_j] = \sum_i \indicatrice[C_{ij}]
+\)
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org39cb2c0" class="outline-3">
+<h3 id="org39cb2c0"><span class="section-number-3">9.2.</span> Expression alternative</h3>
+<div class="outline-text-3" id="text-9-2">
+<p>
+Utilisant les propriétés des \(C_{ij}\), la fonction \(w\) peut se réécrire comme suit :
+</p>
+
+<p>
+\[w(x) = \sum_{(i,j) \in P} a_i \cdot \indicatrice[C_{ij}](x) = \sum_{(i,j) \in P} b_j \cdot \indicatrice[C_{ij}](x)\]
+</p>
+
+<p>
+On en conclut que :
+</p>
+
+<p>
+\[\sum_{(i,j) \in P} (a_i - b_j) \cdot \indicatrice[C_{ij}](x) = 0\]
+</p>
+</div>
+</div>
+<div id="outline-container-org1da8072" class="outline-3">
+<h3 id="org1da8072"><span class="section-number-3">9.3.</span> Implication de l'égalité</h3>
+<div class="outline-text-3" id="text-9-3">
+<p>
+Soit un couple \((i,j) \in P\) tel que \(\indicatrice[C_{ij}] \ne 0\), c'est-à-dire \(C_{ij} \ne \emptyset\). Soit \(x \in C_{ij}\). Pour tout \((k,l) \in P \setminus (i,j)\), on a \(C_{kl} \cap C_{ij} = \emptyset\) et donc \(\indicatrice[C_{kl}](x) = 0\). La somme :
+</p>
+
+<p>
+\[\sum_{(k,l) \in P} (a_k - b_l) \cdot \indicatrice[C_{kl}](x) = 0\]
+</p>
+
+<p>
+se réduit donc à :
+</p>
+
+<p>
+\[(a_i - b_j) \cdot \indicatrice[C_{ij}](x) = 0\]
+</p>
+
+<p>
+On doit donc avoir \(a_i - b_j = 0\), c'est-à-dire \(a_i = b_j\). On pose :
+</p>
+
+<p>
+\[F = \{ (i,j) \in P : C_{ij} \ne \emptyset \}\]
+</p>
+</div>
+</div>
+<div id="outline-container-org84d1e4f" class="outline-3">
+<h3 id="org84d1e4f"><span class="section-number-3">9.4.</span> Intégrales</h3>
+<div class="outline-text-3" id="text-9-4">
+<p>
+L'intégrale évaluée sur le découpage des \(A_i\) s'écrit :
+</p>
+
+<p>
+\[I = \sum_i a_i \cdot \mu(A_i) = \sum_{(i,j) \in P} a_i \cdot \mu(C_{ij})\]
+</p>
+
+<p>
+Mais comme \(\mu(C_{ij}) = \mu(\emptyset) = 0\) pour tout \((i,j) \in P \setminus F\), on a finalement :
+</p>
+
+<p>
+\[I = \sum_{(i,j) \in F} a_i \cdot \mu(C_{ij})\]
+</p>
+
+<p>
+De même, l'intégrale évaluée sur le découpage des \(B_j\) s'écrit :
+</p>
+
+<p>
+\[J = \sum_j b_j \cdot \mu(B_j) = \sum_{(i,j) \in P} b_j \cdot \mu(C_{ij}) = \sum_{(i,j) \in F} b_j \cdot \mu(C_{ij})\]
+</p>
+
+<p>
+Comme \(a_i = b_j\) pour tous les couples \((i,j) \in F\), on en déduit que :
+</p>
+
+<p>
+\[J = \sum_{(i,j) \in F} a_i \cdot \mu(C_{ij}) = I\]
+</p>
+
+<p>
+L'intégrale d'une fonction étagée ne dépend donc pas du choix de la partition utilisée.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbac05b2" class="outline-2">
+<h2 id="orgbac05b2"><span class="section-number-2">10.</span> Ordre</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+Soit les fonctions étagées \(u,v \in \etagee(A)\) vérifiant \(u \essinferieur v\). Soit les partitions \(\{U_1,...,U_m\}\) et \(\{V_1,...,V_n\}\) et les réels \(u_i,v_j\) tels que :
+</p>
+
+<div class="org-center">
+<p>
+\(
+u(x) = \sum_{i = 1}^m u_i \cdot \indicatrice_{U_i}(x) \)
+</p>
+
+<p>
+\(
+v(x) = \sum_{j = 1}^n v_j \cdot \indicatrice_{V_j}(x)
+\)
+</p>
+</div>
+
+<p>
+pour tout \(x \in A\). Si \(W_{ij} = U_i \cap V_j\), on sait que :
+</p>
+
+<div class="org-center">
+<p>
+\(
+u(x) = \sum_{i,j} u_i \cdot \indicatrice[W_{ij}](x) \)
+</p>
+
+<p>
+\(
+v(x) = \sum_{i,j} v_j \cdot \indicatrice[W_{ij}](x)
+\)
+</p>
+</div>
+
+<p>
+Posons \(P = \{1,...,m\} \times \{1,...,n\}\) et :
+</p>
+
+<p>
+\[M = \{ (i,j) \in P : \mu(W_{ij}) \strictsuperieur 0 \}\]
+</p>
+
+<p>
+Considérons le choix \((i,j) \in P\) et \(x \in W_{ij}\). Comme \(u\) est essentiellement inférieure à \(v\), on doit avoir \(u_i \le v_j\) dès que \(\mu(W_{ij}) \strictsuperieur 0\), c'est-à-dire lorsque \((i,j) \in M\). Examinons à présent les intégrales. Les mesures des \(W_{ij}\) s'annulant pour tout \((i,j) \in P \setminus M\), on a :
+</p>
+
+<p>
+\[\int_A u(x) \ d\mu(x) = \sum_{i,j} u_i \cdot \mu(W_{ij}) = \sum_{(i,j) \in M} u_i \cdot \mu(W_{ij})\]
+</p>
+
+<p>
+et :
+</p>
+
+<p>
+\[\int_A v(x) \ d\mu(x) = \sum_{i,j} v_j \cdot \mu(W_{ij}) = \sum_{(i,j) \in M} v_j \cdot \mu(W_{ij})\]
+</p>
+
+<p>
+La propriété \(u_i \le v_j\) étant vérifiée pour tout \((i,j) \in M\), on en conclut que :
+</p>
+
+<p>
+\[\int_A u(x) \ d\mu(x) \le \int_A v(x) \ d\mu(x)\]
+</p>
+
+<p>
+L'intégrale conserve l'ordre essentiel entre fonctions étagées.
+</p>
+</div>
+<div id="outline-container-orge8f4aa4" class="outline-3">
+<h3 id="orge8f4aa4"><span class="section-number-3">10.1.</span> Signe</h3>
+<div class="outline-text-3" id="text-10-1">
+<p>
+Comme la fonction constante \(0\) est un cas particulier de fonction étagée, l'intégrale d'une fonction étagée \(u\) essentiellement supérieure à zéro est positive. De même, l'intégrale d'un fonction étagée \(v\) essentiellement inférieure à zéro est négative.
+</p>
+</div>
+</div>
+<div id="outline-container-org8ec48c2" class="outline-3">
+<h3 id="org8ec48c2"><span class="section-number-3">10.2.</span> Egalité</h3>
+<div class="outline-text-3" id="text-10-2">
+<p>
+Soit deux fonctions étagées \(u,v\) essentiellement égales (\(u \essegal v\)). On a \(u \essinferieur v\) et l'intégrale de \(u\) est inférieure à l'intégrale de \(v\). Mais on a aussi \(u \esssuperieur v\) et l'intégrale de \(u\) est supérieure à l'intégrale de \(v\). On en conclut que :
+</p>
+
+<p>
+\[\int_A u(x) \ d\mu(x) = \int_A v(x) \ d\mu(x)\]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbae427a" class="outline-2">
+<h2 id="orgbae427a"><span class="section-number-2">11.</span> Encadrement</h2>
+<div class="outline-text-2" id="text-11">
+<p>
+Soit \(w \in \etagee(A)\). Comme les constantes sont des cas particuliers de fonctions étagées et que l'on a :
+</p>
+
+<p>
+\[\infessentiel_{x \in A} w(x) \essinferieur w \essinferieur \supessentiel_{x \in A} w(x)\]
+</p>
+
+<p>
+on en conclut en intégrant que :
+</p>
+
+<p>
+\[\mu(A) \cdot \infessentiel_{x \in A} w(x) \le \int_A w(x) \ d\mu(x) \le \mu(A) \cdot \supessentiel_{x \in A} w(x)\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgba1f128" class="outline-2">
+<h2 id="orgba1f128"><span class="section-number-2">12.</span> Propriétés extrémales</h2>
+<div class="outline-text-2" id="text-12">
+<p>
+Soit \(w \in \etagee(A)\). Si \(u\) est une fonction étagée vérifiant \(u \essinferieur w\), l'intégrale de \(u\) est inférieure à l'intégrale de \(w\). Par ailleurs, le choix \(u = w \essinferieur w\) reproduit bien entendu l'intégrale de \(w\). On en conclut que :
+</p>
+
+<p>
+\[\int_A w(x) \ d\mu(x) = \sup \left\{ \int_A u(x) \ d\mu(x) : u \in \etagee(A), \ u \essinferieur w \right\}\]
+</p>
+
+<p>
+On aboutit avec un raisonnement analogue à :
+</p>
+
+<p>
+\[\int_A w(x) \ d\mu(x) = \inf \left\{ \int_A v(x) \ d\mu(x) : v \in \etagee(A), \ v \esssuperieur w \right\}\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgef540da" class="outline-2">
+<h2 id="orgef540da"><span class="section-number-2">13.</span> Additivité</h2>
+<div class="outline-text-2" id="text-13">
+<p>
+Soit les ensembles \(A\) et \(B\) disjoints :
+</p>
+
+<p>
+\[A \cap B = \emptyset\]
+</p>
+
+<p>
+et une fonction \(w \in \etagee(A \cup B)\). On peut trouver des \(w_i \in \setR\) et des \(C_i \in \mathcal{T}\) formant une partition de \(A \cup B\) et tels que :
+</p>
+
+<p>
+\[w(x) = \sum_i w_i \cdot \indicatrice_{C_i}(x)\]
+</p>
+
+<p>
+pour tout \(x \in A\). On sait que les \(A_i = C_i \cap A\) forment une partition de \(A\) et que les \(B_i = C_i \cap B\) forment une partition de \(B\). On a aussi :
+</p>
+
+<p>
+\[A_i \cap B_i = C_i \cap A \cap C_i \cap B = C_i \cap (A \cap B) = \emptyset\]
+</p>
+
+<p>
+Comme :
+</p>
+
+<p>
+\[C_i = C_i \cap (A \cup B) = (C_i \cap A) \cup (C_i \cap B) = A_i \cup B_i\]
+</p>
+
+<p>
+on a \(\indicatrice[C_i] = \indicatrice[A_i] + \indicatrice[B_i]\) et :
+</p>
+
+\begin{align}
+w &= \sum_i w_i \cdot (\indicatrice[A_i] + \indicatrice[B_i]) \)
+
+\(
+&= \sum_i w_i \cdot \indicatrice[A_i] + \sum_i w_i \cdot \indicatrice[B_i]
+\end{align}
+
+<p>
+Evaluons l'intégrale de \(w\) sur \(A \cup B\). Il vient :
+</p>
+
+\begin{align}
+\int_{A \cup B} w(x) \ d\mu(x) &= \sum_i w_i \cdot \mu(A_i) + \sum_i w_i \cdot \mu(B_i) \)
+
+\(
+&= \int_A w(x) \ d\mu(x) + \int_B w(x) \ d\mu(x)
+\end{align}
+
+<p>
+L'intégrale des fonctions étagées est donc additive sur les ensembles concernés.
+</p>
+</div>
+</div>
+<div id="outline-container-orgd424901" class="outline-2">
+<h2 id="orgd424901"><span class="section-number-2">14.</span> Propriétés diverses</h2>
+<div class="outline-text-2" id="text-14">
+<p>
+Soit \(u,v \in \etagee(A)\). On peut trouver des \(u_i,v_j \in \setR\) et des \(U_i,V_i \in \mathcal{T}\) tels que \(\{U_1,...,U_n\}\) et \(\{V_1,...,V_m\}\) forment des partitions de \(A\) et vérifiant :
+</p>
+
+<div class="org-center">
+<p>
+\(
+u(x) = \sum_{i = 1}^n u_i \cdot \indicatrice[U_i](x) \)
+</p>
+
+<p>
+\(
+v(x) = \sum_{j = 1}^m v_j \cdot \indicatrice[V_j](x)
+\)
+</p>
+</div>
+
+<p>
+pour tout \(x \in A\). Nous avons vu que les intersections \(W_{ij} = U_i \cup V_j \in \mathcal{T}\) forment aussi une partition de \(A\) et qu'elles possèdent les propriétés :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\mu(U_i) = \sum_j \mu(W_{ij}) \)
+</p>
+
+<p>
+\(
+\mu(V_j) = \sum_i \mu(W_{ij})
+\)
+</p>
+</div>
+
+<p>
+et :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\indicatrice[U_i] = \sum_j \indicatrice[W_{ij}] \)
+</p>
+
+<p>
+\(
+\indicatrice[V_j] = \sum_i \indicatrice[W_{ij}]
+\)
+</p>
+</div>
+
+<p>
+Les fonctions \(u,v\) peuvent donc également s'exprimer comme :
+</p>
+
+<div class="org-center">
+<p>
+\(
+u(x) = \sum_{i,j} u_i \cdot \indicatrice[W_{ij}](x) \)
+</p>
+
+<p>
+\(
+v(x) = \sum_{i,j} v_j \cdot \indicatrice[W_{ij}](x)
+\)
+</p>
+</div>
+</div>
+<div id="outline-container-org3e44aa7" class="outline-3">
+<h3 id="org3e44aa7"><span class="section-number-3">14.1.</span> Espace vectoriel</h3>
+<div class="outline-text-3" id="text-14-1">
+<p>
+Soit \(\alpha,\beta \in \setR\). On voit que la fonction \(w : A \mapsto \setR\) définie par :
+</p>
+
+<p>
+\[w(x) = \alpha \cdot u(x) + \beta \cdot v(x)\]
+</p>
+
+<p>
+est également une fonction étagée puisque :
+</p>
+
+<p>
+\[w(x) = \sum_{i,j} (\alpha \cdot u_i + \beta \cdot v_j) \cdot \indicatrice[W_{ij}](x)\]
+</p>
+
+<p>
+Nous venons de montrer que toute combinaison linéaire de fonctions étagées est une fonction étagée. L'ensemble \(\etagee(A)\) forme donc un espace vectoriel sur \(\setR\).
+</p>
+</div>
+</div>
+<div id="outline-container-org88ba075" class="outline-3">
+<h3 id="org88ba075"><span class="section-number-3">14.2.</span> Intégrale</h3>
+<div class="outline-text-3" id="text-14-2">
+<p>
+Evaluons l'intégrale de \(w\). On obtient :
+</p>
+
+\begin{align}
+\int_A w(x) \ d\mu(x) &= \sum_{i,j} (\alpha \cdot u_i + \beta \cdot v_j) \cdot \mu(W_{ij}) \)
+
+\(
+&= \alpha \sum_i u_i \sum_j \mu(W_{ij}) + \beta \sum_j v_j \sum_i \mu(W_{ij}) \)
+
+\(
+&= \alpha \sum_i u_i \cdot \mu(U_i) + \beta \sum_j v_j \cdot \mu(V_j) \)
+
+\(
+&= \alpha \int_A u(x) \ d\mu(x) + \beta \int_A v(x) \ d\mu(x)
+\end{align}
+
+<p>
+On en conclut que :
+</p>
+
+<p>
+\[\int_A (\alpha \cdot u(x) + \beta \cdot v(x)) \ d\mu(x) = \alpha \cdot \int_A u(x) \ d\mu(x) + \beta \cdot \int_A v(x) \ d\mu(x)\]
+</p>
+
+<p>
+Nous venons de prouver la linéarité de l'intégrale des fonctions étagées.
+</p>
+</div>
+</div>
+<div id="outline-container-org9011876" class="outline-3">
+<h3 id="org9011876"><span class="section-number-3">14.3.</span> Fonctions max et min</h3>
+<div class="outline-text-3" id="text-14-3">
+<p>
+On voit que la fonction :
+</p>
+
+<p>
+\[\max\{u,v\}(x) = \sum_{i,j} \max\{u_i,v_j\} \cdot \indicatrice[W_{ij}](x)\]
+</p>
+
+<p>
+est également une fonction étagée. Il en va de même pour :
+</p>
+
+<p>
+\[\min\{u,v\}(x) = \sum_{i,j} \min\{u_i,v_j\} \cdot \indicatrice[W_{ij}](x)\]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcd32e59" class="outline-2">
+<h2 id="orgcd32e59"><span class="section-number-2">15.</span> Mesure nulle</h2>
+<div class="outline-text-2" id="text-15">
+<p>
+Soit un ensemble \(A\) vérifiant \(\mu(A) = 0\) et une fonction \(w\) étagée sur \(A\) définie par :
+</p>
+
+<p>
+\[w(x) = \sum_{i = 1}^n w_i \cdot \indicatrice_{A_i}(x)\]
+</p>
+
+<p>
+pour tout \(x \in A\). Les \(w_i\) sont bien entendu des réels et les \(A_i\) forment une partition de \(A\). Comme les \(A_i\) sont inclus dans l'ensemble \(A\) qui est de mesure nulle, on a \(\mu(A_i) = 0\). L'intégrale s'écrit donc :
+</p>
+
+<p>
+\[\int_A w(x) \ d\mu(x) = \sum_{i = 1}^n w_i \cdot \mu(A_i) = \sum_{i = 1}^n w_i \cdot 0 = 0\]
+</p>
+
+<p>
+L'intégrale d'une fonction étagée sur un ensemble de mesure nulle est nulle.
+</p>
+</div>
+</div>
+<div id="outline-container-org43477a1" class="outline-2">
+<h2 id="org43477a1"><span class="section-number-2">16.</span> Mesurabilité et opérations</h2>
+<div class="outline-text-2" id="text-16">
+<p>
+Soit la mesure \(\mu : \mathcal{T} \mapsto \setR\), l'ensemble \(A \in \mathcal{T}\), une fonction mesurable \(f : A \mapsto \setR\) et une fonction étagée \(w \in \etagee(A)\). Considérons un choix de \(w_i \in \setR\) et de \(A_i \in \mathcal{T}\) formant une partition de \(A\) et tels que :
+</p>
+
+<p>
+\[w(x) = \sum_{i = 1}^n w_i \cdot \indicatrice_{A_i}(x)\]
+</p>
+
+<p>
+pour tout \(x \in A\).
+</p>
+</div>
+<div id="outline-container-org2392e75" class="outline-3">
+<h3 id="org2392e75"><span class="section-number-3">16.1.</span> Addition</h3>
+<div class="outline-text-3" id="text-16-1">
+<p>
+On a clairement :
+</p>
+
+\begin{align}
+\{ x \in A : f(x) + w(x) \strictsuperieur a \} &= \bigcup_{i = 1}^n \{ x \in A_i : f(x) + w(x) \strictsuperieur a \} \)
+
+\(
+&= \bigcup_{i = 1}^n \{ x \in A_i : f(x) + w_i \strictsuperieur a \} \)
+
+\(
+&= \bigcup_{i = 1}^n \{ x \in A_i : f(x) \strictsuperieur a - w_i \}
+\end{align}
+
+<p>
+Comme \(f\) est mesurable, les ensembles :
+</p>
+
+<p>
+\[F_i = \{ x \in A_i : f(x) \strictsuperieur a - w_i \}\]
+</p>
+
+<p>
+appartiennent à \(\mathcal{T}\). Comme l'union opère sur un nombre fini d'ensembles, on a :
+</p>
+
+<p>
+\[\{ x \in A : f(x) + w(x) \strictsuperieur a \} = \bigcup_{i = 1}^n F_i \in \mathcal{T}\]
+</p>
+
+<p>
+On conclut de même que :
+</p>
+
+<p>
+\[\{ x \in A : f(x) + w(x) \strictinferieur a \} = \bigcup_{i = 1}^n \{ x \in A_i : f(x) \strictinferieur a - w_i \} \in \mathcal{T}\]
+</p>
+
+<p>
+La fonction \(f + w\) est donc mesurable. Il en va de même pour \(-(f + w) = -f - w\).
+</p>
+</div>
+</div>
+<div id="outline-container-org5223794" class="outline-3">
+<h3 id="org5223794"><span class="section-number-3">16.2.</span> Soustraction</h3>
+<div class="outline-text-3" id="text-16-2">
+<p>
+Comme l'opposé d'une fonction étagée est une fonction étagée :
+</p>
+
+<p>
+\[-w(x) = - \sum_{i = 1}^n w_i \cdot \indicatrice_{A_i}(x) = \sum_{i = 1}^n (-w_i) \cdot \indicatrice_{A_i}(x)\]
+</p>
+
+<p>
+la fonction \(f - w = f + (-w)\) est également mesurable. Il en va de même pour \(-(f - w) = w - f\).
+</p>
+</div>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-10-21 mar 09:53</p>
+<p class="date">Created: 2025-10-21 mar 10:10</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

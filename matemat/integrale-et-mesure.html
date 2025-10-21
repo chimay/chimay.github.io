@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-10-21 mar 09:53 -->
+<!-- 2025-10-21 mar 10:32 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Eclats de vers : Matemat : Collections</title>
+<title>Eclats de vers : Matemat : Intégrales et mesures</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
 <style type="text/css">
@@ -228,7 +228,7 @@
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Eclats de vers : Matemat : Collections</h1>
+<h1 class="title">Eclats de vers : Matemat : Intégrales et mesures</h1>
 <p>
 <a href="index.html">Index des Grimoires</a>
 </p>
@@ -236,6 +236,20 @@
 <p>
 <a href="../index.html">Retour à l’accueil</a>
 </p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org8026e3c">1. Addition de mesure</a></li>
+<li><a href="#org2187d5e">2. Mesure de Lebesgue</a></li>
+<li><a href="#org7d2c771">3. Intégrale de Stieltjes</a></li>
+<li><a href="#orgc29ed99">4. Mesure pondérée</a></li>
+<li><a href="#org8234dcc">5. Mesure de Dirac</a></li>
+<li><a href="#org80c4317">6. Pondérée - Dirac</a></li>
+</ul>
+</div>
+</div>
 
 <p>
 \(
@@ -404,10 +418,290 @@
 {\end{array} \right]}
 \)
 </p>
+<div id="outline-container-org8026e3c" class="outline-2">
+<h2 id="org8026e3c"><span class="section-number-2">1.</span> Addition de mesure</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Soit les mesures \(\gamma, \lambda\) et la mesure \(\mu\) définie par :
+</p>
+
+<p>
+\[\mu = \gamma + \lambda\]
+</p>
+
+<p>
+Soit un ensemble \(A\) et une fonction \(w \in \etagee(A)\). On peut trouver des \(w_i \in \setR\) et des \(A_i \in \mathcal{T}\) formant une partition de \(A\) et tels que :
+</p>
+
+<p>
+\[w(x) = \sum_{i = 1}^n w_i \cdot \indicatrice_{A_i}(x)\]
+</p>
+
+<p>
+On a alors :
+</p>
+
+\begin{align}
+\int_A w(x) \ d\mu(x) &= \sum_{i = 1}^n w_i \cdot \mu(A_i) \)
+
+\(
+&= \sum_{i = 1}^n w_i \cdot (\gamma(A_i) + \lambda(A_i)) \)
+
+\(
+&= \sum_{i = 1}^n w_i \cdot \gamma(A_i) + \sum_{i = 1}^n w_i \cdot \lambda(A_i) \)
+
+\(
+&= \int_A w(x) \ d\gamma(x) + \int_A w(x) \ d\lambda(x)
+\end{align}
+
+<p>
+En passant au suprémum sur toutes les fonctions étagées \(w\) essentiellement inférieures à une fonction positive intégrable, puis en utilisant la définition d'une fonction intégrable \(f\) on en déduit que :
+</p>
+
+<p>
+\[\int_A f(x) \ d(\gamma + \lambda)(x) = \int_A f(x) \ d\gamma(x) + \int_A f(x) \ d\lambda(x)\]
+</p>
+</div>
+</div>
+<div id="outline-container-org2187d5e" class="outline-2">
+<h2 id="org2187d5e"><span class="section-number-2">2.</span> Mesure de Lebesgue</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Soit \(A \subseteq \setR^n\) et \(\mu_L\) la mesure de Lebesgue. On note alors \(d\mu_L(x) = dx\) ou :
+</p>
+
+<p>
+\[d\mu_L(x) = dx = dx_1 \ ... \ dx_n\]
+</p>
+
+<p>
+et :
+</p>
+
+<p>
+\[\int_A f(x) \ dx = \int_A f(x) \ d\mu_L(x)\]
+</p>
+</div>
+</div>
+<div id="outline-container-org7d2c771" class="outline-2">
+<h2 id="org7d2c771"><span class="section-number-2">3.</span> Intégrale de Stieltjes</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Soit la fonction croissante \(\gamma : A \mapsto \setR\). L'intégrale de Stieltjes associée à \(\gamma\) se note :
+</p>
+
+<p>
+\[\int_A f(x) \ d\gamma(x)\]
+</p>
+
+<p>
+Elle se définit d'après la mesure de Stieltjes \(\mu_\gamma\) associée à \(\gamma\) :
+</p>
+
+<p>
+\[\int_A f(x) \ d\gamma(x) = \int_A f(x) \ d\mu_\gamma(x)\]
+</p>
+</div>
+<div id="outline-container-org06d9e44" class="outline-3">
+<h3 id="org06d9e44"><span class="section-number-3">3.1.</span> Fonction à variation bornée</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Nous allons étendre la définition à des fonctions non nécessairement croissantes. Soit une fonction \(g : [\alpha,\beta] \mapsto \setR\) et \(S[a,b]\) l'ensemble des suites réelles croissantes inclues dans \([a,b]\) :
+</p>
+
+<p>
+\[S[a,b] = \Big\{ \{x_0, x_1, x_2, ..., x_n \} : a \le x_0 \le x_1 \le x_2 \le ... \le b, \ n \in \setN \Big\}\]
+</p>
+
+<p>
+Nous supposons que la fonction \(g\) nous permet de définir les fonctions \(\sigma,\lambda\) associées par :
+</p>
+
+<p>
+\[\sigma(x) = \sup \accolades{ \sum_{i = 0}^n \max\{g(x_{i + 1}) - g(x_i), 0\} : \{x_0, x_1, ..., x_n \} \in S[\alpha,x] }\]
+</p>
+
+<p>
+et :
+</p>
+
+<p>
+\[\lambda(x) = - \inf \accolades{ \sum_{i = 0}^n \min\{g(x_{i + 1}) - g(x_i), 0\} : \{x_0, x_1, ..., x_n \} \in S[\alpha,x] }\]
+</p>
+
+<p>
+pour tout \(x \in [\alpha,\beta]\). Il est clair que les fonctions \(\sigma, \lambda\) sont croissantes. On peut donc définir l'intégrale de Stieltjes associée à \(g\) par :
+</p>
+
+<p>
+\[\int_A f(x) \ dg(x) = \int_A f(x) \ d\sigma(x) - \int_A f(x) \ d\lambda(x)\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgc9a5a46" class="outline-3">
+<h3 id="orgc9a5a46"><span class="section-number-3">3.2.</span> Positivité</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+L'intégrale de Stieltjes d'une fonction essentiellement positive n'est généralement pas positive.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc29ed99" class="outline-2">
+<h2 id="orgc29ed99"><span class="section-number-2">4.</span> Mesure pondérée</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Soit une fonction essentiellement positive \(\varphi\) telle que la fonction \(\mu\) associée définie par :
+</p>
+
+<p>
+\[\mu(A) = \int_A \varphi(x) \ dx\]
+</p>
+
+<p>
+soit une mesure. Considérons une fonction \(w \in \mathcal{E}_A(f)\), avec :
+</p>
+
+<p>
+\[w = \sum_i w_i \cdot \indicatrice_{A_i}\]
+</p>
+
+<p>
+où les \(A_i\) forment une partition de \(A\) et où les \(w_i \in \setR\). On a alors :
+</p>
+
+<p>
+\[\int_A w(x) \ d\mu(x) = \sum_i w_i \cdot \int_{A_i} \varphi(x) \ dx\]
+</p>
+
+<p>
+Par linéarité de l'intégrale, on voit aussi que :
+</p>
+
+\begin{align}
+\int_A w(x) \cdot \varphi(x) \ dx &= \sum_i w_i \cdot \int_A \varphi(x) \cdot \indicatrice_{A_i}(x) \ dx \)
+
+\(
+&= \sum_i w_i \cdot \int_{A_i} \varphi(x) \ dx
+\end{align}
+
+<p>
+On en conclut que :
+</p>
+
+<p>
+\[\int_A w(x) \ d\mu(x) = \int_A w(x) \cdot \varphi(x) \ dx\]
+</p>
+
+<p>
+Comme \(\varphi\) est positive, on a l'équivalence entre \(w \essinferieur f\) et \(w \cdot \varphi \essinferieur f \cdot \varphi\). En passant au supremum, on obtient donc :
+</p>
+
+<p>
+\[\int_A f(x) \ d\mu(x) = \int_A f(x) \cdot \varphi(x) \ dx\]
+</p>
+
+<p>
+pour toute fonction intégrable \(f : A \to \setR\). On note symboliquement :
+</p>
+
+<p>
+\[d\mu(x) = \varphi(x) \ dx\]
+</p>
+</div>
+<div id="outline-container-org9b82392" class="outline-3">
+<h3 id="org9b82392"><span class="section-number-3">4.1.</span> Problème inverse</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+Remarquons qu'on ne sait généralement pas faire correspondre une fonction \(\varphi\) à une mesure \(\mu\) donnée.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org8234dcc" class="outline-2">
+<h2 id="org8234dcc"><span class="section-number-2">5.</span> Mesure de Dirac</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+L'intégrale d'une fonction \(f : \setR \to \setR\) par rapport à une mesure de Dirac \(\mu_D^a\) est fort simple à calculer. En effet :
+</p>
+
+<p>
+\[\int_A d\mu_D^a(x) = \mu_D^a(A) = \indicatrice_A(a)\]
+</p>
+
+<p>
+par définition. Si \(a \notin A\), l'ensemble \(A\) est de mesure nulle et :
+</p>
+
+<p>
+\[\int_A f(x) \ d\mu_D^a(x) = 0\]
+</p>
+
+<p>
+Considérons à présent le cas où \(a \in A\). L'ensemble \(A \setminus \{a\}\) étant disjoint de \(\{a\}\) et de mesure nulle :
+</p>
+
+<p>
+\[\int_{A \setminus \{a\}} d\mu_D^a(x) = \indicatrice_{A \setminus \{a\}}(a) = 0\]
+</p>
+
+<p>
+on a :
+</p>
+
+<p>
+\[\int_A f(x) \ d\mu_D^a(x) = \int_{\{a\}} f(x) \ d\mu_D^a(x)\]
+</p>
+
+<p>
+La fonction \(f\) étant constante sur \(\{a\}\) et valant \(f(a)\), on a finalement :
+</p>
+
+<p>
+\[\int_A f(x) \ d\mu_D^a(x) = f(a) \cdot \indicatrice_{\{a\}}(a) = f(a)\]
+</p>
+
+<p>
+Dans le cas général, on a donc :
+</p>
+
+<p>
+\[\int_A f(x) \ d\mu_D^a(x) = f(a) \cdot \indicatrice_A(a)\]
+</p>
+
+<p>
+On note également :
+</p>
+
+<p>
+\[\int_A f(x) \ \indicatrice(x - a) \ dx = f(a) \cdot \indicatrice_A(a)\]
+</p>
+</div>
+</div>
+<div id="outline-container-org80c4317" class="outline-2">
+<h2 id="org80c4317"><span class="section-number-2">6.</span> Pondérée - Dirac</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Soit une mesure \(\mu\) définie par :
+</p>
+
+<p>
+\[d\mu(x) = \left[ \varphi(x) + \sum_i \alpha_i \cdot \indicatrice(x - x_i) \right] \ dx\]
+</p>
+
+<p>
+où les \(\alpha_i \in \setR\). Si les \(x_i\) appartiennent tous à \(A\), l'intégrale d'une fonction \(f\) par rapport à cette mesure s'écrit :
+</p>
+
+<p>
+\[\int_A f(x) \ d\mu(x) = \int_A f(x) \cdot \varphi(x) \ dx + \sum_i \alpha_i \cdot f(x_i)\]
+</p>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-10-21 mar 09:53</p>
+<p class="date">Created: 2025-10-21 mar 10:32</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

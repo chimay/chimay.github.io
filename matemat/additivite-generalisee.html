@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-10-21 mar 09:53 -->
+<!-- 2025-10-21 mar 10:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Eclats de vers : Matemat : Collections</title>
+<title>Eclats de vers : Matemat : Additivité généralisée</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
 <style type="text/css">
@@ -228,7 +228,7 @@
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Eclats de vers : Matemat : Collections</h1>
+<h1 class="title">Eclats de vers : Matemat : Additivité généralisée</h1>
 <p>
 <a href="index.html">Index des Grimoires</a>
 </p>
@@ -236,6 +236,21 @@
 <p>
 <a href="../index.html">Retour à l’accueil</a>
 </p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org22a543c">1. Dépendances</a></li>
+<li><a href="#org8a8f2c1">2. Introduction</a></li>
+<li><a href="#org9ca9d12">3. Notation</a></li>
+<li><a href="#orgea812c9">4. Fubini</a></li>
+<li><a href="#org73f5a38">5. Produit cartésien</a></li>
+<li><a href="#org59bd31e">6. Domaine régulier</a></li>
+<li><a href="#orgc91af40">7. Lemme du triangle</a></li>
+</ul>
+</div>
+</div>
 
 <p>
 \(
@@ -404,10 +419,772 @@
 {\end{array} \right]}
 \)
 </p>
+
+<p>
+\label{chap:fubini}
+</p>
+<div id="outline-container-org22a543c" class="outline-2">
+<h2 id="org22a543c"><span class="section-number-2">1.</span> Dépendances</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>Chapitre \ref{chap:fonction} : Les fonctions</li>
+<li>Chapitre \ref{chap:mesure} : Les mesures</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org8a8f2c1" class="outline-2">
+<h2 id="org8a8f2c1"><span class="section-number-2">2.</span> Introduction</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orgee2811f" class="outline-3">
+<h3 id="orgee2811f"><span class="section-number-3">2.1.</span> Mesure induite</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Soit les ensembles \(\Omega\) et \(\Psi\), les tribus \(\mathcal{T} \subseteq \sousens(\Omega)\) et \(\mathcal{U} \subseteq \sousens(\Psi)\) et les mesures \(\mu : \mathcal{T} \mapsto \setR\) et \(\nu : \mathcal{U} \mapsto \setR\).
+</p>
+
+<p>
+On considère un ensemble \(X \subseteq \Psi\) mesurable pour \(\nu\) et paramétrant la collection \(\mathcal{C} = \{ P(x) \in \sousens(\Omega) : x \in X \}\) formant une partition de \(\Omega\). Nous supposons également que chaque ensemble-élément de \(\mathcal{C}\) est mesurable pour \(\mu\). Choisissons un sous-ensemble quelconque \(A \subseteq \Omega\). Posons \(A(x) = P(x) \cap A\) et :
+</p>
+
+<p>
+\[\mathcal{P}(A) = \{ A(x) : x \in X \} = \{ P(x) \cap A : x \in X \}\]
+</p>
+
+<p>
+On a :
+</p>
+
+<p>
+\[\bigcup_{x \in X} A(x) = A \cap \bigcup_{x \in X} P(x) = A \cap \Omega = A\]
+</p>
+
+<p>
+Si \(x,y \in X\) vérifient \(x \ne y\), on a aussi :
+</p>
+
+<p>
+\[A(x) \cap A(y) = P(x) \cap P(y) \cap A = \emptyset\]
+</p>
+
+<p>
+On en déduit que \(\mathcal{P}(A)\) forme une partition de \(A\). Soit la collection \(\mathcal{M}\) des sous-ensembles \(A\) de \(\Omega\) tels que la fonction \(x \mapsto \mu(A(x))\) soit mesurable. Si \(\mathcal{M}\) forme une tribu, on peut définir une mesure \(\sigma : \mathcal{M} \mapsto \setR\) par la relation :
+</p>
+
+<p>
+\[\sigma(A) = \int_X \mu(A(x)) \ d\nu(x)\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgfa17864" class="outline-3">
+<h3 id="orgfa17864"><span class="section-number-3">2.2.</span> Validité</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Par positivité de \(\mu\) et de l'intégrale, on a clairement \(\sigma \ge 0\). L'ensemble vide étant de mesure nulle au sens de \(\mu\), on a :
+</p>
+
+\begin{align}
+\sigma(\emptyset) &= \int_X \mu(\emptyset \cap P(x)) \ d\nu(x) \)
+
+\(
+&= \int_X \mu(\emptyset) \ d\nu(x) \)
+
+\(
+&= \int_X 0 \ d\nu(x) \)
+
+\(
+&= 0
+\end{align}
+
+<p>
+Soit \(A,B \subseteq \Omega\) avec \(A \cap B = \emptyset\). On a :
+</p>
+
+\begin{align}
+A(x) \cup B(x) &= (A \cap P(x)) \cup (B \cap P(x)) \)
+
+\(
+&= (A \cup B) \cap P(x) \)
+
+\(
+&= (A \cup B)(x)
+\end{align}
+
+<p>
+Par additivité de \(\mu\) et linéarité de l'intégrale, on a :
+</p>
+
+\begin{align}
+\sigma(A \cup B) &= \int_X \mu((A \cup B)(x)) \ d\nu(x) \)
+
+\(
+&= \int_X \mu(A(x) \cup B(x)) \ d\nu(x) \)
+
+\(
+&= \int_X [\mu(A(x)) + \mu(B(x))] \ d\nu(x) \)
+
+\(
+&= \int_X \mu(A(x)) \ d\nu(x) + \int_X \mu(B(x)) \ d\nu(x) \)
+
+\(
+&= \sigma(A) + \sigma(B)
+\end{align}
+
+<p>
+La fonction \(\sigma\) est donc également additive et représente bien une mesure.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org9ca9d12" class="outline-2">
+<h2 id="org9ca9d12"><span class="section-number-2">3.</span> Notation</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Soit une fonction \(f : A \mapsto \setR\) et la fonction \(I : X \mapsto \setR\) définie par :
+</p>
+
+<p>
+\[I(x) = \int_{A(x)} f(y) \ d\mu(y)\]
+</p>
+
+<p>
+pour tout \(x \in X\). On note dans la suite :
+</p>
+
+<p>
+\[\int_X \int_{A(x)} f(y) \ d\mu(y) \ d\nu(x) = \int_X I(x) \ d\nu(x)\]
+</p>
+
+<p>
+ou encore :
+</p>
+
+<p>
+\[\int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y) = \int_X I(x) \ d\nu(x)\]
+</p>
+</div>
+<div id="outline-container-org5c24414" class="outline-3">
+<h3 id="org5c24414"><span class="section-number-3">3.1.</span> Fonctions étagées</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Soit une fonction étagée \(w : A \mapsto \setR\). On dispose d'une partition \(\{A_1,...,A_n\}\) de \(A\) et de réels \(w_i\) tels que :
+</p>
+
+<p>
+\[w = \sum_i w_i \cdot \indicatrice_{A_i}\]
+</p>
+
+<p>
+Evaluons son intégrale :
+</p>
+
+\begin{align}
+\int_A w(z) \ d\sigma(z) &= \sum_i w_i \cdot \sigma(A_i) \)
+
+\(
+&= \sum_i w_i \int_X \mu(A_i(x)) \ d\nu(x) \)
+
+\(
+&= \int_X \sum_i w_i \cdot \mu(A_i(x)) \ d\nu(x) \)
+
+\(
+&= \int_X \left[ \int_{A(x)} w(y) \ d\mu(y) \right] \ d\nu(x)
+\end{align}
+
+<p>
+On a donc :
+</p>
+
+<p>
+\[\int_A w(z) \ d\sigma(z) = \int_X \ d\nu(x) \int_{A(x)} w(y) \ d\mu(y)\]
+</p>
+
+<p>
+pour toute fonction étagée.
+</p>
+</div>
+</div>
+<div id="outline-container-orgab6babf" class="outline-3">
+<h3 id="orgab6babf"><span class="section-number-3">3.2.</span> Ordre</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+Soit les fonctions mesurables \(f,g\) vérifiant \(f \essinferieur g\) au sens de la mesure \(\sigma\). Soit :
+</p>
+
+<p>
+\[N = \{ z \in A : f(z) \strictsuperieur g(z) \}\]
+</p>
+
+<p>
+Comme \(N \subseteq A\), on a \(N = N \cap A\) et :
+</p>
+
+\begin{align}
+N(x) = N \cap P(x) &= N \cap A \cap P(x) \)
+
+\(
+&= N \cap A(x) \)
+
+\(
+&= \{ z \in A(x) : f(z) \strictsuperieur g(z) \}
+\end{align}
+
+<p>
+La mesure de \(N\) étant $&sigma;$-nulle, on a :
+</p>
+
+<p>
+\[\sigma(N) = \int_X \mu(N(x)) \ d\nu(x) = 0\]
+</p>
+
+<p>
+Comme \(\mu\) est positive, elle est essentiellement positive. On en conclut que la fonction \(x \mapsto \mu(N(x))\) est essentiellement nulle sur \(X\) (au sens de la mesure \(\nu\)). L'ensemble :
+</p>
+
+<p>
+\[Z = \{ x \in X : \mu(N(x)) \strictsuperieur 0 \}\]
+</p>
+
+<p>
+vérifie \(\nu(Z) = 0\). Le sous-ensemble :
+</p>
+
+<p>
+\[E = X \setminus Z = \{ x \in X : \mu(N(x)) = 0 \}\]
+</p>
+
+<p>
+est donc $&nu;$-essentiel dans \(X\). Soit les fonctions \(F,G : X \mapsto \setR\) définies par :
+</p>
+
+<div class="org-center">
+<p>
+\(
+F(x) = \int_{A(x)} f(y) \ d\mu(y) \\ \)
+</p>
+
+<p>
+\(
+G(x) = \int_{A(x)} g(y) \ d\mu(y)
+\)
+</p>
+</div>
+
+<p>
+Pour tout \(x \in E\), on a \(\mu(N(x)) = 0\). Le sous-ensemble :
+</p>
+
+<p>
+\[C(x) = A(x) \setminus N(x) = \{ y \in A(x) : f(y) \le g(y) \}\]
+</p>
+
+<p>
+est donc $&mu;$-essentiel dans \(A(x)\). On a donc \(w \essinferieur f\) au sens de \(\mu\) sur \(A(x)\) et :
+</p>
+
+<p>
+\[F(x) = \int_{A(x)} f(y) \ d\mu(y) \le \int_{A(x)} g(y) \ d\mu(y) = G(x)\]
+</p>
+
+<p>
+On a donc \(F \le G\) sur \(E\) qui est un sous-ensemble essentiel de \(X\). Donc, \(F \essinferieur G\) au sens de \(\nu\) sur \(X\) et :
+</p>
+
+<p>
+\[\int_X F(x) \ d\nu(x) \le \int_X G(x) \ d\nu(x)\]
+</p>
+
+<p>
+Autrement dit :
+</p>
+
+<p>
+\[\int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y) \le \int_X \ d\nu(x) \int_{A(x)} g(y) \ d\mu(y)\]
+</p>
+</div>
+</div>
+<div id="outline-container-org800ba1c" class="outline-3">
+<h3 id="org800ba1c"><span class="section-number-3">3.3.</span> Positives majorées</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Soit une fonction intégrable \(f : A \mapsto \setR\) essentiellement positive et majorée au sens de \(\sigma\) :
+</p>
+
+<p>
+\[\supessentiel_{x \in A}^\sigma f(x) \strictinferieur +\infty\]
+</p>
+
+<p>
+Soit un réel \(\epsilon \strictsuperieur 0\).
+</p>
+
+<ul class="org-ul">
+<li>Le supremum étant dans l'adhérence, on peut trouver une fonction étagée \(w\) essentiellement inférieure à \(f\) au sens de \(\sigma\) et telle que :</li>
+</ul>
+
+<p>
+\[\int_A f(z) \ d\sigma(z) - \epsilon \le \int_A w(z) \ d\sigma(z)\]
+</p>
+
+<p>
+On a aussi :
+</p>
+
+\begin{align}
+\int_A w(x) \ d\sigma(x) &= \int_X \ d\nu(x) \int_{A(x)} w(y) \ d\mu(y) \)
+
+\(
+&\le \int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y)
+\end{align}
+
+<p>
+d'où finalement :
+</p>
+
+<p>
+\[\int_A f(x) \ d\sigma(x) - \epsilon \le \int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y)\]
+</p>
+
+<p>
+Comme cette relation est valable pour tout \(\epsilon \strictsuperieur 0\), on doit avoir :
+</p>
+
+<p>
+\[\int_A f(x) \ d\sigma(x) \le \int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y)\]
+</p>
+
+<ul class="org-ul">
+<li>Comme \(f\) est essentiellement majorée, on peut trouver une fonction étagée \(w\) essentiellement inférieure à \(f\) au sens de \(\sigma\) et telle que :</li>
+</ul>
+
+<p>
+\[\supessentiel_{x \in A}^\sigma [f(x) - w(x)] \le \epsilon\]
+</p>
+
+<p>
+On a donc \(f \essinferieur w + \epsilon\) au sens de \(\sigma\) et :
+</p>
+
+<p>
+\[\int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y) \le \int_X \ d\nu(x) \int_{A(x)} [w(y) + \epsilon] \ d\mu(y)\]
+</p>
+
+<p>
+On voit que :
+</p>
+
+\begin{align}
+\int_X \ d\nu(x) \int_{A(x)} [w(y) + \epsilon] \ d\mu(y) &= \int_X \ d\nu(x) \left[ \int_{A(x)} w(y) \ d\mu(y) + \epsilon \cdot \mu(A(x)) \right] \)
+
+\(
+&= \int_X \ d\nu(x) \int_{A(x)} w(y) \ d\mu(y) + \epsilon \cdot \int_X \mu(A(x)) \ d\nu(x) \)
+
+\(
+&= \int_X \ d\nu(x) \int_{A(x)} w(y) \ d\mu(y) + \epsilon \cdot \sigma(A)
+\end{align}
+
+<p>
+Or :
+</p>
+
+<p>
+\[\int_X \ d\nu(x) \int_{A(x)} w(y) \ d\mu(y) = \int_A w(z) \ d\sigma(z) \le \int_A f(z) \ d\sigma(z)\]
+</p>
+
+<p>
+par définition du supremum. Rassemblant tous ces résultats, il vient :
+</p>
+
+<p>
+\[\int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y) \le \int_A f(z) \ d\sigma(z) + \epsilon \cdot \sigma(A)\]
+</p>
+
+<p>
+Cette inégalité devant être satisfaite pour tout \(\epsilon \strictsuperieur 0\), on en conclut que :
+</p>
+
+<p>
+\[\int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y) \le \int_A f(z) \ d\sigma(z)\]
+</p>
+
+
+<p>
+L'intégrale double \(\int_X \int_{A(x)}\) devant être simultanément supérieure et inférieure à l'intégrale \(\int_A\), on a :
+</p>
+
+<p>
+\[\int_A f(z) \ d\sigma(z) = \int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y)\]
+</p>
+</div>
+</div>
+<div id="outline-container-org4464bac" class="outline-3">
+<h3 id="org4464bac"><span class="section-number-3">3.4.</span> Positives</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+Posons :
+</p>
+
+<div class="org-center">
+<p>
+\(
+C(\alpha) = \{ x \in A : f(x) \le \alpha \} \)
+</p>
+
+<p>
+\(
+Z(\alpha) = \{ x \in A : f(x) \strictsuperieur \alpha \}
+\)
+</p>
+</div>
+
+<p>
+et :
+</p>
+
+<div class="org-center">
+<p>
+\(
+C(\alpha,x) = C(\alpha) \cap A(x) = \{ x \in A(x) : f(x) \le \alpha \} \)
+</p>
+
+<p>
+\(
+Z(\alpha,x) = A(x) \setminus C(\alpha) = \{ x \in A(x) : f(x) \strictsuperieur \alpha \}
+\)
+</p>
+</div>
+
+<p>
+Comme \(f\) est essentiellement majorée sur \(C(\alpha)\), on a :
+</p>
+
+<p>
+\[\int_{C(\alpha)} f(z) \ d\sigma(z) = \int_X \ d\nu(x) \int_{C(\alpha,x)} f(y) \ d\mu(y)\]
+</p>
+
+<p>
+Les propriétés de \(Z(\alpha) = A \setminus C(\alpha)\) nous montrent que :
+</p>
+
+<p>
+\[\lim_{\alpha \to +\infty} \int_{C(\alpha)} f(z) \ d\sigma(z) = \int_A f(z) \ d\sigma(z)\]
+</p>
+
+<p>
+On obtient bien entendu le même résultat en se restreignant aux entiers \(n \in \setN\) :
+</p>
+
+<p>
+\[\lim_{n \to \infty} \int_{C(n)} f(z) \ d\sigma(z) = \int_A f(z) \ d\sigma(z)\]
+</p>
+
+<p>
+Comme \(Z(\alpha,x)\) vérifie les mêmes propriétés, on a :
+</p>
+
+<p>
+\[\lim_{n \to \infty} \int_{C(n,x)} f(y) \ d\mu(y) = \int_{A(x)} f(y) \ d\mu(y)\]
+</p>
+
+<p>
+Pour tout \(n \in \setN\), posons :
+</p>
+
+<p>
+\[u_n(x) = \int_{C(n,x)} f(y) \ d\mu(y)\]
+</p>
+
+<p>
+Il s'agit d'une suite de fonctions positives. Comme l'inégalité \(m \le n\) implique \(C(m,x) \subseteq C(n,x)\), on a \(u_m \le u_n\). La suite est donc croissante et converge vers :
+</p>
+
+<p>
+\[\lim_{n \to \infty} u_n(x) = \int_{A(x)} f(y) \ d\mu(y)\]
+</p>
+
+<p>
+La convergence monotone nous montre alors que :
+</p>
+
+\begin{align}
+\lim_{n \to \infty} \int_X u_n(x) \ d\nu(x) &= \int_X \lim_{n \to \infty} u_n(x) \ d\nu(x) \)
+
+\(
+&= \int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y)
+\end{align}
+
+<p>
+D'un autre coté, on a :
+</p>
+
+\begin{align}
+\lim_{n \to \infty} \int_X u_n(x) \ d\nu(x) &= \lim_{n \to \infty} \int_X \ d\nu(x) \int_{C(n,x)} f(y) \ d\mu(y) \)
+
+\(
+&= \lim_{n \to \infty} \int_{C(n)} f(z) \ d\sigma(z) \)
+
+\(
+&= \int_A f(z) \ d\sigma(z)
+\end{align}
+
+<p>
+On en conclut finalement que :
+</p>
+
+<p>
+\[\int_A f(z) \ d\sigma(z) = \int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y)\]
+</p>
+</div>
+</div>
+<div id="outline-container-org722d646" class="outline-3">
+<h3 id="org722d646"><span class="section-number-3">3.5.</span> Signe quelconque</h3>
+<div class="outline-text-3" id="text-3-5">
+<p>
+Soit une fonction intégrable \(f : A \mapsto \setR\) et sa décomposition en fonctions positives \(f = f^+ - f^-\). On a :
+</p>
+
+\begin{align}
+\int_A f(z) \ d\sigma(z) &= \int_A f^+(z) \ d\sigma(z) - \int_A f^-(z) \ d\sigma(z) \)
+
+\(
+&= \int_X \ d\nu(x) \int_{A(x)} f^+(y) \ d\mu(y) - \int_X \ d\nu(x) \int_{A(x)} f^-(y) \ d\mu(y) \)
+
+\(
+&= \int_X \left[ \int_{A(x)} f^+(y) \ d\mu(y) - \int_{A(x)} f^-(y) \ d\mu(y) \right] \ d\nu(x) \)
+
+\(
+&= \int_X \ d\nu(x) \int_{A(x)} f(y) \ d\mu(y)
+\end{align}
+</div>
+</div>
+</div>
+<div id="outline-container-orgea812c9" class="outline-2">
+<h2 id="orgea812c9"><span class="section-number-2">4.</span> Fubini</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Sur \(\setR^2\), la mesure de Lebesgue, que nous notons ici \(\sigma\), est basée sur des ensembles de la forme :
+</p>
+
+<p>
+\[P = [a,b] \times [c,d]\]
+</p>
+
+<p>
+où \(a,b,c,d \in \setR\) et \(a \le b\), \(c \le d\). Si \(\mu\) est la mesure de Lebesgue sur \(\setR\), on a alors :
+</p>
+
+<p>
+\[\sigma(P) = (\mu \otimes \mu)([a,b] \times [c,d]) = \mu([a,b]) \cdot \mu([c,d]) = (b - a) \cdot (d - c)\]
+</p>
+
+<p>
+Considérons le partionnement formé des segments \([(x,c),(x,d)]\) pour tous les \(x\) compris
+entre \(a\) et \(b\) :
+</p>
+
+<p>
+\[\mathcal{P} = \{ [(x,c),(x,d)] : x \in [a,b] \}\]
+</p>
+
+<p>
+Comme :
+</p>
+
+<p>
+\[[(x,c),(x,d)] = \{ (x,y) : y \in [c,d] \}\]
+</p>
+
+<p>
+on définit la mesure \(\mu\) d'un tel segment par extension de la mesure de Lebesgue :
+</p>
+
+<p>
+\[\mu([(x,c),(x,d)]) = d - c\]
+</p>
+
+<p>
+La mesure \(\sigma_x\) qui en découle s'évalue :
+</p>
+
+<p>
+\[\sigma_x(A) = \int_a^b (d - c) dx = (d - c) \int_a^b dx = (d - c) \cdot (b - a)\]
+</p>
+
+<p>
+Considérons le partionnement alternatif :
+</p>
+
+<p>
+\[\mathcal{Q} = \{ [(a,y),(b,y)] : y \in [c,d] \}\]
+</p>
+
+<p>
+Comme :
+</p>
+
+<p>
+\[[(a,y),(b,y)] = \{ (x,y) : x \in [a,b] \}\]
+</p>
+
+<p>
+on définit la mesure \(\mu\) d'un tel segment par extension de la mesure de Lebesgue :
+</p>
+
+<p>
+\[\mu([(a,y),(b,y)]) = b - a\]
+</p>
+
+<p>
+La mesure \(\sigma_y\) qui en découle s'évalue :
+</p>
+
+<p>
+\[\sigma_y(A) = \int_c^d (b - a) dy = (b - a) \int_c^d dy = (b - a) \cdot (d - c)\]
+</p>
+
+<p>
+On en conclut que \(\sigma_x = \sigma_y = \sigma\). Si \(f\) est une fonction intégrable sur \(A = [\alpha,\beta] \times [\gamma,\delta] \subseteq \setR^2\), on a alors :
+</p>
+
+<p>
+\[\int_A f(x,y) \ d\sigma(x,y) = \int_\alpha^\beta dx \int_\gamma^\delta f(x,y) \ dy = \int_\gamma^\delta dy \int_\alpha^\beta f(x,y) \ dx\]
+</p>
+
+<p>
+On note souvent \(d\sigma(x,y) = dx \ dy\) et :
+</p>
+
+<p>
+\[\int_A f(x,y) \ dx \ dy = \int_\alpha^\beta dx \int_\gamma^\delta f(x,y) \ dy = \int_\gamma^\delta dy \int_\alpha^\beta f(x,y) \ dx\]
+</p>
+</div>
+<div id="outline-container-org4d1a27f" class="outline-3">
+<h3 id="org4d1a27f"><span class="section-number-3">4.1.</span> Dimension \(n\)</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+Soit \(A = [a_1,b_1] \times [a_2,b_2] ... \times [a_n,b_n] \subseteq \setR^n\). On a :
+</p>
+
+<p>
+\[\int_A f(x) \ dx = \int_{a_1}^{b_1} dx_1 \ ... \int_{a_n}^{b_n} dx_n \ f(x_1,...x_n)\]
+</p>
+
+<p>
+où \(dx\) correspond à la mesure de Lebesgue \(\sigma = \mu \otimes ... \otimes \mu\).
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org73f5a38" class="outline-2">
+<h2 id="org73f5a38"><span class="section-number-2">5.</span> Produit cartésien</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+On peut généraliser Fubini dans certaines conditions. On a alors :
+</p>
+
+<p>
+\[\int_{A \times B} f(x,y) \ d\mu(x) \ d\nu(y) = \int_B d\nu(y) \ \int_A f(x,y) \ d\mu(x)\]
+</p>
+
+<p>
+et symétriquement :
+</p>
+
+<p>
+\[\int_{A \times B} f(x,y) \ d\mu(x) \ d\nu(y) = \int_A \ d\mu(x) \int_B f(x,y) \ d\nu(y)\]
+</p>
+</div>
+</div>
+<div id="outline-container-org59bd31e" class="outline-2">
+<h2 id="org59bd31e"><span class="section-number-2">6.</span> Domaine régulier</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Soit les réels \(a,b\) et les fonctions \(S,I : [a,b] \mapsto \setR\) permettant de définir l'ensemble :
+</p>
+
+<p>
+\[A = \{ (x,y) \in [a,b] \times \setR : I(x) \le y \le S(x) \}\]
+</p>
+
+<p>
+Posons :
+</p>
+
+<p>
+\[A(x) = \{ (x,y) : I(x) \le y \le S(x) \}\]
+</p>
+
+<p>
+On voit que \(A(x) \cap A(z) = \emptyset\) si \(x \ne z\) et que :
+</p>
+
+<p>
+\[A = \bigcup_{x \in [a,b]} A(x)\]
+</p>
+
+<p>
+On a donc :
+</p>
+
+<p>
+\[\int_A f(x,y) \ d\sigma(x,y) = \int_a^b d\nu(x) \ \int_{I(x)}^{S(x)} f(x,y) \ d\mu(y)\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgc91af40" class="outline-2">
+<h2 id="orgc91af40"><span class="section-number-2">7.</span> Lemme du triangle</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Un petit lemme intéressant permettant de permuter l'intégration de deux
+variables. Soit le triangle \(\Delta\) :
+</p>
+
+<p>
+\[\Delta = \{ (s,t) \in \setR^2 : 0 \le s,t \le T, \quad s \ge t \}\]
+</p>
+
+<p>
+On peut redéfinir cet ensemble de deux manières équivalentes :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\Delta = \{ (s,t) \in \setR^2 : 0 \le s \le T, \quad 0 \le t \le s \} \)
+</p>
+
+<p>
+\(
+\Delta = \{ (s,t) \in \setR^2 : 0 \le t \le T, \quad t \le s \le T \}
+\)
+</p>
+</div>
+
+<p>
+On a donc :
+</p>
+
+<p>
+\[\int_\Delta f(x) \ dx = \int_0^T \ ds \int_0^s f(s,t) \ dt = \int_0^T \ dt \int_t^T f(s,t) \ ds\]
+</p>
+</div>
+<div id="outline-container-orgacfb99a" class="outline-3">
+<h3 id="orgacfb99a"><span class="section-number-3">7.1.</span> Cas particulier</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+En particulier, si la fonction à intégrer ne dépend que de \(t\), on a :
+</p>
+
+<p>
+\[\int_0^T \ ds \int_0^s u(t) \ dt = \int_0^T u(t) \ dt \int_t^T  \ ds = \int_0^T (T - t) \cdot u(t) \ dt\]
+</p>
+</div>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-10-21 mar 09:53</p>
+<p class="date">Created: 2025-10-21 mar 10:39</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

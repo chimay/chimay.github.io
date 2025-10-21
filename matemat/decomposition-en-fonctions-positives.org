@@ -1,7 +1,7 @@
 
 #+STARTUP: showall
 
-#+TITLE: Eclats de vers : Matemat : Collections
+#+TITLE: Eclats de vers : Matemat : Décomposition en fonctions positives
 #+AUTHOR: chimay
 #+EMAIL: or du val chez gé courriel commercial
 #+LANGUAGE: fr
@@ -21,5 +21,125 @@
 #+TOC: headlines 1
 
 #+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:mesure}
+
+* Dépendances
+
+  - Chapitre \ref{chap:ensemble} : Les ensembles
+  - Chapitre \ref{chap:ordre} : Les ordres et extréma
+  - Chapitre \ref{chap:fonction} : Les fonctions
+
+* Introduction
+
+On considère une fonction mesurable $f : A \mapsto \setR$ et les fonctions positives associées $f^+,f^- : A \mapsto \setR$ définies par :
+
+\begin{align}
+f^+(x) &= \max \{ f(x) , 0 \} \ge 0 \)
+
+\(
+f^-(x) &= \max \{ -f(x) , 0 \} \ge 0
+\end{align}
+
+
+* Mesurabilité
+
+On constate que les ensembles suivant sont dans la tribu :
+
+\begin{align}
+A^+ &= \{ x \in A : f(x) \strictsuperieur 0 \} \in \mathcal{T} \)
+
+\(
+A^0 &= \{ x \in A : f(x) = 0 \} \in \mathcal{T} \)
+
+\(
+A^- &= \{ x \in A : f(x) \strictinferieur 0 \} \in \mathcal{T}
+\end{align}
+
+On a clairement $A = A^+ \cup A^0 \cup A^-$. On voit que :
+
+  - Sur $A^+$, on a $f^+ = f \strictsuperieur 0$ et $f^- = 0$
+  - Sur $A^0$, on a $f^+ = f = 0$ et $f^- = -f = 0$
+  - Sur $A^-$ on a $f^+ = 0$ et $f^- = -f \strictsuperieur 0$
+
+** Conditions $\strictsuperieur a$
+
+Soit un réel $a \strictinferieur 0$. La condition $f^+(x) \ge 0 \strictsuperieur a$ implique que $f^+(x) \strictsuperieur a$. Comme $f^+$ est positive, cette condition est satisfaite pour tout $x \in A$. Il en va de même pour $f^-$. Donc :
+
+#+BEGIN_CENTER
+\(
+\{ x \in A : f^+(x) \strictsuperieur a \} = \{ x \in A : f^+(x) \ge 0 \} = A \in \mathcal{T} \)
+
+\(
+\{ x \in A : f^-(x) \strictsuperieur a \} = \{ x \in A : f^-(x) \ge 0 \} = A \in \mathcal{T}
+\)
+#+END_CENTER
+
+Soit un réel $a \ge 0$. La condition $f^+(x) \strictsuperieur a$ implique que $f^+(x) \strictsuperieur 0$. Un $x$ vérifiant cette condition est donc forcément dans $A^+$, où $f^+ = f$. On peut alors faire sortir la condition $x \in A^+$ en utilisant l'intersection. Comme l'intersection de deux ensembles d'une tribu est dans la tribu, on a finalement :
+
+\begin{align}
+\{ x \in A : f^+(x) \strictsuperieur a \} &= \{ x \in A^+ : f^+(x) \strictsuperieur a \} \)
+
+\(
+&= \{ x \in A^+ : f(x) \strictsuperieur a \} \)
+
+\(
+&= \{ x \in A : f(x) \strictsuperieur a \} \cap A^+ \in \mathcal{T}
+\end{align}
+
+La condition $f^-(x) \strictsuperieur a$ implique que $f^-(x) \strictsuperieur 0$. Un $x$ vérifiant cette condition est donc forcément dans $A^-$, où $f^- = -f$. On peut alors faire sortir la condition $x \in A^-$ en utilisant l'intersection. La fonction $-f$ étant mesurable, on a finalement :
+
+\begin{align}
+\{ x \in A : f^-(x) \strictsuperieur a \} &= \{ x \in A^- : f^-(x) \strictsuperieur a \} \)
+
+\(
+&= \{ x \in A^- : -f(x) \strictsuperieur a \} \)
+
+\(
+&= \{ x \in A : -f(x) \strictsuperieur a \} \cap A^- \in \mathcal{T}
+\end{align}
+
+** Conditions $\strictinferieur a$
+
+Soit un réel $a \le 0$. Comme $f^+ \ge 0$, la condition $f^+(x) \strictinferieur a \le 0$ n'est satisfaite pour aucun $x \in A$. Il en va de même pour $f^-$. Donc :
+
+#+BEGIN_CENTER
+\(
+\{ x \in A : f^+(x) \strictinferieur a \} = \emptyset \in \mathcal{T} \)
+
+\(
+\{ x \in A : f^-(x) \strictinferieur a \} = \emptyset \in \mathcal{T}
+\)
+#+END_CENTER
+
+Soit un réel $a \strictsuperieur 0$. Les $x \in A$ vérifiant La condition $f^+(x) \strictinferieur a$ sont de deux types :
+
+  - Si $x \in A^- \cup A^0$, on a $f^+(x) = 0 \strictinferieur a$. La condition est alors a fortiori satisfaite.
+  - Sinon, $x \in A \setminus (A^- \cup A^0) = A^+$ et il faut toujours imposer $f^+(x) \strictinferieur a$. Par contre, on a alors $f = f^+$.
+
+On a donc :
+
+\begin{align}
+\{ x \in A : f^+(x) \strictinferieur a \} &= (A^- \cup A^0) \cup \{ x \in A^+ : f^+(x) \strictsuperieur a \} \)
+
+\(
+&= A^- \cup A^0 \cup \{ x \in A^+ : f(x) \strictsuperieur a \} \in \mathcal{T}
+\end{align}
+
+Les $x \in A$ vérifiant La condition $f^-(x) \strictinferieur a$ sont de deux types :
+
+  - Si $x \in A^+ \cup A^0$, on a $f^-(x) = 0 \strictinferieur a$. La condition est alors a fortiori satisfaite.
+  - Sinon, $x \in A \setminus (A^+ \cup A^0) = A^-$ et il faut toujours imposer $f^-(x) \strictinferieur a$. Par contre, on a alors $f = -f^-$.
+
+On a donc :
+
+\begin{align}
+\{ x \in A : f^-(x) \strictinferieur a \} &= (A^+ \cup A^0) \cup \{ x \in A^- : f^-(x) \strictsuperieur a \} \)
+
+\(
+&= A^- \cup A^0 \cup \{ x \in A^- : -f(x) \strictsuperieur a \} \in \mathcal{T}
+\end{align}
+
+On conclut de ce qui précède que les fonctions $f^+$ et $f^-$ sont mesurables.
 
 

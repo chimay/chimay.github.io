@@ -1,7 +1,7 @@
 
 #+STARTUP: showall
 
-#+TITLE: Eclats de vers : Matemat : Collections
+#+TITLE: Eclats de vers : Matemat : Integrales unidimensionnelles
 #+AUTHOR: chimay
 #+EMAIL: or du val chez gé courriel commercial
 #+LANGUAGE: fr
@@ -21,5 +21,119 @@
 #+TOC: headlines 1
 
 #+INCLUDE: "../include/latex/latex.org"
+
+* Intreduction
+
+Soit une fonction $f : \setR \mapsto \setR$ et $a,b \in \setR$ tels que $a \le b$.
+
+
+** Intervalle
+
+On définit la notation particulière :
+
+$$\int_a^b f(x) \ d\mu(x) = \int_{[a,b]} f(x) \ d\mu(x)$$
+
+
+** Intervalle inversé
+
+On étend la notation à des « intervalles » inversés par :
+
+$$\int_b^a f(x) \ d\mu(x) = - \int_a^b f(x) \ d\mu(x)$$
+
+
+** Intervalle ouvert
+
+Pour les intervalles ouverts, on considère la limite :
+
+$$\int_{]a,b[} f(x) \ d\mu(x) = \lim_{(s,t) \to (a,b)} \int_s^t f(x) \ d\mu(x)$$
+
+
+** Infini
+
+Quand une des bornes de l'intervalle tend vers l'infini, on définit l'intégrale par :
+
+#+BEGIN_CENTER
+\(
+\int_a^{+\infty} f(x) \ d\mu(x) = \lim_{b \to +\infty} \int_a^b f(x) \ d\mu(x) \)
+
+\(
+\int_{-\infty}^b f(x) \ d\mu(x) = \lim_{a \to -\infty} \int_a^b f(x) \ d\mu(x)
+\)
+#+END_CENTER
+
+
+** Sur l'ensemble des réels
+
+Enfin, l'intégrale sur $\setR$ entier est définie par :
+
+$$\int_{-\infty}^{+\infty} f(x) \ d\mu(x) = \int_\setR f(x) \ d\mu(x) = \lim_{a \to -\infty} \int_{-a}^a f(x) \ d\mu(x)$$
+
+
+* Additivité d'intervalles
+
+Soit $a,b,c,\alpha,\beta \in \setR$ avec $\alpha \le a,b,c \le \beta$. Soit une fonction intégrable $f : [\alpha,\beta] \mapsto \setR$. Posons :
+
+$$I(x,y) = \int_x^y f(\xi) \ d\xi$$
+
+où $d\xi = d\mu_L(\xi)$ est la mesure de Lebesgue. Par définition, on a :
+
+$$I(y,x) = - I(x,y)$$
+
+Si $a \le b \le c$, on a :
+
+$$\mu_L( [a,b] \cap [b,c] ) = \mu_L( \{ b \} ) = 0$$
+
+L'additivité nous donne alors :
+
+$$I(a,c) = I(a,b) + I(b,c)$$
+
+Si $a \le c \le b$, on a :
+
+$$\mu_L( [a,c] \cap [c, b] ) = \mu_L( \{ c \} ) = 0$$
+
+et :
+
+$$I(a,b) = I(a,c) + I(c,b)$$
+
+On en déduit que :
+
+$$I(a,c) = I(a,b) - I(c,b) = I(a,b) + I(b,c)$$
+
+On vérifie pareillement, en considérant tous les cas, que $I(a,b) = I(a,c) + I(c,b)$ quel que soit l'ordre des réels $a,b,c$. On a donc :
+
+$$\int_a^c f(x) \ dx = \int_a^b f(x) \ dx + \int_b^c f(x) \ dx$$
+
+
+* Valeur moyenne d'une intégrale
+
+Soit la fonction intégrable et continue $f : [a,b] \mapsto \setR$. Pour la mesure de Lebesgue, on a :
+
+#+BEGIN_CENTER
+\(
+\supessentiel \{ f(x) : x \in [a,b] \} = \max f([a,b]) \)
+
+\(
+\infessentiel \{ f(x) : x \in [a,b] \} = \min f([a,b])
+\)
+#+END_CENTER
+
+Les bornes d'une fonction continue sur un intervalle fermé étant atteintes, on peut trouver des réels $\sigma,\lambda \in [a,b]$ tels que :
+
+#+BEGIN_CENTER
+\(
+f(\sigma) = \max f([a,b]) \)
+
+\(
+f(\lambda) = \min f([a,b])
+\)
+#+END_CENTER
+
+Les bornes de l'intégrales nous disent que :
+
+$$f(\lambda) \le \unsur{b - a} \int_a^b f(s) ds \le f(\sigma)$$
+
+Le théorème des valeurs intermédiaires nous permet alors de trouver un $c$ compris entre $\lambda$ et $\sigma$ (et donc dans $[a,b]$) tel que :
+
+$$f(c) = \unsur{b - a} \int_a^b f(s) ds$$
 
 

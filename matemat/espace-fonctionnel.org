@@ -1,7 +1,7 @@
 
 #+STARTUP: showall
 
-#+TITLE: Eclats de vers : Matemat : Collections
+#+TITLE: Eclats de vers : Matemat : Espaces fonctionnels
 #+AUTHOR: chimay
 #+EMAIL: or du val chez gé courriel commercial
 #+LANGUAGE: fr
@@ -21,5 +21,134 @@
 #+TOC: headlines 1
 
 #+INCLUDE: "../include/latex/latex.org"
+
+* Dépendances
+
+  - Chapitre \ref{chap:mesure} : Les normes
+  - Chapitre \ref{chap:ps} : Les produits scalaires
+  - Chapitre \ref{chap:integral} : Les intégrales
+
+* Fonctions intégrables
+
+Soit une fonction $f : A \mapsto \setR$ et sa décomposition en fonctions positives $f = f^+ - f^-$. Soit $\abs{f} : A \mapsto \setR$ définie par :
+
+$$\abs{f}(x) = \abs{f(x)}$$
+
+pour tout $x \in A$. Si $f(x) \ge 0$, on a $f^-(x) = 0$ et :
+
+$$\abs{f(x)} = f(x) = f^+(x) = f^+(x) + f^-(x)$$
+
+Si $f(x) \strictinferieur 0$, on a $f^+(x) = 0$ et :
+
+$$\abs{f(x)} = -f(x) = f^-(x) = f^+(x) + f^-(x)$$
+
+On en conclut que $\abs{f} = f^+ + f^-$. Si $f$ est intégrable, $f^+$ et $f^-$ le sont aussi et :
+
+$$\int_A \abs{f(x)} \ d\mu(x) = \int_A f^+(x) \ d\mu(x) + \int_A f^-(x) \ d\mu(x) \strictinferieur +\infty$$
+
+La fonction $\abs{f}$ est donc également intégrable. Inversément, si $\abs{f}$ est intégrable, on a $f^+ = \abs{f} - f^- \le \abs{f}$ et $f^- = \abs{f} - f^+ \le \abs{f}$, d'où :
+
+#+BEGIN_CENTER
+\(
+\int_A f^+(x) \ d\mu(x) \le \int_A \abs{f(x)} \ d\mu(x) \strictinferieur +\infty \\ \)
+
+\(
+\int_A f^-(x) \ d\mu(x) \le \int_A \abs{f(x)} \ d\mu(x) \strictinferieur +\infty
+\)
+#+END_CENTER
+
+La fonction $f$ est donc également intégrable. On en conclut que l'on peut représenter l'ensemble des fonctions intégrables par :
+
+$$\lebesgue(A) = \left\{ f \in \setR^A : \int_A \abs{f(x)} \ d\mu(x) \strictinferieur +\infty \right\}$$
+
+
+* Intégrale complexe
+
+Soit une fonction à valeurs complexes $u : A \mapsto \setC$. On définit les fonctions à valeurs réelles associées $v,w : A \mapsto \setR$ par :
+
+#+BEGIN_CENTER
+\(
+\phi(x) = \Re(u(x)) \)
+
+\(
+\psi(x) = \Im(u(x)) \)
+
+\(
+\)
+#+END_CENTER
+
+L'intégrale de la fonction $u$ est alors définie par :
+
+$$\int_A u(x) \ d\mu(x) = \int_A \phi(x) \ d\mu(x) + \img \int_A \psi(x) \ d\mu(x)$$
+
+
+* Produit scalaire
+
+Par analogie avec le produit scalaire sur $\corps^n$ :
+
+$$\scalaire{x}{y} = \sum_i \conjaccent{x}_i \cdot y_i \equiv \sum_i \conjaccent{x}(i) \cdot y(i)$$
+
+on définit le produit scalaire entre deux fonctions $u,v : A \mapsto \setC$ par :
+
+$$\scalaire{u}{v} = \int_A \conjaccent{u(x)} \cdot v(x) \ d\mu(x)$$
+
+Cette application est clairement hermitienne et linéaire à droite. Comme l'intégrale d'une fonction positive est positive, on a aussi :
+
+$$\scalaire{u}{u} = \int_A \abs{u(x)}^2 \ d\mu(x) \ge 0$$
+
+Il ne s'agit cependant pas tout à fait d'un produit scalaire, car la condition :
+
+$$\scalaire{u}{u} = \int_A \abs{u(x)}^2 \ d\mu(x) = 0$$
+
+n'implique pas que $u = 0$ partout sur $A$. Par contre, l'annulation de cette intégrale implique que la fonction positive $x \mapsto \abs{u(x)}^2$ soit essentiellement nulle. On aura donc également $u \essegal 0$. L'application $\scalaire{}{}$ est donc essentiellement un produit scalaire. On parlera aussi de produit scalaire au sens faible. La norme essentielle (ou norme faible) associée est :
+
+$$\norme{u} = \sqrt{ \scalaire{u}{u} } = \sqrt{ \int_A \abs{u(x)}^2 \ d\mu(x) }$$
+
+Sur quel espace ce « produit scalaire » est-il correctement défini ? Il faut que la norme associée soit finie :
+
+$$\norme{u}^2 = \scalaire{u}{u} = \int_A \abs{u(x)}^2 \ d\mu(x) \strictinferieur +\infty$$
+
+Si les normes de $u$ et $v$ sont finies, Cauchy-Schwartz nous garantit que :
+
+$$\abs{\int_A \conjaccent{u(x)} \cdot v(x) \ d\mu(x)} \le \left[ \int_A \abs{u(x)}^2 \ d\mu(x) \right] \cdot \left[ \int_A \abs{v(x)}^2 \ d\mu(x) \right] \strictinferieur +\infty$$
+
+Nous définissons donc notre produit scalaire fonctionnel sur l'espace :
+
+$$\lebesgue^2(A) = \left\{ u \in \setC^A : \int_A \abs{u(x)}^2 \ d\mu(x) \strictinferieur +\infty \right\}$$
+
+nommé espace de Lebesgue de degré $2$.
+
+
+* Espaces de Lebesgue
+
+L'espace de Lebesgue de degré $k$ est l'ensemble des fonctions telles que l'intégrale
+de la puissance $k$ existe (et ne soit donc pas infinie) :
+
+$$\lebesgue^k(A,B) = \left\{ u \in \setC^A : \int_A \abs{u(x)}^k \ d\mu(x) \strictinferieur +\infty \right\}$$
+
+
+** Norme
+
+La norme usuelle sur cet espace est définie par :
+
+$$\norme{u}_k = \left[ \int_A \abs{u(x)}^k \ dx \right]^{1/k}$$
+
+Il s'agit d'une norme faible.
+
+
+* Espace de fonctions essentiellement bornées
+
+Par analogie avec la norme « max », on définit l'espace des fonctions essentiellement bornées par :
+
+$$\lebesgue^\infty(A,B) = \left\{ u \in \setR^A : \supessentiel \{ \abs{u(x)} : x \in A \} \strictinferieur +\infty \right\}$$
+
+
+* Noyau
+
+On peut généraliser le produit scalaire usuel de $\lebesgue^2(A,B)$ en généralisant la notion de « matrice de produit scalaire ». On choisit une fonction $K : A^2 \to B$ appelée « noyau » et on définit le produit scalaire associé :
+
+$$\braket{u}{K}{v} = \scalaire{u}{v}_K = \int_{A^2} u(x) \cdot K(x,y) \cdot v(y) \ d\mu(x) \ d\mu(y)$$
+
+Ce noyau doit bien entendu respecter certaines propriétés afin de s'assurer que $\scalaire{}{}_K$ soit bien un produit scalaire.
 
 

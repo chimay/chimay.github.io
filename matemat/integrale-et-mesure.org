@@ -1,7 +1,7 @@
 
 #+STARTUP: showall
 
-#+TITLE: Eclats de vers : Matemat : Collections
+#+TITLE: Eclats de vers : Matemat : Intégrales et mesures
 #+AUTHOR: chimay
 #+EMAIL: or du val chez gé courriel commercial
 #+LANGUAGE: fr
@@ -21,5 +21,163 @@
 #+TOC: headlines 1
 
 #+INCLUDE: "../include/latex/latex.org"
+
+* Addition de mesure
+
+Soit les mesures $\gamma, \lambda$ et la mesure $\mu$ définie par :
+
+$$\mu = \gamma + \lambda$$
+
+Soit un ensemble $A$ et une fonction $w \in \etagee(A)$. On peut trouver des $w_i \in \setR$ et des $A_i \in \mathcal{T}$ formant une partition de $A$ et tels que :
+
+$$w(x) = \sum_{i = 1}^n w_i \cdot \indicatrice_{A_i}(x)$$
+
+On a alors :
+
+\begin{align}
+\int_A w(x) \ d\mu(x) &= \sum_{i = 1}^n w_i \cdot \mu(A_i) \)
+
+\(
+&= \sum_{i = 1}^n w_i \cdot (\gamma(A_i) + \lambda(A_i)) \)
+
+\(
+&= \sum_{i = 1}^n w_i \cdot \gamma(A_i) + \sum_{i = 1}^n w_i \cdot \lambda(A_i) \)
+
+\(
+&= \int_A w(x) \ d\gamma(x) + \int_A w(x) \ d\lambda(x)
+\end{align}
+
+En passant au suprémum sur toutes les fonctions étagées $w$ essentiellement inférieures à une fonction positive intégrable, puis en utilisant la définition d'une fonction intégrable $f$ on en déduit que :
+
+$$\int_A f(x) \ d(\gamma + \lambda)(x) = \int_A f(x) \ d\gamma(x) + \int_A f(x) \ d\lambda(x)$$
+
+
+* Mesure de Lebesgue
+
+Soit $A \subseteq \setR^n$ et $\mu_L$ la mesure de Lebesgue. On note alors $d\mu_L(x) = dx$ ou :
+
+$$d\mu_L(x) = dx = dx_1 \ ... \ dx_n$$
+
+et :
+
+$$\int_A f(x) \ dx = \int_A f(x) \ d\mu_L(x)$$
+
+
+* Intégrale de Stieltjes
+
+Soit la fonction croissante $\gamma : A \mapsto \setR$. L'intégrale de Stieltjes associée à $\gamma$ se note :
+
+$$\int_A f(x) \ d\gamma(x)$$
+
+Elle se définit d'après la mesure de Stieltjes $\mu_\gamma$ associée à $\gamma$ :
+
+$$\int_A f(x) \ d\gamma(x) = \int_A f(x) \ d\mu_\gamma(x)$$
+
+
+** Fonction à variation bornée
+
+Nous allons étendre la définition à des fonctions non nécessairement croissantes. Soit une fonction $g : [\alpha,\beta] \mapsto \setR$ et $S[a,b]$ l'ensemble des suites réelles croissantes inclues dans $[a,b]$ :
+
+$$S[a,b] = \Big\{ \{x_0, x_1, x_2, ..., x_n \} : a \le x_0 \le x_1 \le x_2 \le ... \le b, \ n \in \setN \Big\}$$
+
+Nous supposons que la fonction $g$ nous permet de définir les fonctions $\sigma,\lambda$ associées par :
+
+$$\sigma(x) = \sup \accolades{ \sum_{i = 0}^n \max\{g(x_{i + 1}) - g(x_i), 0\} : \{x_0, x_1, ..., x_n \} \in S[\alpha,x] }$$
+
+et :
+
+$$\lambda(x) = - \inf \accolades{ \sum_{i = 0}^n \min\{g(x_{i + 1}) - g(x_i), 0\} : \{x_0, x_1, ..., x_n \} \in S[\alpha,x] }$$
+
+pour tout $x \in [\alpha,\beta]$. Il est clair que les fonctions $\sigma, \lambda$ sont croissantes. On peut donc définir l'intégrale de Stieltjes associée à $g$ par :
+
+$$\int_A f(x) \ dg(x) = \int_A f(x) \ d\sigma(x) - \int_A f(x) \ d\lambda(x)$$
+
+
+** Positivité
+
+L'intégrale de Stieltjes d'une fonction essentiellement positive n'est généralement pas positive.
+
+
+* Mesure pondérée
+
+Soit une fonction essentiellement positive $\varphi$ telle que la fonction $\mu$ associée définie par :
+
+$$\mu(A) = \int_A \varphi(x) \ dx$$
+
+soit une mesure. Considérons une fonction $w \in \mathcal{E}_A(f)$, avec :
+
+$$w = \sum_i w_i \cdot \indicatrice_{A_i}$$
+
+où les $A_i$ forment une partition de $A$ et où les $w_i \in \setR$. On a alors :
+
+$$\int_A w(x) \ d\mu(x) = \sum_i w_i \cdot \int_{A_i} \varphi(x) \ dx$$
+
+Par linéarité de l'intégrale, on voit aussi que :
+
+\begin{align}
+\int_A w(x) \cdot \varphi(x) \ dx &= \sum_i w_i \cdot \int_A \varphi(x) \cdot \indicatrice_{A_i}(x) \ dx \)
+
+\(
+&= \sum_i w_i \cdot \int_{A_i} \varphi(x) \ dx
+\end{align}
+
+On en conclut que :
+
+$$\int_A w(x) \ d\mu(x) = \int_A w(x) \cdot \varphi(x) \ dx$$
+
+Comme $\varphi$ est positive, on a l'équivalence entre $w \essinferieur f$ et $w \cdot \varphi \essinferieur f \cdot \varphi$. En passant au supremum, on obtient donc :
+
+$$\int_A f(x) \ d\mu(x) = \int_A f(x) \cdot \varphi(x) \ dx$$
+
+pour toute fonction intégrable $f : A \to \setR$. On note symboliquement :
+
+$$d\mu(x) = \varphi(x) \ dx$$
+
+
+** Problème inverse
+
+Remarquons qu'on ne sait généralement pas faire correspondre une fonction $\varphi$ à une mesure $\mu$ donnée.
+
+
+* Mesure de Dirac
+
+L'intégrale d'une fonction $f : \setR \to \setR$ par rapport à une mesure de Dirac $\mu_D^a$ est fort simple à calculer. En effet :
+
+$$\int_A d\mu_D^a(x) = \mu_D^a(A) = \indicatrice_A(a)$$
+
+par définition. Si $a \notin A$, l'ensemble $A$ est de mesure nulle et :
+
+$$\int_A f(x) \ d\mu_D^a(x) = 0$$
+
+Considérons à présent le cas où $a \in A$. L'ensemble $A \setminus \{a\}$ étant disjoint de $\{a\}$ et de mesure nulle :
+
+$$\int_{A \setminus \{a\}} d\mu_D^a(x) = \indicatrice_{A \setminus \{a\}}(a) = 0$$
+
+on a :
+
+$$\int_A f(x) \ d\mu_D^a(x) = \int_{\{a\}} f(x) \ d\mu_D^a(x)$$
+
+La fonction $f$ étant constante sur $\{a\}$ et valant $f(a)$, on a finalement :
+
+$$\int_A f(x) \ d\mu_D^a(x) = f(a) \cdot \indicatrice_{\{a\}}(a) = f(a)$$
+
+Dans le cas général, on a donc :
+
+$$\int_A f(x) \ d\mu_D^a(x) = f(a) \cdot \indicatrice_A(a)$$
+
+On note également :
+
+$$\int_A f(x) \ \indicatrice(x - a) \ dx = f(a) \cdot \indicatrice_A(a)$$
+
+
+* Pondérée - Dirac
+
+Soit une mesure $\mu$ définie par :
+
+$$d\mu(x) = \left[ \varphi(x) + \sum_i \alpha_i \cdot \indicatrice(x - x_i) \right] \ dx$$
+
+où les $\alpha_i \in \setR$. Si les $x_i$ appartiennent tous à $A$, l'intégrale d'une fonction $f$ par rapport à cette mesure s'écrit :
+
+$$\int_A f(x) \ d\mu(x) = \int_A f(x) \cdot \varphi(x) \ dx + \sum_i \alpha_i \cdot f(x_i)$$
 
 

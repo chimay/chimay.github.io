@@ -1,0 +1,779 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<!-- 2025-10-21 mar 15:51 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Eclats de vers : Matemat : Développements d’Hadamard</title>
+<meta name="author" content="chimay" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Eclats de vers : Matemat : Développements d’Hadamard</h1>
+<p>
+<a href="index.html">Index des Grimoires</a>
+</p>
+
+<p>
+<a href="../index.html">Retour à l’accueil</a>
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org5fb70f2">1. Dépendances</a></li>
+<li><a href="#orgb271b7a">2. Lemme de Hadamard</a></li>
+<li><a href="#org7b1e8df">3. Développement du second ordre</a></li>
+<li><a href="#org46147a6">4. Développement du troisième ordre</a></li>
+</ul>
+</div>
+</div>
+
+<p>
+\(
+\newcommand{\parentheses}[1]{\left(#1\right)}
+\newcommand{\crochets}[1]{\left[#1\right]}
+\newcommand{\accolades}[1]{\left\{#1\right\}}
+\newcommand{\ensemble}[1]{\left\{#1\right\}}
+\newcommand{\identite}{\mathrm{Id}}
+\newcommand{\indicatrice}{\boldsymbol{\delta}}
+\newcommand{\dirac}{\delta}
+\newcommand{\moinsun}{{-1}}
+\newcommand{\inverse}{\ddagger}
+\newcommand{\pinverse}{\dagger}
+\newcommand{\topologie}{\mathfrak{T}}
+\newcommand{\ferme}{\mathfrak{F}}
+\newcommand{\img}{\mathbf{i}}
+\newcommand{\binome}[2]{
+\left\{ \begin{array}{c}
+#1 \\
+#2 \\
+\end{array} \right\}
+}
+\newcommand{\canonique}{\mathfrak{c}}
+\newcommand{\tenseuridentite}{\boldsymbol{\mathcal{I}}}
+\newcommand{\permutation}{\boldsymbol{\epsilon}}
+\newcommand{\matriceZero}{\mathfrak{0}}
+\newcommand{\matriceUn}{\mathfrak{1}}
+\newcommand{\christoffel}[2]{
+\left\{ \begin{array}{c}
+#1 \\
+#2 \\
+\end{array} \right\}
+}
+\newcommand{\lagrangien}{\mathfrak{L}}
+\newcommand{\sousens}{\mathfrak{P}}
+\newcommand{\partition}{\mathrm{Partition}}
+\newcommand{\tribu}{\mathrm{Tribu}}
+\newcommand{\topologies}{\mathrm{Topo}}
+\newcommand{\setB}{\mathbb{B}}
+\newcommand{\setN}{\mathbb{N}}
+\newcommand{\setZ}{\mathbb{Z}}
+\newcommand{\setQ}{\mathbb{Q}}
+\newcommand{\setR}{\mathbb{R}}
+\newcommand{\setC}{\mathbb{C}}
+\newcommand{\corps}{\mathbb{K}}
+\newcommand{\boule}{\mathfrak{B}}
+\newcommand{\intervalleouvert}[2]{\left] #1 , #2 \right[}
+\newcommand{\intervallesemiouvertgauche}[2]{ \left] #1 , #2 \right]}
+\newcommand{\intervallesemiouvertdroite}[2]{\left[ #1 , #2 \right[ }
+\newcommand{\fonction}{\mathbb{F}}
+\newcommand{\bijection}{\mathrm{Bij}}
+\newcommand{\polynome}{\mathrm{Poly}}
+\newcommand{\lineaire}{\mathrm{Lin}}
+\newcommand{\continue}{\mathrm{Cont}}
+\newcommand{\homeomorphisme}{\mathrm{Hom}}
+\newcommand{\etagee}{\mathrm{Etagee}}
+\newcommand{\lebesgue}{\mathrm{Leb}}
+\newcommand{\lipschitz}{\mathrm{Lip}}
+\newcommand{\suitek}{\mathrm{Suite}}
+\newcommand{\matrice}{\mathbb{M}}
+\newcommand{\krylov}{\mathrm{Krylov}}
+\newcommand{\tenseur}{\mathbb{T}}
+\newcommand{\essentiel}{\mathfrak{E}}
+\newcommand{\relation}{\mathrm{Rel}}
+\DeclareMathOperator*{\strictinferieur}{\ < \ }
+\DeclareMathOperator*{\strictsuperieur}{\ > \ }
+\DeclareMathOperator*{\ensinferieur}{\eqslantless}
+\DeclareMathOperator*{\enssuperieur}{\eqslantgtr}
+\DeclareMathOperator*{\esssuperieur}{\gtrsim}
+\DeclareMathOperator*{\essinferieur}{\lesssim}
+\newcommand{\essegal}{\eqsim}
+\newcommand{\union}{\ \cup \ }
+\newcommand{\intersection}{\ \cap \ }
+\newcommand{\opera}{\divideontimes}
+\newcommand{\autreaddition}{\boxplus}
+\newcommand{\autremultiplication}{\circledast}
+\newcommand{\commutateur}[2]{\left[ #1 , #2 \right]}
+\newcommand{\convolution}{\circledcirc}
+\newcommand{\correlation}{\ \natural \ }
+\newcommand{\diventiere}{\div}
+\newcommand{\modulo}{\bmod}
+\DeclareMathOperator*{\pgcd}{pgcd}
+\DeclareMathOperator*{\ppcm}{ppcm}
+\newcommand{\produitscalaire}[2]{\left\langle #1 \vert #2 \right\rangle}
+\newcommand{\scalaire}[2]{\left\langle #1 \| #2 \right\rangle}
+\newcommand{\braket}[3]{\left\langle #1 \vert #2 \vert #3 \right\rangle}
+\newcommand{\orthogonal}{\bot}
+\newcommand{\forme}[2]{\left\langle #1 , #2 \right\rangle}
+\newcommand{\biforme}[3]{\left\langle #1 , #2 , #3 \right\rangle}
+\newcommand{\contraction}[3]{\left\langle #1 \odot #3 \right\rangle_{#2}}
+\newcommand{\dblecont}[5]{\left\langle #1 \vert #3 \vert #5 \right\rangle_{#2,#4}}
+\DeclareMathOperator*{\major}{major}
+\DeclareMathOperator*{\minor}{minor}
+\DeclareMathOperator*{\maxim}{maxim}
+\DeclareMathOperator*{\minim}{minim}
+\DeclareMathOperator*{\argument}{arg}
+\DeclareMathOperator*{\argmin}{arg\ min}
+\DeclareMathOperator*{\argmax}{arg\ max}
+\DeclareMathOperator*{\supessentiel}{ess\ sup}
+\DeclareMathOperator*{\infessentiel}{ess\ inf}
+\newcommand{\dual}{\star}
+\newcommand{\distance}{\mathfrak{dist}}
+\newcommand{\norme}[1]{\left\| #1 \right\|}
+\newcommand{\normetrois}[1]{\left|\left\| #1 \right\|\right|}
+\DeclareMathOperator*{\adh}{adh}
+\DeclareMathOperator*{\interieur}{int}
+\newcommand{\frontiere}{\partial}
+\DeclareMathOperator*{\image}{im}
+\DeclareMathOperator*{\domaine}{dom}
+\DeclareMathOperator*{\noyau}{ker}
+\DeclareMathOperator*{\support}{supp}
+\DeclareMathOperator*{\signe}{sign}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\unsur}[1]{\frac{1}{#1}}
+\newcommand{\arrondisup}[1]{\lceil #1 \rceil}
+\newcommand{\arrondiinf}[1]{\lfloor #1 \rfloor}
+\DeclareMathOperator*{\conjugue}{conj}
+\newcommand{\conjaccent}[1]{\overline{#1}}
+\DeclareMathOperator*{\division}{division}
+\newcommand{\difference}{\boldsymbol{\Delta}}
+\newcommand{\differentielle}[2]{\mathfrak{D}^{#1}_{#2}}
+\newcommand{\OD}[2]{\frac{d #1}{d #2}}
+\newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
+\newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
+\newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
+\newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
+\newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\gradient}{\mathbf{\nabla}}
+\newcommand{\combilin}[1]{\mathrm{span}\{ #1 \}}
+\DeclareMathOperator*{\trace}{tr}
+\newcommand{\proba}{\mathbb{P}}
+\newcommand{\probaof}[1]{\mathbb{P}\left[#1\right]}
+\newcommand{\esperof}[1]{\mathbb{E}\left[#1\right]}
+\newcommand{\cov}[2]{\mathrm{cov} \left( #1 , #2 \right) }
+\newcommand{\var}[1]{\mathrm{var} \left( #1 \right) }
+\newcommand{\rand}{\mathrm{rand}}
+\newcommand{\variation}[1]{\left\langle #1 \right\rangle}
+\DeclareMathOperator*{\composante}{comp}
+\DeclareMathOperator*{\bloc}{bloc}
+\DeclareMathOperator*{\ligne}{ligne}
+\DeclareMathOperator*{\colonne}{colonne}
+\DeclareMathOperator*{\diagonale}{diag}
+\newcommand{\matelementaire}{\mathrm{Elem}}
+\DeclareMathOperator*{\matpermutation}{permut}
+\newcommand{\matunitaire}{\mathrm{Unitaire}}
+\newcommand{\gaussjordan}{\mathrm{GaussJordan}}
+\newcommand{\householder}{\mathrm{Householder}}
+\DeclareMathOperator*{\rang}{rang}
+\newcommand{\schur}{\mathrm{Schur}}
+\newcommand{\singuliere}{\mathrm{DVS}}
+\newcommand{\convexe}{\mathrm{Convexe}}
+\newcommand{\petito}[1]{o\left(#1\right)}
+\newcommand{\grando}[1]{O\left(#1\right)}
+\)
+</p>
+
+<p>
+\(
+\newenvironment{Eqts}
+{ \begin{equation*} \begin{gathered} }
+{ \end{gathered} \end{equation*} }
+\newenvironment{Matrix}
+{\left[ \begin{array}}
+{\end{array} \right]}
+\)
+</p>
+
+<p>
+\label{chap:fonda}
+</p>
+<div id="outline-container-org5fb70f2" class="outline-2">
+<h2 id="org5fb70f2"><span class="section-number-2">1.</span> Dépendances</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>Chapitre \ref{chap:differ} : Les différentielles</li>
+<li>Chapitre \ref{chap:integral} : Les intégrales</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgb271b7a" class="outline-2">
+<h2 id="orgb271b7a"><span class="section-number-2">2.</span> Lemme de Hadamard</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Soit la fonction \(f : \setR^m \to \setR^n\) et les vecteurs \(u,v \in \setR^m\). On définit la fonction \(\lambda : [0,1] \mapsto \setR^m\) associée au segment \([u,v] \subseteq \setR^m\) par :
+</p>
+
+<p>
+\[\lambda(s) = u + s \cdot (v - u)\]
+</p>
+
+<p>
+pour tout \(s \in [0,1]\). On a bien entendu \(\lambda(0) = u\) et \(\lambda(1) = v\). On définit également la fonction \(\varphi = f \circ \lambda\) qui vérifie :
+</p>
+
+<p>
+\[\varphi(s) = (f \circ \lambda)(s) = f(u + s \cdot (v - u))\]
+</p>
+
+<p>
+pour tout \(t \in [0,1]\). On voit que \(\varphi(0) = f(u)\) et \(\varphi(1) = f(v)\). Donc, en termes de composantes dans \(\setR^n\), on a :
+</p>
+
+<p>
+\[f_i(v) - f_i(u) = \varphi_i(1) - \varphi_i(0) = \int_0^1 \OD{\varphi_i}{s}(s) \ ds\]
+</p>
+
+<p>
+où \(i \in \{1,2,...,n\}\).
+</p>
+
+<p>
+Voyons quelle est la forme de la dérivée :
+</p>
+
+\begin{align}
+\OD{\varphi_i}{s}(s) &= \sum_j \partial_j f_i(u + s \cdot (v - u)) \cdot \partial \lambda_j(s) \)
+
+\(
+&= \sum_j \partial_j f_i(u + s \cdot (v - u)) \cdot (v_j - u_j)
+\end{align}
+
+<p>
+où \(j \in \{1,2,...,m\}\). Si nous définissons :
+</p>
+
+<p>
+\[G_{ij}(u,v) = \int_0^1 \partial_j f_i(u + s \cdot (v - u)) \ ds\]
+</p>
+
+<p>
+nous obtenons alors l'expression de la variation :
+</p>
+
+<p>
+\[f_i(v) - f_i(u) = \sum_j G_{ij}(u,v) \cdot (v_j - u_j)\]
+</p>
+
+<p>
+En termes matriciels :
+</p>
+
+<p>
+$$G(u,v) = \big[G<sub>ij</sub>(u,v)\big]<sub>i,j</sub> = \left[ \int_0^1 \partial_j f_i(u + s \cdot (v - u)) \ ds \right]<sub>i,j</sub>
+</p>
+
+<p>
+est donc l'intégrale de la Jacobienne :
+</p>
+
+<p>
+\[G(u,v) = \int_0^1 \partial f(u + s \cdot (v - u)) \ ds\]
+</p>
+
+<p>
+et :
+</p>
+
+<p>
+\[f(v) - f(u) = G(u,v) \cdot (v - u)\]
+</p>
+</div>
+</div>
+<div id="outline-container-org7b1e8df" class="outline-2">
+<h2 id="org7b1e8df"><span class="section-number-2">3.</span> Développement du second ordre</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Soit la fonction \(f \in \continue^2(\setR^n,\setR)\) et les vecteurs \(a,h \in \setR^n\). On définit la fonction \(\lambda : [0,1] \mapsto \setR^n\) associée au segment \([a, a + h]\) :
+</p>
+
+<p>
+\[\lambda(s) = a + s \cdot h\]
+</p>
+
+<p>
+pour tout \(s \in [0,1]\). Le lemme de Hadamard nous dit que :
+</p>
+
+<p>
+\[f(a + h) - f(a) = \int_0^1 \partial f(a + s \cdot h) \cdot h \ ds\]
+</p>
+
+<p>
+Par définition de la dérivée seconde, on a :
+</p>
+
+<p>
+\[\partial_i f(a + s \cdot h) = \partial_i f(a) + \sum_j \partial_{ji}^2 f(a) \cdot h_j \cdot s + e_i(s \cdot h)\]
+</p>
+
+<p>
+où l'erreur \(e\) vérifie :
+</p>
+
+<p>
+\[\lim_{h \to 0} \frac{ \norme{e(h)} }{ \norme{h} } = 0\]
+</p>
+
+<p>
+L'intégrale s'écrit alors :
+</p>
+
+<p>
+\[f(a + h) - f(a) = \sum_i \int_0^1 \left[ \partial_i f(a) + \sum_j \partial_{ji}^2 f(a) \cdot h_j \cdot s + e_i(s \cdot h) \right]  \cdot h_i \ ds\]
+</p>
+
+<p>
+La grandeur \(\partial_i f(a) \cdot h_i\) ne dépendant pas de \(s\), on a :
+</p>
+
+<p>
+\[\int_0^1 \partial_i f(a) \cdot h_i \ ds = \partial_i f(a) \cdot h_i \cdot (1 - 0) = \partial_i f(a) \cdot h_i\]
+</p>
+
+<p>
+D'un autre coté, comme \(s^2/2\) est une primitive de \(s\), on a :
+</p>
+
+<p>
+\[\int_0^1 s \ ds = \unsur{2} \cdot (1^2 - 0^2) = \unsur{2}\]
+</p>
+
+<p>
+et donc :
+</p>
+
+<p>
+\[\int_0^1 \partial_{ji}^2 f(a) \cdot h_j \cdot h_i \cdot s \ ds = \unsur{2} \partial_{ji}^2 f(a) \cdot h_j \cdot h_i\]
+</p>
+
+<p>
+Posons :
+</p>
+
+<p>
+\[\mathcal{E}_2(h) = \sum_i \int_0^1 e_i(s \cdot h) \cdot h_i \ ds\]
+</p>
+
+<p>
+On a alors :
+</p>
+
+<p>
+\[f(a + h) - f(a) = \sum_i \partial_i f(a) \cdot h_i + \unsur{2} \sum_{i,j} h_j \cdot \partial_{ji}^2 f(a) \cdot h_i + \mathcal{E}_2(h)\]
+</p>
+
+<p>
+En termes matriciels, cette expression fait intervenir la Jacobienne et la Hessienne :
+</p>
+
+<p>
+\[f(a + h) - f(a) = \partial f(a) \cdot h + \unsur{2} \ h^\dual \cdot \partial^2 f(a) \cdot h + \mathcal{E}_2(h)\]
+</p>
+</div>
+<div id="outline-container-org94a6321" class="outline-3">
+<h3 id="org94a6321"><span class="section-number-3">3.1.</span> Comportement de l'erreur</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Nous savons que, pour toute précision \(\epsilon \strictsuperieur 0\), nous pouvons trouver un \(\delta \strictsuperieur 0\) tel que :
+</p>
+
+<p>
+\[\frac{\norme{e(h)}}{\norme{h}} \le \epsilon\]
+</p>
+
+<p>
+pour tout \(h\) vérifiant \(\norme{h} \le \delta\). Comme \(\abs{e_i} \le \norme{e}\) et \(\abs{h_i} \le \norme{h}\), on a alors :
+</p>
+
+\begin{align}
+\abs{\mathcal{E}_2(h)} &\le \sum_i \abs{\int_0^1 e_i(s \cdot h) \cdot h_i \ ds} \)
+
+\(
+&\le n \cdot \epsilon \cdot \norme{h}^2
+\end{align}
+
+<p>
+L'erreur décroît donc plus vite que \(\norme{h}^2\) :
+</p>
+
+<p>
+\[\lim_{h \to 0} \frac{ \abs{\mathcal{E}_2(h)} }{ \norme{h}^2 } = 0\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgc5a8315" class="outline-3">
+<h3 id="orgc5a8315"><span class="section-number-3">3.2.</span> Dérivées ordinaires</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+Lorsque \(n = 1\), le développement est simplement :
+</p>
+
+<p>
+\[f(a + h) = f(a) + \OD{f}{x}(a) \cdot h + \OOD{f}{x}(a) \cdot \frac{h^2}{2} + \mathcal{E}_2(h)\]
+</p>
+
+<p>
+On constate qu'il est analogue au développement de Taylor d'ordre deux autour de \(a\).
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org46147a6" class="outline-2">
+<h2 id="org46147a6"><span class="section-number-2">4.</span> Développement du troisième ordre</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Soit la fonction \(f \in \continue^3(\setR^n,\setR)\) et les vecteurs \(a,h \in \setR^n\). En évaluant le développement du second ordre de chaque \(\partial_i f\), on a :
+</p>
+
+<p>
+\[\partial_i f(a + s \cdot h) = \partial_i f(a) + \sum_j \partial_{ji} f(a) \cdot h_j \cdot s + \sum_{j,k} h_k \cdot \partial_{kji}^3 f(a) \cdot h_j \cdot \frac{s^2}{2} + e_i(h)\]
+</p>
+
+<p>
+où \(e \sim \petito{h^2}\). En intégrant, nous obtenons une estimation de la variation de \(f\) :
+</p>
+
+<p>
+\[f(a + h) - f(a) = \sum_i \int_0^1 \partial_i f(a + s \cdot h) \cdot h_i \ ds\]
+</p>
+
+<p>
+Posons :
+</p>
+
+\begin{align}
+I_1(h) &= \sum_i \int_0^1 \partial_i f(a) \cdot h_i \ ds \)
+
+\(
+I_2(h) &= \sum_{i,j} \int_0^1 h_j \cdot \partial_{ji} f(a) \cdot h_i \cdot s \ ds \)
+
+\(
+I_3(h) &= \unsur{2} \sum_{i,j,k} \int_0^1 h_k \cdot \partial_{kji}^3 f(a) \cdot h_j \cdot h_i \cdot s^2 \ ds \)
+
+\(
+\mathcal{E}_3(h) &= \sum_i \int_0^1 e_i(h) \cdot h_i \ ds
+\end{align}
+
+<p>
+Comme \(s^3/3\) est une primitive de \(s^2\), on a :
+</p>
+
+<p>
+\[\int_0^1 s^2 \ ds = \unsur{3} \cdot (1^3 - 0^3) = \unsur{3}\]
+</p>
+
+<p>
+Les intégrales s'écrivent donc :
+</p>
+
+\begin{align}
+I_1(h) &= \sum_i \partial_i f(a) \cdot h_i \)
+
+\(
+I_2(h) &= \unsur{2} \sum_{i,j} h_i \cdot \partial_{ji} f(a) \cdot h_j \)
+
+\(
+I_3(h) &= \unsur{6} \sum_{i,j,k} \partial_{kji}^3 f(a) \cdot h_i \cdot h_j \cdot h_k
+\end{align}
+
+<p>
+et la variation de \(f\) est donnée par :
+</p>
+
+<p>
+\[f(a + h) - f(a) = I_1(h) + I_2(h) + I_3(h) + \mathcal{E}_3(h)\]
+</p>
+
+<p>
+En terme de notations tensorielles, on peut l'écrire symboliquement :
+</p>
+
+<p>
+\[f(a + h) - f(a) = \partial f(a) \cdot h + \unsur{2} h^\dual \cdot \partial^2 f(a) \cdot h + \unsur{6} \contraction{\partial^3 f(a)}{3}{h \otimes h \otimes h}\]
+</p>
+</div>
+<div id="outline-container-orga887007" class="outline-3">
+<h3 id="orga887007"><span class="section-number-3">4.1.</span> Comportement de l'erreur</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+Nous savons que, pour toute précision \(\epsilon \strictsuperieur 0\), nous pouvons trouver un \(\delta \strictsuperieur 0\) tel que :
+</p>
+
+<p>
+\[\frac{\norme{e(h)}}{\norme{h}^2} \le \epsilon\]
+</p>
+
+<p>
+pour tout \(h\) vérifiant \(\norme{h} \le \delta\). Comme \(\abs{e_i(h)} \le \norme{e(h)}\) et \(\abs{h_i} \le \norme{h}\), on a :
+</p>
+
+\begin{align}
+\abs{\mathcal{E}_3(h)} &\le \sum_i \abs{\int_0^1 e_i(h) \cdot h_i \ ds} \)
+
+\(
+&\le n \cdot \epsilon \cdot \norme{h}^3
+\end{align}
+
+<p>
+L'erreur \(\abs{\mathcal{E}_3(h)}\) est donc en \(\petito{h^3}\).
+</p>
+</div>
+</div>
+<div id="outline-container-org16aec93" class="outline-3">
+<h3 id="org16aec93"><span class="section-number-3">4.2.</span> Dérivées ordinaires</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+Lorsque \(n = 1\), le développement est simplement :
+</p>
+
+<p>
+\[f(a + h) = f(a) + \OD{f}{x}(a) \cdot h + \OOD{f}{x}(a) \cdot \frac{h^2}{2} + \NOD{f}{x}{3} \cdot \frac{h^3}{6} + \mathcal{E}_3(h)\]
+</p>
+
+<p>
+On constate qu'il est analogue au développement de Taylor d'ordre trois autour de \(a\).
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Auteur: chimay</p>
+<p class="date">Created: 2025-10-21 mar 15:51</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

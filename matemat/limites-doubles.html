@@ -1,0 +1,978 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<!-- 2025-10-21 mar 15:52 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Eclats de vers : Matemat : Limites doubles</title>
+<meta name="author" content="chimay" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Eclats de vers : Matemat : Limites doubles</h1>
+<p>
+<a href="index.html">Index des Grimoires</a>
+</p>
+
+<p>
+<a href="../index.html">Retour à l’accueil</a>
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org6e35436">1. Dépendances</a></li>
+<li><a href="#orgc028456">2. Introduction</a></li>
+<li><a href="#org1bfe137">3. Limite en un point</a></li>
+<li><a href="#org9289bc1">4. Limite à l'infini</a></li>
+<li><a href="#orge9457b1">5. Dualité</a></li>
+</ul>
+</div>
+</div>
+
+<p>
+\(
+\newcommand{\parentheses}[1]{\left(#1\right)}
+\newcommand{\crochets}[1]{\left[#1\right]}
+\newcommand{\accolades}[1]{\left\{#1\right\}}
+\newcommand{\ensemble}[1]{\left\{#1\right\}}
+\newcommand{\identite}{\mathrm{Id}}
+\newcommand{\indicatrice}{\boldsymbol{\delta}}
+\newcommand{\dirac}{\delta}
+\newcommand{\moinsun}{{-1}}
+\newcommand{\inverse}{\ddagger}
+\newcommand{\pinverse}{\dagger}
+\newcommand{\topologie}{\mathfrak{T}}
+\newcommand{\ferme}{\mathfrak{F}}
+\newcommand{\img}{\mathbf{i}}
+\newcommand{\binome}[2]{
+\left\{ \begin{array}{c}
+#1 \\
+#2 \\
+\end{array} \right\}
+}
+\newcommand{\canonique}{\mathfrak{c}}
+\newcommand{\tenseuridentite}{\boldsymbol{\mathcal{I}}}
+\newcommand{\permutation}{\boldsymbol{\epsilon}}
+\newcommand{\matriceZero}{\mathfrak{0}}
+\newcommand{\matriceUn}{\mathfrak{1}}
+\newcommand{\christoffel}[2]{
+\left\{ \begin{array}{c}
+#1 \\
+#2 \\
+\end{array} \right\}
+}
+\newcommand{\lagrangien}{\mathfrak{L}}
+\newcommand{\sousens}{\mathfrak{P}}
+\newcommand{\partition}{\mathrm{Partition}}
+\newcommand{\tribu}{\mathrm{Tribu}}
+\newcommand{\topologies}{\mathrm{Topo}}
+\newcommand{\setB}{\mathbb{B}}
+\newcommand{\setN}{\mathbb{N}}
+\newcommand{\setZ}{\mathbb{Z}}
+\newcommand{\setQ}{\mathbb{Q}}
+\newcommand{\setR}{\mathbb{R}}
+\newcommand{\setC}{\mathbb{C}}
+\newcommand{\corps}{\mathbb{K}}
+\newcommand{\boule}{\mathfrak{B}}
+\newcommand{\intervalleouvert}[2]{\left] #1 , #2 \right[}
+\newcommand{\intervallesemiouvertgauche}[2]{ \left] #1 , #2 \right]}
+\newcommand{\intervallesemiouvertdroite}[2]{\left[ #1 , #2 \right[ }
+\newcommand{\fonction}{\mathbb{F}}
+\newcommand{\bijection}{\mathrm{Bij}}
+\newcommand{\polynome}{\mathrm{Poly}}
+\newcommand{\lineaire}{\mathrm{Lin}}
+\newcommand{\continue}{\mathrm{Cont}}
+\newcommand{\homeomorphisme}{\mathrm{Hom}}
+\newcommand{\etagee}{\mathrm{Etagee}}
+\newcommand{\lebesgue}{\mathrm{Leb}}
+\newcommand{\lipschitz}{\mathrm{Lip}}
+\newcommand{\suitek}{\mathrm{Suite}}
+\newcommand{\matrice}{\mathbb{M}}
+\newcommand{\krylov}{\mathrm{Krylov}}
+\newcommand{\tenseur}{\mathbb{T}}
+\newcommand{\essentiel}{\mathfrak{E}}
+\newcommand{\relation}{\mathrm{Rel}}
+\DeclareMathOperator*{\strictinferieur}{\ < \ }
+\DeclareMathOperator*{\strictsuperieur}{\ > \ }
+\DeclareMathOperator*{\ensinferieur}{\eqslantless}
+\DeclareMathOperator*{\enssuperieur}{\eqslantgtr}
+\DeclareMathOperator*{\esssuperieur}{\gtrsim}
+\DeclareMathOperator*{\essinferieur}{\lesssim}
+\newcommand{\essegal}{\eqsim}
+\newcommand{\union}{\ \cup \ }
+\newcommand{\intersection}{\ \cap \ }
+\newcommand{\opera}{\divideontimes}
+\newcommand{\autreaddition}{\boxplus}
+\newcommand{\autremultiplication}{\circledast}
+\newcommand{\commutateur}[2]{\left[ #1 , #2 \right]}
+\newcommand{\convolution}{\circledcirc}
+\newcommand{\correlation}{\ \natural \ }
+\newcommand{\diventiere}{\div}
+\newcommand{\modulo}{\bmod}
+\DeclareMathOperator*{\pgcd}{pgcd}
+\DeclareMathOperator*{\ppcm}{ppcm}
+\newcommand{\produitscalaire}[2]{\left\langle #1 \vert #2 \right\rangle}
+\newcommand{\scalaire}[2]{\left\langle #1 \| #2 \right\rangle}
+\newcommand{\braket}[3]{\left\langle #1 \vert #2 \vert #3 \right\rangle}
+\newcommand{\orthogonal}{\bot}
+\newcommand{\forme}[2]{\left\langle #1 , #2 \right\rangle}
+\newcommand{\biforme}[3]{\left\langle #1 , #2 , #3 \right\rangle}
+\newcommand{\contraction}[3]{\left\langle #1 \odot #3 \right\rangle_{#2}}
+\newcommand{\dblecont}[5]{\left\langle #1 \vert #3 \vert #5 \right\rangle_{#2,#4}}
+\DeclareMathOperator*{\major}{major}
+\DeclareMathOperator*{\minor}{minor}
+\DeclareMathOperator*{\maxim}{maxim}
+\DeclareMathOperator*{\minim}{minim}
+\DeclareMathOperator*{\argument}{arg}
+\DeclareMathOperator*{\argmin}{arg\ min}
+\DeclareMathOperator*{\argmax}{arg\ max}
+\DeclareMathOperator*{\supessentiel}{ess\ sup}
+\DeclareMathOperator*{\infessentiel}{ess\ inf}
+\newcommand{\dual}{\star}
+\newcommand{\distance}{\mathfrak{dist}}
+\newcommand{\norme}[1]{\left\| #1 \right\|}
+\newcommand{\normetrois}[1]{\left|\left\| #1 \right\|\right|}
+\DeclareMathOperator*{\adh}{adh}
+\DeclareMathOperator*{\interieur}{int}
+\newcommand{\frontiere}{\partial}
+\DeclareMathOperator*{\image}{im}
+\DeclareMathOperator*{\domaine}{dom}
+\DeclareMathOperator*{\noyau}{ker}
+\DeclareMathOperator*{\support}{supp}
+\DeclareMathOperator*{\signe}{sign}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\unsur}[1]{\frac{1}{#1}}
+\newcommand{\arrondisup}[1]{\lceil #1 \rceil}
+\newcommand{\arrondiinf}[1]{\lfloor #1 \rfloor}
+\DeclareMathOperator*{\conjugue}{conj}
+\newcommand{\conjaccent}[1]{\overline{#1}}
+\DeclareMathOperator*{\division}{division}
+\newcommand{\difference}{\boldsymbol{\Delta}}
+\newcommand{\differentielle}[2]{\mathfrak{D}^{#1}_{#2}}
+\newcommand{\OD}[2]{\frac{d #1}{d #2}}
+\newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
+\newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
+\newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
+\newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
+\newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\gradient}{\mathbf{\nabla}}
+\newcommand{\combilin}[1]{\mathrm{span}\{ #1 \}}
+\DeclareMathOperator*{\trace}{tr}
+\newcommand{\proba}{\mathbb{P}}
+\newcommand{\probaof}[1]{\mathbb{P}\left[#1\right]}
+\newcommand{\esperof}[1]{\mathbb{E}\left[#1\right]}
+\newcommand{\cov}[2]{\mathrm{cov} \left( #1 , #2 \right) }
+\newcommand{\var}[1]{\mathrm{var} \left( #1 \right) }
+\newcommand{\rand}{\mathrm{rand}}
+\newcommand{\variation}[1]{\left\langle #1 \right\rangle}
+\DeclareMathOperator*{\composante}{comp}
+\DeclareMathOperator*{\bloc}{bloc}
+\DeclareMathOperator*{\ligne}{ligne}
+\DeclareMathOperator*{\colonne}{colonne}
+\DeclareMathOperator*{\diagonale}{diag}
+\newcommand{\matelementaire}{\mathrm{Elem}}
+\DeclareMathOperator*{\matpermutation}{permut}
+\newcommand{\matunitaire}{\mathrm{Unitaire}}
+\newcommand{\gaussjordan}{\mathrm{GaussJordan}}
+\newcommand{\householder}{\mathrm{Householder}}
+\DeclareMathOperator*{\rang}{rang}
+\newcommand{\schur}{\mathrm{Schur}}
+\newcommand{\singuliere}{\mathrm{DVS}}
+\newcommand{\convexe}{\mathrm{Convexe}}
+\newcommand{\petito}[1]{o\left(#1\right)}
+\newcommand{\grando}[1]{O\left(#1\right)}
+\)
+</p>
+
+<p>
+\(
+\newenvironment{Eqts}
+{ \begin{equation*} \begin{gathered} }
+{ \end{gathered} \end{equation*} }
+\newenvironment{Matrix}
+{\left[ \begin{array}}
+{\end{array} \right]}
+\)
+</p>
+
+<p>
+\label{chap:limitesDoubles}
+</p>
+<div id="outline-container-org6e35436" class="outline-2">
+<h2 id="org6e35436"><span class="section-number-2">1.</span> Dépendances</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>Chapitre \ref{chap:limites} : Les limites</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc028456" class="outline-2">
+<h2 id="orgc028456"><span class="section-number-2">2.</span> Introduction</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Si les ensemble \(A, B\) sont munis d'une distance, on définit la distance :
+</p>
+
+<p>
+\[\distance^2 : (A \times B) \times (A \times B) \mapsto \corps\]
+</p>
+
+<p>
+associée par :
+</p>
+
+<p>
+\[\distance^2\big[(x,y), (a,b)\big] = \max \big\{ \distance(x,a), \distance(y,b) \big\}\]
+</p>
+
+<p>
+pour tout \((x,y),(a,b) \in A \times B\). La fonction définie est-elle une distance ? On a clairement \(\distance^2 \ge 0\) et :
+</p>
+
+<p>
+\[\distance^2\big[(x,y), (a,b)\big] = \distance^2\big[(a,b), (x,y)\big]\]
+</p>
+
+<p>
+On a aussi :
+</p>
+
+<p>
+\[\distance^2\big[(x,y), (x,y)\big] = \max \big\{ \distance(x,x), \distance(y,y) \big\} = \max \{ 0, 0 \} = 0\]
+</p>
+
+<p>
+Si :
+</p>
+
+<p>
+\[\distance^2\big[(x,y), (a,b)\big] = 0\]
+</p>
+
+<p>
+on a forcément :
+</p>
+
+<p>
+\[\distance(x,a) = \distance(y,b) = 0\]
+</p>
+
+<p>
+Donc \(x = a\), \(y = b\) et :
+</p>
+
+<p>
+\[(x,y) = (a,b)\]
+</p>
+
+<p>
+Pour l'inégalité triangulaire, soit \((x,y),(a,b),(c,d) \in A \times B\) et :
+</p>
+
+<p>
+\[d = \distance^2\big[(a,b), (c,d)\big] = \max \big\{ \distance(a,c), \distance(b,d) \big\}\]
+</p>
+
+<p>
+La distance sur \(A\) vérifie :
+</p>
+
+<p>
+\[\distance(a,c) \le \distance(a,x) + \distance(x,c)\]
+</p>
+
+<p>
+La distance sur \(B\) vérifie :
+</p>
+
+<p>
+\[\distance(b,d) \le \distance(b,y) + \distance(y,d)\]
+</p>
+
+<p>
+On en déduit que :
+</p>
+
+\begin{align}
+d &\le \max \{ \distance(a,x) + \distance(x,c), \distance(b,y) + \distance(y,d) \} \)
+
+\(
+&\le \max \{ \distance(a,x), \distance(b,y) \} + \max \{ \distance(x,c), \distance(y,d) \} \)
+
+\(
+&\le \distance^2\big[(a,b), (x,y)\big] + \distance^2\big[(x,y), (c,d)\big]
+\end{align}
+</div>
+</div>
+<div id="outline-container-org1bfe137" class="outline-2">
+<h2 id="org1bfe137"><span class="section-number-2">3.</span> Limite en un point</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Soit un ensemble \(F\) et une fonction \(f : A \times B \mapsto F\). On choisit un ensemble \(U \subseteq A \times B\). On dit que \(L\) est la limite de \(f\) en \((a,b) \in A \times B\) et on le note :
+</p>
+
+<p>
+\[\lim_{ \substack{ (x,y) \to (a,b) \\ (x,y) \in U } } f(x,y) = L\]
+</p>
+
+<p>
+si, pour toute précision \(\epsilon \strictsuperieur 0\), on peut trouver un \(\delta \strictsuperieur 0\) tel que :
+</p>
+
+<p>
+\[\distance(f(x,y), L) \le \epsilon\]
+</p>
+
+<p>
+pour tout \((x,y) \in U\) vérifiant :
+</p>
+
+<p>
+\[\distance^2\big[ (x,y), (a,b) \big] = \max \{ \distance(x,a), \distance(y,b) \} \le \delta\]
+</p>
+</div>
+<div id="outline-container-org120ecbb" class="outline-3">
+<h3 id="org120ecbb"><span class="section-number-3">3.1.</span> Formulation équivalente</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+La condition :
+</p>
+
+<p>
+\[\max \{ \distance(x,a), \distance(y,b) \} \le \delta\]
+</p>
+
+<p>
+est équivalente à :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\distance(x,a) \le \delta \)
+</p>
+
+<p>
+\(
+\distance(y,b) \le \delta
+\)
+</p>
+</div>
+
+<p>
+On en conclut que :
+</p>
+
+<p>
+\[\lim_{ \substack{ (x,y) \to (a,b) \\ (x,y) \in U } } f(x,y) = L\]
+</p>
+
+<p>
+si et seulement si, pour toute précision \(\epsilon \strictsuperieur 0\), on peut trouver un \(\delta \strictsuperieur 0\) tel que :
+</p>
+
+<p>
+\[\distance(f(x,y), L) \le \epsilon\]
+</p>
+
+<p>
+pour tout \((x,y) \in U\) vérifiant :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\distance(x,a) \le \delta \)
+</p>
+
+<p>
+\(
+\distance(y,b) \le \delta
+\)
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org38c08a8" class="outline-3">
+<h3 id="org38c08a8"><span class="section-number-3">3.2.</span> Extension</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+Supposons que pour toute précision \(\epsilon \strictsuperieur 0\) on puisse trouver des \(\delta_1, \delta_2 \strictsuperieur 0\) tels que :
+</p>
+
+<p>
+\[\distance(f(x,y), L) \le \epsilon\]
+</p>
+
+<p>
+pour tout \((x,y) \in U\) vérifiant :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\distance(x,a) \le \delta_1 \)
+</p>
+
+<p>
+\(
+\distance(y,b) \le \delta_2
+\)
+</p>
+</div>
+
+<p>
+En posant :
+</p>
+
+<p>
+\[\delta = \min \{ \delta_1, \delta_2 \} \strictsuperieur 0\]
+</p>
+
+<p>
+on voit que :
+</p>
+
+<p>
+\[\distance(f(x,y), L) \le \epsilon\]
+</p>
+
+<p>
+pour tout \((x,y) \in U\) vérifiant :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\distance(x,a) \le \delta \le \delta_1 \)
+</p>
+
+<p>
+\(
+\distance(y,b) \le \delta \le \delta_2
+\)
+</p>
+</div>
+
+<p>
+On en conclut que :
+</p>
+
+<p>
+\[\lim_{ \substack{ (x,y) \to (a,b) \\ (x,y) \in U } } f(x,y) = L\]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org9289bc1" class="outline-2">
+<h2 id="org9289bc1"><span class="section-number-2">4.</span> Limite à l'infini</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+On suppose que les ensembles \(A, B\) sont ordonnés. On dit que \(L \in F\) est la limite de \(f : A \times B \mapsto F\) à l'infini positif et on le note :
+</p>
+
+<p>
+\[\lim_{(x,y) \to +\infty} f(x,y) = L\]
+</p>
+
+<p>
+si, pour toute précision \(\epsilon \strictsuperieur 0\), on peut trouver des bornes inférieures \((I, J) \in A \times B\) telles que :
+</p>
+
+<p>
+\[\distance\big[f(x,y), L\big] \le \epsilon\]
+</p>
+
+<p>
+pour tout \((x,y) \in A \times B\) vérifiant :
+</p>
+
+<div class="org-center">
+<p>
+\(
+x \ge I \)
+</p>
+
+<p>
+\(
+y \ge J
+\)
+</p>
+</div>
+
+<p>
+On dit que \(L \in F\) est la limite de \(f : A \times B \mapsto F\) à l'infini négatif et on le note :
+</p>
+
+<p>
+\[\lim_{(x,y) \to -\infty} f(x,y) = L\]
+</p>
+
+<p>
+si, pour toute précision \(\epsilon \strictsuperieur 0\), on peut trouver des bornes supérieures \((I, J) \in A \times B\) telles que :
+</p>
+
+<p>
+\[\distance\big[f(x,y), L\big] \le \epsilon\]
+</p>
+
+<p>
+pour tout \((x,y) \in A \times B\) vérifiant :
+</p>
+
+<div class="org-center">
+<p>
+\(
+x \le I \)
+</p>
+
+<p>
+\(
+y \le J
+\)
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orge9457b1" class="outline-2">
+<h2 id="orge9457b1"><span class="section-number-2">5.</span> Dualité</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-orgea56262" class="outline-3">
+<h3 id="orgea56262"><span class="section-number-3">5.1.</span> \(x\) puis \(y\)</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+Supposons que la limite \(\lambda(y)\) définie par :
+</p>
+
+<p>
+\[\lambda(y) = \lim_{x \to a} f(x,y)\]
+</p>
+
+<p>
+existe pour tout \(y \in B\) et que :
+</p>
+
+<p>
+\[L = \lim_{y \to b} \lambda(y) = \lim_{y \to b} \lim_{x \to a} f(x,y)\]
+</p>
+
+<p>
+est bien définie. Nous supposons également que, quelque soit \(\epsilon \strictsuperieur 0\), on peut trouver un \(\delta \strictsuperieur 0\) tel que :
+</p>
+
+<p>
+\[\distance(f(x,y),\lambda(y)) \le \epsilon\]
+</p>
+
+<p>
+pour tout \((x,y) \in A \times B\) vérifiant :
+</p>
+
+<p>
+\[\distance(x,a) \le \delta\]
+</p>
+
+<p>
+Choissons \(\epsilon \strictsuperieur 0\). On peut trouver \(\delta_1 \strictsuperieur 0\) tel que :
+</p>
+
+<p>
+\[\distance(\lambda(y), L) \le \frac{\epsilon}{2}\]
+</p>
+
+<p>
+pour tout \((x,y) \in A \times B\) vérifiant :
+</p>
+
+<p>
+\[\distance(y,b) \le \delta_1\]
+</p>
+
+<p>
+On peut aussi trouver \(\delta_2\) tel que :
+</p>
+
+<p>
+\[\distance(f(x,y),\lambda(y)) \le \frac{\epsilon}{2}\]
+</p>
+
+<p>
+pour tout \((x,y) \in A \times B\) vérifiant :
+</p>
+
+<p>
+\[\distance(x,a) \le \delta_2\]
+</p>
+
+<p>
+Soit \(\delta = \min \{ \delta_1, \delta_2 \}\) et \((x,y) \in A \times B\) vérifiant :
+</p>
+
+<p>
+\[\max \{ \distance(x,a), \distance(y,b) \} \le \delta\]
+</p>
+
+<p>
+On a alors :
+</p>
+
+\begin{align}
+\distance(f(x,y),L) &\le \distance(f(x,y),\lambda(y)) + \distance(\lambda(y),L) \)
+
+\(
+&\le \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+\end{align}
+
+<p>
+On en conclut que :
+</p>
+
+<p>
+\[\lim_{(x,y) \to (a,b)} f(x,y) = L\]
+</p>
+
+<p>
+autrement dit :
+</p>
+
+<p>
+\[\lim_{(x,y) \to (a,b)} f(x,y) = \lim_{y \to b} \lim_{x \to a} f(x,y)\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgdf0f519" class="outline-3">
+<h3 id="orgdf0f519"><span class="section-number-3">5.2.</span> \(y\) puis \(x\)</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+Supposons que la limite \(\mu(x)\) définie par :
+</p>
+
+<p>
+\[\mu(x) = \lim_{y \to b} f(x,y)\]
+</p>
+
+<p>
+existe pour tout \(x \in A\) et que :
+</p>
+
+<p>
+\[M = \lim_{x \to a} \mu(y) = \lim_{x \to a} \lim_{y \to b} f(x,y)\]
+</p>
+
+<p>
+est bien définie. Nous supposons également que, quelque soit \(\epsilon \strictsuperieur 0\), on peut trouver un \(\delta \strictsuperieur 0\) tel que :
+</p>
+
+<p>
+\[\distance(f(x,y),\mu(x)) \le \epsilon\]
+</p>
+
+<p>
+pour tout \((x,y) \in A \times B\) vérifiant :
+</p>
+
+<p>
+\[\distance(y,b) \le \delta\]
+</p>
+
+<p>
+Choissons \(\epsilon \strictsuperieur 0\). On peut trouver \(\delta_1 \strictsuperieur 0\) tel que :
+</p>
+
+<p>
+\[\distance(\mu(x), M) \le \frac{\epsilon}{2}\]
+</p>
+
+<p>
+pour tout \((x,y) \in A \times B\) vérifiant :
+</p>
+
+<p>
+\[\distance(x,a) \le \delta_1\]
+</p>
+
+<p>
+On peut aussi trouver \(\delta_2\) tel que :
+</p>
+
+<p>
+\[\distance(f(x,y),\mu(x)) \le \frac{\epsilon}{2}\]
+</p>
+
+<p>
+pour tout \((x,y) \in A \times B\) vérifiant :
+</p>
+
+<p>
+\[\distance(y,b) \le \delta_2\]
+</p>
+
+<p>
+Soit \(\delta = \min \{ \delta_1, \delta_2 \}\) et \((x,y) \in A \times B\) vérifiant :
+</p>
+
+<p>
+\[\max \{ \distance(x,a), \distance(y,b) \} \le \delta\]
+</p>
+
+<p>
+On a alors :
+</p>
+
+\begin{align}
+\distance(f(x,y),M) &\le \distance(f(x,y),\mu(x)) + \distance(\mu(x),M) \)
+
+\(
+&\le \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+\end{align}
+
+<p>
+On en conclut que :
+</p>
+
+<p>
+\[\lim_{(x,y) \to (a,b)} f(x,y) = M\]
+</p>
+
+<p>
+autrement dit :
+</p>
+
+<p>
+\[\lim_{(x,y) \to (a,b)} f(x,y) = \lim_{x \to a} \lim_{y \to b} f(x,y)\]
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Auteur: chimay</p>
+<p class="date">Created: 2025-10-21 mar 15:52</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

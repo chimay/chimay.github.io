@@ -1,0 +1,466 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Espace vectoriel des polynômes
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:vectpoly}
+
+* Introduction
+
+AFAIRE : ARRANGER LE CHAPITRE
+
+Il est clair d'après la définition des polynômes que les espaces
+$\mathcal{P}_n$ sont des espaces vectoriels pour l'ensemble des
+scalaires $S=\setR$ et que :
+
+$$\mathcal{P}_n = \ev{\mu_0,\mu_1,...,\mu_n}$$
+
+Nous allons montrer que $(\mu_0,\mu_1,...,\mu_n)$ forme
+une base de $\mathcal{P}_n$. Pour cela, il nous reste à prouver
+l'indépendance linéaire des $\mu_i$ :
+
+$$\sum_{i=0}^n a_i \mu_i = 0 \quad\Rightarrow\quad a_0 = a_1 = ... = a_n = 0$$
+
+c'est-à-dire :
+
+$$\sum_{i=0}^n a_i x^i = 0 \quad\forall x \in\setR \quad\Rightarrow\quad a_0 = a_1 = ... = a_n = 0$$
+
+Nous allons le montrer par récurrence.
+
+Comme $\mu_0=1$ on a évidemment :
+
+$$a_0 1 = 0 \quad\Rightarrow\quad a_0 = 0$$
+
+et la thèse est vraie pour $n=0$. Supposons à présent qu'elle
+soit vraie pour $n-1$. Choisissons $p\in\mathcal{P}_n$ :
+
+$$p(x) = \sum_{i=0}^n a_i x^i$$
+
+et supposons que $p(x) = 0$ pour tout $x\in\setR$. Comme $p(0)=0$,
+on a :
+
+$$a_0 = 0$$
+
+donc :
+
+$$p(x) = \sum_{i=1}^n a_i x^i = x q(x) = 0$$
+
+où l'on à définit $q\in\mathcal{P}_{n-1}$ par :
+
+$$q(x) = \sum_{i=1}^n a_i x^{i-1}$$
+
+Il est clair que, pour tout $x\ne 0$, $q(x) = 0$. Mais comme les polynômes
+sont des fonctions continues, on a :
+
+$$q(0) = \lim_{ \substack{ x \rightarrow 0 \\ x \ne 0 } } q(x) = 0$$
+
+Donc $q$ s'annule également en $0$. On en conclut que $q(x)$ est
+nul pour tout $x\in\setR$. Par l'hypothèse de récurrence, les
+coefficients de ce polynôme sont tous nuls :
+
+$$a_1 = a_2 = ... = a_n = 0$$
+
+Rassemblant les résultats, il vient :
+
+$$a_0 = a_1 = ... = a_n = 0$$
+
+et $(\mu_0,\mu_1,...,\mu_n)$ forme bien une base de $\mathcal{P}_n$.
+
+
+* Polynômes orthogonaux
+
+Nous allons à présent voir comment construire des suites de polynômes
+orthogonaux pour le produit scalaire :
+
+$$\scalaire{p}{q} = \int_a^b p(x) q(x) d\mu(x)$$
+
+ou, lorsque c'est possible :
+
+$$\scalaire{p}{q} = \int_a^b p(x) q(x) w(x) dx$$
+
+
+** Récurrence
+
+On pourrait bien entendu partir de la suite de la base canonique
+de monômes $(1,x,x^2,...,x^n)$ et l'orthogonaliser en utilisant le
+procédé de Gram-Schmidt, mais on peut arriver à un algorithme plus
+rapide en utilisant les propriétés des polynômes. Soit $(\phi_n)_n$
+une suite de polynômes orthonormés, où $\phi_i$ est de degré $i$.
+On a donc :
+
+$$\scalaire{\phi_m}{\phi_n} = \int_A \phi_m(x) \phi_n(x) d\mu(x) = \delta_{mn}$$
+
+Supposons que $(\phi_0,...,\phi_n)$ forme une base de $\mathcal{P}_n$.
+On peut vérifier que $(\phi_0,...,\phi_n,x\phi_n)$ forme une base de
+$\mathcal{P}_{n+1}$. On peut donc représenter $\phi_{n+1}$ comme :
+
+$$\phi_{n+1}(x) = a_n x\phi_n(x) + b_n \phi_n(x) + c_n \phi_{n-1}(x) + \sum_{i=0}^{n-2} d_i \phi_i(x)$$
+
+Soit $i \in \{0, ..., n-2\}$. La condition d'orthogonalité de
+$\phi_{n+1}$ avec $\phi_i$ s'écrit :
+
+$$\scalaire{\phi_i}{\phi_{n+1}} = a_n \scalaire{\phi_i}{x\phi_n} + b_n \scalaire{\phi_i}{\phi_n} + c_n \scalaire{\phi_i}{\phi_{n-1}} + \sum_{j=0}^{n-2} d_j \scalaire{\phi_i}{\phi_j} = 0$$
+
+L'orthogonalité implique que :
+
+#+BEGIN_CENTER
+\(
+\scalaire{\phi_i}{\phi_n} = \scalaire{\phi_i}{\phi_{n-1}} = 0 \)
+
+\(
+\scalaire{\phi_i}{\phi_j} = \delta_{ij}
+\)
+#+END_CENTER
+
+On a aussi :
+
+$$\scalaire{\phi_i}{x\phi_n} = \int_A x \phi_i(x) \phi_n(x) d\mu(x) = \scalaire{x\phi_i}{\phi_n}$$
+
+Mais comme $\phi_i$ est de degré $i$, $x\phi_i$ est de degré $i+1$
+et on peut l'exprimer comme :
+
+$$x \phi_i = \sum_{j=0}^{i+1} \alpha_i \phi_j$$
+
+Le produit scalaire devient alors :
+
+$$\scalaire{\phi_i}{x\phi_n} = \sum_{j=0}^{i+1} \alpha_i \scalaire{\phi_j}{\phi_n} = 0$$
+
+puisque $j \le i+1 < n$. On en conclut que :
+
+$$\scalaire{\phi_i}{\phi_{n+1}} = \sum_{j=0}^{n-2} d_j \delta_{ij} = d_i = 0$$
+
+Les conditions :
+
+#+BEGIN_CENTER
+\(
+\scalaire{\phi_{n+1}}{\phi_n} = 0 \)
+
+\(
+\scalaire{\phi_{n+1}}{\phi_{n-1}} = 0
+\)
+#+END_CENTER
+
+impliquent respectivement que :
+
+#+BEGIN_CENTER
+\(
+b_n = -a_n\scalaire{\phi_n}{x\phi_n} \)
+
+\(
+c_n = -a_n\scalaire{\phi_{n-1}}{x\phi_n}
+\)
+#+END_CENTER
+
+La condition de normalisation :
+
+$$\scalaire{\phi_{n+1}}{\phi_{n+1}} = a_n \scalaire{x\phi_n}{\phi_{n+1}} = 1$$
+
+nous donne alors la valeur de $a_n$ :
+
+#+BEGIN_CENTER
+\(
+a_n^2 \scalaire{x\phi_n}{x\phi_n}} -
+a_n^2 \scalaire{x\phi_n}{\phi_n}^2 -
+a_n^2 \scalaire{x\phi_n}{\phi_{n-1}}^2 = 1 \)
+
+\(
+a_n = \left[\scalaire{x\phi_n}{x\phi_n} -
+\scalaire{x\phi_n}{\phi_n}^2 -
+\scalaire{x\phi_n}{\phi_{n-1}}^2\right]^{-1/2}
+\)
+#+END_CENTER
+
+On voit donc que le choix du produit scalaire détermine :
+
+#+BEGIN_CENTER
+\(
+\phi_0 = \unsur{\sqrt{\scalaire{1}{1}}} \)
+
+\(
+\phi_1 = a_1 (x - \scalaire{\phi_0}{x} \phi_0)
+\)
+#+END_CENTER
+
+ainsi que toute la suite de polynômes.
+
+
+** Approximation
+
+Soit une suite de polynômes orthonormaux $(\phi_0,...\phi_n)$
+pour le produit scalaire :
+
+$$\scalaire{u}{v} = \int_A u(x) v(x) d\mu(x)$$
+
+Nous cherchons l'approximation de $u$ :
+
+$$w(x) = \sum_{i=0}^n w_i \phi_i(x)$$
+
+qui minimise l'erreur au sens intégral :
+
+$$\scalaire{u-w}{u-w} = \int_A [u(x)-w(x)]^2 d\mu(x)$$
+
+sur $\mathcal{P}_n$. Imposant que la dérivée par rapport aux $w_i$ soit nulle, on
+obtient :
+
+$$2 \int_A \phi_i(x) [u(x)-w(x)] d\mu(x) = 0$$
+
+Mais comme :
+
+$$w_i = \int_A \phi_i(x) w(x) d\mu(x)$$
+
+on obtient :
+
+$$w_i = \int_A \phi_i(x) u(x) d\mu(x) = \scalaire{\phi_i}{u}$$
+
+Ce qui n'a rien d'étonnant au vu  des résultats du chapitre \ref{chap:vector}.
+On peut vérifier facilement que la hessienne de l'erreur par rapport aux $w_i$
+est bien positive. L'approximation ainsi définie :
+
+#+BEGIN_CENTER
+\(
+w(x) = \sum_{i=0}^n \phi_i(x) \int_A \phi_i(y) u(y) d\mu(y) \)
+
+\(
+w(x) = \sum_{i=0}^n \int_A \phi_i(x) \phi_i(y) u(y) d\mu(y)
+\)
+#+END_CENTER
+
+minimise donc bien l'erreur sur l'ensemble des polynômes de degré $n$.
+
+
+** Intégration de Gauss
+
+Soit une suite de polynômes orthonormaux $(\phi_0,...\phi_n)$
+pour le produit scalaire :
+
+$$\scalaire{u}{v} = \int_A u(x) v(x) d\mu(x)$$
+
+Considérons la formule d'intégration :
+
+$$I(f) = \sum_{i=0}^n w_i f(x_i)$$
+
+supposée approximer l'intégrale :
+
+$$\langle f \rangle = \scalaire{f}{1} = \int_A f(x) d\mu(x)$$
+
+Fixons les points $x_0 < x_1 < ... < x_n$ et imposons que
+la formule soit exacte pour $\phi_0,...,\phi_n$. On a :
+
+$$\langle \phi_k \rangle = \sum_{i=0}^n w_i \phi_k(x_i)$$
+
+où $k = 0,1,...,n$. Définissant les matrices et vecteurs :
+
+#+BEGIN_CENTER
+\(
+\varphi = (\langle \phi_k \rangle)_k \)
+
+\(
+W  = (w_i)_i \)
+
+\(
+\Phi = \left(\phi_i(x_j)\right)_{i,j}
+\)
+#+END_CENTER
+
+ces conditions se ramènent à :
+
+$$\Phi W = \varphi$$
+
+Si la matrice $\Phi(n+1,n+1)$ est inversible, on a alors :
+
+$$W = \Phi^{-1} \varphi$$
+
+La formule est alors valable pour tout polynôme de $\mathcal{P}_n$.
+Notons que
+
+$$\langle \phi_k \rangle = \unsur{\phi_0} \scalaire{\phi_k}{\phi_0}$$
+
+s'annule pour tout $k\ne 0$. Si les racines de $\phi_{n+1}$ sont
+toutes distinctes, on peut choisir les $x_i$ tels que :
+
+$$\phi_{n+1}(x_i) = 0$$
+
+On a alors :
+
+$$\langle \phi_{n+1} \rangle = I(\phi_{n+1}) = 0$$
+
+et la formule devient valable sur $\mathcal{P}_{n+1}$. Mieux,
+considérons un polynôme $p$ de degré $n+m+1$ où $m \ge 0$ et sa
+division euclidienne par $\phi_{n+1}$. On a :
+
+$$p(x) = q(x) \phi_{n+1}(x) + r(x)$$
+
+Comme $q$ est de degré $m$, on a :
+
+$$q = \sum_{i=0}^m q_i \phi_i$$
+
+Si $m \le n$, on a donc :
+
+$$\langle q \phi_{n+1} \rangle = \sum_{i=0}^n q_i \scalaire{\phi_i}{\phi_{n+1}} = 0$$
+
+et :
+
+$$\langle p \rangle = \langle r \rangle = I(r)$$
+
+puisque $r$ est de degré $n$ au plus. Comme $\phi_{n+1}$ s'annule en
+les $x_i$, on a aussi ;
+
+$$I(p) = I(r)$$
+
+Rassemblant tout ces résultats, on obtient :
+
+$$\int_A f(x) d\mu(x) = \sum_{i=0}^n w_i f(x_i)$$
+
+pour tout polynôme $f\in\mathcal{P}_{2n+1}$. En pratique, on utilise
+ces formules d'intégration pour des fonctions qui ne sont pas forcément
+des polynômes.
+
+
+* Legendre
+
+Les polynômes de Legendre sont orthogonaux pour le produit scalaire :
+
+$$\int_{-1}^1 P_n(x) P_m(x) dx = \frac{2}{2 n + 1} \delta_{mn}$$
+
+Ils obéissent à la récurrence :
+
+#+BEGIN_CENTER
+\(
+P_0(x) = 1 \)
+
+\(
+P_1(x) = x \)
+
+\(
+(n+1) P_{n+1}(x) = (2 n + 1) x P_n(x) - n P_{n-1}(x)
+\)
+#+END_CENTER
+
+
+* Interpolation
+
+Un problème d'interpolation consiste à trouver les coefficients :
+$a_i\in\setR$ tels que la fonction :
+
+$$u = \sum_{i=1}^n a_i u_i$$
+
+où les $u_i$ sont des polynômes de degré $n$, vérifie :
+
+$$\form{\phi_i}{u} = y_i$$
+
+pour tout $i=1,2,...,n$, où les $\phi_i$ sont des formes linéaires de $\mathcal{P}_N^D$
+et les $y_i$ des réels donnés.
+
+On utilise couramment des bases biorthogonales :
+
+$$\form{\phi_i}{u_j} = \delta_{ij}$$
+
+et on a alors simplement :
+
+$$a_i = \form{\phi_i}{u}$$
+
+L'exemple le plus courant est :
+
+#+BEGIN_CENTER
+\(
+\form{\phi_i}{u} = u(x_i) \)
+
+\(
+y_i = f(x_i)
+\)
+#+END_CENTER
+
+pour une certaine fonction $f$ à interpoler. Les conditions ci-dessus
+se résument alors à l'égalité de $f$ et de $u$ en un nombre fini de points :
+
+$$u(x_i) = f(x_i)$$
+
+On rencontre parfois aussi le cas :
+
+#+BEGIN_CENTER
+\(
+\form{\phi_i}{u} = \OD{u}{x}(x_i) \)
+
+\(
+y_i = \OD{f}{x}(x_i)
+\)
+#+END_CENTER
+
+
+** Lagrange
+
+Les polynômes de Lagrange $\Lambda_i$ sont biorthogonaux aux formes :
+
+$$\form{\phi_i}{u} = u(x_i)$$
+
+On a donc :
+
+$$\form{\phi_j}{\Lambda_i} = \Lambda_i(x_j) = \delta_{ij}$$
+
+Le polynôme $\Lambda_i$ doit donc s'annuler en tout les points $x_j$,
+où $j \ne i$. On peut donc le factoriser comme :
+
+$$\Lambda_i(x) = A_i \prod_{j \in E_i} (x-x_j) = A_i P_i(x)$$
+
+où $E_i = \{ 1,2,...,n \} \setminus \{i\}$. Mais comme $\Lambda_i(x_i) = 1$, on a :
+
+$$A_i = \unsur{P_i(x_i)}$$
+
+et :
+
+$$\Lambda_i(x) = \prod_{j \in E_i} \frac{(x-x_j)}{(x_i - x_j)}$$
+
+Donc si on souhaite construire un polynôme :
+
+$$w(x) = \sum_{i=1}^{n} u_i \Lambda_i(x)$$
+
+qui interpole $u$ en les $x_i$ :
+
+$$u(x_i) = w(x_i)$$
+
+pour tout $i = 1,2,...,n$, il faut et il suffit de prendre :
+
+$$u_i = \form{\phi_i}{u} = u(x_i)$$
+
+
+** Newton
+
+L'interpolation de Newton utilise des polynômes construit récursivement à partir
+des polynômes de degré inférieur. Soit $f$ la fonction à interpoler, $p_{i,j}$ le polynôme
+de degré $j-i$ :
+
+$$p_{ij}(x) = \sum_{j=0}^{j-i} a_k x^k$$
+
+tels que :
+
+$$p_{ij}(x_k) = f(x_k)$$
+
+pour tous $k\in\{i,i+1,...,j\}$. On voit que si $i=j$, on a :
+
+$$p_{ii} = f(x_i)$$
+
+Pour $i < j$, on peut construire les $p_{i,j}$ par récurrence. On vérifie
+que :
+
+$$p_{ij}(x) = \frac{(x-x_i)p_{i+1,j}(x)-(x-x_j)p_{i,j-1}(x)}{x_j-x_i}$$
+
+satisfait bien aux conditions d'interpolation ci-dessus.

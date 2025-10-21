@@ -1,0 +1,296 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Formes différentielles
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:formedif}
+
+* Dépendances
+
+  - Chapitre \ref{chap:differ} : Les différentielles
+  - Chapitre \ref{chap:integral} : Les intégrales
+
+* Intégrale d'un tenseur
+
+Soit $(\canonique_1,\canonique_2,...,\canonique_n)$ la bace canonique de $\setR^n$ et la fonction tensorielle $T : A \mapsto \tenseur_m(\setR^n)$ qui, à chaque $x \in A$ associe un tenseur $T(x)$ de la forme :
+
+$$T(x) = \sum_{i,j,...,p} t_{ij...p}(x) \cdot \canonique_i \otimes \canonique_j \otimes ... \otimes \canonique_p$$
+
+L'intégrale de cette fonction est définie par :
+
+$$\int_A T(x) \ d\mu(x) = \sum_{i,j,...,p} I_{ij...p} \cdot \canonique_i \otimes \canonique_j \otimes ... \otimes \canonique_p$$
+
+où chaque coordonnée $I_{ij...p}$ est l'intégrale de la coordonnée correspondante de $T$ :
+
+$$I_{ij...p} = \int_A t_{ij...p}(x) \ d\mu(x)$$
+
+
+* Produit extérieur
+
+Soit $d\mu = dx = dx_1 \ ... \ dx_n$ la mesure de Lebesgue sur $\setR^n$. On sait que $dx$ représente la mesure de l'élément de volume $[x_1,x_1 + dx_1] \times ... \times [x_n,x_n + dx_N]$. Etant donné que nous avons construit le produit extérieur pour représenter (au signe près) des mesures de surfaces et de volumes, il est tout à fait naturel de le faire intervenir dans une mesure de Lebesgue. Soit la base canonique $(e_1,e_2,...,e_n)$ de $\setR^n$ et les vecteurs :
+
+$$\delta_i = dx_i \cdot e_i$$
+
+où les $dx_i$ sont bien évidemment des scalaires. Si nous évaluons le produit extérieur des ces vecteurs, nous obtenons :
+
+$$\delta_1 \wedge \delta_2 \wedge ... \wedge \delta_n = \sum_{i,j,...,k} \permutation_{ij...k} \cdot dx_1 \cdot \delta_{1i} \cdot dx_2 \cdot \delta_{2j} \hdots \cdot dx_n \cdot \delta_{nk}$$
+
+Le seul terme ne s'annulant pas étant $\permutation_{1,2,...,n} = 1$, on a finalement :
+
+$$\delta_1 \wedge \delta_2 \wedge ... \wedge \delta_n = dx_1 \cdot dx_2 \cdot ... \cdot dx_n = dx$$
+
+Cette constatation nous amène à définir une mesure plus générale. Considérons à présent des vecteurs infinitésimaux $\upsilon_1,\upsilon_2,...,\upsilon_n \in \setR^n$, c'est à dire des vecteurs dont la norme tendra vers zéro dans l'intégrale. Afin de garantir la positivité de la mesure, nous définissons :
+
+$$du = \abs{\upsilon_1 \wedge \upsilon_2 \wedge ... \wedge \upsilon_n}$$
+
+
+* Tenseur différentiel
+
+Il est même possible de définir des tenseurs différentiels $dU$ en choisissant $m \le n$ et en posant :
+
+$$dU = \upsilon_1 \wedge \upsilon_2 \wedge ... \wedge \upsilon_m$$
+
+Il est clair que $dU \in \tenseur_{n - m}(\setR^n)$. On nomme ce type de tenseur une forme différentielle.
+
+
+* Paramétrisation
+
+Soit $m,n \in \setN$ avec $m \le n$ et la fonction $\phi : U \subseteq \setR^m \mapsto \setR^n$, dérivable et inversible. Le but est de paramétrer $x$ sur $\phi(U)$ par la relation $x = \phi(u)$ pour tout $u \in U$. Nous utilisons la base canonique $(e_1,e_2,...,e_m)$ de $\setR^m$ et nous posons :
+
+$$\delta_i = \phi(u + du_i \ e_i) - \phi(u) = \partial_i \phi(u) \ du_i$$
+
+Sur $\phi(U)$, on utilise le tenseur différentiel :
+
+$$dX = \delta_1 \wedge \delta_2 \wedge ... \wedge \delta_m$$
+
+La linéarité du produit extérieur nous permet d'ecrire :
+
+\begin{align}
+dX &= \partial_1 \phi(u) \wedge \partial_2 \phi(u) \wedge ... \wedge \partial_m \phi(u) \ du_1 \ du_2 \ ... \ du_m \)
+
+\(
+&= \partial_1 \phi(u) \wedge \partial_2 \phi(u) \wedge ... \wedge \partial_m \phi(u) \ du
+\end{align}
+
+On définit le tenseur $W \in \tenseur_{n - m}(\setR^n)$ associé à $dX$ par :
+
+$$W(u) = \partial_1 \phi(u) \wedge \partial_2 \phi(u) \wedge ... \wedge \partial_m \phi(u)$$
+
+Deux cas peuvent alors se présenter.
+
+
+** Fonction tensorielle
+
+On peut évaluer l'intégrale d'une fonction tensorielle $f : \setR^n \mapsto \tenseur_p(\setR^n)$ en utilisant la contraction maximale avec $dX$. Comme on a l'équivalence $x \in \phi(U) \leftrightarrow u \in U$, on a alors :
+
+$$\int_{\phi(U)} f(x) : dX = \int_U (f\circ\phi)(u) : W(u) \ du$$
+
+Dans le cas particulier où $p = n - m$, on obtiendra un scalaire.
+
+
+** Fonction scalaire
+
+On peut évaluer l'intégrale d'une fonction scalaire $f : \setR^n \mapsto \setR$ en utilisant la norme de $dX$. On a alors $dx = \norme{dX}$ et :
+
+$$\int_{\phi(U)} f(x) dx = \int_U (f\circ\phi)(u) \cdot \norme{W(u)} \ du$$
+
+
+** Pavé
+
+Un cas particulier important est celui où $U = [\alpha_1,\beta_1] \times .. \times [\alpha_m,\beta_m]$ pour certains $\alpha_i,\beta_i \in \setR$. On a alors :
+
+$$\int_{\phi(U)} \sim \int_{\alpha_1}^{\beta_1} du_1 \int_{\alpha_2}^{\beta_2} du_2 \ ... \int_{\alpha_m}^{\beta_m} du_m$$
+
+
+* Changement de variable
+
+Nous considérons à présent le cas où $m = n$. Nous utilisons la base canonique $(e_1,e_2,...,e_n)$ de $\setR^n$ et nous posons de nouveau :
+
+$$\delta_i = \phi(u + du_i \ e_i) - \phi(u) = \partial_i \phi(u) \ du_i$$
+
+On utilise la mesure :
+
+$$dx = \abs{\delta_1 \wedge \delta_2 \wedge ... \wedge \delta_n}$$
+
+On a alors :
+
+\begin{align}
+dx &= \abs{\partial_1 \phi(u) \wedge \partial_2 \phi(u) \wedge ... \wedge \partial_n \phi(u) \ du} \)
+
+\(
+&= \abs{\sum_{i,j,...,k} \permutation_{ij...k} \cdot \partial_1 \phi_i(u) \cdot \partial_2 \phi_j(u) \cdot \ \hdots \ \cdot \partial_n \phi_k(u)} \ du \)
+
+\(
+&= \abs{\det \partial \phi(u)} \ du
+\end{align}
+
+On voit donc apparaître le déterminant de la Jacobienne de $\phi$. Comme on a l'équivalence $x \in A \leftrightarrow u \in \phi^{-1}(A)$, le changement de variable peut s'écrire :
+
+$$\int_A f(x) \ dx = \int_{\phi^{-1}(A)} (f\circ\phi)(u) \cdot \abs{ \det \partial \phi(u) } \ du$$
+
+
+** Pavé
+
+Un cas particulier important est celui où $\phi^{-1}(A) = [\alpha_1,\beta_1] \times .. \times [\alpha_n,\beta_n]$ pour certains $\alpha_i,\beta_i \in \setR$. On a alors :
+
+$$\int_A \sim \int_{\alpha_1}^{\beta_1} du_1 \int_{\alpha_2}^{\beta_2} du_2 \ ... \int_{\alpha_n}^{\beta_n} du_n$$
+
+
+* Intégrales de ligne vectorielles
+
+Soit une fonction continue $\gamma : [a,b] \to \setR^n$ définissant la courbe $\Lambda = \gamma([a,b])$.  L'intégrale de ligne d'une fonction $f : \setR^n \mapsto \setR^n$ sur cette courbe est l'intégrale de la contraction d'ordre $1$ de $f$ avec $d\gamma$, qui revient ici au produit scalaire du vecteur $f(x) \in \Lambda$ par le vecteur $\partial \gamma(t)$. On a donc :
+
+$$\int_\Lambda f\cdot d\Lambda = \int_a^b \scalaire{(f \circ \gamma)(t)}{\partial \gamma(t) } dt$$
+
+
+* Intégrales de ligne scalaires
+
+Dans le cas d'une fonction $g : \setR^n \mapsto \setR$, on utilise comme mesure la longueur $\norme{\partial \gamma(t)}$ de chaque petit segment $d\Lambda$. On a alors :
+
+$$\int_\Lambda g \ d\Lambda = \int_a^b (g \circ \gamma)(t) \cdot \norme{\partial \gamma(t)} \ dt$$
+
+
+* Contour fermé
+
+Si $\gamma(a) = \gamma(b)$, on dit que le contour fermé, et on note en général :
+
+$$\oint_\Lambda = \int_\Lambda$$
+
+
+* Intégrales de surface vectorielles
+
+Soit $f : \setR^n \mapsto \setR^n$, $\sigma : A \subseteq \setR^{n - 1} \mapsto \setR^n$ et la surface $\Theta = \sigma(A)$. On définit les vecteurs :
+
+$$\delta_i = \deriveepartielle{\sigma}{u_i} du_i$$
+
+pour $i = 1, ..., n - 1$. L'intégrale de surface est simplement la contraction d'ordre $1$ :
+
+$$\int_\Theta f \cdot d\Theta = \int_A \scalaire{(f \circ \sigma)(u)}{ \delta_1 \wedge ... \wedge \delta_{n-1} }$$
+
+qui nous donne un scalaire. Dans le cas particulier où $n = 3$ et où $A = [U_1,U_2] \times [V_1,V_2]$, on a :
+
+$$\int_\Theta f \cdot d\Theta = \int_{U_1}^{U_2} du \ \int_{V_1}^{V_2} (f \circ \sigma)(u,v) \cdot \left( \deriveepartielle{\sigma}{u}(u,v) \wedge \deriveepartielle{\sigma}{v}(u,v) \right) \ dv$$
+
+
+* Intégrales de surface scalaires
+
+Soit $f : \setR^n \mapsto \setR^n$, $\sigma : A \subseteq \setR^{n - 1} \mapsto \setR^n$ et la surface $\Theta = \sigma(A)$. On définit les vecteurs :
+
+$$\delta_i = \deriveepartielle{\sigma}{u_i} du_i$$
+
+pour $i = 1, ..., n - 1$. Utilisant comme mesure la norme du produit extérieur des $\delta_i$, on obtient :
+
+$$\int_\Theta f \ d\Theta = \int_A (f \circ \sigma)(u) \cdot \norme{ \delta_1 \wedge ... \wedge \delta_{n-1} }$$
+
+Dans le cas particulier où $n = 3$ et où $A = [U_1,U_2] \times [V_1,V_2]$, on a :
+
+$$\int_\Theta f \ d\Theta = \int_{U_1}^{U_2} du \ \int_{V_1}^{V_2} (f \circ \sigma)(u,v) \cdot \norme{ \deriveepartielle{\sigma}{u}(u,v) \wedge \deriveepartielle{\sigma}{v}(u,v) } \ dv$$
+
+
+* Intégrale de flux
+
+Soit $A \subseteq \setR^n$ et la fonction $a : \setR^n \to \setR$ telle que :
+
+$$A = \{ x \in \setR^n : a(x) \le 0 \}$$
+
+On s'arrange de plus pour avoir $a$ constante sur la frontière :
+
+$$\partial A = \{ x \in \setR^n : a(x) = 0 \}$$
+
+On introduit le vecteur normal :
+
+$$n = \unsur{\norme{\deriveepartielle{a}{x}}} \cdot \deriveepartielle{a}{x}$$
+
+L'intégrale du flux sortant de la fonction $f : \setR^n \to \setR^n$ est alors donnée par :
+
+$$\int_{\partial A} \scalaire{f}{n} \ d\mu$$
+
+
+* Différentielle
+
+Soit une fonction $f : \setR^n \mapsto \setR$, les vecteurs infinitésimaux $\delta_1,...,\delta_{n - 1} \in \setR^n$ et la forme différentielle :
+
+$$\omega = f \cdot \delta_1 \wedge \delta_2 \wedge ... \wedge \delta_{n-1}$$
+
+Si $f$ est différentiable, on définit la différentielle de $\omega$ par :
+
+$$d\omega = \sum_i \deriveepartielle{f}{x_i} \cdot \kappa_i \wedge \delta_1 \wedge \delta_2 \wedge ... \wedge \delta_{n-1}$$
+
+où :
+
+$$\kappa_i = dx_i \cdot e_i$$
+
+On note aussi symboliquement :
+
+$$d\omega = df \wedge dx_1 \wedge ... \wedge dx_{n-1}$$
+
+On peut montrer sous certaines conditions que l'intégrale
+sur la frontière de $A$ est alors donnée par :
+
+$$\int_{\partial A} \omega = \int_A d\omega$$
+
+
+* Théorème de Stokes
+
+Soit $f,g : \setR^2 \mapsto \setR$ et les vecteurs infinitésimaux :
+
+#+BEGIN_CENTER
+\(
+\delta x = e_1 \ dx \)
+
+\(
+\delta y = e_2 \ dy
+\)
+#+END_CENTER
+
+Considérons la forme différentielle :
+
+$$\omega = f \delta x + g \delta y$$
+
+Si les fonctions sont différentiables, on a alors :
+
+$$d\omega = \deriveepartielle{f}{x} \delta x \wedge \delta x +  \deriveepartielle{f}{y} \delta y \wedge \delta x + \deriveepartielle{g}{x} \delta x \wedge \delta y +  \deriveepartielle{g}{y} \delta y \wedge \delta y$$
+
+Mais comme :
+
+#+BEGIN_CENTER
+\(
+\delta x \wedge \delta x = \delta y \wedge \delta y = 0 \)
+
+\(
+\delta y \wedge \delta x = - \delta x \wedge \delta y
+\)
+#+END_CENTER
+
+il vient :
+
+$$d\omega =  \left( \deriveepartielle{g}{x} - \deriveepartielle{f}{y} \right) \delta x \wedge \delta y$$
+
+En intégrant, on obtient alors :
+
+$$\int_{\partial A} (f \ \delta x + g \ \delta y)  = \int_A \left( \deriveepartielle{g}{x} - \deriveepartielle{f}{y} \right) dx \wedge dy$$
+
+Mais comme nous somme dans la base canonique, on a $\delta x \wedge \delta y = dx \ dy$ et :
+
+$$\int_{\partial A} (f \ \delta x + g \ \delta y)  = \int_A \left( \deriveepartielle{g}{x} - \deriveepartielle{f}{y} \right) \ dx \ dy$$
+
+

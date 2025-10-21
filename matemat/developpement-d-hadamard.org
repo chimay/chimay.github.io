@@ -1,0 +1,231 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Développements d’Hadamard
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:fonda}
+
+* Dépendances
+
+  - Chapitre \ref{chap:differ} : Les différentielles
+  - Chapitre \ref{chap:integral} : Les intégrales
+
+
+* Lemme de Hadamard
+
+Soit la fonction $f : \setR^m \to \setR^n$ et les vecteurs $u,v \in \setR^m$. On définit la fonction $\lambda : [0,1] \mapsto \setR^m$ associée au segment $[u,v] \subseteq \setR^m$ par :
+
+$$\lambda(s) = u + s \cdot (v - u)$$
+
+pour tout $s \in [0,1]$. On a bien entendu $\lambda(0) = u$ et $\lambda(1) = v$. On définit également la fonction $\varphi = f \circ \lambda$ qui vérifie :
+
+$$\varphi(s) = (f \circ \lambda)(s) = f(u + s \cdot (v - u))$$
+
+pour tout $t \in [0,1]$. On voit que $\varphi(0) = f(u)$ et $\varphi(1) = f(v)$. Donc, en termes de composantes dans $\setR^n$, on a :
+
+$$f_i(v) - f_i(u) = \varphi_i(1) - \varphi_i(0) = \int_0^1 \OD{\varphi_i}{s}(s) \ ds$$
+
+où $i \in \{1,2,...,n\}$.
+
+Voyons quelle est la forme de la dérivée :
+
+\begin{align}
+\OD{\varphi_i}{s}(s) &= \sum_j \partial_j f_i(u + s \cdot (v - u)) \cdot \partial \lambda_j(s) \)
+
+\(
+&= \sum_j \partial_j f_i(u + s \cdot (v - u)) \cdot (v_j - u_j)
+\end{align}
+
+où $j \in \{1,2,...,m\}$. Si nous définissons :
+
+$$G_{ij}(u,v) = \int_0^1 \partial_j f_i(u + s \cdot (v - u)) \ ds$$
+
+nous obtenons alors l'expression de la variation :
+
+$$f_i(v) - f_i(u) = \sum_j G_{ij}(u,v) \cdot (v_j - u_j)$$
+
+En termes matriciels :
+
+$$G(u,v) = \big[G_{ij}(u,v)\big]_{i,j} = \left[ \int_0^1 \partial_j f_i(u + s \cdot (v - u)) \ ds \right]_{i,j}
+
+est donc l'intégrale de la Jacobienne :
+
+$$G(u,v) = \int_0^1 \partial f(u + s \cdot (v - u)) \ ds$$
+
+et :
+
+$$f(v) - f(u) = G(u,v) \cdot (v - u)$$
+
+
+* Développement du second ordre
+
+Soit la fonction $f \in \continue^2(\setR^n,\setR)$ et les vecteurs $a,h \in \setR^n$. On définit la fonction $\lambda : [0,1] \mapsto \setR^n$ associée au segment $[a, a + h]$ :
+
+$$\lambda(s) = a + s \cdot h$$
+
+pour tout $s \in [0,1]$. Le lemme de Hadamard nous dit que :
+
+$$f(a + h) - f(a) = \int_0^1 \partial f(a + s \cdot h) \cdot h \ ds$$
+
+Par définition de la dérivée seconde, on a :
+
+$$\partial_i f(a + s \cdot h) = \partial_i f(a) + \sum_j \partial_{ji}^2 f(a) \cdot h_j \cdot s + e_i(s \cdot h)$$
+
+où l'erreur $e$ vérifie :
+
+$$\lim_{h \to 0} \frac{ \norme{e(h)} }{ \norme{h} } = 0$$
+
+L'intégrale s'écrit alors :
+
+$$f(a + h) - f(a) = \sum_i \int_0^1 \left[ \partial_i f(a) + \sum_j \partial_{ji}^2 f(a) \cdot h_j \cdot s + e_i(s \cdot h) \right]  \cdot h_i \ ds$$
+
+La grandeur $\partial_i f(a) \cdot h_i$ ne dépendant pas de $s$, on a :
+
+$$\int_0^1 \partial_i f(a) \cdot h_i \ ds = \partial_i f(a) \cdot h_i \cdot (1 - 0) = \partial_i f(a) \cdot h_i$$
+
+D'un autre coté, comme $s^2/2$ est une primitive de $s$, on a :
+
+$$\int_0^1 s \ ds = \unsur{2} \cdot (1^2 - 0^2) = \unsur{2}$$
+
+et donc :
+
+$$\int_0^1 \partial_{ji}^2 f(a) \cdot h_j \cdot h_i \cdot s \ ds = \unsur{2} \partial_{ji}^2 f(a) \cdot h_j \cdot h_i$$
+
+Posons :
+
+$$\mathcal{E}_2(h) = \sum_i \int_0^1 e_i(s \cdot h) \cdot h_i \ ds$$
+
+On a alors :
+
+$$f(a + h) - f(a) = \sum_i \partial_i f(a) \cdot h_i + \unsur{2} \sum_{i,j} h_j \cdot \partial_{ji}^2 f(a) \cdot h_i + \mathcal{E}_2(h)$$
+
+En termes matriciels, cette expression fait intervenir la Jacobienne et la Hessienne :
+
+$$f(a + h) - f(a) = \partial f(a) \cdot h + \unsur{2} \ h^\dual \cdot \partial^2 f(a) \cdot h + \mathcal{E}_2(h)$$
+
+
+** Comportement de l'erreur
+
+Nous savons que, pour toute précision $\epsilon \strictsuperieur 0$, nous pouvons trouver un $\delta \strictsuperieur 0$ tel que :
+
+$$\frac{\norme{e(h)}}{\norme{h}} \le \epsilon$$
+
+pour tout $h$ vérifiant $\norme{h} \le \delta$. Comme $\abs{e_i} \le \norme{e}$ et $\abs{h_i} \le \norme{h}$, on a alors :
+
+\begin{align}
+\abs{\mathcal{E}_2(h)} &\le \sum_i \abs{\int_0^1 e_i(s \cdot h) \cdot h_i \ ds} \)
+
+\(
+&\le n \cdot \epsilon \cdot \norme{h}^2
+\end{align}
+
+L'erreur décroît donc plus vite que $\norme{h}^2$ :
+
+$$\lim_{h \to 0} \frac{ \abs{\mathcal{E}_2(h)} }{ \norme{h}^2 } = 0$$
+
+
+** Dérivées ordinaires
+
+Lorsque $n = 1$, le développement est simplement :
+
+$$f(a + h) = f(a) + \OD{f}{x}(a) \cdot h + \OOD{f}{x}(a) \cdot \frac{h^2}{2} + \mathcal{E}_2(h)$$
+
+On constate qu'il est analogue au développement de Taylor d'ordre deux autour de $a$.
+
+
+* Développement du troisième ordre
+
+Soit la fonction $f \in \continue^3(\setR^n,\setR)$ et les vecteurs $a,h \in \setR^n$. En évaluant le développement du second ordre de chaque $\partial_i f$, on a :
+
+$$\partial_i f(a + s \cdot h) = \partial_i f(a) + \sum_j \partial_{ji} f(a) \cdot h_j \cdot s + \sum_{j,k} h_k \cdot \partial_{kji}^3 f(a) \cdot h_j \cdot \frac{s^2}{2} + e_i(h)$$
+
+où $e \sim \petito{h^2}$. En intégrant, nous obtenons une estimation de la variation de $f$ :
+
+$$f(a + h) - f(a) = \sum_i \int_0^1 \partial_i f(a + s \cdot h) \cdot h_i \ ds$$
+
+Posons :
+
+\begin{align}
+I_1(h) &= \sum_i \int_0^1 \partial_i f(a) \cdot h_i \ ds \)
+
+\(
+I_2(h) &= \sum_{i,j} \int_0^1 h_j \cdot \partial_{ji} f(a) \cdot h_i \cdot s \ ds \)
+
+\(
+I_3(h) &= \unsur{2} \sum_{i,j,k} \int_0^1 h_k \cdot \partial_{kji}^3 f(a) \cdot h_j \cdot h_i \cdot s^2 \ ds \)
+
+\(
+\mathcal{E}_3(h) &= \sum_i \int_0^1 e_i(h) \cdot h_i \ ds
+\end{align}
+
+Comme $s^3/3$ est une primitive de $s^2$, on a :
+
+$$\int_0^1 s^2 \ ds = \unsur{3} \cdot (1^3 - 0^3) = \unsur{3}$$
+
+Les intégrales s'écrivent donc :
+
+\begin{align}
+I_1(h) &= \sum_i \partial_i f(a) \cdot h_i \)
+
+\(
+I_2(h) &= \unsur{2} \sum_{i,j} h_i \cdot \partial_{ji} f(a) \cdot h_j \)
+
+\(
+I_3(h) &= \unsur{6} \sum_{i,j,k} \partial_{kji}^3 f(a) \cdot h_i \cdot h_j \cdot h_k
+\end{align}
+
+et la variation de $f$ est donnée par :
+
+$$f(a + h) - f(a) = I_1(h) + I_2(h) + I_3(h) + \mathcal{E}_3(h)$$
+
+En terme de notations tensorielles, on peut l'écrire symboliquement :
+
+$$f(a + h) - f(a) = \partial f(a) \cdot h + \unsur{2} h^\dual \cdot \partial^2 f(a) \cdot h + \unsur{6} \contraction{\partial^3 f(a)}{3}{h \otimes h \otimes h}$$
+
+
+** Comportement de l'erreur
+
+Nous savons que, pour toute précision $\epsilon \strictsuperieur 0$, nous pouvons trouver un $\delta \strictsuperieur 0$ tel que :
+
+$$\frac{\norme{e(h)}}{\norme{h}^2} \le \epsilon$$
+
+pour tout $h$ vérifiant $\norme{h} \le \delta$. Comme $\abs{e_i(h)} \le \norme{e(h)}$ et $\abs{h_i} \le \norme{h}$, on a :
+
+\begin{align}
+\abs{\mathcal{E}_3(h)} &\le \sum_i \abs{\int_0^1 e_i(h) \cdot h_i \ ds} \)
+
+\(
+&\le n \cdot \epsilon \cdot \norme{h}^3
+\end{align}
+
+L'erreur $\abs{\mathcal{E}_3(h)}$ est donc en $\petito{h^3}$.
+
+
+** Dérivées ordinaires
+
+Lorsque $n = 1$, le développement est simplement :
+
+$$f(a + h) = f(a) + \OD{f}{x}(a) \cdot h + \OOD{f}{x}(a) \cdot \frac{h^2}{2} + \NOD{f}{x}{3} \cdot \frac{h^3}{6} + \mathcal{E}_3(h)$$
+
+On constate qu'il est analogue au développement de Taylor d'ordre trois autour de $a$.
+
+

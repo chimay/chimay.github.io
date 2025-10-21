@@ -1,0 +1,275 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Symétrie
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+* Introduction
+
+#+TOC: headlines 1 local
+
+Soit la fonction $f \in \continue^2(\setR^2,\setR)$. Posons $\partial_x = \partial_1$ et $\partial_y = \partial_2$. Nous allons tenter d'évaluer les dérivées secondes $\partial_{xy} = \partial_{12}$ et $\partial_{yx} = \partial_{21}$. On note :
+
+\begin{align}
+\varphi_{11} &= \varphi(x,y) \)
+
+\(
+\varphi_{21} &= \varphi(x + h, y) \)
+
+\(
+\varphi_{12} &= \varphi(x, y + h) \)
+
+\(
+\varphi_{22} &= \varphi(x + h, y + h)
+\end{align}
+
+où $\varphi = f$ ou une de ses dérivées. Comme $\partial_{xy} = \partial_x \partial_y$ et $\partial_{yx} = \partial_y \partial_x$, on a par définition :
+
+#+BEGIN_CENTER
+\(
+\Delta_{xy} = \partial_y f_{21} - \partial_y f_{11} = \partial_{xy} f_{11} \cdot h + o(h) \)
+
+\(
+\Delta_{yx} = \partial_x f_{12} - \partial_x f_{11} = \partial_{yx} f_{11} \cdot h + o(h)
+\)
+#+END_CENTER
+
+Multiplié par $h$, cela devient :
+
+#+BEGIN_CENTER
+\(
+\Delta_{xy} \cdot h = \partial_{xy} f_{11} \cdot h^2 + o(h^2) \)
+
+\(
+\Delta_{yx} \cdot h = \partial_{yx} f_{11} \cdot h^2 + o(h^2)
+\)
+#+END_CENTER
+
+On dispose également des développements d'ordre deux :
+
+#+BEGIN_CENTER
+\(
+f_{22} - f_{21} = \partial_y f_{21} \cdot h + \partial_{yy} f_{21} \cdot \frac{h^2}{2} + o(h^2) \)
+
+\(
+f_{12} - f_{11} = \partial_y f_{11} \cdot h + \partial_{yy} f_{11} \cdot \frac{h^2}{2} + o(h^2) \)
+
+\(
+f_{22} - f_{12} = \partial_x f_{12} \cdot h + \partial_{xx} f_{12} \cdot \frac{h^2}{2} + o(h^2) \)
+
+\(
+f_{12} - f_{11} = \partial_x f_{11} \cdot h + \partial_{xx} f_{11} \cdot \frac{h^2}{2} + o(h^2)
+\)
+#+END_CENTER
+
+On en conclut que :
+
+#+BEGIN_CENTER
+\(
+\Delta_{xy} \cdot h = D + \Delta_{yy} + o(h^2) \)
+
+\(
+\Delta_{yx} \cdot h = D + \Delta_{xx} + o(h^2)
+\)
+#+END_CENTER
+
+où l'on a posé :
+
+#+BEGIN_CENTER
+\(
+D = f_{22} - f_{21} - f_{12} + f_{11} \)
+
+\(
+\Delta_{yy} = (\partial_{yy} f_{11} - \partial_{yy} f_{21}) \cdot h^2 \)
+
+\(
+\Delta_{xx} = (\partial_{xx} f_{11} -  \partial_{xx} f_{12}) \cdot h^2
+\)
+#+END_CENTER
+
+Par continuité de $\partial_{xx} f$ et de $\partial_{yy} f$, on a :
+
+#+BEGIN_CENTER
+\(
+\lim_{h \to 0} \frac{\Delta_{yy}}{h^2} = \lim_{h \to 0} (\partial_{yy} f_{11} - \partial_{yy} f_{21}) = 0 \)
+
+\(
+\lim_{h \to 0} \frac{\Delta_{xx}}{h^2} = \lim_{h \to 0} (\partial_{xx} f_{11} -  \partial_{xx} f_{12}) = 0
+\)
+#+END_CENTER
+
+On en conclut que $\Delta_{xx}, \Delta_{yy} \sim o(h^2)$. Comme la somme de deux erreurs en $o(h^2)$ donne également une erreur en $o(h^2)$, on a :
+
+#+BEGIN_CENTER
+\(
+\Delta_{xy} \cdot h = D + o(h^2) + o(h^2) = D + o(h^2) \)
+
+\(
+\Delta_{yx} \cdot h = D + o(h^2) + o(h^2) = D + o(h^2)
+\)
+#+END_CENTER
+
+et :
+
+#+BEGIN_CENTER
+\(
+\partial_{xy} f_{11} \cdot h^2 = D + o(h^2) \)
+
+\(
+\partial_{yx} f_{11} \cdot h^2 = D + o(h^2)
+\)
+#+END_CENTER
+
+On en conclut que la différence $\partial_{xy} f_{11} - \partial_{yx} f_{11} \sim o(1)$ tend vers $0$ avec $h$, ce qui n'est possible que si :
+
+$$\partial_{xy} f_{11} = \partial_{yx} f_{11}$$
+
+Nous avons donc prouvé que :
+
+$$\partial_{xy} f(x,y) = \partial_{yx} f(x,y)$$
+
+
+** Généralisation
+
+On peut bien entendu généraliser à une fonction $f \in \continue^2(\setR^n,\setR)$. On a alors :
+
+$$\partial_{ij} f = \partial_{ji} f$$
+
+où $i,j \in \{1,2,...,n\}$. Si $H = \partial^2 f$, on écrit aussi ce résultat sous la forme :
+
+$$H^\dual = H$$
+
+
+* Dérivation par rapport à un paramètre
+
+Nous allons a présent examiner ce qu'il se passe lorsque les bornes de l'intervalle d'intégration ($a,b : \setR \mapsto \setR$) et la fonction à intégrer ($f : \setR \times \setR \mapsto \setR$) varient par rapport à un paramètre. Soit la fonction $I : \setR \mapsto \setR$ définie par :
+
+$$I(t) = \int_{a(t)}^{b(t)} f(s,t) \ ds$$
+
+Pour une valeur donnée de $t$, posons :
+
+$$\phi_t(s) = f(s,t)$$
+
+L'intégrale de $\phi_t$ peut s'évaluer si nous connaissons une primitive $\psi_t$ telle que :
+
+$$\OD{\psi_t}{s}(s) = \phi_t(s)$$
+
+Mais cette expression consiste à évaluer la variation de $\psi$ lorsque $s$ varie, $t$ étant fixé. Cela revient donc à une dérivée partielle par rapport à $s$. Donc, si nous connaissons une fonction $F$ telle que :
+
+$$\deriveepartielle{F}{s}(s,t) = f(s,t)$$
+
+nous pouvons réécrire l'intégrale :
+
+$$\int_{a(t)}^{b(t)} f(s,t) \ ds = F(b(t),t) - F(a(t),t)$$
+
+Il ne nous reste plus alors qu'à évaluer la dérivée de $I$ par rapport à $t$ en utilisant la règle des compositions de fonctions :
+
+$$\OD{I}{t}(t) = \deriveepartielle{F}{s}(b(t),t) \cdot \OD{b}{t}(t) + \deriveepartielle{F}{t}(b(t),t) - \deriveepartielle{F}{s}(a(t),t) \cdot \OD{b}{t}(t) - \deriveepartielle{F}{t}(a(t),t)$$
+
+Si $F \in \continue^2(\setR^2,\setR)$, la symétrie des dérivées secondes nous permet d'écrire :
+
+$$\deriveepartielle{F}{t} = \deriveepartielle{}{t} \left[ \deriveepartielle{f}{s} \right] = \deriveepartielle{}{s} \left[ \deriveepartielle{f}{t} \right]$$
+
+La dérivée partielle de $F$ par rapport à $t$ est donc une primitive de la dérivée partielle de $f$ par rapport à $t$. On en déduit que :
+
+$$\int_\alpha^\beta \deriveepartielle{f}{t}(s,t) \ ds = \deriveepartielle{F}{t}(\beta,t) - \deriveepartielle{F}{t}(\alpha,t)$$
+
+pour tout $\alpha,\beta \in \setR$. Pour un $t$ fixé quelconque, on peut poser $\alpha = a(t)$ et $\beta = b(t)$. Il vient alors :
+
+$$\OD{I}{t}(t) = \deriveepartielle{F}{s}(b(t),t) \cdot \OD{b}{t}(t) - \deriveepartielle{F}{s}(a(t),t) \cdot \OD{b}{t}(t) + \int_{a(t)}^{b(t)} \deriveepartielle{f}{t}(s,t) \ ds$$
+
+
+* Différences finies
+
+Soit une fonction $f : \setR^2 \mapsto \setR^m$ deux fois continument dérivable. Nous allons voir comment évaluer des approximations des dérivées premières et secondes de $f$. On note $\partial_x = \partial_1$ et $\partial_y = \partial_2$. On choisit les réels $x,y$ et la variation non nulle $h \in \setR$.
+
+
+** Dérivées premières
+
+Soustrayons les développements d'ordre deux :
+
+#+BEGIN_CENTER
+\(
+f(x + h,y) \approx f(x,y) + h \cdot \partial_x f(x,y) + \frac{h^2}{2} \cdot \partial^2 f(x,y) \)
+
+\(
+f(x - h,y) \approx f(x,y) - h \cdot \partial_x f(x,y) + \frac{h^2}{2} \cdot \partial^2 f(x,y)
+\)
+#+END_CENTER
+
+On obtient :
+
+$$f(x + h,y) - f(x - h,y) \approx 2 h \cdot \partial_x f(x,y)$$
+
+et donc :
+
+$$\partial_x f(x,y) \approx \frac{f(x + h, y) - f(x - h, y)}{2 h}$$
+
+L'erreur est en $o(h) = o(h^2)/h$. En procédant de même avec $y$, on obtient :
+
+$$\partial_y f(x,y) \approx \frac{f(x, y + h) - f(x, y - h)}{2 h}$$
+
+
+** Dérivées secondes
+
+On additionne cette fois les mêmes développements et on obtient :
+
+$$f(x + h,y) + f(x - h,y) \approx 2 f(x,y) + \frac{h^2}{2} \cdot \partial^2 f(x,y) + o(h^2)$$
+
+et donc :
+
+$$\partial_{xx}^2 f(x,y) \approx \frac{f(x + h, y) - 2 f(x,y) + f(x - h, y)}{h^2}$$
+
+L'erreur est en $o(1) = o(h^2)/h^2$, et donc aussi petite que l'on veut pourvu que $h \ne 0$ soit suffisamment petit. En procédant de même avec $y$, on obtient :
+
+$$\partial_{yy}^2 f(x,y) \approx \frac{f(x, y + h) - 2 f(x,y) + f(x, y - h)}{h^2}$$
+
+On vérifie également en évaluant les développements en $(x \pm h, y \pm h)$ que :
+
+$$\partial_{xy}^2 f(x,y) \approx \frac{f(x + h, y + h) - f(x + h, y - h) - f(x - h, y + h) + f(x - h, y - h)}{h^2}$$
+
+La dernière dérivée seconde s'évalue approximativement par $\partial_{yx}^2 f(x,y) = \partial_{xy}^2 f(x,y)$.
+
+
+** Généralisation
+
+Nous allons voir comment généraliser ces résultats aux dérivées $\partial_{ij}$ d'une fonction $F : \setR^n \mapsto \setR^m$. Soit $u \in \setR^n$ et les vecteurs de la base canonique $\canonique_i \in \setR^n$. On définit les fonctions $f_{ij} : \setR^n \mapsto \setR^m$ par :
+
+$$f_{ij}(x,y) = F(u + x \cdot \canonique_i + y \cdot \canonique_j)$$
+
+On a clairement :
+
+\begin{align}
+\partial_i F(u) &= \partial_x f_{ij}(0,0) \)
+
+\(
+\partial_{ii} F(u) &= \partial_{xx} f_{ij}(0,0) \)
+
+\(
+\partial_{ij} F(u) &= \partial_{xy} f_{ij}(0,0) \)
+
+\(
+\partial_{jj} F(u) &= \partial_{yy} f_{ij}(0,0)
+\end{align}
+
+Il suffit donc d'utiliser les méthodes d'approximations des dérivées de $f_{ij}$ pour approximer les dérivées de $F$.
+
+

@@ -1,0 +1,308 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Théorème de Rolle
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:intediff}
+
+* Dépendances
+
+  - Chapitre \ref{chap:differ} : Les différentielles
+  - Chapitre \ref{chap:integral} : Les intégrales
+
+* Extrema locaux
+
+Soit $f : A \mapsto \setR$ avec $A \subseteq \setR^n$. Supposons que $f$ soit différentiable et atteigne un minimum local en $a \in \interieur A$. On a :
+
+#+BEGIN_CENTER
+\(
+f(a + h) - f(a) = \differentielle{f}{a}(h) + E(h) \)
+
+\(
+f(a - h) - f(a) = - \differentielle{f}{a}(h) + E(-h)
+\)
+#+END_CENTER
+
+Fixons $\epsilon \strictsuperieur 0$. On peut trouver $\delta_1 \strictsuperieur 0$ tel que :
+
+$$\abs{E(h)} \le \epsilon \cdot \abs{h}$$
+
+pour tout $h \in \boule(0,\delta_1)$. On peut aussi trouver $\delta_2 \strictsuperieur 0$ tel que :
+
+$$f(a) \le f(a + h)$$
+
+pour tout $h \in \boule(0,\delta_2)$. Posons $\delta = \min \{ \delta_1,\delta_2 \}$ et choisissons $h \in \boule(0,\delta)$. On a également $-h \in \boule(0,\delta)$. Donc :
+
+#+BEGIN_CENTER
+\(
+\differentielle{f}{a}(h) = f(a + h) - f(a) - E(h) \ge - E(h) \ge - \epsilon \cdot \norme{-h} \)
+
+\(
+\differentielle{f}{a}(h) = f(a) - f(a - h) + E(-h) \le E(-h) \le \epsilon \cdot \norme{h}
+\)
+#+END_CENTER
+
+On en conclut que :
+
+$$\abs{\differentielle{f}{a}(h)} \le \epsilon \cdot \norme{h}$$
+
+Posons $\gamma = \delta / 2$ et remarquons que l'ensemble de norme fixe $N = \{ h \in \setR^n : \norme{h} = \gamma \}$ est inclus dans $\boule(0,\delta)$. Les propriétés des applications linéaires nous disent que :
+
+$$\norme{\differentielle{f}{a}} = \sup \left\{ \unsur{\gamma} \norme{\differentielle{f}{a}(h)} : h \in N \right\}$$
+
+Or, la borne nous dit que :
+
+$$\unsur{\gamma} \abs{\differentielle{f}{a}(h)} \le \epsilon$$
+
+quel que soit $\epsilon \strictsuperieur 0$ et $h \in N$. Donc :
+
+$$\norme{\differentielle{f}{a}} = 0$$
+
+ce qui implique que :
+
+$$\differentielle{f}{a} = 0$$
+
+La différentielle s'annule donc en un minimum local. On montre de la même manière que la différentielle s'annule en un maximum local.
+
+
+** La Jacobienne
+
+La Jacobienne étant la représentation matricielle de la différentielle, elle s'annule également aux extrema locaux.
+
+
+* Théorème de Rolle
+
+Soit $f \in \continue^1([a,b],\setR)$ avec $f(a) = f(b)$. Comme $f$ est continue, il existe $\lambda,\sigma \in [a,b]$ tels que :
+
+#+BEGIN_CENTER
+\(
+f(\lambda) = \min f([a,b]) \)
+
+\(
+f(\sigma) = \max f([a,b])
+\)
+#+END_CENTER
+
+
+** Configurations
+
+Plusieurs cas peuvent se présenter :
+
+
+  - $\lambda \strictinferieur f(a) = f(b) \strictinferieur \sigma$ : dans ce cas, la fonction atteint ses deux bornes à l'intérieur de l'intervalle :
+
+$$\{\lambda,\sigma\} \subseteq \intervalleouvert{a}{b}$$
+
+Comme les extrema sont aussi des extrema locaux, on a :
+
+$$\partial f(\lambda) = \partial f(\sigma) = 0$$
+
+  - $\lambda \strictinferieur f(a) = f(b) = \sigma$ : dans ce cas, la fonction atteint son minimum à l'intérieur de l'intervalle :
+
+$$\lambda \in \intervalleouvert{a}{b}$$
+
+et on a :
+
+$$\partial f(\lambda) = 0$$
+
+  - $\lambda = f(a) = f(b) \strictinferieur \sigma$ : dans ce cas, la fonction atteint son maximum à l'intérieur de l'intervalle :
+
+$$\sigma \in \intervalleouvert{a}{b}$$
+
+et on a :
+
+$$\partial f(\sigma) = 0$$
+
+  - $\lambda = f(a) = f(b) = \sigma$ : dans ce cas, on a :
+
+$$\lambda \le f(x) \le \sigma = \lambda$$
+
+pour tout $x \in [a,b]$, et donc :
+
+$$f(x) = \lambda$$
+
+La fonction $f$ est constante et $\partial f = 0$. On peut donc prendre n'importe quel $c \in \intervalleouvert{a}{b}$, on aura :
+
+$$\partial f(c) = 0$$
+
+
+
+** Conclusion
+
+Dans tous les cas, on a au moins un $c \in \intervalleouvert{a}{b}$ tel que :
+
+$$\partial f(c) = 0$$
+
+
+* Théorème des accroissements finis
+
+Soit $f \in \continue^1([a,b],\setR)$ et la fonction $g$ associée définie par :
+
+$$g(x) = f(x) - \frac{f(b) - f(a)}{b - a} \cdot (x - a)$$
+
+pour tout $x \in [a,b]$. Comme $g(a) = g(b) = f(a)$, on peut trouver un $c \in \intervalleouvert{a}{b}$ tel que :
+
+$$0 = \partial g(c) = \partial f(c) - \frac{f(b) - f(a)}{b - a}$$
+
+On a donc :
+
+$$\partial f(c) = \frac{f(b)-f(a)}{b-a}$$
+
+On vient ainsi de démontrer le théorème des accroissements finis.
+
+
+** Dimension $n$
+
+On peut généraliser ce théorème à une fonction $f \in \continue^1(\setR^m,\setR^n)$. Soit $u,v \in \setR^m$. On considére le segment $[u,v]$ et la fonction associée $\phi : [0,1] \mapsto \setR^m$ définie par :
+
+$$\phi(t) = u + t \cdot (v - u)$$
+
+pour tout $t \in [0,1]$. On pose alors :
+
+$$g(t) = (f \circ \phi)(t) = f( u + t \cdot (v - u))$$
+
+pour tout $t \in [0,1]$. En appliquant le résultat précédent aux composantes $g_i$ sur l'intervalle $[0,1]$, on obtient un $s \in \intervalleouvert{0}{1}$ tel que :
+
+$$\partial g_i(s) = \frac{g_i(1) - g_i(0)}{1 - 0} = g_i(1) - g_i(0) = f_i(v) - f_i(u)$$
+
+En appliquant la formule permettant d'évaluer la dérivée d'une composition de fonctions, on obtient :
+
+$$\partial g_i(s) = \sum_j \partial_j f_i(u + s \cdot (v - u)) \cdot (v_j - u_j)$$
+
+Utilisant la notation matricielle, on a donc :
+
+$$f(v) - f(u) = \partial f(u + s \cdot (v - u)) \cdot (v - u)$$
+
+Ce qui revient à dire qu'il existe un $w \in [u,v] \subseteq \setR^n$ tel que :
+
+$$f(v) - f(u) = \partial f(w) \cdot (v - u)$$
+
+
+* Théorème de Cauchy
+
+Le théorème des accroissements finis nous donne un résultat sous la forme
+symbolique :
+
+$$\OD{f}{x} = \frac{\difference f}{\difference x}$$
+
+Nous allons maintenant généraliser ce théorème, et obtenir le résultat :
+
+$$\frac{df}{dg} = \frac{\difference f}{\difference g}$$
+
+où $f,g \in \continue^1([a,b],\setR)$ et $a,b \in \setR$. Considérons à cette fin la
+fonction $h$ définie par :
+
+$$h(x) = [f(b) - f(a)] \cdot g(x) - f(x) \cdot [ g(b) - g(a) ]$$
+
+On remarque que :
+
+\begin{align}
+h(a) &= f(b) \cdot g(a) - f(a) \cdot g(a) -  f(a)\cdot g(b) +  f(a)\cdot g(a) \)
+
+\(
+&= f(b) \cdot g(a) - f(a) \cdot g(b) \\ \)
+
+\(
+h(b) &= f(b) \cdot g(b) - f(a) \cdot g(b) -  f(b)\cdot g(b) +  f(b)\cdot g(a) \)
+
+\(
+&= f(b) \cdot g(a) - f(a) \cdot g(b)
+\end{align}
+
+Donc :
+
+$$h(a) = h(b)$$
+
+Appliquant le théorème de Rolle à $h$, on peut donc trouver un $c \in \intervalleouvert{a}{b}$ tel que :
+
+$$0 = \partial h(c) = [f(b) - f(a)] \cdot \partial g(c) - \partial f(c) \cdot [ g(b) - g(a) ]$$
+
+On a donc :
+
+$$\left[ f(b) - f(a) \right] \cdot \partial g(c) = \partial f(c) \cdot \left[ g(b) - g(a) \right]$$
+
+Si $\partial f(c) \ne 0$ et $f(b) \ne f(a)$, on peut le mettre sous la forme :
+
+$$\frac{\partial g(c)}{\partial f(c)} = \frac{g(b) - g(a)}{f(b) - f(a)}$$
+
+
+* Théorème de l'Hospital
+
+Soient $F,G$ deux fonctions continues sur $I=[\alpha,\beta]$ et dérivables
+$I\setminus \{a\}$, avec $a \in \interieur\ I$. Supposons que les deux fonctions s'annulent en $a$ :
+
+$$F(a) = G(a) = 0$$
+
+Soit alors $h \ne 0$ tel que $b = a+h\in I\setminus \{a\}$. En appliquant le théorème de Cauchy à $F$ et $G$, on trouve un $t \in \intervalleouvert{0}{1}$ tel que :
+
+$$[F(b) - F(a)] \cdot \partial G(a + t \cdot h) = [G(b) - G(a)] \cdot \partial F(a + t \cdot h)$$
+
+Mais comme $F$ et $G$ s'annulent en $a$, on a :
+
+$$F(b) \cdot \partial G(a + t \cdot h) = G(b) \cdot \partial F(a + t \cdot h)$$
+
+Si de plus $\partial G$ ne s'annule pas sur $I$, on peut écrire :
+
+$$\frac{ \partial F(a + t \cdot h) }{ \partial G(a + t \cdot h) } = \frac{F(b)}{F(a)}$$
+
+On voit en faisant tendre $h$ vers $0$ que les limites, si elles existent, doivent être identiques. On a donc :
+
+$$\lim_{x \to a} \frac{F(x)}{G(x)} =  \lim_{x \to a} \frac{\partial F(a)}{\partial G(a)}$$
+
+
+* Uniformité
+
+Nous allons à présent montrer que toute fonction continument différentiable sur un intervalle de la forme $[\alpha,\beta]$ y est uniformément différentiable.
+
+Soit une fonction $f \in \continue^1([\alpha,\beta],\setR)$. Comme la dérivée $\partial f$ est continue sur $[\alpha,\beta]$, elle y est uniformément continue. Fixons $\epsilon \strictsuperieur 0$. On peut donc trouver un $\delta \strictsuperieur 0$ tel que :
+
+$$\abs{\partial f(s) - \partial f(t)} \le \epsilon$$
+
+pour tout $s,t \in [\alpha,\beta]$ vérifiant $\abs{s - t} \le \delta$. Si $s = t$, on a bien évidemment :
+
+$$\abs{f(t) - f(t) - \partial f(t) \cdot (t - t)} = 0 \le \epsilon \cdot (t - t) = 0$$
+
+Considérons à présent le cas $s \ne t$. Nous pouvons supposer sans perte de généralité que $s \strictinferieur t$. Le théorème des accroissements finis nous dit qu'on peut trouver un $\gamma \in ]s,t[$ tel que :
+
+$$\partial f(\gamma) = \frac{f(t) - f(s)}{t - s}$$
+
+On a donc :
+
+$$\frac{f(t) - f(s)}{t - s} - \partial f(s) = \partial f(\gamma) - \partial f(s)$$
+
+Mais comme $\abs{\gamma - s} \le \abs{t - s} \le \delta$, on a $\abs{\partial f(\gamma) - \partial f(s)} \le \epsilon$ et :
+
+$$\abs{\frac{f(t) - f(s)}{t - s} - \partial f(s)} \le \epsilon$$
+
+On a donc bien :
+
+$$\abs{f(t) - f(s) - \partial f(s) \cdot (t - s)} \le \epsilon \cdot \abs{t - s}$$
+
+pour tout $s,t \in [\alpha,\beta]$ vérifiant $\abs{s - t} \le \delta$.
+
+
+** Remarque
+
+Le théorème {\em n'est pas} applicable aux autres types d'intervalles. Cela ne marche pas sur $]\alpha,\beta[$ par exemple.
+
+
+

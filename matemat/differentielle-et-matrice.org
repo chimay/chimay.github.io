@@ -1,0 +1,177 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Différentielles et matrices
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:diffmatr}
+
+* Applications linéaires
+
+Soit $A \in \matrice(\setR,m,n)$. Considérons la fonction $\mathcal{A} : \setR^m \times \setR^n \mapsto \setR$ définie par :
+
+$$\mathcal{A}(x) = A \cdot x$$
+
+En terme de composantes, on a :
+
+$$\mathcal{A}_i(x) = \sum_j A_{ij} \cdot x_j$$
+
+Les dérivées s'écrivent :
+
+$$\deriveepartielle{\mathcal{A}_i}{x_k}(x) = A_{ik}$$
+
+On a donc :
+
+$$\deriveepartielle{}{x}(A \cdot x) = A$$
+
+
+* Formes linéaires
+
+Soit $u \in \setR^n$. Considérons la forme linéaire $\varphi : \setR^n \mapsto \setR$ définie par :
+
+$$\varphi(x) = x^\dual \cdot u$$
+
+En terme de composantes, on a :
+
+$$\varphi(x) = \sum_i x_i \cdot u_i$$
+
+Les dérivées s'écrivent :
+
+$$\deriveepartielle{\varphi}{x_k}(x) = u_i$$
+
+On a donc :
+
+$$\deriveepartielle{}{x}(x^\dual \cdot u) = u$$
+
+Comme $u^\dual \cdot x = x^\dual \cdot u$, on a aussi :
+
+$$\deriveepartielle{}{x}(u^\dual \cdot x) = u$$
+
+
+* Formes bilinéaires
+
+Soit à présent $A \in \matrice(\setR,m,n)$. Considérons la forme bilinéaire $\vartheta : \setR^m \times \setR^n \mapsto \setR$ définie par :
+
+$$\vartheta(x,y) = x^\dual \cdot A \cdot y$$
+
+En terme de composantes, on a :
+
+$$\vartheta(x,y) = \sum_{i,j} x_i \cdot A_{ij} \cdot y_j$$
+
+Les dérivées s'écrivent :
+
+#+BEGIN_CENTER
+\(
+\deriveepartielle{\vartheta}{x_k}(x,y) = \sum_j A_{kj} \cdot y_j \\ \)
+
+\(
+\deriveepartielle{\vartheta}{y_k}(x,y) = \sum_i x_i \cdot A_{ik}
+\)
+#+END_CENTER
+
+On a donc :
+
+#+BEGIN_CENTER
+\(
+\deriveepartielle{}{x}(x^\dual \cdot A \cdot y) = A \cdot y \\ \)
+
+\(
+\deriveepartielle{}{y}(x^\dual \cdot A \cdot y) = A^\dual \cdot x
+\)
+#+END_CENTER
+
+Les dérivées secondes s'en déduisent alors :
+
+#+BEGIN_CENTER
+\(
+\dfdxdy{}{x}{x}(x^\dual \cdot A \cdot y) = 0 \\ \)
+
+\(
+\dfdxdy{}{y}{y}(x^\dual \cdot A \cdot y) = 0 \\ \)
+
+\(
+\dfdxdy{}{y}{x}(x^\dual \cdot A \cdot y) = A
+\)
+#+END_CENTER
+
+
+* Formes quadratiques
+
+Soit à présent $A \in \matrice(\setR,n,n)$. Considérons la forme quadratique $\mathcal{Q} : \setR^m \times \setR^n \mapsto \setR$ définie par :
+
+$$\mathcal{Q}(x) = x^\dual \cdot A \cdot x$$
+
+En terme de composantes, on a :
+
+$$\mathcal{Q}(x) = \sum_{i,j} x_i \cdot A_{ij} \cdot x_j$$
+
+Les dérivées s'écrivent :
+
+\begin{align}
+\deriveepartielle{\mathcal{Q}}{x_k}(x) &= \sum_j A_{kj} \cdot x_j + \sum_i x_i \cdot A_{ik} \)
+
+\(
+&= \sum_i (A_{ki} + A_{ik}) \cdot x_i
+\end{align}
+
+On a donc :
+
+$$\deriveepartielle{}{x}(x^\dual \cdot A \cdot x) = (A + A^\dual) \cdot x$$
+
+La dérivée seconde est alors immédiate :
+
+$$\dfdxdy{}{x}{x}(x^\dual \cdot A \cdot x) = A + A^\dual$$
+
+Un cas fréquent est celui d'une matrice $H$ hermitienne ($H^\dual = H$). On a alors :
+
+$$\deriveepartielle{}{x}(x^\dual \cdot H \cdot x) = 2 \cdot H \cdot x$$
+
+et :
+
+$$\dfdxdy{}{x}{x}(x^\dual \cdot H \cdot x) = 2 \cdot H$$
+
+
+* Produit matriciel
+
+Soient les fonctions $A : \setR \mapsto \matrice(\setR,m,n)$ et $B : \setR \mapsto \matrice(\setR,n,p)$ qui, à chaque réel $t$, associent des matrices de composantes réelles. Nous allons tenter de trouver une expression de la dérivée du produit matriciel $A \cdot B$. Les propriétés des différentielles nous permettent d'écrire :
+
+$$\partial \sum_{k = 1}^n A_{ik}(t) \cdot B_{kj}(t) = \sum_{k = 1}^n \partial A_{ik}(t) \cdot B_{kj}(t) + \sum_{k=1}^n A_{ik}(t) \cdot \partial B_{kj}(t)$$
+
+On a donc :
+
+$$\partial (A \cdot B) = \partial A \cdot B + A \cdot \partial B$$
+
+ou, symboliquement :
+
+$$d(A \cdot B) = dA \cdot B + A \cdot dB$$
+
+
+* Matrice inverse
+
+Considérons le cas où $A$ est carrée ($m = n$). En dérivant la relation $A \cdot A^{-1} = I$, on obtient :
+
+$$0 = dI = d(A \cdot A^{-1}) = dA \cdot A^{-1} + A \cdot dA^{-1}$$
+
+et donc :
+
+$$d(A^{-1}) = - A^{-1} \cdot dA \cdot A^{-1}$$
+
+

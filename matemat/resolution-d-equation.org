@@ -1,0 +1,125 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Résolution d’équations
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:resolu}
+
+* Introduction
+
+Soit une fonction $F : \setR^n \mapsto \setR^n$ et l'espace des solutions :
+
+$$S = \{ s \in \setR^n : F(s) = 0 \} = \noyau F$$
+
+Nous allons tenter d'obtenir itérativement une estimation d'un $s \in S$. 0n part d'un certain $x_0 \in \setR^n$ et on essaie à chaque itération :
+
+$$x_{k + 1} = I(x_k) = x_k + \Delta_k$$
+
+d'améliorer la qualité de notre estimation, c'est à dire de rapprocher $F(x_{k + 1})$ de zéro. On espère que pour $K$ assez grand, on aura :
+
+$$F(x_K) \approx \lim_{k \to \infty} F(x_k) = 0$$
+
+A moins que l'on ait déjà une vague idée d'une région $X \subseteq \setR^n$ contenant une solution $s \in S$, on choisit en général $x_0 = 0$.
+
+* Newton-Raphson
+
+On demande à chaque étape que le développement du premier ordre autour de $x_k$ s'annule en $x_{k + 1} = x_k + \Delta_k$. On impose donc :
+
+$$F(x_{k + 1}) \approx F(x_k) + \partial F(x_k) \cdot \Delta_k \approx 0$$
+
+On est amenés à résoudre le système :
+
+$$\partial F(x_k) \cdot \Delta_k = - F(x_k)$$
+
+Si la matrice $\partial F(x_k)$ est inversible, on a :
+
+$$\Delta_k = - \left[\partial F(x_k)\right]^{-1} \cdot F(x_k)$$
+
+et :
+
+$$x_{k + 1} = x_k - \left[\partial F(x_k)\right]^{-1} \cdot F(x_k)$$
+
+* Banach
+
+On voit que la condition $F(s) = 0$ est équivalente à $F(s) + s = s$. On définit donc la fonction $f : \setR^n \to \setR^n$ par :
+
+$$f(x) = F(x) + x$$
+
+pour tout $x \in \setR^n$, et on cherche un $s$ tel que $f(s) = F(s) + s = s$.
+Si $f$ est contractante, on applique le théorème de Banach en itérant simplement par :
+
+$$x_{k + 1} = f(x_k) = f^{k + 1}(x_0)$$
+
+Pour $K$ assez grand, on a alors :
+
+$$x_K \approx \lim_{k \to \infty} x_k = s$$
+
+* Méthode hybride d'Aitken
+
+Supposons à présent que $F,f : \setR \to \setR$ avec $f(x) = F(x) + x$ pour tout $x \in \setR$. L'idée est d'utiliser simultanément les deux approches $F(s) = 0$ et $f(s) = F(s) + s = s$. Soit :
+
+$$F'(x) = \OD{F}{x}(x)$$
+
+Supposons qu'au bout de $k$ itérations on ait obtenu $x_k$ comme approximation de la solution $s$. On commence par effectuer deux $f$-itérations en partant de $x_k$ :
+
+\begin{align}
+u_0 &= x_k \)
+
+\(
+u_1 &= f(u_0) \)
+
+\(
+u_2 &= f(u_1)
+\end{align}
+
+Les valeurs de $F$ s'écrivent alors :
+
+#+BEGIN_CENTER
+\(
+F(u_0) = f(u_0) - u_0 = u_1 - u_0 \)
+
+\(
+F(u_1) = f(u_1) - u_1 = u_2 - u_1
+\)
+#+END_CENTER
+
+On se sert ensuite du développement :
+
+$$F(u_0) \approx F(u_1) + F'(u_1) \cdot (u_0 - u_1)$$
+
+pour approximer $F'$ :
+
+$$F'(u_1) \approx \frac{F(u_0) - F(u_1)}{u_0 - u_1} = \frac{F(u_1) - F(u_0)}{u_1 - u_0}$$
+
+On a donc :
+
+$$F'(u_1) \approx \frac{(u_2 - u1) - (u_1 - u_0)}{u_1 - u_0} = \frac{(u_2 - 2 u_1 + u_0)}{u_1 - u_0}$$
+
+On applique ensuite l'itération de Newton-Raphson :
+
+$$x_{k + 1} = x_{k} - \frac{F(x_k)}{F'(x_k)}$$
+
+en remplaçant la dérivée $F'$ par son approximation :
+
+$$x_{k+1} = x_k - \frac{(u_1 - u_0)^2}{u_2 - 2 u_1 + u_0}$$
+
+On espère que la suite des $x_k$ ainsi définie converge plus vite vers la solution $s$ que la suite des $f^k(x_0)$.

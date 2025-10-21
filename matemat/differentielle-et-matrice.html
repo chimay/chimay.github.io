@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<!-- 2025-10-21 mar 12:09 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Eclats de vers : Matemat : Différentielles et matrices</title>
+<meta name="author" content="chimay" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Eclats de vers : Matemat : Différentielles et matrices</h1>
+<p>
+<a href="index.html">Index des Grimoires</a>
+</p>
+
+<p>
+<a href="../index.html">Retour à l’accueil</a>
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org12525f8">1. Applications linéaires</a></li>
+<li><a href="#org9967b86">2. Formes linéaires</a></li>
+<li><a href="#org890479a">3. Formes bilinéaires</a></li>
+<li><a href="#org8c10a43">4. Formes quadratiques</a></li>
+<li><a href="#org387a713">5. Produit matriciel</a></li>
+<li><a href="#orgb7f5a56">6. Matrice inverse</a></li>
+</ul>
+</div>
+</div>
+
+<p>
+\(
+\newcommand{\parentheses}[1]{\left(#1\right)}
+\newcommand{\crochets}[1]{\left[#1\right]}
+\newcommand{\accolades}[1]{\left\{#1\right\}}
+\newcommand{\ensemble}[1]{\left\{#1\right\}}
+\newcommand{\identite}{\mathrm{Id}}
+\newcommand{\indicatrice}{\boldsymbol{\delta}}
+\newcommand{\dirac}{\delta}
+\newcommand{\moinsun}{{-1}}
+\newcommand{\inverse}{\ddagger}
+\newcommand{\pinverse}{\dagger}
+\newcommand{\topologie}{\mathfrak{T}}
+\newcommand{\ferme}{\mathfrak{F}}
+\newcommand{\img}{\mathbf{i}}
+\newcommand{\binome}[2]{
+\left\{ \begin{array}{c}
+#1 \\
+#2 \\
+\end{array} \right\}
+}
+\newcommand{\canonique}{\mathfrak{c}}
+\newcommand{\tenseuridentite}{\boldsymbol{\mathcal{I}}}
+\newcommand{\permutation}{\boldsymbol{\epsilon}}
+\newcommand{\matriceZero}{\mathfrak{0}}
+\newcommand{\matriceUn}{\mathfrak{1}}
+\newcommand{\christoffel}[2]{
+\left\{ \begin{array}{c}
+#1 \\
+#2 \\
+\end{array} \right\}
+}
+\newcommand{\lagrangien}{\mathfrak{L}}
+\newcommand{\sousens}{\mathfrak{P}}
+\newcommand{\partition}{\mathrm{Partition}}
+\newcommand{\tribu}{\mathrm{Tribu}}
+\newcommand{\topologies}{\mathrm{Topo}}
+\newcommand{\setB}{\mathbb{B}}
+\newcommand{\setN}{\mathbb{N}}
+\newcommand{\setZ}{\mathbb{Z}}
+\newcommand{\setQ}{\mathbb{Q}}
+\newcommand{\setR}{\mathbb{R}}
+\newcommand{\setC}{\mathbb{C}}
+\newcommand{\corps}{\mathbb{K}}
+\newcommand{\boule}{\mathfrak{B}}
+\newcommand{\intervalleouvert}[2]{\left] #1 , #2 \right[}
+\newcommand{\intervallesemiouvertgauche}[2]{ \left] #1 , #2 \right]}
+\newcommand{\intervallesemiouvertdroite}[2]{\left[ #1 , #2 \right[ }
+\newcommand{\fonction}{\mathbb{F}}
+\newcommand{\bijection}{\mathrm{Bij}}
+\newcommand{\polynome}{\mathrm{Poly}}
+\newcommand{\lineaire}{\mathrm{Lin}}
+\newcommand{\continue}{\mathrm{Cont}}
+\newcommand{\homeomorphisme}{\mathrm{Hom}}
+\newcommand{\etagee}{\mathrm{Etagee}}
+\newcommand{\lebesgue}{\mathrm{Leb}}
+\newcommand{\lipschitz}{\mathrm{Lip}}
+\newcommand{\suitek}{\mathrm{Suite}}
+\newcommand{\matrice}{\mathbb{M}}
+\newcommand{\krylov}{\mathrm{Krylov}}
+\newcommand{\tenseur}{\mathbb{T}}
+\newcommand{\essentiel}{\mathfrak{E}}
+\newcommand{\relation}{\mathrm{Rel}}
+\DeclareMathOperator*{\strictinferieur}{\ < \ }
+\DeclareMathOperator*{\strictsuperieur}{\ > \ }
+\DeclareMathOperator*{\ensinferieur}{\eqslantless}
+\DeclareMathOperator*{\enssuperieur}{\eqslantgtr}
+\DeclareMathOperator*{\esssuperieur}{\gtrsim}
+\DeclareMathOperator*{\essinferieur}{\lesssim}
+\newcommand{\essegal}{\eqsim}
+\newcommand{\union}{\ \cup \ }
+\newcommand{\intersection}{\ \cap \ }
+\newcommand{\opera}{\divideontimes}
+\newcommand{\autreaddition}{\boxplus}
+\newcommand{\autremultiplication}{\circledast}
+\newcommand{\commutateur}[2]{\left[ #1 , #2 \right]}
+\newcommand{\convolution}{\circledcirc}
+\newcommand{\correlation}{\ \natural \ }
+\newcommand{\diventiere}{\div}
+\newcommand{\modulo}{\bmod}
+\DeclareMathOperator*{\pgcd}{pgcd}
+\DeclareMathOperator*{\ppcm}{ppcm}
+\newcommand{\produitscalaire}[2]{\left\langle #1 \vert #2 \right\rangle}
+\newcommand{\scalaire}[2]{\left\langle #1 \| #2 \right\rangle}
+\newcommand{\braket}[3]{\left\langle #1 \vert #2 \vert #3 \right\rangle}
+\newcommand{\orthogonal}{\bot}
+\newcommand{\forme}[2]{\left\langle #1 , #2 \right\rangle}
+\newcommand{\biforme}[3]{\left\langle #1 , #2 , #3 \right\rangle}
+\newcommand{\contraction}[3]{\left\langle #1 \odot #3 \right\rangle_{#2}}
+\newcommand{\dblecont}[5]{\left\langle #1 \vert #3 \vert #5 \right\rangle_{#2,#4}}
+\DeclareMathOperator*{\major}{major}
+\DeclareMathOperator*{\minor}{minor}
+\DeclareMathOperator*{\maxim}{maxim}
+\DeclareMathOperator*{\minim}{minim}
+\DeclareMathOperator*{\argument}{arg}
+\DeclareMathOperator*{\argmin}{arg\ min}
+\DeclareMathOperator*{\argmax}{arg\ max}
+\DeclareMathOperator*{\supessentiel}{ess\ sup}
+\DeclareMathOperator*{\infessentiel}{ess\ inf}
+\newcommand{\dual}{\star}
+\newcommand{\distance}{\mathfrak{dist}}
+\newcommand{\norme}[1]{\left\| #1 \right\|}
+\newcommand{\normetrois}[1]{\left|\left\| #1 \right\|\right|}
+\DeclareMathOperator*{\adh}{adh}
+\DeclareMathOperator*{\interieur}{int}
+\newcommand{\frontiere}{\partial}
+\DeclareMathOperator*{\image}{im}
+\DeclareMathOperator*{\domaine}{dom}
+\DeclareMathOperator*{\noyau}{ker}
+\DeclareMathOperator*{\support}{supp}
+\DeclareMathOperator*{\signe}{sign}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\unsur}[1]{\frac{1}{#1}}
+\newcommand{\arrondisup}[1]{\lceil #1 \rceil}
+\newcommand{\arrondiinf}[1]{\lfloor #1 \rfloor}
+\DeclareMathOperator*{\conjugue}{conj}
+\newcommand{\conjaccent}[1]{\overline{#1}}
+\DeclareMathOperator*{\division}{division}
+\newcommand{\difference}{\boldsymbol{\Delta}}
+\newcommand{\differentielle}[2]{\mathfrak{D}^{#1}_{#2}}
+\newcommand{\OD}[2]{\frac{d #1}{d #2}}
+\newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
+\newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
+\newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
+\newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
+\newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\gradient}{\mathbf{\nabla}}
+\newcommand{\combilin}[1]{\mathrm{span}\{ #1 \}}
+\DeclareMathOperator*{\trace}{tr}
+\newcommand{\proba}{\mathbb{P}}
+\newcommand{\probaof}[1]{\mathbb{P}\left[#1\right]}
+\newcommand{\esperof}[1]{\mathbb{E}\left[#1\right]}
+\newcommand{\cov}[2]{\mathrm{cov} \left( #1 , #2 \right) }
+\newcommand{\var}[1]{\mathrm{var} \left( #1 \right) }
+\newcommand{\rand}{\mathrm{rand}}
+\newcommand{\variation}[1]{\left\langle #1 \right\rangle}
+\DeclareMathOperator*{\composante}{comp}
+\DeclareMathOperator*{\bloc}{bloc}
+\DeclareMathOperator*{\ligne}{ligne}
+\DeclareMathOperator*{\colonne}{colonne}
+\DeclareMathOperator*{\diagonale}{diag}
+\newcommand{\matelementaire}{\mathrm{Elem}}
+\DeclareMathOperator*{\matpermutation}{permut}
+\newcommand{\matunitaire}{\mathrm{Unitaire}}
+\newcommand{\gaussjordan}{\mathrm{GaussJordan}}
+\newcommand{\householder}{\mathrm{Householder}}
+\DeclareMathOperator*{\rang}{rang}
+\newcommand{\schur}{\mathrm{Schur}}
+\newcommand{\singuliere}{\mathrm{DVS}}
+\newcommand{\convexe}{\mathrm{Convexe}}
+\newcommand{\petito}[1]{o\left(#1\right)}
+\newcommand{\grando}[1]{O\left(#1\right)}
+\)
+</p>
+
+<p>
+\(
+\newenvironment{Eqts}
+{ \begin{equation*} \begin{gathered} }
+{ \end{gathered} \end{equation*} }
+\newenvironment{Matrix}
+{\left[ \begin{array}}
+{\end{array} \right]}
+\)
+</p>
+
+<p>
+\label{chap:diffmatr}
+</p>
+<div id="outline-container-org12525f8" class="outline-2">
+<h2 id="org12525f8"><span class="section-number-2">1.</span> Applications linéaires</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Soit \(A \in \matrice(\setR,m,n)\). Considérons la fonction \(\mathcal{A} : \setR^m \times \setR^n \mapsto \setR\) définie par :
+</p>
+
+<p>
+\[\mathcal{A}(x) = A \cdot x\]
+</p>
+
+<p>
+En terme de composantes, on a :
+</p>
+
+<p>
+\[\mathcal{A}_i(x) = \sum_j A_{ij} \cdot x_j\]
+</p>
+
+<p>
+Les dérivées s'écrivent :
+</p>
+
+<p>
+\[\deriveepartielle{\mathcal{A}_i}{x_k}(x) = A_{ik}\]
+</p>
+
+<p>
+On a donc :
+</p>
+
+<p>
+\[\deriveepartielle{}{x}(A \cdot x) = A\]
+</p>
+</div>
+</div>
+<div id="outline-container-org9967b86" class="outline-2">
+<h2 id="org9967b86"><span class="section-number-2">2.</span> Formes linéaires</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Soit \(u \in \setR^n\). Considérons la forme linéaire \(\varphi : \setR^n \mapsto \setR\) définie par :
+</p>
+
+<p>
+\[\varphi(x) = x^\dual \cdot u\]
+</p>
+
+<p>
+En terme de composantes, on a :
+</p>
+
+<p>
+\[\varphi(x) = \sum_i x_i \cdot u_i\]
+</p>
+
+<p>
+Les dérivées s'écrivent :
+</p>
+
+<p>
+\[\deriveepartielle{\varphi}{x_k}(x) = u_i\]
+</p>
+
+<p>
+On a donc :
+</p>
+
+<p>
+\[\deriveepartielle{}{x}(x^\dual \cdot u) = u\]
+</p>
+
+<p>
+Comme \(u^\dual \cdot x = x^\dual \cdot u\), on a aussi :
+</p>
+
+<p>
+\[\deriveepartielle{}{x}(u^\dual \cdot x) = u\]
+</p>
+</div>
+</div>
+<div id="outline-container-org890479a" class="outline-2">
+<h2 id="org890479a"><span class="section-number-2">3.</span> Formes bilinéaires</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Soit à présent \(A \in \matrice(\setR,m,n)\). Considérons la forme bilinéaire \(\vartheta : \setR^m \times \setR^n \mapsto \setR\) définie par :
+</p>
+
+<p>
+\[\vartheta(x,y) = x^\dual \cdot A \cdot y\]
+</p>
+
+<p>
+En terme de composantes, on a :
+</p>
+
+<p>
+\[\vartheta(x,y) = \sum_{i,j} x_i \cdot A_{ij} \cdot y_j\]
+</p>
+
+<p>
+Les dérivées s'écrivent :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\deriveepartielle{\vartheta}{x_k}(x,y) = \sum_j A_{kj} \cdot y_j \\ \)
+</p>
+
+<p>
+\(
+\deriveepartielle{\vartheta}{y_k}(x,y) = \sum_i x_i \cdot A_{ik}
+\)
+</p>
+</div>
+
+<p>
+On a donc :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\deriveepartielle{}{x}(x^\dual \cdot A \cdot y) = A \cdot y \\ \)
+</p>
+
+<p>
+\(
+\deriveepartielle{}{y}(x^\dual \cdot A \cdot y) = A^\dual \cdot x
+\)
+</p>
+</div>
+
+<p>
+Les dérivées secondes s'en déduisent alors :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\dfdxdy{}{x}{x}(x^\dual \cdot A \cdot y) = 0 \\ \)
+</p>
+
+<p>
+\(
+\dfdxdy{}{y}{y}(x^\dual \cdot A \cdot y) = 0 \\ \)
+</p>
+
+<p>
+\(
+\dfdxdy{}{y}{x}(x^\dual \cdot A \cdot y) = A
+\)
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org8c10a43" class="outline-2">
+<h2 id="org8c10a43"><span class="section-number-2">4.</span> Formes quadratiques</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Soit à présent \(A \in \matrice(\setR,n,n)\). Considérons la forme quadratique \(\mathcal{Q} : \setR^m \times \setR^n \mapsto \setR\) définie par :
+</p>
+
+<p>
+\[\mathcal{Q}(x) = x^\dual \cdot A \cdot x\]
+</p>
+
+<p>
+En terme de composantes, on a :
+</p>
+
+<p>
+\[\mathcal{Q}(x) = \sum_{i,j} x_i \cdot A_{ij} \cdot x_j\]
+</p>
+
+<p>
+Les dérivées s'écrivent :
+</p>
+
+\begin{align}
+\deriveepartielle{\mathcal{Q}}{x_k}(x) &= \sum_j A_{kj} \cdot x_j + \sum_i x_i \cdot A_{ik} \)
+
+\(
+&= \sum_i (A_{ki} + A_{ik}) \cdot x_i
+\end{align}
+
+<p>
+On a donc :
+</p>
+
+<p>
+\[\deriveepartielle{}{x}(x^\dual \cdot A \cdot x) = (A + A^\dual) \cdot x\]
+</p>
+
+<p>
+La dérivée seconde est alors immédiate :
+</p>
+
+<p>
+\[\dfdxdy{}{x}{x}(x^\dual \cdot A \cdot x) = A + A^\dual\]
+</p>
+
+<p>
+Un cas fréquent est celui d'une matrice \(H\) hermitienne (\(H^\dual = H\)). On a alors :
+</p>
+
+<p>
+\[\deriveepartielle{}{x}(x^\dual \cdot H \cdot x) = 2 \cdot H \cdot x\]
+</p>
+
+<p>
+et :
+</p>
+
+<p>
+\[\dfdxdy{}{x}{x}(x^\dual \cdot H \cdot x) = 2 \cdot H\]
+</p>
+</div>
+</div>
+<div id="outline-container-org387a713" class="outline-2">
+<h2 id="org387a713"><span class="section-number-2">5.</span> Produit matriciel</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Soient les fonctions \(A : \setR \mapsto \matrice(\setR,m,n)\) et \(B : \setR \mapsto \matrice(\setR,n,p)\) qui, à chaque réel \(t\), associent des matrices de composantes réelles. Nous allons tenter de trouver une expression de la dérivée du produit matriciel \(A \cdot B\). Les propriétés des différentielles nous permettent d'écrire :
+</p>
+
+<p>
+\[\partial \sum_{k = 1}^n A_{ik}(t) \cdot B_{kj}(t) = \sum_{k = 1}^n \partial A_{ik}(t) \cdot B_{kj}(t) + \sum_{k=1}^n A_{ik}(t) \cdot \partial B_{kj}(t)\]
+</p>
+
+<p>
+On a donc :
+</p>
+
+<p>
+\[\partial (A \cdot B) = \partial A \cdot B + A \cdot \partial B\]
+</p>
+
+<p>
+ou, symboliquement :
+</p>
+
+<p>
+\[d(A \cdot B) = dA \cdot B + A \cdot dB\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgb7f5a56" class="outline-2">
+<h2 id="orgb7f5a56"><span class="section-number-2">6.</span> Matrice inverse</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Considérons le cas où \(A\) est carrée (\(m = n\)). En dérivant la relation \(A \cdot A^{-1} = I\), on obtient :
+</p>
+
+<p>
+\[0 = dI = d(A \cdot A^{-1}) = dA \cdot A^{-1} + A \cdot dA^{-1}\]
+</p>
+
+<p>
+et donc :
+</p>
+
+<p>
+\[d(A^{-1}) = - A^{-1} \cdot dA \cdot A^{-1}\]
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Auteur: chimay</p>
+<p class="date">Created: 2025-10-21 mar 12:09</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Différentielles et polynômes
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:diffpoly}
+
+* Dépendances
+
+  - Chapitre \ref{chap:differ} : Les différentielles
+
+
+* Polynômes
+
+Soit $n \in \setN$. Nous allons analyser la différentiabilité du monôme $\mu : \setR \mapsto \setR$ défini par :
+
+$$\mu : t \mapsto t^n$$
+
+pour tout $t \in \setR$. La formule de factorisation nous donne :
+
+$$s^n - t^n = (s - t) \sum_{i = 0}^{n - 1} s^i \cdot t^{n - 1 - i}$$
+
+On a donc :
+
+$$\frac{s^n - t^n}{s - t} = \sum_{i = 0}^{n - 1} s^i \cdot t^{n - 1 - i}$$
+
+Passant à la limite $s \to t$, on obtient :
+
+$$\lim_{ s \to t} \frac{s^n - t^n}{s - t} = \sum_{i = 0}^{n - 1} t^i \cdot t^{n - 1 - i} = \sum_{i = 0}^{n - 1} t^{n - 1} = n \cdot t^{n - 1}$$
+
+On en conclut que la dérivée existe sur $\setR$ et que :
+
+$$\OD{}{t} (t^n) = \lim_{ s \to t} \frac{s^n - t^n}{s - t} = n \cdot t^{n - 1}$$
+
+La dérivée d'une combinaison linéaire étant identique à la combinaison linéaire des dérivées (voir dérivée d'une somme et la multiplication par une constante), on en conclut que tous les polynômes sont dérivables sur $\setR$.
+
+
+** Uniformité
+
+Choisissons $\alpha,\beta \in \setR$ avec $\alpha \le \beta$ et analysons la différentiabilité sur l'intervalle $[\alpha,\beta]$. Posons :
+
+$$e(s,t) = \frac{s^n - t^n}{s - t} - \OD{}{t}(t^n)$$
+
+Si $n = 1$, on a :
+
+$$e(s,t) = \frac{s - t}{s - t} - 1 = 0$$
+
+Le monôme de degré $1$ est donc uniformément différentiable. Considérons à présent le cas où $n \ge 2$. Le passage à la limite nous montre que :
+
+$$\OD{}{t} (t^n) = \sum_{i = 0}^{n - 1} t^i \cdot t^{n - 1 - i}$$
+
+En utilisant les propriétés des sommes, on obtient :
+
+\begin{align}
+e(s,t) &= \sum_{i = 0}^{n - 1} s^i \ t^{n - 1 - i} - \sum_{i = 0}^{n - 1} t^i \ t^{n - 1 - i} \)
+
+\(
+&= \sum_{i = 0}^{n - 1} (s^i - t^i) \ t^{n - 1 - i}
+\end{align}
+
+En factorisant tous les $s^i - t^i$, on a alors :
+
+$$e(s,t) = \sum_{i = 0}^{n - 1} t^{n - 1 - i} \ (s - t) \ \sum_{k = 0}^{i - 1} s^k \ t^{i - 1 - k}$$
+
+et comme $s - t$ ne dépend pas de $i$ :
+
+$$e(s,t) = (s - t) \sum_{i = 0}^{n - 1} t^{n - 1 - i} \ \sum_{k = 0}^{i - 1} s^k \ t^{i - 1 - k}$$
+
+Si on pose $M = \max \{ \abs{\alpha} , \abs{\beta} \}$, on a clairement $\abs{s}, \abs{t} \le M$. On peut alors trouver la borne supérieure :
+
+\begin{align}
+\abs{e(s,t)} &\le \abs{s - t} \sum_{i = 0}^{n - 1} M^{n - 1 - i} \ \sum_{k = 0}^{i - 1} M^{i - 1} \)
+
+\(
+&\le \abs{s - t} \sum_{i = 0}^{n - 1} M^{n - 1 - i} \ i \ M^{i - 1} \)
+
+\(
+&\le \abs{s - t} \ M^{n - 2} \ \sum_{i = 0}^{n - 1} i \)
+
+\(
+&\le \unsur{2} \ \abs{s - t} \ M^{n - 2} \ (n - 1) \ n
+\end{align}
+
+Fixons à présent $\epsilon \strictsuperieur 0$. Il suffit de prendre :
+
+$$\abs{s - t} \le \delta \le \frac{ 2 \epsilon}{ M^{n - 2} \cdot (n - 1) \cdot n }$$
+
+pour avoir :
+
+$$\abs{e(s,t)} \le \frac{ M^{n - 2} \cdot (n - 1) \cdot n \cdot \delta }{2} \le \epsilon$$
+
+Comme on a :
+
+$$\mu(s) - \mu(t) - \partial \mu(t) = s^n - t^n - n \cdot t^{n - 1} = e(s,t) \cdot (s - t)$$
+
+on dispose de la borne supérieure :
+
+$$\abs{\mu(s) - \mu(t) - \partial \mu(t)} \le \abs{e(s,t)} \cdot \abs{s - t} \le \epsilon \cdot \abs{s - t}$$
+
+Comme le choix de $\delta$ ne dépend ni de $s$ ni de $t$, le monôme $\mu$ est uniformément différentiable sur $[\alpha,\beta]$.
+
+On généralise aisément à un polynôme quelconque :
+
+$$p(x) = \sum_{i = 0}^n a_i \cdot x^i$$
+
+en constatant que :
+
+$$\abs{p(s) - p(t) - \partial p(t) \cdot (s - t)} \le \abs{s - t} \sum_{i = 0}^n \abs{a_i} \cdot \abs{e_i(s,t)}$$
+
+où $e_i$ est l'erreur obtenue avec le monôme de degré $i$. Mais comme on peut trouver des $\delta_k$ tels que :
+
+$$\abs{e_i(s,t)} \le \frac{\epsilon}{\sum_j \abs{a_j}}$$
+
+il suffit de choisir $\delta = \min \{ \delta_0, \delta_1, ..., \delta_n \}$ pour avoir :
+
+$$\abs{p(s) - p(t) - \partial p(t) \cdot (s - t)} \le \abs{s - t} \cdot \epsilon \cdot \frac{ \sum_i \abs{a_i} }{ \sum_j \abs{a_j} } = \abs{s - t} \cdot \epsilon$$
+
+Tout polynôme est uniformément différentiable sur des intervalles de la forme $[\alpha,\beta]$. Cette généralisation montre aussi que toute combinaison linéaire de fonctions uniformément différentiables est uniformément différentiable.
+
+

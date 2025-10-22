@@ -1,0 +1,199 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Polynômes et exponentielles
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:polyexpo}
+
+* Chebyshev
+
+Les polynômes de Chebyshev $T_n$ sont défini par :
+
+#+BEGIN_CENTER
+\(
+T_n : x\mapsto\cos(n \arccos(x) ) \)
+
+\(
+T_n(\cos(\theta)) = \cos(n \theta)
+\)
+#+END_CENTER
+
+Il est clair que :
+
+#+BEGIN_CENTER
+\(
+T_0(x) = 1 \)
+
+\(
+T_1(x) = x
+\)
+#+END_CENTER
+
+Les propriétés des fonctions trigonométriques :
+
+#+BEGIN_CENTER
+\(
+\cos[(n+m)\theta]= \cos[n\theta]\cos[m\theta]+\sin[n\theta]\sin[m\theta] \)
+
+\(
+\cos[(n-m)\theta]= \cos[n\theta]\cos[m\theta]-\sin[n\theta]\sin[m\theta]
+\)
+#+END_CENTER
+
+nous montrent que :
+
+$$T_{n+m}(x) + T_{n-m}(x) = 2 T_n(x) T_m(x)$$
+
+On en déduit entre autre que :
+
+$$T_{n+1}(x) + T_{n-1}(x) = 2 x T_n(x)$$
+
+Les fonctions $T_n$ sont donc des polynômes. Comme :
+
+$$T_n \left[ \cos\left(\frac{2k+1}{2n}\right) \right] = 0$$
+
+les racines sont données par :
+
+$$x_k = \cos\left(\frac{2k+1}{2n}\right)$$
+
+pour $k=0,1,...,n-1$.
+On déduit aussi la propriété suivante de la définition :
+
+$$(T_n \circ T_m)(x) = T_{m \cdot n}(x) = (T_m \circ T_n)(x)$$
+
+Nous allons voir que les $T_n$ sont orthogonaux moyennant un certain
+poids. Si $m = n = 0$, il est clair que :
+
+$$\int_0^\pi T_0(\cos(\theta)) T_0(\cos(\theta)) d\theta = \int_0^\pi d\theta = \pi$$
+
+Si $m, n \ne 0$, on a :
+
+#+BEGIN_CENTER
+\(
+\int_0^\pi T_m(\cos(\theta)) T_n(\cos(\theta)) d\theta =
+\int_0^\pi \cos(m\theta) \cos(n\theta) d\theta \)
+
+\(
+\int_0^\pi T_m(\cos(\theta)) T_n(\cos(\theta)) d\theta =
+\unsur{2} \int_0^\pi \cos[(m+n)\theta] d\theta +
+\unsur{2} \int_0^\pi \cos[(m-n)\theta] d\theta
+\)
+#+END_CENTER
+
+Si $m = n$, on a alors :
+
+$$\int_0^\pi T_m(\cos(\theta)) T_n(\cos(\theta)) d\theta = \unsur{2n} [\sin(2 n \pi) - \sin(0)] + \frac{\pi}{2}$$
+
+La première intégrale s'annule donc par périodicité de la fonction
+$\sin$. A présent, si $m \ne n$, on a :
+
+#+BEGIN_CENTER
+\(
+\int_0^\pi T_m(\cos(\theta)) T_n(\cos(\theta)) d\theta = \)
+
+\(
+\unsur{2(m+n)} [\sin[(m+n)\pi] - \sin(0)] + \)
+
+\(
+\unsur{2(m-n)} [\sin[(m-n)\pi] - \sin(0)] = 0
+\)
+#+END_CENTER
+
+Rassemblant ces résultats, on obtient :
+
+#+BEGIN_CENTER
+\(
+\int_0^\pi T_m(\cos\theta) T_n(\cos\theta) d\theta =
+\begin{cases}
+\pi & \mbox{si  } m = 0 \\
+\pi/2 & \mbox{si  } m = n \ne 0 \\
+0 & \mbox{si  } m \ne n
+\end{cases}
+\)
+#+END_CENTER
+
+Le changement de variable $x = \cos(\theta)$,
+
+#+BEGIN_CENTER
+\(
+dx = -\sin(\theta) d\theta \)
+
+\(
+d\theta = \frac{dx}{\sqrt{1-x^2}}
+\)
+#+END_CENTER
+
+nous donne :
+
+$$\int_0^\pi T_m(\cos\theta) T_n(\cos\theta) d\theta = \int_{-1}^1 \frac{T_m(x) T_n(x)}{\sqrt{1-x^2}}dx$$
+
+On en déduit que :
+
+$$\int_{-1}^1 \frac{T_m(x) T_n(x)}{\sqrt{1-x^2}} dx = \delta_{mn} \frac{\pi}{2} (1+\delta_{m,0})$$
+
+pour tout $m,n\in\setN$.
+
+
+* Hermite
+
+Les polynômes de Hermite sont orthogonaux pour le produit scalaire :
+
+$$\int_{-\infty}^{+\infty} H_n(x) H_m(x) \exp(-x^2) dx = 2^n n ! \sqrt{\pi} \delta_{mn}$$
+
+Ils obéissent à la récurrence :
+
+#+BEGIN_CENTER
+\(
+H_0(x) = 1 \)
+
+\(
+H_1(x) = 2 x \)
+
+\(
+H_{n+1}(x) = 2 x H_n(x) - 2 n H_{n-1}(x) \)
+
+\(
+\)
+#+END_CENTER
+
+
+* Laguerre
+
+Les polynômes de Laguerre sont orthogonaux pour le produit scalaire :
+
+$$\int_{0}^{+\infty} L_n(x) L_m(x) \exp(-x) dx = \delta_{mn}$$
+
+Ils obéissent à la récurrence :
+
+#+BEGIN_CENTER
+\(
+L_0(x) = 1 \)
+
+\(
+L_1(x) = 1-x \)
+
+\(
+(n+1) L_{n+1}(x) = (2 n + 1 - x) L_n(x) - n L_{n-1}(x)
+\)
+#+END_CENTER
+
+

@@ -1,0 +1,297 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Dérivation et intégration dans le plan complexe
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:dicplx}
+
+* Dépendances
+
+  - Chapitre \ref{chap:differ} : Les différentielles
+  - Chapitre \ref{chap:integ} : Les intégrales
+
+* Dérivées
+
+On définit la dérivée d'une fonction $f : \setC \mapsto \setC$
+par analogie avec la dérivée des fonctions réelles :
+
+$$\OD{f}{z}(z) = \lim_{ \substack{ h \to 0 \\ h \in\setC } } \frac{f(z+h) - f(z)}{h}$$
+
+Si $f$ est dérivable sur $A\subseteq\setC$, on dit qu'elle est analytique
+sur $A$.
+
+On définit les fonctions $u,v : \setR^2 \mapsto \setR$ associées à $f$ par :
+
+#+BEGIN_CENTER
+\(
+u(x,y) = \Re\left(f(x + \img y) \right) \)
+
+\(
+v(x,y) = \Im\left(f(x + \img y) \right)
+\)
+#+END_CENTER
+
+On a alors $f(z) = u(x,y) + \img v(x,y)$. Si $f$ est dérivable, la limite
+ne peut pas dépendre du chemin suivi pour arriver en $(x,y)$. On peut donc
+choisir $h$ de la forme $\Delta x$ ou $\img \Delta y$ avec
+$\Delta x,\Delta y\in\setR$. Cela donne :
+
+#+BEGIN_CENTER
+\(
+\OD{f}{z}(z) = \lim_{\Delta x \to 0}
+\frac{\PD{u}{x}\Delta x + \img \PD{v}{x}\Delta x}{\Delta x} \)
+
+\(
+\OD{f}{z}(z) = \lim_{\Delta y \to 0}
+\frac{\PD{u}{y}\Delta y + \img \PD{v}{y}\Delta y}{\img \Delta y}
+\)
+#+END_CENTER
+
+et par comparaison :
+
+#+BEGIN_CENTER
+\(
+\PD{u}{x} = \PD{v}{y} \)
+
+\(
+\PD{u}{y} = -\PD{v}{x}
+\)
+#+END_CENTER
+
+En dérivant de nouveau ces équations, on obtient :
+
+#+BEGIN_CENTER
+\(
+\frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial y^2} = 0 \)
+
+\(
+\frac{\partial^2 v}{\partial x^2} + \frac{\partial^2 v}{\partial y^2} = 0
+\)
+#+END_CENTER
+
+Les puissances de $z$ sont dérivables. On vérifie que :
+
+$$\OD{z^n}{z}=n z^{n-1}$$
+
+
+* Extension de l'intégrale au plan complexe
+
+Soit une fonction $f : A \mapsto \setC$. Comme
+$u = \Re(f)$ et $v = \Im(f)$ sont des fonctions à valeurs réelles :
+
+$$u,v : A \mapsto \setR$$
+
+leur intégrale est bien définie. On définit alors l'intégrale de $f$ par :
+
+$$\int_A f d\mu = \int_A u d\mu + \img \int_A v d\mu$$
+
+
+* Intégrale de ligne
+
+Soit une fonction $\gamma : [a,b] \mapsto \setC$ et la courbe :
+
+$$l = \{ \gamma(t) : t \in [a,b] \} \subset \setC$$
+
+On définit l'intégrale de ligne de $f$ sur $l$ par :
+
+$$\int_l f(z) dz = \int_a^b (f \circ \gamma)(t) \OD{\gamma}{t}(t) dt$$
+
+On peut également écrire :
+
+#+BEGIN_CENTER
+\(
+\int_l f(z) dz = \int_l (u + \img v)(dx + \img dy) \)
+
+\(
+\int_l f(z) dz = \int_l (u dx - v dy) + \img \int_l (u dy + v dx)
+\)
+#+END_CENTER
+
+où les intégrales des membres de droites sont des intégrales de ligne classiques
+de fonctions $\setR^2 \mapsto \setR$.
+
+
+** Théorème fondamental
+
+Soit une fonction analytique $F : \setC \mapsto \setC$. La dérivée
+d'une composée de fonction nous donne :
+
+$$\OD{}{t}(F \circ \gamma)(t) = (\OD{F}{z} \circ \gamma)(t) \OD{\gamma}{t}(t)$$
+
+On en déduit, en appliquant le théorème fondamental que :
+
+$$\int_l \OD{F}{z}(z) dz = F(\gamma(b))-F(\gamma(a))$$
+
+
+** Contour fermé
+
+Dans la suite, lorsque $l$ est une courbe fermée et est donc la frontière d'un
+certain ensemble $l = \partial S$ inclus dans $\setC$, nous notons :
+
+$$\oint_l f(z) dz = \int_{\partial S} f(z) dz$$
+
+Soit $f$ une fonction analytique et $l = \partial S$ une courbe fermée. On a :
+
+$$\oint_l f(z) dz = \oint_l (u dx - v dy) + \img \oint_l (u dy + v dx)$$
+
+En appliquant le théorème de Stokes, il vient :
+
+#+BEGIN_CENTER
+\(
+\oint_l f(z) dz = \int_S (-\PD{v}{x}-\PD{u}{y}) dS + \img \int_S (\PD{u}{x}-\PD{v}{y}) dS \)
+
+\(
+\)
+#+END_CENTER
+
+Mais comme $f$ est analytique :
+
+#+BEGIN_CENTER
+\(
+\PD{u}{x} = \PD{v}{y} \)
+
+\(
+\PD{u}{y} = -\PD{v}{x}
+\)
+#+END_CENTER
+
+Les termes du membre de droite s'annulent donc et :
+
+
+$$\oint_l f(z) dz = 0$$
+
+
+** Cercle
+
+Soit $C$ le cercle de centre $a$ et de rayon $R$ :
+
+$$C = \{ \gamma(\theta) = a + R \exp(\img\theta) : \theta \in [ 0 , 2 \pi ) \}$$
+
+On a alors :
+
+$$\OD{\gamma}{\theta}(\theta) = R \img \exp(\img\theta)$$
+
+et :
+
+$$(z - a)^k = \left( R \exp(\img\theta) \right)^k$$
+
+pour tout $z\in C$ et $k \in \setZ$. Donc :
+
+#+BEGIN_CENTER
+\(
+\oint_C \frac{dz}{(z-a)^k} =
+\int_0^{2\pi} \frac{R \img \exp(\img\theta)}{R^k \exp(\img k\theta)} \)
+
+\(
+\oint_C \frac{dz}{(z-a)^k} = \img R^{1-k} \int_0^{2\pi} \exp[\img(1-k)\theta] d\theta
+\)
+#+END_CENTER
+
+Mais les propriétés de périodicité des fonctions trigonométriques et de l'exponentielle
+associée nous permettent de vérifier que :
+
+$$\int_0^{2\pi} \exp[\img l \theta] d\theta = 2 \pi \delta_{l,0}$$
+
+pour tout $l\in\setZ$. On a donc :
+
+$$\oint_C \frac{dz}{(z-a)^k} = 2 \pi \img \delta_{k,1}$$
+
+pour tout $k \in \setZ$. L'intégrale s'annule pour tout les $k \ne 1$.
+
+Vu que la fonction $f(z) = (z-a)^{-k}$ est analytique partout sauf en $a$,
+on obtient le même résultat pour toute courbe fermée entourant $a$ :
+
+
+$$\oint_{\partial S} \frac{dz}{(z-a)^k} = 2 \pi \img \delta_{k,1} \delta_S(a)$$
+
+
+** Théorème de Cauchy
+
+Si $f$ est analytique, la fonction
+
+#+BEGIN_CENTER
+\[ g(z) =
+\begin{cases}
+\frac{f(z)-f(a)}{z-a} & \mbox{si  } z \ne a \\
+\OD{f}{z}(a) & \mbox{si  } z = a
+\end{cases} \]
+#+END_CENTER
+
+est analytique aussi. On a donc :
+
+$$\oint_l g(z) dz = 0$$
+
+Soit $a\in\setC$ et une courbe fermée entourant $a$ telle que $a\notin l$. On a alors :
+
+$$\oint_l \frac{f(z)-f(a)}{z-a} dz = \oint_l g(z) dz = 0$$
+
+On en déduit que :
+
+$$f(a) = \oint_{\partial S} \frac{1}{z-a} dz  = \oint_{\partial S} \frac{f(z)}{z-a} dz$$
+
+ce qui nous donne la valeur de $f(a)$ en fonction d'une intégrale :
+
+$$f(a)  = \frac{1}{2 \pi \img} \oint_{\partial S} \frac{f(z)}{z-a} dz$$
+
+En dérivant $k$ fois cette dernière relation par rapport à $a$, on obtient :
+
+$$\NOD{f}{z}{k}(a) = \frac{k !}{2 \pi \img} \oint_{\partial S} \frac{f(z)}{(z-a)^{k+1}} dz$$
+
+
+** Séries de Laurent
+
+Supposons que $f$ puisse s'écrire comme une combinaison linéaire de puissances
+entière de $z-a$. On a :
+
+$$f(z) = \sum_{n=-\infty}^{+\infty} \alpha_n (z-a)^n$$
+
+Multipliant le tout par $(z-a)^{-k-1}$ et intégrant sur un contour entourant $a$,
+on obtient :
+
+$$\oint_l f(z)(z-a)^{-k-1} dz = \sum_{n=-\infty}^{+\infty} \alpha_n \oint_l (z-a)^{n-k-1} dz$$
+
+Mais nous avons vu que seule l'intégrale de $(z-a)^{-1}$ ne s'annule pas. On en déduit que :
+
+$$\alpha_k = \frac{1}{2 \pi \img} \oint_l \frac{f(z)}{(z-a)^{k+1}} dz$$
+
+
+** Théorème des résidus
+
+Considérons le cas où :
+
+$$f(z) = \sum_{n=-p}^{+\infty} \alpha_n (z-a)^n$$
+
+pour un certain $p \in \setZ$. On dit alors que $f$ à un pôle d'ordre $p$ en $a$.
+En multpliant le tout par $(z-a)^p$ et en dérivant $p-1$ fois, on obtient :
+
+$$\frac{d^{p-1}}{dz^{p-1}}[(z-a)^p f(z)] = (p-1) ! \left[a_{-1} + a_0 (z-a) + a_1 (z-a)^2 + ...\right]$$
+
+On a donc :
+
+$$\lim_{z \to a} \frac{d^{p-1}}{dz^{p-1}}[(z-a)^p f(z)] = (p-1) ! a_{-1}$$
+
+Mais comme $a_{-1}$ n'est rien d'autre, à un facteur $2\pi\img$ près, que l'intégrale de
+$f$ sur un contour entourant $a$, on a :
+$$$$
+\oint_l f(z) dz = 2 \pi \img \lim_{z \to a} \frac{1}{(p-1)!} \frac{d^{p-1}}{dz^{p-1}}[(z-a)^p f(z)]
+
+

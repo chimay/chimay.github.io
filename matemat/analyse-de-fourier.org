@@ -1,0 +1,546 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Analyse de Fourier
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:fourier}
+
+* Séries de Fourier
+
+ARRANGER LE CHAPITRE
+
+Constatons tout d'abord que :
+
+#+BEGIN_CENTER
+\(
+\int_0^{2\pi} \exp(\img k x) dx =
+\begin{cases}
+2 \pi & \mbox{si  } k = 0 \\
+0 & \mbox{si  } k \ne 0
+\end{cases}
+\)
+#+END_CENTER
+
+pour tout $k\in\setZ$. En effet, si $k=0$, l'intégrale devient :
+
+$$\int_0^{2\pi} \exp(0) dx = \int_0^{2\pi} 1 dx = 2 \pi$$
+
+Par contre, si $k\ne 0$, le changement de variable :
+
+#+BEGIN_CENTER
+\(
+s = \img k x \)
+
+\(
+ds =  \img k dx
+\)
+#+END_CENTER
+
+nous mène à :
+
+$$\int_0^{2\pi} \exp(\img k x) dx = \unsur{\img k} \int_0^{2\pi\img k} \exp(s) ds$$
+
+le théorème fondamental nous donne alors :
+
+$$\int_0^{2\pi} \exp(\img k x) dx = \unsur{\img k} [\exp(2\pi\img k)-\exp(0)] = 0$$
+
+pour tout $k\in\setZ$, par périodicité des exponentielles imaginaires.
+On généralise ce résultat en utilisant le changement de variable :
+
+$$t = a + \frac{T}{2\pi} x$$
+
+ce qui nous donne :
+
+#+BEGIN_CENTER
+\[ \int_a^{a+T} \exp\left(\frac{2\pi\img k x}{T}\right) dx =
+\begin{cases}
+T & \mbox{si  } k = 0 \\
+0 & \mbox{si  } k \ne 0
+\end{cases} \]
+#+END_CENTER
+
+Définissons à présent le produit scalaire :
+
+$$\scalaire{u}{v} = \int\limits_{-T/2}^{T/2} \bar{u}(x) v(x) dx$$
+
+Soient les fonctions $e_k$ :
+
+$$e_k : x \mapsto \exp\left(\frac{2\pi\img k x}{T}\right)$$
+
+où $k\in\setZ$. Notons que :
+
+#+BEGIN_CENTER
+\(
+\bar{e}_m e_n =
+\exp\left(-\frac{2\pi\img m x}{T}\right)\exp\left(\frac{2\pi\img n x}{T}\right) \)
+
+\(
+\bar{e}_m e_n = \exp\left(\frac{2\pi\img (n-m) x}{T}\right)
+\)
+#+END_CENTER
+
+La suite des $e_k$ est donc orthonormée :
+
+$$\scalaire{e_m}{e_n} = \int\limits_{-T/2}^{T/2} \exp\left(\frac{2\pi\img (n-m) x}{T}\right)dx = 2 \pi \delta_{mn}$$
+
+Soit à présent $u\in\ev{e_k : k\in\setZ}$ :
+
+$$u(x) = \sum_{k=-\infty}^{+\infty} \hat{u}_k e_k$$
+
+Nous avons vu au chapitre \ref{chap:vector} que les composantes d'un vecteur
+(ici la fonction $u$) par rapport à une base orthonormée s'écrivent :
+
+$$\hat{u}_k = \scalaire{e_k}{u} = \int\limits_{-T/2}^{T/2} u(x) \exp\left(-\frac{2\pi\img k x}{T}\right)dx$$
+
+Soit à présent $v$ :
+
+$$v(x) = \sum_{k=-\infty}^{+\infty} \hat{v}_k e_k$$
+
+Utilisant à nouveau les propriétés des bases orthonormées, on a :
+
+$$\scalaire{u}{v} = \sum_{k=-\infty}^{+\infty} \conjugue(\hat{u}_k) \hat{v}_k$$
+
+* Transformeée de Fourier discrète
+
+Dans le cas où :
+
+#+BEGIN_CENTER
+\(
+a = \exp(\img x) \ne 1 \)
+
+\(
+a^k = \exp(\img k x)
+\)
+#+END_CENTER
+
+l'équation de la progression géométrique
+du chapitre \ref{chap:real} :
+
+$$\sum_{i=0}^{n} a^i = \frac{1-a^{n+1}}{1-a}$$
+
+devient :
+
+$$\sum_{k=0}^{n} \exp(\img k x) = \frac{1-\exp(\img (n+1) x)}{1-\exp(\img x)}$$
+
+On voit alors que si $(n+1) x$ est un multiple entier de $2\pi$, la
+somme s'annule par périodicité. Il existe toutefois une exception,
+lorsque $x$ est un multiple entier de $2\pi$, auquel cas :
+
+#+begin_center
+\( \exp\left( \img k x \right) = \exp\left( 2 \pi \img k \right) = 1 \)
+#+end_center
+
+et :
+
+#+begin_center
+$$\sum_{k=0}^{n} \exp(\img k x) = \sum_{k=0}^{n} 1 = n + 1 $$
+#+end_center
+
+
+Posant $N = n - 1$ et $x = 2\pi l/N$, on obtient :
+
+#+begin_center
+$$ (n + 1) x = \frac{N 2 \pi l}{N} = 2 \pi l $$
+#+end_center
+
+et :
+
+#+BEGIN_CENTER
+\[ \sum_{k=0}^{N-1} \exp \left( \frac{2 \pi \img k l}{N} \right) =
+\begin{cases}
+N & \mbox{si  } m = l/N \in\setZ \\
+0 & \mbox{si  } m = l/N \notin\setZ
+\end{cases} \]
+#+END_CENTER
+
+pour tout $k,l,m,N \in \setZ$. Dans la suite nous utilisons la notation :
+
+$$e(k,l) = \exp \left( \frac{2 \pi \img k l}{N} \right)$$
+
+Nous allons en déduire la forme de la transformeée de Fourier discrète. Soit la
+série $u_k : k = 0,...,N-1$ :
+
+$$u_k = \sum_{n=-N/2}^{N/2-1} U_n e(k,n)$$
+
+où nous supposons que $N/2 \in\setN$. Multipliant par $e(k,-m)$ où
+$m \in \{-N/2,...,N/2-1\}$, et utilisant l'additivité des exponentielles, il vient :
+
+#+BEGIN_CENTER
+\begin{eqnarray*}
+u_k e(k,-m) &=& \sum_{n=-N/2}^{N/2-1} U_n e(k,n) e(k,-m) \\
+            &=& \sum_{n=-N/2}^{N/2-1} U_n e(k,n-m)
+\end{eqnarray*}
+#+END_CENTER
+
+Sommons à présent sur $k$ :
+
+$$\sum_{k=0}^{N-1} u_k e(k,-m) = \sum_{n=-N/2}^{N/2-1} U_n \sum_{k=0}^{N-1} e(k,n-m)$$
+
+Mais la somme sur $k$ du membre de droite s'annule sauf lorsque $n-m$
+est multiple entier de $N$. Comme $m,n$ sont dans $\{-N/2,...,N/2-1\}$, le seul
+cas possible est ici $m = n$. On a donc :
+
+#+begin_center
+$$\sum_{k=0}^{N-1} u_k e(k,-m) = U_m N$$
+#+end_center
+
+et :
+
+$$U_m = \unsur{N} \sum_{k=0}^{N-1} u_k e(k,-m)$$
+
+Nous avons donc obtenu une bijection entre les $u_k$ et les $U_n$ :
+
+#+BEGIN_CENTER
+$$ u_k = \sum_{n=-N/2}^{N/2-1} U_n \exp\left(\frac{2 \pi \img k n}{N}\right) $$
+
+$$ U_n = \unsur{N} \sum_{k=0}^{N-1} u_k \exp\left(-\frac{2 \pi \img k n}{N}\right) $$
+#+END_CENTER
+
+* Transformeée de Fourier
+
+#+TOC: headlines 1 local
+
+** Heuristique
+
+On peut présenter le résultat précédent sous une autre forme. On peut poser :
+
+#+BEGIN_CENTER
+\(
+x_k = k\Delta x \)
+
+\(
+y_n = n\Delta y
+\)
+#+END_CENTER
+
+avec la condition :
+
+$$\Delta x \Delta y = \frac{1}{N}$$
+
+Avec les fonctions $u,v \in X \subset \fonction(\setR,\setR)$,
+on pose :
+
+#+BEGIN_CENTER
+\(
+u_k = u(x_k) \)
+
+\(
+U_n = U(y_n)
+\)
+#+END_CENTER
+
+Soit :
+
+#+begin_center
+\begin{eqnarray*}
+u(x_k) &=& \sum_{n=-N/2}^{N/2-1} U(y_n) \exp(2 \pi \img x_k y_n) \Delta y \\
+       &=& \sum_{n=-N/2}^{N/2-1} U(y_n) \exp(2 \pi \img k n \Delta x \Delta y) \Delta y \\
+       &=& \sum_{n=-N/2}^{N/2-1} U(y_n) \exp\left( \frac{2 \pi \img k n}{N} \right) \Delta y
+\end{eqnarray*}
+#+end_center
+
+où $k = -N/2 , ... ,N/2 - 1$. Suivant un procédé analogue à la
+transformée de Fourier discière :
+
+#+begin_center
+\begin{eqnarray*}
+\sum_{k=0}^{N-1} u(x_k) \exp( - 2\pi\img k m ) \Delta x
+  &=& \sum_{k=0}^{N-1} \sum_{n=-N/2}^{N/2-1} U(y_n) \exp\left( \frac{2 \pi \img k (n - m)}{N} \right) \Delta x \Delta y \\
+  &=& \sum_{n=-N/2}^{N/2-1} U(y_n) \sum_{k=0}^{N-1} \exp\left( \frac{2 \pi \img k (n - m)}{N} \right) \Delta x \Delta y \\
+  &=& \sum_{n=-N/2}^{N/2-1} U(y_n) \sum_{k=0}^{N-1} \exp\left( \frac{2 \pi \img k (n - m)}{N} \right) \Delta x \Delta y \\
+  &=& U(y_m) N \Delta x \Delta y \\
+  &=& U(y_m)
+\end{eqnarray*}
+#+end_center
+
+on aboutit à la relation inverse :
+
+$$U(y_n) = \sum_{k = -N/2}^{N/2-1} u(x_k) \exp(-2 \pi \img x_k y_n) \Delta x$$
+
+Choisissons :
+
+$$\Delta x  = \Delta y = \frac{1}{\sqrt{N}}$$
+
+On voit que $\Delta x$ et $\Delta y$ tendent alors vers $0$ lorsque $N$ tend vers l'infini.
+Les sommes ci-dessus se rapprochent donc de plus en plus d'intégrales sur
+l'intervalle $[-\sqrt{N}/2,\sqrt{N}/2]$, qui tend lui-même vers
+$(-\infty,+\infty) = \setR$. On arrive donc aux relations :
+
+#+BEGIN_CENTER
+$$ u(x) = \int\limits_{-\infty}^{+\infty} U(y) \exp(2\pi\img x y) dy $$
+
+$$ U(y) = \int\limits_{-\infty}^{+\infty} u(x) \exp(-2\pi\img x y) dx $$
+#+END_CENTER
+
+On définit alors la transformeée de Fourier $\mathcal{F} : X \mapsto X$ et
+son inverse par :
+
+#+BEGIN_CENTER
+$$ U(y) = \mathcal{F}(u)(y) = \int\limits_{-\infty}^{+\infty} u(x) \exp(-2\pi\img x y) dx $$
+
+$$ u(x) = \mathcal{F}^{-1}(U)(x) = \int\limits_{-\infty}^{+\infty} U(y) \exp(2\pi\img x y) dy $$
+#+END_CENTER
+
+
+** Delta de Dirac
+
+On déduit des relations ci dessus que :
+
+#+BEGIN_CENTER
+\(
+u(x) = \int\limits_{-\infty}^{+\infty} \exp(2\pi\img x y) dy
+\int\limits_{-\infty}^{+\infty} u(z) \exp(-2\pi\img z y) dz \)
+
+\(
+u(x) = \int\limits_{-\infty}^{+\infty} u(z) dz
+\int\limits_{-\infty}^{+\infty} \exp(2\pi\img (x-z) y) dy
+\)
+#+END_CENTER
+
+On en déduit la relation fondamentale :
+
+$$\int\limits_{-\infty}^{+\infty} \exp(2\pi\img (x-z) y) dy = \delta(x-z)$$
+
+qui est l'extension de l'orthonormalité des bases discrètes.
+Ce n'est donc pas une intégrale au sens classique du terme, mais une distribution.
+
+Cette relation nous montre aussi, lorsque $z=0$, que :
+
+$$\mathcal{F}(1)(x) = \delta(x)$$
+
+Inversément, on a :
+
+$$\mathcal{F}(\delta)(x) = \int\limits_{-\infty}^{+\infty} \delta(x) \exp(-2\pi\img x y) dx = \exp(0) = 1$$
+
+
+** Produit scalaire
+
+Considérons à présent le produit scalaire :
+
+$$\scalaire{u}{v} = \int\limits_{-\infty}^{+\infty} \bar{u}(x) v(x) dx$$
+
+et examinons $\scalaire{\mathcal{F}(u)}{\mathcal{F}(v)}$. En utilisant la propriété
+d'orthonormalité, on arrive à :
+
+#+BEGIN_CENTER
+\(
+\int\limits_{-\infty}^{+\infty} \conjugue\left[\mathcal{F}(u)(y)\right] \mathcal{F}(v)(y) dy =
+\int_{\setR^2} \bar{u}(x) v(z) \exp\left(2\pi\img (x-z) y\right) dx dz \)
+
+\(
+\int\limits_{-\infty}^{+\infty} \conjugue\left[\mathcal{F}(u)(y)\right] \mathcal{F}(v)(y) dy =
+\int_{\setR^2} \bar{u}(x) v(z) \delta(x-z) dx dz
+\)
+#+END_CENTER
+
+et donc :
+
+#+BEGIN_CENTER
+\(
+\int\limits_{-\infty}^{+\infty} conjugue\left[\mathcal{F}(u)(y)\right] \mathcal{F}(v)(y) dy =
+\int\limits_{-\infty}^{+\infty} \bar{u}(x) v(x) dx
+\)
+#+END_CENTER
+
+La transformeée de Fourier possède donc la propriété de conserver
+le produit scalaire :
+
+$$\scalaire{\mathcal{F}(u)}{\mathcal{F}(v)} = \scalaire{u}{v}$$
+
+
+** Convolution
+
+La transformeèe d'un produit de convolution s'écrit :
+
+#+BEGIN_CENTER
+\(
+\mathcal{F}(u \star v)(y) =
+\int\limits_{-\infty}^{+\infty} \exp(-2\pi\img x y) dx
+\int\limits_{-\infty}^{+\infty} u(x-z) v(z) dz
+\)
+#+END_CENTER
+
+Considérons le changement de variable :
+
+#+BEGIN_CENTER
+\(
+\xi = x - z  \)
+
+\(
+\eta = z
+\)
+#+END_CENTER
+
+On a alors $x = \xi + \eta$ et :
+
+#+BEGIN_CENTER
+\(
+\mathcal{F}(u \star v)(y) =
+\int\limits_{-\infty}^{+\infty} u(\xi) \exp(-2\pi\img \xi y) d\xi
+\int\limits_{-\infty}^{+\infty} v(\eta) \exp(-2\pi\img \eta y) d\eta
+\)
+#+END_CENTER
+
+c'est-à-dire :
+
+$$\mathcal{F}(u \star v) = \mathcal{F}(u)\mathcal{F}(v)$$
+
+
+** Dérivées
+
+Soit $u$ une fonction qui s'annule à l'infini. La transformeée de Fourier
+de sa dérivée s'écrit :
+
+#+BEGIN_CENTER
+\(
+\mathcal{F}\left(\OD{u}{x}\right)(y) =
+\int\limits_{-\infty}^{+\infty} \OD{u}{x}(x)\exp(-2\pi\img x y) dx
+\)
+#+END_CENTER
+
+En intégrant par partie, et en tenant compte du fait que
+les limites à l'infini sont nulles, il vient :
+
+#+BEGIN_CENTER
+\(
+\mathcal{F}\left(\OD{u}{x}\right)(y) =
+- (-2\pi\img y) \int\limits_{-\infty}^{+\infty} u(x)\exp(-2\pi\img x y) dx
+\)
+#+END_CENTER
+
+et finalement :
+
+$$\mathcal{F}\left(\OD{u}{x}\right)(y) =  2 \pi \img y \mathcal{F}(y)$$
+
+
+** Déphasage
+
+Considérons l'opérateur de translation :
+
+$$t_a(u)(x) = u(x-a)$$
+
+La transformeée de Fourier d'une translatée de la fonction $u$ s'écrit :
+
+#+BEGIN_CENTER
+\(
+\mathcal{F}\left[t_a(u)\right](y) =
+\int\limits_{-\infty}^{+\infty} u(x-a) \exp(-2\pi\img x y) dx \)
+
+\(
+\mathcal{F}\left[t_a(u)\right](y) = \exp(-2\pi\img a y)
+\int\limits_{-\infty}^{+\infty} u(x-a) \exp(-2\pi\img (x-a) y) dx
+\)
+#+END_CENTER
+
+Mais comme $dx = d(x-a)$, on en déduit que :
+
+$$\mathcal{F}\left[t_a(u)\right](y) = \exp(-2\pi\img a y)\mathcal{F}(u)(y)$$
+
+
+** Dilatation
+
+Soit $d_a$ l'opérateur de dilatation :
+
+$$d_a(u)(x) = u(a x)$$
+
+où $a > 0$ est un réel strictement positif.
+
+La transformeée de Fourier de la fonction dilaté $d_a(u)$ s'écrit :
+
+#+BEGIN_CENTER
+\(
+\mathcal{F}\left[d_a(u)\right](y) =
+\int\limits_{-\infty}^{+\infty} u(a x) \exp(-2\pi\img x y) dx
+\)
+#+END_CENTER
+
+Considérons le changement de variable $z = a x$. On a alors :
+
+#+BEGIN_CENTER
+\(
+\mathcal{F}\left[d_a(u)\right](y) =
+\unsur{a}\int\limits_{-\infty}^{+\infty} u(z)
+\exp\left(-2\pi\img z \frac{y}{a}\right) dz \)
+
+\(
+\mathcal{F}\left[d_a(u)\right](y) = \unsur{a}\mathcal{F}(u)(y/a)
+\)
+#+END_CENTER
+
+c'est-à-dire :
+
+$$\mathcal{F}\left[d_a(u)\right] = \unsur{a}\mathcal{F}\left[d_{1/a}(u)\right]$$
+
+
+** Gaussienne
+
+Définissons la gaussienne $G$ :
+
+$$G(x) = \exp(-\pi x^2)$$
+
+Sa transformeée s'écrit :
+
+$$\mathcal{F}(G)(y) = \int\limits_{-\infty}^{+\infty} \exp(-\pi x^2 - 2\pi\img x y) dx$$
+
+Il est clair que :
+
+#+BEGIN_CENTER
+\(
+\exp\left[ -\pi (x+\img y)^2 \right] =
+\exp(-\pi x^2 - 2 \pi\img x y)\exp(\pi y^2)
+\)
+#+END_CENTER
+
+Il vient donc, en effectuant le changement de variable
+$\xi = x + \img y$ :
+
+$$\mathcal{F}(G)(y) = \exp(-\pi y^2) \int\limits_{-\infty}^{+\infty} \exp(-\pi \xi^2) d\xi$$
+
+Mais nous avons vu au chapitre \ref{chap:integ} que cette dernière
+intégrale vaut $1$. Donc :
+
+$$\mathcal{F}(G) = G$$
+
+La transformeée de Fourier laisse $G$ inchangée.
+
+* Auto-adjoint
+
+La transformeée de Fourier (voir chapitre \ref{chap:fourier}) est définie par :
+
+$$\mathcal{F}(u)(y) = \int_{\setR} u(x) \exp(2\pi \img x y) dx$$
+
+où $\img = \sqrt{-1}$. On a :
+
+#+BEGIN_CENTER
+\(
+\int_{\setR} \mathcal{F}(u)(y) v(y) dy = \int_{\setR} u(x) v(y) \exp(2\pi \img x y) dx dy \)
+
+\(
+\int_{\setR} \mathcal{F}(u)(y) v(y) dy = \int_{\setR} u(x) \mathcal{F}(v)(x) dx
+\)
+#+END_CENTER
+
+et donc :
+
+$$\forme{\mathcal{F}(u)}{v} = \forme{u}{\mathcal{F}(v)}$$
+
+

@@ -1,0 +1,513 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Collections
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:ondelet}
+
+* Introduction
+
+Les ondelettes constitue un outil d'analyse de signal puissant. L'idée est de décomposer une
+fonction en différentes échelles, des échelles grossières jusqu'à des résolution très fines.
+Contrairement aux séries de Fourier, elles ont une influence locale et des relations simples
+entres les différentes échelles représentées, ce qui permet  de passer rapidement
+(en $\mathcal{O}(N)$) d'une représentation à une autre.
+
+Elles sont fort utilisées en compression de donnée (son, image, ...)
+où les coefficients les plus négligeables sont ignorés.
+
+AFAIRE : ARRANGER LE CHAPITRE
+
+Le plus simple est de commencer avec un exemple célèbre : les ondelettes de Haar :
+
+#+BEGIN_CENTER
+\(
+\varphi(x) = \indicatrice_{[0,1[}(x) \)
+
+\(
+\psi(x) = \indicatrice_{[0,1/2[}(x) - \indicatrice_{[1/2,1[}(x)
+\)
+#+END_CENTER
+
+La fonction $\varphi$ est appelée fonction d'échelle, tandis que
+$\psi$ est l'ondelette proprement dite. La propriété principale
+d'un système d'ondelette est qu'il permet facilement de changer
+d'échelle. Ainsi, on a :
+
+#+BEGIN_CENTER
+\(
+\varphi(x) = \varphi(2x) + \varphi(2x-1) = a_0^0 \varphi(2x) + a_1^0 \varphi(2x-1) \)
+
+\(
+\psi(x) = \varphi(2x) - \varphi(2x-1) = a_0^1 \varphi(2x) + a_1^1 \varphi(2x-1)
+\)
+#+END_CENTER
+
+où l'on a posé $a_0^0 = 1$,  $a_1^0 = 1$,  $a_0^1 = 1$,  $a_1^1 = -1$.
+En inversant les deux relations ci-dessus, on arrive à :
+
+#+BEGIN_CENTER
+\(
+\varphi(2x) = \frac{1}{2} ( \varphi(x) + \psi(x) ) \)
+
+\(
+\varphi(2x-1) = \frac{1}{2} ( \varphi(x) - \psi(x) )
+\)
+#+END_CENTER
+
+Les deux représentations ci-dessous sont donc équivalentes :
+
+#+BEGIN_CENTER
+\(
+f(x) = f_1 \varphi(2x) + f_2 \varphi(2x-1) \)
+
+\(
+f(x) = \frac{f_1+f_2}{2} \varphi(x) + \frac{f_1 - f_2}{2} \psi(x)
+\)
+#+END_CENTER
+
+La différence est que l'on représente $f$ tantôt comme une somme de fonctions
+de base de même échelle, tantôt comme une superposition d'échelles différentes.
+En effet, $\varphi(2x), \varphi(2x-1),\psi(x) $ représentent l'échelle fine $1/2$, tandis
+que $\varphi(x)$ représente l'échelle grossière $1$ (un petit dessin peut aider).
+
+Une autre propriété importante est que le support des fonctions $\varphi$ et $\psi$ est borné,
+et donc la fonction  $\varphi_{jk} : x \mapsto \varphi( 2^j x - k )$ à un support $S_j$ de plus
+en plus fin lorsque $j$ augmente. On dit que les ondelettes ont une influence locale.
+
+
+* Définition
+
+Nous allons construire un système d'ondelettes générique à partir des coefficients :
+
+$$a_k^i \quad : \quad i = 0,1,...,m-1 \qquad k, m \in \setZ, m > 1$$
+
+Adoptant la convention $\sum_k = \sum_{k \in \setZ}$,
+nous demandons que ces coefficients vérifient les propriétés de normalisation :
+
+#+BEGIN_CENTER
+\(
+\sum_k a^0_{p+m k} = 1 \)
+
+\(
+\sum_k a_k^i = m \indicatrice_{i,0}
+\)
+#+END_CENTER
+
+et d'orthogonalisation suivantes :
+
+#+BEGIN_CENTER
+\(
+\sum_k a_{k + m r}^i a_{k + m s}^j = m \indicatrice_{ij} \indicatrice_{rs} \)
+
+\(
+\sum_k\sum_{i=0}^{m-1} a^i_{r+m k} a^i_{s+m k} = m \indicatrice_{rs}
+\)
+#+END_CENTER
+
+Par ailleurs, afin d'assurer le caractère compact des fonctions associées, on impose
+la nullité des coefficients en dehors d'un certain domaine :
+
+#+BEGIN_CENTER
+\(
+a^i_k = 0 \qquad \forall k \notin \{0,1,2,.... m g - 1 \}
+\)
+#+END_CENTER
+
+où $g > 0$ est un entier fixé.
+
+Nous allons voir dans la suite que ces propriétés permettent de montrer d'importants
+résultats sur le comportement des ondelettes associées. Remarquons déjà les conséquences
+directes suivantes :
+
+#+BEGIN_CENTER
+\(
+\sum_k a^0_{p-m k} = 1 \)
+
+\(
+\sum_k\sum_{i=0}^{m-1} a^i_{r-m.k} a^i_{s-m.k} = m \indicatrice_{rs} \)
+
+\(
+\)
+#+END_CENTER
+
+Dans la suite, nous utilisons le produit scalaire :
+
+$$\scalaire{u}{v} = \int_{\setR} u(x) v(x) dx$$
+
+
+
+* Construction
+
+La fonction d'échelle s'obtient en partant de :
+
+$$\varphi^{(0)}(x) = \indicatrice_{[0,1[}(x)$$
+
+et en itérant :
+
+$$\varphi^{(n)}(x) = \sum_k a_k^0 \varphi^{(n-1)}(m x - k)$$
+
+Supposant que l'algorithme converge vers un point fixe (voir chapitre \ref{chap:ode}),
+on définit la fonction d'échelle :
+
+$$\varphi = \lim_{n\rightarrow\infty} \varphi^{(n)}$$
+
+Qui possède la propriété :
+
+$$\varphi(x) = \sum_k a_k^0 \varphi(m x - k)$$
+
+Le système d'ondelettes est définit finalement par :
+
+#+BEGIN_CENTER
+\(
+\varphi(x) = \sum_k a_k^0 \varphi(m x - k) \)
+
+\(
+\psi^i(x) = \sum_k a_k^i \varphi(m x - k)
+\)
+#+END_CENTER
+
+
+
+* Propriétés
+
+Les propriétés des $a^i_k$ permettent de montrer, par récurrence sur $n$, que :
+
+#+BEGIN_CENTER
+\(
+\int_{\setR} \varphi(x) dx = 1 \)
+
+\(
+\int_{\setR} \psi^i(x) dx = 0
+\)
+#+END_CENTER
+
+En effet, on a $\int_{\setR} \varphi^{(0)} = 1$ et si on suppose que
+ $\int_{\setR} \varphi^{(n-1)} = 1$ alors :
+
+#+BEGIN_CENTER
+\(
+\int_{\setR} \varphi^{(n)}(x) dx = \sum_k a_k^0 \int_{\setR} \varphi^{(n-1)}(m x - k) dx \)
+
+\(
+\int_{\setR} \varphi^{(n)}(x) dx = \left( \sum_k a_k^0 \right) \frac{1}{m} \int_{\setR} \varphi^{(n-1)}(\xi) d\xi = 1
+\)
+#+END_CENTER
+
+Par ailleurs on a :
+
+#+BEGIN_CENTER
+\(
+\int_{\setR} \psi^i(x) dx =   \sum_k a_k^i \int_{\setR} \varphi(m x - k) dx \)
+
+\(
+\int_{\setR} \psi^i(x) dx = \left( \sum_k a_k^i \right) \frac{1}{m} \int_{\setR} \varphi(\xi) d\xi = 0
+\)
+#+END_CENTER
+
+On peut aussi montrer par récurrence :
+
+$$\support(\varphi) \subseteq \left[0, 1 + (g-1) \sum_{k=0}^{+\infty} \left( \frac{1}{m} \right)^k \right] = \left[0, 1 + (g-1) \frac{m}{m-1} \right]$$
+
+Le support de $\varphi$ est donc bien borné.
+
+Une autre propriété importante qui va nous permettre de prouver la convergence
+des développements en ondelettes est la partition de l'unité :
+
+$$\sum_k \varphi(x-k) = 1 \qquad \forall x \in \setR$$
+
+En effet, il est clair que $\sum_k \varphi^{(0)}(x-k) = 1$. Partant de l'hypothèse de récurrence $\sum_k \varphi^{(n-1)}(x-k) = 1$, on obtient :
+
+#+BEGIN_CENTER
+\(
+\sum_k \varphi^{(n)}(x-k) = \sum_k\sum_l a^0_l \varphi^{(n-1)}\left( m (x - k) - l \right) \)
+
+\(
+\sum_k \varphi^{(n)}(x-k) = \sum_l\sum_k a^0_l \varphi^{(n-1)}(m x - m k - l)
+\)
+#+END_CENTER
+
+Posant $p = m k + l$, cette dernière équation devient :
+
+$$\sum_k \varphi^{(n)}(x-k) = \sum_p \varphi^{(n-1)}(m x - p) \sum_k  a^0_{p - m k}$$
+
+Mais comme $ \sum_k  a^0_{p - m k} = 1$ quel que soit la valeur de $p$, on en déduit que :
+
+$$\sum_k \varphi^{(n)}(x-k) = \sum_p \varphi^{(n-1)}(m x - p) = 1$$
+
+et la propriété de partition de l'unité est démontréé en passant à la limite :
+
+$$\sum_k \varphi(x-k) = \lim_{n \rightarrow +\infty} \sum_k \varphi^{(n)}(x-k) = 1$$
+
+
+* Niveaux
+
+On définit la fonction d'échelle et les ondelettes du niveau $j \in \setN$ comme étant les
+dilatations translatées des fonctions $\varphi,\psi^i$ :
+
+#+BEGIN_CENTER
+\(
+\varphi_{jk}(x) = m^{j/2} \varphi(m^j x - k) \)
+
+\(
+\psi^i_{jk}(x) = m^{j/2} \psi^i(m^j x - k)
+\)
+#+END_CENTER
+
+Le coefficient $m^{j/2}$ permet d'obtenir les normalisations : $\scalaire{\varphi_{jk} }{\varphi_{jk} } = 1$ et $\scalaire{\psi^i_{jk} }{\psi^i_{jk} } = 1$
+
+La définition du système d'ondelettes permet d'obtenir les relations suivantes
+entres échelles voisines :
+
+#+BEGIN_CENTER
+\(
+\varphi_{jk} = \frac{1}{\sqrt{m}} \sum_l a^0_l \varphi_{j+1,m k + l} = \frac{1}{\sqrt{m}} \sum_p a^0_{p - m k} \varphi_{j+1,p}\)
+
+\(
+\psi^i_{jk} = \frac{1}{\sqrt{m}} \sum_l a^i_l \varphi_{j+1,m k + l} =  \frac{1}{\sqrt{m}} \sum_p a^i_{p - m k} \varphi_{j+1,p}\)
+
+\(
+\)
+#+END_CENTER
+
+
+
+* Développement en série et algorithme de Mallat
+
+
+** Convergence
+
+Commençons par remarquer que :
+
+$$\sup_{\xi\in\setR} \varphi_{jk}(\xi) = m^{j/2} \sup_{\xi\in\setR} \varphi(\xi) = m^{j/2} M$$
+
+où $M$ ne dépend pas de $j$.
+
+Soit la mesure de Lebesgue $\mu$ définie par :
+
+$$\mu([a,b]) = \abs{b-a}$$
+
+On a alors :
+
+$$\mu(\support(\varphi_{jk})) = m^{-j} \mu(\support(\varphi)) = m^{-j} \indicatrice_0$$
+
+où $\indicatrice_0$ de dépend pas de $j$. Le support des fonctions $\varphi_{jk}$ est donc de
+plus en plus fin lorsque $j$ augmente.
+
+Nous définissons la famille d'ensembles :
+
+$$K_j(x) = \{ k \in \setZ : \varphi_{jk}(x) \ne 0 \}$$
+
+où $x \in \setR$. On obtient, à partir des propriétés du support de $\varphi$, que :
+
+$$m^j x - k \in \suppport(\varphi) \Rightarrow m^j x - 2 g \le k \le m^j x$$
+
+pour tout $k\in K_j(x)$. On a donc :
+
+$$\# K_j(x) \le 2 g$$
+
+Pour un réel $x$ fixé, le nombre de $\varphi_{jk}(x)$ non nuls est donc borné, et ce quelle que soit la valeur de $j \in \setN$.
+
+Choisissons $x,y \in \suppport(\varphi_{jk})$. On a alors :
+
+$$\abs{x-y} \le \indicatrice_0 m^{-j}$$
+
+et par continuité de $f$ :
+
+$$\abs{f(x)-f(y)} \le \epsilon_j$$
+
+avec :
+
+$$\lim_{j \rightarrow +\infty} \epsilon_j = 0$$
+
+Utilisant un simple changement de variable $\xi = m^j y - k$, on obtient :
+
+#+BEGIN_CENTER
+\(
+\int_{\setR} \varphi_{jk}(y) dy  = \int_{\setR} m^{j/2} \varphi\left( m^j y - k \right) dy \)
+
+\(
+\int_{\setR} \varphi_{jk}(y) dy  = \int_{\setR} m^{j/2} \varphi(\xi) m^{-j} d\xi \)
+
+\(
+\int_{\setR} \varphi_{jk}(y) dy  = m^{-j/2} \int_{\setR} \varphi(\xi) d\xi = m^{-j/2}
+\)
+#+END_CENTER
+
+Comme $m^j x \in \setR$, on a aussi :
+
+$$\sum_k \varphi_{jk}(x) = m^{j/2} \sum_k \varphi( m^j x - k ) = m^{j/2}$$
+
+Donc :
+
+#+BEGIN_CENTER
+\(
+\sum_k \varphi_{jk}(x) \int_{\setR} \varphi_{jk}(y) dy = m^{-j/2} \sum_k \varphi_{jk}(x) \)
+
+\(
+\sum_k \varphi_{jk}(x) \int_{\setR} \varphi_{jk}(y) dy = m^{-j/2} m^{j/2} = 1
+\)
+#+END_CENTER
+
+On en déduit en particulier que :
+
+$$f(x) = \sum_k \varphi_{jk}(x) \int_{\setR} f(x) \varphi_{jk}(y) dy$$
+
+On aimerait bien montrer que les fonctions échelles de niveau $j$ quelconque forment un cadre (voir chapitre \ref{chap:tensor}), c'est-à-dire que :
+
+$$f = \sum_k\scalaire{f}{\varphi_{jk}}\varphi_{jk}$$
+
+Pour $x$ fixé, seuls les $k$ appartenant à $K_j(x)$ vont donner une contribution non nulle
+à la somme :
+
+$$\sum_k\scalaire{f}{\varphi_{jk}}\varphi_{jk}(x) = \sum_{k \in K_j(x) } \scalaire{f}{\varphi_{jk}}\varphi_{jk}(x)$$
+
+Rassemblant tous les résultats ci-dessus, on en déduit que :
+
+#+BEGIN_CENTER
+\(
+\abs{f(x) - \sum_k\scalaire{f}{\varphi_{jk}}\varphi_{jk}(x)} =
+\abs{\sum_{k \in K_j}\varphi_{jk}(x) \int_{\setR} \left( f(x) - f(y) \right) \varphi_{jk}(y) dy   } \)
+
+\(
+\abs{f(x) - \sum_k\scalaire{f}{\varphi_{jk}}\varphi_{jk}(x)} \le
+2 g M m^{j/2} \epsilon_j \indicatrice_0 m^{-j} M m^{j/2} = 2 g M^2 \indicatrice_0 \epsilon_j
+\)
+#+END_CENTER
+
+qui tend bien vers 0 lorsque $j$ tend vers l'infini.
+
+
+** Algorithme de Mallat
+
+Considérons à présent l'approximation suivante :
+
+$$f(x) \approx \tilde{f}(x) = \sum_k c_{Rk} \varphi_{Rk}(x)$$
+
+où $c_{Rk} = \scalaire{f}{\varphi_{Rk}}$. Nous allons maintenant montrer par récurrence que pour tout $J \le R$ :
+
+$$\tilde{f}(x) = \sum_k c_{Jk} \varphi_{Jk}(x) + \sum_k \sum_{i=1}^{m-1} \sum_{j=J}^{R} d^i_{jk} \psi^i_{jk}(x)$$
+
+où :
+
+#+BEGIN_CENTER
+\(
+c_{jk} = \scalaire{ f  }{ \varphi_{jk}  } \)
+
+\(
+d^i_{jk} = \scalaire{ f  }{ \psi^i_{jk}  }
+\)
+#+END_CENTER
+
+Il suffit pour cela de constater que :
+
+#+BEGIN_CENTER
+\(
+\sum_k c_{jk} \varphi_{jk} + \sum_k\sum_{i=1}^{m-1} d^i_{jk} \psi^i_{jk} =
+\sum_k \scalaire{ f  }{ \varphi_{jk} } \varphi_{jk} + \sum_k\sum_{i=1}^{m-1} \scalaire{ f  }{ \psi^i_{jk}  } \psi^i_{jk} \)
+
+\(
+= \frac{1}{m}\sum_{p,q}\sum_k \sum_{i=0}^{m-1} \scalaire{ f  }{ \varphi_{j+1,p} } \varphi_{j+1,q} a^i_{p - m k} a^i_{q - m k} \)
+
+\(
+= \sum_{p,q} \scalaire{ f  }{ \varphi_{j+1,p} } \varphi_{j+1,q} \frac{1}{m} \sum_k \sum_{i=0}^{m-1}  a^i_{p - m k} a^i_{q - m k} \)
+
+\(
+= \sum_{p,q} \scalaire{ f  }{ \varphi_{j+1,p} } \varphi_{j+1,q} \indicatrice_{pq} \)
+
+\(
+= \sum_p \scalaire{ f  }{ \varphi_{j+1,p} } \varphi_{j+1,p}
+\)
+#+END_CENTER
+
+en utilisant les propriétés des $a^i_k$. On peut donc construire le développement du niveau $j+1$ à partir des fonctions
+d'échelles et des ondelettes du niveau $j$.
+La définition des $c_{jk}$, $d^i_{jk}$  combinée aux équations reliant les échelles voisines nous donne :
+
+#+BEGIN_CENTER
+\(
+c_{jk} = \scalaire{ f  }{ \varphi_{jk}  }  =  \frac{1}{\sqrt{m}}\sum_p\scalaire{ f  }{ \varphi_{j+1,p}  } a^0_{p - m k} \)
+
+\(
+c_{jk} = \frac{1}{\sqrt{m}}\sum_p c_{j+1,p} a^0_{p-m.k} = \frac{1}{\sqrt{m}}\sum_l c_{j+1,l + m k} a^0_{l}
+\)
+#+END_CENTER
+
+ainsi que :
+
+#+BEGIN_CENTER
+\(
+d^i_{jk} = \scalaire{ f  }{ \psi^i_{jk}  }  =  \frac{1}{\sqrt{m}}\sum_p\scalaire{ f  }{ \varphi_{j+1,p}  } a^i_{p - m k} \)
+
+\(
+d^i_{jk} = \frac{1}{\sqrt{m}}\sum_p c_{j+1,p} a^i_{p - m k} = \frac{1}{\sqrt{m}}\sum_l c_{j+1,l + m k} a^i_{l}
+\)
+#+END_CENTER
+
+La relation inverse s'obtient à partir de :
+
+#+BEGIN_CENTER
+\(
+\sum_p \scalaire{ f }{ \varphi_{j+1,p} } \varphi_{j+1,p} = \sum_k c_{jk} \varphi_{jk} + \sum_k\sum_{i=1}^{m-1} d^i_{jk} \psi^i_{jk} \)
+
+\(
+\sum_p c_{j+1,p} \varphi_{j+1,p} = \frac{1}{\sqrt{m}}\sum_p \varphi_{j+1,p} \left[ \sum_k c_{jk} a^0_{p - m k}
++ \sum_k\sum_{i=1}^{m-1} d^i_{jk} a^i_{p - m k} \right] \)
+
+\(
+\)
+#+END_CENTER
+
+En comparant les coefficients des $\varphi_{j+1,p}$, et comme cette équation doit être valable pour tout $x$, on a :
+
+#+BEGIN_CENTER
+\(
+c_{j+1,p} = \frac{1}{\sqrt{m}}\sum_k c_{jk} a^0_{p-m.k} + \sum_k\sum_{i=1}^{m-1} d^i_{jk} a^i_{p - m k}  \)
+
+\(
+c_{j+1,p} = \frac{1}{\sqrt{m}}\sum_k c_{jk} a^0_{p-m.k} + \sum_k\sum_{i=1}^{m-1} d^i_{jk} a^i_{p - m k}  \)
+
+\(
+\)
+#+END_CENTER
+
+On voit donc que pour passer d'une représentation mono-échelle
+
+$$f(x) = \sum_k c_{Rk} \varphi_{Rk}(x)$$
+
+à une représentation multi-échelle
+
+$$f(x) = \sum_k c_{Jk} \varphi_{Jk}(x) + \sum_k \sum_{i=1}^{m-1} \sum_{j=J}^{R} d^i_{jk} \psi^i_{jk}(x)$$
+
+(ou l'inverse) il suffit d'appliquer successivement les équations ci-dessus reliant entre-eux les coefficients
+$c_{j+1,p}$, $c_{jk}$, $d^i_{jk}$, pour $j = R-1,R-2,...,J$.
+En pratique, on approxime les coefficients du niveau de résolution maximal $R$ par :
+
+$$c_{Rk} \approx m^{R/2} f \left(\frac{k}{m^R}\right)$$
+
+Lorsque $f$ est assez régulière pour avoir la convergence :
+
+$$f(x) = \lim_{R \to +\infty} \sum_k c_{Rk} \varphi_{Rk}(x)$$
+
+on écrit :
+
+$$f(x) = \sum_k c_{Jk} \varphi_{Jk}(x) + \sum_k \sum_{i=1}^{m-1} \sum_{j=J}^{+\infty} d^i_{jk} \psi^i_{jk}(x)$$

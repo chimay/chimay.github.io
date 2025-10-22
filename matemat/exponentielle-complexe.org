@@ -1,0 +1,310 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Exponentielle complexe
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:expocomp}
+
+* Dépendances
+
+  - Chapitre \ref{chap:complexe} : Les complexes
+
+* Introduction
+
+AFAIRE : ARRANGER LE CHAPITRE
+
+Considérons l'unique solution $x$ de l'équation différentielle :
+
+#+begin_center
+
+\(
+\OD{x}{t}(t) = z \cdot x(t) \)
+
+\(
+x(0) = 1
+\)
+#+end_center
+
+où $z \in \setC$. On définit alors l'exponentielle d'un nombre complexe par :
+
+$$\exp( z \cdot t ) = x(t)$$
+
+On a donc simplement :
+
+$$\exp(z) = x(1)$$
+
+
+* Additivité
+
+Comme les fonctions :
+
+\(
+s(t) = \exp( (z_1 + z_2) \cdot t ) \)
+
+\(
+p(t) = \exp(z_1 t) \cdot \exp(z_2 t)
+\)
+
+vérifient la même équation différentielle :
+
+#+BEGIN_CENTER
+\(
+\OD{s}{t}(t) = (z_1 + z_2) \ s(t) \)
+
+\(
+s(0) = 1
+\)
+#+END_CENTER
+
+#+BEGIN_CENTER
+\(
+\OD{p}{t}(t) = z_1 \ p(t) + z_2 \ p(t) = (z_1 + z_2) \ p(t) \)
+
+\(
+p(0) = 1
+\)
+#+END_CENTER
+
+on a $s(t) = p(t)$ pour tout $t$. En considérant le cas $t=1$, on arrive à
+la propriété d'additivité des exponentielles :
+
+$$\exp(z_1 + z_2) = \exp(z_1) \cdot \exp(z_2)$$
+
+
+* Lien avec les fonctions trigonométriques
+
+TODO : expliquer mieux avec la linéarité
+
+Considérons maintenant le cas particulier où $u(t) = \exp(\img t)$ :
+
+#+BEGIN_CENTER
+\(
+\OD{u}{t}(t) = \img u(t) \)
+
+\(
+u(0) = 1
+\)
+#+END_CENTER
+
+On a alors :
+
+$$\frac{d^2 u}{dt^2}(t) = - u(t) \qquad u(0) = 1 \qquad \OD{u}{t}(0) = \img$$
+
+Soit la fonction $u : \setR \mapsto \setR$ définie pour tout réel $t$ par :
+
+$$u(t) = \cos(t) + \img \sin(t)$$
+
+On voit que :
+
+$$\OD{u}{t} = -\sin(t) + \img \cos(t)$$
+
+vérifie la même équation. Par unicité de la solution, on a :
+
+$$\exp(\img t) = \cos(t) + \img \sin(t)$$
+
+On en déduit directement que :
+
+#+BEGIN_CENTER
+\(
+\exp(\img \pi/2) = \img \)
+
+\(
+\exp(\img \pi) = -1 \)
+
+\(
+\exp(3\pi\img/2) = \img \)
+
+\(
+\exp(2\pi\img) = 1
+\)
+#+END_CENTER
+
+ainsi que la périodicité :
+
+$$\exp(t+2\pi) = \exp(t)$$
+
+pour tout $t\in\setR$.
+
+En utilisant l'additivité, on note que :
+
+$$\exp(z) = \exp(a) \cdot \exp(\img b) =  \exp(a) \cdot (\cos(b) + \img \sin(b))$$
+
+De la même façon, si nous prenons $u(t) = \exp(-i.t)$, nous en déduisons :
+
+#+BEGIN_CENTER
+\(
+\frac{d^2 u}{dt^2}(t) = - u(t) \)
+
+\(
+u(0) = 1 \qquad \OD{u}{t}(0) = -i
+\)
+#+END_CENTER
+
+Donc :
+
+$$\exp(-\img t) = \cos(t) - \img \sin(t)$$
+
+En additionnant, puis en soustrayant les relations :
+
+#+BEGIN_CENTER
+\(
+\exp( \img u ) = \cos(u) + \img \sin(u) \)
+
+\(
+\exp( - \img u ) = \cos(u) - \img \sin(u)
+\)
+#+END_CENTER
+
+on obtient :
+
+#+BEGIN_CENTER
+\(
+\cos(u) = \frac{ \exp(\img u) + \exp(-\img u) }{2} \)
+
+\(
+\sin(u) = \frac{ \exp(\img u) - \exp(-\img u) }{2 \img}
+\)
+#+END_CENTER
+
+Choisissant un angle $\theta\in\setR$ tel que :
+
+#+BEGIN_CENTER
+\(
+\cos(\theta) = \frac{\Re(z)}{\abs{z}} \)
+
+\(
+\sin(\theta) = \frac{\Im(z)}{\abs{z}}
+\)
+#+END_CENTER
+
+on peut réexprimer $z$ comme :
+
+$$z = \abs{z}(\cos(\theta)+\img\sin(\theta)) = \abs{z}\exp(\img\theta)$$
+
+Comme les fonctions $\cos$ sont $2\pi$ périodiques, il existe une infinité
+d'angles $\theta$ vérifiant cette propriété. On définit l'argument de
+$z$ comme l'unique $\theta$ vérifiant cette propriété et se trouvant
+dans l'intervalle $[0,2\pi)$.
+
+#+BEGIN_CENTER
+\[ \theta = \arg(z) \quad\Leftrightarrow\quad
+\begin{cases}
+z = \abs{z}\exp(\img\theta) \\
+\theta\in [0,2\pi)
+\end{cases} \]
+#+END_CENTER
+
+Inspiré par la relation :
+
+$$z = \abs{z}\exp(\img\arg(z))$$
+
+et cherchant à étendre la propriété :
+
+$$\ln(x \cdot y) = \ln(x) + \ln(y)$$
+
+du logarithme sur $\setR$, on définit le logarithme d'un complexe par :
+
+#+BEGIN_CENTER
+\(
+\ln(z) = \ln(\abs{z}) + \ln(\exp(\img\arg(z))) \)
+
+\(
+\ln(z) = \ln(\abs{z}) + \img\arg(z)
+\)
+#+END_CENTER
+
+Pour un $z \in \setC$ donné, l'ensemble des $y \in \setC$ tels que :
+
+$$\exp(y) = z$$
+
+peut s'écrire :
+
+$$\mathcal{Y} = \{ y_k = \ln(\abs{z}) + \img \arg(z) + 2 \pi \img k : k \in \setZ \}$$
+
+Les complexes permettent de retrouver aisément les propriétés
+fondamentales des fonctions trigonométriques $\cos$, $\sin$.
+En se rappelant que :
+
+$$\exp(-\img t) \cdot \exp(i t) = \exp(i t - i t) = \exp(0) = 1$$
+
+on retombe sur :
+
+#+BEGIN_CENTER
+\(
+( \cos(t) + \img \sin(t) ) ( \cos(t) - \img \sin(t) ) = 1 \)
+
+\(
+\cos(t)^2 + \sin(t)^2 = 1
+\)
+#+END_CENTER
+
+En dérivant la relation reliant l'exponentielle aux fonctions trigonométriques, on obtient :
+
+#+BEGIN_CENTER
+\(
+\OD{}{t}( \cos(t) + \img \sin(t) ) = \OD{}{t}\exp(\img t) \)
+
+\(
+\OD{}{t} \cos(t) + \img \OD{}{t}\sin(t) = \img \exp(\img t) \)
+
+\(
+\OD{}{t} \cos(t) + \img \OD{}{t}\sin(t) = \img \cos(t) - \sin(t)
+\)
+#+END_CENTER
+
+on a bien :
+
+#+BEGIN_CENTER
+\(
+\OD{}{t} \cos(t) = -\sin(t) \)
+
+\(
+\OD{}{t}\sin(t) = \cos(t)
+\)
+#+END_CENTER
+
+On a aussi :
+
+#+BEGIN_CENTER
+\(
+\cos(u+v) + \img \sin(u+v) = \exp\left[ \img ( u + v ) \right] \)
+
+\(
+\cos(u+v) + \img \sin(u+v) = \exp\left[ \img u  \right] \cdot \exp\left[ \img  v \right] \)
+
+\(
+\cos(u+v) + \img \sin(u+v) = (\cos(u) + \img \sin(u))(\cos(v) + \img \sin(v))
+\)
+#+END_CENTER
+
+ce qui donne, tous calculs faits :
+
+#+BEGIN_CENTER
+\(
+\cos(u+v) = \cos(u)\cos(v) - \sin(u)\sin(v) \)
+
+\(
+\sin(u+v) = \sin(u)\cos(v) + \sin(v)\cos(u)
+\)
+#+END_CENTER
+
+

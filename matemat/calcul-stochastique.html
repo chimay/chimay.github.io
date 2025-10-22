@@ -1,0 +1,863 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<!-- 2025-10-22 mer 15:27 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Eclats de vers : Matemat : Calcul stochastique</title>
+<meta name="author" content="chimay" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Eclats de vers : Matemat : Calcul stochastique</h1>
+<p>
+<a href="index.html">Index des Grimoires</a>
+</p>
+
+<p>
+<a href="../index.html">Retour à l’accueil</a>
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org1724f73">1. Processus stochastique</a></li>
+<li><a href="#org6569772">2. Intégrale d'Ito</a></li>
+<li><a href="#org823403d">3. Variation quadratique</a></li>
+<li><a href="#org67e2477">4. Variation conjointe</a></li>
+<li><a href="#orgcaa55dd">5. Relations variations quadratiques - conjointes</a></li>
+<li><a href="#org3bc0510">6. Variation d'ordre quelconque</a></li>
+<li><a href="#orgdd567b4">7. Calcul d'Ito</a></li>
+<li><a href="#org664a4d6">8. Mouvement Brownien</a></li>
+</ul>
+</div>
+</div>
+
+<p>
+\(
+\newcommand{\parentheses}[1]{\left(#1\right)}
+\newcommand{\crochets}[1]{\left[#1\right]}
+\newcommand{\accolades}[1]{\left\{#1\right\}}
+\newcommand{\ensemble}[1]{\left\{#1\right\}}
+\newcommand{\identite}{\mathrm{Id}}
+\newcommand{\indicatrice}{\boldsymbol{\delta}}
+\newcommand{\dirac}{\delta}
+\newcommand{\moinsun}{{-1}}
+\newcommand{\inverse}{\ddagger}
+\newcommand{\pinverse}{\dagger}
+\newcommand{\topologie}{\mathfrak{T}}
+\newcommand{\ferme}{\mathfrak{F}}
+\newcommand{\img}{\mathbf{i}}
+\newcommand{\binome}[2]{
+\left\{ \begin{array}{c}
+#1 \\
+#2 \\
+\end{array} \right\}
+}
+\newcommand{\canonique}{\mathfrak{c}}
+\newcommand{\tenseuridentite}{\boldsymbol{\mathcal{I}}}
+\newcommand{\permutation}{\boldsymbol{\epsilon}}
+\newcommand{\matriceZero}{\mathfrak{0}}
+\newcommand{\matriceUn}{\mathfrak{1}}
+\newcommand{\christoffel}[2]{
+\left\{ \begin{array}{c}
+#1 \\
+#2 \\
+\end{array} \right\}
+}
+\newcommand{\lagrangien}{\mathfrak{L}}
+\newcommand{\sousens}{\mathfrak{P}}
+\newcommand{\partition}{\mathrm{Partition}}
+\newcommand{\tribu}{\mathrm{Tribu}}
+\newcommand{\topologies}{\mathrm{Topo}}
+\newcommand{\setB}{\mathbb{B}}
+\newcommand{\setN}{\mathbb{N}}
+\newcommand{\setZ}{\mathbb{Z}}
+\newcommand{\setQ}{\mathbb{Q}}
+\newcommand{\setR}{\mathbb{R}}
+\newcommand{\setC}{\mathbb{C}}
+\newcommand{\corps}{\mathbb{K}}
+\newcommand{\boule}{\mathfrak{B}}
+\newcommand{\intervalleouvert}[2]{\left] #1 , #2 \right[}
+\newcommand{\intervallesemiouvertgauche}[2]{ \left] #1 , #2 \right]}
+\newcommand{\intervallesemiouvertdroite}[2]{\left[ #1 , #2 \right[ }
+\newcommand{\fonction}{\mathbb{F}}
+\newcommand{\bijection}{\mathrm{Bij}}
+\newcommand{\polynome}{\mathrm{Poly}}
+\newcommand{\lineaire}{\mathrm{Lin}}
+\newcommand{\continue}{\mathrm{Cont}}
+\newcommand{\homeomorphisme}{\mathrm{Hom}}
+\newcommand{\etagee}{\mathrm{Etagee}}
+\newcommand{\lebesgue}{\mathrm{Leb}}
+\newcommand{\lipschitz}{\mathrm{Lip}}
+\newcommand{\suitek}{\mathrm{Suite}}
+\newcommand{\matrice}{\mathbb{M}}
+\newcommand{\krylov}{\mathrm{Krylov}}
+\newcommand{\tenseur}{\mathbb{T}}
+\newcommand{\essentiel}{\mathfrak{E}}
+\newcommand{\relation}{\mathrm{Rel}}
+\DeclareMathOperator*{\strictinferieur}{\ < \ }
+\DeclareMathOperator*{\strictsuperieur}{\ > \ }
+\DeclareMathOperator*{\ensinferieur}{\eqslantless}
+\DeclareMathOperator*{\enssuperieur}{\eqslantgtr}
+\DeclareMathOperator*{\esssuperieur}{\gtrsim}
+\DeclareMathOperator*{\essinferieur}{\lesssim}
+\newcommand{\essegal}{\eqsim}
+\newcommand{\union}{\ \cup \ }
+\newcommand{\intersection}{\ \cap \ }
+\newcommand{\opera}{\divideontimes}
+\newcommand{\autreaddition}{\boxplus}
+\newcommand{\autremultiplication}{\circledast}
+\newcommand{\commutateur}[2]{\left[ #1 , #2 \right]}
+\newcommand{\convolution}{\circledcirc}
+\newcommand{\correlation}{\ \natural \ }
+\newcommand{\diventiere}{\div}
+\newcommand{\modulo}{\bmod}
+\DeclareMathOperator*{\pgcd}{pgcd}
+\DeclareMathOperator*{\ppcm}{ppcm}
+\newcommand{\produitscalaire}[2]{\left\langle #1 \vert #2 \right\rangle}
+\newcommand{\scalaire}[2]{\left\langle #1 \| #2 \right\rangle}
+\newcommand{\braket}[3]{\left\langle #1 \vert #2 \vert #3 \right\rangle}
+\newcommand{\orthogonal}{\bot}
+\newcommand{\forme}[2]{\left\langle #1 , #2 \right\rangle}
+\newcommand{\biforme}[3]{\left\langle #1 , #2 , #3 \right\rangle}
+\newcommand{\contraction}[3]{\left\langle #1 \odot #3 \right\rangle_{#2}}
+\newcommand{\dblecont}[5]{\left\langle #1 \vert #3 \vert #5 \right\rangle_{#2,#4}}
+\DeclareMathOperator*{\major}{major}
+\DeclareMathOperator*{\minor}{minor}
+\DeclareMathOperator*{\maxim}{maxim}
+\DeclareMathOperator*{\minim}{minim}
+\DeclareMathOperator*{\argument}{arg}
+\DeclareMathOperator*{\argmin}{arg\ min}
+\DeclareMathOperator*{\argmax}{arg\ max}
+\DeclareMathOperator*{\supessentiel}{ess\ sup}
+\DeclareMathOperator*{\infessentiel}{ess\ inf}
+\newcommand{\dual}{\star}
+\newcommand{\distance}{\mathfrak{dist}}
+\newcommand{\norme}[1]{\left\| #1 \right\|}
+\newcommand{\normetrois}[1]{\left|\left\| #1 \right\|\right|}
+\DeclareMathOperator*{\adh}{adh}
+\DeclareMathOperator*{\interieur}{int}
+\newcommand{\frontiere}{\partial}
+\DeclareMathOperator*{\image}{im}
+\DeclareMathOperator*{\domaine}{dom}
+\DeclareMathOperator*{\noyau}{ker}
+\DeclareMathOperator*{\support}{supp}
+\DeclareMathOperator*{\signe}{sign}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\unsur}[1]{\frac{1}{#1}}
+\newcommand{\arrondisup}[1]{\lceil #1 \rceil}
+\newcommand{\arrondiinf}[1]{\lfloor #1 \rfloor}
+\DeclareMathOperator*{\conjugue}{conj}
+\newcommand{\conjaccent}[1]{\overline{#1}}
+\DeclareMathOperator*{\division}{division}
+\newcommand{\difference}{\boldsymbol{\Delta}}
+\newcommand{\differentielle}[2]{\mathfrak{D}^{#1}_{#2}}
+\newcommand{\OD}[2]{\frac{d #1}{d #2}}
+\newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
+\newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
+\newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
+\newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
+\newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\gradient}{\mathbf{\nabla}}
+\newcommand{\combilin}[1]{\mathrm{span}\{ #1 \}}
+\DeclareMathOperator*{\trace}{tr}
+\newcommand{\proba}{\mathbb{P}}
+\newcommand{\probaof}[1]{\mathbb{P}\left[#1\right]}
+\newcommand{\esperof}[1]{\mathbb{E}\left[#1\right]}
+\newcommand{\cov}[2]{\mathrm{cov} \left( #1 , #2 \right) }
+\newcommand{\var}[1]{\mathrm{var} \left( #1 \right) }
+\newcommand{\rand}{\mathrm{rand}}
+\newcommand{\variation}[1]{\left\langle #1 \right\rangle}
+\DeclareMathOperator*{\composante}{comp}
+\DeclareMathOperator*{\bloc}{bloc}
+\DeclareMathOperator*{\ligne}{ligne}
+\DeclareMathOperator*{\colonne}{colonne}
+\DeclareMathOperator*{\diagonale}{diag}
+\newcommand{\matelementaire}{\mathrm{Elem}}
+\DeclareMathOperator*{\matpermutation}{permut}
+\newcommand{\matunitaire}{\mathrm{Unitaire}}
+\newcommand{\gaussjordan}{\mathrm{GaussJordan}}
+\newcommand{\householder}{\mathrm{Householder}}
+\DeclareMathOperator*{\rang}{rang}
+\newcommand{\schur}{\mathrm{Schur}}
+\newcommand{\singuliere}{\mathrm{DVS}}
+\newcommand{\convexe}{\mathrm{Convexe}}
+\newcommand{\petito}[1]{o\left(#1\right)}
+\newcommand{\grando}[1]{O\left(#1\right)}
+\)
+</p>
+
+<p>
+\(
+\newenvironment{Eqts}
+{ \begin{equation*} \begin{gathered} }
+{ \end{gathered} \end{equation*} }
+\newenvironment{Matrix}
+{\left[ \begin{array}}
+{\end{array} \right]}
+\)
+</p>
+
+<p>
+\label{chap:stocha}
+</p>
+<div id="outline-container-org1724f73" class="outline-2">
+<h2 id="org1724f73"><span class="section-number-2">1.</span> Processus stochastique</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Un processus stochastique est une fonction :
+</p>
+
+<p>
+\[X : [0,+\infty) \times \Omega \mapsto \setR, \quad (t,\omega) \mapsto X(t,\omega)\]
+</p>
+
+<p>
+On sous-entend souvent l'événement \(\omega\), et on note \(X(t)=X(t,\omega)\).
+</p>
+</div>
+</div>
+<div id="outline-container-org6569772" class="outline-2">
+<h2 id="org6569772"><span class="section-number-2">2.</span> Intégrale d'Ito</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Il s'agit d'une intégrale utilisant un processus stochastique \(X\) comme mesure :
+</p>
+
+<p>
+\[I(t) = \int_0^t f(s) \ dX(s) = \lim_{\delta \to 0} \sum_k f(t_k) (X(t_{k+1}) - X(t_k))\]
+</p>
+</div>
+</div>
+<div id="outline-container-org823403d" class="outline-2">
+<h2 id="org823403d"><span class="section-number-2">3.</span> Variation quadratique</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Soit \(\delta \strictsuperieur 0\) et les \(N\) temps \(t_k = k \cdot \delta\) où \(k = 0,...,\arrondisup{\frac{T}{\delta}}\). On définit la variation quadratique d'une fonction \(f\) :
+</p>
+
+<p>
+\[\variation{f}(T) = \lim_{\delta \to 0} \sum_k (f(t_{k+1}) - f(t_k))^2\]
+</p>
+
+<p>
+Si la dérivée de \(f\) existe, la variation quadratique s'annule car :
+</p>
+
+<p>
+\[(f(t_{k+1}) - f(t_k))^2 \to \delta^2 \ \OD{f}{t}(t_k)^2\]
+</p>
+
+<p>
+Comme \(\delta^2 \to \delta \ ds\), on a :
+</p>
+
+<p>
+\[\variation{f}(T) = \lim_{\delta \to 0} \delta \int_0^T \left(\OD{f}{t}(s)\right)^2 ds = 0\]
+</p>
+</div>
+</div>
+<div id="outline-container-org67e2477" class="outline-2">
+<h2 id="org67e2477"><span class="section-number-2">4.</span> Variation conjointe</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Considérons maintenant deux processus stochastiques \(X,Y\). Nous définissons la variation conjointe \(\variation{X,Y}\) :
+</p>
+
+<p>
+\[\variation{X,Y}(T) = \lim_{\delta \to 0} \sum_k (X(t_{k+1}) - X(t_k)) \ (Y(t_{k+1}) - Y(t_k))\]
+</p>
+
+<p>
+Dans le cas où les dérivées de \(X\) et de \(Y\) existent, on a évidemment : \(\variation{X,Y} = 0\).
+</p>
+
+<p>
+Pour une fonction \(f : \setR^2 \mapsto \setR\) quelconque, nous avons :
+</p>
+
+<p>
+\[df(X,Y) = f(X + \ dX,Y + dY) - f(X,Y)\]
+</p>
+
+<p>
+Dans le cas particulier où \(f(X,Y)=X \cdot Y\), cette expression se réduit à :
+</p>
+
+\begin{align}
+d(X \cdot Y) &= (X + \ dX) \cdot (Y + dY) - X \cdot Y \)
+
+\(
+&= \ dX \cdot Y + X \cdot dY + \ dX \cdot dY
+\end{align}
+
+<p>
+Mais comme :
+</p>
+
+<p>
+\[\variation{X,Y}(t) = \int_0^t \ dX \cdot dY\]
+</p>
+
+<p>
+on a en définitive :
+</p>
+
+\begin{align}
+X(t) Y(t) - X(0) Y(0) &= \int_0^t d(X Y)(s) \)
+
+\(
+&= \int_0^t X(s) \ dY(s) + \int_0^t Y(s) \ dX(s) + \variation{X,Y}(t)
+\end{align}
+</div>
+</div>
+<div id="outline-container-orgcaa55dd" class="outline-2">
+<h2 id="orgcaa55dd"><span class="section-number-2">5.</span> Relations variations quadratiques - conjointes</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+La définition nous donne directement :
+</p>
+
+<p>
+\[\variation{X} = \variation{X,X}\]
+</p>
+
+<p>
+On peut aussi vérifier que :
+</p>
+
+<p>
+\[(X + Y)^2 - (X - Y)^2 = 4 \ X \ Y\]
+</p>
+
+<p>
+d'où l'on déduit :
+</p>
+
+<p>
+\[\variation{X,Y} = \unsur{4} ( \variation{X + Y} - \variation{X - Y} )\]
+</p>
+</div>
+</div>
+<div id="outline-container-org3bc0510" class="outline-2">
+<h2 id="org3bc0510"><span class="section-number-2">6.</span> Variation d'ordre quelconque</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Soit \(\delta \strictsuperieur 0\) et les temps \(t_k = k \delta\) où \(k = 0,...,\arrondisup{\frac{T}{\delta}}\). On définit la variation d'ordre \(n\) d'une fonction \(f\) :
+</p>
+
+<p>
+\[\variation{f}^n(T) = \lim_{\delta \to 0} \sum_k (f(t_{k+1}) - f(t_k))^n\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgdd567b4" class="outline-2">
+<h2 id="orgdd567b4"><span class="section-number-2">7.</span> Calcul d'Ito</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Soit une fonction \(F : \setR^n \mapsto \setR\) et \(N\) processus stochastiques \(X_i\) dont les variations d'ordre \(n \ge 3\) s'annulent. Soit \(X=(X_1,...,X_N)\). On peut écrire le développement en série de Taylor d'ordre 2 :
+</p>
+
+<p>
+\[F(X + \Delta) - F(X) \approx \deriveepartielle{F}{X}(X) \Delta + \unsur{2} \Delta^T \dblederiveepartielle{F}{X}(X) \Delta\]
+</p>
+
+<p>
+En faisant tendre \(\Delta \to 0\), on obtient :
+</p>
+
+<p>
+\[dF = \deriveepartielle{F}{X} \ dX + \unsur{2} \ dX^T \dblederiveepartielle{F}{X} \ dX\]
+</p>
+
+<p>
+On a donc la formule de Ito pour une fonction $f : \setR<sup>n</sup> \mapsto \setR $ :
+</p>
+
+<p>
+\[dF = \sum_i \deriveepartielle{F}{X_i} \ dX_i + \unsur{2} \sum_{i,j} \dfdxdy{F}{X_i}{X_j} \ dX_i \ dX_j\]
+</p>
+
+<p>
+Ce qui nous permet d'évaluer une variation de \(F\) :
+</p>
+
+<div class="org-center">
+<p>
+\(
+F(X(t)) - F(X(0)) =  \sum_i \int_0^t \deriveepartielle{F}{X_i}(X(s)) \ dX_i(s) + \)
+</p>
+
+<p>
+\(
+\unsur{2} \sum_{i,j} \int_0^t \dfdxdy{F}{X_i}{X_j}(X(s)) \ d\variation{X_i,X_j}(s)
+\)
+</p>
+</div>
+</div>
+<div id="outline-container-org33c14f1" class="outline-3">
+<h3 id="org33c14f1"><span class="section-number-3">7.1.</span> Dérivées ordinaires</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+Dans le cas d'une seule variable, on a :
+</p>
+
+<p>
+\[dF = \sum_i \OD{F}{X} \ dX + \unsur{2} \OOD{F}{X} \ dX \ dX\]
+</p>
+
+<p>
+Ce qui nous permet d'évaluer une variation de \(F\) :
+</p>
+
+<div class="org-center">
+<p>
+\(
+F(X(t)) - F(X(0)) = \sum_i \int_0^t \OD{F}{X}(X(s)) \ dX(s) + \)
+</p>
+
+<p>
+\(
+\unsur{2} \int_0^t \OOD{F}{X}(X(s)) d\variation{X}(s)
+\)
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org664a4d6" class="outline-2">
+<h2 id="org664a4d6"><span class="section-number-2">8.</span> Mouvement Brownien</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Un mouvement brownien est un processus stochastique :
+</p>
+
+<p>
+\[B : [0,+\infty) \times \Omega \mapsto \setR, \quad (t,\omega) \mapsto B(t,\omega)\]
+</p>
+
+<p>
+continu par rapport à \(t\) :
+</p>
+
+<p>
+\[B_\omega : t \mapsto B(t,\omega) \in \Cont([0,+\infty))\]
+</p>
+
+<p>
+De plus, si on définit :
+</p>
+
+<p>
+\[\mathcal{B}_t : \omega \mapsto B(t,\omega)\]
+</p>
+
+<p>
+on a la propriété d'indépendance des variations temporelles :
+</p>
+
+<p>
+\[\cov{\mathcal{B}_u - \mathcal{B}_t}{\mathcal{B}_t - \mathcal{B}_s} = 0\]
+</p>
+
+<p>
+pour tout \(s \strictinferieur t \strictinferieur u\) positifs. On demande aussi qu'une variation \(\mathcal{B}_t - \mathcal{B}_s\) suive une loi normale d'espérance nulle et de variance \(t-s\) :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\esperof{\mathcal{B}_t - \mathcal{B}_s}=0 \)
+</p>
+
+<p>
+\(
+\var{\mathcal{B}_t - \mathcal{B}_s} = t - s
+\)
+</p>
+</div>
+</div>
+<div id="outline-container-org87659a7" class="outline-3">
+<h3 id="org87659a7"><span class="section-number-3">8.1.</span> Variation quadratique</h3>
+<div class="outline-text-3" id="text-8-1">
+<p>
+Si les mouvements browniens sont continus, ils ne sont pas dérivables. Comme les variations sont normalement distribuées avec une moyenne nulle et une variance \(t - s\), on en déduit (en utilisant par exemple le moment générateur des densités normales) :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\esperof{(\mathcal{B}_t - \mathcal{B}_s)^2} = t - s \)
+</p>
+
+<p>
+\(
+\var{(\mathcal{B}_t - \mathcal{B}_s)^2} = 2 \ (t - s)^2
+\)
+</p>
+</div>
+
+<p>
+La variation quadratique des mouvement browniens peut s'écrire :
+</p>
+
+<p>
+\[\variation{B_\omega}(T) = \lim_{\delta \to 0} \sum_k (B_\omega(t_{k+1}) - B_\omega(t_k))^2\]
+</p>
+
+<p>
+Lorsque \(\delta \to 0\), on a \(N \to +\infty\) et la loi des grands nombres nous dit que
+chaque terme de la somme de droite converge vers la variance \(\delta\). Comme on a \(N\)
+termes, on obtient :
+</p>
+
+<p>
+\[\sum_k B_\omega(t_{k+1}) - B_\omega(t_k) \to N \delta = T\]
+</p>
+
+<p>
+On a donc :
+</p>
+
+<p>
+\[\variation{\mathcal{B}_\omega}(T) = T\]
+</p>
+
+<p>
+Ce que l'on note symboliquement sous forme différentielle par :
+</p>
+
+<p>
+\[dB(t) \cdot dB(t) = dt\]
+</p>
+</div>
+</div>
+<div id="outline-container-org3c43f96" class="outline-3">
+<h3 id="org3c43f96"><span class="section-number-3">8.2.</span> Variations d'ordre quelconque</h3>
+<div class="outline-text-3" id="text-8-2">
+<p>
+Les variations \(\variation{B}^n\) d'un mouvement brownien s'annulent pour \(n \ge 3\).
+</p>
+</div>
+</div>
+<div id="outline-container-org74b530f" class="outline-3">
+<h3 id="org74b530f"><span class="section-number-3">8.3.</span> Multidimensionnel</h3>
+<div class="outline-text-3" id="text-8-3">
+<p>
+Nous définissons un mouvement Brownien de dimension \(n\) comme une collection de \(n\) mouvements Browniens \(B_i\) indépendants et vérifiant :
+</p>
+
+<p>
+\[\variation{B_i,B_j}(t) = \indicatrice_{ij} \cdot t\]
+</p>
+</div>
+</div>
+<div id="outline-container-org6fd1b56" class="outline-3">
+<h3 id="org6fd1b56"><span class="section-number-3">8.4.</span> Calul d'Ito</h3>
+<div class="outline-text-3" id="text-8-4">
+<p>
+Dans le cas de \(N\) mouvement browniens \(B_i\), les équations d'Ito deviennent :
+</p>
+
+<p>
+\[dF = \sum_i \deriveepartielle{F}{X_i} dB_i + \unsur{2} \sum_{i,j} \dfdxdy{F}{X_i}{X_j} \ dB_i \ dB_j\]
+</p>
+
+<p>
+Mais comme \(dB_i dB_j = d\variation{B_i,B_j} = \indicatrice_{ij} \ dt\), on a :
+</p>
+
+<p>
+\[dF = \sum_i \deriveepartielle{F}{X_i} \ dB_i + \unsur{2} \sum_i \dfdxdy{F}{X_i}{X_i} \ dt\]
+</p>
+
+<p>
+Ce qui nous permet d'évaluer une variation de \(F\) :
+</p>
+
+<div class="org-center">
+<p>
+\(
+F(X(t)) - F(X(0)) = \sum_i \int_0^t \deriveepartielle{F}{X_i}(X(s)) \ dX_i(s) + \)
+</p>
+
+<p>
+\(
+\unsur{2} \sum_i \int_0^t \dfdxdy{F}{X_i}{X_i}(X(s)) \ ds
+\)
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfe768f9" class="outline-3">
+<h3 id="orgfe768f9"><span class="section-number-3">8.5.</span> Dérivée ordinaire</h3>
+<div class="outline-text-3" id="text-8-5">
+<p>
+Le cas particulier unidimensionnel nous donne :
+</p>
+
+<p>
+\[dF(B) = \OD{F}{X}(B) \ dB + \unsur{2}\OOD{F}{X}(B) \ dB \cdot dB\]
+</p>
+
+<p>
+Mais comme :
+</p>
+
+<p>
+\[d\variation{B} = dB \cdot dB = dt\]
+</p>
+
+<p>
+on a :
+</p>
+
+<p>
+\[dF(B) = \OD{F}{X}(B) \ dB + \unsur{2}\OOD{F}{X}(B) \ dt\]
+</p>
+
+<p>
+et :
+</p>
+
+<p>
+\[F(B(t))-F(B(0)) = \int_0^t \OD{F}{X}(B(s)) \ dB(s) + \unsur{2} \int_0^t \OOD{F}{X}(B(s)) \ ds\]
+</p>
+
+<p>
+AFAIRE : PROCESSUS DE POISSON
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Auteur: chimay</p>
+<p class="date">Created: 2025-10-22 mer 15:27</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

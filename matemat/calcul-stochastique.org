@@ -1,0 +1,273 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Calcul stochastique
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:stocha}
+
+* Processus stochastique
+
+Un processus stochastique est une fonction :
+
+$$X : [0,+\infty) \times \Omega \mapsto \setR, \quad (t,\omega) \mapsto X(t,\omega)$$
+
+On sous-entend souvent l'événement $\omega$, et on note $X(t)=X(t,\omega)$.
+
+
+* Intégrale d'Ito
+
+Il s'agit d'une intégrale utilisant un processus stochastique $X$ comme mesure :
+
+$$I(t) = \int_0^t f(s) \ dX(s) = \lim_{\delta \to 0} \sum_k f(t_k) (X(t_{k+1}) - X(t_k))$$
+
+
+* Variation quadratique
+
+Soit $\delta \strictsuperieur 0$ et les $N$ temps $t_k = k \cdot \delta$ où $k = 0,...,\arrondisup{\frac{T}{\delta}}$. On définit la variation quadratique d'une fonction $f$ :
+
+$$\variation{f}(T) = \lim_{\delta \to 0} \sum_k (f(t_{k+1}) - f(t_k))^2$$
+
+Si la dérivée de $f$ existe, la variation quadratique s'annule car :
+
+$$(f(t_{k+1}) - f(t_k))^2 \to \delta^2 \ \OD{f}{t}(t_k)^2$$
+
+Comme $\delta^2 \to \delta \ ds$, on a :
+
+$$\variation{f}(T) = \lim_{\delta \to 0} \delta \int_0^T \left(\OD{f}{t}(s)\right)^2 ds = 0$$
+
+
+* Variation conjointe
+
+Considérons maintenant deux processus stochastiques $X,Y$. Nous définissons la variation conjointe $\variation{X,Y}$ :
+
+$$\variation{X,Y}(T) = \lim_{\delta \to 0} \sum_k (X(t_{k+1}) - X(t_k)) \ (Y(t_{k+1}) - Y(t_k))$$
+
+Dans le cas où les dérivées de $X$ et de $Y$ existent, on a évidemment : $\variation{X,Y} = 0$.
+
+Pour une fonction $f : \setR^2 \mapsto \setR$ quelconque, nous avons :
+
+$$df(X,Y) = f(X + \ dX,Y + dY) - f(X,Y)$$
+
+Dans le cas particulier où $f(X,Y)=X \cdot Y$, cette expression se réduit à :
+
+\begin{align}
+d(X \cdot Y) &= (X + \ dX) \cdot (Y + dY) - X \cdot Y \)
+
+\(
+&= \ dX \cdot Y + X \cdot dY + \ dX \cdot dY
+\end{align}
+
+Mais comme :
+
+$$\variation{X,Y}(t) = \int_0^t \ dX \cdot dY$$
+
+on a en définitive :
+
+\begin{align}
+X(t) Y(t) - X(0) Y(0) &= \int_0^t d(X Y)(s) \)
+
+\(
+&= \int_0^t X(s) \ dY(s) + \int_0^t Y(s) \ dX(s) + \variation{X,Y}(t)
+\end{align}
+
+
+* Relations variations quadratiques - conjointes
+
+La définition nous donne directement :
+
+$$\variation{X} = \variation{X,X}$$
+
+On peut aussi vérifier que :
+
+$$(X + Y)^2 - (X - Y)^2 = 4 \ X \ Y$$
+
+d'où l'on déduit :
+
+$$\variation{X,Y} = \unsur{4} ( \variation{X + Y} - \variation{X - Y} )$$
+
+
+* Variation d'ordre quelconque
+
+Soit $\delta \strictsuperieur 0$ et les temps $t_k = k \delta$ où $k = 0,...,\arrondisup{\frac{T}{\delta}}$. On définit la variation d'ordre $n$ d'une fonction $f$ :
+
+$$\variation{f}^n(T) = \lim_{\delta \to 0} \sum_k (f(t_{k+1}) - f(t_k))^n$$
+
+
+* Calcul d'Ito
+
+Soit une fonction $F : \setR^n \mapsto \setR$ et $N$ processus stochastiques $X_i$ dont les variations d'ordre $n \ge 3$ s'annulent. Soit $X=(X_1,...,X_N)$. On peut écrire le développement en série de Taylor d'ordre 2 :
+
+$$F(X + \Delta) - F(X) \approx \deriveepartielle{F}{X}(X) \Delta + \unsur{2} \Delta^T \dblederiveepartielle{F}{X}(X) \Delta$$
+
+En faisant tendre $\Delta \to 0$, on obtient :
+
+$$dF = \deriveepartielle{F}{X} \ dX + \unsur{2} \ dX^T \dblederiveepartielle{F}{X} \ dX$$
+
+On a donc la formule de Ito pour une fonction $f : \setR^n \mapsto \setR $ :
+
+$$dF = \sum_i \deriveepartielle{F}{X_i} \ dX_i + \unsur{2} \sum_{i,j} \dfdxdy{F}{X_i}{X_j} \ dX_i \ dX_j$$
+
+Ce qui nous permet d'évaluer une variation de $F$ :
+
+#+BEGIN_CENTER
+\(
+F(X(t)) - F(X(0)) =  \sum_i \int_0^t \deriveepartielle{F}{X_i}(X(s)) \ dX_i(s) + \)
+
+\(
+\unsur{2} \sum_{i,j} \int_0^t \dfdxdy{F}{X_i}{X_j}(X(s)) \ d\variation{X_i,X_j}(s)
+\)
+#+END_CENTER
+
+
+** Dérivées ordinaires
+
+Dans le cas d'une seule variable, on a :
+
+$$dF = \sum_i \OD{F}{X} \ dX + \unsur{2} \OOD{F}{X} \ dX \ dX$$
+
+Ce qui nous permet d'évaluer une variation de $F$ :
+
+#+BEGIN_CENTER
+\(
+F(X(t)) - F(X(0)) = \sum_i \int_0^t \OD{F}{X}(X(s)) \ dX(s) + \)
+
+\(
+\unsur{2} \int_0^t \OOD{F}{X}(X(s)) d\variation{X}(s)
+\)
+#+END_CENTER
+
+
+* Mouvement Brownien
+
+Un mouvement brownien est un processus stochastique :
+
+$$B : [0,+\infty) \times \Omega \mapsto \setR, \quad (t,\omega) \mapsto B(t,\omega)$$
+
+continu par rapport à $t$ :
+
+$$B_\omega : t \mapsto B(t,\omega) \in \Cont([0,+\infty))$$
+
+De plus, si on définit :
+
+$$\mathcal{B}_t : \omega \mapsto B(t,\omega)$$
+
+on a la propriété d'indépendance des variations temporelles :
+
+$$\cov{\mathcal{B}_u - \mathcal{B}_t}{\mathcal{B}_t - \mathcal{B}_s} = 0$$
+
+pour tout $s \strictinferieur t \strictinferieur u$ positifs. On demande aussi qu'une variation $\mathcal{B}_t - \mathcal{B}_s$ suive une loi normale d'espérance nulle et de variance $t-s$ :
+
+#+BEGIN_CENTER
+\(
+\esperof{\mathcal{B}_t - \mathcal{B}_s}=0 \)
+
+\(
+\var{\mathcal{B}_t - \mathcal{B}_s} = t - s
+\)
+#+END_CENTER
+
+
+** Variation quadratique
+
+Si les mouvements browniens sont continus, ils ne sont pas dérivables. Comme les variations sont normalement distribuées avec une moyenne nulle et une variance $t - s$, on en déduit (en utilisant par exemple le moment générateur des densités normales) :
+
+#+BEGIN_CENTER
+\(
+\esperof{(\mathcal{B}_t - \mathcal{B}_s)^2} = t - s \)
+
+\(
+\var{(\mathcal{B}_t - \mathcal{B}_s)^2} = 2 \ (t - s)^2
+\)
+#+END_CENTER
+
+La variation quadratique des mouvement browniens peut s'écrire :
+
+$$\variation{B_\omega}(T) = \lim_{\delta \to 0} \sum_k (B_\omega(t_{k+1}) - B_\omega(t_k))^2$$
+
+Lorsque $\delta \to 0$, on a $N \to +\infty$ et la loi des grands nombres nous dit que
+chaque terme de la somme de droite converge vers la variance $\delta$. Comme on a $N$
+termes, on obtient :
+
+$$\sum_k B_\omega(t_{k+1}) - B_\omega(t_k) \to N \delta = T$$
+
+On a donc :
+
+$$\variation{\mathcal{B}_\omega}(T) = T$$
+
+Ce que l'on note symboliquement sous forme différentielle par :
+
+$$dB(t) \cdot dB(t) = dt$$
+
+
+** Variations d'ordre quelconque
+
+Les variations $\variation{B}^n$ d'un mouvement brownien s'annulent pour $n \ge 3$.
+
+
+** Multidimensionnel
+
+Nous définissons un mouvement Brownien de dimension $n$ comme une collection de $n$ mouvements Browniens $B_i$ indépendants et vérifiant :
+
+$$\variation{B_i,B_j}(t) = \indicatrice_{ij} \cdot t$$
+
+
+** Calul d'Ito
+
+Dans le cas de $N$ mouvement browniens $B_i$, les équations d'Ito deviennent :
+
+$$dF = \sum_i \deriveepartielle{F}{X_i} dB_i + \unsur{2} \sum_{i,j} \dfdxdy{F}{X_i}{X_j} \ dB_i \ dB_j$$
+
+Mais comme $dB_i dB_j = d\variation{B_i,B_j} = \indicatrice_{ij} \ dt$, on a :
+
+$$dF = \sum_i \deriveepartielle{F}{X_i} \ dB_i + \unsur{2} \sum_i \dfdxdy{F}{X_i}{X_i} \ dt$$
+
+Ce qui nous permet d'évaluer une variation de $F$ :
+
+#+BEGIN_CENTER
+\(
+F(X(t)) - F(X(0)) = \sum_i \int_0^t \deriveepartielle{F}{X_i}(X(s)) \ dX_i(s) + \)
+
+\(
+\unsur{2} \sum_i \int_0^t \dfdxdy{F}{X_i}{X_i}(X(s)) \ ds
+\)
+#+END_CENTER
+
+
+** Dérivée ordinaire
+
+Le cas particulier unidimensionnel nous donne :
+
+$$dF(B) = \OD{F}{X}(B) \ dB + \unsur{2}\OOD{F}{X}(B) \ dB \cdot dB$$
+
+Mais comme :
+
+$$d\variation{B} = dB \cdot dB = dt$$
+
+on a :
+
+$$dF(B) = \OD{F}{X}(B) \ dB + \unsur{2}\OOD{F}{X}(B) \ dt$$
+
+et :
+
+$$F(B(t))-F(B(0)) = \int_0^t \OD{F}{X}(B(s)) \ dB(s) + \unsur{2} \int_0^t \OOD{F}{X}(B(s)) \ ds$$
+
+AFAIRE : PROCESSUS DE POISSON

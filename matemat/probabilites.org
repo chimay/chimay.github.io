@@ -1,0 +1,1010 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Probabilités
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:proba}
+
+* Probabilité
+
+Une probabilité $\proba$ sur un ensemble d'événements $\Omega$ est une mesure définie sur $\mathcal{S}=\{ A : A \subseteq \Omega \}$ et à valeurs dans $[0,1]$ :
+
+$$\proba : \mathcal{S} \mapsto [0,1] \quad$$
+
+Cette probabilité doit vérifier la normalisation :
+
+$$\probaof{\Omega} = 1$$
+
+ainsi que l'additivité :
+
+$$\probaof{\bigcup_i \Phi_i} = \sum_i \probaof{\Phi_i}$$
+
+lorsque les ensembles $\Phi_i$ sont disjoints deux à deux :
+
+#+BEGIN_CENTER
+\(
+\Phi_i \cap \Phi_j =
+\begin{cases}
+\Phi_i & i = j \)
+
+\(
+\emptyset & i \ne j
+\end{cases}
+\)
+#+END_CENTER
+
+On en déduit directement que :
+
+$$\probaof{\Phi} = \probaof{\Phi \cup \emptyset} = \probaof{\Phi} + \probaof{\emptyset}$$
+
+d'où $\probaof{\emptyset} = 0$.
+
+La grandeur $\probaof{\Phi}$ peut s'interpréter comme la probabilité que l'un des événements de $\Phi$ se réalise.
+
+
+* Variable aléatoire
+
+Une variable aléatoire $X$ associe une valeur réelle a chaque élément de $\Omega$. On a donc $X : \Omega \mapsto \setR$.
+
+
+* Mesure induite
+
+Etant donné une variable aléatoire $X$, on peut définir une mesure induite $\mathcal{L}_X : \sousens(\setR) \mapsto [0,1]$, qui exprime la probabilité qu'un événement $\omega \in \Omega$ donne une valeur appartenant à un sous-ensemble $U \subseteq \setR$ :
+
+$$\mathcal{L}_X(U) = \probaof{X^{-1}(U)} = \probaof{ \{ \omega\in\Omega : X(\omega) \in U \} }$$
+
+
+** Variables conjointes
+
+La mesure induite par deux variables aléatoires $X$ et $Y$ se définit par :
+
+$$\mathcal{L}_{X,Y}(D) = \probaof{ \{ \omega\in\Omega : (X(\omega),Y(\omega)) \in D \} }$$
+
+pour tout $D \subseteq\setR^2$.
+
+On voit clairement que :
+
+#+BEGIN_CENTER
+\(
+\mathcal{L}_X(U) = \mathcal{L}_{X,Y}(U \times \setR) \)
+
+\(
+\mathcal{L}_Y(U) = \mathcal{L}_{X,Y}(\setR \times U)
+\)
+#+END_CENTER
+
+
+* Collection induite
+
+Soit $X$ une variable aléatoire et $U \subseteq \setR$. On définit le sous-ensemble de $\Omega$ :
+
+$$\Theta(X,U) = \{ \omega \in \Omega : X(\omega) \in U \}$$
+
+ou de manière équivalente en utilisant la relation inverse $X^{-1}$ :
+
+$$\Theta(X,U) = X^{-1}(U)$$
+
+La collection $\Lambda(X)$ induite par $X$ est un ensemble regroupant les $\Theta(X,U)$ pour tous les sous-ensembles de $\setR$ :
+
+$$\Lambda(X) = \{ \Theta(X,U) : U \subseteq \setR \}$$
+
+Comme :
+
+#+BEGIN_CENTER
+\(
+\Theta(X,\emptyset) = \emptyset \)
+
+\(
+\Theta(X,\setR) = \Omega
+\)
+#+END_CENTER
+
+il est clair que l'on a $\emptyset, \Omega \in \Lambda(X)$ quelle que soit la variable aléatoire $X$.
+
+
+** Fonctions indicatrices
+
+Si $\Phi \subseteq \Omega$ et $X = \indicatrice_\Phi$, on a :
+
+#+BEGIN_CENTER
+\(
+\Theta(\indicatrice_\Phi, \{1\}) = \{ \omega : \indicatrice_\Phi(\omega) = 1 \} = \Phi \)
+
+\(
+\Theta(\indicatrice_\Phi, \{0\}) = \{ \omega : \indicatrice_\Phi(\omega) = 0 \} = \Omega \setminus \Phi
+\)
+#+END_CENTER
+
+De même, si un ensemble $U \subseteq \setR$ :
+
+  - ne contient ni $1$ ni $0$, on a $\Theta(\indicatrice_\Phi,U) = \emptyset$
+  - contient $1$ et $0$, on a $\Theta(\indicatrice_\Phi,U) = \Omega$
+  - contient $1$ et pas $0$, on a $\Theta(\indicatrice_\Phi,U) = \Phi$
+  - contient $0$ et pas $1$, on a $\Theta(\indicatrice_\Phi,U) = \Omega \setminus \Phi$
+
+On a donc :
+
+$$\Lambda(\indicatrice_\Phi) = \{ \emptyset, \Omega, \Phi, \Omega \setminus \Phi \}$$
+
+
+* Espérance
+
+L'espérance d'une variable aléatoire $X$ est simplement une moyenne pondérée par les probablités que $X$
+prennent telle ou telle valeur :
+
+$$\esperof{X} = \int_{\Omega} X(\omega) \ d\proba(\omega)$$
+
+
+** Indicatrice
+
+Notons que pour tout $\Phi \subseteq \Omega$, on a :
+
+\begin{align}
+\esperof{\indicatrice_\Phi} &= \int_\Omega \indicatrice_\Phi \ d\proba \)
+
+\(
+&= \int_\Phi \ d\proba
+\end{align}
+
+et donc :
+
+$$\esperof{\indicatrice_\Phi} = \probaof{\Phi}$$
+
+
+** Fonction d'une variable aléatoire
+
+Pour toute fonction $G : \setR \mapsto \setR$, on a bien évidemment $G \circ X : \Omega \mapsto \setR$ et on peut définir :
+
+$$\esperof{G(X)} = \int_\Omega (G \circ X)(\omega) \ d\proba(\omega)$$
+
+
+** Fonction de plusieurs variables aléatoires
+
+De même, si $X$ et $Y$ sont deux variables aléatoires, pour toute fonction $G : \setR^2 \mapsto \setR$, on a évidemment $G(X,Y) \in \setR$ et on peut définir :
+
+$$\esperof{G(X,Y)} = \int_\Omega G\left(X(\omega),Y(\omega)\right) \ d\proba(\omega)$$
+
+Le cas particulier $G(X,Y) = a \ X + b \ Y$, où $a,b \in \setR$, nous montre la linéarité de l'espérance, qui découle directement de celle de l'intégrale :
+
+$$\esperof{a \ X + b \ Y} = a \ \esperof{X} + b \ \esperof{Y}$$
+
+
+* Espérance et mesure induite
+
+Soit une variable aléatoire $X$ et la fonction étagée $G : \setR \mapsto \setR$ définie
+pour tout $x \in \setR$ par :
+
+$$G(x) = \sum_i g_i \ \indicatrice_{A_i}(x)$$
+
+où les $A_i$ forment une partition de $\setR$ et où les $g_i$ sont supposés sans
+perte de généralité être des réels distincts. Soit la partition de $\Omega$ constituée
+des ensembles :
+
+$$\Omega_i = X^{-1}(A_i) = \{ \omega \in \Omega : X(\omega) \in A_i \}$$
+
+On voit que $(G \circ X)(\omega) = g_i$ pour tout $\omega \in \Omega_i$.
+Calculons l'espérance de $G(X)$ :
+
+\begin{align}
+\esperof{G(X)} &= \int_\Omega (G \circ X)(\omega) \ d\proba(\omega) \)
+
+\(
+&= \sum_i \int_{\Omega_i} (G \circ X)(\omega) \ d\proba(\omega) \)
+
+\(
+&= \sum_i \int_{\Omega_i} g_i \ d\proba(\omega) \)
+
+\(
+&= \sum_i g_i \int_{\Omega_i} \ d\proba(\omega) \)
+
+\(
+&= \sum_i g_i \ \probaof{\Omega_i}
+\end{align}
+
+Par définition de la mesure induite, on a :
+
+$$\mathcal{L}_X(A_i) = \probaof{X^{-1}(A_i)} = \probaof{\Omega_i}$$
+
+L'espérance de $G(X)$ peut donc s'exprimer comme :
+
+$$\esperof{G(X)} = \sum_i g_i \ \mathcal{L}_X(A_i)$$
+
+Mais le membre de droite n'est autre que l'intégrale de $G$ sur $\setR$
+utilisant la mesure $\mathcal{L}_X$ :
+
+$$\esperof{G(X)} = \int_\setR G(x) \ d\mathcal{L}_X(x)$$
+
+Comme cette expression doit être valable pour toute fonction en escalier, on en conclut que :
+
+$$\esperof{G(X)} = \int_\setR G(x) \ d\mathcal{L}_X(x)$$
+
+pour toute fonction intégrable $G$.
+
+
+** Identité
+
+Le cas particulier $G = \identite$ nous donne :
+
+$$\esperof{X} = \int_\setR x \ d\mathcal{L}_X(x)$$
+
+
+** Densité
+
+Si il existe une fonction $f_X : \setR \mapsto \setR$ telle que $d\mathcal{L}_X = f_X \ dx$,
+où $dx$ correspond à la mesure de Lebesgue sur $\setR$, on a :
+
+$$\esperof{G(X)} = \int_\setR G(x) \ f_X(x) \ dx$$
+
+ainsi que :
+
+$$\esperof{X} = \int_\setR x \ f_X(x) \ dx$$
+
+On nomme cette fonction $f_X$ la densité de la variable aléatoire $X$.
+
+Remarquons que $f_X$ est positive par positivité de la mesure. Comme :
+
+$$\esperof{1} = 1$$
+
+on obtient la propriété de normalité :
+
+$$\int_\setR f_X(x) \ dx = 1$$
+
+
+*** Variable aléatoire gaussienne
+
+Une variable aléatoire est dite normale de paramètres $\mu$, $\sigma$ si sa fonction
+densité vérifie :
+
+$$f_{X}(x) = \frac{1}{ \sigma\sqrt{2 \pi} } \exp\left(-\frac{(x-\mu)^2}{2 \sigma^2}\right)$$
+
+
+** Variables conjointes
+
+Soit les variables aléatoires $X, Y$ et la fonction étagée $G : \setR^2 \mapsto \setR$ définie
+pour tout $x, y \in \setR$ par :
+
+$$G(x,y) = \sum_i g_i \ \indicatrice_{A_i}(x,y)$$
+
+où les $A_i$ forment une partition de $\setR^2$ et où les $g_i$ sont supposés sans
+perte de généralité être des réels distincts. Soit la partition de $\Omega$ constituée
+des ensembles :
+
+$$\Omega_i = \{ \omega \in \Omega : (X(\omega), Y(\omega)) \in A_i \}$$
+
+On voit que $G(X(\omega), Y(\omega)) = g_i$ pour tout $\omega \in \Omega_i$.
+Calculons l'espérance de $G(X,Y)$ :
+
+\begin{align}
+\esperof{G(X,Y)} &= \int_\Omega G(X(\omega), Y(\omega)) \ d\proba(\omega) \)
+
+\(
+&= \sum_i \int_{\Omega_i} G(X(\omega), Y(\omega)) \ d\proba(\omega) \)
+
+\(
+&= \sum_i \int_{\Omega_i} g_i \ d\proba(\omega) \)
+
+\(
+&= \sum_i g_i \int_{\Omega_i} \ d\proba(\omega) \)
+
+\(
+&= \sum_i g_i \ \probaof{\Omega_i}
+\end{align}
+
+Par définition de la mesure induite, on a :
+
+$$\mathcal{L}_{X,Y}(A_i) = \probaof{\Omega_i}$$
+
+L'espérance de $G(X)$ peut donc s'exprimer comme :
+
+$$\esperof{G(X,Y)} = \sum_i g_i \ \mathcal{L}_{X,Y}(A_i)$$
+
+Mais le membre de droite n'est autre que l'intégrale de $G$ sur $\setR^2$
+utilisant la mesure $\mathcal{L}_{X,Y}$ :
+
+$$\esperof{G(X,Y)} = \int_{\setR^2} G(x,y) \ d\mathcal{L}_{X,Y}(x,y)$$
+
+Comme cette expression doit être valable pour toute fonction en escalier, on en conclut que :
+
+$$\esperof{G(X,Y)} = \int_{\setR^2} G(x,y) \ d\mathcal{L}_{X,Y}(x,y)$$
+
+pour toute fonction intégrable $G$.
+
+
+** Densité conjointe
+
+Si il existe une fonction $f_{X,Y} : \setR^2 \mapsto \setR$ telle que
+$d\mathcal{L}_{X,Y} = f_{X,Y} \ dx \ dy$, où $dx \ dy$ correspond à la mesure de Lebesgue
+sur $\setR^2$, on a :
+
+$$\esperof{G(X,Y)} = \int_{\setR^2} G(x,y) \ f_{X,Y}(x,y) \ dx \ dy$$
+
+En considérant le cas particulier $G(X,Y) = X$, on obtient :
+
+\begin{align}
+\esperof{X} &= \int_{\setR^2} x \ f_{X,Y}(x,y) \ dx \ dy \)
+
+\(
+&= \int_\setR x \ \left[\int_\setR f_{X,Y}(x,y) \ dy\right] \ dx
+\end{align}
+
+En définissant la fonction associée $f_X$ par :
+
+$$f_X(x) = \int_\setR f_{X,Y}(x,y) \ dy$$
+
+on peut dès lors écrire l'espérance de $X$ comme :
+
+$$\esperof{X} = \int_\setR x \ f_X(x) \ dx$$
+
+En suivant le même déroulement pour $\esperof{Y}$, et en définissant :
+
+$$f_Y(y) = \int_\setR f_{X,Y}(x,y) \ dx$$
+
+on peut écrire l'espérance de $Y$ comme :
+
+$$\esperof{Y} = \int_\setR y \ f_Y(y) \ dy$$
+
+
+*** Distribution normale
+
+On dit que les variables aléatoires $X_1, ..., X_N$ présentent une distribution normale multivariée si il existe :
+
+#+BEGIN_CENTER
+\(
+\mu = \left( \mu_i \right)_i \)
+
+\(
+\Theta = \left( \sigma_{ij} \right)_{i,j}
+\)
+#+END_CENTER
+
+tels que la fonction densité associée à $X = (X_1, ..., X_N)^T$ s'écrive :
+
+$$\f_X(x) = \unsur{2 \pi^{n/2} \det{A}} \exp\left(-\unsur{2} (x-\mu)^T \cdot \Theta^{-1} \cdot (x-\mu) \right)$$
+
+pour tout $x \in \setR^N$. On a alors :
+
+#+BEGIN_CENTER
+\(
+\esperof{X_i} = \mu_i \)
+
+\(
+\cov{X_i}{X_j} = \sigma_{ij}
+\)
+#+END_CENTER
+
+On a aussi la fonction génératrice :
+
+$$\Psi_X(u) = \exp\left(u^T \cdot \mu + \unsur{2} u^T \cdot \Theta^{-1} \cdot u\right)$$
+
+pour tout $u \in \setR^N$.
+
+* Fonction génératrice des moments
+
+On définit le moment générateur d'une densité par :
+
+$$\Psi_X(u) = \esperof{\exp(X \cdot u)}$$
+
+L'intérêt de cette fonction est qu'elle permet de calculer facilement
+les espérances des puissances naturelles de $X$. En effet :
+
+$$\frac{d^k \Psi_X}{du^k}(u) = \esperof{X^k \ \exp(X \cdot u)}$$
+
+et donc :
+
+$$\OD{\Psi}{u}(0) = \esperof{X^k \ \exp(0)} = \esperof{X^k}$$
+
+
+** Variable gaussienne
+
+A titre d'exemple, nous calculons le  moment générateur associé à une densité gaussienne :
+
+$$\Psi(u) = \unsur{\sqrt{2 \pi} \sigma} \int_\setR \exp(x u) \exp\left(-\frac{(x-\mu)^2}{2 \sigma^2}\right) dx$$
+
+On obtient en développant :
+
+\begin{align}
+\Psi(u) &= \unsur{\sqrt{2 \pi} \sigma} \int_\setR \exp\left(x u - \frac{(x-\mu)^2}{2 \sigma^2}\right) dx \)
+
+\(
+&= \unsur{\sqrt{2 \pi} \sigma} \exp(\mu u + \unsur{2} u^2 \sigma^2) \int_\setR \exp\left(- \frac{(x-(\mu + u \sigma^2) )^2}{2 \sigma^2}\right) dx
+\end{align}
+
+Comme l'intégrale vaut $\sqrt{2 \pi} \sigma$, on obtient finalement :
+
+$$\Psi(u) = \exp(u \mu + \unsur{2} u^2 \sigma^2)$$
+
+
+* Variance
+
+La variance de $X$ est la variation carrée moyenne de $X$ autour de son espérance $\esperof{X}$ :
+
+$$\var{X} = \esperof{\left(X-\esperof{X}\right)^2}$$
+
+Comme la variable $Z = \left(X-\esperof{X}\right)^2$ est positive, son espérance doit également etre positive et $\var{X} \ge 0$.
+
+En développant la définition et en utilisant la linéarité de l'espérance, on obtient :
+
+\begin{align}
+\var{X} &= \esperof{X^2 - 2 \ X \cdot \esperof{X} + \esperof{X}^2} \)
+
+\(
+&= \esperof{X^2} - 2 \ \esperof{X} \cdot \esperof{X} + \esperof{X}^2 \cdot \esperof{1} \)
+
+\(
+&= \esperof{X^2} - 2 \ \esperof{X}^2 + \esperof{X}^2
+\end{align}
+
+soit :
+
+$$\var{X} = \esperof{X^2} - \esperof{X}^2$$
+
+
+** Invariance sous translation
+
+Notons que si $X,Y$ sont deux variables aléatoires reliées par :
+
+$$Y = X + a$$
+
+où $a \in \setR$, on a :
+
+\begin{align}
+\var{Y} &= \esperof{\left(Y-\esperof{Y}\right)^2} \)
+
+\(
+&= \esperof{\left(X + a -\esperof{X+a}\right)^2} \)
+
+\(
+&= \esperof{\left(X + a -\esperof{X} - a\right)^2} \)
+
+\(
+&= \esperof{\left(X -\esperof{X}\right)^2} \)
+
+\(
+&= \var{X}
+\end{align}
+
+La variance est donc invariante sous translation :
+
+$$\var{X+a} = \var{X}$$
+
+
+* Covariance
+
+La covariance de deux variables aléatoire $X,Y$ se définit par :
+
+$$\cov{X}{Y} = \esperof{(X-\esperof{X}) \cdot (Y-\esperof{Y})}$$
+
+En développant et en utilisant la linéarité de l'espérance, on obtient :
+
+\begin{align}
+\cov{X}{Y} &= \esperof{X \cdot Y} - \esperof{X} \cdot \esperof{Y} - \esperof{Y} \cdot \esperof{X} + \esperof{X} \cdot \esperof{Y} \)
+
+\(
+&= \esperof{X \cdot Y} - \esperof{X} \cdot \esperof{Y}
+\end{align}
+
+On voit également que la variance d'une variable aléatoire $X$ n'est rien d'autre que sa covariance avec elle-même :
+
+$$\var{X} = \cov{X}{X}$$
+
+
+** Invariance sous translation
+
+Suivant le même raisonnement que pour la variance, on considère les variables aléatoires $W,X,Y,Z$ reliées par :
+
+#+BEGIN_CENTER
+\(
+W = X + a \)
+
+\(
+Z = Y + b
+\)
+#+END_CENTER
+
+où $a,b \in \setR$. La covariance entre $W$ et $Z$ s'exprime alors :
+
+\begin{align}
+\cov{W}{Z} &= \esperof{(W - \esperof{W})(Z - \esperof{Z})} \)
+
+\(
+&= \esperof{(X + a - \esperof{X} - a)(Y + b - \esperof{Y} - b)} \)
+
+\(
+&= \esperof{(X - \esperof{X})(Y - \esperof{Y})} \)
+
+\(
+&= \cov{X}{Y}
+\end{align}
+
+La covariance est donc invariante sous translation :
+
+$$\cov{X+a}{Y+b} = \cov{X}{Y}$$
+
+
+* Variance d'une combinaison linéaire
+
+Nous utilisons la notation :
+
+$$X_0 = X - \esperof{X}$$
+
+pour toute variable aléatoire $X$. Cette variables aléatoire $X_0$ a la propriété
+d'avoir une espérance nulle car :
+
+$$\esperof{X_0} = \esperof{X - \esperof{X} } = \esperof{X} - \esperof{X} = 0$$
+
+La variance d'une telle variable peut s'écrire :
+
+$$\var{X_0} = \esperof{X_0^2} - \esperof{X_0}^2 = \esperof{X_0^2}$$
+
+Quant à la covariance, elle s'écrit :
+
+$$\cov{X_0}{Y_0} = \esperof{X_0 \ Y_0} - \esperof{X_0} \ \esperof{Y_0} = \esperof{X_0 \ Y_0}$$
+
+Soit les réels $a,b$. Par linéarité de l'espérance, on a :
+
+$$\esperof{a \ X + b \ Y} = a \ \esperof{X} + b \ \esperof{Y}$$
+
+La variance de la combinaison linéaire $a \ X + b \ Y$ s'écrit :
+
+\begin{align}
+\var{a \ X + b \ Y} &= \esperof{(a \ X + b \ Y - \esperof{a \ X + b \ Y})^2} \)
+
+\(
+&= \esperof{(a \ X + b \ Y - a \ \esperof{X} - b \ \esperof{Y})^2} \)
+
+\(
+&= \esperof{(a \ X_0 + b \ Y_0)^2}
+\end{align}
+
+En développant, on arrive à :
+
+\begin{align}
+\var{a \ X + b \ Y} &= \esperof{a^2 \ X_0^2 + 2 \ a \ b \ X_0 \ Y_0 + b^2 \ Y_0^2} \)
+
+\(
+&= a^2 \ \esperof{X_0^2} + 2 \ a \ b \ \esperof{X_0 \ Y_0} + b^2 \ \esperof{Y_0^2}
+\end{align}
+
+et donc :
+
+$$\var{a \ X + b \ Y} = a^2 \ \var{X_0} + 2 \ a \ b \ \cov{X_0}{Y_0} + b^2 \ \var{Y_0}$$
+
+L'invariance sous translation nous permet alors d'écrire :
+
+$$\var{a \ X + b \ Y} = a^2 \ \var{X} + 2 \ a \ b \ \cov{X}{Y} + b^2 \ \var{Y}$$
+
+
+* Produit scalaire
+
+Nous allons voir que la covariance est un produit scalaire. Nous utilisons la notation :
+
+$$X_0 = X - \esperof{X}$$
+
+pour toute variable aléatoire $X$. Cette variables aléatoire $X_0$ a la propriété
+d'avoir une espérance nulle car :
+
+$$\esperof{X_0} = \esperof{X - \esperof{X} } = \esperof{X} - \esperof{X} = 0$$
+
+On en déduit que :
+
+$$\cov{X_0}{Y_0} = \esperof{X_0 \ Y_0} - \esperof{X_0} \ \esperof{Y_0} = \esperof{X_0 \ Y_0}$$
+
+La symétrie est vérifiée :
+
+$$\cov{Y_0}{X_0} = \esperof{Y_0 \cdot X_0} = \esperof{X_0 \cdot Y_0} = \cov{X_0}{Y_0}$$
+
+En ce qui concerne le caractère défini positif, on a :
+
+$$\cov{X_0}{X_0} = \esperof{X_0^2} \ge 0$$
+
+De plus, si $X_0$ est tel que $\cov{X_0}{X_0} = 0$, on a :
+
+$$\int_\Omega X_0^2 \ d\proba(\omega) = 0$$
+
+ce qui entraîne la nullité essentielle $X_0 \essegal 0$ sur $\Omega$.
+
+Soit les réels $a,b$. On voit que la linéarité est bien respectée :
+
+\begin{align}
+\cov{X_0}{a \ Y_0 + b \ Z_0} &= \esperof{X_0 \ (a \ Y_0 + b \ Z_0)} \)
+
+\(
+&= a \ \esperof{X_0 \ Y_0} + b \ \esperof{X_0 \ Z_0} \)
+
+\(
+&= a \ \cov{X_0}{Y_0} + b \ \cov{X_0}{Z_0}
+\end{align}
+
+Nous venons de montrer que la covariance est essentiellement un produit scalaire
+pour toute variable aléatoires à espérance nulles $X_0, Y_0$. Comme la covariance
+est invariante sous translation, on voit que :
+
+$$\cov{X}{Y} = \cov{X_0}{Y_0}$$
+
+est également un produit scalaire pour toutes variables aléatoires $X,Y$.
+
+
+** Cauchy-Schwartz
+
+En appliquant l'inégalité de Cauchy-Schwartz à ce produit scalaire, on obtient :
+
+$$\cov{X}{Y}^2 \le \cov{X}{X} \ \cov{Y}{Y} = \var{X} \ \var{Y}$$
+
+où, en prenant la racine :
+
+$$\cov{X}{Y} \le \sqrt{\var{X} \ \var{Y}}$$
+
+
+* Probabilité conditionnelle
+
+\label{sec:proba_cond}
+
+On définit une nouvelle famille de probabilités :
+
+$$\probaof{A | B} = \frac{ \probaof{A \cap B} }{ \probaof{B} }$$
+
+où $A,B$ sont des sous-ensembles quelconque de $\Omega$, et où $B$ est tel que :
+
+$$\probaof{B} > 0$$
+
+Comme $B \cap B = B$, on a :
+
+$$\probaof{ B | B } = 1$$
+
+On est donc certain qu'un événement de $B$ va se produire. En fait, pour tout ensemble $C$ tel que $B \subseteq C$, on a $C \cap B = B$ et :
+
+$$\probaof{ C | B } = 1$$
+
+On déduit de l'inégalité :
+
+$$\probaof{A \cap B} \le \probaof{B}$$
+
+que :
+
+$$\probaof{A | B} \le 1$$
+
+D'un autre coté, comme $\probaof{B} \le 1$, on a :
+
+$$\probaof{A | B} \ge \probaof{A \cap B} \ge 0$$
+
+L'additivité est également satisfaite :
+
+\begin{align}
+\probaof{ \cup_i A_i | B} &= \frac{ \probaof{(\cup_i A_i) \cap B} }{ \probaof{B} } \)
+
+\(
+&= \frac{ \probaof{\cup_i (A_i \cap B)} }{ \probaof{B} } \)
+
+\(
+&= \sum_i \frac{ \probaof{A_i \cap B} }{ \probaof{B} } = \sum_i \probaof{ A_i | B}
+\end{align}
+
+pour toute famille de $A_i$ disjoints deux à deux. Les fonctions :
+
+$$\proba_B\left[ A \right] = \probaof{A | B}$$
+
+forment donc bien une famille de probabilités. On dit que $\probaof{A | B}$ est la probabilité conditionnelle de $A$ sachant $B$.
+
+Lorsque $B = \Omega$, on retrouve d'ailleurs :
+
+$$\probaof{A | \Omega} = \probaof{A}$$
+
+
+** Indépendance
+
+On dit que deux ensembles d'événements $A$ et $B$ sont indépendants si :
+
+$$\probaof{A | B} = \probaof{A}$$
+
+c'est-à-dire si :
+
+$$\probaof{A \cap B} = \probaof{A} \cdot \probaof{B}$$
+
+
+** Application
+
+Une technique fréquemment employée pour évaluer $\probaof{A}$ est d'utiliser
+une partition $B_1,...,B_n$ de $\Omega$. Utilisant $A = A \cup \Omega$, on a alors :
+
+$$\probaof{A} = \sum_i \probaof{A \cap B_i} = \sum_i \probaof{A | B_i} \cdot \probaof{B_i}$$
+
+
+* Espérance conditionnelle à un ensemble
+
+Soit $A \subseteq \Omega$. On a vu que :
+
+$$\esperof{\indicatrice_A} = \probaof{A}$$
+
+pour toute fonction indicatrice d'un sous-ensemble $A$ de $\Omega$. Par analogie, on aimerait bien obtenir une expression d'une espérance conditionnelle vérifiant :
+
+$$\esperof{\indicatrice_A | B} = \probaof{A | B}$$
+
+pour un ensemble $B \subseteq \Omega$ donné vérifiant $\probaof{B} > 0$.
+
+Soit $\Omega_1, ..., \Omega_N$ une partition de $\Omega$ et $Z$ une variable aléatoire en escalier :
+
+$$Z(\omega) = \sum_i Z_i \ \indicatrice_{\Omega_i}(\omega)$$
+
+On voit que :
+
+\begin{align}
+\esperof{Z | B} &= \sum_i Z_i\ \esperof{\indicatrice_{\Omega_i} | B} \)
+
+\(
+&= \sum_i Z_i\ \probaof{\Omega_i | B}
+\end{align}
+
+Or :
+
+$$\probaof{\Omega_i | B} = \frac{ \probaof{\Omega_i \cap B} }{ \probaof{B} }$$
+
+On a donc :
+
+$$\esperof{Z | B} = \unsur{ \probaof{B} } \sum_i Z_i\ \probaof{\Omega_i \cap B}$$
+
+Considérons la nouvelle partition :
+
+#+BEGIN_CENTER
+\(
+\Phi_i^+ = \Omega_i \cap B \)
+
+\(
+\Phi_i^- = \Omega_i \cap (\Omega \setminus B)
+\)
+#+END_CENTER
+
+Comme $\Phi_i^+ \cup \Phi_i^- = \Omega_i$, on a clairement $\indicatrice_{\Phi_i^+} + \indicatrice_{\Phi_i^-} = \indicatrice_{\Omega_i}$ et on peut réexprimer $Z$ comme :
+
+$$Z(\omega) = \sum_i Z_i\ \indicatrice_{\Phi_i^+}(\omega) + \sum_i Z_i\ \indicatrice_{\Phi_i^-}(\omega)$$
+
+L'expression de l'espérance conditionelle devient :
+
+$$\esperof{Z | B} = \unsur{ \probaof{B} } \left[ \sum_i Z_i\ \probaof{\Phi_i^+ \cap B} + \sum_i Z_i\ \probaof{\Phi_i^- \cap B} \right]$$
+
+Remarquons que par construction :
+
+#+BEGIN_CENTER
+\(
+\Phi_i^+ \cap B = \Phi_i^+ \)
+
+\(
+\Phi_i^- \cap B = \emptyset
+\)
+#+END_CENTER
+
+Par conséquent, les termes en $\probaof{\Phi_i^- \cap B}$ s'annulent et on a :
+
+$$\esperof{Z | B} = \unsur{ \probaof{B} } \sum_i Z_i\ \probaof{\Phi_i^+}$$
+
+Mais comme $\bigcup_i \Phi_i^+ = B$, les $\Phi_i^+$ forment une partition de $B$ et on peut écrire cette expression sous la forme intégrale :
+
+$$\esperof{Z | B} = \frac{ \int_B Z\ \ d\proba }{ \int_B \ d\proba }$$
+
+Comme cette relation doit être valable pour toute variable aléatoire en escalier $Z$, elle l'est également pour une variable aléatoire quelconque $X$ :
+
+$$\esperof{X | B} = \frac{ \int_B X\ \ d\proba }{ \int_B \ d\proba }$$
+
+
+** Densité conditionnelle
+
+Soient $X,Y$ deux variables aléatoires. Un cas particulier important d'espérance conditionnelle est celui où :
+
+$$B_y = \{ \omega : Y(\omega) = y \}$$
+
+On note alors :
+
+$$\esperof{X | Y = y} = \esperof{X | B_y}$$
+
+On remarque que :
+
+$$(X,Y)(B_y) = \{ (x,y) \in \setR^2 : x \in \setR \}$$
+
+Par conséquent, si il existe une fonction densité $f_{X,Y}$ associée à $X,Y$, on peut écrire :
+
+\begin{align}
+\int_{B_y} X \ d\proba &= \int_{(X,Y)(B_y)} x \ f_{X,Y}(x,y) \ dx \ dy \)
+
+\(
+&= \int_\setR x \ f_{X,Y}(x,y) \ dx
+\end{align}
+
+ainsi que :
+
+$$\int_{B_y} \ d\proba = \int_\setR f_{X,Y}(x,y) \ dx$$
+
+L'espérance conditionnelle s'écrit alors :
+
+$$\esperof{X | Y = y} = \frac{\int_\setR x \ f_{X,Y}(x,y) \ dx}{\int_\setR f_{X,Y}(x,y) \ dx}$$
+
+Donc, si on définit :
+
+$$f_{X | Y}(x,y) = \frac{f_{X,Y}(x,y)}{ \int_\setR f_{X,Y}(x,y) \ dx}$$
+
+on a tout simplement :
+
+$$\esperof{X | Y = y} = \int_\setR x \ f_{X | Y}(x,y) \ dx$$
+
+
+* Espérance conditionnelle à une tribu
+
+
+** Tribu et espace fonctionnel
+
+Soit $\Gamma \subseteq \sousens(\Omega)$ une collection de sous-ensembles de $\Omega$ formant une tribu sur $\Omega$ (voir section \ref{sec:tribu}),
+et $\mathcal{F}(\Gamma)$ l'ensemble des variables aléatoires $W$ telles que :
+
+$$\Lambda(W) \subseteq \Gamma$$
+
+où $\Lambda(W)$ est la collection induite par $W$.
+
+
+** Minimisation
+
+L'espérance conditionnelle est construite comme le meilleur estimateur au sens des moindres carrés d'une variable aléatoire $X$ sur $\mathcal{F}(\Gamma)$. Soit la fonctionnelle $I : \mathcal{F}(\Gamma) \mapsto \setR$ représentant l'erreur :
+
+$$I(Z) = \int_\Omega \left[ Z(\omega) - X(\omega) \right]^2 \ d\proba(\omega)$$
+
+Nous allons minimiser $I$ sur $\mathcal{F}(\Gamma)$. Pour ce faire, on utilise la technique du calcul variationnel (voir chapitre \ref{chap:varia}). On commence par définir :
+
+$$J_W(\epsilon) = I(Z^* + \epsilon W) = \int_\Omega (Z^* + \epsilon W - X)^2 \ d\proba$$
+
+où la variable aléatoire $Z^*$ est l'optimum recherché, et où $W \in \mathcal{F}(\Gamma)$, $\epsilon \in \setR$. La dérivée s'écrit :
+
+$$\OD{J_W}{\epsilon}(\epsilon) = \int_\Omega 2 (Z^* +\epsilon W - X) W \ d\proba = 0$$
+
+Comme celle-ci doit s'annuler en $\epsilon = 0$, on a :
+
+$$\OD{J_W}{\epsilon}(0) = \int_\Omega 2 (Z^* - X) W \ d\proba = 0$$
+
+Autrement dit :
+
+$$\int_\Omega W Z^* \ d\proba = \int_\Omega W X \ d\proba$$
+
+équation qui doit être vérifiée pour tout $W \in \mathcal{F}(\Gamma)$.
+
+
+** Unicité
+
+Nous supposons dorénavant que $\mathcal{F}(\Gamma)$ est un espace vectoriel. Soient $Z_1, Z_2 \in \mathcal{F}(\Gamma)$ des variables aléatoires qui minimisent tous deux la fonctionnelle $I$. On a :
+
+$$\int_\Omega W Z_1 \ d\proba = \int_\Omega W Z_2 \ d\proba = \int_\Omega W X \ d\proba$$
+
+pour tout $W \in \mathcal{F}(\Gamma)$. Donc :
+
+$$\int_\Omega W (Z_1 - Z_2) \ d\proba = 0$$
+
+Mais comme $Z_1 - Z_2 \in \mathcal{F}(\Gamma)$, il suffit de considérer le cas $W = Z_1 - Z_2$ pour avoir :
+
+$$\int_\Omega (Z_1 - Z_2)^2 \ d\proba = 0$$
+
+On en conclut que $Z_1 = Z_2$ presque partout sur $\Omega$. L'espérance conditionnelle est donc unique pour $X$ et $\Gamma$ donnés.
+
+
+** Définition
+
+Forts de ces résultats, on définit l'espérance de $X$ conditionnellement à la tribu $\Gamma$ comme étant :
+
+$$\esperof{X | \Gamma} = \arg\min_{Z \in \mathcal{F}(\Gamma) } \int_{\Omega} \left[ Z - X \right]^2 \ d\proba$$
+
+On a donc :
+
+$$\int_\Omega W\ \esperof{X | \Gamma} \ d\proba = \int_\Omega W\ X \ d\proba$$
+
+pour tout $W \in \mathcal{F}(\Gamma)$.
+
+
+** Fonctions indicatrices
+
+Soit un ensemble $\Phi \in \Gamma$. Les propriétés de $\Gamma$ nous disent que $\Omega \setminus \Phi \in \Gamma$. Donc :
+
+$$\Lambda(\indicatrice_\Phi) = \{ \emptyset, \Omega, \Phi, \Omega \setminus \Phi \} \subseteq \Gamma$$
+
+et $\indicatrice_\Phi \in \mathcal{F}(\Gamma)$. On en déduit que :
+
+$$\int_\Omega \indicatrice_\Phi \ \esperof{X | \Gamma} \ d\proba = \int_\Omega \indicatrice_\Phi \ X \ d\proba$$
+
+c'est-à-dire :
+
+$$\int_\Phi \esperof{X | \Gamma} \ d\proba = \int_\Phi X \ d\proba$$
+
+pour tout $\Phi \in \Gamma$.
+
+Comme $\Omega \in \Gamma$, on a en particulier :
+
+$$\int_\Omega \esperof{X | \Gamma} \ d\proba = \int_\Omega X \ d\proba$$
+
+c'est-à-dire :
+
+$$\esperof{ \esperof{X | \Gamma} } = \esperof{X}$$
+
+
+** Variable aléatoire dans l'espace fonctionnel
+
+Une conséquence directe de la définition de l'espérance conditionnelle est que si $Z \in \mathcal{F}(\Gamma)$, on a :
+
+$$\int_\Omega (Z - Z)^2 \ d\proba = 0$$
+
+Par conséquent, $Z$ minimise la fonctionnelle :
+
+$$I(Y) = \int_\Omega (Y - Z)^2 \ d\proba \ge 0$$
+
+sur $\mathcal{F}(\Gamma)$ et :
+
+$$\esperof{Z | \Gamma} = Z$$
+
+
+** Tour
+
+Soit la tribu $\Delta \subseteq \Gamma$ et $X$ une variable aléatoire et $W \in \mathcal{F}(\Delta)$. On a :
+
+$$\Lambda(W) \subseteq \Delta \subseteq \Gamma$$
+
+Par conséquent $W \in \mathcal{F}(\Gamma)$ et les équations suivantes sont vérifiées :
+
+#+BEGIN_CENTER
+\(
+\int_\Omega W\ \esperof{X | \Delta} \ d\proba = \int_\Omega W\ X \ d\proba \)
+
+\(
+\int_\Omega W\ \esperof{X | \Gamma} \ d\proba = \int_\Omega W\ X \ d\proba
+\)
+#+END_CENTER
+
+On en déduit que :
+
+$$\int_\Omega W\ \esperof{X | \Delta} \ d\proba = \int_\Omega W\ \esperof{X | \Gamma} \ d\proba$$
+
+Comme cette dernière équation est valable pour tout $W \in \mathcal{F}(\Delta)$, on en déduit que $\esperof{X | \Delta}$ est le meilleur estimateur de $\esperof{X | \Gamma}$ sur $\mathcal{F}(\Delta)$. Ce qui revient à dire que :
+
+$$\esperof{ \esperof{X | \Gamma} | \Delta } = \esperof{X | \Delta}$$
+
+
+** Couple de variables aléatoires
+
+Etant donné deux variables aléatoires $X,Y$, on définit :
+
+$$\esperof{X | Y} = \esperof{X | \Lambda(Y)}$$
+
+Comme $\Gamma = \Lambda(Y)$, l'espace $\mathcal{F}(\Gamma)$ est l'ensemble des variables aléatoires $W$ telles que :
+
+$$\Lambda(W) \subseteq \Lambda(Y)$$
+
+
+* Ensemble discret
+
+Nous allons à présent considérer le cas particulier où l'ensemble des événements peut s'écrire
+comme :
+
+$$\Omega = \{ \omega_i : i \in \setN \}$$
+
+Nous notons $p_i$ les probabilités associées aux singletons :
+
+$$p_i = \probaof{ \{\omega_i\} }$$
+
+Étant donnée une variable aléatoire $X$, on note :
+
+$$x_i = X(\omega_i)$$
+
+L'espérance d'une telle variable s'écrit simplement :
+
+$$\esperof{X} = \sum_i x_i \ p_i$$
+

@@ -1,0 +1,154 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Théorie spectrale
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{spectral}
+
+* Progression géométrique
+
+Soit un espace de Hilbert $H$ et une application linéaire $A : H \mapsto H$. On voit que :
+
+\begin{align}
+\sum_{k = 0}^n A^k &= \identite + A + A^2 + ... + A^n \)
+
+\(
+A \circ \sum_{k = 0}^n A^k &= A + A^2 + A^3 + ... + A^{n + 1}
+\end{align}
+
+En soustrayant ces deux équations, on obtient :
+
+$$(\identite - A) \circ \sum_{k = 0}^n A^k = \identite - A^{n + 1}$$
+
+On montre de même que :
+
+$$\left[ \sum_{k = 0}^n A^k \right] \circ (\identite - A) = \identite - A^{n + 1}$$
+
+
+** Infinie
+
+Si $\norme{A} \strictinferieur 1$, on a $\norme{A^n} \le \norme{A}^n \to 0$ lorsque $n \to \infty$ et donc $A^n \to 0$. On en déduit que :
+
+$$(\identite - A) \circ \sum_{k = 0}^{+\infty} A^k = \lim_{n \to \infty} (\identite - A^{n + 1}) = \identite$$
+
+On a aussi :
+
+$$\left[ \sum_{k = 0}^{+\infty} A^k \right] \circ (\identite - A) = \identite$$
+
+On en déduit que :
+
+$$(\identite - A)^{-1} = \sum_{k = 0}^{+\infty} A^k$$
+
+
+* Convergence
+
+Soit une application linéaire continue $A : H \mapsto H$. Choisissons $\lambda \in \setC$ tel que $\norme{A} \strictinferieur \abs{\lambda}$. On a :
+
+$$\norme{A^k} \le \norme{A}^k \strictinferieur \abs{\lambda}^k$$
+
+Posons $r = \norme{A} / \abs{\lambda} \strictinferieur 1$ et divisons par le module de $\lambda$ puissance $k$ :
+
+$$\frac{ \norme{A^k} }{ \abs{\lambda}^k } \le \frac{ \norme{A}^k }{ \abs{\lambda}^k } = r^k \strictinferieur 1$$
+
+On en déduit que :
+
+$$\sum_{k = 0}^n \frac{ \norme{A^k} }{ \abs{\lambda}^k } \le \sum_{k = 0}^n r^k = \frac{1 - r^k}{1 - r} \le \unsur{1 - r}$$
+
+La suite des :
+
+$$S_n = \sum_{k = 0}^n \frac{ \norme{A^k} }{ \abs{\lambda}^k }$$
+
+étant croissante et bornée, elle converge vers son supremum :
+
+$$S = \sum_{k = 0}^{+\infty} \frac{ \norme{A^k} }{ \abs{\lambda}^k } = \lim_{n \to \infty} S_n = \sup_{n \in \setN} S_n$$
+
+Soit $x \in H$ et la suite définie par $u_0 = x$ et :
+
+$$u_n = \sum_{k = 0}^n \unsur{\lambda^k} \cdot A^k(x)$$
+
+Pour tout $m,n \in \setN$ avec $m \ge n$, on a :
+
+$$\norme{u_m - u_n} = \norme{\sum_{k = n + 1}^m \unsur{\lambda^k} \cdot A^k(x)} \le \sum_{k = n + 1}^m \frac{ \norme{A^k(x)} }{ \abs{\lambda}^k }$$
+
+Majorons par la norme de $A^k$, puis la norme de $A$ puissance $k$ :
+
+$$\norme{u_m - u_n} \le \left[ \sum_{k = n + 1}^m \frac{ \norme{A^k} }{ \abs{\lambda}^k } \right] \cdot \norme{x} \le \left[ \sum_{k = n + 1}^m \frac{ \norme{A}^k }{ \abs{\lambda}^k } \right] \cdot \norme{x}$$
+
+et effectuons le changement de variable $i = k - (n + 1)$. Il vient :
+
+$$\norme{u_m - u_n} \le \frac{ \norme{A}^{n + 1} }{ \abs{\lambda}^{n + 1} } \left[ \sum_{i = 0}^{m - n - 1} \frac{ \norme{A}^i }{ \abs{\lambda}^i } \right] \cdot \norme{x} = r^{n + 1} \cdot S_{m - n - 1} \cdot \norme{x}$$
+
+Mais comme $S_{m - n - 1} \le S$, on a finalement :
+
+$$\norme{u_m - u_n} \le r^{n + 1} \cdot S \cdot \norme{x}$$
+
+qui converge vers $0$ lorsque $n \to \infty$. La suite des $u_n$ est donc de Cauchy et converge vers un certain $L(x) \in H$, ce qui définit l'application $L : H \mapsto H$, que l'on note :
+
+$$L = \sum_{k = 0}^{+\infty} \unsur{\lambda^k} \cdot A^k$$
+
+
+** Continuité
+
+Cette application est de norme finie et donc continue car pour tout $n \in \setN$ :
+
+$$\norme{u_n} \le \left[ \sum_{k = 0}^n \frac{ \norme{A}^k }{ \abs{\lambda}^k } \right] \cdot \norme{x} = \frac{ 1 - r^{n + 1} }{1 - r} \cdot \norme{x} \le \frac{\norme{x}}{1 - r}$$
+
+On a donc :
+
+$$\norme{L(x)} = \lim_{n \to \infty} \norme{u_n} \le \frac{\norme{x}}{1 - r}$$
+
+d'où :
+
+$$\norme{L} \le \unsur{1 - r}$$
+
+
+** Inverse
+
+Comme l'application $B = A / \lambda$ vérifie $\norme{B} \strictinferieur 1$, on a :
+
+#+BEGIN_CENTER
+\(
+(\lambda \cdot \identite - A) \circ (\unsur{\lambda} \cdot L) = (\identite - \unsur{\lambda} \cdot A) \circ L = \identite \)
+
+\(
+(\unsur{\lambda} \cdot L) \circ (\lambda \cdot \identite - A) = L \circ (\identite - \unsur{\lambda} \cdot A) = \identite
+\)
+#+END_CENTER
+
+et donc :
+
+$$(\lambda \cdot \identite - A)^{-1} = \unsur{\lambda} \cdot L$$
+
+
+* Exponentielle
+
+Soit une application linéaire continue $A : H \mapsto H$. Sous réserve de convergence, on définit l'opérateur $\exp(A)$ associé par :
+
+$$\exp(A) = \sum_{k = 0}^{+\infty} \unsur{k !} \cdot A^k$$
+
+On a donc :
+
+$$\exp(A)(u) = \sum_{k = 0}^{+\infty} \unsur{k !} \cdot A^k(u)$$
+
+pour tout $u \in H$.
+
+

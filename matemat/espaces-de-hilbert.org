@@ -1,0 +1,647 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Espaces de Hilbert
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:hilbert}
+
+* Définition
+
+Un espace de Hilbert $H$ est un espace de Banach dont la distance découle d'un produit scalaire $\scalaire{}{}$ défini sur $H$ :
+
+$$\distance(u,v) = \norme{u - v} = \sqrt{\scalaire{u - v}{u - v}}$$
+
+Dans la suite, nous considérons un espace de Hilbert $H$ sur $\corps$.
+
+
+* Utilisation
+
+Les espaces de Hilbert permettent de généraliser en dimension infinie nombre de résultats valables en dimension finie. Parmi eux, les espaces fonctionnels sont très utilisés. Ils permettent entre-autres de relier la solution de certaines équations différentielles à des problèmes de minimisation.
+
+
+* Complétude du noyau
+
+Soit $\varphi \in H^\dual$ et une suite de Cauchy $\{x_1,x_2,...\} \subseteq \noyau \varphi \subseteq H$. L'espace $H$ étant complet, cette suite converge vers $x \in H$. Par continuité de $\varphi$, on a :
+
+$$\forme{\varphi}{x} = \lim_{n \to \infty} \forme{\varphi}{x_n} = 0$$
+
+On en conclut que $x \in \noyau \varphi$. L'espace vectoriel $\noyau \varphi$ est donc complet.
+
+
+* Complétude de l'image
+
+Soit l'application linéaire continue $A : H \mapsto H$ et une suite de Cauchy $\{y_1,y_2,...\} \subseteq \image A \subseteq H$. L'espace $H$ étant complet, cette suite converge vers $y \in H$. Comme les $y_i \in \image A$, on peut trouver des $x_i \in H$ tels que $A(x_i) = y_i$. Par continuité de $A$, on a :
+
+$$y = \lim_{n \to \infty} y_n = \lim_{n \to \infty} A(x_n) = A(x) \in \image A$$
+
+On en conclut que $y \in \image A$. L'espace vectoriel $\image A$ est donc complet.
+
+
+* Complétude de l'espace orthogonal
+
+Soit $V \subseteq H$. Considérons une suite de Cauchy $\{x_1,x_2,...\} \subseteq V^\orthogonal \subseteq H$. Comme $H$ est complet, cette suite est convergente vers $x \in H$. Choisissons $z \in V$. On a :
+
+$$\scalaire{x - x_n}{z} = \scalaire{x}{z} - \scalaire{x_n}{z} = \scalaire{x}{z}$$
+
+On en déduit que :
+
+$$\abs{\scalaire{x}{z}} = \abs{\scalaire{x - x_n}{z}} \le \norme{x - x_n} \cdot \norme{z}$$
+
+Comme cette relation doit être valable pour tout $n$ et que $\norme{x - x_n}$ converge vers $0$, on en déduit que :
+
+$$\scalaire{x}{z} = 0$$
+
+c'est-à-dire $x \in V^\orthogonal$. On en conclut que $V^\orthogonal$ est un espace complet.
+
+
+* Théorème de projection
+
+Soit $V \subseteq H$ un sous-espace vectoriel complet. Pour tout $x \in H$, il existe un unique $u \in V$ vérifiant :
+
+\norme{$$x - u} = \inf_{z \in V} \norme{x - z} = \distance(x,V)$$
+
+Soit $x \in H$ et :
+
+$$D = \{ \norme{x - z} : z \in V \} \subseteq \setR$$
+
+L'ensemble $D$ est inclu dans $\setR$ et minoré puisque $0 \le D$. On en conclut que l'infimum $\lambda = \inf D$ existe. On a par définition $\distance(x,V) = \lambda$. Comme $D \subseteq \setR$, on a $\lambda \in \adh D$ et la distance au sens des réels est nulle :
+
+$$\distance(\lambda,D) = \inf_{r \in D} \abs{\lambda - r} = 0$$
+
+On peut donc contruire une suite de $z_n \in V$ tels que :
+
+$$\lim_{n \to \infty} \norme{x - z_n} = \lambda$$
+
+Choisissons $\epsilon \strictsuperieur 0$ et $m,n \in \setN$ tels que :
+
+$$\max\{\norme{x - z_m} , \norme{x - z_n} \} \le \lambda + \epsilon$$
+
+et appliquons l'égalité du parallèlogramme à :
+
+#+BEGIN_CENTER
+\(
+v = x - z_m \)
+
+\(
+w = x - z_n
+\)
+#+END_CENTER
+
+On a alors :
+
+#+BEGIN_CENTER
+\(
+v + w = 2 x - (z_m + z_n) \)
+
+\(
+v - w = z_n - z_m
+\)
+#+END_CENTER
+
+et donc :
+
+$$\norme{2 x - (z_m + z_n)}^2 + \norme{z_n - z_m}^2 = 2 \left( \norme{x - z_m}^2 + \norme{x - z_m}^2 \right)$$
+
+Comme :
+
+$$\norme{2 x - (z_m + z_n)}^2 = \norme{2 \left(x - \frac{z_m + z_n}{2}\right)}^2 = 4 \norme{x - \frac{z_m + z_n}{2}}^2$$
+
+on peut réécrire ce résultat sous la forme :
+
+$$\norme{z_n - z_m}^2 + 4 \norme{x - \frac{z_m + z_n}{2}}^2 = 2 \left( \norme{x - z_m}^2 + \norme{x - z_m}^2 \right)$$
+
+et donc :
+
+$$\norme{z_n - z_m}^2 = 2 \left( \norme{x - z_m}^2 + \norme{x - z_m}^2 \right) - 4 \norme{x - \frac{z_m + z_n}{2}}^2$$
+
+Comme $V$ est un espace vectoriel, on a $(z_m + z_n)/2 \in V$. Donc, par définition de l'infimum :
+
+$$\norme{x - \frac{z_m + z_n}{2}} \ge \lambda$$
+
+On a aussi :
+
+$$\norme{x - z_m}^2 + \norme{x - z_m}^2 \le 2 (\lambda + \epsilon)^2$$
+
+On en déduit que :
+
+$$\norme{z_n - z_m}^2 \le 4 (\lambda + \epsilon)^2 - 4 \lambda^2 = 8 \lambda \cdot \epsilon + 4 \epsilon^2$$
+
+ce qui montre que les $z_n$ forment une suite de Cauchy. L'espace $V$ étant complet, cette suite converge vers un certain $u \in V$. On a alors :
+
+$$\norme{x - u} = \lim_{n \to \infty} \norme{x - z_n} = \lambda = \distance(x,V)$$
+
+Nous avons donc prouvé l'existence d'un vecteur $u \in V$ minimisant la distance à $x$. Supposons à présent que $u,v \in V$ vérifient :
+
+$$\norme{x - u} = \norme{x - v} = \lambda$$
+
+Appliquons le parallélogramme à $u - x$ et $x - v$. On a :
+
+#+BEGIN_CENTER
+\(
+(u - x) + (x - v) = u - v \)
+
+\(
+(u - x) - (x - v) = u + v - 2 x
+\)
+#+END_CENTER
+
+et :
+
+\begin{align}
+\norme{u - v}^2 + \norme{u + v - 2 x}^2 &= 2 ( \norme{u - x}^2 + \norme{x - v}^2 ) \)
+
+\(
+&= 2 (\lambda^2 + \lambda^2) = 4 \lambda^2
+\end{align}
+
+On en conclut que :
+
+\begin{align}
+\norme{u - v}^2 &= 4 \lambda^2 - \norme{u + v - 2 x}^2 \)
+
+\(
+&= 4 \lambda^2 - 4 \norme{\frac{u + v}{2} - x}^2
+\end{align}
+
+Mais comme $(u + v)/2 \in V$, on a :
+
+$$\norme{\frac{u + v}{2} - x}^2 \ge \lambda^2$$
+
+et :
+
+$$0 \le \norme{u - v}^2 \le 4 \lambda^2 - 4 \lambda^2 = 0$$
+
+Donc, $\norme{u - v} = 0$ et $u = v$, ce qui prouve l'unicité de la solution optimale.
+
+* Application projective
+
+On peut donc définir l'application de projection $P : H \mapsto V$ par :
+
+$$\norme{x - P(x)} = \inf_{z \in V} \norme{x - z}$$
+
+ou :
+
+$$P(x) = \argument_H\inf_{z \in V} \norme{x - z}$$
+
+Comme $P(x) \in V$, cela revient à :
+
+$$P(x) = \arg\min_{z \in V} \norme{x - z}$$
+
+
+* Orthogonalité
+
+Soit $x \in H$ et $u = P(x)$. L'écart $e = x - u$ possède-t-il les mêmes propriétés d'orthogonalité qu'en dimension finie ? Soit $\alpha \in \corps$ et $v \in V$. On a $u + \alpha \cdot v \in V$ et donc :
+
+$$\norme{x - u}^2 = \norme{e}^2 \le \norme{x - u - \alpha \cdot v}^2 = \norme{e - \alpha \cdot v}^2$$
+
+En développant ce dernier membre, on obtient :
+
+$$\norme{e}^2 \le \norme{e}^2 - 2 \Re(\alpha \cdot \scalaire{e}{v}) + \abs{\alpha}^2 \cdot \norme{v}^2$$
+
+On en déduit que :
+
+$$\abs{\alpha}^2 \cdot \norme{v}^2 - 2 \Re(\alpha \cdot \scalaire{e}{v}) \ge 0$$
+
+Utilisant la définition du produit complexe, il vient :
+
+$$\abs{\alpha}^2 \cdot \norme{v}^2 - 2 \Re(\alpha) \cdot \Re(\scalaire{e}{v}) + 2 \Im(\alpha) \cdot \Im(\scalaire{e}{v}) \ge 0$$
+
+Choisissons $\alpha = \gamma \in \setR$, avec $\gamma \strictsuperieur 0$. On a $\Re(\alpha) = \gamma$, $\Im(\alpha) = 0$ et $\abs{\alpha}^2 = \gamma^2$. Donc :
+
+$$\gamma^2 \cdot \norme{v}^2 - 2 \gamma \cdot \Re(\scalaire{e}{v}) \ge 0$$
+
+Si nous divisons par $\gamma$ et que nous faisons passer le second terme dans le second membre, il vient :
+
+$$2 \Re(\scalaire{e}{v}) \le \gamma \cdot \norme{v}^2$$
+
+Comme ce doit être valable pour tout $\gamma$ strictement positif, on en conclut que $\Re(\scalaire{e}{v}) \le 0$. Recommençons le même procédée avec $\alpha = - \gamma \strictinferieur 0$. On a :
+
+$$\gamma^2 \cdot \norme{v}^2 + 2 \gamma \cdot \Re(\scalaire{e}{v}) \ge 0$$
+
+et :
+
+$$2 \Re(\scalaire{e}{v}) \ge - \gamma \cdot \norme{v}^2$$
+
+Comme ce doit être valable pour tout $\delta = - \gamma$ strictement négatif, on en conclut que $\Re(\scalaire{e}{v}) \ge 0$. D'où finalement $\Re(\scalaire{e}{v}) = 0$.
+
+Choisissons à présent $\alpha = \img \gamma$, où le réel $\gamma \strictsuperieur 0$ et où $\img = \sqrt{-1}$. On a $\Re(\alpha) = 0$, $\Im(\alpha) = \gamma$ et $\abs{\alpha}^2 = \gamma^2$. Donc :
+
+$$\gamma^2 \cdot \norme{v}^2 + 2 \gamma \cdot \Im(\scalaire{e}{v}) \ge 0$$
+
+On en déduit que :
+
+$$2 \Im(\scalaire{e}{v}) \ge - \gamma \cdot \norme{v}^2$$
+
+Comme ce doit être valable pour tout $\delta = - \gamma$ strictement négatif, on en conclut que $\Im(\scalaire{e}{v}) \ge 0$. Recommençons le même procédée avec $\alpha = - \img \gamma$, avec $\gamma \strictsuperieur 0$. On a :
+
+$$\gamma^2 \cdot \norme{v}^2 - 2 \gamma \cdot \Im(\scalaire{e}{v}) \ge 0$$
+
+et :
+
+$$2 \Im(\scalaire{e}{v}) \le \gamma \cdot \norme{v}^2$$
+
+Comme ce doit être valable pour tout $\gamma$ strictement positif, on en conclut que $\Im(\scalaire{e}{v}) \le 0$. D'où finalement $\Im(\scalaire{e}{v}) = 0$. Ce produit scalaire ayant des parties réelles et imaginaires nulles, il est nul :
+
+$$\scalaire{e}{v} = 0$$
+
+Cette relation d'orthogonalité étant valable pour tout $v \in V$, on en conclut que $e \in V^\orthogonal$.
+
+
+* Identité locale
+
+Soit $v \in V$. Il est clair que le choix $u = v$ minimise la distance $\norme{v - u} \ge 0$ sur $u \in V$ puisque $\norme{v - v} = 0$. Par unicité de la solution optimale, on en déduit que $P(v) = v$ pour tout $v \in V$.
+
+
+* Invariance
+
+Comme $v = P(x) \in V$ pour tout $x \in H$, on a :
+
+$$P^2(x) = P \circ P(x) = P(v) = v = P(x)$$
+
+d'où $P^2 = P$.
+
+
+* Somme directe
+
+On peut donc exprimer tout $x \in H$ comme une somme :
+
+$$x = u + e$$
+
+où $u = P(x) \in V$ et $e = x - P(x) \in V^\orthogonal$. Nous allons voir que cette décomposition est unique. Soit $x \in H$ et les vecteurs $u,v \in V$ et $y,z \in V^\orthogonal$ tels que :
+
+$$x = u + y = v + z$$
+
+On a :
+
+$$0 = \norme{x - x}^2 = \norme{u + y - v - z}^2 = \norme{(u - v) + (y - z)}^2$$
+
+Comme $u - v \in V$ et $y - z \in V^\orthogonal$, on a $\scalaire{u - v}{y - z} = 0$. On peut donc appliquer le théorème de Pythagore. On obtient :
+
+$$0 = \norme{(u - v) + (y - z)}^2 = \norme{u - v}^2 + \norme{y - z}^2$$
+
+ce qui n'est possible que si $\norme{u - v} = \norme{y - z} = 0$, c'est-à-dire $u = v$ et $y = z$, ce qui prouve l'unicité de la décomposition. L'espace $H$ est donc la somme directe de $V$ et de $V^\orthogonal$ :
+
+$$H = V \bigoplus V^\orthogonal$$
+
+
+* Biorthogonal
+
+
+  - Soit $x \in V$. Pour tout $z \in V^\orthogonal$, on a :
+
+$$\scalaire{x}{z} = 0$$
+
+Donc $x \in (V^\orthogonal)^\orthogonal$ et $V \subseteq (V^\orthogonal)^\orthogonal$.
+
+  - Soit $x \in (V^\orthogonal)^\orthogonal \subseteq H$. On pose $u = P(x) \in V$ et $v = x - P(x) \in V^\orthogonal$. On a donc $x = u + v$. Par définition de $(V^\orthogonal)^\orthogonal$, on a :
+
+$$\scalaire{x}{z} = 0$$
+
+pour tout $z \in V^\orthogonal$. Comme $u \in V$, on a aussi $\scalaire{u}{z} = 0$ et finalement :
+
+$$0 = \scalaire{x}{z} = \scalaire{u}{z} + \scalaire{v}{z} = \scalaire{v}{z}$$
+
+Si on choisit $z = v$, cela donne $\scalaire{v}{v} = 0$, d'où $v = 0$ et $x = u \in V$. On en conclut que $(V^\orthogonal)^\orthogonal \subseteq V$.
+
+
+On conclut de ces deux inclusions que :
+
+$$(V^\orthogonal)^\orthogonal = V$$
+
+
+* Théorème de représentation de Riesz
+
+Nous allons à présent établir une équivalence entre les formes linéaires de $H^\dual$ et le produit scalaire sur $H$.
+
+Pour toute forme linéaire $\varphi \in H^\dual$, il existe un et un seul $u \in H$ tel que :
+
+$$\forme{\varphi}{x} = \scalaire{u}{x}$$
+
+pour tout $x \in H$. On dit que $u$ représente $\varphi$ sur $H$.
+
+Soit le noyau :
+
+$$N = \noyau \varphi = \{ x \in H : \forme{\varphi}{x} = 0 \}$$
+
+  - Si $N = H$, il suffit de choisir $u = 0$. On a alors :
+
+$$\forme{\varphi}{x} = 0 = \scalaire{0}{x} = \scalaire{u}{x}$$
+
+pour tout $x \in H$. Pour prouver l'unicité, si on a aussi $v \in H$ représente également $\varphi$, le choix $x = v$ nous donne :
+
+$$\forme{\varphi}{v} = 0 = \scalaire{v}{v}$$
+
+ce qui implique que $v = 0$.
+
+  - Dans le cas contraire, on a $H \setminus N \ne \emptyset$. Comme $N$ est complet, on peut lui appliquer les résultats relatifs aux projections, dont la somme directe $H = N \bigoplus N^\orthogonal$. Choisissons $a \in H \setminus N$. On a $\forme{\varphi}{a} \ne 0$ et une unique décomposition $a = b + c$, où $b \in N$ et $c \in N^\orthogonal$. On a donc par définition $\forme{\varphi}{b} = 0$ et :
+
+$$0 \ne \forme{\varphi}{a} = \forme{\varphi}{b} + \forme{\varphi}{c} = \forme{\varphi}{c}$$
+
+En partant de vecteurs de la forme $\gamma \cdot c$, où $\gamma \in \corps$, on peut obtenir la valeur de $\varphi$ en n'importe quel $x \in H$ :
+
+$$\forme{\varphi}{\gamma \cdot c} = \gamma \cdot \forme{\varphi}{c} = \forme{\varphi}{x}$$
+
+Il suffit donc de choisir :
+
+$$\gamma = \frac{ \forme{\varphi}{x} }{ \forme{\varphi}{c} }$$
+
+Considérons un $x \in H$ quelconque et sa décomposition unique $x = y + z$, où $y \in N$ et $z \in N^\orthogonal$. Si :
+
+$$w = \frac{ \forme{\varphi}{x} }{ \forme{\varphi}{c} } \cdot c$$
+
+on a $\forme{\varphi}{w} = \forme{\varphi}{x}$. Posons $v = x - w$. On a alors :
+
+$$\forme{\varphi}{v} = \forme{\varphi}{x} - \forme{\varphi}{w} = 0$$
+
+On en déduit que $v \in N$. Comme on a aussi $w \in N^\orthogonal$ et $x = v + w$, on conclut par unicité de la décomposition que $v = y$ et $w = z$. Pour tout $u \in H$, on a :
+
+$$\scalaire{u}{x} = \scalaire{u}{v} + \scalaire{u}{w}$$
+
+Par analogie avec $\forme{\varphi}{v} = 0$, on voudrait bien que $\scalaire{u}{v} = 0$. Pour cela, il suffit de choisir $u \in N^\orthogonal$, par exemple $u = \lambda \cdot c$ pour un certain $\lambda \in \corps$. Si on veut que $u$ représente $\varphi$, il faut en particulier que $\scalaire{u}{c} = \forme{\varphi}{c}$, c'est-à-dire :
+
+$$\scalaire{\lambda \cdot c}{c} = \conjaccent{\lambda} \cdot \scalaire{c}{c} = \forme{\varphi}{c}$$
+
+d'où :
+
+$$\lambda = \frac{ \conjaccent{\forme{\varphi}{c}} }{ \scalaire{c}{c} }$$
+
+et :
+
+$$u = \frac{ \conjaccent{\forme{\varphi}{c}} }{ \scalaire{c}{c} } \cdot c$$
+
+Soit $x \in H$. On a la décomposition :
+
+$$x = \frac{ \forme{\varphi}{x} }{ \forme{\varphi}{c} } \cdot c + v$$
+
+où $v \in N$. Donc :
+
+\begin{align}
+\scalaire{u}{x} &= \frac{ \forme{\varphi}{x} }{ \forme{\varphi}{c} } \cdot \frac{ \forme{\varphi}{c} }{ \scalaire{c}{c} } \cdot \scalaire{c}{c} + \scalaire{u}{v} \)
+
+\(
+&= \forme{\varphi}{x}
+\end{align}
+
+Nous avons prouvé l'existence d'un $u \in H$ représentant $\varphi$. Pour l'unicité, si $u$ et $p$ représentent $\varphi$, on a :
+
+$$\scalaire{u - p}{x} = \scalaire{u}{x} - \scalaire{p}{x} = \forme{\varphi}{x} - \forme{\varphi}{x} = 0$$
+
+pour tout $x \in H$, et en particulier pour $x = u - p$, d'où :
+
+$$\norme{u - p}^2 = \scalaire{u - p}{u - p} = 0$$
+
+ce qui implique $u - p = 0$ et donc $u = p$.
+
+* Extension aux formes bilinéaires
+
+Si $\vartheta : H \times H \mapsto \corps$ est une forme bilinéaire de norme finie sur $H$, il existe une unique application linéaire et continue $A : H \mapsto H$ telle que :
+
+$$\biforme{u}{\vartheta}{v} = \scalaire{A(u)}{v}$$
+
+pour tout $u,v \in H$.
+
+Pour tout $u \in H$, on définit la forme linéaire $\varphi_u : H \mapsto \corps$ par :
+
+$$\forme{\varphi_u}{x} = \biforme{u}{\vartheta}{x}$$
+
+pour tout $x \in H$. Pour $u \in H$ fixé, $\varphi_u$ est continue car :
+
+$$\norme{\forme{\varphi_u}{x}} = \norme{\biforme{u}{\vartheta}{x}} \le \norme{\vartheta}_\lineaire \cdot \norme{u} \cdot \norme{x}$$
+
+d'où $\norme{\varphi_u} \le {\vartheta}_\lineaire \cdot \norme{u} \strictinferieur +\infty$. On peut donc trouver un unique représentant $A(u) \in H$ tel que :
+
+$$\scalaire{A(u)}{x} = \forme{\varphi_u}{x} = \biforme{u}{\vartheta}{x}$$
+
+pour tout $x \in H$, ce qui définit l'application $A : u \in H \mapsto A(u) \in H$. Cette application est linéaire car :
+
+\begin{align}
+\scalaire{A(\alpha \cdot u + \beta \cdot v)}{x} &= \biforme{\alpha \cdot u + \beta \cdot v}{\vartheta}{x} \)
+
+\(
+&= \alpha \cdot \biforme{u}{\vartheta}{x} + \beta \cdot \biforme{v}{\vartheta}{x} \)
+
+\(
+&= \alpha \cdot \scalaire{A(u)}{x} + \beta \cdot \scalaire{A(v)}{x}
+\end{align}
+
+pour tout $u,v,x \in H$ et $\alpha,\beta \in \corps$. Elle est également continue car :
+
+$$\norme{A(u)}^2 = \scalaire{A(u)}{A(u)} = \biforme{u}{\vartheta}{A(u)} \le \norme{\vartheta}_\lineaire \cdot \norme{u} \cdot \norme{A(u)}$$
+
+On a donc soit $A = 0$ et a fortiori $A$ continue, soit :
+
+\norme{$$A(u)} \le \norme{\vartheta}_\lineaire \cdot \norme{u} \strictinferieur +\infty$$
+
+* Application adjointe
+
+Soit une application $A : H \mapsto H$ linéaire et continue. Il existe une unique application $A^\dual : H \mapsto H$ telle que :
+
+$$\scalaire{A^\dual(v)}{u} = \scalaire{v}{A(u)}$$
+
+pour tout $(u,v) \in H^2$.
+
+Choisissons $v \in H$. L'application $\varphi_v : u \mapsto \scalaire{v}{A(u)}$ est une forme linéaire. Elle est continue car :
+
+$$\abs{\forme{\varphi_v}{u}} = \abs{\scalaire{v}{A(u)}} \le \norme{v} \cdot \norme{A(u)} \le \norme{v} \cdot \norme{A} \cdot \norme{u}$$
+
+On a donc :
+
+$$\abs{\varphi_v} \le \norme{A} \cdot \norme{v}$$
+
+Le théorème de Riesz nous dit qu'il existe un unique $A^\dual(v) \in H$ tel que :
+
+$$\scalaire{A^\dual(v)}{u} = \forme{\varphi_v}{u} = \scalaire{v}{A(u)}$$
+
+pour tout $u \in H$. Comme ce résultat est également valable quel que soit $v \in H$, nous avons défini l'application $A^\dual : H \mapsto H$ demandée.
+
+* Théorème de Lax-Milgram
+
+Soit une forme bilinéaire $\vartheta : H \times H \mapsto \corps$ de norme finie. Nous supposons qu'il existe un réel $\varrho \strictsuperieur 0$ tel que :
+
+$$\biforme{u}{\vartheta}{u} \ge \varrho \cdot \norme{u}^2$$
+
+pour tout $u \in H$. On dit que $\vartheta$ est coercive. Soit une forme linéaire et continue $\varphi : H \mapsto \corps$. Nous allons montrer qu'il existe un unique $s \in H$ tel que :
+
+$$\biforme{s}{\vartheta}{v} = \forme{\varphi}{v}$$
+
+pour tout $v \in H$.
+
+En appliquant le théorème de Riesz, on peut trouver un unique $f \in H$ qui représente $\varphi$ sur $H$ :
+
+$$\forme{\varphi}{v} = \scalaire{f}{v}$$
+
+pour tout $v \in H$. On dispose aussi d'une application linéaire continue $A$ telle que :
+
+$$\biforme{u}{\vartheta}{v} = \scalaire{A(u)}{v}$$
+
+pour tout $u,v \in H$. Pour tout $s$ vérifiant la condition du théorème, on doit donc avoir :
+
+$$\scalaire{f}{v} = \forme{\varphi}{v} = \biforme{s}{\vartheta}{v} = \scalaire{A(s)}{v}$$
+
+et donc $\scalaire{f}{v} = \scalaire{A(s)}{v}$ pour tout $v \in H$. Par linéarité, on
+en déduit que :
+
+$$\scalaire{f - A(s)}{v} = 0$$
+
+Le cas particulier $v = f - A(s)$ nous donne :
+
+$$\scalaire{f - A(s)}{f - A(s)} = \norme{f - A(s)}^2 = 0$$
+
+On en déduit que $f - A(s) = 0$, autrement dit $A(s) = f$.
+
+On sait que l'image $V = \image A \subseteq H$ est un espace complet. On a dès lors la somme directe $H = V \bigoplus V^\orthogonal$. Soit $u \in V^\orthogonal$. On a $\scalaire{A(x)}{u} = 0$ pour tout $x \in H$. Le choix $x = u$ combiné avec la coercivité de $\vartheta$ nous donne :
+
+$$0 \le \varrho \cdot \norme{u}^2 \le \biforme{u}{\vartheta}{u} = \scalaire{A(u)}{u} = 0$$
+
+Divisant alors par $\varrho$ strictement positif, on obtient $\norme{u}^2 = 0$, ce qui n'est possible que si $u = 0$. On en déduit que $V^\orthogonal = \{0\}$. Pour tout $x \in H$, on a donc la décomposition $x = y + 0 = y$ avec $y \in V$. On en déduit que $H = V = \image A$. Donc $f \in \image A$, ce qui prouve l'existence d'au moins un $s \in H$ tel que $A(s) = f$.
+
+D'un autre coté, si $s,t \in H$ vérifient $A(s) = A(t) = f$, on a $A(s - t) = A(s) - A(t) = f - f = 0$. Donc :
+
+$$0 \le \varrho \cdot \norme{s - t}^2 \le \biforme{s - t}{\vartheta}{s - t} = \scalaire{A(s - t)}{s - t} = \scalaire{0}{s - t} = 0$$
+
+ce qui implique que $\norme{s - t}^2 = 0$, d'où $s = t$. La solution $s$ est donc unique.
+
+** Inverse
+
+Nous avons également prouvé que pour tout $v \in H$, il existe un unique $u \in H$ vérifiant $A(u) = v$. L'application $A$ est donc inversible et $A^{-1}(v) = u$.
+
+* Suite orthonormée
+
+Si une suite $\{ u_i \in H : i \in \setN\}$ vérifie :
+
+$$\scalaire{u_i}{u_j} = \delta_{ij}$$
+
+pour tout $i,j \in \setN$, on dit qu'elle est orthonormée. Dans la suite, nous considérons une suite $\{ u_i \in H : i \in \setN\}$ orthonormée.
+
+
+* Inégalité de Bessel
+
+Soit $x \in H$ et une suite orthonormée $\{ u_i \in H : i \in \setN\}$. Par analogie avec les projections sur des espaces de dimension finie, on pose (sous réserve de convergence) :
+
+$$p = \sum_{i = 1}^{+\infty} \scalaire{u_i}{x} \cdot u_i$$
+
+Soit $e = x - p$. On a :
+
+\begin{align}
+\scalaire{u_k}{e} &= \scalaire{u_k}{x} - \sum_i \scalaire{u_i}{x} \scalaire{u_k}{u_i} \)
+
+\(
+&= \scalaire{u_k}{x} - \sum_i \scalaire{u_i}{x} \delta_{ik} \)
+
+\(
+&= \scalaire{u_k}{x} - \scalaire{u_k}{x} \)
+
+\(
+&= 0
+\end{align}
+
+On en conclut que :
+
+$$\scalaire{p}{e} = \sum_i \scalaire{x}{u_i} \cdot \scalaire{u_i}{e} = 0$$
+
+On a donc :
+
+$$\norme{x}^2 = \norme{p + e}^2 = \norme{p}^2 + \norme{e}^2$$
+
+d'où :
+
+$$\norme{x}^2 - \norme{p}^2 = \norme{e}^2 \ge 0$$
+
+Par orthonormalité, la norme de $p$ vérifie :
+
+$$\norme{p}^2 = \sum_i \abs{\scalaire{u_i}{x}}^2$$
+
+d'où :
+
+$$\norme{x}^2 - \sum_i \abs{\scalaire{u_i}{x}}^2 \ge 0$$
+
+c'est-à-dire :
+
+$$\sum_i \abs{\scalaire{u_i}{x}}^2 \le \norme{x}^2$$
+
+
+* Base hilbertienne
+
+Si, pour tout $x \in H$, la suite des projections finies :
+
+$$p_n = \sum_{i = 1}^n \scalaire{u_i}{x} \cdot u_i$$
+
+converge vers $x$ :
+
+$$x = \lim_{n \to \infty} \sum_{i = 1}^n \scalaire{u_i}{x} \cdot u_i$$
+
+au sens de la distance dérivant du produit scalaire, on dit que les $u_i$ forment une base de Hilbert (ou une base hilbertienne) de $H$. On a alors :
+
+$$x = \sum_{i = 1}^{+\infty} \scalaire{u_i}{x} \cdot u_i$$
+
+Les scalaires :
+
+$$x_i = \scalaire{u_i}{x}$$
+
+sont appelés les coordonnées de $x$ par rapport aux $u_i$. Dans la suite, nous considérons une suite $\{ u_i \in H : i \in \setN \}$ formant une base hilbertienne de $H$.
+
+
+* Egalité de Parseval
+
+Soit $x \in H$ et  $\epsilon \strictsuperieur 0$. On peut trouver un $n \in \setN$ tel que :
+
+$$D = \norme{x - \sum_{i = 1}^n \scalaire{u_i}{x} \cdot u_i} \le \epsilon$$
+
+Mais les propriétés des projections nous disent que :
+
+$$0 \le D^2 = \norme{x}^2 - \sum_{i = 1}^n \abs{\scalaire{u_i}{x}}^2$$
+
+et donc :
+
+$$0 \le \norme{x}^2 - \sum_{i = 1}^n \abs{\scalaire{u_i}{x}}^2 \le \epsilon^2$$
+
+En faisant tendre $n \to \infty$, on a $\epsilon \to 0$ et donc :
+
+$$0 \le \norme{x}^2 - \sum_{i = 1}^{+\infty} \abs{\scalaire{u_i}{x}}^2 \le 0$$
+
+c'est-à-dire :
+
+$$\norme{x}^2 = \sum_{i = 1}^{+\infty} \abs{\scalaire{u_i}{x}}^2$$
+
+
+* Produit scalaire
+
+Soit $x,y \in E$. On a :
+
+#+BEGIN_CENTER
+\(
+x = \sum_{i = 1}^{+\infty} x_i \cdot u_i \)
+
+\(
+y = \sum_{i = 1}^{+\infty} y_i \cdot u_i
+\)
+#+END_CENTER
+
+où $x_i = \scalaire{u_i}{x}$ et $y_i = \scalaire{u_i}{y}$. Par orthonormalité, leur produit scalaire s'écrit :
+
+$$\scalaire{x}{y} = \lim_{n \to \infty} \sum_{i = 1}^n \conjaccent{x}_i \cdot y_i$$
+
+On a donc :
+
+$$\scalaire{x}{y} = \sum_{i = 1}^{+\infty} \conjaccent{x}_i \cdot y_i$$
+
+

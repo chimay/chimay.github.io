@@ -1,0 +1,837 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Optimisation sous contrainte
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:lagrange}
+
+* Introduction
+
+Ce chapitre traite de la résolution numérique de problèmes d'optimisation sous contraintes, ainsi que de leurs fondements théoriques. Les applications de ces méthodes sont nombreuses : maximisation du profit sous contrainte de ne pas dépasser un certain budget, maximiser la solidité d'une structure sans dépasser un certain poids, ...
+
+
+* Problème de minimisation sous contrainte
+
+Soit les fonctions convexes et et deux fois continument différentiables $\omega_1,\omega_2,...,\omega_m : \setR^n \mapsto \setR$ et la fonction $\omega : \setR^n \mapsto \setR^m$ définie par :
+
+$$\omega(x) = (\omega_1(x), \omega_2(x), ..., \omega_m(x))$$
+
+pour tout $x \in \setR^n$. On considère l'ensemble associé :
+
+$$\Omega = \{ x \in \setR^n : \omega(x) \le 0 \}$$
+
+Par définition de l'ordre partiel sur $\setR^m$, tout $x \in \Omega$ doit donc vérifier les $m$ contraintes :
+
+\begin{align}
+\omega_1(x) &\le 0 \)
+
+\(
+\omega_2(x) &\le 0 \)
+
+\(
+\dots & & \)
+
+\(
+\omega_m(x) &\le 0
+\end{align}
+
+Nous considérons le problème général suivant : trouver un $\gamma \in \Omega$ qui minimise la fonction convexe et et deux fois continument différentiable $\varphi : \setR^n \mapsto \setR$ sur $\Omega$ :
+
+$$\gamma \in \arg\min_{x \in \Omega} \varphi(x)$$
+
+Nous avons donc un problème de minimisation à $n$ paramètres :
+
+$$x = (x_1,...,x_n)$$
+
+et $m$ contraintes correspondant aux $\omega_i$. On dit que $\varphi$ est la fonction objectif et $\omega$ la fonction contraignante.
+
+
+** Lien avec la minimisation libre
+
+Il est important de se rendre compte que si $\xi$ est la solution de :
+
+$$\partial \varphi(\xi) = 0$$
+
+on sait que :
+
+$$\xi \in \arg\min_{x \in \setR^n} \varphi(x)$$
+
+mais rien ne nous dit que $\xi$ respecte les contraintes exigées ! On ne peut donc pas dans le cas général appliquer la technique classique de la minimisation libre pour résoudre des problèmes de minimisation contraints.
+
+
+* Convexité
+
+Soit $u,v \in \Omega$ et $s,t \in \setR$ tels que $s,t \ge 0$ et $s + t = 1$. On a alors par convexité des $\omega_i$ :
+
+$$\omega(s \cdot u + t \cdot v) \le s \cdot \omega(u) + t \cdot \omega(v) \le 0$$
+
+On en conclut que $w = s \cdot u + t \cdot v \in \Omega$. On a donc $\convexe(\Omega) = \Omega$. L'ensemble $\Omega$ est convexe.
+
+
+* Frontière
+
+Soit $x \in \frontiere \Omega$. Comme $x \in \adh \Omega$, on a $\distance(x,\Omega) = 0$. On peut donc construire une suite $u_n \in \Omega$ convergeant vers $x$. La continuité des $\omega_i$ et la définition de $\Omega$ nous disent que :
+
+$$\omega_i(x) = \lim_{n \to \infty} \omega_i(u_n) \le \limsup_{n \to \infty} \omega_i(u_n) \le 0$$
+
+pour tout $i \in \{1,...,m\}$. Comme $x \notin \interieur \Omega$, on a aussi $\distance(x,\setR^n \setminus \Omega) = 0$ et on peut construire une suite $v_n \in \setR^n \setminus \Omega$ convergeant vers $x$. On peut alors trouver un $i \in \{1,...,m\}$ tel que :
+
+$$\omega_i(x) = \lim_{n \to \infty} \omega_i(v_n) \ge \liminf_{n \to \infty} \omega_i(v_n) \ge 0$$
+
+Ces deux inégalités nous disent que, pour tout $x \in \frontiere \Omega$, il existe un $i$ tel que $\omega_i(x) = 0$.
+
+
+* Pénalité
+
+L'idée est de laisser l'objectif inchangé sur $\Omega$ mais de l'augmenter suffisamment en dehors pour que le minimum sur $\Omega$ soit également le minimum global. On utilise une fonction $p$ convexe et différentiable vérifiant :
+
+\begin{align}
+p(x) &= 0 \text{ pour tout } x \in \Omega \)
+
+\(
+p(x) &\strictsuperieur& 0 \text{ pour tout } x \in \setR^n \setminus \Omega
+\end{align}
+
+et on construit donc un nouvel objectif $\psi$ par :
+
+$$\psi(x) = \varphi(x) + p(x)$$
+
+On dit alors que $p(x)$ est un terme de pénalité. On a :
+
+$$\min_{x \in \Omega} \psi(x) = \min_{x \in \Omega} \varphi(x) = \varphi(\gamma)$$
+
+Choisissons :
+
+$$\chi \in \arg\min_{x \in \setR^n \setminus \Omega} \psi(x)$$
+
+Si $p$ est assez élevée en dehors de $\Omega$ pour avoir $\psi(\chi) \ge \varphi(\gamma)$, on a :
+
+$$\min_{x \in \setR^n} \psi(x) = \min \{ \psi(\chi) , \varphi(\gamma) \} = \varphi(\gamma)$$
+
+Si de plus $\psi(\chi) \strictsuperieur \varphi(\gamma)$, aucun minimum global ne pourra être en dehors de $\Omega$ (sinon il serait minimisé par $\varphi(\gamma)$). On aura donc :
+
+$$\arg\min_{x \in \setR^n} \psi(x) \subseteq \Omega$$
+
+et il suffit de choisir :
+
+$$\gamma \in \arg\min_{x \in \setR^n} \psi(x)$$
+
+pour obtenir une solution à notre problème. De par les propriétés des fonctions convexes, $\gamma$ sera une solution de $\partial \psi(\gamma) = 0$.
+
+
+* Lagrangien
+
+Par définition de $\Omega$, on peut trouver au moins un $\omega_i(x) \strictsuperieur 0$ pour tout $x \notin \Omega$. Il est donc possible de s'en servir pour former un terme de pénalité. Comme chaque $\omega_i$ est convexe, $y_i \cdot \omega_i$ le sera aussi pour tout $y_i \in \setR$ tel que $y_i \ge 0$ (si $y_i$ était strictement négatif, on aurait $y_i \cdot \omega_i$ concave). Posons :
+
+$$\mathcal{P} = \{ y \in \setR^m : y \ge 0 \}$$
+
+L'objectif modifié s'écrit alors :
+
+$$\lagrangien(x,y) = \varphi(x) + \sum_{i = 1}^m y_i \cdot \omega_i(x)$$
+
+pour tout $x \in \setR^n$ et tout $y = (y_1,...,y_m) \in \mathcal{P}$. On dit que les $y_i$ sont les multiplicateurs de Lagrange et que $\lagrangien$ est le lagrangien associé au problème de minimisation. Utilisant la notation du produit scalaire entre vecteurs matriciels, on le note sous la forme schématique :
+
+$$\lagrangien(x,y) = \varphi(x) + y^\dual \cdot \omega(x)$$
+
+
+* Conditions de Kuhn-Tucker
+
+Nous allons à présent essayer de caractériser un choix $y = \lambda$ tel que $\gamma$ minimise globalement $\lagrangien(x,\lambda)$ :
+
+$$\lagrangien(\gamma,\lambda) = \min_{x \in \setR^n} \lagrangien(x,\lambda)$$
+
+Puisqu'il s'agit d'un problème de minimisation libre, on sait que la dérivée doit s'annuler en $\gamma$ :
+
+$$\deriveepartielle{\lagrangien}{x}(\gamma,\lambda) = \partial \varphi(\gamma) + \lambda^\dual \cdot \partial \omega(\gamma) = 0$$
+
+En terme de composantes, on a donc :
+
+$$\partial \varphi(\gamma) + \sum_{i = 1}^m \lambda_i \cdot \partial \omega_i(\gamma) = 0$$
+
+D'un autre coté, $\gamma$ doit appartenir à $\Omega$, où le terme de pénalité doit également s'annuler :
+
+$$\lambda^\dual \cdot \omega(\gamma) = 0$$
+
+On a donc :
+
+$$\lagrangien(\gamma,\lambda) = \varphi(\gamma) + \lambda^\dual \cdot \omega(\gamma) = \varphi(\gamma) + 0 = \varphi(\gamma)$$
+
+En terme de composantes, la condition d'annulation du terme de pénalité s'écrit :
+
+$$\sum_i \lambda_i \cdot \omega_i(\gamma) = 0$$
+
+Mais comme $\lambda_i \ge 0$ et $\omega_i(\gamma) \le 0$, on en déduit que $\lambda_i \cdot \omega_i(\gamma) \le 0$. Que se passerait-il si on pouvait trouver un $k$ tel que $\lambda_k \cdot \omega_k(\gamma) \strictinferieur 0$ ? On aurait :
+
+$$\sum_i \lambda_i \cdot \omega_i(\gamma) \le \lambda_k \cdot \omega_k(\gamma) \strictinferieur 0$$
+
+ce qui est incompatible avec la condition d'annulation du terme de pénalité. On a donc :
+
+$$\lambda_i^\dual \cdot \omega_i(\gamma) = 0$$
+
+pour tout $i \in \{1,2,...,m\}$. Les conditions :
+
+#+BEGIN_CENTER
+\(
+\partial \varphi(\gamma) + \sum_{i = 1}^m \lambda_i \cdot \partial \omega_i(\gamma) = 0 \\ \)
+
+\(
+\lambda_i^\dual \cdot \omega_i(\gamma) = 0 \\ \)
+
+\(
+\omega(\gamma) \le 0
+\)
+#+END_CENTER
+
+sont appellées conditions de Kuhn-Tucker.
+
+
+* Point de selle
+
+Supposons que $(\gamma,\lambda) \in \Omega \times \mathcal{P}$ vérifie les conditions de Kuhn-Tucker. Choisissons $x \in \setR^n$ et $y \in \mathcal{P}$. L'annulation du gradient ($\partial_x \lagrangien(\gamma,\lambda) = 0$) et la convexité du lagrangien par rapport à la variable $x$ nous assurent que :
+
+$$\lagrangien(\gamma,\lambda) \le \lagrangien(x,\lambda)$$
+
+D'un autre coté, on a $\lambda^\dual \cdot \omega(\gamma) = 0$ et $\lagrangien(\gamma,\lambda) = \varphi(\gamma)$. On sait aussi que $y \ge 0$ et que $\omega(\gamma) \le 0$. Donc $y^\dual \cdot \omega(\gamma) \le 0$ et :
+
+$$\lagrangien(\gamma,y) = \varphi(\gamma) + y^\dual \cdot \omega(\gamma) \le \varphi(\gamma) = \lagrangien(\gamma,\lambda)$$
+
+On voit que $\lambda$ maximise le lagrangien par rapport à la variable $y$. Ces deux propriétés extrémales nous montrent que $(\gamma,\lambda)$ est un point de selle :
+
+$$\lagrangien(\gamma,y) \le \lagrangien(\gamma,\lambda) \le \lagrangien(x,\lambda)$$
+
+
+** Réciproque
+
+Nous venons de voir que les conditions de Kuhn-Tucker remplies sur $\Omega \times \mathcal{P}$ nous offraient un point de selle sur $\setR^n \times \mathcal{P}$. Nous allons voir que la réciproque est également vraie. Supposons que $(\gamma,\lambda) \in \setR^n \times \mathcal{P}$ soit un point de selle du lagrangien :
+
+$$\lagrangien(\gamma,y) \le \lagrangien(\gamma,\lambda) \le \lagrangien(x,\lambda)$$
+
+pour tout $(x,y) \in \setR^n \times \mathcal{P}$. On a :
+
+$$\lagrangien(\gamma,y) - \lagrangien(\gamma,\lambda) = (y - \lambda)^\dual \cdot \omega(\gamma) \le 0$$
+
+relation qui doit être valable pour tout $y \ge 0$. Fixons $i \in \{1,2,...,m\}$ et choisissons :
+
+#+BEGIN_CENTER
+\(
+y_k =
+\begin{cases}
+\lambda_k & \text{ si } k \ne i \)
+
+\(
+0 & \text{ si } k = i
+\end{cases}
+\)
+#+END_CENTER
+
+on en déduit que $(y - \lambda)^\dual \cdot \omega(\gamma) = -\lambda_i \cdot \omega_i(\gamma) \le 0$, c'est-à-dire :
+
+$$\lambda_i \cdot \omega_i(\gamma) \ge 0$$
+
+Considérons à présent le choix :
+
+#+BEGIN_CENTER
+\(
+y_k =
+\begin{cases}
+\lambda_k & \text{ si } k \ne i \)
+
+\(
+2 \lambda_i & \text{ si } k = i
+\end{cases}
+\)
+#+END_CENTER
+
+On en déduit alors que :
+
+$$(y - \lambda)^\dual \cdot \omega(\gamma) = \lambda_i \cdot \omega_i(\gamma) \le 0$$
+
+On conclut de ces deux inégalités que :
+
+$$\lambda_i \cdot \omega_i(\gamma) = 0$$
+
+Enfin, si nous prenons :
+
+#+BEGIN_CENTER
+\(
+y_k =
+\begin{cases}
+\lambda_k & \text{ si } k \ne i \)
+
+\(
+\lambda_i + 1 & \text{ si } k = i
+\end{cases}
+\)
+#+END_CENTER
+
+on voit que :
+
+$$(y - \lambda)^\dual \cdot \omega(\gamma) = 1 \cdot \omega_i(\gamma) = \omega_i(\gamma) \le 0$$
+
+ce qui nous montre que $\gamma \in \Omega$.
+
+De plus, comme :
+
+$$\gamma \in \arg\min_{x \in \setR^n} \lagrangien(x,\lambda)$$
+
+les propriétés des fonctions dérivables nous imposent que $\partial_x \lagrangien(\gamma,\lambda) = 0$.
+
+
+* Solution
+
+Supposons que $(\gamma,\lambda)$ soit un point de selle du lagrangien. Choisissons $x \in \Omega$. On a $\omega(x) \le 0$ et $\lambda^\dual \cdot \omega(x) \le 0$. On en déduit que :
+
+$$\lagrangien(x,\lambda) = \varphi(x) + \lambda^\dual \cdot \omega(x) \le \varphi(x)$$
+
+On a donc bien :
+
+$$\varphi(\gamma) = \lagrangien(\gamma,\lambda) \le \lagrangien(x,\lambda) \le \varphi(x)$$
+
+ce qui prouve que $\gamma$ minimise $\varphi$ sur $\Omega$. La solution du problème de point de selle du lagrangien contient donc la solution de notre problème de minimisation sous contrainte.
+
+
+** Généralisation
+
+Remarquons que nous n'avons pas utilisé la convexité de $\varphi$ ou de $\omega$ pour démontrer que $\gamma$ est bien la solution de notre problème. On peut donc appliquer la technique du point de selle du lagrangien à une classe de fonctions beaucoup plus générale.
+
+Attention, si $\varphi$ et/ou $\omega$ ne sont plus supposées convexes, le point de selle impliquera toujours les conditions de Kuhn-Tucker mais l'inverse ne sera plus vrai. En pratique, on essaiera malgré tout de trouver une solution aux conditions de Kuhn-Tucker, et on déterminera a posteriori :
+
+  - si le minimum trouvé est bien un minimum local (test de la Hessienne définie positive au $\gamma$ obtenu)
+  - si ce minimum local est aussi un minimum sur $\Omega$
+
+
+* Problème de maximisation sous contrainte
+
+Soit les fonctions {\em concaves} et deux fois continument différentiables $\vartheta_1,\vartheta_2,...,\vartheta_m : \setR^n \mapsto \setR$ et la fonction $\vartheta : \setR^n \mapsto \setR^m$ définie par :
+
+$$\vartheta(x) = (\vartheta_1(x), \vartheta_2(x), ..., \vartheta_m(x))$$
+
+pour tout $x \in \setR^n$. On considère l'ensemble associé :
+
+$$\Theta = \{ x \in \setR^n : \vartheta(x) \ge 0 \}$$
+
+Nous considérons le problème général suivant : trouver un $\gamma \in \Theta$ qui maximise la fonction concave et et deux fois continument différentiable $\psi : \setR^n \mapsto \setR$ sur $\Theta$ :
+
+$$\gamma \in \arg\max_{x \in \Theta} \psi(x)$$
+
+On note que ce problème est équivalent au suivant :
+
+$$\gamma \in \arg\min_{x \in \Omega} (-\psi(x))$$
+
+où :
+
+$$\Omega = \{ x \in \setR^n : -\vartheta(x) \le 0 \}$$
+
+
+** Lagrangien
+
+On sait que maximiser $\psi$ revient à minimiser $-\psi$. Comme $-\psi$ et $-\vartheta$ sont convexes, on peut utiliser le lagrangien défini par :
+
+$$\lagrangien_{\min}(x,y) = \Big[-\psi(x)\Big] + y^\dual \cdot \Big[-\vartheta(x)\Big] =  -\psi(x) - y^\dual \cdot \vartheta(x)$$
+
+pour tout $(x,y) \in \setR^n \times \mathcal{P}$. La solution $(\gamma,\lambda)$ vérifie alors :
+
+$$\lagrangien_{\min}(\gamma,y) \le \lagrangien_{\min}(\gamma,\lambda) \le \lagrangien_{\min}(x,\lambda)$$
+
+On voit que la fonction opposée :
+
+$$\lagrangien_{\max}(x,y) = - \lagrangien_{\min}(x,y) = \psi(x) + y^\dual \cdot \vartheta(x)$$
+
+vérifie les conditions du point de selle inversées :
+
+$$\lagrangien_{\max}(x,\lambda) \le \lagrangien_{\max}(\gamma,\lambda) \le \lagrangien_{\max}(\gamma,y)$$
+
+Il s'agit du lagrangien natif du problème de maximisation. Il est maximisé par rapport à $x$ et minimisé par rapport aux multiplicateurs de Lagrange.
+
+
+** Kuhn-Tucker
+
+Les conditions de Kuhn-Tucker associées à $\lagrangien_{\min}$ s'écrivent :
+
+#+BEGIN_CENTER
+\(
+- \partial \psi(\gamma) - \sum_{i = 1}^m \lambda_i \cdot \partial \vartheta_i(\gamma) = 0 \\ \)
+
+\(
+- \lambda_i^\dual \cdot \vartheta_i(\gamma) = 0 \\ \)
+
+\(
+- \vartheta(\gamma) \le 0
+\)
+#+END_CENTER
+
+Elles sont équivalentes aux conditions analogues associées à $\lagrangien_{\max}$ :
+
+#+BEGIN_CENTER
+\(
+\partial \psi(\gamma) + \sum_{i = 1}^m \lambda_i \cdot \partial \vartheta_i(\gamma) = 0 \\ \)
+
+\(
+\lambda_i^\dual \cdot \vartheta_i(\gamma) = 0 \\ \)
+
+\(
+\vartheta(\gamma) \ge 0
+\)
+#+END_CENTER
+
+
+* Contraintes d'égalité
+
+Soit les fonctions deux fois continument différentiables $\varrho_1,\varrho_2,...,\varrho_m : \setR^n \mapsto \setR$ et la fonction $\varrho : \setR^n \mapsto \setR^m$ définie par :
+
+$$\varrho(x) = (\varrho_1(x), \varrho_2(x), ..., \varrho_m(x))$$
+
+pour tout $x \in \setR^n$. On considère l'ensemble associé :
+
+$$\Phi = \{ x \in \setR^n : \varrho(x) = 0 \}$$
+
+Nous considérons le problème général suivant : trouver un $\gamma \in \Phi$ qui minimise la fonction deux fois continument différentiable $\varphi : \setR^n \mapsto \setR$ sur $\Phi$ :
+
+$$\gamma \in \arg\min_{x \in \Phi} \varphi(x)$$
+
+
+** Lagrangien
+
+On peut réécrire l'ensemble $\Phi$ sous la forme :
+
+$$\Phi = \{ x \in \setR^n : \varrho(x) \le 0, \ \varrho(x) \ge 0 \}$$
+
+On introduit donc deux séries de multiplicateurs et le lagrangien défini par :
+
+$$L(x,y,z) = \varphi(x) + y^\dual \cdot \varrho(x) + z^\dual \cdot (-\varrho(x))$$
+
+pour tout $(x,y,z) \in \setR^n \times \mathcal{P} \times \mathcal{P}$. On constate qu'il ne dépend que de $x$ et de $y - z$ :
+
+$$L(x,y,z) = \varphi(x) + (y - z)^\dual \cdot \varrho(x)$$
+
+On voit que $u = y - z$ est libre d'aller où il veut dans $\setR^m$. On pose :
+
+$$\lagrangien(x,u) = \varphi(x) + u^\dual \cdot \varrho(x)$$
+
+pour tout $(x,u) \in \setR^n \times \setR^m$.
+
+
+** Kuhn-Tucker
+
+Comme on veut que $\gamma$ minimise $\lagrangien$ par rapport à la variable $x$ sur $\setR^n$, on impose $\partial_x \lagrangien(\gamma,\lambda) = 0$. On doit avoir aussi $\varrho(x) = 0$. Mais comme $\partial_u \lagrangien(x,u) = \varrho(x)$, on se retrouve finalement avec les conditions nécessaires de Kuhn-Tucker :
+
+#+BEGIN_CENTER
+\(
+\partial_x \lagrangien(\gamma,\lambda) = 0 \\ \)
+
+\(
+\partial_u \lagrangien(\gamma,\lambda) = 0
+\)
+#+END_CENTER
+
+
+** Point de selle
+
+Nous allons montrer que tout point de selle est solution du problème de minimisation. Soit $(\gamma,\lambda)$ tel que :
+
+$$\lagrangien(\gamma,u) \le \lagrangien(\gamma,\lambda) \le \lagrangien(x,\lambda)$$
+
+pour tout $(x,u) \in \setR^n \times \setR^m$. On en déduit que :
+
+$$\lagrangien(\gamma,u) - \lagrangien(\gamma,\lambda) \le 0$$
+
+pour tout $u \in \setR^m$, c'est-à-dire :
+
+$$(u - \lambda)^\dual \cdot \varrho(\gamma) \le 0$$
+
+Considérons la base canonique $(\canonique_1,...,\canonique_m)$ de $\setR^m$. Si on prend $u = \lambda + \canonique_i$, on obtient la condition
+
+$$(u - \lambda)^\dual \cdot \varrho(\gamma) = \varrho_i(\gamma) \le 0$$
+
+Mais comme $u$ n'est pas forcément positif, on peut aussi prendre $u = \lambda - \canonique_i$. On obtient alors la condition :
+
+$$(u - \lambda)^\dual \cdot \varrho(\gamma) = -\varrho_i(\gamma) \le 0$$
+
+On déduit de ces deux inégalités que $\varrho(\gamma) = 0$, c'est à dire $\gamma \in \Phi$.
+
+A présent, soit $x \in \Phi$. Comme $\varrho(\gamma) = \varrho(x) = 0$, on a :
+
+$$\varphi(\gamma) = \lagrangien(\gamma,\lambda) \le \lagrangien(x,\lambda) = \varphi(x)$$
+
+Le $\gamma$ issu du point de selle est donc bien la solution de notre problème de minimisation contraint.
+
+
+* Récapitulation
+
+Considérons l'ensemble :
+
+$$\Omega = \{ x \in \setR^n : \omega(x) \le 0, \ \vartheta(x) \ge 0, \ \varrho(x) = 0 \}$$
+
+
+** Minimisation
+
+Si on veut minimiser $\varphi$ sur $\Omega$, on utilisera le lagrangien défini par :
+
+$$\lagrangien(x,y,z,u) = \varphi(x) + y^\dual \cdot \omega(x) - z^\dual \cdot \vartheta(x) + u^\dual \cdot \varrho(x)$$
+
+pour tout $(x,y,z,u)$ tels que $y,z \ge 0$. Le point de selle $(\gamma,\lambda,\mu,\nu)$ vérifiera :
+
+$$\lagrangien(\gamma,y,z,u) \le \lagrangien(\gamma,\lambda,\mu,\nu) \le \lagrangien(x,\lambda,\mu,\nu)$$
+
+Les conditions de Kuhn-Tucker s'écriront :
+
+#+BEGIN_CENTER
+\(
+\partial \varphi(\gamma) + \sum_i \left[ \lambda_i \cdot \partial \omega_i(x) - \mu_i \cdot \partial \vartheta_i(x) + \nu_i \cdot \partial \varrho_i(x) \right] = 0 \\ \)
+
+\(
+\lambda_i \cdot \omega_i(x) = 0 \\ \)
+
+\(
+\mu_i \cdot \vartheta_i(x) = 0 \\ \)
+
+\(
+\omega_i(x) \le 0 \\ \)
+
+\(
+\vartheta_i(x) \ge 0 \\ \)
+
+\(
+\varrho_i(x) = 0
+\)
+#+END_CENTER
+
+
+** Maximisation
+
+Si on veut maximiser $\psi$ sur $\Omega$, on utilisera le lagrangien défini par :
+
+$$\lagrangien(x,y,z,u) = \psi(x) - y^\dual \cdot \omega(x) + z^\dual \cdot \vartheta(x) + u^\dual \cdot \varrho(x)$$
+
+pour tout $(x,y,z,u)$ tels que $y,z \ge 0$. Le point de selle $(\gamma,\lambda,\mu,\nu)$ vérifiera :
+
+$$\lagrangien(x,\lambda,\mu,\nu) \le \lagrangien(\gamma,\lambda,\mu,\nu) \le \lagrangien(\gamma,y,z,u)$$
+
+Les conditions de Kuhn-Tucker s'écriront :
+
+#+BEGIN_CENTER
+\(
+\partial \psi(\gamma) + \sum_i \left[ -\lambda_i \cdot \partial \omega_i(x) + \mu_i \cdot \partial \vartheta_i(x) + \nu_i \cdot \partial \varrho_i(x) \right] = 0 \\ \)
+
+\(
+\lambda_i \cdot \omega_i(x) = 0 \\ \)
+
+\(
+\mu_i \cdot \vartheta_i(x) = 0 \\ \)
+
+\(
+\omega_i(x) \le 0 \\ \)
+
+\(
+\vartheta_i(x) \ge 0 \\ \)
+
+\(
+\varrho_i(x) = 0
+\)
+#+END_CENTER
+
+
+** Equivalence
+
+On exprime parfois ces problèmes en utilisant des contraintes équivalentes. Si on pose $s = - \omega(x)$, on a $s \ge 0$. De même, on pose $t = \vartheta(x) \ge 0$. On définit alors $\Gamma$ comme l'ensemble des $(x,s,t)$ vérifiant les conditions :
+
+\begin{align}
+s,t &\ge 0 \)
+
+\(
+s + \omega(x) &= 0 \)
+
+\(
+t - \vartheta(x) &= 0 \)
+
+\(
+\varrho(x) &= 0
+\end{align}
+
+Et on minimise $\varphi(x)$ (ou on maximise $\psi(x)$) sur les $(x,s,t) \in \Gamma$.
+
+
+* Découplage
+
+
+** Minimisation
+
+Soit le problème de minimisation :
+
+$$\gamma \in \arg\min_{x \in \Omega} \varphi(x)$$
+
+où :
+
+$$\Omega^+ = \{ x \in \corps^n : \omega(x) \le 0, \ x \ge 0 \}$$
+
+La condition $x \ge 0$ est équivalente à $-x \le 0$. On définit le lagrangien :
+
+$$L(x,y,z) = \varphi(x) + y^\dual \cdot \omega(x) - z^\dual \cdot x$$
+
+La solution de notre problème vérifie les conditions du point de selle :
+
+$$L(\gamma,y,z) \le L(\gamma,\lambda,\mu) \le L(x,\lambda,\mu)$$
+
+pour tout $x \in \setR^n$ et $y,z \ge 0$. Si $x \ge 0$, on a :
+
+$$-z^\dual \cdot x \le 0$$
+
+par positivité de $z$. On a alors :
+
+$$L(x,y,z) = \varphi(x) + y^\dual \cdot \omega(x) - z^\dual \cdot x \le \varphi(x) + y^\dual \cdot \omega(x) = L(x,y,0)$$
+
+On en conclut qu'un choix permettant de maximiser $L$ par rapport à son troisième argument est $\mu = 0$. Introduisons le lagrangien modifié :
+
+$$\lagrangien(x,y) = L(x,y,0) = \varphi(x) + y^\dual \cdot \omega(x)$$
+
+Le problème du point de selle est équivalent à trouver $(\gamma,\lambda) \ge 0$ tel que :
+
+$$\lagrangien(\gamma,y) \le \lagrangien(\gamma,\lambda) \le \lagrangien(x,\lambda)$$
+
+pour tout $(x,y) \ge 0$. La différence est qu'on ne fait plus apparaître explicitement la contrainte de positivité de $x$ dans le lagrangien.
+
+
+** Maximisation
+
+Soit le problème de minimisation :
+
+$$\gamma \in \arg\max_{x \in \Theta} \psi(x)$$
+
+où :
+
+$$\Theta = \{ x \in \corps^n : \vartheta(x) \ge 0, \ x \ge 0 \}$$
+
+On pose le lagrangien :
+
+$$L(x,y,z) = \psi(x) + y^\dual \cdot \omega(x) + z^\dual \cdot x$$
+
+La solution de notre problème vérifie les conditions du point de selle inversé :
+
+$$L(x,\lambda,\mu) \le L(\gamma,\lambda,\mu) \le L(\gamma,y,z)$$
+
+pour tout $x \in \setR^n$ et $y,z \ge 0$. Si $x \ge 0$, on a :
+
+$$z^\dual \cdot x \ge 0$$
+
+par positivité de $z$. On a alors :
+
+$$L(x,y,z) \ge L(x,y,0)$$
+
+On en conclut qu'un choix permettant de minimiser $L$ par rapport à son troisième argument est $\mu = 0$. Introduisons le lagrangien modifié :
+
+$$\lagrangien(x,y) = L(x,y,0) = \psi(x) + y^\dual \cdot \vartheta(x)$$
+
+Le problème du point de selle est équivalent à trouver $(\gamma,\lambda) \ge 0$ tel que :
+
+$$\lagrangien(x,\lambda) \le \lagrangien(\gamma,\lambda) \le \lagrangien(\gamma,y)$$
+
+pour tout $(x,y) \ge 0$.
+
+
+* Dualité en optimisation linéaire
+
+
+** Problème primal
+
+Soit une matrice réelle $A$ de taille $(m,n)$, l'ensemble :
+
+$$\Theta = \{ x \in \setR^n : A \cdot x \le b, \ x \ge 0 \}$$
+
+et le vecteur $c \in \setR^n$. Nous nous intéressons au problème de maximisation linéaire sous contrainte :
+
+$$\gamma \in \arg\max_{x \in \Theta} \big[ c^\dual \cdot x \big]$$
+
+
+** Lagrangien
+
+La contrainte $A \cdot x \le b$ est équivalente à :
+
+$$b - A \cdot x \ge 0$$
+
+On introduit donc le lagrangien :
+
+\begin{align}
+\lagrangien(x,y) &= c^\dual \cdot x + y^\dual \cdot (b - A \cdot x) \)
+
+\(
+&= c^\dual \cdot x + y^\dual \cdot b - y^\dual \cdot A \cdot x
+\end{align}
+
+défini pour tout $(x,y) \ge 0$.
+
+
+** Dualité
+
+Comme on travaille dans les réels, on a par symétrie du produit scalaire :
+
+\begin{align}
+c^\dual \cdot x &= x^\dual \cdot c \)
+
+\(
+y^\dual \cdot b &= b^\dual \cdot y \)
+
+\(
+y^\dual \cdot A \cdot x &= (A \cdot x)^\dual \cdot y = x^\dual \cdot A^\dual \cdot y
+\end{align}
+
+Le lagrangien du problème primal peut donc se réécrire :
+
+\begin{align}
+\lagrangien(x,y) &= x^\dual \cdot c + b^\dual \cdot y - x^\dual \cdot A^\dual \cdot y \)
+
+\(
+&= b^\dual \cdot y + x^\dual \cdot (c - A^\dual \cdot y)
+\end{align}
+
+On voit que la fonction duale définie par :
+
+$$\lagrangien^\dual(y,x) = \lagrangien(x,y) = b^\dual \cdot y + x^\dual \cdot (c - A^\dual \cdot y)$$
+
+pour tout $(y,x) \ge 0$ peut également être considérée comme un lagrangien formé à partir de l'objectif $y \mapsto b^\dual \cdot y$ et d'une des deux contraintes suivantes :
+
+#+BEGIN_CENTER
+\(
+?
+\begin{cases}
+c - A^\dual \cdot y \le 0 \)
+
+\(
+c - A^\dual \cdot y \ge 0
+\end{cases}
+\)
+#+END_CENTER
+
+Résoudre le problème primal revient à trouver un point $(\gamma,\lambda) \ge 0$ vérifiant :
+
+$$\lagrangien(x,\lambda) \le \lagrangien(\gamma,\lambda) \le \lagrangien(\gamma,y)$$
+
+pour tout $x,y \ge 0$. En utilisant la définition de $\lagrangien^\dual$, ces conditions se réécrivent :
+
+$$\lagrangien^\dual(\lambda,x) \le \lagrangien^\dual(\lambda,\gamma) \le \lagrangien^\dual(y,\gamma)$$
+
+Le couple $(\lambda,\gamma)$ est donc solution d'un problème de minimisation en $y$. Dans un problème de minimisation, les contraintes associées aux multiplicateurs de lagrange doivent être négatives. On a donc $c - A^\dual \cdot y \le 0$, autrement dit :
+
+$$A^\dual \cdot y \ge c$$
+
+Le problème primal est donc équivalent au problème dual suivant.
+
+
+** Problème dual
+
+Trouver :
+
+$$\lambda \in \arg\min_{y \in \Omega} (b^\dual \cdot y)$$
+
+où :
+
+$$\Omega = \{ y \in \setR^m : A^\dual \cdot y \ge c, \ y \ge 0 \}$$
+
+
+** Valeurs extrémales
+
+Les conditions de Khun-Tucker des problèmes primal et dual impliquent :
+
+#+BEGIN_CENTER
+\(
+\lambda^\dual \cdot (b - A \cdot \gamma) = 0 \\ \)
+
+\(
+\gamma^\dual \cdot (c - A^\dual \cdot \lambda) = 0
+\)
+#+END_CENTER
+
+Les valeurs des lagrangiens aux points de selle s'écrivent donc :
+
+#+BEGIN_CENTER
+\(
+\lagrangien(\gamma,\lambda) = c^\dual \cdot \gamma + \lambda^\dual \cdot (b - A \cdot \gamma) = c^\dual \cdot \gamma \\ \)
+
+\(
+\lagrangien^\dual(\lambda,\gamma) = b^\dual \cdot \lambda + \gamma^\dual \cdot (c - A^\dual \cdot \lambda) = b^\dual \cdot \lambda
+\)
+#+END_CENTER
+
+La définition du lagrangien dual implique que :
+
+$$\lagrangien(\gamma,\lambda) = \lagrangien^\dual(\lambda,\gamma)$$
+
+c'est-à-dire :
+
+$$c^\dual \cdot \gamma = b^\dual \cdot \lambda$$
+
+Le maximum de $x \mapsto c^\dual \cdot x$ sur $\Theta$ est donc égal au minimum de $y \mapsto b^\dual \cdot y$ sur $\Omega$. Dans la suite, on note :
+
+$$V = \max_{x \in \Theta} (c^\dual \cdot x) = \min_{y \in \Omega} (b^\dual \cdot y)$$
+
+
+** Bornes
+
+Par définition des maxima et minima, on a :
+
+$$c^\dual \cdot x \le V \le b^\dual \cdot y$$
+
+pour tout $x \in \Theta$ et $y \in \Omega$. Si les deux valeurs $c^\dual \cdot x$ et $b^\dual \cdot y$ sont proches, les éléments $x$ et $y$ sont presque optimaux.
+
+
+** Attention
+
+Ne pas confondre la notion de dualité $\max - \min$ avec la dualité au sens des applications linéaires.
+
+
+* Minimisation de la norme sous contraintes linéaires
+
+Soit la matrice $A \in \matrice(\setR,m,n)$, le vecteur colonne $b \in \matrice(\setR,m,1)$ et l'ensemble :
+
+$$\Phi = \{ x \in \matrice(\setR,n,1) : A \cdot x = b \}$$
+
+On veut trouver le $\gamma \in \Phi$ qui minimise la norme usuelle $\norme{x} = \sqrt{x^\dual \cdot x}$ sur $\Phi$. Comme la fonction $\norme{x} \mapsto \norme{x}^2 /2 $ est une fonction monotone strictement croissante sur $\norme{x} \in \setR^+$, cela revient à minimiser :
+
+$$\gamma = \arg\min_{x \in \Phi} \left( \unsur{2} \cdot x^\dual \cdot x \right)$$
+
+Afin de résoudre ce problème, on introduit le lagrangien :
+
+$$\lagrangien(x,u) = \unsur{2} \cdot x^\dual \cdot x + u^\dual \cdot (b - A \cdot x)$$
+
+On impose les conditions de Kuhn-Tucker :
+
+#+BEGIN_CENTER
+\(
+\partial_x \lagrangien(\gamma,\lambda) = \gamma - A^\dual \cdot \lambda = 0 \\ \)
+
+\(
+\partial_u \lagrangien(\gamma,\lambda) = b - A \cdot \gamma = 0
+\)
+#+END_CENTER
+
+On en déduit que $\gamma = A^\dual \cdot \lambda$ et que :
+
+$$A \cdot A^\dual \cdot \lambda = b$$
+
+Si $A \cdot A^\dual$ est inversible, on a donc :
+
+$$\lambda = \left( A \cdot A^\dual \right)^{-1} \cdot b$$
+
+et :
+
+$$\gamma = A^\dual \cdot \left( A \cdot A^\dual \right)^{-1} \cdot b$$
+
+

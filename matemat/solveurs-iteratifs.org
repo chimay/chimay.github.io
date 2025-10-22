@@ -1,0 +1,319 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Solveurs itératifs
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:solveur}
+
+* Dépendances
+
+  - Chapitre \ref{chap:matrice} : Les matrices
+
+
+* Méthodes itératives
+
+Il s'agit de résoudre itérativement (et approximativement) en $x$ un système linéaire $A \cdot x = b$, où $A$ est une matrice et $b$ un vecteur. L'itération générique s'écrit :
+
+$$x_{k + 1} = I(x_k)$$
+
+et on espère que la suite des $x_k \in \setR^n$ converge vers la solution. On initialise en général les algorithmes avec $x_0 = 0$.
+
+
+* Résolution par minimisation
+
+Soit une matrice $H$ de taille $(n,n)$ hermitienne ($H = H^\dual$) et définie positive :
+
+$$x^\dual \cdot H \cdot x \ge 0$$
+
+pour tout $x \in \setR^n$. Considérons la fonction définie par :
+
+$$\varphi(x) = \unsur{2} x^\dual \cdot H \cdot x - x^\dual \cdot b$$
+
+Si un certain $x$ minimise $\varphi$ sur $\setR^n$, on doit avoir :
+
+$$\partial \varphi(x) = H \cdot x - b = 0$$
+
+ce qui revient à résoudre le système linéaire :
+
+$$H \cdot x = b$$
+
+Comme $\partial^2 \varphi = H$ est définie positive, résoudre le système $H \cdot x = b$ en $x$ revient donc à minimiser $\varphi$ sur $\setR^n$. On peut obtenir une approximation de la solution en utilisant la méthode de la plus grande descente, le gradient étant donné par :
+
+$$J = (\partial \varphi)^\dual = H \cdot x - b$$
+
+On a donc des itérations $k$ de la forme :
+
+$$x_{k + 1} = x_k + \alpha_k \cdot (b - H \cdot x)$$
+
+pour un $\alpha_k \in \setR$ bien choisi. On peut aussi utiliser un autre algorithme, comme les gradients conjugués par exemple.
+
+
+** Résidu
+
+On remarque que la direction de la descente est donné par le résidu :
+
+$$-J =  b - H \cdot x$$
+
+
+** Newton
+
+On pourrait bien entendu résoudre par la méthode de Newton, mais cela reviendrait alors à inverser la matrice $H$ directement, ce que l'on cherche précisément à éviter ici.
+
+
+** Généralisation
+
+Soit la matrice $A$ de taille $(N,n)$, où $N \ge n$, et $y \in \setR^N$. Considérons le système général :
+
+$$A \cdot x = y$$
+
+à résoudre en $x \in \setR^n$. Si on multiplie à gauche par $A^\dual$, on obtient :
+
+$$A^\dual \cdot A \cdot x = A^\dual \cdot y$$
+
+Posons :
+
+#+BEGIN_CENTER
+\(
+H = A^\dual \cdot A \)
+
+\(
+b = A^\dual \cdot y
+\)
+#+END_CENTER
+
+On est donc amenés à résoudre le système :
+
+$$H \cdot x = b$$
+
+où $H$ est clairement hermitienne et définie positive puisque :
+
+$$x^\dual \cdot (A^\dual \cdot A) \cdot x = (A \cdot x)^\dual \cdot (A \cdot x) \ge 0$$
+
+Cette technique présente deux avantages. Premièrement, si $H$ est inversible, la solution :
+
+$$x = H^{-1} \cdot b = (A^\dual \cdot A)^{-1} \cdot A^\dual \cdot y$$
+
+minimise la norme $\norme{A \cdot x - y}$ même si la solution de $A \cdot x = y$ n'existe pas. Il est même possible d'utiliser cette méthode avec des matrices $A$ strictement hautes. Ensuite, les propriétés de $H$ nous disent qu'une solution du système minimise la fonction $\varphi$ associée. Il est donc possible de se ramener au problème de minimisation :
+
+$$x \in \arg\min_{z \in \setR^n} \left[ \unsur{2} z^\dual \cdot A^\dual \cdot A \cdot z - z^\dual \cdot A^\dual \cdot y \right]$$
+
+que l'on peut de nouveau résoudre itérativement en utilisant par exemple la méthode de la plus grande descente ou les gradients conjugués.
+
+
+* Espaces de Krylov
+
+Les espaces de Krylov sont des espaces de vecteurs engendrés par les puissances de la matrice $A$ appliquées à un vecteur initial $u$ :
+
+$$\krylov_m(A,u) = \combilin{ u, A \cdot u, A^2 \cdot u, ..., A^{m - 1} \cdot u }$$
+
+On a donc des éléments $x \in \krylov_m(A,u)$ de la forme :
+
+$$x = \left[ \sum_{i = 0}^{m - 1} \alpha_i \cdot A^i \right] \cdot u$$
+
+pour certains $\alpha_i \in \corps$. Il s'agit donc de polynômes matriciels appliquées à $u$.
+
+
+* Méthode de projection
+
+Soit la matrice $A$ de taille $(n,n)$, le vecteur $b \in \setR^n$ et le système $A \cdot x = b$ à résoudre en $x \in \setR^n$. On choisit $m \le n$ beaucoup plus petit que $n$ et les vecteurs $(v_1,...,v_m)$ de $\setR^n$. Nous allons tenter de minimiser l'erreur en $x_{k + 1}$ produite par l'itération générique suivante :
+
+$$x_{k + 1} = x_k + \sum_{i = 1}^m v_i \cdot y_i$$
+
+où les $y_i \in \setR$. Posons :
+
+\begin{align}
+V &= [v_1 \ ... \ v_m] \)
+
+\(
+y &= [y_1 \ ... \ y_m]^\dual
+\end{align}
+
+On peut réécrire l'itération sous la forme :
+
+$$x_{k + 1} = x_k + V \cdot y$$
+
+Nous avons vu en résolvant les moindres carrés qu'une condition nécessaire de minimisation était d'imposer l'orthogonalité entre $(A \cdot x - b)$ et les colonnes de $A$. Nous imposant ici une variante :
+
+$$w_i^\dual \cdot (b - A \cdot x_{k + 1}) = 0$$
+
+pour certains $w_1,...,w_m \in \setR^n$. En posant :
+
+$$W = [w_1 \ ... \ w_m]$$
+
+cette condition peut s'écrire :
+
+$$W^\dual \cdot (b - A \cdot x_{k + 1}) = 0$$
+
+Posons :
+
+$$r_k = b - A \cdot x_k$$
+
+On a alors :
+
+$$b - A \cdot x_{k + 1} = b - A \cdot x_k - A \cdot V \cdot y = r_k - A \cdot V \cdot y$$
+
+La condition d'orthogonalité devient :
+
+$$W^\dual \cdot (r_k - A \cdot V \cdot y) = W^\dual \cdot r_k - W^\dual \cdot A \cdot V \cdot y = 0$$
+
+Si la matrice $W^\dual \cdot A \cdot V$ est inversible, on a :
+
+$$y = (W^\dual \cdot A \cdot V)^{-1} \cdot W^\dual \cdot r_k$$
+
+Comme $V$ et $W$ sont de taille $(n,m)$, la matrice $W^\dual \cdot A \cdot V$ est de taille $(m,m)$, donc beaucoup plus petite que $A$. Le système correspondant est donc beaucoup plus facile à résoudre.
+
+
+** Orthonormés
+
+Si On choisit $V = W$ et si les vecteurs $v_i = w_i$ sont $A$-orthonormés, on a simplement :
+
+$$\composante_{ij} W^\dual \cdot A \cdot V = w_i^\dual \cdot A \cdot v_j = v_i^\dual \cdot A \cdot v_j = \indicatrice_{ij}$$
+
+et :
+
+$$(W^\dual \cdot A \cdot V)^{-1} = W^\dual \cdot A \cdot V = I$$
+
+
+** Krylov
+
+On peut par exemple choisir des vecteurs de base de $\krylov_m(A,r_k)$ pour former les colonnes des matrices $V$ et $W$. On peut aussi utiliser aussi des vecteurs de base de $\krylov_m(A^\dual,r_k)$.
+
+
+* Minimisation du résidu
+
+On tente de minimiser la norme quadratique du résidu :
+
+$$\mathcal{E}(y) = (r_k - A \cdot V \cdot y)^\dual \cdot (r_k - A \cdot V \cdot y)$$
+
+La condition d'annulation de la dérivée par rapport à $y$ nous donne la valeur optimale :
+
+$$y = (V^\dual \cdot A^\dual \cdot A \cdot V)^{-1} \cdot (V^\dual \cdot A^\dual \cdot r_k)$$
+
+
+* Gradients biconjugués
+
+Soit la matrice $A$ de taille $(n,n)$ et les vecteurs $b,c \in \corps^n$. Les gradients biconjugués permettent d'obtenir simultanément les deux solutions $x,y \in \corps^n$ telles que :
+
+#+BEGIN_CENTER
+\(
+A \cdot x = b \quad \text{ (système primal)} \)
+
+\(
+A^\dual \cdot y = c \quad \text{ (système dual)}
+\)
+#+END_CENTER
+
+Soit $(x_k,y_k)$ l'estimation de $(x,y)$ obtenues à l'itération $k$ et les résidus :
+
+#+BEGIN_CENTER
+\(
+r_k = b - A \cdot x_k \)
+
+\(
+s_k = c - A^\dual \cdot y_k
+\)
+#+END_CENTER
+
+L'algorithme est initialisé par $x_0 = y_0 = 0$. On a alors $r_0 = b$ et $s_0 = c$. L'itération est donnée par :
+
+#+BEGIN_CENTER
+\(
+x_{k + 1} = x_k + \alpha_k \cdot p_k \)
+
+\(
+y_{k + 1} = y_k + \gamma_k \cdot q_k
+\)
+#+END_CENTER
+
+où $p_k,q_k \in \corps^n$ et $\alpha_k,\gamma_k \in \corps$. Par analogie avec la plus grande descente, les premiers pas s'écrivent $p_0 = r_0$ et $q_0 = s_0$. On adapte ensuite à chaque itération les $p_k, q_k$ par :
+
+#+BEGIN_CENTER
+\(
+p_{k + 1} = r_{k + 1} + \beta_k \cdot p_k \)
+
+\(
+q_{k + 1} = s_{k + 1} + \delta_k \cdot q_k
+\)
+#+END_CENTER
+
+où $\beta_k,\delta_k \in \corps$. On impose l'orthogonalité des résidus ainsi que l'$A$-orthogonalité
+des pas successifs :
+
+$$s_k^\dual \cdot r_{k + 1} = r_k^\dual \cdot s_{k + 1} = q_k^\dual \cdot A \cdot p_{k + 1} = p_k^\dual \cdot A^\dual \cdot q_{k + 1} = 0$$
+
+On voit que :
+
+\begin{align}
+r_{k + 1} &= b - A \cdot x_{k + 1} \)
+
+\(
+&= b - A \cdot x_k - \alpha_k\cdot A\cdot p_k \)
+
+\(
+&= r_k - \alpha_k \cdot A \cdot p_k \)
+
+\(
+s_{k + 1} &= c - A^\dual \cdot y_{k + 1} \)
+
+\(
+&= c - A^\dual \cdot y_k - \gamma_k \cdot A^\dual \cdot q_k \)
+
+\(
+&= s_k - \gamma_k \cdot A^\dual \cdot q_k
+\end{align}
+
+Les conditions d'orthogonalité nous donnent donc les valeurs des coefficients
+
+\begin{align}
+\alpha_k = \frac{s_k^\dual \cdot r_k}{s_k^\dual \cdot A \cdot p_k} \ \ && \ \
+\gamma_k = \frac{r_k^\dual \cdot s_k}{r_k^\dual \cdot A^\dual \cdot q_k} \\ \)
+
+\(
+\beta_k = - \frac{ q_k^\dual \cdot A \cdot r_{k + 1} }{q_k^\dual \cdot A \cdot p_k} \ \ && \ \
+\delta_k = - \frac{ p_k^\dual \cdot A^\dual \cdot s_{k + 1} }{p_k^\dual \cdot A^\dual \cdot  q_k}
+\end{align}
+
+
+** Simplification des coefficients
+
+Il existe un procédé plus rapide pour évaluer les coefficients. En prenant le dual des relations entre les résidus successifs, on obtient $(s_k - s_{k + 1})^\dual = \conjaccent{\gamma_k} \cdot q_k^\dual \cdot A$. Donc :
+
+$$q_k^\dual \cdot A \cdot r_{k + 1} = \unsur{\conjaccent{\gamma_k}} \cdot (s_k - s_{k + 1})^\dual \cdot r_{k + 1} = - \unsur{\conjaccent{\gamma_k}} \cdot s_{k + 1}^\dual \cdot r_{k + 1}$$
+
+et :
+
+\begin{align}
+q_k^\dual \cdot A \cdot p_k &= q_k^\dual \cdot A \cdot r_k - \beta_k \cdot q_k^\dual \cdot A \cdot p_{k - 1} = q_k^\dual \cdot A \cdot r_k \)
+
+\(
+&=  \unsur{\conjaccent{\gamma_k}} \cdot (s_k - s_{k + 1})^\dual \cdot r_k = \unsur{\conjaccent{\gamma_k}} \cdot s_k^\dual \cdot r_k
+\end{align}
+
+On en conclut que :
+
+$$\beta_k = \frac{ s_{k + 1}^\dual \cdot r_{k + 1} }{ s_k^\dual \cdot r_k }$$
+
+D'un autre coté, $(r_k - r_{k + 1})^\dual = \conjaccent{\alpha_k} \cdot p_k^\dual \cdot A^\dual$. On obtient en suivant un raisonnement analogue :
+
+$$\delta_k = \frac{ r_{k + 1}^\dual \cdot s_{k + 1} }{ r_k^\dual \cdot s_k }$$
+
+

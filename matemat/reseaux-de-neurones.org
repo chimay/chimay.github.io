@@ -1,0 +1,68 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Réseaux de neurones
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+* Définition
+
+Commençons par la description d'un neurone $i$ de fonction caractéristique
+$\sigma$. La relation entre les entrées $x_j$ et la sortie $y_i$ s'écrit :
+
+$$y_i = \sigma\left( \sum_j ( w_{ij} \ x_j ) + b_i \right)$$
+
+Un réseau de neurones est composé de neurones reliés entres eux (la sortie d'un neurone peut servir d'entrée à un autre).
+
+La fonction caractéristique est généralement l'une de celles
+décrites ci-dessous :
+
+#+BEGIN_CENTER
+\(
+\sigma(x) = \signe(x) \)
+
+\(
+\sigma(x) = \tanh(x) \)
+
+\(
+\sigma(x) = \exp(-x^2) \)
+
+\(
+\sigma(x) = x \exp(-x^2)
+\)
+#+END_CENTER
+
+
+* Perceptron à une couche
+
+Le perceptron monocouche est composé d'une rangée de neurones reliant les
+entrées $x_i$ aux sorties $y_i$ (le perceptron multicouche est composé de monocouches assemblées
+l'une à la suite de l'autre). La relation entrées-sorties s'écrit :
+
+$$y_i = P_{\theta}(x) = c + \sum_j v_j \ \sigma\left( \sum_k ( w_{jk} \ x_k ) + b_j \right)$$
+
+On écrit $y_i = P_{\theta}(x)$ pour mettre en évidence l'influence des paramètres du résau $\theta = (v,w,b,c)$ sur la sortie $y$.
+
+
+* Entrainement
+
+Les réseaux de neurones sont principalement utilisés afin de calquer le comportement d'un système difficille à modéliser par d'autres méthodes. On dispose d'un certain nombre de vecteurs $y^{(n)}\in\setR^M$, $x^{(n)}\in\setR^{N}$, où $n=1,...,K$. On aimerait bien trouver le vecteur des paramètres, $\theta$, qui correspond le mieux à cette série d'entrées-sorties. On va alors entrainer le réseau de neurones défini par $y=R_{\theta}(x)$  en  utilisant une méthode d'optimisation non linéaire afin d'obtenir la solution de
+
+$$\theta^* = \arg\min_{\theta} \sum_n \norme{ y^{(n)} - R_{\theta}\left( x^{(n)} \right) }^2$$

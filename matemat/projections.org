@@ -1,0 +1,541 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Projections
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:project}
+
+* Minimisation de l'écart
+
+Soit un espace vectoriel $E$ sur $\setR$ et des vecteurs $x,y \in E$, où $x \ne 0$. La projection de $y$ sur $x$ est le vecteur :
+
+$$p \in \combilin{x} = \{ \gamma \cdot x : \gamma \in \setR \}$$
+
+qui minimise sur $\combilin{x}$ la norme usuelle $\norme{e} = \sqrt{ \scalaire{e}{e} }$ de l'écart $e$ séparant $y$ de $p$. Afin de trouver le $\lambda \in \setR$ minimisant cet écart, on utilise la fonction $\mathcal{E} : \setR \mapsto \setR$ définie par :
+
+$$\mathcal{E}(\gamma) = \scalaire{y - \gamma \cdot x}{y - \gamma \cdot x} = \scalaire{y}{y} - 2 \cdot \gamma \cdot \scalaire{x}{y} + \gamma^2 \cdot \scalaire{x}{x}$$
+
+pour tout $\gamma \in \setR$. Nous imposons l'annulation de la dérivée en un certain $\gamma = \lambda$ qui minimise potentiellement l'écart :
+
+$$\partial \mathcal{E}(\lambda) = - 2 \cdot \scalaire{x}{y} + 2 \cdot \lambda \cdot \scalaire{x}{x} = 0$$
+
+ce qui nous donne :
+
+$$\lambda = \frac{\scalaire{x}{y}}{\scalaire{x}{x}}$$
+
+
+** Produit scalaire complexe
+
+Nous nous plaçons à présent dans le cas plus général où $E$ est un espace vectoriel sur $\setC$. Le $\lambda$ défini plus haut devient donc un complexe. Nous allons déterminer s'il minimise la fonction $\mathcal{E} : \setC \mapsto \setR$ définie par :
+
+$$\mathcal{E}(\gamma) = \norme{y - \gamma \cdot x}^2$$
+
+pour tout $\gamma \in \setC$. Considérons le vecteur d'écart :
+
+$$e = y - \lambda \cdot x$$
+
+On voit qu'il vérifie la propriété :
+
+$$\scalaire{x}{e} = \scalaire{x}{y} - \lambda \cdot \scalaire{x}{x} = 0$$
+
+On a donc aussi :
+
+$$\scalaire{e}{x} = \conjugue \scalaire{x}{e} = 0$$
+
+On dit que le vecteur d'écart est orthogonal à $x$. Soit l'écart $\delta = \gamma - \lambda$. On a alors $\gamma = \lambda + \delta$ et :
+
+$$y - \gamma \cdot x = y - \lambda \cdot x - \delta \cdot x = e - \delta \cdot x$$
+
+En utilisant les propriétés du produit scalaire, on en déduit :
+
+\begin{align}
+\mathcal{E}(\gamma) &= \scalaire{e - \delta \cdot x}{e - \delta \cdot x} \)
+
+\(
+&= \scalaire{e}{e} - \delta \cdot \scalaire{e}{x} - \conjaccent{\delta} \cdot \scalaire{x}{e} + \abs{\delta}^2 \cdot \scalaire{x}{x} \)
+
+\(
+&= \scalaire{e}{e} + \abs{\delta}^2 \cdot \scalaire{x}{x}
+\end{align}
+
+Comme $\abs{\delta}^2 \cdot \scalaire{x}{x}$ est un réel $\ge 0$, on a finalement :
+
+$$\mathcal{E}(\gamma) \ge \scalaire{e}{e} = \mathcal{E}(\lambda)$$
+
+Notre paramètre $\lambda$ ainsi défini minimise donc bien $\mathcal{E}$ sur $\setC$. De plus, si $\delta \ne 0$ on a $\abs{\delta}^2 \strictsuperieur 0$ et
+$\mathcal{E}(\gamma) \strictsuperieur \scalaire{e}{e}$, ce qui prouve que :
+
+$$\lambda = \arg\min_{\gamma \in \setC} \mathcal{E}(\gamma)$$
+
+est l'unique complexe à minimiser $\mathcal{E}$. La racine carrée étant une fonction monotone strictement croissante sur $\setR$, la norme $\norme{e} = \sqrt{\mathcal{E}(\lambda)}$ est donc également minimisée et la projection s'écrit :
+
+$$p = \lambda \cdot x = \frac{ \scalaire{x}{y} }{ \scalaire{x}{x} } \cdot x$$
+
+
+* Théorème de Pythagore
+
+Calculons à présent la norme de $y$ en partant de la relation :
+
+$$y = p + e$$
+
+On déduit de la propriété d'orthogonalité que :
+
+$$\scalaire{p}{e} = \lambda \cdot \scalaire{x}{e} = 0$$
+
+On peut donc appliquer le théorème de pythagore, qui nous dit que :
+
+$$\norme{y}^2 = \norme{p + e}^2 = \norme{p}^2 + \norme{e}^2$$
+
+
+* Carré de la distance
+
+Si :
+
+$$D = \min_{\gamma \in \setC} \norme{y - \gamma \cdot x}$$
+
+on a donc :
+
+$$D^2 = \norme{y - \lambda \cdot x}^2 = \norme{e}^2 = \norme{y}^2 - \norme{p}^2$$
+
+et finalement :
+
+$$D^2 = \norme{y}^2 - \abs{\lambda}^2 \cdot \norme{x}^2$$
+
+
+* Cauchy-Schwartz
+
+Par positivité du produit scalaire, on a bien évidemment :
+
+$$\norme{e}^2 = \scalaire{e}{e} \ge 0$$
+
+Le théorème de Pythagore implique donc que :
+
+$$\scalaire{p}{p} = \norme{p}^2 \le \norme{y}^2 = \scalaire{y}{y}$$
+
+En substituant $p = \lambda \cdot x$, on obtient :
+
+$$\conjaccent \lambda \cdot \lambda \cdot \scalaire{x}{x} \le \scalaire{y}{y}$$
+
+Mais comme :
+
+$$\conjaccent{\lambda} = \conjugue \frac{ \scalaire{x}{y} }{ \scalaire{x}{x} } = \frac{ \scalaire{y}{x} }{ \scalaire{x}{x} }$$
+
+on a :
+
+$$\frac{ \scalaire{y}{x} }{ \scalaire{x}{x} } \cdot \frac{ \scalaire{x}{y} }{ \scalaire{x}{x} } \cdot \scalaire{x}{x} \le \scalaire{y}{y}$$
+
+En simplifiant et en multipliant par la norme carrée de $x$, on a finalement :
+
+$$\scalaire{y}{x} \cdot \scalaire{x}{y} \le \scalaire{x}{x} \cdot \scalaire{y}{y}$$
+
+relation dont la racine nous donne l'inégalité de Cauchy-Schwartz :
+
+$$\abs{ \scalaire{x}{y} } \le \norme{x} \cdot \norme{y}$$
+
+
+* Propriétés extrémales
+
+L'égalité :
+
+$$\norme{p}^2 = \norme{y}^2$$
+
+n'est atteinte que lorsque $\norme{e}^2 = 0$, c'est-à-dire $e = 0$ et $y = \lambda \cdot x$ pour un certain $\lambda \in \setC$. Ce constat nous amène aux problèmes d'optimisations suivants. Soit un vecteur $c \ne 0$ fixé et :
+
+$$d = \norme{c} = \sqrt{ \scalaire{c}{c} }$$
+
+On cherche à maximiser ou à minimiser :
+
+$$\varphi(x) = \scalaire{c}{x}$$
+
+sur l'ensemble $B = \boule(0,r) = \{ x : \norme{x} \le r \}$. L'inégalité de Cauchy-Schwartz nous dit que :
+
+$$- d \cdot r \le - \norme{c} \cdot \norme{x} \le \scalaire{c}{x} \le \norme{c} \cdot \norme{x} \le d \cdot r$$
+
+Nous allons chercher nos solutions sous la forme $x = \alpha \cdot c$, pour un certain $\alpha \in \setC$. On a alors :
+
+$$\norme{\alpha \cdot c} = \abs{\alpha} \cdot \norme{c} = \abs{\alpha} \cdot d \le r$$
+
+et donc $\abs{\alpha} \le r / d$. Si on choisit $\alpha = r / d$, on a :
+
+$$\scalaire{c}{x} = \frac{r}{d} \cdot \scalaire{c}{c} = \frac{r}{d} \cdot d^2 = d \cdot r$$
+
+La borne supérieure est atteinte. La fonction $\varphi$ est donc maximisée :
+
+$$\eta = \frac{r}{d} \cdot c \in \arg\max_{x \in B} \scalaire{c}{x}$$
+
+Si on choisit $\alpha = - r / d$, on a :
+
+$$\scalaire{c}{x} = - \frac{r}{d} \cdot \scalaire{c}{c} = - d \cdot r$$
+
+La borne inférieure est atteinte. La fonction $\varphi$ est donc minimisée :
+
+$$\theta = - \frac{r}{d} \cdot c \in \arg\min_{x \in B} \scalaire{c}{x}$$
+
+
+* Sous-espace vectoriel
+
+Soit l'espace vectoriel $E$ sur $\setR$ et un sous-espace vectoriel $U \subseteq E$ possédant une base orthonormée $(u_1,...,u_n)$. La projection d'un vecteur quelconque $z \in E$ sur $U$ est le vecteur $p \in U$ qui minimise la norme de l'écart entre $z$ et $p$. On cherche donc le $\lambda = (\lambda_1,...,\lambda_n) \in \setR^n$ qui minimise la fonction $\mathcal{E} : \setR^n \mapsto \setR$ définie par :
+
+$$\mathcal{E}(\gamma) = \norme{z - \sum_{i = 1}^n \gamma_i \cdot u_i}^2$$
+
+pour tout $\gamma = (\gamma_1,...,\gamma_n) \in \setR^n$. En utilisant $\scalaire{u_i}{u_j} = \indicatrice_{ij}$, on obtient :
+
+\begin{align}
+\mathcal{E}(\gamma) &= \scalaire{z}{z} - 2 \sum_i \gamma_i \cdot \scalaire{u_i}{z} + \sum_{i,j} \gamma_i \cdot \gamma_j \cdot \scalaire{u_i}{u_j} \)
+
+\(
+&= \scalaire{z}{z} - 2 \sum_i \gamma_i \cdot \scalaire{u_i}{z} + \sum_i \gamma_i^2
+\end{align}
+
+Imposant $\partial_k \mathcal{E}(\lambda_1,...,\lambda_n) = 0$, on obtient les $n$ équations :
+
+$$-2 \lambda_k \cdot \scalaire{u_k}{z} + 2 \lambda_k = 0$$
+
+On en déduit que le choix :
+
+$$\lambda = (\lambda_1,...,\lambda_n) = (\scalaire{u_1}{z},...,\scalaire{u_n}{z})$$
+
+minimise potentiellement $\mathcal{E}$. Notre projection potentielle de $z$ sur $U$ est donc donnée par :
+
+$$p = \sum_i \scalaire{u_i}{z} \cdot u_i$$
+
+
+** Produit scalaire complexe
+
+Nous nous plaçons à présent dans le cas plus général où $E$ est un espace vectoriel sur $\setC$. Le $\lambda$ défini plus haut devient donc un élément de $\setC^n$. Nous allons déterminer s'il minimise la fonction $\mathcal{E} : \setC^n \mapsto \setR$ définie par :
+
+$$\mathcal{E}(\gamma) = \norme{z - \sum_{i = 1}^n \gamma_i \cdot u_i}^2$$
+
+pour tout $\gamma = (\gamma_1,...,\gamma_n) \in \setC^n$. Choisissons $x \in U$. On a alors :
+
+$$x = \sum_i x_i \cdot u_i$$
+
+où $x_i = \scalaire{u_i}{z}$. Considérons le vecteur d'écart :
+
+$$e = z - p$$
+
+On a alors :
+
+\begin{align}
+\scalaire{x}{e} &= \sum_i \conjaccent{x_i} \cdot \scalaire{u_i}{z - p} \)
+
+\(
+&= \sum_i \conjaccent{x_i} \cdot \scalaire{u_i}{z} - \sum_{i,j} \conjaccent{x_i} \cdot \scalaire{u_i}{u_j} \cdot \lambda_j \)
+
+\(
+&= \sum_i \scalaire{x}{u_i} \cdot \scalaire{u_i}{z} - \sum_i \scalaire{x}{u_i} \cdot \scalaire{u_i}{z} = 0
+\end{align}
+
+Le vecteur d'écart est donc orthogonal à tous les $x \in U$. On a également :
+
+$$\scalaire{e}{x} = \conjugue \scalaire{x}{e} = 0$$
+
+Soit l'écart $\delta = \gamma - \lambda$. On a alors $\gamma = \lambda + \delta$. Posons :
+
+#+BEGIN_CENTER
+\(
+g = \sum_i \gamma_i \cdot u_i \)
+
+\(
+p = \sum_i \lambda_i \cdot u_i \)
+
+\(
+\Delta = \sum_i \delta_i \cdot u_i
+\)
+#+END_CENTER
+
+On a alors $z - g = z - p - \Delta = e - \Delta$ et :
+
+\begin{align}
+\mathcal{E}(\gamma) &= \scalaire{e - \Delta}{e - \Delta} \)
+
+\(
+&= \scalaire{e}{e} - \scalaire{e}{\Delta} - \scalaire{\Delta}{e} + \scalaire{\Delta}{\Delta}
+\end{align}
+
+Comme $\Delta \in U$, ses produits scalaires avec $e$ s'annulent par orthogonalité et on a finalement :
+
+$$\mathcal{E}(\gamma) = \scalaire{e}{e} + \scalaire{\Delta}{\Delta} \ge \scalaire{e}{e} = \mathcal{E}(\lambda)$$
+
+Les scalaires $\lambda_k$ minimisent donc bien la norme de l'écart sur $U$.
+
+
+** Théorème de Pythagore
+
+On a $z = p + e$. Comme $p$ est un vecteur de $U$, on a $\scalaire{p}{e} = \scalaire{e}{p} = 0$. Le théorème de Pythagore est donc applicable :
+
+$$\norme{z}^2 = \norme{p}^2 + \norme{e}^2$$
+
+
+** Carré de la distance
+
+Soit :
+
+$$D = \min \{ \norme{z - v} : v \in U \}$$
+
+Par orthonormalité, on a :
+
+$$\norme{p}^2 = \sum_{i,j} \conjugue(\scalaire{u_i}{z}) \cdot \scalaire{u_j}{z} \cdot \scalaire{u_i}{u_j} = \sum_i \abs{\scalaire{u_i}{z}}^2$$
+
+et donc :
+
+$$D^2 = \norme{z}^2 - \norme{p}^2 = \norme{z}^2 - \sum_i \abs{\scalaire{u_i}{z}}^2$$
+
+
+* Tenseur de projection
+
+On peut réécrire la projection de $z$ sur $U$ sous la forme :
+
+$$p = \sum_i u_i \cdot \scalaire{u_i}{z}$$
+
+Cette expression ressemble à la contraction d'ordre $1$ d'un tenseur d'ordre $2$. Effectivement, si on pose :
+
+$$\mathcal{P} = \sum_i u_i \otimes u_i$$
+
+on a alors :
+
+$$p = \mathcal{P} \cdot z = \contraction{\mathcal{P} }{1}{z}$$
+
+
+** Identité locale
+
+Pour tout $y \in U$, on a :
+
+$$y = \sum_i \scalaire{u_i}{y} \cdot u_i$$
+
+et :
+
+$$\mathcal{P} \cdot y = \sum_i u_i \cdot \scalaire{u_i}{y}$$
+
+Ces deux expressions étant identiques, on a $\mathcal{P} \cdot y = y$. Le tenseur de projection correspond donc localement (sur $U$) au tenseur identité.
+
+
+** Invariance
+
+Pour tout $z \in E$, on a $y = \mathcal{P} \cdot z \in U$. On en conclut que :
+
+$$\mathcal{P} \cdot z = y = \mathcal{P} \cdot y = \mathcal{P} \cdot (\mathcal{P} \cdot z)$$
+
+Donc $\mathcal{P} = \mathcal{P} \cdot \mathcal{P}$.
+
+
+** Complémentaire
+
+Soit $(u_1,...,u_n)$ une base orthonormée de $E$. On voit que le tenseur identité :
+
+$$\tenseuridentite = \sum_{i = 1}^n u_i \otimes u_i$$
+
+est le tenseur de projection de $E$ dans lui-même. On considère le tenseur de projection sur $\combilin{u_1,...,u_m}$, où $m \le n$ :
+
+$$\mathcal{P} = \sum_{i = 1}^m u_i \otimes u_i$$
+
+Le tenseur complémentaire est défini par :
+
+$$\mathcal{Q} = \tenseuridentite - \mathcal{P} = \sum_{i = 1}^n u_i \otimes u_i - \sum_{i = 1}^m u_i \otimes u_i = \sum_{i = m + 1}^n u_i \otimes u_i$$
+
+Il s'agit donc d'un tenseur de projection sur l'espace complémentaire $\combilin{u_{m + 1},...,u_n}$. Il est lié à l'écart de projection car $e = z - p = \mathcal{Q} \cdot z$. On remarque l'orthogonalité :
+
+$$\mathcal{Q} \cdot \mathcal{P} = (\tenseuridentite - \mathcal{P}) \cdot \mathcal{P} = \mathcal{P} - \mathcal{P} \cdot \mathcal{P} = 0$$
+
+De même :
+
+$$\mathcal{P} \cdot \mathcal{Q} = \mathcal{P} \cdot \mathcal{P} - \mathcal{P} = 0$$
+
+On a aussi sans surprise :
+
+$$\mathcal{Q} \cdot \mathcal{Q} = \mathcal{Q} - \mathcal{Q} \cdot \mathcal{P} =  \mathcal{Q}$$
+
+
+* Gram-Schmidt
+
+Nous allons construire une suite de vecteurs orthonormaux $(u_1,u_2,...u_n)$ à partir d'une suite $(a_1,a_2,...,a_n)$ de vecteurs linéairement indépendants de $E$. L'indépendance linéaire nous garantit que $a_1 \ne 0$. On peut donc normaliser pour obtenir le premier vecteur de la série :
+
+$$u_1 = \frac{a_1}{ \norme{a_1} }$$
+
+On a alors :
+
+$$\scalaire{u_1}{u_1} = \frac{ \scalaire{a_1}{a_1} }{ \norme{a_1}^2 } = \frac{ \scalaire{a_1}{a_1} }{ \scalaire{a_1}{a_1} } = 1$$
+
+Nous projetons $a_2$ sur $u_1$ en utilisant le tenseur $\mathcal{P}_1 = u_1 \otimes u_1$ et nous évaluons l'écart :
+
+$$e_2 = (\tenseuridentite - \mathcal{P}_1) \cdot a_2 = a_2 - u_1 \cdot \scalaire{u_1}{a_2}$$
+
+Les propriétés d'orthogonalité de l'écart nous assurent alors que $\scalaire{u_1}{e_2} = 0$. L'indépendance linéaire nous garantit que $e_2 \ne 0$. On peut donc normaliser en utilisant $u_2 = e_2 / \norme{e_2}$. On a alors clairement $\scalaire{u_2}{u_2} = 1$ et $\scalaire{u_1}{u_2} = 0$.
+
+Supposons à présent avoir trouvé la suite orthonormée $(u_1,u_2,...,u_k)$, où $k \le n - 1$. Nous projetons $a_{k + 1}$ sur l'espace vectoriel $U_k = \combilin{u_1,u_2,...,u_k}$ en utilisant le tenseur :
+
+$$\mathcal{P}_k = \sum_{i = 1}^k u_i \otimes u_i$$
+
+et nous évaluons l'écart :
+
+$$e_{k + 1} = (\tenseuridentite - \mathcal{P}_k) \cdot a_{k + 1} = a_{k + 1} - \sum_{i = 1}^k u_i \cdot \scalaire{u_i}{a_{k + 1} }$$
+
+Les propriétés d'orthogonalité de l'écart nous assurent alors que $\scalaire{u_j}{e_{k + 1} } = 0$ pour tout $j \in \{1,2,...,k\}$. L'indépendance linéaire nous garantit que $e_{k + 1} \ne 0$. On peut donc normaliser en utilisant :
+
+$$u_{k + 1} = \frac{e_{k + 1} }{ \norme{ e_{k + 1} } }$$
+
+On a alors clairement $\scalaire{u_j }{u_{k + 1} } = \indicatrice_{j, k + 1}$.
+
+Nous disposons donc à la fin du processus d'une suite de vecteurs $(u_1,u_2,...,u_n)$ orthonormée :
+
+$$\scalaire{u_i}{u_j} = \indicatrice_{ij}$$
+
+Ce procédé est appelé processus d'orthogonalisation de Gram-Schmidt.
+
+
+** Remarque
+
+Dans le cas où l'indépendance linéaire n'est pas garantie, il est toujours possible d'adapter l'algorithme en enlevant dynamiquement de la liste des $a_k$ les vecteurs donnant un écart de projection nul. On se retrouve alors à la fin du processus avec une suite orthonormée $(u_1,...,u_m)$, où $m \le n$.
+
+
+* Représentation matricielle
+
+Soient $u_1,u_2,...,u_m \in \matrice(\corps,n,1)$ des vecteurs matriciels orthonormés pour le produit scalaire usuel :
+
+$$u_i^\dual \cdot u_j = \indicatrice_{ij}$$
+
+La matrice de projection associée au tenseur de projection sur $U = \combilin{u_1,...,u_m}$ s'écrit :
+
+$$P = \sum_{k = 1}^m u_k \otimes u_k = \sum_{k = 1}^m u_k \cdot u_k^\dual$$
+
+Il s'agit donc d'une matrice de taille $(n,n)$. Elle permet de projeter tout vecteur matriciel $z \in \matrice(\corps,n,1)$ sur $U$ :
+
+$$P \cdot z = \sum_{k = 1}^m u_k \cdot u_k^\dual \cdot z = \sum_{k = 1}^m u_k \cdot \scalaire{u_k}{z}$$
+
+
+* Factorisation
+
+En terme de composantes, si $u_k = ( u_{kj} )_j$ et si $P = ( p_{ij} )_{i,j}$, on a :
+
+$$p_{ij} = \sum_{k = 1}^m u_{ki} \cdot \conjaccent{u}_{kj}$$
+
+expression qui ressemble furieusement à un produit matriciel. Soit la matrice $U$ de taille $(n,m)$ rassemblant les $m$ vecteurs $u_k$ :
+
+$$U = [u_1 \ u_2 \ \hdots \ u_m]$$
+
+On a alors :
+
+\begin{align}
+\composante_{ik} U &= u_{ki} \)
+
+\(
+\composante_{kj} U^\dual &= \conjugue \composante_{jk} U = \conjaccent{u}_{kj}
+\end{align}
+
+Le produit ci-dessus peut donc s'écrire :
+
+$$p_{ij} = \sum_{k = 1}^m b_{ik} \cdot c_{kj}$$
+
+où $b_{ik} = \composante_{ik} U$ et $c_{kj} = \composante_{kj} U^\dual$. On a donc finalement :
+
+$$P = U \cdot U^\dual$$
+
+
+** Propriétés
+
+Comme les $u_k$ sont orthonormaux, on a :
+
+$$\composante_{ij} (U^\dual \cdot U) = u_i^\dual \cdot u_j = \scalaire{u_i}{u_j} = \indicatrice_{ij}$$
+
+On a donc $U^\dual \cdot U = I$, la matrice identité de taille $(m,m)$. On a également, comme attendu :
+
+$$P^2 = U \cdot U^\dual \cdot U \cdot U^\dual = U \cdot I \cdot U^\dual = U \cdot U^\dual = P$$
+
+Si on pose $Q = I - P$, on a aussi :
+
+$$P \cdot Q = Q \cdot P = P - P^2 = 0$$
+
+
+** Cas particulier
+
+Les $m$ vecteurs $u_i$ étant linéairement indépendants dans $\corps^n$ qui est de dimension $n$, on doit forcément avoir $m \le n$. Dans le cas où $m = n$, on a de plus $U^\dual = U^{-1}$ et :
+
+$$\sum_{i = 1}^n u_i \otimes u_i = P = U \cdot U^{-1} = I$$
+
+
+* Vecteurs $A$-orthogonaux
+
+Soit une matrice de produit scalaire $A \in \matrice(\corps,n,n)$. On peut utiliser le procédé de Gram-Schmidt pour construire une base de vecteurs orthogonaux pour le produit scalaire :
+
+$$\scalaire{x}{y} = x^\dual \cdot A \cdot y$$
+
+On part d'une suite $(a_1,a_2,...,a_n)$ de vecteurs matriciels linéairement indépendants de $\corps^n$ (typiquement la base canonique). On commence par normaliser $a_1$ :
+
+$$u_1 = \frac{a_1}{ \sqrt{a_1^\dual \cdot A \cdot a_1} }$$
+
+et on construit étape après étape la suite des $u_i$. Supposons être arrivé à la suite $(u_1,u_2,...,u_k)$ vérifiant $\scalaire{u_i}{u_j} = u_i^\dual \cdot A \cdot u_j = \indicatrice_{ij}$, où $k \le n - 1$. Nous projetons $a_{k + 1}$ sur l'espace vectoriel $\combilin{u_1,u_2,...,u_k}$ et nous évaluons l'écart :
+
+\begin{align}
+e_{k + 1} &= a_{k + 1} - \sum_{i = 1}^k u_i \cdot \scalaire{u_i}{ a_{k + 1} } \)
+
+\(
+&= a_{k + 1} - \sum_{i = 1}^k u_i \cdot u_i^\dual \cdot A \cdot a_{k + 1}
+\end{align}
+
+Ensuite, nous normalisons le résultat :
+
+$$u_{k + 1} = \frac{e_{k + 1} }{ \sqrt{e_{k + 1}^\dual \cdot A \cdot e_{k + 1} } }$$
+
+Nous disposons donc à la fin du processus d'une suite de vecteurs $(u_1,u_2,...,u_n)$ orthonormée :
+
+$$\scalaire{u_i}{u_j} = u_i^\dual \cdot A \cdot u_j = \indicatrice_{ij}$$
+
+On dit que la suite des $u_i$ est $A$-orthonormée. Si on définit la famille de matrices :
+
+$$U_m = [u_1 \ u_2 \ ... \ u_m]$$
+
+pour tout $m \le n$, on peut réecrire l'orthogonalité comme suit :
+
+$$U_m^\dual \cdot A \cdot U_m = I_m$$
+
+On note aussi $U = U_n$.
+
+
+** Complément orthogonal
+
+Si les vecteurs orthonormaux $(u_1,...,u_p)$, où $p \le n$, sont donnés, on peut simplement commencer le processus à $k = p$ pour complèter la suite de vecteurs jusqu'à $k = n$. On obtient alors la suite orthonormée $(u_1,...,u_p,u_{p + 1},...,u_n)$. On dit que $(u_{p + 1},...,u_n)$ est le complément orthogonal de $(u_1,...,u_p)$.
+
+
+** Orthogonalité usuelle
+
+Dans le cas où l'on choisit $A = I$, cette méthode offre un moyen d'obtenir (ou de compléter) une suite de vecteurs $u_i$ tels que $u_i^\dual \cdot u_j = \indicatrice_{ij}$ et des matrices $U_m$ correspondantes telles que $U_m^\dual \cdot U_m = I_m$. Comme $U = U_n$ est carrée, on a de plus :
+
+$$U^{-1} = U^\dual$$
+
+
+** Systèmes linéaires
+
+Lorsqu'on dispose de $n$ vecteurs $A$-orthonormés, il est facile de résoudre le système linéaire $A \cdot x = y$. Les $u_i$ forment alors une base de $\corps^n$ et on peut trouver des scalaires $x_i \in \corps$ tels que :
+
+$$x = \sum_{i = 1}^n x_i \cdot u_i$$
+
+En prenant le produit scalaire de $x$ avec $u_k$, on obtient :
+
+$$u_k^\dual \cdot A \cdot x = \sum_{i = 1}^n (u_k^\dual \cdot A \cdot u_i) \cdot x_i = x_k$$
+
+On voit donc apparaître une expression analogue à celle d'une projection usuelle :
+
+$$x = \sum_{i = 1}^n u_i \cdot (u_i^\dual \cdot A \cdot x) = \sum_{i = 1}^n u_i \cdot u_i^\dual \cdot y$$
+
+Attention, analogue n'est pas identique, les $u_i$ ne sont en général pas orthonormés pour le produit scalaire usuel.
+
+

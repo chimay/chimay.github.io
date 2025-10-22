@@ -1,0 +1,553 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Valeurs singulières
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:vs}
+
+* Décomposition en valeurs singulières
+
+Soit les espaces vectoriels $E$ et $F$ et une application linéaire $A : E \mapsto F$ admettant un dual $A^\dual : F \mapsto E$. Les applications $A^\dual \circ A$ et $A \circ A^\dual$ étant auto-adjointes, il y a fort à parier que leurs valeurs et vecteurs propres possèdent d'importantes propriétés.
+
+Supposons que $A^\dual \circ A$ admette les valeurs propres $\lambda_i \in \corps$ triées par ordre décroissant ($\lambda_1 \ge \lambda_2 \ge \lambda_3 \ge ...$) et correspondant aux vecteurs propres $v_i \in E$ formant une suite orthonormée. On a donc :
+
+$$A^\dual \circ A(v_i) = \lambda_i \cdot v_i$$
+
+On voit que les vecteurs $z_i = A(v_i) \in F$ possèdent la propriété :
+
+$$A^\dual(z_i) = A^\dual \circ A(v_i) = \lambda_i \cdot v_i$$
+
+et :
+
+$$A \circ A^\dual(z_i) = A(\lambda_i \cdot v_i) = \lambda_i \cdot A(v_i) = \lambda_i \cdot z_i$$
+
+Les $z_i$ sont donc vecteurs propres de $A \circ A^\dual$ de valeurs propres $\lambda_i$ identiques à celles de $A^\dual \circ A$. On a l'orthogonalité :
+
+#+BEGIN_CENTER
+\(
+\scalaire{z_i}{z_j} = \scalaire{A(v_i)}{A(v_j)} = \scalaire{v_i}{A^\dual \circ A(v_j)} = \lambda_j \cdot \scalaire{v_i}{v_j} = \lambda_i \cdot \indicatrice_{ij}
+\)
+#+END_CENTER
+
+On voit aussi que les valeurs propres sont positives :
+
+$$\lambda_i = \scalaire{A(v_i)}{A(v_i)} \ge 0$$
+
+Comme elles sont également triées par ordre décroissant, on a $\lambda_1 \ge \lambda_2 \ge ... \ge \lambda_r \strictsuperieur 0$ pour un certain $r \in \setN$, et $\lambda_n = 0$ pour tout $n \strictsuperieur r$. Dans la suite, nous nous restreignons aux valeurs propres non nulles. On peut alors poser :
+
+$$\sigma_i = \sqrt{\lambda_i} \strictsuperieur 0$$
+
+afin de normaliser les $z_i$ :
+
+$$u_i = \unsur{\sigma_i} \cdot z_i = \unsur{\sigma_i} \cdot A(v_i)$$
+
+On a alors :
+
+$$\scalaire{u_i}{u_j} = \scalaire{v_i}{v_j} = \indicatrice_{ij}$$
+
+ainsi que :
+
+$$A^\dual(u_i) = \frac{\lambda_i}{\sigma_i} \cdot v_i = \sigma_i \cdot v_i$$
+
+Nous disposons donc des relations primales et duales :
+
+#+BEGIN_CENTER
+\(
+A(v_i) = \sigma_i \cdot u_i \)
+
+\(
+A^\dual(u_i) = \sigma_i \cdot v_i
+\)
+#+END_CENTER
+
+Pour tout $x \in \combilin{v_1,...,v_r}$, on a :
+
+$$x = \sum_{i = 1}^r \scalaire{v_i}{x} \cdot v_i$$
+
+et :
+
+\begin{align}
+A(x) &= \sum_{i = 1}^r \scalaire{v_i}{x} \cdot A(v_i) \)
+
+\(
+&= \sum_{i = 1}^r \scalaire{v_i}{x} \cdot \sigma_i \cdot u_i
+\end{align}
+
+
+* Représentation tensorielle
+
+On conclut de ce qui précède que $A$ peut être représentée sur $\combilin{v_1,...,v_n}$ par le tenseur associé :
+
+$$\mathcal{A} = \sum_{i = 1}^r \sigma_i \cdot u_i \otimes v_i$$
+
+de sorte que :
+
+$$A(x) = \mathcal{A} \cdot x = \contraction{ \mathcal{A} }{1}{x} = \sum_{i = 1}^r \sigma_i \cdot u_i \cdot \scalaire{v_i}{x}$$
+
+On appelle une telle représentation une décomposition en valeurs singulières.
+
+
+* Dualité
+
+Le tenseur dual est donc :
+
+$$\mathcal{A}^\dual = \sum_{i = 1}^r \sigma_i \cdot v_i \otimes u_i$$
+
+
+** Propriétés
+
+On retrouve sans surprise les représentation de :
+
+\begin{align}
+\mathcal{A}^\dual \cdot \mathcal{A} &= \sum_{i,j = 1}^r \sigma_i \cdot \sigma_j \cdot \scalaire{u_i}{u_j} \cdot v_i \otimes v_j \)
+
+\(
+&= \sum_{i = 1}^r \sigma_i^2 \cdot v_i \otimes v_i
+\end{align}
+
+et de :
+
+\begin{align}
+\mathcal{A} \cdot \mathcal{A}^\dual &= \sum_{i,j = 1}^r \sigma_i \cdot \sigma_j \cdot \scalaire{v_i}{v_j} \cdot u_i \otimes u_j \)
+
+\(
+&= \sum_{i = 1}^r \sigma_i^2 \cdot u_i \otimes u_i
+\end{align}
+
+en fonction de leurs valeurs et vecteurs propres.
+
+
+* Inverse
+
+Supposons que $(v_1,...,v_r)$ forme une base de $E$ et que $(u_1,...u_r)$ forme une base de $F$. Soit $x \in E$ et $y \in F$ tels que $y = A(x) = \mathcal{A} \cdot x$. On a :
+
+$$y = \sum_{i = 1}^r \scalaire{u_i}{y} \cdot u_i = \mathcal{A} \cdot x = \sum_{i = 1}^r \sigma_i \cdot u_i \cdot \scalaire{v_i}{x}$$
+
+On en déduit en comparant que $\sigma_i \cdot \scalaire{v_i}{x} = \scalaire{u_i}{y}$, ce qui nous donne les produits scalaires correspondant aux coordonnées de $x$ par rapport aux $v_i$ :
+
+$$\scalaire{v_i}{x} = \unsur{\sigma_i} \cdot \scalaire{u_i}{y}$$
+
+On a donc :
+
+$$x = \sum_i \scalaire{v_i}{x} \cdot v_i = \sum_i \unsur{\sigma_i} \cdot \scalaire{u_i}{y} \cdot v_i$$
+
+Donc, si on pose :
+
+$$\mathcal{A}^{-1} = \sum_{i = 1}^r \unsur{\sigma_i} \cdot v_i \otimes u_i$$
+
+on a :
+
+$$x = \mathcal{A}^{-1} \cdot y$$
+
+
+* Pseudo-inverse
+
+Nous ne supposons à présent plus que les suites de vecteurs $(u_1,...,u_r)$ et $(v_1,...,v_r)$ forment des bases de $E$ et $F$, mais nous définissons malgré tout par analogie le tenseur pseudo-inverse de $A$ par :
+
+$$\mathcal{A}^\pinverse = \sum_{i = 1}^r \unsur{\sigma_i} \cdot v_i \otimes u_i$$
+
+Le pseudo-inverse $A^\pinverse$ de l'application linéaire correspondante $A$ est donc défini par :
+
+$$A^\pinverse(y) = \mathcal{A}^\pinverse \cdot y = \sum_{i = 1}^r \unsur{\sigma_i} \cdot v_i \cdot \scalaire{u_i}{y}$$
+
+
+** Tenseurs de projections
+
+On voit que :
+
+\begin{align}
+\mathcal{A}^\pinverse \cdot \mathcal{A} &= \sum_{i,j = 1}^r \unsur{\sigma_i} \cdot \sigma_j \cdot \scalaire{u_i}{u_j} \cdot v_i \otimes v_j \)
+
+\(
+&= \sum_{i = 1}^r v_i \otimes v_i
+\end{align}
+
+correspond au tenseur de projection sur $\combilin{v_1,...,v_r}$. De même :
+
+\begin{align}
+\mathcal{A} \cdot \mathcal{A}^\pinverse &= \sum_{i,j = 1}^r \sigma_i \cdot \unsur{\sigma_j} \cdot \scalaire{v_i}{v_j} \cdot u_i \otimes u_j \)
+
+\(
+&= \sum_{i = 1}^r u_i \otimes u_i
+\end{align}
+
+correspond au tenseur de projection sur $\combilin{u_1,...,u_r}$.
+
+
+** Dualité
+
+On a clairement :
+
+#+BEGIN_CENTER
+\(
+(\mathcal{A} \cdot \mathcal{A}^\pinverse)^\dual = \mathcal{A} \cdot \mathcal{A}^\pinverse \)
+
+\(
+(\mathcal{A}^\pinverse \cdot \mathcal{A})^\dual = \mathcal{A}^\pinverse \cdot \mathcal{A}
+\)
+#+END_CENTER
+
+
+** Produits
+
+On déduit des résultats ci-dessus que :
+
+\begin{align}
+\mathcal{A} \cdot \mathcal{A}^\pinverse \cdot \mathcal{A} &= \sum_{i,j = 1}^r \sigma_i \cdot \scalaire{v_i}{v_j} \cdot u_i \otimes v_j \)
+
+\(
+&= \sum_{i = 1}^r \sigma_i \cdot u_i \otimes v_i \)
+
+\(
+&= \mathcal{A}
+\end{align}
+
+et :
+
+\begin{align}
+\mathcal{A}^\pinverse \cdot \mathcal{A} \cdot \mathcal{A}^\pinverse &= \sum_{i,j = 1}^r \unsur{\sigma_i} \cdot \scalaire{u_i}{u_j} \cdot v_i \otimes u_j \)
+
+\(
+&= \sum_{i = 1}^r \unsur{\sigma_i} \cdot v_i \otimes u_i \)
+
+\(
+&= \mathcal{A}^\pinverse
+\end{align}
+
+
+** Orthogonalité
+
+Soit le tenseur identité $\tenseuridentite$. On déduit de ce qui précède les propriétés d'orthogonalité :
+
+#+BEGIN_CENTER
+\(
+\mathcal{A} \cdot (\tenseuridentite - \mathcal{A}^\pinverse \cdot \mathcal{A}) = 0 \)
+
+\(
+\mathcal{A}^\pinverse \cdot (\tenseuridentite - \mathcal{A} \cdot \mathcal{A}^\pinverse) = 0
+\)
+#+END_CENTER
+
+
+* Représentation matricielle
+
+Soit une matrice $A \in \matrice(\corps,m,n)$ et $p = \min \{ m , n \}$. L'algorithme de décomposition en valeurs singulières est très simple. On évalue :
+
+#+BEGIN_CENTER
+\(
+(\Lambda_1, U) = \schur(A \cdot A^\dual) \)
+
+\(
+(\Lambda_2, V) = \schur(A^\dual \cdot A)
+\)
+#+END_CENTER
+
+On a alors $U,\Lambda_1 \in \matrice(\corps,n,n)$ et $V,\Lambda_2 \in \matrice(\corps,m,m)$. Comme les matrices $A^\dual \cdot A$ et $A \cdot A^\dual$ sont hermitiennes et que leurs valeurs propres sont identiques, les matrices « triangulaires » obtenues sont en fait diagonales et :
+
+#+BEGIN_CENTER
+\(
+\Lambda_1 = \diagonale_n(\lambda_1,...\lambda_p) \)
+
+\(
+\Lambda_2 = \diagonale_m(\lambda_1,...\lambda_p)
+\)
+#+END_CENTER
+
+On pose alors $\sigma_i = \sqrt{\lambda_i}$ pour $i \in \{1,2,...,p\}$ et on a $\sigma_1 \ge \sigma_2 \ge ... \ge \sigma_r \strictsuperieur 0$ et $\sigma_{r + 1} = ... = \sigma_p = 0$. Les colonnes de $U$ et de $V$ sont les vecteurs propres correspondant :
+
+#+BEGIN_CENTER
+\(
+u_i = \colonne_i U \)
+
+\(
+v_i = \colonne_i V
+\)
+#+END_CENTER
+
+On a également $U^{-1} = U^\dual$ et $V^{-1} = V^\dual$. La décomposition en valeurs singulières de $A$ s'écrit :
+
+$$A = \sum_{i = 1}^r \sigma_i \cdot u_i \otimes v_i = \sum_{i = 1}^r \sigma_i \cdot u_i \cdot v_i^\dual$$
+
+Si nous posons :
+
+$$S = \diagonale_{m,n}(\sigma_1,...,\sigma_r)$$
+
+on peut réécrire la décomposition de $A$ sous la forme :
+
+$$A = U \cdot S \cdot V^\dual$$
+
+On note alors :
+
+$$(U,S,V) = \singuliere(A)$$
+
+
+* Pseudo-inverse
+
+Le pseudo-inverse est donné par :
+
+$$A^\pinverse = \sum_{i = 1}^r \unsur{\sigma_i} \cdot v_i \cdot u_i^\dual$$
+
+On a donc :
+
+$$S^\pinverse = \diagonale_{n,m}\left(\unsur{\sigma_1},...,\unsur{\sigma_r}\right)$$
+
+et :
+
+$$A^\pinverse = V \cdot S^\pinverse \cdot U^\dual$$
+
+
+* Systèmes linéaires
+
+
+** Moindres carrés
+
+Soit la matrice $A \in \matrice(\corps,m,n)$, le vecteur matriciel $b \in \corps^m$ et l'erreur produite par $x \in \corps^n$ :
+
+$$e(x) = b - A \cdot x$$
+
+On dit aussi que $e(x)$ est le résidu du système en $x$. Nous allons tenter de minimiser :
+
+$$\mathcal{E}(x) = e(x)^\dual \cdot e(x) = \norme{e(x)}^2$$
+
+en utilisant la décomposition en valeurs singulières $A = \sum_{i = 1}^r \sigma_i \cdot u_i \cdot v_i^\dual$. Comme $(v_1,...,v_n)$, suite orthonormée et linéairement indépendante, forme une base de $\corps^n$, on peut exprimer $x$ en fonction de ses coordonnées dans cette base :
+
+$$x = \sum_{i = 1}^n x_i \cdot v_i = \sum_{i = 1}^n \scalaire{v_i}{x} \cdot v_i$$
+
+Comme $(u_1,...,u_m)$, suite orthonormée et linéairement indépendante, forme une base de $\corps^m$, on peut exprimer $b$ comme :
+
+$$b = \sum_{i = 1}^m \scalaire{u_i}{b} \cdot u_i$$
+
+On a également :
+
+$$A \cdot x = \sum_{i = 1}^r \sigma_i \cdot u_i \cdot \scalaire{v_i}{x} = \sum_{i = 1}^r \sigma_i \cdot u_i \cdot x_i$$
+
+On en conclut que l'erreur s'écrit :
+
+$$e(x) = \sum_{i = 1}^r (\scalaire{u_i}{b} - \sigma_i \cdot x_i) \cdot u_i + \sum_{i = r + 1}^m \scalaire{u_i}{b} \cdot u_i$$
+
+Posons :
+
+#+BEGIN_CENTER
+\(
+e_i(x) =
+\begin{cases}
+\scalaire{u_i}{b} - \sigma_i \cdot x_i & \text{ si } i \in \{1,...,r\} \)
+
+\(
+\scalaire{u_i}{b} & \text{ si } i \in \{r + 1, ...,m\} \)
+
+\(
+\end{cases}
+\)
+#+END_CENTER
+
+On a alors $e(x) = \sum_{i = 1}^m e_i(x) \cdot u_i$ et :
+
+$$\mathcal{E}(x) = \norme{e(x)}^2 = \sum_{i,j = 1}^m \conjaccent{e}_i(x) \cdot e_j(x) \cdot u_i^\dual \cdot u_j = \sum_{i = 1}^m \abs{e_i(x)}^2$$
+
+On a donc :
+
+$$\mathcal{E}(x) = \sum_{i = 1}^r \abs{\scalaire{u_i}{b} - \sigma_i \cdot x_i}^2 + \sum_{i = r + 1}^m \abs{\scalaire{u_i}{b}}^2$$
+
+Dans le cas où l'on travaille avec des réels, l'annulation de la dérivée par rapport aux $x_i$ nous donne :
+
+$$2 (\scalaire{u_i}{b} - \sigma_i \cdot x_i) = 0$$
+
+lorsque $i \in \{1,...,r\}$. Nous n'avons par contre aucune contrainte sur $x_{r + 1},...,x_n$. Un choix satisfaisant les conditions ci-dessus est donc :
+
+#+BEGIN_CENTER
+\(
+x_i =
+\begin{cases}
+\scalaire{u_i}{b} / \sigma_i & \text{ si } i \in \{1,...,r\} \)
+
+\(
+0 & \text{ si } i \in \{r + 1, ...,n\} \)
+
+\(
+\end{cases}
+\)
+#+END_CENTER
+
+Notre $x$ potentiellement optimal s'écrit donc :
+
+$$x = \sum_{i = 1}^r \unsur{\sigma_i} \cdot \scalaire{u_i}{b} \cdot v_i$$
+
+La somme ressemble à une expression faisant intervenir le pseudo-inverse. En effet, on a :
+
+$$A^\pinverse \cdot b = \sum_{i = 1}^r \unsur{\sigma_i} \cdot v_i \cdot \scalaire{u_i}{b} = x$$
+
+Considérons à présent le cas général complexe. On voit que pour le choix $x = A^\pinverse \cdot b$ :
+
+$$\mathcal{E}(x) = \sum_{i = r + 1}^m \abs{\scalaire{u_i}{b}}^2$$
+
+On en déduit la borne inférieure de l'erreur :
+
+$$\mathcal{E}(z) = \sum_{i = 1}^r \abs{\scalaire{u_i}{b} - \sigma_i \cdot \scalaire{v_i}{z}}^2 + \sum_{i = r + 1}^m \abs{\scalaire{u_i}{b}}^2 \ge \sum_{i = r + 1}^n \abs{\scalaire{u_i}{b}}^2 = \mathcal{E}(x)$$
+
+pour tout $z \in \setC^n$. Le choix $x = A^\pinverse \cdot b$ minimise bien la norme de l'erreur sur $\setC^n$ :
+
+$$x = A^\pinverse \cdot b \in \arg\min_{z \in \setC^n} \mathcal{E}(z)$$
+
+Les $x_{r + 1},...,x_n$ étant des complexes arbitraires, nous allons montrer que l'ensemble optimal s'écrit :
+
+$$\arg\min_{z \in \setC^n} \mathcal{E}(z) = \Gamma = \left\{ \left(A^\pinverse \cdot b + \sum_{i = r + 1}^n x_i \cdot v_i \right) : \ x_{r + 1},...,x_n \in \setC \right\}$$
+
+En effet, on a $\mathcal{E}(z) = \mathcal{E}(x)$ pour tout $z \in \Gamma$. On voit aussi que tout choix de $z \notin \Gamma$ provoque :
+
+$$\sum_{i = 1}^r \abs{\scalaire{u_i}{b} - \sigma_i \cdot \scalaire{v_i}{z}}^2 \strictsuperieur 0$$
+
+et donc $\mathcal{E}(z) \strictsuperieur \mathcal{E}(x)$.
+
+
+** Projection
+
+On peut réécrire $\Gamma$ sous la forme :
+
+$$\Gamma = \{ A^\pinverse \cdot b \} + \combilin{v_{r + 1},...,v_n}$$
+
+Soit la matrice de projection :
+
+$$P = \sum_{i = r + 1}^n v_i \otimes v_i$$
+
+On sait que $P \cdot z \in \combilin{v_{r + 1},...,v_n}$ pour tout $z \in \setC^n$ et que $P \cdot y = y$ pour tout $y \in \combilin{v_{r + 1},...,v_n}$. On en conclut que tout $x \in \Gamma$ peut s'écrire sous la forme :
+
+$$x = A^\pinverse \cdot b + P \cdot z$$
+
+pour un certain $z \in \corps^n$. La matrice de projection $P$ est également la complémentaire de la projection sur $\combilin{v_1,...,v_r}$. Or, on a a vu que $A^\pinverse \cdot A$ est précisément cette matrice de projection. On retrouve donc fort logiquement :
+
+$$I - A^\pinverse \cdot A = \sum_{i = 1}^n v_i \otimes v_i - \sum_{i = 1}^r v_i \otimes v_i = \sum_{i = r + 1}^n v_i \otimes v_i = P$$
+
+On a donc en définitive des vecteurs optimaux de la forme :
+
+$$x = A^\pinverse \cdot b + (I - A^\pinverse \cdot A) \cdot z$$
+
+
+** Solutions
+
+Soit l'espace des solutions :
+
+$$S = \{ x \in \setC^n : A \cdot x = b \} = \{ x \in \setC^n : \mathcal{E}(x) = 0 \}$$
+
+Si $\scalaire{u_{r + 1}}{b} = ... = \scalaire{u_m}{b} = 0$, le minimum de l'erreur est nul et $\mathcal{E}(x) = 0$ pour tout $x \in \Gamma$. On en conclut que $x \in S$, d'où $\Gamma \subseteq S$. D'un autre coté, tout $z \in S$ minimise $\mathcal{E}(z) = 0$. On a donc également $S \subseteq \Gamma$ et finalement $\Gamma = S$.
+
+Inversément, si $S \ne \emptyset$, on conclut que $\scalaire{u_{r + 1}}{b} = ... = \scalaire{u_m}{b} = 0$.
+
+
+** Norme contrainte
+
+Supposons que $S \ne \emptyset$. Soit $x \in \Gamma = S$, que l'on écrit sous la forme :
+
+\begin{align}
+x &= A^\pinverse \cdot b + \sum_{i = r + 1}^n x_i \cdot v_i \)
+
+\(
+&= \sum_{i = 1}^r \unsur{\sigma_i} \cdot v_i \cdot \scalaire{u_i}{b} + \sum_{i = r + 1}^n x_i \cdot v_i \)
+
+\(
+\end{align}
+
+Par orthonormalité des $v_i$, on a :
+
+$$\norme{x}^2 = x^\dual \cdot x = \sum_{i = 1}^r \unsur{\sigma_i^2} \cdot \abs{\scalaire{u_i}{b}}^2 + \sum_{i = r + 1}^n \abs{x_i}^2$$
+
+On voit que :
+
+$$\norme{x}^2 \ge \sum_{i = 1}^r \unsur{\sigma_i^2} \cdot \abs{\scalaire{u_i}{b}}^2 = \norme{A^\pinverse \cdot b}^2$$
+
+On en conclut que le choix $x = A^\pinverse \cdot b$ minimise la norme de $x$ sur $S$ :
+
+$$A^\pinverse \cdot b \in \arg\min_{z \in S} \norme{z}^2$$
+
+
+** Lien avec les résultats précédents
+
+  - On a montré précédemment en dérivant les expressions matricielles que le choix :
+
+$$x = (A^\dual \cdot A)^{-1} \cdot A^\dual \cdot b$$
+
+minimise également l'erreur $\mathcal{E}$ sur $\setR^n$ lorsque l'inverse de $A^\dual \cdot A$ existe. Si tel est le cas, on a :
+
+$$(A^\dual \cdot A)^{-1} = \sum_{i = 1}^r \unsur{\sigma_i^2} \cdot v_i \otimes v_i$$
+
+et :
+
+\begin{align}
+(A^\dual \cdot A)^{-1} \cdot A^\dual &= \sum_{i,j = 1}^r \frac{\sigma_j}{\sigma_i^2} \cdot \scalaire{v_i}{v_j} \cdot v_i \otimes u_j \)
+
+\(
+&= \sum_{i = 1}^r \unsur{\sigma_i} \cdot v_i \otimes u_i = A^\pinverse
+\end{align}
+
+  - On a vu aussi en utilisant les multiplicateurs de lagrange que le choix :
+
+$$x = A^\dual \cdot (A \cdot A^\dual)^{-1} \cdot b$$
+
+minimise également la norme de $x$ sur $S$ lorsque l'inverse de $A \cdot A^\dual$ existe. Si tel est le cas, on a :
+
+$$(A \cdot A^\dual)^{-1} = \sum_{i = 1}^r \unsur{\sigma_i^2} \cdot u_i \otimes u_i$$
+
+et :
+
+\begin{align}
+A^\dual \cdot (A \cdot A^\dual)^{-1} &= \sum_{i,j = 1}^r \frac{\sigma_i}{\sigma_j^2} \cdot \scalaire{u_i}{u_j} \cdot v_i \otimes u_j \)
+
+\(
+&= \sum_{i = 1}^r \unsur{\sigma_i} \cdot v_i \otimes u_i = A^\pinverse
+\end{align}
+
+
+* Image et noyau
+
+Tout vecteur $b = A \cdot x = \sum_{i = 1}^r \sigma_i \cdot \scalaire{v_i}{x} \cdot u_i$ est exprimé comme une combinaison linéaire des $(u_1,...,u_r)$. On en conclut que $\image A \subseteq \combilin{u_1,...,u_r}$. Réciproquement, si $b \in \combilin{u_1,...,u_r}$, on a $\scalaire{u_{r + 1}}{b} = \scalaire{u_m}{b} = 0$ et l'espace des solutions $\{ x \in \setC^n : A \cdot x = b\}$ n'est pas vide. On en conclut que $\combilin{u_1,...,u_r} \subseteq \image A$. D'où finalement :
+
+$$\image A = \combilin{u_1,...,u_r}$$
+
+Tout vecteur $z \in \combilin{v_{r + 1},...,v_n}$ vérifie $\scalaire{v_1}{z} = ... = \scalaire{v_r}{z} = 0$. On en déduit que $A \cdot z = \sum_{i = 1}^r \sigma_i \cdot 0 \cdot u_i = 0$ et que $\combilin{v_{r + 1},...,v_n} \subseteq \noyau A$. Réciproquement, si $z \in \noyau A$, on a $\sum_{i = 1}^r \sigma_i \cdot \scalaire{v_i}{z} \cdot u_i = 0$ ce qui implique $\scalaire{v_1}{z} = ... = \scalaire{v_r}{z} = 0$. On en conclut que $\noyau A \subseteq \combilin{v_{r + 1},...,v_n}$. D'où finalement :
+
+$$\noyau A = \combilin{v_{r + 1},...,v_n}$$
+
+
+* Normes
+
+La décomposition en valeurs singulières permet d'évaluer facilement
+la norme usuelle des applications linéaires :
+
+$$\norme{A}_\lineaire = \sup_{x \ne 0} \frac{\norme{A \cdot x}}{\norme{x}} = \max \{\sigma_1,...,\sigma_r\}$$
+
+ainsi que la norme de Frobénius :
+
+$$\norme{A}_F = \sqrt{A^\dual : A} = \sqrt{\sum_{i = 1}^r \sigma_i^2}$$
+
+
+* Fonctions de matrices
+
+La décomposition en valeurs singulières permet d'étendre la définition
+d'une fonction $f : \setR \mapsto \setR$. Soit la décomposition de $A$ :
+
+$$A = \sum_{i = 1}^r \sigma_i \cdot u_i \cdot v_i^\dual$$
+
+On définit alors :
+
+$$f(A) = \sum_{i = 1}^r f(\sigma_i) \cdot u_i \cdot v_i^\dual$$
+
+

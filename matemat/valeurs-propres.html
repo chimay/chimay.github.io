@@ -1,0 +1,1883 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<!-- 2025-10-22 mer 11:41 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Eclats de vers : Matemat : Valeurs propres</title>
+<meta name="author" content="chimay" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Eclats de vers : Matemat : Valeurs propres</h1>
+<p>
+<a href="index.html">Index des Grimoires</a>
+</p>
+
+<p>
+<a href="../index.html">Retour à l’accueil</a>
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orga9b53d5">1. Minimisation d'une forme quadratique avec norme contrainte</a></li>
+<li><a href="#org29b0bf9">2. Application linéaire</a></li>
+<li><a href="#orgdc7649f">3. Opérateurs auto-adjoints</a></li>
+<li><a href="#org1654c76">4. Représentation tensorielle</a></li>
+<li><a href="#org46854a9">5. Inverse</a></li>
+<li><a href="#org83aa7f3">6. Représentation matricielle</a></li>
+<li><a href="#orgb56958d">7. Invariance</a></li>
+<li><a href="#orgbc0837d">8. Matrices triangulaires</a></li>
+<li><a href="#orgcf238a4">9. Forme de Schur</a></li>
+<li><a href="#org9869a89">10. Algorithme \(Q R\)</a></li>
+<li><a href="#org8817aa6">11. Matrices hermitiennes</a></li>
+<li><a href="#org5b661a1">12. Théorème de Courant-Fisher</a></li>
+</ul>
+</div>
+</div>
+
+<p>
+\(
+\newcommand{\parentheses}[1]{\left(#1\right)}
+\newcommand{\crochets}[1]{\left[#1\right]}
+\newcommand{\accolades}[1]{\left\{#1\right\}}
+\newcommand{\ensemble}[1]{\left\{#1\right\}}
+\newcommand{\identite}{\mathrm{Id}}
+\newcommand{\indicatrice}{\boldsymbol{\delta}}
+\newcommand{\dirac}{\delta}
+\newcommand{\moinsun}{{-1}}
+\newcommand{\inverse}{\ddagger}
+\newcommand{\pinverse}{\dagger}
+\newcommand{\topologie}{\mathfrak{T}}
+\newcommand{\ferme}{\mathfrak{F}}
+\newcommand{\img}{\mathbf{i}}
+\newcommand{\binome}[2]{
+\left\{ \begin{array}{c}
+#1 \\
+#2 \\
+\end{array} \right\}
+}
+\newcommand{\canonique}{\mathfrak{c}}
+\newcommand{\tenseuridentite}{\boldsymbol{\mathcal{I}}}
+\newcommand{\permutation}{\boldsymbol{\epsilon}}
+\newcommand{\matriceZero}{\mathfrak{0}}
+\newcommand{\matriceUn}{\mathfrak{1}}
+\newcommand{\christoffel}[2]{
+\left\{ \begin{array}{c}
+#1 \\
+#2 \\
+\end{array} \right\}
+}
+\newcommand{\lagrangien}{\mathfrak{L}}
+\newcommand{\sousens}{\mathfrak{P}}
+\newcommand{\partition}{\mathrm{Partition}}
+\newcommand{\tribu}{\mathrm{Tribu}}
+\newcommand{\topologies}{\mathrm{Topo}}
+\newcommand{\setB}{\mathbb{B}}
+\newcommand{\setN}{\mathbb{N}}
+\newcommand{\setZ}{\mathbb{Z}}
+\newcommand{\setQ}{\mathbb{Q}}
+\newcommand{\setR}{\mathbb{R}}
+\newcommand{\setC}{\mathbb{C}}
+\newcommand{\corps}{\mathbb{K}}
+\newcommand{\boule}{\mathfrak{B}}
+\newcommand{\intervalleouvert}[2]{\left] #1 , #2 \right[}
+\newcommand{\intervallesemiouvertgauche}[2]{ \left] #1 , #2 \right]}
+\newcommand{\intervallesemiouvertdroite}[2]{\left[ #1 , #2 \right[ }
+\newcommand{\fonction}{\mathbb{F}}
+\newcommand{\bijection}{\mathrm{Bij}}
+\newcommand{\polynome}{\mathrm{Poly}}
+\newcommand{\lineaire}{\mathrm{Lin}}
+\newcommand{\continue}{\mathrm{Cont}}
+\newcommand{\homeomorphisme}{\mathrm{Hom}}
+\newcommand{\etagee}{\mathrm{Etagee}}
+\newcommand{\lebesgue}{\mathrm{Leb}}
+\newcommand{\lipschitz}{\mathrm{Lip}}
+\newcommand{\suitek}{\mathrm{Suite}}
+\newcommand{\matrice}{\mathbb{M}}
+\newcommand{\krylov}{\mathrm{Krylov}}
+\newcommand{\tenseur}{\mathbb{T}}
+\newcommand{\essentiel}{\mathfrak{E}}
+\newcommand{\relation}{\mathrm{Rel}}
+\DeclareMathOperator*{\strictinferieur}{\ < \ }
+\DeclareMathOperator*{\strictsuperieur}{\ > \ }
+\DeclareMathOperator*{\ensinferieur}{\eqslantless}
+\DeclareMathOperator*{\enssuperieur}{\eqslantgtr}
+\DeclareMathOperator*{\esssuperieur}{\gtrsim}
+\DeclareMathOperator*{\essinferieur}{\lesssim}
+\newcommand{\essegal}{\eqsim}
+\newcommand{\union}{\ \cup \ }
+\newcommand{\intersection}{\ \cap \ }
+\newcommand{\opera}{\divideontimes}
+\newcommand{\autreaddition}{\boxplus}
+\newcommand{\autremultiplication}{\circledast}
+\newcommand{\commutateur}[2]{\left[ #1 , #2 \right]}
+\newcommand{\convolution}{\circledcirc}
+\newcommand{\correlation}{\ \natural \ }
+\newcommand{\diventiere}{\div}
+\newcommand{\modulo}{\bmod}
+\DeclareMathOperator*{\pgcd}{pgcd}
+\DeclareMathOperator*{\ppcm}{ppcm}
+\newcommand{\produitscalaire}[2]{\left\langle #1 \vert #2 \right\rangle}
+\newcommand{\scalaire}[2]{\left\langle #1 \| #2 \right\rangle}
+\newcommand{\braket}[3]{\left\langle #1 \vert #2 \vert #3 \right\rangle}
+\newcommand{\orthogonal}{\bot}
+\newcommand{\forme}[2]{\left\langle #1 , #2 \right\rangle}
+\newcommand{\biforme}[3]{\left\langle #1 , #2 , #3 \right\rangle}
+\newcommand{\contraction}[3]{\left\langle #1 \odot #3 \right\rangle_{#2}}
+\newcommand{\dblecont}[5]{\left\langle #1 \vert #3 \vert #5 \right\rangle_{#2,#4}}
+\DeclareMathOperator*{\major}{major}
+\DeclareMathOperator*{\minor}{minor}
+\DeclareMathOperator*{\maxim}{maxim}
+\DeclareMathOperator*{\minim}{minim}
+\DeclareMathOperator*{\argument}{arg}
+\DeclareMathOperator*{\argmin}{arg\ min}
+\DeclareMathOperator*{\argmax}{arg\ max}
+\DeclareMathOperator*{\supessentiel}{ess\ sup}
+\DeclareMathOperator*{\infessentiel}{ess\ inf}
+\newcommand{\dual}{\star}
+\newcommand{\distance}{\mathfrak{dist}}
+\newcommand{\norme}[1]{\left\| #1 \right\|}
+\newcommand{\normetrois}[1]{\left|\left\| #1 \right\|\right|}
+\DeclareMathOperator*{\adh}{adh}
+\DeclareMathOperator*{\interieur}{int}
+\newcommand{\frontiere}{\partial}
+\DeclareMathOperator*{\image}{im}
+\DeclareMathOperator*{\domaine}{dom}
+\DeclareMathOperator*{\noyau}{ker}
+\DeclareMathOperator*{\support}{supp}
+\DeclareMathOperator*{\signe}{sign}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\unsur}[1]{\frac{1}{#1}}
+\newcommand{\arrondisup}[1]{\lceil #1 \rceil}
+\newcommand{\arrondiinf}[1]{\lfloor #1 \rfloor}
+\DeclareMathOperator*{\conjugue}{conj}
+\newcommand{\conjaccent}[1]{\overline{#1}}
+\DeclareMathOperator*{\division}{division}
+\newcommand{\difference}{\boldsymbol{\Delta}}
+\newcommand{\differentielle}[2]{\mathfrak{D}^{#1}_{#2}}
+\newcommand{\OD}[2]{\frac{d #1}{d #2}}
+\newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
+\newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
+\newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
+\newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
+\newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\gradient}{\mathbf{\nabla}}
+\newcommand{\combilin}[1]{\mathrm{span}\{ #1 \}}
+\DeclareMathOperator*{\trace}{tr}
+\newcommand{\proba}{\mathbb{P}}
+\newcommand{\probaof}[1]{\mathbb{P}\left[#1\right]}
+\newcommand{\esperof}[1]{\mathbb{E}\left[#1\right]}
+\newcommand{\cov}[2]{\mathrm{cov} \left( #1 , #2 \right) }
+\newcommand{\var}[1]{\mathrm{var} \left( #1 \right) }
+\newcommand{\rand}{\mathrm{rand}}
+\newcommand{\variation}[1]{\left\langle #1 \right\rangle}
+\DeclareMathOperator*{\composante}{comp}
+\DeclareMathOperator*{\bloc}{bloc}
+\DeclareMathOperator*{\ligne}{ligne}
+\DeclareMathOperator*{\colonne}{colonne}
+\DeclareMathOperator*{\diagonale}{diag}
+\newcommand{\matelementaire}{\mathrm{Elem}}
+\DeclareMathOperator*{\matpermutation}{permut}
+\newcommand{\matunitaire}{\mathrm{Unitaire}}
+\newcommand{\gaussjordan}{\mathrm{GaussJordan}}
+\newcommand{\householder}{\mathrm{Householder}}
+\DeclareMathOperator*{\rang}{rang}
+\newcommand{\schur}{\mathrm{Schur}}
+\newcommand{\singuliere}{\mathrm{DVS}}
+\newcommand{\convexe}{\mathrm{Convexe}}
+\newcommand{\petito}[1]{o\left(#1\right)}
+\newcommand{\grando}[1]{O\left(#1\right)}
+\)
+</p>
+
+<p>
+\(
+\newenvironment{Eqts}
+{ \begin{equation*} \begin{gathered} }
+{ \end{gathered} \end{equation*} }
+\newenvironment{Matrix}
+{\left[ \begin{array}}
+{\end{array} \right]}
+\)
+</p>
+
+<p>
+\label{chap:vp}
+</p>
+<div id="outline-container-orga9b53d5" class="outline-2">
+<h2 id="orga9b53d5"><span class="section-number-2">1.</span> Minimisation d'une forme quadratique avec norme contrainte</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Soit un réel \(R \ne 0\), la matrice \(H \in \matrice(\setR,m,n)\) hermitienne et définie positive, et l'ensemble :
+</p>
+
+<p>
+\[\Omega = \{ x \in \corps^n : \norme{x} = \sqrt{x^\dual \cdot x} = R \}\]
+</p>
+
+<p>
+On peut reformuler \(\Omega\) de manière équivalente par :
+</p>
+
+<p>
+\[\Omega = \{ x \in \corps^n : x^\dual \cdot x = R^2 \}\]
+</p>
+
+<p>
+Soit l'objectif \(\varphi : \corps^n \mapsto \corps\) défini par :
+</p>
+
+<p>
+\[\varphi(x) = x^\dual \cdot H \cdot x\]
+</p>
+
+<p>
+pour tout \(x \in \corps^n\). On veut trouver le \(x \in \Omega\) qui minimise \(\varphi\) sur \(\Omega\). Définissons le lagrangien :
+</p>
+
+<p>
+\[\lagrangien(x,\lambda) = x^\dual \cdot H \cdot x + \lambda \cdot (R^2 - x^\dual \cdot x)\]
+</p>
+
+<p>
+où \(\lambda \in \setR\). On impose les conditions de Kuhn-Tucker :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\partial_x \lagrangien(x,\lambda) = 2 H \cdot x - 2 \lambda \cdot x = 0 \)
+</p>
+
+<p>
+\(
+\partial_\lambda \lagrangien(x,\lambda) = R^2 - x^\dual \cdot x = 0
+\)
+</p>
+</div>
+
+<p>
+Toute solution optimale \(x \in \Omega\) vérifie donc l'équation :
+</p>
+
+<p>
+\[H \cdot x = \lambda \cdot x\]
+</p>
+
+<p>
+pour un certain \(\lambda \in \setR\). Nous allons généraliser cette propriété aux applications linéaires.
+</p>
+</div>
+<div id="outline-container-orga22f308" class="outline-3">
+<h3 id="orga22f308"><span class="section-number-3">1.1.</span> Norme unité</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Un cas particulier souvent utilisé est celui où \(R = 1\).
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org29b0bf9" class="outline-2">
+<h2 id="org29b0bf9"><span class="section-number-2">2.</span> Application linéaire</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Soit l'espace vectoriel \(E\) sur \(\corps\) et une application linéaire \(A : E \mapsto E\). Si le couple \((u,\lambda) \in (E \setminus \{0\}) \times \corps\) vérifie :
+</p>
+
+<p>
+\[A(u) = \lambda \cdot u\]
+</p>
+
+<p>
+On dit que \(u\) est vecteur propre de \(A\) correspondant à la valeur propre \(\lambda\).
+</p>
+</div>
+<div id="outline-container-orgdee9911" class="outline-3">
+<h3 id="orgdee9911"><span class="section-number-3">2.1.</span> Rapport de Rayleigh</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+En prenant le produit scalaire de \(u\) avec la relation \(A(u) = \lambda \cdot u\), on obtient :
+</p>
+
+<p>
+\[\scalaire{u}{A(u)} = \lambda \cdot \scalaire{u}{u}\]
+</p>
+
+<p>
+d'où l'on tire :
+</p>
+
+<p>
+\[\lambda  = \frac{ \scalaire{u}{A(u)} }{ \scalaire{u}{u} }\]
+</p>
+
+<p>
+Une telle expression est appelée rapport de Rayleigh. Par extension, on définit :
+</p>
+
+<p>
+\[R(v)  = \frac{ \scalaire{v}{A(v)} }{ \scalaire{v}{v} }\]
+</p>
+
+<p>
+pou tout vecteur non nul \(v \in E\).
+</p>
+</div>
+</div>
+<div id="outline-container-orgec4ba52" class="outline-3">
+<h3 id="orgec4ba52"><span class="section-number-3">2.2.</span> Définie positive</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Si \(A\) est définie positive, toute valeur propre \(\lambda = R(u) \ge 0\) est un réel positif.
+</p>
+</div>
+</div>
+<div id="outline-container-org761cf84" class="outline-3">
+<h3 id="org761cf84"><span class="section-number-3">2.3.</span> Formulation équivalente</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+On voit qu'il est équivalent de chercher un scalaire \(\lambda\) et un vecteur \(u \ne 0\) tel que :
+</p>
+
+<p>
+\[(A - \lambda \cdot \identite)(u) = A(u) - \lambda \cdot u = 0\]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgdc7649f" class="outline-2">
+<h2 id="orgdc7649f"><span class="section-number-2">3.</span> Opérateurs auto-adjoints</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Si l'application linéaire \(A\) est auto-adjointe (\(A^\dual = A\)), ses valeurs et vecteurs propres possèdent d'importantes propriétés. Soit \(u \in E\) et \(\lambda \in \setC\) tels que \(A(u) = \lambda \cdot u\) et \(\scalaire{u}{u} = 1\). On a alors :
+</p>
+
+<p>
+\[\lambda  = \scalaire{u}{A(u)} = \scalaire{A(u)}{u} = \conjugue \scalaire{u}{A(u)} = \bar{\lambda}\]
+</p>
+
+<p>
+La valeur propre doit donc être réelle.
+</p>
+</div>
+<div id="outline-container-org9eb526f" class="outline-3">
+<h3 id="org9eb526f"><span class="section-number-3">3.1.</span> Orthonormalité</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Soit la suite de vecteurs propres \(u_i \in \Omega\) et de valeurs propres \(\lambda_i \in \setR\). On a :
+</p>
+
+<p>
+\[\scalaire{u_i}{A(u_j)} = \lambda_j \cdot \scalaire{u_i}{u_j}\]
+</p>
+
+<p>
+ainsi que :
+</p>
+
+<p>
+\[\scalaire{u_i}{A(u_j)} = \scalaire{A(u_i)}{u_j} = \lambda_i \cdot \scalaire{u_i}{u_j}\]
+</p>
+
+<p>
+En soustrayant ces deux équations, on obtient :
+</p>
+
+<p>
+\[(\lambda_j - \lambda_i) \cdot \scalaire{u_i}{u_j} = 0\]
+</p>
+
+<p>
+Le produit scalaire doit s'annuler lorsque les valeurs propres diffèrent.
+Si toutes les valeurs propres sont distinctes, les vecteurs propres forment une suite orthonormée :
+</p>
+
+<p>
+\[\scalaire{u_i}{u_j} = \indicatrice_{ij}\]
+</p>
+</div>
+</div>
+<div id="outline-container-org322f0b1" class="outline-3">
+<h3 id="org322f0b1"><span class="section-number-3">3.2.</span> Orthogonalité par rapport à l'application linéaire</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+Si les vecteurs propres \(u_i \in \Omega\) sont orthonormés, on a :
+</p>
+
+<p>
+\[\scalaire{u_i}{A(u_j)} = \lambda_j \cdot \scalaire{u_i}{u_j} = \lambda_j \cdot \indicatrice_{ij}\]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org1654c76" class="outline-2">
+<h2 id="org1654c76"><span class="section-number-2">4.</span> Représentation tensorielle</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Supposons que la suite de vecteurs propres \((u_1,...,u_n)\) soit orthonormée. Pour tout \(x \in \combilin{u_1,...,u_n}\), on a alors :
+</p>
+
+<p>
+\[x = \sum_i \scalaire{u_i}{x} \cdot u_i\]
+</p>
+
+<p>
+et :
+</p>
+
+\begin{align}
+A(x) &= \sum_i \scalaire{u_i}{x} \cdot A(u_i) \)
+
+\(
+&= \sum_i \lambda_i \cdot \scalaire{u_i}{x} \cdot u_i
+\end{align}
+
+<p>
+On peut donc représenter \(A\) sur \(\combilin{u_1,...,u_n}\) par le tenseur associé :
+</p>
+
+<p>
+\[\mathcal{A} = \sum_i \lambda_i \cdot u_i \otimes u_i\]
+</p>
+
+<p>
+de sorte que :
+</p>
+
+<p>
+\[A(x) = \mathcal{A} \cdot x = \contraction{ \mathcal{A} }{1}{x}\]
+</p>
+</div>
+</div>
+<div id="outline-container-org46854a9" class="outline-2">
+<h2 id="org46854a9"><span class="section-number-2">5.</span> Inverse</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Supposons que les vecteurs propres \(u_i\) forment une base orthonormée de \(E\), et que les valeurs propres correspondantes \(\lambda_i\) soient non nulles. Si \(x,y \in E\) sont tels que \(A(x) = \mathcal{A} \cdot x = y\), on a :
+</p>
+
+<p>
+\[y = \sum_i \scalaire{u_i}{y} \cdot u_i = \mathcal{A} \cdot x = \sum_i \lambda_i \cdot u_i \cdot \scalaire{u_i}{x}\]
+</p>
+
+<p>
+On en déduit en comparant les coefficients de chaque vecteur \(u_i\) que \(\lambda_i \cdot \scalaire{u_i}{x} = \scalaire{u_i}{y}\), d'où :
+</p>
+
+<p>
+\[\scalaire{u_i}{x} = \unsur{\lambda_i} \cdot \scalaire{u_i}{y}\]
+</p>
+
+<p>
+Mais ces produits scalaires sont les coordonnées de \(x\) par rapport aux \(u_i\) :
+</p>
+
+<p>
+\[x = \sum_i \scalaire{u_i}{x} \cdot u_i = \sum_i \unsur{\lambda_i} \cdot \scalaire{u_i}{y} \cdot u_i\]
+</p>
+
+<p>
+Donc, si on pose :
+</p>
+
+<p>
+\[\mathcal{A}^{-1} = \sum_i \unsur{\lambda_i} \cdot u_i \otimes u_i\]
+</p>
+
+<p>
+on a :
+</p>
+
+<p>
+\[x = \mathcal{A}^{-1} \cdot y\]
+</p>
+</div>
+</div>
+<div id="outline-container-org83aa7f3" class="outline-2">
+<h2 id="org83aa7f3"><span class="section-number-2">6.</span> Représentation matricielle</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+On dit que \(\lambda \in \corps\) est la valeur propre de la matrice \(A \in \matrice(\corps,n,n)\) correspondant au vecteur propre non nul \(u \in \corps^n\) si ils sont valeurs et vecteurs propres de l'application linéaire sous-jacente :
+</p>
+
+<p>
+\[A \cdot u = \lambda \cdot u\]
+</p>
+</div>
+<div id="outline-container-org6d43abc" class="outline-3">
+<h3 id="org6d43abc"><span class="section-number-3">6.1.</span> Formulation équivalente</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+On voit qu'il est équivalent de chercher un scalaire \(\lambda\) et un vecteur \(u \ne 0\) tel que :
+</p>
+
+<p>
+\[(A - \lambda \cdot I) \cdot u = 0\]
+</p>
+</div>
+</div>
+<div id="outline-container-orge60ba8b" class="outline-3">
+<h3 id="orge60ba8b"><span class="section-number-3">6.2.</span> Rapport de Rayleigh</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+On peut évaluer \(\lambda\) à partir de \(u\) en multipliant l'équation ci-dessus à gauche par \(u^\dual\). On obtient alors :
+</p>
+
+<p>
+\[u^\dual \cdot A \cdot u = \lambda \cdot u^\dual \cdot u\]
+</p>
+
+<p>
+et le rapport de Rayleigh en \(u\) s'en suit :
+</p>
+
+<p>
+\[\lambda = \frac{u^\dual \cdot A \cdot u}{u^\dual \cdot u} = R(u)\]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb56958d" class="outline-2">
+<h2 id="orgb56958d"><span class="section-number-2">7.</span> Invariance</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Soit la valeur propre \(\lambda\) de \(A\) et le vecteur propre correspondant \(u \ne 0\). On a :
+</p>
+
+<p>
+\[A \cdot u = \lambda \cdot u\]
+</p>
+
+<p>
+Multiplions cette équation à gauche par une matrice inversible \(Q\) :
+</p>
+
+<p>
+\[Q \cdot A \cdot u = \lambda \cdot Q \cdot u\]
+</p>
+
+<p>
+Posons à présent \(v = Q \cdot u\). On a alors \(u = Q^{-1} \cdot v\) et :
+</p>
+
+<p>
+\[Q \cdot A \cdot Q^{-1} \cdot v = \lambda \cdot v\]
+</p>
+
+<p>
+On constate aussi que \(v \ne 0\), car sinon :
+</p>
+
+<p>
+\[0 \ne u = Q^{-1} \cdot v = Q^{-1} \cdot 0 = 0\]
+</p>
+
+<p>
+ce qui est impossible. On en conclut que \(\lambda\) est aussi une valeur propre de la matrice :
+</p>
+
+<p>
+\[B = Q \cdot A \cdot Q^{-1}\]
+</p>
+
+<p>
+On dit que les valeurs propres sont des invariants sous transformation linéaire réversible.
+</p>
+</div>
+</div>
+<div id="outline-container-orgbc0837d" class="outline-2">
+<h2 id="orgbc0837d"><span class="section-number-2">8.</span> Matrices triangulaires</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Nous allons démontrer par récurrence sur la taille \(n\) d'une matrice triangulaire supérieure \(T\) que les composantes diagonales sont des valeurs propres de \(T\).
+</p>
+
+<ul class="org-ul">
+<li>Si \(n = 1\), soit les uniques composantes \(\lambda = \composante_{11}(T)\) et \(\mu = \composante_1(u)\). On a :</li>
+</ul>
+
+<p>
+\[T \cdot u = [\lambda] \cdot [\mu] = \lambda \cdot [1] \cdot [\mu] = \lambda \cdot u\]
+</p>
+
+<p>
+ce qui montre que la composante diagonale \(\lambda\) est une valeur propre de \(T\).
+</p>
+
+<ul class="org-ul">
+<li>Supposons que le résultat soit vrai pour \(n - 1\). Partitionnons à part la dernière ligne et la dernière colonne d'une matrice \(T \in \matrice(\corps,n,n)\) :</li>
+</ul>
+
+<div class="org-center">
+<p>
+\(
+T =
+</p>
+\begin{Matrix}{cc}
+T^{(n-1)} & z \)
+
+\(
+0 & \lambda_n
+\end{Matrix}
+<p>
+\)
+</p>
+</div>
+
+<p>
+Donc, \(T^{(n-1)}\) est une matrice triangulaire de la forme :
+</p>
+
+<div class="org-center">
+<p>
+\(
+T<sup>(n-1)</sup> =
+</p>
+\begin{Matrix}{ccc}
+\lambda_1 & \hdots & \hdots \)
+
+\(
+0 & \ddots & \hdots \)
+
+\(
+0 & 0 & \lambda_{n-1} \)
+
+\(
+\end{Matrix}
+<p>
+\)
+</p>
+</div>
+
+<p>
+où les composantes diagonales \(\lambda_1,...,\lambda_{n-1}\) vérifient :
+</p>
+
+<p>
+\[T^{(n-1)} \cdot u_i^{(n-1)} = \lambda_i \cdot u_i^{(n-1)}\]
+</p>
+
+<p>
+pour certains vecteurs propres \(u_i^{(n-1)} \ne 0\). Nous allons chercher les vecteurs propres \(u \in \corps^n\) de \(T\) sous la forme :
+</p>
+
+<div class="org-center">
+<p>
+\(
+u =
+</p>
+\begin{Matrix}{c}
+v \\ \mu
+\end{Matrix}
+<p>
+\)
+</p>
+</div>
+
+<p>
+où \(v \in \corps^{n - 1}\) et \(\mu \in \setC\). Si on choisit \(v = u_i^{(n-1)}\) pour \(i \in \{1,2,...,n-1\}\) et \(\mu = 0\), on a :
+</p>
+
+\begin{align}
+T \cdot u &=
+\begin{Matrix}{cc}
+T^{(n-1)} & z \)
+
+\(
+0 & \lambda_n
+\end{Matrix}
+\cdot
+\begin{Matrix}{c}
+u_i^{(n-1)} \\ 0
+\end{Matrix} \)
+
+\(
+&=
+\begin{Matrix}{c}
+T^{(n-1)} \cdot u_i^{(n-1)} \)
+
+\(
+0
+\end{Matrix}
+=
+\begin{Matrix}{c}
+\lambda_i \cdot u_i^{(n-1)} \\ 0
+\end{Matrix} \)
+
+\(
+&= \lambda_i \cdot
+\begin{Matrix}{c}
+u_i \\ 0
+\end{Matrix}
+= \lambda_i \cdot u
+\end{align}
+
+<p>
+Les valeurs propres de \(T^{(n-1)}\) sont donc également valeurs propres de \(T\). Il nous reste à examiner le cas de \(\lambda_n\). Posons :
+</p>
+
+<div class="org-center">
+<p>
+\(
+A =
+</p>
+\begin{Matrix}{cccc}
+\lambda_1 - \lambda_n & \hdots & \hdots & \hdots \)
+
+\(
+0 & \ddots & \hdots & \hdots \)
+
+\(
+0 & 0 & \lambda_{n-1} - \lambda_n & \hdots
+\end{Matrix}
+<p>
+\)
+</p>
+</div>
+
+<p>
+On doit donc trouver un vecteur \(u \in \corps^n\) non nul tel que :
+</p>
+
+<div class="org-center">
+<p>
+\(
+(T - &lambda;<sub>n</sub> &sdot; I) &sdot; u =
+</p>
+\begin{Matrix}{c}
+A \\ 0
+\end{Matrix}
+<p>
+&sdot; u =
+</p>
+\begin{Matrix}{c}
+A \cdot u \\ 0
+\end{Matrix}
+<p>
+= 0
+\)
+</p>
+</div>
+
+<p>
+Il suffit donc que \(u \ne 0\) vérifie \(A \cdot u = 0\). Mais comme \(A\) est de taille \((n - 1, n)\), le rang \(r\) vérifie \(r \le n - 1 \strictinferieur n\). Le système admet donc une infinité de solutions non nulles et \(\lambda_n\) est également une valeur propre de \(T\).
+</p>
+</div>
+</div>
+<div id="outline-container-orgcf238a4" class="outline-2">
+<h2 id="orgcf238a4"><span class="section-number-2">9.</span> Forme de Schur</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+Soit une matrice carrée \(A\) de taille \((n,n)\). On choisit la valeur propre \(\lambda_1\) la plus grande de \(A\) et on évaluer un vecteur propre non nul correspondant \(u_1\) en résolvant le système :
+</p>
+
+<p>
+\[(A - \lambda_1 \cdot I) \cdot u_1 = 0\]
+</p>
+
+<p>
+On construit alors le complément orthogonal \((u_2, ..., u_n)\) tel que \((u_1,...,u_n)\) forme une suite orthonormée. On a donc \(u_j^\dual \cdot u_i = \indicatrice_{ij}\). Soit la matrice \(U\) de taille \((n,n)\) définie par :
+</p>
+
+<p>
+\[U_1 = [u_1 \ u_2 \ ... \ u_n]\]
+</p>
+
+<p>
+On a bien sur \(U_1^{-1} = U_1^\dual\) et :
+</p>
+
+\begin{align}
+A \cdot U_1 &=
+\begin{Matrix}{cccc}
+A \cdot u_1 & A \cdot u_2 & \hdots & A \cdot u_n
+\end{Matrix} \)
+
+\(
+&=
+\begin{Matrix}{cccc}
+\lambda_1 \cdot u_1 & A \cdot u_2 & \hdots & A \cdot u_n
+\end{Matrix}
+\end{align}
+
+<p>
+En multipliant à gauche par la duale, on obtient :
+</p>
+
+\begin{align}
+U_1^\dual \cdot A \cdot U_1 &=
+\begin{Matrix}{cccc}
+(\lambda_1 \cdot u_1^\dual \cdot u_1) & (u_1^\dual \cdot A \cdot u_2) & \hdots & (u_1^\dual \cdot A \cdot u_n) \)
+
+\(
+(\lambda_1 \cdot u_2^\dual \cdot u_1) & (u_2^\dual \cdot A \cdot u_2) & \hdots & (u_2^\dual \cdot A \cdot u_n) \)
+
+\(
+\vdots & \vdots & \vdots & \vdots \)
+
+\(
+(\lambda_1 \cdot u_n^\dual \cdot u_1) & (u_n^\dual \cdot A \cdot u_2) & \hdots & (u_n^\dual \cdot A \cdot u_n)
+\end{Matrix} \)
+
+\(
+&=
+\begin{Matrix}{cccc}
+\lambda_1 & (u_1^\dual \cdot A \cdot u_2) & \hdots & (u_1^\dual \cdot A \cdot u_n) \)
+
+\(
+0 & (u_2^\dual \cdot A \cdot u_2) & \hdots & (u_2^\dual \cdot A \cdot u_n) \)
+
+\(
+\vdots & \vdots & \vdots & \vdots \)
+
+\(
+0 & (u_n^\dual \cdot A \cdot u_2) & \hdots & (u_n^\dual \cdot A \cdot u_n)
+\end{Matrix} \)
+
+\(
+\end{align}
+
+<p>
+ou, plus schématiquement :
+</p>
+
+<div class="org-center">
+<p>
+\(
+U<sub>1</sub>^\dual &sdot; A &sdot; U<sub>1</sub> =
+</p>
+\begin{Matrix}{cc}
+\lambda_1 &  \hdots \\ 0 & A^{(n - 1)}
+\end{Matrix}
+<p>
+\)
+</p>
+</div>
+
+<p>
+On peut réitérer le même raisonnement en utilisant la plus grande valeur propre de \(A^{(n - 1)}\) et une matrice unitaire correspondante \(U^{(n - 1)}\). Posons :
+</p>
+
+<div class="org-center">
+<p>
+\(
+U<sub>2</sub> =
+</p>
+\begin{Matrix}{cc}
+1 & 0 \)
+
+\(
+0 & U^{(n - 1)}
+\end{Matrix}
+<p>
+\)
+</p>
+</div>
+
+<p>
+On obtient :
+</p>
+
+<div class="org-center">
+<p>
+\(
+U<sub>2</sub>^\dual &sdot; U<sub>1</sub>^\dual &sdot; A &sdot; U<sub>1</sub> &sdot; U<sub>2</sub> =
+</p>
+\begin{Matrix}{ccc}
+\lambda_1 & \hdots & \hdots \)
+
+\(
+0 & \lambda_2 & \hdots \)
+
+\(
+0 & 0 & A^{(n - 2)}
+\end{Matrix}
+<p>
+\)
+</p>
+</div>
+
+<p>
+On continue ainsi, en utilisant à l'étape \(k + 1\) la plus grande valeur propre de \(A^{(n - k)}\) et :
+</p>
+
+<div class="org-center">
+<p>
+\(
+U<sub>k + 1</sub> =
+</p>
+\begin{Matrix}{cc}
+I_k & 0 \)
+
+\(
+0 & U^{(n-k)}
+\end{Matrix}
+<p>
+\)
+</p>
+</div>
+
+<p>
+On s'arrête évidemment lorsque \(k + 1 = n\). Posons :
+</p>
+
+<p>
+\[U = U_1 \cdot ... \cdot U_n\]
+</p>
+
+<p>
+On obtient à la fin du processus une matrice triangulaire :
+</p>
+
+<div class="org-center">
+<p>
+\(
+U^\dual &sdot; A &sdot; U = T =
+</p>
+\begin{Matrix}{ccc}
+\lambda_1 & \hdots & \hdots \)
+
+\(
+0 & \ddots & \hdots \)
+
+\(
+0 & 0 & \lambda_n
+\end{Matrix}
+<p>
+\)
+</p>
+</div>
+
+<p>
+Comme :
+</p>
+
+<p>
+\[U^{-1} = U_n^\dual \cdot ... \cdot U_1^\dual = U^\dual\]
+</p>
+
+<p>
+on obtient, en multipliant la relation précédente à gauche par \(U\) et à droite par \(U^\dual\) la décomposition :
+</p>
+
+<p>
+\[A = U \cdot T \cdot U^\dual\]
+</p>
+
+<p>
+On appelle cette décomposition la forme de Schur et on la note :
+</p>
+
+<p>
+\[(T,U) = \schur(A)\]
+</p>
+</div>
+<div id="outline-container-orgae7aa44" class="outline-3">
+<h3 id="orgae7aa44"><span class="section-number-3">9.1.</span> Valeurs propres</h3>
+<div class="outline-text-3" id="text-9-1">
+<p>
+La matrice \(T\) étant triangulaire supérieure, ses éléments diagonaux sont des valeurs propres de \(T\). Par invariance sous transformation, on voit aussi que les valeurs propres de :
+</p>
+
+<p>
+\[A = U \cdot T \cdot U^\dual = U \cdot T \cdot U^{-1}\]
+</p>
+
+<p>
+sont égales aux valeurs propres de \(T\). La décomposition de Schur d'une matrice \(A\) nous permet donc de connaître les valeurs propres en examinant la matrice triangulaire obtenue.
+</p>
+</div>
+</div>
+<div id="outline-container-orgec40bbe" class="outline-3">
+<h3 id="orgec40bbe"><span class="section-number-3">9.2.</span> Ordre</h3>
+<div class="outline-text-3" id="text-9-2">
+<p>
+Nous allons montrer par récurrence sur la taille de \(A\) que les valeurs propres sont triées par ordre décroissant. Si \(n = 1\), il n'y a rien à montrer. Supposons à présent que le résultat soit vrai pour \(n - 1\). Soit :
+</p>
+
+<p>
+\[(R,V) = \schur(A^{(n - 1)})\]
+</p>
+
+<p>
+Par l'hypothèse de récurrence, \(R\) contient sur sa diagonale les valeurs propres de \(A^{(n - 1)}\) triées par ordre décroissant :
+</p>
+
+<p>
+\[\lambda_2 \ge \lambda_3 \ge ...\]
+</p>
+
+<p>
+Mais on a aussi :
+</p>
+
+<div class="org-center">
+<p>
+\(
+</p>
+\begin{Matrix}{cc}
+1 & 0 \)
+
+\(
+0 & V^\dual
+\end{Matrix}
+<p>
+&sdot; U<sub>1</sub>^\dual &sdot; A &sdot; U<sub>1</sub> &sdot;
+</p>
+\begin{Matrix}{cc}
+1 & 0 \)
+
+\(
+0 & V
+\end{Matrix}
+<p>
+=
+</p>
+\begin{Matrix}{cc}
+\lambda_1 & \hdots \)
+
+\(
+0 & R
+\end{Matrix}
+<p>
+\)
+</p>
+</div>
+
+<p>
+Les valeurs propres de \(A^{(n - 1)}\) sont donc également les valeurs propres de \(A\). Par construction de l'algorithme, \(\lambda_1\) est la plus grande valeur propre et on a \(\lambda_1 \ge \max\{\lambda_2,...,\lambda_n\}\). On en conclut finalement que :
+</p>
+
+<p>
+\[\lambda_1 \ge \lambda_2 \ge \lambda_3 \ge ...\]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org9869a89" class="outline-2">
+<h2 id="org9869a89"><span class="section-number-2">10.</span> Algorithme \(Q R\)</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+Le but est d'évaluer les valeurs propres d'une matrice \(A\). Pour cela, on tente d'obtenir une approximation de la forme de Schur. Il s'agit d'un algorithme itératif qui part de :
+</p>
+
+<p>
+\[A_0 = A\]
+</p>
+
+<p>
+A chaque itération \(k\), on décompose la matrice \(A_k\) obtenue à l'itération précédente en utilisant l'algorithme de Householder :
+</p>
+
+<p>
+\[(Q_k, R_k) = \householder(A_k)\]
+</p>
+
+<p>
+On a alors \(A_k = Q_k \cdot R_k\), avec \(Q_k^\dual = Q_k^{-1}\). On construit ensuite une nouvelle matrice \(A_{k+1}\) par :
+</p>
+
+<p>
+\[A_{k + 1} = Q_k^\dual \cdot A_k \cdot Q_k = Q_k^\dual \cdot Q_k \cdot R_k \cdot Q_k = R_k \cdot Q_k\]
+</p>
+
+<p>
+Au bout de \(p\) itérations, la matrice \(A_p\) produite par l'algorithme vérifie :
+</p>
+
+<p>
+\[A_p = Q_p^\dual \cdot ... \cdot Q_0^\dual \cdot A \cdot Q_0 \cdot ... \cdot Q_p\]
+</p>
+
+<p>
+En inversant cette relation, on obtient :
+</p>
+
+<p>
+\[A = Q_0 \cdot ... \cdot Q_p \cdot A_p \cdot Q_p^\dual \cdot ... \cdot Q_0^\dual\]
+</p>
+
+<p>
+En injectant l'identité \(A_p \cdot Q_p^\dual = R_p\), on arrive à :
+</p>
+
+<p>
+\[A = Q_0 \cdot ... Q_p \cdot R_p \cdot Q_{p - 1}^\dual \cdot ... \cdot Q_0^\dual\]
+</p>
+
+<p>
+Si les suites :
+</p>
+
+<p>
+\[\mathcal{U}_p = Q_0 \cdot ... Q_p\]
+</p>
+
+<p>
+et \(R_p\) convergent :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\lim_{p \to \infty} \mathcal{U}_p = U \)
+</p>
+
+<p>
+\(
+\lim_{p \to \infty} R_p = R
+\)
+</p>
+</div>
+
+<p>
+on a bien évidemment :
+</p>
+
+<p>
+\[\lim_{p \to \infty} \mathcal{U}_{p - 1}^\dual = U^\dual\]
+</p>
+
+<p>
+On en déduit la forme approximative :
+</p>
+
+<p>
+\[A = U \cdot R \cdot U^\dual \approx \mathcal{U}_N \cdot R_N \cdot \mathcal{U}_N^\dual\]
+</p>
+
+<p>
+pour \(N\) suffisamment grand. Par invariance sous transformation réversible, les estimations des valeurs propres de \(A\) sont sur la diagonale de la matrice triangulaire supérieure \(R_N \approx R\). On peut se servir de ces estimations pour appliquer l'algorithme de Schur et construire une matrice triangulaire où les valeurs propres sont triées par ordre décroissant sur la diagonale.
+</p>
+</div>
+</div>
+<div id="outline-container-org8817aa6" class="outline-2">
+<h2 id="org8817aa6"><span class="section-number-2">11.</span> Matrices hermitiennes</h2>
+<div class="outline-text-2" id="text-11">
+<p>
+Si \(A\) est hermitienne (\(A = A^\dual)\), la forme de Schur \((T,U) = \schur(A)\) implique que :
+</p>
+
+<p>
+\[A = U \cdot T \cdot U^\dual = A^\dual = U \cdot T^\dual \cdot U^\dual\]
+</p>
+
+<p>
+On en déduit en multipliant à gauche par \(U^\dual\) et à droite par \(U\) que \(T = T^\dual\). Mais comme \(T\) est triangulaire supérieure, on a \(t_{ij} = \composante_{ij}(T) = 0\) si \(i \strictsuperieur j\). De l'autre coté de la diagonale, on a \(t_{ji} = \conjaccent{t}_{ij} = 0\). On en conclut que les seuls éléments potentiellement non nuls doivent se trouver sur la diagonale (\(i = j\)). La matrice \(T\) se réduit donc à une matrice diagonale formée à partir des valeurs propres \(\lambda_i\) (non nécessairement distinctes) de \(A\) :
+</p>
+
+<p>
+\[T = \Lambda  = \diagonale_n(\lambda_1,...,\lambda_n)\]
+</p>
+
+<p>
+En multipliant \(A = U \cdot \Lambda \cdot U^\dual\) à droite par \(U\), on a :
+</p>
+
+<p>
+\[A \cdot U = \Lambda \cdot U\]
+</p>
+
+<p>
+Donc, si \(u_i = \colonne_i U\), on a :
+</p>
+
+<p>
+\[A \cdot u_i = \lambda_i \cdot u_i\]
+</p>
+
+<p>
+Les vecteurs propres sont donc donnés par les colonnes de \(U\). Comme \(U^\dual \cdot U = I\), on a la propriété d'orthonormalité :
+</p>
+
+<p>
+\[u_i^\dual \cdot u_j = \indicatrice_{ij}\]
+</p>
+</div>
+</div>
+<div id="outline-container-org5b661a1" class="outline-2">
+<h2 id="org5b661a1"><span class="section-number-2">12.</span> Théorème de Courant-Fisher</h2>
+<div class="outline-text-2" id="text-12">
+<p>
+Soit une matrice hermitienne \(A\) et sa forme de Schur :
+</p>
+
+<p>
+\[A = U \cdot \Lambda \cdot U^\dual\]
+</p>
+
+<p>
+Nous posons :
+</p>
+
+\begin{align}
+\lambda_i &= \composante_{ii} \Lambda \)
+
+\(
+u_i &= \colonne_i U
+\end{align}
+
+<p>
+pour les valeurs propres et vecteurs propres correspondants. Les valeurs propres étant triées par ordre décroissant, on a :
+</p>
+
+<p>
+\[\lambda_1 \ge \lambda_2 \ge \lambda_3 \ge ...\]
+</p>
+
+<p>
+On considère le rapport de Rayleigh défini par :
+</p>
+
+<p>
+\[R(x) = \frac{x^\dual \cdot A \cdot x}{x^\dual \cdot x}\]
+</p>
+
+<p>
+pour tout \(x \in \setC^n \setminus \{0\}\). Choisissons un tel \(x\). Comme les \(u_i\) forment une base orthonormée, on a :
+</p>
+
+<p>
+\[x = \sum_{i = 1}^n a_i \cdot u_i\]
+</p>
+
+<p>
+où \(a_i = \scalaire{u_i}{x}\) par orthonormalité. Le rapport s'écrit alors :
+</p>
+
+\begin{align}
+R(x) &= \frac{ \sum_{i,j = 1}^n \conjaccent{a}_i \cdot a_j \cdot u_i^\dual \cdot A \cdot u_j }{ \sum_{i,j = 1}^n \conjaccent{a}_i \cdot a_j \cdot u_i^\dual \cdot u_j} \\ \)
+
+\(
+&= \frac{ \sum_{i = 1}^n \abs{a_i}^2 \cdot \lambda_i }{ \sum_{j = 1}^n \abs{a_j}^2 }
+\end{align}
+
+<p>
+Posons :
+</p>
+
+<p>
+\[w_i = \frac{\abs{a_i}^2}{\sum_{j = 1}^n \abs{a_j}^2}\]
+</p>
+
+<p>
+Il est clair que les \(w_i\) sont des réels positifs et que :
+</p>
+
+<p>
+\[\sum_{i = 1}^n w_i = \frac{\sum_{i = 1}^n \abs{a_i}^2}{\sum_{j = 1}^n \abs{a_j}^2} = 1\]
+</p>
+
+<p>
+On a alors :
+</p>
+
+<p>
+\[R(x) = \sum_{i = 1}^n w_i \cdot \lambda_i\]
+</p>
+</div>
+<div id="outline-container-orgd88b14c" class="outline-3">
+<h3 id="orgd88b14c"><span class="section-number-3">12.1.</span> Propriétés extrémales</h3>
+<div class="outline-text-3" id="text-12-1">
+<p>
+Nous allons analyser les extrema du rapport de Rayleigh sur les ensembles :
+</p>
+
+\begin{align}
+\mathcal{P}_m &= \combilin{u_1,u_2,...,u_m} \setminus \{0\} \)
+
+\(
+\mathcal{Q}_m &= \mathcal{P}_{m - 1}^\orthogonal \setminus \{0\}
+\end{align}
+
+<ul class="org-ul">
+<li>Si \(x \in \mathcal{P}_m\), les seules coordonnées non nulles sont \(a_1,...,a_m\). Il en va donc de même des \(w_i\) et :</li>
+</ul>
+
+<p>
+\[R(x) = \sum_{i = 1}^m w_i \cdot \lambda_i\]
+</p>
+
+<p>
+On voit aussi que :
+</p>
+
+\begin{align}
+1 = \sum_{i = 1}^n w_i &= \sum_{i = 1}^m w_i + \sum_{i = m + 1}^n w_i \)
+
+\(
+&= \sum_{i = 1}^m w_i + 0 \)
+
+\(
+&= \sum_{i = 1}^m w_i
+\end{align}
+
+<p>
+Les valeurs propres étant ordonnées par ordre décroissant, on a donc :
+</p>
+
+<p>
+\[R(x) \ge \lambda_m \sum_{i = 1}^m w_i = \lambda_m\]
+</p>
+
+<p>
+Cette borne inférieure est atteinte en \(u_m \in \mathcal{P}_m\) :
+</p>
+
+<p>
+\[R(u_m) = \lambda_m\]
+</p>
+
+<p>
+On en conclut que \(\lambda_m\) est le minimum de \(R\) sur l'espace \(\mathcal{P}_m\) :
+</p>
+
+<p>
+\[\lambda_m = \min_{x \in \mathcal{P}_m} \frac{x^\dual \cdot A \cdot x}{x^\dual \cdot x}\]
+</p>
+
+<p>
+et que \(u_m\) est solution du problème de minimisation :
+</p>
+
+<p>
+\[u_m \in \arg\min_{x \in \mathcal{P}_m} \frac{x^\dual \cdot A \cdot x}{x^\dual \cdot x}\]
+</p>
+
+<ul class="org-ul">
+<li>Si \(x \in \mathcal{Q}_m\), on doit avoir \(\scalaire{z}{x} = 0\) pour tout \(z \in \mathcal{P}_{m - 1}\), et en particulier :</li>
+</ul>
+
+<p>
+\[a_k = \scalaire{u_k}{x} = 0\]
+</p>
+
+<p>
+pour tout \(k \in \{1, ..., m - 1\}\). Les \(m - 1\) premières coordonnées sont nulles. Les \(m - 1\) premiers \(w_i\) le sont donc aussi et :
+</p>
+
+<p>
+\[R(x) = \sum_{i = m}^n w_i \cdot \lambda_i\]
+</p>
+
+<p>
+La somme des \(w_i\) se simplifie alors en :
+</p>
+
+<p>
+\[\sum_{i = m}^n w_i = 1\]
+</p>
+
+<p>
+Les valeurs propres étant ordonnées par ordre décroissant, on a donc :
+</p>
+
+<p>
+\[R(x) \le \lambda_m \sum_{i = m}^n w_i = \lambda_m\]
+</p>
+
+<p>
+Cette borne supérieure est atteinte en \(u_m \in \mathcal{Q}_m\) :
+</p>
+
+<p>
+\[R(u_m) = \lambda_m\]
+</p>
+
+<p>
+On en conclut que \(\lambda_m\) est le maximum de \(R\) sur l'espace \(\mathcal{Q}_m\) :
+</p>
+
+<p>
+\[\lambda_m = \max_{x \in \mathcal{Q}_m} \frac{x^\dual \cdot A \cdot x}{x^\dual \cdot x}\]
+</p>
+
+<p>
+et que \(u_m\) est solution du problème de maximisation :
+</p>
+
+<p>
+\[u_m \in \arg\max_{x \in \mathcal{Q}_m} \frac{x^\dual \cdot A \cdot x}{x^\dual \cdot x}\]
+</p>
+</div>
+</div>
+<div id="outline-container-org9238e79" class="outline-3">
+<h3 id="org9238e79"><span class="section-number-3">12.2.</span> Minimax</h3>
+<div class="outline-text-3" id="text-12-2">
+<p>
+Soit \(m \in \setN\) et la collection d'espaces vectoriels de dimension \(m\) générés par des bases orthonormées :
+</p>
+
+<p>
+\[\mathcal{D}_m = \{ \combilin{v_1,...,v_m} : v_i \in \setC^n, \ \scalaire{v_i}{v_j} = \delta_{ij} \text{ pour tout } i,j \in \{1,...,m\} \}\]
+</p>
+
+<p>
+On définit des collections associées par :
+</p>
+
+\begin{align}
+\mathcal{V}_m &= \{ X \setminus \{0\} : X \in \mathcal{D}_m \} \)
+
+\(
+\mathcal{W}_m &= \{ X^\orthogonal \setminus \{0\} : X \in \mathcal{D}_{m - 1} \}
+\end{align}
+
+<ul class="org-ul">
+<li>Soit \(X \in \mathcal{V}_m\) et la suite \((v_1,...,v_m)\) formant une base orthonormée de \(X\). Il est équivalent d'imposer la contrainte \(x \in X \cap \mathcal{Q}_m\), ou d'imposer simultanément que \(x \ne 0\) s'écrive :</li>
+</ul>
+
+<p>
+\[x = \sum_{j = 1}^m a_j \cdot v_j\]
+</p>
+
+<p>
+et que \(x\) soit orthogonal à \(u_1,...,u_{m - 1}\) :
+</p>
+
+<p>
+\[\scalaire{u_i}{x} = \sum_{j = 1}^m \scalaire{u_i}{v_j} \cdot a_j = 0\]
+</p>
+
+<p>
+pour tout \(i \in \{1,...,m - 1\}\). Soit la matrice \(C \in \matrice(\setC, m - 1, m)\) de composantes :
+</p>
+
+<p>
+\[\composante_{ij} C = \scalaire{u_i}{v_j}\]
+</p>
+
+<p>
+et le vecteur \(a = [a_1 \ ... \ a_m]^\dual\). On doit alors avoir \(C \cdot a = 0\). Cette matrice étant strictement longue, il existe une infinité de solution dans l'espace :
+</p>
+
+<p>
+\[S = \{ a \in \setC^m : C \cdot a = 0 \}\]
+</p>
+
+<p>
+On peut donc choisir \(a \ne 0\) dans \(S\) correspondant à un \(x \ne 0\) appartenant à \(X \cap \mathcal{Q}_m\). On a alors :
+</p>
+
+<p>
+\[\min_{z \in X} R(z) \le R(x) \le \max_{z \in \mathcal{Q}_m} R(z) = \lambda_m\]
+</p>
+
+<p>
+L'espace \(X\) produit donc un minimum inférieur ou égal à \(\lambda_m\). Le cas particulier \(X = \mathcal{P}_m \in \mathcal{V}_m\) atteignant la borne, on en déduit que :
+</p>
+
+<p>
+\[\lambda_m = \max_{X \in \mathcal{V}_m} \min_{x \in X} \frac{x^\dual \cdot A \cdot x}{x^\dual \cdot x}\]
+</p>
+
+<ul class="org-ul">
+<li>Soit \(Y \in \mathcal{W}_m\). On peut alors trouver un \(X \in \mathcal{D}_{m - 1}\) tel que \(Y = X^\orthogonal \setminus \{0\}\). Soit la suite \((v_1,...,v_{m - 1})\) formant une base orthonormée de \(X\). Il est équivalent d'imposer la contrainte \(x \in Y \cap \mathcal{P}_m\), ou d'imposer simultanément que \(x \ne 0\) s'écrive :</li>
+</ul>
+
+<p>
+\[x = \sum_{j = 1}^m a_j \cdot u_j\]
+</p>
+
+<p>
+et que \(x\) soit orthogonal à \(v_1,...,v_{m - 1}\) :
+</p>
+
+<p>
+\[\scalaire{v_i}{x} = \sum_{j = 1}^m \scalaire{v_i}{u_j} \cdot a_j = 0\]
+</p>
+
+<p>
+pour tout \(i \in \{1,...,m - 1\}\). Soit la matrice \(C \in \matrice(\setC, m - 1, m)\) de composantes :
+</p>
+
+<p>
+\[\composante_{ij} C = \scalaire{v_i}{u_j}\]
+</p>
+
+<p>
+et le vecteur \(a = [a_1 \ ... \ a_m]^\dual\). On doit alors avoir \(C \cdot a = 0\). Cette matrice étant strictement longue, il existe une infinité de solution dans l'espace :
+</p>
+
+<p>
+\[S = \{ a \in \setC^m : C \cdot a = 0 \}\]
+</p>
+
+<p>
+On peut donc choisir \(a \ne 0\) dans \(S\) correspondant à un \(x \ne 0\) appartenant à \(Y \cap \mathcal{P}_m\). On a alors :
+</p>
+
+<p>
+\[\lambda_m = \min_{z \in \mathcal{P}_m} R(z) \le R(x) \le \max_{z \in Y} R(z)\]
+</p>
+
+<p>
+L'espace \(Y\) produit donc un maximum supérieur ou égal à \(\lambda_m\). Le cas particulier \(Y = \mathcal{Q}_m \in \mathcal{V}_m\) atteignant la borne, on en déduit que :
+</p>
+
+<p>
+\[\lambda_m = \min_{Y \in \mathcal{W}_m} \max_{x \in Y} \frac{x^\dual \cdot A \cdot x}{x^\dual \cdot x}\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgad872e1" class="outline-3">
+<h3 id="orgad872e1"><span class="section-number-3">12.3.</span> Remarque</h3>
+<div class="outline-text-3" id="text-12-3">
+<p>
+Si les valeurs propres étaient ordonnées par ordre croissant :
+</p>
+
+<p>
+\[\lambda_1 \le \lambda_2 \le \lambda_3 \le ...\]
+</p>
+
+<p>
+on aurait bien entendu :
+</p>
+
+<p>
+\[\lambda_m = \min_{X \in \mathcal{V}_m} \max_{x \in X} \frac{x^\dual \cdot A \cdot x}{x^\dual \cdot x} = \max_{Y \in \mathcal{W}_m} \min_{x \in Y} \frac{x^\dual \cdot A \cdot x}{x^\dual \cdot x}\]
+</p>
+</div>
+</div>
+<div id="outline-container-orgc72d9e0" class="outline-3">
+<h3 id="orgc72d9e0"><span class="section-number-3">12.4.</span> Résolution numérique</h3>
+<div class="outline-text-3" id="text-12-4">
+<p>
+Les propriétés extrémales nous offrent un moyen d'obtenir numériquement des approximations des valeurs et vecteurs propres d'une matrice hermitienne.
+</p>
+</div>
+<div id="outline-container-org08e2240" class="outline-4">
+<h4 id="org08e2240"><span class="section-number-4">12.4.1.</span> Valeur propre maximale</h4>
+<div class="outline-text-4" id="text-12-4-1">
+<p>
+Nous allons nous servir d'un algorithme d'optimisation pour obtenir le maximum \(\lambda_1\) de \(R\) sur \(\mathcal{Q}_1 = \setR^n\). A titre d'exemple, nous choisissons « la plus grande montée », qui n'est rien d'autre que l'opposé de la plus grande descente. On part d'un vecteur \(x \ne 0\) et on considère l'itération \(k\) :
+</p>
+
+<p>
+\[x_{k + 1} = x_k + \alpha_k \cdot \delta_k\]
+</p>
+
+<p>
+où \(\alpha_k \in \setR\) et \(\delta_k \in \setR^n\). Soit \(J_k = (\partial R(x_k))^\dual\) et le développement :
+</p>
+
+<p>
+\[R(x_{k + 1}) \approx R(x_k) + \alpha_k \cdot J_k^\dual \cdot \delta_k\]
+</p>
+
+<p>
+On a vu que pour maximiser \(J_k^\dual \cdot \delta_k = \scalaire{J_k}{\delta_k}\) sur \(\boule(0,\norme{J_k})\), il suffit de choisir \(\delta_k = J_k\). On pose donc :
+</p>
+
+<p>
+\[x_{k + 1} = x_k + \alpha_k \cdot J_k\]
+</p>
+
+<p>
+Si \(H_k = \partial^2 R(x_k)\), la valeur optimale de \(\alpha_k\) s'écrit :
+</p>
+
+<p>
+\[\alpha_k = \frac{J_k^\dual \cdot J_k}{J_k^\dual \cdot H_k \cdot J_k}\]
+</p>
+
+<p>
+On peut aussi utiliser un autre algorithme de minimisation libre pour construire une suite \(x_k\) dont on espère que \(\lim_{k \to \infty} x_k = u_1\) et \(\lim_{k \to \infty} R(x_k) = \lambda_1\).
+</p>
+</div>
+</div>
+<div id="outline-container-org11fe43c" class="outline-4">
+<h4 id="org11fe43c"><span class="section-number-4">12.4.2.</span> Autres valeurs propres</h4>
+<div class="outline-text-4" id="text-12-4-2">
+<p>
+Supposons que l'on ait déjà obtenu une bonne approximation de \((\lambda_1,...,\lambda_{m - 1})\) et de \((u_1,...,u_{m - 1})\). Si on veut que \(x \in \mathcal{Q}_m\), il faut et il suffit d'imposer que :
+</p>
+
+<p>
+\[\scalaire{u_1}{x} = ... = \scalaire{u_{m - 1}}{x} = 0\]
+</p>
+
+<p>
+On est donc amenés à construire le complémentaire orthogonal \((v_m,...,v_n)\) de \((u_1,...,u_{m - 1})\) et à poser :
+</p>
+
+<p>
+\[V = [v_m \ v_{m + 1} \ ... \ v_n]\]
+</p>
+
+<p>
+On a alors \(\combilin{v_m,...,v_n} = \mathcal{Q}_m\). Pour tout \(x \in \mathcal{Q}_m\), on peut donc trouver \(z = [z_m \ ... \ z_n]^\dual \in \setR^{n - m + 1}\) tel que :
+</p>
+
+<p>
+\[x = \sum_{i = m}^n z_i \cdot v_i = V \cdot z\]
+</p>
+
+<p>
+On pose donc :
+</p>
+
+<p>
+\[\varrho(z) = R(V \cdot z) = \frac{z^\dual \cdot V^\dual \cdot A \cdot V \cdot z}{z^\dual \cdot V^\dual \cdot V \cdot z}\]
+</p>
+
+<p>
+Par orthonormalité, on a \(V^\dual \cdot V = I\). On est donc finalement amené à maximiser :
+</p>
+
+<p>
+\[\varrho(z) = \frac{z^\dual \cdot V^\dual \cdot A \cdot V \cdot z}{z^\dual \cdot z}\]
+</p>
+
+<p>
+sur \(\setR^{n - m + 1}\). Pour cela, on part de \(z_0 \ne 0\) et on itère :
+</p>
+
+<p>
+\[z_{k + 1} = z_k + \alpha_k \cdot \partial \varrho(z_k)\]
+</p>
+
+<p>
+où :
+</p>
+
+<p>
+\[\alpha_k = \frac{\partial \varrho(z_k)^\dual \cdot \partial \varrho(z_k)}{\partial \varrho(z_k)^\dual \cdot \partial^2 \varrho(z_k) \cdot \partial \varrho(z_k)}\]
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Auteur: chimay</p>
+<p class="date">Created: 2025-10-22 mer 11:41</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

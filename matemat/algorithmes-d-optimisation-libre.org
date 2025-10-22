@@ -1,0 +1,196 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Algorithmes d’optimisation libre
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:algoptim}
+
+* Introduction
+
+Nous allons présenter des algorithmes permettant de résoudre approximativement des problèmes de minimisation d'une fonction $\varphi$ sur $\setR^n$. Ces algorithmes partent d'un point initial $x_0 \in \Omega$ et itèrent schématiquement comme suit :
+
+$$x_{k + 1} = I(x_k) = x_k + p_k$$
+
+pour un certain $p_k \in \setR^n$. On espère bien entendu que la suite converge et que :
+
+$$x_N \approx \lim_{k \to \infty} x_k = \arg\min_{x \in \Omega} \varphi(x)$$
+
+pour $N$ assez grand. Nous adoptons les notations :
+
+$$J = (\partial \varphi)^\dual$$
+
+pour le gradient, de taille $(n,1)$, et :
+
+$$H = \partial^2 \varphi$$
+
+pour la hessienne, de taille $(n,n)$. On note également :
+
+$$\Phi_k = \Phi(x_k)$$
+
+pour toute fonction $\Phi$ (par exemple, $\Phi \in \{\varphi,J,H\}$).
+
+
+* Minimum dans une direction
+
+Soit l'itération :
+
+$$x_{k+1} = x_k - \alpha_k \cdot p_k$$
+
+où $\alpha_k \in \setR$ et $p_k \in \setR^n$. On choisit généralement le paramètre $\alpha_k$ de façon à minimiser le développement d'ordre deux :
+
+$$\varphi_{k + 1} \approx \varphi_k - \alpha_k \cdot J_k^\dual \cdot p_k + \frac{\alpha_k^2}{2} \cdot p_k^\dual \cdot H_k \cdot p_k$$
+
+En imposant l'annulation de la dérivée de ce développement par rapport à $\alpha_k$, on en déduit que :
+
+$$- J_k^\dual \cdot p_k + \alpha_k \cdot p_k^\dual \cdot H_k \cdot p_k = 0$$
+
+La valeur optimale de $\alpha_k$ s'écrit :
+
+$$\alpha_k = \frac{J_k^\dual \cdot p_k}{p_k^\dual \cdot H_k \cdot p_k}$$
+
+
+* Méthode de la plus grande descente
+
+La méthode de la plus grande pente consiste à partir à chaque itération
+du point $x^{(k)}$ et à suivre la direction $\delta_k$ où $\varphi$
+descend le plus rapidement dans le voisinage immédiat. En première approximation, si :
+
+$$x_{k + 1} = x_k + \alpha_k \cdot \delta_k$$
+
+pour un certain $\alpha_k \in \setR$, on a :
+
+$$\varphi_{k+1} \approx \varphi_k + \alpha_k \cdot J_k^\dual \cdot \delta_k$$
+
+Nous choisissons le vecteur $\delta_k$ qui minimise $J_k^\dual \cdot \delta_k = \scalaire{J_k}{\delta_k}$ sur $\boule(0,\norme{J_k})$, c'est-à-dire :
+
+$$\delta_k = - J_k$$
+
+On a alors :
+
+$$x_{k + 1} = x_k - \alpha_k \cdot J_k$$
+
+La valeur optimale de $\alpha_k$ s'écrit donc :
+
+$$\alpha_k = \frac{J_k^\dual \cdot J_k}{J_k^\dual \cdot H_k \cdot J_k}$$
+
+
+* Newton
+
+Il s'agit ici d'optimiser le pas $s_k$ :
+
+$$x_{k + 1} = x_k + s_k$$
+
+pour minimiser le développement :
+
+$$\varphi_{k+1} \approx \varphi_k + J_k^\dual \cdot s_k + \unsur{2} \cdot s_k^\dual \cdot H_k \cdot s_k$$
+
+Mais comme $H = H^\dual$, l'annulation du gradient par rappord à $s_k$ nous donne :
+
+$$J_k + H_k \cdot s_k \approx 0$$
+
+On en déduit la valeur optimale :
+
+$$s_k = - H_k^{-1} \cdot J_k$$
+
+
+* Gradients conjugués
+
+Soit l'itération :
+
+$$x_{k + 1} = x_k - \alpha_k \cdot p_k$$
+
+où $\alpha_k \in \setR$ et $p_k \in \setR^n$. On a comme d'habitude :
+
+$$\alpha_k = \frac{J_k^\dual \cdot p_k}{p_k^\dual \cdot H_k \cdot p_k}$$
+
+Lorsque $k = 0$, on prend le gradient comme direction :
+
+$$p_0 = J_0$$
+
+Pour $k \ge 1$, on choisit $p_k$ comme combinaison linéaire du gradient $J_k$ et du pas précédent $p_{k - 1}$ :
+
+$$p_k = J_k - \beta_k \cdot p_{k-1}$$
+
+où $\beta_k \in \setR$. L'idée des gradients conjugué est de construire une suite de $p_k$ orthogonaux entre-eux afin de minimiser la fonction dans toutes les directions. Au bout de $n$ itérations, on espère avoir construit une base de $\setR^n$ et être très proche du minimum global. En fait, nous n'allons pas vérifier que toutes les directions sont orthogonales, mais seulement que deux directions successives le sont. On demande donc l'orthogonalité au sens du produit scalaire défini par $H$ :
+
+$$p_k^\dual \cdot H_k \cdot p_{k - 1} = J_k^\dual \cdot H_k \cdot p_{k - 1} - \beta_k \cdot p_{k - 1}^\dual \cdot H_k \cdot p_{k - 1} = 0$$
+
+On en déduit la valeur de $\beta_k$ :
+
+$$\beta_k = \frac{J_k^\dual \cdot H_k \cdot p_{k - 1}}{p_{k - 1}^\dual \cdot H_k \cdot p_{k - 1}}$$
+
+Nous allons à présent obtenir une valeur approximative de $\beta_k$ en fonction des variations du gradient. Le développement d'ordre un de $J$ s'écrit :
+
+$$J_k - J_{k - 1} \approx H_k \cdot (x_k - x_{k - 1}) = - \alpha_k \cdot H_k \cdot p_{k - 1}$$
+
+On en déduit que :
+
+$$\beta_k \approx \frac{J_k^\dual \cdot (J_k - J_{k - 1})}{p_{k - 1}^\dual \cdot (J_k - J_{k - 1})}$$
+
+
+* Moindres carrés
+
+Soit la fonction $f : \setR^n \mapsto \setR^m$. On cherce à minimiser la fonction $\varphi = f^\dual \cdot f / 2$. Le problème de minimisation s'écrit alors :
+
+$$\arg\min_x \unsur{2} f(x)^\dual \cdot f(x)$$
+
+Dans ce cas, si on définit :
+
+$$D = \partial f$$
+
+le gradient s'écrit :
+
+$$J = D^\dual \cdot f$$
+
+Si on suppose que les dérivées secondes de $f$ sont négligeables par rapport
+aux dérivées premières, on a :
+
+$$H \approx D^\dual \cdot D$$
+
+La méthode de Newton devient dans ce cas :
+
+$$x_{k+1} = x_k + s_k$$
+
+avec :
+
+$$s_k = -[D_k^\dual \cdot D_k]^{-1} \cdot D_k^\dual \cdot f_k$$
+
+
+** Zéros
+
+Si $S = \noyau f \ne \emptyset$, soit $\gamma \in S$. On a alors :
+
+$$0 \le \min \unsur{2} f(x)^\dual \cdot f(x) \le  \unsur{2} f(\gamma)^\dual \cdot f(\gamma) = 0$$
+
+On en déduit que tout $x \in \setR^n$ minimisant $\varphi$ vérifiera $f(x) = 0$. La méthode de minimisation nous fournit donc une approximation d'un tel $x$.
+
+
+* Levenberg-Marquardt
+
+C'est une variante de la méthode des moindres carrés, utile dans les cas où
+$D_k^\dual \cdot D_k$ est numériquement proche d'une matrice non inversible. On
+ajoute alors la matrice identité multipliée par un scalaire $\lambda$
+sur la diagonale :
+
+$$s_k = -[D_k^\dual \cdot D_k+ \lambda_k \cdot I]^{-1} \cdot D_k^\dual \cdot f_k$$
+
+

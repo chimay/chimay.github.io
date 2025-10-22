@@ -1,0 +1,498 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Calcul variationnel
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:varia}
+
+* Méthode des variations
+
+Soit l'espace fonctionnel $\mathcal{F}$ et la forme $I : \mathcal{F} \mapsto \setR$. Un problème variationnel consiste à chercher une fonction $u$ qui minimise $I$ sur $\mathcal{F}$ :
+
+$$I(u) \le I(v)$$
+
+pour tout $v\in\mathcal{F}$. L'astuce consiste à transformer ce problème en considérant la famille de fonctions $\{ J_w : w \in \mathcal{F} \}$ définies par :
+
+$$J_w(\epsilon) = I(u + \epsilon \cdot w)$$
+
+pour tout $\epsilon\in\setR$. Comme $\mathcal{F}$ est un espace vectoriel, $u + \epsilon \cdot w \in \mathcal{F}$. On en déduit que :
+
+$$J_w(0) = I(u) \le J_w(\epsilon)$$
+
+Si les fonctions $J_w$ sont dérivables, les propriétés des extrema des fonctions $\setR \mapsto \setR$ nous disent que :
+
+$$\OD{J_w}{\epsilon}(0) = 0$$
+
+pour toute variation $w \in \mathcal{F}$. Si la dérivée seconde existe, on doit également avoir :
+
+$$\OOD{J_w}{\epsilon}(0) \ge 0$$
+
+Ces équations nous permettent de caractériser la solution $u$ de notre problème variationnel.
+
+
+* Discrétisation
+
+Une technique couramment employée pour résoudre les problèmes variationnels
+est de choisir une suite de fonctions $\varphi_i \in \mathcal{F}$ linéairement indépendantes et de minimiser sur l'espace vectoriel $\mathcal{F}_n = \combilin{\varphi_1,\varphi_2,...,\varphi_n} \subseteq \mathcal{F}$. On espère que la solution obtenue sera proche de la solution exacte. Ce sera par exemple le cas si on a schématiquement :
+
+$$\lim_{n \to \infty} \adh \mathcal{F}_n = \mathcal{F}$$
+
+au sens de la distance $\distance$ définie sur $\mathcal{F}$. Pour toute précision $\epsilon > 0$, on pourra alors trouver un $n \in \setN$ assez grand et un $u_n\in \mathcal{F}_n$ tels que :
+
+$$\distance(u_n,u) \le \epsilon$$
+
+
+* Moindres carrés
+
+Soit $f : A \mapsto \setR$ et le sous-ensemble $\mathcal{F} \subseteq \fonction(A,\setR)$. On cherche la fonction $u \in \mathcal{F}$ qui se rapproche le plus possible de $f$ au sens intégral des moindres carrés. On cherche donc le $u$ qui minimise la fonctionnelle :
+
+$$I(u) = \int_A \Big[ u(x) - f(x) \Big]^2 dx$$
+
+Afin de résoudre ce problème, on pose :
+
+$$J_v(\epsilon) = I(u + \epsilon \cdot v) = \int_A \Big[ u(x) + \epsilon \cdot v(x) - f(x) \Big]^2 dx$$
+
+pour tout $\epsilon \in \setR$ et $v \in \mathcal{F}$. La dérivée s'écrit :
+
+$$\OD{J_v}{\epsilon}(\epsilon) = \int_A 2 \big[ u(x) + \epsilon \cdot v(x) - f(x) \big] \cdot v(x) \ dx$$
+
+Comme elle doit s'annuler en $\epsilon = 0$, on a :
+
+$$\OD{J_v}{\epsilon}(0) = 2 \int_A \big[ u(x) - f(x) \big] \cdot v(x) \ dx = 0$$
+
+donc :
+
+$$\int_A \big[ u(x) - f(x) \big] \cdot v(x) \ dx = 0$$
+
+pour tout $v \in F$.
+
+
+** Discrétisation
+
+On résout approximativement ce problème en posant :
+
+$$u_n(x) = \sum_{i = 1}^n U_i \cdot \varphi_i(x)$$
+
+où les $\varphi_i \in \mathcal{F}$ sont des fonctions connues et où les $U_i$ sont des réels à déterminer. Comme on désire que $u_n \approx u$, on impose :
+
+$$\int_A (u_n(x) - f(x)) \cdot \varphi_i(x) \ dx = 0$$
+
+On a alors :
+
+$$\int_A \varphi_i \sum_j U_j \cdot \varphi_j \ dx = \int_A \varphi_i \cdot f \ dx$$
+
+ou :
+
+$$\sum_j \left[ \int_A \varphi_i \cdot \varphi_j \ dx \right] \cdot U_j = \int_A \varphi_i \cdot f \ dx$$
+
+Définissons les matrices $A \in \matrice(\setR,n,n)$, $B \in \matrice(\setR,n,1)$ et $U \in \matrice(\setR,n,1)$ :
+
+\begin{align}
+A &= \left[ \int_A \varphi_i \cdot \varphi_j \ dx \right]_{i,j} \)
+
+\(
+B &= \left[ \int_A \varphi_i \cdot f \ dx \right]_i \)
+
+\(
+U &= \left[ U_i \right]_i
+\end{align}
+
+Le problème peut alors s'exprimer sous forme matricielle :
+
+$$A \cdot U = B$$
+
+Si la matrice $A$ est inversible, la solution est donnée par :
+
+$$U = A^{-1} \cdot B$$
+
+et nous en déduisons notre approximation $u_n = \sum_i U_i \cdot \varphi_i$.
+
+
+* Lax-Milgram
+
+Soit un espace fonctionnel de Hilbert $\mathcal{F}$. Nous considérons une forme bilinéaire $a : \mathcal{F} \times \mathcal{F} \mapsto \setR$, de norme finie, coercive et symétrique :
+
+$$\biforme{u}{a}{v} = \biforme{v}{a}{u}$$
+
+pour tout $u,v \in F$. Nous considérons également une forme linéaire continue $b : \mathcal{F} \mapsto \setR$ et nous définissons la fonctionnelle $I : \mathcal{F} \mapsto \setR$ par :
+
+$$I(v) = \unsur{2} \biforme{v}{a}{v} - \forme{b}{v}$$
+
+
+  - Supposons que $I$ atteigne un minimum global en $u$. On a alors :
+
+$$I(u) \le I(v)$$
+
+pour tout $v \in F$. Choisissons un quelconque $w \in \mathcal{F}$ et posons :
+
+$$J_w(\epsilon) = I(u + \epsilon \cdot w)$$
+
+pour tout $\epsilon \in \setR$. Tenant compte des propriétés de $a$ et $b$, on obtient :
+
+$$J_w(\epsilon) = \unsur{2} \biforme{u}{a}{u} + \epsilon \cdot \biforme{u}{a}{w} + \frac{\epsilon^2}{2} \cdot \biforme{w}{a}{w} - \forme{b}{u} - \epsilon \cdot \forme{b}{w}$$
+
+La dérivée s'écrit :
+
+$$\OD{J_v}{\epsilon}(\epsilon) = \biforme{u}{a}{w} + \epsilon \cdot \biforme{w}{a}{w} - \forme{b}{w}$$
+
+La condition extrémale sur $u$ nous dit que $J_w(0) \le J_w(\epsilon)$ pour tout $\epsilon \in \setR$. On doit donc avoir :
+
+$$\OD{J_v}{\epsilon}(0) = \biforme{u}{a}{w} - \forme{b}{w} = 0$$
+
+c'est-à-dire :
+
+$$\biforme{u}{a}{w} = \forme{b}{w}$$
+
+pour tout $w \in \mathcal{F}$. Le théorème de Lax-Milgram nous dit qu'il existe un unique $u \in  \mathcal{F}$ vérifiant cette condition.
+
+  - Supposons à présent que $u \in \mathcal{F}$ soit l'unique élément de $\mathcal{F}$ vérifiant :
+
+$$\biforme{u}{a}{w} = \forme{b}{w}$$
+
+pour tout $w \in \mathcal{F}$. Choisissons $v \in \mathcal{F}$ et posons $w = v - u$. Comme $\biforme{u}{a}{w} = \forme{b}{w}$, on a :
+
+\begin{align}
+I(v) &= I(u + w) \)
+
+\(
+&= \unsur{2} \biforme{u}{a}{u} + \biforme{u}{a}{w} + \unsur{2} \cdot \biforme{w}{a}{w} - \forme{b}{u} - \forme{b}{w} \)
+
+\(
+&= \unsur{2} \biforme{u}{a}{u} + \unsur{2} \cdot \biforme{w}{a}{w} - \forme{b}{u} \)
+
+\(
+&= I(u) + \unsur{2} \biforme{w}{a}{w} \ge I(u)
+\end{align}
+
+On a donc :
+
+$$u = \arg\min_{ v \in \mathcal{F} } I(v)$$
+
+
+
+** Orthogonalité
+
+Soit le sous-espace vectoriel $\mathcal{G} \subseteq \mathcal{F}$ et :
+
+$$v \in \arg\min_{ z \in \mathcal{G} } I(z)$$
+
+On a alors :
+
+$$\biforme{v}{a}{w} = \forme{b}{w}$$
+
+pour tout $w \in \mathcal{G}$.
+
+Supposons que $u \in \mathcal{F}$ minimise $I$ sur $\mathcal{F}$ et posons $e = v - u$. On a :
+
+$$\biforme{e}{a}{w} = \biforme{v}{a}{w} - \biforme{u}{a}{w} = \forme{b}{w} - \forme{b}{w} = 0$$
+
+Cette propriété est similaire aux propriétés d'orthogonalité vue dans les projections. On est tenté d'en déduire que le $v$ en question minimise la « norme » de l'écart $e$ au sens de $a$. Soit $z \in \mathcal{G}$ et $\delta = z - v$. On a $z - u = z - v + v - u = \delta + e$ et :
+
+$$\biforme{z - u}{a}{z - u} = \biforme{\delta}{a}{\delta} + 2 \biforme{e}{a}{\delta} + \biforme{e}{a}{e}$$
+
+Mais comme $\delta \in \mathcal{G}$, on a $\biforme{e}{a}{\delta} = 0$ et :
+
+$$\biforme{z - u}{a}{z - u} = \biforme{\delta}{a}{\delta} + \biforme{e}{a}{e} \ge \biforme{e}{a}{e}$$
+
+ce qui prouve que :
+
+$$v \in \arg\min_{ z \in \mathcal{G} } \biforme{z - u}{a}{z - u}$$
+
+
+** Borne inférieure
+
+Comme $a$ est coercive, on peut trouver un réel $\varrho \strictsuperieur 0$ tel que :
+
+$$a(u,u) \ge \varrho \cdot \norme{u}^2$$
+
+pour tout $u \in \mathcal{F}$. On sait aussi que :
+
+$$\norme{b} = \sup \{ \abs{b(u)} : u \in \mathcal{F}, \ \norme{u} = 1 \} \strictinferieur +\infty$$
+
+Posons :
+
+$$K(\epsilon) = I(\epsilon \cdot v) = \frac{\epsilon^2}{2} \cdot \biforme{v}{a}{v} - \epsilon \cdot \forme{b}{v}$$
+
+et cherchons la valeur de $\epsilon = \gamma$ qui minimise cette fonction. On trouve :
+
+$$\OD{K}{\epsilon}(\gamma) = \gamma \cdot \biforme{v}{a}{v} - \forme{b}{v} = 0$$
+
+Donc :
+
+$$\gamma = \frac{ \forme{b}{v} }{ \biforme{v}{a}{v} }$$
+
+et :
+
+$$K(\gamma) = \frac{ \forme{b}{v}^2 }{ 2 \biforme{v}{a}{v} } - \frac{ \forme{b}{v}^2 }{ \biforme{v}{a}{v} } = - \frac{ \forme{b}{v}^2 }{ 2 \biforme{v}{a}{v} }$$
+
+On en déduit que :
+
+$$I(v) = K(1) \ge K(\gamma) = - \frac{ \forme{b}{v}^2 }{ 2 \biforme{v}{a}{v} }$$
+
+Mais comme :
+
+#+BEGIN_CENTER
+\(
+\forme{b}{v}^2 \le \norme{b}^2 \cdot \norme{v}^2 \)
+
+\(
+\biforme{v}{a}{v} \ge \varrho \cdot \norme{v}^2
+\)
+#+END_CENTER
+
+on a :
+
+$$\frac{ \forme{b}{v}^2 }{ 2 \biforme{v}{a}{v} } \le \frac{\norme{b}^2}{2 \varrho}$$
+
+et :
+
+$$I(v) \ge - \frac{\norme{b}^2}{2 \varrho}$$
+
+Ce résultat étant valable pour tout $v \in \mathcal{F}$, on a la borne inférieure :
+
+$$\inf_{ v \in \mathcal{F} } I(v) \ge - \frac{\norme{b}^2}{2\varrho}$$
+
+
+** Discrétisation
+
+Afin de trouver une approximation $u_n \approx u$, on pose :
+
+$$u_n = \sum_{i = 1}^n U_i \cdot \varphi_i$$
+
+où les $\varphi_i \in \mathcal{F}$ sont connues et où les $U_i$ sont des réels à déterminer. La linéarité de $a$ et $b$ nous permet de développer :
+
+$$I(u_n) = \unsur{2} \sum_{i,j = 1}^n U_i \cdot \biforme{\varphi_i}{a}{\varphi_j} \cdot U_j - \sum_{i=1}^n \forme{b}{\varphi_i} U_i$$
+
+Si nous définissons les matrices :
+
+\begin{align}
+A &= \left[ \biforme{\varphi_i}{a}{\varphi_j} \right]_{i,j} \)
+
+\(
+B &= \left[ \forme{b}{\varphi_i} \right]_i \)
+
+\(
+U &= \left[ U_i \right]_i
+\end{align}
+
+on peut réécrire $I(u_n)$ sous forme matricielle :
+
+$$I(u_n) = J(U) = \unsur{2} U^\dual \cdot A \cdot U - U^\dual \cdot B$$
+
+La condition $\partial J(U) = 0$ nous amène à :
+
+$$A \cdot U - B = 0$$
+
+Si la matrice $A$ est inversible, on en déduit :
+
+$$U = A^{-1} \cdot B$$
+
+ce qui nous donne $U$ et donc $u_n$.
+
+
+* Valeurs propres
+
+Soit un espace vectoriel $E$ et les formes bilinéaires $a,b : E \times E \mapsto \setR$. Nous supposons que $a,b$ sont symétriques et définies positives. Nous allons tenter de minimiser la fonctionnelle :
+
+$$I(v) = \biforme{v}{a}{v}$$
+
+sur l'ensemble :
+
+$$\Omega = \{ v \in E : \biforme{v}{b}{v} = 1 \}$$
+
+L'espace $\Omega$ n'est malheureusement pas un sous-espace vectoriel. Par exemple, si $u$ appartient à $\Omega$, on a :
+
+$$\biforme{2 u}{b}{2 u} = 4 \biforme{u}{b}{u} = 4 \ne 1$$
+
+Donc $2 u \notin \Omega$. Par conséquent, nous ne pouvons pas utiliser les techniques de projection sur un espace vectoriel pour résoudre ce problème. Nous allons donc employer les techniques de minimisation sous contraintes. Définissons le lagrangien :
+
+$$\lagrangien(v,y) = \biforme{v}{a}{v} + y \cdot (1 - \biforme{v}{b}{v})$$
+
+pour tout $(v,y) \in E \times \setR$. La fonction $u$ minimisant $I$ sur $\Omega$ peut dès lors s'obtenir via le point de selle $(u,\lambda)$ :
+
+$$\lagrangien(u,y) \le \lagrangien(u,\lambda) \le \lagrangien(v,\lambda)$$
+
+pour tout $(v,y) \in E \times \setR$. Nous allons évaluer le minimum sur $v$ en utilisant la méthode des variations. Soit $w \in E$ et $\epsilon \in \setR$. On pose :
+
+\begin{align}
+J_v(\epsilon) &= \lagrangien(u + \epsilon \cdot w, \lambda) \)
+
+\(
+&= \biforme{u + \epsilon \cdot w}{a}{u + \epsilon \cdot w} + \lambda \cdot [ 1 - \biforme{u + \epsilon \cdot w}{b}{u + \epsilon \cdot w} ]
+\end{align}
+
+Utilisant les propriétés de $a,b$ et la contrainte $\biforme{u}{b}{u} = 1$, il vient :
+
+#+BEGIN_CENTER
+\(
+J_v(\epsilon) = \biforme{u}{a}{u} + 2 \epsilon \cdot \biforme{w}{a}{u} + \epsilon^2 \cdot \biforme{w}{a}{w} \)
+
+\(
+\qquad - \lambda \cdot [ 2 \epsilon \cdot \biforme{w}{b}{u} + \epsilon^2 \cdot \biforme{w}{b}{w} ]
+\)
+#+END_CENTER
+
+Les propriétés du point de selle en $(u,\lambda)$ nous garantissent que :
+
+$$J_v(0) \le J_v(\epsilon)$$
+
+pour tout $\epsilon\in\setR$. La dérivée :
+
+$$\OD{J_v}{\epsilon}(\epsilon) = 2 \biforme{w}{a}{u} + 2 \epsilon \cdot \biforme{w}{a}{w} - 2 \lambda \cdot [ \biforme{w}{b}{u} + \epsilon \cdot \biforme{w}{b}{w} ]$$
+
+doit donc s'annuler en $\epsilon = 0$ :
+
+$$\OD{J_v^\lambda}{\epsilon}(0) = 2 \biforme{w}{a}{u} - 2 \lambda \cdot \biforme{w}{b}{u} = 0$$
+
+c'est-à-dire :
+
+$$\biforme{w}{a}{u} = \lambda \cdot \biforme{w}{b}{u}$$
+
+pour tout $w \in E$. On dit alors que $\lambda$ est valeur propre de
+$a,b$ correspondant à la fonction propre $u$. On remarque également
+que cela donne un rapport de Rayleigh généralisé :
+
+$$\lambda = \frac{\biforme{w}{a}{u}}{\biforme{w}{b}{u}}$$
+
+** Propriétés extrémales
+
+Si nous choisissons $w = u$, nous obtenons :
+
+$$\biforme{u}{a}{u} = \lambda \cdot \biforme{u}{b}{u} = \lambda$$
+
+La valeur propre est donc la valeur minimale de $I$ sur $\Omega$ :
+
+$$\lambda = \biforme{u}{a}{u} = \min_{v \in \Omega} \biforme{v}{a}{v}$$
+
+
+** Rapport de Rayleigh
+
+Supposons que $b$ soit strictement définie positive. Posons $x = \alpha \cdot u$, pour un certain $\alpha \in \setR$ non nul. On a $\biforme{x}{a}{x} = \alpha^2 \cdot \biforme{u}{a}{u}$ et $\biforme{x}{b}{x} = \alpha^2 \cdot \biforme{u}{b}{u} = \alpha^2$. Donc :
+
+$$\lambda = \biforme{u}{a}{u} = \frac{ \biforme{x}{a}{x} }{ \biforme{x}{b}{x} }$$
+
+Considérons la même expression pour un quelconque $z \in E$ non nul :
+
+$$R(z) = \frac{ \biforme{z}{a}{z} }{ \biforme{z}{b}{z} }$$
+
+On dit que $R(z)$ est le rapport de Rayleigh de $z$. Soit $v = z / \sqrt{ \biforme{z}{b}{z} }$. On a :
+
+$$\biforme{v}{a}{v} = \frac{ \biforme{z}{a}{z} }{ \biforme{z}{b}{z} } = R(z)$$
+
+et :
+
+$$\biforme{v}{b}{v} = \frac{ \biforme{z}{b}{z} }{ \biforme{z}{b}{z} } = 1$$
+
+ce qui prouve que $v \in \Omega$. On a donc :
+
+$$\lambda = R(x) \le \biforme{v}{a}{v} = R(z)$$
+
+On en conclut que $x$ minimise le rapport de Rayleigh sur $E_0 = E \setminus \{0\}$ :
+
+$$\lambda = R(x) = \arg\min_{z \in E_0} R(z) = \arg\min_{z \ne 0} R(z)$$
+
+Comme $\Omega \subseteq F$, on en conclut que la réciproque est vraie : si $x$ minimise $R$ sur $E_0$, le vecteur $x/\sqrt{ \biforme{x}{b}{x} }$ minimise la fonctionnelle $I$ sur $\Omega$. Les deux problèmes de minimisation sont donc équivalents.
+
+
+** Suite de vecteurs propres
+
+On peut en fait définir une suite de vecteurs et de valeurs propres. Soit $\Omega_1 = \Omega$ et $e_1 = u$. On pose récursivement :
+
+$$\Omega_{n + 1} = \{ v \in \Omega : \biforme{v}{b}{e_1} = ... = \biforme{v}{b}{e_n} = 0 \}$$
+
+et :
+
+$$e_{n + 1} \in \arg\min_{ v \in \Omega_{n + 1} } \biforme{v}{a}{v}$$
+
+On aura alors bien sûr $\Omega_{n + 1} \subseteq \Omega_n \subseteq ... \Omega_1$. Les propriétés extrémales des valeurs propres nous montrent que $\lambda_{n + 1} \ge \lambda_n \ge ... \ge \lambda_1$.
+
+
+** Discrétisation
+
+On pose :
+
+$$u_n = \sum_{i=1}^n U_i \cdot \varphi_i$$
+
+On a alors :
+
+#+BEGIN_CENTER
+\(
+\biforme{u_n}{a}{u_n} = \sum_{i,j = 1}^n U_i \cdot \biforme{\varphi_i}{a}{\varphi_j} \cdot U_j \)
+
+\(
+\biforme{u_n}{b}{u_n} = \sum_{i,j = 1}^n U_i \cdot \biforme{\varphi_i}{b}{\varphi_j} \cdot U_j
+\)
+#+END_CENTER
+
+Avec les matrices :
+
+#+BEGIN_CENTER
+\(
+A = \left[ \biforme{\varphi_i}{a}{\varphi_j} \right]_{i,j} \)
+
+\(
+B = \left[ \biforme{\varphi_i}{b}{\varphi_j} \right]_{i,j}
+\)
+#+END_CENTER
+
+le lagrangien peut s'écrire :
+
+$$\lagrangien(u_n,y) = U^\dual \cdot A \cdot U + y \cdot \left[ 1 - U^\dual \cdot B \cdot U \right]$$
+
+Les conditions :
+
+#+BEGIN_CENTER
+\(
+\partial_v \lagrangien(u_n,\lambda) = 2 A \cdot U - 2 \lambda \cdot B \cdot U = 0 \)
+
+\(
+\partial_y \lagrangien(u_n,\lambda) = 1 - U^\dual \cdot B \cdot U = 0
+\)
+#+END_CENTER
+
+nous amènent au problème :
+
+#+BEGIN_CENTER
+\(
+A \cdot U = \lambda \cdot B \cdot U \)
+
+\(
+U^\dual \cdot B \cdot U = 1
+\)
+#+END_CENTER
+
+à résoudre en $U$. Notons que si on choisit les $\varphi_i$ « orthonormées » dans le sens du pseudo-produit scalaire introduit par $b$, on a :
+
+$$\biforme{\varphi_i}{b}{\varphi_j} = \delta_{ij}$$
+
+et $B = I$. On peut par exemple construire une telle suite de $\varphi_i$ en utilisant la méthode de Gram-Schmidt. Le problème se simplifie alors en :
+
+#+BEGIN_CENTER
+\(
+A \cdot U = \lambda \cdot U \)
+
+\(
+U^\dual \cdot U = 1
+\)
+#+END_CENTER
+
+

@@ -1,0 +1,207 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Logarithme
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chapter:log}
+
+* Introduction
+
+La fonction $\exp : \setR \mapsto \setR^+ \setminus \{ 0 \}$ étant strictement croissante et d'image égale à $\setR^+ \setminus \{ 0 \}$, elle est inversible. On définit le logarithme :
+
+$$\ln : \setR^+ \setminus \{ 0 \} \mapsto \setR$$
+
+comme la fonction inverse de $\exp$ :
+
+$$\ln = \exp^{-1}$$
+
+Pour tout $x,y \in \setR$ tels que $y = \exp(x) \strictsuperieur 0$, on a donc :
+
+$$\ln(y) = x$$
+
+* Valeurs particulières
+
+Le cas particulier $x = 0$ et $y = \exp(0) = 1$ nous montre que :
+
+$$\ln(1) = 0$$
+
+
+* Dérivée
+
+Soit les réels $x,y$ tels que :
+
+$$x = \ln(y)$$
+
+On a alors par définition  :
+
+$$y = \exp(x)$$
+
+La dérivée de cette relation s'écrit symboliquement :
+
+$$\OD{y}{x} = \exp(x) = y$$
+
+Comme la dérivée d'une fonction inverse est l'inverse de la dérivée, on a :
+
+$$\OD{x}{y} = \unsur{y}$$
+
+c'est-à-dire :
+
+$$\OD{\ln}{y}(y) = \unsur{y}$$
+
+
+* Développement de Taylor
+
+Soit la fonction $u : \setR \mapsto \setR$ définie par :
+
+$$u(t) = \ln(1 + t)$$
+
+pour tout réel $t$. On a :
+
+$$u(0) = \ln(1 + 0) = \ln(1) = 0$$
+
+La dérivée s'écrit :
+
+$$\partial u(t) = \unsur{1 + t}$$
+
+et en particulier :
+
+$$\partial u(0) = \unsur{1 + 0} = 1$$
+
+On procède de même pour la dérivée seconde :
+
+$$\partial^2 u(t) = -\unsur{(1 + t)^2}$$
+
+et en particulier :
+
+$$\partial^2 u(0) = -\unsur{(1 + 0)^2} = -1$$
+
+on procède de même pour la dérivée tierce :
+
+$$\partial^3 u(t) = \frac{2}{(1 + t)^3}$$
+
+et en particulier :
+
+$$\partial^3 u(0) = \frac{2}{(1 + 0)^3} = 2$$
+
+on procède de même pour la dérivée quarte :
+
+$$\partial^4 u(t) = \frac{-6}{(1 + t)^4}$$
+
+et en particulier :
+
+$$\partial^4 u(0) = \frac{-6}{(1 + 0)^4} = -6$$
+
+On voit que :
+
+$$\partial^k u(0) = (-1)^{1+k} \cdot (k - 1) !$$
+
+pour tout $k \in \setN$ vérifiant $k \ge 1$. Le développement de Taylor s'écrit donc :
+
+$$\ln(1+t) = \sum_{k=1}^{+\infty} \frac{(-1)^{1+k} \cdot (k - 1) !}{k !} \ t^k$$
+
+Comme $k ! = k \cdot (k - 1) !$, on a :
+
+$$\frac{(k - 1) !}{k !} = \unsur{k}$$
+
+Le développement s'écrit donc finalement :
+
+$$\ln(1+t) = \sum_{k=1}^{+\infty} \frac{(-1)^{1+k}}{k} \ t^k$$
+
+En posant $x = 1 + t$, on obtient la forme équivalente :
+
+$$\ln(x) = \sum_{k=1}^{+\infty} \frac{(-1)^{1+k}}{k} \ (x - 1)^k$$
+
+
+* Additivité
+
+Soit $a, b \in \setR$. En utilisant l'additivité de l'exponentielle, on obtient :
+
+$$\exp\Big[\ln(a \cdot b)\Big] = a \cdot b = \exp\big[\ln(a)\big] \cdot \exp\big[\ln(b)\big] = \exp\Big[\ln(a) + \ln(b)\Big]$$
+
+En prenant le logarithme de cette égalité, on en déduit que :
+
+$$\ln(a \cdot b) = \ln(a) + \ln(b)$$
+
+
+* Miroir
+
+Soit $a \in \setR$. On a :
+
+$$\ln(a) + \ln\left(\unsur{a}\right) = \ln\left(a \cdot \unsur{a}\right) = \ln(1) = 0$$
+
+On en conclut que :
+
+$$\ln\left(\unsur{a}\right) = - \ln(a)$$
+
+
+* Soustraction
+
+Soit les réels $a, b$. On a :
+
+$$\ln\left(\frac{a}{b}\right) = \ln(a) + \ln\left(\unsur{b}\right) = \ln(a) - \ln(b)$$
+
+
+* Intégrale de $x \mapsto 1/x$
+
+Comme $\ln$ est une primitive de la fonction :
+
+$$u : \setR \setminus \{ 0 \}, \ x \mapsto 1/x$$
+
+On a :
+
+$$\int_a^b \unsur{x} \ dx = \ln(b) - \ln(a) = \ln\left[\frac{b}{a}\right]$$
+
+
+* Gaussienne
+
+Soit les réels $\gamma$ et $u_0$. Nous cherchons la fonction $u : \setR \mapsto \setR$ solution du problème différentiel :
+
+\begin{align}
+\OD{u}{t} &= \gamma \cdot t \cdot u \\ \)
+
+\(
+u(0) &= u_0
+\end{align}
+
+en procédant par séparation de variables :
+
+$$\frac{du}{u} = \gamma \cdot t \ dt$$
+
+En intégrant :
+
+$$\int_{u_0}^{u(s)} \frac{du}{u} = \int_0^s \gamma \cdot t \ dt$$
+
+on obtient :
+
+$$\ln(u(s))-\ln(u_0) =  \gamma \cdot \frac{s^2}{2}$$
+
+ou :
+
+$$\ln\left(\frac{u(s)}{u_0}\right) =  \gamma \cdot \frac{s^2}{2}$$
+
+En prenant l'exponentielle, on arrive à la solution :
+
+$$u(s) =  u_0 \cdot \exp\left( \gamma \cdot \frac{s^2}{2} \right)$$
+
+Une fonction de cette forme est appelée gaussienne.
+
+

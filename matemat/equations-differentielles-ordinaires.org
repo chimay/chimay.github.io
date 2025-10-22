@@ -1,0 +1,578 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Équations différentielles ordinaires (EDO)
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:edo}
+
+* Fonctions Lipschitziennes
+
+Les fonctions Lipschitziennes sont des fonctions à variations bornées :
+
+$$\lipschitz(A,B) = \{ f \in \fonction(A,B) : \exists L \in \setR : \forall x,y \in A : \norme{f(x)-f(y)} \le L \norme{x-y} \}$$
+
+* Problème différentiel d'ordre un
+
+Soit $f\in\lipschitz( \setR \times \setR^n , \setR)$, et l'application $A$ définie par :
+
+$$A(u)(t) = u_0 + \int_0^t f(s, u(s)) \ ds$$
+
+pour toute fonction $u : U \subseteq \setR \mapsto \setR$.
+
+On peut montrer que $A$ est contractante pour la distance définie pour toutes fonctions $u,v$ par :
+
+$$\distance(u,v) = \sup_{a \le t \le b} \norme{u(t) - v(t)}$$
+
+où $\norme{.}$ est la norme usuelle sur $\setR^n$ :
+
+$$\norme{x} = \sqrt{ \sum_{i=1}^n x_i^2 }$$
+
+Cette application admet donc un unique point fixe $u$ tel que :
+
+$$u = A(u)$$
+
+En dérivant cette relation, on obtient :
+
+$$\OD{u}{t}(t) = \OD{}{t} A(u)(t) = \OD{}{t} \int_0^t f(s, u(s)) \ ds$$
+
+La dérivée de l'intégrale vaut $f(t, u(t)$ et on a :
+
+$$\OD{u}{t}(t) = f(t, u(t))$$
+
+On a aussi :
+
+$$u(0) = u_0 + \int_0^0 f(s, u(s)) \ ds = u_0$$
+
+Notre point fixe $u$ est donc solution du problème différentiel :
+
+\begin{align}
+\OD{u}{t}(t) &= f(t,u(t)) \\ \)
+
+\(
+u(0) &= u_0
+\end{align}
+
+Inversément, en intégrant la première équation ci-dessous entre $0$ et $t$, on obtient la relation :
+
+$$u(t) - u_0 = \int_0^t f(s, u(s)) \ ds$$
+
+autrement dit :
+
+$$u(t) = u_0 + \int_0^t f(s, u(s)) \ ds = A(u)$$
+
+Toute solution du problème différentiel est donc point fixe de $A$. Comme ce point fixe
+est unique, on en conclut que la solution du problème différentiel l'est aussi.
+
+
+** Convergence
+
+La série des $u^{(n)}$ définie par :
+
+$$u^{(n)}(t) = A\big(u^{(n-1)}\big) = u_0 + \int_0^t f\big(s,u^{(n-1)}(s)\big) \ ds$$
+
+converge au sens de la distance $\sup$ définie ci-dessus vers la solution de ce problème différentiel :
+
+$$\lim_{n \to +\infty} \sup_{a \le t \le b} \norme{u(t) - u^{(n)}(t)} = 0$$
+
+
+** Notation
+
+Pour toute fonction :
+
+$$u : \setR \mapsto \setR, \ t \mapsto u(t)$$
+
+on note aussi :
+
+#+BEGIN_CENTER
+\(
+\dot{u} = \OD{u}{t} \)
+
+\(
+\ddot{u} = \OOD{u}{t}
+\)
+#+END_CENTER
+
+ou :
+
+#+BEGIN_CENTER
+\(
+u'(t) = \OD{u}{t}(t) \)
+
+\(
+u''(t) = \OOD{u}{t}(t)
+\)
+#+END_CENTER
+
+
+* Problème différentiel d'ordre quelconque
+
+Soit les fonctions :
+
+$$a_0, a_1, ..., a_{n - 1} : \setR \mapsto \setR$$
+
+et une solution $u : \setR \mapsto \setR$ du problème différentiel d'ordre $n$ :
+
+\begin{align}
+a_0(t) \cdot u(t) + \sum_{i=1}^{n-1} a_i(t) \cdot \NOD{u}{t}{i}(t) &= 0 \\ \)
+
+\(
+u(0) &= U_0 \\ \)
+
+\(
+\NOD{u}{t}{i}(0) &= U_i \qquad (i=1,...,n - 1)
+\end{align}
+
+Ce problème peut se ramener à un problème différentiel d'ordre un. Pour cela on définit la fonction $v : \setR \mapsto \setR^n$ par :
+
+#+BEGIN_CENTER
+\(
+v(t) = \Big(v_i(t)\Big)_{i = 0, ..., n - 1} = \Big( \NOD{u}{t}{i}(t) \Big)_{i = 0, ..., n - 1}
+\)
+#+END_CENTER
+
+pour tout $t \in \setR$. On voit alors que :
+
+#+BEGIN_CENTER
+\(
+\OD{v}{t} =
+\begin{Matrix}{ccccc}
+0 & 1 & 0 & \hdots & \)
+
+\(
+0 & 0 & 1 & 0 & \hots \)
+
+\(
+\vdots & & & & \)
+
+\(
+0 & \hdots & \hdots & 0 & 1 \)
+
+\(
+-a_0/a_n & -a_1/a_n & \hdots & \hdots & -a_{n-1}/a_n
+\end{Matrix}
+\cdot
+v
+\)
+#+END_CENTER
+
+La condition initiale s'écrit :
+
+#+BEGIN_CENTER
+\(
+v(0) = (U_i)_{i = 0, ..., n - 1}
+\)
+#+END_CENTER
+
+Comme il existe une et une seule solution $v$ au problème d'ordre un associé, le problème différentiel d'ordre $n$ admet également une unique solution :
+
+$$u : t \mapsto v_0(t)$$
+
+
+* Problème aux limites
+
+Soit la fonctionnelle $I : \continue^2([a,b],\setR) \mapsto \setR$. Nous allons tenter de minimiser $I$ sur l'ensemble :
+
+$$\mathcal{F} = \{ u \in \continue^2([a,b],\setR) : u(a) = U_1, \ u(b) = U_2 \}$$
+
+On voit que les valeurs de toute fonction $u \in \mathcal{F}$ sont contraintes aux extrémités du domaine de $u$. On parle dans ce cas de problème aux limites.
+
+Soit $u \in \mathcal{F}$ et la fonction $w$ appartenant à l'ensemble :
+
+$$\mathcal{W} = \{ w \in \continue^2([a,b],\setR) : w(a) = w(b) = 0 \}$$
+
+On a alors $u + \epsilon \cdot w \in \mathcal{F}$ pour tout $w \in \mathcal{W}$ et tout $\epsilon \in \setR$, car :
+
+#+BEGIN_CENTER
+\(
+u(a) + \epsilon \cdot w(a) = u(a) = U_1 \)
+
+\(
+u(b) + \epsilon \cdot w(b) = u(b) = U_2
+\)
+#+END_CENTER
+
+On considère la famille de fonctions $J_w : \setR \mapsto \setR$ définies par :
+
+$$J_w(\epsilon) = I(u + \epsilon \cdot w)$$
+
+pour tout $w \in \mathcal{W}$ et tout $\epsilon \in \setR$. Si $u$ minimise $I$ sur $\mathcal{F}$, on a évidemment $J_w(\epsilon) \ge J_w(0)$ pour tout $w \in \mathcal{W}$ et pour tout $\epsilon \in \setR$. Il est par conséquent nécessaire que la condition de stationarité :
+
+$$\OD{J_w}{\epsilon}(0) = 0$$
+
+soit satisfaite pour tout $w\in\mathcal{W}$.
+
+
+** Équation d’Euler - Lagrange
+:PROPERTIES:
+:CUSTOM_ID: heading:eulerLagrange
+:END:
+
+Un exemple typique de fonctionnelle $I$ est définie pour tout $u \in \continue^2([a,b],\setR)$ par :
+
+$$I(u) = \int_a^b f(t, u(t), u'(t)) \ dt$$
+
+avec :
+
+$$f\in \continue^2([a,b]\times\setR^2,\setR), \ (t,u,v) \mapsto f(t,u,v)$$
+
+On a :
+
+$$J_w(\epsilon) = \int_a^b f(t, u + \epsilon \cdot w, u' + \epsilon \cdot w') \ dt$$
+
+Donc :
+
+$$\OD{J_w}{\epsilon}(0) = \int_a^b \left(
+\deriveepartielle{f}{u}(t,u,u') \cdot w +
+\deriveepartielle{f}{v}(t,u,u') \cdot w' \right) dt = 0$$
+
+Nous allons tenter d'intégrer par parties le deuxième terme de l’intégrale. On sait que :
+
+$$\OD{}{t}\left[\deriveepartielle{f}{v} \ w \right] =
+\OD{}{t}\left[ \deriveepartielle{f}{v} \right] \ w + \deriveepartielle{f}{v} \ w'$$
+
+En intégrant, nous obtenons :
+
+$$\int_a^b \OD{}{t}\left[\deriveepartielle{f}{v} \ w \right] dt =
+\int_a^b \OD{}{t} \left[ \deriveepartielle{f}{v} \right] \ w \ dt +
+\int_a^b \deriveepartielle{f}{v} \ w' \ dt$$
+
+En utilisant le théorème fondamental et les conditions sur $w$, on arrive à :
+
+$$\int_a^b \OD{}{t}\left[\deriveepartielle{f}{v} \ w \right] dt = \deriveepartielle{f}{v}(b,u(b),u'(b)) \ w(b) - \deriveepartielle{f}{v}(a,u(a),u'(a)) \ w(a) = 0$$
+
+On en déduit que :
+
+$$0 = \int_a^b \OD{}{t} \left[ \deriveepartielle{f}{v} \right] \ w \ dt +
+\int_a^b \deriveepartielle{f}{v} \ w' \ dt$$
+
+et :
+
+$$\int_a^b \deriveepartielle{f}{v} \ w' \ dt = - \int_a^b
+\OD{}{t} \left[ \deriveepartielle{f}{v} \right] \ w \ dt$$
+
+La condition de stationarité sur $J_w$ devient alors :
+
+$$\int_a^b \left( \deriveepartielle{f}{u} - \OD{}{t} \deriveepartielle{f}{v}  \right) \ w \ dt = 0$$
+
+Comme cette équation est valable pour tout les $w$ dans $\mathcal{W}$,
+on en déduit que $u$ vérifie l'équation différentielle d’Euler - Lagrange :
+
+$$\deriveepartielle{f}{u} - \OD{}{t} \deriveepartielle{f}{v} = 0$$
+
+où les dérivées de $f$ sont bien entendu évaluées en $(t,u(t),u'(t))$.
+
+Il es possible de détailler la dérivation temporelle du second terme :
+
+$$\OD{}{t}\left[\deriveepartielle{f}{v} \right] = \dfdxdy{f}{t}{v} + \dfdxdy{f}{u}{v} \ u' + \dfdxdy{f}{v}{v} \ u''$$
+
+L’équation d’Euler - Lagrange devient alors :
+
+$$\deriveepartielle{f}{u} - \dfdxdy{f}{t}{v} - \dfdxdy{f}{u}{v} \ u' - \dfdxdy{f}{v}{v} \cdot u'' = 0$$
+
+
+** Euler-Lagrange avec contraintes
+
+Nous tentons cette fois de minimiser :
+
+$$I(u) = \int_a^b f(t, u(t), u'(t)) \ dt$$
+
+mais en respectant les $m$ contraintes :
+
+$$g_i(t,u(t),u'(t)) = 0$$
+
+pour tout $i \in \{1, 2, ..., m\}$, où :
+
+$$g_i\in \continue^1([a,b]\times\setR^2,\setR), \ (t,u,v) \mapsto g(t,u,v)$$
+
+Nous devons donc minimiser $u$ sur l’espace :
+
+$$\mathcal{G} = \{ u \in \mathcal{F} : g_i(t,u(t),u'(t)) = 0  \ \ \ \forall i \in \{1,2,...,m\} \}$$
+
+Comme la fonction $g$ prend des valeurs nulles entre $a$ et $b$, son
+intégrale y est également nulle :
+
+$$\int_a^b g_i(t,u(t),u'(t)) \ dt = 0$$
+
+Nous pouvons même multiplier $g_i$ par un multiplicateur de lagrange :
+
+$$\lambda_i \in \continue([a,b]\times\setR^2,\setR), \ t \mapsto \lambda_i(t)$$
+
+et obtenir le même résultat :
+
+$$\int_a^b \lambda_i(t) \cdot g_i(t,u(t),u'(t)) \ dt = 0$$
+
+Définissons la fonctionnelle étendue :
+
+$$H(u) = \int_a^b \left( f(t, u(t), u'(t)) +
+\sum_{i=1}^m \lambda_i(t) \cdot g_i(t,u(t),u'(t)) \right) \ dt$$
+
+Comme $u$ doit respecter les contraintes $g_i$, on a :
+
+$$H(u) = I(u)$$
+
+Soit :
+
+$$\mathcal{X} = \{ u \in \mathcal{W} : g_i(t,u(t),u'(t)) = 0 \ \ \ \forall i \in \{1,2,...,m\} \}$$
+
+et $w \in \mathcal{X}$. On a :
+
+$$J_w(\epsilon) = I(u + \epsilon \cdot w) = H(u + \epsilon \cdot w)$$
+
+En développant, nous obtenons :
+
+$$J_w(\epsilon) = \int_a^b \left(
+f(t, u + \epsilon \cdot w, u' + \epsilon \cdot w') +
+\sum_{i=1}^m \lambda_i(t) \cdot g_i(t, u + \epsilon \cdot w ,u' + \epsilon \cdot w')
+\right) \ dt$$
+
+Donc :
+
+$$\OD{J_w}{\epsilon}(0) = \int_a^b \left[
+\deriveepartielle{f}{u}(t,u,u') \cdot w +
+\deriveepartielle{f}{v}(t,u,u') \cdot w' +
+\sum_{i=1}^m \lambda_i(t) \cdot \deriveepartielle{g_i}{u}(t,u,u') \cdot w +
+\sum_{i=1}^m \lambda_i(t) \cdot \deriveepartielle{g_i}{v}(t,u,u') \cdot w' +
+\right] dt = 0$$
+
+En utilisons l’intégration par parties et les conditions sur $w$, nous
+arrivons à :
+
+$$\int_a^b \deriveepartielle{f}{v} \ w' \ dt = - \int_a^b
+\OD{}{t} \left[ \deriveepartielle{f}{v} \right] \ w \ dt$$
+
+et :
+
+$$\int_a^b \lambda_i \cdot \deriveepartielle{g_i}{v} \ w' \ dt = - \int_a^b
+\OD{}{t} \left[ \lambda_i \cdot \deriveepartielle{g_i}{v} \right] \ w \ dt$$
+
+La condition de stationarité sur $J_w$ devient alors :
+
+$$\int_a^b \left(
+\deriveepartielle{f}{u} - \OD{}{t} \deriveepartielle{f}{v} +
+\sum_{i=1}^m \lambda_i \cdot \deriveepartielle{g_i}{u} -
+\sum_{i=1}^m \OD{}{t} \left[ \lambda_i \cdot \deriveepartielle{g_i}{v} \right]
+\right) \ w \ dt = 0$$
+
+Comme cette équation est valable pour tout les $w$ dans $\mathcal{W}$,
+on en déduit que $u$ vérifie l'équation différentielle d’Euler -
+Lagrange sous contrainte :
+
+$$\deriveepartielle{f}{u} - \OD{}{t} \deriveepartielle{f}{v} +
+\sum_{i=1}^m \lambda_i \cdot \deriveepartielle{g_i}{u} -
+\sum_{i=1}^m \OD{}{t} \left[ \lambda_i \cdot \deriveepartielle{g_i}{v} \right] = 0$$
+
+où les dérivées de $f$ et des $g_i$ sont bien entendu évaluées en
+$(t,u(t),u'(t))$.
+
+
+* Sturm-Liouville
+
+Nous considérons à présent une application importante du théorème
+de Lax-milgram. Soit l'espace :
+
+$$F = \{u \in \continue^2([a,b],\setR) : u(a) = u(b) = 0\}$$
+
+et les fonctions :
+
+$$p, q, f : \setR \mapsto \setR$$
+
+Considérons la fonctionnelle $\mathcal{L} : F \mapsto \Cont([a,b],\setR)$ définie par :
+
+$$\mathcal{L}(u) = \OD{}{t}\left[p \cdot \OD{u}{t} \right] - q \cdot u + f \\$$
+
+et le problème différentiel avec conditions aux limites associé :
+
+\begin{align}
+\mathcal{L}(u) &= 0 \)
+
+\(
+u(a) = u(b) &= 0
+\end{align}
+
+Choisissons $v\in F$ et intégrons l'équation :
+
+$$\mathcal{L}(u) \cdot v = 0$$
+
+sur $[a,b]$. On obtient :
+
+$$- \int_a^b \OD{}{t} \Big[ p(t) \ \OD{u}{t}(t) \Big] \ v(t) \ dt + \int_a^b q(t) \ u(t) \ v(t) \ dt = \int_a^b f(t) \ v(t) \ dt$$
+
+Nous allons tenter d'intégrer par parties. On a :
+
+$$\OD{}{t} \Big[ p(t) \ \OD{u}{t}(t) \ v(t) \Big] = \OD{}{t} \Big[ p(t) \ \OD{u}{t}(t) \Big] \ v(t) + p(t) \ \OD{u}{t}(t) \ \OD{v}{t}(t)$$
+
+En appliquant le théorème fondamental, on obtient :
+
+$$\int_a^b \OD{}{t} \Big[ p(t) \ \OD{u}{t}(t) \ v(t) \Big] \ dt = p(b) \ \OD{u}{t}(b) \ v(b) - p(a) \ \OD{u}{t}(a) \ v(a) = 0$$
+
+On en conclut que :
+
+$$\int_a^b \OD{}{t} \Big[ p(t) \ \OD{u}{t}(t) \Big] \ v(t) \ dt = - \int_a^b p(t) \ \OD{u}{t}(t) \ \OD{v}{t}(t) \ dt$$
+
+L'intégrale de $\mathcal{L}(u) \cdot v = 0$ devient :
+
+$$\int_a^b \Big[ p(t) \ \OD{u}{t}(t) \ \OD{v}{t}(t) + q(t) \ u(t) \ v(t) \Big] \ dt = \int_a^b f(t) \ v(t) \ dt$$
+
+Donc, si on définit
+
+\begin{align}
+a(u,v) &= \int_a^b \left[ p(t) \cdot \OD{u}{t}(t) \cdot \OD{v}{t}(t) + q(t) \cdot u(t) \cdot v(t) \right] \ dt \\ \)
+
+\(
+b(v) &= \int_a^b f(t) \cdot v(t) \ dt
+\end{align}
+
+on a :
+
+$$a(u,v) = b(v)$$
+
+pour tout $v \in F$. En appliquant le théorème de Lax-Milgram, on en déduit que la solution du probléme :
+
+\begin{align}
+\mathcal{L}(u) &= 0 \)
+
+\(
+u(a) = u(b) &= 0
+\end{align}
+
+minimise sur $F$ la fonctionnelle $I$ définie pour toute fonction $v \in \continue^2([a,b],\setR)$ par :
+
+$$I(v) = \int_a^b \Big[ p(x) \ \left(\OD{v}{x}(x)\right)^2 + q(x) \ v(x)^2 \Big] \ dx - \int_a^b f(x) \ v(x) \ dx$$
+
+
+* Séparation des variables
+
+Soit les fonctions :
+
+$$a, b : \setR \mapsto \setR$$
+
+et $f : \setR^2 \mapsto \setR$ définie par :
+
+$$f(t, u) = a(t) \cdot b(u)$$
+
+Si $f$ est lipschitzienne, le probléme différentiel :
+
+\begin{align}
+\OD{u}{t}(t) &= f(t, u(t)) = a(t) \cdot b\big( u(t) \big) \\ \)
+
+\(
+u(0) &= u_0
+\end{align}
+
+admet une unique solution. En faisant passer $u$ dans le premier membre et $dt$ dans le second, la première équation peut se réécrire symboliquement :
+
+$$\frac{du}{a(u)} = b(t) dt$$
+
+En intégrant les deux membres, il vient :
+
+$$\int_{u(0)}^{u(s)} \frac{du}{A(u)} = \int_0^s B(t) dt$$
+
+
+* Dérivées des fonctions usuelles
+
+
+** Arcsinus
+
+AFAIRE : ARRANGER LA FIN DU CHAPITRE
+
+Soit la relation :
+
+#+BEGIN_CENTER
+\(
+y = \sin(x) \)
+
+\(
+x = \arcsin(y)
+\)
+#+END_CENTER
+
+Comme
+
+#+BEGIN_CENTER
+\(
+\OD{y}{x} = \cos(x) \)
+
+\(
+\sin(x)^2 + \cos(x)^2 = 1
+\)
+#+END_CENTER
+
+on a 
+
+#+BEGIN_CENTER
+\(
+\OD{y}{x} = \sqrt{1-y^2} \)
+
+\(
+\OD{}{y}\arcsin(y) = \unsur{\sqrt{1-y^2}}
+\)
+#+END_CENTER
+
+
+** Table
+
+#+BEGIN_CENTER
+\(
+\OD{\tan(x)}{x} = 1 + \tan(x)^2 \)
+
+\(
+\OD{\arcsin(x)}{x} = \frac{1}{\sqrt{1-x^2}} \)
+
+\(
+\OD{\arccos(x)}{x} = -\frac{1}{\sqrt{1-x^2}} \)
+
+\(
+\OD{\arctan(x)}{x} = \frac{1}{1+x^2} \)
+
+\(
+\)
+#+END_CENTER
+
+% ===================================================================
+
+#+BEGIN_CENTER
+\(
+\cos(x) = \sum_{k=0}^{+\infty} \frac{(-1)^k}{(2k)!} x^{2k} \)
+
+\(
+\sin(x) = \sum_{k=0}^{+\infty} \frac{(-1)^k}{(2k+1)!} x^{2k+1}
+\)
+#+END_CENTER
+
+% ===================================================================
+
+
+** Fonctions usuelles
+
+Le théorème fondamental appliqué aux dérivées des fonctions usuelles du chapitre \ref{chap:differ}
+nous permet d'obtenir les résultats suivants :
+
+#+BEGIN_CENTER
+\(
+\int_0^x {\frac{1}{\sqrt{1-\xi^2}}d\xi} = \arcsin(x) \)
+
+\(
+\int_0^x {\frac{1}{1+\xi^2}d\xi} = \arctan(x)
+\)
+#+END_CENTER
+
+

@@ -1,0 +1,123 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Algorithmes de résolution d’EDO
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:algoedo}
+
+* Introduction
+
+AFAIRE : ARRANGER LE CHAPITRE
+
+Le but est de calculer une approximation de la solution $y$ de
+
+#+BEGIN_CENTER
+\(
+\OD{y}{x}(x) = f(x,y(x)) \)
+
+\(
+y(0) = y_0
+\)
+#+END_CENTER
+
+Pour cela, on choisit $n$ points $x_i$, et on tente de progresser en évaluant les approximations successives $y_{i+1} \approx y(x_{i+1})$ à partir de $y_i$, pour $i=0,1,2,...$. On pose :
+
+$$h_i = x_{i+1} - x_i$$
+
+
+** Euler
+
+On se sert de la formulation intégrale correspondant à l'équation différentielle que l'on veut résoudre :
+
+$$y_{i+1} = y_i + \int_{x_i}^{x_{i+1}} f(x,y(x)) \ dx$$
+
+Si $h_i$ est suffisamment petit, la fonction $y$ sera plus ou moins constante sur l'intervalle $[x_i,x_{i+1}]$ et on peut approximer la formulation intégrale par :
+
+$$y_{i+1} = y_i + h_i \cdot f(x_i,y_i)$$
+
+Cette méthode se nomme Euler explicite.
+
+\label{page:euler_expl}
+
+
+** Predicteur - Correcteur
+
+On part de nouveau de :
+
+$$y_{i+1} = y_i + \int_{x_i}^{x_{i+1}} f(x,y(x)) \ dx$$
+
+On commence par calculer une première estimation de $y(x_{i+1})$ en utilisant la méthode d'Euler explicite :
+
+$$y_{i+1}^* = y_i + h_i \cdot f(x_i,y_i)$$
+
+La valeur $y_{i+1}^*$ ainsi obtenue est nommé prédicteur.
+
+Une fois cette première estimation évaluée, on construit une meilleure approximation de l'intégrale en supposant que, pour $t\in [0,1]$ :
+
+$$f\left(x_i + t \cdot h_i,y(x_i + t h_i)\right) \approx f_i + t \cdot (f^*_{i+1} - f_i)$$
+
+avec :
+
+#+BEGIN_CENTER
+\(
+f_i = f(x_i,y_i) \)
+
+\(
+f^*_{i+1} = f(x_{i+1},y^*_{i+1})
+\)
+#+END_CENTER
+
+On obtient :
+
+\begin{align}
+\int_{x_i}^{x_{i+1}} f(x,y(x)) \ dx &\approx&
+h_i \int_0^1 \left[ f_i + t \cdot (f^*_{i+1} - f_i) \right] dt \)
+
+\(
+&\approx&
+\frac{h_i}{2} \cdot \left( f_i + f^*_{i+1} \right)
+\end{align}
+
+L'étape correctrice s'écrit donc :
+
+$$y_{i+1} = y_i + \frac{h_i}{2} \cdot [f(x_i,y_i) + f(x_{i+1},y_{i+1}^*)]$$
+
+
+** Taylor
+
+Partant des dérivées de la fonction $y(x) = f(x,y(x))$ :
+
+\begin{align}
+\OD{y}{x} &= f \)
+
+\(
+\frac{d^2 y}{dx^2} &= \deriveepartielle{f}{x}+\deriveepartielle{f}{y}\OD{y}{x} =
+\deriveepartielle{f}{x}+\deriveepartielle{f}{y} f \)
+
+\(
+\frac{d^3 y}{dx^3} &= ...
+\end{align}
+
+on peut écrire le développement en série de Taylor de $y$
+autour de $x_i$ :
+
+$$y_{i+1} = y_i + f(x_i,h_i) \ h_i + \OD{f}{x}(x_i,y_i) \ \frac{h_i^2}{2} + ...$$

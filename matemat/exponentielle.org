@@ -1,0 +1,194 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Exponentielle
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+* Dépendances
+
+  - Chapitre \ref{chap:edo} : Équations différentielles ordinaires
+
+* Introduction
+
+L'exponentielle est définie comme l'unique solution $\exp : \setR \mapsto \setR$ du problème différentiel :
+
+\begin{align}
+\OD{\exp}{t}(t) &= \exp(t) \\ \)
+
+\(
+\exp(0) &= 1
+\end{align}
+
+
+* Développement de Taylor
+
+On a :
+
+$$\OD{\exp}{t}(0) = \exp(0) = 1$$
+
+On montre par récurrence que :
+
+$$\NOD{\exp}{t}{k}(0) = \NOD{\exp}{t}{k - 1}(0) = 1$$
+
+Le développement de Taylor autour de $0$ s'écrit donc :
+
+$$\exp(t) = \sum_{k = 0}^{+\infty} \frac{t^k}{k !}$$
+
+
+* Additivité
+
+Soit $t \in \setR$. On remarque que les applications $f,g : \setR \mapsto \setR$ définies par :
+
+\begin{align}
+f &:& s \mapsto \exp(s + t) \)
+
+\(
+g &:& s \mapsto \exp(s) \cdot \exp(t)
+\end{align}
+
+pour tout $s \in \setR$ vérifient :
+
+\begin{align}
+\partial f(s) &= \exp(s + t) = f(s) \)
+
+\(
+f(0) &= \exp(0 + t) = \exp(t)
+\end{align}
+
+et :
+
+\begin{align}
+\partial g(s) &= \exp(s) \cdot \exp(t) = g(s) \)
+
+\(
+g(0) &= \exp(0) \cdot \exp(t) = 1 \cdot \exp(t) = \exp(t)
+\end{align}
+
+Par unicité de la solution en $u$ du problème différentiel :
+
+\begin{align}
+\partial u(s) &= u(s) \)
+
+\(
+u(0) &= \exp(t)
+\end{align}
+
+on en déduit que :
+
+$$\exp(s + t) = \exp(s) \cdot \exp(t)$$
+
+
+* Miroir
+
+On déduit de l'additivité que :
+
+$$1 = \exp(0) = \exp(t - t) = \exp(t) \cdot \exp(-t)$$
+
+pour tout $t \in \setR$. On en conclut que :
+
+$$\exp(-t) = \unsur{\exp(t)}$$
+
+
+* Limites
+
+On a :
+
+$$\lim_{t \to +\infty} \exp(t) = \lim_{t \to +\infty} (1 + t + \frac{t^2}{2} + ...) \ge \lim_{t \to +\infty} t = +\infty$$
+
+La limite à l'infini positif est donc infinie :
+
+$$\lim_{t \to +\infty} \exp(t) = +\infty$$
+
+En utilisant le changement de variable $t = -s$, on obtient la limite à l'infini négatif :
+
+$$\lim_{s \to -\infty} \exp(s) = \lim_{t \to +\infty} \exp(-t) = \lim_{t \to +\infty} \unsur{\exp(t)} = 0$$
+
+
+* Image
+
+Si $t \ge 0$ il est clair que $\exp(t) \strictsuperieur 0$ puisqu'il s'agit d'une somme infinie de termes strictement positifs. Si $s \le 0$, on a $t = - s \ge 0$ et :
+
+$$\exp(s) = \exp(-t) = \unsur{\exp(t)} \strictsuperieur 0$$
+
+On en conclut que :
+
+$$\exp : \setR \mapsto \setR^+ \setminus \{0\}$$
+
+Comme la fonction $\exp$ est continue et croît avec $t$ sur $\setR$ de :
+
+$$\lim_{t \to -\infty} \exp(t) = 0$$
+
+jusqu'à :
+
+$$\lim_{t \to +\infty} \exp(t) = +\infty$$
+
+on a :
+
+$$\exp(\setR) = \ ]0,+\infty[ \ = \setR^+ \setminus \{ 0 \}$$
+
+
+** Réels positifs
+
+Comme la fonction $\exp$ est continue et croît avec $t$ sur $\setR^+$ de :
+
+$$\exp(0) = 1$$
+
+jusqu'à :
+
+$$\lim_{t \to +\infty} \exp(t) = +\infty$$
+
+on a :
+
+$$\exp(\setR^+) = [1,+\infty[$$
+
+
+** Réels négatifs
+
+Comme la fonction $\exp$ est continue et croît avec $s$ sur $\setR^-$ de :
+
+$$\lim_{s \to -\infty} \exp(s) = 0$$
+
+jusqu'à :
+
+$$\exp(0) = 1$$
+
+on a :
+
+$$\exp(\setR^-) = \ ]0,1]$$
+
+
+* Intégrale
+
+Comme la fonction $\exp$ est une primitive d'elle-même, on a :
+
+$$\int_a^b \exp(t) \ dt = \exp(b) - \exp(a)$$
+
+En faisant tendre $a$ vers $-\infty$, on voit que :
+
+$$\int_{-\infty}^b \exp(t) \ dt = \lim_{a \to -\infty} \Big(\exp(b) - \exp(a)\Big) = \exp(b)$$
+
+Les autres intégrales à bornes infinies sont infinies :
+
+$$\int_{-\infty}^{+\infty} \exp(t) \ dt = \lim_{ \substack{ a \to -\infty \\ b \to +\infty } } \Big(\exp(b) - \exp(a)\Big) = +\infty$$
+
+$$\int_a^{+\infty} \exp(t) \ dt = \lim_{b \to +\infty} \Big(\exp(b) - \exp(a)\Big) = +\infty$$
+
+

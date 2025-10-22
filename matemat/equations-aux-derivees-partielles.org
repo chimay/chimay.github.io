@@ -1,0 +1,136 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Équations aux dérivées partitielles (EDP)
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:pde}
+
+* Courbes caractéristiques
+
+Soit $u \in F = \continue^1(\setR^2,\setR)$ et l'équation aux dérivées partielles à résoudre sur $\Omega\subseteq\setR^2$ :
+
+$$a(x,y,u) \ u_x(x,y) + b(x,y,u) \ u_y(x,y) = c(x,y,u)$$
+
+où nous introduisons les notations :
+
+#+BEGIN_CENTER
+\(
+u_x(x,y) = \deriveepartielle{u}{x}(x,y) \)
+
+\(
+u_y(x,y) = \deriveepartielle{u}{y}(x,y)
+\)
+#+END_CENTER
+
+Les coefficients $a,b,c$ sont en général des fonctions de $x,y,u$ mais ne peuvent
+pas dépendre de $u_x$ ni de $u_y$. Soit à présent la courbe $\Gamma$ définie par :
+
+$$\Gamma = \{ \left(w_x(t),w_y(t)\right) : t \in\setR \}$$
+
+où $w_x$ et $w_y$ sont des fonctions dérivables. Définissons la restriction
+de $u$ à $\Gamma$ :
+
+$$\varphi(t) = u\left(w_x(t),w_y(t)\right)$$
+
+Si on s'arrange pour que :
+
+#+BEGIN_CENTER
+\(
+\OD{w_x}{t}(t) = a(w_x(t),w_y(t),u(w_x(t),w_y(t))) \)
+
+\(
+\OD{w_y}{t}(t) = b(w_x(t),w_y(t),u(w_x(t),w_y(t)))
+\)
+#+END_CENTER
+
+On a alors :
+
+$$\OD{\varphi}{t} = u_x \ a + u_y \ b = c$$
+
+Définissons alors :
+
+$$f : (t,u) \mapsto c\left(w_x(t),w_y(t),u\right)$$
+
+On a :
+
+$$\OD{\varphi}{t}(t) = f(t,u(t))$$
+
+qui est une équation différentielle ordinaire en $t$. On peut donc connaître $\varphi$ et
+donc $u$ sur $\Gamma$ si on ajoute la condition initiale :
+
+$$\varphi(0) = u_0$$
+
+On dit alors que $\Gamma$ est une courbe caractéristique de l'équation aux dérivées partielles.
+
+
+* Fonction de Green
+
+Soit un espace fonctionnel $F \subseteq \Leb^2(\setR^n,\setR)$ et une forme $\forme{}{} : F^D \times F \mapsto \setR$ à laquelle on associe par abus de notation :
+
+$$\int_A u(x) \cdot v(x) \ dx = \forme{u}{v}$$
+
+où $A \subseteq \setR^n$.
+
+Soit un opérateur $L : F \mapsto \Leb^2(\setR^n,\setR)$ qui vérifie :
+
+$$\forme{u}{L(v)} = \forme{L(u)}{v}$$
+
+pour tout $u,v\in F$. On dit d'un tel opérateur qu'il est auto-adjoint.
+
+Nous nous intéressons à l'équation différentielle :
+
+$$L(u) = f$$
+
+où $f \in F$.
+
+Introduisons la distribution $\delta$ de Dirac :
+
+$$\int_A \delta(x-a) \ f(x) \ dx = f(a)$$
+
+et définissons la famille de solutions $v_x$ telles que :
+
+$$L(v_x)(y)=\delta(y-x)$$
+
+On peut alors définir la fonction de Green $G$ :
+
+$$G(x,y)=v_x(y)$$
+
+Mais les propriétés de $L$ nous permettent d'écrire :
+
+$$\forme{L(v_x)}{u} = \forme{v_x}{L(u)}$$
+
+Si $u$ est la solution de $L(u) = f$, l'équation précédente peut se formeuler comme :
+
+$$\int_A \delta(y-x) \ u(y) \ dy = \int_A v_x(y) \ f(y) \ dy$$
+
+et finalement :
+
+$$u(x) = \int_A G(x,y) \ f(y) \ dy$$
+
+
+** Exemple d'opérateur auto-adjoint
+
+Comme exemple d'opérateur auto-adjoint, citons :
+
+$$L : u \mapsto \lapl u = \sum_i \dfdxdx{u}{x_i}$$
+
+

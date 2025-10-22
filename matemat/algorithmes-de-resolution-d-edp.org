@@ -1,0 +1,184 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Algorithmes de résolution d’EDP
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index des Grimoires]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:algoedp}
+
+* Résolution par les caractéristiques
+
+AFAIRE : ARRANGER LE CHAPITRE
+
+Soit une équation du premier ordre à résoudre :
+
+$$a(x,y,u) \ u_x(x,y) + b(x,y,u) \ u_y(x,y) = c(x,y,u)$$
+
+Supposons que l'on connaisse la valeur de la solution :
+
+$$u_{i0} = u(x_{i0},y_{i0})$$
+
+pour $i = 1,2,...,n$. Les équations :
+
+$$\OD{x}{t} = a \qquad \OD{y}{t} = b \qquad \OD{u}{t} = c$$
+
+nous permettent de construire simultanément les courbes
+caractéristiques et la solution. Par exemple, si on utilise
+le schéma d'Euler explicite, on a :
+
+#+BEGIN_CENTER
+\(
+x_{i,k+1} = x_{ik} + h_k \ a(x_{ik},y_{ik},u_{ik}) \)
+
+\(
+y_{i,k+1} = y_{ik} + h_k \ b(x_{ik},y_{ik},u_{ik}) \)
+
+\(
+u_{i,k+1} = u_{ik} + h_k \ c(x_{ik},y_{ik},u_{ik})
+\)
+#+END_CENTER
+
+
+* Différences finies
+
+On vérifie sur le développement de Taylor de $u$ que :
+
+#+BEGIN_CENTER
+\(
+u_x(x,y) \approx \frac{u(x+h,y) - u(x-h,y)}{2 h} \)
+
+\(
+u_y(x,y) \approx \frac{u(x,y+h) - u(x,y-h)}{2 h}
+\)
+#+END_CENTER
+
+pour les dérivées premières et :
+
+#+BEGIN_CENTER
+\begin{align}
+u_{xx}(x,y) &\approx& \unsur{h^2} \ \left( u(x+h,y) - 2 u(x,y) + u(x-h,y) \right) \\
+u_{yy}(x,y) &\approx& \unsur{h^2} \ \left( u(x,y+h) - 2 u(x,y) + u(x,y-h) \right) \\
+u_{xy}(x,y) &\approx& \unsur{4h^2} \ \left( u(x+h,y+h) + u(x-h,y-h) - u(x+h,y-h) - u(x-h,y+h) \right)
+\end{align}
+#+END_CENTER
+
+pour les dérivées secondes. L'erreur converge vers $0$ aussi vite que
+$h^2$. Posons :
+
+$$U_{ij} = u(i h, j h)$$
+
+Les dérivées approximatives s'écrivent :
+
+#+BEGIN_CENTER
+\(
+u_x \approx \Delta_x U_{ij} = \unsur{2 h} \ (U_{i+1,j} - U_{i-1,j}) \)
+
+\(
+u_y \approx \Delta_y U_{ij} = \unsur{2 h} \ (U_{i,j+1} - U_{i,j-1})
+\)
+#+END_CENTER
+
+et :
+
+#+BEGIN_CENTER
+\(
+u_{xx} \approx \Delta_x^2 U_{ij} = \unsur{h^2} \ (U_{i+1,j} - 2 U_{ij} + U_{i-1,j}) \)
+
+\(
+u_{yy} \approx \Delta_y^2 U_{ij} = \unsur{h^2} \ (U_{i,j+1} - 2 U_{ij} + U_{i,j-1}) \)
+
+\(
+u_{xy} \approx \Delta_x\Delta_y U_{ij} =
+\unsur{4 h^2} \ (U_{i+1,j+1} - U_{i+1,j-1} - U_{i-1,j+1} + U_{i-1,j-1})
+\)
+#+END_CENTER
+
+On substitue alors ces expressions dans l'équation :
+
+$$F(x,y,u,u_x,u_y,u_{xx},u_{xy},u_{yy}) = 0$$
+
+et on obtient un système linéaire à résoudre en les $U_{ij}$.
+
+
+* Eléments finis
+
+\label{sec:elements_finis}
+
+Soient des espaces fonctionnels $F,H\subset\fonction(\Omega,\setR)$ et un
+opérateur linéaire :
+
+$$L \in \lineaire(F,H)$$
+
+Nous cherchons à résoudre de manière approchée l'équation
+différentielle associée :
+
+$$L(u) = f$$
+
+où $f$ est une fonction de $H$. La méthode des éléments finis
+consiste à imposer l'annulation de l'intégrale du résidu $L(u)$,
+pondéré par des fonctions $\psi_i$ :
+
+$$\int_\Omega \left[L(u)(x)-f(x)\right] \ \psi_i(x) \ dx = 0$$
+
+pour $i = 1,2,...,n$. Afin de résoudre ce problème, on discrétise
+la solution approchée $u$ :
+
+$$u(x) = \sum_{i=1}^n U_i \ \varphi_i(x)$$
+
+où les $U_i$ sont des réels et les $\varphi_i$ des fonctions de $F$.
+On définit les grandeurs :
+
+#+BEGIN_CENTER
+\(
+A_{ij} = \int_\Omega L(\varphi_i)(x) \ \psi_i(x) \ dx \)
+
+\(
+F_i = \int_\Omega f(x) \ \psi_i(x) \ dx
+\)
+#+END_CENTER
+
+et les matrices :
+
+#+BEGIN_CENTER
+\(
+U = (U_i)_i \)
+
+\(
+A = (A_{ij})_{i,j} \)
+
+\(
+F = (F_i)_i
+\)
+#+END_CENTER
+
+En utilisant la linéarité de $L$, l'équation des résidus pondérés :
+
+$$\int_\Omega L(u)(x) \ \psi_i(x) \ dx = \int_\Omega f(x) \ \psi_i(x) \ dx$$
+
+devient :
+
+$$A \ U = F$$
+
+soit un système linéaire à résoudre en $U$ :
+
+$$U = A^{-1} \ F$$
+
+ce qui nous donne une forme approchée $u$ de la solution exacte.

@@ -2,7 +2,7 @@
 
 include ../Makefile.inc
 
-.DEFAULT_GOAL := sync-html
+.DEFAULT_GOAL := all
 
 #  phony {{{1
 
@@ -15,8 +15,8 @@ include ../Makefile.inc
 
 .PHONY: all install
 
-.PHONY: $(HTML_SUBDIRS)
-.PHONY: $(CLEAN_SUBDIRS) $(CLEAN_HTML_SUBDIRS) $(WIPE_SUBDIRS)
+.PHONY: $(ALL_SUBDIRS)
+.PHONY: $(CLEAN_SUBDIRS) $(CLEAN_ALL_SUBDIRS) $(WIPE_SUBDIRS)
 
 .PHONY: clean clean-html wipe
 
@@ -28,55 +28,47 @@ debug:
 #  org -> html {{{1
 
 $(HTML_SUBDIRS):
-	$(MAKE) -C ${@:html-%=%} html
+	$(MAKELINE) -C ${@:html-%=%} html
 	@$(ECHO)
 
 ~/racine/refer/bookmarks/%.html: ~/racine/refer/bookmarks/%.org
-	$(MAKE) -C ~/racine/refer/bookmarks $@
+	$(MAKELINE) -C ~/racine/refer/bookmarks $@
 
 %.html: %.org $(INC_FILES) ~/racine/refer/bookmarks/%.html
 	$(EMACS) $(EMACS_PRE_FLAGS) $< $(EMACS_POST_FLAGS)
 	remove-max-width-from-org-html-export.zsh $(patsubst %.org,%.html,$<)
 	@$(ECHO)
 
-html: $(HTML_SUBDIRS) $(HTML_FILES)
+html: $(HTML_FILES)
 
 # sync -> html dir {{{1
-
-dry-sync-html: html
-	$(DRY_RSYNC) $(CUR_DIR)/ $(HTML_DIR)
-	@$(ECHO)
 
 sync-html: html
 	$(RSYNC) $(CUR_DIR)/ $(HTML_DIR)
 	@$(ECHO)
 
-
-# sync all {{{1
-
-dry-sync: dry-sync-html
-
-sync: sync-html
-
 # all, install {{{1
 
-all: sync-html
+$(ALL_SUBDIRS):
+	$(MAKELINE) -C ${@:all-%=%} all
+	@$(ECHO)
 
-install: sync-html
+all: html $(ALL_SUBDIRS)
 
+install : all sync-html
 
 # clean, wipe {{{1
 
 $(CLEAN_SUBDIRS):
-	$(MAKE) -C ${@:clean-%=%} clean
+	$(MAKELINE) -C ${@:clean-%=%} clean
 	@$(ECHO)
 
 $(CLEAN_HTML_SUBDIRS):
-	$(MAKE) -C ${@:clean-html-%=%} clean-html
+	$(MAKELINE) -C ${@:clean-html-%=%} clean-html
 	@$(ECHO)
 
 $(WIPE_SUBDIRS):
-	$(MAKE) -C ${@:wipe-%=%} wipe
+	$(MAKELINE) -C ${@:wipe-%=%} wipe
 	@$(ECHO)
 
 clean: $(CLEAN_SUBDIRS)

@@ -2,52 +2,45 @@
 
 include ../../Makefile.inc
 
-.DEFAULT_GOAL := sync-html
+.DEFAULT_GOAL := all
 
 #  phony {{{1
 
 .PHONY: debug
 
-.PHONY: html
+.PHONY: lilypond-install
+
+.PHONY: sync-html
 
 .PHONY: all install
+
+.PHONY: $(CLEAN_SUBDIRS) $(CLEAN_HTML_SUBDIRS) $(WIPE_SUBDIRS)
+
 .PHONY: clean clean-html wipe
 
 # debug {{{1
 
 debug:
-	@echo $(SUBDIRS)
+	@echo coucou
 
+# lilypond-install {{{1
 
-#  org -> html {{{1
-
-html:
-	$(ECHO) nothing to do
-	@$(ECHO)
-
+lilypond-install:
+	$(MAKELINE) -C ~/racine/musica/lilypond/template install
 
 # sync -> html dir {{{1
 
-dry-sync-html: html
-	$(DRY_RSYNC) $(CUR_DIR)/ $(HTML_DIR)
-	@$(ECHO)
-
-sync-html: html
+sync-html:
 	$(RSYNC) $(CUR_DIR)/ $(HTML_DIR)
 	@$(ECHO)
 
+# all, install {{{1
 
-#sync all {{{1
+all: lilypond-install
 
-dry-sync: dry-sync-html
+install: all sync-html
 
-sync: sync-html
-
-# all, install, clean, wipe {{{1
-
-all: sync-html
-
-install: sync-html
+# clean, wipe {{{1
 
 clean:
 	rm -f ?*~

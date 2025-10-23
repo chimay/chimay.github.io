@@ -2,21 +2,20 @@
 
 include Makefile.inc
 
-.DEFAULT_GOAL := sync-html
+.DEFAULT_GOAL := install
 
 #  phony {{{1
 
 .PHONY: debug
 
-.PHONY: lilypond-template
 .PHONY: html
 
-.PHONY: dry-sync-html sync-html
-.PHONY: dry-sync sync
+.PHONY: sync-html
+
+.PHONY: $(ALL_SUBDIRS)
 
 .PHONY: all install
 
-.PHONY: $(HTML_SUBDIRS)
 .PHONY: $(CLEAN_SUBDIRS) $(CLEAN_HTML_SUBDIRS) $(WIPE_SUBDIRS)
 
 .PHONY: clean clean-html wipe
@@ -24,63 +23,46 @@ include Makefile.inc
 # debug {{{1
 
 debug:
-	@echo $(HTML_FILES)
-	@echo $(LY_MEL_FILES)
-
-# lilypond template {{{1
-
-lilypond-template:
-	make -k -C ~/racine/musica/lilypond/template install
-	git add -f **/*.png
+	@echo $(MAKELINE)
 
 #  org -> html {{{1
-
-$(HTML_SUBDIRS):
-	$(MAKE) -C ${@:html-%=%} html
-	@$(ECHO)
 
 %.html: %.org $(INC_FILES)
 	$(EMACS) $(EMACS_PRE_FLAGS) $< $(EMACS_POST_FLAGS)
 	remove-max-width-from-org-html-export.zsh $(patsubst %.org,%.html,$<)
 	@$(ECHO)
 
-html: $(HTML_SUBDIRS) $(HTML_FILES)
-	git add -A
+html: $(HTML_FILES)
 
 # sync -> html dir {{{1
 
-dry-sync-html: lilypond-template html
-	$(DRY_RSYNC) $(ROOT_GENERIC)/ $(ROOT_HTML)
-	@$(ECHO)
-
-sync-html: lilypond-template html
+sync-html: $(ALL_SUBDIRS)
 	$(RSYNC) $(ROOT_GENERIC)/ $(ROOT_HTML)
 	@$(ECHO)
 
-# sync all {{{1
-
-dry-sync: dry-sync-html
-
-sync: sync-html
-
 # all, install {{{1
 
-all: lilypond-template sync-html
+$(ALL_SUBDIRS):
+	$(MAKELINE) -C ${@:all-%=%} all
+	@$(ECHO)
 
-install: lilypond-template sync-html
+all: html $(ALL_SUBDIRS)
+	git add -A
+
+install: all sync-html
 
 # clean, wipe {{{1
 
 $(CLEAN_SUBDIRS):
-	$(MAKE) -C ${@:clean-%=%} clean
+	$(MAKELINE) -C ${@:clean-%=%} clean
 	@$(ECHO)
 
 $(CLEAN_HTML_SUBDIRS):
-	$(MAKE) -C ${@:clean-html-%=%} clean-html
+	$(MAKELINE) -C ${@:clean-html-%=%} clean-html
 	@$(ECHO)
 
 $(WIPE_SUBDIRS):
-	$(MAKE) -C ${@:wipe-%=%} wipe
+	$(MAKELINE) -C ${@:wipe-%=%} wipe
 	@$(ECHO)
 
 clean: $(CLEAN_SUBDIRS)

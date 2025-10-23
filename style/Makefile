@@ -2,7 +2,7 @@
 
 include ../Makefile.inc
 
-.DEFAULT_GOAL := sync-html
+.DEFAULT_GOAL := all
 
 #  phony {{{1
 
@@ -43,7 +43,7 @@ sync-html: html
 	@$(ECHO)
 
 
-#sync all {{{1
+# sync all {{{1
 
 dry-sync: dry-sync-html
 
@@ -59,15 +59,15 @@ install: sync-html
 # clean, wipe {{{1
 
 $(CLEAN_SUBDIRS):
-	$(MAKE) -C ${@:clean-%=%} clean
+	$(MAKELINE) -C ${@:clean-%=%} clean
 	@$(ECHO)
 
 $(CLEAN_HTML_SUBDIRS):
-	$(MAKE) -C ${@:clean-html-%=%} clean-html
+	$(MAKELINE) -C ${@:clean-html-%=%} clean-html
 	@$(ECHO)
 
 $(WIPE_SUBDIRS):
-	$(MAKE) -C ${@:wipe-%=%} wipe
+	$(MAKELINE) -C ${@:wipe-%=%} wipe
 	@$(ECHO)
 
 clean: $(CLEAN_SUBDIRS)

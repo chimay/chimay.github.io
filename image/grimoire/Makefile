@@ -2,15 +2,19 @@
 
 include ../../Makefile.inc
 
-.DEFAULT_GOAL := sync-html
+.DEFAULT_GOAL := all
 
 #  phony {{{1
 
 .PHONY: debug
 
-.PHONY: html
+.PHONY: sync-html
 
+.PHONY: $(ALL_SUBDIRS)
 .PHONY: all install
+
+.PHONY: $(CLEAN_SUBDIRS) $(CLEAN_HTML_SUBDIRS) $(WIPE_SUBDIRS)
+
 .PHONY: clean clean-html wipe
 
 # debug {{{1
@@ -18,44 +22,43 @@ include ../../Makefile.inc
 debug:
 	@echo $(SUBDIRS)
 
-
-#  org -> html {{{1
-
-html:
-	$(ECHO) nothing to do
-	@$(ECHO)
-
-
 # sync -> html dir {{{1
 
-dry-sync-html: html
-	$(DRY_RSYNC) $(CUR_DIR)/ $(HTML_DIR)
-	@$(ECHO)
-
-sync-html: html
+sync-html: $(ALL_SUBDIRS)
 	$(RSYNC) $(CUR_DIR)/ $(HTML_DIR)
 	@$(ECHO)
 
+# all, install {{{1
 
-#sync all {{{1
+$(ALL_SUBDIRS):
+	$(MAKELINE) -C ${@:all-%=%} all
+	@$(ECHO)
 
-dry-sync: dry-sync-html
+all: $(ALL_SUBDIRS)
 
-sync: sync-html
+install: all sync-html
 
-# all, install, clean, wipe {{{1
+# clean, wipe {{{1
 
-all: sync-html
+$(CLEAN_SUBDIRS):
+	$(MAKELINE) -C ${@:clean-%=%} clean
+	@$(ECHO)
 
-install: sync-html
+$(CLEAN_HTML_SUBDIRS):
+	$(MAKELINE) -C ${@:clean-html-%=%} clean-html
+	@$(ECHO)
 
-clean:
+$(WIPE_SUBDIRS):
+	$(MAKELINE) -C ${@:wipe-%=%} wipe
+	@$(ECHO)
+
+clean: $(CLEAN_SUBDIRS)
 	rm -f ?*~
 
-clean-html:
+clean-html: $(CLEAN_HTML_SUBDIRS)
 	rm -f ?*.html
 	rm -f ?*~
 
-wipe:
+wipe: $(WIPE_SUBDIRS)
 	rm -f ?*.html
 	rm -f ?*~

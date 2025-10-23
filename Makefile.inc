@@ -12,16 +12,19 @@ HTML_DIR = $(CUR_DIR:$(ROOT_GENERIC)%=$(ROOT_HTML)%)
 
 # subdirs {{{1
 
-SUBDIRS            = $(wildcard */)
-HTML_SUBDIRS       = $(SUBDIRS:%=html-%)
-CLEAN_SUBDIRS      = $(SUBDIRS:%=clean-%)
-CLEAN_HTML_SUBDIRS = $(SUBDIRS:%=clean-html-%)
-WIPE_SUBDIRS       = $(SUBDIRS:%=wipe-%)
+SUBDIRS                =  $(wildcard */)
+
+ALL_SUBDIRS            =  $(SUBDIRS:%=all-%)
+
+CLEAN_SUBDIRS          =  $(SUBDIRS:%=clean-%)
+CLEAN_HTML_SUBDIRS     =  $(SUBDIRS:%=clean-html-%)
+WIPE_SUBDIRS           =  $(SUBDIRS:%=wipe-%)
 
 # files {{{1
 
 ORG_FILES        =  $(wildcard *.org)
 HTML_FILES       =  $(ORG_FILES:.org=.html)
+
 CSS_FILES        =  $(wildcard $(ROOT_GENERIC)/style/*.css)
 INC_FILES        =  $(wildcard $(ROOT_GENERIC)/include/*.org)
 INC_LATEX_FILES  =  $(wildcard $(ROOT_GENERIC)/include/latex/*.*)
@@ -37,6 +40,8 @@ LY_GLOB_FILES = $(wildcard ~/racine/musica/lilypond/template/global/*.ly)
 LY_TMPL_PNG = $(wildcard $(ROOT_GENERIC)/image/musica/template/*.png)
 
 # programs & options {{{1
+
+MAKELINE = $(if $(MAKEFLAGS),$(MAKE) -$(MAKEFLAGS),$(MAKE))
 
 ECHO  = echo
 

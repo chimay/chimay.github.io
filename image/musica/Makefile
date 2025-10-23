@@ -9,11 +9,9 @@ include ../../Makefile.inc
 .PHONY: debug
 
 .PHONY: html
-.PHONY: epub
 
 .PHONY: all install
-.PHONY: clean clean-html clean-epub wipe
-
+.PHONY: clean clean-html wipe
 
 # debug {{{1
 
@@ -24,13 +22,6 @@ debug:
 #  org -> html {{{1
 
 html:
-	$(ECHO) nothing to do
-	@$(ECHO)
-
-
-#  org -> epub {{{1
-
-epub:
 	$(ECHO) nothing to do
 	@$(ECHO)
 
@@ -46,23 +37,11 @@ sync-html: html
 	@$(ECHO)
 
 
-# sync -> epub dir {{{1
-
-dry-sync-epub: epub
-	$(DRY_RSYNC) $(CUR_DIR)/ $(EPUB_DIR)
-	@$(ECHO)
-
-sync-epub: epub
-	$(RSYNC) $(CUR_DIR)/ $(EPUB_DIR)
-	@$(ECHO)
-
-
 #sync all {{{1
 
-dry-sync: dry-sync-html dry-sync-epub
+dry-sync: dry-sync-html
 
-sync: sync-html sync-epub
-
+sync: sync-html
 
 # all, install, clean, wipe {{{1
 
@@ -77,12 +56,6 @@ clean-html:
 	rm -f ?*.html
 	rm -f ?*~
 
-clean-epub:
-	rm -f ?*.epub
-	rm -f ?*~
-
 wipe:
 	rm -f ?*.html
-	rm -f ?*.epub
 	rm -f ?*~
-

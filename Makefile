@@ -10,24 +10,21 @@ include Makefile.inc
 
 .PHONY: lilypond-template
 .PHONY: html
-.PHONY: epub
 
 .PHONY: dry-sync-html sync-html
-.PHONY: dry-sync-epub sync-epub
 .PHONY: dry-sync sync
 
 .PHONY: all install
 
-.PHONY: $(HTML_SUBDIRS) $(EPUB_SUBDIRS)
-.PHONY: $(CLEAN_SUBDIRS) $(CLEAN_HTML_SUBDIRS) $(CLEAN_EPUB_SUBDIRS) $(WIPE_SUBDIRS)
+.PHONY: $(HTML_SUBDIRS)
+.PHONY: $(CLEAN_SUBDIRS) $(CLEAN_HTML_SUBDIRS) $(WIPE_SUBDIRS)
 
-.PHONY: clean clean-html clean-epub wipe
+.PHONY: clean clean-html wipe
 
 # debug {{{1
 
 debug:
 	@echo $(HTML_FILES)
-	@echo $(EPUB_FILES)
 	@echo $(LY_MEL_FILES)
 
 # lilypond template {{{1
@@ -50,18 +47,6 @@ $(HTML_SUBDIRS):
 html: $(HTML_SUBDIRS) $(HTML_FILES)
 	git add -A
 
-#  org -> epub {{{1
-
-$(EPUB_SUBDIRS):
-	$(MAKE) -C ${@:epub-%=%} epub
-	@$(ECHO)
-
-%.epub: %.org $(INC_FILES)
-	pandoc -t epub $< -o $(<:.org=.epub) 2> pandoc.log
-	@$(ECHO)
-
-epub: $(EPUB_SUBDIRS) $(EPUB_FILES)
-
 # sync -> html dir {{{1
 
 dry-sync-html: lilypond-template html
@@ -72,21 +57,11 @@ sync-html: lilypond-template html
 	$(RSYNC) $(ROOT_GENERIC)/ $(ROOT_HTML)
 	@$(ECHO)
 
-# sync -> epub dir {{{1
-
-dry-sync-epub: epub
-	$(DRY_RSYNC) $(ROOT_GENERIC)/ $(ROOT_EPUB)
-	@$(ECHO)
-
-sync-epub: epub
-	$(SYNC) $(ROOT_GENERIC)/ $(ROOT_EPUB)
-	@$(ECHO)
-
 # sync all {{{1
 
-dry-sync: dry-sync-html dry-sync-epub
+dry-sync: dry-sync-html
 
-sync: sync-html sync-epub
+sync: sync-html
 
 # all, install {{{1
 
@@ -104,10 +79,6 @@ $(CLEAN_HTML_SUBDIRS):
 	$(MAKE) -C ${@:clean-html-%=%} clean-html
 	@$(ECHO)
 
-$(CLEAN_EPUB_SUBDIRS):
-	$(MAKE) -C ${@:clean-epub-%=%} clean-epub
-	@$(ECHO)
-
 $(WIPE_SUBDIRS):
 	$(MAKE) -C ${@:wipe-%=%} wipe
 	@$(ECHO)
@@ -119,11 +90,6 @@ clean-html: $(CLEAN_HTML_SUBDIRS)
 	rm -f ?*.html
 	rm -f ?*~
 
-clean-epub: $(CLEAN_EPUB_SUBDIRS)
-	rm -f ?*.epub
-	rm -f ?*~
-
 wipe: $(WIPE_SUBDIRS)
 	rm -f ?*.html
-	rm -f ?*.epub
 	rm -f ?*~

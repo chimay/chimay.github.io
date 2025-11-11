@@ -117,15 +117,15 @@ $$\scalaire{u}{v} = \sum_{k=-\infty}^{+\infty} \conjugue(\hat{u}_k) \hat{v}_k$$
 
 * Progression géométrique d’exponentielle complexe
 
+** En partant de zéro
+
 Dans le cas où :
 
 #+BEGIN_CENTER
-\(
-a = \exp(\img x) \ne 1 \)
-
-\(
-a^k = \exp(\img k x)
-\)
+\begin{align*}
+a &=& \exp(\img x) \ne 1 \\
+a^k &=& \exp(\img k x)
+\end{align*}
 #+END_CENTER
 
 l'équation de la progression géométrique
@@ -133,84 +133,75 @@ du chapitre \ref{chap:real} :
 
 $$\sum_{i=0}^{n} a^i = \frac{1-a^{n+1}}{1-a}$$
 
-devient :
+valide quand $a \ne 1$, devient :
 
-$$\sum_{k=0}^{n} \exp(\img k x) = \frac{1-\exp(\img (n+1) x)}{1-\exp(\img x)}$$
+$$\sum_{k=0}^{n} \exp(\img k x) = \frac{1-\exp[\img (n+1) x]}{1-\exp(\img x)}$$
 
-On voit alors que si $(n+1) x$ est un multiple entier de $2\pi$, la
-somme s'annule par périodicité. Il existe toutefois une exception,
-lorsque $x$ est un multiple entier de $2\pi$, auquel cas :
+Si $(n+1) x$ est un multiple entier de $2\pi$, on a :
+
+$$\exp[\img (n+1) x] = 1$$
+
+et la somme s'annule :
+
+$$\sum_{k=0}^{n} \exp(\img k x) = \frac{1-1}{1-\exp(\img x)} = 0$$
+
+Lorsque $x$ est aussi un multiple entier de $2\pi$, soit $x = 2\pi l$, on a :
 
 #+begin_center
-\( \exp\left( \img k x \right) = \exp\left( 2 \pi \img k \right) = 1 \)
+\( a^k = \exp\left( \img k x \right) = \exp\left( 2 \pi \img k l \right) = 1 \)
 #+end_center
 
-et :
+et en particulier $a = 1$. On ne peut pas appliquer la formule ci-dessus
+de la progression géométrique, mais la somme se simplifie :
 
 #+begin_center
 $$\sum_{k=0}^{n} \exp(\img k x) = \sum_{k=0}^{n} 1 = n + 1 $$
 #+end_center
 
-
-Posant $N = n - 1$ et $x = 2\pi l/N$, on obtient :
+Posant $N = n + 1$ et $x = 2\pi l/N$, on obtient :
 
 #+begin_center
-$$ (n + 1) x = \frac{N 2 \pi l}{N} = 2 \pi l $$
+$$ (n + 1) x = N \frac{2 \pi l}{N} = 2 \pi l $$
 #+end_center
 
 et :
 
 #+BEGIN_CENTER
-\[ \sum_{k=0}^{N-1} \exp \left( \frac{2 \pi \img k l}{N} \right) =
+\[ \sum_{k=0}^{N-1} \exp\left(\frac{2 \pi \img k l}{N}\right) =
 \begin{cases}
-N & \mbox{si  } m = l/N \in\setZ \\
-0 & \mbox{si  } m = l/N \notin\setZ
+N & \mbox{si  } l/N \in\setZ \\
+0 & \mbox{si  } l/N \notin\setZ
 \end{cases} \]
 #+END_CENTER
 
-pour tout $k,l,m,N \in \setZ$. Dans la suite nous utilisons la notation :
+pour tout $k,l,N \in \setZ$.
 
-$$e(k,l) = \exp \left( \frac{2 \pi \img k l}{N} \right)$$
+** Approximativement symétrique autour de zéro
 
-* Transformeée de Fourier discrète
+Choisissons à présent un $N$ pair. Dans le cas où $l$ est un multiple de
+$N$, on a :
 
-Nous allons en déduire la forme de la transformeée de Fourier discrète. Soit la
-série $u_k : k = 0,...,N-1$ :
+$$\sum_{k=-N/2}^{N/2 - 1} \exp\left(\frac{2 \pi \img k l}{N}\right) = \sum_{k=-N/2}^{N/2 - 1} 1 = N$$
 
-$$u_k = \sum_{n=-N/2}^{N/2-1} U_n e(k,n)$$
-
-où nous supposons que $N/2 \in\setN$. Multipliant par $e(k,-m)$ où
-$m \in \{-N/2,...,N/2-1\}$, et utilisant l'additivité des exponentielles, il vient :
+Dans les autres cas :
 
 #+BEGIN_CENTER
 \begin{eqnarray*}
-u_k e(k,-m) &=& \sum_{n=-N/2}^{N/2-1} U_n e(k,n) e(k,-m) \\
-            &=& \sum_{n=-N/2}^{N/2-1} U_n e(k,n-m)
+\sum_{k=-N/2}^{N/2 - 1} \exp\left(\frac{2 \pi \img k l}{N}\right)
+&=& \exp\left(- \pi \img l\right) \sum_{k=0}^{N - 1} \exp\left(\frac{2 \pi \img k l}{N}\right) \\
+&=& -\img \cdot 0 \\
+&=& 0
 \end{eqnarray*}
 #+END_CENTER
 
-Sommons à présent sur $k$ :
-
-$$\sum_{k=0}^{N-1} u_k e(k,-m) = \sum_{n=-N/2}^{N/2-1} U_n \sum_{k=0}^{N-1} e(k,n-m)$$
-
-Mais la somme sur $k$ du membre de droite s'annule sauf lorsque $n-m$
-est multiple entier de $N$. Comme $m,n$ sont dans $\{-N/2,...,N/2-1\}$, le seul
-cas possible est ici $m = n$. On a donc :
-
-#+begin_center
-$$\sum_{k=0}^{N-1} u_k e(k,-m) = U_m N$$
-#+end_center
-
-et :
-
-$$U_m = \unsur{N} \sum_{k=0}^{N-1} u_k e(k,-m)$$
-
-Nous avons donc obtenu une bijection entre les $u_k$ et les $U_n$ :
+On a donc aussi :
 
 #+BEGIN_CENTER
-$$ u_k = \sum_{n=-N/2}^{N/2-1} U_n \exp\left(\frac{2 \pi \img k n}{N}\right) $$
-
-$$ U_n = \unsur{N} \sum_{k=0}^{N-1} u_k \exp\left(-\frac{2 \pi \img k n}{N}\right) $$
+\[ \sum_{k=-N/2}^{N/2-1} \exp\left(\frac{2 \pi \img k l}{N}\right) =
+\begin{cases}
+N & \mbox{si  } l/N \in\setZ \\
+0 & \mbox{si  } l/N \notin\setZ
+\end{cases} \]
 #+END_CENTER
 
 * Transformeée de Fourier
@@ -219,31 +210,22 @@ $$ U_n = \unsur{N} \sum_{k=0}^{N-1} u_k \exp\left(-\frac{2 \pi \img k n}{N}\righ
 
 ** Heuristique
 
-On peut présenter le résultat précédent sous une autre forme. On peut poser :
+Soit :
 
 #+BEGIN_CENTER
-\(
-x_k = k\Delta x \)
-
-\(
-y_n = n\Delta y
-\)
+\begin{align*}
+x_k &=& k\Delta x \\
+y_n &=& n\Delta y
+\end{align*}
 #+END_CENTER
 
-avec la condition :
-
-$$\Delta x \Delta y = \frac{1}{N}$$
-
-Avec les fonctions $u,v \in X \subset \fonction(\setR,\setR)$,
-on pose :
+et les fonctions $u,v \in X \subset \fonction(\setR,\setR)$. On pose :
 
 #+BEGIN_CENTER
-\(
-u_k = u(x_k) \)
-
-\(
+\begin{align*}
+u_k = u(x_k) \\
 U_n = U(y_n)
-\)
+\end{align*}
 #+END_CENTER
 
 Soit :
@@ -252,25 +234,47 @@ Soit :
 \begin{eqnarray*}
 u(x_k) &=& \sum_{n=-N/2}^{N/2-1} U(y_n) \exp(2 \pi \img x_k y_n) \Delta y \\
        &=& \sum_{n=-N/2}^{N/2-1} U(y_n) \exp(2 \pi \img k n \Delta x \Delta y) \Delta y \\
-       &=& \sum_{n=-N/2}^{N/2-1} U(y_n) \exp\left( \frac{2 \pi \img k n}{N} \right) \Delta y
 \end{eqnarray*}
 #+end_center
 
-où $k = -N/2 , ... ,N/2 - 1$. Suivant un procédé analogue à la
-transformée de Fourier discière :
+où $k = -N/2 , ... ,N/2 - 1$. Avec la condition :
+
+$$\Delta x \Delta y = \frac{1}{N}$$
+
+l’expression précédente devient :
 
 #+begin_center
-\begin{eqnarray*}
-\sum_{k=0}^{N-1} u(x_k) \exp( - 2\pi\img k m ) \Delta x
-  &=& \sum_{k=0}^{N-1} \sum_{n=-N/2}^{N/2-1} U(y_n) \exp\left( \frac{2 \pi \img k (n - m)}{N} \right) \Delta x \Delta y \\
-  &=& \sum_{n=-N/2}^{N/2-1} U(y_n) \sum_{k=0}^{N-1} \exp\left( \frac{2 \pi \img k (n - m)}{N} \right) \Delta x \Delta y \\
-  &=& \sum_{n=-N/2}^{N/2-1} U(y_n) \sum_{k=0}^{N-1} \exp\left( \frac{2 \pi \img k (n - m)}{N} \right) \Delta x \Delta y \\
-  &=& U(y_m) N \Delta x \Delta y \\
-  &=& U(y_m)
-\end{eqnarray*}
+$$ u(x_k) =
+\sum_{n=-N/2}^{N/2-1} U(y_n) \exp\left( \frac{2 \pi \img k n}{N} \right) \Delta y $$
 #+end_center
 
-on aboutit à la relation inverse :
+Dans l’idée d’approximer une intégrale par une somme similaire à
+une série de Fourier, on évalue :
+
+#+begin_center
+$$ \sum_{k=0}^{N-1} u(x_k) \exp( - 2\pi\img k m ) \Delta x
+= \sum_{k=-N/2}^{N/2-1} \sum_{n=-N/2}^{N/2-1} U(y_n) \exp\left( \frac{2 \pi \img k (n - m)}{N} \right) \Delta x \Delta y $$
+#+end_center
+
+On peut réorganiser cette double somme sous la forme :
+
+#+begin_center
+$$ \sum_{k=0}^{N-1} u(x_k) \exp( - 2\pi\img k m ) \Delta x
+= \sum_{n=-N/2}^{N/2-1} U(y_n) \sum_{k=-N/2}^{N/2-1} \exp\left( \frac{2 \pi \img k (n - m)}{N} \right) \Delta x \Delta y $$
+#+end_center
+
+Mais la somme sur $k$ du membre de droite s'annule sauf lorsque $n-m$
+est multiple entier de $N$. Comme $m,n$ sont dans $\{-N/2,...,N/2-1\}$,
+la seule possibilité est celle où $m = n$. Le somme sur $k$ vaut alors
+$N$ et :
+
+#+begin_center
+$$ \sum_{k=0}^{N-1} u(x_k) \exp( - 2\pi\img k m ) \Delta x
+= U(y_m) N \Delta x \Delta y \\
+= U(y_m) $$
+#+end_center
+
+On aboutit donc à la relation inverse :
 
 $$U(y_n) = \sum_{k = -N/2}^{N/2-1} u(x_k) \exp(-2 \pi \img x_k y_n) \Delta x$$
 
@@ -298,21 +302,15 @@ $$ U(y) = \mathcal{F}(u)(y) = \int\limits_{-\infty}^{+\infty} u(x) \exp(-2\pi\im
 $$ u(x) = \mathcal{F}^{-1}(U)(x) = \int\limits_{-\infty}^{+\infty} U(y) \exp(2\pi\img x y) dy $$
 #+END_CENTER
 
-
 ** Delta de Dirac
 
 On déduit des relations ci dessus que :
 
-#+BEGIN_CENTER
-\(
-u(x) = \int\limits_{-\infty}^{+\infty} \exp(2\pi\img x y) dy
-\int\limits_{-\infty}^{+\infty} u(z) \exp(-2\pi\img z y) dz \)
+$$ u(x) = \int\limits_{-\infty}^{+\infty} \exp(2\pi\img x y) dy
+\int\limits_{-\infty}^{+\infty} u(z) \exp(-2\pi\img z y) dz $$
 
-\(
-u(x) = \int\limits_{-\infty}^{+\infty} u(z) dz
-\int\limits_{-\infty}^{+\infty} \exp(2\pi\img (x-z) y) dy
-\)
-#+END_CENTER
+$$ u(x) = \int\limits_{-\infty}^{+\infty} u(z) dz
+\int\limits_{-\infty}^{+\infty} \exp(2\pi\img (x-z) y) dy $$
 
 On en déduit la relation fondamentale :
 
@@ -329,7 +327,6 @@ Inversément, on a :
 
 $$\mathcal{F}(\delta)(x) = \int\limits_{-\infty}^{+\infty} \delta(x) \exp(-2\pi\img x y) dx = \exp(0) = 1$$
 
-
 ** Produit scalaire
 
 Considérons à présent le produit scalaire :
@@ -339,22 +336,17 @@ $$\scalaire{u}{v} = \int\limits_{-\infty}^{+\infty} \bar{u}(x) v(x) dx$$
 et examinons $\scalaire{\mathcal{F}(u)}{\mathcal{F}(v)}$. En utilisant la propriété
 d'orthonormalité, on arrive à :
 
-#+BEGIN_CENTER
-\(
-\int\limits_{-\infty}^{+\infty} \conjugue\left[\mathcal{F}(u)(y)\right] \mathcal{F}(v)(y) dy =
-\int_{\setR^2} \bar{u}(x) v(z) \exp\left(2\pi\img (x-z) y\right) dx dz \)
+$$ \int\limits_{-\infty}^{+\infty} \conjugue\left[\mathcal{F}(u)(y)\right] \mathcal{F}(v)(y) dy =
+\int_{\setR^2} \bar{u}(x) v(z) \exp\left(2\pi\img (x-z) y\right) dx dz $$
 
-\(
-\int\limits_{-\infty}^{+\infty} \conjugue\left[\mathcal{F}(u)(y)\right] \mathcal{F}(v)(y) dy =
-\int_{\setR^2} \bar{u}(x) v(z) \delta(x-z) dx dz
-\)
-#+END_CENTER
+$$ \int\limits_{-\infty}^{+\infty} \conjugue\left[\mathcal{F}(u)(y)\right] \mathcal{F}(v)(y) dy =
+\int_{\setR^2} \bar{u}(x) v(z) \delta(x-z) dx dz $$
 
 et donc :
 
 #+BEGIN_CENTER
 \(
-\int\limits_{-\infty}^{+\infty} conjugue\left[\mathcal{F}(u)(y)\right] \mathcal{F}(v)(y) dy =
+\int\limits_{-\infty}^{+\infty} \conjugue\left[\mathcal{F}(u)(y)\right] \mathcal{F}(v)(y) dy =
 \int\limits_{-\infty}^{+\infty} \bar{u}(x) v(x) dx
 \)
 #+END_CENTER
@@ -408,27 +400,18 @@ $$\mathcal{F}(u \star v) = \mathcal{F}(u)\mathcal{F}(v)$$
 Soit $u$ une fonction qui s'annule à l'infini. La transformeée de Fourier
 de sa dérivée s'écrit :
 
-#+BEGIN_CENTER
-\(
-\mathcal{F}\left(\OD{u}{x}\right)(y) =
-\int\limits_{-\infty}^{+\infty} \OD{u}{x}(x)\exp(-2\pi\img x y) dx
-\)
-#+END_CENTER
+$$ \mathcal{F}\left(\OD{u}{x}\right)(y) =
+\int\limits_{-\infty}^{+\infty} \OD{u}{x}(x)\exp(-2\pi\img x y) dx $$
 
 En intégrant par partie, et en tenant compte du fait que
 les limites à l'infini sont nulles, il vient :
 
-#+BEGIN_CENTER
-\(
-\mathcal{F}\left(\OD{u}{x}\right)(y) =
-- (-2\pi\img y) \int\limits_{-\infty}^{+\infty} u(x)\exp(-2\pi\img x y) dx
-\)
-#+END_CENTER
+$$ \mathcal{F}\left(\OD{u}{x}\right)(y)
+= - (-2\pi\img y) \int\limits_{-\infty}^{+\infty} u(x)\exp(-2\pi\img x y) dx $$
 
 et finalement :
 
 $$\mathcal{F}\left(\OD{u}{x}\right)(y) =  2 \pi \img y \mathcal{F}(y)$$
-
 
 ** Déphasage
 

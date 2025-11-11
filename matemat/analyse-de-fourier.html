@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-11-11 mar 09:13 -->
+<!-- 2025-11-11 mar 13:04 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Analyse de Fourier</title>
@@ -241,11 +241,10 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org397195e">1. Séries de Fourier</a></li>
-<li><a href="#orgce59a8a">2. Progression géométrique d’exponentielle complexe</a></li>
-<li><a href="#orgf95caa5">3. Transformeée de Fourier discrète</a></li>
-<li><a href="#org2de0b75">4. Transformeée de Fourier</a></li>
-<li><a href="#org7dd2604">5. Auto-adjoint</a></li>
+<li><a href="#org302739c">1. Séries de Fourier</a></li>
+<li><a href="#org1b568a1">2. Progression géométrique d’exponentielle complexe</a></li>
+<li><a href="#org4b29d35">3. Transformeée de Fourier</a></li>
+<li><a href="#orga02eaa0">4. Auto-adjoint</a></li>
 </ul>
 </div>
 </div>
@@ -421,8 +420,8 @@
 <p>
 \label{chap:fourier}
 </p>
-<div id="outline-container-org397195e" class="outline-2">
-<h2 id="org397195e"><span class="section-number-2">1.</span> Séries de Fourier</h2>
+<div id="outline-container-org302739c" class="outline-2">
+<h2 id="org302739c"><span class="section-number-2">1.</span> Séries de Fourier</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 ARRANGER LE CHAPITRE
@@ -576,24 +575,22 @@ Utilisant à nouveau les propriétés des bases orthonormées, on a :
 </p>
 </div>
 </div>
-<div id="outline-container-orgce59a8a" class="outline-2">
-<h2 id="orgce59a8a"><span class="section-number-2">2.</span> Progression géométrique d’exponentielle complexe</h2>
+<div id="outline-container-org1b568a1" class="outline-2">
+<h2 id="org1b568a1"><span class="section-number-2">2.</span> Progression géométrique d’exponentielle complexe</h2>
 <div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orgd2fece1" class="outline-3">
+<h3 id="orgd2fece1"><span class="section-number-3">2.1.</span> En partant de zéro</h3>
+<div class="outline-text-3" id="text-2-1">
 <p>
 Dans le cas où :
 </p>
 
 <div class="org-center">
-<p>
-\(
-a = \exp(\img x) \ne 1 \)
-</p>
-
-<p>
-\(
-a^k = \exp(\img k x)
-\)
-</p>
+\begin{align*}
+a &=& \exp(\img x) \ne 1 \\
+a^k &=& \exp(\img k x)
+\end{align*}
 </div>
 
 <p>
@@ -606,27 +603,42 @@ du chapitre \ref{chap:real} :
 </p>
 
 <p>
-devient :
+valide quand \(a \ne 1\), devient :
 </p>
 
 <p>
-\[\sum_{k=0}^{n} \exp(\img k x) = \frac{1-\exp(\img (n+1) x)}{1-\exp(\img x)}\]
+\[\sum_{k=0}^{n} \exp(\img k x) = \frac{1-\exp[\img (n+1) x]}{1-\exp(\img x)}\]
 </p>
 
 <p>
-On voit alors que si \((n+1) x\) est un multiple entier de \(2\pi\), la
-somme s'annule par périodicité. Il existe toutefois une exception,
-lorsque \(x\) est un multiple entier de \(2\pi\), auquel cas :
+Si \((n+1) x\) est un multiple entier de \(2\pi\), on a :
+</p>
+
+<p>
+\[\exp[\img (n+1) x] = 1\]
+</p>
+
+<p>
+et la somme s'annule :
+</p>
+
+<p>
+\[\sum_{k=0}^{n} \exp(\img k x) = \frac{1-1}{1-\exp(\img x)} = 0\]
+</p>
+
+<p>
+Lorsque \(x\) est aussi un multiple entier de \(2\pi\), soit \(x = 2\pi l\), on a :
 </p>
 
 <div class="org-center">
 <p>
-\( \exp\left( \img k x \right) = \exp\left( 2 \pi \img k \right) = 1 \)
+\( a^k = \exp\left( \img k x \right) = \exp\left( 2 \pi \img k l \right) = 1 \)
 </p>
 </div>
 
 <p>
-et :
+et en particulier \(a = 1\). On ne peut pas appliquer la formule ci-dessus
+de la progression géométrique, mais la somme se simplifie :
 </p>
 
 <div class="org-center">
@@ -635,14 +647,13 @@ et :
 </p>
 </div>
 
-
 <p>
-Posant \(N = n - 1\) et \(x = 2\pi l/N\), on obtient :
+Posant \(N = n + 1\) et \(x = 2\pi l/N\), on obtient :
 </p>
 
 <div class="org-center">
 <p>
-\[ (n + 1) x = \frac{N 2 \pi l}{N} = 2 \pi l \]
+\[ (n + 1) x = N \frac{2 \pi l}{N} = 2 \pi l \]
 </p>
 </div>
 
@@ -652,150 +663,99 @@ et :
 
 <div class="org-center">
 <p>
-\[ \sum_{k=0}^{N-1} \exp \left( \frac{2 \pi \img k l}{N} \right) =
+\[ \sum_{k=0}^{N-1} \exp\left(\frac{2 \pi \img k l}{N}\right) =
 \begin{cases}
-N & \mbox{si  } m = l/N \in\setZ \\
-0 & \mbox{si  } m = l/N \notin\setZ
+N & \mbox{si  } l/N \in\setZ \\
+0 & \mbox{si  } l/N \notin\setZ
 \end{cases} \]
 </p>
 </div>
 
 <p>
-pour tout \(k,l,m,N \in \setZ\). Dans la suite nous utilisons la notation :
-</p>
-
-<p>
-\[e(k,l) = \exp \left( \frac{2 \pi \img k l}{N} \right)\]
+pour tout \(k,l,N \in \setZ\).
 </p>
 </div>
 </div>
-<div id="outline-container-orgf95caa5" class="outline-2">
-<h2 id="orgf95caa5"><span class="section-number-2">3.</span> Transformeée de Fourier discrète</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-org152a22a" class="outline-3">
+<h3 id="org152a22a"><span class="section-number-3">2.2.</span> Approximativement symétrique autour de zéro</h3>
+<div class="outline-text-3" id="text-2-2">
 <p>
-Nous allons en déduire la forme de la transformeée de Fourier discrète. Soit la
-série \(u_k : k = 0,...,N-1\) :
+Choisissons à présent un \(N\) pair. Dans le cas où \(l\) est un multiple de
+\(N\), on a :
 </p>
 
 <p>
-\[u_k = \sum_{n=-N/2}^{N/2-1} U_n e(k,n)\]
+\[\sum_{k=-N/2}^{N/2 - 1} \exp\left(\frac{2 \pi \img k l}{N}\right) = \sum_{k=-N/2}^{N/2 - 1} 1 = N\]
 </p>
 
 <p>
-où nous supposons que \(N/2 \in\setN\). Multipliant par \(e(k,-m)\) où
-\(m \in \{-N/2,...,N/2-1\}\), et utilisant l'additivité des exponentielles, il vient :
+Dans les autres cas :
 </p>
 
 <div class="org-center">
 \begin{eqnarray*}
-u_k e(k,-m) &=& \sum_{n=-N/2}^{N/2-1} U_n e(k,n) e(k,-m) \\
-            &=& \sum_{n=-N/2}^{N/2-1} U_n e(k,n-m)
+\sum_{k=-N/2}^{N/2 - 1} \exp\left(\frac{2 \pi \img k l}{N}\right)
+&=& \exp\left(- \pi \img l\right) \sum_{k=0}^{N - 1} \exp\left(\frac{2 \pi \img k l}{N}\right) \\
+&=& -\img \cdot 0 \\
+&=& 0
 \end{eqnarray*}
 </div>
 
 <p>
-Sommons à présent sur \(k\) :
-</p>
-
-<p>
-\[\sum_{k=0}^{N-1} u_k e(k,-m) = \sum_{n=-N/2}^{N/2-1} U_n \sum_{k=0}^{N-1} e(k,n-m)\]
-</p>
-
-<p>
-Mais la somme sur \(k\) du membre de droite s'annule sauf lorsque \(n-m\)
-est multiple entier de \(N\). Comme \(m,n\) sont dans \(\{-N/2,...,N/2-1\}\), le seul
-cas possible est ici \(m = n\). On a donc :
+On a donc aussi :
 </p>
 
 <div class="org-center">
 <p>
-\[\sum_{k=0}^{N-1} u_k e(k,-m) = U_m N\]
-</p>
-</div>
-
-<p>
-et :
-</p>
-
-<p>
-\[U_m = \unsur{N} \sum_{k=0}^{N-1} u_k e(k,-m)\]
-</p>
-
-<p>
-Nous avons donc obtenu une bijection entre les \(u_k\) et les \(U_n\) :
-</p>
-
-<div class="org-center">
-<p>
-\[ u_k = \sum_{n=-N/2}^{N/2-1} U_n \exp\left(\frac{2 \pi \img k n}{N}\right) \]
-</p>
-
-<p>
-\[ U_n = \unsur{N} \sum_{k=0}^{N-1} u_k \exp\left(-\frac{2 \pi \img k n}{N}\right) \]
+\[ \sum_{k=-N/2}^{N/2-1} \exp\left(\frac{2 \pi \img k l}{N}\right) =
+\begin{cases}
+N & \mbox{si  } l/N \in\setZ \\
+0 & \mbox{si  } l/N \notin\setZ
+\end{cases} \]
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org2de0b75" class="outline-2">
-<h2 id="org2de0b75"><span class="section-number-2">4.</span> Transformeée de Fourier</h2>
-<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org4b29d35" class="outline-2">
+<h2 id="org4b29d35"><span class="section-number-2">3.</span> Transformeée de Fourier</h2>
+<div class="outline-text-2" id="text-3">
 <div id="text-table-of-contents-1" role="doc-toc">
 <ul>
-<li><a href="#org2f31e1a">4.1. Heuristique</a></li>
-<li><a href="#org1fd752d">4.2. Delta de Dirac</a></li>
-<li><a href="#org0127230">4.3. Produit scalaire</a></li>
-<li><a href="#org4d31c30">4.4. Convolution</a></li>
-<li><a href="#orgfd30679">4.5. Dérivées</a></li>
-<li><a href="#org9e5abb8">4.6. Déphasage</a></li>
-<li><a href="#orgd1b1c6d">4.7. Dilatation</a></li>
-<li><a href="#orgb28db57">4.8. Gaussienne</a></li>
+<li><a href="#org0418428">3.1. Heuristique</a></li>
+<li><a href="#org1377c72">3.2. Delta de Dirac</a></li>
+<li><a href="#org2ff8967">3.3. Produit scalaire</a></li>
+<li><a href="#org5c0ca91">3.4. Convolution</a></li>
+<li><a href="#orga9bea26">3.5. Dérivées</a></li>
+<li><a href="#orgc40e973">3.6. Déphasage</a></li>
+<li><a href="#org13b6e42">3.7. Dilatation</a></li>
+<li><a href="#org21c488c">3.8. Gaussienne</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org2f31e1a" class="outline-3">
-<h3 id="org2f31e1a"><span class="section-number-3">4.1.</span> Heuristique</h3>
-<div class="outline-text-3" id="text-4-1">
+<div id="outline-container-org0418428" class="outline-3">
+<h3 id="org0418428"><span class="section-number-3">3.1.</span> Heuristique</h3>
+<div class="outline-text-3" id="text-3-1">
 <p>
-On peut présenter le résultat précédent sous une autre forme. On peut poser :
+Soit :
 </p>
 
 <div class="org-center">
-<p>
-\(
-x_k = k\Delta x \)
-</p>
-
-<p>
-\(
-y_n = n\Delta y
-\)
-</p>
+\begin{align*}
+x_k &=& k\Delta x \\
+y_n &=& n\Delta y
+\end{align*}
 </div>
 
 <p>
-avec la condition :
-</p>
-
-<p>
-\[\Delta x \Delta y = \frac{1}{N}\]
-</p>
-
-<p>
-Avec les fonctions \(u,v \in X \subset \fonction(\setR,\setR)\),
-on pose :
+et les fonctions \(u,v \in X \subset \fonction(\setR,\setR)\). On pose :
 </p>
 
 <div class="org-center">
-<p>
-\(
-u_k = u(x_k) \)
-</p>
-
-<p>
-\(
+\begin{align*}
+u_k = u(x_k) \\
 U_n = U(y_n)
-\)
-</p>
+\end{align*}
 </div>
 
 <p>
@@ -806,28 +766,68 @@ Soit :
 \begin{eqnarray*}
 u(x_k) &=& \sum_{n=-N/2}^{N/2-1} U(y_n) \exp(2 \pi \img x_k y_n) \Delta y \\
        &=& \sum_{n=-N/2}^{N/2-1} U(y_n) \exp(2 \pi \img k n \Delta x \Delta y) \Delta y \\
-       &=& \sum_{n=-N/2}^{N/2-1} U(y_n) \exp\left( \frac{2 \pi \img k n}{N} \right) \Delta y
 \end{eqnarray*}
 </div>
 
 <p>
-où \(k = -N/2 , ... ,N/2 - 1\). Suivant un procédé analogue à la
-transformée de Fourier discière :
+où \(k = -N/2 , ... ,N/2 - 1\). Avec la condition :
+</p>
+
+<p>
+\[\Delta x \Delta y = \frac{1}{N}\]
+</p>
+
+<p>
+l’expression précédente devient :
 </p>
 
 <div class="org-center">
-\begin{eqnarray*}
-\sum_{k=0}^{N-1} u(x_k) \exp( - 2\pi\img k m ) \Delta x
-  &=& \sum_{k=0}^{N-1} \sum_{n=-N/2}^{N/2-1} U(y_n) \exp\left( \frac{2 \pi \img k (n - m)}{N} \right) \Delta x \Delta y \\
-  &=& \sum_{n=-N/2}^{N/2-1} U(y_n) \sum_{k=0}^{N-1} \exp\left( \frac{2 \pi \img k (n - m)}{N} \right) \Delta x \Delta y \\
-  &=& \sum_{n=-N/2}^{N/2-1} U(y_n) \sum_{k=0}^{N-1} \exp\left( \frac{2 \pi \img k (n - m)}{N} \right) \Delta x \Delta y \\
-  &=& U(y_m) N \Delta x \Delta y \\
-  &=& U(y_m)
-\end{eqnarray*}
+<p>
+\[ u(x_k) =
+\sum_{n=-N/2}^{N/2-1} U(y_n) \exp\left( \frac{2 \pi \img k n}{N} \right) \Delta y \]
+</p>
 </div>
 
 <p>
-on aboutit à la relation inverse :
+Dans l’idée d’approximer une intégrale par une somme similaire à
+une série de Fourier, on évalue :
+</p>
+
+<div class="org-center">
+<p>
+\[ \sum_{k=0}^{N-1} u(x_k) \exp( - 2\pi\img k m ) \Delta x
+= \sum_{k=-N/2}^{N/2-1} \sum_{n=-N/2}^{N/2-1} U(y_n) \exp\left( \frac{2 \pi \img k (n - m)}{N} \right) \Delta x \Delta y \]
+</p>
+</div>
+
+<p>
+On peut réorganiser cette double somme sous la forme :
+</p>
+
+<div class="org-center">
+<p>
+\[ \sum_{k=0}^{N-1} u(x_k) \exp( - 2\pi\img k m ) \Delta x
+= \sum_{n=-N/2}^{N/2-1} U(y_n) \sum_{k=-N/2}^{N/2-1} \exp\left( \frac{2 \pi \img k (n - m)}{N} \right) \Delta x \Delta y \]
+</p>
+</div>
+
+<p>
+Mais la somme sur \(k\) du membre de droite s'annule sauf lorsque \(n-m\)
+est multiple entier de \(N\). Comme \(m,n\) sont dans \(\{-N/2,...,N/2-1\}\),
+la seule possibilité est celle où \(m = n\). Le somme sur \(k\) vaut alors
+\(N\) et :
+</p>
+
+<div class="org-center">
+<p>
+\[ \sum_{k=0}^{N-1} u(x_k) \exp( - 2\pi\img k m ) \Delta x
+= U(y_m) N \Delta x \Delta y \\
+= U(y_m) \]
+</p>
+</div>
+
+<p>
+On aboutit donc à la relation inverse :
 </p>
 
 <p>
@@ -875,27 +875,22 @@ son inverse par :
 </div>
 </div>
 </div>
-<div id="outline-container-org1fd752d" class="outline-3">
-<h3 id="org1fd752d"><span class="section-number-3">4.2.</span> Delta de Dirac</h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-org1377c72" class="outline-3">
+<h3 id="org1377c72"><span class="section-number-3">3.2.</span> Delta de Dirac</h3>
+<div class="outline-text-3" id="text-3-2">
 <p>
 On déduit des relations ci dessus que :
 </p>
 
-<div class="org-center">
 <p>
-\(
-u(x) = \int\limits_{-\infty}^{+\infty} \exp(2\pi\img x y) dy
-\int\limits_{-\infty}^{+\infty} u(z) \exp(-2\pi\img z y) dz \)
+\[ u(x) = \int\limits_{-\infty}^{+\infty} \exp(2\pi\img x y) dy
+\int\limits_{-\infty}^{+\infty} u(z) \exp(-2\pi\img z y) dz \]
 </p>
 
 <p>
-\(
-u(x) = \int\limits_{-\infty}^{+\infty} u(z) dz
-\int\limits_{-\infty}^{+\infty} \exp(2\pi\img (x-z) y) dy
-\)
+\[ u(x) = \int\limits_{-\infty}^{+\infty} u(z) dz
+\int\limits_{-\infty}^{+\infty} \exp(2\pi\img (x-z) y) dy \]
 </p>
-</div>
 
 <p>
 On en déduit la relation fondamentale :
@@ -927,9 +922,9 @@ Inversément, on a :
 </p>
 </div>
 </div>
-<div id="outline-container-org0127230" class="outline-3">
-<h3 id="org0127230"><span class="section-number-3">4.3.</span> Produit scalaire</h3>
-<div class="outline-text-3" id="text-4-3">
+<div id="outline-container-org2ff8967" class="outline-3">
+<h3 id="org2ff8967"><span class="section-number-3">3.3.</span> Produit scalaire</h3>
+<div class="outline-text-3" id="text-3-3">
 <p>
 Considérons à présent le produit scalaire :
 </p>
@@ -943,20 +938,15 @@ et examinons \(\scalaire{\mathcal{F}(u)}{\mathcal{F}(v)}\). En utilisant la prop
 d'orthonormalité, on arrive à :
 </p>
 
-<div class="org-center">
 <p>
-\(
-\int\limits_{-\infty}^{+\infty} \conjugue\left[\mathcal{F}(u)(y)\right] \mathcal{F}(v)(y) dy =
-\int_{\setR^2} \bar{u}(x) v(z) \exp\left(2\pi\img (x-z) y\right) dx dz \)
+\[ \int\limits_{-\infty}^{+\infty} \conjugue\left[\mathcal{F}(u)(y)\right] \mathcal{F}(v)(y) dy =
+\int_{\setR^2} \bar{u}(x) v(z) \exp\left(2\pi\img (x-z) y\right) dx dz \]
 </p>
 
 <p>
-\(
-\int\limits_{-\infty}^{+\infty} \conjugue\left[\mathcal{F}(u)(y)\right] \mathcal{F}(v)(y) dy =
-\int_{\setR^2} \bar{u}(x) v(z) \delta(x-z) dx dz
-\)
+\[ \int\limits_{-\infty}^{+\infty} \conjugue\left[\mathcal{F}(u)(y)\right] \mathcal{F}(v)(y) dy =
+\int_{\setR^2} \bar{u}(x) v(z) \delta(x-z) dx dz \]
 </p>
-</div>
 
 <p>
 et donc :
@@ -965,7 +955,7 @@ et donc :
 <div class="org-center">
 <p>
 \(
-\int\limits_{-\infty}^{+\infty} conjugue\left[\mathcal{F}(u)(y)\right] \mathcal{F}(v)(y) dy =
+\int\limits_{-\infty}^{+\infty} \conjugue\left[\mathcal{F}(u)(y)\right] \mathcal{F}(v)(y) dy =
 \int\limits_{-\infty}^{+\infty} \bar{u}(x) v(x) dx
 \)
 </p>
@@ -981,9 +971,9 @@ le produit scalaire :
 </p>
 </div>
 </div>
-<div id="outline-container-org4d31c30" class="outline-3">
-<h3 id="org4d31c30"><span class="section-number-3">4.4.</span> Convolution</h3>
-<div class="outline-text-3" id="text-4-4">
+<div id="outline-container-org5c0ca91" class="outline-3">
+<h3 id="org5c0ca91"><span class="section-number-3">3.4.</span> Convolution</h3>
+<div class="outline-text-3" id="text-3-4">
 <p>
 La transformeèe d'un produit de convolution s'écrit :
 </p>
@@ -1038,40 +1028,28 @@ c'est-à-dire :
 </p>
 </div>
 </div>
-<div id="outline-container-orgfd30679" class="outline-3">
-<h3 id="orgfd30679"><span class="section-number-3">4.5.</span> Dérivées</h3>
-<div class="outline-text-3" id="text-4-5">
+<div id="outline-container-orga9bea26" class="outline-3">
+<h3 id="orga9bea26"><span class="section-number-3">3.5.</span> Dérivées</h3>
+<div class="outline-text-3" id="text-3-5">
 <p>
 Soit \(u\) une fonction qui s'annule à l'infini. La transformeée de Fourier
 de sa dérivée s'écrit :
 </p>
 
-<div class="org-center">
 <p>
-\(
-\mathcal{F}\left(\OD{u}{x}\right)(y) =
-\int\limits_{-\infty}^{+\infty} \OD{u}{x}(x)\exp(-2\pi\img x y) dx
-\)
+\[ \mathcal{F}\left(\OD{u}{x}\right)(y) =
+\int\limits_{-\infty}^{+\infty} \OD{u}{x}(x)\exp(-2\pi\img x y) dx \]
 </p>
-</div>
 
 <p>
 En intégrant par partie, et en tenant compte du fait que
 les limites à l'infini sont nulles, il vient :
 </p>
 
-<div class="org-center">
 <p>
-\(
-\mathcal{F}\left(\OD{u}{x}\right)(y) =
+\[ \mathcal{F}\left(\OD{u}{x}\right)(y)
+= - (-2\pi\img y) \int\limits_{-\infty}^{+\infty} u(x)\exp(-2\pi\img x y) dx \]
 </p>
-<ul class="org-ul">
-<li>(-2&pi;\img y) &int;\limits<sub>-&infin;</sub><sup>+&infin;</sup> u(x)exp(-2&pi;\img x y) dx</li>
-</ul>
-<p>
-\)
-</p>
-</div>
 
 <p>
 et finalement :
@@ -1082,9 +1060,9 @@ et finalement :
 </p>
 </div>
 </div>
-<div id="outline-container-org9e5abb8" class="outline-3">
-<h3 id="org9e5abb8"><span class="section-number-3">4.6.</span> Déphasage</h3>
-<div class="outline-text-3" id="text-4-6">
+<div id="outline-container-orgc40e973" class="outline-3">
+<h3 id="orgc40e973"><span class="section-number-3">3.6.</span> Déphasage</h3>
+<div class="outline-text-3" id="text-3-6">
 <p>
 Considérons l'opérateur de translation :
 </p>
@@ -1121,9 +1099,9 @@ Mais comme \(dx = d(x-a)\), on en déduit que :
 </p>
 </div>
 </div>
-<div id="outline-container-orgd1b1c6d" class="outline-3">
-<h3 id="orgd1b1c6d"><span class="section-number-3">4.7.</span> Dilatation</h3>
-<div class="outline-text-3" id="text-4-7">
+<div id="outline-container-org13b6e42" class="outline-3">
+<h3 id="org13b6e42"><span class="section-number-3">3.7.</span> Dilatation</h3>
+<div class="outline-text-3" id="text-3-7">
 <p>
 Soit \(d_a\) l'opérateur de dilatation :
 </p>
@@ -1177,9 +1155,9 @@ c'est-à-dire :
 </p>
 </div>
 </div>
-<div id="outline-container-orgb28db57" class="outline-3">
-<h3 id="orgb28db57"><span class="section-number-3">4.8.</span> Gaussienne</h3>
-<div class="outline-text-3" id="text-4-8">
+<div id="outline-container-org21c488c" class="outline-3">
+<h3 id="org21c488c"><span class="section-number-3">3.8.</span> Gaussienne</h3>
+<div class="outline-text-3" id="text-3-8">
 <p>
 Définissons la gaussienne \(G\) :
 </p>
@@ -1233,9 +1211,9 @@ La transformeée de Fourier laisse \(G\) inchangée.
 </div>
 </div>
 </div>
-<div id="outline-container-org7dd2604" class="outline-2">
-<h2 id="org7dd2604"><span class="section-number-2">5.</span> Auto-adjoint</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-orga02eaa0" class="outline-2">
+<h2 id="orga02eaa0"><span class="section-number-2">4.</span> Auto-adjoint</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 La transformeée de Fourier (voir chapitre \ref{chap:fourier}) est définie par :
 </p>
@@ -1273,7 +1251,7 @@ et donc :
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-11-11 mar 09:13</p>
+<p class="date">Created: 2025-11-11 mar 13:04</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

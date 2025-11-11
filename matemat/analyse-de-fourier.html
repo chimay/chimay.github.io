@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-11-10 lun 17:35 -->
+<!-- 2025-11-11 mar 09:13 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Analyse de Fourier</title>
@@ -241,11 +241,11 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org8627df7">1. Séries de Fourier</a></li>
-<li><a href="#org44ed677">2. Progression géométrique d’exponentielle complexe</a></li>
-<li><a href="#org8db27e3">3. Transformeée de Fourier discrète</a></li>
-<li><a href="#org53a089a">4. Transformeée de Fourier</a></li>
-<li><a href="#org93c1602">5. Auto-adjoint</a></li>
+<li><a href="#org397195e">1. Séries de Fourier</a></li>
+<li><a href="#orgce59a8a">2. Progression géométrique d’exponentielle complexe</a></li>
+<li><a href="#orgf95caa5">3. Transformeée de Fourier discrète</a></li>
+<li><a href="#org2de0b75">4. Transformeée de Fourier</a></li>
+<li><a href="#org7dd2604">5. Auto-adjoint</a></li>
 </ul>
 </div>
 </div>
@@ -421,8 +421,8 @@
 <p>
 \label{chap:fourier}
 </p>
-<div id="outline-container-org8627df7" class="outline-2">
-<h2 id="org8627df7"><span class="section-number-2">1.</span> Séries de Fourier</h2>
+<div id="outline-container-org397195e" class="outline-2">
+<h2 id="org397195e"><span class="section-number-2">1.</span> Séries de Fourier</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 ARRANGER LE CHAPITRE
@@ -527,17 +527,11 @@ où \(k\in\setZ\). Notons que :
 </p>
 
 <div class="org-center">
-<p>
-\(
-\bar{e}_m e_n =
-\exp\left(-\frac{2\pi\img m x}{T}\right)\exp\left(\frac{2\pi\img n x}{T}\right) \)
-</p>
-
-<p>
-\(
-\bar{e}_m e_n = \exp\left(\frac{2\pi\img (n-m) x}{T}\right)
-\)
-</p>
+\begin{align*}
+\bar{e}_m e_n
+&=& \exp\left(-\frac{2\pi\img m x}{T}\right)\exp\left(\frac{2\pi\img n x}{T}\right) \\
+&=& \exp\left(\frac{2\pi\img (n-m) x}{T}\right)
+\end{align*}
 </div>
 
 <p>
@@ -545,7 +539,7 @@ La suite des \(e_k\) est donc orthogonale :
 </p>
 
 <p>
-\[\scalaire{e_m}{e_n} = \int\limits_{-T/2}^{T/2} \exp\left(\frac{2\pi\img (n-m) x}{T}\right)dx = 2 \pi \delta_{mn}\]
+\[\scalaire{e_m}{e_n} = \int\limits_{-T/2}^{T/2} \exp\left(\frac{2\pi\img (n-m) x}{T}\right)dx = T \delta_{mn}\]
 </p>
 
 <p>
@@ -553,16 +547,16 @@ Soit à présent \(u\in\combilin{e_k : k\in\setZ}\) :
 </p>
 
 <p>
-\[u(x) = \sum_{k=-\infty}^{+\infty} \hat{u}_k e_k\]
+\[u(x) = \sum_{k=-\infty}^{+\infty} \hat{u}_k e_k = \sum_{k=-\infty}^{+\infty} \hat{u}_k \exp\left(\frac{2\pi\img k x}{T}\right)\]
 </p>
 
 <p>
 Nous avons vu au chapitre \ref{chap:vector} que les composantes d'un vecteur
-(ici la fonction \(u\)) par rapport à une base orthonormée s'écrivent :
+(ici la fonction \(u\)) par rapport à une base orthogonale s'écrivent :
 </p>
 
 <p>
-\[\hat{u}_k = \scalaire{e_k}{u} = \int\limits_{-T/2}^{T/2} u(x) \exp\left(-\frac{2\pi\img k x}{T}\right)dx\]
+\[\hat{u}_k = \frac{\scalaire{e_k}{u}}{\scalaire{e_k}{e_k}} = \unsur{T} \int\limits_{-T/2}^{T/2} u(x) \exp\left(-\frac{2\pi\img k x}{T}\right)dx\]
 </p>
 
 <p>
@@ -582,8 +576,8 @@ Utilisant à nouveau les propriétés des bases orthonormées, on a :
 </p>
 </div>
 </div>
-<div id="outline-container-org44ed677" class="outline-2">
-<h2 id="org44ed677"><span class="section-number-2">2.</span> Progression géométrique d’exponentielle complexe</h2>
+<div id="outline-container-orgce59a8a" class="outline-2">
+<h2 id="orgce59a8a"><span class="section-number-2">2.</span> Progression géométrique d’exponentielle complexe</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Dans le cas où :
@@ -675,8 +669,8 @@ pour tout \(k,l,m,N \in \setZ\). Dans la suite nous utilisons la notation :
 </p>
 </div>
 </div>
-<div id="outline-container-org8db27e3" class="outline-2">
-<h2 id="org8db27e3"><span class="section-number-2">3.</span> Transformeée de Fourier discrète</h2>
+<div id="outline-container-orgf95caa5" class="outline-2">
+<h2 id="orgf95caa5"><span class="section-number-2">3.</span> Transformeée de Fourier discrète</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Nous allons en déduire la forme de la transformeée de Fourier discrète. Soit la
@@ -742,24 +736,24 @@ Nous avons donc obtenu une bijection entre les \(u_k\) et les \(U_n\) :
 </div>
 </div>
 </div>
-<div id="outline-container-org53a089a" class="outline-2">
-<h2 id="org53a089a"><span class="section-number-2">4.</span> Transformeée de Fourier</h2>
+<div id="outline-container-org2de0b75" class="outline-2">
+<h2 id="org2de0b75"><span class="section-number-2">4.</span> Transformeée de Fourier</h2>
 <div class="outline-text-2" id="text-4">
 <div id="text-table-of-contents-1" role="doc-toc">
 <ul>
-<li><a href="#orgb759264">4.1. Heuristique</a></li>
-<li><a href="#org8c8e296">4.2. Delta de Dirac</a></li>
-<li><a href="#orgcf0c443">4.3. Produit scalaire</a></li>
-<li><a href="#org0688b5d">4.4. Convolution</a></li>
-<li><a href="#org7305e74">4.5. Dérivées</a></li>
-<li><a href="#orgd262c2f">4.6. Déphasage</a></li>
-<li><a href="#orge350c12">4.7. Dilatation</a></li>
-<li><a href="#org29156ce">4.8. Gaussienne</a></li>
+<li><a href="#org2f31e1a">4.1. Heuristique</a></li>
+<li><a href="#org1fd752d">4.2. Delta de Dirac</a></li>
+<li><a href="#org0127230">4.3. Produit scalaire</a></li>
+<li><a href="#org4d31c30">4.4. Convolution</a></li>
+<li><a href="#orgfd30679">4.5. Dérivées</a></li>
+<li><a href="#org9e5abb8">4.6. Déphasage</a></li>
+<li><a href="#orgd1b1c6d">4.7. Dilatation</a></li>
+<li><a href="#orgb28db57">4.8. Gaussienne</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgb759264" class="outline-3">
-<h3 id="orgb759264"><span class="section-number-3">4.1.</span> Heuristique</h3>
+<div id="outline-container-org2f31e1a" class="outline-3">
+<h3 id="org2f31e1a"><span class="section-number-3">4.1.</span> Heuristique</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 On peut présenter le résultat précédent sous une autre forme. On peut poser :
@@ -881,8 +875,8 @@ son inverse par :
 </div>
 </div>
 </div>
-<div id="outline-container-org8c8e296" class="outline-3">
-<h3 id="org8c8e296"><span class="section-number-3">4.2.</span> Delta de Dirac</h3>
+<div id="outline-container-org1fd752d" class="outline-3">
+<h3 id="org1fd752d"><span class="section-number-3">4.2.</span> Delta de Dirac</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 On déduit des relations ci dessus que :
@@ -933,8 +927,8 @@ Inversément, on a :
 </p>
 </div>
 </div>
-<div id="outline-container-orgcf0c443" class="outline-3">
-<h3 id="orgcf0c443"><span class="section-number-3">4.3.</span> Produit scalaire</h3>
+<div id="outline-container-org0127230" class="outline-3">
+<h3 id="org0127230"><span class="section-number-3">4.3.</span> Produit scalaire</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 Considérons à présent le produit scalaire :
@@ -987,8 +981,8 @@ le produit scalaire :
 </p>
 </div>
 </div>
-<div id="outline-container-org0688b5d" class="outline-3">
-<h3 id="org0688b5d"><span class="section-number-3">4.4.</span> Convolution</h3>
+<div id="outline-container-org4d31c30" class="outline-3">
+<h3 id="org4d31c30"><span class="section-number-3">4.4.</span> Convolution</h3>
 <div class="outline-text-3" id="text-4-4">
 <p>
 La transformeèe d'un produit de convolution s'écrit :
@@ -1044,8 +1038,8 @@ c'est-à-dire :
 </p>
 </div>
 </div>
-<div id="outline-container-org7305e74" class="outline-3">
-<h3 id="org7305e74"><span class="section-number-3">4.5.</span> Dérivées</h3>
+<div id="outline-container-orgfd30679" class="outline-3">
+<h3 id="orgfd30679"><span class="section-number-3">4.5.</span> Dérivées</h3>
 <div class="outline-text-3" id="text-4-5">
 <p>
 Soit \(u\) une fonction qui s'annule à l'infini. La transformeée de Fourier
@@ -1088,8 +1082,8 @@ et finalement :
 </p>
 </div>
 </div>
-<div id="outline-container-orgd262c2f" class="outline-3">
-<h3 id="orgd262c2f"><span class="section-number-3">4.6.</span> Déphasage</h3>
+<div id="outline-container-org9e5abb8" class="outline-3">
+<h3 id="org9e5abb8"><span class="section-number-3">4.6.</span> Déphasage</h3>
 <div class="outline-text-3" id="text-4-6">
 <p>
 Considérons l'opérateur de translation :
@@ -1127,8 +1121,8 @@ Mais comme \(dx = d(x-a)\), on en déduit que :
 </p>
 </div>
 </div>
-<div id="outline-container-orge350c12" class="outline-3">
-<h3 id="orge350c12"><span class="section-number-3">4.7.</span> Dilatation</h3>
+<div id="outline-container-orgd1b1c6d" class="outline-3">
+<h3 id="orgd1b1c6d"><span class="section-number-3">4.7.</span> Dilatation</h3>
 <div class="outline-text-3" id="text-4-7">
 <p>
 Soit \(d_a\) l'opérateur de dilatation :
@@ -1183,8 +1177,8 @@ c'est-à-dire :
 </p>
 </div>
 </div>
-<div id="outline-container-org29156ce" class="outline-3">
-<h3 id="org29156ce"><span class="section-number-3">4.8.</span> Gaussienne</h3>
+<div id="outline-container-orgb28db57" class="outline-3">
+<h3 id="orgb28db57"><span class="section-number-3">4.8.</span> Gaussienne</h3>
 <div class="outline-text-3" id="text-4-8">
 <p>
 Définissons la gaussienne \(G\) :
@@ -1239,8 +1233,8 @@ La transformeée de Fourier laisse \(G\) inchangée.
 </div>
 </div>
 </div>
-<div id="outline-container-org93c1602" class="outline-2">
-<h2 id="org93c1602"><span class="section-number-2">5.</span> Auto-adjoint</h2>
+<div id="outline-container-org7dd2604" class="outline-2">
+<h2 id="org7dd2604"><span class="section-number-2">5.</span> Auto-adjoint</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 La transformeée de Fourier (voir chapitre \ref{chap:fourier}) est définie par :
@@ -1279,7 +1273,7 @@ et donc :
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-11-10 lun 17:35</p>
+<p class="date">Created: 2025-11-11 mar 09:13</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

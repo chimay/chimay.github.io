@@ -1,0 +1,1513 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<!-- 2025-11-11 mar 15:53 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Eclats de vers : Matemat : Continuité</title>
+<meta name="author" content="chimay" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Eclats de vers : Matemat : Continuité</h1>
+<p>
+<a href="index.html">Index des Grimoires</a>
+</p>
+
+<p>
+<a href="../index.html">Retour à l’accueil</a>
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgfae09c8">1. Dépendances</a></li>
+<li><a href="#org6e1d625">2. Continuité uniforme</a></li>
+<li><a href="#orgf02917e">3. Théorème des valeurs intermédiaires</a></li>
+<li><a href="#org7408005">4. Théorème de la bijection</a></li>
+<li><a href="#org8568223">5. Continuité uniforme</a></li>
+<li><a href="#orge9ff868">6. Polynômes</a></li>
+<li><a href="#org0597571">7. Uniformité</a></li>
+<li><a href="#org7e44065">8. Variations bornées</a></li>
+<li><a href="#org65c9fee">9. Extrema</a></li>
+</ul>
+</div>
+</div>
+
+<p>
+\(
+\newcommand{\parentheses}[1]{\left(#1\right)}
+\newcommand{\crochets}[1]{\left[#1\right]}
+\newcommand{\accolades}[1]{\left\{#1\right\}}
+\newcommand{\ensemble}[1]{\left\{#1\right\}}
+\newcommand{\identite}{\mathrm{Id}}
+\newcommand{\indicatrice}{\boldsymbol{\delta}}
+\newcommand{\dirac}{\delta}
+\newcommand{\moinsun}{{-1}}
+\newcommand{\inverse}{\ddagger}
+\newcommand{\pinverse}{\dagger}
+\newcommand{\topologie}{\mathfrak{T}}
+\newcommand{\ferme}{\mathfrak{F}}
+\newcommand{\img}{\mathbf{i}}
+\newcommand{\binome}[2]{
+\left\{ \begin{array}{c}
+#1 \\
+#2 \\
+\end{array} \right\}
+}
+\newcommand{\canonique}{\mathfrak{c}}
+\newcommand{\tenseuridentite}{\boldsymbol{\mathcal{I}}}
+\newcommand{\permutation}{\boldsymbol{\epsilon}}
+\newcommand{\matriceZero}{\mathfrak{0}}
+\newcommand{\matriceUn}{\mathfrak{1}}
+\newcommand{\christoffel}[2]{
+\left\{ \begin{array}{c}
+#1 \\
+#2 \\
+\end{array} \right\}
+}
+\newcommand{\lagrangien}{\mathfrak{L}}
+\newcommand{\sousens}{\mathfrak{P}}
+\newcommand{\partition}{\mathrm{Partition}}
+\newcommand{\tribu}{\mathrm{Tribu}}
+\newcommand{\topologies}{\mathrm{Topo}}
+\newcommand{\setB}{\mathbb{B}}
+\newcommand{\setN}{\mathbb{N}}
+\newcommand{\setZ}{\mathbb{Z}}
+\newcommand{\setQ}{\mathbb{Q}}
+\newcommand{\setR}{\mathbb{R}}
+\newcommand{\setC}{\mathbb{C}}
+\newcommand{\corps}{\mathbb{K}}
+\newcommand{\boule}{\mathfrak{B}}
+\newcommand{\intervalleouvert}[2]{\left] #1 , #2 \right[}
+\newcommand{\intervallesemiouvertgauche}[2]{ \left] #1 , #2 \right]}
+\newcommand{\intervallesemiouvertdroite}[2]{\left[ #1 , #2 \right[ }
+\newcommand{\fonction}{\mathbb{F}}
+\newcommand{\bijection}{\mathrm{Bij}}
+\newcommand{\polynome}{\mathrm{Poly}}
+\newcommand{\lineaire}{\mathrm{Lin}}
+\newcommand{\continue}{\mathrm{Cont}}
+\newcommand{\homeomorphisme}{\mathrm{Hom}}
+\newcommand{\etagee}{\mathrm{Etagee}}
+\newcommand{\lebesgue}{\mathrm{Leb}}
+\newcommand{\lipschitz}{\mathrm{Lip}}
+\newcommand{\suitek}{\mathrm{Suite}}
+\newcommand{\matrice}{\mathbb{M}}
+\newcommand{\krylov}{\mathrm{Krylov}}
+\newcommand{\tenseur}{\mathbb{T}}
+\newcommand{\essentiel}{\mathfrak{E}}
+\newcommand{\relation}{\mathrm{Rel}}
+\DeclareMathOperator*{\strictinferieur}{\ < \ }
+\DeclareMathOperator*{\strictsuperieur}{\ > \ }
+\DeclareMathOperator*{\ensinferieur}{\eqslantless}
+\DeclareMathOperator*{\enssuperieur}{\eqslantgtr}
+\DeclareMathOperator*{\esssuperieur}{\gtrsim}
+\DeclareMathOperator*{\essinferieur}{\lesssim}
+\newcommand{\essegal}{\eqsim}
+\newcommand{\union}{\ \cup \ }
+\newcommand{\intersection}{\ \cap \ }
+\newcommand{\opera}{\divideontimes}
+\newcommand{\autreaddition}{\boxplus}
+\newcommand{\autremultiplication}{\circledast}
+\newcommand{\commutateur}[2]{\left[ #1 , #2 \right]}
+\newcommand{\convolution}{\circledcirc}
+\newcommand{\correlation}{\ \natural \ }
+\newcommand{\diventiere}{\div}
+\newcommand{\modulo}{\bmod}
+\DeclareMathOperator*{\pgcd}{pgcd}
+\DeclareMathOperator*{\ppcm}{ppcm}
+\newcommand{\produitscalaire}[2]{\left\langle #1 \vert #2 \right\rangle}
+\newcommand{\scalaire}[2]{\left\langle #1 \| #2 \right\rangle}
+\newcommand{\braket}[3]{\left\langle #1 \vert #2 \vert #3 \right\rangle}
+\newcommand{\orthogonal}{\bot}
+\newcommand{\forme}[2]{\left\langle #1 , #2 \right\rangle}
+\newcommand{\biforme}[3]{\left\langle #1 , #2 , #3 \right\rangle}
+\newcommand{\contraction}[3]{\left\langle #1 \odot #3 \right\rangle_{#2}}
+\newcommand{\dblecont}[5]{\left\langle #1 \vert #3 \vert #5 \right\rangle_{#2,#4}}
+\DeclareMathOperator*{\major}{major}
+\DeclareMathOperator*{\minor}{minor}
+\DeclareMathOperator*{\maxim}{maxim}
+\DeclareMathOperator*{\minim}{minim}
+\DeclareMathOperator*{\argument}{arg}
+\DeclareMathOperator*{\argmin}{arg\ min}
+\DeclareMathOperator*{\argmax}{arg\ max}
+\DeclareMathOperator*{\supessentiel}{ess\ sup}
+\DeclareMathOperator*{\infessentiel}{ess\ inf}
+\newcommand{\dual}{\star}
+\newcommand{\distance}{\mathfrak{dist}}
+\newcommand{\norme}[1]{\left\| #1 \right\|}
+\newcommand{\normetrois}[1]{\left|\left\| #1 \right\|\right|}
+\DeclareMathOperator*{\adh}{adh}
+\DeclareMathOperator*{\interieur}{int}
+\newcommand{\frontiere}{\partial}
+\DeclareMathOperator*{\image}{im}
+\DeclareMathOperator*{\domaine}{dom}
+\DeclareMathOperator*{\noyau}{ker}
+\DeclareMathOperator*{\support}{supp}
+\DeclareMathOperator*{\signe}{sign}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\unsur}[1]{\frac{1}{#1}}
+\newcommand{\arrondisup}[1]{\lceil #1 \rceil}
+\newcommand{\arrondiinf}[1]{\lfloor #1 \rfloor}
+\DeclareMathOperator*{\conjugue}{conj}
+\newcommand{\conjaccent}[1]{\overline{#1}}
+\DeclareMathOperator*{\division}{division}
+\newcommand{\difference}{\boldsymbol{\Delta}}
+\newcommand{\differentielle}[2]{\mathfrak{D}^{#1}_{#2}}
+\newcommand{\OD}[2]{\frac{d #1}{d #2}}
+\newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
+\newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
+\newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
+\newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
+\newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\gradient}{\mathbf{\nabla}}
+\newcommand{\combilin}[1]{\mathrm{span}\{ #1 \}}
+\DeclareMathOperator*{\trace}{tr}
+\newcommand{\proba}{\mathbb{P}}
+\newcommand{\probaof}[1]{\mathbb{P}\left[#1\right]}
+\newcommand{\esperof}[1]{\mathbb{E}\left[#1\right]}
+\newcommand{\cov}[2]{\mathrm{cov} \left( #1 , #2 \right) }
+\newcommand{\var}[1]{\mathrm{var} \left( #1 \right) }
+\newcommand{\rand}{\mathrm{rand}}
+\newcommand{\variation}[1]{\left\langle #1 \right\rangle}
+\DeclareMathOperator*{\composante}{comp}
+\DeclareMathOperator*{\bloc}{bloc}
+\DeclareMathOperator*{\ligne}{ligne}
+\DeclareMathOperator*{\colonne}{colonne}
+\DeclareMathOperator*{\diagonale}{diag}
+\newcommand{\matelementaire}{\mathrm{Elem}}
+\DeclareMathOperator*{\matpermutation}{permut}
+\newcommand{\matunitaire}{\mathrm{Unitaire}}
+\newcommand{\gaussjordan}{\mathrm{GaussJordan}}
+\newcommand{\householder}{\mathrm{Householder}}
+\DeclareMathOperator*{\rang}{rang}
+\newcommand{\schur}{\mathrm{Schur}}
+\newcommand{\singuliere}{\mathrm{DVS}}
+\newcommand{\convexe}{\mathrm{Convexe}}
+\newcommand{\petito}[1]{o\left(#1\right)}
+\newcommand{\grando}[1]{O\left(#1\right)}
+\)
+</p>
+
+<p>
+\(
+\newenvironment{Eqts}
+{ \begin{equation*} \begin{gathered} }
+{ \end{gathered} \end{equation*} }
+\newenvironment{Matrix}
+{\left[ \begin{array}}
+{\end{array} \right]}
+\)
+</p>
+
+<p>
+\label{chap:limite}
+</p>
+<div id="outline-container-orgfae09c8" class="outline-2">
+<h2 id="orgfae09c8"><span class="section-number-2">1.</span> Dépendances</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>Chapitre \ref{chap:limite} : Les limites</li>
+<li>Chapitre \ref{chap:reel} : Les réels</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org6e1d625" class="outline-2">
+<h2 id="org6e1d625"><span class="section-number-2">2.</span> Continuité uniforme</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+\label{sec:continuite_uniforme}
+</p>
+
+<p>
+On dit qu'une fonction \(f\) est uniformément continue sur \(A\), si pour
+toute précision \(\epsilon \strictsuperieur 0\), on peut trouver un
+\(\delta \strictsuperieur 0\) tel que :
+</p>
+
+<p>
+\[\abs{f(s) - f(t)} \le \epsilon\]
+</p>
+
+<p>
+pour tout \(s,t \in A\) vérifiant \(\abs{s - t} \le \delta\).
+</p>
+</div>
+<div id="outline-container-org466720f" class="outline-3">
+<h3 id="org466720f"><span class="section-number-3">2.1.</span> Continuité simple</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Si \(f\) est uniformément continue sur \(A\), on a clairement :
+</p>
+
+<p>
+\[\lim_{s \to t} \abs{f(s) - f(t)} = 0\]
+</p>
+
+<p>
+et donc :
+</p>
+
+<p>
+\[\lim_{s \to t} f(s) = f(t)\]
+</p>
+
+<p>
+pour tout \(t \in A\). Toute fonction uniformément continue est donc continue.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf02917e" class="outline-2">
+<h2 id="orgf02917e"><span class="section-number-2">3.</span> Théorème des valeurs intermédiaires</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Les fonctions continues possèdent l'importante propriété suivante.
+</p>
+
+<ul class="org-ul">
+<li>Soit \(f \in \continue(I,\setR)\) où \(I = [a,b]\) est un intervalle inclus dans \(\setR\). On suppose que :</li>
+</ul>
+
+<p>
+\[f(a) \strictinferieur f(b)\]
+</p>
+
+<p>
+Soit le réel \(\varphi\) vérifiant \(f(a) \strictinferieur \varphi \strictinferieur f(b)\). On peut alors trouver un \(c \in \intervalleouvert{a}{b}\) tel que \(f(c) = \varphi\).
+</p>
+
+<ul class="org-ul">
+<li>Soit \(g \in \continue(I,\setR)\). On suppose que :</li>
+</ul>
+
+<p>
+\[g(a) \strictsuperieur g(b)\]
+</p>
+
+<p>
+Soit le réel \(\varphi\) vérifiant \(g(a) \strictsuperieur \varphi \strictsuperieur g(b)\). On peut alors trouver un \(c \in \intervalleouvert{a}{b}\) tel que \(g(c) = \varphi\).
+</p>
+
+<p>
+Nous allons démontrer ce résultat par l'absurde.
+</p>
+
+<ul class="org-ul">
+<li>Considérons le cas où \(f(a) \strictinferieur \varphi \strictinferieur f(b)\). On définit les ensembles :</li>
+</ul>
+
+<div class="org-center">
+<p>
+\(
+A^+ = \{ x \in I : f(x) \strictsuperieur \varphi \} \)
+</p>
+
+<p>
+\(
+A^- = \{ x \in I : f(x) \strictinferieur \varphi \}
+\)
+</p>
+</div>
+
+<p>
+Si aucun \(c \in I\) ne vérifie \(f(c) = \varphi\), on doit avoir clairement \(A^+ \cup A^- = I\).
+</p>
+
+<p>
+Nous définissons \(\alpha = \sup A^-\). Comme \(A^-\subseteq I\), on à clairement
+\(\alpha \in I\). Si \(\alpha \in A^-\), alors par continuité de \(f\) en \(\alpha\),
+on peut trouver \(\delta \strictsuperieur 0\) tel que :
+</p>
+
+<p>
+\[\abs{ f(\alpha + \delta) - f(\alpha) } \le \epsilon = \unsur{2}(\varphi - f(\alpha))\]
+</p>
+
+<p>
+On a alors clairement \(f(\alpha + \delta) \strictinferieur \varphi\) et \(\alpha \strictinferieur \alpha + \delta \in A^-\) ce qui contredit l'hypothèse de suprémum pour \(\alpha\).
+</p>
+
+<p>
+On doit donc avoir \(\alpha \notin A^-\). Mais alors \(\alpha \in I \setminus A^- = A^+\). Donc \(f(\alpha) \strictsuperieur \varphi\). Par continuité de \(f\) en \(\alpha\), on peut trouver \(\delta \strictsuperieur 0\) tel que :
+</p>
+
+<p>
+\[\abs{ f(\alpha) - f(x) } \le \epsilon = \unsur{2}(f(\alpha)-\varphi)\]
+</p>
+
+<p>
+pour tout \(x \in \intervalleouvert{\alpha - \delta}{\alpha}\). On a alors clairement \(f(x) \strictsuperieur \varphi\) pour tout \(x \in \intervalleouvert{\alpha - \delta}{\alpha}\).
+</p>
+
+<p>
+Soit \(\beta \in \intervalleouvert{\alpha - \delta}{\alpha}\). Par définition de \(\alpha\), on ne peut pas avoir \(\beta \ge A^-\), donc il existe \(\gamma \in \intervalleouvert{\beta}{\alpha} \subseteq \intervalleouvert{\alpha - \delta}{\alpha}\) tel que \(\gamma \in A^-\). On a donc \(f(\gamma) \strictinferieur \varphi\) ce qui contredit la propriété ci-dessus en \(x = \gamma\).
+</p>
+
+<ul class="org-ul">
+<li>Considérons à présent le cas \(g(a) \strictsuperieur \varphi \strictsuperieur g(b)\). On pose :</li>
+</ul>
+
+<p>
+\[f = -g\]
+</p>
+
+<p>
+On a :
+</p>
+
+<p>
+\[f(a) \strictinferieur -\varphi \strictinferieur f(b)\]
+</p>
+
+<p>
+On peut donc trouver un \(c \in \intervalleouvert{a}{b}\) tel que :
+</p>
+
+<p>
+\[f(c) = -\varphi\]
+</p>
+
+<p>
+On en conclut que :
+</p>
+
+<p>
+\[g(c) = -f(c) = \varphi\]
+</p>
+</div>
+<div id="outline-container-orga450002" class="outline-3">
+<h3 id="orga450002"><span class="section-number-3">3.1.</span> Généralisation</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Soit le réel \(\varphi\) tel que \(f(a) \le \varphi \le f(b)\). Si \(\varphi \in \{f(a),f(b)\}\), il suffit de prendre \(c \in \{a,b\}\) pour avoir \(f(a) \le f(c) \le f(b)\). Sinon, on applique le théorème des valeurs intermédiaires et on trouve un \(c\) vérifiant \(f(a) \strictinferieur f(c) \strictinferieur f(b)\). Mais dans tous les cas, on pourra trouver un \(c \in [a,b]\) tel que \(f(a) \le f(c) \le f(b)\). De même si \(f(a) \strictsuperieur f(b)\).
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org7408005" class="outline-2">
+<h2 id="org7408005"><span class="section-number-2">4.</span> Théorème de la bijection</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Soit \(f \in \continue(I,J)\) où \(I = [a,b]\) est un intervalle inclus dans \(\setR\) et où \(J = f(I)\). Si \(f\) est strictement croissante (ou décroissante), alors \(f\) est inversible et :
+</p>
+
+<p>
+\[f(I) = [\alpha,\beta]\]
+</p>
+
+<p>
+avec :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\alpha = \min \{ f(a), f(b) \} \)
+</p>
+
+<p>
+\(
+\beta = \max \{ f(a), f(b) \}
+\)
+</p>
+</div>
+
+<p>
+Comme \(f : I \mapsto J = f(I)\) est strictement croissante ou décroissante, on a vu dans le chapitre traitant des bijections que \(f\) est inversible. Choisissons un réel \(\varphi \in [\alpha,\beta]\). Le théorème des valeurs intermédiaires nous dit qu'on peut trouver un réel \(c \in [a,b]\) tel que \(f(c) = \varphi\). On en conclut que \(\varphi \in f(I)\). Cette relation étant vérifiée pour tout \(\varphi \in [\alpha,\beta]\), on a :
+</p>
+
+<p>
+\[[\alpha,\beta] \subseteq f(I)\]
+</p>
+
+<p>
+Soit \(x \in I\). Comme \(f\) est croissante ou décroissante, on doit avoir :
+</p>
+
+<p>
+\[f(a) \le f(x) \le f(b)\]
+</p>
+
+<p>
+ou :
+</p>
+
+<p>
+\[f(a) \ge f(x) \ge f(b)\]
+</p>
+
+<p>
+On a donc également :
+</p>
+
+<p>
+\[f(I) \subseteq [\alpha,\beta]\]
+</p>
+
+<p>
+L'inclusion étant réciproque, on a :
+</p>
+
+<p>
+\[f(I) = [\alpha,\beta]\]
+</p>
+</div>
+</div>
+<div id="outline-container-org8568223" class="outline-2">
+<h2 id="org8568223"><span class="section-number-2">5.</span> Continuité uniforme</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+\label{sec:continuite_uniforme}
+</p>
+
+<p>
+On dit qu'une fonction \(f\) est uniformément continue sur \(A\), si pour toute précision \(\epsilon \strictsuperieur 0\), on peut trouver un \(\delta \strictsuperieur 0\) tel que :
+</p>
+
+<p>
+\[\abs{f(s) - f(t)} \le \epsilon\]
+</p>
+
+<p>
+pour tout \(s,t \in A\) vérifiant \(\abs{s - t} \le \delta\).
+</p>
+</div>
+<div id="outline-container-org6be5ef2" class="outline-3">
+<h3 id="org6be5ef2"><span class="section-number-3">5.1.</span> Continuité simple</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+Si \(f\) est uniformément continue sur \(A\), on a clairement :
+</p>
+
+<p>
+\[\lim_{s \to t} \abs{f(s) - f(t)} = 0\]
+</p>
+
+<p>
+et donc :
+</p>
+
+<p>
+\[\lim_{s \to t} f(s) = f(t)\]
+</p>
+
+<p>
+pour tout \(t \in A\). Toute fonction uniformément continue est donc continue.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orge9ff868" class="outline-2">
+<h2 id="orge9ff868"><span class="section-number-2">6.</span> Polynômes</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Soit \(n \in \setN\) et \(\alpha,\beta \in \setR\) avec \(\alpha \le \beta\). Nous allons analyser la continuité du monôme \(\mu : [\alpha,\beta] \mapsto \setR\) défini par :
+</p>
+
+<p>
+\[\mu : x \mapsto x^n\]
+</p>
+
+<p>
+pour tout \(x \in [\alpha,\beta]\). Reprenant les résultats de la section \ref{sec:factorisation_progression_geometrique}, nous avons :
+</p>
+
+<p>
+\[s^n - t^n = (s - t) \sum_{i = 0}^{n - 1} s^{n - 1 - i} \cdot t^i\]
+</p>
+
+<p>
+Quelque soient \(s,t \in [\alpha,\beta]\), il est clair que
+</p>
+
+<p>
+\[\abs{s}, \abs{t} \le M = \max \{ \abs{\alpha} , \abs{\beta} \}\]
+</p>
+
+<p>
+On a donc :
+</p>
+
+<p>
+\[\abs{s^n - t^n} \le \abs{s - t} \cdot n \cdot M^{n - 1}\]
+</p>
+
+<p>
+Fixons à présent \(\epsilon \strictsuperieur 0\). Il suffit de prendre :
+</p>
+
+<p>
+\[\abs{s - t} \le \delta \le \frac{\epsilon}{ n \cdot M^{n - 1} }\]
+</p>
+
+<p>
+pour avoir :
+</p>
+
+<p>
+\[\abs{s^n - t^n} \le \delta \cdot n \cdot M^n \le \epsilon\]
+</p>
+
+<p>
+Comme le choix de \(\delta\) ne dépend ni de \(s\) ni de \(t\), le monôme \(\mu\) est uniformément continu sur \([\alpha,\beta]\).
+</p>
+
+<p>
+Pour généraliser aux polynômes de la forme :
+</p>
+
+<p>
+\[p(x) = \sum_{i = 0}^n a_i \cdot x^i\]
+</p>
+
+<p>
+on part de :
+</p>
+
+<p>
+\[p(s) - p(t) = \sum_{i = 0}^n a_i \cdot (s^i - t^i)\]
+</p>
+
+<p>
+On a donc :
+</p>
+
+<p>
+\[\abs{p(s) - p(t)} \le \sum_{i = 0}^n \abs{a_i} \cdot \abs{s^i - t^i}\]
+</p>
+
+<p>
+Mais comme on peut trouver des \(\delta_k\) tels que :
+</p>
+
+<p>
+\[\abs{s^k - t^k} \le \frac{\epsilon}{\sum_j \abs{a_j}}\]
+</p>
+
+<p>
+il suffit de choisir \(\delta = \min \{ \delta_0, \delta_1, ..., \delta_n \}\) pour avoir :
+</p>
+
+<p>
+\[\abs{p(s) - p(t)} \le \epsilon \cdot \frac{ \sum_i \abs{a_i} }{ \sum_j \abs{a_j} } = \epsilon\]
+</p>
+
+<p>
+Cette généralisation montre aussi que toute combinaison linéaire de fonctions uniformément continues est uniformément continue.
+</p>
+</div>
+<div id="outline-container-orgb78224a" class="outline-3">
+<h3 id="orgb78224a"><span class="section-number-3">6.1.</span> Continuité simple</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+Qu'en est-il de la continuité sur \(\setR\) ? Choisissons \(a \in \setR\) et considérons l'intervalle \(I = [a - 1, a + 1]\). Le polynôme est uniformément continu sur cette intervalle, et \(a \in \interieur I\). Plus précisément, \(\distance(a,\setR \setminus I) = 1 \strictsuperieur 0\). Donc, si \(\abs{x - a} \le 1\), on a forcément \(x \in I\). On peut donc se servir de la continuité uniforme sur \(I\) pour trouver un \(\delta \in \intervalleouvert{0}{1}\) tel que \(\abs{p(x) - p(a)} \le \epsilon\) lorsque \(\abs{x - a} \le \delta\). Les polynômes sont donc continus en tout point de \(\setR\), et par conséquent continus sur \(\setR\).
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org0597571" class="outline-2">
+<h2 id="org0597571"><span class="section-number-2">7.</span> Uniformité</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Nous allons à présent montrer que toute fonction continue sur un intervalle de la forme \([\alpha,\beta]\) y est uniformément continue.
+</p>
+
+<p>
+Soit la fonction \(f \in \continue([\alpha,\beta],\setR)\). Etant donné un \(\epsilon \strictsuperieur 0\) et un \(a \in [\alpha,\beta]\), on note \(\Delta(a,\epsilon)\) l'ensemble des écarts strictement positifs offrant la précision demandée. Pour tout \(\delta \in \Delta(a,\epsilon)\), on aura donc \(\delta \strictsuperieur 0\) et :
+</p>
+
+<p>
+\[\abs{f(a + h) - f(a)} \le \epsilon\]
+</p>
+
+<p>
+pourvu que \(h \in \setR\) vérifie :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\abs{h} \le \delta \)
+</p>
+
+<p>
+\(
+a + h \in [\alpha,\beta]
+\)
+</p>
+</div>
+
+<p>
+On note les supremums de cette famille d'ensemble par :
+</p>
+
+<p>
+\[\sigma(a,\epsilon) = \sup \Delta(a,\epsilon)\]
+</p>
+
+<p>
+Nous allons voir que l'intersection de ces ensembles est non vide, même après avoir parcouru tout l'intervalle :
+</p>
+
+<p>
+\[\Gamma(\epsilon) = \bigcap_{a \in [\alpha,\beta]} \Delta(a,\epsilon) \ne \emptyset\]
+</p>
+
+<p>
+et que l'infimum des supremums est strictement positif :
+</p>
+
+<p>
+\[I(\epsilon) = \inf \{ \sigma(a,\epsilon) : a \in [\alpha,\beta] \} \strictsuperieur 0\]
+</p>
+
+<p>
+Etant donné un \(\epsilon \strictsuperieur 0\), on peut donc trouver un \(\delta  \in \Gamma(\epsilon)\) tel que :
+</p>
+
+<p>
+\[\abs{f(x + h) - f(x)} \le \epsilon\]
+</p>
+
+<p>
+pour tout \(x \in [\alpha,\beta]\) et pour tout \(h\) vérifiant :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\abs{h} \le \delta \)
+</p>
+
+<p>
+\(
+x + h \in [\alpha,\beta]
+\)
+</p>
+</div>
+
+<p>
+Posant \(s = x + h\) et \(t = x\), cela revient à dire que :
+</p>
+
+<p>
+\[\abs{f(s) - f(t)} \le \epsilon\]
+</p>
+
+<p>
+pour tout \(s,t \in [\alpha,\beta]\) vérifiant \(\abs{s - t} \le \delta\). La fonction \(f\) est donc uniformément continue sur \([\alpha,\beta]\).
+</p>
+</div>
+<div id="outline-container-org43aff76" class="outline-3">
+<h3 id="org43aff76"><span class="section-number-3">7.1.</span> Remarques</h3>
+<div class="outline-text-3" id="text-7-1">
+<ul class="org-ul">
+<li>La continuité de \(f\) nous garantit que ces écarts strictement positifs existent bien, c'est à dire que :</li>
+</ul>
+
+<p>
+\[\Delta(a,\epsilon) \ne \emptyset\]
+</p>
+
+<p>
+quelles que soient les valeurs de \(\epsilon \strictsuperieur 0\) et de \(a \in [\alpha,\beta]\).
+</p>
+
+<ul class="org-ul">
+<li>Par ailleurs, si :</li>
+</ul>
+
+<p>
+\[0 \strictinferieur \gamma \le \delta \in \Delta(a,\epsilon)\]
+</p>
+
+<p>
+tous les réels présentant un écart inférieur à \(\gamma\) (par rapport à \(a\)) auront a fortiori un écart inférieur à \(\delta\) et satisferont donc la précision \(\epsilon\) :
+</p>
+
+<p>
+\[f\big( [a - \gamma, a + \gamma] \big) \subseteq [f(a) - \epsilon, f(a) + \epsilon]\]
+</p>
+
+<p>
+Par conséquent, \(\gamma\) appartient à \(\Delta(a,\epsilon)\) et :
+</p>
+
+<p>
+\[]0,\delta] \subseteq \Delta(a,\epsilon)\]
+</p>
+
+<p>
+pour tout \(\delta \in \Delta(a,\epsilon)\).
+</p>
+
+<ul class="org-ul">
+<li>Si \(x \in \intervalleouvert{0}{\sigma(a,\epsilon)}\), on a :</li>
+</ul>
+
+<p>
+\[\psi = \sigma(a,\epsilon) - x \strictsuperieur 0\]
+</p>
+
+<p>
+Comme le supremum est dans l'adhérence, la distance à son ensemble est nulle et on peut trouver un \(\delta \in \Delta(a,\epsilon)\) tel que :
+</p>
+
+<p>
+\[\abs{\sigma(a,\epsilon) - \delta} \le \psi\]
+</p>
+
+<p>
+On a donc :
+</p>
+
+<p>
+\[\sigma(a,\epsilon) - \delta \le \sigma(a,\epsilon) - x\]
+</p>
+
+<p>
+et :
+</p>
+
+<p>
+\[x \le \delta\]
+</p>
+
+<p>
+On a alors :
+</p>
+
+<p>
+\[x \in \ ]0,\delta] \subseteq \Delta(a,\epsilon)\]
+</p>
+
+<p>
+et donc \(x \in \Delta(a,\epsilon)\). Cette relation étant vérifiée pour tout \(x \in \intervalleouvert{0}{\sigma(a,\epsilon)}\), on a :
+</p>
+
+<p>
+\[\intervalleouvert{0}{\sigma(a,\epsilon)} \subseteq \Delta(a,\epsilon)\]
+</p>
+
+<ul class="org-ul">
+<li>Par définition du supremum, il ne peut avoir d'élément de \(\Delta(a,\epsilon)\) supérieur à \(\sigma(a,\epsilon)\), et on a également :</li>
+</ul>
+
+<p>
+\[\Delta(a,\epsilon) \subseteq \intervallesemiouvertgauche{0}{\sigma(a,\epsilon)}\]
+</p>
+
+<ul class="org-ul">
+<li>Les propositions sur l'intersection non vide et l'infimum strictement positif sont équivalentes. En effet, si \(I(\epsilon) \strictsuperieur 0\), on a :</li>
+</ul>
+
+<p>
+\[\sigma(a,\epsilon) \ge I(\epsilon) \strictsuperieur 0\]
+</p>
+
+<p>
+pour tout \(a\). On a donc :
+</p>
+
+<p>
+\[\emptyset \ne \ ]0,I(\epsilon)[ \ \subseteq \bigcap_{a \in [\alpha,\beta]} (0,\sigma(a,\epsilon)) \subseteq \bigcap_{a \in [\alpha,\beta]} \Delta(a,\epsilon)\]
+</p>
+
+<p>
+D'un autre coté, si l'intersection est non nulle, soit :
+</p>
+
+<p>
+\[\delta \in \bigcap_{a \in [\alpha,\beta]} \Delta(a,\epsilon)\]
+</p>
+
+<p>
+Comme \(\delta\) appartient à \(\Delta(a,\epsilon)\) pour tout \(a \in [\alpha,\beta]\), on a :
+</p>
+
+<p>
+\[\sigma(a,\epsilon) \ge \delta \strictsuperieur 0\]
+</p>
+
+<p>
+par définition du supremum localisé en \(a\). Il suffit alors de passer à l'infimum sur \(a\) pour obtenir :
+</p>
+
+<p>
+\[I(\epsilon) = \inf_{a \in [\alpha,\beta]} \sigma(a,\epsilon) \ge \delta \strictsuperieur 0\]
+</p>
+
+<p>
+Nous nous attelerons ici à démontrer que \(I(\epsilon) \strictsuperieur 0\).
+</p>
+
+<p>
+Soit \(\epsilon \strictsuperieur 0\). Considérons la suite d'infimums intermédiaires :
+</p>
+
+<p>
+\[D(x) = \inf \{ \sigma(\xi,\epsilon) : \xi \in [\alpha,x] \}\]
+</p>
+
+<p>
+où \(x \in [\alpha,\beta]\). Nous considérons l'ensemble \(\Psi\) des éléments tels que cet infimum soit non nul :
+</p>
+
+<p>
+\[\Psi = \{ x \in [\alpha,\beta] : D(x) \strictsuperieur 0 \}\]
+</p>
+
+<p>
+On a \(D(\alpha) = \inf\{ \sigma(\alpha,\epsilon) \} = \sigma(\alpha,\epsilon) \strictsuperieur 0\). Donc \(\alpha \in \Psi\). On a aussi \(\Psi \subseteq [\alpha,\beta] \le \beta\). L'ensemble \(\Psi\) est non vide et majoré. Il admet donc un supremum :
+</p>
+
+<p>
+\[S = \sup \Psi \le \beta\]
+</p>
+
+<ul class="org-ul">
+<li>Si \(x \in \Psi\) et \(a \in [\alpha,x]\), on a :</li>
+</ul>
+
+<p>
+\[[\alpha,a] \subseteq [\alpha,x]\]
+</p>
+
+<p>
+Les propriétés de l'infimum pour l'inclusion nous donnent alors :
+</p>
+
+<p>
+\[D(a) \ge D(x) \strictsuperieur 0\]
+</p>
+
+<p>
+On en conclut que :
+</p>
+
+<p>
+\[[\alpha,x] \subseteq \Psi\]
+</p>
+
+<p>
+pour tout \(x \in \Psi\).
+</p>
+
+<ul class="org-ul">
+<li>Soit \(a \in [\alpha,\beta]\). Nous allons construire une zone autour de \(a\) où l'infimum est strictement positif. Choisissons \(\delta(a) \in \Delta(a,\epsilon/2)\) et posons :</li>
+</ul>
+
+<p>
+\[\gamma(a) =  \unsur{2} \delta(a) \strictsuperieur 0\]
+</p>
+
+<p>
+Considérons à présent l'ensemble :
+</p>
+
+<p>
+\[U(a) = [a - \gamma(a), a + \gamma(a)] \cap [\alpha,\beta]\]
+</p>
+
+<p>
+Pour tout \(b \in U(a)\) et \(x \in [b - \gamma(a), b + \gamma(a)] \cap [\alpha,\beta]\), on a alors :
+</p>
+
+\begin{align}
+\abs{b - a} &\le \gamma(a) \strictinferieur \delta(a) \)
+
+\(
+\abs{x - b} &\le \gamma(a) \)
+
+\(
+\abs{x - a} &\le \abs{x - b} + \abs{b - a} \le 2 \gamma(a) \le \delta(a)
+\end{align}
+
+<p>
+et :
+</p>
+
+<div class="org-center">
+<p>
+\(
+\abs{f(b) - f(a)} \le \frac{\epsilon}{2} \\ \)
+</p>
+
+<p>
+\(
+\abs{f(x) - f(a)} \le \frac{\epsilon}{2}
+\)
+</p>
+</div>
+
+<p>
+On en déduit la borne supérieure :
+</p>
+
+\begin{align}
+\abs{f(x) - f(b)} &\le \abs{f(x) - f(a)} + \abs{f(a) - f(b)} \)
+
+\(
+&\le \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+\end{align}
+
+<p>
+On a donc :
+</p>
+
+<p>
+\[\sigma(b,\epsilon) \ge \gamma(a) \strictsuperieur 0\]
+</p>
+
+<p>
+pour tout \(b \in U(a)\). En prenant l'infimum, il vient :
+</p>
+
+<p>
+\[\inf_{b \in U(a)} \sigma(b,\epsilon) \ge \gamma(a) \strictsuperieur 0 \]
+</p>
+
+<ul class="org-ul">
+<li>Supposons que \(S = \alpha\) et posons :</li>
+</ul>
+
+<p>
+\[\theta = \min \{ \gamma(\alpha) , \beta - \alpha \} \strictsuperieur 0\]
+</p>
+
+<p>
+On a alors \(U(S) = U(\alpha) = [\alpha, \alpha + \theta]\) et :
+</p>
+
+<p>
+\[D(\alpha + \theta) = \inf_{b \in U(\alpha)} \sigma(b,\epsilon) \ge \gamma(\alpha) \strictsuperieur 0 \]
+</p>
+
+<p>
+On en conclut que \(\alpha + \theta \in \Psi\) avec \(S \strictinferieur \alpha + \theta\), ce qui contredit \(S = \sup \Psi\).
+</p>
+
+<ul class="org-ul">
+<li>Supposons à présent que \(\alpha \strictinferieur S \strictinferieur \beta\) et posons :</li>
+</ul>
+
+<div class="org-center">
+<p>
+\(
+\eta = \min \{ \gamma(S) , S - \alpha \} \strictsuperieur 0 \)
+</p>
+
+<p>
+\(
+\theta = \min \{ \gamma(S) , \beta - S \} \strictsuperieur 0
+\)
+</p>
+</div>
+
+<p>
+On a alors \(U(S) = [S - \eta, S + \theta]\). Voyons comment se comporte \(\sigma(b,\epsilon)\) lorsquer \(b\) voyage dans \([\alpha, S + \theta]\). Le supremum étant dans l'adhérence, on peut trouver \(\psi \in \Psi\) tel que :
+</p>
+
+<p>
+\[\abs{S - \psi} = S - \psi \le \eta\]
+</p>
+
+<p>
+Si \(b \in [\alpha,\psi]\), on a :
+</p>
+
+<p>
+\[\sigma(b,\epsilon) \ge D(\psi) \strictsuperieur 0 \]
+</p>
+
+<p>
+par définition de \(\Psi\). Mais si \(b \in [\psi, S + \theta]\), on a :
+</p>
+
+<p>
+\[S - \eta \le \psi \le b \le S + \theta\]
+</p>
+
+<p>
+Donc, \(b \in [S - \eta, S + \theta] = U(S)\) et :
+</p>
+
+<p>
+\[\sigma(b,\epsilon) \ge \gamma(S) \strictsuperieur 0\]
+</p>
+
+<p>
+Il suffit donc de poser :
+</p>
+
+<p>
+\[\varpi = \min \{ \gamma(S) , D(\psi) \} \strictsuperieur 0\]
+</p>
+
+<p>
+pour avoir \(\sigma(b,\epsilon) \ge \varpi\) sur \([\alpha, S + \theta]\). On en déduit que l'infimum est strictement positif :
+</p>
+
+<p>
+\[D(S + \theta) \ge \varpi \strictsuperieur 0 \]
+</p>
+
+<p>
+C'est à dire \(S + \theta \in \Psi\) avec \(S \strictinferieur S + \theta\), ce qui contredit la définition du supremum. On doit donc avoir \(S = \sup \Psi = \beta\).
+</p>
+
+<ul class="org-ul">
+<li>Posons :</li>
+</ul>
+
+<p>
+\[\theta = \min \{ \gamma(\beta) , \beta - \alpha \} \strictsuperieur 0\]
+</p>
+
+<p>
+On a alors \(U(S) = U(\beta) = [S - \theta, S] = [\beta - \theta, \beta]\). Comme le supremum est dans l'adhérence, on peut trouver un \(\psi \in \Psi\) tel que :
+</p>
+
+<p>
+\[\abs{S - \psi} = S - \psi \le \theta\]
+</p>
+
+<p>
+Si \(b \in [\alpha,\psi]\), on a :
+</p>
+
+<p>
+\[\sigma(b,\epsilon) \ge D(\psi) \strictsuperieur 0 \]
+</p>
+
+<p>
+par définition de \(\Psi\). Mais si \(b \in [\psi, S] = [\psi, \beta]\), on a :
+</p>
+
+<p>
+\[S - \theta \le \psi \le b \le \beta\]
+</p>
+
+<p>
+Donc, \(b \in [S - \theta, S] = U(S)\) et :
+</p>
+
+<p>
+\[\sigma(b,\epsilon) \ge \gamma(S) = \gamma(\beta) \strictsuperieur 0\]
+</p>
+
+<p>
+Il suffit donc de poser :
+</p>
+
+<p>
+\[\varpi = \min \{ \gamma(\beta) , D(\psi) \} \strictsuperieur 0\]
+</p>
+
+<p>
+pour avoir \(\sigma(b,\epsilon) \ge \varpi\) sur \([\alpha, \beta]\). On en déduit que l'infimum est strictement positif :
+</p>
+
+<p>
+\[D(\beta) \ge \varpi \strictsuperieur 0 \]
+</p>
+
+<p>
+C'est à dire \(\beta \in \Psi\) et :
+</p>
+
+<p>
+\[\Psi = [\alpha,\beta]\]
+</p>
+
+<p>
+L'infimum \(D(x)\) est donc strictement positif sur tout l'intervalle \([\alpha,\beta]\) et on a :
+</p>
+
+<div class="org-center">
+<p>
+\(
+I(\epsilon) = D(\beta) \strictsuperieur 0 \)
+</p>
+
+<p>
+\(
+\intervalleouvert{0}{I(\epsilon)} \subseteq \Gamma(\epsilon)
+\)
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgaa1aa99" class="outline-3">
+<h3 id="orgaa1aa99"><span class="section-number-3">7.2.</span> Remarque</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+Le théorème <i>n'est pas</i> applicable aux intervalles ouverts ou semi-ouverts.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org7e44065" class="outline-2">
+<h2 id="org7e44065"><span class="section-number-2">8.</span> Variations bornées</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+On déduit de l'uniforme continuité des fonctions continues sur les intervalles que les fonctions continues y sont bornées. En effet, soit \(\epsilon \strictsuperieur\) et \(\delta \strictsuperieur 0\) tel que :
+</p>
+
+<p>
+\[\abs{f(b) - f(a)} \le \epsilon\]
+</p>
+
+<p>
+pour tout \(a,b \in [\alpha,\beta]\) tels que \(\abs{a - b} \le \delta\).
+Choisissons \(N \in \setN\) tel que :
+</p>
+
+<p>
+\[\frac{\beta - \alpha}{N} \le \delta\]
+</p>
+
+<p>
+Choisissons à présent \(x,y \in [\alpha,\beta]\) et posons :
+</p>
+
+<p>
+\[h = \frac{y - x}{N}\]
+</p>
+
+<p>
+On a alors :
+</p>
+
+<p>
+\[\abs{h} = \abs{\frac{y - x}{N}} \le \frac{\beta - \alpha}{N} \le \delta\]
+</p>
+
+<p>
+Posons \(x_i = x + i \cdot h\) pour \(i = 0,1,2,...,N\). On a alors \(x_0 = x\) et \(x_N = y\). La variation est bornée par :
+</p>
+
+<p>
+\[\abs{f(x) - f(y)} \le \sum_{i = 0}^N \abs{f(x_i) - f(x_{i - 1})} \le (N + 1) \cdot \epsilon\]
+</p>
+</div>
+<div id="outline-container-org39d6aa3" class="outline-3">
+<h3 id="org39d6aa3"><span class="section-number-3">8.1.</span> Norme</h3>
+<div class="outline-text-3" id="text-8-1">
+<p>
+Comme \(N\) ne dépend ni de \(x\) ni de \(y\), on en conclut que les variations de \(f\) sont bornées sur l'intervalle. On a aussi :
+</p>
+
+<p>
+\[\abs{f(x)} \le \abs{f(x) - f(\alpha)} + \abs{f(\alpha)} \le M\]
+</p>
+
+<p>
+où \(M = (N + 1) \cdot \epsilon + \abs{f(\alpha)}\) ne dépend pas du choix de \(x\), ce qui prouve que \(f\) est bornée sur l'intervalle. En passant au supremum, on en déduit que la norme est finie et que :
+</p>
+
+<p>
+\[\norme{f}_\infty \le M\]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org65c9fee" class="outline-2">
+<h2 id="org65c9fee"><span class="section-number-2">9.</span> Extrema</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+Soit \(f \in \continue([a,b],\setR)\). Comme \(f\) est bornée, on peut poser :
+</p>
+
+<p>
+\[I = \inf \{ f(x) : x \in [a,b] \} = \inf f([a,b])\]
+</p>
+
+<p>
+Comme la distance de l'infimum à l'ensemble est nulle, on peut construire une suite \(\{x_1,x_2,...\}\) convergente vers \(\lambda \in [a,b]\) :
+</p>
+
+<p>
+\[\lambda = \lim_{n \to \infty} x_n\]
+</p>
+
+<p>
+et telle que :
+</p>
+
+<p>
+\[f(x_n) - I \le \unsur{2^n}\]
+</p>
+
+<p>
+On voit que :
+</p>
+
+<p>
+\[\lim_{n \to \infty} f(x_n) = I\]
+</p>
+
+<p>
+Mais par continuité de \(f\), on a aussi :
+</p>
+
+<p>
+\[\lim_{n \to \infty} f(x_n) = f(\lambda)\]
+</p>
+
+<p>
+On en conclut que :
+</p>
+
+<p>
+\[f(\lambda) = I\]
+</p>
+
+<p>
+On peut donc trouver un réel dans l'intervalle qui minimise la fonction. L'infimum appartient à l'image \(f([a,b])\). Il est donc également un minimum et on a :
+</p>
+
+<p>
+\[f(\lambda) = \inf f([a,b]) = \min f([a,b])\]
+</p>
+
+<p>
+On construit de même un \(\sigma \in [a,b]\) qui atteint le supremum :
+</p>
+
+<p>
+\[f(\sigma) = \sup f([a,b]) = \max f([a,b])\]
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Auteur: chimay</p>
+<p class="date">Created: 2025-11-11 mar 15:53</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

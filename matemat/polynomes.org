@@ -33,7 +33,9 @@
 
 * Définition
 
-Soit un corps $\corps$. On dit qu'une fonction $p : \corps \mapsto \corps$ est un polynôme de degré $n$ si on peut trouver des éléments $a_0,a_1,...a_n \in \corps$ tels que :
+Soit un corps $\corps$. On dit qu'une fonction $p : \corps \mapsto
+\corps$ est un polynôme de degré $n$ si on peut trouver des éléments
+$a_0,a_1,...a_n \in \corps$ tels que :
 
 $$p(x) = \sum_{i = 0}^n a_i \cdot x^i$$
 
@@ -159,6 +161,103 @@ $$ q(x) = A \cdot x^n + \sum_{i = 0}^{n - 1} b_i(x_1,...,x_n) \cdot x^i $$
 on a $A = a_n$ et :
 
 $$p(x) = a_n \cdot \prod_{i=1}^n (x - x_i)$$
+
+* Division Euclidienne polynômiale
+
+Soit deux polynomes $p \in \mathcal{P}_n$ et $d \in \mathcal{P}_m$
+avec $m \le n$ et :
+
+$$ p(x) = \sum_{i = 0}^n p_i \cdot x^i $$
+
+$$ d(x) = \sum_{i = 0}^m d_i \cdot x^i $$
+
+On dit que $q$ et $r$ sont respectivement le quotient et le reste de la
+division euclidienne de $p$ par le polynôme diviseur $d$, et on note :
+
+$$(q,r) = \division(p,d)$$
+
+si :
+
+$$ p(x) = d(x) \cdot q(x) + r(x) $$
+
+avec :
+
+$$ q(x) = \sum_{i=0}^{n-m} q_i \cdot x^i $$
+
+et :
+
+\[ r(x) = \sum_{i=0}^{p} r_i \cdot x^i \]
+
+où $p \strictinferieur m \le n$.
+
+** Méthode de Ruffini-Horner
+
+*** Introduction
+
+La méthode de Horner permet de diviser un polynôme $p$ de degré $n$ :
+
+$$ p(x) = \sum_{i = 0}^n p_i \cdot x^i $$
+
+par un polynôme $d$ du type :
+
+$$ d(x) = x - a $$
+
+Le polynôme diviseur $d$ est donc de degré 1.  Le polynôme quotient
+doit donc être de degré $n - 1$, soit :
+
+$$ q(x) = \sum_{i = 0}^{n - 1} q_i \cdot x^i $$
+
+Le reste $r$ devant être de degré $p \strictinferieur 1$, il est
+forcément de degré 0, soit :
+
+$$ r(x) = R $$
+
+La division euclidienne polynômiale s’écrit :
+
+$$ p(x) = d(x) \cdot q(x) + r(x) $$
+
+ou encore :
+
+$$ p(x) = (x-a) \cdot q(x) + R $$
+
+*** Valeur du polynôme au point $a$
+
+En évaluant la division euclidienne polynômiale en $x = a$, on obtient :
+
+$$ p(a) = (a-a) \cdot q(x) + R = 0 + R = R $$
+
+Le reste est donc égal à la valeur du polynôme $p$ au point $a$.
+
+*** Calcul du polynôme quotient et du reste
+
+Examinons à présent plus en détail la division euclidienne polynômiale :
+
+$$ \sum_{i=0}^n p_i \cdot x^i = (x - a) \sum_{i=1}^{n-1} \left(q_i \cdot x^i\right) + R $$
+
+En comparant les termes de même puissance en $x$, on obtient :
+
+\begin{align*}
+q_{n-1} &= p_n \\
+q_{n-2} - a \cdot q_{n-1} &= p_{n-1} \\
+\ldots & \ldots \\
+q_{i-1} - a \cdot q_i &= p_i \\
+\ldots &= \ldots \\
+q_0 - a \cdot q_1 &= p_1 \\
+- a \cdot q_0 + R &= p_0
+\end{align*}
+
+Ces relations nous permettent d’évaluer les coefficients
+du quotient de manière récursive :
+
+\begin{align*}
+q_{n-1} &= p_n \\
+q_{n-2} &= p_{n-1} + a \cdot q_{n-1} \\
+\ldots & \ldots \\
+q_{i-1} &= p_i + a \cdot q_i \\
+\ldots & \ldots \\
+q_0 &= p_1 + a \cdot q_1 \\
+R &= p_0 + a \cdot q_0
+\end{align*}
 
 * Binômes canoniques
 
@@ -308,41 +407,4 @@ $$\mathcal{B}_n(c)(t) = \sum_{i = 0}^n c \cdot B_i^n(t) = c \sum_{i = 0}^n \bino
 
 quelle que soit la valeur de $t \in [0,1]$.
 
-
-* Division Euclidienne
-
-Soit deux polynomes $a \in \mathcal{P}_n$ et $b \in \mathcal{P}_m$
-avec $m \le n$ et :
-
-#+BEGIN_CENTER
-\(
-a(x) = \sum_{i = 0}^n a_i \cdot x^i \)
-
-\(
-b(x) = \sum_{i = 0}^m b_i \cdot x^i
-\)
-#+END_CENTER
-
-On dit que $q$ et $r$ sont respectivement le quotient et le reste
-de la division euclidienne de $a$ et $b$, et on note :
-
-$$(q,r) = \division(a,b)$$
-
-si :
-
-#+BEGIN_CENTER
-\(
-a(x) = b(x) \cdot q(x) + r(x) \)
-
-\(
-q(x) = \sum_{i=0}^{n-m} q_i x^i \)
-
-\(
-r(x) = \sum_{i=0}^{p} r_i x^i
-\)
-#+END_CENTER
-
-avec $p \strictinferieur m \le n$.
-
-* Méthode de Ruffini-Horner
 

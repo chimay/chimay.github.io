@@ -67,6 +67,10 @@ pour tout $x \in \corps$.
 
 * Division Euclidienne polynômiale
 
+#+TOC: headlines 1 local
+
+** Définition
+
 Soit deux polynomes $p \in \mathcal{P}_n$ et $d \in \mathcal{P}_m$
 avec $m \le n$ et :
 
@@ -94,6 +98,8 @@ et :
 où $p \strictinferieur m \le n$.
 
 ** Méthode de Ruffini-Horner
+
+#+TOC: headlines 1 local
 
 *** Introduction
 
@@ -130,6 +136,22 @@ En évaluant la division euclidienne polynômiale en $x = a$, on obtient :
 $$ p(a) = (a-a) \cdot q(x) + R = 0 + R = R $$
 
 Le reste est donc égal à la valeur du polynôme $p$ au point $a$.
+
+*** Racine au point $a$
+
+Si le reste $R$ est nul, on a :
+
+$$ p(a) = (a-a) \cdot q(x) + R = 0 + 0 = 0 $$
+
+La valeur $a$ est alors une racine du polynôme $p$.
+
+Inversément, si $p(a) = 0$, on a :
+
+$$ 0 = p(a) = (a-a) \cdot q(x) + R $$
+
+et donc :
+
+$$ R = 0 $$
 
 *** Calcul du polynôme quotient et du reste
 
@@ -170,7 +192,44 @@ un résultat permettant de
 La méthode de Horner fournit une autre technique permettant d’arriver au
 même résultat.
 
-$$x^{n + 1} - a^{n + 1} = (x - a) \cdot \sum_{i = 0}^n x^{n - i} \cdot a^i$$
+Soit le polynôme :
+
+$$ p(x) = x^n - a^n $$
+
+pour un certain $a\in\corps$. On a clairement :
+
+$$ p(a) = a^n - a^n = 0 $$
+
+La valeur $a$ est donc une racine de $p$. Si on utilise la méthode de
+Horner pour diviser $p$ par $x - a$, on aura un reste nul et :
+
+$$ p(x) = (x - a) \cdot q(x) $$
+
+où $q$ est un polynôme de degré $n-1$ :
+
+$$ q(x) = \sum_{i=0}^{n-1} q_i \cdot x^i $$
+
+Suivant la méthode, les coefficients successifs s’écrivent :
+
+\begin{align*}
+q_{n-1} &= 1 \\
+q_{n-2} &= 0 + a \cdot 1 = a \\
+q_{n-3} &= 0 + a \cdot a = a^2 \\
+q_{n-4} &= 0 + a \cdot a^2 = a^3 \\
+\ldots & \ldots \\
+q_{n - 1 - i} &= a^i \\
+\ldots & \ldots \\
+q_0 &= a^{n - 1} \\
+R &= -a^n + a^n = 0
+\end{align*}
+
+Le polynôme $q$ peut donc se réécrire :
+
+$$ q(x) = \sum_{i = 0}^{n-1} x^{n - 1 - i} \cdot a^i $$
+
+ce qui nous donne l’expression suivante pour la factorisation de $p$ :
+
+$$ p(x) = x^n - a^n = (x - a) \cdot \sum_{i = 0}^{n-1} x^{n - 1 - i} \cdot a^i $$
 
 * Racines
 

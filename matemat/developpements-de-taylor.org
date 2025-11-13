@@ -30,24 +30,14 @@ $$p(x) = \sum_{i = 0}^n \gamma_i \cdot x^i$$
 
 pour tout $x \in \setR$. Calculons ses dérivées :
 
-\begin{align}
-\partial p(x) &= \sum_{i = 1}^n \gamma_i \cdot i \cdot x^{i - 1} \)
-
-\(
-\partial^2 p(x) &= \sum_{i = 2}^n \gamma_i \cdot i \cdot (i - 1) \cdot x^{i - 2} \)
-
-\(
-\vdots \)
-
-\(
-\partial^k p(x) &= \sum_{i = k}^n \gamma_i \cdot \frac{i !}{(i - k) !} \cdot x^{i - k} \)
-
-\(
-\vdots \)
-
-\(
+\begin{align*}
+\partial p(x) &= \sum_{i = 1}^n \gamma_i \cdot i \cdot x^{i - 1} \\
+\partial^2 p(x) &= \sum_{i = 2}^n \gamma_i \cdot i \cdot (i - 1) \cdot x^{i - 2} \\
+\vdots \\
+\partial^k p(x) &= \sum_{i = k}^n \gamma_i \cdot \frac{i !}{(i - k) !} \cdot x^{i - k} \\
+\vdots \\
 \partial^n p(x) &= n! \cdot \gamma_n
-\end{align}
+\end{align*}
 
 Lorsqu'on évalue ces dérivées en $0$, seuls les termes en $x^{k - k} = 1$ ne s'annulent pas. On obtient donc :
 
@@ -84,7 +74,7 @@ $$r(t) = \sum_{i = 0}^n \unsur{i !} \cdot \partial^i p(a) \cdot t^i$$
 
 En posant $x = t + a$, on a $t = x - a$ et :
 
-$$p(x) = p(t + a) = r(t)$$
+$$p(x) = p(t + a) = r(t) = r(x - a)$$
 
 Le développement devient :
 
@@ -161,7 +151,8 @@ par $x$, on arrive au résultat :
 
 $$x \ \partial f(x) = x \ \partial f(a) + \int_a^x x \ \partial^2 f(t) \ dt$$
 
-L'expression de $f(x)$ devient alors :
+En remplaçant $x\ \partial f(x)$ par le membre de droite dans
+l’expression de $f(x)$, on obtient :
 
 $$f(x) = f(a) + x \ \partial f(a) + \int_a^x x \ \partial^2 f(t) \ dt - a \ \partial f(a) - \int_a^x t \ \partial^2 f(t) \ dt$$
 
@@ -180,7 +171,7 @@ $$\int_a^x (x - t) \cdot \partial^2 f(t) \ dt$$
 
 On sait que :
 
-$$\OD{}{ŧ} \left[ \unsur{2} (x - t)^2 \right] = (x - t) \cdot (-1) = - (x - t)$$
+$$\OD{}{t} \left[ \unsur{2} (x - t)^2 \right] = (x - t) \cdot (-1) = - (x - t)$$
 
 Posons $u = \partial^2 f$ et :
 
@@ -196,15 +187,11 @@ $$\int_a^x v(t) \ \partial u(t) \ dt = \unsur{2} \int_a^x (x - t)^2 \ \partial^3
 
 Enfin :
 
-\begin{align}
-\int_a^x \partial (v \cdot u)(t) \ dt &= \unsur{2} \ (x - x)^2 \ \partial^2 f(x) - \unsur{2} \ (x - a)^2 \ \partial^2 f(a) \)
-
-\(
-&= 0 - \unsur{2} \ (x - a)^2 \ \partial^2 f(a) \)
-
-\(
+\begin{align*}
+\int_a^x \partial (v \cdot u)(t) \ dt &= \unsur{2} \ (x - x)^2 \ \partial^2 f(x) - \unsur{2} \ (x - a)^2 \ \partial^2 f(a) \\
+&= 0 - \unsur{2} \ (x - a)^2 \ \partial^2 f(a) \\
 &= - \unsur{2} \ (x - a)^2 \ \partial^2 f(a)
-\end{align}
+\end{align*}
 
 On en conclut que :
 
@@ -240,14 +227,13 @@ $$E_a^N(f)(x) = f(x) - T_a^N(f)(x) = \unsur{N !} \int_a^x (x - t)^N \ \partial^{
 
 En appliquant le théorème de Cauchy entre $a$ et $x$ aux fonctions $F,G$ définies par :
 
-\begin{align}
-F(z) &= \int_a^z (x - t)^N \ \partial^{N + 1} f(t) \ dt \)
+$$ F(z) = \int_a^z (x - t)^N \ \partial^{N + 1} f(t) \ dt $$
 
-\(
-G(z) &= \int_a^z (x - t)^N \ dt
-\end{align}
+$$ G(z) = \int_a^z (x - t)^N \ dt $$
 
-pour tout $z \in [\alpha,\beta]$, on voit que l'on peut trouver un $c \in \intervalleouvert{a}{x}$ si $a \strictinferieur x$ ou un $c \in \intervalleouvert{x}{a}$ si $x \strictinferieur a$ tel que :
+pour tout $z \in [\alpha,\beta]$, on voit que l'on peut trouver un $c
+\in \intervalleouvert{a}{x}$ si $a \strictinferieur x$ ou un $c \in
+\intervalleouvert{x}{a}$ si $x \strictinferieur a$ tel que :
 
 $$(x - c)^N \ F(x) = (x - c)^N \ \partial^{N + 1} f(c) \ G(x)$$
 
@@ -257,15 +243,11 @@ $$\partial^{N + 1} f(c) \ G(x) = F(x)$$
 
 Comme :
 
-\begin{align}
-G(x) = \int_a^x (x - t)^N \ dt &= - \big[ (x - x)^{N + 1} - (x - a)^{N + 1} \big] / (N + 1) \)
-
-\(
-&= - \big[ 0 - (x - a)^{N + 1} \big] / (N + 1) \)
-
-\(
+\begin{align*}
+G(x) = \int_a^x (x - t)^N \ dt &= - \big[ (x - x)^{N + 1} - (x - a)^{N + 1} \big] / (N + 1) \\
+&= - \big[ 0 - (x - a)^{N + 1} \big] / (N + 1) \\
 &= (x - a)^{N + 1} / (N + 1)
-\end{align}
+\end{align*}
 
 on a :
 
@@ -280,12 +262,8 @@ $$E_a^N(f)(x) = \partial^{N + 1} f(c) \ \frac{ (x - a)^{N + 1} }{(N + 1) !}$$
 
 Soit une fonction $f \in \continue^{N+1}([\alpha,\beta],\setR)$ et $a,x \in [\alpha,\beta]$. On définit la fonction $F : [\alpha,\beta] \mapsto \setR$ par :
 
-\begin{align}
-F(t) &= \sum_{k = 0}^N \unsur{k !} \cdot \partial^k f(t) \cdot (x - t)^k \)
-
-\(
-&= f(t) + \partial f(t) \ (x - t) + \partial^2 f(t) \ \frac{(x - t)^2}{2} + ...
-\end{align}
+$$ F(t) = \sum_{k = 0}^N \unsur{k !} \cdot \partial^k f(t) \cdot (x - t)^k
+= f(t) + \partial f(t) \ (x - t) + \partial^2 f(t) \ \frac{(x - t)^2}{2} + ... $$
 
 pour tout $t \in [\alpha,\beta]$. On a :
 
@@ -297,29 +275,18 @@ $$F(a) = f(a) + \partial f(a) \ (x - a) + \partial^2 f(a) \frac{(x - a)^2}{2} + 
 
 La dérivée de $F$ s'écrit :
 
-#+BEGIN_CENTER
-\(
-\partial F(t) = \partial f(t) + \big[ \partial f(t) \ (-1) + \partial^2 f(t) \ (x - t) \big] \)
-
-\(
-+ \left[ - \partial^2 f(t) \ (x - t) + \partial^3 f(t) \ \frac{(x-t)^2}{2} \right] \)
-
-\(
-... \)
-
-\(
-+ \left[ - \partial^{N - 1} f(t) \ \frac{(x - t)^{N - 2}}{(N - 2) !} + \partial^N f(t) \ \frac{(x-t)^{N - 1}}{(N - 1) !} \right] \)
-
-\(
-+ \left[ - \partial^N f(t) \ \frac{(x-t)^{N - 1}}{(N - 1) !} + \partial^{N + 1} f(t) \ \frac{(x-t)^N}{N !} \right]
-\)
-#+END_CENTER
+$$ \partial F(t) = \partial f(t) + \big[ \partial f(t) \ (-1) + \partial^2 f(t) \ (x - t) \big] +
+\left[ - \partial^2 f(t) \ (x - t) + \partial^3 f(t) \ \frac{(x-t)^2}{2} \right] + \ldots +
+\left[ - \partial^N f(t) \ \frac{(x-t)^{N - 1}}{(N - 1) !} + \partial^{N + 1} f(t) \ \frac{(x-t)^N}{N !} \right] $$
 
 On voit que tous les termes s'annulent sauf le dernier, et :
 
 $$\partial F(t) = \partial^{N + 1} f(t) \ \frac{(x-t)^N}{N !}$$
 
-Soit $G \in \continue^1([\alpha,\beta],\setR)$. On peut appliquer le théorème de Cauchy à $F$ et $G$ entre $a$ et $x$. On dispose alors d'un $c \in \intervalleouver{a}{x}$ si $a \strictinferieur x$ ou d'un $c \in \intervalleouvert{x}{a}$ si $x \strictinferieur a$ tel que :
+Soit $G \in \continue^1([\alpha,\beta],\setR)$. On peut appliquer le
+théorème de Cauchy à $F$ et $G$ entre $a$ et $x$. On dispose alors
+d'un $c \in \intervalleouvert{a}{x}$ si $a \strictinferieur x$ ou d'un
+$c \in \intervalleouvert{x}{a}$ si $x \strictinferieur a$ tel que :
 
 $$\partial F(c) \ \big[G(x) - G(a)\big] = \big[F(x) - F(a)\big] \ \partial G(c)$$
 

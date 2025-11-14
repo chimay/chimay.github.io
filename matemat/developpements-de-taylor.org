@@ -564,54 +564,6 @@ Le $\grando{1}$ implique une erreur bornée en valeur absolue, le $\petito{1}$ i
 Pour toute fonction $f \in \continue^{N + 1}(\Omega, \setR^n)$, l'erreur $E_a^N(f)$ du développement de Taylor d'ordre $N$ est en $\grando{h^{N+1}}$.
 
 
-* Extrapolation de Richardson
-
-Supposons qu'une fonction $v$ nous donne une approximation de $V$ respectant :
-
-$$v(h) \approx V + C \cdot h^m + O(h^{m+1})$$
-
-pour un certain $C \in \setR$ et pour tout $h \in [0,R] \subseteq \setR$. L'entier $m$ est appelé l'ordre de l'approximation. Supposons que l'on dispose de deux estimations de $V_1 = v(h)$ et $V_2 = v(h/k)$. On a alors :
-
-#+BEGIN_CENTER
-\(
-V_1 = v(h) = V + C \cdot h^m + O(h^{m+1}) \)
-
-\(
-V_2 = v\left(h/k\right) = V + C \cdot \left(\frac{h}{k}\right)^m
-+ O(h^{m+1})
-\)
-#+END_CENTER
-
-On se sert de la première équation pour obtenir une expression de $C \cdot h^m$ :
-
-$$C \cdot h^m = V_1 - V + O(h^{m+1})$$
-
-Posons :
-
-$$r = \unsur{k^m}$$
-
-On a alors :
-
-$$V_2 = V + r \cdot C \cdot h^m + O(h^{m+1}) = V + r \cdot (V_1 - V) + O(h^{m+1})$$
-
-On en conclut que :
-
-$$(1 - r) \cdot V = V_2 - r \cdot V_1 + O(h^{m+1})$$
-
-Ce qui nous donne l'approximation :
-
-$$V = \frac{V_2 - r \cdot V_1}{1 - r} + O(h^{m+1})$$
-
-Cette approximation est plus précise, car l'erreur n'est plus en $O(h^m)$ mais en $O(h^{m + 1})$. On appelle cette technique l'extrapolation de Richardson.
-
-** Cas particulier
-
-Un cas particulier intéressant est celui où l'approximation est d'ordre $1$ et où $k = 2$. On a alors :
-
-$$V = 2 V_2 - V_1 + O(h^2) = V_2 + (V_2 - V_1) + O(h^2)$$
-
-ce qui revient à faire l'approximation $V - V_2 \approx V_2 - V_1$.
-
 * Nombres binômiaux
 
 Soit le binôme canonique :
@@ -670,6 +622,53 @@ on obtient l’identité :
 $$ \sum_{k = 0}^n \binome{n}{k} \cdot x^k = \sum_{k=0}^n \frac{n !}{k ! (n -k) !} x^k$$
 
 Cette dernière équation étant valide pour tout $x\in\corps$, tous les
-coefficients doivent être égaux, et on a :
+coefficients doivent être égaux, et nous obtenons l’expression suivante
+pour les nombres binômiaux :
 
 $$ \binome{n}{k} = \frac{n !}{k ! (n -k) !} $$
+
+* Extrapolation de Richardson
+
+Supposons qu'une fonction $v$ nous donne une approximation de $V$ respectant :
+
+$$v(h) \approx V + C \cdot h^m + O(h^{m+1})$$
+
+pour un certain $C \in \setR$ et pour tout $h \in [0,R] \subseteq
+\setR$. L'entier $m$ est appelé l'ordre de l'approximation. Supposons
+que l'on dispose de deux estimations de $V_1 = v(h)$ et $V_2 = v(h/k)$. On
+a alors :
+
+$$ V_1 = v(h) = V + C \cdot h^m + O(h^{m+1}) $$
+
+$$ V_2 = v\left(h/k\right) = V + C \cdot \left(\frac{h}{k}\right)^m + O(h^{m+1}) $$
+
+On se sert de la première équation pour obtenir une expression de $C \cdot h^m$ :
+
+$$C \cdot h^m = V_1 - V + O(h^{m+1})$$
+
+Posons :
+
+$$r = \unsur{k^m}$$
+
+On a alors :
+
+$$V_2 = V + r \cdot C \cdot h^m + O(h^{m+1}) = V + r \cdot (V_1 - V) + O(h^{m+1})$$
+
+On en conclut que :
+
+$$(1 - r) \cdot V = V_2 - r \cdot V_1 + O(h^{m+1})$$
+
+Ce qui nous donne l'approximation :
+
+$$V = \frac{V_2 - r \cdot V_1}{1 - r} + O(h^{m+1})$$
+
+Cette approximation est plus précise, car l'erreur n'est plus en $O(h^m)$ mais en $O(h^{m + 1})$. On appelle cette technique l'extrapolation de Richardson.
+
+** Cas particulier
+
+Un cas particulier intéressant est celui où l'approximation est d'ordre $1$ et où $k = 2$. On a alors :
+
+$$V = 2 V_2 - V_1 + O(h^2) = V_2 + (V_2 - V_1) + O(h^2)$$
+
+ce qui revient à faire l'approximation $V - V_2 \approx V_2 - V_1$.
+

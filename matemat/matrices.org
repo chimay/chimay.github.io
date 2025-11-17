@@ -117,24 +117,57 @@ On dit aussi que $a_{ij}$ est la composante $i,j$ et $A$, et on le note :
 
 $$a_{ij} = \composante_{ij} A$$
 
+* Vecteurs lignes et colonnes
+
+On peut considérer un vecteur ligne comme une matrice ne possédant
+qu'une seule ligne. Un vecteur ligne est donc de taille générique
+$(1,n)$.
+
+De même, on peut considérer un vecteur colonne omme une matrice ne
+possédant qu'une seule colonne. Un vecteur colonne est donc de taille
+générique $(m,1)$.
+
+** Équivalence avec $\corps^n$
+
+A partir d'un n-tuple $(x_1,x_2,...,x_n) \in \corps^n$, on peut former
+un vecteur ligne $l \in \matrice(\corps,1,n)$ et un vecteur colonne $c
+\in \matrice(\corps,n,1)$. Les réciproques étant également vraies,
+on a les équivalences :
+
+#+begin_center
+$\matrice(\corps,1,n) \equiv \matrice(\corps,n,1) \equiv \corps^n$
+#+end_center
+
+* Formes lignes et colonnes
+
+On peut exprimer une matrice $A \in \matrice(\corps,m,n)$ sous la forme
+de lignes superposées. Soit :
+
+$$ A =
+\begin{Matrix}{c}
+l_1 \\
+l_2 \\
+\vdots \\
+l_m
+\end{Matrix} $$
+
+où les $l_i \in \matrice(\corps,1,n)$ sont les lignes de $A$. On note :
+
+$$\ligne_i A = l_i$$
+
+On peut aussi l'exprimer sous la forme de colonnes juxtaposées. Soit :
+
+$$A = [c_1 \ \ c_2 \ldots \ \ c_n]$$
+
+où les $c_i \in \matrice(\corps,m,1)$ sont les colonnes de $A$. On note :
+
+$$\colonne_i A = c_i$$
+
 * Blocs
 
-Soit $A = (a_{ij})_{i,j}$. La fonction $\bloc_{ijkl}$ donne la sous-matrice située entre la $i^{ème}$ et la $j^{ème}$ ligne, ainsi qu'entre la $k^{ième}$ et la $l^{ième}$ colonne :
+#+TOC: headlines 1 local
 
-#+BEGIN_CENTER
-\(
-\bloc_{ijkl} A = \begin{Matrix}{cccc}
-a_{ik} & a_{i,k+1} & \ldots & a_{il} \\
-a_{i+1,k} & a_{i+1,k+1} & \ldots & a_{i+1,l} \\
-\vdots &        & \ddots &  \vdots \\
-a_{jk} & a_{j,k+1} & \ldots & a_{jl}
-\end{Matrix}
-\)
-#+END_CENTER
-
-On appelle bloc une telle sous-matrice.
-
-* Partitionnement en blocs
+** Partitionnement en blocs
 
 Il est parfois très utile de partitionner une matrice en blocs, ou de
 former une matrice plus grande à partir de matrices de tailles plus
@@ -159,30 +192,20 @@ tailles compatibles (nombres de lignes identiques pour $B$ et $C$,
 ainsi que pour $D$ et $E$ ; nombres de colonnes identiques pour $B$
 et $D$, ainsi que pour $C$ et $E$).
 
-* Formes lignes et colonnes
+** Extraction d’un bloc
 
-On peut exprimer une matrice $A \in \matrice(\corps,m,n)$ sous la forme de lignes superposées. Soit :
+Soit $A = (a_{ij})_{i,j}$. La fonction $\bloc_{ijkl}$ donne la
+sous-matrice située entre la $i^{ème}$ et la $j^{ème}$ ligne, ainsi
+qu'entre la $k^{ième}$ et la $l^{ième}$ colonne :
 
-$$ A =
-\begin{Matrix}{c}
-l_1 \\
-l_2 \\
-\vdots \\
-l_m
+$$ \bloc_{ijkl} A = \begin{Matrix}{cccc}
+a_{ik} & a_{i,k+1} & \ldots & a_{il} \\
+a_{i+1,k} & a_{i+1,k+1} & \ldots & a_{i+1,l} \\
+\vdots &        & \ddots &  \vdots \\
+a_{jk} & a_{j,k+1} & \ldots & a_{jl}
 \end{Matrix} $$
 
-où les $l_i \in \matrice(\corps,1,n)$ sont les lignes de $A$. On note :
-
-$$\ligne_i A = l_i$$
-
-On peut aussi l'exprimer sous la forme de colonnes juxtaposées. Soit :
-
-$$A = [c_1 \ c_2 \ldots \ c_n]$$
-
-où les $c_i \in \matrice(\corps,m,1)$ sont les colonnes de $A$. On note :
-
-$$\colonne_i A = c_i$$
-
+On appelle bloc une telle sous-matrice.
 
 * Transposée
 
@@ -205,28 +228,11 @@ On a clairement :
 
 $$\big( A^T \big)^T = A$$
 
-* Vecteurs lignes et colonnes
+* Catégories
 
-On peut considérer un vecteur ligne comme une matrice ne possédant
-qu'une seule ligne. Un vecteur ligne est donc de taille générique
-$(1,n)$.
+#+TOC: headlines 1 local
 
-De même, on peut considérer un vecteur colonne omme une matrice ne
-possédant qu'une seule colonne. Un vecteur colonne est donc de taille
-générique $(m,1)$.
-
-** Équivalence avec $\corps^n$
-
-A partir d'un n-tuple $(x_1,x_2,...,x_n) \in \corps^n$, on peut former
-un vecteur ligne $l \in \matrice(\corps,1,n)$ et un vecteur colonne $c
-\in \matrice(\corps,n,1)$. Les réciproques étant également vraies,
-on a les équivalences :
-
-#+begin_center
-$\matrice(\corps,1,n) \equiv \matrice(\corps,n,1) \equiv \corps^n$
-#+end_center
-
-* Carrées et rectangulaires
+** Matrices carrées et rectangulaires
 
 Les matrices $A \in \matrice(\corps,n,n)$ ayant même nombre
 de colonnes et de lignes sont dites « carrées ». Les
@@ -235,7 +241,7 @@ matrices $A \in \matrice(\corps,m,n)$ avec $m \ne n$ sont dites
 matrice est « longue ». Si $m \strictsuperieur n$, on dit que la
 matrice est « haute ».
 
-* Matrices diagonales
+** Matrices diagonales
 
 Une matrice diagonale contient des composantes nulles partout, à
 l'exception de la diagonale où aucune contrainte n'est fixée. On peut
@@ -259,15 +265,13 @@ d_i & \text{ si } i = j \in \{1,2,...,p\} \\
 \end{cases} $$
 #+END_CENTER
 
-
-** Carrée
+*** Carrée
 
 Dans le cas particulier où $m = n$, on note aussi :
 
 $$\diagonale_n(d) = \diagonale_{n,n}(d)$$
 
-
-* Matrices triangulaires
+** Matrices triangulaires
 
 Les composantes des matrices triangulaires supérieures ne peuvent être non nulles qu'au-dessus de la diagonale, c'est-à-dire lorsque $i \le j$. Elles peuvent se représenter par :
 
@@ -420,5 +424,3 @@ A \cdot \beta = \beta \cdot A \)
 La conjuguée d'une matrice $A = (a_{ij})_{i,j} \in \matrice(\setC,m,n)$ est définie par la conjuguée des composantes :
 
 $$\conjugue A = \bar{A} = ( \bar{a}_{ij} )_{i,j} = ( \conjugue a_{ij} )_{i,j}$$
-
-

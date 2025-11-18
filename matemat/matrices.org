@@ -29,7 +29,11 @@
   - Chapitre \ref{chap:reel} : Les réels
   - Chapitre \ref{chap:complexe} : Les complexes
 
-* Définition
+* Introduction
+
+#+TOC: headlines 1 local
+
+** Définition
 
 Soit un corps $\corps$, une fonction linéaire $\mathcal{A} : \corps^n
 \mapsto \corps^m$ de composantes :
@@ -79,7 +83,7 @@ coefficients $a_{ij}\in\corps$ sont appelés composantes de $A$.
 On note $\matrice(\corps,m,n)$ l'ensemble des matrices à $m$ lignes et
 $n$ colonnes.
 
-* Composantes
+** Composantes
 
 Soit une matrice $A\in\matrice(\corps,m,n)$ :
 
@@ -113,11 +117,58 @@ ou encore :
 
 $$ A = [ a_{ij} ]_{i,j} = [ a_{ij} ]_{ij} $$
 
-On dit aussi que $a_{ij}$ est la composante $i,j$ et $A$, et on le note :
+On dit aussi que $a_{ij}$ est la composante $i,j$ de $A$, et on le note :
 
 $$a_{ij} = \composante_{ij} A$$
 
-* Vecteurs lignes et colonnes
+** Egalité
+
+Il est clair que deux matrices $A,B \in \matrice(\corps,m,n)$ :
+
+$$ A = ( a_{ij} )_{i,j} $$
+
+$$ B = ( b_{ij} )_{i,j} $$
+
+sont égales ($A = B$) si et seulement si toutes leurs composantes
+le sont :
+
+$$a_{ij} = b_{ij}$$
+
+pour tout $(i,j) \in \{ 1,2,...,m \} \times \{ 1,2,...,n \}$.
+
+** Ordre partiel
+
+Soit les matrices $A,B \in \matrice(\corps,m,n)$ :
+
+#+BEGIN_CENTER
+\(
+A = ( a_{ij} )_{i,j} \)
+
+\(
+B = ( b_{ij} )_{i,j}
+\)
+#+END_CENTER
+
+On dit que $A$ est inférieure à $B$, et on le note $A \le B$, si :
+
+$$a_{ij} \le b_{ij}$$
+
+pour tout $(i,j) \in \{ 1,2,...,m \} \times \{ 1,2,...,n \}$.
+
+** Scalaire
+
+On peut associer à tout scalaire $a \in \corps$ une matrice $A$
+de taille $(1,1)$ :
+
+$$ A = [ a ] $$
+
+et vice-versa. On a donc l’équivalence :
+
+$$ \matrice(\corps,1,1) \equiv \corps $$
+
+On assimile donc toute matrice de taille $(1,1)$ à un scalaire.
+
+** Vecteurs lignes et colonnes
 
 On peut considérer un vecteur ligne comme une matrice ne possédant
 qu'une seule ligne. Un vecteur ligne est donc de taille générique
@@ -127,7 +178,7 @@ De même, on peut considérer un vecteur colonne omme une matrice ne
 possédant qu'une seule colonne. Un vecteur colonne est donc de taille
 générique $(m,1)$.
 
-** Équivalence avec $\corps^n$
+*** Équivalence avec $\corps^n$
 
 A partir d'un n-tuple $(x_1,x_2,...,x_n) \in \corps^n$, on peut former
 un vecteur ligne $l \in \matrice(\corps,1,n)$ et un vecteur colonne $c
@@ -137,6 +188,93 @@ on a les équivalences :
 #+begin_center
 $\matrice(\corps,1,n) \equiv \matrice(\corps,n,1) \equiv \corps^n$
 #+end_center
+
+* Opérations
+
+#+TOC: headlines 1 local
+
+** Multiplication matrice et vecteur
+
+** Multiplication de deux matrices
+
+** Addition et soustraction
+
+Soit les matrices de tailles identiques $A, B \in \matrice(\corps,m,n)$ :
+
+#+BEGIN_CENTER
+\(
+A = (a_{ij})_{i,j} \)
+
+\(
+B = (b_{ij})_{i,j}
+\)
+#+END_CENTER
+
+L'addition et la soustraction des matrices sont simplement définies par l'addition et la soustraction des composantes :
+
+#+BEGIN_CENTER
+\(
+A + B = (a_{ij} + b_{ij})_{i,j} \)
+
+\(
+A - B = (a_{ij} - b_{ij})_{i,j}
+\)
+#+END_CENTER
+
+On a donc clairement :
+
+$$A + B = B + A$$
+
+*** Neutre
+
+La matrice nulle $0$ est le neutre pour cette opération :
+
+$$A + 0 = A$$
+
+On en déduit que tous ses éléments doivent être nuls :
+
+$$0 = ( 0 )_{i,j}$$
+
+On note $0_{m,n}$ au lieu de $0$ lorsqu'on veut préciser que $0$ est
+de taille $(m,n)$.
+
+*** Opposé
+
+L'opposé de $A$, noté $-A$, est tel que :
+
+$$A + (-A) = 0$$
+
+On a donc clairement :
+
+$$-A = (-a_{ij})_{i,j}$$
+
+** Multiplication mixte
+
+On définit la multiplication mixte $\cdot : \corps \times \matrice(\corps,m,n) \to \matrice(\corps,m,n)$ par :
+
+$$\beta \cdot A = (\beta \cdot a_{ij})_{i,j}$$
+
+où $\beta \in \corps$ et $A \in \matrice(\corps,m,n)$.
+
+Choissons également $\gamma \in \corps$. On note comme d'habitude :
+
+#+BEGIN_CENTER
+\(
+A \cdot \beta = \beta \cdot A \)
+
+\(
+\gamma \cdot \beta \cdot A = (\gamma \cdot \beta) \cdot A \)
+
+\(
+\beta A = \beta \cdot A
+\)
+#+END_CENTER
+
+* Conjuguée
+
+La conjuguée d'une matrice $A = (a_{ij})_{i,j} \in \matrice(\setC,m,n)$ est définie par la conjuguée des composantes :
+
+$$\conjugue A = \bar{A} = ( \bar{a}_{ij} )_{i,j} = ( \conjugue a_{ij} )_{i,j}$$
 
 * Formes lignes et colonnes
 
@@ -155,7 +293,7 @@ où les $l_i \in \matrice(\corps,1,n)$ sont les lignes de $A$. On note :
 
 $$\ligne_i A = l_i$$
 
-On peut aussi l'exprimer sous la forme de colonnes juxtaposées. Soit :
+On peut aussi exprimer $A$ sous la forme de colonnes juxtaposées. Soit :
 
 $$A = [c_1 \ \ c_2 \ldots \ \ c_n]$$
 
@@ -302,125 +440,3 @@ $$ \tau^-_{ij} =
 #+END_CENTER
 
 
-* Egalité
-
-Il est clair que deux matrices $A,B \in \matrice(\corps,m,n)$ :
-
-#+BEGIN_CENTER
-\(
-A = ( a_{ij} )_{i,j} \)
-
-\(
-B = ( b_{ij} )_{i,j}
-\)
-#+END_CENTER
-
-sont égales ($A = B$) si tous leurs éléments le sont :
-
-$$a_{ij} = b_{ij}$$
-
-pour tout $(i,j) \in \{ 1,2,...,m \} \times \{ 1,2,...,n \}$.
-
-
-* Ordre partiel
-
-Soit les matrices $A,B \in \matrice(\corps,m,n)$ :
-
-#+BEGIN_CENTER
-\(
-A = ( a_{ij} )_{i,j} \)
-
-\(
-B = ( b_{ij} )_{i,j}
-\)
-#+END_CENTER
-
-On dit que $A$ est inférieure à $B$, et on le note $A \le B$, si :
-
-$$a_{ij} \le b_{ij}$$
-
-pour tout $(i,j) \in \{ 1,2,...,m \} \times \{ 1,2,...,n \}$.
-
-
-* Addition et soustraction
-
-Soit les matrices de tailles identiques $A, B \in \matrice(\corps,m,n)$ :
-
-#+BEGIN_CENTER
-\(
-A = (a_{ij})_{i,j} \)
-
-\(
-B = (b_{ij})_{i,j}
-\)
-#+END_CENTER
-
-L'addition et la soustraction des matrices sont simplement définies par l'addition et la soustraction des composantes :
-
-#+BEGIN_CENTER
-\(
-A + B = (a_{ij} + b_{ij})_{i,j} \)
-
-\(
-A - B = (a_{ij} - b_{ij})_{i,j}
-\)
-#+END_CENTER
-
-On a donc clairement :
-
-$$A + B = B + A$$
-
-
-** Neutre
-
-La matrice nulle $0$ est le neutre pour cette opération :
-
-$$A + 0 = A$$
-
-On en déduit que tous ses éléments doivent être nuls :
-
-$$0 = ( 0 )_{i,j}$$
-
-On note $0_{m,n}$ au lieu de $0$ lorsqu'on veut préciser que $0$ est
-de taille $(m,n)$.
-
-
-** Opposé
-
-L'opposé de $A$, noté $-A$, est tel que :
-
-$$A + (-A) = 0$$
-
-On a donc clairement :
-
-$$-A = (-a_{ij})_{i,j}$$
-
-
-* Multiplication mixte
-
-On définit la multiplication mixte $\cdot : \corps \times \matrice(\corps,m,n) \to \matrice(\corps,m,n)$ par :
-
-$$\beta \cdot A = (\beta \cdot a_{ij})_{i,j}$$
-
-où $\beta \in \corps$ et $A \in \matrice(\corps,m,n)$.
-
-Choissons également $\gamma \in \corps$. On note comme d'habitude :
-
-#+BEGIN_CENTER
-\(
-A \cdot \beta = \beta \cdot A \)
-
-\(
-\gamma \cdot \beta \cdot A = (\gamma \cdot \beta) \cdot A \)
-
-\(
-\beta A = \beta \cdot A
-\)
-#+END_CENTER
-
-
-* Conjuguée
-
-La conjuguée d'une matrice $A = (a_{ij})_{i,j} \in \matrice(\setC,m,n)$ est définie par la conjuguée des composantes :
-
-$$\conjugue A = \bar{A} = ( \bar{a}_{ij} )_{i,j} = ( \conjugue a_{ij} )_{i,j}$$

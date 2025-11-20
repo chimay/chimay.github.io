@@ -29,9 +29,13 @@
   - Chapitre \ref{chap:forme} : Les formes linéaires
   - Chapitre \ref{chap:ps} : Les produits scalaires
 
-* Application duale ou adjointe
+* Introduction
 
-Soient $E$ et $F$ deux espaces vectoriels munis de produits scalaires et l'application linéaire $A : E \mapsto F$. Si $A^\dual : F \mapsto E$ est l'unique fonction de $E^F$ vérifiant :
+** Au sens du produit scalaire
+
+Soient $E$ et $F$ deux espaces vectoriels munis de produits scalaires
+et l'application linéaire $A : E \mapsto F$. Si $A^\dual : F \mapsto E$
+est l'unique fonction de $E^F$ vérifiant :
 
 $$\scalaire{v}{A(u)} = \scalaire{A^\dual(v)}{u}$$
 
@@ -39,39 +43,18 @@ pour tout $(u,v) \in E \times F$, on dit que $A^\dual$ est l'application
 duale (ou adjointe) de $A$. Nous supposons dans la suite que les
 applications rencontrées possèdent une application adjointe.
 
+** Au sens des formes linéaires
+
+Il existe aussi un concept analogue au sens des formes linéaires. Voir
+[[file:formes-lineaires.org::#heading:application_adjointe_ou_duale][la section sur les applications duales]]
+dans le chapitre sur les formes linéaires.
+
+Les notions étant similaires, nous nous concentrons dans ce chapitre
+sur les applications adjointes au sens du produit scalaire.
+
 ** Applications auto-adjointes
 
 Si $E = F$ et $A = A^\dual$, on dit que $A$ est hermitienne ou auto-adjointe.
-
-
-* Identité
-
-Comme :
-
-$$\scalaire{v}{\identite(u)} = \scalaire{\identite(v)}{u} = \scalaire{v}{u}$$
-
-on a bien évidemment $\identite^\dual = \identite$.
-
-
-* Adjoint d'une combinaison linéaire
-
-Soit deux applications linéaires $A,B : E \mapsto F$ et $\alpha,\beta \in \corps$. Si $(u,v) \in E \times F$, on a :
-
-\begin{align}
-\scalaire{(\conjaccent{\alpha} \cdot A^\dual + \conjaccent{\beta} \cdot B^\dual)(v)}{u} &= \alpha \cdot \scalaire{A^\dual(v)}{u} + \beta \cdot \scalaire{B^\dual(v)}{u} \)
-
-\(
-&= \alpha \cdot \scalaire{v}{A(u)} + \beta \cdot \scalaire{v}{A(u)} \)
-
-\(
-&= \scalaire{v}{(\alpha \cdot A + \beta \cdot B)(u)}
-\end{align}
-
-On en conclut que :
-
-$$(\alpha \cdot A + \beta \cdot B)^\dual = \conjaccent{\alpha} \cdot A^\dual + \conjaccent{\beta} \cdot B^\dual$$
-
-L'opérateur $^\dual : A \mapsto A^\dual$ est antilinéaire.
 
 
 * Bidual
@@ -84,8 +67,70 @@ pour tout $(u,v) \in E \times F$. On a donc :
 
 $$\left( A^\dual \right)^\dual = A$$
 
+* Linéarité de l'adjoint
 
-* Adjoint d'une composée
+Soit $u,v \in E$, $x,y \in F$ et $\alpha, \beta \in \corps$. On a :
+
+\begin{align*}
+\scalaire{A^\dual(\alpha \cdot x + \beta \cdot y)}{u}
+&= \scalaire{\alpha \cdot x + \beta \cdot y}{A(u)} \\
+&= \conjaccent{\alpha} \cdot \scalaire{x}{A(u)} + \conjaccent{\beta} \cdot \scalaire{y}{A(u)} \\
+&= \conjaccent{\alpha} \cdot \scalaire{A^\dual(x)}{u} + \conjaccent{\beta} \cdot \scalaire{A^\dual(y)}{u} \\
+&=\scalaire{\alpha \cdot A^\dual(x) + \beta \cdot A^\dual(y)}{u}
+\end{align*}
+
+Comme ce doit être valable pour tout $u \in E$, on en conclut que l'application adjointe est linéaire :
+
+$$A^\dual(\alpha \cdot x + \beta \cdot y) = \alpha \cdot A^\dual(x) + \beta \cdot A^\dual(y)$$
+
+
+* Adjoint d'une combinaison linéaire
+
+Soit deux applications linéaires $A,B : E \mapsto F$ et $\alpha,\beta \in \corps$. Si $(u,v) \in E \times F$, on a :
+
+\begin{align*}
+\scalaire{(\conjaccent{\alpha} \cdot A^\dual + \conjaccent{\beta} \cdot B^\dual)(v)}{u}
+&= \alpha \cdot \scalaire{A^\dual(v)}{u} + \beta \cdot \scalaire{B^\dual(v)}{u} \\
+&= \alpha \cdot \scalaire{v}{A(u)} + \beta \cdot \scalaire{v}{A(u)} \\
+&= \scalaire{v}{(\alpha \cdot A + \beta \cdot B)(u)}
+\end{align*}
+
+On en conclut que :
+
+$$(\alpha \cdot A + \beta \cdot B)^\dual = \conjaccent{\alpha} \cdot A^\dual + \conjaccent{\beta} \cdot B^\dual$$
+
+L'opérateur $^\dual : A \mapsto A^\dual$ est antilinéaire.
+
+* Composition
+
+#+TOC: headlines 1 local
+
+** Identité
+
+Comme :
+
+$$\scalaire{v}{\identite(u)} = \scalaire{\identite(v)}{u} = \scalaire{v}{u}$$
+
+on a bien évidemment $\identite^\dual = \identite$.
+
+** Inverse
+
+Supposons que $A$ soit inversible. On a :
+
+#+BEGIN_CENTER
+\(
+\identite = \identite^\dual = (A^{-1} \circ A)^\dual = A^\dual \circ (A^{-1})^\dual \)
+
+\(
+\identite = \identite^\dual = (A \circ A^{-1})^\dual = (A^{-1})^\dual \circ A^\dual
+\)
+#+END_CENTER
+
+On en conclut que $A^\dual$ est également inversible et que :
+
+$$(A^\dual)^{-1} = (A^{-1})^\dual$$
+
+** Adjoint d'une composée
 
 Soit un troisième espace vectoriel $G$. Si les applications adjointes des
 applications linéaires $B : E \mapsto F$ et $A : F \mapsto G$ existent,
@@ -97,7 +142,7 @@ pour tout $(u,v) \in E \times G$. On en conclut que :
 
 $$(A \circ B)^\dual = B^\dual \circ A^\dual$$
 
-* Construction d'applications auto-adjointes
+** Construction d'applications auto-adjointes
 
 Nous allons voir que nous pouvons construire deux applications auto-adjointes à partir de n'importe quelle application linéaire $A : E \mapsto F$ admettant une application duale $A^\dual : F \mapsto E$.
 
@@ -117,23 +162,6 @@ pour tout $x,y \in F$. On en déduit que :
 
 $$(A \circ A^\dual)^\dual = A \circ A^\dual$$
 
-
-
-* Linéarité de l'adjoint
-
-Soit $u,v \in E$, $x,y \in F$ et $\alpha, \beta \in \corps$. On a :
-
-\begin{align*}
-\scalaire{A^\dual(\alpha \cdot x + \beta \cdot y)}{u}
-&= \scalaire{\alpha \cdot x + \beta \cdot y}{A(u)} \\
-&= \conjaccent{\alpha} \cdot \scalaire{x}{A(u)} + \conjaccent{\beta} \cdot \scalaire{y}{A(u)} \\
-&= \conjaccent{\alpha} \cdot \scalaire{A^\dual(x)}{u} + \conjaccent{\beta} \cdot \scalaire{A^\dual(y)}{u} \\
-&=\scalaire{\alpha \cdot A^\dual(x) + \beta \cdot A^\dual(y)}{u}
-\end{align*}
-
-Comme ce doit être valable pour tout $u \in E$, on en conclut que l'application adjointe est linéaire :
-
-$$A^\dual(\alpha \cdot x + \beta \cdot y) = \alpha \cdot A^\dual(x) + \beta \cdot A^\dual(y)$$
 
 
 * Norme de l'adjoint
@@ -171,31 +199,17 @@ Ces deux inégalités nous montrent que :
 $$\norme{A^\dual} = \norme{A}$$
 
 
-* Inverse
-
-Supposons que $A$ soit inversible. On a :
-
-#+BEGIN_CENTER
-\(
-\identite = \identite^\dual = (A^{-1} \circ A)^\dual = A^\dual \circ (A^{-1})^\dual \)
-
-\(
-\identite = \identite^\dual = (A \circ A^{-1})^\dual = (A^{-1})^\dual \circ A^\dual
-\)
-#+END_CENTER
-
-On en conclut que $A^\dual$ est également inversible et que :
-
-$$(A^\dual)^{-1} = (A^{-1})^\dual$$
-
-
 * Noyau et image
 
-Soit l'application linéaire $A : E \mapsto F$. Soit $u \in \noyau A$ et $v \in \image A^\dual$. On peut donc trouver un $x \in F$ tel que $v = A^\dual(x)$. On a :
+Soit l'application linéaire $A : E \mapsto F$. Soit $u \in \noyau A$
+et $v \in \image A^\dual$. On peut donc trouver un $x \in F$ tel que $v =
+A^\dual(x)$. On a :
 
 $$\scalaire{u}{v} = \scalaire{u}{A^\dual(x)} = \scalaire{A(u)}{x} = \scalaire{0}{x} = 0$$
 
-d'où $u \in (\image A^\dual)^\orthogonal$ et $\noyau A \subseteq (\image A^\dual)^\orthogonal$. Inversément, si $u \in (\image A^\dual)^\orthogonal$, on a :
+d'où $u \in (\image A^\dual)^\orthogonal$ et $\noyau A \subseteq
+(\image A^\dual)^\orthogonal$. Inversément, si $u \in (\image
+A^\dual)^\orthogonal$, on a :
 
 $$\scalaire{A(u)}{x} = \scalaire{u}{A^\dual(x)} = 0$$
 
@@ -257,13 +271,3 @@ $$(A \cdot B)^\dual = B^\dual \cdot A^\dual$$
 
 pour toutes matrices $A \in \matrice(\corps,m,n)$ et $B \in
 \matrice(\corps,n,p)$ de dimensions compatibles pour la multiplication.
-
-* Adjoint au sens des formes linéaires
-
-Soit les espaces vectoriels $E$ et $F$ sur $\corps$ et l'application linéaire
-$A : E \mapsto F$. Si $A^\dual : F^\dual \mapsto E^\dual$ est l'unique fonction de $E^F$ vérifiant :
-
-$$\forme{\varphi}{A(u)} = \forme{A^\dual(\varphi)}{u}$$
-
-pour tout $\varphi \in F^\dual$ et $u \in E$, on dit que $A^\dual$ est l'application duale (ou adjointe) de $A$ au sens des formes linéaires.
-

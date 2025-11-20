@@ -249,7 +249,7 @@ on a :
 
 \begin{align*}
 (A \cdot B) \cdot u
-&= \mathcal{A}\left(\mathcal{B}(u)\right) \\
+&= A \cdot (B \cdot u) \\
 &= \sum_{k=1}^n a_{ik} \cdot (B \cdot u)_k = \sum_{k=1}^n a_{ik} \sum_{j=1}^p b_{kj} \cdot u_j \\
 &= \sum_{k=1}^n \sum_{j=1}^p a_{ik} \cdot b_{kj} \cdot u_j \\
 &= \sum_{j=1}^p \left[ \sum_{k=1}^n a_{ik} \cdot b_{kj} \right] \cdot u_j
@@ -351,7 +351,7 @@ on a :
 
 \begin{align*}
 (A + B) \cdot u
-&= \mathcal{A}(u) + \mathcal{B}(u) \\
+&= A \cdot u + B \cdot u \\
 &= \sum_{j=1}^n a_{ij} \cdot u_j + \sum_{j=1}^n b_{ij} \cdot u_j \\
 &= \sum_{j=1}^n \left[ a_{ij} + b_{ij} \right] \cdot u_j
 \end{align*}
@@ -408,11 +408,51 @@ $$A - B = \left[ a_{ij} - b_{ij} \right]_{i,j}$$
 
 ** Multiplication mixte
 
-On définit la multiplication mixte $\cdot : \corps \times \matrice(\corps,m,n) \to \matrice(\corps,m,n)$ par :
+Soit un scalaire $\alpha \in \corps$ et la fonction linéaire
+$\mathcal{A} : \corps^n \mapsto \corps^m$ représentée par la matrice $A \in
+\matrice(\corps,m,n)$. On définit la multiplication mixte $\alpha \cdot
+A$ pour qu’elle représente la fonction $\alpha \cdot \mathcal{A}$. On
+a donc :
 
-$$\beta \cdot A = (\beta \cdot a_{ij})_{i,j}$$
+$$ (\alpha \cdot A) \cdot u
+= (\alpha \cdot \mathcal{A})(u)
+= \alpha \cdot \mathcal{A}(u) $$
 
-où $\beta \in \corps$ et $A \in \matrice(\corps,m,n)$.
+pour tout vecteur colonne $u \in \corps^p$. Par définition du produit
+matrice-vecteur :
+
+$$ (\alpha \cdot A) \cdot u
+= \alpha \cdot \mathcal{A}(u)
+= \alpha \cdot (A \cdot u) $$
+
+En terme de composantes, si :
+
+$$ A = (a_{ij})_{i,j} $$
+
+$$ u = (u_i)_i $$
+
+on a :
+
+\begin{align*}
+(\alpha \cdot A) \cdot u
+&= \alpha \cdot (A \cdot u) \\
+&= \alpha \sum_{j=1}^n a_{ij} \cdot u_j \\
+&= \sum_{j=1}^n \left[ \alpha \cdot a_{ij} \right] \cdot u_j
+\end{align*}
+
+La dernière ligne représente le produit d’une matrice
+$C\in\matrice(\corps,m,p)$ de composantes :
+
+$$ \composante_{ij} C = \alpha \cdot a_{ij} $$
+
+par $u$ :
+
+$$ (\alpha \cdot A) \cdot u = C \cdot u $$
+
+Ce résultat étant valable pour tout vecteur colonne $u \in \corps^p$, on
+en déduit que $C$ est identique à $\alpha \cdot A$, ce qui nous donne :
+
+$$\alpha \cdot A = \left[ \alpha \cdot a_{ij} \right]_{i,j}$$
 
 Choissons également $\gamma \in \corps$. On note comme d'habitude :
 

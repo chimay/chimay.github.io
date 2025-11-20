@@ -121,6 +121,10 @@ $$ A = [ a_{ij} ]_{i,j} = [ a_{ij} ]_{ij} $$
 
 On dit aussi que $a_{ij}$ est la composante $i,j$ de $A$, et on le note :
 
+$$a_{ij} = \composante_{i,j} A$$
+
+avec ou sans virgule :
+
 $$a_{ij} = \composante_{ij} A$$
 
 ** Egalité
@@ -215,62 +219,60 @@ $$ A \cdot u = \left[ \sum_{j=1}^n a_{ij} \cdot u_j \right]_i $$
 
 ** Produit matriciel
 
-Soit à présent les matrices $A \in \matrice(\corps,m,n)$ et $B \in \matrice(\corps,n,p)$ données par :
+Soit les fonctions linéaires $\mathcal{A} : \corps^n \mapsto
+\corps^m$ et $\mathcal{B} : \corps^p \mapsto \corps^n$ respectivement
+représentées par les matrices $A \in \matrice(\corps,m,n)$ et $B \in
+\matrice(\corps,n,p)$. On définit le produit matriciel $A \cdot B$
+pour qu’il représente la fonction $\mathcal{A} \circ \mathcal{B}$. On
+a donc :
 
-#+BEGIN_CENTER
-\(
-A = ( a_{ij} )_{i,j} \)
+$$ (A \cdot B) \cdot u
+= (\mathcal{A} \circ \mathcal{B})(u)
+= \mathcal{A}\left(\mathcal{B}(u)\right) $$
 
-\(
-B = ( b_{ij} )_{i,j}
-\)
-#+END_CENTER
+pour tout vecteur colonne $u \in \corps^p$. Par définition du produit
+matrice-vecteur :
 
-où les $a_{ij},b_{ij} \in K$. Soit les applications linéaires $\mathcal{B} : \corps^p \to \corps^n$ et $\mathcal{A} : \corps^n \to \corps^m$ définies par :
+$$ (A \cdot B) \cdot u
+= \mathcal{A}\left(\mathcal{B}(u)\right)
+= A \cdot (B \cdot u) $$
 
-#+BEGIN_CENTER
-\(
-\mathcal{B}(x) = B \cdot x \)
+En terme de composantes, si :
 
-\(
-\mathcal{A}(y) = A \cdot y
-\)
-#+END_CENTER
+$$ A = (a_{ij})_{i,j} $$
 
-pour tout $x \in \corps^p$, $y \in \corps^n$. Choisissons $z \in \corps^m$ et relions $x,y,z$ par :
+$$ B = (b_{ij})_{i,j} $$
 
-#+BEGIN_CENTER
-\(
-y = \mathcal{B}(x) \)
+$$ u = (u_i)_i $$
 
-\(
-z = \mathcal{A}(y) = \big( \mathcal{A} \circ \mathcal{B} \big)(x)
-\)
-#+END_CENTER
+on a :
 
-Examinons les composantes de $z$ en fonction de celles de $x$ :
+\begin{align*}
+(A \cdot B) \cdot u
+&= \mathcal{A}\left(\mathcal{B}(u)\right) \\
+&= \sum_{k=1}^n a_{ik} \cdot (B \cdot u)_k = \sum_{k=1}^n a_{ik} \sum_{j=1}^p b_{kj} \cdot u_j \\
+&= \sum_{k=1}^n \sum_{j=1}^p a_{ik} \cdot b_{kj} \cdot u_j \\
+&= \sum_{j=1}^p \left[ \sum_{k=1}^n a_{ik} \cdot b_{kj} \right] \cdot u_j
+\end{align*}
 
-$$z_i = \sum_k a_{ik} \cdot y_k = \sum_k a_{ik} \sum_j b_{kj} \cdot x_j = \sum_{k,j} a_{ik} \cdot b_{kj} \cdot x_j$$
+La dernière ligne représente le produit d’une matrice
+$C\in\matrice(\corps,m,p)$ de composantes :
 
-On en déduit que la composée $\mathcal{C} = \mathcal{A} \circ \mathcal{B}$ est représentée par la matrice $C \in \matrice(\corps,m,p)$ de composantes :
+$$ \composante_{ij} C = \sum_{k=1}^n a_{ik} \cdot b_{kj} $$
 
-$$\composante_{ij} C = c_{ij} = \sum_k a_{ik} \cdot b_{kj}$$
+par $u$ :
 
-Il suffit donc de définir le produit matriciel $A \cdot B$ par :
+$$ (A \cdot B) \cdot u = C \cdot u $$
 
-$$A \cdot B = \left(\sum_{k=1}^n a_{ik} \cdot b_{kj}\right)_{i,j}$$
+Ce résultat étant valable pour tout vecteur colonne $u \in \corps^p$, on
+en déduit que $C$ est identique à $A \cdot B$, ce qui nous donne :
 
-pour avoir :
+$$A \cdot B = \left[\sum_{k=1}^n a_{ik} \cdot b_{kj}\right]_{i,j}$$
 
-$$(A \cdot B) \cdot x = \big( \mathcal{A} \circ \mathcal{B} \big)(x)$$
-
-Le produit matriciel représente donc une composée d'applications
-linéaires. Pour que ce produit soit bien défini, il est nécessaire
-que le nombre de colonnes $n$ de $A$ et le nombre de lignes de $B$
-soient identiques.
-
-On voit également que le produit matrice - vecteur défini
-précédemment en est un cas particulier lorsque $p = 1$.
+Le produit d'une matrice de taille $(m,n)$ par une matrice de taille
+$(n,p)$ est une matrice de taille $(m,p)$. Pour que ce produit soit
+bien défini, il est nécessaire que le nombre de colonnes $n$ de $A$
+et le nombre de lignes de $B$ soient identiques.
 
 *** Notation
 
@@ -278,34 +280,20 @@ En pratique, on laisse souvent tomber le ``$\cdot$'' et on note $A B$
 au lieu de $A \cdot B$ lorsqu'il est évident que $A$ et $B$ sont deux
 matrices différentes.
 
-*** Taille
+*** Propriétés
 
-Le produit d'une matrice de taille $(m,n)$ par une matrice de taille $(n,p)$ est une matrice de taille $(m,p)$.
-
-*** Lignes et colonnes
-
-Si $x_i^T = \ligne_i(A)$ et $y_j = \colonne_j(B)$, on voit que :
-
-$$\composante_{ij} (A \cdot B) = x_i^T \cdot y_j$$
-
-*** Associativité
+**** Associativité
 
 Soit les matrices $A \in \matrice(\corps,m,n)$, $B \in
-\matrice(\corps,n,p)$ et $C \in \matrice(\corps,p,q)$ données par :
+\matrice(\corps,n,p)$ et $C \in \matrice(\corps,p,q)$ définies par :
 
-#+BEGIN_CENTER
-\(
-A = ( a_{ij} )_{i,j} \)
+$$ A = ( a_{ij} )_{i,j} $$
 
-\(
-B = ( b_{ij} )_{i,j} \)
+$$ B = ( b_{ij} )_{i,j} $$
 
-\(
-C = ( c_{ij} )_{i,j}
-\)
-#+END_CENTER
+$$ C = ( c_{ij} )_{i,j} $$
 
-où les $a_{ij},b_{ij},c_{ij} \in K$. La relation :
+La relation :
 
 $$A \cdot (B \cdot C) = \left( \sum_{k,l} a_{ik} \cdot b_{kl} \cdot c_{lj} \right)_{i,j} = (A \cdot B) \cdot C$$
 
@@ -313,7 +301,7 @@ nous montre que la multiplication entre matrices est associative. On définit :
 
 $$A \cdot B \cdot C = A \cdot (B \cdot C) = (A \cdot B) \cdot C$$
 
-*** Distributivité
+**** Distributivité
 
 On a aussi les propriétés de distribution :
 
@@ -328,8 +316,7 @@ A \cdot (B + C) = A \cdot B + A \cdot C \)
 
 où $A \in \matrice(\corps,m,n)$, $B,C \in \matrice(\corps,n,p)$ et $D \in \matrice(\corps,p,q)$.
 
-
-*** Non commutativité
+**** Non commutativité
 
 Par contre, on peut trouver des matrices $A$ et $B$ telles que :
 
@@ -422,7 +409,8 @@ A \cdot \beta = \beta \cdot A \)
 
 * Matrice identité
 
-La matrice identité $I \in \matrice(\corps,n,n)$ correspond à la fonction $\identite$. On a donc :
+La matrice identité $I \in \matrice(\corps,n,n)$ correspond à la
+fonction $\identite$. On a donc :
 
 $$I \cdot x = x$$
 
@@ -442,7 +430,11 @@ $$I = [\canonique_1 \ \ \ldots \ \ \canonique_n]$$
 
 ** Neutre
 
-Comme la fonction identité est neutre pour la composition, la matrice unité correspondante $I \in \matrice(\corps,m,n)$ doit être neutre pour la multiplication avec toutes les matrices de dimensions compatibles. Soit $A \in \matrice(\corps,m,n)$ et $B \in \matrice(\corps,n,p)$. On vérifie que l'on a bien :
+Comme la fonction identité est neutre pour la composition, la matrice
+unité correspondante $I \in \matrice(\corps,m,n)$ doit être neutre pour
+la multiplication avec toutes les matrices de dimensions compatibles. Soit
+$A \in \matrice(\corps,m,n)$ et $B \in \matrice(\corps,n,p)$. On vérifie
+que l'on a bien :
 
 #+BEGIN_CENTER
 \(
@@ -457,7 +449,6 @@ I \cdot B = B
 ** Notation
 
 On note aussi $I_n$ pour préciser que $I$ est de taille $(n,n)$.
-
 
 * Inverse
 
@@ -543,6 +534,12 @@ $$A = [c_1 \ \ c_2 \ldots \ \ c_n]$$
 où les $c_i \in \matrice(\corps,m,1)$ sont les colonnes de $A$. On note :
 
 $$\colonne_i A = c_i$$
+
+** Lignes et colonnes
+
+Si $x_i^T = \ligne_i(A)$ et $y_j = \colonne_j(B)$, on voit que :
+
+$$\composante_{ij} (A \cdot B) = x_i^T \cdot y_j$$
 
 * Blocs
 

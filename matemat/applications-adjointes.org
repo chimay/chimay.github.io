@@ -29,23 +29,15 @@
   - Chapitre \ref{chap:forme} : Les formes linéaires
   - Chapitre \ref{chap:ps} : Les produits scalaires
 
-* Adjoint au sens des formes linéaires
-
-Soit les espaces vectoriels $E$ et $F$ sur $\corps$ et l'application linéaire
-$A : E \mapsto F$. Si $A^\dual : F^\dual \mapsto E^\dual$ est l'unique fonction de $E^F$ vérifiant :
-
-$$\forme{\varphi}{A(u)} = \forme{A^\dual(\varphi)}{u}$$
-
-pour tout $\varphi \in F^\dual$ et $u \in E$, on dit que $A^\dual$ est l'application duale (ou adjointe) de $A$ au sens des formes linéaires.
-
-* Adjoint au sens du produit scalaire
+* Application duale ou adjointe
 
 Soient $E$ et $F$ deux espaces vectoriels munis de produits scalaires et l'application linéaire $A : E \mapsto F$. Si $A^\dual : F \mapsto E$ est l'unique fonction de $E^F$ vérifiant :
 
 $$\scalaire{v}{A(u)} = \scalaire{A^\dual(v)}{u}$$
 
-pour tout $(u,v) \in E \times F$, on dit que $A^\dual$ est l'application duale (ou adjointe) de $A$ au sens du produit scalaire. Nous supposons dans la suite que les applications rencontrées possèdent une application adjointe.
-
+pour tout $(u,v) \in E \times F$, on dit que $A^\dual$ est l'application
+duale (ou adjointe) de $A$. Nous supposons dans la suite que les
+applications rencontrées possèdent une application adjointe.
 
 ** Applications auto-adjointes
 
@@ -95,14 +87,15 @@ $$\left( A^\dual \right)^\dual = A$$
 
 * Adjoint d'une composée
 
-Soit un troisième espace vectoriel $G$. Si les applications adjointes des applications linéaires $A : E \mapsto F$ et $B : F \mapsto G$ existent, on a :
+Soit un troisième espace vectoriel $G$. Si les applications adjointes des
+applications linéaires $B : E \mapsto F$ et $A : F \mapsto G$ existent,
+on a :
 
 $$\scalaire{v}{(A \circ B)(u)} = \scalaire{A^\dual(v)}{B(u)} = \scalaire{(B^\dual \circ A^\dual)(v)}{u}$$
 
 pour tout $(u,v) \in E \times G$. On en conclut que :
 
 $$(A \circ B)^\dual = B^\dual \circ A^\dual$$
-
 
 * Construction d'applications auto-adjointes
 
@@ -130,18 +123,13 @@ $$(A \circ A^\dual)^\dual = A \circ A^\dual$$
 
 Soit $u,v \in E$, $x,y \in F$ et $\alpha, \beta \in \corps$. On a :
 
-\begin{align}
-\scalaire{A^\dual(\alpha \cdot x + \beta \cdot y)}{u} &= \scalaire{\alpha \cdot x + \beta \cdot y}{A(u)} \)
-
-\(
-&= \conjaccent{\alpha} \cdot \scalaire{x}{A(u)} + \conjaccent{\beta} \cdot \scalaire{y}{A(u)} \)
-
-\(
-&= \conjaccent{\alpha} \cdot \scalaire{A^\dual(x)}{u} + \conjaccent{\beta} \cdot \scalaire{A^\dual(y)}{u} \)
-
-\(
+\begin{align*}
+\scalaire{A^\dual(\alpha \cdot x + \beta \cdot y)}{u}
+&= \scalaire{\alpha \cdot x + \beta \cdot y}{A(u)} \\
+&= \conjaccent{\alpha} \cdot \scalaire{x}{A(u)} + \conjaccent{\beta} \cdot \scalaire{y}{A(u)} \\
+&= \conjaccent{\alpha} \cdot \scalaire{A^\dual(x)}{u} + \conjaccent{\beta} \cdot \scalaire{A^\dual(y)}{u} \\
 &=\scalaire{\alpha \cdot A^\dual(x) + \beta \cdot A^\dual(y)}{u}
-\end{align}
+\end{align*}
 
 Comme ce doit être valable pour tout $u \in E$, on en conclut que l'application adjointe est linéaire :
 
@@ -222,7 +210,14 @@ $$\noyau A^\dual = (\image A)^\orthogonal$$
 
 * Représentation matricielle
 
-Soit $\corps \in \{ \setR , \setC \}$ et la matrice $A \in \matrice(\corps,m,n)$ représentant l'application linéaire $\mathcal{A} : \corps^n \mapsto \corps^m$. Soit $A^\dual \in \matrice(\corps,n,m)$ représentant $\mathcal{A}^\dual$. On a :
+#+TOC: headlines 1 local
+
+** Matrice adjointe
+
+Soit $\corps \in \{ \setR , \setC \}$ et la matrice $A \in
+\matrice(\corps,m,n)$ représentant l'application linéaire
+$\mathcal{A} : \corps^n \mapsto \corps^m$. Soit $A^\dual \in \matrice(\corps,n,m)$
+représentant $\mathcal{A}^\dual$. On a :
 
 $$\scalaire{y}{ \mathcal{A}(x) } = \conjaccent{y^T} \cdot A \cdot x$$
 
@@ -240,20 +235,35 @@ $$A^\dual = \conjaccent{A^T} = \conjugue A^T$$
 
 Ce résultat prouve l'existence et l'unicité de l'adjoint dans le cas d'espaces de dimension finie.
 
-
-** Cas particulier
+** Adjointe réelle
 
 Dans le cas d'une matrice réelle, on a $\conjaccent{A} = A$ et :
 
 $$A^\dual = A^T$$
 
+** Adjoint d'un produit
 
-* Adjoint d'un produit
+Soit les applications linéaires $\mathcal{A} : \corps^n \mapsto \corps^m$ et
+$\mathcal{B} : \corps^p \mapsto \corps^n$, respectivement représentées par les
+matrices $A$ et $B$. On sait que :
 
-On peut vérifier que :
+$$(\mathcal{A} \circ \mathcal{B})^\dual = \mathcal{B}^\dual \circ \mathcal{A}^\dual$$
+
+Comme le produit matriciel $A \cdot B$ représente la composée
+$\mathcal{A} \circ \mathcal{B}$ et que $B^\dual \cdot A^\dual$ représente
+$\mathcal{B}^\dual \circ \mathcal{A}^\dual$, on doit avoir :
 
 $$(A \cdot B)^\dual = B^\dual \cdot A^\dual$$
 
-pour toutes matrices $A \in \matrice(\corps,m,n)$ et $B \in \matrice(\corps,n,p)$ de dimensions compatibles pour la multiplication.
+pour toutes matrices $A \in \matrice(\corps,m,n)$ et $B \in
+\matrice(\corps,n,p)$ de dimensions compatibles pour la multiplication.
 
+* Adjoint au sens des formes linéaires
+
+Soit les espaces vectoriels $E$ et $F$ sur $\corps$ et l'application linéaire
+$A : E \mapsto F$. Si $A^\dual : F^\dual \mapsto E^\dual$ est l'unique fonction de $E^F$ vérifiant :
+
+$$\forme{\varphi}{A(u)} = \forme{A^\dual(\varphi)}{u}$$
+
+pour tout $\varphi \in F^\dual$ et $u \in E$, on dit que $A^\dual$ est l'application duale (ou adjointe) de $A$ au sens des formes linéaires.
 

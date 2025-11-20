@@ -217,109 +217,6 @@ est dès lors immédiate :
 
 $$ A \cdot u = \left[ \sum_{j=1}^n a_{ij} \cdot u_j \right]_i $$
 
-** Produit matriciel
-
-Soit les fonctions linéaires $\mathcal{A} : \corps^n \mapsto
-\corps^m$ et $\mathcal{B} : \corps^p \mapsto \corps^n$ respectivement
-représentées par les matrices $A \in \matrice(\corps,m,n)$ et $B \in
-\matrice(\corps,n,p)$. On définit le produit matriciel $A \cdot B$
-pour qu’il représente la fonction $\mathcal{A} \circ \mathcal{B}$. On
-a donc :
-
-$$ (A \cdot B) \cdot u
-= (\mathcal{A} \circ \mathcal{B})(u)
-= \mathcal{A}\left(\mathcal{B}(u)\right) $$
-
-pour tout vecteur colonne $u \in \corps^p$. Par définition du produit
-matrice-vecteur :
-
-$$ (A \cdot B) \cdot u
-= \mathcal{A}\left(\mathcal{B}(u)\right)
-= A \cdot (B \cdot u) $$
-
-En terme de composantes, si :
-
-$$ A = (a_{ij})_{i,j} $$
-
-$$ B = (b_{ij})_{i,j} $$
-
-$$ u = (u_i)_i $$
-
-on a :
-
-\begin{align*}
-(A \cdot B) \cdot u
-&= A \cdot (B \cdot u) \\
-&= \sum_{k=1}^n a_{ik} \cdot (B \cdot u)_k = \sum_{k=1}^n a_{ik} \sum_{j=1}^p b_{kj} \cdot u_j \\
-&= \sum_{k=1}^n \sum_{j=1}^p a_{ik} \cdot b_{kj} \cdot u_j \\
-&= \sum_{j=1}^p \left[ \sum_{k=1}^n a_{ik} \cdot b_{kj} \right] \cdot u_j
-\end{align*}
-
-La dernière ligne représente le produit d’une matrice
-$C\in\matrice(\corps,m,p)$ de composantes :
-
-$$ \composante_{ij} C = \sum_{k=1}^n a_{ik} \cdot b_{kj} $$
-
-par $u$ :
-
-$$ (A \cdot B) \cdot u = C \cdot u $$
-
-Ce résultat étant valable pour tout vecteur colonne $u \in \corps^p$, on
-en déduit que $C$ est identique à $A \cdot B$, ce qui nous donne :
-
-$$A \cdot B = \left[\sum_{k=1}^n a_{ik} \cdot b_{kj}\right]_{i,j}$$
-
-Le produit d'une matrice de taille $(m,n)$ par une matrice de taille
-$(n,p)$ est une matrice de taille $(m,p)$. Pour que ce produit soit
-bien défini, il est nécessaire que le nombre de colonnes $n$ de $A$
-et le nombre de lignes de $B$ soient identiques.
-
-*** Notation
-
-En pratique, on laisse souvent tomber le ``$\cdot$'' et on note $A B$
-au lieu de $A \cdot B$ lorsqu'il est évident que $A$ et $B$ sont deux
-matrices différentes.
-
-*** Propriétés
-
-**** Associativité
-
-Soit les matrices $A \in \matrice(\corps,m,n)$, $B \in
-\matrice(\corps,n,p)$ et $C \in \matrice(\corps,p,q)$ définies par :
-
-$$ A = ( a_{ij} )_{i,j} $$
-
-$$ B = ( b_{ij} )_{i,j} $$
-
-$$ C = ( c_{ij} )_{i,j} $$
-
-La relation :
-
-$$A \cdot (B \cdot C)
-= \left[ \sum_{k,l} a_{ik} \cdot b_{kl} \cdot c_{lj} \right]_{i,j} = (A \cdot B) \cdot C$$
-
-nous montre que la multiplication entre matrices est associative. On définit :
-
-$$A \cdot B \cdot C = A \cdot (B \cdot C) = (A \cdot B) \cdot C$$
-
-**** Non commutativité
-
-Par contre, on peut trouver des matrices $A$ et $B$ telles que :
-
-$$A \cdot B \ne B \cdot A$$
-
-La multiplication matricielle n'est donc en général pas commutative. D'ailleurs, pour que ces deux produits existent simultanément, il faut que $A$ et $B$ soient toutes deux carrées, ce qui n'est pas forcément le cas.
-
-*** Commutateur
-
-La matrice associée au commutateur :
-
-$$[\mathcal{A},\mathcal{B}] = \mathcal{A} \circ \mathcal{B} - \mathcal{B} \circ \mathcal{A}$$
-
-est donnée par le commutateur équivalent :
-
-$$[A,B] = A \cdot B - B \cdot A$$
-
 ** Addition
 
 Soit les fonctions linéaires $\mathcal{A},\mathcal{B} : \corps^n
@@ -468,6 +365,109 @@ A \cdot \beta = \beta \cdot A \)
 \)
 #+END_CENTER
 
+** Produit matriciel
+
+Soit les fonctions linéaires $\mathcal{A} : \corps^n \mapsto
+\corps^m$ et $\mathcal{B} : \corps^p \mapsto \corps^n$ respectivement
+représentées par les matrices $A \in \matrice(\corps,m,n)$ et $B \in
+\matrice(\corps,n,p)$. On définit le produit matriciel $A \cdot B$
+pour qu’il représente la fonction $\mathcal{A} \circ \mathcal{B}$. On
+a donc :
+
+$$ (A \cdot B) \cdot u
+= (\mathcal{A} \circ \mathcal{B})(u)
+= \mathcal{A}\left(\mathcal{B}(u)\right) $$
+
+pour tout vecteur colonne $u \in \corps^p$. Par définition du produit
+matrice-vecteur :
+
+$$ (A \cdot B) \cdot u
+= \mathcal{A}\left(\mathcal{B}(u)\right)
+= A \cdot (B \cdot u) $$
+
+En terme de composantes, si :
+
+$$ A = (a_{ij})_{i,j} $$
+
+$$ B = (b_{ij})_{i,j} $$
+
+$$ u = (u_i)_i $$
+
+on a :
+
+\begin{align*}
+(A \cdot B) \cdot u
+&= A \cdot (B \cdot u) \\
+&= \sum_{k=1}^n a_{ik} \cdot (B \cdot u)_k = \sum_{k=1}^n a_{ik} \sum_{j=1}^p b_{kj} \cdot u_j \\
+&= \sum_{k=1}^n \sum_{j=1}^p a_{ik} \cdot b_{kj} \cdot u_j \\
+&= \sum_{j=1}^p \left[ \sum_{k=1}^n a_{ik} \cdot b_{kj} \right] \cdot u_j
+\end{align*}
+
+La dernière ligne représente le produit d’une matrice
+$C\in\matrice(\corps,m,p)$ de composantes :
+
+$$ \composante_{ij} C = \sum_{k=1}^n a_{ik} \cdot b_{kj} $$
+
+par $u$ :
+
+$$ (A \cdot B) \cdot u = C \cdot u $$
+
+Ce résultat étant valable pour tout vecteur colonne $u \in \corps^p$, on
+en déduit que $C$ est identique à $A \cdot B$, ce qui nous donne :
+
+$$A \cdot B = \left[\sum_{k=1}^n a_{ik} \cdot b_{kj}\right]_{i,j}$$
+
+Le produit d'une matrice de taille $(m,n)$ par une matrice de taille
+$(n,p)$ est une matrice de taille $(m,p)$. Pour que ce produit soit
+bien défini, il est nécessaire que le nombre de colonnes $n$ de $A$
+et le nombre de lignes de $B$ soient identiques.
+
+*** Notation
+
+En pratique, on laisse souvent tomber le ``$\cdot$'' et on note $A B$
+au lieu de $A \cdot B$ lorsqu'il est évident que $A$ et $B$ sont deux
+matrices différentes.
+
+*** Propriétés
+
+**** Associativité
+
+Soit les matrices $A \in \matrice(\corps,m,n)$, $B \in
+\matrice(\corps,n,p)$ et $C \in \matrice(\corps,p,q)$ définies par :
+
+$$ A = ( a_{ij} )_{i,j} $$
+
+$$ B = ( b_{ij} )_{i,j} $$
+
+$$ C = ( c_{ij} )_{i,j} $$
+
+La relation :
+
+$$A \cdot (B \cdot C)
+= \left[ \sum_{k,l} a_{ik} \cdot b_{kl} \cdot c_{lj} \right]_{i,j} = (A \cdot B) \cdot C$$
+
+nous montre que la multiplication entre matrices est associative. On définit :
+
+$$A \cdot B \cdot C = A \cdot (B \cdot C) = (A \cdot B) \cdot C$$
+
+**** Non commutativité
+
+Par contre, on peut trouver des matrices $A$ et $B$ telles que :
+
+$$A \cdot B \ne B \cdot A$$
+
+La multiplication matricielle n'est donc en général pas commutative. D'ailleurs, pour que ces deux produits existent simultanément, il faut que $A$ et $B$ soient toutes deux carrées, ce qui n'est pas forcément le cas.
+
+*** Commutateur
+
+La matrice associée au commutateur :
+
+$$[\mathcal{A},\mathcal{B}] = \mathcal{A} \circ \mathcal{B} - \mathcal{B} \circ \mathcal{A}$$
+
+est donnée par le commutateur équivalent :
+
+$$[A,B] = A \cdot B - B \cdot A$$
+
 ** Distributivité
 
 Soit les matrices $A \in \matrice(\corps,m,n)$, $B \in
@@ -511,14 +511,14 @@ $$ (B + C) \cdot D = B \cdot D + C \cdot D $$
 On en déduit que la multiplication matricielle se distribue sur
 l’addition matricielle.
 
-* Matrice identité
+** Matrice identité
 
 La matrice identité $I \in \matrice(\corps,n,n)$ correspond à la
 fonction $\identite$. On a donc :
 
-$$I \cdot x = x$$
+$$I \cdot u = u$$
 
-pour tout $x \in \corps^n$. Si $(\canonique_1,...\canonique_n)$ est
+pour tout $u \in \corps^n$. Si $(\canonique_1,...\canonique_n)$ est
 la base canonique de $\corps^n$ sous la forme de vecteurs colonnes,
 on a donc :
 
@@ -532,81 +532,143 @@ On remarque que :
 
 $$I = [\canonique_1 \ \ \ldots \ \ \canonique_n]$$
 
-** Neutre
+*** Neutre
 
 Comme la fonction identité est neutre pour la composition, la matrice
-unité correspondante $I \in \matrice(\corps,m,n)$ doit être neutre pour
-la multiplication avec toutes les matrices de dimensions compatibles. Soit
-$A \in \matrice(\corps,m,n)$ et $B \in \matrice(\corps,n,p)$. On vérifie
-que l'on a bien :
+unité correspondante doit être neutre pour la multiplication avec toutes
+les matrices de dimensions compatibles. Soit $A \in \matrice(\corps,m,n)$
+définie par :
 
-#+BEGIN_CENTER
-\(
-A \cdot I = A \)
+$$ A = (a_{ij})_{i,j} $$
 
-\(
-I \cdot B = B
-\)
-#+END_CENTER
+Si $I_n \in \matrice(\corps,n,n)$, on vérifie que l'on a bien :
 
+$$ A \cdot I_n
+= \left[ \sum_{k=1}^n a_{ik} \cdot \indicatrice_{kj} \right]_{i,j}
+= \left[ a_{ij} \right]_{i,j} $$
 
-** Notation
+c’est-à-dire :
+
+$$ A \cdot I_n = A $$
+
+Si $I_m \in \matrice(\corps,m,m)$, on vérifie que l'on a bien :
+
+$$ I_m \cdot A
+= \left[ \sum_{k=1}^m \indicatrice_{ik} \cdot a_{kj} \right]_{i,j}
+= \left[ a_{ij} \right]_{i,j} $$
+
+c’est-à-dire :
+
+$$ I_m \cdot A = A $$
+
+*** Notation
 
 On note aussi $I_n$ pour préciser que $I$ est de taille $(n,n)$.
 
-* Inverse
+** Inverse
 
-Lorsqu'elle existe, la matrice inverse de $A$, notée $A^{-1}$, reflète l'application linéaire inverse sous-jacente. Elle est donc l'unique matrice telle que :
+*** Inverse à gauche et à droite
+
+On dit que $L$ est un inverse à gauche de $A$ si :
+
+$$ L \cdot A = I $$
+
+On dit que $R$ est un inverse à droite de $A$ si :
+
+$$ A \cdot R = I $$
+
+*** Simultané
+
+Si $A \in \matrice(\corps,n,n)$ possède à la fois un inverse $L$
+à gauche et in un inverse $R$ à droite, on a :
+
+$$ L = L \cdot I = L \cdot (A \cdot R) = (L \cdot A) \cdot R = I \cdot R = R $$
+
+On a donc :
+
+$$ L = R $$
+
+La matrice inverse est donc unique et on la note $A^{-1}$. Elle est donc l'unique
+matrice telle que :
 
 $$A^{-1} \cdot A = A \cdot A^{-1} = I$$
 
+*** Fonction inverse
 
-* Inverse d'un produit
+Soit la fonction linéaire $\mathcal{A} : \corps^n \mapsto \corps^m$
+représentée par la matrice $A \in \matrice(\corps,n,n)$, qui possède un
+inverse $A^{-1}$. Si $\mathcal{B}$ est la fonction linéaire représentée
+par $A^{-1}$, on a :
 
-Soit $A$ et $B$ deux matrices inversibles. Les relations $C \cdot (A \cdot B) = I$ et $(A \cdot B) \cdot D = I$ nous donnent :
+$$ \mathcal{B}(\mathcal{A}(u)) = A^{-1} \cdot A \cdot u = I \cdot u = u $$
 
-$$C = D = B^{-1} \cdot A^{-1}$$
+$$ \mathcal{A}(\mathcal{B}(u)) = A \cdot A^{-1} \cdot u = I \cdot u = u $$
 
-et donc :
+pour tout vecteur colonne $u \in \corps^n$, ce qui implique :
+
+$$ \mathcal{B} = \mathcal{A}^{-1} $$
+
+La matrice inverse $A^{-1}$ représente la fonction linéaire inverse
+$\mathcal{A}^{-1}$.
+
+*** Inverse d'un produit
+
+Soit $A$ et $B$ deux matrices inversibles. Supposons que leur produit
+$A \cdot B$ possède un inverse à gauche $L$ et un inverse à droite
+$R$. La relation :
+
+$$ L \cdot (A \cdot B) = L \cdot A \cdot B = I $$
+
+nous donne :
+
+$$ L \cdot A = I \cdot B^{-1} = B^{-1} $$
+
+$$ L = B^{-1} \cdot A^{-1} $$
+
+La relation :
+
+$$ (A \cdot B) \cdot R = A \cdot B \cdot R = I $$
+
+nous donne :
+
+$$ B \cdot R = A^{-1} \cdot I = A^{-1} $$
+
+$$ R = B^{-1} \cdot A^{-1} $$
+
+On a donc :
+
+$$ L = R = B^{-1} \cdot A^{-1} $$
+
+L’inverse de $A \cdot B$ existe et est donné par :
 
 $$(A \cdot B)^{-1} = B^{-1} \cdot A^{-1}$$
 
-
-** Inverse à gauche et à droite
-
-On dit que $L$ est un inverse à gauche de $A$ si $L \cdot A = I$. On dit que $R$ est un inverse à droite de $A$ si $A \cdot R = I$.
-
-
-* Puissance
+** Puissance
 
 Il est possible de multiplier une matrice carrée $A$ avec elle-même.
-On peut donc définir l'exposant par :
+On peut donc définir la puissance par :
 
-#+BEGIN_CENTER
-\(
-A^0 = I \)
+\begin{align*}
+A^0 &= I \\
+A^k &= A \cdot A^{k-1}
+\end{align*}
 
-\(
-A^k = A \cdot A^{k-1}
-\)
-#+END_CENTER
-
-
-** Négative
+*** Puissance négative
 
 Si l'inverse $A^{-1}$ existe, on définit également :
 
 $$A^{-k} = (A^{-1})^k$$
 
-
 * Polynômes matriciels
 
-Ici, $\corps$ n'est plus un corps mais l'anneau des matrices $X$ de taille $(N,N)$. On dit que $p : \matrice(\corps,N,N) \mapsto \matrice(\corps,N,N)$ est un polynôme matriciel si il existe $a_0,...,a_n \in \corps$ tels que :
+Ici, $\corps$ n'est plus un corps mais l'anneau des matrices $X$
+de taille $(N,N)$. On dit que $p : \matrice(\corps,N,N) \mapsto
+\matrice(\corps,N,N)$ est un polynôme matriciel si il existe $a_0,...,a_n
+\in \corps$ tels que :
 
 $$p(X) = \sum_{i = 0}^n a_i \cdot X^i$$
 
 pour tout $X \in \matrice(\corps,N,N)$.
-
 
 * Conjuguée
 
@@ -834,5 +896,3 @@ $$ \tau^-_{ij} =
 0 & \mbox{ si } i \strictinferieur j
 \end{cases} $$
 #+END_CENTER
-
-

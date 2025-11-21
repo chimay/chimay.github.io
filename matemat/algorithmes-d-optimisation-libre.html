@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-11-21 ven 16:35 -->
+<!-- 2025-11-21 ven 22:13 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Algorithmes d’optimisation libre</title>
@@ -241,13 +241,13 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2fe3bca">1. Introduction</a></li>
-<li><a href="#orgdfe942e">2. Minimum dans une direction</a></li>
-<li><a href="#org27ffd41">3. Méthode de la plus grande descente</a></li>
-<li><a href="#orga814bb8">4. Newton</a></li>
-<li><a href="#org2521864">5. Gradients conjugués</a></li>
-<li><a href="#org3ae0370">6. Moindres carrés</a></li>
-<li><a href="#orga9fcf31">7. Levenberg-Marquardt</a></li>
+<li><a href="#org044fc2b">1. Introduction</a></li>
+<li><a href="#org332cabf">2. Minimum dans une direction</a></li>
+<li><a href="#org938aaf9">3. Méthode de la plus grande descente</a></li>
+<li><a href="#org38680e6">4. Newton</a></li>
+<li><a href="#org8781c49">5. Gradients conjugués</a></li>
+<li><a href="#org8041014">6. Moindres carrés</a></li>
+<li><a href="#org1113de0">7. Levenberg-Marquardt</a></li>
 </ul>
 </div>
 </div>
@@ -271,13 +271,13 @@ MathJax = {
       topologie: "\\mathfrak{T}",
       ferme: "\\mathfrak{F}",
       img: "\\mathbf{i}",
-      binome: ["\\left\\{ \\\\begin{array}{c} #1 \\\\ #2 \\\\ \\\\end{array} \\\\right\\}", 2],
+      binome: ["\\left\\{ \\begin{array}{c} #1 \\\\ #2 \\\\ \\end{array} \\right\\}", 2],
       canonique: "\\mathfrak{c}",
       tenseuridentite: "\\boldsymbol{\\mathcal{I}}",
       permutation: "\\boldsymbol{\\epsilon}",
       matriceZero: "\\mathfrak{0}",
       matriceUn: "\\mathfrak{1}",
-      christoffel: ["\\left\\{ \\\\begin{array}{c} #1 \\\\ #2 \\\\ \\\\end{array} \\\\right\\}", 2],
+      christoffel: ["\\left\\{ \\begin{array}{c} #1 \\\\ #2 \\\\ \\end{array} \\right\\}", 2],
       lagrangien: "\\mathfrak{L}",
       sousens: "\\mathfrak{P}",
       partition: "\\mathrm{Partition}",
@@ -291,9 +291,9 @@ MathJax = {
       setC: "\\mathbb{C}",
       corps: "\\mathbb{K}",
       boule: "\\mathfrak{B}",
-      intervalleouvert: ["\\left] #1 , #2 \\\\right[", 2],
-      intervallesemiouvertgauche: ["\\left] #1 , #2 \\\\right]", 2],
-      intervallesemiouvertdroite: ["\\left[ #1 , #2 \\\\right[", 2],
+      intervalleouvert: ["\\left] #1 , #2 \\right[", 2],
+      intervallesemiouvertgauche: ["\\left] #1 , #2 \\right]", 2],
+      intervallesemiouvertdroite: ["\\left[ #1 , #2 \\right[", 2],
       fonction: "\\mathbb{F}",
       bijection: "\\mathrm{Bij}",
       polynome: "\\mathrm{Poly}",
@@ -321,21 +321,21 @@ MathJax = {
       opera: "\\divideontimes",
       autreaddition: "\\boxplus",
       autremultiplication: "\\circledast",
-      commutateur: ["\\left[ #1 , #2 \\\\right]", 2],
+      commutateur: ["\\left[ #1 , #2 \\right]", 2],
       convolution: "\\circledcirc",
       correlation: "\\natural",
       diventiere: "\\div",
       modulo: "\\bmod",
       pgcd: ["\\mathop{\\mathrm{pgcd}\\ }\\limits",0],
       ppcm: ["\\mathop{\\mathrm{ppcm}\\ }\\limits",0],
-      produitscalaire: ["\\left\\langle #1 \\\\vert #2 \\\\right\\rangle", 2],
-      scalaire: ["\\left\\langle #1 \\| #2 \\\\right\\rangle", 2],
-      braket: ["\\left\\langle #1 \\\\vert #2 \\\\vert #3 \\\\right\\rangle", 3],
+      produitscalaire: ["\\left\\langle #1 \\vert #2 \\right\\rangle", 2],
+      scalaire: ["\\left\\langle #1 \\| #2 \\right\\rangle", 2],
+      braket: ["\\left\\langle #1 \\vert #2 \\vert #3 \\right\\rangle", 3],
       orthogonal: "\\bot",
-      forme: ["\\left\\langle #1 , #2 \\\\right\\rangle", 2],
-      biforme: ["\\left\\langle #1 , #2 , #3 \\\\right\\rangle", 3],
-      contraction: ["\\left\\langle #1 \\\\odot #3 \\\\right\\rangle_{#2}", 3],
-      dblecont: ["\\left\\langle #1 \\\\vert #3 \\\\vert #5 \\\\right\\rangle_{#2,#4}", 5],
+      forme: ["\\left\\langle #1 , #2 \\right\\rangle", 2],
+      biforme: ["\\left\\langle #1 , #2 , #3 \\right\\rangle", 3],
+      contraction: ["\\left\\langle #1 \\odot #3 \\right\\rangle_{#2}", 3],
+      dblecont: ["\\left\\langle #1 \\vert #3 \\vert #5 \\right\\rangle_{#2,#4}", 5],
       major: ["\\mathop{\\mathrm{major}\\ }\\limits",0],
       minor: ["\\mathop{\\mathrm{minor}\\ }\\limits",0],
       maxim: ["\\mathop{\\mathrm{maxim}\\ }\\limits",0],
@@ -348,8 +348,8 @@ MathJax = {
       dual: "\\star",
       vardual: "\\circledast",
       distance: "\\mathfrak{dist}",
-      norme: ["\\left\\| #1 \\\\right\\|", 1],
-      normetrois: ["\\left|\\left\\| #1 \\\\right\\|\\right|", 1],
+      norme: ["\\left\\lVert #1 \\right\\rVert", 1],
+      normetrois: ["\\left|\\left\\| #1 \\right\\|\\right|", 1],
       adh: ["\\mathop{\\mathrm{adh}\\ }\\limits",0],
       interieur: ["\\mathop{\\mathrm{int}\\ }\\limits",0],
       frontiere: "\\partial",
@@ -358,10 +358,10 @@ MathJax = {
       noyau: ["\\mathop{\\mathrm{ker}\\ }\\limits",0],
       support: ["\\mathop{\\mathrm{supp}\\ }\\limits",0],
       signe: ["\\mathop{\\mathrm{sign}\\ }\\limits",0],
-      abs: ["\\left| #1 \\\\right|", 1],
+      abs: ["\\left\\lvert #1 \\right\\rvert", 1],
       unsur: ["\\frac{1}{#1}", 1],
-      arrondisup: ["\\lceil #1 \\\\rceil", 1],
-      arrondiinf: ["\\lfloor #1 \\\\rfloor", 1],
+      arrondisup: ["\\lceil #1 \\rceil", 1],
+      arrondiinf: ["\\lfloor #1 \\rfloor", 1],
       conjugue: "conj",
       conjaccent: ["\\overline{#1}", 1],
       division: "division",
@@ -372,8 +372,8 @@ MathJax = {
       NOD: ["\\frac{d^{#3} #1}{d #2^{#3}}", 3],
       deriveepartielle: ["\\frac{\\partial #1}{\\partial #2}", 2],
       PD: ["\\frac{\\partial #1}{\\partial #2}", 2],
-      dblederiveepartielle: ["\\frac{\\partial^2 #1}{\\partial #2 \\\\partial #2}", 2],
-      dfdxdy: ["\\frac{\\partial^2 #1}{\\partial #2 \\\\partial #3}", 3],
+      dblederiveepartielle: ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #2}", 2],
+      dfdxdy: ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3],
       dfdxdx: ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2],
       gradient: "\\mathbf{\\nabla}",
       combilin: ["\\mathrm{span}\\{ #1 \\", 1],
@@ -384,7 +384,7 @@ MathJax = {
       cov: ["\\mathrm{cov} ( #1 , #2 )", 2],
       var: ["\\mathrm{var} ( #1 )", 1],
       rand: "\\mathrm{rand}",
-      variation: ["\\left\\langle #1 \\\\right\\rangle", 1],
+      variation: ["\\left\\langle #1 \\right\\rangle", 1],
       composante: ["\\mathop{\\mathrm{comp}\\ }\\limits",0],
       bloc: ["\\mathop{\\mathrm{bloc}\\ }\\limits",0],
       ligne: ["\\mathop{\\mathrm{ligne}\\ }\\limits",0],
@@ -421,8 +421,8 @@ MathJax = {
 <p>
 \label{chap:algoptim}
 </p>
-<div id="outline-container-org2fe3bca" class="outline-2">
-<h2 id="org2fe3bca"><span class="section-number-2">1.</span> Introduction</h2>
+<div id="outline-container-org044fc2b" class="outline-2">
+<h2 id="org044fc2b"><span class="section-number-2">1.</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Nous allons présenter des algorithmes permettant de résoudre approximativement des problèmes de minimisation d'une fonction \(\varphi\) sur \(\setR^n\). Ces algorithmes partent d'un point initial \(x_0 \in \Omega\) et itèrent schématiquement comme suit :
@@ -469,8 +469,8 @@ pour toute fonction \(\Phi\) (par exemple, \(\Phi \in \{\varphi,J,H\}\)).
 </p>
 </div>
 </div>
-<div id="outline-container-orgdfe942e" class="outline-2">
-<h2 id="orgdfe942e"><span class="section-number-2">2.</span> Minimum dans une direction</h2>
+<div id="outline-container-org332cabf" class="outline-2">
+<h2 id="org332cabf"><span class="section-number-2">2.</span> Minimum dans une direction</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Soit l'itération :
@@ -505,8 +505,8 @@ La valeur optimale de \(\alpha_k\) s'écrit :
 </p>
 </div>
 </div>
-<div id="outline-container-org27ffd41" class="outline-2">
-<h2 id="org27ffd41"><span class="section-number-2">3.</span> Méthode de la plus grande descente</h2>
+<div id="outline-container-org938aaf9" class="outline-2">
+<h2 id="org938aaf9"><span class="section-number-2">3.</span> Méthode de la plus grande descente</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 La méthode de la plus grande pente consiste à partir à chaque itération
@@ -551,8 +551,8 @@ La valeur optimale de \(\alpha_k\) s'écrit donc :
 </p>
 </div>
 </div>
-<div id="outline-container-orga814bb8" class="outline-2">
-<h2 id="orga814bb8"><span class="section-number-2">4.</span> Newton</h2>
+<div id="outline-container-org38680e6" class="outline-2">
+<h2 id="org38680e6"><span class="section-number-2">4.</span> Newton</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Il s'agit ici d'optimiser le pas \(s_k\) :
@@ -587,8 +587,8 @@ On en déduit la valeur optimale :
 </p>
 </div>
 </div>
-<div id="outline-container-org2521864" class="outline-2">
-<h2 id="org2521864"><span class="section-number-2">5.</span> Gradients conjugués</h2>
+<div id="outline-container-org8781c49" class="outline-2">
+<h2 id="org8781c49"><span class="section-number-2">5.</span> Gradients conjugués</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Soit l'itération :
@@ -655,8 +655,8 @@ On en déduit que :
 </p>
 </div>
 </div>
-<div id="outline-container-org3ae0370" class="outline-2">
-<h2 id="org3ae0370"><span class="section-number-2">6.</span> Moindres carrés</h2>
+<div id="outline-container-org8041014" class="outline-2">
+<h2 id="org8041014"><span class="section-number-2">6.</span> Moindres carrés</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Soit la fonction \(f : \setR^n \mapsto \setR^m\). On cherce à minimiser la fonction \(\varphi = f^\dual \cdot f / 2\). Le problème de minimisation s'écrit alors :
@@ -707,8 +707,8 @@ avec :
 \[s_k = -[D_k^\dual \cdot D_k]^{-1} \cdot D_k^\dual \cdot f_k\]
 </p>
 </div>
-<div id="outline-container-org7c11cbb" class="outline-3">
-<h3 id="org7c11cbb"><span class="section-number-3">6.1.</span> Zéros</h3>
+<div id="outline-container-orgd5f63b3" class="outline-3">
+<h3 id="orgd5f63b3"><span class="section-number-3">6.1.</span> Zéros</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 Si \(S = \noyau f \ne \emptyset\), soit \(\gamma \in S\). On a alors :
@@ -724,8 +724,8 @@ On en déduit que tout \(x \in \setR^n\) minimisant \(\varphi\) vérifiera \(f(x
 </div>
 </div>
 </div>
-<div id="outline-container-orga9fcf31" class="outline-2">
-<h2 id="orga9fcf31"><span class="section-number-2">7.</span> Levenberg-Marquardt</h2>
+<div id="outline-container-org1113de0" class="outline-2">
+<h2 id="org1113de0"><span class="section-number-2">7.</span> Levenberg-Marquardt</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 C'est une variante de la méthode des moindres carrés, utile dans les cas où
@@ -742,7 +742,7 @@ sur la diagonale :
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-11-21 ven 16:35</p>
+<p class="date">Created: 2025-11-21 ven 22:13</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

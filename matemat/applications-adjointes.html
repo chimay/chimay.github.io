@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-11-20 jeu 17:18 -->
+<!-- 2025-11-21 ven 16:36 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Applications adjointes</title>
@@ -241,175 +241,171 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orge860db2">1. Dépendances</a></li>
-<li><a href="#org8bf4bad">2. Introduction</a></li>
-<li><a href="#org1513541">3. Linéarité</a></li>
-<li><a href="#org8ef856d">4. Composition</a></li>
-<li><a href="#org93d3cc4">5. Norme de l'adjoint</a></li>
-<li><a href="#org218660c">6. Noyau et image</a></li>
-<li><a href="#orga131478">7. Représentation matricielle</a></li>
+<li><a href="#org1adf998">1. Dépendances</a></li>
+<li><a href="#orgd533801">2. Introduction</a></li>
+<li><a href="#org2faaf38">3. Linéarité</a></li>
+<li><a href="#orgeec2087">4. Composition</a></li>
+<li><a href="#org0c3af82">5. Norme de l'adjoint</a></li>
+<li><a href="#orgef38ff1">6. Noyau et image</a></li>
+<li><a href="#orgf4abaa6">7. Représentation matricielle</a></li>
 </ul>
 </div>
 </div>
 
-<p>
-\(
-\newcommand{\parentheses}[1]{\left(#1\right)}
-\newcommand{\crochets}[1]{\left[#1\right]}
-\newcommand{\accolades}[1]{\left\{#1\right\}}
-\newcommand{\ensemble}[1]{\left\{#1\right\}}
-\DeclareMathOperator*{\cardinal}{\mathrm{card}}
-\newcommand{\identite}{\mathrm{Id}}
-\newcommand{\indicatrice}{\boldsymbol{\delta}}
-\newcommand{\dirac}{\delta}
-\newcommand{\moinsun}{{-1}}
-\newcommand{\inverse}{\ddagger}
-\newcommand{\pinverse}{\dagger}
-\newcommand{\topologie}{\mathfrak{T}}
-\newcommand{\ferme}{\mathfrak{F}}
-\newcommand{\img}{\mathbf{i}}
-\newcommand{\binome}[2]{
-\left\{ \begin{array}{c}
-#1 \\
-#2 \\
-\end{array} \right\}
-}
-\newcommand{\canonique}{\mathfrak{c}}
-\newcommand{\tenseuridentite}{\boldsymbol{\mathcal{I}}}
-\newcommand{\permutation}{\boldsymbol{\epsilon}}
-\newcommand{\matriceZero}{\mathfrak{0}}
-\newcommand{\matriceUn}{\mathfrak{1}}
-\newcommand{\christoffel}[2]{
-\left\{ \begin{array}{c}
-#1 \\
-#2 \\
-\end{array} \right\}
-}
-\newcommand{\lagrangien}{\mathfrak{L}}
-\newcommand{\sousens}{\mathfrak{P}}
-\newcommand{\partition}{\mathrm{Partition}}
-\newcommand{\tribu}{\mathrm{Tribu}}
-\newcommand{\topologies}{\mathrm{Topo}}
-\newcommand{\setB}{\mathbb{B}}
-\newcommand{\setN}{\mathbb{N}}
-\newcommand{\setZ}{\mathbb{Z}}
-\newcommand{\setQ}{\mathbb{Q}}
-\newcommand{\setR}{\mathbb{R}}
-\newcommand{\setC}{\mathbb{C}}
-\newcommand{\corps}{\mathbb{K}}
-\newcommand{\boule}{\mathfrak{B}}
-\newcommand{\intervalleouvert}[2]{\left] #1 , #2 \right[}
-\newcommand{\intervallesemiouvertgauche}[2]{ \left] #1 , #2 \right]}
-\newcommand{\intervallesemiouvertdroite}[2]{\left[ #1 , #2 \right[ }
-\newcommand{\fonction}{\mathbb{F}}
-\newcommand{\bijection}{\mathrm{Bij}}
-\newcommand{\polynome}{\mathrm{Poly}}
-\newcommand{\lineaire}{\mathrm{Lin}}
-\newcommand{\continue}{\mathrm{Cont}}
-\newcommand{\homeomorphisme}{\mathrm{Hom}}
-\newcommand{\etagee}{\mathrm{Etagee}}
-\newcommand{\lebesgue}{\mathrm{Leb}}
-\newcommand{\lipschitz}{\mathrm{Lip}}
-\newcommand{\suitek}{\mathrm{Suite}}
-\newcommand{\matrice}{\mathbb{M}}
-\newcommand{\krylov}{\mathrm{Krylov}}
-\newcommand{\tenseur}{\mathbb{T}}
-\newcommand{\essentiel}{\mathfrak{E}}
-\newcommand{\relation}{\mathrm{Rel}}
-\DeclareMathOperator*{\strictinferieur}{\ < \ }
-\DeclareMathOperator*{\strictsuperieur}{\ > \ }
-\DeclareMathOperator*{\ensinferieur}{\eqslantless}
-\DeclareMathOperator*{\enssuperieur}{\eqslantgtr}
-\DeclareMathOperator*{\esssuperieur}{\gtrsim}
-\DeclareMathOperator*{\essinferieur}{\lesssim}
-\newcommand{\essegal}{\eqsim}
-\newcommand{\union}{\ \cup \ }
-\newcommand{\intersection}{\ \cap \ }
-\newcommand{\opera}{\divideontimes}
-\newcommand{\autreaddition}{\boxplus}
-\newcommand{\autremultiplication}{\circledast}
-\newcommand{\commutateur}[2]{\left[ #1 , #2 \right]}
-\newcommand{\convolution}{\circledcirc}
-\newcommand{\correlation}{\ \natural \ }
-\newcommand{\diventiere}{\div}
-\newcommand{\modulo}{\bmod}
-\DeclareMathOperator*{\pgcd}{pgcd}
-\DeclareMathOperator*{\ppcm}{ppcm}
-\newcommand{\produitscalaire}[2]{\left\langle #1 \vert #2 \right\rangle}
-\newcommand{\scalaire}[2]{\left\langle #1 \| #2 \right\rangle}
-\newcommand{\braket}[3]{\left\langle #1 \vert #2 \vert #3 \right\rangle}
-\newcommand{\orthogonal}{\bot}
-\newcommand{\forme}[2]{\left\langle #1 , #2 \right\rangle}
-\newcommand{\biforme}[3]{\left\langle #1 , #2 , #3 \right\rangle}
-\newcommand{\contraction}[3]{\left\langle #1 \odot #3 \right\rangle_{#2}}
-\newcommand{\dblecont}[5]{\left\langle #1 \vert #3 \vert #5 \right\rangle_{#2,#4}}
-\DeclareMathOperator*{\major}{major}
-\DeclareMathOperator*{\minor}{minor}
-\DeclareMathOperator*{\maxim}{maxim}
-\DeclareMathOperator*{\minim}{minim}
-\DeclareMathOperator*{\argument}{arg}
-\DeclareMathOperator*{\argmin}{arg\ min}
-\DeclareMathOperator*{\argmax}{arg\ max}
-\DeclareMathOperator*{\supessentiel}{ess\ sup}
-\DeclareMathOperator*{\infessentiel}{ess\ inf}
-\newcommand{\dual}{\star}
-\newcommand{\vardual}{\circledast}
-\newcommand{\distance}{\mathfrak{dist}}
-\newcommand{\norme}[1]{\left\| #1 \right\|}
-\newcommand{\normetrois}[1]{\left|\left\| #1 \right\|\right|}
-\DeclareMathOperator*{\adh}{adh}
-\DeclareMathOperator*{\interieur}{int}
-\newcommand{\frontiere}{\partial}
-\DeclareMathOperator*{\image}{im}
-\DeclareMathOperator*{\domaine}{dom}
-\DeclareMathOperator*{\noyau}{ker}
-\DeclareMathOperator*{\support}{supp}
-\DeclareMathOperator*{\signe}{sign}
-\newcommand{\abs}[1]{\left| #1 \right|}
-\newcommand{\unsur}[1]{\frac{1}{#1}}
-\newcommand{\arrondisup}[1]{\lceil #1 \rceil}
-\newcommand{\arrondiinf}[1]{\lfloor #1 \rfloor}
-\DeclareMathOperator*{\conjugue}{conj}
-\newcommand{\conjaccent}[1]{\overline{#1}}
-\DeclareMathOperator*{\division}{division}
-\newcommand{\difference}{\boldsymbol{\Delta}}
-\newcommand{\differentielle}[2]{\mathfrak{D}^{#1}_{#2}}
-\newcommand{\OD}[2]{\frac{d #1}{d #2}}
-\newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
-\newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
-\newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
-\newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
-\newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
-\newcommand{\gradient}{\mathbf{\nabla}}
-\newcommand{\combilin}[1]{\mathrm{span}\{ #1 \}}
-\DeclareMathOperator*{\trace}{tr}
-\newcommand{\proba}{\mathbb{P}}
-\newcommand{\probaof}[1]{\mathbb{P}\left[#1\right]}
-\newcommand{\esperof}[1]{\mathbb{E}\left[#1\right]}
-\newcommand{\cov}[2]{\mathrm{cov} \left( #1 , #2 \right) }
-\newcommand{\var}[1]{\mathrm{var} \left( #1 \right) }
-\newcommand{\rand}{\mathrm{rand}}
-\newcommand{\variation}[1]{\left\langle #1 \right\rangle}
-\DeclareMathOperator*{\composante}{comp}
-\DeclareMathOperator*{\bloc}{bloc}
-\DeclareMathOperator*{\ligne}{ligne}
-\DeclareMathOperator*{\colonne}{colonne}
-\DeclareMathOperator*{\diagonale}{diag}
-\newcommand{\matelementaire}{\mathrm{Elem}}
-\DeclareMathOperator*{\matpermutation}{permut}
-\newcommand{\matunitaire}{\mathrm{Unitaire}}
-\newcommand{\gaussjordan}{\mathrm{GaussJordan}}
-\newcommand{\householder}{\mathrm{Householder}}
-\DeclareMathOperator*{\rang}{rang}
-\newcommand{\schur}{\mathrm{Schur}}
-\newcommand{\singuliere}{\mathrm{DVS}}
-\newcommand{\convexe}{\mathrm{Convexe}}
-\newcommand{\petito}[1]{o\left(#1\right)}
-\newcommand{\grando}[1]{O\left(#1\right)}
-\)
-</p>
+<script>
+MathJax = {
+  tex: {
+    packages: {'[+]': ['base','ams','braket']},
+    macros: {
+      parentheses: ["\\left(#1\\right)", 1],
+      crochets: ["\\left[#1\\right]", 1],
+      accolades: ["\\left\\{#1\\right\\}", 1],
+      ensemble: ["\\left\\{#1\\right\\}", 1],
+      cardinal: ["\\mathop{\\mathrm{card}\\ }\\limits",0],
+      identite: "\\mathrm{Id}",
+      indicatrice: "\\boldsymbol{\\delta}",
+      dirac: "\\delta",
+      moinsun: "-1",
+      inverse: "\\ddagger",
+      pinverse: "\\dagger",
+      topologie: "\\mathfrak{T}",
+      ferme: "\\mathfrak{F}",
+      img: "\\mathbf{i}",
+      binome: ["\\left\\{ \\\\begin{array}{c} #1 \\\\ #2 \\\\ \\\\end{array} \\\\right\\}", 2],
+      canonique: "\\mathfrak{c}",
+      tenseuridentite: "\\boldsymbol{\\mathcal{I}}",
+      permutation: "\\boldsymbol{\\epsilon}",
+      matriceZero: "\\mathfrak{0}",
+      matriceUn: "\\mathfrak{1}",
+      christoffel: ["\\left\\{ \\\\begin{array}{c} #1 \\\\ #2 \\\\ \\\\end{array} \\\\right\\}", 2],
+      lagrangien: "\\mathfrak{L}",
+      sousens: "\\mathfrak{P}",
+      partition: "\\mathrm{Partition}",
+      tribu: "\\mathrm{Tribu}",
+      topologies: "\\mathrm{Topo}",
+      setB: "\\mathbb{B}",
+      setN: "\\mathbb{N}",
+      setZ: "\\mathbb{Z}",
+      setQ: "\\mathbb{Q}",
+      setR: "\\mathbb{R}",
+      setC: "\\mathbb{C}",
+      corps: "\\mathbb{K}",
+      boule: "\\mathfrak{B}",
+      intervalleouvert: ["\\left] #1 , #2 \\\\right[", 2],
+      intervallesemiouvertgauche: ["\\left] #1 , #2 \\\\right]", 2],
+      intervallesemiouvertdroite: ["\\left[ #1 , #2 \\\\right[", 2],
+      fonction: "\\mathbb{F}",
+      bijection: "\\mathrm{Bij}",
+      polynome: "\\mathrm{Poly}",
+      lineaire: "\\mathrm{Lin}",
+      continue: "\\mathrm{Cont}",
+      homeomorphisme: "\\mathrm{Hom}",
+      etagee: "\\mathrm{Etagee}",
+      lebesgue: "\\mathrm{Leb}",
+      lipschitz: "\\mathrm{Lip}",
+      suitek: "\\mathrm{Suite}",
+      matrice: "\\mathbb{M}",
+      krylov: "\\mathrm{Krylov}",
+      tenseur: "\\mathbb{T}",
+      essentiel: "\\mathfrak{E}",
+      relation: "\\mathrm{Rel}",
+      strictinferieur: "<",
+      strictsuperieur: ">",
+      ensinferieur: "\\eqslantless",
+      enssuperieur: "\\eqslantgtr",
+      esssuperieur: "\\gtrsim",
+      essinferieur: "\\lesssim",
+      essegal: "\\eqsim",
+      union: "\\cup",
+      intersection: "\\cap",
+      opera: "\\divideontimes",
+      autreaddition: "\\boxplus",
+      autremultiplication: "\\circledast",
+      commutateur: ["\\left[ #1 , #2 \\\\right]", 2],
+      convolution: "\\circledcirc",
+      correlation: "\\natural",
+      diventiere: "\\div",
+      modulo: "\\bmod",
+      pgcd: ["\\mathop{\\mathrm{pgcd}\\ }\\limits",0],
+      ppcm: ["\\mathop{\\mathrm{ppcm}\\ }\\limits",0],
+      produitscalaire: ["\\left\\langle #1 \\\\vert #2 \\\\right\\rangle", 2],
+      scalaire: ["\\left\\langle #1 \\| #2 \\\\right\\rangle", 2],
+      braket: ["\\left\\langle #1 \\\\vert #2 \\\\vert #3 \\\\right\\rangle", 3],
+      orthogonal: "\\bot",
+      forme: ["\\left\\langle #1 , #2 \\\\right\\rangle", 2],
+      biforme: ["\\left\\langle #1 , #2 , #3 \\\\right\\rangle", 3],
+      contraction: ["\\left\\langle #1 \\\\odot #3 \\\\right\\rangle_{#2}", 3],
+      dblecont: ["\\left\\langle #1 \\\\vert #3 \\\\vert #5 \\\\right\\rangle_{#2,#4}", 5],
+      major: ["\\mathop{\\mathrm{major}\\ }\\limits",0],
+      minor: ["\\mathop{\\mathrm{minor}\\ }\\limits",0],
+      maxim: ["\\mathop{\\mathrm{maxim}\\ }\\limits",0],
+      minim: ["\\mathop{\\mathrm{minim}\\ }\\limits",0],
+      argument: ["\\mathop{\\mathrm{arg}\\ }\\limits",0],
+      argmin: ["\\mathop{\\mathrm{arg\\,min}\\ }\\limits",0],
+      argmax: ["\\mathop{\\mathrm{arg\\,max}\\ }\\limits",0],
+      supessentiel: ["\\mathop{\\mathrm{ess\\,sup}\\ }\\limits",0],
+      infessentiel: ["\\mathop{\\mathrm{ess\\,inf}\\ }\\limits",0],
+      dual: "\\star",
+      vardual: "\\circledast",
+      distance: "\\mathfrak{dist}",
+      norme: ["\\left\\| #1 \\\\right\\|", 1],
+      normetrois: ["\\left|\\left\\| #1 \\\\right\\|\\right|", 1],
+      adh: ["\\mathop{\\mathrm{adh}\\ }\\limits",0],
+      interieur: ["\\mathop{\\mathrm{int}\\ }\\limits",0],
+      frontiere: "\\partial",
+      image: ["\\mathop{\\mathrm{im}\\ }\\limits",0],
+      domaine: ["\\mathop{\\mathrm{dom}\\ }\\limits",0],
+      noyau: ["\\mathop{\\mathrm{ker}\\ }\\limits",0],
+      support: ["\\mathop{\\mathrm{supp}\\ }\\limits",0],
+      signe: ["\\mathop{\\mathrm{sign}\\ }\\limits",0],
+      abs: ["\\left| #1 \\\\right|", 1],
+      unsur: ["\\frac{1}{#1}", 1],
+      arrondisup: ["\\lceil #1 \\\\rceil", 1],
+      arrondiinf: ["\\lfloor #1 \\\\rfloor", 1],
+      conjugue: "conj",
+      conjaccent: ["\\overline{#1}", 1],
+      division: "division",
+      difference: "\\boldsymbol{\\Delta}",
+      differentielle: ["\\mathfrak{D}^{#1}_{#2}", 2],
+      OD: ["\\frac{d #1}{d #2}", 2],
+      OOD: ["\\frac{d^2 #1}{d #2^2}", 2],
+      NOD: ["\\frac{d^{#3} #1}{d #2^{#3}}", 3],
+      deriveepartielle: ["\\frac{\\partial #1}{\\partial #2}", 2],
+      PD: ["\\frac{\\partial #1}{\\partial #2}", 2],
+      dblederiveepartielle: ["\\frac{\\partial^2 #1}{\\partial #2 \\\\partial #2}", 2],
+      dfdxdy: ["\\frac{\\partial^2 #1}{\\partial #2 \\\\partial #3}", 3],
+      dfdxdx: ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2],
+      gradient: "\\mathbf{\\nabla}",
+      combilin: ["\\mathrm{span}\\{ #1 \\", 1],
+      trace: "tr",
+      proba: "\\mathbb{P}",
+      probaof: ["\\mathbb{P}\\left[#1\\right]", 1],
+      esperof: ["\\mathbb{E}\\left[#1\\right]", 1],
+      cov: ["\\mathrm{cov} ( #1 , #2 )", 2],
+      var: ["\\mathrm{var} ( #1 )", 1],
+      rand: "\\mathrm{rand}",
+      variation: ["\\left\\langle #1 \\\\right\\rangle", 1],
+      composante: ["\\mathop{\\mathrm{comp}\\ }\\limits",0],
+      bloc: ["\\mathop{\\mathrm{bloc}\\ }\\limits",0],
+      ligne: ["\\mathop{\\mathrm{ligne}\\ }\\limits",0],
+      colonne: ["\\mathop{\\mathrm{colonne}\\ }\\limits",0],
+      diagonale: ["\\mathop{\\mathrm{diag}\\ }\\limits",0],
+      matelementaire: "\\mathrm{Elem}",
+      matpermutation: ["\\mathop{\\mathrm{permut}\\ }\\limits",0],
+      matunitaire: "\\mathrm{Unitaire}",
+      gaussjordan: "\\mathrm{GaussJordan}",
+      householder: "\\mathrm{Householder}",
+      rang: "rang",
+      schur: "\\mathrm{Schur}",
+      singuliere: "\\mathrm{DVS}",
+      convexe: "\\mathrm{Convexe}",
+      petito: ["o(#1)", 1],
+      grando: ["O(#1)", 1]
+    }
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <p>
 \(
@@ -425,8 +421,8 @@
 <p>
 \label{chap:dualite}
 </p>
-<div id="outline-container-orge860db2" class="outline-2">
-<h2 id="orge860db2"><span class="section-number-2">1.</span> Dépendances</h2>
+<div id="outline-container-org1adf998" class="outline-2">
+<h2 id="org1adf998"><span class="section-number-2">1.</span> Dépendances</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:forme} : Les formes linéaires</li>
@@ -434,12 +430,12 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org8bf4bad" class="outline-2">
-<h2 id="org8bf4bad"><span class="section-number-2">2.</span> Introduction</h2>
+<div id="outline-container-orgd533801" class="outline-2">
+<h2 id="orgd533801"><span class="section-number-2">2.</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org7fb9f9d" class="outline-3">
-<h3 id="org7fb9f9d"><span class="section-number-3">2.1.</span> Au sens du produit scalaire</h3>
+<div id="outline-container-orga81db85" class="outline-3">
+<h3 id="orga81db85"><span class="section-number-3">2.1.</span> Au sens du produit scalaire</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Soient \(E\) et \(F\) deux espaces vectoriels munis de produits scalaires
@@ -458,8 +454,8 @@ applications rencontrées possèdent une application adjointe.
 </p>
 </div>
 </div>
-<div id="outline-container-org70becbc" class="outline-3">
-<h3 id="org70becbc"><span class="section-number-3">2.2.</span> Au sens des formes linéaires</h3>
+<div id="outline-container-org01a7332" class="outline-3">
+<h3 id="org01a7332"><span class="section-number-3">2.2.</span> Au sens des formes linéaires</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Il existe aussi un concept analogue au sens des formes linéaires. Voir
@@ -473,16 +469,16 @@ sur les applications adjointes au sens du produit scalaire.
 </p>
 </div>
 </div>
-<div id="outline-container-org5d3e419" class="outline-3">
-<h3 id="org5d3e419"><span class="section-number-3">2.3.</span> Applications auto-adjointes</h3>
+<div id="outline-container-org6440d69" class="outline-3">
+<h3 id="org6440d69"><span class="section-number-3">2.3.</span> Applications auto-adjointes</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Si \(E = F\) et \(A = A^\dual\), on dit que \(A\) est hermitienne ou auto-adjointe.
 </p>
 </div>
 </div>
-<div id="outline-container-org4f70302" class="outline-3">
-<h3 id="org4f70302"><span class="section-number-3">2.4.</span> Bidual</h3>
+<div id="outline-container-org63f9e18" class="outline-3">
+<h3 id="org63f9e18"><span class="section-number-3">2.4.</span> Bidual</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 On remarque que :
@@ -501,8 +497,8 @@ pour tout \((u,v) \in E \times F\). On a donc :
 </p>
 </div>
 </div>
-<div id="outline-container-org75ce083" class="outline-3">
-<h3 id="org75ce083"><span class="section-number-3">2.5.</span> Identité</h3>
+<div id="outline-container-org7a8ceae" class="outline-3">
+<h3 id="org7a8ceae"><span class="section-number-3">2.5.</span> Identité</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 Comme :
@@ -518,18 +514,18 @@ on a bien évidemment \(\identite^\dual = \identite\).
 </div>
 </div>
 </div>
-<div id="outline-container-org1513541" class="outline-2">
-<h2 id="org1513541"><span class="section-number-2">3.</span> Linéarité</h2>
+<div id="outline-container-org2faaf38" class="outline-2">
+<h2 id="org2faaf38"><span class="section-number-2">3.</span> Linéarité</h2>
 <div class="outline-text-2" id="text-3">
 <div id="text-table-of-contents-1" role="doc-toc">
 <ul>
-<li><a href="#org1d1dae8">3.1. Linéarité de l'adjoint</a></li>
-<li><a href="#org4193fd4">3.2. Adjoint d'une combinaison linéaire</a></li>
+<li><a href="#org02c0afd">3.1. Linéarité de l'adjoint</a></li>
+<li><a href="#org4123ef2">3.2. Adjoint d'une combinaison linéaire</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org1d1dae8" class="outline-3">
-<h3 id="org1d1dae8"><span class="section-number-3">3.1.</span> Linéarité de l'adjoint</h3>
+<div id="outline-container-org02c0afd" class="outline-3">
+<h3 id="org02c0afd"><span class="section-number-3">3.1.</span> Linéarité de l'adjoint</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Soit \(u,v \in E\), \(x,y \in F\) et \(\alpha, \beta \in \corps\). On a :
@@ -552,8 +548,8 @@ Comme ce doit être valable pour tout \(u \in E\), on en conclut que l'applicati
 </p>
 </div>
 </div>
-<div id="outline-container-org4193fd4" class="outline-3">
-<h3 id="org4193fd4"><span class="section-number-3">3.2.</span> Adjoint d'une combinaison linéaire</h3>
+<div id="outline-container-org4123ef2" class="outline-3">
+<h3 id="org4123ef2"><span class="section-number-3">3.2.</span> Adjoint d'une combinaison linéaire</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Soit deux applications linéaires \(A,B : E \mapsto F\) et \(\alpha,\beta \in \corps\). Si \((u,v) \in E \times F\), on a :
@@ -580,19 +576,19 @@ L'opérateur \(^\dual : A \mapsto A^\dual\) est antilinéaire.
 </div>
 </div>
 </div>
-<div id="outline-container-org8ef856d" class="outline-2">
-<h2 id="org8ef856d"><span class="section-number-2">4.</span> Composition</h2>
+<div id="outline-container-orgeec2087" class="outline-2">
+<h2 id="orgeec2087"><span class="section-number-2">4.</span> Composition</h2>
 <div class="outline-text-2" id="text-4">
 <div id="text-table-of-contents-2" role="doc-toc">
 <ul>
-<li><a href="#org0ac1dc4">4.1. Inverse</a></li>
-<li><a href="#org674f997">4.2. Adjoint d'une composée</a></li>
-<li><a href="#org10811af">4.3. Construction d'applications auto-adjointes</a></li>
+<li><a href="#org680e038">4.1. Inverse</a></li>
+<li><a href="#org4e1710b">4.2. Adjoint d'une composée</a></li>
+<li><a href="#orgf31d84b">4.3. Construction d'applications auto-adjointes</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org0ac1dc4" class="outline-3">
-<h3 id="org0ac1dc4"><span class="section-number-3">4.1.</span> Inverse</h3>
+<div id="outline-container-org680e038" class="outline-3">
+<h3 id="org680e038"><span class="section-number-3">4.1.</span> Inverse</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Supposons que \(A\) soit inversible. On a :
@@ -620,8 +616,8 @@ On en conclut que \(A^\dual\) est également inversible et que :
 </p>
 </div>
 </div>
-<div id="outline-container-org674f997" class="outline-3">
-<h3 id="org674f997"><span class="section-number-3">4.2.</span> Adjoint d'une composée</h3>
+<div id="outline-container-org4e1710b" class="outline-3">
+<h3 id="org4e1710b"><span class="section-number-3">4.2.</span> Adjoint d'une composée</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Soit un troisième espace vectoriel \(G\). Si les applications adjointes des
@@ -642,8 +638,8 @@ pour tout \((u,v) \in E \times G\). On en conclut que :
 </p>
 </div>
 </div>
-<div id="outline-container-org10811af" class="outline-3">
-<h3 id="org10811af"><span class="section-number-3">4.3.</span> Construction d'applications auto-adjointes</h3>
+<div id="outline-container-orgf31d84b" class="outline-3">
+<h3 id="orgf31d84b"><span class="section-number-3">4.3.</span> Construction d'applications auto-adjointes</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 Nous allons voir que nous pouvons construire deux applications auto-adjointes à partir de n'importe quelle application linéaire \(A : E \mapsto F\) admettant une application duale \(A^\dual : F \mapsto E\).
@@ -683,8 +679,8 @@ pour tout \(x,y \in F\). On en déduit que :
 </div>
 </div>
 </div>
-<div id="outline-container-org93d3cc4" class="outline-2">
-<h2 id="org93d3cc4"><span class="section-number-2">5.</span> Norme de l'adjoint</h2>
+<div id="outline-container-org0c3af82" class="outline-2">
+<h2 id="org0c3af82"><span class="section-number-2">5.</span> Norme de l'adjoint</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Soit une application linéaire \(A : E \mapsto F\) de norme finie. Si \(x \in F\) est un vecteur non nul, on a :
@@ -747,8 +743,8 @@ Ces deux inégalités nous montrent que :
 </p>
 </div>
 </div>
-<div id="outline-container-org218660c" class="outline-2">
-<h2 id="org218660c"><span class="section-number-2">6.</span> Noyau et image</h2>
+<div id="outline-container-orgef38ff1" class="outline-2">
+<h2 id="orgef38ff1"><span class="section-number-2">6.</span> Noyau et image</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Soit l'application linéaire \(A : E \mapsto F\). Soit \(u \in \noyau A\)
@@ -787,19 +783,19 @@ Comme le bidual revient à l'application d'origine, on a aussi :
 </p>
 </div>
 </div>
-<div id="outline-container-orga131478" class="outline-2">
-<h2 id="orga131478"><span class="section-number-2">7.</span> Représentation matricielle</h2>
+<div id="outline-container-orgf4abaa6" class="outline-2">
+<h2 id="orgf4abaa6"><span class="section-number-2">7.</span> Représentation matricielle</h2>
 <div class="outline-text-2" id="text-7">
 <div id="text-table-of-contents-3" role="doc-toc">
 <ul>
-<li><a href="#org6bc7f0d">7.1. Matrice adjointe</a></li>
-<li><a href="#org2cfe3a0">7.2. Adjointe réelle</a></li>
-<li><a href="#org33768cf">7.3. Adjoint d'un produit</a></li>
+<li><a href="#org4e579c9">7.1. Matrice adjointe</a></li>
+<li><a href="#org264ad2b">7.2. Adjointe réelle</a></li>
+<li><a href="#org87d3847">7.3. Adjoint d'un produit</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org6bc7f0d" class="outline-3">
-<h3 id="org6bc7f0d"><span class="section-number-3">7.1.</span> Matrice adjointe</h3>
+<div id="outline-container-org4e579c9" class="outline-3">
+<h3 id="org4e579c9"><span class="section-number-3">7.1.</span> Matrice adjointe</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 Soit \(\corps \in \{ \setR , \setC \}\) et la matrice \(A \in
@@ -841,8 +837,8 @@ Ce résultat prouve l'existence et l'unicité de l'adjoint dans le cas d'espaces
 </p>
 </div>
 </div>
-<div id="outline-container-org2cfe3a0" class="outline-3">
-<h3 id="org2cfe3a0"><span class="section-number-3">7.2.</span> Adjointe réelle</h3>
+<div id="outline-container-org264ad2b" class="outline-3">
+<h3 id="org264ad2b"><span class="section-number-3">7.2.</span> Adjointe réelle</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 Dans le cas d'une matrice réelle, on a \(\conjaccent{A} = A\) et :
@@ -853,8 +849,8 @@ Dans le cas d'une matrice réelle, on a \(\conjaccent{A} = A\) et :
 </p>
 </div>
 </div>
-<div id="outline-container-org33768cf" class="outline-3">
-<h3 id="org33768cf"><span class="section-number-3">7.3.</span> Adjoint d'un produit</h3>
+<div id="outline-container-org87d3847" class="outline-3">
+<h3 id="org87d3847"><span class="section-number-3">7.3.</span> Adjoint d'un produit</h3>
 <div class="outline-text-3" id="text-7-3">
 <p>
 Soit les applications linéaires \(\mathcal{A} : \corps^n \mapsto \corps^m\) et
@@ -886,7 +882,7 @@ pour toutes matrices \(A \in \matrice(\corps,m,n)\) et \(B \in
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-11-20 jeu 17:18</p>
+<p class="date">Created: 2025-11-21 ven 16:36</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

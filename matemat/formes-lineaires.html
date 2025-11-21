@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-11-20 jeu 17:02 -->
+<!-- 2025-11-21 ven 16:37 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Formes linéaires</title>
@@ -241,179 +241,175 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf90ece6">1. Dépendances</a></li>
-<li><a href="#orga414fa6">2. Définition</a></li>
-<li><a href="#orgb7df654">3. Espace dual</a></li>
-<li><a href="#org1cc52f7">4. Bilinéarité</a></li>
-<li><a href="#orgc3a3777">5. Biorthonormalité</a></li>
-<li><a href="#orgf3b033b">6. Similitude</a></li>
-<li><a href="#orgaa1f5d8">7. Espace bidual</a></li>
+<li><a href="#org288cba5">1. Dépendances</a></li>
+<li><a href="#org64685b1">2. Définition</a></li>
+<li><a href="#org291ce43">3. Espace dual</a></li>
+<li><a href="#orgb225aaa">4. Bilinéarité</a></li>
+<li><a href="#org5531a86">5. Biorthonormalité</a></li>
+<li><a href="#org75f2608">6. Similitude</a></li>
+<li><a href="#org2ce6d03">7. Espace bidual</a></li>
 <li><a href="#heading:application_adjointe_ou_duale">8. Application adjointe ou duale</a></li>
-<li><a href="#org759a45c">9. Formes bilinéaires</a></li>
-<li><a href="#orga722b3c">10. Formes quadratiques</a></li>
-<li><a href="#orgae13731">11. Représentation matricielle</a></li>
+<li><a href="#orgd1f235e">9. Formes bilinéaires</a></li>
+<li><a href="#org2d5957f">10. Formes quadratiques</a></li>
+<li><a href="#orgca2aab2">11. Représentation matricielle</a></li>
 </ul>
 </div>
 </div>
 
-<p>
-\(
-\newcommand{\parentheses}[1]{\left(#1\right)}
-\newcommand{\crochets}[1]{\left[#1\right]}
-\newcommand{\accolades}[1]{\left\{#1\right\}}
-\newcommand{\ensemble}[1]{\left\{#1\right\}}
-\DeclareMathOperator*{\cardinal}{\mathrm{card}}
-\newcommand{\identite}{\mathrm{Id}}
-\newcommand{\indicatrice}{\boldsymbol{\delta}}
-\newcommand{\dirac}{\delta}
-\newcommand{\moinsun}{{-1}}
-\newcommand{\inverse}{\ddagger}
-\newcommand{\pinverse}{\dagger}
-\newcommand{\topologie}{\mathfrak{T}}
-\newcommand{\ferme}{\mathfrak{F}}
-\newcommand{\img}{\mathbf{i}}
-\newcommand{\binome}[2]{
-\left\{ \begin{array}{c}
-#1 \\
-#2 \\
-\end{array} \right\}
-}
-\newcommand{\canonique}{\mathfrak{c}}
-\newcommand{\tenseuridentite}{\boldsymbol{\mathcal{I}}}
-\newcommand{\permutation}{\boldsymbol{\epsilon}}
-\newcommand{\matriceZero}{\mathfrak{0}}
-\newcommand{\matriceUn}{\mathfrak{1}}
-\newcommand{\christoffel}[2]{
-\left\{ \begin{array}{c}
-#1 \\
-#2 \\
-\end{array} \right\}
-}
-\newcommand{\lagrangien}{\mathfrak{L}}
-\newcommand{\sousens}{\mathfrak{P}}
-\newcommand{\partition}{\mathrm{Partition}}
-\newcommand{\tribu}{\mathrm{Tribu}}
-\newcommand{\topologies}{\mathrm{Topo}}
-\newcommand{\setB}{\mathbb{B}}
-\newcommand{\setN}{\mathbb{N}}
-\newcommand{\setZ}{\mathbb{Z}}
-\newcommand{\setQ}{\mathbb{Q}}
-\newcommand{\setR}{\mathbb{R}}
-\newcommand{\setC}{\mathbb{C}}
-\newcommand{\corps}{\mathbb{K}}
-\newcommand{\boule}{\mathfrak{B}}
-\newcommand{\intervalleouvert}[2]{\left] #1 , #2 \right[}
-\newcommand{\intervallesemiouvertgauche}[2]{ \left] #1 , #2 \right]}
-\newcommand{\intervallesemiouvertdroite}[2]{\left[ #1 , #2 \right[ }
-\newcommand{\fonction}{\mathbb{F}}
-\newcommand{\bijection}{\mathrm{Bij}}
-\newcommand{\polynome}{\mathrm{Poly}}
-\newcommand{\lineaire}{\mathrm{Lin}}
-\newcommand{\continue}{\mathrm{Cont}}
-\newcommand{\homeomorphisme}{\mathrm{Hom}}
-\newcommand{\etagee}{\mathrm{Etagee}}
-\newcommand{\lebesgue}{\mathrm{Leb}}
-\newcommand{\lipschitz}{\mathrm{Lip}}
-\newcommand{\suitek}{\mathrm{Suite}}
-\newcommand{\matrice}{\mathbb{M}}
-\newcommand{\krylov}{\mathrm{Krylov}}
-\newcommand{\tenseur}{\mathbb{T}}
-\newcommand{\essentiel}{\mathfrak{E}}
-\newcommand{\relation}{\mathrm{Rel}}
-\DeclareMathOperator*{\strictinferieur}{\ < \ }
-\DeclareMathOperator*{\strictsuperieur}{\ > \ }
-\DeclareMathOperator*{\ensinferieur}{\eqslantless}
-\DeclareMathOperator*{\enssuperieur}{\eqslantgtr}
-\DeclareMathOperator*{\esssuperieur}{\gtrsim}
-\DeclareMathOperator*{\essinferieur}{\lesssim}
-\newcommand{\essegal}{\eqsim}
-\newcommand{\union}{\ \cup \ }
-\newcommand{\intersection}{\ \cap \ }
-\newcommand{\opera}{\divideontimes}
-\newcommand{\autreaddition}{\boxplus}
-\newcommand{\autremultiplication}{\circledast}
-\newcommand{\commutateur}[2]{\left[ #1 , #2 \right]}
-\newcommand{\convolution}{\circledcirc}
-\newcommand{\correlation}{\ \natural \ }
-\newcommand{\diventiere}{\div}
-\newcommand{\modulo}{\bmod}
-\DeclareMathOperator*{\pgcd}{pgcd}
-\DeclareMathOperator*{\ppcm}{ppcm}
-\newcommand{\produitscalaire}[2]{\left\langle #1 \vert #2 \right\rangle}
-\newcommand{\scalaire}[2]{\left\langle #1 \| #2 \right\rangle}
-\newcommand{\braket}[3]{\left\langle #1 \vert #2 \vert #3 \right\rangle}
-\newcommand{\orthogonal}{\bot}
-\newcommand{\forme}[2]{\left\langle #1 , #2 \right\rangle}
-\newcommand{\biforme}[3]{\left\langle #1 , #2 , #3 \right\rangle}
-\newcommand{\contraction}[3]{\left\langle #1 \odot #3 \right\rangle_{#2}}
-\newcommand{\dblecont}[5]{\left\langle #1 \vert #3 \vert #5 \right\rangle_{#2,#4}}
-\DeclareMathOperator*{\major}{major}
-\DeclareMathOperator*{\minor}{minor}
-\DeclareMathOperator*{\maxim}{maxim}
-\DeclareMathOperator*{\minim}{minim}
-\DeclareMathOperator*{\argument}{arg}
-\DeclareMathOperator*{\argmin}{arg\ min}
-\DeclareMathOperator*{\argmax}{arg\ max}
-\DeclareMathOperator*{\supessentiel}{ess\ sup}
-\DeclareMathOperator*{\infessentiel}{ess\ inf}
-\newcommand{\dual}{\star}
-\newcommand{\vardual}{\circledast}
-\newcommand{\distance}{\mathfrak{dist}}
-\newcommand{\norme}[1]{\left\| #1 \right\|}
-\newcommand{\normetrois}[1]{\left|\left\| #1 \right\|\right|}
-\DeclareMathOperator*{\adh}{adh}
-\DeclareMathOperator*{\interieur}{int}
-\newcommand{\frontiere}{\partial}
-\DeclareMathOperator*{\image}{im}
-\DeclareMathOperator*{\domaine}{dom}
-\DeclareMathOperator*{\noyau}{ker}
-\DeclareMathOperator*{\support}{supp}
-\DeclareMathOperator*{\signe}{sign}
-\newcommand{\abs}[1]{\left| #1 \right|}
-\newcommand{\unsur}[1]{\frac{1}{#1}}
-\newcommand{\arrondisup}[1]{\lceil #1 \rceil}
-\newcommand{\arrondiinf}[1]{\lfloor #1 \rfloor}
-\DeclareMathOperator*{\conjugue}{conj}
-\newcommand{\conjaccent}[1]{\overline{#1}}
-\DeclareMathOperator*{\division}{division}
-\newcommand{\difference}{\boldsymbol{\Delta}}
-\newcommand{\differentielle}[2]{\mathfrak{D}^{#1}_{#2}}
-\newcommand{\OD}[2]{\frac{d #1}{d #2}}
-\newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
-\newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
-\newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
-\newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
-\newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
-\newcommand{\gradient}{\mathbf{\nabla}}
-\newcommand{\combilin}[1]{\mathrm{span}\{ #1 \}}
-\DeclareMathOperator*{\trace}{tr}
-\newcommand{\proba}{\mathbb{P}}
-\newcommand{\probaof}[1]{\mathbb{P}\left[#1\right]}
-\newcommand{\esperof}[1]{\mathbb{E}\left[#1\right]}
-\newcommand{\cov}[2]{\mathrm{cov} \left( #1 , #2 \right) }
-\newcommand{\var}[1]{\mathrm{var} \left( #1 \right) }
-\newcommand{\rand}{\mathrm{rand}}
-\newcommand{\variation}[1]{\left\langle #1 \right\rangle}
-\DeclareMathOperator*{\composante}{comp}
-\DeclareMathOperator*{\bloc}{bloc}
-\DeclareMathOperator*{\ligne}{ligne}
-\DeclareMathOperator*{\colonne}{colonne}
-\DeclareMathOperator*{\diagonale}{diag}
-\newcommand{\matelementaire}{\mathrm{Elem}}
-\DeclareMathOperator*{\matpermutation}{permut}
-\newcommand{\matunitaire}{\mathrm{Unitaire}}
-\newcommand{\gaussjordan}{\mathrm{GaussJordan}}
-\newcommand{\householder}{\mathrm{Householder}}
-\DeclareMathOperator*{\rang}{rang}
-\newcommand{\schur}{\mathrm{Schur}}
-\newcommand{\singuliere}{\mathrm{DVS}}
-\newcommand{\convexe}{\mathrm{Convexe}}
-\newcommand{\petito}[1]{o\left(#1\right)}
-\newcommand{\grando}[1]{O\left(#1\right)}
-\)
-</p>
+<script>
+MathJax = {
+  tex: {
+    packages: {'[+]': ['base','ams','braket']},
+    macros: {
+      parentheses: ["\\left(#1\\right)", 1],
+      crochets: ["\\left[#1\\right]", 1],
+      accolades: ["\\left\\{#1\\right\\}", 1],
+      ensemble: ["\\left\\{#1\\right\\}", 1],
+      cardinal: ["\\mathop{\\mathrm{card}\\ }\\limits",0],
+      identite: "\\mathrm{Id}",
+      indicatrice: "\\boldsymbol{\\delta}",
+      dirac: "\\delta",
+      moinsun: "-1",
+      inverse: "\\ddagger",
+      pinverse: "\\dagger",
+      topologie: "\\mathfrak{T}",
+      ferme: "\\mathfrak{F}",
+      img: "\\mathbf{i}",
+      binome: ["\\left\\{ \\\\begin{array}{c} #1 \\\\ #2 \\\\ \\\\end{array} \\\\right\\}", 2],
+      canonique: "\\mathfrak{c}",
+      tenseuridentite: "\\boldsymbol{\\mathcal{I}}",
+      permutation: "\\boldsymbol{\\epsilon}",
+      matriceZero: "\\mathfrak{0}",
+      matriceUn: "\\mathfrak{1}",
+      christoffel: ["\\left\\{ \\\\begin{array}{c} #1 \\\\ #2 \\\\ \\\\end{array} \\\\right\\}", 2],
+      lagrangien: "\\mathfrak{L}",
+      sousens: "\\mathfrak{P}",
+      partition: "\\mathrm{Partition}",
+      tribu: "\\mathrm{Tribu}",
+      topologies: "\\mathrm{Topo}",
+      setB: "\\mathbb{B}",
+      setN: "\\mathbb{N}",
+      setZ: "\\mathbb{Z}",
+      setQ: "\\mathbb{Q}",
+      setR: "\\mathbb{R}",
+      setC: "\\mathbb{C}",
+      corps: "\\mathbb{K}",
+      boule: "\\mathfrak{B}",
+      intervalleouvert: ["\\left] #1 , #2 \\\\right[", 2],
+      intervallesemiouvertgauche: ["\\left] #1 , #2 \\\\right]", 2],
+      intervallesemiouvertdroite: ["\\left[ #1 , #2 \\\\right[", 2],
+      fonction: "\\mathbb{F}",
+      bijection: "\\mathrm{Bij}",
+      polynome: "\\mathrm{Poly}",
+      lineaire: "\\mathrm{Lin}",
+      continue: "\\mathrm{Cont}",
+      homeomorphisme: "\\mathrm{Hom}",
+      etagee: "\\mathrm{Etagee}",
+      lebesgue: "\\mathrm{Leb}",
+      lipschitz: "\\mathrm{Lip}",
+      suitek: "\\mathrm{Suite}",
+      matrice: "\\mathbb{M}",
+      krylov: "\\mathrm{Krylov}",
+      tenseur: "\\mathbb{T}",
+      essentiel: "\\mathfrak{E}",
+      relation: "\\mathrm{Rel}",
+      strictinferieur: "<",
+      strictsuperieur: ">",
+      ensinferieur: "\\eqslantless",
+      enssuperieur: "\\eqslantgtr",
+      esssuperieur: "\\gtrsim",
+      essinferieur: "\\lesssim",
+      essegal: "\\eqsim",
+      union: "\\cup",
+      intersection: "\\cap",
+      opera: "\\divideontimes",
+      autreaddition: "\\boxplus",
+      autremultiplication: "\\circledast",
+      commutateur: ["\\left[ #1 , #2 \\\\right]", 2],
+      convolution: "\\circledcirc",
+      correlation: "\\natural",
+      diventiere: "\\div",
+      modulo: "\\bmod",
+      pgcd: ["\\mathop{\\mathrm{pgcd}\\ }\\limits",0],
+      ppcm: ["\\mathop{\\mathrm{ppcm}\\ }\\limits",0],
+      produitscalaire: ["\\left\\langle #1 \\\\vert #2 \\\\right\\rangle", 2],
+      scalaire: ["\\left\\langle #1 \\| #2 \\\\right\\rangle", 2],
+      braket: ["\\left\\langle #1 \\\\vert #2 \\\\vert #3 \\\\right\\rangle", 3],
+      orthogonal: "\\bot",
+      forme: ["\\left\\langle #1 , #2 \\\\right\\rangle", 2],
+      biforme: ["\\left\\langle #1 , #2 , #3 \\\\right\\rangle", 3],
+      contraction: ["\\left\\langle #1 \\\\odot #3 \\\\right\\rangle_{#2}", 3],
+      dblecont: ["\\left\\langle #1 \\\\vert #3 \\\\vert #5 \\\\right\\rangle_{#2,#4}", 5],
+      major: ["\\mathop{\\mathrm{major}\\ }\\limits",0],
+      minor: ["\\mathop{\\mathrm{minor}\\ }\\limits",0],
+      maxim: ["\\mathop{\\mathrm{maxim}\\ }\\limits",0],
+      minim: ["\\mathop{\\mathrm{minim}\\ }\\limits",0],
+      argument: ["\\mathop{\\mathrm{arg}\\ }\\limits",0],
+      argmin: ["\\mathop{\\mathrm{arg\\,min}\\ }\\limits",0],
+      argmax: ["\\mathop{\\mathrm{arg\\,max}\\ }\\limits",0],
+      supessentiel: ["\\mathop{\\mathrm{ess\\,sup}\\ }\\limits",0],
+      infessentiel: ["\\mathop{\\mathrm{ess\\,inf}\\ }\\limits",0],
+      dual: "\\star",
+      vardual: "\\circledast",
+      distance: "\\mathfrak{dist}",
+      norme: ["\\left\\| #1 \\\\right\\|", 1],
+      normetrois: ["\\left|\\left\\| #1 \\\\right\\|\\right|", 1],
+      adh: ["\\mathop{\\mathrm{adh}\\ }\\limits",0],
+      interieur: ["\\mathop{\\mathrm{int}\\ }\\limits",0],
+      frontiere: "\\partial",
+      image: ["\\mathop{\\mathrm{im}\\ }\\limits",0],
+      domaine: ["\\mathop{\\mathrm{dom}\\ }\\limits",0],
+      noyau: ["\\mathop{\\mathrm{ker}\\ }\\limits",0],
+      support: ["\\mathop{\\mathrm{supp}\\ }\\limits",0],
+      signe: ["\\mathop{\\mathrm{sign}\\ }\\limits",0],
+      abs: ["\\left| #1 \\\\right|", 1],
+      unsur: ["\\frac{1}{#1}", 1],
+      arrondisup: ["\\lceil #1 \\\\rceil", 1],
+      arrondiinf: ["\\lfloor #1 \\\\rfloor", 1],
+      conjugue: "conj",
+      conjaccent: ["\\overline{#1}", 1],
+      division: "division",
+      difference: "\\boldsymbol{\\Delta}",
+      differentielle: ["\\mathfrak{D}^{#1}_{#2}", 2],
+      OD: ["\\frac{d #1}{d #2}", 2],
+      OOD: ["\\frac{d^2 #1}{d #2^2}", 2],
+      NOD: ["\\frac{d^{#3} #1}{d #2^{#3}}", 3],
+      deriveepartielle: ["\\frac{\\partial #1}{\\partial #2}", 2],
+      PD: ["\\frac{\\partial #1}{\\partial #2}", 2],
+      dblederiveepartielle: ["\\frac{\\partial^2 #1}{\\partial #2 \\\\partial #2}", 2],
+      dfdxdy: ["\\frac{\\partial^2 #1}{\\partial #2 \\\\partial #3}", 3],
+      dfdxdx: ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2],
+      gradient: "\\mathbf{\\nabla}",
+      combilin: ["\\mathrm{span}\\{ #1 \\", 1],
+      trace: "tr",
+      proba: "\\mathbb{P}",
+      probaof: ["\\mathbb{P}\\left[#1\\right]", 1],
+      esperof: ["\\mathbb{E}\\left[#1\\right]", 1],
+      cov: ["\\mathrm{cov} ( #1 , #2 )", 2],
+      var: ["\\mathrm{var} ( #1 )", 1],
+      rand: "\\mathrm{rand}",
+      variation: ["\\left\\langle #1 \\\\right\\rangle", 1],
+      composante: ["\\mathop{\\mathrm{comp}\\ }\\limits",0],
+      bloc: ["\\mathop{\\mathrm{bloc}\\ }\\limits",0],
+      ligne: ["\\mathop{\\mathrm{ligne}\\ }\\limits",0],
+      colonne: ["\\mathop{\\mathrm{colonne}\\ }\\limits",0],
+      diagonale: ["\\mathop{\\mathrm{diag}\\ }\\limits",0],
+      matelementaire: "\\mathrm{Elem}",
+      matpermutation: ["\\mathop{\\mathrm{permut}\\ }\\limits",0],
+      matunitaire: "\\mathrm{Unitaire}",
+      gaussjordan: "\\mathrm{GaussJordan}",
+      householder: "\\mathrm{Householder}",
+      rang: "rang",
+      schur: "\\mathrm{Schur}",
+      singuliere: "\\mathrm{DVS}",
+      convexe: "\\mathrm{Convexe}",
+      petito: ["o(#1)", 1],
+      grando: ["O(#1)", 1]
+    }
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <p>
 \(
@@ -429,8 +425,8 @@
 <p>
 \label{chap:forme}
 </p>
-<div id="outline-container-orgf90ece6" class="outline-2">
-<h2 id="orgf90ece6"><span class="section-number-2">1.</span> Dépendances</h2>
+<div id="outline-container-org288cba5" class="outline-2">
+<h2 id="org288cba5"><span class="section-number-2">1.</span> Dépendances</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:relation} : Les fonctions</li>
@@ -438,8 +434,8 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orga414fa6" class="outline-2">
-<h2 id="orga414fa6"><span class="section-number-2">2.</span> Définition</h2>
+<div id="outline-container-org64685b1" class="outline-2">
+<h2 id="org64685b1"><span class="section-number-2">2.</span> Définition</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Soit un espace vectoriel \(E\) sur \(\corps\). Une forme linéaire est une fonction linéaire continue
@@ -447,8 +443,8 @@ Soit un espace vectoriel \(E\) sur \(\corps\). Une forme linéaire est une fonct
 </p>
 </div>
 </div>
-<div id="outline-container-orgb7df654" class="outline-2">
-<h2 id="orgb7df654"><span class="section-number-2">3.</span> Espace dual</h2>
+<div id="outline-container-org291ce43" class="outline-2">
+<h2 id="org291ce43"><span class="section-number-2">3.</span> Espace dual</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 L'espace dual \(E^\dual\) de \(E\) est l'ensemble des formes linéaires sur \(E\) , autrement dit
@@ -463,8 +459,8 @@ l'ensemble des fonctions linéaires continues de \(E\) vers \(\corps\) :
 Il s'agit d'un espace vectoriel pour les opérations d'addition et de multiplication mixte définies sur les fonctions.
 </p>
 </div>
-<div id="outline-container-org8805b67" class="outline-3">
-<h3 id="org8805b67"><span class="section-number-3">3.1.</span> Notation</h3>
+<div id="outline-container-org9583dbe" class="outline-3">
+<h3 id="org9583dbe"><span class="section-number-3">3.1.</span> Notation</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Pour toute forme \(\varphi \in E^\dual\) et tout vecteur \(v \in E\), on note :
@@ -480,8 +476,8 @@ ce qui définit implicitement la fonction \(\forme{}{} : E^\dual \times E \mapst
 </div>
 </div>
 </div>
-<div id="outline-container-org1cc52f7" class="outline-2">
-<h2 id="org1cc52f7"><span class="section-number-2">4.</span> Bilinéarité</h2>
+<div id="outline-container-orgb225aaa" class="outline-2">
+<h2 id="orgb225aaa"><span class="section-number-2">4.</span> Bilinéarité</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Soit \(\varphi,\psi \in E^\dual\), \(u,v \in E\) et \(\alpha,\beta \in
@@ -505,8 +501,8 @@ L'application \(\forme{}{}\) est donc bilinéaire.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc3a3777" class="outline-2">
-<h2 id="orgc3a3777"><span class="section-number-2">5.</span> Biorthonormalité</h2>
+<div id="outline-container-org5531a86" class="outline-2">
+<h2 id="org5531a86"><span class="section-number-2">5.</span> Biorthonormalité</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 On dit que les suites \((\Phi_1,...,\Phi_m)\) de \(E^\dual\) et
@@ -574,8 +570,8 @@ On a donc en définitive :
 </p>
 </div>
 </div>
-<div id="outline-container-orgf3b033b" class="outline-2">
-<h2 id="orgf3b033b"><span class="section-number-2">6.</span> Similitude</h2>
+<div id="outline-container-org75f2608" class="outline-2">
+<h2 id="org75f2608"><span class="section-number-2">6.</span> Similitude</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 On dit que deux fonctions \(u,v \in E\) sont identique au sens des distributions si :
@@ -602,8 +598,8 @@ pour tout \(u \in E\).
 </p>
 </div>
 </div>
-<div id="outline-container-orgaa1f5d8" class="outline-2">
-<h2 id="orgaa1f5d8"><span class="section-number-2">7.</span> Espace bidual</h2>
+<div id="outline-container-org2ce6d03" class="outline-2">
+<h2 id="org2ce6d03"><span class="section-number-2">7.</span> Espace bidual</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 On définit l'espace bidual de \(E\), noté \(E^{\dual \dual}\), par :
@@ -650,8 +646,8 @@ des formes linéaires.
 </p>
 </div>
 </div>
-<div id="outline-container-org759a45c" class="outline-2">
-<h2 id="org759a45c"><span class="section-number-2">9.</span> Formes bilinéaires</h2>
+<div id="outline-container-orgd1f235e" class="outline-2">
+<h2 id="orgd1f235e"><span class="section-number-2">9.</span> Formes bilinéaires</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 Soit les espaces vectoriels \(E\) et \(F\) sur \(\corps\). Une forme bilinéaire est une fonction bilinéaire continue \(\vartheta : F \times E \mapsto \corps\). On utilise une notation analogue à celle des formes :
@@ -683,8 +679,8 @@ pour tout \(\alpha,\beta \in \corps\), \(u,v \in E\) et \(x,y \in F\).
 </p>
 </div>
 </div>
-<div id="outline-container-orga722b3c" class="outline-2">
-<h2 id="orga722b3c"><span class="section-number-2">10.</span> Formes quadratiques</h2>
+<div id="outline-container-org2d5957f" class="outline-2">
+<h2 id="org2d5957f"><span class="section-number-2">10.</span> Formes quadratiques</h2>
 <div class="outline-text-2" id="text-10">
 <p>
 Soit la forme bilinéaire $ &thetasym; : E &times; E \mapsto \corps$. Une forme quadratique \(\mathcal{Q} : E \mapsto \corps\) est une fonction de la forme :
@@ -695,8 +691,8 @@ Soit la forme bilinéaire $ &thetasym; : E &times; E \mapsto \corps$. Une forme 
 </p>
 </div>
 </div>
-<div id="outline-container-orgae13731" class="outline-2">
-<h2 id="orgae13731"><span class="section-number-2">11.</span> Représentation matricielle</h2>
+<div id="outline-container-orgca2aab2" class="outline-2">
+<h2 id="orgca2aab2"><span class="section-number-2">11.</span> Représentation matricielle</h2>
 <div class="outline-text-2" id="text-11">
 <p>
 On peut représenter toute forme linéaire \(\varphi \in \lineaire(\corps^n,\corps)\) par un vecteur colonne \(\hat{\varphi} \in \corps^n\). Etant donné la base canonique \((e_1,...,e_n)\) de \(\corps^n\), il suffit de poser :
@@ -718,8 +714,8 @@ pour avoir :
 pour tout \(u \in \corps^n\).
 </p>
 </div>
-<div id="outline-container-org2030050" class="outline-3">
-<h3 id="org2030050"><span class="section-number-3">11.1.</span> Formes bilinéaires</h3>
+<div id="outline-container-org1a9bdfd" class="outline-3">
+<h3 id="org1a9bdfd"><span class="section-number-3">11.1.</span> Formes bilinéaires</h3>
 <div class="outline-text-3" id="text-11-1">
 <p>
 On peut représenter toute forme bilinéaire \(\vartheta \in \lineaire(\corps^m \times \corps^n,\corps)\) par une matrice \(\Theta \in \matrice(K,m,n)\). Etant donné les bases canoniques \((f_1,...,f_m)\) de \(\corps^m\) et \((e_1,...,e_n)\) de \(\corps^n\), il suffit de poser :
@@ -746,7 +742,7 @@ pour tout \(u \in \corps^n\) et tout \(v \in \corps^m\).
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-11-20 jeu 17:02</p>
+<p class="date">Created: 2025-11-21 ven 16:37</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

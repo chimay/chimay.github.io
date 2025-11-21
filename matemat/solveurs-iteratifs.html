@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-11-20 jeu 16:29 -->
+<!-- 2025-11-21 ven 16:38 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Solveurs itératifs</title>
@@ -241,175 +241,171 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orge785f89">1. Dépendances</a></li>
-<li><a href="#orgb8462b9">2. Méthodes itératives</a></li>
-<li><a href="#org69ec6c7">3. Résolution par minimisation</a></li>
-<li><a href="#org7daa42e">4. Espaces de Krylov</a></li>
-<li><a href="#org012a893">5. Méthode de projection</a></li>
-<li><a href="#org412f414">6. Minimisation du résidu</a></li>
-<li><a href="#orgfad9d00">7. Gradients biconjugués</a></li>
+<li><a href="#org39e1c8b">1. Dépendances</a></li>
+<li><a href="#org168f491">2. Méthodes itératives</a></li>
+<li><a href="#org43dc83d">3. Résolution par minimisation</a></li>
+<li><a href="#orgadfe30e">4. Espaces de Krylov</a></li>
+<li><a href="#org4f626be">5. Méthode de projection</a></li>
+<li><a href="#org8000a6a">6. Minimisation du résidu</a></li>
+<li><a href="#orgc30b666">7. Gradients biconjugués</a></li>
 </ul>
 </div>
 </div>
 
-<p>
-\(
-\newcommand{\parentheses}[1]{\left(#1\right)}
-\newcommand{\crochets}[1]{\left[#1\right]}
-\newcommand{\accolades}[1]{\left\{#1\right\}}
-\newcommand{\ensemble}[1]{\left\{#1\right\}}
-\DeclareMathOperator*{\cardinal}{\mathrm{card}}
-\newcommand{\identite}{\mathrm{Id}}
-\newcommand{\indicatrice}{\boldsymbol{\delta}}
-\newcommand{\dirac}{\delta}
-\newcommand{\moinsun}{{-1}}
-\newcommand{\inverse}{\ddagger}
-\newcommand{\pinverse}{\dagger}
-\newcommand{\topologie}{\mathfrak{T}}
-\newcommand{\ferme}{\mathfrak{F}}
-\newcommand{\img}{\mathbf{i}}
-\newcommand{\binome}[2]{
-\left\{ \begin{array}{c}
-#1 \\
-#2 \\
-\end{array} \right\}
-}
-\newcommand{\canonique}{\mathfrak{c}}
-\newcommand{\tenseuridentite}{\boldsymbol{\mathcal{I}}}
-\newcommand{\permutation}{\boldsymbol{\epsilon}}
-\newcommand{\matriceZero}{\mathfrak{0}}
-\newcommand{\matriceUn}{\mathfrak{1}}
-\newcommand{\christoffel}[2]{
-\left\{ \begin{array}{c}
-#1 \\
-#2 \\
-\end{array} \right\}
-}
-\newcommand{\lagrangien}{\mathfrak{L}}
-\newcommand{\sousens}{\mathfrak{P}}
-\newcommand{\partition}{\mathrm{Partition}}
-\newcommand{\tribu}{\mathrm{Tribu}}
-\newcommand{\topologies}{\mathrm{Topo}}
-\newcommand{\setB}{\mathbb{B}}
-\newcommand{\setN}{\mathbb{N}}
-\newcommand{\setZ}{\mathbb{Z}}
-\newcommand{\setQ}{\mathbb{Q}}
-\newcommand{\setR}{\mathbb{R}}
-\newcommand{\setC}{\mathbb{C}}
-\newcommand{\corps}{\mathbb{K}}
-\newcommand{\boule}{\mathfrak{B}}
-\newcommand{\intervalleouvert}[2]{\left] #1 , #2 \right[}
-\newcommand{\intervallesemiouvertgauche}[2]{ \left] #1 , #2 \right]}
-\newcommand{\intervallesemiouvertdroite}[2]{\left[ #1 , #2 \right[ }
-\newcommand{\fonction}{\mathbb{F}}
-\newcommand{\bijection}{\mathrm{Bij}}
-\newcommand{\polynome}{\mathrm{Poly}}
-\newcommand{\lineaire}{\mathrm{Lin}}
-\newcommand{\continue}{\mathrm{Cont}}
-\newcommand{\homeomorphisme}{\mathrm{Hom}}
-\newcommand{\etagee}{\mathrm{Etagee}}
-\newcommand{\lebesgue}{\mathrm{Leb}}
-\newcommand{\lipschitz}{\mathrm{Lip}}
-\newcommand{\suitek}{\mathrm{Suite}}
-\newcommand{\matrice}{\mathbb{M}}
-\newcommand{\krylov}{\mathrm{Krylov}}
-\newcommand{\tenseur}{\mathbb{T}}
-\newcommand{\essentiel}{\mathfrak{E}}
-\newcommand{\relation}{\mathrm{Rel}}
-\DeclareMathOperator*{\strictinferieur}{\ < \ }
-\DeclareMathOperator*{\strictsuperieur}{\ > \ }
-\DeclareMathOperator*{\ensinferieur}{\eqslantless}
-\DeclareMathOperator*{\enssuperieur}{\eqslantgtr}
-\DeclareMathOperator*{\esssuperieur}{\gtrsim}
-\DeclareMathOperator*{\essinferieur}{\lesssim}
-\newcommand{\essegal}{\eqsim}
-\newcommand{\union}{\ \cup \ }
-\newcommand{\intersection}{\ \cap \ }
-\newcommand{\opera}{\divideontimes}
-\newcommand{\autreaddition}{\boxplus}
-\newcommand{\autremultiplication}{\circledast}
-\newcommand{\commutateur}[2]{\left[ #1 , #2 \right]}
-\newcommand{\convolution}{\circledcirc}
-\newcommand{\correlation}{\ \natural \ }
-\newcommand{\diventiere}{\div}
-\newcommand{\modulo}{\bmod}
-\DeclareMathOperator*{\pgcd}{pgcd}
-\DeclareMathOperator*{\ppcm}{ppcm}
-\newcommand{\produitscalaire}[2]{\left\langle #1 \vert #2 \right\rangle}
-\newcommand{\scalaire}[2]{\left\langle #1 \| #2 \right\rangle}
-\newcommand{\braket}[3]{\left\langle #1 \vert #2 \vert #3 \right\rangle}
-\newcommand{\orthogonal}{\bot}
-\newcommand{\forme}[2]{\left\langle #1 , #2 \right\rangle}
-\newcommand{\biforme}[3]{\left\langle #1 , #2 , #3 \right\rangle}
-\newcommand{\contraction}[3]{\left\langle #1 \odot #3 \right\rangle_{#2}}
-\newcommand{\dblecont}[5]{\left\langle #1 \vert #3 \vert #5 \right\rangle_{#2,#4}}
-\DeclareMathOperator*{\major}{major}
-\DeclareMathOperator*{\minor}{minor}
-\DeclareMathOperator*{\maxim}{maxim}
-\DeclareMathOperator*{\minim}{minim}
-\DeclareMathOperator*{\argument}{arg}
-\DeclareMathOperator*{\argmin}{arg\ min}
-\DeclareMathOperator*{\argmax}{arg\ max}
-\DeclareMathOperator*{\supessentiel}{ess\ sup}
-\DeclareMathOperator*{\infessentiel}{ess\ inf}
-\newcommand{\dual}{\star}
-\newcommand{\vardual}{\circledast}
-\newcommand{\distance}{\mathfrak{dist}}
-\newcommand{\norme}[1]{\left\| #1 \right\|}
-\newcommand{\normetrois}[1]{\left|\left\| #1 \right\|\right|}
-\DeclareMathOperator*{\adh}{adh}
-\DeclareMathOperator*{\interieur}{int}
-\newcommand{\frontiere}{\partial}
-\DeclareMathOperator*{\image}{im}
-\DeclareMathOperator*{\domaine}{dom}
-\DeclareMathOperator*{\noyau}{ker}
-\DeclareMathOperator*{\support}{supp}
-\DeclareMathOperator*{\signe}{sign}
-\newcommand{\abs}[1]{\left| #1 \right|}
-\newcommand{\unsur}[1]{\frac{1}{#1}}
-\newcommand{\arrondisup}[1]{\lceil #1 \rceil}
-\newcommand{\arrondiinf}[1]{\lfloor #1 \rfloor}
-\DeclareMathOperator*{\conjugue}{conj}
-\newcommand{\conjaccent}[1]{\overline{#1}}
-\DeclareMathOperator*{\division}{division}
-\newcommand{\difference}{\boldsymbol{\Delta}}
-\newcommand{\differentielle}[2]{\mathfrak{D}^{#1}_{#2}}
-\newcommand{\OD}[2]{\frac{d #1}{d #2}}
-\newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
-\newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
-\newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
-\newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
-\newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
-\newcommand{\gradient}{\mathbf{\nabla}}
-\newcommand{\combilin}[1]{\mathrm{span}\{ #1 \}}
-\DeclareMathOperator*{\trace}{tr}
-\newcommand{\proba}{\mathbb{P}}
-\newcommand{\probaof}[1]{\mathbb{P}\left[#1\right]}
-\newcommand{\esperof}[1]{\mathbb{E}\left[#1\right]}
-\newcommand{\cov}[2]{\mathrm{cov} \left( #1 , #2 \right) }
-\newcommand{\var}[1]{\mathrm{var} \left( #1 \right) }
-\newcommand{\rand}{\mathrm{rand}}
-\newcommand{\variation}[1]{\left\langle #1 \right\rangle}
-\DeclareMathOperator*{\composante}{comp}
-\DeclareMathOperator*{\bloc}{bloc}
-\DeclareMathOperator*{\ligne}{ligne}
-\DeclareMathOperator*{\colonne}{colonne}
-\DeclareMathOperator*{\diagonale}{diag}
-\newcommand{\matelementaire}{\mathrm{Elem}}
-\DeclareMathOperator*{\matpermutation}{permut}
-\newcommand{\matunitaire}{\mathrm{Unitaire}}
-\newcommand{\gaussjordan}{\mathrm{GaussJordan}}
-\newcommand{\householder}{\mathrm{Householder}}
-\DeclareMathOperator*{\rang}{rang}
-\newcommand{\schur}{\mathrm{Schur}}
-\newcommand{\singuliere}{\mathrm{DVS}}
-\newcommand{\convexe}{\mathrm{Convexe}}
-\newcommand{\petito}[1]{o\left(#1\right)}
-\newcommand{\grando}[1]{O\left(#1\right)}
-\)
-</p>
+<script>
+MathJax = {
+  tex: {
+    packages: {'[+]': ['base','ams','braket']},
+    macros: {
+      parentheses: ["\\left(#1\\right)", 1],
+      crochets: ["\\left[#1\\right]", 1],
+      accolades: ["\\left\\{#1\\right\\}", 1],
+      ensemble: ["\\left\\{#1\\right\\}", 1],
+      cardinal: ["\\mathop{\\mathrm{card}\\ }\\limits",0],
+      identite: "\\mathrm{Id}",
+      indicatrice: "\\boldsymbol{\\delta}",
+      dirac: "\\delta",
+      moinsun: "-1",
+      inverse: "\\ddagger",
+      pinverse: "\\dagger",
+      topologie: "\\mathfrak{T}",
+      ferme: "\\mathfrak{F}",
+      img: "\\mathbf{i}",
+      binome: ["\\left\\{ \\\\begin{array}{c} #1 \\\\ #2 \\\\ \\\\end{array} \\\\right\\}", 2],
+      canonique: "\\mathfrak{c}",
+      tenseuridentite: "\\boldsymbol{\\mathcal{I}}",
+      permutation: "\\boldsymbol{\\epsilon}",
+      matriceZero: "\\mathfrak{0}",
+      matriceUn: "\\mathfrak{1}",
+      christoffel: ["\\left\\{ \\\\begin{array}{c} #1 \\\\ #2 \\\\ \\\\end{array} \\\\right\\}", 2],
+      lagrangien: "\\mathfrak{L}",
+      sousens: "\\mathfrak{P}",
+      partition: "\\mathrm{Partition}",
+      tribu: "\\mathrm{Tribu}",
+      topologies: "\\mathrm{Topo}",
+      setB: "\\mathbb{B}",
+      setN: "\\mathbb{N}",
+      setZ: "\\mathbb{Z}",
+      setQ: "\\mathbb{Q}",
+      setR: "\\mathbb{R}",
+      setC: "\\mathbb{C}",
+      corps: "\\mathbb{K}",
+      boule: "\\mathfrak{B}",
+      intervalleouvert: ["\\left] #1 , #2 \\\\right[", 2],
+      intervallesemiouvertgauche: ["\\left] #1 , #2 \\\\right]", 2],
+      intervallesemiouvertdroite: ["\\left[ #1 , #2 \\\\right[", 2],
+      fonction: "\\mathbb{F}",
+      bijection: "\\mathrm{Bij}",
+      polynome: "\\mathrm{Poly}",
+      lineaire: "\\mathrm{Lin}",
+      continue: "\\mathrm{Cont}",
+      homeomorphisme: "\\mathrm{Hom}",
+      etagee: "\\mathrm{Etagee}",
+      lebesgue: "\\mathrm{Leb}",
+      lipschitz: "\\mathrm{Lip}",
+      suitek: "\\mathrm{Suite}",
+      matrice: "\\mathbb{M}",
+      krylov: "\\mathrm{Krylov}",
+      tenseur: "\\mathbb{T}",
+      essentiel: "\\mathfrak{E}",
+      relation: "\\mathrm{Rel}",
+      strictinferieur: "<",
+      strictsuperieur: ">",
+      ensinferieur: "\\eqslantless",
+      enssuperieur: "\\eqslantgtr",
+      esssuperieur: "\\gtrsim",
+      essinferieur: "\\lesssim",
+      essegal: "\\eqsim",
+      union: "\\cup",
+      intersection: "\\cap",
+      opera: "\\divideontimes",
+      autreaddition: "\\boxplus",
+      autremultiplication: "\\circledast",
+      commutateur: ["\\left[ #1 , #2 \\\\right]", 2],
+      convolution: "\\circledcirc",
+      correlation: "\\natural",
+      diventiere: "\\div",
+      modulo: "\\bmod",
+      pgcd: ["\\mathop{\\mathrm{pgcd}\\ }\\limits",0],
+      ppcm: ["\\mathop{\\mathrm{ppcm}\\ }\\limits",0],
+      produitscalaire: ["\\left\\langle #1 \\\\vert #2 \\\\right\\rangle", 2],
+      scalaire: ["\\left\\langle #1 \\| #2 \\\\right\\rangle", 2],
+      braket: ["\\left\\langle #1 \\\\vert #2 \\\\vert #3 \\\\right\\rangle", 3],
+      orthogonal: "\\bot",
+      forme: ["\\left\\langle #1 , #2 \\\\right\\rangle", 2],
+      biforme: ["\\left\\langle #1 , #2 , #3 \\\\right\\rangle", 3],
+      contraction: ["\\left\\langle #1 \\\\odot #3 \\\\right\\rangle_{#2}", 3],
+      dblecont: ["\\left\\langle #1 \\\\vert #3 \\\\vert #5 \\\\right\\rangle_{#2,#4}", 5],
+      major: ["\\mathop{\\mathrm{major}\\ }\\limits",0],
+      minor: ["\\mathop{\\mathrm{minor}\\ }\\limits",0],
+      maxim: ["\\mathop{\\mathrm{maxim}\\ }\\limits",0],
+      minim: ["\\mathop{\\mathrm{minim}\\ }\\limits",0],
+      argument: ["\\mathop{\\mathrm{arg}\\ }\\limits",0],
+      argmin: ["\\mathop{\\mathrm{arg\\,min}\\ }\\limits",0],
+      argmax: ["\\mathop{\\mathrm{arg\\,max}\\ }\\limits",0],
+      supessentiel: ["\\mathop{\\mathrm{ess\\,sup}\\ }\\limits",0],
+      infessentiel: ["\\mathop{\\mathrm{ess\\,inf}\\ }\\limits",0],
+      dual: "\\star",
+      vardual: "\\circledast",
+      distance: "\\mathfrak{dist}",
+      norme: ["\\left\\| #1 \\\\right\\|", 1],
+      normetrois: ["\\left|\\left\\| #1 \\\\right\\|\\right|", 1],
+      adh: ["\\mathop{\\mathrm{adh}\\ }\\limits",0],
+      interieur: ["\\mathop{\\mathrm{int}\\ }\\limits",0],
+      frontiere: "\\partial",
+      image: ["\\mathop{\\mathrm{im}\\ }\\limits",0],
+      domaine: ["\\mathop{\\mathrm{dom}\\ }\\limits",0],
+      noyau: ["\\mathop{\\mathrm{ker}\\ }\\limits",0],
+      support: ["\\mathop{\\mathrm{supp}\\ }\\limits",0],
+      signe: ["\\mathop{\\mathrm{sign}\\ }\\limits",0],
+      abs: ["\\left| #1 \\\\right|", 1],
+      unsur: ["\\frac{1}{#1}", 1],
+      arrondisup: ["\\lceil #1 \\\\rceil", 1],
+      arrondiinf: ["\\lfloor #1 \\\\rfloor", 1],
+      conjugue: "conj",
+      conjaccent: ["\\overline{#1}", 1],
+      division: "division",
+      difference: "\\boldsymbol{\\Delta}",
+      differentielle: ["\\mathfrak{D}^{#1}_{#2}", 2],
+      OD: ["\\frac{d #1}{d #2}", 2],
+      OOD: ["\\frac{d^2 #1}{d #2^2}", 2],
+      NOD: ["\\frac{d^{#3} #1}{d #2^{#3}}", 3],
+      deriveepartielle: ["\\frac{\\partial #1}{\\partial #2}", 2],
+      PD: ["\\frac{\\partial #1}{\\partial #2}", 2],
+      dblederiveepartielle: ["\\frac{\\partial^2 #1}{\\partial #2 \\\\partial #2}", 2],
+      dfdxdy: ["\\frac{\\partial^2 #1}{\\partial #2 \\\\partial #3}", 3],
+      dfdxdx: ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2],
+      gradient: "\\mathbf{\\nabla}",
+      combilin: ["\\mathrm{span}\\{ #1 \\", 1],
+      trace: "tr",
+      proba: "\\mathbb{P}",
+      probaof: ["\\mathbb{P}\\left[#1\\right]", 1],
+      esperof: ["\\mathbb{E}\\left[#1\\right]", 1],
+      cov: ["\\mathrm{cov} ( #1 , #2 )", 2],
+      var: ["\\mathrm{var} ( #1 )", 1],
+      rand: "\\mathrm{rand}",
+      variation: ["\\left\\langle #1 \\\\right\\rangle", 1],
+      composante: ["\\mathop{\\mathrm{comp}\\ }\\limits",0],
+      bloc: ["\\mathop{\\mathrm{bloc}\\ }\\limits",0],
+      ligne: ["\\mathop{\\mathrm{ligne}\\ }\\limits",0],
+      colonne: ["\\mathop{\\mathrm{colonne}\\ }\\limits",0],
+      diagonale: ["\\mathop{\\mathrm{diag}\\ }\\limits",0],
+      matelementaire: "\\mathrm{Elem}",
+      matpermutation: ["\\mathop{\\mathrm{permut}\\ }\\limits",0],
+      matunitaire: "\\mathrm{Unitaire}",
+      gaussjordan: "\\mathrm{GaussJordan}",
+      householder: "\\mathrm{Householder}",
+      rang: "rang",
+      schur: "\\mathrm{Schur}",
+      singuliere: "\\mathrm{DVS}",
+      convexe: "\\mathrm{Convexe}",
+      petito: ["o(#1)", 1],
+      grando: ["O(#1)", 1]
+    }
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <p>
 \(
@@ -425,16 +421,16 @@
 <p>
 \label{chap:solveur}
 </p>
-<div id="outline-container-orge785f89" class="outline-2">
-<h2 id="orge785f89"><span class="section-number-2">1.</span> Dépendances</h2>
+<div id="outline-container-org39e1c8b" class="outline-2">
+<h2 id="org39e1c8b"><span class="section-number-2">1.</span> Dépendances</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:matrice} : Les matrices</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgb8462b9" class="outline-2">
-<h2 id="orgb8462b9"><span class="section-number-2">2.</span> Méthodes itératives</h2>
+<div id="outline-container-org168f491" class="outline-2">
+<h2 id="org168f491"><span class="section-number-2">2.</span> Méthodes itératives</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Il s'agit de résoudre itérativement (et approximativement) en \(x\) un système linéaire \(A \cdot x = b\), où \(A\) est une matrice et \(b\) un vecteur. L'itération générique s'écrit :
@@ -449,8 +445,8 @@ et on espère que la suite des \(x_k \in \setR^n\) converge vers la solution. On
 </p>
 </div>
 </div>
-<div id="outline-container-org69ec6c7" class="outline-2">
-<h2 id="org69ec6c7"><span class="section-number-2">3.</span> Résolution par minimisation</h2>
+<div id="outline-container-org43dc83d" class="outline-2">
+<h2 id="org43dc83d"><span class="section-number-2">3.</span> Résolution par minimisation</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Soit une matrice \(H\) de taille \((n,n)\) hermitienne (\(H = H^\dual\)) et définie positive :
@@ -504,8 +500,8 @@ On a donc des itérations \(k\) de la forme :
 pour un \(\alpha_k \in \setR\) bien choisi. On peut aussi utiliser un autre algorithme, comme les gradients conjugués par exemple.
 </p>
 </div>
-<div id="outline-container-org51fd917" class="outline-3">
-<h3 id="org51fd917"><span class="section-number-3">3.1.</span> Résidu</h3>
+<div id="outline-container-org7c1f11c" class="outline-3">
+<h3 id="org7c1f11c"><span class="section-number-3">3.1.</span> Résidu</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 On remarque que la direction de la descente est donné par le résidu :
@@ -516,16 +512,16 @@ On remarque que la direction de la descente est donné par le résidu :
 </p>
 </div>
 </div>
-<div id="outline-container-orge3876b3" class="outline-3">
-<h3 id="orge3876b3"><span class="section-number-3">3.2.</span> Newton</h3>
+<div id="outline-container-org54aba64" class="outline-3">
+<h3 id="org54aba64"><span class="section-number-3">3.2.</span> Newton</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 On pourrait bien entendu résoudre par la méthode de Newton, mais cela reviendrait alors à inverser la matrice \(H\) directement, ce que l'on cherche précisément à éviter ici.
 </p>
 </div>
 </div>
-<div id="outline-container-org347c65b" class="outline-3">
-<h3 id="org347c65b"><span class="section-number-3">3.3.</span> Généralisation</h3>
+<div id="outline-container-org8d783fe" class="outline-3">
+<h3 id="org8d783fe"><span class="section-number-3">3.3.</span> Généralisation</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Soit la matrice \(A\) de taille \((N,n)\), où \(N \ge n\), et \(y \in \setR^N\). Considérons le système général :
@@ -598,8 +594,8 @@ que l'on peut de nouveau résoudre itérativement en utilisant par exemple la m�
 </div>
 </div>
 </div>
-<div id="outline-container-org7daa42e" class="outline-2">
-<h2 id="org7daa42e"><span class="section-number-2">4.</span> Espaces de Krylov</h2>
+<div id="outline-container-orgadfe30e" class="outline-2">
+<h2 id="orgadfe30e"><span class="section-number-2">4.</span> Espaces de Krylov</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Les espaces de Krylov sont des espaces de vecteurs engendrés par les puissances de la matrice \(A\) appliquées à un vecteur initial \(u\) :
@@ -622,8 +618,8 @@ pour certains \(\alpha_i \in \corps\). Il s'agit donc de polynômes matriciels a
 </p>
 </div>
 </div>
-<div id="outline-container-org012a893" class="outline-2">
-<h2 id="org012a893"><span class="section-number-2">5.</span> Méthode de projection</h2>
+<div id="outline-container-org4f626be" class="outline-2">
+<h2 id="org4f626be"><span class="section-number-2">5.</span> Méthode de projection</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Soit la matrice \(A\) de taille \((n,n)\), le vecteur \(b \in \setR^n\) et le système \(A \cdot x = b\) à résoudre en \(x \in \setR^n\). On choisit \(m \le n\) beaucoup plus petit que \(n\) et les vecteurs \((v_1,...,v_m)\) de \(\setR^n\). Nous allons tenter de minimiser l'erreur en \(x_{k + 1}\) produite par l'itération générique suivante :
@@ -712,8 +708,8 @@ Si la matrice \(W^\dual \cdot A \cdot V\) est inversible, on a :
 Comme \(V\) et \(W\) sont de taille \((n,m)\), la matrice \(W^\dual \cdot A \cdot V\) est de taille \((m,m)\), donc beaucoup plus petite que \(A\). Le système correspondant est donc beaucoup plus facile à résoudre.
 </p>
 </div>
-<div id="outline-container-org942aa83" class="outline-3">
-<h3 id="org942aa83"><span class="section-number-3">5.1.</span> Orthonormés</h3>
+<div id="outline-container-orga3bd10c" class="outline-3">
+<h3 id="orga3bd10c"><span class="section-number-3">5.1.</span> Orthonormés</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 Si On choisit \(V = W\) et si les vecteurs \(v_i = w_i\) sont $A$-orthonormés, on a simplement :
@@ -732,8 +728,8 @@ et :
 </p>
 </div>
 </div>
-<div id="outline-container-org04d0ed5" class="outline-3">
-<h3 id="org04d0ed5"><span class="section-number-3">5.2.</span> Krylov</h3>
+<div id="outline-container-org0f74755" class="outline-3">
+<h3 id="org0f74755"><span class="section-number-3">5.2.</span> Krylov</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 On peut par exemple choisir des vecteurs de base de \(\krylov_m(A,r_k)\) pour former les colonnes des matrices \(V\) et \(W\). On peut aussi utiliser aussi des vecteurs de base de \(\krylov_m(A^\dual,r_k)\).
@@ -741,8 +737,8 @@ On peut par exemple choisir des vecteurs de base de \(\krylov_m(A,r_k)\) pour fo
 </div>
 </div>
 </div>
-<div id="outline-container-org412f414" class="outline-2">
-<h2 id="org412f414"><span class="section-number-2">6.</span> Minimisation du résidu</h2>
+<div id="outline-container-org8000a6a" class="outline-2">
+<h2 id="org8000a6a"><span class="section-number-2">6.</span> Minimisation du résidu</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 On tente de minimiser la norme quadratique du résidu :
@@ -761,8 +757,8 @@ La condition d'annulation de la dérivée par rapport à \(y\) nous donne la val
 </p>
 </div>
 </div>
-<div id="outline-container-orgfad9d00" class="outline-2">
-<h2 id="orgfad9d00"><span class="section-number-2">7.</span> Gradients biconjugués</h2>
+<div id="outline-container-orgc30b666" class="outline-2">
+<h2 id="orgc30b666"><span class="section-number-2">7.</span> Gradients biconjugués</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Soit la matrice \(A\) de taille \((n,n)\) et les vecteurs \(b,c \in \corps^n\). Les gradients biconjugués permettent d'obtenir simultanément les deux solutions \(x,y \in \corps^n\) telles que :
@@ -877,8 +873,8 @@ Les conditions d'orthogonalité nous donnent donc les valeurs des coefficients
 \delta_k = - \frac{ p_k^\dual \cdot A^\dual \cdot s_{k + 1} }{p_k^\dual \cdot A^\dual \cdot  q_k}
 \end{align}
 </div>
-<div id="outline-container-org73c614b" class="outline-3">
-<h3 id="org73c614b"><span class="section-number-3">7.1.</span> Simplification des coefficients</h3>
+<div id="outline-container-orgfde3bc9" class="outline-3">
+<h3 id="orgfde3bc9"><span class="section-number-3">7.1.</span> Simplification des coefficients</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 Il existe un procédé plus rapide pour évaluer les coefficients. En prenant le dual des relations entre les résidus successifs, on obtient \((s_k - s_{k + 1})^\dual = \conjaccent{\gamma_k} \cdot q_k^\dual \cdot A\). Donc :
@@ -920,7 +916,7 @@ D'un autre coté, \((r_k - r_{k + 1})^\dual = \conjaccent{\alpha_k} \cdot p_k^\d
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-11-20 jeu 16:29</p>
+<p class="date">Created: 2025-11-21 ven 16:38</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

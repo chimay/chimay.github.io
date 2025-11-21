@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-11-20 jeu 16:29 -->
+<!-- 2025-11-21 ven 16:38 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Résolution d’équations</title>
@@ -241,172 +241,168 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org4114fbd">1. Introduction</a></li>
-<li><a href="#orgf0ec28a">2. Newton-Raphson</a></li>
-<li><a href="#org0459075">3. Banach</a></li>
-<li><a href="#org786766b">4. Méthode hybride d'Aitken</a></li>
+<li><a href="#org256122d">1. Introduction</a></li>
+<li><a href="#org35df08c">2. Newton-Raphson</a></li>
+<li><a href="#orgce197ba">3. Banach</a></li>
+<li><a href="#orgdf7940d">4. Méthode hybride d'Aitken</a></li>
 </ul>
 </div>
 </div>
 
-<p>
-\(
-\newcommand{\parentheses}[1]{\left(#1\right)}
-\newcommand{\crochets}[1]{\left[#1\right]}
-\newcommand{\accolades}[1]{\left\{#1\right\}}
-\newcommand{\ensemble}[1]{\left\{#1\right\}}
-\DeclareMathOperator*{\cardinal}{\mathrm{card}}
-\newcommand{\identite}{\mathrm{Id}}
-\newcommand{\indicatrice}{\boldsymbol{\delta}}
-\newcommand{\dirac}{\delta}
-\newcommand{\moinsun}{{-1}}
-\newcommand{\inverse}{\ddagger}
-\newcommand{\pinverse}{\dagger}
-\newcommand{\topologie}{\mathfrak{T}}
-\newcommand{\ferme}{\mathfrak{F}}
-\newcommand{\img}{\mathbf{i}}
-\newcommand{\binome}[2]{
-\left\{ \begin{array}{c}
-#1 \\
-#2 \\
-\end{array} \right\}
-}
-\newcommand{\canonique}{\mathfrak{c}}
-\newcommand{\tenseuridentite}{\boldsymbol{\mathcal{I}}}
-\newcommand{\permutation}{\boldsymbol{\epsilon}}
-\newcommand{\matriceZero}{\mathfrak{0}}
-\newcommand{\matriceUn}{\mathfrak{1}}
-\newcommand{\christoffel}[2]{
-\left\{ \begin{array}{c}
-#1 \\
-#2 \\
-\end{array} \right\}
-}
-\newcommand{\lagrangien}{\mathfrak{L}}
-\newcommand{\sousens}{\mathfrak{P}}
-\newcommand{\partition}{\mathrm{Partition}}
-\newcommand{\tribu}{\mathrm{Tribu}}
-\newcommand{\topologies}{\mathrm{Topo}}
-\newcommand{\setB}{\mathbb{B}}
-\newcommand{\setN}{\mathbb{N}}
-\newcommand{\setZ}{\mathbb{Z}}
-\newcommand{\setQ}{\mathbb{Q}}
-\newcommand{\setR}{\mathbb{R}}
-\newcommand{\setC}{\mathbb{C}}
-\newcommand{\corps}{\mathbb{K}}
-\newcommand{\boule}{\mathfrak{B}}
-\newcommand{\intervalleouvert}[2]{\left] #1 , #2 \right[}
-\newcommand{\intervallesemiouvertgauche}[2]{ \left] #1 , #2 \right]}
-\newcommand{\intervallesemiouvertdroite}[2]{\left[ #1 , #2 \right[ }
-\newcommand{\fonction}{\mathbb{F}}
-\newcommand{\bijection}{\mathrm{Bij}}
-\newcommand{\polynome}{\mathrm{Poly}}
-\newcommand{\lineaire}{\mathrm{Lin}}
-\newcommand{\continue}{\mathrm{Cont}}
-\newcommand{\homeomorphisme}{\mathrm{Hom}}
-\newcommand{\etagee}{\mathrm{Etagee}}
-\newcommand{\lebesgue}{\mathrm{Leb}}
-\newcommand{\lipschitz}{\mathrm{Lip}}
-\newcommand{\suitek}{\mathrm{Suite}}
-\newcommand{\matrice}{\mathbb{M}}
-\newcommand{\krylov}{\mathrm{Krylov}}
-\newcommand{\tenseur}{\mathbb{T}}
-\newcommand{\essentiel}{\mathfrak{E}}
-\newcommand{\relation}{\mathrm{Rel}}
-\DeclareMathOperator*{\strictinferieur}{\ < \ }
-\DeclareMathOperator*{\strictsuperieur}{\ > \ }
-\DeclareMathOperator*{\ensinferieur}{\eqslantless}
-\DeclareMathOperator*{\enssuperieur}{\eqslantgtr}
-\DeclareMathOperator*{\esssuperieur}{\gtrsim}
-\DeclareMathOperator*{\essinferieur}{\lesssim}
-\newcommand{\essegal}{\eqsim}
-\newcommand{\union}{\ \cup \ }
-\newcommand{\intersection}{\ \cap \ }
-\newcommand{\opera}{\divideontimes}
-\newcommand{\autreaddition}{\boxplus}
-\newcommand{\autremultiplication}{\circledast}
-\newcommand{\commutateur}[2]{\left[ #1 , #2 \right]}
-\newcommand{\convolution}{\circledcirc}
-\newcommand{\correlation}{\ \natural \ }
-\newcommand{\diventiere}{\div}
-\newcommand{\modulo}{\bmod}
-\DeclareMathOperator*{\pgcd}{pgcd}
-\DeclareMathOperator*{\ppcm}{ppcm}
-\newcommand{\produitscalaire}[2]{\left\langle #1 \vert #2 \right\rangle}
-\newcommand{\scalaire}[2]{\left\langle #1 \| #2 \right\rangle}
-\newcommand{\braket}[3]{\left\langle #1 \vert #2 \vert #3 \right\rangle}
-\newcommand{\orthogonal}{\bot}
-\newcommand{\forme}[2]{\left\langle #1 , #2 \right\rangle}
-\newcommand{\biforme}[3]{\left\langle #1 , #2 , #3 \right\rangle}
-\newcommand{\contraction}[3]{\left\langle #1 \odot #3 \right\rangle_{#2}}
-\newcommand{\dblecont}[5]{\left\langle #1 \vert #3 \vert #5 \right\rangle_{#2,#4}}
-\DeclareMathOperator*{\major}{major}
-\DeclareMathOperator*{\minor}{minor}
-\DeclareMathOperator*{\maxim}{maxim}
-\DeclareMathOperator*{\minim}{minim}
-\DeclareMathOperator*{\argument}{arg}
-\DeclareMathOperator*{\argmin}{arg\ min}
-\DeclareMathOperator*{\argmax}{arg\ max}
-\DeclareMathOperator*{\supessentiel}{ess\ sup}
-\DeclareMathOperator*{\infessentiel}{ess\ inf}
-\newcommand{\dual}{\star}
-\newcommand{\vardual}{\circledast}
-\newcommand{\distance}{\mathfrak{dist}}
-\newcommand{\norme}[1]{\left\| #1 \right\|}
-\newcommand{\normetrois}[1]{\left|\left\| #1 \right\|\right|}
-\DeclareMathOperator*{\adh}{adh}
-\DeclareMathOperator*{\interieur}{int}
-\newcommand{\frontiere}{\partial}
-\DeclareMathOperator*{\image}{im}
-\DeclareMathOperator*{\domaine}{dom}
-\DeclareMathOperator*{\noyau}{ker}
-\DeclareMathOperator*{\support}{supp}
-\DeclareMathOperator*{\signe}{sign}
-\newcommand{\abs}[1]{\left| #1 \right|}
-\newcommand{\unsur}[1]{\frac{1}{#1}}
-\newcommand{\arrondisup}[1]{\lceil #1 \rceil}
-\newcommand{\arrondiinf}[1]{\lfloor #1 \rfloor}
-\DeclareMathOperator*{\conjugue}{conj}
-\newcommand{\conjaccent}[1]{\overline{#1}}
-\DeclareMathOperator*{\division}{division}
-\newcommand{\difference}{\boldsymbol{\Delta}}
-\newcommand{\differentielle}[2]{\mathfrak{D}^{#1}_{#2}}
-\newcommand{\OD}[2]{\frac{d #1}{d #2}}
-\newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
-\newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
-\newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
-\newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
-\newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
-\newcommand{\gradient}{\mathbf{\nabla}}
-\newcommand{\combilin}[1]{\mathrm{span}\{ #1 \}}
-\DeclareMathOperator*{\trace}{tr}
-\newcommand{\proba}{\mathbb{P}}
-\newcommand{\probaof}[1]{\mathbb{P}\left[#1\right]}
-\newcommand{\esperof}[1]{\mathbb{E}\left[#1\right]}
-\newcommand{\cov}[2]{\mathrm{cov} \left( #1 , #2 \right) }
-\newcommand{\var}[1]{\mathrm{var} \left( #1 \right) }
-\newcommand{\rand}{\mathrm{rand}}
-\newcommand{\variation}[1]{\left\langle #1 \right\rangle}
-\DeclareMathOperator*{\composante}{comp}
-\DeclareMathOperator*{\bloc}{bloc}
-\DeclareMathOperator*{\ligne}{ligne}
-\DeclareMathOperator*{\colonne}{colonne}
-\DeclareMathOperator*{\diagonale}{diag}
-\newcommand{\matelementaire}{\mathrm{Elem}}
-\DeclareMathOperator*{\matpermutation}{permut}
-\newcommand{\matunitaire}{\mathrm{Unitaire}}
-\newcommand{\gaussjordan}{\mathrm{GaussJordan}}
-\newcommand{\householder}{\mathrm{Householder}}
-\DeclareMathOperator*{\rang}{rang}
-\newcommand{\schur}{\mathrm{Schur}}
-\newcommand{\singuliere}{\mathrm{DVS}}
-\newcommand{\convexe}{\mathrm{Convexe}}
-\newcommand{\petito}[1]{o\left(#1\right)}
-\newcommand{\grando}[1]{O\left(#1\right)}
-\)
-</p>
+<script>
+MathJax = {
+  tex: {
+    packages: {'[+]': ['base','ams','braket']},
+    macros: {
+      parentheses: ["\\left(#1\\right)", 1],
+      crochets: ["\\left[#1\\right]", 1],
+      accolades: ["\\left\\{#1\\right\\}", 1],
+      ensemble: ["\\left\\{#1\\right\\}", 1],
+      cardinal: ["\\mathop{\\mathrm{card}\\ }\\limits",0],
+      identite: "\\mathrm{Id}",
+      indicatrice: "\\boldsymbol{\\delta}",
+      dirac: "\\delta",
+      moinsun: "-1",
+      inverse: "\\ddagger",
+      pinverse: "\\dagger",
+      topologie: "\\mathfrak{T}",
+      ferme: "\\mathfrak{F}",
+      img: "\\mathbf{i}",
+      binome: ["\\left\\{ \\\\begin{array}{c} #1 \\\\ #2 \\\\ \\\\end{array} \\\\right\\}", 2],
+      canonique: "\\mathfrak{c}",
+      tenseuridentite: "\\boldsymbol{\\mathcal{I}}",
+      permutation: "\\boldsymbol{\\epsilon}",
+      matriceZero: "\\mathfrak{0}",
+      matriceUn: "\\mathfrak{1}",
+      christoffel: ["\\left\\{ \\\\begin{array}{c} #1 \\\\ #2 \\\\ \\\\end{array} \\\\right\\}", 2],
+      lagrangien: "\\mathfrak{L}",
+      sousens: "\\mathfrak{P}",
+      partition: "\\mathrm{Partition}",
+      tribu: "\\mathrm{Tribu}",
+      topologies: "\\mathrm{Topo}",
+      setB: "\\mathbb{B}",
+      setN: "\\mathbb{N}",
+      setZ: "\\mathbb{Z}",
+      setQ: "\\mathbb{Q}",
+      setR: "\\mathbb{R}",
+      setC: "\\mathbb{C}",
+      corps: "\\mathbb{K}",
+      boule: "\\mathfrak{B}",
+      intervalleouvert: ["\\left] #1 , #2 \\\\right[", 2],
+      intervallesemiouvertgauche: ["\\left] #1 , #2 \\\\right]", 2],
+      intervallesemiouvertdroite: ["\\left[ #1 , #2 \\\\right[", 2],
+      fonction: "\\mathbb{F}",
+      bijection: "\\mathrm{Bij}",
+      polynome: "\\mathrm{Poly}",
+      lineaire: "\\mathrm{Lin}",
+      continue: "\\mathrm{Cont}",
+      homeomorphisme: "\\mathrm{Hom}",
+      etagee: "\\mathrm{Etagee}",
+      lebesgue: "\\mathrm{Leb}",
+      lipschitz: "\\mathrm{Lip}",
+      suitek: "\\mathrm{Suite}",
+      matrice: "\\mathbb{M}",
+      krylov: "\\mathrm{Krylov}",
+      tenseur: "\\mathbb{T}",
+      essentiel: "\\mathfrak{E}",
+      relation: "\\mathrm{Rel}",
+      strictinferieur: "<",
+      strictsuperieur: ">",
+      ensinferieur: "\\eqslantless",
+      enssuperieur: "\\eqslantgtr",
+      esssuperieur: "\\gtrsim",
+      essinferieur: "\\lesssim",
+      essegal: "\\eqsim",
+      union: "\\cup",
+      intersection: "\\cap",
+      opera: "\\divideontimes",
+      autreaddition: "\\boxplus",
+      autremultiplication: "\\circledast",
+      commutateur: ["\\left[ #1 , #2 \\\\right]", 2],
+      convolution: "\\circledcirc",
+      correlation: "\\natural",
+      diventiere: "\\div",
+      modulo: "\\bmod",
+      pgcd: ["\\mathop{\\mathrm{pgcd}\\ }\\limits",0],
+      ppcm: ["\\mathop{\\mathrm{ppcm}\\ }\\limits",0],
+      produitscalaire: ["\\left\\langle #1 \\\\vert #2 \\\\right\\rangle", 2],
+      scalaire: ["\\left\\langle #1 \\| #2 \\\\right\\rangle", 2],
+      braket: ["\\left\\langle #1 \\\\vert #2 \\\\vert #3 \\\\right\\rangle", 3],
+      orthogonal: "\\bot",
+      forme: ["\\left\\langle #1 , #2 \\\\right\\rangle", 2],
+      biforme: ["\\left\\langle #1 , #2 , #3 \\\\right\\rangle", 3],
+      contraction: ["\\left\\langle #1 \\\\odot #3 \\\\right\\rangle_{#2}", 3],
+      dblecont: ["\\left\\langle #1 \\\\vert #3 \\\\vert #5 \\\\right\\rangle_{#2,#4}", 5],
+      major: ["\\mathop{\\mathrm{major}\\ }\\limits",0],
+      minor: ["\\mathop{\\mathrm{minor}\\ }\\limits",0],
+      maxim: ["\\mathop{\\mathrm{maxim}\\ }\\limits",0],
+      minim: ["\\mathop{\\mathrm{minim}\\ }\\limits",0],
+      argument: ["\\mathop{\\mathrm{arg}\\ }\\limits",0],
+      argmin: ["\\mathop{\\mathrm{arg\\,min}\\ }\\limits",0],
+      argmax: ["\\mathop{\\mathrm{arg\\,max}\\ }\\limits",0],
+      supessentiel: ["\\mathop{\\mathrm{ess\\,sup}\\ }\\limits",0],
+      infessentiel: ["\\mathop{\\mathrm{ess\\,inf}\\ }\\limits",0],
+      dual: "\\star",
+      vardual: "\\circledast",
+      distance: "\\mathfrak{dist}",
+      norme: ["\\left\\| #1 \\\\right\\|", 1],
+      normetrois: ["\\left|\\left\\| #1 \\\\right\\|\\right|", 1],
+      adh: ["\\mathop{\\mathrm{adh}\\ }\\limits",0],
+      interieur: ["\\mathop{\\mathrm{int}\\ }\\limits",0],
+      frontiere: "\\partial",
+      image: ["\\mathop{\\mathrm{im}\\ }\\limits",0],
+      domaine: ["\\mathop{\\mathrm{dom}\\ }\\limits",0],
+      noyau: ["\\mathop{\\mathrm{ker}\\ }\\limits",0],
+      support: ["\\mathop{\\mathrm{supp}\\ }\\limits",0],
+      signe: ["\\mathop{\\mathrm{sign}\\ }\\limits",0],
+      abs: ["\\left| #1 \\\\right|", 1],
+      unsur: ["\\frac{1}{#1}", 1],
+      arrondisup: ["\\lceil #1 \\\\rceil", 1],
+      arrondiinf: ["\\lfloor #1 \\\\rfloor", 1],
+      conjugue: "conj",
+      conjaccent: ["\\overline{#1}", 1],
+      division: "division",
+      difference: "\\boldsymbol{\\Delta}",
+      differentielle: ["\\mathfrak{D}^{#1}_{#2}", 2],
+      OD: ["\\frac{d #1}{d #2}", 2],
+      OOD: ["\\frac{d^2 #1}{d #2^2}", 2],
+      NOD: ["\\frac{d^{#3} #1}{d #2^{#3}}", 3],
+      deriveepartielle: ["\\frac{\\partial #1}{\\partial #2}", 2],
+      PD: ["\\frac{\\partial #1}{\\partial #2}", 2],
+      dblederiveepartielle: ["\\frac{\\partial^2 #1}{\\partial #2 \\\\partial #2}", 2],
+      dfdxdy: ["\\frac{\\partial^2 #1}{\\partial #2 \\\\partial #3}", 3],
+      dfdxdx: ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2],
+      gradient: "\\mathbf{\\nabla}",
+      combilin: ["\\mathrm{span}\\{ #1 \\", 1],
+      trace: "tr",
+      proba: "\\mathbb{P}",
+      probaof: ["\\mathbb{P}\\left[#1\\right]", 1],
+      esperof: ["\\mathbb{E}\\left[#1\\right]", 1],
+      cov: ["\\mathrm{cov} ( #1 , #2 )", 2],
+      var: ["\\mathrm{var} ( #1 )", 1],
+      rand: "\\mathrm{rand}",
+      variation: ["\\left\\langle #1 \\\\right\\rangle", 1],
+      composante: ["\\mathop{\\mathrm{comp}\\ }\\limits",0],
+      bloc: ["\\mathop{\\mathrm{bloc}\\ }\\limits",0],
+      ligne: ["\\mathop{\\mathrm{ligne}\\ }\\limits",0],
+      colonne: ["\\mathop{\\mathrm{colonne}\\ }\\limits",0],
+      diagonale: ["\\mathop{\\mathrm{diag}\\ }\\limits",0],
+      matelementaire: "\\mathrm{Elem}",
+      matpermutation: ["\\mathop{\\mathrm{permut}\\ }\\limits",0],
+      matunitaire: "\\mathrm{Unitaire}",
+      gaussjordan: "\\mathrm{GaussJordan}",
+      householder: "\\mathrm{Householder}",
+      rang: "rang",
+      schur: "\\mathrm{Schur}",
+      singuliere: "\\mathrm{DVS}",
+      convexe: "\\mathrm{Convexe}",
+      petito: ["o(#1)", 1],
+      grando: ["O(#1)", 1]
+    }
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <p>
 \(
@@ -422,8 +418,8 @@
 <p>
 \label{chap:resolu}
 </p>
-<div id="outline-container-org4114fbd" class="outline-2">
-<h2 id="org4114fbd"><span class="section-number-2">1.</span> Introduction</h2>
+<div id="outline-container-org256122d" class="outline-2">
+<h2 id="org256122d"><span class="section-number-2">1.</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Soit une fonction \(F : \setR^n \mapsto \setR^n\) et l'espace des solutions :
@@ -454,8 +450,8 @@ A moins que l'on ait déjà une vague idée d'une région \(X \subseteq \setR^n\
 </p>
 </div>
 </div>
-<div id="outline-container-orgf0ec28a" class="outline-2">
-<h2 id="orgf0ec28a"><span class="section-number-2">2.</span> Newton-Raphson</h2>
+<div id="outline-container-org35df08c" class="outline-2">
+<h2 id="org35df08c"><span class="section-number-2">2.</span> Newton-Raphson</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 On demande à chaque étape que le développement du premier ordre autour de \(x_k\) s'annule en \(x_{k + 1} = x_k + \Delta_k\). On impose donc :
@@ -490,8 +486,8 @@ et :
 </p>
 </div>
 </div>
-<div id="outline-container-org0459075" class="outline-2">
-<h2 id="org0459075"><span class="section-number-2">3.</span> Banach</h2>
+<div id="outline-container-orgce197ba" class="outline-2">
+<h2 id="orgce197ba"><span class="section-number-2">3.</span> Banach</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 On voit que la condition \(F(s) = 0\) est équivalente à \(F(s) + s = s\). On définit donc la fonction \(f : \setR^n \to \setR^n\) par :
@@ -519,8 +515,8 @@ Pour \(K\) assez grand, on a alors :
 </p>
 </div>
 </div>
-<div id="outline-container-org786766b" class="outline-2">
-<h2 id="org786766b"><span class="section-number-2">4.</span> Méthode hybride d'Aitken</h2>
+<div id="outline-container-orgdf7940d" class="outline-2">
+<h2 id="orgdf7940d"><span class="section-number-2">4.</span> Méthode hybride d'Aitken</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Supposons à présent que \(F,f : \setR \to \setR\) avec \(f(x) = F(x) + x\) pour tout \(x \in \setR\). L'idée est d'utiliser simultanément les deux approches \(F(s) = 0\) et \(f(s) = F(s) + s = s\). Soit :
@@ -609,7 +605,7 @@ On espère que la suite des \(x_k\) ainsi définie converge plus vite vers la so
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-11-20 jeu 16:29</p>
+<p class="date">Created: 2025-11-21 ven 16:38</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

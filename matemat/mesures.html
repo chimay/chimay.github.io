@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-11-20 jeu 16:29 -->
+<!-- 2025-11-21 ven 16:37 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Mesures</title>
@@ -241,177 +241,173 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org674e5e1">1. Dépendances</a></li>
-<li><a href="#org2cd0f13">2. Introduction</a></li>
-<li><a href="#org1b69a71">3. Lebesgue</a></li>
-<li><a href="#org8f23696">4. Mesure de Stieltjes</a></li>
-<li><a href="#org7a16f20">5. Dirac</a></li>
-<li><a href="#orgc7d47a8">6. Mesure produit</a></li>
-<li><a href="#org059a23b">7. Fonction mesurable</a></li>
-<li><a href="#org308e4ac">8. Opposé d'une fonction mesurable</a></li>
-<li><a href="#org4767d42">9. Fonctions extrema</a></li>
+<li><a href="#org8616374">1. Dépendances</a></li>
+<li><a href="#org464099d">2. Introduction</a></li>
+<li><a href="#orgbe72a29">3. Lebesgue</a></li>
+<li><a href="#orge2994c8">4. Mesure de Stieltjes</a></li>
+<li><a href="#org99bd7df">5. Dirac</a></li>
+<li><a href="#org4ec382e">6. Mesure produit</a></li>
+<li><a href="#org7310372">7. Fonction mesurable</a></li>
+<li><a href="#org260c75a">8. Opposé d'une fonction mesurable</a></li>
+<li><a href="#org65d4c85">9. Fonctions extrema</a></li>
 </ul>
 </div>
 </div>
 
-<p>
-\(
-\newcommand{\parentheses}[1]{\left(#1\right)}
-\newcommand{\crochets}[1]{\left[#1\right]}
-\newcommand{\accolades}[1]{\left\{#1\right\}}
-\newcommand{\ensemble}[1]{\left\{#1\right\}}
-\DeclareMathOperator*{\cardinal}{\mathrm{card}}
-\newcommand{\identite}{\mathrm{Id}}
-\newcommand{\indicatrice}{\boldsymbol{\delta}}
-\newcommand{\dirac}{\delta}
-\newcommand{\moinsun}{{-1}}
-\newcommand{\inverse}{\ddagger}
-\newcommand{\pinverse}{\dagger}
-\newcommand{\topologie}{\mathfrak{T}}
-\newcommand{\ferme}{\mathfrak{F}}
-\newcommand{\img}{\mathbf{i}}
-\newcommand{\binome}[2]{
-\left\{ \begin{array}{c}
-#1 \\
-#2 \\
-\end{array} \right\}
-}
-\newcommand{\canonique}{\mathfrak{c}}
-\newcommand{\tenseuridentite}{\boldsymbol{\mathcal{I}}}
-\newcommand{\permutation}{\boldsymbol{\epsilon}}
-\newcommand{\matriceZero}{\mathfrak{0}}
-\newcommand{\matriceUn}{\mathfrak{1}}
-\newcommand{\christoffel}[2]{
-\left\{ \begin{array}{c}
-#1 \\
-#2 \\
-\end{array} \right\}
-}
-\newcommand{\lagrangien}{\mathfrak{L}}
-\newcommand{\sousens}{\mathfrak{P}}
-\newcommand{\partition}{\mathrm{Partition}}
-\newcommand{\tribu}{\mathrm{Tribu}}
-\newcommand{\topologies}{\mathrm{Topo}}
-\newcommand{\setB}{\mathbb{B}}
-\newcommand{\setN}{\mathbb{N}}
-\newcommand{\setZ}{\mathbb{Z}}
-\newcommand{\setQ}{\mathbb{Q}}
-\newcommand{\setR}{\mathbb{R}}
-\newcommand{\setC}{\mathbb{C}}
-\newcommand{\corps}{\mathbb{K}}
-\newcommand{\boule}{\mathfrak{B}}
-\newcommand{\intervalleouvert}[2]{\left] #1 , #2 \right[}
-\newcommand{\intervallesemiouvertgauche}[2]{ \left] #1 , #2 \right]}
-\newcommand{\intervallesemiouvertdroite}[2]{\left[ #1 , #2 \right[ }
-\newcommand{\fonction}{\mathbb{F}}
-\newcommand{\bijection}{\mathrm{Bij}}
-\newcommand{\polynome}{\mathrm{Poly}}
-\newcommand{\lineaire}{\mathrm{Lin}}
-\newcommand{\continue}{\mathrm{Cont}}
-\newcommand{\homeomorphisme}{\mathrm{Hom}}
-\newcommand{\etagee}{\mathrm{Etagee}}
-\newcommand{\lebesgue}{\mathrm{Leb}}
-\newcommand{\lipschitz}{\mathrm{Lip}}
-\newcommand{\suitek}{\mathrm{Suite}}
-\newcommand{\matrice}{\mathbb{M}}
-\newcommand{\krylov}{\mathrm{Krylov}}
-\newcommand{\tenseur}{\mathbb{T}}
-\newcommand{\essentiel}{\mathfrak{E}}
-\newcommand{\relation}{\mathrm{Rel}}
-\DeclareMathOperator*{\strictinferieur}{\ < \ }
-\DeclareMathOperator*{\strictsuperieur}{\ > \ }
-\DeclareMathOperator*{\ensinferieur}{\eqslantless}
-\DeclareMathOperator*{\enssuperieur}{\eqslantgtr}
-\DeclareMathOperator*{\esssuperieur}{\gtrsim}
-\DeclareMathOperator*{\essinferieur}{\lesssim}
-\newcommand{\essegal}{\eqsim}
-\newcommand{\union}{\ \cup \ }
-\newcommand{\intersection}{\ \cap \ }
-\newcommand{\opera}{\divideontimes}
-\newcommand{\autreaddition}{\boxplus}
-\newcommand{\autremultiplication}{\circledast}
-\newcommand{\commutateur}[2]{\left[ #1 , #2 \right]}
-\newcommand{\convolution}{\circledcirc}
-\newcommand{\correlation}{\ \natural \ }
-\newcommand{\diventiere}{\div}
-\newcommand{\modulo}{\bmod}
-\DeclareMathOperator*{\pgcd}{pgcd}
-\DeclareMathOperator*{\ppcm}{ppcm}
-\newcommand{\produitscalaire}[2]{\left\langle #1 \vert #2 \right\rangle}
-\newcommand{\scalaire}[2]{\left\langle #1 \| #2 \right\rangle}
-\newcommand{\braket}[3]{\left\langle #1 \vert #2 \vert #3 \right\rangle}
-\newcommand{\orthogonal}{\bot}
-\newcommand{\forme}[2]{\left\langle #1 , #2 \right\rangle}
-\newcommand{\biforme}[3]{\left\langle #1 , #2 , #3 \right\rangle}
-\newcommand{\contraction}[3]{\left\langle #1 \odot #3 \right\rangle_{#2}}
-\newcommand{\dblecont}[5]{\left\langle #1 \vert #3 \vert #5 \right\rangle_{#2,#4}}
-\DeclareMathOperator*{\major}{major}
-\DeclareMathOperator*{\minor}{minor}
-\DeclareMathOperator*{\maxim}{maxim}
-\DeclareMathOperator*{\minim}{minim}
-\DeclareMathOperator*{\argument}{arg}
-\DeclareMathOperator*{\argmin}{arg\ min}
-\DeclareMathOperator*{\argmax}{arg\ max}
-\DeclareMathOperator*{\supessentiel}{ess\ sup}
-\DeclareMathOperator*{\infessentiel}{ess\ inf}
-\newcommand{\dual}{\star}
-\newcommand{\vardual}{\circledast}
-\newcommand{\distance}{\mathfrak{dist}}
-\newcommand{\norme}[1]{\left\| #1 \right\|}
-\newcommand{\normetrois}[1]{\left|\left\| #1 \right\|\right|}
-\DeclareMathOperator*{\adh}{adh}
-\DeclareMathOperator*{\interieur}{int}
-\newcommand{\frontiere}{\partial}
-\DeclareMathOperator*{\image}{im}
-\DeclareMathOperator*{\domaine}{dom}
-\DeclareMathOperator*{\noyau}{ker}
-\DeclareMathOperator*{\support}{supp}
-\DeclareMathOperator*{\signe}{sign}
-\newcommand{\abs}[1]{\left| #1 \right|}
-\newcommand{\unsur}[1]{\frac{1}{#1}}
-\newcommand{\arrondisup}[1]{\lceil #1 \rceil}
-\newcommand{\arrondiinf}[1]{\lfloor #1 \rfloor}
-\DeclareMathOperator*{\conjugue}{conj}
-\newcommand{\conjaccent}[1]{\overline{#1}}
-\DeclareMathOperator*{\division}{division}
-\newcommand{\difference}{\boldsymbol{\Delta}}
-\newcommand{\differentielle}[2]{\mathfrak{D}^{#1}_{#2}}
-\newcommand{\OD}[2]{\frac{d #1}{d #2}}
-\newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
-\newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
-\newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
-\newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
-\newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
-\newcommand{\gradient}{\mathbf{\nabla}}
-\newcommand{\combilin}[1]{\mathrm{span}\{ #1 \}}
-\DeclareMathOperator*{\trace}{tr}
-\newcommand{\proba}{\mathbb{P}}
-\newcommand{\probaof}[1]{\mathbb{P}\left[#1\right]}
-\newcommand{\esperof}[1]{\mathbb{E}\left[#1\right]}
-\newcommand{\cov}[2]{\mathrm{cov} \left( #1 , #2 \right) }
-\newcommand{\var}[1]{\mathrm{var} \left( #1 \right) }
-\newcommand{\rand}{\mathrm{rand}}
-\newcommand{\variation}[1]{\left\langle #1 \right\rangle}
-\DeclareMathOperator*{\composante}{comp}
-\DeclareMathOperator*{\bloc}{bloc}
-\DeclareMathOperator*{\ligne}{ligne}
-\DeclareMathOperator*{\colonne}{colonne}
-\DeclareMathOperator*{\diagonale}{diag}
-\newcommand{\matelementaire}{\mathrm{Elem}}
-\DeclareMathOperator*{\matpermutation}{permut}
-\newcommand{\matunitaire}{\mathrm{Unitaire}}
-\newcommand{\gaussjordan}{\mathrm{GaussJordan}}
-\newcommand{\householder}{\mathrm{Householder}}
-\DeclareMathOperator*{\rang}{rang}
-\newcommand{\schur}{\mathrm{Schur}}
-\newcommand{\singuliere}{\mathrm{DVS}}
-\newcommand{\convexe}{\mathrm{Convexe}}
-\newcommand{\petito}[1]{o\left(#1\right)}
-\newcommand{\grando}[1]{O\left(#1\right)}
-\)
-</p>
+<script>
+MathJax = {
+  tex: {
+    packages: {'[+]': ['base','ams','braket']},
+    macros: {
+      parentheses: ["\\left(#1\\right)", 1],
+      crochets: ["\\left[#1\\right]", 1],
+      accolades: ["\\left\\{#1\\right\\}", 1],
+      ensemble: ["\\left\\{#1\\right\\}", 1],
+      cardinal: ["\\mathop{\\mathrm{card}\\ }\\limits",0],
+      identite: "\\mathrm{Id}",
+      indicatrice: "\\boldsymbol{\\delta}",
+      dirac: "\\delta",
+      moinsun: "-1",
+      inverse: "\\ddagger",
+      pinverse: "\\dagger",
+      topologie: "\\mathfrak{T}",
+      ferme: "\\mathfrak{F}",
+      img: "\\mathbf{i}",
+      binome: ["\\left\\{ \\\\begin{array}{c} #1 \\\\ #2 \\\\ \\\\end{array} \\\\right\\}", 2],
+      canonique: "\\mathfrak{c}",
+      tenseuridentite: "\\boldsymbol{\\mathcal{I}}",
+      permutation: "\\boldsymbol{\\epsilon}",
+      matriceZero: "\\mathfrak{0}",
+      matriceUn: "\\mathfrak{1}",
+      christoffel: ["\\left\\{ \\\\begin{array}{c} #1 \\\\ #2 \\\\ \\\\end{array} \\\\right\\}", 2],
+      lagrangien: "\\mathfrak{L}",
+      sousens: "\\mathfrak{P}",
+      partition: "\\mathrm{Partition}",
+      tribu: "\\mathrm{Tribu}",
+      topologies: "\\mathrm{Topo}",
+      setB: "\\mathbb{B}",
+      setN: "\\mathbb{N}",
+      setZ: "\\mathbb{Z}",
+      setQ: "\\mathbb{Q}",
+      setR: "\\mathbb{R}",
+      setC: "\\mathbb{C}",
+      corps: "\\mathbb{K}",
+      boule: "\\mathfrak{B}",
+      intervalleouvert: ["\\left] #1 , #2 \\\\right[", 2],
+      intervallesemiouvertgauche: ["\\left] #1 , #2 \\\\right]", 2],
+      intervallesemiouvertdroite: ["\\left[ #1 , #2 \\\\right[", 2],
+      fonction: "\\mathbb{F}",
+      bijection: "\\mathrm{Bij}",
+      polynome: "\\mathrm{Poly}",
+      lineaire: "\\mathrm{Lin}",
+      continue: "\\mathrm{Cont}",
+      homeomorphisme: "\\mathrm{Hom}",
+      etagee: "\\mathrm{Etagee}",
+      lebesgue: "\\mathrm{Leb}",
+      lipschitz: "\\mathrm{Lip}",
+      suitek: "\\mathrm{Suite}",
+      matrice: "\\mathbb{M}",
+      krylov: "\\mathrm{Krylov}",
+      tenseur: "\\mathbb{T}",
+      essentiel: "\\mathfrak{E}",
+      relation: "\\mathrm{Rel}",
+      strictinferieur: "<",
+      strictsuperieur: ">",
+      ensinferieur: "\\eqslantless",
+      enssuperieur: "\\eqslantgtr",
+      esssuperieur: "\\gtrsim",
+      essinferieur: "\\lesssim",
+      essegal: "\\eqsim",
+      union: "\\cup",
+      intersection: "\\cap",
+      opera: "\\divideontimes",
+      autreaddition: "\\boxplus",
+      autremultiplication: "\\circledast",
+      commutateur: ["\\left[ #1 , #2 \\\\right]", 2],
+      convolution: "\\circledcirc",
+      correlation: "\\natural",
+      diventiere: "\\div",
+      modulo: "\\bmod",
+      pgcd: ["\\mathop{\\mathrm{pgcd}\\ }\\limits",0],
+      ppcm: ["\\mathop{\\mathrm{ppcm}\\ }\\limits",0],
+      produitscalaire: ["\\left\\langle #1 \\\\vert #2 \\\\right\\rangle", 2],
+      scalaire: ["\\left\\langle #1 \\| #2 \\\\right\\rangle", 2],
+      braket: ["\\left\\langle #1 \\\\vert #2 \\\\vert #3 \\\\right\\rangle", 3],
+      orthogonal: "\\bot",
+      forme: ["\\left\\langle #1 , #2 \\\\right\\rangle", 2],
+      biforme: ["\\left\\langle #1 , #2 , #3 \\\\right\\rangle", 3],
+      contraction: ["\\left\\langle #1 \\\\odot #3 \\\\right\\rangle_{#2}", 3],
+      dblecont: ["\\left\\langle #1 \\\\vert #3 \\\\vert #5 \\\\right\\rangle_{#2,#4}", 5],
+      major: ["\\mathop{\\mathrm{major}\\ }\\limits",0],
+      minor: ["\\mathop{\\mathrm{minor}\\ }\\limits",0],
+      maxim: ["\\mathop{\\mathrm{maxim}\\ }\\limits",0],
+      minim: ["\\mathop{\\mathrm{minim}\\ }\\limits",0],
+      argument: ["\\mathop{\\mathrm{arg}\\ }\\limits",0],
+      argmin: ["\\mathop{\\mathrm{arg\\,min}\\ }\\limits",0],
+      argmax: ["\\mathop{\\mathrm{arg\\,max}\\ }\\limits",0],
+      supessentiel: ["\\mathop{\\mathrm{ess\\,sup}\\ }\\limits",0],
+      infessentiel: ["\\mathop{\\mathrm{ess\\,inf}\\ }\\limits",0],
+      dual: "\\star",
+      vardual: "\\circledast",
+      distance: "\\mathfrak{dist}",
+      norme: ["\\left\\| #1 \\\\right\\|", 1],
+      normetrois: ["\\left|\\left\\| #1 \\\\right\\|\\right|", 1],
+      adh: ["\\mathop{\\mathrm{adh}\\ }\\limits",0],
+      interieur: ["\\mathop{\\mathrm{int}\\ }\\limits",0],
+      frontiere: "\\partial",
+      image: ["\\mathop{\\mathrm{im}\\ }\\limits",0],
+      domaine: ["\\mathop{\\mathrm{dom}\\ }\\limits",0],
+      noyau: ["\\mathop{\\mathrm{ker}\\ }\\limits",0],
+      support: ["\\mathop{\\mathrm{supp}\\ }\\limits",0],
+      signe: ["\\mathop{\\mathrm{sign}\\ }\\limits",0],
+      abs: ["\\left| #1 \\\\right|", 1],
+      unsur: ["\\frac{1}{#1}", 1],
+      arrondisup: ["\\lceil #1 \\\\rceil", 1],
+      arrondiinf: ["\\lfloor #1 \\\\rfloor", 1],
+      conjugue: "conj",
+      conjaccent: ["\\overline{#1}", 1],
+      division: "division",
+      difference: "\\boldsymbol{\\Delta}",
+      differentielle: ["\\mathfrak{D}^{#1}_{#2}", 2],
+      OD: ["\\frac{d #1}{d #2}", 2],
+      OOD: ["\\frac{d^2 #1}{d #2^2}", 2],
+      NOD: ["\\frac{d^{#3} #1}{d #2^{#3}}", 3],
+      deriveepartielle: ["\\frac{\\partial #1}{\\partial #2}", 2],
+      PD: ["\\frac{\\partial #1}{\\partial #2}", 2],
+      dblederiveepartielle: ["\\frac{\\partial^2 #1}{\\partial #2 \\\\partial #2}", 2],
+      dfdxdy: ["\\frac{\\partial^2 #1}{\\partial #2 \\\\partial #3}", 3],
+      dfdxdx: ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2],
+      gradient: "\\mathbf{\\nabla}",
+      combilin: ["\\mathrm{span}\\{ #1 \\", 1],
+      trace: "tr",
+      proba: "\\mathbb{P}",
+      probaof: ["\\mathbb{P}\\left[#1\\right]", 1],
+      esperof: ["\\mathbb{E}\\left[#1\\right]", 1],
+      cov: ["\\mathrm{cov} ( #1 , #2 )", 2],
+      var: ["\\mathrm{var} ( #1 )", 1],
+      rand: "\\mathrm{rand}",
+      variation: ["\\left\\langle #1 \\\\right\\rangle", 1],
+      composante: ["\\mathop{\\mathrm{comp}\\ }\\limits",0],
+      bloc: ["\\mathop{\\mathrm{bloc}\\ }\\limits",0],
+      ligne: ["\\mathop{\\mathrm{ligne}\\ }\\limits",0],
+      colonne: ["\\mathop{\\mathrm{colonne}\\ }\\limits",0],
+      diagonale: ["\\mathop{\\mathrm{diag}\\ }\\limits",0],
+      matelementaire: "\\mathrm{Elem}",
+      matpermutation: ["\\mathop{\\mathrm{permut}\\ }\\limits",0],
+      matunitaire: "\\mathrm{Unitaire}",
+      gaussjordan: "\\mathrm{GaussJordan}",
+      householder: "\\mathrm{Householder}",
+      rang: "rang",
+      schur: "\\mathrm{Schur}",
+      singuliere: "\\mathrm{DVS}",
+      convexe: "\\mathrm{Convexe}",
+      petito: ["o(#1)", 1],
+      grando: ["O(#1)", 1]
+    }
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <p>
 \(
@@ -427,8 +423,8 @@
 <p>
 \label{chap:mesure}
 </p>
-<div id="outline-container-org674e5e1" class="outline-2">
-<h2 id="org674e5e1"><span class="section-number-2">1.</span> Dépendances</h2>
+<div id="outline-container-org8616374" class="outline-2">
+<h2 id="org8616374"><span class="section-number-2">1.</span> Dépendances</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:ensemble} : Les ensembles</li>
@@ -437,8 +433,8 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org2cd0f13" class="outline-2">
-<h2 id="org2cd0f13"><span class="section-number-2">2.</span> Introduction</h2>
+<div id="outline-container-org464099d" class="outline-2">
+<h2 id="org464099d"><span class="section-number-2">2.</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 L'objectif des mesures est de « mesurer » des ensembles, ou plutôt des sous-ensembles d'un ensemble donné. Soit l'ensemble \(\Omega\) et une tribu de sous-ensembles \(\mathcal{T} \subseteq \sousens(\Omega)\). Une mesure sur \(\mathcal{T}\) est une fonction \(\mu : \mathcal{T} \mapsto \setR\) associant une valeur réelle à chaque ensemble de la tribu. On demande que cette mesure soit positive :
@@ -472,8 +468,8 @@ pour tout \((i,j)\) tels que \(i \ne j\). On exige dans ce cas que la mesure vé
 \[\mu\left( \bigcup_i A_i \right) = \sum_i \mu(A_i)\]
 </p>
 </div>
-<div id="outline-container-org409fadc" class="outline-3">
-<h3 id="org409fadc"><span class="section-number-3">2.1.</span> Inclusion</h3>
+<div id="outline-container-orgdceea81" class="outline-3">
+<h3 id="orgdceea81"><span class="section-number-3">2.1.</span> Inclusion</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Soit \(A,B \in \mathcal{T}\) avec \(A \subseteq B\). Comme \(C = B \setminus A\) et \(A\) vérifient \(C \cup A = B\) et \(C \cap A = \emptyset\), on a :
@@ -492,8 +488,8 @@ La mesure d'un ensemble « plus petit » au sens de l'inclusion est donc plus 
 </p>
 </div>
 </div>
-<div id="outline-container-org06d74ac" class="outline-3">
-<h3 id="org06d74ac"><span class="section-number-3">2.2.</span> Union</h3>
+<div id="outline-container-orgc1924d4" class="outline-3">
+<h3 id="orgc1924d4"><span class="section-number-3">2.2.</span> Union</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Soit \(A,B \in \mathcal{T}\). Comme \(A \cup B = (A \setminus B) \cup B\) et \((A \setminus B) \cap B = \emptyset\), on a :
@@ -528,8 +524,8 @@ Puis, par passage à la limite :
 </p>
 </div>
 </div>
-<div id="outline-container-org2d95a17" class="outline-3">
-<h3 id="org2d95a17"><span class="section-number-3">2.3.</span> Appellation</h3>
+<div id="outline-container-org538424a" class="outline-3">
+<h3 id="org538424a"><span class="section-number-3">2.3.</span> Appellation</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 On dit qu'un ensemble \(A\) est mesurable (pour \(\mu\)) si \(A \in \mathcal{T}\). Dans la suite, nous considérons une mesure \(\mu : \mathcal{T} \mapsto \setR\) et un ensemble mesurable \(A \in \mathcal{T}\).
@@ -537,8 +533,8 @@ On dit qu'un ensemble \(A\) est mesurable (pour \(\mu\)) si \(A \in \mathcal{T}\
 </div>
 </div>
 </div>
-<div id="outline-container-org1b69a71" class="outline-2">
-<h2 id="org1b69a71"><span class="section-number-2">3.</span> Lebesgue</h2>
+<div id="outline-container-orgbe72a29" class="outline-2">
+<h2 id="orgbe72a29"><span class="section-number-2">3.</span> Lebesgue</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 La mesure de Lebesgue \(\mu_L\) est définie sur la tribu \(\mathcal{T}\) engendrée par les ensembles ouverts de \(\setR\). Elle exprime simplement la longueur d'un intervalle. Pour tout :
@@ -588,8 +584,8 @@ on dit que l'ensemble \(A\) est mesurable au sens de Lebesgue et on définit :
 \[\mu_L(A) = \mu_I(A) = \mu^S(A)\]
 </p>
 </div>
-<div id="outline-container-org96e32da" class="outline-3">
-<h3 id="org96e32da"><span class="section-number-3">3.1.</span> Mesure nulle</h3>
+<div id="outline-container-org6a3d413" class="outline-3">
+<h3 id="org6a3d413"><span class="section-number-3">3.1.</span> Mesure nulle</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Pour tout ensemble \(N\) inclus dans un ensemble \(A \in \mathcal{T}\) de mesure nulle :
@@ -608,8 +604,8 @@ on définit :
 </p>
 </div>
 </div>
-<div id="outline-container-org1cb7163" class="outline-3">
-<h3 id="org1cb7163"><span class="section-number-3">3.2.</span> Singleton</h3>
+<div id="outline-container-org0c392b9" class="outline-3">
+<h3 id="org0c392b9"><span class="section-number-3">3.2.</span> Singleton</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 On voit que les ensembles de la forme \(\{a\} = [a,a]\) sont de mesure nulle :
@@ -648,8 +644,8 @@ et donc :
 </div>
 </div>
 </div>
-<div id="outline-container-org8f23696" class="outline-2">
-<h2 id="org8f23696"><span class="section-number-2">4.</span> Mesure de Stieltjes</h2>
+<div id="outline-container-orge2994c8" class="outline-2">
+<h2 id="orge2994c8"><span class="section-number-2">4.</span> Mesure de Stieltjes</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 On associe à toute fonction croissante \(g : \setR \mapsto \setR\) une mesure de Stieltjes \(\mu_g\). Pour tout :
@@ -675,8 +671,8 @@ Soit \(\mathfrak{J}\) l'ensemble des collections au plus dénombrables d'interva
 \[\mu_g(A) = \inf \accolades{ \sum_{n \in N} \mu_L(I_n) : \{ I_n : n \in N \subseteq \setN \} \in \mathfrak{J} , \ A \subseteq \bigcup_{n \in N} I_n}\]
 </p>
 </div>
-<div id="outline-container-org9db8b28" class="outline-3">
-<h3 id="org9db8b28"><span class="section-number-3">4.1.</span> Mesure nulle</h3>
+<div id="outline-container-orgebe2b2e" class="outline-3">
+<h3 id="orgebe2b2e"><span class="section-number-3">4.1.</span> Mesure nulle</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Pour tout ensemble \(N\) inclus dans un ensemble \(A \in \mathcal{T}\) de mesure nulle :
@@ -696,8 +692,8 @@ on définit :
 </div>
 </div>
 </div>
-<div id="outline-container-org7a16f20" class="outline-2">
-<h2 id="org7a16f20"><span class="section-number-2">5.</span> Dirac</h2>
+<div id="outline-container-org99bd7df" class="outline-2">
+<h2 id="org99bd7df"><span class="section-number-2">5.</span> Dirac</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 La mesure de Dirac \(\mu_D^a\) en \(a\) est définie sur \(\sousens(\Omega)\). Il s'agit d'une mesure permettant de détecter si un \(A \subseteq \Omega\) donné contient \(a\). Elle est donc basée sur les fonctions indicatrices :
@@ -720,8 +716,8 @@ La mesure de Dirac \(\mu_D^a\) en \(a\) est définie sur \(\sousens(\Omega)\). I
 </div>
 </div>
 </div>
-<div id="outline-container-orgc7d47a8" class="outline-2">
-<h2 id="orgc7d47a8"><span class="section-number-2">6.</span> Mesure produit</h2>
+<div id="outline-container-org4ec382e" class="outline-2">
+<h2 id="org4ec382e"><span class="section-number-2">6.</span> Mesure produit</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Soit les tribus \(\mathcal{T}_1\) et \(\mathcal{T}_2\) et la tribu produit :
@@ -739,8 +735,8 @@ A partir de mesures \(\mu : \mathcal{T}_1 \mapsto \setR\) et \(\nu : \mathcal{T}
 \[(\mu \otimes \nu)(A \times B) = \mu(A) \cdot \nu(B)\]
 </p>
 </div>
-<div id="outline-container-orge876962" class="outline-3">
-<h3 id="orge876962"><span class="section-number-3">6.1.</span> Dimension \(n\)</h3>
+<div id="outline-container-org22b22b6" class="outline-3">
+<h3 id="org22b22b6"><span class="section-number-3">6.1.</span> Dimension \(n\)</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 On généralise la mesure de Lebesgue sur \(\setR^n\) par :
@@ -757,8 +753,8 @@ supremum et infimum.
 </div>
 </div>
 </div>
-<div id="outline-container-org059a23b" class="outline-2">
-<h2 id="org059a23b"><span class="section-number-2">7.</span> Fonction mesurable</h2>
+<div id="outline-container-org7310372" class="outline-2">
+<h2 id="org7310372"><span class="section-number-2">7.</span> Fonction mesurable</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 On dit qu'une fonction \(f : A \mapsto \setR\) est mesurable (au sens de la tribu \(\mathcal{T}\)) si la relation \(f^{-1}\) vérifie \(f^{-1}(]a,+\infty[) \in \mathcal{T}\) et \(f^{-1}(]-\infty,a[) \in \mathcal{T}\) pour tout \(a \in \setR\). On a donc :
@@ -777,8 +773,8 @@ On dit qu'une fonction \(f : A \mapsto \setR\) est mesurable (au sens de la trib
 </p>
 </div>
 </div>
-<div id="outline-container-orgb3608e1" class="outline-3">
-<h3 id="orgb3608e1"><span class="section-number-3">7.1.</span> Corollaires</h3>
+<div id="outline-container-org9ddb6ce" class="outline-3">
+<h3 id="org9ddb6ce"><span class="section-number-3">7.1.</span> Corollaires</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 On a :
@@ -811,8 +807,8 @@ Les mesures de tous ces ensembles sont donc bien définies pour tout \(a \in \se
 </div>
 </div>
 </div>
-<div id="outline-container-org308e4ac" class="outline-2">
-<h2 id="org308e4ac"><span class="section-number-2">8.</span> Opposé d'une fonction mesurable</h2>
+<div id="outline-container-org260c75a" class="outline-2">
+<h2 id="org260c75a"><span class="section-number-2">8.</span> Opposé d'une fonction mesurable</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 Soit une fonction mesurable \(f : A \mapsto \setR\). On a :
@@ -836,8 +832,8 @@ On en déduit que la fonction opposée \(-f\) est mesurable.
 </p>
 </div>
 </div>
-<div id="outline-container-org4767d42" class="outline-2">
-<h2 id="org4767d42"><span class="section-number-2">9.</span> Fonctions extrema</h2>
+<div id="outline-container-org65d4c85" class="outline-2">
+<h2 id="org65d4c85"><span class="section-number-2">9.</span> Fonctions extrema</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 Soit la suite \(\{ f_n : n \in \setN \}\) de fonctions mesurables. Posons :
@@ -898,7 +894,7 @@ On en conclut que \(\inf_n f_n\) est mesurable.
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-11-20 jeu 16:29</p>
+<p class="date">Created: 2025-11-21 ven 16:37</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

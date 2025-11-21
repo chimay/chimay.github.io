@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-11-20 jeu 16:27 -->
+<!-- 2025-11-21 ven 16:36 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Distance</title>
@@ -241,177 +241,173 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgaf9ac6d">1. Dépendances</a></li>
-<li><a href="#org41c1bf0">2. Définition</a></li>
-<li><a href="#org668b3c4">3. Distance à un ensemble</a></li>
-<li><a href="#org47b08ec">4. Distance inter-ensembles</a></li>
-<li><a href="#org2eab87e">5. Boules</a></li>
-<li><a href="#org1cd8edc">6. Topologie métrique</a></li>
-<li><a href="#org252ba84">7. Intérieur</a></li>
-<li><a href="#org15c8674">8. Adhérence</a></li>
-<li><a href="#org856c93b">9. Adhérence carrée</a></li>
+<li><a href="#org50d15f6">1. Dépendances</a></li>
+<li><a href="#org2c73048">2. Définition</a></li>
+<li><a href="#org0f3d555">3. Distance à un ensemble</a></li>
+<li><a href="#org1498145">4. Distance inter-ensembles</a></li>
+<li><a href="#org5158ad8">5. Boules</a></li>
+<li><a href="#orge91a697">6. Topologie métrique</a></li>
+<li><a href="#orgc353545">7. Intérieur</a></li>
+<li><a href="#org6d54012">8. Adhérence</a></li>
+<li><a href="#orgeb30578">9. Adhérence carrée</a></li>
 </ul>
 </div>
 </div>
 
-<p>
-\(
-\newcommand{\parentheses}[1]{\left(#1\right)}
-\newcommand{\crochets}[1]{\left[#1\right]}
-\newcommand{\accolades}[1]{\left\{#1\right\}}
-\newcommand{\ensemble}[1]{\left\{#1\right\}}
-\DeclareMathOperator*{\cardinal}{\mathrm{card}}
-\newcommand{\identite}{\mathrm{Id}}
-\newcommand{\indicatrice}{\boldsymbol{\delta}}
-\newcommand{\dirac}{\delta}
-\newcommand{\moinsun}{{-1}}
-\newcommand{\inverse}{\ddagger}
-\newcommand{\pinverse}{\dagger}
-\newcommand{\topologie}{\mathfrak{T}}
-\newcommand{\ferme}{\mathfrak{F}}
-\newcommand{\img}{\mathbf{i}}
-\newcommand{\binome}[2]{
-\left\{ \begin{array}{c}
-#1 \\
-#2 \\
-\end{array} \right\}
-}
-\newcommand{\canonique}{\mathfrak{c}}
-\newcommand{\tenseuridentite}{\boldsymbol{\mathcal{I}}}
-\newcommand{\permutation}{\boldsymbol{\epsilon}}
-\newcommand{\matriceZero}{\mathfrak{0}}
-\newcommand{\matriceUn}{\mathfrak{1}}
-\newcommand{\christoffel}[2]{
-\left\{ \begin{array}{c}
-#1 \\
-#2 \\
-\end{array} \right\}
-}
-\newcommand{\lagrangien}{\mathfrak{L}}
-\newcommand{\sousens}{\mathfrak{P}}
-\newcommand{\partition}{\mathrm{Partition}}
-\newcommand{\tribu}{\mathrm{Tribu}}
-\newcommand{\topologies}{\mathrm{Topo}}
-\newcommand{\setB}{\mathbb{B}}
-\newcommand{\setN}{\mathbb{N}}
-\newcommand{\setZ}{\mathbb{Z}}
-\newcommand{\setQ}{\mathbb{Q}}
-\newcommand{\setR}{\mathbb{R}}
-\newcommand{\setC}{\mathbb{C}}
-\newcommand{\corps}{\mathbb{K}}
-\newcommand{\boule}{\mathfrak{B}}
-\newcommand{\intervalleouvert}[2]{\left] #1 , #2 \right[}
-\newcommand{\intervallesemiouvertgauche}[2]{ \left] #1 , #2 \right]}
-\newcommand{\intervallesemiouvertdroite}[2]{\left[ #1 , #2 \right[ }
-\newcommand{\fonction}{\mathbb{F}}
-\newcommand{\bijection}{\mathrm{Bij}}
-\newcommand{\polynome}{\mathrm{Poly}}
-\newcommand{\lineaire}{\mathrm{Lin}}
-\newcommand{\continue}{\mathrm{Cont}}
-\newcommand{\homeomorphisme}{\mathrm{Hom}}
-\newcommand{\etagee}{\mathrm{Etagee}}
-\newcommand{\lebesgue}{\mathrm{Leb}}
-\newcommand{\lipschitz}{\mathrm{Lip}}
-\newcommand{\suitek}{\mathrm{Suite}}
-\newcommand{\matrice}{\mathbb{M}}
-\newcommand{\krylov}{\mathrm{Krylov}}
-\newcommand{\tenseur}{\mathbb{T}}
-\newcommand{\essentiel}{\mathfrak{E}}
-\newcommand{\relation}{\mathrm{Rel}}
-\DeclareMathOperator*{\strictinferieur}{\ < \ }
-\DeclareMathOperator*{\strictsuperieur}{\ > \ }
-\DeclareMathOperator*{\ensinferieur}{\eqslantless}
-\DeclareMathOperator*{\enssuperieur}{\eqslantgtr}
-\DeclareMathOperator*{\esssuperieur}{\gtrsim}
-\DeclareMathOperator*{\essinferieur}{\lesssim}
-\newcommand{\essegal}{\eqsim}
-\newcommand{\union}{\ \cup \ }
-\newcommand{\intersection}{\ \cap \ }
-\newcommand{\opera}{\divideontimes}
-\newcommand{\autreaddition}{\boxplus}
-\newcommand{\autremultiplication}{\circledast}
-\newcommand{\commutateur}[2]{\left[ #1 , #2 \right]}
-\newcommand{\convolution}{\circledcirc}
-\newcommand{\correlation}{\ \natural \ }
-\newcommand{\diventiere}{\div}
-\newcommand{\modulo}{\bmod}
-\DeclareMathOperator*{\pgcd}{pgcd}
-\DeclareMathOperator*{\ppcm}{ppcm}
-\newcommand{\produitscalaire}[2]{\left\langle #1 \vert #2 \right\rangle}
-\newcommand{\scalaire}[2]{\left\langle #1 \| #2 \right\rangle}
-\newcommand{\braket}[3]{\left\langle #1 \vert #2 \vert #3 \right\rangle}
-\newcommand{\orthogonal}{\bot}
-\newcommand{\forme}[2]{\left\langle #1 , #2 \right\rangle}
-\newcommand{\biforme}[3]{\left\langle #1 , #2 , #3 \right\rangle}
-\newcommand{\contraction}[3]{\left\langle #1 \odot #3 \right\rangle_{#2}}
-\newcommand{\dblecont}[5]{\left\langle #1 \vert #3 \vert #5 \right\rangle_{#2,#4}}
-\DeclareMathOperator*{\major}{major}
-\DeclareMathOperator*{\minor}{minor}
-\DeclareMathOperator*{\maxim}{maxim}
-\DeclareMathOperator*{\minim}{minim}
-\DeclareMathOperator*{\argument}{arg}
-\DeclareMathOperator*{\argmin}{arg\ min}
-\DeclareMathOperator*{\argmax}{arg\ max}
-\DeclareMathOperator*{\supessentiel}{ess\ sup}
-\DeclareMathOperator*{\infessentiel}{ess\ inf}
-\newcommand{\dual}{\star}
-\newcommand{\vardual}{\circledast}
-\newcommand{\distance}{\mathfrak{dist}}
-\newcommand{\norme}[1]{\left\| #1 \right\|}
-\newcommand{\normetrois}[1]{\left|\left\| #1 \right\|\right|}
-\DeclareMathOperator*{\adh}{adh}
-\DeclareMathOperator*{\interieur}{int}
-\newcommand{\frontiere}{\partial}
-\DeclareMathOperator*{\image}{im}
-\DeclareMathOperator*{\domaine}{dom}
-\DeclareMathOperator*{\noyau}{ker}
-\DeclareMathOperator*{\support}{supp}
-\DeclareMathOperator*{\signe}{sign}
-\newcommand{\abs}[1]{\left| #1 \right|}
-\newcommand{\unsur}[1]{\frac{1}{#1}}
-\newcommand{\arrondisup}[1]{\lceil #1 \rceil}
-\newcommand{\arrondiinf}[1]{\lfloor #1 \rfloor}
-\DeclareMathOperator*{\conjugue}{conj}
-\newcommand{\conjaccent}[1]{\overline{#1}}
-\DeclareMathOperator*{\division}{division}
-\newcommand{\difference}{\boldsymbol{\Delta}}
-\newcommand{\differentielle}[2]{\mathfrak{D}^{#1}_{#2}}
-\newcommand{\OD}[2]{\frac{d #1}{d #2}}
-\newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
-\newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
-\newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
-\newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
-\newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
-\newcommand{\gradient}{\mathbf{\nabla}}
-\newcommand{\combilin}[1]{\mathrm{span}\{ #1 \}}
-\DeclareMathOperator*{\trace}{tr}
-\newcommand{\proba}{\mathbb{P}}
-\newcommand{\probaof}[1]{\mathbb{P}\left[#1\right]}
-\newcommand{\esperof}[1]{\mathbb{E}\left[#1\right]}
-\newcommand{\cov}[2]{\mathrm{cov} \left( #1 , #2 \right) }
-\newcommand{\var}[1]{\mathrm{var} \left( #1 \right) }
-\newcommand{\rand}{\mathrm{rand}}
-\newcommand{\variation}[1]{\left\langle #1 \right\rangle}
-\DeclareMathOperator*{\composante}{comp}
-\DeclareMathOperator*{\bloc}{bloc}
-\DeclareMathOperator*{\ligne}{ligne}
-\DeclareMathOperator*{\colonne}{colonne}
-\DeclareMathOperator*{\diagonale}{diag}
-\newcommand{\matelementaire}{\mathrm{Elem}}
-\DeclareMathOperator*{\matpermutation}{permut}
-\newcommand{\matunitaire}{\mathrm{Unitaire}}
-\newcommand{\gaussjordan}{\mathrm{GaussJordan}}
-\newcommand{\householder}{\mathrm{Householder}}
-\DeclareMathOperator*{\rang}{rang}
-\newcommand{\schur}{\mathrm{Schur}}
-\newcommand{\singuliere}{\mathrm{DVS}}
-\newcommand{\convexe}{\mathrm{Convexe}}
-\newcommand{\petito}[1]{o\left(#1\right)}
-\newcommand{\grando}[1]{O\left(#1\right)}
-\)
-</p>
+<script>
+MathJax = {
+  tex: {
+    packages: {'[+]': ['base','ams','braket']},
+    macros: {
+      parentheses: ["\\left(#1\\right)", 1],
+      crochets: ["\\left[#1\\right]", 1],
+      accolades: ["\\left\\{#1\\right\\}", 1],
+      ensemble: ["\\left\\{#1\\right\\}", 1],
+      cardinal: ["\\mathop{\\mathrm{card}\\ }\\limits",0],
+      identite: "\\mathrm{Id}",
+      indicatrice: "\\boldsymbol{\\delta}",
+      dirac: "\\delta",
+      moinsun: "-1",
+      inverse: "\\ddagger",
+      pinverse: "\\dagger",
+      topologie: "\\mathfrak{T}",
+      ferme: "\\mathfrak{F}",
+      img: "\\mathbf{i}",
+      binome: ["\\left\\{ \\\\begin{array}{c} #1 \\\\ #2 \\\\ \\\\end{array} \\\\right\\}", 2],
+      canonique: "\\mathfrak{c}",
+      tenseuridentite: "\\boldsymbol{\\mathcal{I}}",
+      permutation: "\\boldsymbol{\\epsilon}",
+      matriceZero: "\\mathfrak{0}",
+      matriceUn: "\\mathfrak{1}",
+      christoffel: ["\\left\\{ \\\\begin{array}{c} #1 \\\\ #2 \\\\ \\\\end{array} \\\\right\\}", 2],
+      lagrangien: "\\mathfrak{L}",
+      sousens: "\\mathfrak{P}",
+      partition: "\\mathrm{Partition}",
+      tribu: "\\mathrm{Tribu}",
+      topologies: "\\mathrm{Topo}",
+      setB: "\\mathbb{B}",
+      setN: "\\mathbb{N}",
+      setZ: "\\mathbb{Z}",
+      setQ: "\\mathbb{Q}",
+      setR: "\\mathbb{R}",
+      setC: "\\mathbb{C}",
+      corps: "\\mathbb{K}",
+      boule: "\\mathfrak{B}",
+      intervalleouvert: ["\\left] #1 , #2 \\\\right[", 2],
+      intervallesemiouvertgauche: ["\\left] #1 , #2 \\\\right]", 2],
+      intervallesemiouvertdroite: ["\\left[ #1 , #2 \\\\right[", 2],
+      fonction: "\\mathbb{F}",
+      bijection: "\\mathrm{Bij}",
+      polynome: "\\mathrm{Poly}",
+      lineaire: "\\mathrm{Lin}",
+      continue: "\\mathrm{Cont}",
+      homeomorphisme: "\\mathrm{Hom}",
+      etagee: "\\mathrm{Etagee}",
+      lebesgue: "\\mathrm{Leb}",
+      lipschitz: "\\mathrm{Lip}",
+      suitek: "\\mathrm{Suite}",
+      matrice: "\\mathbb{M}",
+      krylov: "\\mathrm{Krylov}",
+      tenseur: "\\mathbb{T}",
+      essentiel: "\\mathfrak{E}",
+      relation: "\\mathrm{Rel}",
+      strictinferieur: "<",
+      strictsuperieur: ">",
+      ensinferieur: "\\eqslantless",
+      enssuperieur: "\\eqslantgtr",
+      esssuperieur: "\\gtrsim",
+      essinferieur: "\\lesssim",
+      essegal: "\\eqsim",
+      union: "\\cup",
+      intersection: "\\cap",
+      opera: "\\divideontimes",
+      autreaddition: "\\boxplus",
+      autremultiplication: "\\circledast",
+      commutateur: ["\\left[ #1 , #2 \\\\right]", 2],
+      convolution: "\\circledcirc",
+      correlation: "\\natural",
+      diventiere: "\\div",
+      modulo: "\\bmod",
+      pgcd: ["\\mathop{\\mathrm{pgcd}\\ }\\limits",0],
+      ppcm: ["\\mathop{\\mathrm{ppcm}\\ }\\limits",0],
+      produitscalaire: ["\\left\\langle #1 \\\\vert #2 \\\\right\\rangle", 2],
+      scalaire: ["\\left\\langle #1 \\| #2 \\\\right\\rangle", 2],
+      braket: ["\\left\\langle #1 \\\\vert #2 \\\\vert #3 \\\\right\\rangle", 3],
+      orthogonal: "\\bot",
+      forme: ["\\left\\langle #1 , #2 \\\\right\\rangle", 2],
+      biforme: ["\\left\\langle #1 , #2 , #3 \\\\right\\rangle", 3],
+      contraction: ["\\left\\langle #1 \\\\odot #3 \\\\right\\rangle_{#2}", 3],
+      dblecont: ["\\left\\langle #1 \\\\vert #3 \\\\vert #5 \\\\right\\rangle_{#2,#4}", 5],
+      major: ["\\mathop{\\mathrm{major}\\ }\\limits",0],
+      minor: ["\\mathop{\\mathrm{minor}\\ }\\limits",0],
+      maxim: ["\\mathop{\\mathrm{maxim}\\ }\\limits",0],
+      minim: ["\\mathop{\\mathrm{minim}\\ }\\limits",0],
+      argument: ["\\mathop{\\mathrm{arg}\\ }\\limits",0],
+      argmin: ["\\mathop{\\mathrm{arg\\,min}\\ }\\limits",0],
+      argmax: ["\\mathop{\\mathrm{arg\\,max}\\ }\\limits",0],
+      supessentiel: ["\\mathop{\\mathrm{ess\\,sup}\\ }\\limits",0],
+      infessentiel: ["\\mathop{\\mathrm{ess\\,inf}\\ }\\limits",0],
+      dual: "\\star",
+      vardual: "\\circledast",
+      distance: "\\mathfrak{dist}",
+      norme: ["\\left\\| #1 \\\\right\\|", 1],
+      normetrois: ["\\left|\\left\\| #1 \\\\right\\|\\right|", 1],
+      adh: ["\\mathop{\\mathrm{adh}\\ }\\limits",0],
+      interieur: ["\\mathop{\\mathrm{int}\\ }\\limits",0],
+      frontiere: "\\partial",
+      image: ["\\mathop{\\mathrm{im}\\ }\\limits",0],
+      domaine: ["\\mathop{\\mathrm{dom}\\ }\\limits",0],
+      noyau: ["\\mathop{\\mathrm{ker}\\ }\\limits",0],
+      support: ["\\mathop{\\mathrm{supp}\\ }\\limits",0],
+      signe: ["\\mathop{\\mathrm{sign}\\ }\\limits",0],
+      abs: ["\\left| #1 \\\\right|", 1],
+      unsur: ["\\frac{1}{#1}", 1],
+      arrondisup: ["\\lceil #1 \\\\rceil", 1],
+      arrondiinf: ["\\lfloor #1 \\\\rfloor", 1],
+      conjugue: "conj",
+      conjaccent: ["\\overline{#1}", 1],
+      division: "division",
+      difference: "\\boldsymbol{\\Delta}",
+      differentielle: ["\\mathfrak{D}^{#1}_{#2}", 2],
+      OD: ["\\frac{d #1}{d #2}", 2],
+      OOD: ["\\frac{d^2 #1}{d #2^2}", 2],
+      NOD: ["\\frac{d^{#3} #1}{d #2^{#3}}", 3],
+      deriveepartielle: ["\\frac{\\partial #1}{\\partial #2}", 2],
+      PD: ["\\frac{\\partial #1}{\\partial #2}", 2],
+      dblederiveepartielle: ["\\frac{\\partial^2 #1}{\\partial #2 \\\\partial #2}", 2],
+      dfdxdy: ["\\frac{\\partial^2 #1}{\\partial #2 \\\\partial #3}", 3],
+      dfdxdx: ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2],
+      gradient: "\\mathbf{\\nabla}",
+      combilin: ["\\mathrm{span}\\{ #1 \\", 1],
+      trace: "tr",
+      proba: "\\mathbb{P}",
+      probaof: ["\\mathbb{P}\\left[#1\\right]", 1],
+      esperof: ["\\mathbb{E}\\left[#1\\right]", 1],
+      cov: ["\\mathrm{cov} ( #1 , #2 )", 2],
+      var: ["\\mathrm{var} ( #1 )", 1],
+      rand: "\\mathrm{rand}",
+      variation: ["\\left\\langle #1 \\\\right\\rangle", 1],
+      composante: ["\\mathop{\\mathrm{comp}\\ }\\limits",0],
+      bloc: ["\\mathop{\\mathrm{bloc}\\ }\\limits",0],
+      ligne: ["\\mathop{\\mathrm{ligne}\\ }\\limits",0],
+      colonne: ["\\mathop{\\mathrm{colonne}\\ }\\limits",0],
+      diagonale: ["\\mathop{\\mathrm{diag}\\ }\\limits",0],
+      matelementaire: "\\mathrm{Elem}",
+      matpermutation: ["\\mathop{\\mathrm{permut}\\ }\\limits",0],
+      matunitaire: "\\mathrm{Unitaire}",
+      gaussjordan: "\\mathrm{GaussJordan}",
+      householder: "\\mathrm{Householder}",
+      rang: "rang",
+      schur: "\\mathrm{Schur}",
+      singuliere: "\\mathrm{DVS}",
+      convexe: "\\mathrm{Convexe}",
+      petito: ["o(#1)", 1],
+      grando: ["O(#1)", 1]
+    }
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <p>
 \(
@@ -427,8 +423,8 @@
 <p>
 \label{chap:distances}
 </p>
-<div id="outline-container-orgaf9ac6d" class="outline-2">
-<h2 id="orgaf9ac6d"><span class="section-number-2">1.</span> Dépendances</h2>
+<div id="outline-container-org50d15f6" class="outline-2">
+<h2 id="org50d15f6"><span class="section-number-2">1.</span> Dépendances</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:algebre} : Les structures algébriques</li>
@@ -437,8 +433,8 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org41c1bf0" class="outline-2">
-<h2 id="org41c1bf0"><span class="section-number-2">2.</span> Définition</h2>
+<div id="outline-container-org2c73048" class="outline-2">
+<h2 id="org2c73048"><span class="section-number-2">2.</span> Définition</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Afin de généraliser le plus possible la notion de distance au sens usuel, nous allons nous poser la question : quelles sont les caractéristiques fondamentales d'une distance ? Nous en déduirons les propriétés que doit respecter une distance générique.
@@ -485,8 +481,8 @@ Enfin, il est toujours plus court d'aller directement de \(x\) à \(z\) plutôt 
 \[\distance(x,z) \le \distance(x,y) + \distance(y,z)\]
 </p>
 </div>
-<div id="outline-container-orge6cf908" class="outline-3">
-<h3 id="orge6cf908"><span class="section-number-3">2.1.</span> Remarque</h3>
+<div id="outline-container-org7ff1a89" class="outline-3">
+<h3 id="org7ff1a89"><span class="section-number-3">2.1.</span> Remarque</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Parfois, au lieu d'imposer l'égalité de deux éléments situés à distance nulle l'un de l'autre, on impose juste l'équivalence suivant un critère prédéfini :
@@ -497,8 +493,8 @@ Parfois, au lieu d'imposer l'égalité de deux éléments situés à distance nu
 </p>
 </div>
 </div>
-<div id="outline-container-orgb19263f" class="outline-3">
-<h3 id="orgb19263f"><span class="section-number-3">2.2.</span> Nombres</h3>
+<div id="outline-container-orge1c5cf8" class="outline-3">
+<h3 id="orge1c5cf8"><span class="section-number-3">2.2.</span> Nombres</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 La distance entre deux nombres \(a\) et \(b\) est souvent définié comme étant la valeur
@@ -511,8 +507,8 @@ absolue de leur différence :
 </div>
 </div>
 </div>
-<div id="outline-container-org668b3c4" class="outline-2">
-<h2 id="org668b3c4"><span class="section-number-2">3.</span> Distance à un ensemble</h2>
+<div id="outline-container-org0f3d555" class="outline-2">
+<h2 id="org0f3d555"><span class="section-number-2">3.</span> Distance à un ensemble</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Quelle est la distance à parcourir d'une ville donnée lorsqu'on désire se rendre dans un certain pays ? On a envie de dire que la distance est parcourue dès que l'on a atteint la frontière du pays en question. Comme on choisit généralement le chemin le plus court pour arriver à destination, on se rend compte que la distance ville - pays est le minimum des distances entre la ville et tous les points appartenant au pays.
@@ -526,8 +522,8 @@ Maintenant, remplaçons la ville par un élément \(x \in \Omega\) et le pays pa
 \[\distance(x,A) = \inf_{a \in A} \distance(x,a) = \inf \{ \distance(x,a) : a \in A \}\]
 </p>
 </div>
-<div id="outline-container-orgb53d206" class="outline-3">
-<h3 id="orgb53d206"><span class="section-number-3">3.1.</span> Inclusion</h3>
+<div id="outline-container-orgbbc0c7c" class="outline-3">
+<h3 id="orgbbc0c7c"><span class="section-number-3">3.1.</span> Inclusion</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Si \(B \subseteq A\), on en déduit directement que :
@@ -538,8 +534,8 @@ Si \(B \subseteq A\), on en déduit directement que :
 </p>
 </div>
 </div>
-<div id="outline-container-org9012984" class="outline-3">
-<h3 id="org9012984"><span class="section-number-3">3.2.</span> Notation</h3>
+<div id="outline-container-org75cef00" class="outline-3">
+<h3 id="org75cef00"><span class="section-number-3">3.2.</span> Notation</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 On note aussi :
@@ -550,8 +546,8 @@ On note aussi :
 </p>
 </div>
 </div>
-<div id="outline-container-orge8edc22" class="outline-3">
-<h3 id="orge8edc22"><span class="section-number-3">3.3.</span> Self-distance</h3>
+<div id="outline-container-org9c7104f" class="outline-3">
+<h3 id="org9c7104f"><span class="section-number-3">3.3.</span> Self-distance</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Soit \(a \in A\). Comme \(\distance(a,a) = 0\) et que la distance \(\distance(a,b) \ge 0\) pour tout \(b \in A\), on voit que le choix \(b = a\) minimise \(\distance(a,b)\) sur \(A\). Donc :
@@ -567,8 +563,8 @@ pour tout élément \(a \in A\).
 </div>
 </div>
 </div>
-<div id="outline-container-org47b08ec" class="outline-2">
-<h2 id="org47b08ec"><span class="section-number-2">4.</span> Distance inter-ensembles</h2>
+<div id="outline-container-org1498145" class="outline-2">
+<h2 id="org1498145"><span class="section-number-2">4.</span> Distance inter-ensembles</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 La distance entre deux ensembles \(A\) et \(B\) est l'infimum des distances possibles entre les couples \((a,b) \in A \times B\) :
@@ -587,8 +583,8 @@ On a bien évidemment :
 </p>
 </div>
 </div>
-<div id="outline-container-org2eab87e" class="outline-2">
-<h2 id="org2eab87e"><span class="section-number-2">5.</span> Boules</h2>
+<div id="outline-container-org5158ad8" class="outline-2">
+<h2 id="org5158ad8"><span class="section-number-2">5.</span> Boules</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Les boules sont la généralisation des disques et des sphères. Or,
@@ -614,8 +610,8 @@ Si l'on veut que la distance soit strictement inférieure à \(r\), on considér
 </p>
 </div>
 </div>
-<div id="outline-container-org1cd8edc" class="outline-2">
-<h2 id="org1cd8edc"><span class="section-number-2">6.</span> Topologie métrique</h2>
+<div id="outline-container-orge91a697" class="outline-2">
+<h2 id="orge91a697"><span class="section-number-2">6.</span> Topologie métrique</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 La topologie usuelle définie sur les ensembles munis d'une distance
@@ -640,8 +636,8 @@ Toute union de boules ouvertes est donc un ouvert.
 </p>
 </div>
 </div>
-<div id="outline-container-org252ba84" class="outline-2">
-<h2 id="org252ba84"><span class="section-number-2">7.</span> Intérieur</h2>
+<div id="outline-container-orgc353545" class="outline-2">
+<h2 id="orgc353545"><span class="section-number-2">7.</span> Intérieur</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Soit \(A \subseteq \Omega\).
@@ -682,8 +678,8 @@ On conclut de ce qui précède que :
 </p>
 </div>
 </div>
-<div id="outline-container-org15c8674" class="outline-2">
-<h2 id="org15c8674"><span class="section-number-2">8.</span> Adhérence</h2>
+<div id="outline-container-org6d54012" class="outline-2">
+<h2 id="org6d54012"><span class="section-number-2">8.</span> Adhérence</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 On voit que :
@@ -702,8 +698,8 @@ Le complémentaire de cet ensemble est bien sur constitué des \(x \in \Omega\) 
 </p>
 </div>
 </div>
-<div id="outline-container-org856c93b" class="outline-2">
-<h2 id="org856c93b"><span class="section-number-2">9.</span> Adhérence carrée</h2>
+<div id="outline-container-orgeb30578" class="outline-2">
+<h2 id="orgeb30578"><span class="section-number-2">9.</span> Adhérence carrée</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 Soit \(x \in \Omega\), \(A \subseteq \Omega\) et :
@@ -774,7 +770,7 @@ Mais comme l'inverse est également vrai, on a :
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-11-20 jeu 16:27</p>
+<p class="date">Created: 2025-11-21 ven 16:36</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

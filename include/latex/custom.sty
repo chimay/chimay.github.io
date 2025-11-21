@@ -1,0 +1,378 @@
+%
+% (c) chimay
+%
+%% This program can be redistributed and/or modified under the terms
+%% of the LaTeX Project Public License Distributed from CTAN archives
+%% in directory macros/latex/base/lppl.txt.
+%
+
+% ======================= identification =================================
+
+\NeedsTeXFormat{LaTeX2e}
+
+\ProvidesPackage{custom}[2025/11/21 v0.1 Custom]
+
+% ======================= dependencies ===================================
+
+\RequirePackage{amsmath}
+\RequirePackage{amsfonts}
+\RequirePackage{amssymb}
+\RequirePackage{amsthm}
+\RequirePackage{ucs}
+
+% ======================= options ========================================
+
+%% 'sans serif' option
+\DeclareOption{sans}{
+  \renewcommand{\familydefault}{\sfdefault}
+}
+
+%% 'roman' option
+\DeclareOption{roman}{
+  \renewcommand{\familydefault}{\rmdefault}
+}
+
+%% Global indentation option
+\newif\if@neverindent\@neverindentfalse
+\DeclareOption{neverindent}{
+  \@neverindenttrue
+}
+
+\ExecuteOptions{roman}
+
+\ProcessOptions\relax
+
+% ======================= table of contents ==============================
+
+\renewcommand{\contentsname}{Table des matières}
+%\renewcommand{\ptctitle}{Table des matières}
+
+% ======================= environments ===================================
+
+\newenvironment{Eqts}
+{ \begin{displaymath} \begin{gathered} }
+{ \end{gathered} \end{displaymath} }
+
+\newenvironment{Matrix}
+{\left[ \begin{array}}
+{\end{array} \right]}
+
+\theoremstyle{plain}
+\newtheorem{theoreme}{Théorème}[section]
+\theoremstyle{definition}
+\newtheorem{proposition}{Proposition}[section]
+\theoremstyle{remark}
+\newtheorem{demonstration}[proposition]{Démonstration}
+
+% ======================= commands =======================================
+
+% ------------ grouping
+
+\newcommand{\parentheses}[1]{\left(#1\right)}
+\newcommand{\crochets}[1]{\left[#1\right]}
+\newcommand{\accolades}[1]{\left\{#1\right\}}
+
+\newcommand{\ensemble}[1]{\left\{#1\right\}}
+
+% ------------ symbols
+
+% ---- fonctions
+
+\newcommand{\identite}{\mathrm{Id}}
+\newcommand{\indicatrice}{\boldsymbol{\delta}}
+\newcommand{\dirac}{\delta}
+
+% ---- operations
+
+\newcommand{\moinsun}{{-1}}
+\newcommand{\inverse}{\ddagger}
+\newcommand{\pinverse}{\dagger}
+
+% ---- topology
+
+\newcommand{\topologie}{\mathfrak{T}}
+\newcommand{\ferme}{\mathfrak{F}}
+
+% ---- complexs
+
+\DeclareMathOperator{\img}{\mathbf{i}}
+
+% ---- polynômes
+
+\newcommand{\binome}[2]{
+\left\{ \begin{array}{c}
+#1 \\
+#2 \\
+\end{array} \right\}
+}
+
+% ---- vectors
+
+\newcommand{\canonique}{\mathfrak{c}}
+
+% ---- tensors
+
+\newcommand{\tenseuridentite}{\boldsymbol{\mathcal{I}}}
+\newcommand{\permutation}{\boldsymbol{\epsilon}}
+
+% ---- matrices
+
+\newcommand{\matriceZero}{\mathfrak{0}}
+\newcommand{\matriceUn}{\mathfrak{1}}
+
+% ---- différential geometry
+
+\newcommand{\christoffel}[2]{
+\left\{ \begin{array}{c}
+#1 \\
+#2 \\
+\end{array} \right\}
+}
+
+% ---- optimisation
+
+\newcommand{\lagrangien}{\mathfrak{L}}
+
+% ------------ sets
+
+\newcommand{\sousens}{\mathfrak{P}}
+
+\newcommand{\partition}{\mathrm{Partition}}
+\newcommand{\tribu}{\mathrm{Tribu}}
+\newcommand{\topologies}{\mathrm{Topo}}
+
+% ---- numbers
+
+\newcommand{\setB}{\mathbb{B}}
+\newcommand{\setN}{\mathbb{N}}
+\newcommand{\setZ}{\mathbb{Z}}
+\newcommand{\setQ}{\mathbb{Q}}
+\newcommand{\setR}{\mathbb{R}}
+\newcommand{\setC}{\mathbb{C}}
+
+\newcommand{\corps}{\mathbb{K}}
+
+% ---- topology
+
+\newcommand{\boule}{\mathfrak{B}}
+\newcommand{\intervalleouvert}[2]{\relax \ ] #1 , #2 [ \ \relax}
+\newcommand{\intervallesemiouvertgauche}[2]{\relax \ ] #1 , #2 ]}
+\newcommand{\intervallesemiouvertdroite}[2]{[ #1 , #2 [ \ \relax}
+
+% ---- functions
+
+\newcommand{\fonction}{\mathbb{F}}
+
+\newcommand{\bijection}{\mathrm{Bij}}
+\newcommand{\polynome}{\mathrm{Poly}}
+\newcommand{\lineaire}{\mathrm{Lin}}
+\newcommand{\continue}{\mathrm{Cont}}
+\newcommand{\homeomorphisme}{\mathrm{Hom}}
+\newcommand{\etagee}{\mathrm{Etagee}}
+\newcommand{\lebesgue}{\mathrm{Leb}}
+\newcommand{\lipschitz}{\mathrm{Lip}}
+
+% ---- sequences
+
+\newcommand{\suitek}{\mathrm{Suite}}
+
+% ---- matrices
+
+\newcommand{\matrice}{\mathbb{M}}
+\newcommand{\krylov}{\mathrm{Krylov}}
+
+% ---- tensors
+
+\newcommand{\tenseur}{\mathbb{T}}
+
+% ---- essential
+
+\newcommand{\essentiel}{\mathfrak{E}}
+
+% ------------ relations
+
+\newcommand{\relation}{\mathrm{Rel}}
+
+\DeclareMathOperator{\strictinferieur}{\ < \ }
+\DeclareMathOperator{\strictsuperieur}{\ > \ }
+
+\DeclareMathOperator{\ensinferieur}{\eqslantless}
+\DeclareMathOperator{\enssuperieur}{\eqslantgtr}
+
+% ---- essential
+
+\newcommand{\esssuperieur}{\gtrsim}
+\newcommand{\essinferieur}{\lesssim}
+\newcommand{\essegal}{\eqsim}
+
+% ------------ operations
+
+\newcommand{\union}{\ \cup \ }
+\newcommand{\intersection}{\ \cap \ }
+
+% ---- generic
+
+\newcommand{\opera}{\divideontimes}
+\newcommand{\autreaddition}{\boxplus}
+\newcommand{\autremultiplication}{\circledast}
+
+% ---- functions
+
+\newcommand{\commutateur}[2]{\left[ #1 , #2 \right]}
+
+\newcommand{\convolution}{\circledcirc}
+\newcommand{\correlation}{\ \natural \ }
+
+% ---- natural numbers
+
+\newcommand{\diventiere}{\div}
+\newcommand{\modulo}{\bmod}
+\DeclareMathOperator{\pgcd}{pgcd}
+\DeclareMathOperator{\ppcm}{ppcm}
+
+% ---- scalar product
+
+\newcommand{\scalaire}[2]{\left\langle #1 \vert\relax #2 \right\rangle}
+\newcommand{\braket}[3]{\left\langle #1 \vert #2 \vert #3 \right\rangle}
+\newcommand{\orthogonal}{\bot}
+
+% ---- forms
+
+\newcommand{\forme}[2]{\left\langle #1 , #2 \right\rangle}
+\newcommand{\biforme}[3]{\left\langle #1 , #2 , #3 \right\rangle}
+
+% ---- tensors
+
+\newcommand{\contraction}[3]{\left\langle #1 \odot #3 \right\rangle_{#2}}
+\newcommand{\dblecont}[5]{\left\langle #1 \vert #3 \vert #5 \right\rangle_{#2,#4}}
+
+% ------------ operators
+
+% ---- extrema
+
+\DeclareMathOperator*{\major}{major}
+\DeclareMathOperator*{\minor}{minor}
+
+\DeclareMathOperator*{\maxim}{maxim}
+\DeclareMathOperator*{\minim}{minim}
+
+\DeclareMathOperator*{\argument}{arg}
+\DeclareMathOperator*{\argmin}{arg\ min}
+\DeclareMathOperator*{\argmax}{arg\ max}
+
+\DeclareMathOperator*{\supessentiel}{ess\ sup}
+\DeclareMathOperator*{\infessentiel}{ess\ inf}
+
+% ---- duality
+
+\newcommand{\dual}{\star}
+
+% ---- topology
+
+\newcommand{\distance}{\mathfrak{dist}}
+
+\newcommand{\norme}[1]{\left\| #1 \right\|}
+\newcommand{\normetrois}[1]{\left|\left\| #1 \right\|\right|}
+
+\DeclareMathOperator*{\adh}{adh}
+\DeclareMathOperator*{\interieur}{int}
+\newcommand{\frontiere}{\partial}
+
+% ---- functions
+
+\DeclareMathOperator{\image}{im}
+\DeclareMathOperator{\domaine}{dom}
+\DeclareMathOperator{\noyau}{ker}
+\DeclareMathOperator{\support}{supp}
+
+% ---- integers
+
+\DeclareMathOperator{\signe}{sign}
+\newcommand{\abs}[1]{\left| #1 \right|}
+
+% ---- rational numbers
+
+\newcommand{\unsur}[1]{\frac{1}{#1}}
+
+% ---- real numbers
+
+\newcommand{\arrondisup}[1]{\lceil #1 \rceil}
+\newcommand{\arrondiinf}[1]{\lfloor #1 \rfloor}
+
+% ---- complex numbers
+
+\DeclareMathOperator{\conjugue}{conj}
+\newcommand{\conjaccent}[1]{\overline{#1}}
+
+% ---------- Polynômes ---------------
+
+\DeclareMathOperator{\division}{division}
+
+% ---- differences
+
+\newcommand{\difference}{\boldsymbol{\Delta}}
+
+% ---- differentials
+
+\newcommand{\differentielle}[2]{\mathfrak{D}^{#1}_{#2}}
+
+\newcommand{\OD}[2]{\frac{d #1}{d #2}}
+\newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
+\newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
+
+\newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
+\newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
+\newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+
+\newcommand{\gradient}{\mathbf{\nabla}}
+\newcommand{\laplace}{\mathbf{\Delta}}
+
+% ---- vectors
+
+\newcommand{\combilin}[1]{\mathrm{span}\{ #1 \}}
+
+% ---- tensors
+
+\DeclareMathOperator{\trace}{tr}
+
+% ---- probability
+
+\newcommand{\proba}{\mathbb{P}}
+\newcommand{\probaof}[1]{\mathbb{P}\left[#1\right]}
+\newcommand{\esperof}[1]{\mathbb{E}\left[#1\right]}
+\newcommand{\cov}[2]{\mathrm{cov} \left( #1 , #2 \right) }
+\newcommand{\var}[1]{\mathrm{var} \left( #1 \right) }
+\newcommand{\rand}{\mathrm{rand}}
+
+\newcommand{\variation}[1]{\left\langle #1 \right\rangle}
+
+% ---- matrices
+
+\DeclareMathOperator*{\composante}{comp}
+\DeclareMathOperator*{\bloc}{bloc}
+\DeclareMathOperator*{\ligne}{ligne}
+\DeclareMathOperator*{\colonne}{colonne}
+\DeclareMathOperator*{\diagonale}{diag}
+
+\newcommand{\matelementaire}{\mathrm{Elem}}
+\DeclareMathOperator*{\matpermutation}{permut}
+\newcommand{\matunitaire}{\mathrm{Unitaire}}
+
+\newcommand{\gaussjordan}{\mathrm{GaussJordan}}
+\newcommand{\householder}{\mathrm{Householder}}
+\DeclareMathOperator{\rang}{rang}
+
+\newcommand{\schur}{\mathrm{Schur}}
+\newcommand{\singuliere}{\mathrm{DVS}}
+
+% ---- miscellaneous
+
+\newcommand{\convexe}{\mathrm{Convexe}}
+
+\newcommand{\petito}[1]{o\left(#1\right)}
+\newcommand{\grando}[1]{O\left(#1\right)}
+
+% ======================= end ============================================
+
+\endinput

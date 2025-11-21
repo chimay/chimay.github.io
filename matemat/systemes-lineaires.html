@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-11-20 jeu 16:38 -->
+<!-- 2025-11-21 ven 16:38 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Systèmes linéaires</title>
@@ -241,176 +241,172 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb3dc11e">1. Gauss-Jordan</a></li>
-<li><a href="#org3c3d784">2. Systèmes linéaires</a></li>
-<li><a href="#org235a169">3. Matrices hautes</a></li>
-<li><a href="#org1a256cf">4. Matrices longues</a></li>
-<li><a href="#org11a6a71">5. Matrices carrées</a></li>
-<li><a href="#org5d831e8">6. Complément de Schur</a></li>
-<li><a href="#org527f94f">7. Dimension</a></li>
-<li><a href="#org682b391">8. Indépendance linéaire</a></li>
+<li><a href="#orgd9944a2">1. Gauss-Jordan</a></li>
+<li><a href="#org5b875d4">2. Systèmes linéaires</a></li>
+<li><a href="#orga0b998d">3. Matrices hautes</a></li>
+<li><a href="#orgc6d8aeb">4. Matrices longues</a></li>
+<li><a href="#org59ebe60">5. Matrices carrées</a></li>
+<li><a href="#org1a6a4e8">6. Complément de Schur</a></li>
+<li><a href="#orgaa605dc">7. Dimension</a></li>
+<li><a href="#org6a1b9c1">8. Indépendance linéaire</a></li>
 </ul>
 </div>
 </div>
 
-<p>
-\(
-\newcommand{\parentheses}[1]{\left(#1\right)}
-\newcommand{\crochets}[1]{\left[#1\right]}
-\newcommand{\accolades}[1]{\left\{#1\right\}}
-\newcommand{\ensemble}[1]{\left\{#1\right\}}
-\DeclareMathOperator*{\cardinal}{\mathrm{card}}
-\newcommand{\identite}{\mathrm{Id}}
-\newcommand{\indicatrice}{\boldsymbol{\delta}}
-\newcommand{\dirac}{\delta}
-\newcommand{\moinsun}{{-1}}
-\newcommand{\inverse}{\ddagger}
-\newcommand{\pinverse}{\dagger}
-\newcommand{\topologie}{\mathfrak{T}}
-\newcommand{\ferme}{\mathfrak{F}}
-\newcommand{\img}{\mathbf{i}}
-\newcommand{\binome}[2]{
-\left\{ \begin{array}{c}
-#1 \\
-#2 \\
-\end{array} \right\}
-}
-\newcommand{\canonique}{\mathfrak{c}}
-\newcommand{\tenseuridentite}{\boldsymbol{\mathcal{I}}}
-\newcommand{\permutation}{\boldsymbol{\epsilon}}
-\newcommand{\matriceZero}{\mathfrak{0}}
-\newcommand{\matriceUn}{\mathfrak{1}}
-\newcommand{\christoffel}[2]{
-\left\{ \begin{array}{c}
-#1 \\
-#2 \\
-\end{array} \right\}
-}
-\newcommand{\lagrangien}{\mathfrak{L}}
-\newcommand{\sousens}{\mathfrak{P}}
-\newcommand{\partition}{\mathrm{Partition}}
-\newcommand{\tribu}{\mathrm{Tribu}}
-\newcommand{\topologies}{\mathrm{Topo}}
-\newcommand{\setB}{\mathbb{B}}
-\newcommand{\setN}{\mathbb{N}}
-\newcommand{\setZ}{\mathbb{Z}}
-\newcommand{\setQ}{\mathbb{Q}}
-\newcommand{\setR}{\mathbb{R}}
-\newcommand{\setC}{\mathbb{C}}
-\newcommand{\corps}{\mathbb{K}}
-\newcommand{\boule}{\mathfrak{B}}
-\newcommand{\intervalleouvert}[2]{\left] #1 , #2 \right[}
-\newcommand{\intervallesemiouvertgauche}[2]{ \left] #1 , #2 \right]}
-\newcommand{\intervallesemiouvertdroite}[2]{\left[ #1 , #2 \right[ }
-\newcommand{\fonction}{\mathbb{F}}
-\newcommand{\bijection}{\mathrm{Bij}}
-\newcommand{\polynome}{\mathrm{Poly}}
-\newcommand{\lineaire}{\mathrm{Lin}}
-\newcommand{\continue}{\mathrm{Cont}}
-\newcommand{\homeomorphisme}{\mathrm{Hom}}
-\newcommand{\etagee}{\mathrm{Etagee}}
-\newcommand{\lebesgue}{\mathrm{Leb}}
-\newcommand{\lipschitz}{\mathrm{Lip}}
-\newcommand{\suitek}{\mathrm{Suite}}
-\newcommand{\matrice}{\mathbb{M}}
-\newcommand{\krylov}{\mathrm{Krylov}}
-\newcommand{\tenseur}{\mathbb{T}}
-\newcommand{\essentiel}{\mathfrak{E}}
-\newcommand{\relation}{\mathrm{Rel}}
-\DeclareMathOperator*{\strictinferieur}{\ < \ }
-\DeclareMathOperator*{\strictsuperieur}{\ > \ }
-\DeclareMathOperator*{\ensinferieur}{\eqslantless}
-\DeclareMathOperator*{\enssuperieur}{\eqslantgtr}
-\DeclareMathOperator*{\esssuperieur}{\gtrsim}
-\DeclareMathOperator*{\essinferieur}{\lesssim}
-\newcommand{\essegal}{\eqsim}
-\newcommand{\union}{\ \cup \ }
-\newcommand{\intersection}{\ \cap \ }
-\newcommand{\opera}{\divideontimes}
-\newcommand{\autreaddition}{\boxplus}
-\newcommand{\autremultiplication}{\circledast}
-\newcommand{\commutateur}[2]{\left[ #1 , #2 \right]}
-\newcommand{\convolution}{\circledcirc}
-\newcommand{\correlation}{\ \natural \ }
-\newcommand{\diventiere}{\div}
-\newcommand{\modulo}{\bmod}
-\DeclareMathOperator*{\pgcd}{pgcd}
-\DeclareMathOperator*{\ppcm}{ppcm}
-\newcommand{\produitscalaire}[2]{\left\langle #1 \vert #2 \right\rangle}
-\newcommand{\scalaire}[2]{\left\langle #1 \| #2 \right\rangle}
-\newcommand{\braket}[3]{\left\langle #1 \vert #2 \vert #3 \right\rangle}
-\newcommand{\orthogonal}{\bot}
-\newcommand{\forme}[2]{\left\langle #1 , #2 \right\rangle}
-\newcommand{\biforme}[3]{\left\langle #1 , #2 , #3 \right\rangle}
-\newcommand{\contraction}[3]{\left\langle #1 \odot #3 \right\rangle_{#2}}
-\newcommand{\dblecont}[5]{\left\langle #1 \vert #3 \vert #5 \right\rangle_{#2,#4}}
-\DeclareMathOperator*{\major}{major}
-\DeclareMathOperator*{\minor}{minor}
-\DeclareMathOperator*{\maxim}{maxim}
-\DeclareMathOperator*{\minim}{minim}
-\DeclareMathOperator*{\argument}{arg}
-\DeclareMathOperator*{\argmin}{arg\ min}
-\DeclareMathOperator*{\argmax}{arg\ max}
-\DeclareMathOperator*{\supessentiel}{ess\ sup}
-\DeclareMathOperator*{\infessentiel}{ess\ inf}
-\newcommand{\dual}{\star}
-\newcommand{\vardual}{\circledast}
-\newcommand{\distance}{\mathfrak{dist}}
-\newcommand{\norme}[1]{\left\| #1 \right\|}
-\newcommand{\normetrois}[1]{\left|\left\| #1 \right\|\right|}
-\DeclareMathOperator*{\adh}{adh}
-\DeclareMathOperator*{\interieur}{int}
-\newcommand{\frontiere}{\partial}
-\DeclareMathOperator*{\image}{im}
-\DeclareMathOperator*{\domaine}{dom}
-\DeclareMathOperator*{\noyau}{ker}
-\DeclareMathOperator*{\support}{supp}
-\DeclareMathOperator*{\signe}{sign}
-\newcommand{\abs}[1]{\left| #1 \right|}
-\newcommand{\unsur}[1]{\frac{1}{#1}}
-\newcommand{\arrondisup}[1]{\lceil #1 \rceil}
-\newcommand{\arrondiinf}[1]{\lfloor #1 \rfloor}
-\DeclareMathOperator*{\conjugue}{conj}
-\newcommand{\conjaccent}[1]{\overline{#1}}
-\DeclareMathOperator*{\division}{division}
-\newcommand{\difference}{\boldsymbol{\Delta}}
-\newcommand{\differentielle}[2]{\mathfrak{D}^{#1}_{#2}}
-\newcommand{\OD}[2]{\frac{d #1}{d #2}}
-\newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
-\newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
-\newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
-\newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
-\newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
-\newcommand{\gradient}{\mathbf{\nabla}}
-\newcommand{\combilin}[1]{\mathrm{span}\{ #1 \}}
-\DeclareMathOperator*{\trace}{tr}
-\newcommand{\proba}{\mathbb{P}}
-\newcommand{\probaof}[1]{\mathbb{P}\left[#1\right]}
-\newcommand{\esperof}[1]{\mathbb{E}\left[#1\right]}
-\newcommand{\cov}[2]{\mathrm{cov} \left( #1 , #2 \right) }
-\newcommand{\var}[1]{\mathrm{var} \left( #1 \right) }
-\newcommand{\rand}{\mathrm{rand}}
-\newcommand{\variation}[1]{\left\langle #1 \right\rangle}
-\DeclareMathOperator*{\composante}{comp}
-\DeclareMathOperator*{\bloc}{bloc}
-\DeclareMathOperator*{\ligne}{ligne}
-\DeclareMathOperator*{\colonne}{colonne}
-\DeclareMathOperator*{\diagonale}{diag}
-\newcommand{\matelementaire}{\mathrm{Elem}}
-\DeclareMathOperator*{\matpermutation}{permut}
-\newcommand{\matunitaire}{\mathrm{Unitaire}}
-\newcommand{\gaussjordan}{\mathrm{GaussJordan}}
-\newcommand{\householder}{\mathrm{Householder}}
-\DeclareMathOperator*{\rang}{rang}
-\newcommand{\schur}{\mathrm{Schur}}
-\newcommand{\singuliere}{\mathrm{DVS}}
-\newcommand{\convexe}{\mathrm{Convexe}}
-\newcommand{\petito}[1]{o\left(#1\right)}
-\newcommand{\grando}[1]{O\left(#1\right)}
-\)
-</p>
+<script>
+MathJax = {
+  tex: {
+    packages: {'[+]': ['base','ams','braket']},
+    macros: {
+      parentheses: ["\\left(#1\\right)", 1],
+      crochets: ["\\left[#1\\right]", 1],
+      accolades: ["\\left\\{#1\\right\\}", 1],
+      ensemble: ["\\left\\{#1\\right\\}", 1],
+      cardinal: ["\\mathop{\\mathrm{card}\\ }\\limits",0],
+      identite: "\\mathrm{Id}",
+      indicatrice: "\\boldsymbol{\\delta}",
+      dirac: "\\delta",
+      moinsun: "-1",
+      inverse: "\\ddagger",
+      pinverse: "\\dagger",
+      topologie: "\\mathfrak{T}",
+      ferme: "\\mathfrak{F}",
+      img: "\\mathbf{i}",
+      binome: ["\\left\\{ \\\\begin{array}{c} #1 \\\\ #2 \\\\ \\\\end{array} \\\\right\\}", 2],
+      canonique: "\\mathfrak{c}",
+      tenseuridentite: "\\boldsymbol{\\mathcal{I}}",
+      permutation: "\\boldsymbol{\\epsilon}",
+      matriceZero: "\\mathfrak{0}",
+      matriceUn: "\\mathfrak{1}",
+      christoffel: ["\\left\\{ \\\\begin{array}{c} #1 \\\\ #2 \\\\ \\\\end{array} \\\\right\\}", 2],
+      lagrangien: "\\mathfrak{L}",
+      sousens: "\\mathfrak{P}",
+      partition: "\\mathrm{Partition}",
+      tribu: "\\mathrm{Tribu}",
+      topologies: "\\mathrm{Topo}",
+      setB: "\\mathbb{B}",
+      setN: "\\mathbb{N}",
+      setZ: "\\mathbb{Z}",
+      setQ: "\\mathbb{Q}",
+      setR: "\\mathbb{R}",
+      setC: "\\mathbb{C}",
+      corps: "\\mathbb{K}",
+      boule: "\\mathfrak{B}",
+      intervalleouvert: ["\\left] #1 , #2 \\\\right[", 2],
+      intervallesemiouvertgauche: ["\\left] #1 , #2 \\\\right]", 2],
+      intervallesemiouvertdroite: ["\\left[ #1 , #2 \\\\right[", 2],
+      fonction: "\\mathbb{F}",
+      bijection: "\\mathrm{Bij}",
+      polynome: "\\mathrm{Poly}",
+      lineaire: "\\mathrm{Lin}",
+      continue: "\\mathrm{Cont}",
+      homeomorphisme: "\\mathrm{Hom}",
+      etagee: "\\mathrm{Etagee}",
+      lebesgue: "\\mathrm{Leb}",
+      lipschitz: "\\mathrm{Lip}",
+      suitek: "\\mathrm{Suite}",
+      matrice: "\\mathbb{M}",
+      krylov: "\\mathrm{Krylov}",
+      tenseur: "\\mathbb{T}",
+      essentiel: "\\mathfrak{E}",
+      relation: "\\mathrm{Rel}",
+      strictinferieur: "<",
+      strictsuperieur: ">",
+      ensinferieur: "\\eqslantless",
+      enssuperieur: "\\eqslantgtr",
+      esssuperieur: "\\gtrsim",
+      essinferieur: "\\lesssim",
+      essegal: "\\eqsim",
+      union: "\\cup",
+      intersection: "\\cap",
+      opera: "\\divideontimes",
+      autreaddition: "\\boxplus",
+      autremultiplication: "\\circledast",
+      commutateur: ["\\left[ #1 , #2 \\\\right]", 2],
+      convolution: "\\circledcirc",
+      correlation: "\\natural",
+      diventiere: "\\div",
+      modulo: "\\bmod",
+      pgcd: ["\\mathop{\\mathrm{pgcd}\\ }\\limits",0],
+      ppcm: ["\\mathop{\\mathrm{ppcm}\\ }\\limits",0],
+      produitscalaire: ["\\left\\langle #1 \\\\vert #2 \\\\right\\rangle", 2],
+      scalaire: ["\\left\\langle #1 \\| #2 \\\\right\\rangle", 2],
+      braket: ["\\left\\langle #1 \\\\vert #2 \\\\vert #3 \\\\right\\rangle", 3],
+      orthogonal: "\\bot",
+      forme: ["\\left\\langle #1 , #2 \\\\right\\rangle", 2],
+      biforme: ["\\left\\langle #1 , #2 , #3 \\\\right\\rangle", 3],
+      contraction: ["\\left\\langle #1 \\\\odot #3 \\\\right\\rangle_{#2}", 3],
+      dblecont: ["\\left\\langle #1 \\\\vert #3 \\\\vert #5 \\\\right\\rangle_{#2,#4}", 5],
+      major: ["\\mathop{\\mathrm{major}\\ }\\limits",0],
+      minor: ["\\mathop{\\mathrm{minor}\\ }\\limits",0],
+      maxim: ["\\mathop{\\mathrm{maxim}\\ }\\limits",0],
+      minim: ["\\mathop{\\mathrm{minim}\\ }\\limits",0],
+      argument: ["\\mathop{\\mathrm{arg}\\ }\\limits",0],
+      argmin: ["\\mathop{\\mathrm{arg\\,min}\\ }\\limits",0],
+      argmax: ["\\mathop{\\mathrm{arg\\,max}\\ }\\limits",0],
+      supessentiel: ["\\mathop{\\mathrm{ess\\,sup}\\ }\\limits",0],
+      infessentiel: ["\\mathop{\\mathrm{ess\\,inf}\\ }\\limits",0],
+      dual: "\\star",
+      vardual: "\\circledast",
+      distance: "\\mathfrak{dist}",
+      norme: ["\\left\\| #1 \\\\right\\|", 1],
+      normetrois: ["\\left|\\left\\| #1 \\\\right\\|\\right|", 1],
+      adh: ["\\mathop{\\mathrm{adh}\\ }\\limits",0],
+      interieur: ["\\mathop{\\mathrm{int}\\ }\\limits",0],
+      frontiere: "\\partial",
+      image: ["\\mathop{\\mathrm{im}\\ }\\limits",0],
+      domaine: ["\\mathop{\\mathrm{dom}\\ }\\limits",0],
+      noyau: ["\\mathop{\\mathrm{ker}\\ }\\limits",0],
+      support: ["\\mathop{\\mathrm{supp}\\ }\\limits",0],
+      signe: ["\\mathop{\\mathrm{sign}\\ }\\limits",0],
+      abs: ["\\left| #1 \\\\right|", 1],
+      unsur: ["\\frac{1}{#1}", 1],
+      arrondisup: ["\\lceil #1 \\\\rceil", 1],
+      arrondiinf: ["\\lfloor #1 \\\\rfloor", 1],
+      conjugue: "conj",
+      conjaccent: ["\\overline{#1}", 1],
+      division: "division",
+      difference: "\\boldsymbol{\\Delta}",
+      differentielle: ["\\mathfrak{D}^{#1}_{#2}", 2],
+      OD: ["\\frac{d #1}{d #2}", 2],
+      OOD: ["\\frac{d^2 #1}{d #2^2}", 2],
+      NOD: ["\\frac{d^{#3} #1}{d #2^{#3}}", 3],
+      deriveepartielle: ["\\frac{\\partial #1}{\\partial #2}", 2],
+      PD: ["\\frac{\\partial #1}{\\partial #2}", 2],
+      dblederiveepartielle: ["\\frac{\\partial^2 #1}{\\partial #2 \\\\partial #2}", 2],
+      dfdxdy: ["\\frac{\\partial^2 #1}{\\partial #2 \\\\partial #3}", 3],
+      dfdxdx: ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2],
+      gradient: "\\mathbf{\\nabla}",
+      combilin: ["\\mathrm{span}\\{ #1 \\", 1],
+      trace: "tr",
+      proba: "\\mathbb{P}",
+      probaof: ["\\mathbb{P}\\left[#1\\right]", 1],
+      esperof: ["\\mathbb{E}\\left[#1\\right]", 1],
+      cov: ["\\mathrm{cov} ( #1 , #2 )", 2],
+      var: ["\\mathrm{var} ( #1 )", 1],
+      rand: "\\mathrm{rand}",
+      variation: ["\\left\\langle #1 \\\\right\\rangle", 1],
+      composante: ["\\mathop{\\mathrm{comp}\\ }\\limits",0],
+      bloc: ["\\mathop{\\mathrm{bloc}\\ }\\limits",0],
+      ligne: ["\\mathop{\\mathrm{ligne}\\ }\\limits",0],
+      colonne: ["\\mathop{\\mathrm{colonne}\\ }\\limits",0],
+      diagonale: ["\\mathop{\\mathrm{diag}\\ }\\limits",0],
+      matelementaire: "\\mathrm{Elem}",
+      matpermutation: ["\\mathop{\\mathrm{permut}\\ }\\limits",0],
+      matunitaire: "\\mathrm{Unitaire}",
+      gaussjordan: "\\mathrm{GaussJordan}",
+      householder: "\\mathrm{Householder}",
+      rang: "rang",
+      schur: "\\mathrm{Schur}",
+      singuliere: "\\mathrm{DVS}",
+      convexe: "\\mathrm{Convexe}",
+      petito: ["o(#1)", 1],
+      grando: ["O(#1)", 1]
+    }
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <p>
 \(
@@ -426,8 +422,8 @@
 <p>
 \label{chap:syslin}
 </p>
-<div id="outline-container-orgb3dc11e" class="outline-2">
-<h2 id="orgb3dc11e"><span class="section-number-2">1.</span> Gauss-Jordan</h2>
+<div id="outline-container-orgd9944a2" class="outline-2">
+<h2 id="orgd9944a2"><span class="section-number-2">1.</span> Gauss-Jordan</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Nous allons tenter de diagonaliser une matrice \(A \in \matrice(\corps,m,n)\) en une matrice diagonale aussi proche que possible de la matrice identité. Soit les \(\canonique_i\), vecteurs de la base canonique de \(\corps^m\) ou \(\corps^n\) suivant le contexte. Si \(A\) est non nulle, on peut trouver un \(i\) et un \(j\) tels que :
@@ -795,8 +791,8 @@ I_r & 0 \)
 suivant que \(r = p = m = n\), \(r = p = n\), \(r = p = m\) ou \(r \strictinferieur p\).
 </p>
 </div>
-<div id="outline-container-org7b06813" class="outline-3">
-<h3 id="org7b06813"><span class="section-number-3">1.1.</span> Inverse</h3>
+<div id="outline-container-orgdf238e1" class="outline-3">
+<h3 id="orgdf238e1"><span class="section-number-3">1.1.</span> Inverse</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Les matrices élémentaires de permutation sont inversibles, d'inverse identique à elles-mêmes. On a donc \(P_i^{-1} = P_i\) et \(Q_i^{-1} = Q_i\). Les matrices élémentaires de transformation sont également inversibles. En effet, \(x^\dual \cdot y = x^\dual \cdot \canonique_1 = a \ne 0\). L'inverse de \(E_0\) existe donc et s'écrit :
@@ -842,8 +838,8 @@ Une telle décomposition est appelée décomposition de Gauss-Jordan et notée 
 </p>
 </div>
 </div>
-<div id="outline-container-org0f23bdc" class="outline-3">
-<h3 id="org0f23bdc"><span class="section-number-3">1.2.</span> Rang</h3>
+<div id="outline-container-org22e540d" class="outline-3">
+<h3 id="org22e540d"><span class="section-number-3">1.2.</span> Rang</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Le \(r\) ainsi obtenu est appelé rang de la matrice \(A\). On le note :
@@ -859,8 +855,8 @@ On a par construction \(r \le p\).
 </div>
 </div>
 </div>
-<div id="outline-container-org3c3d784" class="outline-2">
-<h2 id="org3c3d784"><span class="section-number-2">2.</span> Systèmes linéaires</h2>
+<div id="outline-container-org5b875d4" class="outline-2">
+<h2 id="org5b875d4"><span class="section-number-2">2.</span> Systèmes linéaires</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Nous allons à présent utiliser la décomposition de Gauss-Jordan pour analyser les espaces de solutions :
@@ -911,8 +907,8 @@ Le système linéaire s'écrit alors :
 \[C \cdot z = b\]
 </p>
 </div>
-<div id="outline-container-org5216792" class="outline-3">
-<h3 id="org5216792"><span class="section-number-3">2.1.</span> Plein rang, matrice carrée</h3>
+<div id="outline-container-org97a5464" class="outline-3">
+<h3 id="org97a5464"><span class="section-number-3">2.1.</span> Plein rang, matrice carrée</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Si \(r = m = n\), on a :
@@ -939,8 +935,8 @@ L'équation \(A \cdot x = y\) admet donc pour unique solution \(x \in S(y)\) le 
 </p>
 </div>
 </div>
-<div id="outline-container-org82a7f1e" class="outline-3">
-<h3 id="org82a7f1e"><span class="section-number-3">2.2.</span> Plein rang, matrice haute</h3>
+<div id="outline-container-orgf16322c" class="outline-3">
+<h3 id="orgf16322c"><span class="section-number-3">2.2.</span> Plein rang, matrice haute</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Si \(r = n \strictinferieur m\), on a :
@@ -1053,8 +1049,8 @@ où \(b_2 \ne 0\).
 </p>
 </div>
 </div>
-<div id="outline-container-org35107b8" class="outline-3">
-<h3 id="org35107b8"><span class="section-number-3">2.3.</span> Plein rang, matrice longue</h3>
+<div id="outline-container-org2fe96ff" class="outline-3">
+<h3 id="org2fe96ff"><span class="section-number-3">2.3.</span> Plein rang, matrice longue</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Si \(r = m \strictinferieur n\), on se retrouve alors avec :
@@ -1124,8 +1120,8 @@ L^{-1} \cdot y \\ z_2
 </div>
 </div>
 </div>
-<div id="outline-container-org475bb0b" class="outline-3">
-<h3 id="org475bb0b"><span class="section-number-3">2.4.</span> Rang incomplet</h3>
+<div id="outline-container-org8755900" class="outline-3">
+<h3 id="org8755900"><span class="section-number-3">2.4.</span> Rang incomplet</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Supposons que \(r \strictinferieur p\). On partitionne alors \(z\) en deux vecteurs \(z_1\) et \(z_2\) de tailles \((r,1)\) et \((n - r, 1)\) et \(b\) en deux vecteurs \(b_1\) et \(b_2\) de tailles \((r,1)\) et \((m - r,1)\). Avec ces notations, le produit \(C \cdot z\) s'écrit :
@@ -1241,16 +1237,16 @@ où \(b_2 \ne 0\).
 </p>
 </div>
 </div>
-<div id="outline-container-orgc631b16" class="outline-3">
-<h3 id="orgc631b16"><span class="section-number-3">2.5.</span> Rang et existence</h3>
+<div id="outline-container-org057f688" class="outline-3">
+<h3 id="org057f688"><span class="section-number-3">2.5.</span> Rang et existence</h3>
 <div class="outline-text-3" id="text-2-5">
 <p>
 On conclut de ce qui précède que si \(r \strictinferieur m\) ou \(r \strictinferieur p\), on peut toujours trouver un \(y\) tel qu'il n'existe pas de solution. Pour qu'il existe au moins une solution du système quel que soit \(y\), il faut donc avoir \(r = m = p\).
 </p>
 </div>
 </div>
-<div id="outline-container-org5b6d065" class="outline-3">
-<h3 id="org5b6d065"><span class="section-number-3">2.6.</span> Rang et unicité</h3>
+<div id="outline-container-orga7d3a7f" class="outline-3">
+<h3 id="orga7d3a7f"><span class="section-number-3">2.6.</span> Rang et unicité</h3>
 <div class="outline-text-3" id="text-2-6">
 <p>
 On conclut de ce qui précède que si \(r \strictinferieur n\) ou \(r \strictinferieur p\), on peut toujours trouver un \(y\) tel qu'il existe une infinité de solution, et même une infinité de solutions non nulles puisque \(z_2 \ne 0\) peut être quelconque.
@@ -1262,8 +1258,8 @@ Pour qu'il existe au maximum une solution du système quel que soit \(y\), il fa
 </div>
 </div>
 </div>
-<div id="outline-container-org235a169" class="outline-2">
-<h2 id="org235a169"><span class="section-number-2">3.</span> Matrices hautes</h2>
+<div id="outline-container-orga0b998d" class="outline-2">
+<h2 id="orga0b998d"><span class="section-number-2">3.</span> Matrices hautes</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Soit une matrice \(A \in \matrice(\corps,m,n)\) strictement haute (\(m \strictsuperieur n\)). Un inverse à droite \(R\) vérifiant \(A \cdot B = I\) ne peut pas exister, car sinon il suffirait de prendre \(x = B \cdot y\) pour avoir :
@@ -1278,8 +1274,8 @@ Le système \(A \cdot x = y\) admettrait toujours au moins une solution, ce qui 
 </p>
 </div>
 </div>
-<div id="outline-container-org1a256cf" class="outline-2">
-<h2 id="org1a256cf"><span class="section-number-2">4.</span> Matrices longues</h2>
+<div id="outline-container-orgc6d8aeb" class="outline-2">
+<h2 id="orgc6d8aeb"><span class="section-number-2">4.</span> Matrices longues</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Soit une matrice \(A \in \matrice(\corps,m,n)\) strictement longue (\(n \strictsuperieur m\)). Un inverse à gauche \(B\) vérifiant \(B \cdot A = I\) ne peut pas exister, car sinon on aurait :
@@ -1294,8 +1290,8 @@ La matrice \(B^\dual\) serait donc un inverse à droite de la matrice \(A^\dual\
 </p>
 </div>
 </div>
-<div id="outline-container-org11a6a71" class="outline-2">
-<h2 id="org11a6a71"><span class="section-number-2">5.</span> Matrices carrées</h2>
+<div id="outline-container-org59ebe60" class="outline-2">
+<h2 id="org59ebe60"><span class="section-number-2">5.</span> Matrices carrées</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Supposons que \(m = n\) et considérons deux matrices carrées \(A,B \in \matrice(\corps,n,n)\) telles que :
@@ -1323,8 +1319,8 @@ En multipliant à gauche par \(A^{-1}\), il vient simplement \(B - A^{-1} = 0\),
 </p>
 </div>
 </div>
-<div id="outline-container-org5d831e8" class="outline-2">
-<h2 id="org5d831e8"><span class="section-number-2">6.</span> Complément de Schur</h2>
+<div id="outline-container-org1a6a4e8" class="outline-2">
+<h2 id="org1a6a4e8"><span class="section-number-2">6.</span> Complément de Schur</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Soit le système suivant :
@@ -1416,8 +1412,8 @@ Si \(A\) est facilement inversible, et si \(D - C \cdot A^{-1} \cdot B\) est de 
 </p>
 </div>
 </div>
-<div id="outline-container-org527f94f" class="outline-2">
-<h2 id="org527f94f"><span class="section-number-2">7.</span> Dimension</h2>
+<div id="outline-container-orgaa605dc" class="outline-2">
+<h2 id="orgaa605dc"><span class="section-number-2">7.</span> Dimension</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Soit un espace vectoriel \(E\) sur \(\corps\) possédant deux bases \((e_1,e_2,...,e_n)\) et \((f_1,f_2,...,f_m)\). Comme les \(f_i \in E\), on a :
@@ -1467,8 +1463,8 @@ d'où l'on conclut que \(B \cdot A = I_n\). La matrice \(A\) admettant un invers
 \[\dim E = n\]
 </p>
 </div>
-<div id="outline-container-org586894a" class="outline-3">
-<h3 id="org586894a"><span class="section-number-3">7.1.</span> Corollaire</h3>
+<div id="outline-container-org7838818" class="outline-3">
+<h3 id="org7838818"><span class="section-number-3">7.1.</span> Corollaire</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 La base canonique de \(\corps^n\) comptant \(n\) éléments,
@@ -1477,8 +1473,8 @@ on en déduit que \(\corps^n\) est de dimension \(n\).
 </div>
 </div>
 </div>
-<div id="outline-container-org682b391" class="outline-2">
-<h2 id="org682b391"><span class="section-number-2">8.</span> Indépendance linéaire</h2>
+<div id="outline-container-org6a1b9c1" class="outline-2">
+<h2 id="org6a1b9c1"><span class="section-number-2">8.</span> Indépendance linéaire</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 Soit un espace vectoriel \(E\) de dimension \(m\) et une suite de vecteurs linéairement indépendants \((u_1,...,u_n)\) de \(E\). Si \((e_1,...,e_m)\) est une base de \(E\), on peut trouver des coordonnées \(a_{ki} \in \corps\) telles que :
@@ -1544,7 +1540,7 @@ Soit \(r\) le rang de \(A\). On sait déjà que \(r \le \min \{m,n\}\). Examinon
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-11-20 jeu 16:38</p>
+<p class="date">Created: 2025-11-21 ven 16:38</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

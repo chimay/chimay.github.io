@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-11-20 jeu 16:27 -->
+<!-- 2025-11-21 ven 16:36 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Calcul stochastique</title>
@@ -241,176 +241,172 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org43cbd65">1. Processus stochastique</a></li>
-<li><a href="#org2250f5d">2. Intégrale d'Ito</a></li>
-<li><a href="#org2d5852c">3. Variation quadratique</a></li>
-<li><a href="#org37109d2">4. Variation conjointe</a></li>
-<li><a href="#org224bcd0">5. Relations variations quadratiques - conjointes</a></li>
-<li><a href="#orgc12ad8f">6. Variation d'ordre quelconque</a></li>
-<li><a href="#org1859b42">7. Calcul d'Ito</a></li>
-<li><a href="#org5214aca">8. Mouvement Brownien</a></li>
+<li><a href="#orgae3587c">1. Processus stochastique</a></li>
+<li><a href="#org277820d">2. Intégrale d'Ito</a></li>
+<li><a href="#org6a39994">3. Variation quadratique</a></li>
+<li><a href="#org8ac2504">4. Variation conjointe</a></li>
+<li><a href="#org32be1a6">5. Relations variations quadratiques - conjointes</a></li>
+<li><a href="#orgd34f139">6. Variation d'ordre quelconque</a></li>
+<li><a href="#org90ceb11">7. Calcul d'Ito</a></li>
+<li><a href="#org596ab41">8. Mouvement Brownien</a></li>
 </ul>
 </div>
 </div>
 
-<p>
-\(
-\newcommand{\parentheses}[1]{\left(#1\right)}
-\newcommand{\crochets}[1]{\left[#1\right]}
-\newcommand{\accolades}[1]{\left\{#1\right\}}
-\newcommand{\ensemble}[1]{\left\{#1\right\}}
-\DeclareMathOperator*{\cardinal}{\mathrm{card}}
-\newcommand{\identite}{\mathrm{Id}}
-\newcommand{\indicatrice}{\boldsymbol{\delta}}
-\newcommand{\dirac}{\delta}
-\newcommand{\moinsun}{{-1}}
-\newcommand{\inverse}{\ddagger}
-\newcommand{\pinverse}{\dagger}
-\newcommand{\topologie}{\mathfrak{T}}
-\newcommand{\ferme}{\mathfrak{F}}
-\newcommand{\img}{\mathbf{i}}
-\newcommand{\binome}[2]{
-\left\{ \begin{array}{c}
-#1 \\
-#2 \\
-\end{array} \right\}
-}
-\newcommand{\canonique}{\mathfrak{c}}
-\newcommand{\tenseuridentite}{\boldsymbol{\mathcal{I}}}
-\newcommand{\permutation}{\boldsymbol{\epsilon}}
-\newcommand{\matriceZero}{\mathfrak{0}}
-\newcommand{\matriceUn}{\mathfrak{1}}
-\newcommand{\christoffel}[2]{
-\left\{ \begin{array}{c}
-#1 \\
-#2 \\
-\end{array} \right\}
-}
-\newcommand{\lagrangien}{\mathfrak{L}}
-\newcommand{\sousens}{\mathfrak{P}}
-\newcommand{\partition}{\mathrm{Partition}}
-\newcommand{\tribu}{\mathrm{Tribu}}
-\newcommand{\topologies}{\mathrm{Topo}}
-\newcommand{\setB}{\mathbb{B}}
-\newcommand{\setN}{\mathbb{N}}
-\newcommand{\setZ}{\mathbb{Z}}
-\newcommand{\setQ}{\mathbb{Q}}
-\newcommand{\setR}{\mathbb{R}}
-\newcommand{\setC}{\mathbb{C}}
-\newcommand{\corps}{\mathbb{K}}
-\newcommand{\boule}{\mathfrak{B}}
-\newcommand{\intervalleouvert}[2]{\left] #1 , #2 \right[}
-\newcommand{\intervallesemiouvertgauche}[2]{ \left] #1 , #2 \right]}
-\newcommand{\intervallesemiouvertdroite}[2]{\left[ #1 , #2 \right[ }
-\newcommand{\fonction}{\mathbb{F}}
-\newcommand{\bijection}{\mathrm{Bij}}
-\newcommand{\polynome}{\mathrm{Poly}}
-\newcommand{\lineaire}{\mathrm{Lin}}
-\newcommand{\continue}{\mathrm{Cont}}
-\newcommand{\homeomorphisme}{\mathrm{Hom}}
-\newcommand{\etagee}{\mathrm{Etagee}}
-\newcommand{\lebesgue}{\mathrm{Leb}}
-\newcommand{\lipschitz}{\mathrm{Lip}}
-\newcommand{\suitek}{\mathrm{Suite}}
-\newcommand{\matrice}{\mathbb{M}}
-\newcommand{\krylov}{\mathrm{Krylov}}
-\newcommand{\tenseur}{\mathbb{T}}
-\newcommand{\essentiel}{\mathfrak{E}}
-\newcommand{\relation}{\mathrm{Rel}}
-\DeclareMathOperator*{\strictinferieur}{\ < \ }
-\DeclareMathOperator*{\strictsuperieur}{\ > \ }
-\DeclareMathOperator*{\ensinferieur}{\eqslantless}
-\DeclareMathOperator*{\enssuperieur}{\eqslantgtr}
-\DeclareMathOperator*{\esssuperieur}{\gtrsim}
-\DeclareMathOperator*{\essinferieur}{\lesssim}
-\newcommand{\essegal}{\eqsim}
-\newcommand{\union}{\ \cup \ }
-\newcommand{\intersection}{\ \cap \ }
-\newcommand{\opera}{\divideontimes}
-\newcommand{\autreaddition}{\boxplus}
-\newcommand{\autremultiplication}{\circledast}
-\newcommand{\commutateur}[2]{\left[ #1 , #2 \right]}
-\newcommand{\convolution}{\circledcirc}
-\newcommand{\correlation}{\ \natural \ }
-\newcommand{\diventiere}{\div}
-\newcommand{\modulo}{\bmod}
-\DeclareMathOperator*{\pgcd}{pgcd}
-\DeclareMathOperator*{\ppcm}{ppcm}
-\newcommand{\produitscalaire}[2]{\left\langle #1 \vert #2 \right\rangle}
-\newcommand{\scalaire}[2]{\left\langle #1 \| #2 \right\rangle}
-\newcommand{\braket}[3]{\left\langle #1 \vert #2 \vert #3 \right\rangle}
-\newcommand{\orthogonal}{\bot}
-\newcommand{\forme}[2]{\left\langle #1 , #2 \right\rangle}
-\newcommand{\biforme}[3]{\left\langle #1 , #2 , #3 \right\rangle}
-\newcommand{\contraction}[3]{\left\langle #1 \odot #3 \right\rangle_{#2}}
-\newcommand{\dblecont}[5]{\left\langle #1 \vert #3 \vert #5 \right\rangle_{#2,#4}}
-\DeclareMathOperator*{\major}{major}
-\DeclareMathOperator*{\minor}{minor}
-\DeclareMathOperator*{\maxim}{maxim}
-\DeclareMathOperator*{\minim}{minim}
-\DeclareMathOperator*{\argument}{arg}
-\DeclareMathOperator*{\argmin}{arg\ min}
-\DeclareMathOperator*{\argmax}{arg\ max}
-\DeclareMathOperator*{\supessentiel}{ess\ sup}
-\DeclareMathOperator*{\infessentiel}{ess\ inf}
-\newcommand{\dual}{\star}
-\newcommand{\vardual}{\circledast}
-\newcommand{\distance}{\mathfrak{dist}}
-\newcommand{\norme}[1]{\left\| #1 \right\|}
-\newcommand{\normetrois}[1]{\left|\left\| #1 \right\|\right|}
-\DeclareMathOperator*{\adh}{adh}
-\DeclareMathOperator*{\interieur}{int}
-\newcommand{\frontiere}{\partial}
-\DeclareMathOperator*{\image}{im}
-\DeclareMathOperator*{\domaine}{dom}
-\DeclareMathOperator*{\noyau}{ker}
-\DeclareMathOperator*{\support}{supp}
-\DeclareMathOperator*{\signe}{sign}
-\newcommand{\abs}[1]{\left| #1 \right|}
-\newcommand{\unsur}[1]{\frac{1}{#1}}
-\newcommand{\arrondisup}[1]{\lceil #1 \rceil}
-\newcommand{\arrondiinf}[1]{\lfloor #1 \rfloor}
-\DeclareMathOperator*{\conjugue}{conj}
-\newcommand{\conjaccent}[1]{\overline{#1}}
-\DeclareMathOperator*{\division}{division}
-\newcommand{\difference}{\boldsymbol{\Delta}}
-\newcommand{\differentielle}[2]{\mathfrak{D}^{#1}_{#2}}
-\newcommand{\OD}[2]{\frac{d #1}{d #2}}
-\newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
-\newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
-\newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
-\newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
-\newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
-\newcommand{\gradient}{\mathbf{\nabla}}
-\newcommand{\combilin}[1]{\mathrm{span}\{ #1 \}}
-\DeclareMathOperator*{\trace}{tr}
-\newcommand{\proba}{\mathbb{P}}
-\newcommand{\probaof}[1]{\mathbb{P}\left[#1\right]}
-\newcommand{\esperof}[1]{\mathbb{E}\left[#1\right]}
-\newcommand{\cov}[2]{\mathrm{cov} \left( #1 , #2 \right) }
-\newcommand{\var}[1]{\mathrm{var} \left( #1 \right) }
-\newcommand{\rand}{\mathrm{rand}}
-\newcommand{\variation}[1]{\left\langle #1 \right\rangle}
-\DeclareMathOperator*{\composante}{comp}
-\DeclareMathOperator*{\bloc}{bloc}
-\DeclareMathOperator*{\ligne}{ligne}
-\DeclareMathOperator*{\colonne}{colonne}
-\DeclareMathOperator*{\diagonale}{diag}
-\newcommand{\matelementaire}{\mathrm{Elem}}
-\DeclareMathOperator*{\matpermutation}{permut}
-\newcommand{\matunitaire}{\mathrm{Unitaire}}
-\newcommand{\gaussjordan}{\mathrm{GaussJordan}}
-\newcommand{\householder}{\mathrm{Householder}}
-\DeclareMathOperator*{\rang}{rang}
-\newcommand{\schur}{\mathrm{Schur}}
-\newcommand{\singuliere}{\mathrm{DVS}}
-\newcommand{\convexe}{\mathrm{Convexe}}
-\newcommand{\petito}[1]{o\left(#1\right)}
-\newcommand{\grando}[1]{O\left(#1\right)}
-\)
-</p>
+<script>
+MathJax = {
+  tex: {
+    packages: {'[+]': ['base','ams','braket']},
+    macros: {
+      parentheses: ["\\left(#1\\right)", 1],
+      crochets: ["\\left[#1\\right]", 1],
+      accolades: ["\\left\\{#1\\right\\}", 1],
+      ensemble: ["\\left\\{#1\\right\\}", 1],
+      cardinal: ["\\mathop{\\mathrm{card}\\ }\\limits",0],
+      identite: "\\mathrm{Id}",
+      indicatrice: "\\boldsymbol{\\delta}",
+      dirac: "\\delta",
+      moinsun: "-1",
+      inverse: "\\ddagger",
+      pinverse: "\\dagger",
+      topologie: "\\mathfrak{T}",
+      ferme: "\\mathfrak{F}",
+      img: "\\mathbf{i}",
+      binome: ["\\left\\{ \\\\begin{array}{c} #1 \\\\ #2 \\\\ \\\\end{array} \\\\right\\}", 2],
+      canonique: "\\mathfrak{c}",
+      tenseuridentite: "\\boldsymbol{\\mathcal{I}}",
+      permutation: "\\boldsymbol{\\epsilon}",
+      matriceZero: "\\mathfrak{0}",
+      matriceUn: "\\mathfrak{1}",
+      christoffel: ["\\left\\{ \\\\begin{array}{c} #1 \\\\ #2 \\\\ \\\\end{array} \\\\right\\}", 2],
+      lagrangien: "\\mathfrak{L}",
+      sousens: "\\mathfrak{P}",
+      partition: "\\mathrm{Partition}",
+      tribu: "\\mathrm{Tribu}",
+      topologies: "\\mathrm{Topo}",
+      setB: "\\mathbb{B}",
+      setN: "\\mathbb{N}",
+      setZ: "\\mathbb{Z}",
+      setQ: "\\mathbb{Q}",
+      setR: "\\mathbb{R}",
+      setC: "\\mathbb{C}",
+      corps: "\\mathbb{K}",
+      boule: "\\mathfrak{B}",
+      intervalleouvert: ["\\left] #1 , #2 \\\\right[", 2],
+      intervallesemiouvertgauche: ["\\left] #1 , #2 \\\\right]", 2],
+      intervallesemiouvertdroite: ["\\left[ #1 , #2 \\\\right[", 2],
+      fonction: "\\mathbb{F}",
+      bijection: "\\mathrm{Bij}",
+      polynome: "\\mathrm{Poly}",
+      lineaire: "\\mathrm{Lin}",
+      continue: "\\mathrm{Cont}",
+      homeomorphisme: "\\mathrm{Hom}",
+      etagee: "\\mathrm{Etagee}",
+      lebesgue: "\\mathrm{Leb}",
+      lipschitz: "\\mathrm{Lip}",
+      suitek: "\\mathrm{Suite}",
+      matrice: "\\mathbb{M}",
+      krylov: "\\mathrm{Krylov}",
+      tenseur: "\\mathbb{T}",
+      essentiel: "\\mathfrak{E}",
+      relation: "\\mathrm{Rel}",
+      strictinferieur: "<",
+      strictsuperieur: ">",
+      ensinferieur: "\\eqslantless",
+      enssuperieur: "\\eqslantgtr",
+      esssuperieur: "\\gtrsim",
+      essinferieur: "\\lesssim",
+      essegal: "\\eqsim",
+      union: "\\cup",
+      intersection: "\\cap",
+      opera: "\\divideontimes",
+      autreaddition: "\\boxplus",
+      autremultiplication: "\\circledast",
+      commutateur: ["\\left[ #1 , #2 \\\\right]", 2],
+      convolution: "\\circledcirc",
+      correlation: "\\natural",
+      diventiere: "\\div",
+      modulo: "\\bmod",
+      pgcd: ["\\mathop{\\mathrm{pgcd}\\ }\\limits",0],
+      ppcm: ["\\mathop{\\mathrm{ppcm}\\ }\\limits",0],
+      produitscalaire: ["\\left\\langle #1 \\\\vert #2 \\\\right\\rangle", 2],
+      scalaire: ["\\left\\langle #1 \\| #2 \\\\right\\rangle", 2],
+      braket: ["\\left\\langle #1 \\\\vert #2 \\\\vert #3 \\\\right\\rangle", 3],
+      orthogonal: "\\bot",
+      forme: ["\\left\\langle #1 , #2 \\\\right\\rangle", 2],
+      biforme: ["\\left\\langle #1 , #2 , #3 \\\\right\\rangle", 3],
+      contraction: ["\\left\\langle #1 \\\\odot #3 \\\\right\\rangle_{#2}", 3],
+      dblecont: ["\\left\\langle #1 \\\\vert #3 \\\\vert #5 \\\\right\\rangle_{#2,#4}", 5],
+      major: ["\\mathop{\\mathrm{major}\\ }\\limits",0],
+      minor: ["\\mathop{\\mathrm{minor}\\ }\\limits",0],
+      maxim: ["\\mathop{\\mathrm{maxim}\\ }\\limits",0],
+      minim: ["\\mathop{\\mathrm{minim}\\ }\\limits",0],
+      argument: ["\\mathop{\\mathrm{arg}\\ }\\limits",0],
+      argmin: ["\\mathop{\\mathrm{arg\\,min}\\ }\\limits",0],
+      argmax: ["\\mathop{\\mathrm{arg\\,max}\\ }\\limits",0],
+      supessentiel: ["\\mathop{\\mathrm{ess\\,sup}\\ }\\limits",0],
+      infessentiel: ["\\mathop{\\mathrm{ess\\,inf}\\ }\\limits",0],
+      dual: "\\star",
+      vardual: "\\circledast",
+      distance: "\\mathfrak{dist}",
+      norme: ["\\left\\| #1 \\\\right\\|", 1],
+      normetrois: ["\\left|\\left\\| #1 \\\\right\\|\\right|", 1],
+      adh: ["\\mathop{\\mathrm{adh}\\ }\\limits",0],
+      interieur: ["\\mathop{\\mathrm{int}\\ }\\limits",0],
+      frontiere: "\\partial",
+      image: ["\\mathop{\\mathrm{im}\\ }\\limits",0],
+      domaine: ["\\mathop{\\mathrm{dom}\\ }\\limits",0],
+      noyau: ["\\mathop{\\mathrm{ker}\\ }\\limits",0],
+      support: ["\\mathop{\\mathrm{supp}\\ }\\limits",0],
+      signe: ["\\mathop{\\mathrm{sign}\\ }\\limits",0],
+      abs: ["\\left| #1 \\\\right|", 1],
+      unsur: ["\\frac{1}{#1}", 1],
+      arrondisup: ["\\lceil #1 \\\\rceil", 1],
+      arrondiinf: ["\\lfloor #1 \\\\rfloor", 1],
+      conjugue: "conj",
+      conjaccent: ["\\overline{#1}", 1],
+      division: "division",
+      difference: "\\boldsymbol{\\Delta}",
+      differentielle: ["\\mathfrak{D}^{#1}_{#2}", 2],
+      OD: ["\\frac{d #1}{d #2}", 2],
+      OOD: ["\\frac{d^2 #1}{d #2^2}", 2],
+      NOD: ["\\frac{d^{#3} #1}{d #2^{#3}}", 3],
+      deriveepartielle: ["\\frac{\\partial #1}{\\partial #2}", 2],
+      PD: ["\\frac{\\partial #1}{\\partial #2}", 2],
+      dblederiveepartielle: ["\\frac{\\partial^2 #1}{\\partial #2 \\\\partial #2}", 2],
+      dfdxdy: ["\\frac{\\partial^2 #1}{\\partial #2 \\\\partial #3}", 3],
+      dfdxdx: ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2],
+      gradient: "\\mathbf{\\nabla}",
+      combilin: ["\\mathrm{span}\\{ #1 \\", 1],
+      trace: "tr",
+      proba: "\\mathbb{P}",
+      probaof: ["\\mathbb{P}\\left[#1\\right]", 1],
+      esperof: ["\\mathbb{E}\\left[#1\\right]", 1],
+      cov: ["\\mathrm{cov} ( #1 , #2 )", 2],
+      var: ["\\mathrm{var} ( #1 )", 1],
+      rand: "\\mathrm{rand}",
+      variation: ["\\left\\langle #1 \\\\right\\rangle", 1],
+      composante: ["\\mathop{\\mathrm{comp}\\ }\\limits",0],
+      bloc: ["\\mathop{\\mathrm{bloc}\\ }\\limits",0],
+      ligne: ["\\mathop{\\mathrm{ligne}\\ }\\limits",0],
+      colonne: ["\\mathop{\\mathrm{colonne}\\ }\\limits",0],
+      diagonale: ["\\mathop{\\mathrm{diag}\\ }\\limits",0],
+      matelementaire: "\\mathrm{Elem}",
+      matpermutation: ["\\mathop{\\mathrm{permut}\\ }\\limits",0],
+      matunitaire: "\\mathrm{Unitaire}",
+      gaussjordan: "\\mathrm{GaussJordan}",
+      householder: "\\mathrm{Householder}",
+      rang: "rang",
+      schur: "\\mathrm{Schur}",
+      singuliere: "\\mathrm{DVS}",
+      convexe: "\\mathrm{Convexe}",
+      petito: ["o(#1)", 1],
+      grando: ["O(#1)", 1]
+    }
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <p>
 \(
@@ -426,8 +422,8 @@
 <p>
 \label{chap:stocha}
 </p>
-<div id="outline-container-org43cbd65" class="outline-2">
-<h2 id="org43cbd65"><span class="section-number-2">1.</span> Processus stochastique</h2>
+<div id="outline-container-orgae3587c" class="outline-2">
+<h2 id="orgae3587c"><span class="section-number-2">1.</span> Processus stochastique</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Un processus stochastique est une fonction :
@@ -442,8 +438,8 @@ On sous-entend souvent l'événement \(\omega\), et on note \(X(t)=X(t,\omega)\)
 </p>
 </div>
 </div>
-<div id="outline-container-org2250f5d" class="outline-2">
-<h2 id="org2250f5d"><span class="section-number-2">2.</span> Intégrale d'Ito</h2>
+<div id="outline-container-org277820d" class="outline-2">
+<h2 id="org277820d"><span class="section-number-2">2.</span> Intégrale d'Ito</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Il s'agit d'une intégrale utilisant un processus stochastique \(X\) comme mesure :
@@ -454,8 +450,8 @@ Il s'agit d'une intégrale utilisant un processus stochastique \(X\) comme mesur
 </p>
 </div>
 </div>
-<div id="outline-container-org2d5852c" class="outline-2">
-<h2 id="org2d5852c"><span class="section-number-2">3.</span> Variation quadratique</h2>
+<div id="outline-container-org6a39994" class="outline-2">
+<h2 id="org6a39994"><span class="section-number-2">3.</span> Variation quadratique</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Soit \(\delta \strictsuperieur 0\) et les \(N\) temps \(t_k = k \cdot \delta\) où \(k = 0,...,\arrondisup{\frac{T}{\delta}}\). On définit la variation quadratique d'une fonction \(f\) :
@@ -482,8 +478,8 @@ Comme \(\delta^2 \to \delta \ ds\), on a :
 </p>
 </div>
 </div>
-<div id="outline-container-org37109d2" class="outline-2">
-<h2 id="org37109d2"><span class="section-number-2">4.</span> Variation conjointe</h2>
+<div id="outline-container-org8ac2504" class="outline-2">
+<h2 id="org8ac2504"><span class="section-number-2">4.</span> Variation conjointe</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Considérons maintenant deux processus stochastiques \(X,Y\). Nous définissons la variation conjointe \(\variation{X,Y}\) :
@@ -536,8 +532,8 @@ X(t) Y(t) - X(0) Y(0) &= \int_0^t d(X Y)(s) \)
 \end{align}
 </div>
 </div>
-<div id="outline-container-org224bcd0" class="outline-2">
-<h2 id="org224bcd0"><span class="section-number-2">5.</span> Relations variations quadratiques - conjointes</h2>
+<div id="outline-container-org32be1a6" class="outline-2">
+<h2 id="org32be1a6"><span class="section-number-2">5.</span> Relations variations quadratiques - conjointes</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 La définition nous donne directement :
@@ -564,8 +560,8 @@ d'où l'on déduit :
 </p>
 </div>
 </div>
-<div id="outline-container-orgc12ad8f" class="outline-2">
-<h2 id="orgc12ad8f"><span class="section-number-2">6.</span> Variation d'ordre quelconque</h2>
+<div id="outline-container-orgd34f139" class="outline-2">
+<h2 id="orgd34f139"><span class="section-number-2">6.</span> Variation d'ordre quelconque</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Soit \(\delta \strictsuperieur 0\) et les temps \(t_k = k \delta\) où \(k = 0,...,\arrondisup{\frac{T}{\delta}}\). On définit la variation d'ordre \(n\) d'une fonction \(f\) :
@@ -576,8 +572,8 @@ Soit \(\delta \strictsuperieur 0\) et les temps \(t_k = k \delta\) où \(k = 0,.
 </p>
 </div>
 </div>
-<div id="outline-container-org1859b42" class="outline-2">
-<h2 id="org1859b42"><span class="section-number-2">7.</span> Calcul d'Ito</h2>
+<div id="outline-container-org90ceb11" class="outline-2">
+<h2 id="org90ceb11"><span class="section-number-2">7.</span> Calcul d'Ito</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Soit une fonction \(F : \setR^n \mapsto \setR\) et \(N\) processus stochastiques \(X_i\) dont les variations d'ordre \(n \ge 3\) s'annulent. Soit \(X=(X_1,...,X_N)\). On peut écrire le développement en série de Taylor d'ordre 2 :
@@ -620,8 +616,8 @@ F(X(t)) - F(X(0)) =  \sum_i \int_0^t \deriveepartielle{F}{X_i}(X(s)) \ dX_i(s) +
 </p>
 </div>
 </div>
-<div id="outline-container-org763a1a9" class="outline-3">
-<h3 id="org763a1a9"><span class="section-number-3">7.1.</span> Dérivées ordinaires</h3>
+<div id="outline-container-orgf61b74d" class="outline-3">
+<h3 id="orgf61b74d"><span class="section-number-3">7.1.</span> Dérivées ordinaires</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 Dans le cas d'une seule variable, on a :
@@ -650,8 +646,8 @@ F(X(t)) - F(X(0)) = \sum_i \int_0^t \OD{F}{X}(X(s)) \ dX(s) + \)
 </div>
 </div>
 </div>
-<div id="outline-container-org5214aca" class="outline-2">
-<h2 id="org5214aca"><span class="section-number-2">8.</span> Mouvement Brownien</h2>
+<div id="outline-container-org596ab41" class="outline-2">
+<h2 id="org596ab41"><span class="section-number-2">8.</span> Mouvement Brownien</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 Un mouvement brownien est un processus stochastique :
@@ -702,8 +698,8 @@ pour tout \(s \strictinferieur t \strictinferieur u\) positifs. On demande aussi
 </p>
 </div>
 </div>
-<div id="outline-container-org14c0583" class="outline-3">
-<h3 id="org14c0583"><span class="section-number-3">8.1.</span> Variation quadratique</h3>
+<div id="outline-container-orgdebe1d1" class="outline-3">
+<h3 id="orgdebe1d1"><span class="section-number-3">8.1.</span> Variation quadratique</h3>
 <div class="outline-text-3" id="text-8-1">
 <p>
 Si les mouvements browniens sont continus, ils ne sont pas dérivables. Comme les variations sont normalement distribuées avec une moyenne nulle et une variance \(t - s\), on en déduit (en utilisant par exemple le moment générateur des densités normales) :
@@ -757,16 +753,16 @@ Ce que l'on note symboliquement sous forme différentielle par :
 </p>
 </div>
 </div>
-<div id="outline-container-org25fcf37" class="outline-3">
-<h3 id="org25fcf37"><span class="section-number-3">8.2.</span> Variations d'ordre quelconque</h3>
+<div id="outline-container-org2522bc1" class="outline-3">
+<h3 id="org2522bc1"><span class="section-number-3">8.2.</span> Variations d'ordre quelconque</h3>
 <div class="outline-text-3" id="text-8-2">
 <p>
 Les variations \(\variation{B}^n\) d'un mouvement brownien s'annulent pour \(n \ge 3\).
 </p>
 </div>
 </div>
-<div id="outline-container-org2b86173" class="outline-3">
-<h3 id="org2b86173"><span class="section-number-3">8.3.</span> Multidimensionnel</h3>
+<div id="outline-container-orge77c2c5" class="outline-3">
+<h3 id="orge77c2c5"><span class="section-number-3">8.3.</span> Multidimensionnel</h3>
 <div class="outline-text-3" id="text-8-3">
 <p>
 Nous définissons un mouvement Brownien de dimension \(n\) comme une collection de \(n\) mouvements Browniens \(B_i\) indépendants et vérifiant :
@@ -777,8 +773,8 @@ Nous définissons un mouvement Brownien de dimension \(n\) comme une collection 
 </p>
 </div>
 </div>
-<div id="outline-container-org9209701" class="outline-3">
-<h3 id="org9209701"><span class="section-number-3">8.4.</span> Calul d'Ito</h3>
+<div id="outline-container-org0d90d49" class="outline-3">
+<h3 id="org0d90d49"><span class="section-number-3">8.4.</span> Calul d'Ito</h3>
 <div class="outline-text-3" id="text-8-4">
 <p>
 Dans le cas de \(N\) mouvement browniens \(B_i\), les équations d'Ito deviennent :
@@ -814,8 +810,8 @@ F(X(t)) - F(X(0)) = \sum_i \int_0^t \deriveepartielle{F}{X_i}(X(s)) \ dX_i(s) + 
 </div>
 </div>
 </div>
-<div id="outline-container-org9cc8b12" class="outline-3">
-<h3 id="org9cc8b12"><span class="section-number-3">8.5.</span> Dérivée ordinaire</h3>
+<div id="outline-container-org250c8d5" class="outline-3">
+<h3 id="org250c8d5"><span class="section-number-3">8.5.</span> Dérivée ordinaire</h3>
 <div class="outline-text-3" id="text-8-5">
 <p>
 Le cas particulier unidimensionnel nous donne :
@@ -858,7 +854,7 @@ AFAIRE : PROCESSUS DE POISSON
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-11-20 jeu 16:27</p>
+<p class="date">Created: 2025-11-21 ven 16:36</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-11-20 jeu 16:38 -->
+<!-- 2025-11-21 ven 16:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Valeurs singulières</title>
@@ -241,179 +241,175 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org59d32f0">1. Décomposition en valeurs singulières</a></li>
-<li><a href="#orga166f1d">2. Représentation tensorielle</a></li>
-<li><a href="#org80ae19e">3. Dualité</a></li>
-<li><a href="#orgdd59255">4. Inverse</a></li>
-<li><a href="#org123d095">5. Pseudo-inverse</a></li>
-<li><a href="#org191b30e">6. Représentation matricielle</a></li>
-<li><a href="#orge37dc9c">7. Pseudo-inverse</a></li>
-<li><a href="#org513df83">8. Systèmes linéaires</a></li>
-<li><a href="#orgedf5636">9. Image et noyau</a></li>
-<li><a href="#org2ef353f">10. Normes</a></li>
-<li><a href="#orgddc0228">11. Fonctions de matrices</a></li>
+<li><a href="#org30640f1">1. Décomposition en valeurs singulières</a></li>
+<li><a href="#orgee727b8">2. Représentation tensorielle</a></li>
+<li><a href="#org0d1a97d">3. Dualité</a></li>
+<li><a href="#orgce17911">4. Inverse</a></li>
+<li><a href="#org64fe4a2">5. Pseudo-inverse</a></li>
+<li><a href="#org60e3f66">6. Représentation matricielle</a></li>
+<li><a href="#org94fc964">7. Pseudo-inverse</a></li>
+<li><a href="#org5b9688c">8. Systèmes linéaires</a></li>
+<li><a href="#org0010d3c">9. Image et noyau</a></li>
+<li><a href="#orgd15efb6">10. Normes</a></li>
+<li><a href="#orgc5c2530">11. Fonctions de matrices</a></li>
 </ul>
 </div>
 </div>
 
-<p>
-\(
-\newcommand{\parentheses}[1]{\left(#1\right)}
-\newcommand{\crochets}[1]{\left[#1\right]}
-\newcommand{\accolades}[1]{\left\{#1\right\}}
-\newcommand{\ensemble}[1]{\left\{#1\right\}}
-\DeclareMathOperator*{\cardinal}{\mathrm{card}}
-\newcommand{\identite}{\mathrm{Id}}
-\newcommand{\indicatrice}{\boldsymbol{\delta}}
-\newcommand{\dirac}{\delta}
-\newcommand{\moinsun}{{-1}}
-\newcommand{\inverse}{\ddagger}
-\newcommand{\pinverse}{\dagger}
-\newcommand{\topologie}{\mathfrak{T}}
-\newcommand{\ferme}{\mathfrak{F}}
-\newcommand{\img}{\mathbf{i}}
-\newcommand{\binome}[2]{
-\left\{ \begin{array}{c}
-#1 \\
-#2 \\
-\end{array} \right\}
-}
-\newcommand{\canonique}{\mathfrak{c}}
-\newcommand{\tenseuridentite}{\boldsymbol{\mathcal{I}}}
-\newcommand{\permutation}{\boldsymbol{\epsilon}}
-\newcommand{\matriceZero}{\mathfrak{0}}
-\newcommand{\matriceUn}{\mathfrak{1}}
-\newcommand{\christoffel}[2]{
-\left\{ \begin{array}{c}
-#1 \\
-#2 \\
-\end{array} \right\}
-}
-\newcommand{\lagrangien}{\mathfrak{L}}
-\newcommand{\sousens}{\mathfrak{P}}
-\newcommand{\partition}{\mathrm{Partition}}
-\newcommand{\tribu}{\mathrm{Tribu}}
-\newcommand{\topologies}{\mathrm{Topo}}
-\newcommand{\setB}{\mathbb{B}}
-\newcommand{\setN}{\mathbb{N}}
-\newcommand{\setZ}{\mathbb{Z}}
-\newcommand{\setQ}{\mathbb{Q}}
-\newcommand{\setR}{\mathbb{R}}
-\newcommand{\setC}{\mathbb{C}}
-\newcommand{\corps}{\mathbb{K}}
-\newcommand{\boule}{\mathfrak{B}}
-\newcommand{\intervalleouvert}[2]{\left] #1 , #2 \right[}
-\newcommand{\intervallesemiouvertgauche}[2]{ \left] #1 , #2 \right]}
-\newcommand{\intervallesemiouvertdroite}[2]{\left[ #1 , #2 \right[ }
-\newcommand{\fonction}{\mathbb{F}}
-\newcommand{\bijection}{\mathrm{Bij}}
-\newcommand{\polynome}{\mathrm{Poly}}
-\newcommand{\lineaire}{\mathrm{Lin}}
-\newcommand{\continue}{\mathrm{Cont}}
-\newcommand{\homeomorphisme}{\mathrm{Hom}}
-\newcommand{\etagee}{\mathrm{Etagee}}
-\newcommand{\lebesgue}{\mathrm{Leb}}
-\newcommand{\lipschitz}{\mathrm{Lip}}
-\newcommand{\suitek}{\mathrm{Suite}}
-\newcommand{\matrice}{\mathbb{M}}
-\newcommand{\krylov}{\mathrm{Krylov}}
-\newcommand{\tenseur}{\mathbb{T}}
-\newcommand{\essentiel}{\mathfrak{E}}
-\newcommand{\relation}{\mathrm{Rel}}
-\DeclareMathOperator*{\strictinferieur}{\ < \ }
-\DeclareMathOperator*{\strictsuperieur}{\ > \ }
-\DeclareMathOperator*{\ensinferieur}{\eqslantless}
-\DeclareMathOperator*{\enssuperieur}{\eqslantgtr}
-\DeclareMathOperator*{\esssuperieur}{\gtrsim}
-\DeclareMathOperator*{\essinferieur}{\lesssim}
-\newcommand{\essegal}{\eqsim}
-\newcommand{\union}{\ \cup \ }
-\newcommand{\intersection}{\ \cap \ }
-\newcommand{\opera}{\divideontimes}
-\newcommand{\autreaddition}{\boxplus}
-\newcommand{\autremultiplication}{\circledast}
-\newcommand{\commutateur}[2]{\left[ #1 , #2 \right]}
-\newcommand{\convolution}{\circledcirc}
-\newcommand{\correlation}{\ \natural \ }
-\newcommand{\diventiere}{\div}
-\newcommand{\modulo}{\bmod}
-\DeclareMathOperator*{\pgcd}{pgcd}
-\DeclareMathOperator*{\ppcm}{ppcm}
-\newcommand{\produitscalaire}[2]{\left\langle #1 \vert #2 \right\rangle}
-\newcommand{\scalaire}[2]{\left\langle #1 \| #2 \right\rangle}
-\newcommand{\braket}[3]{\left\langle #1 \vert #2 \vert #3 \right\rangle}
-\newcommand{\orthogonal}{\bot}
-\newcommand{\forme}[2]{\left\langle #1 , #2 \right\rangle}
-\newcommand{\biforme}[3]{\left\langle #1 , #2 , #3 \right\rangle}
-\newcommand{\contraction}[3]{\left\langle #1 \odot #3 \right\rangle_{#2}}
-\newcommand{\dblecont}[5]{\left\langle #1 \vert #3 \vert #5 \right\rangle_{#2,#4}}
-\DeclareMathOperator*{\major}{major}
-\DeclareMathOperator*{\minor}{minor}
-\DeclareMathOperator*{\maxim}{maxim}
-\DeclareMathOperator*{\minim}{minim}
-\DeclareMathOperator*{\argument}{arg}
-\DeclareMathOperator*{\argmin}{arg\ min}
-\DeclareMathOperator*{\argmax}{arg\ max}
-\DeclareMathOperator*{\supessentiel}{ess\ sup}
-\DeclareMathOperator*{\infessentiel}{ess\ inf}
-\newcommand{\dual}{\star}
-\newcommand{\vardual}{\circledast}
-\newcommand{\distance}{\mathfrak{dist}}
-\newcommand{\norme}[1]{\left\| #1 \right\|}
-\newcommand{\normetrois}[1]{\left|\left\| #1 \right\|\right|}
-\DeclareMathOperator*{\adh}{adh}
-\DeclareMathOperator*{\interieur}{int}
-\newcommand{\frontiere}{\partial}
-\DeclareMathOperator*{\image}{im}
-\DeclareMathOperator*{\domaine}{dom}
-\DeclareMathOperator*{\noyau}{ker}
-\DeclareMathOperator*{\support}{supp}
-\DeclareMathOperator*{\signe}{sign}
-\newcommand{\abs}[1]{\left| #1 \right|}
-\newcommand{\unsur}[1]{\frac{1}{#1}}
-\newcommand{\arrondisup}[1]{\lceil #1 \rceil}
-\newcommand{\arrondiinf}[1]{\lfloor #1 \rfloor}
-\DeclareMathOperator*{\conjugue}{conj}
-\newcommand{\conjaccent}[1]{\overline{#1}}
-\DeclareMathOperator*{\division}{division}
-\newcommand{\difference}{\boldsymbol{\Delta}}
-\newcommand{\differentielle}[2]{\mathfrak{D}^{#1}_{#2}}
-\newcommand{\OD}[2]{\frac{d #1}{d #2}}
-\newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
-\newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
-\newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
-\newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
-\newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
-\newcommand{\gradient}{\mathbf{\nabla}}
-\newcommand{\combilin}[1]{\mathrm{span}\{ #1 \}}
-\DeclareMathOperator*{\trace}{tr}
-\newcommand{\proba}{\mathbb{P}}
-\newcommand{\probaof}[1]{\mathbb{P}\left[#1\right]}
-\newcommand{\esperof}[1]{\mathbb{E}\left[#1\right]}
-\newcommand{\cov}[2]{\mathrm{cov} \left( #1 , #2 \right) }
-\newcommand{\var}[1]{\mathrm{var} \left( #1 \right) }
-\newcommand{\rand}{\mathrm{rand}}
-\newcommand{\variation}[1]{\left\langle #1 \right\rangle}
-\DeclareMathOperator*{\composante}{comp}
-\DeclareMathOperator*{\bloc}{bloc}
-\DeclareMathOperator*{\ligne}{ligne}
-\DeclareMathOperator*{\colonne}{colonne}
-\DeclareMathOperator*{\diagonale}{diag}
-\newcommand{\matelementaire}{\mathrm{Elem}}
-\DeclareMathOperator*{\matpermutation}{permut}
-\newcommand{\matunitaire}{\mathrm{Unitaire}}
-\newcommand{\gaussjordan}{\mathrm{GaussJordan}}
-\newcommand{\householder}{\mathrm{Householder}}
-\DeclareMathOperator*{\rang}{rang}
-\newcommand{\schur}{\mathrm{Schur}}
-\newcommand{\singuliere}{\mathrm{DVS}}
-\newcommand{\convexe}{\mathrm{Convexe}}
-\newcommand{\petito}[1]{o\left(#1\right)}
-\newcommand{\grando}[1]{O\left(#1\right)}
-\)
-</p>
+<script>
+MathJax = {
+  tex: {
+    packages: {'[+]': ['base','ams','braket']},
+    macros: {
+      parentheses: ["\\left(#1\\right)", 1],
+      crochets: ["\\left[#1\\right]", 1],
+      accolades: ["\\left\\{#1\\right\\}", 1],
+      ensemble: ["\\left\\{#1\\right\\}", 1],
+      cardinal: ["\\mathop{\\mathrm{card}\\ }\\limits",0],
+      identite: "\\mathrm{Id}",
+      indicatrice: "\\boldsymbol{\\delta}",
+      dirac: "\\delta",
+      moinsun: "-1",
+      inverse: "\\ddagger",
+      pinverse: "\\dagger",
+      topologie: "\\mathfrak{T}",
+      ferme: "\\mathfrak{F}",
+      img: "\\mathbf{i}",
+      binome: ["\\left\\{ \\\\begin{array}{c} #1 \\\\ #2 \\\\ \\\\end{array} \\\\right\\}", 2],
+      canonique: "\\mathfrak{c}",
+      tenseuridentite: "\\boldsymbol{\\mathcal{I}}",
+      permutation: "\\boldsymbol{\\epsilon}",
+      matriceZero: "\\mathfrak{0}",
+      matriceUn: "\\mathfrak{1}",
+      christoffel: ["\\left\\{ \\\\begin{array}{c} #1 \\\\ #2 \\\\ \\\\end{array} \\\\right\\}", 2],
+      lagrangien: "\\mathfrak{L}",
+      sousens: "\\mathfrak{P}",
+      partition: "\\mathrm{Partition}",
+      tribu: "\\mathrm{Tribu}",
+      topologies: "\\mathrm{Topo}",
+      setB: "\\mathbb{B}",
+      setN: "\\mathbb{N}",
+      setZ: "\\mathbb{Z}",
+      setQ: "\\mathbb{Q}",
+      setR: "\\mathbb{R}",
+      setC: "\\mathbb{C}",
+      corps: "\\mathbb{K}",
+      boule: "\\mathfrak{B}",
+      intervalleouvert: ["\\left] #1 , #2 \\\\right[", 2],
+      intervallesemiouvertgauche: ["\\left] #1 , #2 \\\\right]", 2],
+      intervallesemiouvertdroite: ["\\left[ #1 , #2 \\\\right[", 2],
+      fonction: "\\mathbb{F}",
+      bijection: "\\mathrm{Bij}",
+      polynome: "\\mathrm{Poly}",
+      lineaire: "\\mathrm{Lin}",
+      continue: "\\mathrm{Cont}",
+      homeomorphisme: "\\mathrm{Hom}",
+      etagee: "\\mathrm{Etagee}",
+      lebesgue: "\\mathrm{Leb}",
+      lipschitz: "\\mathrm{Lip}",
+      suitek: "\\mathrm{Suite}",
+      matrice: "\\mathbb{M}",
+      krylov: "\\mathrm{Krylov}",
+      tenseur: "\\mathbb{T}",
+      essentiel: "\\mathfrak{E}",
+      relation: "\\mathrm{Rel}",
+      strictinferieur: "<",
+      strictsuperieur: ">",
+      ensinferieur: "\\eqslantless",
+      enssuperieur: "\\eqslantgtr",
+      esssuperieur: "\\gtrsim",
+      essinferieur: "\\lesssim",
+      essegal: "\\eqsim",
+      union: "\\cup",
+      intersection: "\\cap",
+      opera: "\\divideontimes",
+      autreaddition: "\\boxplus",
+      autremultiplication: "\\circledast",
+      commutateur: ["\\left[ #1 , #2 \\\\right]", 2],
+      convolution: "\\circledcirc",
+      correlation: "\\natural",
+      diventiere: "\\div",
+      modulo: "\\bmod",
+      pgcd: ["\\mathop{\\mathrm{pgcd}\\ }\\limits",0],
+      ppcm: ["\\mathop{\\mathrm{ppcm}\\ }\\limits",0],
+      produitscalaire: ["\\left\\langle #1 \\\\vert #2 \\\\right\\rangle", 2],
+      scalaire: ["\\left\\langle #1 \\| #2 \\\\right\\rangle", 2],
+      braket: ["\\left\\langle #1 \\\\vert #2 \\\\vert #3 \\\\right\\rangle", 3],
+      orthogonal: "\\bot",
+      forme: ["\\left\\langle #1 , #2 \\\\right\\rangle", 2],
+      biforme: ["\\left\\langle #1 , #2 , #3 \\\\right\\rangle", 3],
+      contraction: ["\\left\\langle #1 \\\\odot #3 \\\\right\\rangle_{#2}", 3],
+      dblecont: ["\\left\\langle #1 \\\\vert #3 \\\\vert #5 \\\\right\\rangle_{#2,#4}", 5],
+      major: ["\\mathop{\\mathrm{major}\\ }\\limits",0],
+      minor: ["\\mathop{\\mathrm{minor}\\ }\\limits",0],
+      maxim: ["\\mathop{\\mathrm{maxim}\\ }\\limits",0],
+      minim: ["\\mathop{\\mathrm{minim}\\ }\\limits",0],
+      argument: ["\\mathop{\\mathrm{arg}\\ }\\limits",0],
+      argmin: ["\\mathop{\\mathrm{arg\\,min}\\ }\\limits",0],
+      argmax: ["\\mathop{\\mathrm{arg\\,max}\\ }\\limits",0],
+      supessentiel: ["\\mathop{\\mathrm{ess\\,sup}\\ }\\limits",0],
+      infessentiel: ["\\mathop{\\mathrm{ess\\,inf}\\ }\\limits",0],
+      dual: "\\star",
+      vardual: "\\circledast",
+      distance: "\\mathfrak{dist}",
+      norme: ["\\left\\| #1 \\\\right\\|", 1],
+      normetrois: ["\\left|\\left\\| #1 \\\\right\\|\\right|", 1],
+      adh: ["\\mathop{\\mathrm{adh}\\ }\\limits",0],
+      interieur: ["\\mathop{\\mathrm{int}\\ }\\limits",0],
+      frontiere: "\\partial",
+      image: ["\\mathop{\\mathrm{im}\\ }\\limits",0],
+      domaine: ["\\mathop{\\mathrm{dom}\\ }\\limits",0],
+      noyau: ["\\mathop{\\mathrm{ker}\\ }\\limits",0],
+      support: ["\\mathop{\\mathrm{supp}\\ }\\limits",0],
+      signe: ["\\mathop{\\mathrm{sign}\\ }\\limits",0],
+      abs: ["\\left| #1 \\\\right|", 1],
+      unsur: ["\\frac{1}{#1}", 1],
+      arrondisup: ["\\lceil #1 \\\\rceil", 1],
+      arrondiinf: ["\\lfloor #1 \\\\rfloor", 1],
+      conjugue: "conj",
+      conjaccent: ["\\overline{#1}", 1],
+      division: "division",
+      difference: "\\boldsymbol{\\Delta}",
+      differentielle: ["\\mathfrak{D}^{#1}_{#2}", 2],
+      OD: ["\\frac{d #1}{d #2}", 2],
+      OOD: ["\\frac{d^2 #1}{d #2^2}", 2],
+      NOD: ["\\frac{d^{#3} #1}{d #2^{#3}}", 3],
+      deriveepartielle: ["\\frac{\\partial #1}{\\partial #2}", 2],
+      PD: ["\\frac{\\partial #1}{\\partial #2}", 2],
+      dblederiveepartielle: ["\\frac{\\partial^2 #1}{\\partial #2 \\\\partial #2}", 2],
+      dfdxdy: ["\\frac{\\partial^2 #1}{\\partial #2 \\\\partial #3}", 3],
+      dfdxdx: ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2],
+      gradient: "\\mathbf{\\nabla}",
+      combilin: ["\\mathrm{span}\\{ #1 \\", 1],
+      trace: "tr",
+      proba: "\\mathbb{P}",
+      probaof: ["\\mathbb{P}\\left[#1\\right]", 1],
+      esperof: ["\\mathbb{E}\\left[#1\\right]", 1],
+      cov: ["\\mathrm{cov} ( #1 , #2 )", 2],
+      var: ["\\mathrm{var} ( #1 )", 1],
+      rand: "\\mathrm{rand}",
+      variation: ["\\left\\langle #1 \\\\right\\rangle", 1],
+      composante: ["\\mathop{\\mathrm{comp}\\ }\\limits",0],
+      bloc: ["\\mathop{\\mathrm{bloc}\\ }\\limits",0],
+      ligne: ["\\mathop{\\mathrm{ligne}\\ }\\limits",0],
+      colonne: ["\\mathop{\\mathrm{colonne}\\ }\\limits",0],
+      diagonale: ["\\mathop{\\mathrm{diag}\\ }\\limits",0],
+      matelementaire: "\\mathrm{Elem}",
+      matpermutation: ["\\mathop{\\mathrm{permut}\\ }\\limits",0],
+      matunitaire: "\\mathrm{Unitaire}",
+      gaussjordan: "\\mathrm{GaussJordan}",
+      householder: "\\mathrm{Householder}",
+      rang: "rang",
+      schur: "\\mathrm{Schur}",
+      singuliere: "\\mathrm{DVS}",
+      convexe: "\\mathrm{Convexe}",
+      petito: ["o(#1)", 1],
+      grando: ["O(#1)", 1]
+    }
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <p>
 \(
@@ -429,8 +425,8 @@
 <p>
 \label{chap:vs}
 </p>
-<div id="outline-container-org59d32f0" class="outline-2">
-<h2 id="org59d32f0"><span class="section-number-2">1.</span> Décomposition en valeurs singulières</h2>
+<div id="outline-container-org30640f1" class="outline-2">
+<h2 id="org30640f1"><span class="section-number-2">1.</span> Décomposition en valeurs singulières</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Soit les espaces vectoriels \(E\) et \(F\) et une application linéaire \(A : E \mapsto F\) admettant un dual \(A^\dual : F \mapsto E\). Les applications \(A^\dual \circ A\) et \(A \circ A^\dual\) étant auto-adjointes, il y a fort à parier que leurs valeurs et vecteurs propres possèdent d'importantes propriétés.
@@ -549,8 +545,8 @@ A(x) &= \sum_{i = 1}^r \scalaire{v_i}{x} \cdot A(v_i) \)
 \end{align}
 </div>
 </div>
-<div id="outline-container-orga166f1d" class="outline-2">
-<h2 id="orga166f1d"><span class="section-number-2">2.</span> Représentation tensorielle</h2>
+<div id="outline-container-orgee727b8" class="outline-2">
+<h2 id="orgee727b8"><span class="section-number-2">2.</span> Représentation tensorielle</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 On conclut de ce qui précède que \(A\) peut être représentée sur \(\combilin{v_1,...,v_n}\) par le tenseur associé :
@@ -573,8 +569,8 @@ On appelle une telle représentation une décomposition en valeurs singulières.
 </p>
 </div>
 </div>
-<div id="outline-container-org80ae19e" class="outline-2">
-<h2 id="org80ae19e"><span class="section-number-2">3.</span> Dualité</h2>
+<div id="outline-container-org0d1a97d" class="outline-2">
+<h2 id="org0d1a97d"><span class="section-number-2">3.</span> Dualité</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Le tenseur dual est donc :
@@ -584,8 +580,8 @@ Le tenseur dual est donc :
 \[\mathcal{A}^\dual = \sum_{i = 1}^r \sigma_i \cdot v_i \otimes u_i\]
 </p>
 </div>
-<div id="outline-container-org6f57d61" class="outline-3">
-<h3 id="org6f57d61"><span class="section-number-3">3.1.</span> Propriétés</h3>
+<div id="outline-container-orga8526a9" class="outline-3">
+<h3 id="orga8526a9"><span class="section-number-3">3.1.</span> Propriétés</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 On retrouve sans surprise les représentation de :
@@ -615,8 +611,8 @@ en fonction de leurs valeurs et vecteurs propres.
 </div>
 </div>
 </div>
-<div id="outline-container-orgdd59255" class="outline-2">
-<h2 id="orgdd59255"><span class="section-number-2">4.</span> Inverse</h2>
+<div id="outline-container-orgce17911" class="outline-2">
+<h2 id="orgce17911"><span class="section-number-2">4.</span> Inverse</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Supposons que \((v_1,...,v_r)\) forme une base de \(E\) et que \((u_1,...u_r)\) forme une base de \(F\). Soit \(x \in E\) et \(y \in F\) tels que \(y = A(x) = \mathcal{A} \cdot x\). On a :
@@ -659,8 +655,8 @@ on a :
 </p>
 </div>
 </div>
-<div id="outline-container-org123d095" class="outline-2">
-<h2 id="org123d095"><span class="section-number-2">5.</span> Pseudo-inverse</h2>
+<div id="outline-container-org64fe4a2" class="outline-2">
+<h2 id="org64fe4a2"><span class="section-number-2">5.</span> Pseudo-inverse</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Nous ne supposons à présent plus que les suites de vecteurs \((u_1,...,u_r)\) et \((v_1,...,v_r)\) forment des bases de \(E\) et \(F\), mais nous définissons malgré tout par analogie le tenseur pseudo-inverse de \(A\) par :
@@ -678,8 +674,8 @@ Le pseudo-inverse \(A^\pinverse\) de l'application linéaire correspondante \(A\
 \[A^\pinverse(y) = \mathcal{A}^\pinverse \cdot y = \sum_{i = 1}^r \unsur{\sigma_i} \cdot v_i \cdot \scalaire{u_i}{y}\]
 </p>
 </div>
-<div id="outline-container-org9cfb73c" class="outline-3">
-<h3 id="org9cfb73c"><span class="section-number-3">5.1.</span> Tenseurs de projections</h3>
+<div id="outline-container-orgf764e7f" class="outline-3">
+<h3 id="orgf764e7f"><span class="section-number-3">5.1.</span> Tenseurs de projections</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 On voit que :
@@ -708,8 +704,8 @@ correspond au tenseur de projection sur \(\combilin{u_1,...,u_r}\).
 </p>
 </div>
 </div>
-<div id="outline-container-orgfc0819e" class="outline-3">
-<h3 id="orgfc0819e"><span class="section-number-3">5.2.</span> Dualité</h3>
+<div id="outline-container-org0cf7d02" class="outline-3">
+<h3 id="org0cf7d02"><span class="section-number-3">5.2.</span> Dualité</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 On a clairement :
@@ -729,8 +725,8 @@ On a clairement :
 </div>
 </div>
 </div>
-<div id="outline-container-org5c161d7" class="outline-3">
-<h3 id="org5c161d7"><span class="section-number-3">5.3.</span> Produits</h3>
+<div id="outline-container-org336a61f" class="outline-3">
+<h3 id="org336a61f"><span class="section-number-3">5.3.</span> Produits</h3>
 <div class="outline-text-3" id="text-5-3">
 <p>
 On déduit des résultats ci-dessus que :
@@ -761,8 +757,8 @@ et :
 \end{align}
 </div>
 </div>
-<div id="outline-container-orgd275010" class="outline-3">
-<h3 id="orgd275010"><span class="section-number-3">5.4.</span> Orthogonalité</h3>
+<div id="outline-container-orgb090b41" class="outline-3">
+<h3 id="orgb090b41"><span class="section-number-3">5.4.</span> Orthogonalité</h3>
 <div class="outline-text-3" id="text-5-4">
 <p>
 Soit le tenseur identité \(\tenseuridentite\). On déduit de ce qui précède les propriétés d'orthogonalité :
@@ -783,8 +779,8 @@ Soit le tenseur identité \(\tenseuridentite\). On déduit de ce qui précède l
 </div>
 </div>
 </div>
-<div id="outline-container-org191b30e" class="outline-2">
-<h2 id="org191b30e"><span class="section-number-2">6.</span> Représentation matricielle</h2>
+<div id="outline-container-org60e3f66" class="outline-2">
+<h2 id="org60e3f66"><span class="section-number-2">6.</span> Représentation matricielle</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Soit une matrice \(A \in \matrice(\corps,m,n)\) et \(p = \min \{ m , n \}\). L'algorithme de décomposition en valeurs singulières est très simple. On évalue :
@@ -870,8 +866,8 @@ On note alors :
 </p>
 </div>
 </div>
-<div id="outline-container-orge37dc9c" class="outline-2">
-<h2 id="orge37dc9c"><span class="section-number-2">7.</span> Pseudo-inverse</h2>
+<div id="outline-container-org94fc964" class="outline-2">
+<h2 id="org94fc964"><span class="section-number-2">7.</span> Pseudo-inverse</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Le pseudo-inverse est donné par :
@@ -898,12 +894,12 @@ et :
 </p>
 </div>
 </div>
-<div id="outline-container-org513df83" class="outline-2">
-<h2 id="org513df83"><span class="section-number-2">8.</span> Systèmes linéaires</h2>
+<div id="outline-container-org5b9688c" class="outline-2">
+<h2 id="org5b9688c"><span class="section-number-2">8.</span> Systèmes linéaires</h2>
 <div class="outline-text-2" id="text-8">
 </div>
-<div id="outline-container-org93069b1" class="outline-3">
-<h3 id="org93069b1"><span class="section-number-3">8.1.</span> Moindres carrés</h3>
+<div id="outline-container-org01ad722" class="outline-3">
+<h3 id="org01ad722"><span class="section-number-3">8.1.</span> Moindres carrés</h3>
 <div class="outline-text-3" id="text-8-1">
 <p>
 Soit la matrice \(A \in \matrice(\corps,m,n)\), le vecteur colonne \(b \in \corps^m\) et l'erreur produite par \(x \in \corps^n\) :
@@ -1082,8 +1078,8 @@ et donc \(\mathcal{E}(z) \strictsuperieur \mathcal{E}(x)\).
 </p>
 </div>
 </div>
-<div id="outline-container-org197841c" class="outline-3">
-<h3 id="org197841c"><span class="section-number-3">8.2.</span> Projection</h3>
+<div id="outline-container-orgccf0ea0" class="outline-3">
+<h3 id="orgccf0ea0"><span class="section-number-3">8.2.</span> Projection</h3>
 <div class="outline-text-3" id="text-8-2">
 <p>
 On peut réécrire \(\Gamma\) sous la forme :
@@ -1126,8 +1122,8 @@ On a donc en définitive des vecteurs optimaux de la forme :
 </p>
 </div>
 </div>
-<div id="outline-container-orge713b2e" class="outline-3">
-<h3 id="orge713b2e"><span class="section-number-3">8.3.</span> Solutions</h3>
+<div id="outline-container-org140cb74" class="outline-3">
+<h3 id="org140cb74"><span class="section-number-3">8.3.</span> Solutions</h3>
 <div class="outline-text-3" id="text-8-3">
 <p>
 Soit l'espace des solutions :
@@ -1146,8 +1142,8 @@ Inversément, si \(S \ne \emptyset\), on conclut que \(\scalaire{u_{r + 1}}{b} =
 </p>
 </div>
 </div>
-<div id="outline-container-orge80b18e" class="outline-3">
-<h3 id="orge80b18e"><span class="section-number-3">8.4.</span> Norme contrainte</h3>
+<div id="outline-container-org195593c" class="outline-3">
+<h3 id="org195593c"><span class="section-number-3">8.4.</span> Norme contrainte</h3>
 <div class="outline-text-3" id="text-8-4">
 <p>
 Supposons que \(S \ne \emptyset\). Soit \(x \in \Gamma = S\), que l'on écrit sous la forme :
@@ -1187,8 +1183,8 @@ On en conclut que le choix \(x = A^\pinverse \cdot b\) minimise la norme de \(x\
 </p>
 </div>
 </div>
-<div id="outline-container-orgcb54661" class="outline-3">
-<h3 id="orgcb54661"><span class="section-number-3">8.5.</span> Lien avec les résultats précédents</h3>
+<div id="outline-container-orgc4a0e5c" class="outline-3">
+<h3 id="orgc4a0e5c"><span class="section-number-3">8.5.</span> Lien avec les résultats précédents</h3>
 <div class="outline-text-3" id="text-8-5">
 <ul class="org-ul">
 <li>On a montré précédemment en dérivant les expressions matricielles que le choix :</li>
@@ -1246,8 +1242,8 @@ A^\dual \cdot (A \cdot A^\dual)^{-1} &= \sum_{i,j = 1}^r \frac{\sigma_i}{\sigma_
 </div>
 </div>
 </div>
-<div id="outline-container-orgedf5636" class="outline-2">
-<h2 id="orgedf5636"><span class="section-number-2">9.</span> Image et noyau</h2>
+<div id="outline-container-org0010d3c" class="outline-2">
+<h2 id="org0010d3c"><span class="section-number-2">9.</span> Image et noyau</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 Tout vecteur \(b = A \cdot x = \sum_{i = 1}^r \sigma_i \cdot \scalaire{v_i}{x} \cdot u_i\) est exprimé comme une combinaison linéaire des \((u_1,...,u_r)\). On en conclut que \(\image A \subseteq \combilin{u_1,...,u_r}\). Réciproquement, si \(b \in \combilin{u_1,...,u_r}\), on a \(\scalaire{u_{r + 1}}{b} = \scalaire{u_m}{b} = 0\) et l'espace des solutions \(\{ x \in \setC^n : A \cdot x = b\}\) n'est pas vide. On en conclut que \(\combilin{u_1,...,u_r} \subseteq \image A\). D'où finalement :
@@ -1266,8 +1262,8 @@ Tout vecteur \(z \in \combilin{v_{r + 1},...,v_n}\) vérifie \(\scalaire{v_1}{z}
 </p>
 </div>
 </div>
-<div id="outline-container-org2ef353f" class="outline-2">
-<h2 id="org2ef353f"><span class="section-number-2">10.</span> Normes</h2>
+<div id="outline-container-orgd15efb6" class="outline-2">
+<h2 id="orgd15efb6"><span class="section-number-2">10.</span> Normes</h2>
 <div class="outline-text-2" id="text-10">
 <p>
 La décomposition en valeurs singulières permet d'évaluer facilement
@@ -1287,8 +1283,8 @@ ainsi que la norme de Frobénius :
 </p>
 </div>
 </div>
-<div id="outline-container-orgddc0228" class="outline-2">
-<h2 id="orgddc0228"><span class="section-number-2">11.</span> Fonctions de matrices</h2>
+<div id="outline-container-orgc5c2530" class="outline-2">
+<h2 id="orgc5c2530"><span class="section-number-2">11.</span> Fonctions de matrices</h2>
 <div class="outline-text-2" id="text-11">
 <p>
 La décomposition en valeurs singulières permet d'étendre la définition
@@ -1311,7 +1307,7 @@ On définit alors :
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-11-20 jeu 16:38</p>
+<p class="date">Created: 2025-11-21 ven 16:39</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

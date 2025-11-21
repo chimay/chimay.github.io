@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-11-20 jeu 16:38 -->
+<!-- 2025-11-21 ven 16:38 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Projections</title>
@@ -241,179 +241,175 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgea15a81">1. Minimisation de l'écart</a></li>
-<li><a href="#orgc0fec28">2. Théorème de Pythagore</a></li>
-<li><a href="#orge6bb08a">3. Carré de la distance</a></li>
-<li><a href="#orgb494917">4. Cauchy-Schwartz</a></li>
-<li><a href="#orgc93fca4">5. Propriétés extrémales</a></li>
-<li><a href="#org41ef08f">6. Sous-espace vectoriel</a></li>
-<li><a href="#org5128637">7. Tenseur de projection</a></li>
-<li><a href="#org9a4ee5a">8. Gram-Schmidt</a></li>
-<li><a href="#org6976da8">9. Représentation matricielle</a></li>
-<li><a href="#org30c031a">10. Factorisation</a></li>
-<li><a href="#org116320b">11. Vecteurs $A$-orthogonaux</a></li>
+<li><a href="#org3a550c9">1. Minimisation de l'écart</a></li>
+<li><a href="#org28eba02">2. Théorème de Pythagore</a></li>
+<li><a href="#org86f7109">3. Carré de la distance</a></li>
+<li><a href="#orgb782d48">4. Cauchy-Schwartz</a></li>
+<li><a href="#org8ea9c80">5. Propriétés extrémales</a></li>
+<li><a href="#org5566ed1">6. Sous-espace vectoriel</a></li>
+<li><a href="#org33ea0da">7. Tenseur de projection</a></li>
+<li><a href="#org54d853e">8. Gram-Schmidt</a></li>
+<li><a href="#orge542d6f">9. Représentation matricielle</a></li>
+<li><a href="#org00066c3">10. Factorisation</a></li>
+<li><a href="#orgb3fdfa3">11. Vecteurs $A$-orthogonaux</a></li>
 </ul>
 </div>
 </div>
 
-<p>
-\(
-\newcommand{\parentheses}[1]{\left(#1\right)}
-\newcommand{\crochets}[1]{\left[#1\right]}
-\newcommand{\accolades}[1]{\left\{#1\right\}}
-\newcommand{\ensemble}[1]{\left\{#1\right\}}
-\DeclareMathOperator*{\cardinal}{\mathrm{card}}
-\newcommand{\identite}{\mathrm{Id}}
-\newcommand{\indicatrice}{\boldsymbol{\delta}}
-\newcommand{\dirac}{\delta}
-\newcommand{\moinsun}{{-1}}
-\newcommand{\inverse}{\ddagger}
-\newcommand{\pinverse}{\dagger}
-\newcommand{\topologie}{\mathfrak{T}}
-\newcommand{\ferme}{\mathfrak{F}}
-\newcommand{\img}{\mathbf{i}}
-\newcommand{\binome}[2]{
-\left\{ \begin{array}{c}
-#1 \\
-#2 \\
-\end{array} \right\}
-}
-\newcommand{\canonique}{\mathfrak{c}}
-\newcommand{\tenseuridentite}{\boldsymbol{\mathcal{I}}}
-\newcommand{\permutation}{\boldsymbol{\epsilon}}
-\newcommand{\matriceZero}{\mathfrak{0}}
-\newcommand{\matriceUn}{\mathfrak{1}}
-\newcommand{\christoffel}[2]{
-\left\{ \begin{array}{c}
-#1 \\
-#2 \\
-\end{array} \right\}
-}
-\newcommand{\lagrangien}{\mathfrak{L}}
-\newcommand{\sousens}{\mathfrak{P}}
-\newcommand{\partition}{\mathrm{Partition}}
-\newcommand{\tribu}{\mathrm{Tribu}}
-\newcommand{\topologies}{\mathrm{Topo}}
-\newcommand{\setB}{\mathbb{B}}
-\newcommand{\setN}{\mathbb{N}}
-\newcommand{\setZ}{\mathbb{Z}}
-\newcommand{\setQ}{\mathbb{Q}}
-\newcommand{\setR}{\mathbb{R}}
-\newcommand{\setC}{\mathbb{C}}
-\newcommand{\corps}{\mathbb{K}}
-\newcommand{\boule}{\mathfrak{B}}
-\newcommand{\intervalleouvert}[2]{\left] #1 , #2 \right[}
-\newcommand{\intervallesemiouvertgauche}[2]{ \left] #1 , #2 \right]}
-\newcommand{\intervallesemiouvertdroite}[2]{\left[ #1 , #2 \right[ }
-\newcommand{\fonction}{\mathbb{F}}
-\newcommand{\bijection}{\mathrm{Bij}}
-\newcommand{\polynome}{\mathrm{Poly}}
-\newcommand{\lineaire}{\mathrm{Lin}}
-\newcommand{\continue}{\mathrm{Cont}}
-\newcommand{\homeomorphisme}{\mathrm{Hom}}
-\newcommand{\etagee}{\mathrm{Etagee}}
-\newcommand{\lebesgue}{\mathrm{Leb}}
-\newcommand{\lipschitz}{\mathrm{Lip}}
-\newcommand{\suitek}{\mathrm{Suite}}
-\newcommand{\matrice}{\mathbb{M}}
-\newcommand{\krylov}{\mathrm{Krylov}}
-\newcommand{\tenseur}{\mathbb{T}}
-\newcommand{\essentiel}{\mathfrak{E}}
-\newcommand{\relation}{\mathrm{Rel}}
-\DeclareMathOperator*{\strictinferieur}{\ < \ }
-\DeclareMathOperator*{\strictsuperieur}{\ > \ }
-\DeclareMathOperator*{\ensinferieur}{\eqslantless}
-\DeclareMathOperator*{\enssuperieur}{\eqslantgtr}
-\DeclareMathOperator*{\esssuperieur}{\gtrsim}
-\DeclareMathOperator*{\essinferieur}{\lesssim}
-\newcommand{\essegal}{\eqsim}
-\newcommand{\union}{\ \cup \ }
-\newcommand{\intersection}{\ \cap \ }
-\newcommand{\opera}{\divideontimes}
-\newcommand{\autreaddition}{\boxplus}
-\newcommand{\autremultiplication}{\circledast}
-\newcommand{\commutateur}[2]{\left[ #1 , #2 \right]}
-\newcommand{\convolution}{\circledcirc}
-\newcommand{\correlation}{\ \natural \ }
-\newcommand{\diventiere}{\div}
-\newcommand{\modulo}{\bmod}
-\DeclareMathOperator*{\pgcd}{pgcd}
-\DeclareMathOperator*{\ppcm}{ppcm}
-\newcommand{\produitscalaire}[2]{\left\langle #1 \vert #2 \right\rangle}
-\newcommand{\scalaire}[2]{\left\langle #1 \| #2 \right\rangle}
-\newcommand{\braket}[3]{\left\langle #1 \vert #2 \vert #3 \right\rangle}
-\newcommand{\orthogonal}{\bot}
-\newcommand{\forme}[2]{\left\langle #1 , #2 \right\rangle}
-\newcommand{\biforme}[3]{\left\langle #1 , #2 , #3 \right\rangle}
-\newcommand{\contraction}[3]{\left\langle #1 \odot #3 \right\rangle_{#2}}
-\newcommand{\dblecont}[5]{\left\langle #1 \vert #3 \vert #5 \right\rangle_{#2,#4}}
-\DeclareMathOperator*{\major}{major}
-\DeclareMathOperator*{\minor}{minor}
-\DeclareMathOperator*{\maxim}{maxim}
-\DeclareMathOperator*{\minim}{minim}
-\DeclareMathOperator*{\argument}{arg}
-\DeclareMathOperator*{\argmin}{arg\ min}
-\DeclareMathOperator*{\argmax}{arg\ max}
-\DeclareMathOperator*{\supessentiel}{ess\ sup}
-\DeclareMathOperator*{\infessentiel}{ess\ inf}
-\newcommand{\dual}{\star}
-\newcommand{\vardual}{\circledast}
-\newcommand{\distance}{\mathfrak{dist}}
-\newcommand{\norme}[1]{\left\| #1 \right\|}
-\newcommand{\normetrois}[1]{\left|\left\| #1 \right\|\right|}
-\DeclareMathOperator*{\adh}{adh}
-\DeclareMathOperator*{\interieur}{int}
-\newcommand{\frontiere}{\partial}
-\DeclareMathOperator*{\image}{im}
-\DeclareMathOperator*{\domaine}{dom}
-\DeclareMathOperator*{\noyau}{ker}
-\DeclareMathOperator*{\support}{supp}
-\DeclareMathOperator*{\signe}{sign}
-\newcommand{\abs}[1]{\left| #1 \right|}
-\newcommand{\unsur}[1]{\frac{1}{#1}}
-\newcommand{\arrondisup}[1]{\lceil #1 \rceil}
-\newcommand{\arrondiinf}[1]{\lfloor #1 \rfloor}
-\DeclareMathOperator*{\conjugue}{conj}
-\newcommand{\conjaccent}[1]{\overline{#1}}
-\DeclareMathOperator*{\division}{division}
-\newcommand{\difference}{\boldsymbol{\Delta}}
-\newcommand{\differentielle}[2]{\mathfrak{D}^{#1}_{#2}}
-\newcommand{\OD}[2]{\frac{d #1}{d #2}}
-\newcommand{\OOD}[2]{\frac{d^2 #1}{d #2^2}}
-\newcommand{\NOD}[3]{\frac{d^{#3} #1}{d #2^{#3}}}
-\newcommand{\deriveepartielle}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\PD}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\dblederiveepartielle}[2]{\frac{\partial^2 #1}{\partial #2 \partial #2}}
-\newcommand{\dfdxdy}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
-\newcommand{\dfdxdx}[2]{\frac{\partial^2 #1}{\partial #2^2}}
-\newcommand{\gradient}{\mathbf{\nabla}}
-\newcommand{\combilin}[1]{\mathrm{span}\{ #1 \}}
-\DeclareMathOperator*{\trace}{tr}
-\newcommand{\proba}{\mathbb{P}}
-\newcommand{\probaof}[1]{\mathbb{P}\left[#1\right]}
-\newcommand{\esperof}[1]{\mathbb{E}\left[#1\right]}
-\newcommand{\cov}[2]{\mathrm{cov} \left( #1 , #2 \right) }
-\newcommand{\var}[1]{\mathrm{var} \left( #1 \right) }
-\newcommand{\rand}{\mathrm{rand}}
-\newcommand{\variation}[1]{\left\langle #1 \right\rangle}
-\DeclareMathOperator*{\composante}{comp}
-\DeclareMathOperator*{\bloc}{bloc}
-\DeclareMathOperator*{\ligne}{ligne}
-\DeclareMathOperator*{\colonne}{colonne}
-\DeclareMathOperator*{\diagonale}{diag}
-\newcommand{\matelementaire}{\mathrm{Elem}}
-\DeclareMathOperator*{\matpermutation}{permut}
-\newcommand{\matunitaire}{\mathrm{Unitaire}}
-\newcommand{\gaussjordan}{\mathrm{GaussJordan}}
-\newcommand{\householder}{\mathrm{Householder}}
-\DeclareMathOperator*{\rang}{rang}
-\newcommand{\schur}{\mathrm{Schur}}
-\newcommand{\singuliere}{\mathrm{DVS}}
-\newcommand{\convexe}{\mathrm{Convexe}}
-\newcommand{\petito}[1]{o\left(#1\right)}
-\newcommand{\grando}[1]{O\left(#1\right)}
-\)
-</p>
+<script>
+MathJax = {
+  tex: {
+    packages: {'[+]': ['base','ams','braket']},
+    macros: {
+      parentheses: ["\\left(#1\\right)", 1],
+      crochets: ["\\left[#1\\right]", 1],
+      accolades: ["\\left\\{#1\\right\\}", 1],
+      ensemble: ["\\left\\{#1\\right\\}", 1],
+      cardinal: ["\\mathop{\\mathrm{card}\\ }\\limits",0],
+      identite: "\\mathrm{Id}",
+      indicatrice: "\\boldsymbol{\\delta}",
+      dirac: "\\delta",
+      moinsun: "-1",
+      inverse: "\\ddagger",
+      pinverse: "\\dagger",
+      topologie: "\\mathfrak{T}",
+      ferme: "\\mathfrak{F}",
+      img: "\\mathbf{i}",
+      binome: ["\\left\\{ \\\\begin{array}{c} #1 \\\\ #2 \\\\ \\\\end{array} \\\\right\\}", 2],
+      canonique: "\\mathfrak{c}",
+      tenseuridentite: "\\boldsymbol{\\mathcal{I}}",
+      permutation: "\\boldsymbol{\\epsilon}",
+      matriceZero: "\\mathfrak{0}",
+      matriceUn: "\\mathfrak{1}",
+      christoffel: ["\\left\\{ \\\\begin{array}{c} #1 \\\\ #2 \\\\ \\\\end{array} \\\\right\\}", 2],
+      lagrangien: "\\mathfrak{L}",
+      sousens: "\\mathfrak{P}",
+      partition: "\\mathrm{Partition}",
+      tribu: "\\mathrm{Tribu}",
+      topologies: "\\mathrm{Topo}",
+      setB: "\\mathbb{B}",
+      setN: "\\mathbb{N}",
+      setZ: "\\mathbb{Z}",
+      setQ: "\\mathbb{Q}",
+      setR: "\\mathbb{R}",
+      setC: "\\mathbb{C}",
+      corps: "\\mathbb{K}",
+      boule: "\\mathfrak{B}",
+      intervalleouvert: ["\\left] #1 , #2 \\\\right[", 2],
+      intervallesemiouvertgauche: ["\\left] #1 , #2 \\\\right]", 2],
+      intervallesemiouvertdroite: ["\\left[ #1 , #2 \\\\right[", 2],
+      fonction: "\\mathbb{F}",
+      bijection: "\\mathrm{Bij}",
+      polynome: "\\mathrm{Poly}",
+      lineaire: "\\mathrm{Lin}",
+      continue: "\\mathrm{Cont}",
+      homeomorphisme: "\\mathrm{Hom}",
+      etagee: "\\mathrm{Etagee}",
+      lebesgue: "\\mathrm{Leb}",
+      lipschitz: "\\mathrm{Lip}",
+      suitek: "\\mathrm{Suite}",
+      matrice: "\\mathbb{M}",
+      krylov: "\\mathrm{Krylov}",
+      tenseur: "\\mathbb{T}",
+      essentiel: "\\mathfrak{E}",
+      relation: "\\mathrm{Rel}",
+      strictinferieur: "<",
+      strictsuperieur: ">",
+      ensinferieur: "\\eqslantless",
+      enssuperieur: "\\eqslantgtr",
+      esssuperieur: "\\gtrsim",
+      essinferieur: "\\lesssim",
+      essegal: "\\eqsim",
+      union: "\\cup",
+      intersection: "\\cap",
+      opera: "\\divideontimes",
+      autreaddition: "\\boxplus",
+      autremultiplication: "\\circledast",
+      commutateur: ["\\left[ #1 , #2 \\\\right]", 2],
+      convolution: "\\circledcirc",
+      correlation: "\\natural",
+      diventiere: "\\div",
+      modulo: "\\bmod",
+      pgcd: ["\\mathop{\\mathrm{pgcd}\\ }\\limits",0],
+      ppcm: ["\\mathop{\\mathrm{ppcm}\\ }\\limits",0],
+      produitscalaire: ["\\left\\langle #1 \\\\vert #2 \\\\right\\rangle", 2],
+      scalaire: ["\\left\\langle #1 \\| #2 \\\\right\\rangle", 2],
+      braket: ["\\left\\langle #1 \\\\vert #2 \\\\vert #3 \\\\right\\rangle", 3],
+      orthogonal: "\\bot",
+      forme: ["\\left\\langle #1 , #2 \\\\right\\rangle", 2],
+      biforme: ["\\left\\langle #1 , #2 , #3 \\\\right\\rangle", 3],
+      contraction: ["\\left\\langle #1 \\\\odot #3 \\\\right\\rangle_{#2}", 3],
+      dblecont: ["\\left\\langle #1 \\\\vert #3 \\\\vert #5 \\\\right\\rangle_{#2,#4}", 5],
+      major: ["\\mathop{\\mathrm{major}\\ }\\limits",0],
+      minor: ["\\mathop{\\mathrm{minor}\\ }\\limits",0],
+      maxim: ["\\mathop{\\mathrm{maxim}\\ }\\limits",0],
+      minim: ["\\mathop{\\mathrm{minim}\\ }\\limits",0],
+      argument: ["\\mathop{\\mathrm{arg}\\ }\\limits",0],
+      argmin: ["\\mathop{\\mathrm{arg\\,min}\\ }\\limits",0],
+      argmax: ["\\mathop{\\mathrm{arg\\,max}\\ }\\limits",0],
+      supessentiel: ["\\mathop{\\mathrm{ess\\,sup}\\ }\\limits",0],
+      infessentiel: ["\\mathop{\\mathrm{ess\\,inf}\\ }\\limits",0],
+      dual: "\\star",
+      vardual: "\\circledast",
+      distance: "\\mathfrak{dist}",
+      norme: ["\\left\\| #1 \\\\right\\|", 1],
+      normetrois: ["\\left|\\left\\| #1 \\\\right\\|\\right|", 1],
+      adh: ["\\mathop{\\mathrm{adh}\\ }\\limits",0],
+      interieur: ["\\mathop{\\mathrm{int}\\ }\\limits",0],
+      frontiere: "\\partial",
+      image: ["\\mathop{\\mathrm{im}\\ }\\limits",0],
+      domaine: ["\\mathop{\\mathrm{dom}\\ }\\limits",0],
+      noyau: ["\\mathop{\\mathrm{ker}\\ }\\limits",0],
+      support: ["\\mathop{\\mathrm{supp}\\ }\\limits",0],
+      signe: ["\\mathop{\\mathrm{sign}\\ }\\limits",0],
+      abs: ["\\left| #1 \\\\right|", 1],
+      unsur: ["\\frac{1}{#1}", 1],
+      arrondisup: ["\\lceil #1 \\\\rceil", 1],
+      arrondiinf: ["\\lfloor #1 \\\\rfloor", 1],
+      conjugue: "conj",
+      conjaccent: ["\\overline{#1}", 1],
+      division: "division",
+      difference: "\\boldsymbol{\\Delta}",
+      differentielle: ["\\mathfrak{D}^{#1}_{#2}", 2],
+      OD: ["\\frac{d #1}{d #2}", 2],
+      OOD: ["\\frac{d^2 #1}{d #2^2}", 2],
+      NOD: ["\\frac{d^{#3} #1}{d #2^{#3}}", 3],
+      deriveepartielle: ["\\frac{\\partial #1}{\\partial #2}", 2],
+      PD: ["\\frac{\\partial #1}{\\partial #2}", 2],
+      dblederiveepartielle: ["\\frac{\\partial^2 #1}{\\partial #2 \\\\partial #2}", 2],
+      dfdxdy: ["\\frac{\\partial^2 #1}{\\partial #2 \\\\partial #3}", 3],
+      dfdxdx: ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2],
+      gradient: "\\mathbf{\\nabla}",
+      combilin: ["\\mathrm{span}\\{ #1 \\", 1],
+      trace: "tr",
+      proba: "\\mathbb{P}",
+      probaof: ["\\mathbb{P}\\left[#1\\right]", 1],
+      esperof: ["\\mathbb{E}\\left[#1\\right]", 1],
+      cov: ["\\mathrm{cov} ( #1 , #2 )", 2],
+      var: ["\\mathrm{var} ( #1 )", 1],
+      rand: "\\mathrm{rand}",
+      variation: ["\\left\\langle #1 \\\\right\\rangle", 1],
+      composante: ["\\mathop{\\mathrm{comp}\\ }\\limits",0],
+      bloc: ["\\mathop{\\mathrm{bloc}\\ }\\limits",0],
+      ligne: ["\\mathop{\\mathrm{ligne}\\ }\\limits",0],
+      colonne: ["\\mathop{\\mathrm{colonne}\\ }\\limits",0],
+      diagonale: ["\\mathop{\\mathrm{diag}\\ }\\limits",0],
+      matelementaire: "\\mathrm{Elem}",
+      matpermutation: ["\\mathop{\\mathrm{permut}\\ }\\limits",0],
+      matunitaire: "\\mathrm{Unitaire}",
+      gaussjordan: "\\mathrm{GaussJordan}",
+      householder: "\\mathrm{Householder}",
+      rang: "rang",
+      schur: "\\mathrm{Schur}",
+      singuliere: "\\mathrm{DVS}",
+      convexe: "\\mathrm{Convexe}",
+      petito: ["o(#1)", 1],
+      grando: ["O(#1)", 1]
+    }
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 <p>
 \(
@@ -429,8 +425,8 @@
 <p>
 \label{chap:project}
 </p>
-<div id="outline-container-orgea15a81" class="outline-2">
-<h2 id="orgea15a81"><span class="section-number-2">1.</span> Minimisation de l'écart</h2>
+<div id="outline-container-org3a550c9" class="outline-2">
+<h2 id="org3a550c9"><span class="section-number-2">1.</span> Minimisation de l'écart</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Soit un espace vectoriel \(E\) sur \(\setR\) et des vecteurs \(x,y \in E\), où \(x \ne 0\). La projection de \(y\) sur \(x\) est le vecteur :
@@ -464,8 +460,8 @@ ce qui nous donne :
 \[\lambda = \frac{\scalaire{x}{y}}{\scalaire{x}{x}}\]
 </p>
 </div>
-<div id="outline-container-org4b7be8d" class="outline-3">
-<h3 id="org4b7be8d"><span class="section-number-3">1.1.</span> Produit scalaire complexe</h3>
+<div id="outline-container-org5cd50db" class="outline-3">
+<h3 id="org5cd50db"><span class="section-number-3">1.1.</span> Produit scalaire complexe</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Nous nous plaçons à présent dans le cas plus général où \(E\) est un espace vectoriel sur \(\setC\). Le \(\lambda\) défini plus haut devient donc un complexe. Nous allons déterminer s'il minimise la fonction \(\mathcal{E} : \setC \mapsto \setR\) définie par :
@@ -548,8 +544,8 @@ est l'unique complexe à minimiser \(\mathcal{E}\). La racine carrée étant une
 </div>
 </div>
 </div>
-<div id="outline-container-orgc0fec28" class="outline-2">
-<h2 id="orgc0fec28"><span class="section-number-2">2.</span> Théorème de Pythagore</h2>
+<div id="outline-container-org28eba02" class="outline-2">
+<h2 id="org28eba02"><span class="section-number-2">2.</span> Théorème de Pythagore</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Calculons à présent la norme de \(y\) en partant de la relation :
@@ -576,8 +572,8 @@ On peut donc appliquer le théorème de pythagore, qui nous dit que :
 </p>
 </div>
 </div>
-<div id="outline-container-orge6bb08a" class="outline-2">
-<h2 id="orge6bb08a"><span class="section-number-2">3.</span> Carré de la distance</h2>
+<div id="outline-container-org86f7109" class="outline-2">
+<h2 id="org86f7109"><span class="section-number-2">3.</span> Carré de la distance</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Si :
@@ -604,8 +600,8 @@ et finalement :
 </p>
 </div>
 </div>
-<div id="outline-container-orgb494917" class="outline-2">
-<h2 id="orgb494917"><span class="section-number-2">4.</span> Cauchy-Schwartz</h2>
+<div id="outline-container-orgb782d48" class="outline-2">
+<h2 id="orgb782d48"><span class="section-number-2">4.</span> Cauchy-Schwartz</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Par positivité du produit scalaire, on a bien évidemment :
@@ -664,8 +660,8 @@ relation dont la racine nous donne l'inégalité de Cauchy-Schwartz :
 </p>
 </div>
 </div>
-<div id="outline-container-orgc93fca4" class="outline-2">
-<h2 id="orgc93fca4"><span class="section-number-2">5.</span> Propriétés extrémales</h2>
+<div id="outline-container-org8ea9c80" class="outline-2">
+<h2 id="org8ea9c80"><span class="section-number-2">5.</span> Propriétés extrémales</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 L'égalité :
@@ -740,8 +736,8 @@ La borne inférieure est atteinte. La fonction \(\varphi\) est donc minimisée 
 </p>
 </div>
 </div>
-<div id="outline-container-org41ef08f" class="outline-2">
-<h2 id="org41ef08f"><span class="section-number-2">6.</span> Sous-espace vectoriel</h2>
+<div id="outline-container-org5566ed1" class="outline-2">
+<h2 id="org5566ed1"><span class="section-number-2">6.</span> Sous-espace vectoriel</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Soit l'espace vectoriel \(E\) sur \(\setR\) et un sous-espace vectoriel \(U \subseteq E\) possédant une base orthonormée \((u_1,...,u_n)\). La projection d'un vecteur quelconque \(z \in E\) sur \(U\) est le vecteur \(p \in U\) qui minimise la norme de l'écart entre \(z\) et \(p\). On cherche donc le \(\lambda = (\lambda_1,...,\lambda_n) \in \setR^n\) qui minimise la fonction \(\mathcal{E} : \setR^n \mapsto \setR\) définie par :
@@ -786,8 +782,8 @@ minimise potentiellement \(\mathcal{E}\). Notre projection potentielle de \(z\) 
 \[p = \sum_i \scalaire{u_i}{z} \cdot u_i\]
 </p>
 </div>
-<div id="outline-container-org2013a47" class="outline-3">
-<h3 id="org2013a47"><span class="section-number-3">6.1.</span> Produit scalaire complexe</h3>
+<div id="outline-container-orgb4d2add" class="outline-3">
+<h3 id="orgb4d2add"><span class="section-number-3">6.1.</span> Produit scalaire complexe</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 Nous nous plaçons à présent dans le cas plus général où \(E\) est un espace vectoriel sur \(\setC\). Le \(\lambda\) défini plus haut devient donc un élément de \(\setC^n\). Nous allons déterminer s'il minimise la fonction \(\mathcal{E} : \setC^n \mapsto \setR\) définie par :
@@ -881,8 +877,8 @@ Les scalaires \(\lambda_k\) minimisent donc bien la norme de l'écart sur \(U\).
 </p>
 </div>
 </div>
-<div id="outline-container-org500ae2d" class="outline-3">
-<h3 id="org500ae2d"><span class="section-number-3">6.2.</span> Théorème de Pythagore</h3>
+<div id="outline-container-org64977e8" class="outline-3">
+<h3 id="org64977e8"><span class="section-number-3">6.2.</span> Théorème de Pythagore</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 On a \(z = p + e\). Comme \(p\) est un vecteur de \(U\), on a \(\scalaire{p}{e} = \scalaire{e}{p} = 0\). Le théorème de Pythagore est donc applicable :
@@ -893,8 +889,8 @@ On a \(z = p + e\). Comme \(p\) est un vecteur de \(U\), on a \(\scalaire{p}{e} 
 </p>
 </div>
 </div>
-<div id="outline-container-org7e5e836" class="outline-3">
-<h3 id="org7e5e836"><span class="section-number-3">6.3.</span> Carré de la distance</h3>
+<div id="outline-container-org4264f4f" class="outline-3">
+<h3 id="org4264f4f"><span class="section-number-3">6.3.</span> Carré de la distance</h3>
 <div class="outline-text-3" id="text-6-3">
 <p>
 Soit :
@@ -922,8 +918,8 @@ et donc :
 </div>
 </div>
 </div>
-<div id="outline-container-org5128637" class="outline-2">
-<h2 id="org5128637"><span class="section-number-2">7.</span> Tenseur de projection</h2>
+<div id="outline-container-org33ea0da" class="outline-2">
+<h2 id="org33ea0da"><span class="section-number-2">7.</span> Tenseur de projection</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 On peut réécrire la projection de \(z\) sur \(U\) sous la forme :
@@ -949,8 +945,8 @@ on a alors :
 \[p = \mathcal{P} \cdot z = \contraction{\mathcal{P} }{1}{z}\]
 </p>
 </div>
-<div id="outline-container-org7a7f3b3" class="outline-3">
-<h3 id="org7a7f3b3"><span class="section-number-3">7.1.</span> Identité locale</h3>
+<div id="outline-container-org88fccdd" class="outline-3">
+<h3 id="org88fccdd"><span class="section-number-3">7.1.</span> Identité locale</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 Pour tout \(y \in U\), on a :
@@ -973,8 +969,8 @@ Ces deux expressions étant identiques, on a \(\mathcal{P} \cdot y = y\). Le ten
 </p>
 </div>
 </div>
-<div id="outline-container-org402d979" class="outline-3">
-<h3 id="org402d979"><span class="section-number-3">7.2.</span> Invariance</h3>
+<div id="outline-container-orgd7f48cf" class="outline-3">
+<h3 id="orgd7f48cf"><span class="section-number-3">7.2.</span> Invariance</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 Pour tout \(z \in E\), on a \(y = \mathcal{P} \cdot z \in U\). On en conclut que :
@@ -989,8 +985,8 @@ Donc \(\mathcal{P} = \mathcal{P} \cdot \mathcal{P}\).
 </p>
 </div>
 </div>
-<div id="outline-container-orgf246465" class="outline-3">
-<h3 id="orgf246465"><span class="section-number-3">7.3.</span> Complémentaire</h3>
+<div id="outline-container-orgb430322" class="outline-3">
+<h3 id="orgb430322"><span class="section-number-3">7.3.</span> Complémentaire</h3>
 <div class="outline-text-3" id="text-7-3">
 <p>
 Soit \((u_1,...,u_n)\) une base orthonormée de \(E\). On voit que le tenseur identité :
@@ -1042,8 +1038,8 @@ On a aussi sans surprise :
 </div>
 </div>
 </div>
-<div id="outline-container-org9a4ee5a" class="outline-2">
-<h2 id="org9a4ee5a"><span class="section-number-2">8.</span> Gram-Schmidt</h2>
+<div id="outline-container-org54d853e" class="outline-2">
+<h2 id="org54d853e"><span class="section-number-2">8.</span> Gram-Schmidt</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 Nous allons construire une suite de vecteurs orthonormaux \((u_1,u_2,...u_n)\) à partir d'une suite \((a_1,a_2,...,a_n)\) de vecteurs linéairement indépendants de \(E\). L'indépendance linéaire nous garantit que \(a_1 \ne 0\). On peut donc normaliser pour obtenir le premier vecteur de la série :
@@ -1113,8 +1109,8 @@ Nous disposons donc à la fin du processus d'une suite de vecteurs \((u_1,u_2,..
 Ce procédé est appelé processus d'orthogonalisation de Gram-Schmidt.
 </p>
 </div>
-<div id="outline-container-org357b471" class="outline-3">
-<h3 id="org357b471"><span class="section-number-3">8.1.</span> Remarque</h3>
+<div id="outline-container-org6bc103d" class="outline-3">
+<h3 id="org6bc103d"><span class="section-number-3">8.1.</span> Remarque</h3>
 <div class="outline-text-3" id="text-8-1">
 <p>
 Dans le cas où l'indépendance linéaire n'est pas garantie, il est toujours possible d'adapter l'algorithme en enlevant dynamiquement de la liste des \(a_k\) les vecteurs donnant un écart de projection nul. On se retrouve alors à la fin du processus avec une suite orthonormée \((u_1,...,u_m)\), où \(m \le n\).
@@ -1122,8 +1118,8 @@ Dans le cas où l'indépendance linéaire n'est pas garantie, il est toujours po
 </div>
 </div>
 </div>
-<div id="outline-container-org6976da8" class="outline-2">
-<h2 id="org6976da8"><span class="section-number-2">9.</span> Représentation matricielle</h2>
+<div id="outline-container-orge542d6f" class="outline-2">
+<h2 id="orge542d6f"><span class="section-number-2">9.</span> Représentation matricielle</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 Soient \(u_1,u_2,...,u_m \in \matrice(\corps,n,1)\) des vecteurs colonnes orthonormés pour le produit scalaire usuel :
@@ -1150,8 +1146,8 @@ Il s'agit donc d'une matrice de taille \((n,n)\). Elle permet de projeter tout v
 </p>
 </div>
 </div>
-<div id="outline-container-org30c031a" class="outline-2">
-<h2 id="org30c031a"><span class="section-number-2">10.</span> Factorisation</h2>
+<div id="outline-container-org00066c3" class="outline-2">
+<h2 id="org00066c3"><span class="section-number-2">10.</span> Factorisation</h2>
 <div class="outline-text-2" id="text-10">
 <p>
 En terme de composantes, si \(u_k = ( u_{kj} )_j\) et si \(P = ( p_{ij} )_{i,j}\), on a :
@@ -1196,8 +1192,8 @@ où \(b_{ik} = \composante_{ik} U\) et \(c_{kj} = \composante_{kj} U^\dual\). On
 \[P = U \cdot U^\dual\]
 </p>
 </div>
-<div id="outline-container-org8437488" class="outline-3">
-<h3 id="org8437488"><span class="section-number-3">10.1.</span> Propriétés</h3>
+<div id="outline-container-org4591cd0" class="outline-3">
+<h3 id="org4591cd0"><span class="section-number-3">10.1.</span> Propriétés</h3>
 <div class="outline-text-3" id="text-10-1">
 <p>
 Comme les \(u_k\) sont orthonormaux, on a :
@@ -1224,8 +1220,8 @@ Si on pose \(Q = I - P\), on a aussi :
 </p>
 </div>
 </div>
-<div id="outline-container-org4123375" class="outline-3">
-<h3 id="org4123375"><span class="section-number-3">10.2.</span> Cas particulier</h3>
+<div id="outline-container-org19b1d54" class="outline-3">
+<h3 id="org19b1d54"><span class="section-number-3">10.2.</span> Cas particulier</h3>
 <div class="outline-text-3" id="text-10-2">
 <p>
 Les \(m\) vecteurs \(u_i\) étant linéairement indépendants dans \(\corps^n\) qui est de dimension \(n\), on doit forcément avoir \(m \le n\). Dans le cas où \(m = n\), on a de plus \(U^\dual = U^{-1}\) et :
@@ -1237,8 +1233,8 @@ Les \(m\) vecteurs \(u_i\) étant linéairement indépendants dans \(\corps^n\) 
 </div>
 </div>
 </div>
-<div id="outline-container-org116320b" class="outline-2">
-<h2 id="org116320b"><span class="section-number-2">11.</span> Vecteurs $A$-orthogonaux</h2>
+<div id="outline-container-orgb3fdfa3" class="outline-2">
+<h2 id="orgb3fdfa3"><span class="section-number-2">11.</span> Vecteurs $A$-orthogonaux</h2>
 <div class="outline-text-2" id="text-11">
 <p>
 Soit une matrice de produit scalaire \(A \in \matrice(\corps,n,n)\). On peut utiliser le procédé de Gram-Schmidt pour construire une base de vecteurs orthogonaux pour le produit scalaire :
@@ -1303,16 +1299,16 @@ pour tout \(m \le n\), on peut réecrire l'orthogonalité comme suit :
 On note aussi \(U = U_n\).
 </p>
 </div>
-<div id="outline-container-orgd230e56" class="outline-3">
-<h3 id="orgd230e56"><span class="section-number-3">11.1.</span> Complément orthogonal</h3>
+<div id="outline-container-orgc65154d" class="outline-3">
+<h3 id="orgc65154d"><span class="section-number-3">11.1.</span> Complément orthogonal</h3>
 <div class="outline-text-3" id="text-11-1">
 <p>
 Si les vecteurs orthonormaux \((u_1,...,u_p)\), où \(p \le n\), sont donnés, on peut simplement commencer le processus à \(k = p\) pour complèter la suite de vecteurs jusqu'à \(k = n\). On obtient alors la suite orthonormée \((u_1,...,u_p,u_{p + 1},...,u_n)\). On dit que \((u_{p + 1},...,u_n)\) est le complément orthogonal de \((u_1,...,u_p)\).
 </p>
 </div>
 </div>
-<div id="outline-container-org0677bdb" class="outline-3">
-<h3 id="org0677bdb"><span class="section-number-3">11.2.</span> Orthogonalité usuelle</h3>
+<div id="outline-container-orgb3cf92a" class="outline-3">
+<h3 id="orgb3cf92a"><span class="section-number-3">11.2.</span> Orthogonalité usuelle</h3>
 <div class="outline-text-3" id="text-11-2">
 <p>
 Dans le cas où l'on choisit \(A = I\), cette méthode offre un moyen d'obtenir (ou de compléter) une suite de vecteurs \(u_i\) tels que \(u_i^\dual \cdot u_j = \indicatrice_{ij}\) et des matrices \(U_m\) correspondantes telles que \(U_m^\dual \cdot U_m = I_m\). Comme \(U = U_n\) est carrée, on a de plus :
@@ -1323,8 +1319,8 @@ Dans le cas où l'on choisit \(A = I\), cette méthode offre un moyen d'obtenir 
 </p>
 </div>
 </div>
-<div id="outline-container-org149eb80" class="outline-3">
-<h3 id="org149eb80"><span class="section-number-3">11.3.</span> Systèmes linéaires</h3>
+<div id="outline-container-orga14df97" class="outline-3">
+<h3 id="orga14df97"><span class="section-number-3">11.3.</span> Systèmes linéaires</h3>
 <div class="outline-text-3" id="text-11-3">
 <p>
 Lorsqu'on dispose de \(n\) vecteurs $A$-orthonormés, il est facile de résoudre le système linéaire \(A \cdot x = y\). Les \(u_i\) forment alors une base de \(\corps^n\) et on peut trouver des scalaires \(x_i \in \corps\) tels que :
@@ -1359,7 +1355,7 @@ Attention, analogue n'est pas identique, les \(u_i\) ne sont en général pas or
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-11-20 jeu 16:38</p>
+<p class="date">Created: 2025-11-21 ven 16:38</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

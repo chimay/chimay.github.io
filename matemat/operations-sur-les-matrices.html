@@ -1,0 +1,1545 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
+<head>
+<!-- 2025-11-22 sam 14:31 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Eclats de vers : Matemat : Opérations sur les matrices</title>
+<meta name="author" content="chimay" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Eclats de vers : Matemat : Opérations sur les matrices</h1>
+<p>
+<a href="index.html">Index mathématique</a>
+</p>
+
+<p>
+<a href="../index.html">Retour à l’accueil</a>
+</p>
+
+<div id="table-of-contents" role="doc-toc">
+<h2>Table des matières</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org2fe8eda">1. Dépendances</a></li>
+<li><a href="#org16ccb4b">2. Multiplication d’une matrice et d’un vecteur</a></li>
+<li><a href="#orga4b2652">3. Addition</a></li>
+<li><a href="#org7a62b7f">4. Soustraction</a></li>
+<li><a href="#org7380133">5. Multiplication mixte</a></li>
+<li><a href="#org55703c1">6. Produit matriciel</a></li>
+<li><a href="#org9ac2012">7. Distributivité</a></li>
+<li><a href="#orgad4f7b6">8. Matrice identité</a></li>
+<li><a href="#org8dd9179">9. Inverse</a></li>
+<li><a href="#org0bc2511">10. Puissance</a></li>
+</ul>
+</div>
+</div>
+
+<script>
+MathJax = {
+  tex: {
+    packages: {'[+]': ['base','ams','braket']},
+    macros: {
+      parentheses: ["\\left(#1\\right)", 1],
+      crochets: ["\\left[#1\\right]", 1],
+      accolades: ["\\left\\{#1\\right\\}", 1],
+      ensemble: ["\\left\\{#1\\right\\}", 1],
+      cardinal: ["\\mathop{\\mathrm{card}\\ }\\limits",0],
+      identite: "\\mathrm{Id}",
+      indicatrice: "\\boldsymbol{\\delta}",
+      dirac: "\\delta",
+      moinsun: "-1",
+      inverse: "\\ddagger",
+      pinverse: "\\dagger",
+      topologie: "\\mathfrak{T}",
+      ferme: "\\mathfrak{F}",
+      img: "\\mathbf{i}",
+      binome: ["\\left\\{ \\begin{array}{c} #1 \\\\ #2 \\\\ \\end{array} \\right\\}", 2],
+      canonique: "\\mathfrak{c}",
+      tenseuridentite: "\\boldsymbol{\\mathcal{I}}",
+      permutation: "\\boldsymbol{\\epsilon}",
+      matriceZero: "\\mathfrak{0}",
+      matriceUn: "\\mathfrak{1}",
+      christoffel: ["\\left\\{ \\begin{array}{c} #1 \\\\ #2 \\\\ \\end{array} \\right\\}", 2],
+      lagrangien: "\\mathfrak{L}",
+      sousens: "\\mathfrak{P}",
+      partition: "\\mathrm{Partition}",
+      tribu: "\\mathrm{Tribu}",
+      topologies: "\\mathrm{Topo}",
+      setB: "\\mathbb{B}",
+      setN: "\\mathbb{N}",
+      setZ: "\\mathbb{Z}",
+      setQ: "\\mathbb{Q}",
+      setR: "\\mathbb{R}",
+      setC: "\\mathbb{C}",
+      corps: "\\mathbb{K}",
+      boule: "\\mathfrak{B}",
+      intervalleouvert: ["\\left] #1 , #2 \\right[", 2],
+      intervallesemiouvertgauche: ["\\left] #1 , #2 \\right]", 2],
+      intervallesemiouvertdroite: ["\\left[ #1 , #2 \\right[", 2],
+      fonction: "\\mathbb{F}",
+      bijection: "\\mathrm{Bij}",
+      polynome: "\\mathrm{Poly}",
+      lineaire: "\\mathrm{Lin}",
+      continue: "\\mathrm{Cont}",
+      homeomorphisme: "\\mathrm{Hom}",
+      etagee: "\\mathrm{Etagee}",
+      lebesgue: "\\mathrm{Leb}",
+      lipschitz: "\\mathrm{Lip}",
+      suitek: "\\mathrm{Suite}",
+      matrice: "\\mathbb{M}",
+      krylov: "\\mathrm{Krylov}",
+      tenseur: "\\mathbb{T}",
+      essentiel: "\\mathfrak{E}",
+      relation: "\\mathrm{Rel}",
+      strictinferieur: "<",
+      strictsuperieur: ">",
+      ensinferieur: "\\eqslantless",
+      enssuperieur: "\\eqslantgtr",
+      esssuperieur: "\\gtrsim",
+      essinferieur: "\\lesssim",
+      essegal: "\\eqsim",
+      union: "\\cup",
+      intersection: "\\cap",
+      opera: "\\divideontimes",
+      autreaddition: "\\boxplus",
+      autremultiplication: "\\circledast",
+      commutateur: ["\\left[ #1 , #2 \\right]", 2],
+      convolution: "\\circledcirc",
+      correlation: "\\natural",
+      diventiere: "\\div",
+      modulo: "\\bmod",
+      pgcd: ["\\mathop{\\mathrm{pgcd}\\ }\\limits",0],
+      ppcm: ["\\mathop{\\mathrm{ppcm}\\ }\\limits",0],
+      produitscalaire: ["\\left\\langle #1 \\vert #2 \\right\\rangle", 2],
+      scalaire: ["\\left\\langle #1 \\| #2 \\right\\rangle", 2],
+      braket: ["\\left\\langle #1 \\vert #2 \\vert #3 \\right\\rangle", 3],
+      orthogonal: "\\bot",
+      forme: ["\\left\\langle #1 , #2 \\right\\rangle", 2],
+      biforme: ["\\left\\langle #1 , #2 , #3 \\right\\rangle", 3],
+      contraction: ["\\left\\langle #1 \\odot #3 \\right\\rangle_{#2}", 3],
+      dblecont: ["\\left\\langle #1 \\vert #3 \\vert #5 \\right\\rangle_{#2,#4}", 5],
+      major: ["\\mathop{\\mathrm{major}\\ }\\limits",0],
+      minor: ["\\mathop{\\mathrm{minor}\\ }\\limits",0],
+      maxim: ["\\mathop{\\mathrm{maxim}\\ }\\limits",0],
+      minim: ["\\mathop{\\mathrm{minim}\\ }\\limits",0],
+      argument: ["\\mathop{\\mathrm{arg}\\ }\\limits",0],
+      argmin: ["\\mathop{\\mathrm{arg\\,min}\\ }\\limits",0],
+      argmax: ["\\mathop{\\mathrm{arg\\,max}\\ }\\limits",0],
+      supessentiel: ["\\mathop{\\mathrm{ess\\,sup}\\ }\\limits",0],
+      infessentiel: ["\\mathop{\\mathrm{ess\\,inf}\\ }\\limits",0],
+      dual: "\\star",
+      vardual: "\\circledast",
+      distance: "\\mathfrak{dist}",
+      norme: ["\\left\\lVert #1 \\right\\rVert", 1],
+      normetrois: ["\\left|\\left\\| #1 \\right\\|\\right|", 1],
+      adh: ["\\mathop{\\mathrm{adh}\\ }\\limits",0],
+      interieur: ["\\mathop{\\mathrm{int}\\ }\\limits",0],
+      frontiere: "\\partial",
+      image: ["\\mathop{\\mathrm{im}\\ }\\limits",0],
+      domaine: ["\\mathop{\\mathrm{dom}\\ }\\limits",0],
+      noyau: ["\\mathop{\\mathrm{ker}\\ }\\limits",0],
+      support: ["\\mathop{\\mathrm{supp}\\ }\\limits",0],
+      signe: ["\\mathop{\\mathrm{sign}\\ }\\limits",0],
+      abs: ["\\left\\lvert #1 \\right\\rvert", 1],
+      unsur: ["\\frac{1}{#1}", 1],
+      arrondisup: ["\\lceil #1 \\rceil", 1],
+      arrondiinf: ["\\lfloor #1 \\rfloor", 1],
+      conjugue: "\\mathrm{conj\\ }",
+      conjaccent: ["\\overline{#1}", 1],
+      division: "division",
+      difference: "\\boldsymbol{\\Delta}",
+      differentielle: ["\\mathfrak{D}^{#1}_{#2}", 2],
+      OD: ["\\frac{d #1}{d #2}", 2],
+      OOD: ["\\frac{d^2 #1}{d #2^2}", 2],
+      NOD: ["\\frac{d^{#3} #1}{d #2^{#3}}", 3],
+      deriveepartielle: ["\\frac{\\partial #1}{\\partial #2}", 2],
+      PD: ["\\frac{\\partial #1}{\\partial #2}", 2],
+      dblederiveepartielle: ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #2}", 2],
+      dfdxdy: ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3],
+      dfdxdx: ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2],
+      gradient: "\\mathbf{\\nabla}",
+      combilin: ["\\mathrm{span}\\{ #1 \\", 1],
+      trace: "tr",
+      proba: "\\mathbb{P}",
+      probaof: ["\\mathbb{P}\\left[#1\\right]", 1],
+      esperof: ["\\mathbb{E}\\left[#1\\right]", 1],
+      cov: ["\\mathrm{cov} ( #1 , #2 )", 2],
+      var: ["\\mathrm{var} ( #1 )", 1],
+      rand: "\\mathrm{rand}",
+      variation: ["\\left\\langle #1 \\right\\rangle", 1],
+      composante: ["\\mathop{\\mathrm{comp}\\ }\\limits",0],
+      bloc: ["\\mathop{\\mathrm{bloc}\\ }\\limits",0],
+      ligne: ["\\mathop{\\mathrm{ligne}\\ }\\limits",0],
+      colonne: ["\\mathop{\\mathrm{colonne}\\ }\\limits",0],
+      diagonale: ["\\mathop{\\mathrm{diag}\\ }\\limits",0],
+      matelementaire: "\\mathrm{Elem}",
+      matpermutation: ["\\mathop{\\mathrm{permut}\\ }\\limits",0],
+      matunitaire: "\\mathrm{Unitaire}",
+      gaussjordan: "\\mathrm{GaussJordan}",
+      householder: "\\mathrm{Householder}",
+      rang: "rang",
+      schur: "\\mathrm{Schur}",
+      singuliere: "\\mathrm{DVS}",
+      convexe: "\\mathrm{Convexe}",
+      petito: ["o(#1)", 1],
+      grando: ["O(#1)", 1]
+    }
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<p>
+\(
+\newenvironment{Eqts}
+{ \begin{equation*} \begin{gathered} }
+{ \end{gathered} \end{equation*} }
+\newenvironment{Matrix}
+{\left[ \begin{array}}
+{\end{array} \right]}
+\)
+</p>
+
+<p>
+\label{chap:matrices}
+</p>
+<div id="outline-container-org2fe8eda" class="outline-2">
+<h2 id="org2fe8eda"><span class="section-number-2">1.</span> Dépendances</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>Chapitre \ref{chap:reel} : Les réels</li>
+<li>Chapitre \ref{chap:complexe} : Les complexes</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org16ccb4b" class="outline-2">
+<h2 id="org16ccb4b"><span class="section-number-2">2.</span> Multiplication d’une matrice et d’un vecteur</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Soit une matrice \(A \in \matrice(\corps,m,n)\) représentant une fonction
+linéaire \(\mathcal{A} : \corps^n \mapsto \corps^m\). On définit le
+produit matrice - vecteur pour que :
+</p>
+
+<p>
+\[ A \cdot u = \mathcal{A}(u) \]
+</p>
+
+<p>
+pour tout vecteur colonne \(u \in \corps^n\). Si :
+</p>
+
+<p>
+\[ A = (a_{ij})_{i,j} \]
+</p>
+
+<p>
+on a par définition :
+</p>
+
+<p>
+\[ \mathcal{A}_i(u) = \sum_{j=1}^n a_{ij} \cdot u_j \]
+</p>
+
+<p>
+où \(\mathcal{A}_i\) est la \(i^{ème}\) composante de \(\mathcal{A}\). Comme
+\(u\) est un vecteur colonne, on impose que le résultat de \(A \cdot u\) soit
+également un vecteur colonne. La définition du produit matrice-vecteur
+est dès lors immédiate :
+</p>
+
+<p>
+\[ A \cdot u = \left[ \sum_{j=1}^n a_{ij} \cdot u_j \right]_i \]
+</p>
+</div>
+</div>
+<div id="outline-container-orga4b2652" class="outline-2">
+<h2 id="orga4b2652"><span class="section-number-2">3.</span> Addition</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Soit les fonctions linéaires \(\mathcal{A},\mathcal{B} : \corps^n
+\mapsto \corps^m\) respectivement représentées par les matrices \(A,B
+\in \matrice(\corps,m,n)\). On définit l’addition matricielle \(A + B\)
+pour qu’elle représente la fonction \(\mathcal{A} + \mathcal{B}\). On
+a donc :
+</p>
+
+<p>
+\[ (A + B) \cdot u
+= (\mathcal{A} + \mathcal{B})(u)
+= \mathcal{A}(u) + \mathcal{B}(u) \]
+</p>
+
+<p>
+pour tout vecteur colonne \(u \in \corps^p\). Par définition du produit
+matrice-vecteur :
+</p>
+
+<p>
+\[ (A + B) \cdot u
+= \mathcal{A}(u) + \mathcal{B}(u)
+= A \cdot u + B \cdot u \]
+</p>
+
+<p>
+En terme de composantes, si :
+</p>
+
+<p>
+\[ A = (a_{ij})_{i,j} \]
+</p>
+
+<p>
+\[ B = (b_{ij})_{i,j} \]
+</p>
+
+<p>
+\[ u = (u_i)_i \]
+</p>
+
+<p>
+on a :
+</p>
+
+\begin{align*}
+(A + B) \cdot u
+&= A \cdot u + B \cdot u \\
+&= \sum_{j=1}^n a_{ij} \cdot u_j + \sum_{j=1}^n b_{ij} \cdot u_j \\
+&= \sum_{j=1}^n \left[ a_{ij} + b_{ij} \right] \cdot u_j
+\end{align*}
+
+<p>
+La dernière ligne représente le produit d’une matrice
+\(C\in\matrice(\corps,m,p)\) de composantes :
+</p>
+
+<p>
+\[ \composante_{ij} C = a_{ij} + b_{ij} \]
+</p>
+
+<p>
+par \(u\) :
+</p>
+
+<p>
+\[ (A + B) \cdot u = C \cdot u \]
+</p>
+
+<p>
+Ce résultat étant valable pour tout vecteur colonne \(u \in \corps^p\), on
+en déduit que \(C\) est identique à \(A + B\), ce qui nous donne :
+</p>
+
+<p>
+\[A + B = \left[ a_{ij} + b_{ij} \right]_{i,j}\]
+</p>
+</div>
+<div id="outline-container-orgc2095be" class="outline-3">
+<h3 id="orgc2095be"><span class="section-number-3">3.1.</span> Neutre</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+La matrice nulle \(0\) est le neutre pour cette opération :
+</p>
+
+<p>
+\[A + 0 = A\]
+</p>
+
+<p>
+On en déduit que tous ses éléments doivent être nuls :
+</p>
+
+<p>
+\[0 = ( 0 )_{i,j}\]
+</p>
+
+<p>
+On note \(0_{m,n}\) au lieu de \(0\) lorsqu'on veut préciser que \(0\) est
+de taille \((m,n)\).
+</p>
+</div>
+</div>
+<div id="outline-container-orgc17111b" class="outline-3">
+<h3 id="orgc17111b"><span class="section-number-3">3.2.</span> Opposé</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+L'opposé de \(A\), noté \(-A\), est tel que :
+</p>
+
+<p>
+\[A + (-A) = 0\]
+</p>
+
+<p>
+On a donc clairement :
+</p>
+
+<p>
+\[-A = (-a_{ij})_{i,j}\]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org7a62b7f" class="outline-2">
+<h2 id="org7a62b7f"><span class="section-number-2">4.</span> Soustraction</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Soit les fonctions linéaires \(\mathcal{A},\mathcal{B} : \corps^n
+\mapsto \corps^m\) respectivement représentées par les matrices \(A,B
+\in \matrice(\corps,m,n)\). On définit la soustraction matricielle \(A -
+B\) par :
+</p>
+
+<p>
+\[ A - B = A + (-B) \]
+</p>
+
+<p>
+On a clairement :
+</p>
+
+<p>
+\[A - B = \left[ a_{ij} - b_{ij} \right]_{i,j}\]
+</p>
+</div>
+</div>
+<div id="outline-container-org7380133" class="outline-2">
+<h2 id="org7380133"><span class="section-number-2">5.</span> Multiplication mixte</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Soit un scalaire \(\alpha \in \corps\) et la fonction linéaire
+\(\mathcal{A} : \corps^n \mapsto \corps^m\) représentée par la matrice \(A \in
+\matrice(\corps,m,n)\). On définit la multiplication mixte \(\alpha \cdot
+A\) pour qu’elle représente la fonction \(\alpha \cdot \mathcal{A}\). On
+a donc :
+</p>
+
+<p>
+\[ (\alpha \cdot A) \cdot u
+= (\alpha \cdot \mathcal{A})(u)
+= \alpha \cdot \mathcal{A}(u) \]
+</p>
+
+<p>
+pour tout vecteur colonne \(u \in \corps^p\). Par définition du produit
+matrice-vecteur :
+</p>
+
+<p>
+\[ (\alpha \cdot A) \cdot u
+= \alpha \cdot \mathcal{A}(u)
+= \alpha \cdot (A \cdot u) \]
+</p>
+
+<p>
+En terme de composantes, si :
+</p>
+
+<p>
+\[ A = (a_{ij})_{i,j} \]
+</p>
+
+<p>
+\[ u = (u_i)_i \]
+</p>
+
+<p>
+on a :
+</p>
+
+\begin{align*}
+(\alpha \cdot A) \cdot u
+&= \alpha \cdot (A \cdot u) \\
+&= \alpha \sum_{j=1}^n a_{ij} \cdot u_j \\
+&= \sum_{j=1}^n \left[ \alpha \cdot a_{ij} \right] \cdot u_j
+\end{align*}
+
+<p>
+La dernière ligne représente le produit d’une matrice
+\(C\in\matrice(\corps,m,p)\) de composantes :
+</p>
+
+<p>
+\[ \composante_{ij} C = \alpha \cdot a_{ij} \]
+</p>
+
+<p>
+par \(u\) :
+</p>
+
+<p>
+\[ (\alpha \cdot A) \cdot u = C \cdot u \]
+</p>
+
+<p>
+Ce résultat étant valable pour tout vecteur colonne \(u \in \corps^p\), on
+en déduit que \(C\) est identique à \(\alpha \cdot A\), ce qui nous donne :
+</p>
+
+<p>
+\[\alpha \cdot A = \left[ \alpha \cdot a_{ij} \right]_{i,j}\]
+</p>
+
+<p>
+Choissons également \(\gamma \in \corps\). On note comme d'habitude :
+</p>
+
+<div class="org-center">
+<p>
+\(
+A \cdot \beta = \beta \cdot A \)
+</p>
+
+<p>
+\(
+\gamma \cdot \beta \cdot A = (\gamma \cdot \beta) \cdot A \)
+</p>
+
+<p>
+\(
+\beta A = \beta \cdot A
+\)
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org55703c1" class="outline-2">
+<h2 id="org55703c1"><span class="section-number-2">6.</span> Produit matriciel</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Soit les fonctions linéaires \(\mathcal{A} : \corps^n \mapsto
+\corps^m\) et \(\mathcal{B} : \corps^p \mapsto \corps^n\) respectivement
+représentées par les matrices \(A \in \matrice(\corps,m,n)\) et \(B \in
+\matrice(\corps,n,p)\). On définit le produit matriciel \(A \cdot B\)
+pour qu’il représente la fonction \(\mathcal{A} \circ \mathcal{B}\). On
+a donc :
+</p>
+
+<p>
+\[ (A \cdot B) \cdot u
+= (\mathcal{A} \circ \mathcal{B})(u)
+= \mathcal{A}\left(\mathcal{B}(u)\right) \]
+</p>
+
+<p>
+pour tout vecteur colonne \(u \in \corps^p\). Par définition du produit
+matrice-vecteur :
+</p>
+
+<p>
+\[ (A \cdot B) \cdot u
+= \mathcal{A}\left(\mathcal{B}(u)\right)
+= A \cdot (B \cdot u) \]
+</p>
+
+<p>
+En terme de composantes, si :
+</p>
+
+<p>
+\[ A = (a_{ij})_{i,j} \]
+</p>
+
+<p>
+\[ B = (b_{ij})_{i,j} \]
+</p>
+
+<p>
+\[ u = (u_i)_i \]
+</p>
+
+<p>
+on a :
+</p>
+
+\begin{align*}
+(A \cdot B) \cdot u
+&= A \cdot (B \cdot u) \\
+&= \sum_{k=1}^n a_{ik} \cdot (B \cdot u)_k = \sum_{k=1}^n a_{ik} \sum_{j=1}^p b_{kj} \cdot u_j \\
+&= \sum_{k=1}^n \sum_{j=1}^p a_{ik} \cdot b_{kj} \cdot u_j \\
+&= \sum_{j=1}^p \left[ \sum_{k=1}^n a_{ik} \cdot b_{kj} \right] \cdot u_j
+\end{align*}
+
+<p>
+La dernière ligne représente le produit d’une matrice
+\(C\in\matrice(\corps,m,p)\) de composantes :
+</p>
+
+<p>
+\[ \composante_{ij} C = \sum_{k=1}^n a_{ik} \cdot b_{kj} \]
+</p>
+
+<p>
+par \(u\) :
+</p>
+
+<p>
+\[ (A \cdot B) \cdot u = C \cdot u \]
+</p>
+
+<p>
+Ce résultat étant valable pour tout vecteur colonne \(u \in \corps^p\), on
+en déduit que \(C\) est identique à \(A \cdot B\), ce qui nous donne :
+</p>
+
+<p>
+\[A \cdot B = \left[\sum_{k=1}^n a_{ik} \cdot b_{kj}\right]_{i,j}\]
+</p>
+
+<p>
+Le produit d'une matrice de taille \((m,n)\) par une matrice de taille
+\((n,p)\) est une matrice de taille \((m,p)\). Pour que ce produit soit
+bien défini, il est nécessaire que le nombre de colonnes \(n\) de \(A\)
+et le nombre de lignes de \(B\) soient identiques.
+</p>
+</div>
+<div id="outline-container-orgbad9418" class="outline-3">
+<h3 id="orgbad9418"><span class="section-number-3">6.1.</span> Notation</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+En pratique, on laisse souvent tomber le ``\(\cdot\)'' et on note \(A B\)
+au lieu de \(A \cdot B\) lorsqu'il est évident que \(A\) et \(B\) sont deux
+matrices différentes.
+</p>
+</div>
+</div>
+<div id="outline-container-orgd6b2939" class="outline-3">
+<h3 id="orgd6b2939"><span class="section-number-3">6.2.</span> Propriétés</h3>
+<div class="outline-text-3" id="text-6-2">
+</div>
+<div id="outline-container-org98e5539" class="outline-4">
+<h4 id="org98e5539"><span class="section-number-4">6.2.1.</span> Associativité</h4>
+<div class="outline-text-4" id="text-6-2-1">
+<p>
+Soit les matrices \(A \in \matrice(\corps,m,n)\), \(B \in
+\matrice(\corps,n,p)\) et \(C \in \matrice(\corps,p,q)\) définies par :
+</p>
+
+<p>
+\[ A = ( a_{ij} )_{i,j} \]
+</p>
+
+<p>
+\[ B = ( b_{ij} )_{i,j} \]
+</p>
+
+<p>
+\[ C = ( c_{ij} )_{i,j} \]
+</p>
+
+<p>
+La relation :
+</p>
+
+<p>
+\[A \cdot (B \cdot C)
+= \left[ \sum_{k,l} a_{ik} \cdot b_{kl} \cdot c_{lj} \right]_{i,j} = (A \cdot B) \cdot C\]
+</p>
+
+<p>
+nous montre que la multiplication entre matrices est associative. On définit :
+</p>
+
+<p>
+\[A \cdot B \cdot C = A \cdot (B \cdot C) = (A \cdot B) \cdot C\]
+</p>
+</div>
+</div>
+<div id="outline-container-org565ca37" class="outline-4">
+<h4 id="org565ca37"><span class="section-number-4">6.2.2.</span> Non commutativité</h4>
+<div class="outline-text-4" id="text-6-2-2">
+<p>
+Par contre, on peut trouver des matrices \(A\) et \(B\) telles que :
+</p>
+
+<p>
+\[A \cdot B \ne B \cdot A\]
+</p>
+
+<p>
+La multiplication matricielle n'est donc en général pas commutative. D'ailleurs, pour que ces deux produits existent simultanément, il faut que \(A\) et \(B\) soient toutes deux carrées, ce qui n'est pas forcément le cas.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgeb9ca14" class="outline-3">
+<h3 id="orgeb9ca14"><span class="section-number-3">6.3.</span> Commutateur</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+La matrice associée au commutateur des fonctions linéaires :
+</p>
+
+<p>
+\[[\mathcal{A},\mathcal{B}] = \mathcal{A} \circ \mathcal{B} - \mathcal{B} \circ \mathcal{A}\]
+</p>
+
+<p>
+est donnée par le commutateur matriciel équivalent :
+</p>
+
+<p>
+\[[A,B] = A \cdot B - B \cdot A\]
+</p>
+</div>
+</div>
+<div id="outline-container-org7db75cf" class="outline-3">
+<h3 id="org7db75cf"><span class="section-number-3">6.4.</span> Transposée d’un produit</h3>
+<div class="outline-text-3" id="text-6-4">
+<p>
+On vérifie que :
+</p>
+
+<p>
+\[(A \cdot B)^T = B^T \cdot A^T\]
+</p>
+</div>
+</div>
+<div id="outline-container-org91ad529" class="outline-3">
+<h3 id="org91ad529"><span class="section-number-3">6.5.</span> Produit entre vecteurs</h3>
+<div class="outline-text-3" id="text-6-5">
+<div id="text-table-of-contents-1" role="doc-toc">
+<ul>
+<li><a href="#org74c1dfe">6.5.1. Produit scalaire usuel</a></li>
+<li><a href="#org9a094fb">6.5.2. Produit tensoriel</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org74c1dfe" class="outline-4">
+<h4 id="org74c1dfe"><span class="section-number-4">6.5.1.</span> Produit scalaire usuel</h4>
+<div class="outline-text-4" id="text-6-5-1">
+<p>
+Soit les vecteurs colonne \(u,v \in \corps^n\) définis par :
+</p>
+
+<p>
+\[ u = (u_i)_i \]
+</p>
+
+<p>
+\[ v = (v_i)_i \]
+</p>
+
+<p>
+On peut considérer que \(u\) et \(v\) sont aussi des matrices de taille
+\((n,1)\) et calculer le produit du vecteur ligne \(u^T\) par le vecteur
+colonne \(v\). On obtient une matrice de taille \((1,1)\), c’est-à-dire
+un scalaire :
+</p>
+
+<p>
+\[ u^T \cdot v = \sum_{i=1}^n u_i \cdot v_i \]
+</p>
+
+<p>
+Lorsque \(\corps = \setR\), ce produit est appalé produit scalaire usuel
+sur \(\setR^n\). On le note :
+</p>
+
+<p>
+\[ \scalaire{u}{v} = u^T \cdot v \]
+</p>
+
+<p>
+Lorsque \(\corps = \setC\), on utilise le produit scalaire usuel sur
+\(\setC\) :
+</p>
+
+<p>
+\[ \scalaire{u}{v} = \conjaccent{u^T} \cdot v \]
+</p>
+
+<p>
+L’utilisation du complexe conjugué permet d’avoir :
+</p>
+
+<p>
+\[ \scalaire{u}{u}
+= \conjaccent{u^T} \cdot u
+= \sum_i \conjaccent{u_i} \cdot u_i
+= \sum_i \abs{u_i}^2 \]
+</p>
+
+<p>
+et donc :
+</p>
+
+<p>
+\[ \scalaire{u}{u} \in \setR \]
+</p>
+
+<p>
+\[ \scalaire{u}{u} \ge 0 \]
+</p>
+</div>
+</div>
+<div id="outline-container-org9a094fb" class="outline-4">
+<h4 id="org9a094fb"><span class="section-number-4">6.5.2.</span> Produit tensoriel</h4>
+<div class="outline-text-4" id="text-6-5-2">
+<p>
+Soit les vecteurs colonne \(u \in \corps^m\) et \(v \in \corps^n\) définis
+par :
+</p>
+
+<p>
+\[ u = (u_i)_i \]
+</p>
+
+<p>
+\[ v = (v_i)_i \]
+</p>
+
+<p>
+On peut considérer que \(u\) et \(v\) sont respectivement des matrices de
+taille \((m,1)\) et \((n,1)\), et calculer le produit du vecteur colonne \(u\)
+par le vecteur ligne \(v^T\). On obtient une matrice de taille \((m,n)\) :
+</p>
+
+<p>
+\[ u \cdot v^T = (u_i \cdot v_j)_{i,j} \]
+</p>
+
+<p>
+Lorsque \(\corps = \setR\), ce produit est appalé produit tensoriel sur
+\(\setR^m \times \setR^n\). On le note :
+</p>
+
+<p>
+\[ u \otimes v = u \cdot v^T \]
+</p>
+
+<p>
+Si \(w \in \setR^n\) est un troisième vecteur colonne, on a :
+</p>
+
+<p>
+\[ (u \otimes v) \cdot w
+= u \cdot v^T \cdot w
+= u \cdot (v^T \cdot w) \]
+</p>
+
+<p>
+et finalement :
+</p>
+
+<p>
+\[ (u \otimes v) \cdot w = u \cdot \scalaire{v}{w} \]
+</p>
+
+<p>
+Lorsque \(\corps = \setC\), on utilise une variante avec complexe conjugué :
+</p>
+
+<p>
+\[ u \otimes v = u \cdot \conjaccent{v^T} \]
+</p>
+
+<p>
+Si \(w \in \setC^n\) est un troisième vecteur colonne, on a :
+</p>
+
+<p>
+\[ (u \otimes v) \cdot w
+= u \cdot \conjaccent{v^T} \cdot w
+= u \cdot (\conjaccent{v^T} \cdot w) \]
+</p>
+
+<p>
+et finalement :
+</p>
+
+<p>
+\[ (u \otimes v) \cdot w = u \cdot \scalaire{v}{w} \]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orga25df67" class="outline-3">
+<h3 id="orga25df67"><span class="section-number-3">6.6.</span> Lignes et colonnes</h3>
+<div class="outline-text-3" id="text-6-6">
+<p>
+Soit les matrices :
+</p>
+
+<p>
+\[ A = (a_{ij})_{i,j} \]
+</p>
+
+<p>
+\[ B = (b_{ij})_{i,j} \]
+</p>
+
+<p>
+On a :
+</p>
+
+<p>
+\[ \composante_{ij} (A \cdot B) = \sum_{k=1}^n a_{ik} \cdot b_{kj} \]
+</p>
+
+<p>
+Si :
+</p>
+
+<p>
+\[ l_i = \ligne_i(A) = (a_{ij})_j \]
+</p>
+
+<p>
+\[ c_j = \colonne_j(B) = (a_{ij})_i \]
+</p>
+
+<p>
+L’expression de la composante \(i,j\) de \(A \cdot B\) peut se réécrire :
+</p>
+
+<p>
+\[\composante_{ij} (A \cdot B) = l_i \cdot c_j\]
+</p>
+</div>
+</div>
+<div id="outline-container-org2be9b57" class="outline-3">
+<h3 id="org2be9b57"><span class="section-number-3">6.7.</span> Produit matriciel et blocs</h3>
+<div class="outline-text-3" id="text-6-7">
+<p>
+En utilisant l'associativité de l'addition, on peut facilement vérifier
+que la formule de multiplication reste valable lorsqu'on considère
+des blocs de matrices au lieu des éléments, à condition de respecter
+l'ordre de multiplication.
+</p>
+
+<p>
+Par exemple, si :
+</p>
+
+<p>
+\[ A = \begin{Matrix}{cc}
+A_{11} & A_{12} \\
+A_{21} & A_{22}
+\end{Matrix} \]
+</p>
+
+<p>
+\[ B = \begin{Matrix}{cc}
+B_{11} & B_{12} \\
+B_{21} & B_{22}
+\end{Matrix} \]
+</p>
+
+<p>
+on a :
+</p>
+
+<p>
+\[ A \cdot B
+= \begin{Matrix}{cc}
+A_{11} \cdot B_{11} +  A_{12} \cdot B_{21} & A_{11} \cdot B_{12} +  A_{12} \cdot B_{22} \\
+A_{21} \cdot B_{11} +  A_{22} \cdot B_{21} & A_{21} \cdot B_{12} +  A_{22} \cdot B_{22}
+\end{Matrix} \]
+</p>
+</div>
+<div id="outline-container-org1ab3128" class="outline-4">
+<h4 id="org1ab3128"><span class="section-number-4">6.7.1.</span> Bloc-diagonale</h4>
+<div class="outline-text-4" id="text-6-7-1">
+<p>
+Un cas particulier important, si :
+</p>
+
+<p>
+\[ A = \begin{Matrix}{cc}
+A_1 & 0 \\
+0 & A_2
+\end{Matrix} \]
+</p>
+
+<p>
+\[ B = \begin{Matrix}{cc}
+B_1 & 0 \\
+0 & B_2
+\end{Matrix} \]
+</p>
+
+<p>
+on a :
+</p>
+
+<p>
+\[ A \cdot B = \begin{Matrix}{cc}
+A_1 \cdot B_1 & 0 \\
+0 & A_2 \cdot B_2
+\end{Matrix} \]
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org9ac2012" class="outline-2">
+<h2 id="org9ac2012"><span class="section-number-2">7.</span> Distributivité</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Soit les matrices \(A \in \matrice(\corps,m,n)\), \(B \in
+\matrice(\corps,n,p)\) et \(C \in \matrice(\corps,n,p)\) et
+\(D \in \matrice(\corps,p,q)\) définies par :
+</p>
+
+<p>
+\[ A = ( a_{ij} )_{i,j} \]
+</p>
+
+<p>
+\[ B = ( b_{ij} )_{i,j} \]
+</p>
+
+<p>
+\[ C = ( c_{ij} )_{i,j} \]
+</p>
+
+<p>
+\[ D = ( d_{ij} )_{i,j} \]
+</p>
+
+<p>
+La relation :
+</p>
+
+\begin{align*}
+A \cdot (B + C)
+&= \left[ \sum_k a_{ik} \cdot (b_{kj} + c_{kj}) \right]_{i,j} \\
+&= \left[ \sum_k a_{ik} \cdot b_{kj} \right]_{i,j} + \left[ \sum_k a_{ik} \cdot c_{kj} \right]_{i,j} \\
+&= A \cdot B + A \cdot C
+\end{align*}
+
+<p>
+nous montre que :
+</p>
+
+<p>
+\[ A \cdot (B + C) = A \cdot B + A \cdot C \]
+</p>
+
+<p>
+La relation :
+</p>
+
+\begin{align*}
+(B + C) \cdot D
+&= \left[ \sum_k (b_{ik} + c_{ik}) \cdot d_{kj} \right]_{i,j} \\
+&= \left[ \sum_k b_{ik} \cdot d_{kj} \right]_{i,j} + \left[ \sum_k c_{ik} \cdot d_{kj} \right]_{i,j} \\
+&= B \cdot D + C \cdot D
+\end{align*}
+
+<p>
+nous montre que :
+</p>
+
+<p>
+\[ (B + C) \cdot D = B \cdot D + C \cdot D \]
+</p>
+
+<p>
+On en déduit que la multiplication matricielle se distribue sur
+l’addition matricielle.
+</p>
+</div>
+</div>
+<div id="outline-container-orgad4f7b6" class="outline-2">
+<h2 id="orgad4f7b6"><span class="section-number-2">8.</span> Matrice identité</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+La matrice identité \(I \in \matrice(\corps,n,n)\) correspond à la
+fonction \(\identite\). On a donc :
+</p>
+
+<p>
+\[I \cdot u = u\]
+</p>
+
+<p>
+pour tout \(u \in \corps^n\). Si \((\canonique_1,...\canonique_n)\) est
+la base canonique de \(\corps^n\) sous la forme de vecteurs colonnes,
+on a donc :
+</p>
+
+<p>
+\[I \cdot \canonique_i = \canonique_i\]
+</p>
+
+<p>
+ce qui entraîne directement :
+</p>
+
+<p>
+\[I = ( \indicatrice_{ij} )_{i,j}\]
+</p>
+
+<p>
+On remarque que :
+</p>
+
+<p>
+\[I = [\canonique_1 \ \ \ldots \ \ \canonique_n]\]
+</p>
+</div>
+<div id="outline-container-org3dbe3b8" class="outline-3">
+<h3 id="org3dbe3b8"><span class="section-number-3">8.1.</span> Neutre</h3>
+<div class="outline-text-3" id="text-8-1">
+<p>
+Comme la fonction identité est neutre pour la composition, la matrice
+unité correspondante doit être neutre pour la multiplication avec toutes
+les matrices de dimensions compatibles. Soit \(A \in \matrice(\corps,m,n)\)
+définie par :
+</p>
+
+<p>
+\[ A = (a_{ij})_{i,j} \]
+</p>
+
+<p>
+Si \(I_n \in \matrice(\corps,n,n)\), on vérifie que l'on a bien :
+</p>
+
+<p>
+\[ A \cdot I_n
+= \left[ \sum_{k=1}^n a_{ik} \cdot \indicatrice_{kj} \right]_{i,j}
+= \left[ a_{ij} \right]_{i,j} \]
+</p>
+
+<p>
+c’est-à-dire :
+</p>
+
+<p>
+\[ A \cdot I_n = A \]
+</p>
+
+<p>
+Si \(I_m \in \matrice(\corps,m,m)\), on vérifie que l'on a bien :
+</p>
+
+<p>
+\[ I_m \cdot A
+= \left[ \sum_{k=1}^m \indicatrice_{ik} \cdot a_{kj} \right]_{i,j}
+= \left[ a_{ij} \right]_{i,j} \]
+</p>
+
+<p>
+c’est-à-dire :
+</p>
+
+<p>
+\[ I_m \cdot A = A \]
+</p>
+</div>
+</div>
+<div id="outline-container-orgfe5bbe1" class="outline-3">
+<h3 id="orgfe5bbe1"><span class="section-number-3">8.2.</span> Notation</h3>
+<div class="outline-text-3" id="text-8-2">
+<p>
+On note aussi \(I_n\) pour préciser que \(I\) est de taille \((n,n)\).
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org8dd9179" class="outline-2">
+<h2 id="org8dd9179"><span class="section-number-2">9.</span> Inverse</h2>
+<div class="outline-text-2" id="text-9">
+</div>
+<div id="outline-container-org12f2abb" class="outline-3">
+<h3 id="org12f2abb"><span class="section-number-3">9.1.</span> Inverse à gauche et à droite</h3>
+<div class="outline-text-3" id="text-9-1">
+<p>
+On dit que \(L\) est un inverse à gauche de \(A\) si :
+</p>
+
+<p>
+\[ L \cdot A = I \]
+</p>
+
+<p>
+On dit que \(R\) est un inverse à droite de \(A\) si :
+</p>
+
+<p>
+\[ A \cdot R = I \]
+</p>
+</div>
+</div>
+<div id="outline-container-org828fdf3" class="outline-3">
+<h3 id="org828fdf3"><span class="section-number-3">9.2.</span> Simultané</h3>
+<div class="outline-text-3" id="text-9-2">
+<p>
+Si \(A \in \matrice(\corps,n,n)\) possède à la fois un inverse \(L\)
+à gauche et in un inverse \(R\) à droite, on a :
+</p>
+
+<p>
+\[ L = L \cdot I = L \cdot (A \cdot R) = (L \cdot A) \cdot R = I \cdot R = R \]
+</p>
+
+<p>
+On a donc :
+</p>
+
+<p>
+\[ L = R \]
+</p>
+
+<p>
+La matrice inverse est donc unique et on la note \(A^{-1}\). Elle est donc l'unique
+matrice telle que :
+</p>
+
+<p>
+\[A^{-1} \cdot A = A \cdot A^{-1} = I\]
+</p>
+</div>
+</div>
+<div id="outline-container-org52ae552" class="outline-3">
+<h3 id="org52ae552"><span class="section-number-3">9.3.</span> Fonction inverse</h3>
+<div class="outline-text-3" id="text-9-3">
+<p>
+Soit la fonction linéaire \(\mathcal{A} : \corps^n \mapsto \corps^m\)
+représentée par la matrice \(A \in \matrice(\corps,n,n)\), qui possède un
+inverse \(A^{-1}\). Si \(\mathcal{B}\) est la fonction linéaire représentée
+par \(A^{-1}\), on a :
+</p>
+
+<p>
+\[ \mathcal{B}(\mathcal{A}(u)) = A^{-1} \cdot A \cdot u = I \cdot u = u \]
+</p>
+
+<p>
+\[ \mathcal{A}(\mathcal{B}(u)) = A \cdot A^{-1} \cdot u = I \cdot u = u \]
+</p>
+
+<p>
+pour tout vecteur colonne \(u \in \corps^n\), ce qui implique :
+</p>
+
+<p>
+\[ \mathcal{B} = \mathcal{A}^{-1} \]
+</p>
+
+<p>
+La matrice inverse \(A^{-1}\) représente la fonction linéaire inverse
+\(\mathcal{A}^{-1}\).
+</p>
+</div>
+</div>
+<div id="outline-container-orgd06bd28" class="outline-3">
+<h3 id="orgd06bd28"><span class="section-number-3">9.4.</span> Inverse d'un produit</h3>
+<div class="outline-text-3" id="text-9-4">
+<p>
+Soit \(A\) et \(B\) deux matrices inversibles. Supposons que leur produit
+\(A \cdot B\) possède un inverse à gauche \(L\) et un inverse à droite
+\(R\). La relation :
+</p>
+
+<p>
+\[ L \cdot (A \cdot B) = L \cdot A \cdot B = I \]
+</p>
+
+<p>
+nous donne :
+</p>
+
+<p>
+\[ L \cdot A = I \cdot B^{-1} = B^{-1} \]
+</p>
+
+<p>
+\[ L = B^{-1} \cdot A^{-1} \]
+</p>
+
+<p>
+La relation :
+</p>
+
+<p>
+\[ (A \cdot B) \cdot R = A \cdot B \cdot R = I \]
+</p>
+
+<p>
+nous donne :
+</p>
+
+<p>
+\[ B \cdot R = A^{-1} \cdot I = A^{-1} \]
+</p>
+
+<p>
+\[ R = B^{-1} \cdot A^{-1} \]
+</p>
+
+<p>
+On a donc :
+</p>
+
+<p>
+\[ L = R = B^{-1} \cdot A^{-1} \]
+</p>
+
+<p>
+L’inverse de \(A \cdot B\) existe et est donné par :
+</p>
+
+<p>
+\[(A \cdot B)^{-1} = B^{-1} \cdot A^{-1}\]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org0bc2511" class="outline-2">
+<h2 id="org0bc2511"><span class="section-number-2">10.</span> Puissance</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+Il est possible de multiplier une matrice carrée \(A\) avec elle-même.
+On peut donc définir la puissance par :
+</p>
+
+\begin{align*}
+A^0 &= I \\
+A^k &= A \cdot A^{k-1}
+\end{align*}
+</div>
+<div id="outline-container-orgbd44997" class="outline-3">
+<h3 id="orgbd44997"><span class="section-number-3">10.1.</span> Puissance négative</h3>
+<div class="outline-text-3" id="text-10-1">
+<p>
+Si l'inverse \(A^{-1}\) existe, on définit également :
+</p>
+
+<p>
+\[A^{-k} = (A^{-1})^k\]
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Auteur: chimay</p>
+<p class="date">Created: 2025-11-22 sam 14:31</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

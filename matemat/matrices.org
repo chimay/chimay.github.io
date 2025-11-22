@@ -29,11 +29,7 @@
   - Chapitre \ref{chap:reel} : Les réels
   - Chapitre \ref{chap:complexe} : Les complexes
 
-* Introduction
-
-#+TOC: headlines 1 local
-
-** Définition
+* Définition
 
 Soit un corps $\corps$, une fonction linéaire $\mathcal{A} : \corps^n
 \mapsto \corps^m$ de composantes :
@@ -85,7 +81,7 @@ coefficients $a_{ij}\in\corps$ sont appelés composantes de $A$.
 On note $\matrice(\corps,m,n)$ l'ensemble des matrices à $m$ lignes et
 $n$ colonnes.
 
-** Composantes
+* Composantes
 
 Soit une matrice $A\in\matrice(\corps,m,n)$ :
 
@@ -127,7 +123,7 @@ avec ou sans virgule :
 
 $$a_{ij} = \composante_{ij} A$$
 
-** Egalité
+* Egalité
 
 Il est clair que deux matrices $A,B \in \matrice(\corps,m,n)$ :
 
@@ -142,7 +138,7 @@ $$a_{ij} = b_{ij}$$
 
 pour tout $(i,j) \in \{ 1,2,...,m \} \times \{ 1,2,...,n \}$.
 
-** Ordre partiel
+* Ordre partiel
 
 Soit les matrices $A,B \in \matrice(\corps,m,n)$ :
 
@@ -156,7 +152,7 @@ $$a_{ij} \le b_{ij}$$
 
 pour tout $(i,j) \in \{ 1,2,...,m \} \times \{ 1,2,...,n \}$.
 
-** Scalaires
+* Scalaires
 
 On peut associer à tout scalaire $a \in \corps$ une matrice $A$
 de taille $(1,1)$ :
@@ -169,17 +165,21 @@ $$ \matrice(\corps,1,1) \equiv \corps $$
 
 Dans la suite, on assimile toute matrice de taille $(1,1)$ à un scalaire.
 
-** Vecteurs lignes et colonnes
+* Vecteurs lignes et colonnes
 
-On peut considérer un vecteur ligne comme une matrice ne possédant
-qu'une seule ligne. Un vecteur ligne est donc de taille générique
-$(1,n)$.
+#+TOC: headlines 1 local
 
-De même, on peut considérer un vecteur colonne omme une matrice ne
-possédant qu'une seule colonne. Un vecteur colonne est donc de taille
-générique $(m,1)$.
+** Taille des vecteurs
 
-*** Équivalence avec $\corps^n$
+On peut considérer un vecteur colonne comme une matrice ne possédant
+qu'une seule colonne. Un vecteur colonne est donc de taille générique
+$(m,1)$.
+
+De même, on peut considérer un vecteur ligne comme une matrice ne
+possédant qu'une seule ligne. Un vecteur ligne est donc de taille
+générique $(1,n)$.
+
+** Équivalence avec $\corps^n$
 
 A partir d'un n-tuple $(x_1,x_2,...,x_n) \in \corps^n$, on peut former
 un vecteur ligne $l \in \matrice(\corps,1,n)$ et un vecteur colonne $c
@@ -190,484 +190,48 @@ on a les équivalences :
 $\matrice(\corps,1,n) \equiv \matrice(\corps,n,1) \equiv \corps^n$
 #+end_center
 
-* Opérations
+** Colonne d’une matrice
 
-#+TOC: headlines 1 local
+La colonne $j$ d’une matrice :
 
-** Multiplication d’une matrice et d’un vecteur
+$$ A = (a_{ij})_{i,j} \in \matrice(\corps,m,n) $$
 
-Soit une matrice $A \in \matrice(\corps,m,n)$ représentant une fonction
-linéaire $\mathcal{A} : \corps^n \mapsto \corps^m$. On définit le
-produit matrice - vecteur pour que :
+est aussi un vecteur colonne $c_j \in \corps^m$ défini par :
 
-$$ A \cdot u = \mathcal{A}(u) $$
+$$ c_j =  (a_{ij})_i = \begin{Matrix}{c}
+a_{1j} \\
+a_{2j} \\
+\vdots \\
+a_{mj}
+\end{Matrix} $$
 
-pour tout vecteur colonne $u \in \corps^n$. Si :
+ On note :
 
-$$ A = (a_{ij})_{i,j} $$
+$$ \colonne_j A = c_j $$
 
-on a par définition :
+** Ligne d’une matrice
 
-$$ \mathcal{A}_i(u) = \sum_{j=1}^n a_{ij} \cdot u_j $$
+La ligne $i$ d’une matrice :
 
-où $\mathcal{A}_i$ est la $i^{ème}$ composante de $\mathcal{A}$. Comme
-$u$ est un vecteur colonne, on impose que le résultat de $A \cdot u$ soit
-également un vecteur colonne. La définition du produit matrice-vecteur
-est dès lors immédiate :
+$$ A = (a_{ij})_{i,j} \in \matrice(\corps,m,n) $$
 
-$$ A \cdot u = \left[ \sum_{j=1}^n a_{ij} \cdot u_j \right]_i $$
+est aussi un vecteur ligne $l_i \in \corps^n$ défini par :
 
-** Addition
+$$ l_i =  (a_{ij})_j = [a_{i1} \ \ a_{i2} \ \ldots \ \ a_{in}] $$
 
-Soit les fonctions linéaires $\mathcal{A},\mathcal{B} : \corps^n
-\mapsto \corps^m$ respectivement représentées par les matrices $A,B
-\in \matrice(\corps,m,n)$. On définit l’addition matricielle $A + B$
-pour qu’elle représente la fonction $\mathcal{A} + \mathcal{B}$. On
-a donc :
+On note :
 
-$$ (A + B) \cdot u
-= (\mathcal{A} + \mathcal{B})(u)
-= \mathcal{A}(u) + \mathcal{B}(u) $$
-
-pour tout vecteur colonne $u \in \corps^p$. Par définition du produit
-matrice-vecteur :
-
-$$ (A + B) \cdot u
-= \mathcal{A}(u) + \mathcal{B}(u)
-= A \cdot u + B \cdot u $$
-
-En terme de composantes, si :
-
-$$ A = (a_{ij})_{i,j} $$
-
-$$ B = (b_{ij})_{i,j} $$
-
-$$ u = (u_i)_i $$
-
-on a :
-
-\begin{align*}
-(A + B) \cdot u
-&= A \cdot u + B \cdot u \\
-&= \sum_{j=1}^n a_{ij} \cdot u_j + \sum_{j=1}^n b_{ij} \cdot u_j \\
-&= \sum_{j=1}^n \left[ a_{ij} + b_{ij} \right] \cdot u_j
-\end{align*}
-
-La dernière ligne représente le produit d’une matrice
-$C\in\matrice(\corps,m,p)$ de composantes :
-
-$$ \composante_{ij} C = a_{ij} + b_{ij} $$
-
-par $u$ :
-
-$$ (A + B) \cdot u = C \cdot u $$
-
-Ce résultat étant valable pour tout vecteur colonne $u \in \corps^p$, on
-en déduit que $C$ est identique à $A + B$, ce qui nous donne :
-
-$$A + B = \left[ a_{ij} + b_{ij} \right]_{i,j}$$
-
-*** Neutre
-
-La matrice nulle $0$ est le neutre pour cette opération :
-
-$$A + 0 = A$$
-
-On en déduit que tous ses éléments doivent être nuls :
-
-$$0 = ( 0 )_{i,j}$$
-
-On note $0_{m,n}$ au lieu de $0$ lorsqu'on veut préciser que $0$ est
-de taille $(m,n)$.
-
-*** Opposé
-
-L'opposé de $A$, noté $-A$, est tel que :
-
-$$A + (-A) = 0$$
-
-On a donc clairement :
-
-$$-A = (-a_{ij})_{i,j}$$
-
-** Soustraction
-
-Soit les fonctions linéaires $\mathcal{A},\mathcal{B} : \corps^n
-\mapsto \corps^m$ respectivement représentées par les matrices $A,B
-\in \matrice(\corps,m,n)$. On définit la soustraction matricielle $A -
-B$ par :
-
-$$ A - B = A + (-B) $$
-
-On a clairement :
-
-$$A - B = \left[ a_{ij} - b_{ij} \right]_{i,j}$$
-
-** Multiplication mixte
-
-Soit un scalaire $\alpha \in \corps$ et la fonction linéaire
-$\mathcal{A} : \corps^n \mapsto \corps^m$ représentée par la matrice $A \in
-\matrice(\corps,m,n)$. On définit la multiplication mixte $\alpha \cdot
-A$ pour qu’elle représente la fonction $\alpha \cdot \mathcal{A}$. On
-a donc :
-
-$$ (\alpha \cdot A) \cdot u
-= (\alpha \cdot \mathcal{A})(u)
-= \alpha \cdot \mathcal{A}(u) $$
-
-pour tout vecteur colonne $u \in \corps^p$. Par définition du produit
-matrice-vecteur :
-
-$$ (\alpha \cdot A) \cdot u
-= \alpha \cdot \mathcal{A}(u)
-= \alpha \cdot (A \cdot u) $$
-
-En terme de composantes, si :
-
-$$ A = (a_{ij})_{i,j} $$
-
-$$ u = (u_i)_i $$
-
-on a :
-
-\begin{align*}
-(\alpha \cdot A) \cdot u
-&= \alpha \cdot (A \cdot u) \\
-&= \alpha \sum_{j=1}^n a_{ij} \cdot u_j \\
-&= \sum_{j=1}^n \left[ \alpha \cdot a_{ij} \right] \cdot u_j
-\end{align*}
-
-La dernière ligne représente le produit d’une matrice
-$C\in\matrice(\corps,m,p)$ de composantes :
-
-$$ \composante_{ij} C = \alpha \cdot a_{ij} $$
-
-par $u$ :
-
-$$ (\alpha \cdot A) \cdot u = C \cdot u $$
-
-Ce résultat étant valable pour tout vecteur colonne $u \in \corps^p$, on
-en déduit que $C$ est identique à $\alpha \cdot A$, ce qui nous donne :
-
-$$\alpha \cdot A = \left[ \alpha \cdot a_{ij} \right]_{i,j}$$
-
-Choissons également $\gamma \in \corps$. On note comme d'habitude :
-
-#+BEGIN_CENTER
-\(
-A \cdot \beta = \beta \cdot A \)
-
-\(
-\gamma \cdot \beta \cdot A = (\gamma \cdot \beta) \cdot A \)
-
-\(
-\beta A = \beta \cdot A
-\)
-#+END_CENTER
-
-** Produit matriciel
-
-Soit les fonctions linéaires $\mathcal{A} : \corps^n \mapsto
-\corps^m$ et $\mathcal{B} : \corps^p \mapsto \corps^n$ respectivement
-représentées par les matrices $A \in \matrice(\corps,m,n)$ et $B \in
-\matrice(\corps,n,p)$. On définit le produit matriciel $A \cdot B$
-pour qu’il représente la fonction $\mathcal{A} \circ \mathcal{B}$. On
-a donc :
-
-$$ (A \cdot B) \cdot u
-= (\mathcal{A} \circ \mathcal{B})(u)
-= \mathcal{A}\left(\mathcal{B}(u)\right) $$
-
-pour tout vecteur colonne $u \in \corps^p$. Par définition du produit
-matrice-vecteur :
-
-$$ (A \cdot B) \cdot u
-= \mathcal{A}\left(\mathcal{B}(u)\right)
-= A \cdot (B \cdot u) $$
-
-En terme de composantes, si :
-
-$$ A = (a_{ij})_{i,j} $$
-
-$$ B = (b_{ij})_{i,j} $$
-
-$$ u = (u_i)_i $$
-
-on a :
-
-\begin{align*}
-(A \cdot B) \cdot u
-&= A \cdot (B \cdot u) \\
-&= \sum_{k=1}^n a_{ik} \cdot (B \cdot u)_k = \sum_{k=1}^n a_{ik} \sum_{j=1}^p b_{kj} \cdot u_j \\
-&= \sum_{k=1}^n \sum_{j=1}^p a_{ik} \cdot b_{kj} \cdot u_j \\
-&= \sum_{j=1}^p \left[ \sum_{k=1}^n a_{ik} \cdot b_{kj} \right] \cdot u_j
-\end{align*}
-
-La dernière ligne représente le produit d’une matrice
-$C\in\matrice(\corps,m,p)$ de composantes :
-
-$$ \composante_{ij} C = \sum_{k=1}^n a_{ik} \cdot b_{kj} $$
-
-par $u$ :
-
-$$ (A \cdot B) \cdot u = C \cdot u $$
-
-Ce résultat étant valable pour tout vecteur colonne $u \in \corps^p$, on
-en déduit que $C$ est identique à $A \cdot B$, ce qui nous donne :
-
-$$A \cdot B = \left[\sum_{k=1}^n a_{ik} \cdot b_{kj}\right]_{i,j}$$
-
-Le produit d'une matrice de taille $(m,n)$ par une matrice de taille
-$(n,p)$ est une matrice de taille $(m,p)$. Pour que ce produit soit
-bien défini, il est nécessaire que le nombre de colonnes $n$ de $A$
-et le nombre de lignes de $B$ soient identiques.
-
-*** Notation
-
-En pratique, on laisse souvent tomber le ``$\cdot$'' et on note $A B$
-au lieu de $A \cdot B$ lorsqu'il est évident que $A$ et $B$ sont deux
-matrices différentes.
-
-*** Propriétés
-
-**** Associativité
-
-Soit les matrices $A \in \matrice(\corps,m,n)$, $B \in
-\matrice(\corps,n,p)$ et $C \in \matrice(\corps,p,q)$ définies par :
-
-$$ A = ( a_{ij} )_{i,j} $$
-
-$$ B = ( b_{ij} )_{i,j} $$
-
-$$ C = ( c_{ij} )_{i,j} $$
-
-La relation :
-
-$$A \cdot (B \cdot C)
-= \left[ \sum_{k,l} a_{ik} \cdot b_{kl} \cdot c_{lj} \right]_{i,j} = (A \cdot B) \cdot C$$
-
-nous montre que la multiplication entre matrices est associative. On définit :
-
-$$A \cdot B \cdot C = A \cdot (B \cdot C) = (A \cdot B) \cdot C$$
-
-**** Non commutativité
-
-Par contre, on peut trouver des matrices $A$ et $B$ telles que :
-
-$$A \cdot B \ne B \cdot A$$
-
-La multiplication matricielle n'est donc en général pas commutative. D'ailleurs, pour que ces deux produits existent simultanément, il faut que $A$ et $B$ soient toutes deux carrées, ce qui n'est pas forcément le cas.
-
-*** Commutateur
-
-La matrice associée au commutateur :
-
-$$[\mathcal{A},\mathcal{B}] = \mathcal{A} \circ \mathcal{B} - \mathcal{B} \circ \mathcal{A}$$
-
-est donnée par le commutateur équivalent :
-
-$$[A,B] = A \cdot B - B \cdot A$$
-
-** Distributivité
-
-Soit les matrices $A \in \matrice(\corps,m,n)$, $B \in
-\matrice(\corps,n,p)$ et $C \in \matrice(\corps,n,p)$ et
-$D \in \matrice(\corps,p,q)$ définies par :
-
-$$ A = ( a_{ij} )_{i,j} $$
-
-$$ B = ( b_{ij} )_{i,j} $$
-
-$$ C = ( c_{ij} )_{i,j} $$
-
-$$ D = ( d_{ij} )_{i,j} $$
-
-La relation :
-
-\begin{align*}
-A \cdot (B + C)
-&= \left[ \sum_k a_{ik} \cdot (b_{kj} + c_{kj}) \right]_{i,j} \\
-&= \left[ \sum_k a_{ik} \cdot b_{kj} \right]_{i,j} + \left[ \sum_k a_{ik} \cdot c_{kj} \right]_{i,j} \\
-&= A \cdot B + A \cdot C
-\end{align*}
-
-nous montre que :
-
-$$ A \cdot (B + C) = A \cdot B + A \cdot C $$
-
-La relation :
-
-\begin{align*}
-(B + C) \cdot D
-&= \left[ \sum_k (b_{ik} + c_{ik}) \cdot d_{kj} \right]_{i,j} \\
-&= \left[ \sum_k b_{ik} \cdot d_{kj} \right]_{i,j} + \left[ \sum_k c_{ik} \cdot d_{kj} \right]_{i,j} \\
-&= B \cdot D + C \cdot D
-\end{align*}
-
-nous montre que :
-
-$$ (B + C) \cdot D = B \cdot D + C \cdot D $$
-
-On en déduit que la multiplication matricielle se distribue sur
-l’addition matricielle.
-
-** Matrice identité
-
-La matrice identité $I \in \matrice(\corps,n,n)$ correspond à la
-fonction $\identite$. On a donc :
-
-$$I \cdot u = u$$
-
-pour tout $u \in \corps^n$. Si $(\canonique_1,...\canonique_n)$ est
-la base canonique de $\corps^n$ sous la forme de vecteurs colonnes,
-on a donc :
-
-$$I \cdot \canonique_i = \canonique_i$$
-
-ce qui entraîne directement :
-
-$$I = ( \indicatrice_{ij} )_{i,j}$$
-
-On remarque que :
-
-$$I = [\canonique_1 \ \ \ldots \ \ \canonique_n]$$
-
-*** Neutre
-
-Comme la fonction identité est neutre pour la composition, la matrice
-unité correspondante doit être neutre pour la multiplication avec toutes
-les matrices de dimensions compatibles. Soit $A \in \matrice(\corps,m,n)$
-définie par :
-
-$$ A = (a_{ij})_{i,j} $$
-
-Si $I_n \in \matrice(\corps,n,n)$, on vérifie que l'on a bien :
-
-$$ A \cdot I_n
-= \left[ \sum_{k=1}^n a_{ik} \cdot \indicatrice_{kj} \right]_{i,j}
-= \left[ a_{ij} \right]_{i,j} $$
-
-c’est-à-dire :
-
-$$ A \cdot I_n = A $$
-
-Si $I_m \in \matrice(\corps,m,m)$, on vérifie que l'on a bien :
-
-$$ I_m \cdot A
-= \left[ \sum_{k=1}^m \indicatrice_{ik} \cdot a_{kj} \right]_{i,j}
-= \left[ a_{ij} \right]_{i,j} $$
-
-c’est-à-dire :
-
-$$ I_m \cdot A = A $$
-
-*** Notation
-
-On note aussi $I_n$ pour préciser que $I$ est de taille $(n,n)$.
-
-** Inverse
-
-*** Inverse à gauche et à droite
-
-On dit que $L$ est un inverse à gauche de $A$ si :
-
-$$ L \cdot A = I $$
-
-On dit que $R$ est un inverse à droite de $A$ si :
-
-$$ A \cdot R = I $$
-
-*** Simultané
-
-Si $A \in \matrice(\corps,n,n)$ possède à la fois un inverse $L$
-à gauche et in un inverse $R$ à droite, on a :
-
-$$ L = L \cdot I = L \cdot (A \cdot R) = (L \cdot A) \cdot R = I \cdot R = R $$
-
-On a donc :
-
-$$ L = R $$
-
-La matrice inverse est donc unique et on la note $A^{-1}$. Elle est donc l'unique
-matrice telle que :
-
-$$A^{-1} \cdot A = A \cdot A^{-1} = I$$
-
-*** Fonction inverse
-
-Soit la fonction linéaire $\mathcal{A} : \corps^n \mapsto \corps^m$
-représentée par la matrice $A \in \matrice(\corps,n,n)$, qui possède un
-inverse $A^{-1}$. Si $\mathcal{B}$ est la fonction linéaire représentée
-par $A^{-1}$, on a :
-
-$$ \mathcal{B}(\mathcal{A}(u)) = A^{-1} \cdot A \cdot u = I \cdot u = u $$
-
-$$ \mathcal{A}(\mathcal{B}(u)) = A \cdot A^{-1} \cdot u = I \cdot u = u $$
-
-pour tout vecteur colonne $u \in \corps^n$, ce qui implique :
-
-$$ \mathcal{B} = \mathcal{A}^{-1} $$
-
-La matrice inverse $A^{-1}$ représente la fonction linéaire inverse
-$\mathcal{A}^{-1}$.
-
-*** Inverse d'un produit
-
-Soit $A$ et $B$ deux matrices inversibles. Supposons que leur produit
-$A \cdot B$ possède un inverse à gauche $L$ et un inverse à droite
-$R$. La relation :
-
-$$ L \cdot (A \cdot B) = L \cdot A \cdot B = I $$
-
-nous donne :
-
-$$ L \cdot A = I \cdot B^{-1} = B^{-1} $$
-
-$$ L = B^{-1} \cdot A^{-1} $$
-
-La relation :
-
-$$ (A \cdot B) \cdot R = A \cdot B \cdot R = I $$
-
-nous donne :
-
-$$ B \cdot R = A^{-1} \cdot I = A^{-1} $$
-
-$$ R = B^{-1} \cdot A^{-1} $$
-
-On a donc :
-
-$$ L = R = B^{-1} \cdot A^{-1} $$
-
-L’inverse de $A \cdot B$ existe et est donné par :
-
-$$(A \cdot B)^{-1} = B^{-1} \cdot A^{-1}$$
-
-** Puissance
-
-Il est possible de multiplier une matrice carrée $A$ avec elle-même.
-On peut donc définir la puissance par :
-
-\begin{align*}
-A^0 &= I \\
-A^k &= A \cdot A^{k-1}
-\end{align*}
-
-*** Puissance négative
-
-Si l'inverse $A^{-1}$ existe, on définit également :
-
-$$A^{-k} = (A^{-1})^k$$
-
-* Conjuguée
-
-La conjuguée d'une matrice $A = (a_{ij})_{i,j} \in \matrice(\setC,m,n)$ est définie par la conjuguée des composantes :
-
-$$\conjugue A = \bar{A} = ( \bar{a}_{ij} )_{i,j} = ( \conjugue a_{ij} )_{i,j}$$
+$$\ligne_i A = l_i$$
 
 * Formes lignes et colonnes
 
-On peut exprimer une matrice $A \in \matrice(\corps,m,n)$ sous la forme
+On peut exprimer $A$ sous la forme de colonnes juxtaposées. Soit :
+
+$$A = [c_1 \ \ c_2 \ \ \ldots \ \ c_n]$$
+
+où les $c_i \in \matrice(\corps,m,1)$ sont les colonnes de $A$.
+
+On peut aussi exprimer une matrice $A \in \matrice(\corps,m,n)$ sous la forme
 de lignes superposées. Soit :
 
 $$ A =
@@ -678,23 +242,7 @@ l_2 \\
 l_m
 \end{Matrix} $$
 
-où les $l_i \in \matrice(\corps,1,n)$ sont les lignes de $A$. On note :
-
-$$\ligne_i A = l_i$$
-
-On peut aussi exprimer $A$ sous la forme de colonnes juxtaposées. Soit :
-
-$$A = [c_1 \ \ c_2 \ldots \ \ c_n]$$
-
-où les $c_i \in \matrice(\corps,m,1)$ sont les colonnes de $A$. On note :
-
-$$\colonne_i A = c_i$$
-
-** Lignes et colonnes
-
-Si $x_i^T = \ligne_i(A)$ et $y_j = \colonne_j(B)$, on voit que :
-
-$$\composante_{ij} (A \cdot B) = x_i^T \cdot y_j$$
+où les $l_i \in \matrice(\corps,1,n)$ sont les lignes de $A$.
 
 * Blocs
 
@@ -731,7 +279,7 @@ Soit $A = (a_{ij})_{i,j}$. La fonction $\bloc_{ijkl}$ donne la
 sous-matrice située entre la $i^{ème}$ et la $j^{ème}$ ligne, ainsi
 qu'entre la $k^{ième}$ et la $l^{ième}$ colonne :
 
-$$ \bloc_{ijkl} A = \begin{Matrix}{cccc}
+$$ \bloc_{i,j,k,l} A = \bloc_{ijkl} A = \begin{Matrix}{cccc}
 a_{ik} & a_{i,k+1} & \ldots & a_{il} \\
 a_{i+1,k} & a_{i+1,k+1} & \ldots & a_{i+1,l} \\
 \vdots &        & \ddots &  \vdots \\
@@ -739,56 +287,6 @@ a_{jk} & a_{j,k+1} & \ldots & a_{jl}
 \end{Matrix} $$
 
 On appelle bloc une telle sous-matrice.
-
-** Produit matriciel et blocs
-
-En utilisant l'associativité de l'addition, on peut facilement vérifier
-que la formule de multiplication reste valable lorsqu'on considère
-des blocs de matrices au lieu des éléments, à condition de respecter
-l'ordre de multiplication. Un exemple fréquemment utilisé :
-
-#+BEGIN_CENTER
-\(
-\begin{Matrix}{cc}
-A_{11} & A_{12} \\ A_{21} & A_{22}
-\end{Matrix}
-\cdot
-\begin{Matrix}{cc}
-B_{11} & B_{12} \\ B_{21} & B_{22}
-\end{Matrix}
-=
-\begin{Matrix}{cc}
-A_{11} \cdot B_{11} +  A_{12} \cdot B_{21} & A_{11} \cdot B_{12} +  A_{12} \cdot B_{22} \)
-
-\(
-A_{21} \cdot B_{11} +  A_{22} \cdot B_{21} & A_{21} \cdot B_{12} +  A_{22} \cdot B_{22}
-\end{Matrix}
-\)
-#+END_CENTER
-
-*** Bloc-diagonale
-
-Un cas particulier important :
-
-#+BEGIN_CENTER
-\(
-\begin{Matrix}{cc}
-A_1 & 0 \\ 0 & A_2
-\end{Matrix}
-\cdot
-\begin{Matrix}{cc}
-B_1 & 0 \\ 0 & B_2
-\end{Matrix}
-=
-\begin{Matrix}{cc}
-A_1 \cdot B_1 & 0 \)
-
-\(
-0 & A_2 \cdot B_2
-\end{Matrix}
-\)
-#+END_CENTER
-
 
 * Transposée
 
@@ -807,11 +305,12 @@ On a clairement :
 
 $$\big( A^T \big)^T = A$$
 
-** Produit matriciel
+* Conjuguée
 
-On vérifie que :
+La conjuguée d'une matrice $A = (a_{ij})_{i,j} \in \matrice(\setC,m,n)$
+est définie par la conjuguée des composantes :
 
-$$(A \cdot B)^T = B^T \cdot A^T$$
+$$\conjugue A = \conjaccent{A} = ( \bar{a}_{ij} )_{i,j} = ( \conjugue a_{ij} )_{i,j}$$
 
 * Catégories
 

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-11-22 sam 13:40 -->
+<!-- 2025-11-22 sam 15:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Espaces vectoriels</title>
@@ -241,14 +241,12 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc3304f8">1. Dépendances</a></li>
-<li><a href="#org1f01324">2. Introduction</a></li>
-<li><a href="#org53e93e0">3. Définition</a></li>
-<li><a href="#org7683aff">4. Sous-espace</a></li>
-<li><a href="#org7edf44d">5. Espace engendré</a></li>
-<li><a href="#org5340da7">6. Indépendance linéaire</a></li>
-<li><a href="#org31297a1">7. Coordonnées</a></li>
-<li><a href="#org35c0234">8. Absence de redondance</a></li>
+<li><a href="#orgeaaebfa">1. Dépendances</a></li>
+<li><a href="#org5b3ee19">2. Introduction</a></li>
+<li><a href="#orgdaa9391">3. Définition</a></li>
+<li><a href="#org099659c">4. Sous-espace</a></li>
+<li><a href="#org68c610f">5. Indépendance linéaire</a></li>
+<li><a href="#org5cf6eab">6. Base</a></li>
 </ul>
 </div>
 </div>
@@ -377,7 +375,7 @@ MathJax = {
       dfdxdy: ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3],
       dfdxdx: ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2],
       gradient: "\\mathbf{\\nabla}",
-      combilin: ["\\mathrm{span}\\{ #1 \\", 1],
+      combilin: ["\\mathrm{span}\\{ #1 \\}", 1],
       trace: "tr",
       proba: "\\mathbb{P}",
       probaof: ["\\mathbb{P}\\left[#1\\right]", 1],
@@ -422,8 +420,8 @@ MathJax = {
 <p>
 \label{chap:vecteur}
 </p>
-<div id="outline-container-orgc3304f8" class="outline-2">
-<h2 id="orgc3304f8"><span class="section-number-2">1.</span> Dépendances</h2>
+<div id="outline-container-orgeaaebfa" class="outline-2">
+<h2 id="orgeaaebfa"><span class="section-number-2">1.</span> Dépendances</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:algebre} : Les structures algébriques</li>
@@ -431,8 +429,8 @@ MathJax = {
 </ul>
 </div>
 </div>
-<div id="outline-container-org1f01324" class="outline-2">
-<h2 id="org1f01324"><span class="section-number-2">2.</span> Introduction</h2>
+<div id="outline-container-org5b3ee19" class="outline-2">
+<h2 id="org5b3ee19"><span class="section-number-2">2.</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Soit un corps \(\corps\), un ensemble quelconque \(A\) et \(n \in \setN\). Le
@@ -471,13 +469,14 @@ et \(\cdot : \corps \times \corps^A \to \corps^A\) :
 </p>
 
 <p>
-semblables. Les matrices représentant des applications linéaires,
-nous pouvons également les ajouter dans la liste.
+semblables. Plus généralement, ces opérations respectent les mêmes
+<a href="vecteurs-de-dimension-finie.html#heading:proprietes_operations_sur_vecteurs_de_dimension_finie">propriétés</a>
+que les opérations sur les vecteurs de \(\corps^n\)
 </p>
 </div>
 </div>
-<div id="outline-container-org53e93e0" class="outline-2">
-<h2 id="org53e93e0"><span class="section-number-2">3.</span> Définition</h2>
+<div id="outline-container-orgdaa9391" class="outline-2">
+<h2 id="orgdaa9391"><span class="section-number-2">3.</span> Définition</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Soit un groupe commutatif pour l'addition \(E\), ainsi qu'un corps \(\corps\)
@@ -510,67 +509,53 @@ qui n'est pas une multiplication induite, et est non commutative.
 </p>
 
 <p>
-Exemples d’espaces vectoriels : \(\corps^n , \corps^A , \matrice(\corps,m,n)\).
+Exemples d’espaces vectoriels :
 </p>
+
+<ul class="org-ul">
+<li>\(\corps^n\)</li>
+<li>\(\corps^A\)</li>
+<li>les matrices représentant des fonctions linéaires,
+nous pouvons également les ajouter dans la liste</li>
+<li>l’ensemble des polynômes de degré \(n-1\) est défini par \(n\)
+coefficients et est donc similaire à \(\corps^n\)</li>
+</ul>
 </div>
-<div id="outline-container-orged180b4" class="outline-3">
-<h3 id="orged180b4"><span class="section-number-3">3.1.</span> Attention</h3>
+<div id="outline-container-org38cdb2b" class="outline-3">
+<h3 id="org38cdb2b"><span class="section-number-3">3.1.</span> Notations</h3>
 <div class="outline-text-3" id="text-3-1">
-<p>
-Ne pas confondre les additions définies sur \(E\) et \(\corps\), ni la
-multiplication de \(\corps\) avec la multiplication mixte, ni le neutre
-de \(E\) avec celui de \(\corps\). Lorsqu'il y a un risque d'ambiguité,
-on parle du vecteur nul \(0 \in E\) et du scalaire nul \(0 \in \corps\).
-</p>
-</div>
-</div>
-<div id="outline-container-orge556c7d" class="outline-3">
-<h3 id="orge556c7d"><span class="section-number-3">3.2.</span> Notation</h3>
-<div class="outline-text-3" id="text-3-2">
 <p>
 On note aussi :
 </p>
 
-<div class="org-center">
 <p>
-\(
-x - y = x + (-1) \cdot y \)
+\[ u - v = u + (-1) \cdot v \]
 </p>
 
 <p>
-\(
-x \cdot \alpha = \alpha \cdot x \)
+\[ u \cdot \alpha = \alpha \cdot u \]
 </p>
 
 <p>
-\(
-\alpha \cdot \beta \cdot x = (\alpha \cdot \beta) \cdot x \)
+\[ \alpha \cdot \beta \cdot u = (\alpha \cdot \beta) \cdot u \]
 </p>
 
 <p>
-\(
-\alpha x = \alpha \cdot x \)
+\[ \alpha u = \alpha \cdot u \]
 </p>
-
-<p>
-\(
-\frac{x}{\alpha} = \alpha^{-1} \cdot x
-\)
-</p>
-</div>
 
 <p>
 Lorsque \(\alpha\) a un inverse dans \(\corps\), on a même les « fractions » :
 </p>
 
 <p>
-\[\frac{x}{\alpha} = \unsur{\alpha} \cdot x\]
+\[\frac{u}{\alpha} = \alpha^{-1} \cdot u = \unsur{\alpha} \cdot u\]
 </p>
 </div>
 </div>
-<div id="outline-container-org502259a" class="outline-3">
-<h3 id="org502259a"><span class="section-number-3">3.3.</span> Corollaires</h3>
-<div class="outline-text-3" id="text-3-3">
+<div id="outline-container-orgbf1bdc2" class="outline-3">
+<h3 id="orgbf1bdc2"><span class="section-number-3">3.2.</span> Corollaires</h3>
+<div class="outline-text-3" id="text-3-2">
 <p>
 Les propriétés de la multiplication mixte nous montrent directement
 que :
@@ -590,8 +575,19 @@ que :
 </div>
 </div>
 </div>
-<div id="outline-container-orgfb159c2" class="outline-3">
-<h3 id="orgfb159c2"><span class="section-number-3">3.4.</span> Remarque</h3>
+<div id="outline-container-orga0afb80" class="outline-3">
+<h3 id="orga0afb80"><span class="section-number-3">3.3.</span> Attention</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+Ne pas confondre les additions définies sur \(E\) et \(\corps\), ni la
+multiplication de \(\corps\) avec la multiplication mixte, ni le neutre
+de \(E\) avec celui de \(\corps\). Lorsqu'il y a un risque d'ambiguité,
+on parle du vecteur nul \(0 \in E\) et du scalaire nul \(0 \in \corps\).
+</p>
+</div>
+</div>
+<div id="outline-container-orgb082197" class="outline-3">
+<h3 id="orgb082197"><span class="section-number-3">3.4.</span> Remarque</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 Le corps \(\corps\) est souvent \(\setR\) ou \(\setC\).
@@ -599,8 +595,8 @@ Le corps \(\corps\) est souvent \(\setR\) ou \(\setC\).
 </div>
 </div>
 </div>
-<div id="outline-container-org7683aff" class="outline-2">
-<h2 id="org7683aff"><span class="section-number-2">4.</span> Sous-espace</h2>
+<div id="outline-container-org099659c" class="outline-2">
+<h2 id="org099659c"><span class="section-number-2">4.</span> Sous-espace</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 On dit que \(F \subseteq E\) est un sous-espace vectoriel de \(E\) si \(0
@@ -608,11 +604,11 @@ On dit que \(F \subseteq E\) est un sous-espace vectoriel de \(E\) si \(0
 </p>
 
 <p>
-\[z = \alpha \cdot x + \beta \cdot y\]
+\[z = \alpha \cdot u + \beta \cdot v\]
 </p>
 
 <p>
-appartient à \(F\) quels que soient les vecteurs \(x,y \in F\) et les
+appartient à \(F\) quels que soient les vecteurs \(u,v \in F\) et les
 scalaires \(\alpha,\beta \in \corps\).
 </p>
 
@@ -620,12 +616,12 @@ scalaires \(\alpha,\beta \in \corps\).
 On vérifie par exemple que \(E\) est un sous-espace vectoriel de lui-même.
 </p>
 </div>
-</div>
-<div id="outline-container-org7edf44d" class="outline-2">
-<h2 id="org7edf44d"><span class="section-number-2">5.</span> Espace engendré</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-orgd0d3fe7" class="outline-3">
+<h3 id="orgd0d3fe7"><span class="section-number-3">4.1.</span> Espace engendré</h3>
+<div class="outline-text-3" id="text-4-1">
 <p>
-L'espace engendré par les vecteurs \(e_1,e_2,...,e_n \in E\) est l'ensemble des combinaisons linéaires formées à partir des \(e_i\) :
+L'espace engendré par les vecteurs \(e_1,e_2,...,e_n \in E\) est l'ensemble
+des combinaisons linéaires formées à partir des \(e_i\) :
 </p>
 
 <p>
@@ -633,21 +629,15 @@ L'espace engendré par les vecteurs \(e_1,e_2,...,e_n \in E\) est l'ensemble des
 </p>
 
 <p>
-On vérifie que \(\combilin{e_1,...,e_n}\) est un sous-espace vectoriel de \(E\).
-</p>
-</div>
-<div id="outline-container-org26b1709" class="outline-3">
-<h3 id="org26b1709"><span class="section-number-3">5.1.</span> Remarque</h3>
-<div class="outline-text-3" id="text-5-1">
-<p>
-Les espaces vectoriels ne pouvant pas s'exprimer comme ci-dessus sont dit de dimension infinie.
+On vérifie que \(\combilin{e_1,...,e_n}\) est un sous-espace vectoriel
+de \(E\).
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org5340da7" class="outline-2">
-<h2 id="org5340da7"><span class="section-number-2">6.</span> Indépendance linéaire</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-org68c610f" class="outline-2">
+<h2 id="org68c610f"><span class="section-number-2">5.</span> Indépendance linéaire</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 On dit qu'une série de vecteurs \(e_1,...,e_n\) est linéairement
 indépendante si pour toute suite de scalaires \(\alpha_i\), la condition :
@@ -669,17 +659,35 @@ implique que tous les scalaires soient nuls :
 pour tout \(i \in \{1,2,...,n\}\).
 </p>
 </div>
-</div>
-<div id="outline-container-org31297a1" class="outline-2">
-<h2 id="org31297a1"><span class="section-number-2">7.</span> Coordonnées</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-orgeca7381" class="outline-3">
+<h3 id="orgeca7381"><span class="section-number-3">5.1.</span> Coordonnées</h3>
+<div class="outline-text-3" id="text-5-1">
 <p>
-Soit les vecteurs linéairement indépendants \((e_1,...,e_n)\) et
-\(x \in \combilin{e_1,...,e_n}\). On peut trouver une suite de scalaire \(\alpha_i\) tels que :
+Soit les vecteurs linéairement indépendants \((e_1,...,e_n)\) et \(u \in
+\combilin{e_1,...,e_n}\). On peut alors trouver une suite de scalaires
+\(\alpha_i\) tels que :
 </p>
 
 <p>
-\[x = \sum_{i = 1}^n \alpha_i \cdot e_i\]
+\[u = \sum_{i = 1}^n \alpha_i \cdot e_i\]
+</p>
+
+<p>
+Les scalaires \(\alpha_1,\alpha_2,\ldots,\alpha_n\) sont appelés
+coordonnées de \(u\) par rapport aux vecteurs \(e_1,e_2,\ldots,e_n\).
+</p>
+</div>
+<div id="outline-container-orgfd0408e" class="outline-4">
+<h4 id="orgfd0408e"><span class="section-number-4">5.1.1.</span> Unicité</h4>
+<div class="outline-text-4" id="text-5-1-1">
+<p>
+Soit les vecteurs linéairement indépendants \((e_1,...,e_n)\) et \(u \in
+\combilin{e_1,...,e_n}\). On peut alors trouver une suite de scalaires
+\(\alpha_i\) tels que :
+</p>
+
+<p>
+\[u = \sum_{i = 1}^n \alpha_i \cdot e_i\]
 </p>
 
 <p>
@@ -687,7 +695,7 @@ Supposons que l'on ait également :
 </p>
 
 <p>
-\[x = \sum_{i=1}^n \beta_i \cdot e_i\]
+\[u = \sum_{i=1}^n \beta_i \cdot e_i\]
 </p>
 
 <p>
@@ -712,60 +720,26 @@ pour tout \(i \in \{1,2,...,n\}\).
 </p>
 
 <p>
-On a donc unicité des coefficients scalaire de la combinaison linéaire. On dit que les \(\alpha_i\) sont les coordonnées de \(x\) par rapport aux \((e_1,...,e_n)\).
-</p>
-</div>
-<div id="outline-container-org156970e" class="outline-3">
-<h3 id="org156970e"><span class="section-number-3">7.1.</span> Base</h3>
-<div class="outline-text-3" id="text-7-1">
-<p>
-Par contre, l'existence de telles coordonnées n'est pas garantie pour tout \(x \in E\). Ce ne sera le cas que si :
-</p>
-
-<p>
-\[E \subseteq \combilin{e_1,...,e_n}\]
-</p>
-
-<p>
-On dit alors que \((e_1,...,e_n)\) forme une base de \(E\).
-</p>
-</div>
-</div>
-<div id="outline-container-orgdca2784" class="outline-3">
-<h3 id="orgdca2784"><span class="section-number-3">7.2.</span> Dimension finie</h3>
-<div class="outline-text-3" id="text-7-2">
-<p>
-On dit qu'un espace vectoriel \(E\) est de dimension finie s'il posséde au moins une base de la forme \((e_1,...,e_n)\), où \(n \in \setN\) est fini. Dans le cas où \(E\) {\em ne possède pas} une telle base, il est dit de dimension infinie.
-</p>
-</div>
-</div>
-<div id="outline-container-org3f11353" class="outline-3">
-<h3 id="org3f11353"><span class="section-number-3">7.3.</span> Equivalence</h3>
-<div class="outline-text-3" id="text-7-3">
-<p>
-On voit qu'étant donné une base de \(E\), il y a équivalence entre un vecteur \(x \in E\) et un élément \((x_1,x_2,...,x_n) \in \corps^n\) formé par ses coordonnées.
-</p>
-
-<p>
-Nous noterons donc également (et abusivement) \(x = (x_1,x_2,...,x_n)\), mais attention : il ne faut jamais perdre de vue que les \(x_i\) dépendent de la base utilisée. Le vecteur \(x\) est lui invariant sous changement de base.
+On a donc unicité des coordonnées.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org35c0234" class="outline-2">
-<h2 id="org35c0234"><span class="section-number-2">8.</span> Absence de redondance</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-orgb4b5d4b" class="outline-3">
+<h3 id="orgb4b5d4b"><span class="section-number-3">5.2.</span> Absence de redondance</h3>
+<div class="outline-text-3" id="text-5-2">
 <p>
 Soit \(e_1,...,e_n \in E\) une suite de vecteurs linéairement indépendants.
 Soit \(i \in \{ 1,2,...,n \}\) et :
 </p>
 
 <p>
-\[J(i) = \setZ(0,n) \setminus \{ i \}\]
+\[J(i) = \{1,2,...,n\} \setminus \{ i \}\]
 </p>
 
 <p>
-Supposons que le vecteur \(e_i\) soit une combinaison des autres vecteurs :
+Supposons que le vecteur \(e_i\) soit une combinaison linéaire des autres
+vecteurs :
 </p>
 
 <p>
@@ -781,21 +755,77 @@ On a donc :
 </p>
 
 <p>
-L'hypothèse d'indépendance linéaire voudrait que tous les \(\alpha_j\)
-et le \(\alpha_i\) soient nuls. Ce qui n'est manifestement pas le cas
-puisque \(\alpha_i = 1 \ne 0\) !
+L'hypothèse d'indépendance linéaire voudrait que tous les coefficients
+scalaires soient nuls, ce qui n'est manifestement pas le cas puisque le
+coefficient de \(e_i\) vaut 1 !
 </p>
 
 <p>
-Aucun des vecteurs de la suite n'est donc combinaison des autres. On
-dit qu'aucun vecteur n'est redondant dans la suite.
+Notre hypothèse est donc fausse : aucun des vecteurs de la suite n'est
+combinaison linéaire des autres. On dit qu'aucun vecteur n'est redondant
+dans la suite.
 </p>
+</div>
+</div>
+</div>
+<div id="outline-container-org5cf6eab" class="outline-2">
+<h2 id="org5cf6eab"><span class="section-number-2">6.</span> Base</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Soit une série de vecteurs linéairement indépendants
+\(e_1,e_2,\ldots,e_n \in E\) qui engendrent complètement \(E\) :
+</p>
+
+<p>
+\[E \subseteq \combilin{e_1,...,e_n}\]
+</p>
+
+<p>
+Soit \(u \in E\). On peut alors trouver un unique jeu de coordonnées
+\(\alpha_1, \alpha_2, \ldots, \alpha_n \in \corps\) tels que :
+</p>
+
+<p>
+\[u = \sum_{i = 1}^n \alpha_i \cdot e_i\]
+</p>
+
+<p>
+On dit alors que \((e_1,...,e_n)\) forme une base de \(E\).
+</p>
+</div>
+<div id="outline-container-org6663bbc" class="outline-3">
+<h3 id="org6663bbc"><span class="section-number-3">6.1.</span> Dimension finie</h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+On dit qu'un espace vectoriel \(E\) est de dimension finie s'il posséde
+au moins une base de la forme \((e_1,...,e_n)\), où \(n \in \setN\) est
+fini. Dans le cas où \(E\) <i>ne possède pas</i> une telle base, il est dit
+de dimension infinie.
+</p>
+</div>
+</div>
+<div id="outline-container-orga4b0377" class="outline-3">
+<h3 id="orga4b0377"><span class="section-number-3">6.2.</span> Equivalence</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+On voit qu'étant donné une base de \(E\), il y a équivalence entre
+un vecteur \(u \in E\) et un élément \((\alpha_1,\alpha_2,...,\alpha_n)
+\in \corps^n\) formé par ses coordonnées.
+</p>
+
+<p>
+Nous noterons donc également (et abusivement) \(u = (x_1,x_2,...,x_n)\),
+mais attention : il ne faut jamais perdre de vue que les \(\alpha_i\)
+dépendent de la base utilisée. Le vecteur \(u\) est lui invariant sous
+changement de base.
+</p>
+</div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-11-22 sam 13:40</p>
+<p class="date">Created: 2025-11-22 sam 15:29</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

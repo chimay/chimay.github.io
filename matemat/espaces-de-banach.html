@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-11-22 sam 15:31 -->
+<!-- 2025-11-23 dim 15:36 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Espaces de Banach</title>
@@ -241,12 +241,8 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgd6c000c">1. Définition</a></li>
-<li><a href="#org5289401">2. Application contractante</a></li>
-<li><a href="#org7b340af">3. Suite de Cauchy</a></li>
-<li><a href="#org86fbbbd">4. Point fixe</a></li>
-<li><a href="#org202c0ba">5. Unicité</a></li>
-<li><a href="#org7d6fc2a">6. Vitesse de convergence</a></li>
+<li><a href="#org39d83a5">1. Définition</a></li>
+<li><a href="#orgbe83779">2. Application contractante</a></li>
 </ul>
 </div>
 </div>
@@ -420,19 +416,20 @@ MathJax = {
 <p>
 \label{chap:banach}
 </p>
-<div id="outline-container-orgd6c000c" class="outline-2">
-<h2 id="orgd6c000c"><span class="section-number-2">1.</span> Définition</h2>
+<div id="outline-container-org39d83a5" class="outline-2">
+<h2 id="org39d83a5"><span class="section-number-2">1.</span> Définition</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 On dit qu'un espace vectoriel \(X\) est un espace de Banach si il est complet pour la distance issue de la norme \(\distance(x,y) = \norme{x - y}\). Dans la suite, nous considérons un espace de Banach \(X\) sur \(\setR\) ou \(\setC\).
 </p>
 </div>
 </div>
-<div id="outline-container-org5289401" class="outline-2">
-<h2 id="org5289401"><span class="section-number-2">2.</span> Application contractante</h2>
+<div id="outline-container-orgbe83779" class="outline-2">
+<h2 id="orgbe83779"><span class="section-number-2">2.</span> Application contractante</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-On dit qu'une application \(A : X \mapsto X\) est contractante s'il existe un \(c \in \intervallesemiouvertdroite{0}{1} \subseteq \setR\) tel que :
+On dit qu'une application \(A : X \mapsto X\) est contractante s'il existe
+un \(c \in \intervallesemiouvertdroite{0}{1} \subseteq \setR\) tel que :
 </p>
 
 <p>
@@ -443,16 +440,16 @@ On dit qu'une application \(A : X \mapsto X\) est contractante s'il existe un \(
 pour tout \(u,v\in X\).
 </p>
 </div>
-</div>
-<div id="outline-container-org7b340af" class="outline-2">
-<h2 id="org7b340af"><span class="section-number-2">3.</span> Suite de Cauchy</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-orgc8e3ed8" class="outline-3">
+<h3 id="orgc8e3ed8"><span class="section-number-3">2.1.</span> Suite de Cauchy</h3>
+<div class="outline-text-3" id="text-2-1">
 <p>
-Soit une application contractante \(A : X \mapsto X\) et \(u_0 \in X\). On définit la suite $u<sub>0,u</sub><sub>1,u</sub><sub>2</sub>,&#x2026;$ par :
+Soit une application contractante \(A : X \mapsto X\) et \(u_0 \in X\). On
+définit la suite $u<sub>0,u</sub><sub>1,u</sub><sub>2</sub>,&#x2026;$ par :
 </p>
 
 <p>
-\[u_n = A(u_{n - 1}) = ... = A^n(u_0)\]
+\[u_n = A(u_{n - 1}) = A^2(u_{n-2}) = \ldots = A^n(u_0)\]
 </p>
 
 <p>
@@ -460,11 +457,17 @@ pour tout \(n \in \setN\). On a alors :
 </p>
 
 <p>
-\[\distance( u_{n + 1} , u_n ) \le c \cdot \distance( u_n , u_{n - 1} ) \le ... \le c^n \cdot \distance( u_1 , u_0 )\]
+\[ \distance( u_{n + 1} , u_n )
+\le c \cdot \distance( u_n , u_{n - 1} )
+\le c^2 \cdot \distance( u_{n-1} , u_{n - 2} )
+\le \ldots
+\le c^n \cdot \distance( u_1 , u_0 ) \]
 </p>
 
 <p>
-Soit \(m,n \in \setN\). Les propriétés des distances nous permettent d'écrire :
+pour un certain \(c \in \intervallesemiouvertdroite{0}{1} \subseteq \setR\).
+Soit \(m,n \in \setN\). Les propriétés des distances nous permettent
+d'écrire :
 </p>
 
 <p>
@@ -472,18 +475,16 @@ Soit \(m,n \in \setN\). Les propriétés des distances nous permettent d'écrire
 </p>
 
 <p>
-Mais comme \(\distance( u_{n + i + 1} , u_{n + i} ) \le c^{n + i} \cdot \distance( u_1 , u_0 )\), on a :
+Mais comme \(\distance( u_{n + i + 1} , u_{n + i} ) \le c^{n + i} \cdot
+\distance( u_1 , u_0 )\), on a :
 </p>
 
-\begin{align}
-\distance( u_{n + m} , u_n ) &\le \sum_{i = 0}^{m - 1} c^{n + i} \cdot \distance( u_1 , u_0 ) \)
-
-\(
-&\le c^n \cdot \distance( u_1 , u_0 ) \cdot \sum_{i = 0}^{m - 1} c^i \)
-
-\(
-&\le c^n \cdot \frac{1 - c^m}{1-c}
-\end{align}
+<p>
+\[ \distance( u_{n + m} , u_n )
+\le \sum_{i = 0}^{m - 1} c^{n + i} \cdot \distance( u_1 , u_0 )
+\le c^n \cdot \distance( u_1 , u_0 ) \cdot \sum_{i = 0}^{m - 1} c^i
+\le c^n \cdot \frac{1 - c^m}{1-c} \]
+</p>
 
 <p>
 Finalement, comme \(1 - c^m \le 1\) quel que soit \(m \in \setN\) on obtient une expression qui ne dépend pas de \(m\) :
@@ -515,9 +516,9 @@ On en conclut que la suite des \(u_n\) est de Cauchy.
 </p>
 </div>
 </div>
-<div id="outline-container-org86fbbbd" class="outline-2">
-<h2 id="org86fbbbd"><span class="section-number-2">4.</span> Point fixe</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org5c0ef1b" class="outline-3">
+<h3 id="org5c0ef1b"><span class="section-number-3">2.2.</span> Point fixe</h3>
+<div class="outline-text-3" id="text-2-2">
 <p>
 Comme \(X\) est complet, notre suite \(u_n\) étant de Cauchy converge vers une certaine limite :
 </p>
@@ -563,9 +564,9 @@ L'élément \(p \in X\) est un point fixe de \(A\).
 </p>
 </div>
 </div>
-<div id="outline-container-org202c0ba" class="outline-2">
-<h2 id="org202c0ba"><span class="section-number-2">5.</span> Unicité</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-org943842d" class="outline-3">
+<h3 id="org943842d"><span class="section-number-3">2.3.</span> Unicité</h3>
+<div class="outline-text-3" id="text-2-3">
 <p>
 Si \(p_1\) et \(p_2\) sont deux points fixes, on a :
 </p>
@@ -604,22 +605,30 @@ Le point fixe de \(A\) est unique.
 </p>
 </div>
 </div>
-<div id="outline-container-org7d6fc2a" class="outline-2">
-<h2 id="org7d6fc2a"><span class="section-number-2">6.</span> Vitesse de convergence</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-orga850b30" class="outline-3">
+<h3 id="orga850b30"><span class="section-number-3">2.4.</span> Vitesse de convergence</h3>
+<div class="outline-text-3" id="text-2-4">
 <p>
-Nous avons donc montré que la suite des \(u_n\) converge vers l'unique point fixe \(p\) de \(A\), et ce quel que soit \(u_0\). On a même la propriété suivante nous donnant une borne supérieure pour le taux de convergence :
+Nous avons donc montré que la suite des \(u_n\) converge vers l'unique
+point fixe \(p\) de \(A\), et ce quel que soit \(u_0\). On a même la
+propriété suivante nous donnant une borne supérieure pour le taux
+de convergence :
 </p>
 
 <p>
-\[\distance(u_n,p) \le \distance\big(A(u_{n - 1}),A(p)\big) \le c \cdot \distance(u_{n - 1},p) \le ... \le c^n \cdot \distance(u_0,p)\]
+\[ \distance(u_n,p)
+\le \distance\big(A(u_{n - 1}),A(p)\big)
+\le c \cdot \distance(u_{n - 1},p)
+\le \ldots
+\le c^n \cdot \distance(u_0,p) \]
 </p>
+</div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-11-22 sam 15:31</p>
+<p class="date">Created: 2025-11-23 dim 15:36</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -202,6 +202,10 @@ A \cdot \beta = \beta \cdot A \)
 
 * Produit matriciel
 
+#+TOC: headlines 1 local
+
+** Introduction
+
 Soit les fonctions linéaires $\mathcal{A} : \corps^n \mapsto
 \corps^m$ et $\mathcal{B} : \corps^p \mapsto \corps^n$ respectivement
 représentées par les matrices $A \in \matrice(\corps,m,n)$ et $B \in
@@ -291,7 +295,10 @@ Par contre, on peut trouver des matrices $A$ et $B$ telles que :
 
 $$A \cdot B \ne B \cdot A$$
 
-La multiplication matricielle n'est donc en général pas commutative. D'ailleurs, pour que ces deux produits existent simultanément, il faut que $A$ et $B$ soient toutes deux carrées, ce qui n'est pas forcément le cas.
+La multiplication matricielle n'est donc en général pas
+commutative. D'ailleurs, pour que ces deux produits existent
+simultanément, il faut que $A$ et $B$ soient toutes deux carrées,
+ce qui n'est pas forcément le cas.
 
 ** Commutateur
 
@@ -305,7 +312,28 @@ $$[A,B] = A \cdot B - B \cdot A$$
 
 ** Transposée d’un produit
 
-On vérifie que :
+Soit les matrices $A \in \matrice(\corps,m,n)$ et $B \in
+\matrice(\corps,n,p)$ définies par :
+
+$$ A = ( a_{ij} )_{i,j} $$
+
+$$ B = ( b_{ij} )_{i,j} $$
+
+On a :
+
+$$ A \cdot B = \left[\sum_{k=1}^n a_{ik} \cdot b_{kj}\right]_{i,j} $$
+
+La transposée du produit s’écrit :
+
+$$ (A \cdot B)^T = \left[\sum_{k=1}^n a_{jk} \cdot b_{ki}\right]_{i,j} $$
+
+On a aussi :
+
+$$ B^T \cdot A^T
+= \left[\sum_{k=1}^n b_{ki} \cdot a_{jk}\right]_{i,j}
+= \left[\sum_{k=1}^n a_{jk} \cdot b_{ki}\right]_{i,j} $$
+
+On en conclut que :
 
 $$(A \cdot B)^T = B^T \cdot A^T$$
 
@@ -328,17 +356,32 @@ un scalaire :
 
 $$ u^T \cdot v = \sum_{i=1}^n u_i \cdot v_i $$
 
+Un produit scalaire générique est souvent noté :
+
+$$ \scalaire{u}{v} $$
+
+**** Réel
+
 Lorsque $\corps = \setR$, ce produit est appalé produit scalaire usuel
 sur $\setR^n$. On le note :
 
 $$ \scalaire{u}{v} = u^T \cdot v $$
+
+On remarque le produit scalaire usuel d’un vecteur colonne réel avec
+lui-même est positif ou nul :
+
+$$ \scalaire{u}{u} = u^T \cdot u = \sum_{i=1}^n u_i^2 \ge 0 $$
+
+**** Complexe
 
 Lorsque $\corps = \setC$, on utilise le produit scalaire usuel sur
 $\setC$ :
 
 $$ \scalaire{u}{v} = \conjaccent{u^T} \cdot v $$
 
-L’utilisation du complexe conjugué permet d’avoir :
+L’utilisation du complexe conjugué permet de garantir
+que le produit d’un vecteur colonne avec lui-même est un réel positif ou
+nul. En effet :
 
 $$ \scalaire{u}{u}
 = \conjaccent{u^T} \cdot u
@@ -366,6 +409,12 @@ par le vecteur ligne $v^T$. On obtient une matrice de taille $(m,n)$ :
 
 $$ u \cdot v^T = (u_i \cdot v_j)_{i,j} $$
 
+Un produit tensoriel générique est souvent noté :
+
+$$ u \otimes v $$
+
+**** Réel
+
 Lorsque $\corps = \setR$, ce produit est appalé produit tensoriel sur
 $\setR^m \times \setR^n$. On le note :
 
@@ -381,11 +430,17 @@ et finalement :
 
 $$ (u \otimes v) \cdot w = u \cdot \scalaire{v}{w} $$
 
+**** Complexe
+
 Lorsque $\corps = \setC$, on utilise une variante avec complexe conjugué :
 
 $$ u \otimes v = u \cdot \conjaccent{v^T} $$
 
-Si $w \in \setC^n$ est un troisième vecteur colonne, on a :
+afin de conserver la propriété :
+
+$$ (u \otimes v) \cdot w = u \cdot \scalaire{v}{w} $$
+
+En effet, si $w \in \setC^n$ est un troisième vecteur colonne, on a :
 
 $$ (u \otimes v) \cdot w
 = u \cdot \conjaccent{v^T} \cdot w

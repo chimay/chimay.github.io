@@ -6,7 +6,7 @@
 <!-- 2025-11-28 ven 13:32 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Eclats de vers : Matemat : Polynômes</title>
+<title>Eclats de vers : Matemat : Binômes</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
 <style type="text/css">
@@ -228,7 +228,7 @@
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Eclats de vers : Matemat : Polynômes</h1>
+<h1 class="title">Eclats de vers : Matemat : Binômes</h1>
 <p>
 <a href="index.html">Index mathématique</a>
 </p>
@@ -241,13 +241,12 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc9c7102">1. Dépendances</a></li>
-<li><a href="#org1bbbb93">2. Définition</a></li>
-<li><a href="#org9d07360">3. Équivalence avec \(\corps^{n+1}\)</a></li>
-<li><a href="#orgc23d286">4. Monôme</a></li>
-<li><a href="#org58a5df8">5. Division Euclidienne polynômiale</a></li>
-<li><a href="#org0e11dbc">6. Racines</a></li>
-<li><a href="#org17e2e5d">7. Factorisation</a></li>
+<li><a href="#org45013e2">1. Binômes canoniques</a></li>
+<li><a href="#org1ce07c6">2. Binômes génériques</a></li>
+<li><a href="#orgee7480e">3. Second degré</a></li>
+<li><a href="#org9e1b9a8">4. Symétrie</a></li>
+<li><a href="#org81ad103">5. Cas particuliers</a></li>
+<li><a href="#org70e37b1">6. Bernstein</a></li>
 </ul>
 </div>
 </div>
@@ -421,582 +420,280 @@ MathJax = {
 <p>
 \label{chap:polynomes}
 </p>
-<div id="outline-container-orgc9c7102" class="outline-2">
-<h2 id="orgc9c7102"><span class="section-number-2">1.</span> Dépendances</h2>
+<div id="outline-container-org45013e2" class="outline-2">
+<h2 id="org45013e2"><span class="section-number-2">1.</span> Binômes canoniques</h2>
 <div class="outline-text-2" id="text-1">
-<ul class="org-ul">
-<li>Chapitre \ref{chap:reel} : Les réels</li>
-<li>Chapitre \ref{chap:complexe} : Les complexes</li>
-<li>Chapitre \ref{chap:somme} : Les sommes</li>
-<li>Chapitre \ref{chap:produit} : Les produits</li>
-</ul>
+<p>
+Le binôme canonique de degré \(n \in \setN\) est une fonction \(b_n : \corps \to \corps\) définie par :
+</p>
+
+<p>
+\[b_n(x) = (1 + x)^n\]
+</p>
+
+<p>
+pour tout \(x \in \corps\). On a par exemple :
+</p>
+
+\begin{align}
+b_0(x) &= (1 + x)^0 = 1 \\
+b_1(x) &= (1 + x)^1 = 1 + x \\
+b_2(x) &= (1 + x)^2 = (1 + x) \cdot (1 + x) = 1 + 2 \ x + x^2
+\end{align}
+
+<p>
+On voit donc que le binôme canonique de degré \(n\) peut s'écrire comme :
+</p>
+
+<p>
+\[b_n(x) = (1 + x)^n = \sum_{k = 0}^n a_{nk} \cdot x^k\]
+</p>
+
+<p>
+pour certains coefficients \(a_{nk} \in \corps\). On nomme ces coefficients les « nombres binômiaux », et on les note :
+</p>
+
+<p>
+\[\binome{n}{k} = a_{nk}\]
+</p>
+
+<p>
+On a donc :
+</p>
+
+<p>
+\[ (1 + x)^n = \sum_{k = 0}^n \binome{n}{k} \cdot x^k\]
+</p>
+
+<p>
+L'expression de \(b_0\) nous donne :
+</p>
+
+<p>
+\[\binome{0}{0} = 1\]
+</p>
+
+<p>
+On peut évaluer récursivement les nombres binômiaux d'ordres plus élevés en utilisant la définition de la puissance :
+</p>
+
+<p>
+\[b_n(x) = (1 + x) \cdot b_{n-1}(x)\]
+</p>
+
+<p>
+Il vient alors :
+</p>
+
+\begin{align*}
+\sum_{k = 0}^n \binome{n}{k} \cdot x^k &= (1 + x) \sum_{k = 0}^{n - 1} \binome{n - 1}{k} \cdot x^k \\
+&= \sum_{k = 0}^{n - 1} \binome{n - 1}{k} \cdot x^k + \sum_{k = 0}^{n - 1} \binome{n - 1}{k} \cdot x^{k + 1} \\
+&= \sum_{k = 0}^{n - 1} \binome{n - 1}{k} \cdot x^k + \sum_{i = 1}^n \binome{n - 1}{i - 1} \cdot x^i
+\end{align*}
+
+<p>
+et finalement :
+</p>
+
+\begin{Eqts}
+\sum_{k = 0}^n \binome{n}{k} \cdot x^k
+= \binome{n - 1}{0} + \sum_{k = 1}^{n - 1} \left[ \binome{n - 1}{k} + \binome{n - 1}{k - 1} \right] \cdot x^k +
+\binome{n - 1}{n - 1} \cdot x^n
+\end{Eqts}
+
+<p>
+En égalisant les coefficients des \(x^0 = 1\), nous avons :
+</p>
+
+<p>
+\[\binome{n}{0} = \binome{n - 1}{0}\]
+</p>
+
+<p>
+On en déduit par récurrence que :
+</p>
+
+<p>
+\[\binome{n}{0} = 1\]
+</p>
+
+<p>
+En égalisant les coefficients des \(x^n\), nous avons :
+</p>
+
+<p>
+\[\binome{n}{n} = \binome{n - 1}{n - 1}\]
+</p>
+
+<p>
+On en déduit par récurrence que :
+</p>
+
+<p>
+\[\binome{n}{n} = 1\]
+</p>
+
+<p>
+En égalisant les coefficients de \(x^k\) pour \(k \in \{1,...,n-1\}\), il vient :
+</p>
+
+<p>
+\[\binome{n}{k} = \binome{n - 1}{k} + \binome{n - 1}{k - 1}\]
+</p>
+
+<p>
+Il est donc facile d'évaluer les coefficients de \(b_n\) à partir des coefficients de \(b_{n - 1}\).
+</p>
 </div>
 </div>
-<div id="outline-container-org1bbbb93" class="outline-2">
-<h2 id="org1bbbb93"><span class="section-number-2">2.</span> Définition</h2>
+<div id="outline-container-org1ce07c6" class="outline-2">
+<h2 id="org1ce07c6"><span class="section-number-2">2.</span> Binômes génériques</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-Soit un corps \(\corps\). On dit qu'une fonction \(p : \corps \mapsto
-\corps\) est un polynôme de degré \(n\) si on peut trouver des éléments
-\(p_0,p_1,...p_n \in \corps\) tels que :
+Le binôme générique de degré \(n \in \setN\) est une fonction \(B_n : \corps \times \corps
+\mapsto \corps\) définie par :
 </p>
 
 <p>
-\[p(x) = \sum_{i = 0}^n p_i \cdot x^i\]
+\[B_n(x,y) = (x + y)^n\]
 </p>
 
 <p>
-pour tout \(x \in \corps\). On note \(\polynome(\corps,n)\) l'espace des polynômes de degré \(n\) définis sur \(\corps\).
+pour tout \((x,y) \in \corps^2\). Nous avons la forme équivalente :
 </p>
 
 <p>
-Un cas particulier important est celui des polynômes réels :
+\[B_n(x,y) = y^n \cdot \left( 1 + \frac{x}{y} \right)^n = y^n \cdot b_n\left( \frac{x}{y} \right)\]
 </p>
 
 <p>
-\[\mathcal{P}_n = \polynome(\setR,n)\]
+c'est-à-dire :
+</p>
+
+<p>
+\[B_n(x,y) = \sum_{k = 0}^n \binome{n}{k} \cdot x^k \cdot y^{n - k}\]
 </p>
 </div>
 </div>
-<div id="outline-container-org9d07360" class="outline-2">
-<h2 id="org9d07360"><span class="section-number-2">3.</span> Équivalence avec \(\corps^{n+1}\)</h2>
+<div id="outline-container-orgee7480e" class="outline-2">
+<h2 id="orgee7480e"><span class="section-number-2">3.</span> Second degré</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-Tout n-tuple \((p_0,p_1,p_2,...,p_n)\in\corps^{n+1}\) peut être associé
-à un polynôme :
+Le binôme du second degré est couramment utilisé :
 </p>
 
 <p>
-\[p(x) = \sum_{i = 0}^n p_i \cdot x^i \in \polynome(\corps,n)\]
-</p>
-
-<p>
-et vice versa. On a donc l’équivalence :
-</p>
-
-<p>
-\[\polynome(\corps,n) \equiv \corps^{n+1}\]
+\[(x + y)^2 = x \ (x + y) + y \ (x + y) = x^2 + 2 \ x \ y + y^2\]
 </p>
 </div>
 </div>
-<div id="outline-container-orgc23d286" class="outline-2">
-<h2 id="orgc23d286"><span class="section-number-2">4.</span> Monôme</h2>
+<div id="outline-container-org9e1b9a8" class="outline-2">
+<h2 id="org9e1b9a8"><span class="section-number-2">4.</span> Symétrie</h2>
 <div class="outline-text-2" id="text-4">
 <p>
-Un monôme \(\mu_i : \corps \mapsto \corps\) est une fonction de la forme :
+Par commutativité de l'addition, on a \(B_n(x,y) = B_n(y,x)\) et :
 </p>
 
 <p>
-\[\mu_i(x) = x^i\]
+\[\sum_{k = 0}^n \binome{n}{k} \cdot x^k \cdot y^{n - k} = \sum_{i = 0}^n \binome{n}{i} \cdot y^i \cdot x^{n - i}\]
 </p>
 
 <p>
-pour tout \(x \in \corps\).
+Procédant au changement d'indice \(n - i = k\), il vient :
+</p>
+
+<p>
+\[\sum_{k = 0}^n \binome{n}{k} \cdot x^k \cdot y^{n - k} = \sum_{k = 0}^n \binome{n}{n - k} \cdot x^k \cdot y^{n - k}\]
+</p>
+
+<p>
+On en déduit en égalisant les coefficients de \(x^k\) que :
+</p>
+
+<p>
+\[\binome{n}{k} = \binome{n}{n - k}\]
 </p>
 </div>
 </div>
-<div id="outline-container-org58a5df8" class="outline-2">
-<h2 id="org58a5df8"><span class="section-number-2">5.</span> Division Euclidienne polynômiale</h2>
+<div id="outline-container-org81ad103" class="outline-2">
+<h2 id="org81ad103"><span class="section-number-2">5.</span> Cas particuliers</h2>
 <div class="outline-text-2" id="text-5">
-<div id="text-table-of-contents-1" role="doc-toc">
-<ul>
-<li><a href="#orgbffaff1">5.1. Définition</a></li>
-<li><a href="#org2248e64">5.2. Méthode de Ruffini-Horner</a></li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orgbffaff1" class="outline-3">
-<h3 id="orgbffaff1"><span class="section-number-3">5.1.</span> Définition</h3>
-<div class="outline-text-3" id="text-5-1">
 <p>
-Soit deux polynomes \(p \in \mathcal{P}_n\) et \(d \in \mathcal{P}_m\)
-avec \(m \le n\) et :
+En considérant le cas particuliers \(x = y = 1\), on constate que :
 </p>
 
 <p>
-\[ p(x) = \sum_{i = 0}^n p_i \cdot x^i \]
+\[\sum_{k=0}^{n} \binome{n}{k} = (1 + 1)^n = 2^n\]
 </p>
 
 <p>
-\[ d(x) = \sum_{i = 0}^m d_i \cdot x^i \]
+Pour \(x = -1\), \(y = 1\), on a :
 </p>
 
 <p>
-On dit que \(q\) et \(r\) sont respectivement le quotient et le reste de la
-division euclidienne de \(p\) par le polynôme diviseur \(d\), et on note :
+\[\sum_{k=0}^{n} \binome{n}{k} \cdot (-1)^k = (-1 + 1)^n = 0^n = 0\]
 </p>
 
 <p>
-\[(q,r) = \division(p,d)\]
+Lorsque \(y = 1 - x\) on arrive à :
 </p>
 
 <p>
-si :
-</p>
-
-<p>
-\[ p(x) = d(x) \cdot q(x) + r(x) \]
-</p>
-
-<p>
-avec :
-</p>
-
-<p>
-\[ q(x) = \sum_{i=0}^{n-m} q_i \cdot x^i \]
-</p>
-
-<p>
-et :
-</p>
-
-<p>
-\[ r(x) = \sum_{i=0}^{p} r_i \cdot x^i \]
-</p>
-
-<p>
-où \(p \strictinferieur m \le n\).
+\[\sum_{k=0}^{n} \binome{n}{k} \cdot x^k \cdot (1-x)^{n-k} = (x + 1 - x)^n = 1^n = 1\]
 </p>
 </div>
 </div>
-<div id="outline-container-org2248e64" class="outline-3">
-<h3 id="org2248e64"><span class="section-number-3">5.2.</span> Méthode de Ruffini-Horner</h3>
-<div class="outline-text-3" id="text-5-2">
-<div id="text-table-of-contents-2" role="doc-toc">
-<ul>
-<li><a href="#orga426d46">5.2.1. Introduction</a></li>
-<li><a href="#orge4ea096">5.2.2. Valeur du polynôme au point \(a\)</a></li>
-<li><a href="#orgf0c24f1">5.2.3. Racine au point \(a\)</a></li>
-<li><a href="#org16c2055">5.2.4. Calcul du polynôme quotient et du reste</a></li>
-<li><a href="#orga1ce1e0">5.2.5. Factorisation d’une différence de puissances</a></li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orga426d46" class="outline-4">
-<h4 id="orga426d46"><span class="section-number-4">5.2.1.</span> Introduction</h4>
-<div class="outline-text-4" id="text-5-2-1">
-<p>
-La méthode de Horner permet de diviser un polynôme \(p\) de degré \(n\) :
-</p>
-
-<p>
-\[ p(x) = \sum_{i = 0}^n p_i \cdot x^i \]
-</p>
-
-<p>
-par un polynôme \(d\) du type :
-</p>
-
-<p>
-\[ d(x) = x - a \]
-</p>
-
-<p>
-Le polynôme diviseur \(d\) est donc de degré 1.  Le polynôme quotient
-doit donc être de degré \(n - 1\), soit :
-</p>
-
-<p>
-\[ q(x) = \sum_{i = 0}^{n - 1} q_i \cdot x^i \]
-</p>
-
-<p>
-Le reste \(r\) devant être de degré \(p \strictinferieur 1\), il est
-forcément de degré 0, soit :
-</p>
-
-<p>
-\[ r(x) = R \]
-</p>
-
-<p>
-La division euclidienne polynômiale s’écrit :
-</p>
-
-<p>
-\[ p(x) = d(x) \cdot q(x) + r(x) \]
-</p>
-
-<p>
-ou encore :
-</p>
-
-<p>
-\[ p(x) = (x-a) \cdot q(x) + R \]
-</p>
-</div>
-</div>
-<div id="outline-container-orge4ea096" class="outline-4">
-<h4 id="orge4ea096"><span class="section-number-4">5.2.2.</span> Valeur du polynôme au point \(a\)</h4>
-<div class="outline-text-4" id="text-5-2-2">
-<p>
-En évaluant la division euclidienne polynômiale en \(x = a\), on obtient :
-</p>
-
-<p>
-\[ p(a) = (a-a) \cdot q(x) + R = 0 + R = R \]
-</p>
-
-<p>
-Le reste est donc égal à la valeur du polynôme \(p\) au point \(a\).
-</p>
-</div>
-</div>
-<div id="outline-container-orgf0c24f1" class="outline-4">
-<h4 id="orgf0c24f1"><span class="section-number-4">5.2.3.</span> Racine au point \(a\)</h4>
-<div class="outline-text-4" id="text-5-2-3">
-<p>
-Si le reste \(R\) est nul, on a :
-</p>
-
-<p>
-\[ p(a) = (a-a) \cdot q(x) + R = 0 + 0 = 0 \]
-</p>
-
-<p>
-La valeur \(a\) est alors une racine du polynôme \(p\).
-</p>
-
-<p>
-Inversément, si \(p(a) = 0\), on a :
-</p>
-
-<p>
-\[ 0 = p(a) = (a-a) \cdot q(x) + R \]
-</p>
-
-<p>
-et donc :
-</p>
-
-<p>
-\[ R = 0 \]
-</p>
-</div>
-</div>
-<div id="outline-container-org16c2055" class="outline-4">
-<h4 id="org16c2055"><span class="section-number-4">5.2.4.</span> Calcul du polynôme quotient et du reste</h4>
-<div class="outline-text-4" id="text-5-2-4">
-<p>
-Examinons à présent plus en détail la division euclidienne polynômiale :
-</p>
-
-<p>
-\[ \sum_{i=0}^n p_i \cdot x^i = (x - a) \sum_{i=1}^{n-1} \left(q_i \cdot x^i\right) + R \]
-</p>
-
-<p>
-En comparant les termes de même puissance en \(x\), on obtient :
-</p>
-
-\begin{align*}
-q_{n-1} &= p_n \\
-q_{n-2} - a \cdot q_{n-1} &= p_{n-1} \\
-\ldots & \ldots \\
-q_{i-1} - a \cdot q_i &= p_i \\
-\ldots &= \ldots \\
-q_0 - a \cdot q_1 &= p_1 \\
-- a \cdot q_0 + R &= p_0
-\end{align*}
-
-<p>
-Ces relations nous permettent d’évaluer les coefficients
-du quotient de manière récursive :
-</p>
-
-\begin{align*}
-q_{n-1} &= p_n \\
-q_{n-2} &= p_{n-1} + a \cdot q_{n-1} \\
-\ldots & \ldots \\
-q_{i-1} &= p_i + a \cdot q_i \\
-\ldots & \ldots \\
-q_0 &= p_1 + a \cdot q_1 \\
-R &= p_0 + a \cdot q_0
-\end{align*}
-</div>
-</div>
-<div id="outline-container-orga1ce1e0" class="outline-4">
-<h4 id="orga1ce1e0"><span class="section-number-4">5.2.5.</span> Factorisation d’une différence de puissances</h4>
-<div class="outline-text-4" id="text-5-2-5">
-<p>
-Nous avons déjà vu dans le chapitre sur les progressions
-un résultat permettant de
-<a href="progressions.html#heading:factorisation_progression_geometrique">factoriser une différence de puissances</a>
-La méthode de Horner fournit une autre technique permettant d’arriver au
-même résultat.
-</p>
-
-<p>
-Soit le polynôme :
-</p>
-
-<p>
-\[ p(x) = x^n - a^n \]
-</p>
-
-<p>
-pour un certain \(a\in\corps\). On a clairement :
-</p>
-
-<p>
-\[ p(a) = a^n - a^n = 0 \]
-</p>
-
-<p>
-La valeur \(a\) est donc une racine de \(p\). Si on utilise la méthode de
-Horner pour diviser \(p\) par \(x - a\), on aura un reste nul et :
-</p>
-
-<p>
-\[ p(x) = (x - a) \cdot q(x) \]
-</p>
-
-<p>
-où \(q\) est un polynôme de degré \(n-1\) :
-</p>
-
-<p>
-\[ q(x) = \sum_{i=0}^{n-1} q_i \cdot x^i \]
-</p>
-
-<p>
-Suivant la méthode, les coefficients successifs s’écrivent :
-</p>
-
-\begin{align*}
-q_{n-1} &= 1 \\
-q_{n-2} &= 0 + a \cdot 1 = a \\
-q_{n-3} &= 0 + a \cdot a = a^2 \\
-q_{n-4} &= 0 + a \cdot a^2 = a^3 \\
-\ldots & \ldots \\
-q_{n - 1 - i} &= a^i \\
-\ldots & \ldots \\
-q_0 &= a^{n - 1} \\
-R &= -a^n + a^n = 0
-\end{align*}
-
-<p>
-Le polynôme \(q\) peut donc se réécrire :
-</p>
-
-<p>
-\[ q(x) = \sum_{i = 0}^{n-1} x^{n - 1 - i} \cdot a^i \]
-</p>
-
-<p>
-ce qui nous donne l’expression suivante pour la factorisation de \(p\) :
-</p>
-
-<p>
-\[ p(x) = x^n - a^n = (x - a) \cdot \sum_{i = 0}^{n-1} x^{n - 1 - i} \cdot a^i \]
-</p>
-</div>
-</div>
-</div>
-</div>
-<div id="outline-container-org0e11dbc" class="outline-2">
-<h2 id="org0e11dbc"><span class="section-number-2">6.</span> Racines</h2>
+<div id="outline-container-org70e37b1" class="outline-2">
+<h2 id="org70e37b1"><span class="section-number-2">6.</span> Bernstein</h2>
 <div class="outline-text-2" id="text-6">
 <p>
-On dit que \(r\) est une racine ou un zéro du polynôme \(p\) si :
+Soit \(i,n \in \setN\) avec \(i \le n\). Les polynômes de Bernstein \(B_i^n\) sont définis par :
 </p>
 
 <p>
-\[p(r) = 0\]
+\[B_i^n(t) = \binome{n}{i} \cdot t^i \cdot (1 - t)^{n-i}\]
 </p>
 
 <p>
-Nous allons montrer que tout polynôme de degré \(n\) non nul
-admet au plus \(n\) racines distinctes.
+pour tout \(t \in [0,1]\).
 </p>
 
 <p>
-Ce qui revient à dire que si un polynôme de degré \(n\) admet \(m+1\)
-racines distinctes avec \(m \ge n\), alors ce polynôme est forcément nul.
+Considérons l'espace fonctionnel \(\mathcal{F} =
+\fonction([0,1],\corps)\). L'opérateur de Bernstein \(\mathcal{B}_n :
+\mathcal{F} \mapsto \mathcal{F}\) est défini par :
 </p>
 
 <p>
-Soit \(n = 0\). Considérons un polynôme \(p_0\) de degré 0, défini par
-\(p_0(x) = a_0\) pour un certain \(a_0 \in \corps\). On a \(n + 1 = 1\). Si on
-peut trouver au moins un \(x_0 \in \corps\) qui est racine de \(p_0\), on a :
+\[\mathcal{B}_n(f)(t) = \sum_{i = 0}^n f(i / n) \cdot B_i^n(t)\]
 </p>
 
 <p>
-\[ p_0(x_0) = a_0 = 0 \]
+pour tout \(f \in \mathcal{F}\) et pour tout \(t \in [0,1]\).
 </p>
 
 <p>
-On en conclut que \(a_0 = 0\) et que \(p_0(x) = 0\) pour tout \(x
-\in \corps\), ce qui revient à dire que \(p_0 = 0\). La thèse est donc
-vérifiée pour \(n = 0\).
+Soit la fonction constante \(c \in \mathcal{F}\) associée à un certain \(c \in \corps\) et définie par :
 </p>
 
 <p>
-A présent, supposons que l'affirmation soit vraie pour \(n -
-1\). Choisissons un polynôme \(p_n\) de degré \(n\) :
+\[c(t) = c\]
 </p>
 
 <p>
-\[p_n(x) = \sum_{i=0}^n a_i \cdot x^i\]
+pour tout \(t \in [0,1]\).
 </p>
 
 <p>
-Supposons que \(p\) possède \(m+1\) racines
+L'opérateur de Bernstein possède l'importante propriété de conserver ces fonctions constantes :
 </p>
 
 <p>
-\[p_n(x_0) = p_n(x_1) = ... = p_n(x_m) = 0\]
+\[\mathcal{B}_n(c)(t) = \sum_{i = 0}^n c \cdot B_i^n(t) = c \sum_{i = 0}^n \binome{n}{i} t^i \cdot (1 - t)^{n-i} = c\]
 </p>
 
 <p>
-avec \(m \ge n\) et  :
-</p>
-
-<p>
-\[x_0 \strictinferieur x_1 \strictinferieur ... \strictinferieur x_m\]
-</p>
-
-<p>
-On a alors :
-</p>
-
-<p>
-\[p_n(x) = p_n(x) - p_n(x_0) = \sum_{i=1}^n a_i \cdot (x^i - x_0^i)\]
-</p>
-
-<p>
-Nous pouvons factoriser chaque différence de puissances intervenant dans
-la somme :
-</p>
-
-<p>
-\[x^i - x_0^i = (x - x_0) \sum_{j = 0}^{i - 1} x^j \cdot x_0^{i - 1 -j}\]
-</p>
-
-<p>
-on en déduit que :
-</p>
-
-<p>
-\[p_n(x) = (x - x_0) \cdot q_{n-1}(x)\]
-</p>
-
-<p>
-où le polynôme \(q_{n - 1}\) est défini par :
-</p>
-
-<p>
-\[q_{n - 1}(x) = \sum_{i = 1}^n a_i \sum_{j = 0}^{i - 1}  x^j \cdot x_0^{i - 1 - j}\]
-</p>
-
-<p>
-Cette expression ne faisant intervenir que les puissances
-\(1,x,...,x^{n-1}\), on voit que \(q_{n-1} \in \mathcal{P}_n\) est de degré
-\(n-1\). Considérons les cas des racines \(x_k\in\{x_1, x_2, ...,x_m\}\)
-de \(p_n\). On a :
-</p>
-
-<p>
-\[0 = p_n(x_k) = (x_k - x_0) \cdot q_{n-1}(x_k)\]
-</p>
-
-<p>
-Comme \(x_k - x_0 \ne 0\), on peut multiplier par \((x_k - x_0)^{-1}\) pour obtenir :
-</p>
-
-<p>
-\[q_{n-1}(x_k) = \frac{p_{n-1}(x_k)}{x_k - x_0} = 0\]
-</p>
-
-<p>
-Le polynôme \(q_{n-1}\) possède par conséquent au moins \(m \ge n\) racines
-distinctes. Il est dès lors nul par l'hypothèse de récurrence. La
-factorisation de \(p_n\) devient alors :
-</p>
-
-<p>
-\[p_n(x) = (x - x_0) \cdot q_{n-1}(x) = 0\]
-</p>
-
-<p>
-pour tout \(x \in \corps\). Le polynôme \(p_n\) est également nul et la
-thèse est démontrée.
-</p>
-</div>
-<div id="outline-container-orgb93787b" class="outline-3">
-<h3 id="orgb93787b"><span class="section-number-3">6.1.</span> Egalité</h3>
-<div class="outline-text-3" id="text-6-1">
-<p>
-Si deux polynômes \(p_1,p_2 \in \mathcal{P}_n\) sont égaux en \(m + 1 \ge n + 1\) points distincts, alors le polynôme de degré \(n\) :
-</p>
-
-<p>
-\[h = p_1 - p_2\]
-</p>
-
-<p>
-admet \(m+1\) racines. Il est donc nul et \(p_1 = p_2\).
-</p>
-</div>
-</div>
-</div>
-<div id="outline-container-org17e2e5d" class="outline-2">
-<h2 id="org17e2e5d"><span class="section-number-2">7.</span> Factorisation</h2>
-<div class="outline-text-2" id="text-7">
-<p>
-Choisissons un polynôme \(p\in\mathcal{P}_n\) qui admet \(n\) racines
-distinctes \(x_1,x_2,...,x_n\). Soit alors \(x_0 \notin \{x_1,...,x_n\}\)
-et :
-</p>
-
-<p>
-\[A = \frac{p(x_0)}{\prod_{i = 1}^n (x_0 - x_i)}\]
-</p>
-
-<p>
-On voit que le polynôme :
-</p>
-
-<p>
-\[q(x) = A \cdot \prod_{i=1}^n (x - x_i)\]
-</p>
-
-<p>
-est égal à \(p\) en chacune des racines :
-</p>
-
-<p>
-\[p(x_i) = q(x_i) = 0 \qquad i = 1,2,...,n\]
-</p>
-
-<p>
-Mais par la définition de \(A\), on a aussi :
-</p>
-
-<p>
-\[p(x_0) = q(x_0)\]
-</p>
-
-<p>
-Les deux polynômes sont donc égaux en \(n+1\) points distincts.
-Comme ils sont tous deux de degré \(n\), on en déduit que \(p = q\).
-Les coefficients doivent donc tous être égaux, et comme :
-</p>
-
-<p>
-\[ p(x) = a_n \cdot x^n + \sum_{i = 0}^{n - 1} a_i \cdot x^i \]
-</p>
-
-<p>
-\[ q(x) = A \cdot x^n + \sum_{i = 0}^{n - 1} b_i(x_1,...,x_n) \cdot x^i \]
-</p>
-
-<p>
-on a \(A = a_n\) et :
-</p>
-
-<p>
-\[p(x) = a_n \cdot \prod_{i=1}^n (x - x_i)\]
+quelle que soit la valeur de \(t \in [0,1]\).
 </p>
 </div>
 </div>

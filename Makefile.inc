@@ -25,9 +25,10 @@ WIPE_SUBDIRS           =  $(SUBDIRS:%=wipe-%)
 ORG_FILES        =  $(wildcard *.org)
 HTML_FILES       =  $(ORG_FILES:.org=.html)
 
-CSS_FILES        =  $(wildcard $(ROOT_GENERIC)/style/*.css)
-INC_FILES        =  $(wildcard $(ROOT_GENERIC)/include/*.org)
-INC_LATEX_FILES  =  $(wildcard $(ROOT_GENERIC)/include/latex/*.*)
+CSS_FILES          =  $(wildcard $(ROOT_GENERIC)/style/*.css)
+INC_FILES          =  $(wildcard $(ROOT_GENERIC)/include/*.org)
+INC_LATEX_FILES    =  $(wildcard $(ROOT_GENERIC)/include/latex/*.*)
+INC_MATHJAX_FILES  =  $(wildcard $(ROOT_GENERIC)/include/mathjax/*.*)
 
 # HTML_FILES = $(patsubst %.org,%.html,$(wildcard *.org))
 

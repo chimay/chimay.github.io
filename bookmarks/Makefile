@@ -27,10 +27,6 @@ debug:
 
 #  org -> html {{{1
 
-$(HTML_SUBDIRS):
-	$(MAKELINE) -C ${@:html-%=%} html
-	@$(ECHO)
-
 ~/racine/refer/bookmarks/%.html: ~/racine/refer/bookmarks/%.org
 	$(MAKELINE) -C ~/racine/refer/bookmarks $@
 

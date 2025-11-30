@@ -1,6 +1,6 @@
 # vim: set ft=make :
 
-include ../Makefile.inc
+include ../../Makefile.inc
 
 .DEFAULT_GOAL := all
 
@@ -10,9 +10,9 @@ include ../Makefile.inc
 
 .PHONY: html
 
-.PHONY: dry-sync-html sync-html
-.PHONY: dry-sync sync
+.PHONY: sync-html
 
+.PHONY: $(ALL_SUBDIRS)
 .PHONY: all install
 
 .PHONY: $(CLEAN_SUBDIRS) $(CLEAN_HTML_SUBDIRS) $(WIPE_SUBDIRS)
@@ -24,36 +24,30 @@ include ../Makefile.inc
 debug:
 	@echo $(SUBDIRS)
 
-
 #  org -> html {{{1
 
-html:
-	@$(ECHO) nothing to do
+%.html: %.org $(INC_FILES)
+	$(EMACS) $(EMACS_PRE_FLAGS) $< $(EMACS_POST_FLAGS)
+	remove-max-width-from-org-html-export.zsh $(patsubst %.org,%.html,$<)
+	@$(ECHO)
 
+html: $(HTML_FILES)
 
 # sync -> html dir {{{1
 
-dry-sync-html: html
-	$(DRY_RSYNC) $(CUR_DIR)/ $(HTML_DIR)
-	@$(ECHO)
-
-sync-html: html
+sync-html: html $(ALL_SUBDIRS)
 	$(RSYNC) $(CUR_DIR)/ $(HTML_DIR)
 	@$(ECHO)
 
-
-# sync all {{{1
-
-dry-sync: dry-sync-html
-
-sync: sync-html
-
 # all, install {{{1
 
-all: sync-html
+$(ALL_SUBDIRS):
+	$(MAKELINE) -C ${@:all-%=%} all
+	@$(ECHO)
 
-install: sync-html
+all: $(ALL_SUBDIRS)
 
+install: all sync-html
 
 # clean, wipe {{{1
 
@@ -79,4 +73,3 @@ clean-html: $(CLEAN_HTML_SUBDIRS)
 wipe: $(WIPE_SUBDIRS)
 	rm -f ?*.html
 	rm -f ?*~
-

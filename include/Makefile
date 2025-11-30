@@ -15,7 +15,6 @@ include ../Makefile.inc
 
 .PHONY: all install
 
-.PHONY: $(HTML_SUBDIRS)
 .PHONY: $(CLEAN_SUBDIRS) $(CLEAN_HTML_SUBDIRS) $(WIPE_SUBDIRS)
 
 .PHONY: clean clean-html
@@ -25,7 +24,6 @@ include ../Makefile.inc
 debug:
 	@echo $(SUBDIRS)
 
-
 #  org -> html {{{1
 
 html:
@@ -34,27 +32,19 @@ html:
 
 # sync -> html dir {{{1
 
-dry-sync-html: html
-	$(DRY_RSYNC) $(CUR_DIR)/ $(HTML_DIR)
+sync-html: $(ALL_SUBDIRS)
+	$(RSYNC) $(ROOT_GENERIC)/ $(ROOT_HTML)
 	@$(ECHO)
-
-sync-html: html
-	$(RSYNC) $(CUR_DIR)/ $(HTML_DIR)
-	@$(ECHO)
-
-
-# sync all {{{1
-
-dry-sync: dry-sync-html
-
-sync: sync-html
 
 # all, install {{{1
 
-all: sync-html
+$(ALL_SUBDIRS):
+	$(MAKELINE) -C ${@:all-%=%} all
+	@$(ECHO)
 
-install: sync-html
+all: html $(ALL_SUBDIRS)
 
+install: all sync-html
 
 # clean, wipe {{{1
 

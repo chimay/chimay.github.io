@@ -23,14 +23,18 @@ WIPE_SUBDIRS           =  $(SUBDIRS:%=wipe-%)
 # files {{{1
 
 ORG_FILES        =  $(wildcard *.org)
-HTML_FILES       =  $(ORG_FILES:.org=.html)
+ORG_HTML_FILES   =  $(ORG_FILES:.org=.html)
+
+TEX_FILES        =  $(wildcard *.tex)
+TEX_PDF_FILES    =  $(TEX_FILES:.tex=.pdf)
+TEX_SVG_FILES    =  $(TEX_FILES:.tex=.svg)
 
 CSS_FILES          =  $(wildcard $(ROOT_GENERIC)/style/*.css)
 INC_FILES          =  $(wildcard $(ROOT_GENERIC)/include/*.org)
 INC_LATEX_FILES    =  $(wildcard $(ROOT_GENERIC)/include/latex/*.*)
 INC_MATHJAX_FILES  =  $(wildcard $(ROOT_GENERIC)/include/mathjax/*.*)
 
-# HTML_FILES = $(patsubst %.org,%.html,$(wildcard *.org))
+# ORG_HTML_FILES = $(patsubst %.org,%.html,$(wildcard *.org))
 
 # files in ~/racine/musica/lilypond/template
 

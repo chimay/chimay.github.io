@@ -26,12 +26,12 @@ debug:
 
 #  org -> html {{{1
 
-%.html: %.org $(INC_FILES) $(INC_LATEX_FILES) $(INC_MATHJAX_FILES)
+%.html: %.org $(INC_FILES) $(INC_LATEX_FILES)
 	$(EMACS) $(EMACS_PRE_FLAGS) $< $(EMACS_POST_FLAGS)
 	remove-max-width-from-org-html-export.zsh $(patsubst %.org,%.html,$<)
 	@$(ECHO)
 
-html: $(HTML_FILES)
+html: $(ORG_HTML_FILES)
 
 # sync -> html dir {{{1
 

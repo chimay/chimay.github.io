@@ -31,7 +31,7 @@ debug:
 	remove-max-width-from-org-html-export.zsh $(patsubst %.org,%.html,$<)
 	@$(ECHO)
 
-html: $(HTML_FILES)
+html: $(ORG_HTML_FILES)
 
 # sync -> html dir {{{1
 

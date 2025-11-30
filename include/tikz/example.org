@@ -1,0 +1,61 @@
+#+HEADER: :file ../../image/tikz/contour.svg :imagemagick yes
+#+HEADER: :results output silent :headers '("\\usepackage{tikz}")
+#+HEADER: :fit yes :imoutoptions -geometry 400 :iminoptions -density 600
+#+BEGIN_src latex
+  \begin{tikzpicture}
+    % Every aspect of the figure can be altered through these definitions
+    \def\radius{3} \def\X{0.35} \def\labelSpacing{1.1}
+    \def\A{110} \def\B{315} \def\C{70} \def\D{215}
+
+    % Restricts the canvas
+    \tkzInit[xmin=-3.25,xmax=3.25,ymin=-3.25,ymax=3.25]\tkzClip
+
+    \tkzDefPoints{0/0/O, \radius/0/R} % defines the first two points
+
+    % The remainder of the points are defined through rotation
+    \tkzDefPointBy[rotation=center O angle \A](R)\tkzGetPoint{A}
+    \tkzDefPointBy[rotation=center O angle \B](R)\tkzGetPoint{B}
+    \tkzDefPointBy[rotation=center O angle \C](R)\tkzGetPoint{C}
+    \tkzDefPointBy[rotation=center O angle \D](R)\tkzGetPoint{D}
+
+    % Get the point M as the intersection between the lines AB and CD
+    \tkzInterLL(A,B)(C,D)   \tkzGetPoint{M}
+
+    % Calculate the length AD, and define the point X
+    % as X = 0 at A and X = 1 at D
+    \tkzCalcLength[cm](A,D) \tkzGetLength{dAD}
+    \pgfmathparse{\X*\dAD}
+    % Intersect between circle with center A and radius \X * AD
+    \tkzInterLC[R](A,D)(A,\pgfmathresult cm) \tkzGetPoints{X'}{X}
+
+    % Finds the intersection for PQ in a similar fashion, same with Y
+    \tkzInterLC(X,M)(O,R)                    \tkzGetPoints{P}{Q}
+    \tkzInterLL(X,M)(C,B)                    \tkzGetPoint{Y}
+
+    \tkzDrawPoints[fill=black,size=7pt](A,B,C,D,X,Y,P,Q,M)
+
+    \tkzMarkAngle[size=1cm, arc=lll](C,D,A)
+    \tkzMarkAngle[size=1cm, arc=lll](C,B,A)
+
+    \tkzMarkAngle[size=0.5cm, arc=ll](X,M,D)
+    \tkzMarkAngle[size=0.5cm, arc=ll](Y,M,C)
+
+    \tkzMarkAngle[size=0.4cm, arc=l](A,M,X)
+    \tkzMarkAngle[size=0.4cm, arc=l](B,M,Y)
+
+    \tkzDrawSegments(A,B B,C C,D D,A P,Q)
+    \tkzDrawCircle(O,R)
+
+    % This just defines the labels radially, looks slightly better
+    \node at ($(O)+\labelSpacing*(A)$)  {$A$};
+    \node at ($(O)+\labelSpacing*(B)$)  {$B$};
+    \node at ($(O)+\labelSpacing*(C)$)  {$C$};
+    \node at ($(O)+\labelSpacing*(D)$)  {$D$};
+    \node at ($(O)+\labelSpacing*(P)$)  {$P$};
+    \node at ($(O)+\labelSpacing*(Q)$)  {$Q$};
+
+    \tkzLabelPoints[above=0.2cm](M)
+    \tkzLabelPoints[above left](X)
+    \tkzLabelPoints[above right](Y)
+  \end{tikzpicture}
+#+END_src

@@ -33,6 +33,20 @@ debug:
 
 html: $(ORG_HTML_FILES)
 
+# tex --> pdf {{{1
+
+%.pdf: %.tex
+	pdflatex $<
+
+pdf: $(TEX_PDF_FILES)
+
+# pdf --> svg {{{1
+
+%.svg: %.pdf
+	pdf2svg $< $@
+
+svg: $(TEX_SVG_FILES)
+
 # sync -> html dir {{{1
 
 sync-html: html $(ALL_SUBDIRS)
@@ -45,7 +59,7 @@ $(ALL_SUBDIRS):
 	$(MAKELINE) -C ${@:all-%=%} all
 	@$(ECHO)
 
-all: $(ALL_SUBDIRS)
+all: svg $(ALL_SUBDIRS)
 
 install: all sync-html
 

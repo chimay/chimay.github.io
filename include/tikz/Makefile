@@ -36,7 +36,8 @@ html: $(ORG_HTML_FILES)
 # tex --> pdf {{{1
 
 %.pdf: %.tex
-	pdflatex $<
+	latexmk -f -pdf $<
+	#pdflatex $<
 
 pdf: $(TEX_PDF_FILES)
 
@@ -60,6 +61,10 @@ $(ALL_SUBDIRS):
 	@$(ECHO)
 
 all: svg $(ALL_SUBDIRS)
+	rm -f ?*.aux
+	rm -f ?*.fdb_latexmk
+	rm -f ?*.fls
+	rm -f ?*.log
 
 install: all sync-html
 
@@ -79,6 +84,10 @@ $(WIPE_SUBDIRS):
 
 clean: $(CLEAN_SUBDIRS)
 	rm -f ?*~
+	rm -f ?*.aux
+	rm -f ?*.fdb_latexmk
+	rm -f ?*.fls
+	rm -f ?*.log
 
 clean-html: $(CLEAN_HTML_SUBDIRS)
 	rm -f ?*.html

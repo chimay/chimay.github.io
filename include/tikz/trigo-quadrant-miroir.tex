@@ -1,0 +1,60 @@
+
+\documentclass[tikz,border=6pt]{standalone}
+
+\usepackage{amsmath}
+\usepackage{tikz}
+
+\usetikzlibrary{calc}
+\usetikzlibrary{angles,quotes}
+
+\begin{document}
+\begin{tikzpicture}[scale=3, >=stealth]
+
+	\def\R{1}
+	\def\ang{32} % angle in degrees
+
+	\coordinate (O) at (0,0);
+
+	\coordinate (P) at ({cos(\ang)},{sin(\ang)});
+	\coordinate (Q) at ({cos(\ang)},{-sin(\ang)});
+
+	\node[below left] at ($(O)$) {$O$};
+
+	% axes
+	\draw[->] (-1.25,0) -- (1.25,0) node[right] {$x$};
+	\draw[->] (0,-1.25) -- (0,1.25) node[above] {$y$};
+
+	% unit circle
+	\draw[thick] (O) circle (\R);
+
+	% radius to point P
+	\draw[thick] (O) -- (P);
+	\filldraw (P) circle (0.7pt);
+
+	% radius to point Q
+	\draw[thick] (O) -- (Q);
+	\filldraw (P) circle (0.7pt);
+
+	% projections
+	\draw[dashed] (P) -- ({cos(\ang)},0)
+	node[below] {$\cos\theta$};
+	\draw[dashed] (P) -- (0,{sin(\ang)})
+	node[left] {$\sin\theta$};
+
+	\draw[dashed] (Q) -- ({cos(\ang)},0)
+	node[below] {$\cos\theta$};
+	\draw[dashed] (Q) -- (0,{-sin(\ang)})
+	node[left] {$-\sin\theta$};
+
+	% angle arc
+	\draw[->, thick]
+	(0.42,0) arc (0:\ang:0.42)
+	node[midway, right] {$\theta$};
+
+	% angle arc
+	\draw[->, thick]
+	(0.22,0) arc (0:-\ang:0.22)
+	node[midway, right] {$-\theta$};
+
+\end{tikzpicture}
+\end{document}

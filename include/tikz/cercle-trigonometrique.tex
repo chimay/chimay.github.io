@@ -1,60 +1,74 @@
 
 \documentclass[tikz,border=6pt]{standalone}
+
 \usepackage{amsmath}
 \usepackage{tikz}
+
+\usetikzlibrary{calc}
 \usetikzlibrary{angles,quotes}
 
 \begin{document}
 \begin{tikzpicture}[scale=3, >=stealth]
 
-  \def\R{1}
-  \def\ang{40} % angle in degrees
+	\def\R{1}
+	\def\ang{40} % angle in degrees
 
-  \coordinate (O) at (0,0);
-  \coordinate (P) at ({cos(\ang)},{sin(\ang)});
+	\coordinate (O) at (0,0);
+	\coordinate (P) at ({cos(\ang)},{sin(\ang)});
+	\coordinate (C) at ({cos(\ang)},0);
+	\coordinate (S) at (0,{sin(\ang)});
+	\coordinate (T) at (1,{tan(\ang)});
 
-  % axes
-  \draw[->] (-1.25,0) -- (1.25,0) node[right] {$x$};
-  \draw[->] (0,-1.25) -- (0,1.25) node[above] {$y$};
+	\node[below left] at ($(O)$) {$O$};
 
-  % unit circle
-  \draw[thick] (O) circle (\R);
+	% axes
+	\draw[->] (-1.25,0) -- (1.25,0) node[right] {$x$};
+	\draw[->] (0,-1.25) -- (0,1.25) node[above] {$y$};
 
-  % axis ticks and labels
-  \draw (-1,0) -- ++(0,-0.02) node[below] {$-1$};
-  \draw (1,0) -- ++(0,-0.02) node[below] {$1$};
-  \draw (0,-1) -- ++(-0.02,0) node[left] {$-1$};
-  \draw (0,1) -- ++(-0.02,0) node[left] {$1$};
+	% unit circle
+	\draw[thick] (O) circle (\R);
 
-  % radius to point P
-  \draw[thick, blue] (O) -- (P);
-  \filldraw (P) circle (0.7pt)
-    node[above right] {$P(\cos\theta,\sin\theta)$};
+	% axis ticks and labels
+	\draw (-1,0) -- ++(0,-0.02) node[below] {$-1$};
+	\draw (1,0) -- ++(0,-0.02) node[below] {$1$};
+	\draw (0,-1) -- ++(-0.02,0) node[left] {$-1$};
+	\draw (0,1) -- ++(-0.02,0) node[left] {$1$};
 
-  % projections
-  \draw[dashed] (P) -- ({cos(\ang)},0)
-    node[below] {$\cos\theta$};
-  \draw[dashed] (P) -- (0,{sin(\ang)})
-    node[left] {$\sin\theta$};
+	% radius to point P
+	\draw[thick, green] (O) -- (P);
+	\filldraw (P) circle (0.7pt)
+	node[right] {$P(\cos\theta,\sin\theta)$};
 
-  % colored sine / cosine segments
-  \draw[very thick, red]
-    (O) -- ({cos(\ang)},0) node[midway, below] {$\cos\theta$};
-  \draw[very thick, orange]
-    ({cos(\ang)},0) -- (P) node[midway, right] {$\sin\theta$};
+	% projections
+	\draw[dashed] (P) -- ({cos(\ang)},0)
+	node[below] {$\cos\theta$};
+	\draw[dashed] (P) -- (0,{sin(\ang)})
+	node[left] {$\sin\theta$};
 
-  % angle arc
-  \draw[->, thick]
-    (0.22,0) arc (0:\ang:0.22)
-    node[midway, right] {$\theta$};
+	% colored sine / cosine segments
+	\draw[very thick, red]
+	(O) -- ({cos(\ang)},0) node[midway, below] {$\cos\theta$};
+	\draw[very thick, orange]
+	({cos(\ang)},0) -- (P) node[midway, right] {$\sin\theta$};
 
-  % tangent line & intersection
-  \draw[dotted] (1,-1.2) -- (1,1.2);
-  \coordinate (T) at (1,{tan(\ang)});
-  \draw[green!60!black, thick] (O) -- (T)
-    node[midway, above right] {$\tan\theta$};
-  \filldraw[green!60!black] (T) circle (0.7pt)
-    node[right] {$(1,\tan\theta)$};
+	% angle arc
+	\draw[->, thick]
+	(0.22,0) arc (0:\ang:0.22)
+	node[midway, right] {$\theta$};
+
+	% tangent line & intersection
+	\draw[dashed,blue] (1,-1.2) -- (1,1.2);
+	\draw[green!60!black] (O) -- (P)
+	node[midway, above left, green!60!black] {$1$};
+	\draw[black] (P) -- (T);
+	\filldraw[blue!60!black] (T) circle (0.7pt)
+	node[right] {$T(1,\tan\theta)$};
+
+	% Right angle marker
+	\draw ($(C)+(0,0.07)$) -- ($(C)+(-0.07,0.07)$) -- ($(C)-(0.07,0)$);
+
+	% Right angle marker
+	\draw ($(S)-(0,0.07)$) -- ($(S)+(0.07,-0.07)$) -- ($(S)+(0.07,0)$);
 
 \end{tikzpicture}
 \end{document}

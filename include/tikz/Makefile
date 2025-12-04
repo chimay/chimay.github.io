@@ -65,7 +65,6 @@ all: svg $(ALL_SUBDIRS)
 	rm -f ?*.fdb_latexmk
 	rm -f ?*.fls
 	rm -f ?*.log
-	rm -f ?*.pdf
 
 install: all sync-html
 

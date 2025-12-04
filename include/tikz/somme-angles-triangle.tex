@@ -7,40 +7,50 @@
 
 \begin{document}
 
-\begin{tikzpicture}[scale=1.2, font=\small]
+\begin{tikzpicture}[scale=1.0]
 
-% Coordinates of triangle
-\coordinate (A) at (0,0);
-\coordinate (B) at (4,0.5);
-\coordinate (C) at (1,3);
+	% Points
+	\coordinate (A) at (0,0);
+	\coordinate (C) at (5,0);
+	\coordinate (B) at (3,3);
 
-% Triangle
-\draw[thick] (A)--(B)--(C)--cycle;
+	\coordinate (D) at (4.5,4.5);
+	\coordinate (E) at (2,4.5);
 
-% Labels
-\node[below left]  at (A) {$A$};
-\node[below right] at (B) {$B$};
-\node[above]       at (C) {$C$};
+	\coordinate (F) at (0,3);
+	\coordinate (G) at (6,3);
 
-% Angles inside triangle
-\pic [draw, "$\alpha$", angle eccentricity=1.3, angle radius=0.6]
-    {angle = C--A--B};
+	% Triangle sides
+	\draw[thick] (A) -- (B) -- (C) -- cycle;
+	\draw[thick] (B) -- (D);
+	\draw[thick] (B) -- (E);
+	\draw[thick] (F) -- (G);
 
-\pic [draw, "$\beta$", angle eccentricity=1.3, angle radius=0.6]
-    {angle = A--B--C};
+	% Side labels
+	\node[left]  at ($(A)!0.5!(B)$) {$a$};
+	\node[below] at ($(A)!0.5!(C)$) {$b$};
+	\node[right] at ($(B)!0.5!(C)$) {$c$};
+	\node[above] at ($(F)!0.1!(G)$) {$d$};
 
-\pic [draw, "$\gamma$", angle eccentricity=1.3, angle radius=0.6]
-    {angle = B--C--A};
+	% Angle alpha
+	\pic[draw, ->, "$\alpha$", angle eccentricity=1.3, angle radius=0.7cm]
+	{angle = B--C--A};
+	\pic[draw, ->, "$\alpha$", angle eccentricity=1.3, angle radius=0.7cm]
+	{angle = E--B--F};
+	\pic[draw, ->, "$\alpha$", angle eccentricity=1.3, angle radius=1.1cm]
+	{angle = C--B--G};
 
-% Parallel line through C
-\draw[dashed] ($(C)+(-2,0)$) -- ($(C)+(2,0)$);
+	% Angle beta
+	\pic[draw, ->, "$\beta$", angle eccentricity=1.3, angle radius=0.7cm]
+	{angle = A--B--C};
 
-% Corresponding alternate angles
-%\pic [draw, "$\alpha'$", angle eccentricity=1.3, angle radius=0.6]
-    %{angle = A--C--($(C)+(-2,0)$)};
-
-%\pic [draw, "$\beta'$", angle eccentricity=1.3, angle radius=0.6]
-    %{angle = ($(C)+(2,0)$)--C--B};
+	% Angle gamma
+	\pic[draw, ->, "$\gamma$", angle eccentricity=1.3, angle radius=0.7cm]
+	{angle = C--A--B};
+	\pic[draw, ->, "$\gamma$", angle eccentricity=1.3, angle radius=0.7cm]
+	{angle = G--B--D};
+	\pic[draw, ->, "$\gamma$", angle eccentricity=1.3, angle radius=1.1cm]
+	{angle = F--B--A};
 
 \end{tikzpicture}
 

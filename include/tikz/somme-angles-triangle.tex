@@ -1,0 +1,47 @@
+% Minimal TikZ standalone example
+\documentclass[tikz, border=1mm]{standalone}
+
+\usepackage{amsmath}
+
+\usetikzlibrary{calc,angles,quotes}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=1.2, font=\small]
+
+% Coordinates of triangle
+\coordinate (A) at (0,0);
+\coordinate (B) at (4,0.5);
+\coordinate (C) at (1,3);
+
+% Triangle
+\draw[thick] (A)--(B)--(C)--cycle;
+
+% Labels
+\node[below left]  at (A) {$A$};
+\node[below right] at (B) {$B$};
+\node[above]       at (C) {$C$};
+
+% Angles inside triangle
+\pic [draw, "$\alpha$", angle eccentricity=1.3, angle radius=0.6]
+    {angle = C--A--B};
+
+\pic [draw, "$\beta$", angle eccentricity=1.3, angle radius=0.6]
+    {angle = A--B--C};
+
+\pic [draw, "$\gamma$", angle eccentricity=1.3, angle radius=0.6]
+    {angle = B--C--A};
+
+% Parallel line through C
+\draw[dashed] ($(C)+(-2,0)$) -- ($(C)+(2,0)$);
+
+% Corresponding alternate angles
+%\pic [draw, "$\alpha'$", angle eccentricity=1.3, angle radius=0.6]
+    %{angle = A--C--($(C)+(-2,0)$)};
+
+%\pic [draw, "$\beta'$", angle eccentricity=1.3, angle radius=0.6]
+    %{angle = ($(C)+(2,0)$)--C--B};
+
+\end{tikzpicture}
+
+\end{document}

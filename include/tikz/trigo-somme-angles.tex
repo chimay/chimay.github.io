@@ -11,24 +11,23 @@
 \begin{tikzpicture}[scale=7,>=stealth]
 
 	% angles
-	\def\a{30}  % alpha
-	\def\b{40}  % beta
-	\def\S{1.0}
+	\def\a{40}  % alpha
+	\def\b{25}  % beta
 
 	% base triangle ABC for alpha (unit hypotenuse)
 	\coordinate (A) at (0,0);
-	\coordinate (B) at ({\S*cos(\a)},{\S*sin(\a)});
-	\coordinate (C) at ({\S*cos(\a)},0);
+	\coordinate (B) at ({cos(\b)*cos(\a)},{cos(\b)*sin(\a)});
+	\coordinate (C) at ({cos(\b)*cos(\a)},0);
 
 	% triangle ADB for beta
-	\coordinate (D) at ({\S*cos(\a)*cos(\b)},{\S*sin(\a+\b)});
+	\coordinate (D) at ({cos(\a+\b},{sin(\a+\b)});
 
 	% engulfing rectangle
-	\coordinate (E) at ({\S*cos(\a)},{\S*sin(\a+\b)});
-	\coordinate (F) at (0,{\S*sin(\a+\b)});
+	\coordinate (E) at ({cos(\b)*cos(\a)},{sin(\a+\b)});
+	\coordinate (F) at (0,{sin(\a+\b)});
 
 	% projections
-	%\coordinate (G) at ({\S*cos(\a)*cos(\b)},0);
+	%\coordinate (G) at ({cos(\a)*cos(\b)},0);
 
 	% triangle sides
 	\draw (A) -- (B) -- (C) -- cycle;
@@ -61,6 +60,10 @@
 	\pic[draw, ->, "$\beta$", angle eccentricity=1.3, angle radius=1.5cm]
 	{angle = B--A--D};
 
+	% angle alpha + beta
+	\pic[draw, ->, "$\alpha+\beta$", angle eccentricity=1.3, angle radius=2.5cm]
+	{angle = C--A--D};
+
 	% angle gamma
 	\pic[draw, ->, "$\gamma$", angle eccentricity=1.3, angle radius=1.1cm]
 	{angle = A--B--C};
@@ -68,14 +71,6 @@
 	% angle delta
 	\pic[draw, ->, "$\delta$", angle eccentricity=1.3, angle radius=1.1cm]
 	{angle = E--B--D};
-
-	% angle epsilon
-	\pic[draw, ->, "$\epsilon$", angle eccentricity=1.3, angle radius=1.1cm]
-	{angle = D--A--F};
-
-	% angle theta
-	\pic[draw, ->, "$\theta$", angle eccentricity=1.3, angle radius=1.1cm]
-	{angle = F--D--A};
 
 	% right angles
 	\tkzMarkRightAngle[size=0.05](D,B,A)

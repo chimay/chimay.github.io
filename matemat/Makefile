@@ -24,11 +24,19 @@ include ../Makefile.inc
 debug:
 	@echo $(SUBDIRS)
 
-#  org -> html {{{1
+# org -> html {{{1
 
 %.html: %.org $(INC_FILES) $(INC_LATEX_FILES)
 	$(EMACS) $(EMACS_PRE_FLAGS) $< $(EMACS_POST_FLAGS)
 	remove-max-width-from-org-html-export.zsh $(patsubst %.org,%.html,$<)
+	@$(ECHO)
+
+html: $(ORG_HTML_FILES)
+
+# html -> pdf {{{1
+
+%.pdf: %.html
+	pandoc $< -t latex -o $(patsubst %.html,%.pdf,$<)
 	@$(ECHO)
 
 html: $(ORG_HTML_FILES)

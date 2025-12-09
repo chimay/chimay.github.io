@@ -6,7 +6,7 @@
 <!-- 2025-12-09 mar 19:32 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Eclats de vers : Matemat : Moindres carrés</title>
+<title>Eclats de vers : Matemat : Polygones</title>
 <meta name="author" content="chimay" />
 <meta name="generator" content="Org Mode" />
 <style type="text/css">
@@ -228,7 +228,7 @@
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Eclats de vers : Matemat : Moindres carrés</h1>
+<h1 class="title">Eclats de vers : Matemat : Polygones</h1>
 <p>
 <a href="index.html">Index mathématique</a>
 </p>
@@ -241,9 +241,8 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org8811c20">1. Introduction</a></li>
-<li><a href="#org9ede590">2. Orthogonalité</a></li>
-<li><a href="#orgb1f7e9e">3. Approximation de fonctions</a></li>
+<li><a href="#orgae6cc35">1. Somme des angles d’un triangle</a></li>
+<li><a href="#org9bce2d2">2. Triangle rectangle</a></li>
 </ul>
 </div>
 </div>
@@ -413,155 +412,553 @@ MathJax = {
 {\end{array} \right]}
 \)
 </p>
-
-<p>
-\label{chap:optimisationlibre}
-</p>
-<div id="outline-container-org8811c20" class="outline-2">
-<h2 id="org8811c20"><span class="section-number-2">1.</span> Introduction</h2>
+<div id="outline-container-orgae6cc35" class="outline-2">
+<h2 id="orgae6cc35"><span class="section-number-2">1.</span> Somme des angles d’un triangle</h2>
 <div class="outline-text-2" id="text-1">
+
+<div id="org3425c27" class="figure">
+<p><img src="../include/tikz/somme-angles-triangle.svg" alt="somme-angles-triangle.svg" class="org-svg" width="500px" />
+</p>
+</div>
+
 <p>
-Soit la matrice \(A \in \matrice(\setR,m,n)\) et le vecteur colonne
-\(b \in \matrice(\setR,m,1)\). On aimerait trouver le \(\xi \in
-\matrice(\setR^n,n,1)\) qui minimise la norme de l'erreur \(e\) définie
-par :
+La figure ci-dessus, où la droite \(d\) est parallèle au côté \(b\),
+nous montre que la somme des angles d’un triangle vaut un angle plat,
+c’est-à-dire \(\pi\) :
 </p>
 
 <p>
-\[e(x) = A \cdot x - b\]
-</p>
-
-<p>
-pour tout \(x \in \matrice(\setR^n,n,1)\). Comme la fonction \(\norme{x}
-\mapsto \norme{x}^2\) est strictement croissante sur \(\norme{x} \in
-\setR^+\), cela revient à minimiser :
-</p>
-
-<p>
-\[\mathcal{E}(x) = \norme{x}^2 = e(x)^\dual \cdot e(x) = (A \cdot x - b)^\dual \cdot (A \cdot x - b)\]
-</p>
-
-<p>
-En développant, on obtient :
-</p>
-
-<p>
-\[\mathcal{E}(x)
-= x^\dual \cdot A^\dual \cdot A \cdot x - x^\dual \cdot A^\dual \cdot b - b^\dual \cdot A \cdot x + b^\dual \cdot b\]
-</p>
-
-<p>
-Comme \((A^\dual \cdot A)^\dual = A^\dual \cdot A\) et \(x^\dual \cdot
-A^\dual \cdot b = b^\dual \cdot A^\dual \cdot x\), l'annulation de la
-dérivée nous donne :
-</p>
-
-<p>
-\[\partial \mathcal{E}(\xi) = 2 A^\dual \cdot A \cdot \xi - 2 A^\dual \cdot b = 0\]
-</p>
-
-<p>
-d'où l'on tire directement :
-</p>
-
-<p>
-\[A^\dual \cdot A \cdot \xi = A^\dual \cdot b\]
-</p>
-
-<p>
-Si \(A^\dual \cdot A\) est inversible, on en déduit que :
-</p>
-
-<p>
-\[\xi = \left(A^\dual \cdot A\right)^{-1} \cdot A^\dual \cdot b\]
+\[ \alpha + \beta + \gamma = \pi \]
 </p>
 </div>
 </div>
-<div id="outline-container-org9ede590" class="outline-2">
-<h2 id="org9ede590"><span class="section-number-2">2.</span> Orthogonalité</h2>
+<div id="outline-container-org9bce2d2" class="outline-2">
+<h2 id="org9bce2d2"><span class="section-number-2">2.</span> Triangle rectangle</h2>
 <div class="outline-text-2" id="text-2">
+<div id="text-table-of-contents-1" role="doc-toc">
+<ul>
+<li><a href="#org565b256">2.1. Glossaire</a></li>
+<li><a href="#orgc1af4f8">2.2. Somme des angles</a></li>
+<li><a href="#orgf078a40">2.3. Aire</a></li>
+<li><a href="#orgeb4057a">2.4. Théorème de Pythagore</a></li>
+<li><a href="#org207f362">2.5. Triangles de Pythagore</a></li>
+<li><a href="#orgeaa6baa">2.6. Propriétés des cathètes</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org565b256" class="outline-3">
+<h3 id="org565b256"><span class="section-number-3">2.1.</span> Glossaire</h3>
+<div class="outline-text-3" id="text-2-1">
 <p>
-Considérons la partition en colonne \(A = [c_1 \ ... \ c_n]\). On a alors :
+Dans un triangle rectangle :
 </p>
 
-<div class="org-center">
-<p>
-\(
-A^\dual =
-</p>
-\begin{Matrix}{c}
-c_1^\dual \\ \vdots \\ c_n^\dual
-\end{Matrix}
-<p>
-\)
+<ul class="org-ul">
+<li>le plus long côté est appelé hypothénuse</li>
+<li>les deux autres côtés, appelés cathètes, sont adjacents à l’angle droit</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc1af4f8" class="outline-3">
+<h3 id="orgc1af4f8"><span class="section-number-3">2.2.</span> Somme des angles</h3>
+<div class="outline-text-3" id="text-2-2">
+
+<div id="org12be03a" class="figure">
+<p><img src="../include/tikz/somme-angles-triangle-rectangle.svg" alt="somme-angles-triangle-rectangle.svg" class="org-svg" width="500px" />
 </p>
 </div>
 
 <p>
-La propriété :
+Dans le cas d’un triangle rectangle, un des angles vaut \(\pi/2\) et
+leur somme s’écrit :
 </p>
 
 <p>
-\[A^\dual \cdot (A \cdot \xi - b) = A^\dual \cdot A \cdot \xi - A^\dual \cdot b = 0\]
+\[ \alpha + \beta + \frac{\pi}{2} = \pi \]
 </p>
 
 <p>
-nous dit donc que les colonnes de \(A\) sont orthogonales au vecteur \(r = A \cdot \xi - b\) :
+ou encore :
 </p>
 
 <p>
-\[\scalaire{c_i}{r} = c_i^\dual \cdot r = \ligne_i [ A^\dual \cdot (A \cdot \xi - b) ] = 0\]
+\[ \alpha + \beta = \pi - \frac{\pi}{2} \]
+</p>
+
+<p>
+et finalement :
+</p>
+
+<p>
+\[ \alpha + \beta = \frac{\pi}{2} \]
 </p>
 </div>
 </div>
-<div id="outline-container-orgb1f7e9e" class="outline-2">
-<h2 id="orgb1f7e9e"><span class="section-number-2">3.</span> Approximation de fonctions</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-orgf078a40" class="outline-3">
+<h3 id="orgf078a40"><span class="section-number-3">2.3.</span> Aire</h3>
+<div class="outline-text-3" id="text-2-3">
+
+<div id="orge6c33e8" class="figure">
+<p><img src="../include/tikz/aire-triangle-rectangle.svg" alt="aire-triangle-rectangle.svg" class="org-svg" width="500px" />
+</p>
+</div>
+
 <p>
-On désire obtenir une approximation \(w\) d'une fonction \(u\) dont on connaît les valeurs aux points \(x_1,...,x_m\) en minimisant l'erreur :
+Que vaut l’aire \(A_T\) du triangle rectangle \(T\) de côtés \(a\), \(b\),
+\(c\) ?  On sait que l’aire \(A_R\) du rectangle \(R\) de côtés \(a\), \(b\),
+\(d\), \(e\) vaut :
 </p>
 
 <p>
-\[\sum_{i=1}^{m} ( u(x_i) - w(x_i) )^2\]
+\[ A_R = a \cdot b \]
 </p>
 
 <p>
-On choisit alors les fonctions \(\varphi_1(x),...,\varphi_n(x)\), où \(n \le m\) et on pose :
+Or, ce rectangle contient deux triangles identiques : \(T\) et le triangle
+rectangle de côtés \(d\), \(e\), \(c\). On a donc :
 </p>
 
 <p>
-\[w(x) = \sum_{i=1}^m a_i \cdot \varphi_i(x)\]
+\[ d = a \]
 </p>
 
 <p>
-En utilisant les matrices :
-</p>
-
-\begin{align}
-A &= [\varphi_j(x_i)]_{i,j} \)
-
-\(
-a &= [a_1 \ a_2 \ ... \ a_m]^T \)
-
-\(
-b &= [u(x_1) \ u(x_2) \ ... \ u(x_n)]^T
-\end{align}
-
-<p>
-on peut réécrire le problème de minimisation comme suit :
+\[ e = b \]
 </p>
 
 <p>
-\[a = \arg\min_z (A \cdot z - b)^\dual \cdot (A \cdot z - b)\]
+Ces deux triangles ayant la même aire, on a :
 </p>
 
 <p>
-La solution est donc :
+\[ A_R = 2 \cdot A_T \]
 </p>
 
 <p>
-\[a = (A^\dual \cdot A)^{-1} \cdot A^\dual \cdot b\]
+ou encore :
 </p>
+
+<p>
+\[ A_T = \frac{A_R}{2} \]
+</p>
+
+<p>
+et donc :
+</p>
+
+<p>
+\[ A_T = \frac{a \cdot b}{2} \]
+</p>
+</div>
+</div>
+<div id="outline-container-orgeb4057a" class="outline-3">
+<h3 id="orgeb4057a"><span class="section-number-3">2.4.</span> Théorème de Pythagore</h3>
+<div class="outline-text-3" id="text-2-4">
+
+<div id="orgac50011" class="figure">
+<p><img src="../include/tikz/pythagore.svg" alt="pythagore.svg" class="org-svg" width="500px" />
+</p>
+</div>
+
+<p>
+Aire de chaque triangle rectangle :
+</p>
+
+<p>
+\[ A_T = \frac{a b}{2} \]
+</p>
+
+<p>
+Aire du grand carré d’après son côté \(a+b\) :
+</p>
+
+<p>
+\[ A = (a+b)^2 = a^2 + 2 \ a \ b + b^2 \]
+</p>
+
+<p>
+Aire du grand carré exprimé comme la somme des aires du carré et
+des triangles qu’il contient :
+</p>
+
+<p>
+\[ A = c^2 + 4 \cdot A_T = c^2 + 4 \cdot \frac{a \ b}{2} = c^2 + 2 \ a \ b \]
+</p>
+
+<p>
+Comme les deux expressions de \(A\) sont égales, on a :
+</p>
+
+<p>
+\[ a^2 + 2 \ a \ b + b^2 = c^2 + 2 \ a \ b \]
+</p>
+
+<p>
+ce qui donne en simplifiant :
+</p>
+
+<p>
+\[ a^2 + b^2 = c^2 \]
+</p>
+
+<p>
+Le carré de l’hypothénuse d’un triangle rectangle est égal à la
+somme des carrés des deux autres côtés.
+</p>
+</div>
+</div>
+<div id="outline-container-org207f362" class="outline-3">
+<h3 id="org207f362"><span class="section-number-3">2.5.</span> Triangles de Pythagore</h3>
+<div class="outline-text-3" id="text-2-5">
+<p>
+Un triangle de Pythagore est un triangle rectangle où les longueurs
+des trois côtés sont des nombres entiers.
+</p>
+
+
+<div id="orga0f17a2" class="figure">
+<p><img src="../include/tikz/triangle-pythagore.svg" alt="triangle-pythagore.svg" class="org-svg" width="500px" />
+</p>
+</div>
+
+<p>
+La figure ci-dessus utilise une astuce algébrique pour obtenir certains
+triangles de Pythagore. En effet :
+</p>
+
+\begin{align*}
+A^2 + B^2
+&= \left(a^2 - b^2\right)^2 + \left(2 \ a \ b\right)^2 \\
+&= a^4 - 2 \ a^2 \ b^2 + b^4 + 4 \ a^2 \ b^2 \\
+&= a^4 + 2 \ a^2 \ b^2 + b^4 \\
+&= \left(a^2 + b^2\right)^2
+\end{align*}
+
+<p>
+et finalement :
+</p>
+
+<p>
+\[ A^2 + B^2 = C^2 \]
+</p>
+
+<p>
+Choisir de telles expressions pour \(A\), \(B\), \(C\) nous assure d’avoir
+des longueurs qui respectent le théorème de Pythagore. De plus, si
+les longueurs \(a\), \(b\), \(c\) sont entières, les longueurs \(A\), \(B\),
+\(C\) le seront également. Le tableau suivant nous donne les premiers
+triangles de Pythagore obtenus avec cette méthode.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">\(a\)</th>
+<th scope="col" class="org-right">\(b\)</th>
+<th scope="col" class="org-right">\(A\)</th>
+<th scope="col" class="org-right">\(B\)</th>
+<th scope="col" class="org-right">\(C\)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">2</td>
+<td class="org-right">1</td>
+<td class="org-right">3</td>
+<td class="org-right">4</td>
+<td class="org-right">5</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-right">2</td>
+<td class="org-right">5</td>
+<td class="org-right">12</td>
+<td class="org-right">13</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-right">1</td>
+<td class="org-right">8</td>
+<td class="org-right">15</td>
+<td class="org-right">17</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-right">3</td>
+<td class="org-right">7</td>
+<td class="org-right">24</td>
+<td class="org-right">25</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-right">2</td>
+<td class="org-right">20</td>
+<td class="org-right">21</td>
+<td class="org-right">29</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-right">4</td>
+<td class="org-right">9</td>
+<td class="org-right">40</td>
+<td class="org-right">41</td>
+</tr>
+
+<tr>
+<td class="org-right">6</td>
+<td class="org-right">1</td>
+<td class="org-right">12</td>
+<td class="org-right">35</td>
+<td class="org-right">37</td>
+</tr>
+
+<tr>
+<td class="org-right">6</td>
+<td class="org-right">5</td>
+<td class="org-right">11</td>
+<td class="org-right">60</td>
+<td class="org-right">61</td>
+</tr>
+
+<tr>
+<td class="org-right">7</td>
+<td class="org-right">2</td>
+<td class="org-right">28</td>
+<td class="org-right">45</td>
+<td class="org-right">53</td>
+</tr>
+
+<tr>
+<td class="org-right">7</td>
+<td class="org-right">4</td>
+<td class="org-right">33</td>
+<td class="org-right">56</td>
+<td class="org-right">65</td>
+</tr>
+
+<tr>
+<td class="org-right">7</td>
+<td class="org-right">6</td>
+<td class="org-right">13</td>
+<td class="org-right">84</td>
+<td class="org-right">85</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orgeaa6baa" class="outline-3">
+<h3 id="orgeaa6baa"><span class="section-number-3">2.6.</span> Propriétés des cathètes</h3>
+<div class="outline-text-3" id="text-2-6">
+<p>
+Examinons le triangle rectangle ci-dessous :
+</p>
+
+
+<div id="orga9b8301" class="figure">
+<p><img src="../include/tikz/cathetes.svg" alt="cathetes.svg" class="org-svg" width="500px" />
+</p>
+</div>
+
+<p>
+L’hypothénuse \(c\) y est scindée en deux parties \(u\) et \(v\) par la
+hauteur \(h\) qui lui est perpendiculaire. On a donc :
+</p>
+
+<p>
+\[ c = u + v \]
+</p>
+
+<p>
+De plus, la hauteur \(h\) divise le triangle rectangle principal en deux
+triangles rectangles : \(a,h,u\) et \(b,h,c\).
+</p>
+</div>
+<div id="outline-container-org4c1ac0b" class="outline-4">
+<h4 id="org4c1ac0b"><span class="section-number-4">2.6.1.</span> Carré de la hauteur</h4>
+<div class="outline-text-4" id="text-2-6-1">
+<p>
+Le théorème de Pythagore appliqué au triangle rectangle principal nous
+donne :
+</p>
+
+<p>
+\[ a^2 + b^2 = c^2 \]
+</p>
+
+<p>
+On sait déjà que \(c = u + v\). Par ailleurs, le théorème de Pythagore
+appliqué au triangle rectangle de gauche nous donne :
+</p>
+
+<p>
+\[ h^2 + u^2 = a^2 \]
+</p>
+
+<p>
+Le théorème de Pythagore appliqué au triangle rectangle de droite nous
+donne :
+</p>
+
+<p>
+\[ h^2 + v^2 = b^2 \]
+</p>
+
+<p>
+On peut se servir de ces expressions pour substituer les valeurs de \(a\)
+et \(b\) dans le triangle principal :
+</p>
+
+<p>
+\[ (h^2 + u^2) + (h^2 + v^2) = (u+v)^2 \]
+</p>
+
+<p>
+ou encore :
+</p>
+
+<p>
+\[ 2 \ h^2 + u^2 + v^2 = u^2 + 2 \ u \ v + v^2 \]
+</p>
+
+<p>
+En simplifiant, il vient :
+</p>
+
+<p>
+\[ 2 \ h^2 = 2 \ u \ v \]
+</p>
+
+<p>
+On obtient finalement :
+</p>
+
+<p>
+\[ h^2 = u \ v \]
+</p>
+</div>
+</div>
+<div id="outline-container-orgda4c33d" class="outline-4">
+<h4 id="orgda4c33d"><span class="section-number-4">2.6.2.</span> Carré des cathètes</h4>
+<div class="outline-text-4" id="text-2-6-2">
+<p>
+On reprend le théorème de Pythagore dans le triangle de gauche :
+</p>
+
+<p>
+\[ a^2 = u^2 + h^2 \]
+</p>
+
+<p>
+et on remplace le carré de la hauteur par le produit \(u\ v\) :
+</p>
+
+<p>
+\[ a^2 = u^2 + u \ v \]
+</p>
+
+<p>
+On met ensuite \(u\) en évidence :
+</p>
+
+<p>
+\[ a^2 = u \ (u + v) \]
+</p>
+
+<p>
+ce qui nous donne :
+</p>
+
+<p>
+\[ a^2 = u \ c \]
+</p>
+
+<p>
+On utilise le même procédé dans le triangle de droite :
+</p>
+
+\begin{align*}
+b^2
+&= v^2 + h^2 \\
+&= v^2 + u \ v \\
+&= v \ (u + v) \\
+\end{align*}
+
+<p>
+ce qui nous donne :
+</p>
+
+<p>
+\[ b^2 = v \ c \]
+</p>
+</div>
+</div>
+<div id="outline-container-orge6b667a" class="outline-4">
+<h4 id="orge6b667a"><span class="section-number-4">2.6.3.</span> Produit des cathètes</h4>
+<div class="outline-text-4" id="text-2-6-3">
+<p>
+En multipliant les équations :
+</p>
+
+<p>
+\[ a^2 = u \ c \]
+</p>
+
+<p>
+\[ b^2 = v \ c \]
+</p>
+
+<p>
+ensemble, on obtient :
+</p>
+
+<p>
+\[ a^2 \ b^2 = u \ c \ v \ c \]
+</p>
+
+<p>
+ou encore :
+</p>
+
+<p>
+\[ a^2 \ b^2 = u \ v \ c^2 \]
+</p>
+
+<p>
+Le produit \(u \ v\) étant identique à la hauteur, on a :
+</p>
+
+<p>
+\[ a^2 \ b^2 = h^2 \ c^2 \]
+</p>
+
+<p>
+et finalement :
+</p>
+
+<p>
+\[ a \ b = h \ c \]
+</p>
+</div>
+</div>
 </div>
 </div>
 </div>

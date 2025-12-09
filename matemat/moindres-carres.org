@@ -1,0 +1,113 @@
+
+#+STARTUP: showall
+
+#+TITLE: Eclats de vers : Matemat : Optimisation libre
+#+AUTHOR: chimay
+#+EMAIL: or du val chez gé courriel commercial
+#+LANGUAGE: fr
+#+LINK_HOME: file:../index.html
+#+LINK_UP: file:index.html
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+
+#+OPTIONS: H:6
+#+OPTIONS: toc:nil
+
+#+TAGS: noexport(n)
+
+[[file:index.org][Index mathématique]]
+
+#+INCLUDE: "../include/navigan-1.org"
+
+#+TOC: headlines 1
+
+#+INCLUDE: "../include/latex/latex.org"
+
+\label{chap:optimisationlibre}
+
+* Introduction
+
+Soit la matrice $A \in \matrice(\setR,m,n)$ et le vecteur colonne
+$b \in \matrice(\setR,m,1)$. On aimerait trouver le $\xi \in
+\matrice(\setR^n,n,1)$ qui minimise la norme de l'erreur $e$ définie
+par :
+
+$$e(x) = A \cdot x - b$$
+
+pour tout $x \in \matrice(\setR^n,n,1)$. Comme la fonction $\norme{x}
+\mapsto \norme{x}^2$ est strictement croissante sur $\norme{x} \in
+\setR^+$, cela revient à minimiser :
+
+$$\mathcal{E}(x) = \norme{x}^2 = e(x)^\dual \cdot e(x) = (A \cdot x - b)^\dual \cdot (A \cdot x - b)$$
+
+En développant, on obtient :
+
+$$\mathcal{E}(x)
+= x^\dual \cdot A^\dual \cdot A \cdot x - x^\dual \cdot A^\dual \cdot b - b^\dual \cdot A \cdot x + b^\dual \cdot b$$
+
+Comme $(A^\dual \cdot A)^\dual = A^\dual \cdot A$ et $x^\dual \cdot
+A^\dual \cdot b = b^\dual \cdot A^\dual \cdot x$, l'annulation de la
+dérivée nous donne :
+
+$$\partial \mathcal{E}(\xi) = 2 A^\dual \cdot A \cdot \xi - 2 A^\dual \cdot b = 0$$
+
+d'où l'on tire directement :
+
+$$A^\dual \cdot A \cdot \xi = A^\dual \cdot b$$
+
+Si $A^\dual \cdot A$ est inversible, on en déduit que :
+
+$$\xi = \left(A^\dual \cdot A\right)^{-1} \cdot A^\dual \cdot b$$
+
+* Orthogonalité
+
+Considérons la partition en colonne $A = [c_1 \ ... \ c_n]$. On a alors :
+
+#+BEGIN_CENTER
+\(
+A^\dual =
+\begin{Matrix}{c}
+c_1^\dual \\ \vdots \\ c_n^\dual
+\end{Matrix}
+\)
+#+END_CENTER
+
+La propriété :
+
+$$A^\dual \cdot (A \cdot \xi - b) = A^\dual \cdot A \cdot \xi - A^\dual \cdot b = 0$$
+
+nous dit donc que les colonnes de $A$ sont orthogonales au vecteur $r = A \cdot \xi - b$ :
+
+$$\scalaire{c_i}{r} = c_i^\dual \cdot r = \ligne_i [ A^\dual \cdot (A \cdot \xi - b) ] = 0$$
+
+
+* Approximation de fonctions
+
+On désire obtenir une approximation $w$ d'une fonction $u$ dont on connaît les valeurs aux points $x_1,...,x_m$ en minimisant l'erreur :
+
+$$\sum_{i=1}^{m} ( u(x_i) - w(x_i) )^2$$
+
+On choisit alors les fonctions $\varphi_1(x),...,\varphi_n(x)$, où $n \le m$ et on pose :
+
+$$w(x) = \sum_{i=1}^m a_i \cdot \varphi_i(x)$$
+
+En utilisant les matrices :
+
+\begin{align}
+A &= [\varphi_j(x_i)]_{i,j} \)
+
+\(
+a &= [a_1 \ a_2 \ ... \ a_m]^T \)
+
+\(
+b &= [u(x_1) \ u(x_2) \ ... \ u(x_n)]^T
+\end{align}
+
+on peut réécrire le problème de minimisation comme suit :
+
+$$a = \arg\min_z (A \cdot z - b)^\dual \cdot (A \cdot z - b)$$
+
+La solution est donc :
+
+$$a = (A^\dual \cdot A)^{-1} \cdot A^\dual \cdot b$$
+
+

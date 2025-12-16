@@ -43,10 +43,10 @@ Par conséquent :
 
 $$\partial f(a) = 0$$
 
-
 * Identité
 
-Considérons le cas particulier où $m = n$ et où $f = \identite$. Lorsque $i = j$, nous avons :
+Considérons le cas particulier où $m = n$ et où $f =
+\identite$. Lorsque $i = j$, nous avons :
 
 $$\partial_i f_i(a) = \lim_{\lambda \to 0} \frac{x_i + \lambda - x_i}{\lambda} = \lim_{\lambda \to 0} \frac{\lambda}{\lambda} = 1$$
 
@@ -60,58 +60,46 @@ $$\partial f(a) = \partial \identite(a) = ( \indicatrice_{ij} )_{i,j} = I$$
 
 La Jacobienne de la fonction identité est la matrice identité.
 
-
 * Composition de fonctions
 
-Nous allons nous intéresser à présent au moyen d'obtenir la dérivée d'une composée de fonctions $f : E \mapsto F$ et $g : F \mapsto G$. Supposons que $f$ soit différentiable en $a$ et que $g$ soit différentiable en $b = f(a)$. On a alors :
+Nous allons nous intéresser à présent au moyen d'obtenir la
+dérivée d'une composée de fonctions $f : E \mapsto F$ et $g : F
+\mapsto G$. Supposons que $f$ soit différentiable en $a$ et que $g$
+soit différentiable en $b = f(a)$. On a alors :
 
-#+BEGIN_CENTER
-\(
-df(a) = f(a + da) - f(a) = \partial f(a) \cdot da + E_f(da) \)
+$$ df(a) = f(a + da) - f(a) = \partial f(a) \cdot da + E_f(da) $$
 
-\(
-dg(b) = g(b + db) - g(b) = \partial g(b) \cdot db + E_g(db)
-\)
-#+END_CENTER
+$$ dg(b) = g(b + db) - g(b) = \partial g(b) \cdot db + E_g(db) $$
 
 Choisissons en particulier $db = f(a + da) - f(a)$. On a alors :
 
-\begin{align}
-dg(b) &= g(f(a + da)) - g(f(a)) \)
-
-\(
-&= (g \circ f)(a + da) - (g \circ f)(a) \)
-
-\(
+\begin{align*}
+dg(b) &= g(f(a + da)) - g(f(a)) \\
+&= (g \circ f)(a + da) - (g \circ f)(a) \\
 &= d(g \circ f)(a)
-\end{align}
+\end{align*}
 
 Mais d'un autre coté :
 
-\begin{align}
-dg(b) &= \partial g(f(a)) \cdot df(a) + E_g(df(a)) \)
-
-\(
-&= \partial g(f(a)) \cdot \left( \partial f(a) \cdot da + E_f(da) \right) + E_g(df(a)) \)
-
-\(
-&= \partial g(f(a)) \cdot \partial f(a) \cdot da + E_f(da) \cdot da + E_g(df(a)) \)
-
-\(
-\end{align}
+\begin{align*}
+dg(b) &= \partial g(f(a)) \cdot df(a) + E_g(df(a)) \\
+&= \partial g(f(a)) \cdot \left( \partial f(a) \cdot da + E_f(da) \right) + E_g(df(a)) \\
+&= \partial g(f(a)) \cdot \partial f(a) \cdot da + E_f(da) \cdot da + E_g(df(a))
+\end{align*}
 
 Il est aisé de vérifier que :
 
 $$\lim_{h \to 0} \frac{\partial g(f(a)) \cdot E_f(da)  + E_g(df(a))}{\norme{h}} = 0$$
 
-puisque $\partial g(f(a))$ ne dépend pas de $da$. On a donc montré que $g \circ f$ est différentiable en $a$ et que :
+puisque $\partial g(f(a))$ ne dépend pas de $da$. On a donc montré
+que $g \circ f$ est différentiable en $a$ et que :
 
 $$\partial (g \circ f)(a) =  \partial g(f(a)) \cdot \partial f(a) = (\partial g \circ f)(a) \cdot \partial f(a)$$
 
-La dérivée d'une composée de fonctions est donc tout simplement le produit des Jacobiennes.
+La dérivée d'une composée de fonctions est donc tout simplement le
+produit des Jacobiennes.
 
-
-** Notation
+** Jacobiennes
 
 Soit le schéma fonctionnel :
 
@@ -119,70 +107,81 @@ $$(x_1,...,x_n) \mapsto (y_1,...,y_m) \mapsto (z_1,...,z_p)$$
 
 On note aussi :
 
-#+BEGIN_CENTER
-\(
-\deriveepartielle{z_i}{x_j} = \sum_k \deriveepartielle{z_i}{y_k} \cdot \deriveepartielle{y_k}{x_j} \\ \)
+$$ \deriveepartielle{z_i}{x_j} = \sum_k \deriveepartielle{z_i}{y_k} \cdot \deriveepartielle{y_k}{x_j} $$
 
-\(
-\deriveepartielle{z}{x^T} = \deriveepartielle{z}{y^T} \cdot \deriveepartielle{y}{x^T}
-\)
-#+END_CENTER
+ou, sous forme de produit matriciel :
 
-Pour $z : t \mapsto (x_1(t),x_2(t),...,x_n(t))$, on a également :
+$$ \deriveepartielle{z}{x^T} = \deriveepartielle{z}{y^T} \cdot \deriveepartielle{y}{x^T} $$
+
+** Paramètre
+
+Soit le schéma fonctionnel :
+
+$$ t \mapsto (x_1,...,x_n) \mapsto z $$
+
+où $t \in \corps$ est un paramètre. On note :
 
 $$\OD{z}{t} = \sum_k \deriveepartielle{z}{x_k} \cdot \OD{x_k}{t}$$
 
-Si $x,y,z \in \corps$, on a encore :
+** Dérivées ordinaires
+
+Soit le schéma fonctionnel :
+
+$$ x \mapsto y \mapsto z $$
+
+où $x,y,z \in \corps$. On note :
 
 $$\OD{z}{x} = \OD{z}{y} \cdot \OD{y}{x}$$
 
+* Fonction réciproque
 
-* Inverse fonctionnel
-
-En considérant le cas particulier $g = f^{-1}$, on a $g \circ f = \identite$. Choisissons un vecteur $a$ où $f$ est différentiable et posons $b = f(a)$. On a :
+En considérant le cas particulier $g = f^{-1}$, on a $g \circ f =
+\identite$. Choisissons un vecteur $a$ où $f$ est différentiable et
+posons $b = f(a)$. On a :
 
 $$\partial f^{-1}(b) \cdot \partial f(a) = \partial \identite(a) = I$$
 
-La jacobienne de l'inverse d'une fonction est donc l'inverse matriciel de sa jacobienne :
+La jacobienne de l'inverse d'une fonction est donc l'inverse matriciel
+de sa jacobienne :
 
 $$\partial f^{-1}(b) = \left[ \partial f(a) \right]^{-1}$$
 
+** Jacobienne
 
-** Notation
+Soit le schéma fonctionnel :
+
+$$(x_1,...,x_n) \mapsto (y_1,...,y_m) $$
 
 On note aussi :
 
 $$\deriveepartielle{y}{x}  = \left(\deriveepartielle{x}{y}\right)^{-1}$$
 
-ou, pour des fonctions $y : \corps \mapsto \corps$ :
+** Dérivées ordinaires
+
+Soit le schéma fonctionnel :
+
+$$ x \mapsto y $$
+
+où $x,y\in\corps$. On note :
 
 $$\OD{y}{x}  = \left(\OD{x}{y}\right)^{-1}$$
 
+* Linéarité
 
-* Addition
+#+TOC: headlines 1 local
+
+** Addition
 
 Si $f,g$ sont différentiables en $a$, on a :
 
-#+BEGIN_CENTER
-\(
-f(a + h) - f(a) = \partial f(a) \cdot h + E_f(h) \)
+$$ f(a + h) - f(a) = \partial f(a) \cdot h + E_f(h) $$
 
-\(
-g(a + h) - g(a) = \partial g(a) \cdot h + E_g(h)
-\)
-#+END_CENTER
+$$ g(a + h) - g(a) = \partial g(a) \cdot h + E_g(h) $$
 
 En additionnant les équations ci-dessus, on obtient :
 
-#+BEGIN_CENTER
-\(
-\left[ f(a + h) + g(a + h) \right] - \left[ f(a) + g(a) \right]
-= [ \partial f(a) + \partial g(a) ] \cdot h \)
-
-\(
-\qquad \qquad + E_f(h) + E_g(h)
-\)
-#+END_CENTER
+$$ \left[ f(a + h) + g(a + h) \right] - \left[ f(a) + g(a) \right]
+= [ \partial f(a) + \partial g(a) ] \cdot h + E_f(h) + E_g(h)
 
 Il est clair que :
 
@@ -196,43 +195,51 @@ On peut montrer, cette fois en soustrayant les deux équations que :
 
 $$\partial (f - g)(a) = \partial f(a) - \partial g(a)$$
 
+** Multiplication par une constante
+
+Si $f$ est différentiables en $a$, on a :
+
+$$ f(a + h) - f(a) = \partial f(a) \cdot h + E_f(h) $$
+
+En multipliant cette relation par une constante $c \in F$, on obtient :
+
+$$ c \ f(a + h) - c \ f(a) = c \ \partial f(a) \cdot h + c \ E_f(h) $$
+
+Il est clair que :
+
+$$\lim_{h \to 0} \frac{c \ \norme{E_f(h)}}{\norme{h}} = 0$$
+
+La fonction $c \cdot f$ est donc différentiable en $a$ et :
+
+$$ \partial (c \cdot f)(a) = c \cdot \partial f(a) $$
+
+** Synthèse
+
+Soit $\alpha,\beta\in\corps$ et $f,g$ des fonctions différentiables en
+$a$. On déduit des résultats ci-dessus que :
+
+$$ \partial (\alpha \cdot f + \beta \cdot g)(a) = \alpha \cdot \partial f(a) + \beta \cdot \partial g(a) $$
+
+La différentiation est donc un opérateur linéaire par rapport aux
+fonctions que l’on différentie.
 
 * Produit scalaire
 
 Considérons deux fonctions $f,g$ différentiables en $a$ :
 
-#+BEGIN_CENTER
-\(
-f(a + h) = f(a) + \partial f(a) \cdot h + E_f(h) \)
+$$ f(a + h) = f(a) + \partial f(a) \cdot h + E_f(h) $$
 
-\(
-g(a + h) = g(a) + \partial g(a) \cdot h + E_g(h) \)
-
-\(
-\)
-#+END_CENTER
+$$ g(a + h) = g(a) + \partial g(a) \cdot h + E_g(h) $$
 
 Leur produit scalaire s'écrit :
 
-#+BEGIN_CENTER
-\(
-\scalaire{f(a + h)}{g(a + h)} = \scalaire{f(a)}{g(a)} + \scalaire{f(a)}{\partial g(a) \cdot h} + \scalaire{\partial f(a) \cdot h}{g(a)} \)
-
-\(
-\qquad \qquad \qquad + E_{f \cdot g}(h)
-\)
-#+END_CENTER
+$$ \scalaire{f(a + h)}{g(a + h)}
+= \scalaire{f(a)}{g(a)} + \scalaire{f(a)}{\partial g(a) \cdot h} + \scalaire{\partial f(a) \cdot h}{g(a)} + E_{f \cdot g}(h) $$
 
 où :
 
-#+BEGIN_CENTER
-\(
-E_{f \cdot g}(h) = \scalaire{E_f(h)}{E_g(h)} + \scalaire{E_f(h)}{g(a)} + \scalaire{E_f(h)}{\partial g(a)} + \)
-
-\(
-\qquad \qquad \scalaire{f(a)}{E_g(h)} + \scalaire{\partial f(a)}{E_g(h)}
-\)
-#+END_CENTER
+$$ E_{f \cdot g}(h)
+= \scalaire{E_f(h)}{E_g(h)} + \scalaire{E_f(h)}{g(a)} + \scalaire{E_f(h)}{\partial g(a)} + \scalaire{f(a)}{E_g(h)} + \scalaire{\partial f(a)}{E_g(h)} $$
 
 On a donc :
 
@@ -250,13 +257,11 @@ La représentation matricielle s'écrit donc :
 
 $$\partial \scalaire{f}{g}(a) = \left[ \partial g(a) \right]^T \cdot f(a) + \left[ \partial f(a) \right]^T \cdot g(a)$$
 
-
 ** Dérivée ordinaire
 
 Dans le cas où $m = n = 1$, cette expression se simplifie en :
 
 $$\OD{}{x}(f \cdot g)(a) = f(a) \cdot \OD{g}{x}(a) +  \OD{f}{x}(a) \cdot g(a)$$
-
 
 ** Constante
 
@@ -267,7 +272,6 @@ $$\partial g(x) = 0$$
 et :
 
 $$\OD{}{x}(f \cdot c)(a) = f(a) \cdot 0 +  \OD{f}{x}(a) \cdot c = c \cdot \OD{f}{x}(a)$$
-
 
 ** Notation
 
@@ -318,14 +322,10 @@ $$\lim_{n \to \infty} f_n(x) = f(x)$$
 
 Si la fonction $f$ est différentiable en $a \in \setR$, on a :
 
-\begin{align}
-\partial f(a) &= \lim_{h \to 0} \unsur{h} \big[f(a + h) - f(a)\big] \)
-
-\(
-&= \lim_{h \to 0} \unsur{h} \crochets{\lim_{n \to \infty} f_n(a + h) - \lim_{n \to \infty} f_n(a)} \)
-
-\(
+\begin{align*}
+\partial f(a) &= \lim_{h \to 0} \unsur{h} \big[f(a + h) - f(a)\big] \\
+&= \lim_{h \to 0} \unsur{h} \crochets{\lim_{n \to \infty} f_n(a + h) - \lim_{n \to \infty} f_n(a)} \\
 &= \lim_{h \to 0} \lim_{n \to \infty} \frac{f_n(a + h) - f_n(a)}{h}
-\end{align}
+\end{align*}
 
 

@@ -1,0 +1,63 @@
+
+\documentclass[tikz, border=1mm]{standalone}
+
+\usepackage{amsmath}
+
+\usetikzlibrary{calc,angles,quotes}
+
+\begin{document}
+\begin{tikzpicture}[scale=4]
+
+	% axes
+	\draw[->] (-0.1,0) -- (1.2,0) node[right] {$x$};
+	\draw[->] (0,-0.1) -- (0,1.2) node[above] {$y$};
+
+	% unit circle
+	%\draw (0,0) circle (1);
+
+	% angle
+	\def\ang{40}
+
+	% points
+	\coordinate (O) at (0,0);
+	\coordinate (A) at (1,0);
+	\coordinate (B) at ({cos(\ang)},{sin(\ang)});
+	\coordinate (C) at ({cos(\ang)},0);
+	\coordinate (T) at (1,{tan(\ang)});
+
+	% radius
+	\draw (O) -- (B);
+
+	% vertical from B
+	\draw (B) -- (C);
+
+	% tangent line
+	\draw (A) -- (T);
+
+	% tangent segment
+	\draw[dashed] (B) -- (T);
+
+	% arc
+	\draw[thick] (1,0) arc (0:\ang:1)
+	node[pos=0.75, right] {$x$};
+
+	% right angle marker
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = B--C--A};
+
+	% labels
+	\node[below left] at (O) {$O$};
+	\node[below] at (A) {$A$};
+	\node[above] at (B) {$B$};
+	\node[below] at (C) {$C$};
+	\node[above] at (T) {$T$};
+	\node[above] at ($(O)!0.5!(B)$) {$1$};
+	\node[left] at ($(C)!0.5!(B)$) {$\sin \alpha$};
+	\node[right] at ($(A)!0.5!(T)$) {$\tan \alpha$};
+
+	% Angle x
+	\pic[draw, ->, "$\alpha$", angle eccentricity=1.3, angle radius=0.7cm]
+	{angle = C--O--B};
+
+\end{tikzpicture}
+\end{document}

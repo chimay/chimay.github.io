@@ -24,14 +24,13 @@
 
 \label{chap:diffpoly}
 
-* Dépendances
+* Limites en zéro
 
-  - Chapitre \ref{chap:differ} : Les différentielles
+#+TOC: headlines 1 local
 
+** Fonction sinc
 
-* Limite de la fonction sinc en zéro
-
-La fonctions $\mathrm{sinc} : \setR \mapsto \setR$ est définie par :
+La fonction $\mathrm{sinc} : \setR \mapsto \setR$ est définie par :
 
 $$ \mathrm{sinc}(x) = \frac{\sin x}{x} $$
 
@@ -102,9 +101,109 @@ existe également en zéro et que :
 
 $$ \lim_{x \to 0} \mathrm{sinc}(x) = \lim_{x \to 0} \frac{\sin x}{x} = 1 $$
 
+** Cosinus $x$ moins un sur $x$
+
+Examinons la limite :
+
+$$ \lim_{x \to 0} \frac{\cos x - 1}{x} $$
+
+La formule du cosinus de l’angle double :
+
+$$ \cos(2 \ \alpha) = 1 - 2 \ (\sin\alpha)^2 $$
+
+en $\alpha = x / 2$ nous donne :
+
+$$ \cos x = 1 - 2 \ \big(\sin(x/2)\big)^2 $$
+
+c’est-à-dire :
+
+$$ \cos x - 1 = 2 \ \big(\sin(x/2)\big)^2 $$
+
+La limite peut donc se réécrire :
+
+$$ \lim_{x \to 0} \frac{\cos x - 1}{x}
+= \lim_{x \to 0} \frac{2 \ \big(\sin(x/2)\big)^2}{x} $$
+
+ou, en faisant passer le facteur 2 au dénominateur :
+
+$$ \lim_{x \to 0} \frac{\cos x - 1}{x}
+= \lim_{x \to 0} \frac{\big(\sin(x/2)\big)^2}{x/2} $$
+
+En séparant les deux facteurs sinus du carré, on obtient :
+
+$$ \lim_{x \to 0} \frac{\cos x - 1}{x}
+= \left[\lim_{x \to 0} \sin(x/2)\right] \cdot \left[\lim_{x \to 0} \frac{\sin(x/2)}{x/2}\right] $$
+
+Il est équivalent de faire tendre $x$ vers zéro ou $\alpha = x/2$
+vers zéro :
+
+$$ \lim_{x \to 0} \frac{\cos x - 1}{x}
+= \left[\lim_{x \to 0} \sin(x/2)\right] \cdot \left[\lim_{\alpha \to 0} \frac{\sin\alpha}{\alpha}\right]
+= 0 \cdot 1 = 0 $$
+
+On a donc en définitive :
+
+$$ \lim_{x \to 0} \frac{\cos x - 1}{x} = 0 $$
+
 * Cosinus
 
+On a par définition :
+
+$$ \OD{\cos}{x}(x) = \lim_{h \to 0} \frac{\cos(x + h)- \cos x}{h} $$
+
+En utilisant la formule du cosinus d’une somme, le mebre de droite
+devient :
+
+$$ \OD{\cos}{x}(x)
+= \lim_{h \to 0} \frac{\cos x \ \cos h - \sin x \ \sin h - \cos x}{h} $$
+
+Regroupons les cosinus ensemble :
+
+$$ \OD{\cos}{x}(x)
+= \lim_{h \to 0} \frac{\cos x \ \cos h - \cos x}{h} - \lim_{h \to 0} \frac{\sin x \ \sin h}{h} $$
+
+et mettons $\cos x$ en évidence, afin de le sortir de la limite :
+
+$$ \OD{\cos}{x}(x)
+= \cos x \ \lim_{h \to 0} \frac{(\cos h - 1)}{h} - \sin x \ \lim_{h \to 0} \frac{\sin h}{h} $$
+
+Les résultats du début de ce chapitre nous montrent que :
+
+$$ \OD{\cos}{x}(x) = \cos x \cdot 0 - \sin x \cdot 1 $$
+
+c’est-à-dire :
+
+$$ \OD{\cos}{x}(x) = - \sin x $$
+
 * Sinus
+
+On a par définition :
+
+$$ \OD{\sin}{x}(x) = \lim_{h \to 0} \frac{\sin(x + h)- \sin x}{h} $$
+
+En utilisant la formule du sinus d’une somme, le membre de droite
+devient :
+
+$$ \OD{\sin}{x}(x)
+= \lim_{h \to 0} \frac{\sin x \ \cos h + \sin h \ \cos x - \sin x}{h} $$
+
+Regroupons les $\sin x$ ensemble :
+
+$$ \OD{\sin}{x}(x)
+= \lim_{h \to 0} \frac{\sin x \ \cos h - \sin x}{h} + \lim_{h \to 0} \frac{\sin h \ \cos x}{h} $$
+
+et mettons $\sin x$ en évidence, afin de le sortir de la limite :
+
+$$ \OD{\sin}{x}(x)
+= \sin x \ \lim_{h \to 0} \frac{(\cos h - 1)}{h} + \cos x \ \lim_{h \to 0} \frac{\sin h}{h} $$
+
+Les résultats du début de ce chapitre nous montrent que :
+
+$$ \OD{\sin}{x}(x) = \sin x \cdot 0 + \cos x \cdot 1 $$
+
+c’est-à-dire :
+
+$$ \OD{\sin}{x}(x) = \cos x $$
 
 * Tangente
 

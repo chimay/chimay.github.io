@@ -34,40 +34,231 @@ $$ \lim_{b \to a} = \lim_{ \substack{ b \to a \\ b \ne a } } $$
 
 tout au long de ce chapitre.
 
-$$ f'(x) f''(x) f^\prime(x) f\dprime(x) f\trprime(x) $$
+* Introduction
 
-* Définition
+#+TOC: headlines 1 local
 
-Soit une fonction $f : \corps \mapsto \corps$. La dérivée ordinaire
-est alors simplement :
+** Définition
 
-$$\partial f(a) = \lim_{h \to 0} \frac{f(a + h) - f(a)}{h}$$
+Soit un ensemble $A \subseteq \setR$. L'idée à la base de la notion
+de dérivée est de linéariser localement une fonction $f : A \mapsto
+\setR$ autour d'un point $a \in A$. Pour tout $h \in \setR$ suffisamment
+proche de zéro, on veut donc avoir :
 
-** Notation
+$$ f(a + h) - f(a) \approx D f(a) \cdot h $$
 
-On note aussi :
+où $D f(a) \in \setR$. On demande que l'erreur donnée par :
 
-$$\OD{f}{x}(a) = \lim_{h \to 0} \frac{f(a + h) - f(a)}{h}$$
+$$ E(h) = f(a + h) - f(a) - D f(a) \cdot h $$
 
-On a alors :
+devienne négligeable par rapport à :
 
-$$f(a + h) = f(a) + \OD{f}{x}(a) \cdot h + E(h)$$
+$$ D f(a) \cdot h $$
 
-et :
+lorsque $h$ tend vers $0$. Comme $D f(a)$ ne dépend pas de $h$, il nous
+suffit d'imposer que :
 
-$$\lim_{h \to 0} \frac{E(h)}{h} = \lim_{h \to 0} \left[ \frac{f(a + h) - f(a)}{h} - \OD{f}{x}(a) \right] = 0$$
+$$\lim_{h \to 0} \frac{E(h)}{h} = 0$$
 
-** Définition équivalente
+Si ces conditions sont vérifiées, on dit que $f$ est dérivable en $a$
+et que $D f(a)$ est la dérivée de $f$ en $a$. On a alors :
+
+$$ f(a + h) - f(a) = D f(a) \cdot h + E(h) $$
+
+ou encore :
+
+$$ f(a + h) = f(a) + D f(a) \cdot h + E(h) $$
+
+** Limite
+
+Si on divise par $h$ la relation :
+
+$$ f(a + h) - f(a) = D f(a) \cdot h + E(h) $$
+
+on obtient :
+
+$$ \frac{f(a + h) - f(a)}{h} = D f(a) + \frac{E(h)}{h} $$
+
+ou encore :
+
+$$ D f(a) = \frac{f(a + h) - f(a)}{h} - \frac{E(h)}{h} $$
+
+En prenant la limite pour $h \to 0$, cette relation devient :
+
+$$ \lim_{h \to 0} D f(a) = \lim_{h \to 0} \frac{f(a + h) - f(a)}{h} - \lim_{h \to 0} \frac{E(h)}{h} $$
+
+La dernière limite du membre de droite est nulle par définition de la
+dérivée. On a donc :
+
+$$ \lim_{h \to 0} D f(a) = \lim_{h \to 0} \frac{f(a + h) - f(a)}{h} $$
+
+Comme le membre de gauche ne dépend pas de $h$, on a simplement :
+
+$$ D f(a) = \lim_{h \to 0} \frac{f(a + h) - f(a)}{h} $$
+
+*** Définition équivalente
 
 Si on pose $b = a + h$, on voit que $h = b - a$ et que la
 convergence $h \to 0$ est équivalente à $b \to a$. On a donc :
 
-$$\OD{f}{x}(a) = \lim_{b \to a} \frac{f(b) - f(a)}{b - a}$$
+$$ D f(a) = \lim_{b \to a} \frac{f(b) - f(a)}{b - a} $$
 
-* Dérivée seconde ordinaire
+** Fonction dérivée
 
-Dans le cas $\Omega$ est de dimension 1, on peut l'assimiler à $\corps$,
-on a alors une fonction $f : \corps \mapsto \corps$ possédant une seule
-dérivée seconde, que l'on note :
+Si la fonction $f$ est dérivable partout sur l’ensemble $A$, le réel
+$D f(a)$ existe pour tout $a \in A$. On peut donc définir la fonction
+$D f$ par :
 
-$$\OOD{f}{t}(a) = \partial^2 f(a)$$
+$$ D f : a \mapsto D f(a) $$
+
+Cette fonction $D f$ est appelée dérivée de $f$.
+
+** Opérateur de dérivation
+
+L’opérateur de dérivation $D$ construit une dérivée $D f$ à
+partir de n’importe quelle fonction dérivable $f$. Il est formellement
+défini par :
+
+$$ D : f \mapsto D f $$
+
+pour toute fonction $f$ dérivable sur $\domaine f$.
+
+** Notations
+
+#+TOC: headlines 1 local
+
+*** Notation d’Euler
+
+La notation que nous avons utilisée jusqu’ici, qui écrit la dérivée
+d’une fonction $f$ en la précédant d’un $D$ :
+
+$$ D f $$
+
+est la notation d’Euler.
+
+*** Notation de Lagrange
+
+La notation de Lagrange écrit la dérivée d’une fonction $f$ avec un
+prime juste à droite du nom de la fonction :
+
+$$ f' = D f $$
+
+*** Notation de Newton
+
+La notation de Newton écrit la dérivée d’une fonction $f$ en la
+surmontant d’un point :
+
+$$ \dot{f} = D f $$
+
+*** Notation de Leibniz
+
+Reprenons l’expression de la dérivée en $a$ sous forme de limite :
+
+$$ D f(a) = \lim_{h \to 0} \frac{f(a + h) - f(a)}{h} $$
+
+Si on définit :
+
+$$ \difference f = f(a + h) - f(a) $$
+
+$$ \difference x = (a + h) - (a) = h $$
+
+on a schématiquement :
+
+$$ D f(a) = \lim_{\difference x \to 0} \frac{\difference f}{\difference x} $$
+
+La dérivée est donc la limite d’une fraction de différences. En
+utilisant un delta minuscule pour désigner le fait que ces variations
+tendent vers zéro, on peut noter la dérivée en $a$ par :
+
+$$ \frac{\delta f}{\delta x}(a) = \lim_{\difference x \to 0} \frac{\difference f}{\difference x} $$
+
+La notation de Leibniz utilise des $d$ minuscules au lieu des deltas :
+
+$$\OD{f}{x}(a) = \lim_{h \to 0} \frac{f(a + h) - f(a)}{h}$$
+
+ce qui nous donne une autre façon de noter la fonction dérivée :
+
+$$\OD{f}{x} = D f $$
+
+* Dérivée seconde
+
+Soit une fonction $f : A \mapsto \setR$ dérivable sur $A$. Si la dérivée $D
+f$ est elle-même dérivable, on peut évaluer la dérivée de cette dérivée :
+
+$$ D^2 f = D D f = D (D f) $$
+
+La fonction $D^2 f$ est appelée dérivée seconde de $f$.
+
+** Notations
+
+*** Notation de Lagrange
+
+La notation de Lagrange écrit la dérivée seconde d’une fonction $f$
+avec un double prime juste à droite du nom de la fonction :
+
+$$ f'' = D^2 f $$
+
+*** Notation de Newton
+
+La notation de Newton écrit la dérivée d’une fonction $f$ en la
+surmontant d’un double point :
+
+$$ \ddot{f} = D f $$
+
+*** Notation de Leibniz
+
+La notation de Leibniz pour la dérivée seconde identifie les
+opérateurs :
+
+$$ \left(\OD{}{x}\right)^2 = D^2 $$
+
+et :
+
+$$ \OOD{}{x} = \left(\OD{}{x}\right)^2 $$
+
+On a donc la notation :
+
+$$ \OOD{f}{x} = D^2 f $$
+
+ou, en $a \in \domaine f$ :
+
+$$ \OOD{f}{x}(a) = D^2 f(a) $$
+
+* Dérivée d’ordre $n$
+
+Soit $n \in \setN$. Si la fonction $f : A \mapsto \setR$ est $n$ fois dérivable sur $A$,
+on appelle :
+
+$$ D^n f $$
+
+la dérivée d’ordre $n$ de $f$.
+
+** Notations
+
+*** Notation de Lagrange
+
+La notation de Lagrange écrit la dérivée d’ordre $n$ d’une fonction
+$f$ en plaçant un $(n)$ en indice supérieur :
+
+$$ f^{(n)} = D^n f $$
+
+Attention, le $(n)$ n’est pas une puissance.
+
+*** Notation de Leibniz
+
+La notation de Leibniz pour la dérivée d’ordre $n$ identifie les
+opérateurs :
+
+$$ \left(\OD{}{x}\right)^n = D^n $$
+
+et :
+
+$$ \NOD{}{x}{n} = \left(\OD{}{x}\right)^n $$
+
+On a donc la notation :
+
+$$ \NOD{f}{x}{n} = D^n f $$
+
+ou, en $a \in \domaine f$ :
+
+$$ \NOD{f}{x}{n}(a) = D^n f(a) $$

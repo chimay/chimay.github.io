@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-12-17 mer 16:23 -->
+<!-- 2025-12-18 jeu 11:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Dérivées ordinaires</title>
@@ -241,9 +241,10 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org1d9633d">1. Notation</a></li>
-<li><a href="#orgbb5093d">2. Définition</a></li>
-<li><a href="#org91871e9">3. Dérivée seconde ordinaire</a></li>
+<li><a href="#org31f8008">1. Notation</a></li>
+<li><a href="#org9f045d8">2. Introduction</a></li>
+<li><a href="#org5dba1d9">3. Dérivée seconde</a></li>
+<li><a href="#orgbc8b48c">4. Dérivée d’ordre \(n\)</a></li>
 </ul>
 </div>
 </div>
@@ -417,8 +418,8 @@ MathJax = {
 <p>
 \label{chap:differentielles}
 </p>
-<div id="outline-container-org1d9633d" class="outline-2">
-<h2 id="org1d9633d"><span class="section-number-2">1.</span> Notation</h2>
+<div id="outline-container-org31f8008" class="outline-2">
+<h2 id="org31f8008"><span class="section-number-2">1.</span> Notation</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Afin d’alléger les notations, nous notons :
@@ -435,29 +436,278 @@ Afin d’alléger les notations, nous notons :
 <p>
 tout au long de ce chapitre.
 </p>
-
-<p>
-\[ f'(x) f''(x) f^\prime(x) f\dprime(x) f\trprime(x) \]
-</p>
 </div>
 </div>
-<div id="outline-container-orgbb5093d" class="outline-2">
-<h2 id="orgbb5093d"><span class="section-number-2">2.</span> Définition</h2>
+<div id="outline-container-org9f045d8" class="outline-2">
+<h2 id="org9f045d8"><span class="section-number-2">2.</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
-<p>
-Soit une fonction \(f : \corps \mapsto \corps\). La dérivée ordinaire
-est alors simplement :
-</p>
-
-<p>
-\[\partial f(a) = \lim_{h \to 0} \frac{f(a + h) - f(a)}{h}\]
-</p>
+<div id="text-table-of-contents-1" role="doc-toc">
+<ul>
+<li><a href="#org4b0bdf0">2.1. Définition</a></li>
+<li><a href="#org413e1cc">2.2. Limite</a></li>
+<li><a href="#org7549689">2.3. Fonction dérivée</a></li>
+<li><a href="#org2f79621">2.4. Opérateur de dérivation</a></li>
+<li><a href="#org20435b2">2.5. Notations</a></li>
+</ul>
 </div>
-<div id="outline-container-org0d32b00" class="outline-3">
-<h3 id="org0d32b00"><span class="section-number-3">2.1.</span> Notation</h3>
+</div>
+<div id="outline-container-org4b0bdf0" class="outline-3">
+<h3 id="org4b0bdf0"><span class="section-number-3">2.1.</span> Définition</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
-On note aussi :
+Soit un ensemble \(A \subseteq \setR\). L'idée à la base de la notion
+de dérivée est de linéariser localement une fonction \(f : A \mapsto
+\setR\) autour d'un point \(a \in A\). Pour tout \(h \in \setR\) suffisamment
+proche de zéro, on veut donc avoir :
+</p>
+
+<p>
+\[ f(a + h) - f(a) \approx D f(a) \cdot h \]
+</p>
+
+<p>
+où \(D f(a) \in \setR\). On demande que l'erreur donnée par :
+</p>
+
+<p>
+\[ E(h) = f(a + h) - f(a) - D f(a) \cdot h \]
+</p>
+
+<p>
+devienne négligeable par rapport à :
+</p>
+
+<p>
+\[ D f(a) \cdot h \]
+</p>
+
+<p>
+lorsque \(h\) tend vers \(0\). Comme \(D f(a)\) ne dépend pas de \(h\), il nous
+suffit d'imposer que :
+</p>
+
+<p>
+\[\lim_{h \to 0} \frac{E(h)}{h} = 0\]
+</p>
+
+<p>
+Si ces conditions sont vérifiées, on dit que \(f\) est dérivable en \(a\)
+et que \(D f(a)\) est la dérivée de \(f\) en \(a\). On a alors :
+</p>
+
+<p>
+\[ f(a + h) - f(a) = D f(a) \cdot h + E(h) \]
+</p>
+
+<p>
+ou encore :
+</p>
+
+<p>
+\[ f(a + h) = f(a) + D f(a) \cdot h + E(h) \]
+</p>
+</div>
+</div>
+<div id="outline-container-org413e1cc" class="outline-3">
+<h3 id="org413e1cc"><span class="section-number-3">2.2.</span> Limite</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Si on divise par \(h\) la relation :
+</p>
+
+<p>
+\[ f(a + h) - f(a) = D f(a) \cdot h + E(h) \]
+</p>
+
+<p>
+on obtient :
+</p>
+
+<p>
+\[ \frac{f(a + h) - f(a)}{h} = D f(a) + \frac{E(h)}{h} \]
+</p>
+
+<p>
+ou encore :
+</p>
+
+<p>
+\[ D f(a) = \frac{f(a + h) - f(a)}{h} - \frac{E(h)}{h} \]
+</p>
+
+<p>
+En prenant la limite pour \(h \to 0\), cette relation devient :
+</p>
+
+<p>
+\[ \lim_{h \to 0} D f(a) = \lim_{h \to 0} \frac{f(a + h) - f(a)}{h} - \lim_{h \to 0} \frac{E(h)}{h} \]
+</p>
+
+<p>
+La dernière limite du membre de droite est nulle par définition de la
+dérivée. On a donc :
+</p>
+
+<p>
+\[ \lim_{h \to 0} D f(a) = \lim_{h \to 0} \frac{f(a + h) - f(a)}{h} \]
+</p>
+
+<p>
+Comme le membre de gauche ne dépend pas de \(h\), on a simplement :
+</p>
+
+<p>
+\[ D f(a) = \lim_{h \to 0} \frac{f(a + h) - f(a)}{h} \]
+</p>
+</div>
+<div id="outline-container-orgb5fc0e2" class="outline-4">
+<h4 id="orgb5fc0e2"><span class="section-number-4">2.2.1.</span> Définition équivalente</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<p>
+Si on pose \(b = a + h\), on voit que \(h = b - a\) et que la
+convergence \(h \to 0\) est équivalente à \(b \to a\). On a donc :
+</p>
+
+<p>
+\[ D f(a) = \lim_{b \to a} \frac{f(b) - f(a)}{b - a} \]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org7549689" class="outline-3">
+<h3 id="org7549689"><span class="section-number-3">2.3.</span> Fonction dérivée</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+Si la fonction \(f\) est dérivable partout sur l’ensemble \(A\), le réel
+\(D f(a)\) existe pour tout \(a \in A\). On peut donc définir la fonction
+\(D f\) par :
+</p>
+
+<p>
+\[ D f : a \mapsto D f(a) \]
+</p>
+
+<p>
+Cette fonction \(D f\) est appelée dérivée de \(f\).
+</p>
+</div>
+</div>
+<div id="outline-container-org2f79621" class="outline-3">
+<h3 id="org2f79621"><span class="section-number-3">2.4.</span> Opérateur de dérivation</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+L’opérateur de dérivation \(D\) construit une dérivée \(D f\) à
+partir de n’importe quelle fonction dérivable \(f\). Il est formellement
+défini par :
+</p>
+
+<p>
+\[ D : f \mapsto D f \]
+</p>
+
+<p>
+pour toute fonction \(f\) dérivable sur \(\domaine f\).
+</p>
+</div>
+</div>
+<div id="outline-container-org20435b2" class="outline-3">
+<h3 id="org20435b2"><span class="section-number-3">2.5.</span> Notations</h3>
+<div class="outline-text-3" id="text-2-5">
+<div id="text-table-of-contents-2" role="doc-toc">
+<ul>
+<li><a href="#orgf728e73">2.5.1. Notation d’Euler</a></li>
+<li><a href="#org6f75a95">2.5.2. Notation de Lagrange</a></li>
+<li><a href="#orgda09d29">2.5.3. Notation de Newton</a></li>
+<li><a href="#org4509724">2.5.4. Notation de Leibniz</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf728e73" class="outline-4">
+<h4 id="orgf728e73"><span class="section-number-4">2.5.1.</span> Notation d’Euler</h4>
+<div class="outline-text-4" id="text-2-5-1">
+<p>
+La notation que nous avons utilisée jusqu’ici, qui écrit la dérivée
+d’une fonction \(f\) en la précédant d’un \(D\) :
+</p>
+
+<p>
+\[ D f \]
+</p>
+
+<p>
+est la notation d’Euler.
+</p>
+</div>
+</div>
+<div id="outline-container-org6f75a95" class="outline-4">
+<h4 id="org6f75a95"><span class="section-number-4">2.5.2.</span> Notation de Lagrange</h4>
+<div class="outline-text-4" id="text-2-5-2">
+<p>
+La notation de Lagrange écrit la dérivée d’une fonction \(f\) avec un
+prime juste à droite du nom de la fonction :
+</p>
+
+<p>
+\[ f' = D f \]
+</p>
+</div>
+</div>
+<div id="outline-container-orgda09d29" class="outline-4">
+<h4 id="orgda09d29"><span class="section-number-4">2.5.3.</span> Notation de Newton</h4>
+<div class="outline-text-4" id="text-2-5-3">
+<p>
+La notation de Newton écrit la dérivée d’une fonction \(f\) en la
+surmontant d’un point :
+</p>
+
+<p>
+\[ \dot{f} = D f \]
+</p>
+</div>
+</div>
+<div id="outline-container-org4509724" class="outline-4">
+<h4 id="org4509724"><span class="section-number-4">2.5.4.</span> Notation de Leibniz</h4>
+<div class="outline-text-4" id="text-2-5-4">
+<p>
+Reprenons l’expression de la dérivée en \(a\) sous forme de limite :
+</p>
+
+<p>
+\[ D f(a) = \lim_{h \to 0} \frac{f(a + h) - f(a)}{h} \]
+</p>
+
+<p>
+Si on définit :
+</p>
+
+<p>
+\[ \difference f = f(a + h) - f(a) \]
+</p>
+
+<p>
+\[ \difference x = (a + h) - (a) = h \]
+</p>
+
+<p>
+on a schématiquement :
+</p>
+
+<p>
+\[ D f(a) = \lim_{\difference x \to 0} \frac{\difference f}{\difference x} \]
+</p>
+
+<p>
+La dérivée est donc la limite d’une fraction de différences. En
+utilisant un delta minuscule pour désigner le fait que ces variations
+tendent vers zéro, on peut noter la dérivée en \(a\) par :
+</p>
+
+<p>
+\[ \frac{\delta f}{\delta x}(a) = \lim_{\difference x \to 0} \frac{\difference f}{\difference x} \]
+</p>
+
+<p>
+La notation de Leibniz utilise des \(d\) minuscules au lieu des deltas :
 </p>
 
 <p>
@@ -465,54 +715,181 @@ On note aussi :
 </p>
 
 <p>
-On a alors :
+ce qui nous donne une autre façon de noter la fonction dérivée :
 </p>
 
 <p>
-\[f(a + h) = f(a) + \OD{f}{x}(a) \cdot h + E(h)\]
-</p>
-
-<p>
-et :
-</p>
-
-<p>
-\[\lim_{h \to 0} \frac{E(h)}{h} = \lim_{h \to 0} \left[ \frac{f(a + h) - f(a)}{h} - \OD{f}{x}(a) \right] = 0\]
-</p>
-</div>
-</div>
-<div id="outline-container-orgc99fb67" class="outline-3">
-<h3 id="orgc99fb67"><span class="section-number-3">2.2.</span> Définition équivalente</h3>
-<div class="outline-text-3" id="text-2-2">
-<p>
-Si on pose \(b = a + h\), on voit que \(h = b - a\) et que la
-convergence \(h \to 0\) est équivalente à \(b \to a\). On a donc :
-</p>
-
-<p>
-\[\OD{f}{x}(a) = \lim_{b \to a} \frac{f(b) - f(a)}{b - a}\]
+\[\OD{f}{x} = D f \]
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org91871e9" class="outline-2">
-<h2 id="org91871e9"><span class="section-number-2">3.</span> Dérivée seconde ordinaire</h2>
+</div>
+<div id="outline-container-org5dba1d9" class="outline-2">
+<h2 id="org5dba1d9"><span class="section-number-2">3.</span> Dérivée seconde</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-Dans le cas \(\Omega\) est de dimension 1, on peut l'assimiler à \(\corps\),
-on a alors une fonction \(f : \corps \mapsto \corps\) possédant une seule
-dérivée seconde, que l'on note :
+Soit une fonction \(f : A \mapsto \setR\) dérivable sur \(A\). Si la dérivée \(D
+f\) est elle-même dérivable, on peut évaluer la dérivée de cette dérivée :
 </p>
 
 <p>
-\[\OOD{f}{t}(a) = \partial^2 f(a)\]
+\[ D^2 f = D D f = D (D f) \]
 </p>
+
+<p>
+La fonction \(D^2 f\) est appelée dérivée seconde de \(f\).
+</p>
+</div>
+<div id="outline-container-org060f7c1" class="outline-3">
+<h3 id="org060f7c1"><span class="section-number-3">3.1.</span> Notations</h3>
+<div class="outline-text-3" id="text-3-1">
+</div>
+<div id="outline-container-org7e39095" class="outline-4">
+<h4 id="org7e39095"><span class="section-number-4">3.1.1.</span> Notation de Lagrange</h4>
+<div class="outline-text-4" id="text-3-1-1">
+<p>
+La notation de Lagrange écrit la dérivée seconde d’une fonction \(f\)
+avec un double prime juste à droite du nom de la fonction :
+</p>
+
+<p>
+\[ f'' = D^2 f \]
+</p>
+</div>
+</div>
+<div id="outline-container-orgd2c40ff" class="outline-4">
+<h4 id="orgd2c40ff"><span class="section-number-4">3.1.2.</span> Notation de Newton</h4>
+<div class="outline-text-4" id="text-3-1-2">
+<p>
+La notation de Newton écrit la dérivée d’une fonction \(f\) en la
+surmontant d’un double point :
+</p>
+
+<p>
+\[ \ddot{f} = D f \]
+</p>
+</div>
+</div>
+<div id="outline-container-org10e964f" class="outline-4">
+<h4 id="org10e964f"><span class="section-number-4">3.1.3.</span> Notation de Leibniz</h4>
+<div class="outline-text-4" id="text-3-1-3">
+<p>
+La notation de Leibniz pour la dérivée seconde identifie les
+opérateurs :
+</p>
+
+<p>
+\[ \left(\OD{}{x}\right)^2 = D^2 \]
+</p>
+
+<p>
+et :
+</p>
+
+<p>
+\[ \OOD{}{x} = \left(\OD{}{x}\right)^2 \]
+</p>
+
+<p>
+On a donc la notation :
+</p>
+
+<p>
+\[ \OOD{f}{x} = D^2 f \]
+</p>
+
+<p>
+ou, en \(a \in \domaine f\) :
+</p>
+
+<p>
+\[ \OOD{f}{x}(a) = D^2 f(a) \]
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbc8b48c" class="outline-2">
+<h2 id="orgbc8b48c"><span class="section-number-2">4.</span> Dérivée d’ordre \(n\)</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Soit \(n \in \setN\). Si la fonction \(f : A \mapsto \setR\) est \(n\) fois dérivable sur \(A\),
+on appelle :
+</p>
+
+<p>
+\[ D^n f \]
+</p>
+
+<p>
+la dérivée d’ordre \(n\) de \(f\).
+</p>
+</div>
+<div id="outline-container-orgffb3d09" class="outline-3">
+<h3 id="orgffb3d09"><span class="section-number-3">4.1.</span> Notations</h3>
+<div class="outline-text-3" id="text-4-1">
+</div>
+<div id="outline-container-org7eacff7" class="outline-4">
+<h4 id="org7eacff7"><span class="section-number-4">4.1.1.</span> Notation de Lagrange</h4>
+<div class="outline-text-4" id="text-4-1-1">
+<p>
+La notation de Lagrange écrit la dérivée d’ordre \(n\) d’une fonction
+\(f\) en plaçant un \((n)\) en indice supérieur :
+</p>
+
+<p>
+\[ f^{(n)} = D^n f \]
+</p>
+
+<p>
+Attention, le \((n)\) n’est pas une puissance.
+</p>
+</div>
+</div>
+<div id="outline-container-orgfaf1cca" class="outline-4">
+<h4 id="orgfaf1cca"><span class="section-number-4">4.1.2.</span> Notation de Leibniz</h4>
+<div class="outline-text-4" id="text-4-1-2">
+<p>
+La notation de Leibniz pour la dérivée d’ordre \(n\) identifie les
+opérateurs :
+</p>
+
+<p>
+\[ \left(\OD{}{x}\right)^n = D^n \]
+</p>
+
+<p>
+et :
+</p>
+
+<p>
+\[ \NOD{}{x}{n} = \left(\OD{}{x}\right)^n \]
+</p>
+
+<p>
+On a donc la notation :
+</p>
+
+<p>
+\[ \NOD{f}{x}{n} = D^n f \]
+</p>
+
+<p>
+ou, en \(a \in \domaine f\) :
+</p>
+
+<p>
+\[ \NOD{f}{x}{n}(a) = D^n f(a) \]
+</p>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-12-17 mer 16:23</p>
+<p class="date">Created: 2025-12-18 jeu 11:39</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -7,7 +7,7 @@
 \usetikzlibrary{calc,angles,quotes}
 
 \begin{document}
-\begin{tikzpicture}[scale=3, >=stealth]
+\begin{tikzpicture}[scale=3.5, >=stealth]
 
 	\def\R{1}
 	\def\ang{32} % angle in degrees
@@ -15,7 +15,8 @@
 	\coordinate (O) at (0,0);
 
 	\coordinate (P) at ({cos(\ang)},{sin(\ang)});
-	\coordinate (Q) at ({sin(\ang)},{-cos(\ang)});
+	\coordinate (Q) at ({cos(180-\ang)},{sin(180-\ang)});
+	\coordinate (R) at (-1,0);
 
 	\node[below left] at ($(O)$) {$O$};
 
@@ -36,12 +37,12 @@
 	\draw[dashed] (P) -- ({cos(\ang)},0)
 	node[below] {$\cos\alpha$};
 	\draw[dashed] (P) -- (0,{sin(\ang)})
-	node[left] {$\sin\alpha$};
+	node[above right] {$\sin\alpha$};
 
-	\draw[dashed] (Q) -- ({sin(\ang)},0)
-	node[below] {$\sin\alpha$};
-	\draw[dashed] (Q) -- (0,{-cos(\ang)})
-	node[left] {$-\cos\alpha$};
+	\draw[dashed] (Q) -- ({cos(180-\ang)},0)
+	node[below] {$\cos(\pi-\alpha)$};
+	\draw[dashed] (Q) -- (0,{sin(180-\ang)})
+	node[below left] {$\sin(\pi-\alpha)$};
 
 	% angle arc
 	\draw[->, thick]
@@ -50,8 +51,13 @@
 
 	% angle arc
 	\draw[->, thick]
-	(0.22,0) arc (0:\ang+270:0.22)
-	node[midway, left] {$\alpha+3\pi/2$};
+	(0.22,0) arc (0:180-\ang:0.22)
+	node[midway, above] {$\pi-\alpha$};
+
+	% angle arc
+	\draw[<-, thick]
+	(-0.42,0) arc (0:-\ang:-0.42)
+	node[midway, right] {$\alpha$};
 
 \end{tikzpicture}
 \end{document}

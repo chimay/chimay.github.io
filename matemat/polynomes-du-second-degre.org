@@ -24,109 +24,138 @@
 
 \label{chap:optimisationlibre}
 
-* Extrémum
+* Résolution d’une équation du second degré
 
-Soit $a,b,c \in \setR$ avec $a \ne 0$. Soit le polynôme du second degré,
-ou polynôme de degré $2$ défini par :
+#+TOC: headlines 1 local
 
-$$ p(x) = a \cdot x^2 + b \cdot x + c $$
+** Introduction
 
-pour tout $x \in \setR$. Nous allons rechercher un éventuel extremum
-$\gamma$ de ce polynôme. La dérivée première s'écrit :
+Soit $a,b,c \in \setR$ et le polynôme du second degré $p : \setR
+\mapsto \setR$ défini par :
 
-$$ \OD{p}{x}(x) = 2 \cdot a \cdot x + b $$
+$$ p(x) = a \ x^2 + b \ x + c $$
 
-La condition :
+pour tout $x \in \setR$. Pour obtenir les valeurs des racines de ce
+polynôme, nous devons résoudre en $x$ l’équation :
 
-$$ \OD{p}{x}(\gamma) = 2 \cdot a \cdot \gamma + b = 0 $$
-
-nous donne :
-
-$$ \gamma = -\frac{b}{2a} $$
-
-La dérivée seconde est donnée par :
-
-$$ \OOD{p}{x}(x) = 2 \cdot a $$
-
-** Minimum
-
-Si $a \strictsuperieur 0$, la dérivée seconde est toujours positive et
-$\gamma$ minimise localement $p$. On vérifie que $p$ est strictement
-convexe, et on en déduit que $\gamma$ est l'unique réel qui minimise
-globalement $p$.
-
-** Maximum
-
-Si $a \strictinferieur 0$, la dérivée seconde est toujours négative
-et $\gamma$ maximise localement $p$. On vérifie que $p$ est strictement
-concave, et on en déduit que $\gamma$ est l'unique réel qui maximise
-globalement $p$.
-
-* Racines de l’équation du second degré
-
-Soit $a,b,c \in \setR$ avec $a \ne 0$. Soit le polynôme du second degré,
-ou polynôme de degré $2$ défini par :
-
-$$ p(x) = a \cdot x^2 + b \cdot x + c $$
-
-On pose :
-
-$$ \gamma = -\frac{b}{2a} $$
-
-pour l’argument de l’extremum de $p$. Intéressons-nous à l'écart
-par rapport à $\gamma$ :
-
-$$ \delta = x - \gamma = x + \frac{b}{2 a} $$
-
-On a donc :
-
-$$ x = \gamma + \delta = - \frac{b}{2a} + \delta $$
-
-et :
-
-$$ x^2
-= (\gamma + \delta)^2
-= \delta^2 - \frac{\delta \cdot b}{a} + \frac{b^2}{4 \cdot a^2} $$
-
-En injectant ces relations dans la définition du polynôme, on obtient :
-
-\begin{align*}
-p(\gamma + \delta) &=
-a \cdot \delta^2 - b \cdot \delta + \frac{b^2}{4 \cdot a} + b \cdot \delta - \frac{b^2}{2 \cdot a} + c \\
-&= a \cdot \delta^2 - \frac{b^2}{4 \cdot a} + c
-\end{align*}
-
-Cette expression nous permet d'obtenir les racines d'un polynôme du second degré. La condition :
-
-$$ p(\delta + \gamma) = 0 $$
-
-nous donne :
-
-$$ \delta^2 = \frac{b^2 - 4 \cdot a \cdot c}{4 \cdot a^2} $$
-
-équation qui admet deux solutions $\delta_+$ et $\delta_-$ :
-
-$$ \delta_+ = \frac{\sqrt{ b^2 - 4 \cdot a \cdot c }}{2 \cdot a} $$
-
-$$ \delta_- = - \frac{\sqrt{ b^2 - 4 \cdot a \cdot c }}{2 \cdot a} $$
-
-Nous avons deux racines $x_+$ et $x_-$ correspondantes :
-
-$$ x_+ = \gamma + \delta_+ $$
-
-$$ x_- = \gamma + \delta_- $$
+$$ p(x) = 0 $$
 
 c’est-à-dire :
 
-$$ x_+ = \frac{-b + \sqrt{b^2 - 4 \cdot a \cdot c}}{2 \cdot a} $$
+$$ a \ x^2 + b \ x + c = 0 $$
 
-$$ x_- = \frac{-b - \sqrt{b^2 - 4 \cdot a \cdot c}}{2 \cdot a} $$
+** Préambule
 
-avec :
+Soit l’équation en $x$ :
 
-$$ p(x_+) = p(x_-) = 0 $$
+$$ x^2 = s $$
 
-Les expressions de $x_+$ et $x_-$ permettent donc de résoudre
-l’équation du second degré en $x$ :
+En prenant la racine carrée des deux côtés, il vient :
 
-$$ a \cdot x^2 + b \cdot x + c = 0$$
+$$ x = \sqrt{s} $$
+
+On a bien :
+
+$$ x^2 = \left(\sqrt{s}\right)^2 = s $$
+
+Cette solution n’est pas unique. En effet, on a aussi :
+
+$$ \left(- \sqrt{s}\right)^2 = s $$
+
+Les deux solutions en $x$ de l’équation ci-dessus sont donc :
+
+$$ x_+ = \sqrt{s} $$
+
+$$ x_- = - \sqrt{s} $$
+
+** Cas triviaux
+
+Remarquons tout d’abord que si $a = 0$, l’équation se réduit à :
+
+$$ b \ x + c = 0 $$
+
+On a alors, soit $b = 0$ et l’équation n’est vérifée que si :
+
+$$ c = 0 $$
+
+soit $b \ne 0$, ce qui nous donne immédiatement :
+
+$$ x = - \frac{b}{c} $$
+
+** Résolution
+
+Nous pouvons à présent supposer que $a \ne 0$.
+
+Nous allons tenter de réécrire notre équation sous une forme la plus
+proche possible au carré parfait :
+
+$$ (x + \gamma)^2 = x^2 + 2 \ \gamma \ x + \gamma^2 $$
+
+où $\gamma$ est un réel qui reste à déterminer. Commençons par diviser
+l’équation à résoudre par $a$ :
+
+$$ x^2 + \frac{b}{a} \ x + \frac{c}{a} = 0 $$
+
+Nous voulons que le terme en $x$ soit le même que dans le carré
+parfait :
+
+$$ 2 \ \gamma = \frac{b}{a} $$
+
+ce qui nous donne :
+
+$$ \gamma = \frac{b}{2 \ a} $$
+
+L’équation à résoudre devient :
+
+$$ x^2 + 2 \ \gamma \ x + \frac{c}{a} = 0 $$
+
+Faisons apparaître le terme en $\gamma^2$, en ajoutant :
+
+$$ \gamma^2 - \gamma^2 = 0 $$
+
+On a donc :
+
+$$ x^2 + 2 \ \gamma \ x + \gamma^2 + \frac{c}{a} - \gamma^2 = 0 $$
+
+Les trois premiers termes forment un carré parfait que nous pouvons
+factoriser :
+
+$$ (x + \gamma)^2 + \frac{c}{a} - \gamma^2 = 0 $$
+
+Faisons passer les autres termes dans le membre de droite :
+
+$$ (x + \gamma)^2 = \gamma^2 - \frac{c}{a} $$
+
+ou encore :
+
+$$ (x + \gamma)^2
+= \frac{b^2}{4 \ a^2} - \frac{c}{a}
+= \frac{b^2 - 4 \ a \ c}{4 \ a^2} $$
+
+En prenant la racine carrée des deux côtés, on obtient deux solutions
+possibles :
+
+$$ x_+ + \gamma = \sqrt{\frac{b^2 - 4 \ a \ c}{4 \ a^2}} $$
+
+$$ x_- + \gamma = - \sqrt{\frac{b^2 - 4 \ a \ c}{4 \ a^2}} $$
+
+ou encore :
+
+$$ x_+ = - \gamma + \frac{\sqrt{b^2 - 4 \ a \ c}}{2 \ a} $$
+
+$$ x_- = - \gamma - \frac{\sqrt{b^2 - 4 \ a \ c}}{2 \ a} $$
+
+En se rappelant la définition de $\gamma$, on obtient :
+
+$$ x_+ = - \frac{b}{2 \ a} + \frac{\sqrt{b^2 - 4 \ a \ c}}{2 \ a} $$
+
+$$ x_- = - \frac{b}{2 \ a} - \frac{\sqrt{b^2 - 4 \ a \ c}}{2 \ a} $$
+
+c’est-à-dire :
+
+$$ x_+ = \frac{-b + \sqrt{b^2 - 4 \ a \ c}}{2 \ a} $$
+
+$$ x_- = \frac{-b - \sqrt{b^2 - 4 \ a \ c}}{2 \ a} $$
+
+expressions qui nous permettent de calculer les valeurs des solutions
+$x_+$ et $x_-$, qui sont aussi les racines du polynôme $p$.

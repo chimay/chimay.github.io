@@ -7,9 +7,11 @@
 
 \usetikzlibrary{calc,angles,quotes,shapes.geometric}
 
+\usepackage{tkz-euclide}
+
 \begin{document}
 
-\begin{tikzpicture}[scale=1.0]
+\begin{tikzpicture}[scale=1.4]
 
 	% ---- parameters
 
@@ -35,9 +37,29 @@
 
 	\foreach \i in {1,...,\numsides} { \draw (O) -- (P\i); }
 
+	% vertices labels
+	\node[left] at (O) {$O$};
+
 	%\foreach \i in {1,...,\numsides} {
 		%\node[above right] at (P\i) {$P_{\i}$};
 	%}
+
+	% segments marks
+	\foreach \i in {1,...,\numsides} {
+		\tkzMarkSegments[mark=||, size=2pt](O,P\i)
+	}
+
+	% angles labels
+	\foreach \i in {1,...,\numsides} {
+		\pgfmathtruncatemacro{\j}{mod(\i,\numsides)+1}
+		\ifodd\i
+			\def\angradius{0.7cm}
+		\else
+			\def\angradius{0.8cm}
+		\fi
+		\pic[draw, ->, "$\alpha$", angle radius=\angradius, angle eccentricity=1.2]
+		{angle = P\i--O--P\j};
+	}
 
 \end{tikzpicture}
 

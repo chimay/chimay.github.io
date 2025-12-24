@@ -11,7 +11,7 @@
 
 \begin{document}
 
-\begin{tikzpicture}[scale=1.4]
+\begin{tikzpicture}[scale=2.0]
 
 	% parameters
 	\def\numsides{6}
@@ -23,6 +23,7 @@
 	\foreach \i in {1,...,\numsides} {
 		\coordinate (P\i) at ({360/\numsides*(\i-1)+\rotation}:\radius);
 	}
+	\coordinate (G) at (0,{-\radius/2});
 
 	% circle
 	\draw (O) circle (\radius);
@@ -37,13 +38,31 @@
 	\draw (P1) -- (P3) -- (P5) -- cycle;
 	\draw (P2) -- (P4) -- (P6) -- cycle;
 
-	% vertices labels
-% 	\node[left] at (O) {$O$};
-% 	\filldraw (O) circle (0.9pt);
+	% thick vertices
 
-% 	\node[above] at ($(O)!0.5!(P6)$) {$r$};
-% 	\node[below] at ($(O)!0.5!(P5)$) {$r$};
-% 	\node[right] at ($(P5)!0.5!(P6)$) {$r$};
+	\fill (O) circle (0.3mm);
+	\fill (G) circle (0.3mm);
+
+	\foreach \i in {1,...,\numsides} { \fill (P\i) circle (0.3mm); }
+
+	% vertices labels
+	\node[label={[label distance=1.0mm]left:$O$}] at (O) {};
+	%\node[circle, fill, inner sep=1pt,
+	%label={[label distance=2mm]left:$O$}] at (O) {};
+
+	\node[above] at (P1) {$A$};
+	\node[right] at (P6) {$B$};
+	\node[right] at (P5) {$C$};
+	\node[below] at (P4) {$D$};
+	\node[left] at (P3) {$E$};
+	\node[left] at (P2) {$F$};
+
+	\node[below left] at (G) {$G$};
+
+	\node[below] at ($(P3)!0.5!(G)$) {$a$};
+	\node[below] at ($(G)!0.5!(P5)$) {$b$};
+	\node[right] at ($(O)!0.55!(G)$) {$c$};
+	\node[right] at ($(G)!0.5!(P4)$) {$d$};
 
 	% segments marks
 	%\foreach \i in {1,...,\numsides} {
@@ -57,14 +76,29 @@
 % 	\tkzMarkSegments[mark=|, size=2pt](P5,P6)
 % 	\tkzMarkSegments[mark=|, size=2pt](P6,P1)
 
-% 	\pic[draw, ->, "$60^\circ$", angle radius=0.7cm, angle eccentricity=1.4]
-% 	{angle = P5--O--P6};
+	\pic[draw, ->, "$60^\circ$", angle radius=0.5cm, angle eccentricity=1.5]
+	{angle = P3--O--P4};
 
-% 	\pic[draw, ->, "$60^\circ$", angle radius=0.7cm, angle eccentricity=1.4]
-% 	{angle = P6--P5--O};
+	\pic[draw, ->, "$60^\circ$", angle radius=0.5cm, angle eccentricity=1.5]
+	{angle = P4--O--P5};
 
-% 	\pic[draw, ->, "$60^\circ$", angle radius=0.7cm, angle eccentricity=1.4]
-% 	{angle = O--P6--P5};
+	\pic[draw, ->, "$\alpha$", angle radius=1.2cm, angle eccentricity=1.2]
+	{angle = G--P3--O};
+
+	\pic[draw, ->, "$\delta$", angle radius=0.5cm, angle eccentricity=1.3]
+	{angle = O--G--P3};
+
+	\pic[draw, ->, "$\epsilon$", angle radius=0.5cm, angle eccentricity=1.3]
+	{angle = P5--G--O};
+
+	\pic[draw, ->, "$\beta$", angle radius=1.2cm, angle eccentricity=1.2]
+	{angle = O--P5--G};
+
+	\pic[draw, ->, "$\lambda$", angle radius=1.0cm, angle eccentricity=1.2]
+	{angle = P4--P3--G};
+
+	\pic[draw, ->, "$\mu$", angle radius=1.0cm, angle eccentricity=1.2]
+	{angle = G--P5--P4};
 
 \end{tikzpicture}
 

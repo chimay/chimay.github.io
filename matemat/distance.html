@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-12-17 mer 16:21 -->
+<!-- 2025-12-24 mer 11:54 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Distance</title>
@@ -241,15 +241,16 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org69f74f8">1. Dépendances</a></li>
-<li><a href="#org59037d4">2. Définition</a></li>
-<li><a href="#orgacf05b2">3. Distance à un ensemble</a></li>
-<li><a href="#org0a798ef">4. Distance inter-ensembles</a></li>
-<li><a href="#org83c7f63">5. Boules</a></li>
-<li><a href="#org1673f85">6. Topologie métrique</a></li>
-<li><a href="#orgc0a7500">7. Intérieur</a></li>
-<li><a href="#org816926c">8. Adhérence</a></li>
-<li><a href="#org9bde80a">9. Adhérence carrée</a></li>
+<li><a href="#orgb43b54d">1. Dépendances</a></li>
+<li><a href="#org1fc239e">2. Géométrie</a></li>
+<li><a href="#orgd51061e">3. Définition</a></li>
+<li><a href="#org5d5f524">4. Distance à un ensemble</a></li>
+<li><a href="#org2c9c185">5. Distance inter-ensembles</a></li>
+<li><a href="#orgaaf30bf">6. Boules</a></li>
+<li><a href="#org051a991">7. Topologie métrique</a></li>
+<li><a href="#orgd65035d">8. Intérieur</a></li>
+<li><a href="#org749fc31">9. Adhérence</a></li>
+<li><a href="#orgb6dbce0">10. Adhérence carrée</a></li>
 </ul>
 </div>
 </div>
@@ -423,8 +424,8 @@ MathJax = {
 <p>
 \label{chap:distances}
 </p>
-<div id="outline-container-org69f74f8" class="outline-2">
-<h2 id="org69f74f8"><span class="section-number-2">1.</span> Dépendances</h2>
+<div id="outline-container-orgb43b54d" class="outline-2">
+<h2 id="orgb43b54d"><span class="section-number-2">1.</span> Dépendances</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:algebre} : Les structures algébriques</li>
@@ -433,15 +434,93 @@ MathJax = {
 </ul>
 </div>
 </div>
-<div id="outline-container-org59037d4" class="outline-2">
-<h2 id="org59037d4"><span class="section-number-2">2.</span> Définition</h2>
+<div id="outline-container-org1fc239e" class="outline-2">
+<h2 id="org1fc239e"><span class="section-number-2">2.</span> Géométrie</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-Afin de généraliser le plus possible la notion de distance au sens usuel, nous allons nous poser la question : quelles sont les caractéristiques fondamentales d'une distance ? Nous en déduirons les propriétés que doit respecter une distance générique.
+En géométrie, la distance entre deux points \(A\) et \(B\) est notée par :
 </p>
 
 <p>
-Soit l'ensemble \(\Omega\), un corps \(\corps\) et une fonction \(\distance : \Omega \times \Omega \to \corps\) représentant une distance entre deux éléments de l'ensemble \(\Omega\). Choisissons des éléments quelconques \(x,y,z \in \Omega\). Au sens usuel, une distance entre deux objets est clairement positive :
+\[ \abs{AB} \]
+</p>
+
+<p>
+Il est clair quune distance entre deux points est positive :
+</p>
+
+<p>
+\[ \abs{AB} \ge 0 \]
+</p>
+
+<p>
+Elle est également symétrique puisqu'on obtient la même distance
+lorsqu'on intervertit les points :
+</p>
+
+<p>
+\[ \abs{AB} = \abs{BA} \]
+</p>
+
+<p>
+Par ailleurs , la distance entre deux points identiques doit évidemment
+être nulle :
+</p>
+
+<p>
+\[\abs{AA} = 0\]
+</p>
+
+<p>
+On impose également que le seul point \(Y\) qui puisse être à
+distance nulle de \(X\) soit le point \(X\) lui-même :
+</p>
+
+<p>
+\[\abs{XY} = 0 \quad \Rightarrow \quad X = Y\]
+</p>
+
+<p>
+Enfin, il est toujours plus court d'aller directement du point \(A\) au
+point \(C\) plutôt que de passer par le point \(B\). On a donc l'inégalité
+triangulaire :
+</p>
+
+<p>
+\[\abs{AC} \le \abs{AB} + \abs{BC}\]
+</p>
+
+<p>
+Cette inégalité n’atteint l’égalité que lorsque les trois points \(A\),
+\(B\) et \(C\) sont alignés :
+</p>
+
+<p>
+\[\abs{AC} = \abs{AB} + \abs{BC}\]
+</p>
+
+<p>
+Nous allons nous servir de ces propriétés pour généraliser la notion de
+distance.
+</p>
+</div>
+</div>
+<div id="outline-container-orgd51061e" class="outline-2">
+<h2 id="orgd51061e"><span class="section-number-2">3.</span> Définition</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Afin de généraliser le plus possible la notion de distance au
+sens usuel, nous allons nous poser la question : quelles sont les
+caractéristiques fondamentales d'une distance ? Nous en déduirons les
+propriétés que doit respecter une distance générique.
+</p>
+
+<p>
+Soit l'ensemble \(\Omega\), un corps \(\corps\) et une fonction \(\distance :
+\Omega \times \Omega \to \corps\) représentant une distance entre deux
+éléments de l'ensemble \(\Omega\). Choisissons des éléments quelconques
+\(x,y,z \in \Omega\). Au sens usuel, une distance entre deux objets est
+clairement positive :
 </p>
 
 <p>
@@ -449,7 +528,8 @@ Soit l'ensemble \(\Omega\), un corps \(\corps\) et une fonction \(\distance : \O
 </p>
 
 <p>
-Elle est également symétrique puisqu'on obtient la même distance lorsqu'on intervertit les objets :
+Elle est également symétrique puisqu'on obtient la même distance
+lorsqu'on intervertit les objets :
 </p>
 
 <p>
@@ -466,7 +546,8 @@ Par ailleurs , la distance entre deux objets identiques doit évidemment
 </p>
 
 <p>
-On impose également que le seul élément \(y\) qui puisse être à distance nulle de \(x\) soit l'élément \(x\) lui-même :
+On impose également que le seul élément \(y\) qui puisse être à
+distance nulle de \(x\) soit l'élément \(x\) lui-même :
 </p>
 
 <p>
@@ -474,16 +555,18 @@ On impose également que le seul élément \(y\) qui puisse être à distance nu
 </p>
 
 <p>
-Enfin, il est toujours plus court d'aller directement de \(x\) à \(z\) plutôt que de passer par une étape \(y\). On a donc l'inégalité triangulaire :
+Enfin, il est toujours plus court d'aller directement de \(x\) à \(z\)
+plutôt que de passer par une étape \(y\). On a donc l'inégalité
+triangulaire :
 </p>
 
 <p>
 \[\distance(x,z) \le \distance(x,y) + \distance(y,z)\]
 </p>
 </div>
-<div id="outline-container-org5935fce" class="outline-3">
-<h3 id="org5935fce"><span class="section-number-3">2.1.</span> Remarque</h3>
-<div class="outline-text-3" id="text-2-1">
+<div id="outline-container-orgd3151d0" class="outline-3">
+<h3 id="orgd3151d0"><span class="section-number-3">3.1.</span> Remarque</h3>
+<div class="outline-text-3" id="text-3-1">
 <p>
 Parfois, au lieu d'imposer l'égalité de deux éléments situés à distance nulle l'un de l'autre, on impose juste l'équivalence suivant un critère prédéfini :
 </p>
@@ -493,9 +576,9 @@ Parfois, au lieu d'imposer l'égalité de deux éléments situés à distance nu
 </p>
 </div>
 </div>
-<div id="outline-container-orgc52c110" class="outline-3">
-<h3 id="orgc52c110"><span class="section-number-3">2.2.</span> Nombres</h3>
-<div class="outline-text-3" id="text-2-2">
+<div id="outline-container-orga5ce8ba" class="outline-3">
+<h3 id="orga5ce8ba"><span class="section-number-3">3.2.</span> Nombres</h3>
+<div class="outline-text-3" id="text-3-2">
 <p>
 La distance entre deux nombres \(a\) et \(b\) est souvent définié comme étant la valeur
 absolue de leur différence :
@@ -507,9 +590,9 @@ absolue de leur différence :
 </div>
 </div>
 </div>
-<div id="outline-container-orgacf05b2" class="outline-2">
-<h2 id="orgacf05b2"><span class="section-number-2">3.</span> Distance à un ensemble</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-org5d5f524" class="outline-2">
+<h2 id="org5d5f524"><span class="section-number-2">4.</span> Distance à un ensemble</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 Quelle est la distance à parcourir d'une ville donnée lorsqu'on désire se rendre dans un certain pays ? On a envie de dire que la distance est parcourue dès que l'on a atteint la frontière du pays en question. Comme on choisit généralement le chemin le plus court pour arriver à destination, on se rend compte que la distance ville - pays est le minimum des distances entre la ville et tous les points appartenant au pays.
 </p>
@@ -522,9 +605,9 @@ Maintenant, remplaçons la ville par un élément \(x \in \Omega\) et le pays pa
 \[\distance(x,A) = \inf_{a \in A} \distance(x,a) = \inf \{ \distance(x,a) : a \in A \}\]
 </p>
 </div>
-<div id="outline-container-org5e38c39" class="outline-3">
-<h3 id="org5e38c39"><span class="section-number-3">3.1.</span> Inclusion</h3>
-<div class="outline-text-3" id="text-3-1">
+<div id="outline-container-org5901f02" class="outline-3">
+<h3 id="org5901f02"><span class="section-number-3">4.1.</span> Inclusion</h3>
+<div class="outline-text-3" id="text-4-1">
 <p>
 Si \(B \subseteq A\), on en déduit directement que :
 </p>
@@ -534,9 +617,9 @@ Si \(B \subseteq A\), on en déduit directement que :
 </p>
 </div>
 </div>
-<div id="outline-container-org0f79b07" class="outline-3">
-<h3 id="org0f79b07"><span class="section-number-3">3.2.</span> Notation</h3>
-<div class="outline-text-3" id="text-3-2">
+<div id="outline-container-org04088b9" class="outline-3">
+<h3 id="org04088b9"><span class="section-number-3">4.2.</span> Notation</h3>
+<div class="outline-text-3" id="text-4-2">
 <p>
 On note aussi :
 </p>
@@ -546,9 +629,9 @@ On note aussi :
 </p>
 </div>
 </div>
-<div id="outline-container-orgf815674" class="outline-3">
-<h3 id="orgf815674"><span class="section-number-3">3.3.</span> Self-distance</h3>
-<div class="outline-text-3" id="text-3-3">
+<div id="outline-container-org565cf2b" class="outline-3">
+<h3 id="org565cf2b"><span class="section-number-3">4.3.</span> Self-distance</h3>
+<div class="outline-text-3" id="text-4-3">
 <p>
 Soit \(a \in A\). Comme \(\distance(a,a) = 0\) et que la distance \(\distance(a,b) \ge 0\) pour tout \(b \in A\), on voit que le choix \(b = a\) minimise \(\distance(a,b)\) sur \(A\). Donc :
 </p>
@@ -563,9 +646,9 @@ pour tout élément \(a \in A\).
 </div>
 </div>
 </div>
-<div id="outline-container-org0a798ef" class="outline-2">
-<h2 id="org0a798ef"><span class="section-number-2">4.</span> Distance inter-ensembles</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org2c9c185" class="outline-2">
+<h2 id="org2c9c185"><span class="section-number-2">5.</span> Distance inter-ensembles</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 La distance entre deux ensembles \(A\) et \(B\) est l'infimum des distances possibles entre les couples \((a,b) \in A \times B\) :
 </p>
@@ -583,9 +666,9 @@ On a bien évidemment :
 </p>
 </div>
 </div>
-<div id="outline-container-org83c7f63" class="outline-2">
-<h2 id="org83c7f63"><span class="section-number-2">5.</span> Boules</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-orgaaf30bf" class="outline-2">
+<h2 id="orgaaf30bf"><span class="section-number-2">6.</span> Boules</h2>
+<div class="outline-text-2" id="text-6">
 <p>
 Les boules sont la généralisation des disques et des sphères. Or,
 ce qui caractèrise ces entités, c'est qu'elle incluent des points
@@ -610,9 +693,9 @@ Si l'on veut que la distance soit strictement inférieure à \(r\), on considér
 </p>
 </div>
 </div>
-<div id="outline-container-org1673f85" class="outline-2">
-<h2 id="org1673f85"><span class="section-number-2">6.</span> Topologie métrique</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-org051a991" class="outline-2">
+<h2 id="org051a991"><span class="section-number-2">7.</span> Topologie métrique</h2>
+<div class="outline-text-2" id="text-7">
 <p>
 La topologie usuelle définie sur les ensembles munis d'une distance
 est celle générée par les boules ouvertes, soit les éléments de
@@ -636,9 +719,9 @@ Toute union de boules ouvertes est donc un ouvert.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc0a7500" class="outline-2">
-<h2 id="orgc0a7500"><span class="section-number-2">7.</span> Intérieur</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-orgd65035d" class="outline-2">
+<h2 id="orgd65035d"><span class="section-number-2">8.</span> Intérieur</h2>
+<div class="outline-text-2" id="text-8">
 <p>
 Soit \(A \subseteq \Omega\).
 </p>
@@ -678,9 +761,9 @@ On conclut de ce qui précède que :
 </p>
 </div>
 </div>
-<div id="outline-container-org816926c" class="outline-2">
-<h2 id="org816926c"><span class="section-number-2">8.</span> Adhérence</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-org749fc31" class="outline-2">
+<h2 id="org749fc31"><span class="section-number-2">9.</span> Adhérence</h2>
+<div class="outline-text-2" id="text-9">
 <p>
 On voit que :
 </p>
@@ -698,9 +781,9 @@ Le complémentaire de cet ensemble est bien sur constitué des \(x \in \Omega\) 
 </p>
 </div>
 </div>
-<div id="outline-container-org9bde80a" class="outline-2">
-<h2 id="org9bde80a"><span class="section-number-2">9.</span> Adhérence carrée</h2>
-<div class="outline-text-2" id="text-9">
+<div id="outline-container-orgb6dbce0" class="outline-2">
+<h2 id="orgb6dbce0"><span class="section-number-2">10.</span> Adhérence carrée</h2>
+<div class="outline-text-2" id="text-10">
 <p>
 Soit \(x \in \Omega\), \(A \subseteq \Omega\) et :
 </p>
@@ -770,7 +853,7 @@ Mais comme l'inverse est également vrai, on a :
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-12-17 mer 16:21</p>
+<p class="date">Created: 2025-12-24 mer 11:54</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

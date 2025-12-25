@@ -5,7 +5,7 @@
 
 \usepackage{tikz}
 
-\usetikzlibrary{calc,angles,quotes,shapes.geometric}
+\usetikzlibrary{calc,angles,quotes,intersections,shapes.geometric}
 
 \usepackage{tkz-euclide}
 
@@ -19,6 +19,7 @@
 	\def\rotation{90}
 
 	% coordinates
+
 	\coordinate (O) at (0,0);
 	\foreach \i in {1,...,\numsides} {
 		\coordinate (P\i) at ({360/\numsides*(\i-1)+\rotation}:\radius);
@@ -26,6 +27,14 @@
 	\coordinate (G) at (0,{-\radius/2});
 	\coordinate (H) at ({-\radius*sqrt(3)/6},{-\radius/2});
 	\coordinate (I) at ({\radius*sqrt(3)/6},{-\radius/2});
+
+	% intersections
+
+	%\path[name path=hexagram1] (P1) -- (P3);
+	%\path[name path=hexagram2] (P2) -- (P4);
+	%\path[name intersections={of=hexagram1 and hexagram2, by=J}];
+
+	\tkzInterLL(P1,P3)(P2,P4)\tkzGetPoint{J}
 
 	% circle
 	\draw (O) circle (\radius);
@@ -41,13 +50,16 @@
 	\draw (P2) -- (P4) -- (P6) -- cycle;
 
 	% thick vertices
+
 	\fill (O) circle (0.3mm);
 	\fill (G) circle (0.3mm);
 	\fill (H) circle (0.3mm);
 	\fill (I) circle (0.3mm);
+	\fill (J) circle (0.3mm);
 	\foreach \i in {1,...,\numsides} { \fill (P\i) circle (0.3mm); }
 
 	% vertices labels
+
 	\node[label={[label distance=1.0mm]left:$O$}] at (O) {};
 	%\node[circle, fill, inner sep=1pt,
 	%label={[label distance=2mm]left:$O$}] at (O) {};
@@ -59,16 +71,17 @@
 	\node[left] at (P3) {$E$};
 	\node[left] at (P2) {$F$};
 
+	\node[above left] at (G) {$G$};
+	\node[below left] at (H) {$H$};
+	\node[below right] at (I) {$I$};
+	\node[left] at (J) {$J$};
+
 	\node[below left] at ($(H)!0.3!(P4)$) {$a$};
 	\node[below right] at ($(I)!0.3!(P4)$) {$b$};
 	\node[above right] at ($(P3)!0.5!(H)$) {$c$};
 	\node[above right] at ($(H)!0.2!(G)$) {$d$};
 	\node[above right] at ($(G)!0.5!(I)$) {$e$};
 	\node[above right] at ($(I)!0.5!(P5)$) {$f$};
-
-	\node[above left] at (G) {$G$};
-	\node[below left] at (H) {$H$};
-	\node[below right] at (I) {$I$};
 
 	\pic[draw, ->, "$\alpha$", angle radius=0.5cm, angle eccentricity=1.5]
 	{angle = P4--H--G};
@@ -78,6 +91,15 @@
 
 	\pic[draw, ->, "$\gamma$", angle radius=0.75cm, angle eccentricity=1.3]
 	{angle = I--P4--H};
+
+	\pic[draw, ->, "$\lambda$", angle radius=0.9cm, angle eccentricity=1.3]
+	{angle = P3--P2--J};
+
+	\pic[draw, ->, "$\mu$", angle radius=0.9cm, angle eccentricity=1.3]
+	{angle = J--P3--P2};
+
+	\pic[draw, ->, "$\theta$", angle radius=0.6cm, angle eccentricity=1.4]
+	{angle = P2--J--P3};
 
 	% right angle markers
 	\pic [draw, angle radius=7pt, angle eccentricity=1]

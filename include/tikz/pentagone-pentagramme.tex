@@ -5,45 +5,51 @@
 
 \usepackage{tikz}
 
-\usetikzlibrary{calc,angles,quotes,shapes.geometric}
+\usetikzlibrary{calc,angles,quotes,intersections,shapes.geometric}
 
 \usepackage{tkz-euclide}
 
 \begin{document}
 
-\begin{tikzpicture}[scale=1.4]
-
-	% ---- parameters
+\begin{tikzpicture}[scale=2.0]
 
 	\def\numsides{5}
 	\def\radius{2}
 	\def\rotation{90}
 
-	% ---- short method
-
-	%\draw (0,0) circle (\radius);
-	%\node[draw, regular polygon, regular polygon sides=\numsides, minimum size=4cm] at (0,0) {};
-
-	% ---- detailed method
-
 	\coordinate (O) at (0,0);
-	\draw (O) circle (\radius);
 
 	\foreach \i in {1,...,\numsides} {
 		\coordinate (P\i) at ({360/\numsides*(\i-1)+\rotation}:\radius);
 	}
 
+	\tkzInterLL(P2,P5)(P1,P4)\tkzGetPoint{F}
+	\tkzInterLL(P2,P5)(P1,P3)\tkzGetPoint{G}
+
+	\draw (O) circle (\radius);
+
 	\draw (P1) \foreach \i in {2,...,\numsides} { -- (P\i) } -- cycle;
 
 	% radiuses
+
 	\foreach \i in {1,...,\numsides} { \draw[dashdotdotted] (O) -- (P\i); }
 
 	% pentagram
+
 	\draw[solid] (P1) -- (P3) -- (P5) -- (P2) -- (P4) -- cycle;
 
+	% thick vertices
+
+	\fill (O) circle (0.3mm);
+	\fill (F) circle (0.3mm);
+	\fill (G) circle (0.3mm);
+	\foreach \i in {1,...,\numsides} { \fill (P\i) circle (0.3mm); }
+
 	% vertices labels
+
 	\node[above left] at (O) {$O$};
-	\filldraw (O) circle (0.9pt);
+	\node[below left] at (F) {$F$};
+	\node[below left] at (G) {$G$};
 
 	\node[above] at (P1) {$A$};
 	\node[right] at (P5) {$B$};
@@ -56,14 +62,27 @@
 	%}
 
 	% angles labels
-	\pic[draw, ->, "$108^\circ$", angle radius=0.9cm, angle eccentricity=1.3]
-	{angle = P2--P1--P5};
 
-	\pic[draw, ->, "$\alpha$", angle radius=0.7cm, angle eccentricity=1.3]
-	{angle = P5--P2--P1};
+	\pic[draw, ->, "$36^\circ$", angle radius=1.2cm, angle eccentricity=1.3]
+	{angle = P4--P1--P5};
 
-	\pic[draw, ->, "$\beta$", angle radius=0.7cm, angle eccentricity=1.3]
+	\pic[draw, ->, "$36^\circ$", angle radius=1.2cm, angle eccentricity=1.3]
 	{angle = P1--P5--P2};
+
+	\pic[draw, ->, "$36^\circ$", angle radius=1.2cm, angle eccentricity=1.3]
+	{angle = P2--P1--P3};
+
+	\pic[draw, ->, "$\alpha$", angle radius=1.4cm, angle eccentricity=1.2]
+	{angle = P3--P1--P4};
+
+	\pic[draw, ->, "$\beta$", angle radius=0.6cm, angle eccentricity=1.3]
+	{angle = P5--G--P1};
+
+	\pic[draw, ->, "$\gamma$", angle radius=0.6cm, angle eccentricity=1.3]
+	{angle = P1--F--P2};
+
+	\pic[draw, ->, "$\theta$", angle radius=0.6cm, angle eccentricity=1.3]
+	{angle = P5--F--P1};
 
 \end{tikzpicture}
 

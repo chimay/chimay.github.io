@@ -19,12 +19,7 @@
 	\def\radius{2}
 	\def\rotation{90}
 
-	% ---- short method
-
-	%\draw (0,0) circle (\radius);
-	%\node[draw, regular polygon, regular polygon sides=\numsides, minimum size=4cm] at (0,0) {};
-
-	% ---- detailed method
+	% ---- coordinates
 
 	\coordinate (O) at (0,0);
 	\draw (O) circle (\radius);
@@ -33,26 +28,30 @@
 		\coordinate (P\i) at ({360/\numsides*(\i-1)+\rotation}:\radius);
 	}
 
+	% ---- intersections
+
 	\tkzInterLL(P2,P5)(P1,P4)\tkzGetPoint{F}
+
+	% ---- pentagon
 
 	\draw (P1) \foreach \i in {2,...,\numsides} { -- (P\i) } -- cycle;
 
-	% radiuses
+	% ---- radiuses
 	\foreach \i in {1,...,\numsides} { \draw[dashdotdotted] (O) -- (P\i); }
 
-	% pentagram
+	% ---- pentagram
 
 	\draw[dashdotdotted] (P1) -- (P3) -- (P5) -- (P2) -- (P4) -- cycle;
 	\draw[solid] (P5) -- (P2);
 	\draw[solid] (P1) -- (P4);
 
-	% thick vertices
+	% ---- thick vertices
 
 	\fill (O) circle (0.3mm);
 	\fill (F) circle (0.3mm);
 	\foreach \i in {1,...,\numsides} { \fill (P\i) circle (0.3mm); }
 
-	% vertices labels
+	% ---- vertices labels
 
 	\node[above left] at (O) {$O$};
 	\node[below left] at (F) {$F$};
@@ -63,15 +62,16 @@
 	\node[below left] at (P3) {$D$};
 	\node[left] at (P2) {$E$};
 
-	%\foreach \i in {1,...,\numsides} {
-		%\node[above right] at (P\i) {$P_{\i}$};
-	%}
-
 	\node[above] at ($(P1)!0.5!(P2)$) {$c$};
+	\node[above] at ($(P1)!0.5!(P5)$) {$c$};
+	\node[right] at ($(P5)!0.5!(P4)$) {$c$};
 	\node[below] at ($(P2)!0.5!(F)$) {$d$};
-	\node[below] at ($(F)!0.5!(P5)$) {$e$};
+	\node[below] at ($(F)!0.3!(P5)$) {$e$};
+	\node[left] at ($(P1)!0.6!(F)$) {$f$};
+	\node[left] at ($(F)!0.5!(P4)$) {$g$};
 
-	% angles labels
+	% ---- angles labels
+
 	\pic[draw, ->, "$36^\circ$", angle radius=1.2cm, angle eccentricity=1.3]
 	{angle = P5--P2--P1};
 
@@ -81,8 +81,14 @@
 	\pic[draw, ->, "$36^\circ$", angle radius=1.2cm, angle eccentricity=1.3]
 	{angle = P4--P1--P5};
 
+	\pic[draw, ->, "$36^\circ$", angle radius=1.2cm, angle eccentricity=1.3]
+	{angle = P5--P4--P1};
+
 	\pic[draw, ->, "$108^\circ$", angle radius=0.6cm, angle eccentricity=1.5]
 	{angle = P5--F--P1};
+
+	\pic[draw, ->, "$108^\circ$", angle radius=0.7cm, angle eccentricity=1.6]
+	{angle = P1--P5--P4};
 
 	\pic[draw, ->, "$72^\circ$", angle radius=0.6cm, angle eccentricity=1.5]
 	{angle = P1--F--P2};

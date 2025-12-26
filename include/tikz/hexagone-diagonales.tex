@@ -13,40 +13,46 @@
 
 \begin{tikzpicture}[scale=2.3]
 
-	% parameters
+	% ---- parameters
+
 	\def\numsides{6}
 	\def\radius{2}
 	\def\rotation{90}
 
-	% coordinates
+	% ---- coordinates
+
 	\coordinate (O) at (0,0);
 	\foreach \i in {1,...,\numsides} {
 		\coordinate (P\i) at ({360/\numsides*(\i-1)+\rotation}:\radius);
 	}
 	\coordinate (G) at (0,{-\radius/2});
 
-	% circle
+	% ---- circle
+
 	\draw (O) circle (\radius);
 
-	% polygon
+	% ---- polygon
+
 	\draw (P1) \foreach \i in {2,...,\numsides} { -- (P\i) } -- cycle;
 
-	% radiuses
+	% ---- radiuses
+
 	\foreach \i in {1,...,\numsides} { \draw (O) -- (P\i); }
 
-	% hexagram
+	% ---- hexagram
+
 	\draw (P1) -- (P3) -- (P5) -- cycle;
 	\draw[dashed] (P2) -- (P4) -- (P6) -- cycle;
 
-	% thick vertices
+	% ---- thick vertices
+
 	\fill (O) circle (0.3mm);
 	\fill (G) circle (0.3mm);
 	\foreach \i in {1,...,\numsides} { \fill (P\i) circle (0.3mm); }
 
-	% vertices labels
+	% ---- vertices labels
+
 	\node[label={[label distance=1.0mm]left:$O$}] at (O) {};
-	%\node[circle, fill, inner sep=1pt,
-	%label={[label distance=2mm]left:$O$}] at (O) {};
 
 	\node[above] at (P1) {$A$};
 	\node[right] at (P6) {$B$};
@@ -61,6 +67,8 @@
 	\node[below] at ($(G)!0.5!(P5)$) {$b$};
 	\node[right] at ($(O)!0.55!(G)$) {$c$};
 	\node[right] at ($(G)!0.4!(P4)$) {$d$};
+
+	% ---- angles labels
 
 	\pic[draw, ->, "$60^\circ$", angle radius=0.5cm, angle eccentricity=1.5]
 	{angle = P3--O--P4};

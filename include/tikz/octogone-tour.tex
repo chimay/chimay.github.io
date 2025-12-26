@@ -19,15 +19,15 @@
 	\def\radius{2}
 	\def\rotation{90}
 
-	% ---- short method
-
-	%\draw (0,0) circle (\radius);
-	%\node[draw, regular polygon, regular polygon sides=\numsides, minimum size=4cm] at (0,0) {};
-
-	% ---- detailed method
+	% ---- coordinates
 
 	\coordinate (O) at (0,0);
+
+	% ---- circle
+
 	\draw (O) circle (\radius);
+
+	% ---- polygon
 
 	\foreach \i in {1,...,\numsides} {
 		\coordinate (P\i) at ({360/\numsides*(\i-1)+\rotation}:\radius);
@@ -37,7 +37,12 @@
 
 	\foreach \i in {1,...,\numsides} { \draw (O) -- (P\i); }
 
-	% vertices labels
+	% ---- thick vertices
+
+	\foreach \i in {1,...,\numsides} { \fill (P\i) circle (0.3mm); }
+
+	% ---- vertices labels
+
 	\node[label={[label distance=0.3mm]left:$O$}] at (O) {};
 	\filldraw (O) circle (0.9pt);
 
@@ -47,16 +52,14 @@
 	\node[above] at ($(O)!0.5!(P8)$) {$r$};
 	\node[below left] at ($(O)!0.6!(P7)$) {$r$};
 
-	%\foreach \i in {1,...,\numsides} {
-		%\node[above right] at (P\i) {$P_{\i}$};
-	%}
+	% ---- segments marks
 
-	% segments marks
 	\foreach \i in {1,...,\numsides} {
 		\tkzMarkSegments[mark=|, size=2pt](O,P\i)
 	}
 
-	% angles labels
+	% ---- angles labels
+
 	\foreach \i in {1,...,\numsides} {
 		\pgfmathtruncatemacro{\j}{mod(\i,\numsides)+1}
 		\ifodd\i

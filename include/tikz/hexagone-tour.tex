@@ -19,29 +19,31 @@
 	\def\radius{2}
 	\def\rotation{90}
 
-	% ---- short method
+	% ---- coordinates
 
-	%\draw (0,0) circle (\radius);
-	%\node[draw, regular polygon, regular polygon sides=\numsides, minimum size=4cm] at (0,0) {};
-
-	% ---- detailed method
-
-	% coordinates
 	\coordinate (O) at (0,0);
 	\foreach \i in {1,...,\numsides} {
 		\coordinate (P\i) at ({360/\numsides*(\i-1)+\rotation}:\radius);
 	}
 
-	% circle
+	% ---- circle
+
 	\draw (O) circle (\radius);
 
-	% polygon
+	% ---- polygon
+
 	\draw (P1) \foreach \i in {2,...,\numsides} { -- (P\i) } -- cycle;
 
-	% radiuses
+	% ---- radiuses
+
 	\foreach \i in {1,...,\numsides} { \draw (O) -- (P\i); }
 
-	% vertices labels
+	% ---- thick vertices
+
+	\foreach \i in {1,...,\numsides} { \fill (P\i) circle (0.3mm); }
+
+	% ---- vertices labels
+
 	\node[label={[label distance=0.5mm]left:$O$}] at (O) {};
 	\filldraw (O) circle (0.9pt);
 
@@ -52,16 +54,14 @@
 	\node[below] at ($(O)!0.5!(P5)$) {$r$};
 	\node[right] at ($(P5)!0.5!(P6)$) {$c$};
 
-	%\foreach \i in {1,...,\numsides} {
-		%\node[above right] at (P\i) {$P_{\i}$};
-	%}
+	% ---- segments marks
 
-	% segments marks
 	\foreach \i in {1,...,\numsides} {
 		\tkzMarkSegments[mark=|, size=2pt](O,P\i)
 	}
 
-	% angles labels
+	% ---- angles labels
+
 	\foreach \i in {1,...,\numsides} {
 		\pgfmathtruncatemacro{\j}{mod(\i,\numsides)+1}
 		\ifodd\i

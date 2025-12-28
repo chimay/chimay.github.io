@@ -1,0 +1,91 @@
+
+\documentclass[tikz, border=1mm]{standalone}
+
+\usepackage{amsmath}
+
+\usepackage{tikz}
+
+\usetikzlibrary{calc,angles,quotes,shapes.geometric}
+
+\usepackage{tkz-euclide}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=1.4]
+
+	% ---- parameters
+
+	\def\numsides{8}
+	\def\radius{2}
+	\def\rotation{90}
+
+	% ---- coordinates
+
+	\coordinate (O) at (0,0);
+
+	\foreach \i in {1,...,\numsides} {
+		\coordinate (P\i) at ({360/\numsides*(\i-1)+\rotation}:\radius);
+	}
+
+	% ---- circle
+
+	\draw (O) circle (\radius);
+
+	% ---- polygon
+
+	\draw (P1) \foreach \i in {2,...,\numsides} { -- (P\i) } -- cycle;
+
+	% ---- radiuses
+
+	\draw (O) -- (P1);
+	\draw[dashdotdotted] (O) -- (P2);
+	\draw (O) -- (P3);
+	\draw (O) -- (P4);
+	\draw (O) -- (P5);
+	\draw (O) -- (P6);
+	\draw (O) -- (P7);
+	\draw (O) -- (P8);
+
+	% ---- thick vertices
+
+	\foreach \i in {1,...,\numsides} { \fill (P\i) circle (0.3mm); }
+
+	% ---- vertices labels
+
+	\node[label={[label distance=0.3mm]left:$O$}] at (O) {};
+	\filldraw (O) circle (0.9pt);
+
+	\node[right] at (P7) {$B$};
+	\node[right] at (P8) {$A$};
+
+	\node[above] at ($(O)!0.5!(P8)$) {$r$};
+	\node[below left] at ($(O)!0.6!(P7)$) {$r$};
+
+	% ---- angles labels
+
+	\foreach \i in {1,...,\numsides} {
+		\pgfmathtruncatemacro{\j}{mod(\i,\numsides)+1}
+		\ifodd\i
+			\def\angradius{0.7cm}
+		\else
+			\def\angradius{0.7cm}
+		\fi
+		\pic[draw, ->, "$45^\circ$", angle radius=\angradius, angle eccentricity=1.3]
+		{angle = P\i--O--P\j};
+	}
+
+	\pic[draw, ->, "$67.5^\circ$", angle radius=0.7cm, angle eccentricity=1.3]
+	{angle = P8--P7--O};
+
+	\pic[draw, ->, "$67.5^\circ$", angle radius=0.7cm, angle eccentricity=1.3]
+	{angle = O--P8--P7};
+
+	\pic[draw, ->, "$67.5^\circ$", angle radius=0.7cm, angle eccentricity=1.3]
+	{angle = P1--P8--O};
+
+	\pic[draw, ->, "$135^\circ$", angle radius=0.7cm, angle eccentricity=1.4]
+	{angle = P3--P2--P1};
+
+\end{tikzpicture}
+
+\end{document}

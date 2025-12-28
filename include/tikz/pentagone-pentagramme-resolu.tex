@@ -1,0 +1,95 @@
+
+\documentclass[tikz, border=1mm]{standalone}
+
+\usepackage{amsmath}
+
+\usepackage{tikz}
+
+\usetikzlibrary{calc,angles,quotes,intersections,shapes.geometric}
+
+\usepackage{tkz-euclide}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=2.0]
+
+	% ---- parameters
+
+	\def\numsides{5}
+	\def\radius{2}
+	\def\rotation{90}
+
+	% ---- coordinates
+
+	\coordinate (O) at (0,0);
+
+	\foreach \i in {1,...,\numsides} {
+		\coordinate (P\i) at ({360/\numsides*(\i-1)+\rotation}:\radius);
+	}
+
+	% ---- intersections
+
+	\tkzInterLL(P2,P5)(P1,P4)\tkzGetPoint{F}
+	\tkzInterLL(P2,P5)(P1,P3)\tkzGetPoint{G}
+
+	% ---- circle
+
+	\draw (O) circle (\radius);
+
+	% ---- polygon
+
+	\draw (P1) \foreach \i in {2,...,\numsides} { -- (P\i) } -- cycle;
+
+	% ---- radiuses
+
+	\foreach \i in {1,...,\numsides} { \draw[dashdotdotted] (O) -- (P\i); }
+
+	% ---- pentagram
+
+	\draw[solid] (P1) -- (P3) -- (P5) -- (P2) -- (P4) -- cycle;
+
+	% ---- thick vertices
+
+	\fill (O) circle (0.3mm);
+	\fill (F) circle (0.3mm);
+	\fill (G) circle (0.3mm);
+	\foreach \i in {1,...,\numsides} { \fill (P\i) circle (0.3mm); }
+
+	% ---- vertices labels
+
+	\node[above left] at (O) {$O$};
+	\node[below left] at (F) {$F$};
+	\node[above left] at (G) {$G$};
+
+	\node[above] at (P1) {$A$};
+	\node[right] at (P5) {$B$};
+	\node[below right] at (P4) {$C$};
+	\node[below left] at (P3) {$D$};
+	\node[left] at (P2) {$E$};
+
+	% ---- angles labels
+
+	\pic[draw, ->, "$36^\circ$", angle radius=1.2cm, angle eccentricity=1.3]
+	{angle = P4--P1--P5};
+
+	\pic[draw, ->, "$36^\circ$", angle radius=1.2cm, angle eccentricity=1.3]
+	{angle = P1--P5--P2};
+
+	\pic[draw, ->, "$36^\circ$", angle radius=1.2cm, angle eccentricity=1.3]
+	{angle = P2--P1--P3};
+
+	\pic[draw, ->, "$36^\circ$", angle radius=1.4cm, angle eccentricity=1.2]
+	{angle = P3--P1--P4};
+
+	\pic[draw, ->, "$72^\circ$", angle radius=0.6cm, angle eccentricity=1.3]
+	{angle = P5--G--P1};
+
+	\pic[draw, ->, "$72^\circ$", angle radius=0.6cm, angle eccentricity=1.3]
+	{angle = P1--F--P2};
+
+	\pic[draw, ->, "$108^\circ$", angle radius=0.6cm, angle eccentricity=1.3]
+	{angle = P5--F--P1};
+
+\end{tikzpicture}
+
+\end{document}

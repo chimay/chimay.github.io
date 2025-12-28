@@ -1,0 +1,86 @@
+
+\documentclass[tikz, border=1mm]{standalone}
+
+\usepackage{amsmath}
+
+\usepackage{tikz}
+
+\usetikzlibrary{calc,angles,quotes,shapes.geometric}
+
+\usepackage{tkz-euclide}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=1.4]
+
+	% ---- parameters
+
+	\def\numsides{5}
+	\def\radius{2}
+	\def\rotation{90}
+
+	% ---- coordinates
+
+	\coordinate (O) at (0,0);
+
+	\foreach \i in {1,...,\numsides} {
+		\coordinate (P\i) at ({360/\numsides*(\i-1)+\rotation}:\radius);
+	}
+
+	\draw (P1) \foreach \i in {2,...,\numsides} { -- (P\i) } -- cycle;
+
+	% ---- circle
+
+	\draw (O) circle (\radius);
+
+	% ---- radiuses
+
+	\draw (O) -- (P1);
+	\draw[dashdotdotted] (O) -- (P2);
+	\draw (O) -- (P3);
+	\draw (O) -- (P4);
+	\draw (O) -- (P5);
+
+	% ---- thick vertices
+
+	\foreach \i in {1,...,\numsides} { \fill (P\i) circle (0.3mm); }
+
+	% ---- vertices labels
+
+	\node[above left] at (O) {$O$};
+	\filldraw (O) circle (0.9pt);
+
+	\node[above] at (P1) {$A$};
+	\node[right] at (P5) {$B$};
+
+	\node[left] at ($(O)!0.5!(P1)$) {$r$};
+	\node[below] at ($(O)!0.5!(P5)$) {$r$};
+
+	% ---- angles labels
+
+	\foreach \i in {1,...,\numsides} {
+		\pgfmathtruncatemacro{\j}{mod(\i,\numsides)+1}
+		\ifodd\i
+			\def\angradius{0.8cm}
+		\else
+			\def\angradius{0.8cm}
+		\fi
+		\pic[draw, ->, "$72^\circ$", angle radius=\angradius, angle eccentricity=1.3]
+		{angle = P\i--O--P\j};
+	}
+
+	\pic[draw, ->, "$54^\circ$", angle radius=0.8cm, angle eccentricity=1.3]
+	{angle = P1--P5--O};
+
+	\pic[draw, ->, "$54^\circ$", angle radius=0.8cm, angle eccentricity=1.3]
+	{angle = O--P1--P5};
+
+	\pic[draw, ->, "$54^\circ$", angle radius=0.8cm, angle eccentricity=1.3]
+	{angle = P2--P1--O};
+
+	\pic[draw, ->, "$108^\circ$", angle radius=0.7cm, angle eccentricity=1.4]
+	{angle = P3--P2--P1};
+
+\end{tikzpicture}
+
+\end{document}

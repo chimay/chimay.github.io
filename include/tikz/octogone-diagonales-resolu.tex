@@ -1,0 +1,131 @@
+
+\documentclass[tikz, border=1mm]{standalone}
+
+\usepackage{amsmath}
+
+\usepackage{tikz}
+
+\usetikzlibrary{calc,angles,quotes,shapes.geometric}
+
+\usepackage{tkz-euclide}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=1.7]
+
+	% ---- parameters
+
+	\def\numsides{8}
+	\def\radius{2}
+	\def\rotation{67.5}
+
+	% ---- coordinates
+
+	\coordinate (O) at (0,0);
+
+	\foreach \i in {1,...,\numsides} {
+		\coordinate (P\i) at ({360/\numsides*(\i-1)+\rotation}:\radius);
+	}
+
+	% ---- intersections
+
+	\tkzInterLL(P1,P6)(P3,P8)\tkzGetPoint{I}
+	\tkzInterLL(P1,P6)(P4,P7)\tkzGetPoint{J}
+	\tkzInterLL(P2,P5)(P3,P8)\tkzGetPoint{L}
+	\tkzInterLL(P2,P5)(P4,P7)\tkzGetPoint{K}
+
+	% ---- circle
+
+	\draw (O) circle (\radius);
+
+	% ---- polygon
+
+	\draw (P1) \foreach \i in {2,...,\numsides} { -- (P\i) } -- cycle;
+
+	% ---- radiuses
+
+	\foreach \i in {1,...,\numsides} { \draw[dashed] (O) -- (P\i); }
+
+	% ---- diagonals
+
+	%\draw (P1) -- (P4);
+	\draw (P4) -- (P7);
+	%\draw (P7) -- (P2);
+	\draw (P2) -- (P5);
+	%\draw (P5) -- (P8);
+	\draw (P8) -- (P3);
+	%\draw (P3) -- (P6);
+	\draw (P6) -- (P1);
+
+	% ---- thick vertices
+
+	\foreach \i in {1,...,\numsides} { \fill (P\i) circle (0.3mm); }
+
+	\fill (I) circle (0.3mm);
+	\fill (J) circle (0.3mm);
+	\fill (K) circle (0.3mm);
+	\fill (L) circle (0.3mm);
+
+	% ---- vertices labels
+
+	\node[label={[label distance=0.3mm]right:$O$}] at (O) {};
+	\filldraw (O) circle (0.9pt);
+
+	\node[above right] at (P1) {$A$};
+	\node[right] at (P8) {$B$};
+	\node[right] at (P7) {$C$};
+	\node[below right] at (P6) {$D$};
+	\node[below left] at (P5) {$E$};
+	\node[left] at (P4) {$F$};
+	\node[left] at (P3) {$G$};
+	\node[above left] at (P2) {$H$};
+
+	\node[below right] at (I) {$I$};
+	\node[above right] at (J) {$J$};
+	\node[above left] at (K) {$K$};
+	\node[below left] at (L) {$L$};
+
+	% ---- angles labels
+
+	\pic[draw, ->, "$67.5^\circ$", angle radius=0.7cm, angle eccentricity=1.6]
+	{angle = O--P2--P1};
+
+	\pic[draw, ->, "$135^\circ$", angle radius=0.7cm, angle eccentricity=1.6]
+	{angle = P2--P1--P8};
+
+	\pic[draw, ->, "$45^\circ$", angle radius=0.7cm, angle eccentricity=1.4]
+	{angle = P3--P2--L};
+
+	\pic[draw, ->, "$45^\circ$", angle radius=0.7cm, angle eccentricity=1.4]
+	{angle = L--P3--P2};
+
+	\pic[draw, ->, "$22.5^\circ$", angle radius=2.5cm, angle eccentricity=1.1]
+	{angle = L--P2--O};
+
+	\pic[draw, angle radius=0.3cm, angle eccentricity=1.0]
+	{right angle = L--I--J};
+
+	\pic[draw, angle radius=0.3cm, angle eccentricity=1.0]
+	{right angle = I--J--K};
+
+	\pic[draw, angle radius=0.3cm, angle eccentricity=1.0]
+	{right angle = J--K--L};
+
+	\pic[draw, angle radius=0.3cm, angle eccentricity=1.0]
+	{right angle = K--L--I};
+
+	\pic[draw, angle radius=0.3cm, angle eccentricity=1.0]
+	{right angle = J--P6--P5};
+
+	\pic[draw, angle radius=0.3cm, angle eccentricity=1.0]
+	{right angle = P6--P5--K};
+
+	\pic[draw, angle radius=0.3cm, angle eccentricity=1.0]
+	{right angle = P2--L--P3};
+
+	\pic[draw, angle radius=0.3cm, angle eccentricity=1.0]
+	{right angle = P4--K--P5};
+
+\end{tikzpicture}
+
+\end{document}

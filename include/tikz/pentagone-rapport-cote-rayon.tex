@@ -22,30 +22,45 @@
 	% ---- coordinates
 
 	\coordinate (O) at (0,0);
-	\draw (O) circle (\radius);
 
 	\foreach \i in {1,...,\numsides} {
 		\coordinate (P\i) at ({360/\numsides*(\i-1)+\rotation}:\radius);
 	}
 
+	% ---- intersections
+
+	\tkzInterLL(P1,P2)(O,P4)\tkzGetPoint{F}
+
+	% ---- circle
+
+	\draw (O) circle (\radius);
+
+	% ---- polygon
+
 	\draw (P1) \foreach \i in {2,...,\numsides} { -- (P\i) } -- cycle;
 
 	% ---- radiuses
 
-	\foreach \i in {1,...,\numsides} { \draw[dashdotdotted] (O) -- (P\i); }
+	\draw[solid] (O) -- (P1);
+	\draw[solid] (O) -- (P2);
+	\draw[dashdotdotted] (O) -- (P3);
+	\draw[dashdotdotted] (O) -- (P4);
+	\draw[dashdotdotted] (O) -- (P5);
 
-	% ---- pentagram
-
-	\draw[solid] (P1) -- (P3) -- (P5) -- (P2) -- (P4) -- cycle;
+	\draw[solid] (O) -- (F);
 
 	% ---- thick vertices
 
 	\foreach \i in {1,...,\numsides} { \fill (P\i) circle (0.3mm); }
 
+	\fill (F) circle (0.3mm);
+
+	\filldraw (O) circle (0.9pt);
+
 	% ---- vertices labels
 
-	\node[above left] at (O) {$O$};
-	\filldraw (O) circle (0.9pt);
+	\node[below left] at (O) {$O$};
+	\node[above left] at (F) {$F$};
 
 	\node[above] at (P1) {$A$};
 	\node[right] at (P5) {$B$};
@@ -53,16 +68,42 @@
 	\node[below left] at (P3) {$D$};
 	\node[left] at (P2) {$E$};
 
+	% ---- segments labels
+
+	\node[right] at ($(O)!0.5!(P1)$) {$r$};
+	\node[below] at ($(O)!0.5!(P2)$) {$r$};
+
+	\node[above] at ($(P5)!0.5!(P1)$) {$l$};
+
+	\node[above] at ($(P1)!0.5!(F)$) {$a$};
+	\node[above] at ($(F)!0.5!(P2)$) {$b$};
+	\node[above] at ($(O)!0.55!(F)$) {$c$};
+
 	% ---- angles labels
 
-	\pic[draw, ->, "$108^\circ$", angle radius=0.9cm, angle eccentricity=1.3]
-	{angle = P2--P1--P5};
+	\pic[draw, ->, "$72^\circ$", angle radius=0.9cm, angle eccentricity=1.3]
+	{angle = P5--O--P1};
 
-	\pic[draw, ->, "$\alpha$", angle radius=0.7cm, angle eccentricity=1.3]
-	{angle = P5--P2--P1};
+	\pic[draw, ->, "$72^\circ$", angle radius=0.9cm, angle eccentricity=1.3]
+	{angle = P4--O--P5};
 
-	\pic[draw, ->, "$\alpha$", angle radius=0.7cm, angle eccentricity=1.3]
-	{angle = P1--P5--P2};
+	\pic[draw, ->, "$72^\circ$", angle radius=0.9cm, angle eccentricity=1.3]
+	{angle = P3--O--P4};
+
+	\pic[draw, ->, "$72^\circ$", angle radius=0.9cm, angle eccentricity=1.3]
+	{angle = P2--O--P3};
+
+	\pic[draw, ->, "$\alpha$", angle radius=1.0cm, angle eccentricity=1.3]
+	{angle = P1--O--F};
+
+	\pic[draw, ->, "$\gamma$", angle radius=1.0cm, angle eccentricity=1.3]
+	{angle = F--O--P2};
+
+	\pic[draw, ->, "$\delta$", angle radius=0.6cm, angle eccentricity=1.3]
+	{angle = O--F--P1};
+
+	\pic[draw, ->, "$\epsilon$", angle radius=0.6cm, angle eccentricity=1.3]
+	{angle = P2--F--O};
 
 \end{tikzpicture}
 

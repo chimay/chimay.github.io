@@ -28,10 +28,13 @@
 
 ** Somme des angles
 
-*** Par une décomposition en triangle
+#+TOC: headlines 1 local
 
-On obtient la smme des angles d’un polygone générique à $n$ côtés en le
-divisant en triangles. Il y a toutefois quelques précautions à prendre :
+*** Par une décomposition en triangles
+
+On obtient la smme des angles d’un polygone générique à $n$ côtés
+en le décomposant en triangles. Il y a toutefois quelques précautions
+à prendre :
 
 - les triangles doivent former une mosaïque qui recouvrent intégralement
   le polygone
@@ -46,8 +49,8 @@ divisant en triangles. Il y a toutefois quelques précautions à prendre :
 Le schéma ci-dessous donne un exemple de partition d’un polygone en
 triangles :
 
-#+attr_html: :width 500px
-#+attr_latex: :width 500px
+#+attr_html: :width 600px
+#+attr_latex: :width 600px
 #+caption: polygone à $n$ côtés divisé en triangles
 #+name: fig:polygone_a_n_cotes_divise_en_triangles
 [[file:../include/tikz/somme-angles-polygone-par-triangles.svg]]
@@ -75,11 +78,66 @@ On a en particulier le tableau suivant :
 
 *** Par un parcours autour du polygone
 
-TODO
+Ce raisonnement est inspiré de
+[[https://www.youtube.com/watch?v=7wY-Byh8d6M][cette vidéo de Micmath]].
 
-#+attr_html: :width 500px
-#+attr_latex: :width 500px
+Imaginons un personnage fictif qui parcours un tour complet autour du
+polygone suivant :
+
+#+attr_html: :width 700px
+#+attr_latex: :width 700px
 [[file:../include/tikz/somme-angles-polygone-par-parcours.svg]]
+
+Ce parcours se fait dans le sens anti-horlogique, en partant du point
+$P$, avec une direction initiale donnée par le vecteur $\vec{u}$. Notre
+personnage tourne à chaque sommet d’un angle $\alpha_i$. l’angle
+total de sa rotation vaut donc  :
+
+$$ S = \sum_{i=1}^n \alpha_i $$
+
+où $n$ est le nombre de côtés. Mais comme il effectue un tour complet,
+on a aussi :
+
+$$ S = 2 \ \pi $$
+
+On en déduit que :
+
+$$ \sum_{i=1}^n \alpha_i = 2 \ \pi $$
+
+À chaque sommet $i$, les angles $\alpha_i$ et $\gamma_i$ forment ensemble
+un angle plat :
+
+$$ \alpha_i + \gamma_i = \pi $$
+
+On a donc :
+
+$$ \alpha_i = \pi - \gamma_i $$
+
+La relation sur la somme des angles devient :
+
+$$ \sum_{i=1}^n (\pi - \gamma_i) = 2 \ \pi $$
+
+ou encore :
+
+$$ \sum_{i=1}^n \pi - \sum_{i=1}^n \gamma_i = 2 \ \pi $$
+
+La constante $\pi$ ne dépendant pas de $i$, on a simplement :
+
+$$ n \ \pi - \sum_{i=1}^n \gamma_i = 2 \ \pi $$
+
+Isolons la somme des angles internes du polygone :
+
+$$ \sum_{i=1}^n \gamma_i = n \ \pi - 2 \ \pi $$
+
+Mettons en évidence $\pi$ :
+
+$$ \sum_{i=1}^n \gamma_i = (n - 2) \ \pi $$
+
+La somme dans le membre de gauche n’est rien d’autre que la somme
+des angles internes du polygone. Nous avons donc montré que cette somme
+vaut :
+
+$$ \sum_{i=1}^n \gamma_i = (n - 2) \cdot \pi = (n - 2) \cdot 180^\circ $$
 
 ** Angle d’un polygone régulier
 

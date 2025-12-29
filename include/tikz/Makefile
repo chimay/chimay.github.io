@@ -88,6 +88,7 @@ clean: $(CLEAN_SUBDIRS)
 	rm -f ?*.fdb_latexmk
 	rm -f ?*.fls
 	rm -f ?*.log
+	remove-obsolete-targets.zsh +tex -pdf -svg
 
 clean-html: $(CLEAN_HTML_SUBDIRS)
 	rm -f ?*.html

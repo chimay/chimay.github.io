@@ -46,6 +46,8 @@ LY_GLOB_FILES = $(wildcard ~/racine/musica/lilypond/template/global/*.ly)
 
 LY_TMPL_PNG = $(wildcard $(ROOT_GENERIC)/image/musica/template/*.png)
 
+TEX_INTERMEDIARY_EXT = aux log toc ptc out lof lot fls fdb fdb_latexmk
+
 # programs & options {{{1
 
 MAKELINE = $(if $(MAKEFLAGS),$(MAKE) -$(MAKEFLAGS),$(MAKE))

@@ -44,10 +44,11 @@ tex: $(ORG_TEX_FILES)
 # tex --> pdf {{{1
 
 pdf/%.pdf: %.tex | mkdir_pdf
-	latexmk -f -pdf -shell-escape $<
-	#pdflatex $<
+	latexmk -f -pdf -shell-escape -output-directory=pdf $<
+	#mv $@ pdf/
+	#mv $**.aux pdf/
 
-mkdif_pdf:
+mkdir_pdf:
 	mkdir -p pdf
 
 pdf: $(ORG_PDF_FILES)
@@ -85,9 +86,9 @@ $(WIPE_SUBDIRS):
 clean: $(CLEAN_SUBDIRS)
 	rm -f ?*~
 	rm -f ?*.aux
-	rm -f ?*.fdb_latexmk
 	rm -f ?*.fls
 	rm -f ?*.fdb
+	rm -f ?*.fdb_latexmk
 	rm -f ?*.log
 	rm -f ?*.out
 	rm -f ?*.toc

@@ -45,7 +45,7 @@ $(ALL_SUBDIRS):
 	$(MAKELINE) -C ${@:all-%=%} all
 	@$(ECHO)
 
-all: $(ALL_SUBDIRS) clean
+all: $(ALL_SUBDIRS)
 
 install: all sync-html
 

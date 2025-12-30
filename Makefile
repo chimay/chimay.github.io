@@ -46,7 +46,7 @@ $(ALL_SUBDIRS):
 	$(MAKELINE) -C ${@:all-%=%} all
 	@$(ECHO)
 
-all: html $(ALL_SUBDIRS)
+all: html $(ALL_SUBDIRS) clean
 	git add -A
 
 install: all sync-html

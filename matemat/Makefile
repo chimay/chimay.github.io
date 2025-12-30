@@ -43,7 +43,7 @@ tex: $(ORG_TEX_FILES)
 
 # tex --> pdf {{{1
 
-%.pdf: %.tex
+%.pdf: %.tex clean
 	latexmk -f -pdf -shell-escape $<
 	#pdflatex $<
 

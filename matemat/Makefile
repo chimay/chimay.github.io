@@ -84,6 +84,7 @@ clean: $(CLEAN_SUBDIRS)
 	rm -f ?*.aux
 	rm -f ?*.fdb_latexmk
 	rm -f ?*.fls
+	rm -f ?*.fdb
 	rm -f ?*.log
 	rm -f ?*.out
 	rm -f ?*.toc

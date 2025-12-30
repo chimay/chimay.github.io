@@ -44,10 +44,10 @@ tex: $(ORG_TEX_FILES)
 # tex --> pdf {{{1
 
 %.pdf: %.tex
-	latexmk -f -pdf $<
+	latexmk -f -pdf -shell-escape $<
 	#pdflatex $<
 
-pdf: $(ORG_PDF_FILES)
+pdf: $(ORG_PDF_FILES) clean
 
 # sync -> html dir {{{1
 

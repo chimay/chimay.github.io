@@ -25,7 +25,7 @@ WIPE_SUBDIRS           =  $(SUBDIRS:%=wipe-%)
 ORG_FILES        =  $(wildcard *.org)
 ORG_HTML_FILES   =  $(ORG_FILES:.org=.html)
 ORG_TEX_FILES    =  $(ORG_FILES:.org=.tex)
-ORG_PDF_FILES    =  $(ORG_FILES:.org=.pdf)
+ORG_PDF_FILES    = $(patsubst %.org,pdf/%.pdf,$(ORG_FILES))
 
 TEX_FILES        =  $(wildcard *.tex)
 TEX_PDF_FILES    =  $(TEX_FILES:.tex=.pdf)

@@ -43,9 +43,12 @@ tex: $(ORG_TEX_FILES)
 
 # tex --> pdf {{{1
 
-%.pdf: %.tex clean
+pdf/%.pdf: %.tex clean | mkdir_pdf
 	latexmk -f -pdf -shell-escape $<
 	#pdflatex $<
+
+mkdif_pdf:
+	mkdir -p pdf
 
 pdf: $(ORG_PDF_FILES) clean
 

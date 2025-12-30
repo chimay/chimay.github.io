@@ -1,6 +1,6 @@
 # vim: set ft=make :
 
-include ../Makefile.inc
+include ../../Makefile.inc
 
 .DEFAULT_GOAL := all
 

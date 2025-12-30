@@ -60,11 +60,7 @@ $(ALL_SUBDIRS):
 	$(MAKELINE) -C ${@:all-%=%} all
 	@$(ECHO)
 
-all: svg $(ALL_SUBDIRS)
-	rm -f ?*.aux
-	rm -f ?*.fdb_latexmk
-	rm -f ?*.fls
-	rm -f ?*.log
+all: svg $(ALL_SUBDIRS) clean
 
 install: all sync-html
 
@@ -88,6 +84,8 @@ clean: $(CLEAN_SUBDIRS)
 	rm -f ?*.fdb_latexmk
 	rm -f ?*.fls
 	rm -f ?*.log
+	rm -f ?*.out
+	rm -f ?*.toc
 	remove-obsolete-targets.zsh +tex -pdf -svg
 
 clean-html: $(CLEAN_HTML_SUBDIRS)

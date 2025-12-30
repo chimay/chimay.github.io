@@ -24,6 +24,8 @@ WIPE_SUBDIRS           =  $(SUBDIRS:%=wipe-%)
 
 ORG_FILES        =  $(wildcard *.org)
 ORG_HTML_FILES   =  $(ORG_FILES:.org=.html)
+ORG_TEX_FILES    =  $(ORG_FILES:.org=.tex)
+ORG_PDF_FILES    =  $(ORG_FILES:.org=.pdf)
 
 TEX_FILES        =  $(wildcard *.tex)
 TEX_PDF_FILES    =  $(TEX_FILES:.tex=.pdf)
@@ -53,6 +55,9 @@ ECHO  = echo
 EMACS            = /usr/bin/emacs
 EMACS_PRE_FLAGS  =
 EMACS_POST_FLAGS = --batch -f org-html-export-to-html --kill 2> emacs.log
+
+EMACS_POST_FLAGS_TEX = --batch -f org-latex-export-to-latex --kill 2> emacs.log
+EMACS_POST_FLAGS_PDF = --batch -f org-latex-export-to-pdf --kill 2> emacs.log
 
 DRY_RSYNC = rsync -n -au --delete --exclude-from=./rsync-html-exclude -vhi --progress
 RSYNC     = rsync -au --delete --exclude-from=./rsync-html-exclude -vhi --progress

@@ -33,13 +33,21 @@ debug:
 
 html: $(ORG_HTML_FILES)
 
-# html -> pdf {{{1
+# org -> tex {{{1
 
-%.pdf: %.html
-	pandoc $< -t latex -o $(patsubst %.html,%.pdf,$<)
+%.tex: %.org $(INC_FILES) $(INC_LATEX_FILES)
+	$(EMACS) $(EMACS_PRE_FLAGS) $< $(EMACS_POST_FLAGS_TEX)
 	@$(ECHO)
 
-html: $(ORG_HTML_FILES)
+tex: $(ORG_TEX_FILES)
+
+# tex --> pdf {{{1
+
+%.pdf: %.tex
+	latexmk -f -pdf $<
+	#pdflatex $<
+
+pdf: $(ORG_PDF_FILES)
 
 # sync -> html dir {{{1
 
@@ -73,6 +81,12 @@ $(WIPE_SUBDIRS):
 
 clean: $(CLEAN_SUBDIRS)
 	rm -f ?*~
+	rm -f ?*.aux
+	rm -f ?*.fdb_latexmk
+	rm -f ?*.fls
+	rm -f ?*.log
+	rm -f ?*.out
+	rm -f ?*.toc
 	remove-obsolete-targets.zsh +org -html
 
 clean-html: $(CLEAN_HTML_SUBDIRS)

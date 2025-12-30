@@ -63,6 +63,14 @@ $(WIPE_SUBDIRS):
 
 clean: $(CLEAN_SUBDIRS)
 	rm -f ?*~
+	rm -f ?*.aux
+	rm -f ?*.fdb_latexmk
+	rm -f ?*.fls
+	rm -f ?*.log
+	rm -f ?*.out
+	rm -f ?*.toc
+	rm -f ?*.ptc
+	remove-obsolete-targets.zsh +tex -pdf -svg
 
 clean-html: $(CLEAN_HTML_SUBDIRS)
 	rm -f ?*.html

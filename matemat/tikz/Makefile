@@ -86,6 +86,7 @@ clean: $(CLEAN_SUBDIRS)
 	rm -f ?*.log
 	rm -f ?*.out
 	rm -f ?*.toc
+	rm -f ?*.ptc
 	remove-obsolete-targets.zsh +tex -pdf -svg
 
 clean-html: $(CLEAN_HTML_SUBDIRS)

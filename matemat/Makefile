@@ -26,7 +26,7 @@ debug:
 
 # org -> html {{{1
 
-%.html: %.org $(INC_FILES) $(INC_LATEX_FILES)
+%.html: %.org $(INC_FILES) $(INC_MATHJAX_FILES)
 	$(EMACS) $(EMACS_PRE_FLAGS) $< $(EMACS_POST_FLAGS)
 	remove-max-width-from-org-html-export.zsh $(patsubst %.org,%.html,$<)
 	@$(ECHO)
@@ -48,10 +48,10 @@ pdf/%.pdf: %.tex | mkdir_pdf
 	#mv $@ pdf/
 	#mv $**.aux pdf/
 
-mkdir_pdf:
+mkdir_pdf: pdf
 	mkdir -p pdf
 
-pdf: $(ORG_PDF_FILES)
+pdf_files: $(ORG_PDF_FILES)
 
 # sync -> html dir {{{1
 

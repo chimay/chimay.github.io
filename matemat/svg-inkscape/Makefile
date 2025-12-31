@@ -78,4 +78,6 @@ clean-html: $(CLEAN_HTML_SUBDIRS)
 
 wipe: $(WIPE_SUBDIRS)
 	rm -f ?*.html
+	rm -f *_svg-tex.pdf_tex
+	rm -f *_svg-tex.pdf
 	rm -f ?*~

@@ -1,0 +1,61 @@
+
+\documentclass[tikz, border=1mm]{standalone}
+
+\usepackage{amsmath}
+
+\usetikzlibrary{calc,angles,quotes,intersections,shapes.geometric}
+
+\usepackage{tkz-euclide}
+
+\begin{document}
+\begin{tikzpicture}[scale=0.9]
+
+	% ---- parameters
+
+	\def\radius{3}
+
+	% ---- coordinates
+
+	\coordinate (O) at (0,0);
+	\coordinate (A) at (-\radius,0);
+	\coordinate (B) at (\radius,0);
+
+	% ---- points for dimension lines
+
+	\coordinate (Ad) at ($(A) + (0,3.5)$);
+	\coordinate (Bd) at ($(B) + (0,3.5)$);
+
+	% ---- circle
+
+	\draw (O) circle (\radius);
+	\draw (A)--(B);
+
+	% ---- dimension lines
+
+	\draw[<->, solid] (Ad) -- (Bd);
+	\draw[dashdotted] (Ad) -- (A);
+	\draw[dashdotted] (Bd) -- (B);
+
+	% ---- thick vertices
+
+	\fill (O) circle (0.5mm);
+	\fill (A) circle (0.5mm);
+	\fill (B) circle (0.5mm);
+
+	% ---- vertices labels
+
+	\node[below left] at (O) {$O$};
+	\node[below left] at (A) {$A$};
+	\node[below left] at (B) {$B$};
+
+	% ---- segments labels
+
+	\node[above] at ($(Ad)!0.5!(Bd)$) {$d$};
+	\node[above] at ($(O)!0.5!(B)$) {$r$};
+
+	% ---- circle label
+
+	\node at (45:\radius+0.3) {$\mathcal{C}$};
+
+\end{tikzpicture}
+\end{document}

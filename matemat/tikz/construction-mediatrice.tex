@@ -43,6 +43,7 @@
 % \usepackage{tikz}
 
 \usepackage{amsmath}
+\usepackage{mathrsfs}
 
 \usetikzlibrary{calc,angles,quotes,intersections,shapes.geometric}
 
@@ -69,79 +70,52 @@
 
 	% ---- parameters
 
-	\def\length{6}
-	\def\radius{0.7*\length}
+	\def\len{6}
+	\def\radius{0.65*\len}
 
 	% ---- coordinates
 
-	\coordinate (A) at (-\length/2,0);
-	\coordinate (B) at (\length/2,0);
+	\coordinate (A) at (-\len/2,0);
+	\coordinate (B) at (\len/2,0);
 
 	\coordinate (Ra) at ($(A) + (\radius, 0)$);
 	\coordinate (Rb) at ($(B) + (\radius, 0)$);
 
 	% ---- intersections
 
-	\tkzInterCC(A,Ra)(B,Rb)\tkzGetPoints{I}{J}
+	\tkzInterCC(A,Ra)(B,Rb)\tkzGetPoints{D}{E}
 
-	\coordinate (D) at ($(I) + (0, 1)$);
-	\coordinate (E) at ($(J) - (0, 1)$);
-
-	% ---- points for dimension lines
-
-	%\coordinate (IdJ) at ($(I) + (0,0.7)$);
+	\coordinate (I) at ($(D) + (0, 1)$);
+	\coordinate (J) at ($(E) - (0, 1)$);
 
 	% ---- segments
 
 	\draw (A) -- (B);
-	\draw (D) -- (E);
-
-	% ---- circle
-
-	%\draw (O) circle (\radius);
+	\draw (I) -- (J);
 
 	% ---- circular arc
 
-	\draw (A) ++(-75:\radius) arc (-75:75:\radius);
-	\draw (B) ++(105:\radius) arc (105:255:\radius);
-
-	% ---- polygon
-
-	%\draw (P1) \foreach \i in {2,...,\numsides} { -- (P\i) } -- cycle;
-
-	% ---- radiuses
-
-	%\draw (O) -- (P1);
-
-	% ---- dimension lines
-
-	%\draw[dimension] (IdJ) -- (JdI);
-	%\draw[dimension extension] (I) -- (IdJ);
-	%\draw[dimension extension] (J) -- (JdI);
+	\draw (A) ++(-65:\radius) arc (-65:65:\radius);
+	\draw (B) ++(115:\radius) arc (115:245:\radius);
 
 	% ---- thick vertices
 
 	\fill (A) circle (0.5mm);
 	\fill (B) circle (0.5mm);
+	\fill (D) circle (0.5mm);
+	\fill (E) circle (0.5mm);
 
 	% ---- vertices labels
 
 	\node[below] at (A) {$A$};
 	\node[below] at (B) {$B$};
+	\node[label={[label distance=0.5]left:$D$}] at (D) {};
+	\node[label={[label distance=0.5]left:$E$}] at (E) {};
 
-	% ---- segments labels
+	% ---- circular arcs labels
 
-	%\node[above] at ($(G)!0.5!(I)$) {$b$};
-
-	% ---- angles labels
-
-	%\pic[draw, ->, "$60^\circ$", angle radius=0.5cm, angle eccentricity=1.5]
-	%{angle = H--O--I};
-
-	% ---- right angles labels
-
-	%\pic [draw, angle radius=7pt, angle eccentricity=1]
-	%{right angle = C--B--A};
+	\node at ($(20:{\radius+0.3}) + (-\len/2, 0)$) {$\mathscr{C}_1$};
+	\node at ($(160:{\radius+0.3}) + (\len/2, 0)$) {$\mathscr{C}_2$};
 
 \end{tikzpicture}
 \end{document}

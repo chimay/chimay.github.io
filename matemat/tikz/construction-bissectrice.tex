@@ -76,10 +76,10 @@
 
 % parameters %{{{2
 
-	\def\len{2}
-	\def\extlen{4}
-	\def\radius{4}
-	\def\arcradius{5}
+	\def\len{1.5}
+	\def\extlen{3}
+	\def\radius{3}
+	\def\arcradius{4}
 	\def\ang{60}
 
 % coordinates %{{{2
@@ -92,40 +92,38 @@
 
 	\coordinate (R) at ($(O) + (\radius, 0)$);
 
+% intersections %{{{2
+
+	\tkzInterLC(O,A)(O,R)\tkzGetSecondPoint{D}
+	\tkzInterLC(O,B)(O,R)\tkzGetSecondPoint{E}
+
+	\path[name path=circleA] (D) circle (\arcradius);
+	\path[name path=circleB] (E) circle (\arcradius);
+	\path [name intersections={of=circleA and circleB, by={I,J}}];
+
 % vectors %{{{2
 
 	\coordinate (v1) at ($ (A) - (O) $);
 	\coordinate (v2) at ($ (B) - (O) $);
+	\coordinate (v3) at ($ (I) - (O) $);
 
 % unit vectors %{{{3
 
 	\coordinate (u1) at ($ (0,0)!1cm!(v1) $);
 	\coordinate (u2) at ($ (0,0)!1cm!(v2) $);
+	\coordinate (u3) at ($ (0,0)!1cm!(v3) $);
 
 % coordinates from vectors %{{{2
 
 	\coordinate (X) at ($ (A) + \extlen*(u1) $);
 	\coordinate (Y) at ($ (B) + \extlen*(u2) $);
-
-% intersections %{{{2
-
-	\tkzInterLC(O,A)(O,R)\tkzGetSecondPoint{C}
-	\tkzInterLC(O,B)(O,R)\tkzGetSecondPoint{D}
-
-	\path[name path=circleA] (C) circle (\arcradius);
-	\path[name path=circleB] (D) circle (\arcradius);
-	\path [name intersections={of=circleA and circleB, by={I,J}}];
-
-% points for dimension lines %{{{2
-
-	%\coordinate (IdJ) at ($ (I) + (0,0.7) $);
+	\coordinate (Z) at ($ (O) + {2.5*\extlen}*(u3) $);
 
 % segments %{{{2
 
 	\draw (O) -- (X);
 	\draw (O) -- (Y);
-
-	%\foreach \i in {1,...,6} { \draw (O) -- (u\i); }
+	\draw (O) -- (Z);
 
 % circles %{{{2
 
@@ -135,30 +133,16 @@
 
 	\draw (O) ++(-5:\radius) arc (-5:{\ang + 5}:\radius);
 
-	\draw (C) ++(20:\arcradius) arc (20:70:\arcradius);
-	\draw (D) ++(-20:\arcradius) arc (-20:30:\arcradius);
-
-% polygons %{{{2
-
-	%\draw (P1) \foreach \i in {2,...,\numsides} { -- (P\i) } -- cycle;
-
-% radiuses %{{{2
-
-	%\draw (O) -- (P1);
-
-% dimension lines %{{{2
-
-	%\draw[dimension] (IdJ) -- (JdI);
-	%\draw[dimension extension] (I) -- (IdJ);
-	%\draw[dimension extension] (J) -- (JdI);
+	\draw (D) ++(20:\arcradius) arc (20:70:\arcradius);
+	\draw (E) ++(-30:\arcradius) arc (-30:40:\arcradius);
 
 % thick vertices %{{{2
 
 	\fill (O) circle (0.5mm);
 	\fill (A) circle (0.5mm);
 	\fill (B) circle (0.5mm);
-	\fill (C) circle (0.5mm);
 	\fill (D) circle (0.5mm);
+	\fill (E) circle (0.5mm);
 	\fill (I) circle (0.5mm);
 
 % vertices labels %{{{2
@@ -166,12 +150,19 @@
 	\node[below left] at (O) {$O$};
 	\node[below] at (A) {$A$};
 	\node[left] at (B) {$B$};
-
-	%\node[label={[label distance=0.5mm]above:$G$}] at (G) {};
+	\node[below left] at (D) {$D$};
+	\node[label={[label distance=0.5mm]left:$E$}] at (E) {};
+	\node[label={[label distance=0.5mm]right:$I$}] at (I) {};
 
 % segments labels %{{{2
 
 	%\node[above] at ($ (A)!0.5!(B) $) {$a$};
+
+% circular arcs labels %{{{2
+
+	\node at ($ (O)+(20:\radius+0.4) $) {$\mathscr{C}_1$};
+	\node at ($ (D)+(30:\arcradius+0.4) $) {$\mathscr{C}_2$};
+	\node at ($ (E)+(30:\arcradius+0.4) $) {$\mathscr{C}_3$};
 
 % angles labels %{{{2
 

@@ -76,11 +76,18 @@
 
 % parameters %{{{2
 
+	% ---- length is reserved
+	%\def\len{2}
+
 	%\def\radius{2}
 
 % coordinates %{{{2
 
 	%\coordinate (O) at (0,0);
+
+% coordinates of points in circles %{{{3
+
+	%\coordinate (Ra) at ($(A) + (\radius, 0)$);
 
 % vectors %{{{2
 
@@ -90,9 +97,38 @@
 
 	%\coordinate (u) at ($ (0,0)!1cm!(v) $);
 
+% coordinates from vectors %{{{2
+
+% fixed length %{{{3
+
+	%\coordinate (E) at ($ (A) + \len*(u) $);
+
+% proportional length %{{{3
+
+% 	\coordinate (E) at ($ (A) + \arrowratio*(v) $);
+
 % intersections %{{{2
 
 	%\tkzInterLL(A,B)(C,D)\tkzGetPoint{E}
+	%\tkzInterLC(A,B)(O,C)\tkzGetPoints{P}{Q}
+	%\tkzInterCC(O1,A1)(O2,A2)\tkzGetPoints{M}{N}
+
+	% -- in case of 2 intersections
+	%\tkzGetFirstPoint{I}
+	% -- or
+	%\tkzGetSecondPoint{I}
+
+	%\path[name path=line1] (0,0) -- (4,3);
+	%\path[name path=line2] (0,3) -- (4,0);
+	%\path[name intersections={of=line1 and line2, by=I}];
+
+	%\path[name path=line] (0,-1) -- (4,2);
+	%\path[name path=circle] (2,0) circle (1.5);
+	%\path[name intersections={of=line and circle, by={A,B}}];
+
+	%\path[name path=circleA] (0,0) circle (2cm);
+	%\path[name path=circleB] (1,1) circle (2cm);
+	%\path [name intersections={of=circleA and circleB, by={P1,P2}}];
 
 % points for dimension lines %{{{2
 
@@ -110,8 +146,8 @@
 
 % circular arcs %{{{2
 
-	%\draw (A) ++(-90:\length) arc (-90:90:\length);
-	%\draw (B) ++(90:\length) arc (90:270:\length);
+	%\draw (A) ++(-90:\len) arc (-90:90:\len);
+	%\draw (B) ++(90:\len) arc (90:270:\len);
 
 % polygons %{{{2
 
@@ -160,7 +196,7 @@
 	%\pic [draw, angle radius=7pt, angle eccentricity=1]
 	%{right angle = C--B--A};
 
-% closure %{{{2
+% closing %{{{2
 
 \end{tikzpicture}
 \end{document}

@@ -378,150 +378,100 @@ L'ordre est donc conservé lorsqu'on soustrait au moins autant au petit nombre q
 
 * Multiplication
 
-Soit $m,n \in \setN$. La multiplication usuelle, notée $\cdot : \setN \times \setN \mapsto \setN$, est définie par :
+#+TOC: headlines 1 local
 
-$$m \cdot 0 = 0$$
+** Définition
 
-$$m \cdot n^+ = ( m \cdot n ) + m$$
+La multiplication usuelle entre deux nombres $m,n \in \setN$ est le
+nombre de cases que contient un tableau qui comporte $m$ lignes et $n$
+colonnes. On la note $\cdot : \setN \times \setN \mapsto \setN$.
+
+Augmenter le nombre de colonnes de $1$ augmente le nombre de cases total
+du nombre de lignes $m$ :
+
+$$ m \cdot n^+ = ( m \cdot n ) + m$$
+
+Augmenter le nombre de lignes de $1$ augmente le nombre de cases total
+du nombre de colonnes $n$ :
+
+$$ m^+ \cdot n = ( m \cdot n ) + n $$
 
 Posant $i = m$ et $j = n^+$, on en déduit que :
 
-$$i \cdot 0 = 0$$
+$$ i \cdot j = ( i \cdot j^- ) + i $$
 
-$$i \cdot j = ( i \cdot j^- ) + i$$
+Posant $k = m^+$ et $l = n$, on en déduit que :
 
+$$ k \cdot l = ( k^- \cdot l ) + l $$
 
-** Priorité
-
-Afin d'alléger les notations, nous convenons que la multiplication est toujours prioritaire sur l'addition. On pose donc :
-
-$$i \cdot j + k = ( i \cdot j ) + k$$
-
-pour tout $i,j,k \in \setN$.
-
-La définition peut alors se réécrire :
-
-$$m \cdot 0 = 0$$
-
-$$m \cdot n^+ = m \cdot n + m$$
-
-
-** Notation
+*** Notation
 
 Lorsque cela ne pose pas de problème d'ambiguité, on note aussi :
 
 $$m \ n = m \cdot n$$
 
+*** Priorité
 
-** Absorption
+Afin d'alléger les notations, nous convenons que la multiplication est
+toujours prioritaire sur l'addition. On pose donc :
 
-Soit $m \in \setN$. On déduit directement de la définition que :
+$$i \cdot j + k = ( i \cdot j ) + k$$
 
-\begin{align}
-0 \cdot m &= 0 \cdot m^- + 0 \\
-\vdots && \\
-0 \cdot m &= 0 + ... + 0 = 0
-\end{align}
+pour tout $i,j,k \in \setN$.
 
-On a donc $0 \cdot m = m \cdot 0 = 0$. On dit que $0$ est absorbant pour
-la multiplication.
+Les relations ci-dessus peuvent alors se réécrire :
 
-** Définition alternative
+$$ m \cdot n^+ = m \cdot n + m $$
 
-Soit $m \ge 1$. En utilisant récursivement la définition, on obtient :
-
-\begin{align}
-m \cdot n
-&= m \cdot n^- + m \\
-&= m \cdot n^{--} + m + m \\
-& \qquad \vdots \\
-&= m \cdot 0 + m + ... + m \\
-&= 0 + m + ... + m \\
-&= m + ... + m
-\end{align}
-
-où le membre de droite compte $n$ termes « $m$ ». Mais comme $m =
-m^- + 1$, on a :
-
-$$m \cdot n = m^- + 1 + ... + m^- + 1$$
-
-La commutativité nous permet de regrouper les $n$ nombres $1$ à
-la fin :
-
-$$m \cdot n = m^- + ... + m^- + 1 + ... + 1$$
-
-Il est clair que :
-
-$$1 + ... + 1 = 0^{+...+} = n$$
-
-On a dès lors :
-
-$$m \cdot n = m^- + ... + m^- + n$$
-
-Comme le membre de droite contient $n$ termes $m^-$, on en conclut que :
-
-$$m \cdot n = m^- \cdot n + n$$
-
-qui est une version alternative de la définition.
+$$ m^+ \cdot n = m \cdot n + n $$
 
 ** Neutre multiplicatif
 
-La définition implique que :
+Il va de soi qu’un tableau contenant une seule ligne et $n$ colonnes contient au total
+$n$ cases :
 
-$$m \cdot 1 = m \cdot 0 + m = 0 + m = m$$
+$$ 1 \cdot n = n $$
 
-Mais en appliquant la définition alternative à $1 \cdot m$, il vient :
+et qu’un tableau contenant une seule colonne et $m$ lignes contient
+au total $m$ cases :
 
-$$1 \cdot m = 0 \cdot m + m = m$$
+$$ m \cdot 1 = m $$
 
-On a donc $1 \cdot m = m \cdot 1 = m$. On dit que $1$ est neutre pour la multiplication.
-
+On a donc $1 \cdot i = i \cdot 1 = i$ pour tout $i \in \setN$. On dit
+que $1$ est neutre pour la multiplication.
 
 ** Commutativité
 
-Soit $m \in \setN$. On a vu que $m \cdot 0 = 0 \cdot m$. L'équation :
+Un tableau de $m$ lignes et $n$ colonnes contient autant de cases qu’un
+tableau de $n$ lignes et $m$ colonnes. On a donc :
 
-$$m \cdot n = n \cdot m$$
+$$ m \cdot n = n \cdot m $$
 
-Est donc vérifiée pour $n = 0$.
-
-Supposons à présent que :
-
-$$n^- \cdot m = m \cdot n^-$$
-
-En appliquant les deux alternatives de la définition, on a :
-
-$$m \cdot n = m \cdot n^- + m$$
-
-$$n \cdot m = n^- \cdot m + m$$
-
-et donc :
-
-$$m \cdot n = n \cdot m$$
-
-Puisque cette égalité est vraie pour $n = 0 = 1^-$, on en déduit qu'elle est également vraie pour $n = 1 = 2^-$, pour $n = 2 = 3^-$, etc. Elle est donc vérifiée pour tout $n \in \setN$ : la multiplication est commutative.
-
+La multiplication de naturels est commutative.
 
 ** Distributivité
 
-Soit $m,n,p \in \setN$. On a :
+En plaçant côte à côte un tableau $T$ de $m$ lignes et $n$ colonnes
+avec un tableau $U$ de $m$ lignes et $p$ colonnes, on obtient un nombre
+de cases total :
 
-$$m \cdot (n + p) = m + ... + m$$
+$$ m \cdot n + m \cdot p $$
 
-où le membre de droite compte $n+p$ termes « $m$ ». Par associativité de l'addition, on peut regrouper les termes comme suit :
+Mais le tableau formé en associant $T$ et $U$ compte $m$ lignes et $n + p$ colonnes,
+ce qui nous donne un nombre de cases :
 
-$$m \cdot (n + p) = (m + ... + m) + (m + ... + m)$$
+$$ m \cdot (n + p) $$
 
-où la première parenthèse compte $n$ termes et la seconde $p$ termes. On a donc :
+Ces deux expressions comptant le nombre de cases du même tableau,
+elles doivent être égales et on a :
 
-$$m \cdot (n + p) = m \cdot n + m \cdot p$$
-
-Par commutativité de la multiplication, on en déduit :
-
-$$(n + p) \cdot m = n \cdot m + p \cdot m$$
+$$ m \cdot (n + p) = m \cdot n + m \cdot p $$
 
 On dit que la multiplication se distribue sur l'addition.
 
+Par commutativité, on a également :
+
+$$ (n + p) \cdot m = n \cdot m + p \cdot m $$
 
 *** Sur la soustraction
 
@@ -547,8 +497,26 @@ $$(n - p) \cdot m = n \cdot m - p \cdot m$$
 
 On dit que la multiplication se distribue sur la soustraction.
 
+** Absorption
 
-** Unicité de l'absorbant
+Il va de soi qu’un tableau ne contenant aucune ligne contient zéro
+case :
+
+$$ m \cdot 0 = 0 $$
+
+tout comme un tableau ne contenant aucune colonne :
+
+$$ 0 \cdot n = 0 $$
+
+On dit que l’élément $0$ est un absorbant pour la multiplication.
+
+On peut obtenir le même résultat en utilisant la distributivité :
+
+$$ m \cdot 0 = m \cdot (n - n) = m \cdot n - m \cdot n = 0 $$
+
+$$ 0 \cdot m = (n - n) \cdot m = n \cdot m - n \cdot m = 0 $$
+
+*** Unicité de l'absorbant
 
 Nous allons voir que l'absorbant est unique. Soit $a_1, a_2 \in \setN$ tels que :
 

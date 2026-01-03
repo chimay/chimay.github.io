@@ -41,7 +41,8 @@ $$\setN = \{ 0,1,2,3,4,5,6,7,8,9,10,... \}$$
 
 * Addition
 
-L'addition usuelle sur $\setN$, notée $+ : \setN \times \setN \mapsto \setN$, est définie par :
+L'addition usuelle sur $\setN$, notée $+ : \setN \times \setN \mapsto
+\setN$, est définie par :
 
 $$ m + 0 = 0 $$
 
@@ -101,7 +102,9 @@ On dit que l'addition sur $\setN$ est commutative.
 
 ** Associativité
 
-Soit $m,n,p \in \setN$. Développons l'addition $m + (p + n)$. On a :
+Soit $m,n,p \in \setN$.
+
+Développons l'addition $m + (p + n)$. On a :
 
 $$m + (p + n) = m + p^{+...+}$$
 
@@ -386,23 +389,10 @@ La multiplication usuelle entre deux nombres $m,n \in \setN$ est le
 nombre de cases que contient un tableau qui comporte $m$ lignes et $n$
 colonnes. On la note $\cdot : \setN \times \setN \mapsto \setN$.
 
-Augmenter le nombre de colonnes de $1$ augmente le nombre de cases total
-du nombre de lignes $m$ :
+*** Taille d'un tableau
 
-$$ m \cdot n^+ = ( m \cdot n ) + m$$
-
-Augmenter le nombre de lignes de $1$ augmente le nombre de cases total
-du nombre de colonnes $n$ :
-
-$$ m^+ \cdot n = ( m \cdot n ) + n $$
-
-Posant $i = m$ et $j = n^+$, on en déduit que :
-
-$$ i \cdot j = ( i \cdot j^- ) + i $$
-
-Posant $k = m^+$ et $l = n$, on en déduit que :
-
-$$ k \cdot l = ( k^- \cdot l ) + l $$
+Soit $m,n \in \setN$. Un tableau de taille $(m,n)$ est un tableau de $m$
+lignes et $n$ colonnes.
 
 *** Notation
 
@@ -410,29 +400,45 @@ Lorsque cela ne pose pas de problème d'ambiguité, on note aussi :
 
 $$m \ n = m \cdot n$$
 
+pour tout $m,n \in \setN$.
+
 *** Priorité
 
 Afin d'alléger les notations, nous convenons que la multiplication est
 toujours prioritaire sur l'addition. On pose donc :
 
-$$i \cdot j + k = ( i \cdot j ) + k$$
+$$ m \cdot n + p = ( m \cdot n ) + p$$
 
-pour tout $i,j,k \in \setN$.
+pour tout $m,n,p \in \setN$.
 
-Les relations ci-dessus peuvent alors se réécrire :
+** Récurrence
 
-$$ m \cdot n^+ = m \cdot n + m $$
+Soit $m,n \in \setN$. Augmenter le nombre de colonnes de $1$ augmente
+le nombre de cases total du nombre de lignes $m$ :
+
+$$ m \cdot n^+ = m \cdot n + m$$
+
+Augmenter le nombre de lignes de $1$ augmente le nombre de cases total
+du nombre de colonnes $n$ :
 
 $$ m^+ \cdot n = m \cdot n + n $$
 
+Posant $i = m$ et $j = n^+$, on en déduit que :
+
+$$ i \cdot j = i \cdot j^- + i $$
+
+Posant $k = m^+$ et $l = n$, on en déduit que :
+
+$$ k \cdot l = k^- \cdot l + l $$
+
 ** Neutre multiplicatif
 
-Il va de soi qu’un tableau contenant une seule ligne et $n$ colonnes contient au total
-$n$ cases :
+Soit $m,n \in \setN$. Il va de soi qu’un tableau contenant une seule
+ligne de $n$ colonnes contient au total $n$ cases :
 
 $$ 1 \cdot n = n $$
 
-et qu’un tableau contenant une seule colonne et $m$ lignes contient
+et qu’un tableau contenant une seule colonne de $m$ lignes contient
 au total $m$ cases :
 
 $$ m \cdot 1 = m $$
@@ -442,8 +448,8 @@ que $1$ est neutre pour la multiplication.
 
 ** Commutativité
 
-Un tableau de $m$ lignes et $n$ colonnes contient autant de cases qu’un
-tableau de $n$ lignes et $m$ colonnes. On a donc :
+Soit $m,n \in \setN$. Un tableau de taille $(m,n)$ contient autant de
+cases qu’un tableau de taille $(n,m)$. On a donc :
 
 $$ m \cdot n = n \cdot m $$
 
@@ -451,13 +457,13 @@ La multiplication de naturels est commutative.
 
 ** Distributivité
 
-En plaçant côte à côte un tableau $T$ de $m$ lignes et $n$ colonnes
-avec un tableau $U$ de $m$ lignes et $p$ colonnes, on obtient un nombre
-de cases total :
+Soit $m,n,p \in \setN$. En plaçant côte à côte un tableau $T$ de
+taille $(m,n)$ avec un tableau $U$ de taille $(m,p)$, on obtient un
+nombre de cases total :
 
 $$ m \cdot n + m \cdot p $$
 
-Mais le tableau formé en associant $T$ et $U$ compte $m$ lignes et $n + p$ colonnes,
+Mais le tableau formé en associant $T$ et $U$ est de taille $(m,n+p)$,
 ce qui nous donne un nombre de cases :
 
 $$ m \cdot (n + p) $$
@@ -499,8 +505,8 @@ On dit que la multiplication se distribue sur la soustraction.
 
 ** Absorption
 
-Il va de soi qu’un tableau ne contenant aucune ligne contient zéro
-case :
+Soit $m,n \in \setN$. Il va de soi qu’un tableau ne contenant aucune
+ligne contient zéro case :
 
 $$ m \cdot 0 = 0 $$
 
@@ -518,7 +524,8 @@ $$ 0 \cdot m = (n - n) \cdot m = n \cdot m - n \cdot m = 0 $$
 
 *** Unicité de l'absorbant
 
-Nous allons voir que l'absorbant est unique. Soit $a_1, a_2 \in \setN$ tels que :
+Nous allons voir que l'absorbant est unique. Soit $a_1, a_2 \in \setN$
+tels que :
 
 $$a_1 \cdot n = a_2 \cdot n = 0$$
 
@@ -536,14 +543,15 @@ $$(a_1 - a_2) \cdot 1 = a_1 - a_2 = 0$$
 
 Autrement dit, $a_1 = a_2$. L'absorbant est donc unique.
 
-
 ** Associativité
 
 Soit $m,n,p \in \setN$. On a :
 
 $$m \cdot (n \cdot p) = m + ... + m$$
 
-où le membre de droite compte $n \cdot p$ termes « $m$ ». Par associativité de l'addition, on peut les regrouper en $p$ parenthèses contenant chacune $n$ termes :
+où le membre de droite compte $n \cdot p$ termes « $m$ ». Par
+associativité de l'addition, on peut les regrouper en $p$ parenthèses
+contenant chacune $n$ termes :
 
 $$m \cdot (n \cdot p) = (m + ... + m) + ... + (m + ... + m)$$
 

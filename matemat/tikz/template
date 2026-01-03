@@ -1,177 +1,5 @@
 % vim: set ft=tex :
 
-% documentation %{{{1
-
-% ---- units
-%
-% default unit for plain numbers is 1 cm
-%
-% conversion :
-%
-% mm ≈ pt × 0.35
-%
-% scaling :
-%
-% - unitless coordinates scale
-% - explicit units do not scale
-%
-% if you want explicit units to scale, you have to add transform shape :
-%
-% \begin{tikzpicture}[scale=2, transform shape]
-% ...
-% \end{tikzpicture}
-
-% ---- defining styles
-%
-% \tikzset{
-%   main line/.style={line width=0.8pt},
-% }
-
-% ---- using styles
-%
-% \draw[main line] (A)--(B);
-
-% ---- colors with \usepackage[x11names]{xcolor}
-%
-% AliceBlue
-% AntiqueWhite
-% Aquamarine
-% Azure
-% Beige
-% Bisque
-% Black
-% BlanchedAlmond
-% Blue
-% BlueViolet
-% Brown
-% BurlyWood
-% CadetBlue
-% Chartreuse
-% Chocolate
-% Coral
-% CornflowerBlue
-% Cornsilk
-% Crimson
-% Cyan
-% DarkBlue
-% DarkCyan
-% DarkGoldenrod
-% DarkGray
-% DarkGreen
-% DarkKhaki
-% DarkMagenta
-% DarkOliveGreen
-% DarkOrange
-% DarkOrchid
-% DarkRed
-% DarkSalmon
-% DarkSeaGreen
-% DarkSlateBlue
-% DarkSlateGray
-% DarkTurquoise
-% DarkViolet
-% DeepPink
-% DeepSkyBlue
-% DimGray
-% DodgerBlue
-% FireBrick
-% FloralWhite
-% ForestGreen
-% Fuchsia
-% Gainsboro
-% GhostWhite
-% Gold
-% Goldenrod
-% Gray
-% Green
-% GreenYellow
-% Honeydew
-% HotPink
-% IndianRed
-% Indigo
-% Ivory
-% Khaki
-% Lavender
-% LavenderBlush
-% LawnGreen
-% LemonChiffon
-% LightBlue
-% LightCoral
-% LightCyan
-% LightGoldenrod
-% LightGoldenrodYellow
-% LightGray
-% LightGreen
-% LightPink
-% LightSalmon
-% LightSeaGreen
-% LightSkyBlue
-% LightSlateBlue
-% LightSlateGray
-% LightSteelBlue
-% LightYellow
-% LimeGreen
-% Linen
-% Magenta
-% Maroon
-% MediumAquamarine
-% MediumBlue
-% MediumOrchid
-% MediumPurple
-% MediumSeaGreen
-% MediumSlateBlue
-% MediumSpringGreen
-% MediumTurquoise
-% MediumVioletRed
-% MidnightBlue
-% MintCream
-% MistyRose
-% Moccasin
-% NavajoWhite
-% NavyBlue
-% OldLace
-% OliveDrab
-% Orange
-% OrangeRed
-% Orchid
-% PaleGoldenrod
-% PaleGreen
-% PaleTurquoise
-% PaleVioletRed
-% PapayaWhip
-% PeachPuff
-% Peru
-% Pink
-% Plum
-% PowderBlue
-% Purple
-% Red
-% RosyBrown
-% RoyalBlue
-% SaddleBrown
-% Salmon
-% SandyBrown
-% SeaGreen
-% Seashell
-% Sienna
-% SkyBlue
-% SlateBlue
-% SlateGray
-% Snow
-% SpringGreen
-% SteelBlue
-% Tan
-% Thistle
-% Tomato
-% Turquoise
-% Violet
-% VioletRed
-% Wheat
-% White
-% WhiteSmoke
-% Yellow
-% YellowGreen
-
 % header %{{{1
 
 % opening %{{{2
@@ -180,7 +8,7 @@
 
 % packages and libraries %{{{2
 
-% ---- not necessary since the documentclass[tikz ...] requires it
+% ---- not necessary since the documentclass[tikz ...] requires it automatically
 % \usepackage{tikz}
 
 \usepackage{amsmath}
@@ -281,15 +109,30 @@
 
 % 	\coordinate (E) at ($ (A) + \arrowratio*(v) $);
 
-% points for dimension lines %{{{2
+% coordinates for dimension lines %{{{2
 
 	%\coordinate (IdJ) at ($ (I) + (0,0.7) $);
+
+% vertices, points, dots %{{{2
+
+	%\fill (O) circle (0.4mm);
 
 % segments %{{{2
 
 	%\draw (A) -- (B);
 
 	%\foreach \i in {1,...,6} { \draw (O) -- (u\i); }
+
+% polygons %{{{2
+
+	%\draw (P1) \foreach \i in {2,...,\numsides} { -- (P\i) } -- cycle;
+
+	% ---- needs shapes.geometric
+	%\node[
+		%draw,
+		%regular polygon,
+		%regular polygon sides=5
+		%] {Pentagon};
 
 % circles %{{{2
 
@@ -304,19 +147,11 @@
 
 	%\draw (O) -- (P1);
 
-% polygons %{{{2
-
-	%\draw (P1) \foreach \i in {2,...,\numsides} { -- (P\i) } -- cycle;
-
 % dimension lines %{{{2
 
 	%\draw[dimension] (IdJ) -- (JdI);
 	%\draw[dimension extension] (I) -- (IdJ);
 	%\draw[dimension extension] (J) -- (JdI);
-
-% thick vertices %{{{2
-
-	%\fill (O) circle (0.4mm);
 
 % vertices labels %{{{2
 
@@ -324,11 +159,11 @@
 
 	%\node[label={[label distance=0.5]above:$G$}] at (G) {};
 
-% segments labels %{{{2
+% segments, sides labels %{{{2
 
-	%\node[above] at ($ (A)!0.5!(B) $) {$a$};
+	%\node[above] at ($ (A)!0.5!(B) $) {$c$};
 
-% segments marks %{{{2
+% segments, sides marks %{{{2
 
 	%\tkzMarkSegments[mark=|, size=2pt](A,B)
 
@@ -347,7 +182,7 @@
 	%\pic[draw, ->, "$60^\circ$", angle radius=0.5cm, angle eccentricity=1.5]
 	%{angle = H--O--I};
 
-% right angles labels %{{{2
+% right angles markers %{{{2
 
 	%\pic [draw, angle radius=7pt, angle eccentricity=1]
 	%{right angle = C--B--A};

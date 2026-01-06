@@ -1,0 +1,93 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+% header %{{{1
+
+% opening %{{{2
+
+\documentclass[tikz, border=1mm]{standalone}
+
+% packages and libraries %{{{2
+
+% ---- not necessary since the documentclass[tikz ...] requires it automatically
+% \usepackage{tikz}
+
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage[x11names]{xcolor}
+
+\usetikzlibrary{calc,angles,quotes,intersections,shapes.geometric}
+
+\usepackage{tkz-euclide}
+
+% colors %{{{2
+
+\definecolor{goldenbrown}{HTML}{5b3c11}
+
+%\definecolor{somebrown}{RGB}{101,67,33}
+
+%\colorlet{somebrown}{brown!80!black}
+
+% style %{{{2
+
+\tikzset{
+	% ---- default
+	every path/.style={line width=0.3pt},
+	every coordinate/.style={fill=black, circle, inner sep=1pt},
+	every node/.style={font=\normalsize},
+	every picture/.style={scale=1.0},
+	% ---- custom
+	construction/.style={line width=0.1pt, dashed},
+	dimension/.style={line width=0.2pt, <->, goldenbrown},
+	dimension extension/.style={line width=0.2pt, dashed, goldenbrown},
+	vector/.style={->, thick},
+}
+
+% document %{{{1
+
+% opening %{{{2
+
+\begin{document}
+\begin{tikzpicture}[scale=1.2]
+
+% parameters %{{{2
+
+	\def\len{4}
+	\def\ang{15}
+	\def\gle{-10}
+
+% vectors %{{{2
+
+	\coordinate (u) at (\ang:1);
+	\coordinate (v) at (\gle:1);
+
+% coordinates %{{{2
+
+	\coordinate (P) at (0,0);
+	\coordinate (X1) at ($ (P) - \len*(u) $);
+	\coordinate (X2) at ($ (P) + \len*(u) $);
+
+	\coordinate (Y1) at ($ (P) - \len*(v) $);
+	\coordinate (Y2) at ($ (P) + \len*(v) $);
+
+% vertices, points, dots %{{{2
+
+	\fill (P) circle (0.3mm);
+
+% segments %{{{2
+
+	\draw (X1) -- (X2);
+	\draw (Y1) -- (Y2);
+
+% points, dots, vertices labels %{{{2
+
+	\node[above] at (P) {$P$};
+
+% segments, sides labels %{{{2
+
+	\node[above] at ($ (X1)!0.9!(X2) $) {$a$};
+	\node[below] at ($ (Y1)!0.9!(Y2) $) {$b$};
+
+% closing %{{{2
+
+\end{tikzpicture}
+\end{document}

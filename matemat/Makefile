@@ -23,6 +23,7 @@ include ../Makefile.inc
 
 debug:
 	@echo $(SUBDIRS)
+	@echo $(ORG_PDF_FILES)
 
 # org -> html {{{1
 

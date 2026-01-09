@@ -1,4 +1,6 @@
 
+% header %{{{1
+
 \documentclass[tikz, border=1mm]{standalone}
 
 \usepackage{amsmath}
@@ -9,17 +11,20 @@
 
 \usepackage{tkz-euclide}
 
+% document %{{{1
+
+% opening %{{{2
+
 \begin{document}
+\begin{tikzpicture}[scale=1.0]
 
-\begin{tikzpicture}[scale=1.7]
-
-	% ---- parameters
+% parameters %{{{2
 
 	\def\numsides{8}
-	\def\radius{2}
+	\def\radius{4.5}
 	\def\rotation{67.5}
 
-	% ---- coordinates
+% coordinates %{{{2
 
 	\coordinate (O) at (0,0);
 
@@ -27,26 +32,26 @@
 		\coordinate (P\i) at ({360/\numsides*(\i-1)+\rotation}:\radius);
 	}
 
-	% ---- intersections
+% intersections %{{{2
 
 	\tkzInterLL(P1,P6)(P3,P8)\tkzGetPoint{I}
 	\tkzInterLL(P1,P6)(P4,P7)\tkzGetPoint{J}
 	\tkzInterLL(P2,P5)(P3,P8)\tkzGetPoint{L}
 	\tkzInterLL(P2,P5)(P4,P7)\tkzGetPoint{K}
 
-	% ---- circle
+% circle %{{{2
 
 	\draw (O) circle (\radius);
 
-	% ---- polygon
+% polygon %{{{2
 
 	\draw (P1) \foreach \i in {2,...,\numsides} { -- (P\i) } -- cycle;
 
-	% ---- radiuses
+% radiuses %{{{2
 
 	\foreach \i in {1,...,\numsides} { \draw[dashed] (O) -- (P\i); }
 
-	% ---- diagonals
+% diagonals %{{{2
 
 	%\draw (P1) -- (P4);
 	\draw (P4) -- (P7);
@@ -57,35 +62,35 @@
 	%\draw (P3) -- (P6);
 	\draw (P6) -- (P1);
 
-	% ---- thick vertices
+% points, dots, vertices %{{{2
 
-	\foreach \i in {1,...,\numsides} { \fill (P\i) circle (0.3mm); }
+	\foreach \i in {1,...,\numsides} { \fill (P\i) circle (0.5mm); }
 
-	\fill (I) circle (0.3mm);
-	\fill (J) circle (0.3mm);
-	\fill (K) circle (0.3mm);
-	\fill (L) circle (0.3mm);
+	\fill (I) circle (0.5mm);
+	\fill (J) circle (0.5mm);
+	\fill (K) circle (0.5mm);
+	\fill (L) circle (0.5mm);
 
-	% ---- vertices labels
+% points, dots, vertices labels %{{{2
 
 	\node[label={[label distance=0.3mm]right:$O$}] at (O) {};
 	\filldraw (O) circle (0.9pt);
 
 	\node[above right] at (P1) {$A$};
-	\node[right] at (P8) {$B$};
-	\node[right] at (P7) {$C$};
-	\node[below right] at (P6) {$D$};
+	\node[above left] at (P2) {$B$};
+	\node[left] at (P3) {$C$};
+	\node[left] at (P4) {$D$};
 	\node[below left] at (P5) {$E$};
-	\node[left] at (P4) {$F$};
-	\node[left] at (P3) {$G$};
-	\node[above left] at (P2) {$H$};
+	\node[below right] at (P6) {$F$};
+	\node[right] at (P7) {$G$};
+	\node[right] at (P8) {$H$};
 
 	\node[below right] at (I) {$I$};
 	\node[above right] at (J) {$J$};
 	\node[above left] at (K) {$K$};
 	\node[below left] at (L) {$L$};
 
-	% ---- angles labels
+% angles labels %{{{2
 
 	\pic[draw, ->, "$67.5^\circ$", angle radius=0.7cm, angle eccentricity=1.6]
 	{angle = O--P2--P1};
@@ -93,13 +98,13 @@
 	\pic[draw, ->, "$135^\circ$", angle radius=0.7cm, angle eccentricity=1.6]
 	{angle = P2--P1--P8};
 
-	\pic[draw, ->, "$45^\circ$", angle radius=0.7cm, angle eccentricity=1.4]
+	\pic[draw, ->, "$45^\circ$", angle radius=0.7cm, angle eccentricity=1.5]
 	{angle = P3--P2--L};
 
-	\pic[draw, ->, "$45^\circ$", angle radius=0.7cm, angle eccentricity=1.4]
+	\pic[draw, ->, "$45^\circ$", angle radius=0.7cm, angle eccentricity=1.5]
 	{angle = L--P3--P2};
 
-	\pic[draw, ->, "$22.5^\circ$", angle radius=2.5cm, angle eccentricity=1.1]
+	\pic[draw, ->, "$22.5^\circ$", angle radius=3.0cm, angle eccentricity=1.1]
 	{angle = L--P2--O};
 
 	\pic[draw, angle radius=0.3cm, angle eccentricity=1.0]
@@ -126,6 +131,7 @@
 	\pic[draw, angle radius=0.3cm, angle eccentricity=1.0]
 	{right angle = P4--K--P5};
 
-\end{tikzpicture}
+% closing %{{{2
 
+\end{tikzpicture}
 \end{document}

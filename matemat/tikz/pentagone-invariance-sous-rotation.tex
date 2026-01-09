@@ -1,4 +1,6 @@
 
+% header %{{{1
+
 \documentclass[tikz, border=1mm]{standalone}
 
 \usepackage{amsmath}
@@ -9,17 +11,20 @@
 
 \usepackage{tkz-euclide}
 
+% document %{{{1
+
+% opening %{{{2
+
 \begin{document}
+\begin{tikzpicture}[scale=1.0]
 
-\begin{tikzpicture}[scale=2.0]
-
-	% ---- parameters
+% parameters %{{{2
 
 	\def\numsides{5}
-	\def\radius{2}
+	\def\radius{4}
 	\def\rotation{90}
 
-	% ---- coordinates
+% coordinates %{{{2
 
 	\coordinate (O) at (0,0);
 	\draw (O) circle (\radius);
@@ -28,7 +33,7 @@
 		\coordinate (P\i) at ({360/\numsides*(\i-1)+\rotation}:\radius);
 	}
 
-	% ---- intersections
+% intersections %{{{2
 
 	\tkzInterLL(P2,P5)(P1,P4)\tkzGetPoint{F}
 	\tkzInterLL(P2,P5)(P1,P3)\tkzGetPoint{G}
@@ -37,29 +42,29 @@
 	\tkzInterLL(P3,P5)(P1,P4)\tkzGetPoint{I}
 	\tkzInterLL(O,P5)(P1,P4)\tkzGetPoint{J}
 
-	% ---- pentagon
+% pentagon %{{{2
 
 	\draw (P1) \foreach \i in {2,...,\numsides} { -- (P\i) } -- cycle;
 
-	% ---- radiuses
+% radiuses %{{{2
 
 	\foreach \i in {1,...,\numsides} { \draw[dotted] (O) -- (P\i); }
 
-	% ---- pentagram
+% pentagram %{{{2
 
 	\draw (P1) -- (P3) -- (P5) -- (P2) -- (P4) -- cycle;
 
-	% ---- thick vertices
+% points, dots, vertices %{{{2
 
-	\fill (O) circle (0.3mm);
-	\fill (F) circle (0.3mm);
-	\fill (G) circle (0.3mm);
-	\fill (H) circle (0.3mm);
-	\fill (I) circle (0.3mm);
-	\fill (J) circle (0.3mm);
-	\foreach \i in {1,...,\numsides} { \fill (P\i) circle (0.3mm); }
+	\fill (O) circle (0.5mm);
+	\fill (F) circle (0.5mm);
+	\fill (G) circle (0.5mm);
+	\fill (H) circle (0.5mm);
+	\fill (I) circle (0.5mm);
+	\fill (J) circle (0.5mm);
+	\foreach \i in {1,...,\numsides} { \fill (P\i) circle (0.5mm); }
 
-	% ---- vertices labels
+% points, dots, vertices labels %{{{2
 
 	\node[above left] at (O) {$O$};
 	\node[above right] at (F) {$F$};
@@ -69,10 +74,10 @@
 	\node[below right] at (J) {$J$};
 
 	\node[above] at (P1) {$A$};
-	\node[right] at (P5) {$B$};
-	\node[below right] at (P4) {$C$};
-	\node[below left] at (P3) {$D$};
-	\node[left] at (P2) {$E$};
+	\node[left] at (P2) {$B$};
+	\node[below left] at (P3) {$C$};
+	\node[below right] at (P4) {$D$};
+	\node[right] at (P5) {$E$};
 
 	\node[below] at ($(P2)!0.5!(G)$) {$a$};
 	\node[below] at ($(G)!0.5!(H)$) {$b$};
@@ -84,6 +89,7 @@
 	\node[left] at ($(J)!0.5!(I)$) {$d$};
 	\node[left] at ($(I)!0.5!(P4)$) {$c$};
 
-\end{tikzpicture}
+% closing %{{{2
 
+\end{tikzpicture}
 \end{document}

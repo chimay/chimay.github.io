@@ -36,7 +36,8 @@ html: $(ORG_HTML_FILES)
 # tex --> pdf {{{1
 
 %.pdf: %.tex
-	latexmk -f -pdf $<
+	latexmk -pdf $<
+	#latexmk -f -pdf $<
 	#pdflatex $<
 
 pdf: $(TEX_PDF_FILES)

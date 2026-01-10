@@ -1,0 +1,71 @@
+
+% header %{{{1
+
+\documentclass[tikz, border=1mm]{standalone}
+
+\usepackage{../../include/latex/custom}
+
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{tikz}
+
+\usetikzlibrary{calc,angles,quotes}
+
+% document %{{{1
+
+% opening %{{{2
+
+\begin{document}
+\begin{tikzpicture}[scale=2.5]
+
+% parameters %{{{2
+
+	\def\len{2.0}
+	\def\radius{1}
+	\def\extratio{1.2}
+
+% coordinates %{{{2
+
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (\len,0);
+	\coordinate (C) at ({\len*cos(40)}, {\len*sin(40)});
+	\coordinate (D) at (\radius,0);
+	\coordinate (E) at ({\radius*cos(40)}, {\radius*sin(40)});
+	\coordinate (X) at ({\extratio*\len},0);
+	\coordinate (Y) at ({\extratio*\len*cos(40)}, {\extratio*\len*sin(40)});
+
+% radius lines %{{{2
+
+	\draw (A) -- (X);
+	\draw (A) -- (Y);
+
+% arc to represent the angle %{{{2
+
+	\draw (D) arc[start angle=0, end angle=40, radius=\radius]
+	node[midway, right=2pt] {$\arcdecercle{DE}$};
+
+% dots, points, vertices %{{{2
+
+	\fill (A) circle (0.2mm);
+	\fill (B) circle (0.2mm);
+	\fill (C) circle (0.2mm);
+	\fill (D) circle (0.2mm);
+	\fill (E) circle (0.2mm);
+
+% vertices labels %{{{2
+
+	\node[left] at (A) {$A$};
+	\node[below] at (B) {$B$};
+	\node[above] at (C) {$C$};
+	\node[below] at (D) {$D$};
+	\node[above] at (E) {$E$};
+
+% angle label %{{{2
+
+	\pic[draw, ->, "$\alpha$", angle radius=1.3cm, angle eccentricity=1.2]
+	{angle = B--A--C};
+
+% closing %{{{2
+
+\end{tikzpicture}
+\end{document}

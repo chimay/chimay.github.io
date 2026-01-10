@@ -4,6 +4,7 @@
 \documentclass[tikz, border=1mm]{standalone}
 
 \usepackage{amsmath}
+\usepackage{mathrsfs}
 \usepackage{tikz}
 
 \usetikzlibrary{calc,angles,quotes}
@@ -17,35 +18,45 @@
 
 % parameters %{{{2
 
+	\def\len{1.5}
 	\def\radius{2}
+	\def\extratio{1.5}
 
 % coordinates %{{{2
 
 	\coordinate (A) at (0,0);
-	\coordinate (B) at (\radius,0);
-	\coordinate (C) at ({\radius*cos(40)}, {\radius*sin(40)});
+	\coordinate (B) at (\len,0);
+	\coordinate (C) at ({\len*cos(40)}, {\len*sin(40)});
+	\coordinate (D) at (\radius,0);
+	\coordinate (E) at ({\radius*cos(40)}, {\radius*sin(40)});
+	\coordinate (X) at ({\extratio*\radius},0);
+	\coordinate (Y) at ({\extratio*\radius*cos(40)}, {\extratio*\radius*sin(40)});
 
 % radius lines %{{{2
 
-	\draw (A) -- (B);
-	\draw (A) -- (C);
+	\draw (A) -- (X);
+	\draw (A) -- (Y);
 
 % arc to represent the angle %{{{2
 
-	\draw (B) arc[start angle=0, end angle=40, radius=\radius]
-	node[midway, right=2pt] {$l$};
+	\draw (D) arc[start angle=0, end angle=40, radius=\radius]
+	node[midway, right=2pt] {$\mathscr{L}$};
 
 % dots, points, vertices %{{{2
 
 	\fill (A) circle (0.2mm);
 	\fill (B) circle (0.2mm);
 	\fill (C) circle (0.2mm);
+	\fill (D) circle (0.2mm);
+	\fill (E) circle (0.2mm);
 
 % vertices labels %{{{2
 
 	\node[left] at (A) {$A$};
 	\node[below] at (B) {$B$};
 	\node[above] at (C) {$C$};
+	\node[below] at (D) {$D$};
+	\node[above] at (E) {$E$};
 
 % angle label %{{{2
 

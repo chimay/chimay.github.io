@@ -64,6 +64,12 @@
 
 	%\def\radius{2}
 
+	%\def\numsides{6}
+	%\def\rotation{90}
+
+	%\pgfmathtruncatemacro{\last}{\numsides}
+	%\pgfmathtruncatemacro{\prevlast}{\numsides-1}
+
 % vectors %{{{2
 
 	% ---- vectors defined independantly of points coordinates
@@ -84,6 +90,12 @@
 	%\coordinate (cartesien) at (1,2);
 	%\coordinate (polar) at (\ang:\len);
 
+% coordinate for polygon vertices %{{{3
+
+	%\foreach \i in {1,...,\numsides} {
+		%\coordinate (P\i) at ({360/\numsides*(\i-1)+\rotation}:\radius);
+	%}
+
 % coordinates of points in circles %{{{3
 
 	%\coordinate (Ra) at ($ (A) + (\radius, 0) $);
@@ -96,16 +108,16 @@
 
 	% -- using path
 
-	%\path[name path=line1] (0,0) -- (4,3);
-	%\path[name path=line2] (0,3) -- (4,0);
+	%\path[name path=line1] (A) -- (B);
+	%\path[name path=line2] (C) -- (D);
 	%\path[name intersections={of=line1 and line2, by=I}];
 
-	%\path[name path=line] (0,-1) -- (4,2);
-	%\path[name path=circle] (2,0) circle (1.5);
+	%\path[name path=line] (A) -- (B);
+	%\path[name path=circle] (C) circle (1.5);
 	%\path[name intersections={of=line and circle, by={A,B}}];
 
-	%\path[name path=circleA] (0,0) circle (2cm);
-	%\path[name path=circleB] (1,1) circle (2cm);
+	%\path[name path=circleA] (A) circle (2cm);
+	%\path[name path=circleB] (B) circle (2cm);
 	%\path [name intersections={of=circleA and circleB, by={P1,P2}}];
 
 	%\path[
@@ -155,13 +167,17 @@
 
 	%\fill (O) circle (0.4mm);
 
+% polygon vertices %{{{3
+
+	%\foreach \i in {1,...,\numsides} { \fill (P\i) circle (0.3mm); }
+
 % segments, sides %{{{2
 
 	%\draw (A) -- (B);
 
 	%\foreach \i in {1,...,6} { \draw (O) -- (u\i); }
 
-% polygons %{{{2
+% polygons %{{{3
 
 	%\draw (P1) \foreach \i in {2,...,\numsides} { -- (P\i) } -- cycle;
 
@@ -176,7 +192,7 @@
 
 	%\draw (O) circle (\radius);
 
-% circular arcs %{{{2
+% circular arcs %{{{3
 
 	%\draw (A) ++(\ang:\len) arc (\ang:\gle:\len);
 	%\draw (B) ++(\ang:\radius) arc (\ang:\gle:\radius);
@@ -188,6 +204,11 @@
 % radiuses %{{{2
 
 	%\draw (O) -- (P1);
+
+	%\foreach \i in {1,...,\numsides} { \draw (O) -- (P\i); }
+
+	%\foreach \i in {2,...,\prevlast} { \draw[dashed] (O) -- (P\i); }
+	%\foreach \i in {2,...,\numexpr\numsides-1\relax} { \draw[dashed] (O) -- (P\i); }
 
 % dimension lines %{{{2
 
@@ -214,7 +235,7 @@
 	%\node at ($ (O)+(45:\radius+0.3) $) {$\mathscr{C}$};
 	%\node at ($ (A)+(45:\r+2mm) $) {$\mathscr C(A,r)$};
 
-% circular arcs labels %{{{2
+% circular arcs labels %{{{3
 
 	%\node at (45:\radius+0.3) {$\mathscr{C}$};
 
@@ -229,7 +250,7 @@
 	%\pic[draw, {Straight Barb[length=1.5mm]}-{Straight Barb[length=1.5mm]}, "$\alpha$", angle radius=1.5cm, angle eccentricity=1.2]
 	%{angle = B--A--C};
 
-% right angles markers %{{{2
+% right angles markers %{{{3
 
 	%\pic [draw, angle radius=7pt, angle eccentricity=1]
 	%{right angle = C--B--A};

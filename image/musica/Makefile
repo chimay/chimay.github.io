@@ -44,6 +44,7 @@ install: all sync-html
 
 clean:
 	rm -f ?*~
+	remove-obsolete-targets.zsh +org -html
 
 clean-html:
 	rm -f ?*.html

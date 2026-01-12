@@ -66,6 +66,7 @@ $(WIPE_SUBDIRS):
 
 clean: $(CLEAN_SUBDIRS)
 	rm -f ?*~
+	remove-obsolete-targets.zsh +org -html
 
 clean-html: $(CLEAN_HTML_SUBDIRS)
 	rm -f ?*.html

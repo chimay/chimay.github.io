@@ -1,0 +1,125 @@
+% vim: set ft=tex :
+
+% header %{{{1
+
+% opening %{{{2
+
+\documentclass[tikz, border=1mm]{standalone}
+
+% packages and libraries %{{{2
+
+% ---- not necessary since the documentclass[tikz ...] requires it
+% \usepackage{tikz}
+
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage[x11names]{xcolor}
+
+\usetikzlibrary{calc,angles,quotes,intersections,shapes.geometric}
+
+\usepackage{tkz-euclide}
+
+% colors %{{{2
+
+\definecolor{goldenbrown}{HTML}{5b3c11}
+
+%\definecolor{somebrown}{RGB}{101,67,33}
+
+%\colorlet{somebrown}{brown!80!black}
+
+% style %{{{2
+
+\tikzset{
+	% ------- every something
+	every picture/.style={
+		scale=1.0,
+	},
+	every coordinate/.style={
+		fill=black, circle, inner sep=1pt,
+	},
+	every path/.style={
+		line width=0.3pt,
+	},
+	every node/.style={
+		font=\normalsize,
+	},
+	every angle/.style={
+	},
+	every pic/.style={
+		% ---- does not worl
+		%draw,
+		%-{Straight Barb[length=1.2mm]},
+	},
+	% ------- custom
+	construction/.style={
+		line width=0.1pt,
+		dashed,
+	},
+	vector/.style={
+		-{Straight Barb[length=1.7mm]},
+		%thick,
+	},
+	dimension/.style={
+		line width=0.2pt,
+		<->,
+		goldenbrown,
+	},
+	dimension extension/.style={
+		line width=0.2pt,
+		dashed,
+		goldenbrown,
+	},
+}
+
+% document %{{{1
+
+% opening %{{{2
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{2
+
+	\def\len{5}
+	\def\ang{20}
+% coordinates %{{{2
+
+	\coordinate (E) at (0,0);
+	\coordinate (F) at (\ang:\len);
+
+	\coordinate (t) at (3,-2);
+
+	\coordinate (G) at ($ (F) + (t) $);
+	\coordinate (H) at ($ (E) + (t) $);
+
+% segments %{{{2
+
+	\draw[vector] (E) -- (F);
+	\draw[vector] (G) -- (H);
+
+	\draw[dashed] (E) -- (G);
+	\draw[dashed] (F) -- (H);
+
+% points, dots, vertices labels %{{{2
+
+	\fill (E) circle (0.4mm);
+	\fill (F) circle (0.4mm);
+	\fill (G) circle (0.4mm);
+	\fill (H) circle (0.4mm);
+
+% vertices labels %{{{2
+
+	\node[left] at (E) {$E$};
+	\node[above right] at (F) {$F$};
+	\node[right] at (G) {$G$};
+	\node[below left] at (H) {$H$};
+
+% segments, sides marks %{{{2
+
+	\tkzMarkSegments[mark=||, size=2pt](E,F)
+	\tkzMarkSegments[mark=||, size=2pt](G,H)
+
+% closing %{{{2
+
+\end{tikzpicture}
+\end{document}

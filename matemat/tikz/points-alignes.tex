@@ -1,4 +1,4 @@
-% vim: set ft=tex :
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
 
 % header %{{{1
 
@@ -8,14 +8,17 @@
 
 % packages and libraries %{{{2
 
-% ---- not necessary since the documentclass[tikz ...] requires it
+% ---- not necessary since the documentclass[tikz ...] requires it automatically
 % \usepackage{tikz}
 
-\usepackage{amsmath}
-\usepackage{mathrsfs}
-\usepackage[x11names]{xcolor}
+\usepackage{../../include/latex/custom}
 
-\usetikzlibrary{calc,angles,quotes,intersections,shapes.geometric}
+%\usepackage{amsmath}
+%\usepackage{mathrsfs}
+%\usepackage[x11names]{xcolor}
+
+\usetikzlibrary{calc,intersections,angles,quotes}
+%\usetikzlibrary{calc,intersections,angles,quotes,shapes.geometric,arrows.meta}
 
 \usepackage{tkz-euclide}
 
@@ -56,7 +59,7 @@
 		dashed,
 	},
 	vector/.style={
-		-{Straight Barb[length=1.7mm]},
+		-{Straight Barb[length=1.2mm]},
 		%thick,
 	},
 	dimension/.style={
@@ -80,53 +83,36 @@
 
 % parameters %{{{2
 
-	\def\len{2.9}
-	\def\ratio{1.5}
-	\def\ang{5}
+	\def\len{4}
+	\def\gth{7}
+
+	\def\ang{20}
 
 % coordinates %{{{2
 
-	\coordinate (E) at (0,0);
-	\coordinate (F) at (\ang:\len);
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (\ang:\len);
+	\coordinate (C) at (\ang:\gth);
 
-	\coordinate (t) at (\ang:\len);
+% points, dots, vertices %{{{2
 
-	\coordinate (G) at ($ (F) + \ratio*(t) $);
-	\coordinate (H) at ($ (E) + \ratio*(t) $);
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+	\fill (C) circle (0.4mm);
 
-	\coordinate (X) at ($ (E) - 0.5*(t) $);
-	\coordinate (Y) at ($ (G) + 0.5*(t) $);
+% segments, sides %{{{2
 
-% segments %{{{2
-
-	\draw[dashed] (X) -- (E);
-	\draw[vector] (E) -- (F);
-	\draw[dashed] (F) -- (G);
-	\draw[vector] (G) -- (H);
-	\draw[dashed] (H) -- (Y);
+	\draw (A) -- (C);
 
 % points, dots, vertices labels %{{{2
 
-	\fill (E) circle (0.4mm);
-	\fill (F) circle (0.4mm);
-	\fill (G) circle (0.4mm);
-	\fill (H) circle (0.4mm);
-
-% vertices labels %{{{2
-
-	\node[above] at (E) {$E$};
-	\node[above] at (F) {$F$};
-	\node[above] at (G) {$G$};
-	\node[above] at (H) {$H$};
+	\node[above] at (A) {$A$};
+	\node[above] at (B) {$B$};
+	\node[above] at (C) {$C$};
 
 % segments, sides labels %{{{2
 
-	\node[above] at ($ (X)!0.95!(Y) $) {$d$};
-
-% segments, sides marks %{{{2
-
-	\tkzMarkSegments[mark=||, size=2pt](E,F)
-	\tkzMarkSegments[mark=||, size=2pt](G,H)
+	%\node[above] at ($ (A)!0.5!(B) $) {$c$};
 
 % closing %{{{2
 

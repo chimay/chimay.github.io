@@ -80,26 +80,30 @@
 
 % parameters %{{{2
 
-	\def\len{5}
-	\def\ang{20}
+	\def\len{2.9}
+	\def\ratio{1.5}
+	\def\ang{5}
 
 % coordinates %{{{2
 
 	\coordinate (A) at (0,0);
 	\coordinate (B) at (\ang:\len);
 
-	\coordinate (t) at (3,-2);
+	\coordinate (t) at (\ang:\len);
 
-	\coordinate (C) at ($ (A) + (t) $);
-	\coordinate (D) at ($ (B) + (t) $);
+	\coordinate (C) at ($ (B) + \ratio*(t) $);
+	\coordinate (D) at ($ (A) + \ratio*(t) $);
+
+	\coordinate (X) at ($ (A) - 0.5*(t) $);
+	\coordinate (Y) at ($ (C) + 0.5*(t) $);
 
 % segments %{{{2
 
+	\draw[dashed] (X) -- (A);
 	\draw[vector] (A) -- (B);
+	\draw[dashed] (B) -- (C);
 	\draw[vector] (C) -- (D);
-
-	\draw[dashed] (A) -- (C);
-	\draw[dashed] (B) -- (D);
+	\draw[dashed] (D) -- (Y);
 
 % points, dots, vertices labels %{{{2
 
@@ -110,10 +114,14 @@
 
 % vertices labels %{{{2
 
-	\node[left] at (A) {$A$};
-	\node[above right] at (B) {$B$};
-	\node[below left] at (C) {$C$};
-	\node[right] at (D) {$D$};
+	\node[above] at (A) {$A$};
+	\node[above] at (B) {$B$};
+	\node[above] at (C) {$C$};
+	\node[above] at (D) {$D$};
+
+% segments, sides labels %{{{2
+
+	\node[above] at ($ (X)!0.95!(Y) $) {$d$};
 
 % segments, sides marks %{{{2
 

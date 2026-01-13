@@ -1,15 +1,63 @@
 
 % header %{{{1
 
+% opening %{{{2
+
 \documentclass[tikz, border=1mm]{standalone}
+
+% packages and libraries %{{{2
 
 \usepackage{../../include/latex/custom}
 
-\usepackage{amsmath}
-\usepackage{mathrsfs}
-\usepackage{tikz}
-
 \usetikzlibrary{calc,angles,quotes}
+
+% colors %{{{2
+
+\definecolor{goldenbrown}{HTML}{5b3c11}
+
+% style %{{{2
+
+\tikzset{
+	% ------- every something
+	every picture/.style={
+		scale=1.0,
+	},
+	every coordinate/.style={
+		fill=black, circle, inner sep=1pt,
+	},
+	every path/.style={
+		line width=0.3pt,
+	},
+	every node/.style={
+		font=\normalsize,
+	},
+	every angle/.style={
+	},
+	every pic/.style={
+		% ---- does not worl
+		%draw,
+		%-{Straight Barb[length=1.2mm]},
+	},
+	% ------- custom
+	construction/.style={
+		line width=0.1pt,
+		dashed,
+	},
+	vector/.style={
+		-{Straight Barb[length=1.2mm]},
+		%thick,
+	},
+	dimension/.style={
+		line width=0.2pt,
+		<->,
+		goldenbrown,
+	},
+	dimension extension/.style={
+		line width=0.2pt,
+		dashed,
+		goldenbrown,
+	},
+}
 
 % document %{{{1
 
@@ -34,15 +82,10 @@
 	\coordinate (X) at ({\extratio*\len},0);
 	\coordinate (Y) at ({\extratio*\len*cos(40)}, {\extratio*\len*sin(40)});
 
-% radius lines %{{{2
+% coordinates for dimension lines %{{{2
 
-	\draw (A) -- (X);
-	\draw (A) -- (Y);
-
-% arc to represent the angle %{{{2
-
-	\draw (D) arc[start angle=0, end angle=40, radius=\radius]
-	node[midway, right=2pt] {$\arcdecercle{DE}$};
+	\coordinate (Ad) at ($ (A) + (0,-0.4) $);
+	\coordinate (Dd) at ($ (D) + (0,-0.4) $);
 
 % dots, points, vertices %{{{2
 
@@ -52,13 +95,33 @@
 	\fill (D) circle (0.2mm);
 	\fill (E) circle (0.2mm);
 
+% radius lines %{{{2
+
+	\draw (A) -- (X);
+	\draw (A) -- (Y);
+
+% dimension lines %{{{2
+
+	\draw[dimension] (Ad) -- (Dd);
+	\draw[dimension extension] (A) -- (Ad);
+	\draw[dimension extension] (D) -- (Dd);
+
+% arc to represent the angle %{{{2
+
+	\draw (D) arc[start angle=0, end angle=40, radius=\radius]
+	node[midway, right=2pt] {$\arcdecercle{DE}$};
+
 % vertices labels %{{{2
 
-	\node[left] at (A) {$A$};
+	\node[below left] at (A) {$A$};
 	\node[below] at (B) {$B$};
 	\node[above] at (C) {$C$};
-	\node[below] at (D) {$D$};
+	\node[below right] at (D) {$D$};
 	\node[above] at (E) {$E$};
+
+% segments, sides labels %{{{2
+
+	\node[below, goldenbrown] at ($ (Ad)!0.5!(Dd) $) {$1$};
 
 % angle label %{{{2
 

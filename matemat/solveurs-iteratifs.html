@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2026-01-10 sam 15:56 -->
+<!-- 2026-01-13 mar 08:34 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Solveurs itératifs</title>
@@ -241,13 +241,13 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgb109c86">1. Dépendances</a></li>
-<li><a href="#orgd32a00a">2. Méthodes itératives</a></li>
-<li><a href="#org6f6f286">3. Résolution par minimisation</a></li>
-<li><a href="#org3316e42">4. Espaces de Krylov</a></li>
-<li><a href="#orge2b48f5">5. Méthode de projection</a></li>
-<li><a href="#orgcb2211b">6. Minimisation du résidu</a></li>
-<li><a href="#org83f291b">7. Gradients biconjugués</a></li>
+<li><a href="#org501bb29">1. Dépendances</a></li>
+<li><a href="#org13b14de">2. Méthodes itératives</a></li>
+<li><a href="#org18ecadf">3. Résolution par minimisation</a></li>
+<li><a href="#orgbf37aff">4. Espaces de Krylov</a></li>
+<li><a href="#orgb7e8548">5. Méthode de projection</a></li>
+<li><a href="#orgba49cdc">6. Minimisation du résidu</a></li>
+<li><a href="#org26404c6">7. Gradients biconjugués</a></li>
 </ul>
 </div>
 </div>
@@ -277,6 +277,7 @@ MathJax = {
       anglecirc: ["\\widehat{#1}", 1],
       degre: ["#1^\\circ", 1],
       vecteur: ["\\overrightarrow{#1}", 1],
+      combilin: ["\\mathrm{span}\\{ #1 \\}", 1],
       canonique: "\\mathfrak{c}",
       tenseuridentite: "\\boldsymbol{\\mathcal{I}}",
       permutation: "\\boldsymbol{\\epsilon}",
@@ -382,7 +383,6 @@ MathJax = {
       dfdxdy: ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3],
       dfdxdx: ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2],
       gradient: "\\mathbf{\\nabla}",
-      combilin: ["\\mathrm{span}\\{ #1 \\}", 1],
       trace: "tr",
       proba: "\\mathbb{P}",
       probaof: ["\\mathbb{P}\\left[#1\\right]", 1],
@@ -424,16 +424,16 @@ MathJax = {
 <p>
 \label{chap:solveur}
 </p>
-<div id="outline-container-orgb109c86" class="outline-2">
-<h2 id="orgb109c86"><span class="section-number-2">1.</span> Dépendances</h2>
+<div id="outline-container-org501bb29" class="outline-2">
+<h2 id="org501bb29"><span class="section-number-2">1.</span> Dépendances</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:matrice} : Les matrices</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd32a00a" class="outline-2">
-<h2 id="orgd32a00a"><span class="section-number-2">2.</span> Méthodes itératives</h2>
+<div id="outline-container-org13b14de" class="outline-2">
+<h2 id="org13b14de"><span class="section-number-2">2.</span> Méthodes itératives</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Il s'agit de résoudre itérativement (et approximativement) en \(x\) un système linéaire \(A \cdot x = b\), où \(A\) est une matrice et \(b\) un vecteur. L'itération générique s'écrit :
@@ -448,8 +448,8 @@ et on espère que la suite des \(x_k \in \setR^n\) converge vers la solution. On
 </p>
 </div>
 </div>
-<div id="outline-container-org6f6f286" class="outline-2">
-<h2 id="org6f6f286"><span class="section-number-2">3.</span> Résolution par minimisation</h2>
+<div id="outline-container-org18ecadf" class="outline-2">
+<h2 id="org18ecadf"><span class="section-number-2">3.</span> Résolution par minimisation</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Soit une matrice \(H\) de taille \((n,n)\) hermitienne (\(H = H^\dual\)) et définie positive :
@@ -503,8 +503,8 @@ On a donc des itérations \(k\) de la forme :
 pour un \(\alpha_k \in \setR\) bien choisi. On peut aussi utiliser un autre algorithme, comme les gradients conjugués par exemple.
 </p>
 </div>
-<div id="outline-container-orga4f7c38" class="outline-3">
-<h3 id="orga4f7c38"><span class="section-number-3">3.1.</span> Résidu</h3>
+<div id="outline-container-org7339d3c" class="outline-3">
+<h3 id="org7339d3c"><span class="section-number-3">3.1.</span> Résidu</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 On remarque que la direction de la descente est donné par le résidu :
@@ -515,16 +515,16 @@ On remarque que la direction de la descente est donné par le résidu :
 </p>
 </div>
 </div>
-<div id="outline-container-org430e6d0" class="outline-3">
-<h3 id="org430e6d0"><span class="section-number-3">3.2.</span> Newton</h3>
+<div id="outline-container-org084e2d1" class="outline-3">
+<h3 id="org084e2d1"><span class="section-number-3">3.2.</span> Newton</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 On pourrait bien entendu résoudre par la méthode de Newton, mais cela reviendrait alors à inverser la matrice \(H\) directement, ce que l'on cherche précisément à éviter ici.
 </p>
 </div>
 </div>
-<div id="outline-container-org6a910e4" class="outline-3">
-<h3 id="org6a910e4"><span class="section-number-3">3.3.</span> Généralisation</h3>
+<div id="outline-container-orgbd35ae5" class="outline-3">
+<h3 id="orgbd35ae5"><span class="section-number-3">3.3.</span> Généralisation</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Soit la matrice \(A\) de taille \((N,n)\), où \(N \ge n\), et \(y \in \setR^N\). Considérons le système général :
@@ -597,8 +597,8 @@ que l'on peut de nouveau résoudre itérativement en utilisant par exemple la m�
 </div>
 </div>
 </div>
-<div id="outline-container-org3316e42" class="outline-2">
-<h2 id="org3316e42"><span class="section-number-2">4.</span> Espaces de Krylov</h2>
+<div id="outline-container-orgbf37aff" class="outline-2">
+<h2 id="orgbf37aff"><span class="section-number-2">4.</span> Espaces de Krylov</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Les espaces de Krylov sont des espaces de vecteurs engendrés par les puissances de la matrice \(A\) appliquées à un vecteur initial \(u\) :
@@ -621,8 +621,8 @@ pour certains \(\alpha_i \in \corps\). Il s'agit donc de polynômes matriciels a
 </p>
 </div>
 </div>
-<div id="outline-container-orge2b48f5" class="outline-2">
-<h2 id="orge2b48f5"><span class="section-number-2">5.</span> Méthode de projection</h2>
+<div id="outline-container-orgb7e8548" class="outline-2">
+<h2 id="orgb7e8548"><span class="section-number-2">5.</span> Méthode de projection</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Soit la matrice \(A\) de taille \((n,n)\), le vecteur \(b \in \setR^n\) et le système \(A \cdot x = b\) à résoudre en \(x \in \setR^n\). On choisit \(m \le n\) beaucoup plus petit que \(n\) et les vecteurs \((v_1,...,v_m)\) de \(\setR^n\). Nous allons tenter de minimiser l'erreur en \(x_{k + 1}\) produite par l'itération générique suivante :
@@ -711,8 +711,8 @@ Si la matrice \(W^\dual \cdot A \cdot V\) est inversible, on a :
 Comme \(V\) et \(W\) sont de taille \((n,m)\), la matrice \(W^\dual \cdot A \cdot V\) est de taille \((m,m)\), donc beaucoup plus petite que \(A\). Le système correspondant est donc beaucoup plus facile à résoudre.
 </p>
 </div>
-<div id="outline-container-orgc93d72b" class="outline-3">
-<h3 id="orgc93d72b"><span class="section-number-3">5.1.</span> Orthonormés</h3>
+<div id="outline-container-org268e4b8" class="outline-3">
+<h3 id="org268e4b8"><span class="section-number-3">5.1.</span> Orthonormés</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 Si On choisit \(V = W\) et si les vecteurs \(v_i = w_i\) sont $A$-orthonormés, on a simplement :
@@ -731,8 +731,8 @@ et :
 </p>
 </div>
 </div>
-<div id="outline-container-org1f71efe" class="outline-3">
-<h3 id="org1f71efe"><span class="section-number-3">5.2.</span> Krylov</h3>
+<div id="outline-container-org88f11e7" class="outline-3">
+<h3 id="org88f11e7"><span class="section-number-3">5.2.</span> Krylov</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 On peut par exemple choisir des vecteurs de base de \(\krylov_m(A,r_k)\) pour former les colonnes des matrices \(V\) et \(W\). On peut aussi utiliser aussi des vecteurs de base de \(\krylov_m(A^\dual,r_k)\).
@@ -740,8 +740,8 @@ On peut par exemple choisir des vecteurs de base de \(\krylov_m(A,r_k)\) pour fo
 </div>
 </div>
 </div>
-<div id="outline-container-orgcb2211b" class="outline-2">
-<h2 id="orgcb2211b"><span class="section-number-2">6.</span> Minimisation du résidu</h2>
+<div id="outline-container-orgba49cdc" class="outline-2">
+<h2 id="orgba49cdc"><span class="section-number-2">6.</span> Minimisation du résidu</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 On tente de minimiser la norme quadratique du résidu :
@@ -760,8 +760,8 @@ La condition d'annulation de la dérivée par rapport à \(y\) nous donne la val
 </p>
 </div>
 </div>
-<div id="outline-container-org83f291b" class="outline-2">
-<h2 id="org83f291b"><span class="section-number-2">7.</span> Gradients biconjugués</h2>
+<div id="outline-container-org26404c6" class="outline-2">
+<h2 id="org26404c6"><span class="section-number-2">7.</span> Gradients biconjugués</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Soit la matrice \(A\) de taille \((n,n)\) et les vecteurs \(b,c \in \corps^n\). Les gradients biconjugués permettent d'obtenir simultanément les deux solutions \(x,y \in \corps^n\) telles que :
@@ -876,8 +876,8 @@ Les conditions d'orthogonalité nous donnent donc les valeurs des coefficients
 \delta_k = - \frac{ p_k^\dual \cdot A^\dual \cdot s_{k + 1} }{p_k^\dual \cdot A^\dual \cdot  q_k}
 \end{align}
 </div>
-<div id="outline-container-orgb6823ab" class="outline-3">
-<h3 id="orgb6823ab"><span class="section-number-3">7.1.</span> Simplification des coefficients</h3>
+<div id="outline-container-org04d7d51" class="outline-3">
+<h3 id="org04d7d51"><span class="section-number-3">7.1.</span> Simplification des coefficients</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 Il existe un procédé plus rapide pour évaluer les coefficients. En prenant le dual des relations entre les résidus successifs, on obtient \((s_k - s_{k + 1})^\dual = \conjaccent{\gamma_k} \cdot q_k^\dual \cdot A\). Donc :
@@ -919,7 +919,7 @@ D'un autre coté, \((r_k - r_{k + 1})^\dual = \conjaccent{\alpha_k} \cdot p_k^\d
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2026-01-10 sam 15:56</p>
+<p class="date">Created: 2026-01-13 mar 08:34</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

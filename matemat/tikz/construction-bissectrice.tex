@@ -43,9 +43,9 @@
 
 % parameters %{{{2
 
-	\def\len{1.5}
+	\def\len{2.1}
 	\def\extlen{3}
-	\def\radius{3}
+	\def\radius{3.5}
 	\def\arcradius{4}
 	\def\ang{60}
 
@@ -64,9 +64,11 @@
 	\tkzInterLC(O,A)(O,R)\tkzGetSecondPoint{D}
 	\tkzInterLC(O,B)(O,R)\tkzGetSecondPoint{E}
 
-	\path[name path=circleA] (D) circle (\arcradius);
-	\path[name path=circleB] (E) circle (\arcradius);
-	\path [name intersections={of=circleA and circleB, by={I,J}}];
+	\begin{pgfinterruptboundingbox}
+		\path[name path=circleA] (D) circle (\arcradius);
+		\path[name path=circleB] (E) circle (\arcradius);
+		\path [name intersections={of=circleA and circleB, by={I,J}}];
+	\end{pgfinterruptboundingbox}
 
 % vectors %{{{2
 
@@ -82,8 +84,8 @@
 
 % coordinates from vectors %{{{2
 
-	\coordinate (X) at ($ (A) + \extlen*(u1) $);
-	\coordinate (Y) at ($ (B) + \extlen*(u2) $);
+	\coordinate (X) at ($ (A) + {1.5*\extlen}*(u1) $);
+	\coordinate (Y) at ($ (B) + {1.5*\extlen}*(u2) $);
 	\coordinate (Z) at ($ (O) + {2.5*\extlen}*(u3) $);
 
 % segments %{{{2
@@ -123,7 +125,7 @@
 
 % segments labels %{{{2
 
-	%\node[above] at ($ (A)!0.5!(B) $) {$a$};
+	\node[above] at ($ (O)!0.7!(I) $) {$b$};
 
 % circular arcs labels %{{{2
 
@@ -133,13 +135,11 @@
 
 % angles labels %{{{2
 
-	%\pic[draw, ->, "$60^\circ$", angle radius=0.5cm, angle eccentricity=1.5]
-	%{angle = H--O--I};
+	\pic[draw, ->, "$\alpha$", angle radius=1.4cm, angle eccentricity=1.2]
+	{angle = A--O--I};
 
-% right angles labels %{{{2
-
-	%\pic [draw, angle radius=7pt, angle eccentricity=1]
-	%{right angle = C--B--A};
+	\pic[draw, ->, "$\alpha$", angle radius=1.4cm, angle eccentricity=1.2]
+	{angle = I--O--B};
 
 % closing %{{{2
 

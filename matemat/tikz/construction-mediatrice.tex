@@ -1,4 +1,4 @@
-% vim: set ft=tex :
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
 
 % header %{{{1
 
@@ -35,12 +35,12 @@
 \begin{document}
 \begin{tikzpicture}[scale=1.0]
 
-	% ---- parameters
+% parameters %{{{2
 
 	\def\len{6}
 	\def\radius{0.65*\len}
 
-	% ---- coordinates
+% coordinates %{{{2
 
 	\coordinate (A) at (0,0);
 	\coordinate (B) at (\len,0);
@@ -48,41 +48,62 @@
 	\coordinate (Ra) at ($(A) + (\radius, 0)$);
 	\coordinate (Rb) at ($(B) + (\radius, 0)$);
 
-	% ---- intersections
+% intersections %{{{2
 
 	\tkzInterCC(A,Ra)(B,Rb)\tkzGetPoints{D}{E}
 
-	\coordinate (I) at ($(D) + (0, 1)$);
-	\coordinate (J) at ($(E) - (0, 1)$);
+	\coordinate (X) at ($(E) - (0, 2)$);
+	\coordinate (Y) at ($(D) + (0, 2)$);
 
-	% ---- segments
+	\tkzInterLL(A,B)(D,E)\tkzGetPoint{F}
 
-	\draw (A) -- (B);
-	\draw (I) -- (J);
-
-	% ---- circular arcs
-
-	\draw (A) ++(-65:\radius) arc (-65:65:\radius);
-	\draw (B) ++(115:\radius) arc (115:245:\radius);
-
-	% ---- thick vertices
+% points, dots, vertices %{{{2
 
 	\fill (A) circle (0.5mm);
 	\fill (B) circle (0.5mm);
 	\fill (D) circle (0.5mm);
 	\fill (E) circle (0.5mm);
+	\fill (F) circle (0.5mm);
 
-	% ---- vertices labels
+% segments %{{{2
+
+	\draw (A) -- (B);
+	\draw (X) -- (Y);
+
+% circular arcs %{{{2
+
+	\draw (A) ++(-65:\radius) arc (-65:65:\radius);
+	\draw (B) ++(115:\radius) arc (115:245:\radius);
+
+% points, dots, vertices labels %{{{2
 
 	\node[below] at (A) {$A$};
 	\node[below] at (B) {$B$};
 	\node[label={[label distance=0.5]left:$D$}] at (D) {};
 	\node[label={[label distance=0.5]left:$E$}] at (E) {};
 
-	% ---- circular arcs labels
+% segments, sides labels %{{{2
+
+	\node[left] at ($ (X)!0.95!(Y) $) {$m$};
+
+% segments, sides marks %{{{2
+
+	\tkzMarkSegments[mark=||, size=2pt](A,F)
+	\tkzMarkSegments[mark=||, size=2pt](F,B)
+
+% circular arcs labels %{{{2
 
 	\node at ($(20:{\radius+0.3}) + (0, 0)$) {$\mathscr{C}_1$};
 	\node at ($(160:{\radius+0.3}) + (\len, 0)$) {$\mathscr{C}_2$};
+
+% angles labels %{{{2
+
+% right angles markers %{{{3
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = B--F--Y};
+
+% closing %{{{2
 
 \end{tikzpicture}
 \end{document}

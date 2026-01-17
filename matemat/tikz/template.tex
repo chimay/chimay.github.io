@@ -54,13 +54,13 @@
 		%-{Straight Barb[length=1.2mm]},
 	},
 	% ------- custom
-	construction/.style={
-		line width=0.1pt,
-		dashed,
-	},
 	vector/.style={
 		-{Straight Barb[length=1.2mm]},
 		%thick,
+	},
+	construction/.style={
+		line width=0.1pt,
+		dashed,
 	},
 	dimension/.style={
 		line width=0.2pt,
@@ -81,6 +81,11 @@
 \begin{document}
 \begin{tikzpicture}[scale=1.0]
 
+% box %{{{2
+
+	%\useasboundingbox (-2,-1) rectangle (2,1);
+	%\clip (-2,-1) rectangle (2,1);
+
 % parameters %{{{2
 
 	% ---- length is reserved
@@ -96,6 +101,18 @@
 	%\def\numsides{6}
 	%\def\rotation{90}
 
+	%\pgfmathsetmacro{\ang}{30}
+	%\pgfmathsetmacro{\gle}{20}
+	%\pgfmathsetmacro{\endang}{\ang+\gle}
+
+	%\tikzmath{
+		%\ang = 30;
+		%\gle = 20;
+		%\endang = \ang + \gle;
+	%}
+
+	% ---- for integers
+
 	%\pgfmathtruncatemacro{\last}{\numsides}
 	%\pgfmathtruncatemacro{\prevlast}{\numsides-1}
 
@@ -104,7 +121,7 @@
 	% ---- vectors defined independantly of points coordinates
 
 	%\coordinate (v) at (2,3);
-	%\coordinate (w) at (30:4);
+	%\coordinate (w) at (\ang:\len);
 
 % unit vectors %{{{3
 
@@ -145,9 +162,11 @@
 	%\path[name path=circle] (C) circle (1.5);
 	%\path[name intersections={of=line and circle, by={A,B}}];
 
-	%\path[name path=circleA] (A) circle (2cm);
-	%\path[name path=circleB] (B) circle (2cm);
-	%\path [name intersections={of=circleA and circleB, by={P1,P2}}];
+	%\begin{pgfinterruptboundingbox}
+		%\path[name path=circleA] (A) circle (2cm);
+		%\path[name path=circleB] (B) circle (2cm);
+		%\path[name intersections={of=circleA and circleB, by={P1,P2}}];
+	%\end{pgfinterruptboundingbox}
 
 	%\path[
 		%name intersections={
@@ -237,11 +256,11 @@
 	%\draw (A) ++(\ang:\len) arc (\ang:\gle:\len);
 	%\draw (B) ++(\ang:\radius) arc (\ang:\gle:\radius);
 
-    %\draw (A) arc (\ang:\gle:\len);
+    %\draw (A) arc (\ang:\gle:\radius);
 
 	%\draw (A) arc[start angle=0, end angle=40, radius=\radius];
 
-% radiuses %{{{2
+% radiuses %{{{3
 
 	%\draw (O) -- (P1);
 

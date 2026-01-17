@@ -8,7 +8,14 @@
 
 % packages and libraries %{{{2
 
+% ---- not necessary since the documentclass[tikz ...] requires it automatically
+% \usepackage{tikz}
+
 \usepackage{../../include/latex/custom}
+
+%\usepackage{amsmath}
+%\usepackage{mathrsfs}
+%\usepackage[x11names]{xcolor}
 
 \usetikzlibrary{calc,intersections,angles,quotes}
 %\usetikzlibrary{calc,intersections,angles,quotes,shapes.geometric,arrows.meta}
@@ -18,6 +25,10 @@
 % colors %{{{2
 
 \definecolor{goldenbrown}{HTML}{5b3c11}
+
+%\definecolor{somebrown}{RGB}{101,67,33}
+
+%\colorlet{somebrown}{brown!80!black}
 
 % style %{{{2
 
@@ -72,33 +83,60 @@
 
 % parameters %{{{2
 
-	%\def\len{3}
+	\def\radius{6}
 
-	%\def\ang{60}
+	\tikzmath{
+		\ang = 10;
+		\gle = 40;
+		\endang = \ang + \gle;
+		\meanang = (\ang + \endang)/2;
+	}
 
 % coordinates %{{{2
 
-	%\coordinate (A) at (\ang:\radius);
+	\coordinate (O) at (0,0);
+	\coordinate (A) at (\ang:\radius);
+	\coordinate (B) at ({\ang+\gle}:\radius);
 
 % points, dots, vertices %{{{2
 
-	%\fill (A) circle (0.4mm);
+	\fill (O) circle (0.4mm);
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
 
 % segments, sides %{{{2
 
-	%\draw (A) -- (B);
+	\draw (O) -- (A);
+	\draw (O) -- (B);
 
-% vectors %{{{3
+% circles %{{{2
 
-	%\draw[vector] (A) -- (B);
+% circular arcs %{{{3
+
+	\draw (A) arc (\ang:\endang:\radius);
 
 % points, dots, vertices labels %{{{2
 
-	%\node[above] at (A) {$A$};
+	\node[above] at (O) {$O$};
+	\node[above right] at (A) {$A$};
+	\node[above right] at (B) {$B$};
 
 % segments, sides labels %{{{2
 
 	%\node[above] at ($ (A)!0.5!(B) $) {$c$};
+
+% segments, sides marks %{{{2
+
+	%\tkzMarkSegments[mark=|, size=2pt](A,B)
+
+% circular arcs labels %{{{2
+
+	\node at (\meanang:\radius+0.3) {$\Gamma$};
+
+% angles labels %{{{2
+
+	\pic[draw, ->, "$\alpha$", angle radius=1.8cm, angle eccentricity=1.2]
+	{angle = A--O--B};
 
 % closing %{{{2
 

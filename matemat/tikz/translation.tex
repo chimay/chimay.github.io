@@ -72,33 +72,60 @@
 
 % parameters %{{{2
 
-	%\def\len{3}
+	\def\len{3}
 
-	%\def\ang{60}
+	\def\ang{20}
+
+% vectors %{{{2
+
+	\coordinate (v) at (\ang:\len);
+
+% unit vectors %{{{3
+
+	\coordinate (u) at ($ (0,0)!1cm!(v) $);
 
 % coordinates %{{{2
 
-	%\coordinate (A) at (\ang:\radius);
+	\coordinate (X) at (-1,2);
+	\coordinate (Y) at ($ (X) + (v) $);
+
+	\coordinate (A) at (0,0);
+	\coordinate (B) at ($ (A) + (v) $);
+
+	\coordinate (E1) at ($ (A) - 2*(u) $);
+	\coordinate (E2) at ($ (B) + 2*(u) $);
 
 % points, dots, vertices %{{{2
 
-	%\fill (A) circle (0.4mm);
+	\fill (X) circle (0.4mm);
+	\fill (Y) circle (0.4mm);
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
 
 % segments, sides %{{{2
 
-	%\draw (A) -- (B);
+	\draw[dashed] (X) -- (A);
+	\draw[dashed] (Y) -- (B);
+
+	\draw[dashed] (E1) -- (A);
+	\draw[dashed] (B) -- (E2);
 
 % vectors %{{{3
 
-	%\draw[vector] (A) -- (B);
+	\draw[vector] (X) -- (Y);
+	\draw[vector] (A) -- (B);
 
 % points, dots, vertices labels %{{{2
 
-	%\node[above] at (A) {$A$};
+	\node[above left] at (X) {$X$};
+	\node[above right] at (Y) {$Y$};
+	\node[below left] at (A) {$A$};
+	\node[below right] at (B) {$B$};
 
 % segments, sides labels %{{{2
 
-	%\node[above] at ($ (A)!0.5!(B) $) {$c$};
+	\node[above] at ($ (X)!0.5!(Y) $) {$\vecteur{v}$};
+	\node[above] at ($ (A)!0.5!(B) $) {$\vecteur{v}$};
 
 % closing %{{{2
 

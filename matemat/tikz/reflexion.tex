@@ -8,14 +8,7 @@
 
 % packages and libraries %{{{2
 
-% ---- not necessary since the documentclass[tikz ...] requires it automatically
-% \usepackage{tikz}
-
 \usepackage{../../include/latex/custom}
-
-%\usepackage{amsmath}
-%\usepackage{mathrsfs}
-%\usepackage[x11names]{xcolor}
 
 \usetikzlibrary{calc,intersections,angles,quotes}
 %\usetikzlibrary{calc,intersections,angles,quotes,shapes.geometric,arrows.meta}
@@ -25,10 +18,6 @@
 % colors %{{{2
 
 \definecolor{goldenbrown}{HTML}{5b3c11}
-
-%\definecolor{somebrown}{RGB}{101,67,33}
-
-%\colorlet{somebrown}{brown!80!black}
 
 % style %{{{2
 
@@ -83,66 +72,55 @@
 
 % parameters %{{{2
 
-	\def\radius{6}
+	\def\len{3}
+	\def\ext{1.2}
 
-	\def\ang{10}
-	\def\gle{60}
-
-	 \tikzmath{
-% 		\ang = 10;
-% 		\gle = 40;
-		\endang = \ang + \gle;
-		\meanang = (\ang + \endang)/2;
-	 }
+	\def\ang{20}
 
 % coordinates %{{{2
 
-	\coordinate (O) at (0,0);
-	\coordinate (A) at (\ang:\radius);
-	\coordinate (B) at ({\ang+\gle}:\radius);
+	\coordinate (X) at (0,{-\ext*\len});
+	\coordinate (Y) at (0,{\ext*\len});
+
+	\coordinate (A) at (-\len,0);
+	\coordinate (B) at (\len,0);
+
+% intersections %{{{2
+
+	\path[name path=line2] (X) -- (Y);
+	\path[name path=line1] (A) -- (B);
+	\path[name intersections={of=line1 and line2, by=I}];
 
 % points, dots, vertices %{{{2
 
-	\fill (O) circle (0.4mm);
 	\fill (A) circle (0.4mm);
 	\fill (B) circle (0.4mm);
+	\fill (I) circle (0.4mm);
 
 % segments, sides %{{{2
 
-	\draw (O) -- (A);
-	\draw (O) -- (B);
-
-% circles %{{{2
-
-% circular arcs %{{{3
-
-	\draw (A) arc (\ang:\endang:\radius);
-	%\draw (A) arc (\ang:{\ang+\gle}:\radius);
+	\draw (X) -- (Y);
+	\draw (A) -- (B);
 
 % points, dots, vertices labels %{{{2
 
-	\node[above] at (O) {$O$};
-	\node[above right] at (A) {$A$};
-	\node[above right] at (B) {$B$};
+	\node[below left] at (A) {$A$};
+	\node[below right] at (B) {$B$};
+	\node[below left] at (I) {$I$};
 
 % segments, sides labels %{{{2
 
-	\node[above] at ($ (O)!0.7!(A) $) {$r$};
-	\node[above] at ($ (O)!0.7!(B) $) {$r$};
+	\node[left] at ($ (X)!0.9!(Y) $) {$d$};
 
 % segments, sides marks %{{{2
 
-	\tkzMarkSegments[mark=||, size=2pt](O,A)
-	\tkzMarkSegments[mark=||, size=2pt](O,B)
+	\tkzMarkSegments[mark=||, size=2pt](A,I)
+	\tkzMarkSegments[mark=||, size=2pt](I,B)
 
-% circular arcs labels %{{{2
+% right angles markers %{{{3
 
-	\node at (\meanang:\radius+0.3) {$\Gamma$};
-
-% angles labels %{{{2
-
-	\pic[draw, ->, "$\alpha$", angle radius=1.8cm, angle eccentricity=1.2]
-	{angle = A--O--B};
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = B--I--Y};
 
 % closing %{{{2
 

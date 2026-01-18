@@ -18,7 +18,7 @@
 %\usepackage[x11names]{xcolor}
 
 \usetikzlibrary{calc,intersections,angles,quotes}
-%\usetikzlibrary{calc,intersections,angles,quotes,shapes.geometric,arrows.meta}
+%\usetikzlibrary{calc,intersections,angles,quotes,shapes.geometric,arrows.meta,decorations.markings}
 
 \usepackage{tkz-euclide}
 
@@ -58,6 +58,18 @@
 		-{Straight Barb[length=1.2mm]},
 		%thick,
 	},
+	mid arrow/.style={
+		postaction={
+			decorate,
+			decoration={
+				markings,
+				mark=at position #1 with {
+					\arrow{Straight Barb[length=1.2mm]}
+				}
+			}
+		}
+	},
+	mid arrow/.default=0.5,
 	construction/.style={
 		line width=0.1pt,
 		dashed,
@@ -262,6 +274,9 @@
     %\draw (A) arc (\ang:\gle:\radius);
 
 	%\draw (A) arc[start angle=0, end angle=40, radius=\radius];
+
+	%\draw[vector] (A) arc (\ang:\endang:\radius);
+	%\draw[mid arrow] (A) arc (\ang:\endang:\radius);
 
 % radiuses %{{{3
 

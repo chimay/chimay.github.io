@@ -8,14 +8,7 @@
 
 % packages and libraries %{{{2
 
-% ---- not necessary since the documentclass[tikz ...] requires it automatically
-% \usepackage{tikz}
-
 \usepackage{../../include/latex/custom}
-
-%\usepackage{amsmath}
-%\usepackage{mathrsfs}
-%\usepackage[x11names]{xcolor}
 
 \usetikzlibrary{calc,intersections,angles,quotes}
 %\usetikzlibrary{calc,intersections,angles,quotes,shapes.geometric,arrows.meta}
@@ -25,10 +18,6 @@
 % colors %{{{2
 
 \definecolor{goldenbrown}{HTML}{5b3c11}
-
-%\definecolor{somebrown}{RGB}{101,67,33}
-
-%\colorlet{somebrown}{brown!80!black}
 
 % style %{{{2
 
@@ -83,23 +72,24 @@
 
 % parameters %{{{2
 
-	\def\radius{6}
+	\def\len{3.0}
+	\def\homothety{5/2}
 
-	%\def\ang{10}
-	%\def\angrot{60}
+	\tikzmath{
+		\extratio = 1.3;
+		\ext = \extratio * max(1, \homothety);
+	}
 
-	 \tikzmath{
-		\ang = 10;
-		\angrot = 50;
-		\endang = \ang + \angrot;
-		\meanang = (\ang + \endang)/2;
-	 }
+	\def\ang{20}
 
 % coordinates %{{{2
 
 	\coordinate (O) at (0,0);
-	\coordinate (A) at (\ang:\radius);
-	\coordinate (B) at ({\ang+\angrot}:\radius);
+	\coordinate (A) at (\ang:\len);
+	\coordinate (B) at (\ang:{\homothety*\len});
+
+	\coordinate (X) at (\ang:{-(\extratio - 1)*\len});
+	\coordinate (Y) at (\ang:{\ext*\len});
 
 % points, dots, vertices %{{{2
 
@@ -109,40 +99,17 @@
 
 % segments, sides %{{{2
 
-	\draw (O) -- (A);
-	\draw (O) -- (B);
-
-% circles %{{{2
-
-% circular arcs %{{{3
-
-	\draw (A) arc (\ang:\endang:\radius);
-	%\draw (A) arc (\ang:{\ang+\angrot}:\radius);
+	\draw (X) -- (Y);
 
 % points, dots, vertices labels %{{{2
 
-	\node[above] at (O) {$O$};
-	\node[above right] at (A) {$A$};
-	\node[above right] at (B) {$B$};
+	\node[below] at (O) {$O$};
+	\node[below] at (A) {$A$};
+	\node[below] at (B) {$B$};
 
 % segments, sides labels %{{{2
 
-	\node[below right] at ($ (O)!0.7!(A) $) {$r$};
-	\node[left] at ($ (O)!0.7!(B) $) {$r$};
-
-% segments, sides marks %{{{2
-
-	\tkzMarkSegments[mark=||, size=2pt](O,A)
-	\tkzMarkSegments[mark=||, size=2pt](O,B)
-
-% circular arcs labels %{{{2
-
-	\node at (\meanang:\radius+0.3) {$\Gamma$};
-
-% angles labels %{{{2
-
-	\pic[draw, ->, "$\alpha$", angle radius=1.8cm, angle eccentricity=1.2]
-	{angle = A--O--B};
+	\node[above left] at ($ (O)!0.9!(Y) $) {$d$};
 
 % closing %{{{2
 

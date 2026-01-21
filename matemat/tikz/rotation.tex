@@ -13,12 +13,7 @@
 
 \usepackage{../../include/latex/custom}
 
-%\usepackage{amsmath}
-%\usepackage{mathrsfs}
-%\usepackage[x11names]{xcolor}
-
-\usetikzlibrary{calc,intersections,angles,quotes}
-%\usetikzlibrary{calc,intersections,angles,quotes,shapes.geometric,arrows.meta}
+\usetikzlibrary{calc,intersections,angles,quotes,shapes.geometric,arrows.meta,decorations.markings}
 
 \usepackage{tkz-euclide}
 
@@ -58,6 +53,18 @@
 		-{Straight Barb[length=1.2mm]},
 		%thick,
 	},
+	mid arrow/.style={
+		postaction={
+			decorate,
+			decoration={
+				markings,
+				mark=at position #1 with {
+					\arrow{Straight Barb[length=1.2mm]}
+				}
+			}
+		}
+	},
+	mid arrow/.default=0.5,
 	construction/.style={
 		line width=0.1pt,
 		dashed,
@@ -116,12 +123,12 @@
 
 % circular arcs %{{{3
 
-	\draw (A) arc (\ang:\endang:\radius);
+	\draw[mid arrow] (A) arc (\ang:\endang:\radius);
 	%\draw (A) arc (\ang:{\ang+\angrot}:\radius);
 
 % points, dots, vertices labels %{{{2
 
-	\node[above] at (O) {$O$};
+	\node[above left] at (O) {$O$};
 	\node[above right] at (A) {$A$};
 	\node[above right] at (B) {$B$};
 
@@ -137,7 +144,7 @@
 
 % circular arcs labels %{{{2
 
-	\node at (\meanang:\radius+0.3) {$\Gamma$};
+	\node at (\meanang:\radius+0.4) {$\Gamma$};
 
 % angles labels %{{{2
 

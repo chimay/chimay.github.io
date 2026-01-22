@@ -90,45 +90,55 @@
 
 % parameters %{{{2
 
-	\def\radius{4}
-
 	 \tikzmath{
-		\ang = 10;
+		\radius1 = 2.5;
+		\radius2 = 4.5;
+		\ang1 = -20;
+		\ang2 = 20;
 		\angrot = 180;
 	 }
 
 % coordinates %{{{2
 
 	\coordinate (O) at (0,0);
-	\coordinate (A) at (\ang:\radius);
-	\coordinate (B) at ({\ang+\angrot}:\radius);
+	\coordinate (A) at (\ang1:\radius1);
+	\coordinate (sA) at ({\ang1+\angrot}:\radius1);
+	\coordinate (B) at (\ang2:\radius2);
+	\coordinate (sB) at ({\ang2+\angrot}:\radius2);
 
 % points, dots, vertices %{{{2
 
 	\fill (O) circle (0.4mm);
 	\fill (A) circle (0.4mm);
+	\fill (sA) circle (0.4mm);
 	\fill (B) circle (0.4mm);
+	\fill (sB) circle (0.4mm);
 
 % segments, sides %{{{2
 
-	\draw (O) -- (A);
-	\draw (O) -- (B);
+	\draw[dashdotted] (O) -- (A);
+	\draw[dashdotted] (O) -- (sA);
+	\draw[dashdotted] (O) -- (B);
+	\draw[dashdotted] (O) -- (sB);
+
+	\draw (A) -- (B);
+	\draw (sA) -- (sB);
 
 % points, dots, vertices labels %{{{2
 
 	\node[above] at (O) {$O$};
 	\node[below right] at (A) {$A$};
-	\node[below left] at (B) {$B = \mathcal{S}(A)$};
-
-% segments, sides labels %{{{2
-
-	\node[above] at ($ (O)!0.7!(A) $) {$r$};
-	\node[above] at ($ (O)!0.7!(B) $) {$r$};
+	\node[right] at (B) {$B$};
+	\node[above left] at (sA) {$C = \mathcal{S}(A)$};
+	\node[below left] at (sB) {$D = \mathcal{S}(B)$};
 
 % segments, sides marks %{{{2
 
-	\tkzMarkSegments[mark=||, size=2pt](O,A)
+	\tkzMarkSegments[mark=|, size=2pt](O,A)
+	\tkzMarkSegments[mark=|, size=2pt](O,sA)
+
 	\tkzMarkSegments[mark=||, size=2pt](O,B)
+	\tkzMarkSegments[mark=||, size=2pt](O,sB)
 
 % closing %{{{2
 

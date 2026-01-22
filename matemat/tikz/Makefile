@@ -61,7 +61,7 @@ $(ALL_SUBDIRS):
 	$(MAKELINE) -C ${@:all-%=%} all
 	@$(ECHO)
 
-all: svg $(ALL_SUBDIRS)
+all: svg $(ALL_SUBDIRS) clean
 
 install: all sync-html
 

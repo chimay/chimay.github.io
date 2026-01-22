@@ -8,12 +8,9 @@
 
 % packages and libraries %{{{2
 
-% ---- not necessary since the documentclass[tikz ...] requires it automatically
-% \usepackage{tikz}
-
 \usepackage{../../include/latex/custom}
 
-\usetikzlibrary{calc,intersections,angles,quotes,shapes.geometric,arrows.meta,decorations.markings}
+\usetikzlibrary{calc,intersections,angles,quotes}
 
 \usepackage{tkz-euclide}
 
@@ -49,18 +46,6 @@
 		-{Straight Barb[length=1.2mm]},
 		%thick,
 	},
-	mid arrow/.style={
-		postaction={
-			decorate,
-			decoration={
-				markings,
-				mark=at position #1 with {
-					\arrow{Straight Barb[length=1.2mm]}
-				}
-			}
-		}
-	},
-	mid arrow/.default=0.5,
 	construction/.style={
 		line width=0.1pt,
 		dashed,
@@ -86,63 +71,52 @@
 
 % parameters %{{{2
 
-	\def\radius{6}
+	\tikzmath{
+		\lenA = 2.0;
+		\lenB = 3.0;
+		\angA = -20;
+		\angB = 30;
+		\homothety = 5/2;
+		\extratio = 1.3;
+		\ext = \extratio * max(1, \homothety);
+	}
 
-	 \tikzmath{
-		\ang = 10;
-		\angrot = 50;
-		\endang = \ang + \angrot;
-		\meanang = (\ang + \endang)/2;
-	 }
 
 % coordinates %{{{2
 
 	\coordinate (O) at (0,0);
-	\coordinate (A) at (\ang:\radius);
-	\coordinate (B) at ({\ang+\angrot}:\radius);
+	\coordinate (A) at (\angA:\lenA);
+	\coordinate (B) at (\angB:\lenB);
+	\coordinate (hA) at (\angA:{\homothety*\lenA});
+	\coordinate (hB) at (\angB:{\homothety*\lenB});
 
 % points, dots, vertices %{{{2
 
 	\fill (O) circle (0.4mm);
 	\fill (A) circle (0.4mm);
 	\fill (B) circle (0.4mm);
+	\fill (hA) circle (0.4mm);
+	\fill (hB) circle (0.4mm);
 
 % segments, sides %{{{2
 
-	\draw (O) -- (A);
-	\draw (O) -- (B);
+	\draw (A) -- (B);
+	\draw (hA) -- (hB);
 
-% circles %{{{2
-
-% circular arcs %{{{3
-
-	\draw[mid arrow] (A) arc (\ang:\endang:\radius);
-	%\draw (A) arc (\ang:{\ang+\angrot}:\radius);
+	\draw[dashdotted] (O) -- (hA);
+	\draw[dashdotted] (O) -- (hB);
 
 % points, dots, vertices labels %{{{2
 
-	\node[above left] at (O) {$O$};
-	\node[above right] at (A) {$A$};
-	\node[above right] at (B) {$B = \mathcal{R}(A)$};
+	\node[below] at (O) {$O$};
+	\node[below] at (A) {$A$};
+	\node[above] at (B) {$B$};
+	\node[below] at (hA) {$C = \mathcal{H}(A)$};
+	\node[above] at (hB) {$D = \mathcal{H}(B)$};
 
 % segments, sides labels %{{{2
 
-	\node[below right] at ($ (O)!0.7!(A) $) {$r$};
-	\node[left] at ($ (O)!0.7!(B) $) {$r$};
-
-% segments, sides marks %{{{2
-
-	\tkzMarkSegments[mark=||, size=2pt](O,A)
-	\tkzMarkSegments[mark=||, size=2pt](O,B)
-
-% circular arcs labels %{{{2
-
-	\node at (\meanang:\radius+0.4) {$\Gamma$};
-
-% angles labels %{{{2
-
-	\pic[draw, ->, "$\alpha$", angle radius=1.8cm, angle eccentricity=1.2]
-	{angle = A--O--B};
+	%\node[above left] at ($ (O)!0.9!(Y) $) {$d$};
 
 % closing %{{{2
 

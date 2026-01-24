@@ -1,28 +1,110 @@
 % vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
 
-% standard template with header in another file
+% template with full tikz header integrated
 
-\input{../../include/latex/tikz-header.tex}
+% header %{{{1
 
-% opening %{{{1
+% opening %{{{2
+
+\documentclass[tikz, border=1mm]{standalone}
+
+% packages and libraries %{{{2
+
+% ---- not necessary since the documentclass[tikz ...] requires it automatically
+% \usepackage{tikz}
+
+\usepackage{../../include/latex/custom}
+
+%\usepackage{amsmath}
+%\usepackage{mathrsfs}
+%\usepackage[x11names]{xcolor}
+
+\usetikzlibrary{calc,intersections,angles,quotes}
+%\usetikzlibrary{calc,intersections,angles,quotes,shapes.geometric,arrows.meta,decorations.markings}
+
+\usepackage{tkz-euclide}
+
+% colors %{{{2
+
+\definecolor{goldenbrown}{HTML}{5b3c11}
+
+%\definecolor{somebrown}{RGB}{101,67,33}
+
+%\colorlet{somebrown}{brown!80!black}
+
+% style %{{{2
+
+\tikzset{
+	% ------- every something
+	every picture/.style={
+		scale=1.0,
+	},
+	every coordinate/.style={
+		fill=black, circle, inner sep=1pt,
+	},
+	every path/.style={
+		line width=0.3pt,
+	},
+	every node/.style={
+		font=\normalsize,
+	},
+	every angle/.style={
+	},
+	every pic/.style={
+		% ---- does not worl
+		%draw,
+		%-{Straight Barb[length=1.2mm]},
+	},
+	% ------- custom
+	vector/.style={
+		-{Straight Barb[length=1.2mm]},
+		%thick,
+	},
+	mid arrow/.style={
+		postaction={
+			decorate,
+			decoration={
+				markings,
+				mark=at position #1 with {
+					\arrow{Straight Barb[length=1.2mm]}
+				}
+			}
+		}
+	},
+	mid arrow/.default=0.5,
+	construction/.style={
+		line width=0.1pt,
+		dashed,
+	},
+	dimension/.style={
+		line width=0.2pt,
+		<->,
+		goldenbrown,
+	},
+	dimension extension/.style={
+		line width=0.2pt,
+		dashed,
+		goldenbrown,
+	},
+}
+
+% document %{{{1
+
+% opening %{{{2
 
 \begin{document}
 \begin{tikzpicture}[scale=1.0]
 
-% box %{{{1
+% box %{{{2
 
 	%\useasboundingbox (-2,-1) rectangle (2,1);
 	%\clip (-2,-1) rectangle (2,1);
 
-% parameters %{{{1
+% parameters %{{{2
 
 	% ---- length is reserved
 	%\def\len{3}
 	%\def\gth{3}
-
-	%\def\lenAB{3}
-	%\def\lenBC{4}
-	%\def\lenCA{5}
 
 	% ---- angle can cause trouble
 	%\def\ang{60}
@@ -48,21 +130,21 @@
 	%\pgfmathtruncatemacro{\last}{\numsides}
 	%\pgfmathtruncatemacro{\prevlast}{\numsides-1}
 
-% vectors %{{{1
+% vectors %{{{2
 
 	% ---- vectors defined independantly of points coordinates
 
 	%\coordinate (v) at (2,3);
 	%\coordinate (w) at (\ang:\len);
 
-% unit vectors %{{{2
+% unit vectors %{{{3
 
 	%\coordinate (u) at ($ (0,0)!1cm!(v) $);
 
 	%\coordinate (u) at (7:1);
 	%\coordinate (v) at ({180-12}:1);
 
-% coordinates %{{{1
+% coordinates %{{{2
 
 	%\coordinate (O) at (0,0);
 	%\coordinate (A) at (\ang:\radius);
@@ -71,18 +153,18 @@
 	%\coordinate (cartesien) at (1,2);
 	%\coordinate (polar) at (\ang:\len);
 
-% coordinate for polygon vertices %{{{2
+% coordinate for polygon vertices %{{{3
 
 	%\foreach \i in {1,...,\numsides} {
 		%\coordinate (P\i) at ({360/\numsides*(\i-1)+\rotation}:\radius);
 	%}
 
-% coordinates of points in circles %{{{2
+% coordinates of points in circles %{{{3
 
 	%\coordinate (Ra) at ($ (A) + (\radius, 0) $);
 	%\coordinate (Ra) at ($ (A) + (\ang:\radius) $);
 
-% intersections %{{{1
+% intersections %{{{2
 
 	% ------------ warning : the two segments must be extended
 	% ------------ until the intersection
@@ -127,31 +209,31 @@
 	% -- or
 	%\tkzGetSecondPoint{J}
 
-% vectors from coordinates %{{{1
+% vectors from coordinates %{{{2
 
 	%\coordinate (v) at ($ (B) - (A) $);
 	%\coordinate (AB) at ($ (B) - (A) $);
 
-% unit vectors %{{{2
+% unit vectors %{{{3
 
 	%\coordinate (u) at ($ (0,0)!1cm!(v) $);
 	%\coordinate (ab) at ($ (0,0)!1cm!(AB) $);
 
-% coordinates from vectors %{{{1
+% coordinates from vectors %{{{2
 
-% fixed length %{{{2
+% fixed length %{{{3
 
 	%\coordinate (E) at ($ (A) + \len*(u) $);
 
-% proportional length %{{{2
+% proportional length %{{{3
 
 % 	\coordinate (E) at ($ (A) + \arrowratio*(v) $);
 
-% coordinates for dimension lines %{{{1
+% coordinates for dimension lines %{{{2
 
 	%\coordinate (IdJ) at ($ (I) + (0,0.7) $);
 
-% points, dots, vertices %{{{1
+% points, dots, vertices %{{{2
 
 	%\fill (O) circle (0.4mm);
 	%\fill (A) circle (0.4mm);
@@ -160,21 +242,21 @@
 
 	%\draw ($ (A) + ({90+\ang}:2mm) $) -- ($ (A) + ({-90+\ang}:2mm) $);
 
-% polygon vertices %{{{2
+% polygon vertices %{{{3
 
 	%\foreach \i in {1,...,\numsides} { \fill (P\i) circle (0.3mm); }
 
-% segments, sides %{{{1
+% segments, sides %{{{2
 
 	%\draw (A) -- (B);
 
 	%\foreach \i in {1,...,6} { \draw (O) -- (u\i); }
 
-% vectors %{{{2
+% vectors %{{{3
 
 	%\draw[vector] (A) -- (B);
 
-% polygons %{{{2
+% polygons %{{{3
 
 	%\draw (A) -- (B) -- (C) -- cycle;
 
@@ -187,11 +269,11 @@
 		%regular polygon sides=5
 		%] {Pentagon};
 
-% circles %{{{1
+% circles %{{{2
 
 	%\draw (O) circle (\radius);
 
-% circular arcs %{{{2
+% circular arcs %{{{3
 
 	%\draw (A) ++(\ang:\len) arc (\ang:\gle:\len);
 	%\draw (B) ++(\ang:\radius) arc (\ang:\gle:\radius);
@@ -203,7 +285,7 @@
 	%\draw[vector] (A) arc (\ang:\endang:\radius);
 	%\draw[mid arrow] (A) arc (\ang:\endang:\radius);
 
-% radiuses %{{{2
+% radiuses %{{{3
 
 	%\draw (O) -- (P1);
 
@@ -212,13 +294,13 @@
 	%\foreach \i in {2,...,\prevlast} { \draw[dashed] (O) -- (P\i); }
 	%\foreach \i in {2,...,\numexpr\numsides-1\relax} { \draw[dashed] (O) -- (P\i); }
 
-% dimension lines %{{{1
+% dimension lines %{{{2
 
 	%\draw[dimension] (IdJ) -- (JdI);
 	%\draw[dimension extension] (I) -- (IdJ);
 	%\draw[dimension extension] (J) -- (JdI);
 
-% points, dots, vertices labels %{{{1
+% points, dots, vertices labels %{{{2
 
 	%\node[above] at (A) {$A$};
 	%\node[above] at (B) {$B$};
@@ -226,44 +308,44 @@
 
 	%\node[label={[label distance=0.5]above:$G$}] at (G) {};
 
-% segments, sides labels %{{{1
+% segments, sides labels %{{{2
 
 	%\node[above] at ($ (A)!0.5!(B) $) {$c$};
 
-% segments, sides marks %{{{1
+% segments, sides marks %{{{2
 
 	%\tkzMarkSegments[mark=||, size=2pt](A,B)
 	%\tkzMarkSegments[mark=||, size=2pt](C,D)
 
-% circles labels %{{{1
+% circles labels %{{{2
 
 	%\node at ($ (O)+(45:\radius+0.3) $) {$\mathscr{C}$};
 	%\node at ($ (A)+(45:\r+2mm) $) {$\mathscr C(A,r)$};
 
-% circular arcs labels %{{{2
+% circular arcs labels %{{{3
 
 	%\node at (45:\radius+0.3) {$\mathscr{C}$};
 
 	%\node at ($ (A) + {\radiusA + 0.3}*(u) $) {$\mathscr{C}_1$};
 	%\node at ($ (B) + {\radiusB + 0.3}*(v) $) {$\mathscr{C}_2$};
 
-% angles labels %{{{1
+% angles labels %{{{2
 
 	%\pic[draw, ->, "$60^\circ$", angle radius=0.5cm, angle eccentricity=1.5]
 	%{angle = H--O--I};
 
 	%\pic[draw, ->, "$\alpha$", angle radius=0.5cm, angle eccentricity=1.5]
-	%{angle = B--A--C};
+	%{angle = H--O--I};
 
 	%\pic[draw, {Straight Barb[length=1.5mm]}-{Straight Barb[length=1.5mm]}, "$\alpha$", angle radius=1.5cm, angle eccentricity=1.2]
-	%{angle = C--B--A};
+	%{angle = B--A--C};
 
-% right angles markers %{{{2
+% right angles markers %{{{3
 
 	%\pic [draw, angle radius=7pt, angle eccentricity=1]
 	%{right angle = C--B--A};
 
-% closing %{{{1
+% closing %{{{2
 
 \end{tikzpicture}
 \end{document}

@@ -18,6 +18,10 @@
 
 \definecolor{goldenbrown}{HTML}{5b3c11}
 
+%\definecolor{somebrown}{RGB}{101,67,33}
+
+%\colorlet{somebrown}{brown!80!black}
+
 % style %{{{2
 
 \tikzset{
@@ -44,48 +48,65 @@
 
 	\def\lenAB{7}
 	\def\lenAC{5}
-	\def\angBAC{40}
-	\def\ext{1.4}
+	\def\angCBA{35}
+	\def\ext{2.4}
+
+% vectors %{{{2
+
+% unit vectors %{{{3
+
+	\coordinate (u) at (10:1);
+	\coordinate (v) at ({180-\angCBA}:1);
 
 % coordinates %{{{2
 
 	\coordinate (A) at (0,0);
 	\coordinate (B) at (\lenAB,0);
-	\coordinate (C) at (\angBAC:\lenAC);
-
-	\coordinate (X) at (\angBAC:{\ext*\lenAC});
+	\coordinate (X) at ($ (B) + {\ext*\lenAC}*(v) $);
 
 % intersections %{{{2
 
-	\path[name path=line1] (A) -- (B);
-	\path[name path=line2] (A) -- (C);
-	\path[name intersections={of=line1 and line2, by=I}];
+	\path[name path=line] (B) -- (X);
+	\path[name path=circle] (A) circle (\lenAC);
+	\path[name intersections={of=line and circle, by={I,J}}];
 
 % vertices, points, dots %{{{2
 
 	\fill (A) circle (0.4mm);
 	\fill (B) circle (0.4mm);
-	\fill (C) circle (0.4mm);
+	\fill (I) circle (0.4mm);
+	\fill (J) circle (0.4mm);
 
 % segments, sides %{{{2
 
-	\draw (A) -- (B) -- (C) -- cycle;
-	\draw[dashed] (C) -- (X);
+	\draw (A) -- (B) -- (I) -- cycle;
+	\draw (A) -- (J);
+	\draw (J) -- (I);
+	\draw[dashdotted] (J) -- (X);
+
+% circles %{{{2
+
+% circular arcs %{{{3
+
+	\draw[dashed] (A) ++(-35:\lenAC) arc (-35:120:\lenAC);
 
 % points, dots, vertices labels %{{{2
 
 	\node[below left] at (A) {$A$};
 	\node[below right] at (B) {$B$};
-	\node[above left] at (C) {$C$};
+	\node[above] at (I) {$I$};
+	\node[above] at (J) {$J$};
 
-% segments, sides labels %{{{2
+% circles labels %{{{2
 
-	\node[above] at ($ (C)!0.5!(X) $) {$d$};
+% circular arcs labels %{{{3
+
+	\node at ($ (A) + {\lenAC + 0.3}*(u) $) {$\mathscr{C}$};
 
 % angles labels %{{{2
 
-	\pic[draw, ->, "$\alpha$", angle radius=1.5cm, angle eccentricity=1.2]
-	{angle = B--A--C};
+	\pic[draw, ->, "$\alpha$", angle radius=1.0cm, angle eccentricity=1.2]
+	{angle = I--B--A};
 
 % closing %{{{2
 

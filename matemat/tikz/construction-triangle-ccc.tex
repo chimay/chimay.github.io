@@ -52,84 +52,41 @@
 % parameters %{{{2
 
 	\def\lenAB{7}
-	\def\lenBC{5}
-	\def\lenCA{3}
+	\def\lenAC{5}
+	\def\lenBC{3}
 
 % vectors %{{{2
 
-	% ---- vectors defined independantly of points coordinates
-
-	%\coordinate (v) at (2,3);
-	%\coordinate (w) at (30:4);
-
 % unit vectors %{{{3
 
-	%\coordinate (u) at ($ (0,0)!1cm!(v) $);
+	\coordinate (u) at (7:1);
+	\coordinate (v) at ({180-12}:1);
 
 % coordinates %{{{2
 
 	\coordinate (A) at (0,0);
 	\coordinate (B) at (\lenAB,0);
 
-% coordinates of points in circles %{{{3
-
-	%\coordinate (Ra) at ($(A) + (\radius, 0)$);
-
 % intersections %{{{2
 
-	%\tkzInterLL(A,B)(C,D)\tkzGetPoint{E}
-	%\tkzInterLC(A,B)(O,C)\tkzGetPoints{P}{Q}
-	%\tkzInterCC(O1,A1)(O2,A2)\tkzGetPoints{M}{N}
-
-	% -- in case of 2 intersections
-	%\tkzGetFirstPoint{I}
-	% -- or
-	%\tkzGetSecondPoint{I}
-
-	%\path[name path=line1] (0,0) -- (4,3);
-	%\path[name path=line2] (0,3) -- (4,0);
-	%\path[name intersections={of=line1 and line2, by=I}];
-
-	%\path[name path=line] (0,-1) -- (4,2);
-	%\path[name path=circle] (2,0) circle (1.5);
-	%\path[name intersections={of=line and circle, by={A,B}}];
-
-	%\path[name path=circleA] (0,0) circle (2cm);
-	%\path[name path=circleB] (1,1) circle (2cm);
-	%\path [name intersections={of=circleA and circleB, by={P1,P2}}];
-
-% vectors from coordinates %{{{2
-
-	%\coordinate (v) at ($ (A) - (B) $);
-
-% unit vectors %{{{3
-
-	%\coordinate (u) at ($ (0,0)!1cm!(v) $);
-
-% coordinates from vectors %{{{2
-
-% fixed length %{{{3
-
-	%\coordinate (E) at ($ (A) + \len*(u) $);
-
-% proportional length %{{{3
-
-% 	\coordinate (E) at ($ (A) + \arrowratio*(v) $);
-
-% coordinates for dimension lines %{{{2
-
-	%\coordinate (IdJ) at ($ (I) + (0,0.7) $);
+	\begin{pgfinterruptboundingbox}
+		\path[name path=circleA] (A) circle (\lenAC);
+		\path[name path=circleB] (B) circle (\lenBC);
+		\path[name intersections={of=circleA and circleB, by={I,J}}];
+	\end{pgfinterruptboundingbox}
 
 % vertices, points, dots %{{{2
 
 	\fill (A) circle (0.4mm);
 	\fill (B) circle (0.4mm);
+	\fill (I) circle (0.4mm);
+	\fill (J) circle (0.4mm);
 
 % segments, sides %{{{2
 
-	\draw (A) -- (B);
-
-	%\foreach \i in {1,...,6} { \draw (O) -- (u\i); }
+	\draw (A) -- (B) -- (I) -- cycle;
+	\draw (A) -- (J);
+	\draw (J) -- (B);
 
 % polygons %{{{2
 
@@ -144,55 +101,32 @@
 
 % circles %{{{2
 
-	%\draw (O) circle (\radius);
+% circular arcs %{{{3
 
-% circular arcs %{{{2
+	\draw[dashed] (A) ++(-35:\lenAC) arc (-35:35:\lenAC);
+	\draw[dashed] (B) ++(115:\lenBC) arc (115:245:\lenBC);
 
-	\draw (A) ++(-35:\lenBC) arc (-35:35:\lenBC);
-	\draw (B) ++(115:\lenCA) arc (115:245:\lenCA);
-
-% radiuses %{{{2
+% radiuses %{{{3
 
 	%\draw (O) -- (P1);
-
-% dimension lines %{{{2
-
-	%\draw[dimension] (IdJ) -- (JdI);
-	%\draw[dimension extension] (I) -- (IdJ);
-	%\draw[dimension extension] (J) -- (JdI);
 
 % points, dots, vertices labels %{{{2
 
 	\node[below] at (A) {$A$};
 	\node[below] at (B) {$B$};
+	\node[above] at (I) {$I$};
+	\node[below] at (J) {$J$};
 
 % segments, sides labels %{{{2
 
 	%\node[above] at ($ (A)!0.5!(B) $) {$c$};
 
-% segments, sides marks %{{{2
-
-	%\tkzMarkSegments[mark=|, size=2pt](A,B)
-
 % circles labels %{{{2
 
-	%\node at ($ (O)+(45:\radius+0.3) $) {$\mathscr{C}$};
-	%\node at ($ (A)+(45:\r+2mm) $) {$\mathscr C(A,r)$};
+% circular arcs labels %{{{3
 
-% circular arcs labels %{{{2
-
-	%\node at (45:\radius+0.3) {$\mathscr{C}$};
-	%\node at (45:\radius+0.3) {$\mathcal{C}$};
-
-% angles labels %{{{2
-
-	%\pic[draw, ->, "$60^\circ$", angle radius=0.5cm, angle eccentricity=1.5]
-	%{angle = H--O--I};
-
-% right angles markers %{{{2
-
-	%\pic [draw, angle radius=7pt, angle eccentricity=1]
-	%{right angle = C--B--A};
+	\node at ($ (A) + {\lenAC + 0.3}*(u) $) {$\mathscr{C}_1$};
+	\node at ($ (B) + {\lenBC + 0.3}*(v) $) {$\mathscr{C}_2$};
 
 % closing %{{{2
 

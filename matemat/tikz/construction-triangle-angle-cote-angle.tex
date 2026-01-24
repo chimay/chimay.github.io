@@ -1,0 +1,105 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+% header %{{{1
+
+% opening %{{{2
+
+\documentclass[tikz, border=1mm]{standalone}
+
+% packages and libraries %{{{2
+
+\usepackage{../../include/latex/custom}
+
+\usetikzlibrary{calc,angles,quotes,intersections,shapes.geometric}
+
+\usepackage{tkz-euclide}
+
+% colors %{{{2
+
+\definecolor{goldenbrown}{HTML}{5b3c11}
+
+% style %{{{2
+
+\tikzset{
+	% ---- default
+	every path/.style={line width=0.3pt},
+	every coordinate/.style={fill=black, circle, inner sep=1pt},
+	every node/.style={font=\normalsize},
+	every picture/.style={scale=1.0},
+	% ---- custom
+	construction/.style={line width=0.1pt, dashed},
+	dimension/.style={line width=0.2pt, <->, goldenbrown},
+	dimension extension/.style={line width=0.2pt, dashed, goldenbrown},
+	vector/.style={->, thick},
+}
+
+% document %{{{1
+
+% opening %{{{2
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{2
+
+	\def\lenAB{7}
+	\def\angBAC{40}
+	\def\angCBA{30}
+	\def\lenLineD{6}
+	\def\lenLineE{7}
+
+% vectors %{{{2
+
+% unit vectors %{{{3
+
+	\coordinate (u) at ({180-\angCBA}:1);
+
+% coordinates %{{{2
+
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (\lenAB,0);
+
+	\coordinate (X) at (\angBAC:\lenLineD);
+	\coordinate (Y) at ($ (B) + \lenLineE*(u) $);
+
+% intersections %{{{2
+
+	\path[name path=line1] (A) -- (X);
+	\path[name path=line2] (B) -- (Y);
+	\path[name intersections={of=line1 and line2, by=C}];
+
+% vertices, points, dots %{{{2
+
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+	\fill (C) circle (0.4mm);
+
+% segments, sides %{{{2
+
+	\draw (A) -- (B) -- (C) -- cycle;
+	\draw[dashed] (C) -- (X);
+	\draw[dashed] (C) -- (Y);
+
+% points, dots, vertices labels %{{{2
+
+	\node[below left] at (A) {$A$};
+	\node[below right] at (B) {$B$};
+	\node[above] at (C) {$C$};
+
+% segments, sides labels %{{{2
+
+	\node[above] at ($ (C)!0.5!(X) $) {$d$};
+	\node[above] at ($ (C)!0.5!(Y) $) {$f$};
+
+% angles labels %{{{2
+
+	\pic[draw, ->, "$\alpha$", angle radius=1.5cm, angle eccentricity=1.2]
+	{angle = B--A--C};
+
+	\pic[draw, ->, "$\beta$", angle radius=1.5cm, angle eccentricity=1.2]
+	{angle = C--B--A};
+
+% closing %{{{2
+
+\end{tikzpicture}
+\end{document}

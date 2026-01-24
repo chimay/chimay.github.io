@@ -1,0 +1,66 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz-header.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.2]
+
+% parameters %{{{1
+
+	\def\lenAB{4}
+	\def\angBAC{40}
+	\def\extD{1.3}
+	\def\extF{1.8}
+
+% coordinates %{{{1
+
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (\lenAB,0);
+	\coordinate (X) at (\lenAB,{\extD*\lenAB});
+	\coordinate (Y) at (\angBAC:{\extF*\lenAB});
+
+% intersections %{{{1
+
+	\path[name path=line1] (B) -- (X);
+	\path[name path=line2] (A) -- (Y);
+	\path[name intersections={of=line1 and line2, by=C}];
+
+% points, dots, vertices %{{{1
+
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+	\fill (C) circle (0.4mm);
+
+% segments, sides %{{{1
+
+	\draw (A) -- (B) -- (C) -- cycle;
+	\draw[dashed] (C) -- (X);
+	\draw[dashed] (C) -- (Y);
+
+% points, dots, vertices labels %{{{1
+
+	\node[below left] at (A) {$A$};
+	\node[below right] at (B) {$B$};
+	\node[below right] at (C) {$C$};
+
+% segments, sides labels %{{{1
+
+	\node[left] at ($ (C)!0.6!(X) $) {$d$};
+	\node[left] at ($ (C)!0.6!(Y) $) {$f$};
+
+% angles labels %{{{1
+
+	\pic[draw, ->, "$\alpha$", angle radius=1.5cm, angle eccentricity=1.2]
+	{angle = B--A--C};
+
+% right angles markers %{{{1
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = C--B--A};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

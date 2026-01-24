@@ -1,0 +1,57 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz-header.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.2]
+
+% parameters %{{{1
+
+	\def\lenAB{4}
+	\def\lenBC{3}
+	\def\ext{1.5}
+
+% coordinates %{{{1
+
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (\lenAB,0);
+	\coordinate (C) at (\lenAB,\lenBC);
+	\coordinate (X) at (\lenAB,{\ext*\lenBC});
+
+% points, dots, vertices %{{{1
+
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+	\fill (C) circle (0.4mm);
+
+% segments, sides %{{{1
+
+	\draw (A) -- (B) -- (C) -- cycle;
+	\draw[dashed] (C) -- (X);
+
+% points, dots, vertices labels %{{{1
+
+	\node[below left] at (A) {$A$};
+	\node[below right] at (B) {$B$};
+	\node[above right] at (C) {$C$};
+
+% segments, sides labels %{{{1
+
+	\node[left] at ($ (C)!0.6!(X) $) {$d$};
+
+% angles labels %{{{1
+
+	\pic[draw, ->, "$\alpha$", angle radius=1.5cm, angle eccentricity=1.2]
+	{angle = B--A--C};
+
+% right angles markers %{{{1
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = C--B--A};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

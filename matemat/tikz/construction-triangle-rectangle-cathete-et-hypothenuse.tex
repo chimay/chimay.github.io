@@ -10,15 +10,22 @@
 % parameters %{{{1
 
 	\def\lenAB{4}
-	\def\lenBC{3}
-	\def\ext{1.5}
+	\def\lenAC{5}
+	\def\ext{1.3}
 
 % coordinates %{{{1
 
 	\coordinate (A) at (0,0);
 	\coordinate (B) at (\lenAB,0);
-	\coordinate (C) at (\lenAB,\lenBC);
-	\coordinate (X) at (\lenAB,{\ext*\lenBC});
+	\coordinate (X) at (\lenAB,{\ext*\lenAB});
+
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=line] (B) -- (X);
+		\path[name path=circle] (A) circle (\lenAC);
+		\path[name intersections={of=line and circle, by=C}];
+	\end{pgfinterruptboundingbox}
 
 % points, dots, vertices %{{{1
 
@@ -31,6 +38,12 @@
 	\draw (A) -- (B) -- (C) -- cycle;
 	\draw[dashed] (C) -- (X);
 
+% circles %{{{1
+
+% circular arcs %{{{2
+
+	\draw[dashdotted] (A) ++(10:\lenAC) arc (10:70:\lenAC);
+
 % points, dots, vertices labels %{{{1
 
 	\node[below left] at (A) {$A$};
@@ -39,12 +52,11 @@
 
 % segments, sides labels %{{{1
 
-	\node[left] at ($ (C)!0.6!(X) $) {$d$};
+	\node[left] at ($ (C)!0.7!(X) $) {$d$};
 
-% angles labels %{{{1
+% circular arcs labels %{{{2
 
-	\pic[draw, ->, "$\alpha$", angle radius=1.5cm, angle eccentricity=1.2]
-	{angle = B--A--C};
+	\node at (25:\lenAC+0.3) {$\mathscr{C}$};
 
 % right angles markers %{{{1
 

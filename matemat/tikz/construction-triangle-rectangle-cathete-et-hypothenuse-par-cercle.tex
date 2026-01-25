@@ -1,0 +1,74 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.2]
+
+% parameters %{{{1
+
+	\def\lenAB{4}
+	\def\lenAC{5}
+	\def\ang{10}
+	\def\gle{60}
+
+	\tikzmath{
+		\radius = \lenAC/2;
+	}
+
+% coordinates %{{{1
+
+	\coordinate (A) at (0,0);
+	\coordinate (C) at (\lenAC,0);
+	\coordinate (O) at (\radius,0);
+
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=circleO] (O) circle (\radius);
+		\path[name path=circleA] (A) circle (\lenAB);
+		\path[name intersections={of=circleO and circleA, by={B,J}}];
+	\end{pgfinterruptboundingbox}
+
+% points, dots, vertices %{{{1
+
+	\fill (A) circle (0.4mm);
+	\fill (C) circle (0.4mm);
+	\fill (O) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+
+% segments, sides %{{{1
+
+	\draw (A) -- (B) -- (C) -- cycle;
+
+% circles %{{{1
+
+	\draw (O) circle (\radius);
+
+% circular arcs %{{{2
+
+	\draw[dashed] (A) ++(\ang:\lenAB) arc (\ang:\gle:\lenAB);
+
+% points, dots, vertices labels %{{{1
+
+	\node[below left] at (A) {$A$};
+	\node[above right] at (C) {$C$};
+	\node[above right] at (O) {$O$};
+	\node[above right] at (B) {$B$};
+
+% circular arcs labels %{{{1
+
+	\node at ($ (O) + (45:\radius+0.3) $) {$\mathscr{C}_1$};
+	\node at (45:\lenAB+0.3) {$\mathscr{C}_2$};
+
+% right angles markers %{{{1
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = C--B--A};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

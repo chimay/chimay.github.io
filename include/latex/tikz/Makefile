@@ -1,6 +1,6 @@
 # vim: set ft=make :
 
-include ../../Makefile.inc
+include ../../../Makefile.inc
 
 .DEFAULT_GOAL := all
 
@@ -24,46 +24,15 @@ include ../../Makefile.inc
 debug:
 	@echo $(SUBDIRS)
 
-#  org -> html {{{1
-
-%.html: %.org $(INC_FILES)
-	$(EMACS) $(EMACS_PRE_FLAGS) $< $(EMACS_POST_FLAGS)
-	remove-max-width-from-org-html-export.zsh $(patsubst %.org,%.html,$<)
-	@$(ECHO)
-
-html: $(ORG_HTML_FILES)
-
-# tex --> pdf {{{1
-
-%.pdf: %.tex $(INC_TIKZ_FILES)
-	latexmk -pdf $<
-	#latexmk -f -pdf $<
-	#pdflatex $<
-
-pdf: $(TEX_PDF_FILES)
-
-# pdf --> svg {{{1
-
-%.svg: %.pdf
-	pdf2svg $< $@
-
-svg: $(TEX_SVG_FILES)
-
-# sync -> html dir {{{1
-
-sync-html: html $(ALL_SUBDIRS)
-	$(RSYNC) $(CUR_DIR)/ $(HTML_DIR)
-	@$(ECHO)
-
 # all, install {{{1
 
 $(ALL_SUBDIRS):
 	$(MAKELINE) -C ${@:all-%=%} all
 	@$(ECHO)
 
-all: svg $(ALL_SUBDIRS) clean
+all: $(ALL_SUBDIRS)
 
-install: all sync-html
+install: all
 
 # clean, wipe {{{1
 
@@ -81,14 +50,7 @@ $(WIPE_SUBDIRS):
 
 clean: $(CLEAN_SUBDIRS)
 	rm -f ?*~
-	rm -f ?*.aux
-	rm -f ?*.fdb_latexmk
-	rm -f ?*.fls
-	rm -f ?*.log
-	rm -f ?*.out
-	rm -f ?*.toc
-	rm -f ?*.ptc
-	remove-obsolete-targets.zsh +tex -pdf -svg
+	remove-obsolete-targets.zsh +org -html
 
 clean-html: $(CLEAN_HTML_SUBDIRS)
 	rm -f ?*.html

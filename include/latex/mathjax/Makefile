@@ -1,6 +1,6 @@
 # vim: set ft=make :
 
-include ../../Makefile.inc
+include ../../../Makefile.inc
 
 .DEFAULT_GOAL := all
 
@@ -24,21 +24,6 @@ include ../../Makefile.inc
 debug:
 	@echo $(SUBDIRS)
 
-#  org -> html {{{1
-
-%.html: %.org $(INC_FILES)
-	$(EMACS) $(EMACS_PRE_FLAGS) $< $(EMACS_POST_FLAGS)
-	remove-max-width-from-org-html-export.zsh $(patsubst %.org,%.html,$<)
-	@$(ECHO)
-
-html: $(ORG_HTML_FILES)
-
-# sync -> html dir {{{1
-
-sync-html: html $(ALL_SUBDIRS)
-	$(RSYNC) $(CUR_DIR)/ $(HTML_DIR)
-	@$(ECHO)
-
 # all, install {{{1
 
 $(ALL_SUBDIRS):
@@ -47,7 +32,7 @@ $(ALL_SUBDIRS):
 
 all: $(ALL_SUBDIRS)
 
-install: all sync-html
+install: all
 
 # clean, wipe {{{1
 

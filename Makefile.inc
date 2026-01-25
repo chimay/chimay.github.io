@@ -34,8 +34,9 @@ TEX_SVG_FILES    =  $(TEX_FILES:.tex=.svg)
 CSS_FILES          =  $(wildcard $(ROOT_GENERIC)/style/*.css)
 INC_FILES          =  $(wildcard $(ROOT_GENERIC)/include/*.org)
 
-INC_LATEX_FILES    =  $(wildcard $(ROOT_GENERIC)/include/latex/*-tex.*)
-INC_MATHJAX_FILES  =  $(wildcard $(ROOT_GENERIC)/include/latex/*-mathjax.*)
+INC_LATEX_FILES    =  $(wildcard $(ROOT_GENERIC)/include/latex/tex/*.*)
+INC_TIKZ_FILES     =  $(wildcard $(ROOT_GENERIC)/include/latex/tikz/*.*)
+INC_MATHJAX_FILES  =  $(wildcard $(ROOT_GENERIC)/include/latex/mathjax/*.*)
 
 # ORG_HTML_FILES = $(patsubst %.org,%.html,$(wildcard *.org))
 

@@ -9,8 +9,9 @@
 
 % parameters %{{{1
 
-	\def\lenAB{6}
-	\def\lenAC{7}
+	\def\lenAC{6.5}
+	\def\angBAC{35}
+	\def\ext{1.2}
 	\def\ang{10}
 	\def\gle{60}
 
@@ -21,15 +22,16 @@
 % coordinates %{{{1
 
 	\coordinate (A) at (0,0);
+	\coordinate (X) at (\angBAC:{\ext*\lenAC});
 	\coordinate (C) at (\lenAC,0);
 	\coordinate (O) at (\radius,0);
 
 % intersections %{{{1
 
 	\begin{pgfinterruptboundingbox}
-		\path[name path=circleO] (O) circle (\radius);
-		\path[name path=circleA] (A) circle (\lenAB);
-		\path[name intersections={of=circleO and circleA, by={B,J}}];
+		\path[name path=line] (A) -- (X);
+		\path[name path=circle] (O) circle (\radius);
+		\path[name intersections={of=line and circle, by=B}];
 	\end{pgfinterruptboundingbox}
 
 % points, dots, vertices %{{{1
@@ -42,26 +44,31 @@
 % segments, sides %{{{1
 
 	\draw (A) -- (B) -- (C) -- cycle;
+	\draw[dashed] (B) -- (X);
 
 % circles %{{{1
 
 	\draw (O) circle (\radius);
-
-% circular arcs %{{{2
-
-	\draw[dashed] (A) ++(\ang:\lenAB) arc (\ang:\gle:\lenAB);
 
 % points, dots, vertices labels %{{{1
 
 	\node[below left] at (A) {$A$};
 	\node[below right] at (C) {$C$};
 	\node[above right] at (O) {$O$};
-	\node[above right] at (B) {$B$};
+	\node[above] at (B) {$B$};
+
+% segments, sides labels %{{{1
+
+	\node[above] at ($ (B)!0.5!(X) $) {$d$};
 
 % circular arcs labels %{{{1
 
-	\node at ($ (O) + (45:\radius+0.3) $) {$\mathscr{C}_1$};
-	\node at (45:\lenAB+0.3) {$\mathscr{C}_2$};
+	\node at ($ (O) + (45:\radius+0.3) $) {$\mathscr{C}$};
+
+% angles labels %{{{1
+
+	\pic[draw, ->, "$\alpha$", angle radius=1.4cm, angle eccentricity=1.2]
+	{angle = C--A--B};
 
 % right angles markers %{{{1
 

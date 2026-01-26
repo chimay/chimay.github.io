@@ -1,4 +1,6 @@
-% Minimal TikZ standalone example
+
+% header %{{{1
+
 \documentclass[tikz, border=1mm]{standalone}
 
 \usepackage{amsmath}
@@ -6,51 +8,75 @@
 
 \usetikzlibrary{calc,angles,quotes}
 
-\begin{document}
+% document %{{{1
 
+% opening %{{{2
+
+\begin{document}
 \begin{tikzpicture}[scale=1.2]
 
-	% coordinates
+% coordinates %{{{2
 
-	\coordinate (A1) at (0,0);
-	\coordinate (B1) at (2,3);
-	\coordinate (C1) at (5,0);
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (5,0);
+	\coordinate (C) at (2,3);
 
-	\coordinate (A2) at (7,0);
-	\coordinate (B2) at (9,3);
-	\coordinate (C2) at (12,0);
+	\coordinate (D) at (7,0);
+	\coordinate (E) at (12,0);
+	\coordinate (F) at (9,3);
 
-	% triangles sides
+% points, dots, vertices %{{{2
 
-	\draw (A1) -- (B1) -- (C1) -- cycle;
-	\draw (A2) -- (B2) -- (C2) -- cycle;
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+	\fill (C) circle (0.4mm);
 
-	% side labels
+	\fill (D) circle (0.4mm);
+	\fill (E) circle (0.4mm);
+	\fill (F) circle (0.4mm);
 
-	\node[left]  at ($(A1)!0.5!(B1)$) {$a_1$};
-	\node[below] at ($(A1)!0.5!(C1)$) {$b_1$};
-	\node[right] at ($(B1)!0.5!(C1)$) {$c_1$};
+% triangles %{{{2
 
-	\node[left]  at ($(A2)!0.5!(B2)$) {$a_2$};
-	\node[below] at ($(A2)!0.5!(C2)$) {$b_2$};
-	\node[right] at ($(B2)!0.5!(C2)$) {$c_2$};
+	\draw (A) -- (B) -- (C) -- cycle;
+	\draw (D) -- (E) -- (F) -- cycle;
 
-	% angles
+% points, dots, vertices labels %{{{1
+
+	\node[below] at (A) {$A$};
+	\node[below] at (B) {$B$};
+	\node[above] at (C) {$C$};
+
+	\node[below] at (D) {$D$};
+	\node[below] at (E) {$E$};
+	\node[above] at (F) {$F$};
+
+% sides labels %{{{2
+
+	\node[above right] at ($(B)!0.5!(C)$) {$a_1$};
+	\node[above left] at ($(A)!0.5!(C)$) {$b_1$};
+	\node[below]  at ($(A)!0.5!(B)$) {$c_1$};
+
+	\node[above right] at ($(E)!0.5!(F)$) {$a_2$};
+	\node[above left] at ($(D)!0.5!(F)$) {$b_2$};
+	\node[below]  at ($(D)!0.5!(E)$) {$c_2$};
+
+% angles labels %{{{2
 
 	\pic[draw, ->, "$\alpha_1$", angle eccentricity=1.3, angle radius=1cm]
-	{angle = B1--C1--A1};
+	{angle = B--A--C};
 	\pic[draw, ->, "$\beta_1$", angle eccentricity=1.3, angle radius=1cm]
-	{angle = A1--B1--C1};
+	{angle = C--B--A};
 	\pic[draw, ->, "$\gamma_1$", angle eccentricity=1.3, angle radius=1cm]
-	{angle = C1--A1--B1};
+	{angle = A--C--B};
 
 	\pic[draw, ->, "$\alpha_2$", angle eccentricity=1.3, angle radius=1cm]
-	{angle = B2--C2--A2};
+	{angle = E--D--F};
 	\pic[draw, ->, "$\beta_2$", angle eccentricity=1.3, angle radius=1cm]
-	{angle = A2--B2--C2};
+	{angle = F--E--D};
 	\pic[draw, ->, "$\gamma_2$", angle eccentricity=1.3, angle radius=1cm]
-	{angle = C2--A2--B2};
+	{angle = D--F--E};
+
+% closing %{{{2
 
 \end{tikzpicture}
-
 \end{document}

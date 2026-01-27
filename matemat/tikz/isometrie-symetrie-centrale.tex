@@ -1,0 +1,146 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+% header %{{{1
+
+% opening %{{{2
+
+\documentclass[tikz, border=1mm]{standalone}
+
+% packages and libraries %{{{2
+
+% ---- not necessary since the documentclass[tikz ...] requires it automatically
+% \usepackage{tikz}
+
+\usepackage{../../include/latex/tex/custom}
+
+\usetikzlibrary{calc,intersections,angles,quotes}
+
+\usepackage{tkz-euclide}
+
+% colors %{{{2
+
+\definecolor{goldenbrown}{HTML}{5b3c11}
+
+%\definecolor{somebrown}{RGB}{101,67,33}
+
+%\colorlet{somebrown}{brown!80!black}
+
+% style %{{{2
+
+\tikzset{
+	% ------- every something
+	every picture/.style={
+		scale=1.0,
+	},
+	every coordinate/.style={
+		fill=black, circle, inner sep=1pt,
+	},
+	every path/.style={
+		line width=0.3pt,
+	},
+	every node/.style={
+		font=\normalsize,
+	},
+	every angle/.style={
+	},
+	every pic/.style={
+		% ---- does not worl
+		%draw,
+		%-{Straight Barb[length=1.2mm]},
+	},
+	% ------- custom
+	vector/.style={
+		-{Straight Barb[length=1.2mm]},
+		%thick,
+	},
+	mid arrow/.style={
+		postaction={
+			decorate,
+			decoration={
+				markings,
+				mark=at position #1 with {
+					\arrow{Straight Barb[length=1.2mm]}
+				}
+			}
+		}
+	},
+	mid arrow/.default=0.5,
+	construction/.style={
+		line width=0.1pt,
+		dashed,
+	},
+	dimension/.style={
+		line width=0.2pt,
+		<->,
+		goldenbrown,
+	},
+	dimension extension/.style={
+		line width=0.2pt,
+		dashed,
+		goldenbrown,
+	},
+	}
+
+% document %{{{1
+
+% opening %{{{2
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{2
+
+	 \tikzmath{
+		\radius1 = 2.5;
+		\radius2 = 4.5;
+		\ang1 = -20;
+		\ang2 = 20;
+		\angrot = 180;
+	 }
+
+% coordinates %{{{2
+
+	\coordinate (O) at (0,0);
+	\coordinate (A) at (\ang1:\radius1);
+	\coordinate (sA) at ({\ang1+\angrot}:\radius1);
+	\coordinate (B) at (\ang2:\radius2);
+	\coordinate (sB) at ({\ang2+\angrot}:\radius2);
+
+% points, dots, vertices %{{{2
+
+	\fill (O) circle (0.4mm);
+	\fill (A) circle (0.4mm);
+	\fill (sA) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+	\fill (sB) circle (0.4mm);
+
+% segments, sides %{{{2
+
+	\draw[dashdotted] (O) -- (A);
+	\draw[dashdotted] (O) -- (sA);
+	\draw[dashdotted] (O) -- (B);
+	\draw[dashdotted] (O) -- (sB);
+
+	\draw (A) -- (B);
+	\draw (sA) -- (sB);
+
+% points, dots, vertices labels %{{{2
+
+	\node[above] at (O) {$O$};
+	\node[below right] at (A) {$A$};
+	\node[right] at (B) {$B$};
+	\node[above left] at (sA) {$C = \mathcal{S}(A)$};
+	\node[below left] at (sB) {$D = \mathcal{S}(B)$};
+
+% segments, sides marks %{{{2
+
+	\tkzMarkSegments[mark=|, size=2pt](O,A)
+	\tkzMarkSegments[mark=|, size=2pt](O,sA)
+
+	\tkzMarkSegments[mark=||, size=2pt](O,B)
+	\tkzMarkSegments[mark=||, size=2pt](O,sB)
+
+% closing %{{{2
+
+\end{tikzpicture}
+\end{document}

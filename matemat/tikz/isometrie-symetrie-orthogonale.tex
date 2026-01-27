@@ -1,0 +1,149 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+% header %{{{1
+
+% opening %{{{2
+
+\documentclass[tikz, border=1mm]{standalone}
+
+% packages and libraries %{{{2
+
+\usepackage{../../include/latex/tex/custom}
+
+\usetikzlibrary{calc,intersections,angles,quotes}
+%\usetikzlibrary{calc,intersections,angles,quotes,shapes.geometric,arrows.meta}
+
+\usepackage{tkz-euclide}
+
+% colors %{{{2
+
+\definecolor{goldenbrown}{HTML}{5b3c11}
+
+% style %{{{2
+
+\tikzset{
+	% ------- every something
+	every picture/.style={
+		scale=1.0,
+	},
+	every coordinate/.style={
+		fill=black, circle, inner sep=1pt,
+	},
+	every path/.style={
+		line width=0.3pt,
+	},
+	every node/.style={
+		font=\normalsize,
+	},
+	every angle/.style={
+	},
+	every pic/.style={
+		% ---- does not worl
+		%draw,
+		%-{Straight Barb[length=1.2mm]},
+	},
+	% ------- custom
+	vector/.style={
+		-{Straight Barb[length=1.2mm]},
+		%thick,
+	},
+	construction/.style={
+		line width=0.1pt,
+		dashed,
+	},
+	dimension/.style={
+		line width=0.2pt,
+		<->,
+		goldenbrown,
+	},
+	dimension extension/.style={
+		line width=0.2pt,
+		dashed,
+		goldenbrown,
+	},
+}
+
+% document %{{{1
+
+% opening %{{{2
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{2
+
+	\def\lenA{4}
+	\def\lenB{2.5}
+	\def\lenLine{4}
+
+% coordinates %{{{2
+
+	\coordinate (X) at (0,{-\lenLine});
+	\coordinate (Y) at (0,{\lenLine});
+
+	\coordinate (A) at (-\lenA,-2);
+	\coordinate (B) at (-\lenB,2);
+	\coordinate (rA) at (\lenA,-2);
+	\coordinate (rB) at (\lenB,2);
+
+% intersections %{{{2
+
+	\path[name path=line2] (X) -- (Y);
+	\path[name path=line1] (A) -- (rA);
+	\path[name intersections={of=line1 and line2, by=I}];
+
+	\path[name path=line2] (X) -- (Y);
+	\path[name path=line1] (B) -- (rB);
+	\path[name intersections={of=line1 and line2, by=J}];
+
+% points, dots, vertices %{{{2
+
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+	\fill (I) circle (0.4mm);
+
+	\fill (rA) circle (0.4mm);
+	\fill (rB) circle (0.4mm);
+	\fill (J) circle (0.4mm);
+
+% segments, sides %{{{2
+
+	\draw (X) -- (Y);
+	\draw (A) -- (B);
+	\draw (rA) -- (rB);
+	\draw[dashdotted] (A) -- (rA);
+	\draw[dashdotted] (B) -- (rB);
+
+% points, dots, vertices labels %{{{2
+
+	\node[above left] at (A) {$A$};
+	\node[above left] at (B) {$B$};
+	\node[above right] at (rA) {$C = \mathcal{S}(A)$};
+	\node[above right] at (rB) {$D = \mathcal{S}(B)$};
+	\node[below left] at (I) {$I$};
+	\node[below left] at (J) {$J$};
+
+% segments, sides labels %{{{2
+
+	\node[left] at ($ (X)!0.9!(Y) $) {$d$};
+
+% segments, sides marks %{{{2
+
+	\tkzMarkSegments[mark=||, size=2pt](A,I)
+	\tkzMarkSegments[mark=||, size=2pt](I,rA)
+
+	\tkzMarkSegments[mark=|, size=2pt](B,J)
+	\tkzMarkSegments[mark=|, size=2pt](J,rB)
+
+% right angles markers %{{{3
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = rA--I--Y};
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = rB--J--Y};
+
+% closing %{{{2
+
+\end{tikzpicture}
+\end{document}

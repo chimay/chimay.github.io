@@ -1,95 +1,18 @@
 % vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
 
-% header %{{{1
+\input{../../include/latex/tikz/header.tex}
 
-% opening %{{{2
-
-\documentclass[tikz, border=1mm]{standalone}
-
-% packages and libraries %{{{2
-
-% ---- not necessary since the documentclass[tikz ...] requires it automatically
-% \usepackage{tikz}
-
-\usepackage{../../include/latex/tex/custom}
-
-\usetikzlibrary{calc,intersections,angles,quotes,shapes.geometric,arrows.meta,decorations.markings}
-
-\usepackage{tkz-euclide}
-
-% colors %{{{2
-
-\definecolor{goldenbrown}{HTML}{5b3c11}
-
-% style %{{{2
-
-\tikzset{
-	% ------- every something
-	every picture/.style={
-		scale=1.0,
-	},
-	every coordinate/.style={
-		fill=black, circle, inner sep=1pt,
-	},
-	every path/.style={
-		line width=0.3pt,
-	},
-	every node/.style={
-		font=\normalsize,
-	},
-	every angle/.style={
-	},
-	every pic/.style={
-		% ---- does not worl
-		%draw,
-		%-{Straight Barb[length=1.2mm]},
-	},
-	% ------- custom
-	vector/.style={
-		-{Straight Barb[length=1.2mm]},
-		%thick,
-	},
-	mid arrow/.style={
-		postaction={
-			decorate,
-			decoration={
-				markings,
-				mark=at position #1 with {
-					\arrow{Straight Barb[length=1.2mm]}
-				}
-			}
-		}
-	},
-	mid arrow/.default=0.5,
-	construction/.style={
-		line width=0.1pt,
-		dashed,
-	},
-	dimension/.style={
-		line width=0.2pt,
-		<->,
-		goldenbrown,
-	},
-	dimension extension/.style={
-		line width=0.2pt,
-		dashed,
-		goldenbrown,
-	},
-}
-
-% document %{{{1
-
-% opening %{{{2
+% opening %{{{1
 
 \begin{document}
 \begin{tikzpicture}[scale=1.0]
 
-% parameters %{{{2
+% parameters %{{{1
 
 	 \tikzmath{
 		\radius1 = 5;
 		\radius2 = 7;
-		\angrot = 50;
+		\angrot = 70;
 		\ang1 = -20;
 		\ang2 = 20;
 		\endang1 = \ang1 + \angrot;
@@ -98,7 +21,7 @@
 		\meanang2 = (\ang2 + \endang2)/2;
 	 }
 
-% coordinates %{{{2
+% coordinates %{{{1
 
 	\coordinate (O) at (0,0);
 
@@ -108,7 +31,7 @@
 	\coordinate (B) at (\ang2:\radius2);
 	\coordinate (rB) at (\endang2:\radius2);
 
-% points, dots, vertices %{{{2
+% points, dots, vertices %{{{1
 
 	\fill (O) circle (0.4mm);
 	\fill (A) circle (0.4mm);
@@ -116,25 +39,25 @@
 	\fill (B) circle (0.4mm);
 	\fill (rB) circle (0.4mm);
 
-% segments, sides %{{{2
+% segments, sides %{{{1
 
 	\draw (A) -- (B);
 	\draw (rA) -- (rB);
 
-	\draw[dashdotted] (O) -- (A);
-	\draw[dashdotted] (O) -- (rA);
+	\draw (O) -- (A);
+	\draw (O) -- (rA);
 
-	\draw[dashdotted] (O) -- (B);
-	\draw[dashdotted] (O) -- (rB);
+	\draw (O) -- (B);
+	\draw (O) -- (rB);
 
-% circles %{{{2
+% circles %{{{1
 
-% circular arcs %{{{3
+% circular arcs %{{{2
 
 	\draw[mid arrow, dashdotted] (A) arc (\ang1:\endang1:\radius1);
 	\draw[mid arrow, dashdotted] (B) arc (\ang2:\endang2:\radius2);
 
-% points, dots, vertices labels %{{{2
+% points, dots, vertices labels %{{{1
 
 	\node[above left] at (O) {$O$};
 
@@ -144,12 +67,12 @@
 	\node[right] at (B) {$B$};
 	\node[above right] at (rB) {$D = \mathcal{R}(B)$};
 
-% segments, sides labels %{{{2
+% segments, sides labels %{{{1
 
 	%\node[below right] at ($ (O)!0.7!(A) $) {$r$};
 	%\node[left] at ($ (O)!0.7!(rA) $) {$r$};
 
-% segments, sides marks %{{{2
+% segments, sides marks %{{{1
 
 	\tkzMarkSegments[mark=|, size=2pt](O,A)
 	\tkzMarkSegments[mark=|, size=2pt](O,rA)
@@ -157,20 +80,26 @@
 	\tkzMarkSegments[mark=||, size=2pt](O,B)
 	\tkzMarkSegments[mark=||, size=2pt](O,rB)
 
-% circular arcs labels %{{{2
+% circular arcs labels %{{{1
 
 	\node at (\meanang1:\radius1+0.4) {$\Gamma_1$};
 	\node at (\meanang2:\radius2+0.4) {$\Gamma_2$};
 
-% angles labels %{{{2
+% angles labels %{{{1
 
-	\pic[draw, ->, dashdotted, "$\alpha$", angle radius=1.4cm, angle eccentricity=1.2]
+	\pic[draw, ->, "$\alpha$", angle radius=1.2cm, angle eccentricity=1.2]
+	{angle = A--O--B};
+
+	\pic[draw, ->, "$\beta$", angle radius=1.2cm, angle eccentricity=1.2]
+	{angle = rA--O--rB};
+
+	\pic[draw, ->, "$\theta$", angle radius=1.8cm, angle eccentricity=1.2]
 	{angle = A--O--rA};
 
-	\pic[draw, ->, dashdotted, "$\alpha$", angle radius=2.3cm, angle eccentricity=1.1]
+	\pic[draw, ->, "$\theta$", angle radius=2.4cm, angle eccentricity=1.1]
 	{angle = B--O--rB};
 
-% closing %{{{2
+% closing %{{{1
 
 \end{tikzpicture}
 \end{document}

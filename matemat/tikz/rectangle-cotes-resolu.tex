@@ -1,0 +1,67 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+% standard template with header in another file
+
+\input{../../include/latex/tikz/header.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\def\len{7}
+	\def\gth{4}
+
+% coordinates %{{{1
+
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (\len,0);
+	\coordinate (C) at (\len,\gth);
+	\coordinate (D) at (0,\gth);
+
+% points, dots, vertices %{{{1
+
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+	\fill (C) circle (0.4mm);
+	\fill (D) circle (0.4mm);
+
+% segments, sides %{{{1
+
+	\draw (A) -- (B) -- (C) -- (D) -- cycle;
+
+% points, dots, vertices labels %{{{1
+
+	\node[below left] at (A) {$A$};
+	\node[below right] at (B) {$B$};
+	\node[above right] at (C) {$C$};
+	\node[above left] at (D) {$D$};
+
+% segments, sides marks %{{{1
+
+	\tkzMarkSegments[mark=||, size=2pt](A,B)
+	\tkzMarkSegments[mark=||, size=2pt](C,D)
+
+	\tkzMarkSegments[mark=|, size=2pt](A,D)
+	\tkzMarkSegments[mark=|, size=2pt](B,C)
+
+% right angles markers %{{{1
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = B--A--D};
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = C--B--A};
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = D--C--B};
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = A--D--C};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

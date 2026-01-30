@@ -1,0 +1,89 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+% standard template with header in another file
+
+\input{../../include/latex/tikz/header.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	%\def\len{3}
+	%\def\gth{3}
+
+% coordinates %{{{1
+
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (6,0);
+	\coordinate (C) at (8,3);
+	\coordinate (D) at (2,3);
+
+% intersections %{{{1
+
+	\path[name path=diagonal1] (A) -- (C);
+	\path[name path=diagonal2] (B) -- (D);
+	\path[name intersections={of=diagonal1 and diagonal2, by=I}];
+
+% points, dots, vertices %{{{1
+
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+	\fill (C) circle (0.4mm);
+	\fill (D) circle (0.4mm);
+	\fill (I) circle (0.4mm);
+
+% segments, sides %{{{1
+
+	\draw (A) -- (B) -- (C) -- (D) -- cycle;
+	\draw[dashed] (A) -- (C);
+	\draw[dashed] (B) -- (D);
+
+% points, dots, vertices labels %{{{1
+
+	\node[below left] at (A) {$A$};
+	\node[below right] at (B) {$B$};
+	\node[above right] at (C) {$C$};
+	\node[above left] at (D) {$D$};
+	\node[above] at (I) {$I$};
+
+% segments, sides marks %{{{1
+
+	\tkzMarkSegments[mark=||, size=2pt](A,B)
+	\tkzMarkSegments[mark=||, size=2pt](C,D)
+
+	\tkzMarkSegments[mark=|, size=2pt](A,D)
+	\tkzMarkSegments[mark=|, size=2pt](B,C)
+
+% angles labels %{{{1
+
+	\pic[draw, ->, "$\alpha$", angle radius=1.6cm, angle eccentricity=1.2]
+	{angle = B--A--C};
+
+	\pic[draw, ->, "$\alpha$", angle radius=1.6cm, angle eccentricity=1.2]
+	{angle = D--C--I};
+
+	\pic[draw, ->, "$\beta$", angle radius=1.0cm, angle eccentricity=1.4]
+	{angle = B--D--C};
+
+	\pic[draw, ->, "$\beta$", angle radius=1.0cm, angle eccentricity=1.4]
+	{angle = D--B--A};
+
+	%\pic[draw, ->, "$\gamma$", angle radius=1.3cm, angle eccentricity=1.2]
+	%{angle = A--C--B};
+
+	%\pic[draw, ->, "$\gamma$", angle radius=1.3cm, angle eccentricity=1.2]
+	%{angle = C--A--D};
+
+	%\pic[draw, ->, "$\delta$", angle radius=0.7cm, angle eccentricity=1.4]
+	%{angle = C--B--D};
+
+	%\pic[draw, ->, "$\delta$", angle radius=0.7cm, angle eccentricity=1.4]
+	%{angle = A--D--B};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

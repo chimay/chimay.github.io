@@ -21,16 +21,27 @@
 	\coordinate (C) at (\len,0);
 	\coordinate (D) at (0,\gth);
 
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=line1] (A) -- (C);
+		\path[name path=line2] (B) -- (D);
+		\path[name intersections={of=line1 and line2, by=I}];
+	\end{pgfinterruptboundingbox}
+
 % points, dots, vertices %{{{1
 
 	\fill (A) circle (0.4mm);
 	\fill (B) circle (0.4mm);
 	\fill (C) circle (0.4mm);
 	\fill (D) circle (0.4mm);
+	\fill (I) circle (0.4mm);
 
 % segments, sides %{{{1
 
 	\draw (A) -- (B) -- (C) -- (D) -- cycle;
+	\draw[dashed] (A) -- (C);
+	\draw[dashed] (B) -- (D);
 
 % points, dots, vertices labels %{{{1
 
@@ -38,6 +49,7 @@
 	\node[below] at (B) {$B$};
 	\node[right] at (C) {$C$};
 	\node[above] at (D) {$D$};
+	\node[above left] at (I) {$I$};
 
 % segments, sides marks %{{{1
 
@@ -45,6 +57,27 @@
 	\tkzMarkSegments[mark=||, size=2pt](B,C)
 	\tkzMarkSegments[mark=||, size=2pt](C,D)
 	\tkzMarkSegments[mark=||, size=2pt](D,A)
+
+	\tkzMarkSegments[mark=|, size=2pt, pos=0.45](A,I)
+	\tkzMarkSegments[mark=|, size=2pt, pos=0.50](A,I)
+	\tkzMarkSegments[mark=|, size=2pt, pos=0.55](A,I)
+
+	\tkzMarkSegments[mark=|, size=2pt, pos=0.45](C,I)
+	\tkzMarkSegments[mark=|, size=2pt, pos=0.50](C,I)
+	\tkzMarkSegments[mark=|, size=2pt, pos=0.55](C,I)
+
+	\tkzMarkSegments[mark=||, size=2pt, pos=0.45](D,I)
+	\tkzMarkSegments[mark=||, size=2pt, pos=0.55](D,I)
+
+	\tkzMarkSegments[mark=||, size=2pt, pos=0.45](B,I)
+	\tkzMarkSegments[mark=||, size=2pt, pos=0.55](B,I)
+
+% angles labels %{{{1
+
+% right angles markers %{{{2
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = C--I--D};
 
 % closing %{{{1
 

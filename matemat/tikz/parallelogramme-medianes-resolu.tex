@@ -7,7 +7,7 @@
 % opening %{{{1
 
 \begin{document}
-\begin{tikzpicture}[scale=1.4]
+\begin{tikzpicture}[scale=1.0]
 
 % parameters %{{{1
 
@@ -17,9 +17,9 @@
 % coordinates %{{{1
 
 	\coordinate (A) at (0,0);
-	\coordinate (B) at (5,0);
-	\coordinate (C) at (3,3);
-	\coordinate (D) at (0.5,2);
+	\coordinate (B) at (6,0);
+	\coordinate (C) at (8,3);
+	\coordinate (D) at (2,3);
 
 % vectors from coordinates %{{{1
 
@@ -37,6 +37,14 @@
 	\coordinate (G) at ($ (C) + 0.5*(CD) $);
 	\coordinate (H) at ($ (D) + 0.5*(DA) $);
 
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=line1] (E) -- (G);
+		\path[name path=line2] (F) -- (H);
+		\path[name intersections={of=line1 and line2, by=I}];
+	\end{pgfinterruptboundingbox}
+
 % points, dots, vertices %{{{1
 
 	\fill (A) circle (0.4mm);
@@ -48,6 +56,8 @@
 	\fill (F) circle (0.4mm);
 	\fill (G) circle (0.4mm);
 	\fill (H) circle (0.4mm);
+
+	\fill (I) circle (0.4mm);
 
 % segments, sides %{{{1
 
@@ -67,27 +77,27 @@
 	\node[above] at (G) {$G$};
 	\node[left] at (H) {$H$};
 
+	\node[above left] at (I) {$I$};
+
 % segments, sides marks %{{{1
 
-	\tkzMarkSegments[mark=|, size=2pt](A,H)
-	\tkzMarkSegments[mark=|, size=2pt](H,D)
+	\tkzMarkSegments[mark=||, size=2pt](A,E)
+	\tkzMarkSegments[mark=||, size=2pt](E,B)
 
 	\tkzMarkSegments[mark=||, size=2pt](D,G)
 	\tkzMarkSegments[mark=||, size=2pt](G,C)
 
-	\tkzMarkSegments[mark=||, size=2pt, pos=0.45](A,E)
-	\tkzMarkSegments[mark=||, size=2pt, pos=0.55](A,E)
+	\tkzMarkSegments[mark=||, size=2pt](H,I)
+	\tkzMarkSegments[mark=||, size=2pt](I,F)
 
-	\tkzMarkSegments[mark=||, size=2pt, pos=0.45](E,B)
-	\tkzMarkSegments[mark=||, size=2pt, pos=0.55](E,B)
+	\tkzMarkSegments[mark=|, size=2pt](A,H)
+	\tkzMarkSegments[mark=|, size=2pt](H,D)
 
-	\tkzMarkSegments[mark=|, size=2pt, pos=0.45](B,F)
-	\tkzMarkSegments[mark=|, size=2pt, pos=0.50](B,F)
-	\tkzMarkSegments[mark=|, size=2pt, pos=0.55](B,F)
+	\tkzMarkSegments[mark=|, size=2pt](B,F)
+	\tkzMarkSegments[mark=|, size=2pt](F,C)
 
-	\tkzMarkSegments[mark=|, size=2pt, pos=0.45](F,C)
-	\tkzMarkSegments[mark=|, size=2pt, pos=0.50](F,C)
-	\tkzMarkSegments[mark=|, size=2pt, pos=0.55](F,C)
+	\tkzMarkSegments[mark=|, size=2pt](E,I)
+	\tkzMarkSegments[mark=|, size=2pt](I,G)
 
 % closing %{{{1
 

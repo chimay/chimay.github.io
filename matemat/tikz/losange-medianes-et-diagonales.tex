@@ -11,15 +11,15 @@
 
 % parameters %{{{1
 
-	%\def\len{3}
-	%\def\gth{3}
+	\def\len{3.5}
+	\def\gth{2.0}
 
 % coordinates %{{{1
 
-	\coordinate (A) at (0,0);
-	\coordinate (B) at (6,0);
-	\coordinate (C) at (8,3);
-	\coordinate (D) at (2,3);
+	\coordinate (A) at (-\len,0);
+	\coordinate (B) at (0,-\gth);
+	\coordinate (C) at (\len,0);
+	\coordinate (D) at (0,\gth);
 
 % vectors from coordinates %{{{1
 
@@ -35,11 +35,18 @@
 	\coordinate (G) at ($ (C) + 0.5*(CD) $);
 	\coordinate (H) at ($ (D) + 0.5*(DA) $);
 
+% vectors from coordinates %{{{1
+
+	\coordinate (AB) at ($ (B) - (A) $);
+	\coordinate (BC) at ($ (C) - (B) $);
+	\coordinate (CD) at ($ (D) - (C) $);
+	\coordinate (DA) at ($ (A) - (D) $);
+
 % intersections %{{{1
 
 	\begin{pgfinterruptboundingbox}
-		\path[name path=line1] (E) -- (G);
-		\path[name path=line2] (A) -- (C);
+		\path[name path=line1] (A) -- (C);
+		\path[name path=line2] (B) -- (D);
 		\path[name intersections={of=line1 and line2, by=I}];
 	\end{pgfinterruptboundingbox}
 
@@ -67,15 +74,15 @@
 
 % points, dots, vertices labels %{{{1
 
-	\node[below left] at (A) {$A$};
-	\node[below right] at (B) {$B$};
-	\node[above right] at (C) {$C$};
-	\node[above left] at (D) {$D$};
+	\node[left] at (A) {$A$};
+	\node[below] at (B) {$B$};
+	\node[right] at (C) {$C$};
+	\node[above] at (D) {$D$};
 
-	\node[below] at (E) {$E$};
-	\node[right] at (F) {$F$};
-	\node[above] at (G) {$G$};
-	\node[left] at (H) {$H$};
+	\node[below left] at (E) {$E$};
+	\node[below right] at (F) {$F$};
+	\node[above right] at (G) {$G$};
+	\node[above left] at (H) {$H$};
 
 	\node[above left] at (I) {$I$};
 
@@ -98,6 +105,13 @@
 
 	\tkzMarkSegments[mark=|, size=2pt](E,I)
 	\tkzMarkSegments[mark=|, size=2pt](I,G)
+
+% angles labels %{{{1
+
+% right angles markers %{{{2
+
+	%\pic [draw, angle radius=7pt, angle eccentricity=1]
+	%{right angle = C--I--D};
 
 % closing %{{{1
 

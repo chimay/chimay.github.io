@@ -12,7 +12,8 @@
 	\def\len{3}
 	\def\height{3}
 
-	\def\ext{1.7}
+	\def\ext{2.0}
+	\def\ens{1.5}
 
 % coordinates %{{{1
 
@@ -28,11 +29,11 @@
 	\coordinate (Y1) at ({-(\ext - 1)*\len},-\height);
 	\coordinate (Y2) at ({\ext*\len},-\height);
 
-	\coordinate (U1) at (0,{(\ext - 1)*\height});
-	\coordinate (U2) at (0,{-\ext*\height});
+	\coordinate (U1) at (0,{(\ens - 1)*\height});
+	\coordinate (U2) at (0,{-\ens*\height});
 
-	\coordinate (V1) at (\len,{(\ext - 1)*\height});
-	\coordinate (V2) at (\len,{-\ext*\height});
+	\coordinate (V1) at (\len,{(\ens - 1)*\height});
+	\coordinate (V2) at (\len,{-\ens*\height});
 
 % points, dots, vertices %{{{1
 
@@ -49,12 +50,43 @@
 	\draw (U1) -- (U2);
 	\draw (V1) -- (V2);
 
+	\draw[dashed] (A) -- (D);
+
 % points, dots, vertices labels %{{{1
 
 	\node[above left] at (A) {$A$};
 	\node[above right] at (B) {$B$};
 	\node[below left] at (C) {$C$};
 	\node[below right] at (D) {$D$};
+
+% segments, sides labels %{{{1
+
+	\node[above] at ($ (B)!0.5!(X2) $) {$a$};
+	\node[above] at ($ (D)!0.5!(Y2) $) {$b$};
+	\node[left] at ($ (A)!0.8!(U1) $) {$c$};
+	\node[left] at ($ (B)!0.8!(V1) $) {$d$};
+
+% angles labels %{{{1
+
+	\pic[draw, ->, "$\alpha$", angle radius=0.8cm, angle eccentricity=1.5]
+	{angle = D--A--B};
+
+	\pic[draw, ->, "$\alpha$", angle radius=0.8cm, angle eccentricity=1.5]
+	{angle = A--D--C};
+
+% right angles markers %{{{2
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = C--A--B};
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = A--B--D};
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = D--C--A};
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = B--D--C};
 
 % closing %{{{1
 

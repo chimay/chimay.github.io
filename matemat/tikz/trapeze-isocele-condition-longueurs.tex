@@ -1,0 +1,90 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+% standard template with header in another file
+
+\input{../../include/latex/tikz/header.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	%\def\len{3}
+	%\def\gth{3}
+
+	\def\ext{3}
+
+% coordinates %{{{1
+
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (7,0);
+	\coordinate (C) at (5,3);
+	\coordinate (D) at (2,3);
+
+	\coordinate (E) at (2,0);
+	\coordinate (F) at (5,0);
+
+% points, dots, vertices %{{{1
+
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+	\fill (C) circle (0.4mm);
+	\fill (D) circle (0.4mm);
+
+	\fill (E) circle (0.4mm);
+	\fill (F) circle (0.4mm);
+
+% segments, sides %{{{1
+
+	\draw (A) -- (B) -- (C) -- (D) -- cycle;
+	\draw[dashed] (D) -- (E);
+	\draw[dashed] (C) -- (F);
+
+% points, dots, vertices labels %{{{1
+
+	\node[below left] at (A) {$A$};
+	\node[below right] at (B) {$B$};
+	\node[above right] at (C) {$C$};
+	\node[above left] at (D) {$D$};
+
+	\node[below] at (E) {$E$};
+	\node[below] at (F) {$F$};
+
+% segments, sides labels %{{{1
+
+	\node[right] at ($ (D)!0.5!(E) $) {$h$};
+	\node[left] at ($ (C)!0.5!(F) $) {$h$};
+
+% segments, sides marks %{{{1
+
+	\tkzMarkSegments[mark=||, size=2pt](A,D)
+	\tkzMarkSegments[mark=||, size=2pt](C,B)
+
+% angles labels %{{{1
+
+	\pic[draw, ->, "$\alpha$", angle radius=0.8cm, angle eccentricity=1.5]
+	{angle = B--A--D};
+
+	\pic[draw, ->, "$\beta$", angle radius=0.8cm, angle eccentricity=1.5]
+	{angle = C--B--A};
+
+% right angles markers %{{{2
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = D--E--A};
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = E--D--C};
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = D--C--F};
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = B--F--C};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

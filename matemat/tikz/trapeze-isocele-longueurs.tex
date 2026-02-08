@@ -14,12 +14,34 @@
 	%\def\len{3}
 	%\def\gth{3}
 
+	\def\ext{3}
+
 % coordinates %{{{1
 
 	\coordinate (A) at (0,0);
 	\coordinate (B) at (7,0);
-	\coordinate (C) at (5,3);
-	\coordinate (D) at (2,3);
+	\coordinate (C) at (5.5,2);
+	\coordinate (D) at (1.5,2);
+
+% vectors from coordinates %{{{1
+
+	\coordinate (AD) at ($ (D) - (A) $);
+	\coordinate (BC) at ($ (C) - (B) $);
+
+% coordinates from vectors %{{{1
+
+% proportional length %{{{2
+
+	\coordinate (X) at ($ (A) + \ext*(AD) $);
+	\coordinate (Y) at ($ (B) + \ext*(BC) $);
+
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=line1] (A) -- (X);
+		\path[name path=line2] (C) -- (Y);
+		\path[name intersections={of=line1 and line2, by=E}];
+	\end{pgfinterruptboundingbox}
 
 % points, dots, vertices %{{{1
 
@@ -27,17 +49,21 @@
 	\fill (B) circle (0.4mm);
 	\fill (C) circle (0.4mm);
 	\fill (D) circle (0.4mm);
+	\fill (E) circle (0.4mm);
 
 % segments, sides %{{{1
 
 	\draw (A) -- (B) -- (C) -- (D) -- cycle;
+	\draw[dashed] (D) -- (E);
+	\draw[dashed] (C) -- (E);
 
 % points, dots, vertices labels %{{{1
 
 	\node[below left] at (A) {$A$};
 	\node[below right] at (B) {$B$};
-	\node[above] at (C) {$C$};
-	\node[above] at (D) {$D$};
+	\node[above right] at (C) {$C$};
+	\node[above left] at (D) {$D$};
+	\node[above] at (E) {$E$};
 
 % angles labels %{{{1
 
@@ -47,11 +73,11 @@
 	\pic[draw, ->, "$\alpha$", angle radius=0.8cm, angle eccentricity=1.5]
 	{angle = C--B--A};
 
-	\pic[draw, ->, "$180^\circ - \alpha$", angle radius=0.6cm, angle eccentricity=1.7]
-	{angle = A--D--C};
+	\pic[draw, ->, "$\alpha$", angle radius=0.8cm, angle eccentricity=1.5]
+	{angle = C--D--E};
 
-	\pic[draw, ->, "$180^\circ - \alpha$", angle radius=0.6cm, angle eccentricity=1.7]
-	{angle = D--C--B};
+	\pic[draw, ->, "$\alpha$", angle radius=0.8cm, angle eccentricity=1.5]
+	{angle = E--C--D};
 
 % closing %{{{1
 

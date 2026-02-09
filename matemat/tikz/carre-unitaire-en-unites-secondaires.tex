@@ -1,0 +1,58 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=0.4]
+
+% parameters %{{{1
+
+	\tikzmath{
+		\xnum = int(6);
+		\ynum = int(6);
+		\xnumM = int(\xnum - 1);
+		\ynumM = int(\ynum - 1);
+		\xstep = 2.1;
+		\ystep = 2.1;
+	}
+
+% grid %{{{1
+
+	\foreach \i in {0,...,\xnum}
+		\foreach \j in {0,...,\ynum}
+			\coordinate (P-\i-\j) at ({\xstep*\i},{\ystep*\j});
+
+% grid vertices %{{{1
+
+% 	\foreach \i in {0,...,\xnum}
+% 		\foreach \j in {0,...,\ynum}
+% 			\fill (P-\i-\j) circle (0.8mm);
+
+% grid lines %{{{1
+
+	%\draw[xstep=\xstep,ystep=\ystep]
+		%(0,0) grid ({\xstep*\xnum},{\ystep*\ynum});
+
+	% ---- boundary
+
+	\draw (P-0-0) -- (P-0-\ynum);
+	\draw (P-\xnum-0) -- (P-\xnum-\ynum);
+	\draw (P-0-0) -- (P-\xnum-0);
+	\draw (P-0-\ynum) -- (P-\xnum-\ynum);
+
+	% ---- interior vertical lines
+
+	\foreach \i in {1,...,\xnumM}
+		\draw[dashed] ($(\i*\xstep,0)$) -- ($(\i*\xstep,\ynum*\ystep)$);
+
+	% ---- interior horizontal lines
+
+  \foreach \j in {1,...,\ynumM}
+	  \draw[dashed] ($ (0,\j*\ystep) $) -- ($(\xnum*\xstep,\j*\ystep)$);
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

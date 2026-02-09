@@ -49,21 +49,23 @@
 	%\pgfmathtruncatemacro{\last}{\numsides}
 	%\pgfmathtruncatemacro{\prevlast}{\numsides-1}
 
-% vectors %{{{1
+% vectors and coordinates %{{{1
+
+% vectors %{{{2
 
 	% ---- vectors defined independantly of points coordinates
 
 	%\coordinate (v) at (2,3);
 	%\coordinate (w) at (\ang:\len);
 
-% unit vectors %{{{2
+% unit vectors %{{{3
 
 	%\coordinate (u) at ($ (0,0)!1cm!(v) $);
 
 	%\coordinate (u) at (7:1);
 	%\coordinate (v) at ({180-12}:1);
 
-% coordinates %{{{1
+% coordinates %{{{2
 
 	%\coordinate (O) at (0,0);
 	%\coordinate (A) at (\ang:\radius);
@@ -72,38 +74,37 @@
 	%\coordinate (cartesien) at (1,2);
 	%\coordinate (polar) at (\ang:\len);
 
-% coordinate for polygon vertices %{{{2
+% polygon vertices %{{{3
 
-	%\foreach \i in {1,...,\numsides} {
+	%\foreach \i in {1,...,\numsides}
 		%\coordinate (P\i) at ({360/\numsides*(\i-1)+\rotation}:\radius);
-	%}
 
-% coordinates of points in circles %{{{2
+% coordinates for dimension lines %{{{3
+
+	%\coordinate (IdJ) at ($ (I) + (0,0.7) $);
+
+% coordinates of points in circles %{{{3
 
 	%\coordinate (Ra) at ($ (A) + (\radius, 0) $);
 	%\coordinate (Ra) at ($ (A) + (\ang:\radius) $);
 
-% vectors from coordinates %{{{1
+% vectors from coordinates %{{{2
 
 	%\coordinate (v) at ($ (B) - (A) $);
 	%\coordinate (AB) at ($ (B) - (A) $);
 
-% unit vectors %{{{2
+% unit vectors %{{{3
 
 	%\coordinate (u) at ($ (0,0)!1cm!(v) $);
 	%\coordinate (ab) at ($ (0,0)!1cm!(AB) $);
 
-% coordinates from vectors %{{{1
+% coordinates from vectors %{{{2
 
-% fixed length %{{{2
+	%\coordinate (E) at ($ (A) + \ratio*(v) $);
+	%\coordinate (E) at ($ (A) + \ratio*(AB) $);
 
 	%\coordinate (E) at ($ (A) + \len*(u) $);
 	%\coordinate (E) at ($ (A) + \len*(ab) $);
-
-% proportional length %{{{2
-
-% 	\coordinate (E) at ($ (A) + \ratio*(v) $);
-% 	\coordinate (E) at ($ (A) + \ratio*(ab) $);
 
 % intersections %{{{1
 
@@ -156,10 +157,6 @@
 	% -- or
 	%\tkzGetSecondPoint{J}
 
-% coordinates for dimension lines %{{{1
-
-	%\coordinate (IdJ) at ($ (I) + (0,0.7) $);
-
 % points, dots, vertices %{{{1
 
 	%\fill (O) circle (0.4mm);
@@ -172,13 +169,13 @@
 
 % polygon vertices %{{{2
 
-	%\foreach \i in {1,...,\numsides} { \fill (P\i) circle (0.3mm); }
+	%\foreach \i in {1,...,\numsides} \fill (P\i) circle (0.3mm);
 
 % segments, sides %{{{1
 
 	%\draw (A) -- (B);
 
-	%\foreach \i in {1,...,6} { \draw (O) -- (u\i); }
+	%\foreach \i in {1,...,6} \draw (O) -- (u\i);
 
 % vectors %{{{2
 
@@ -196,6 +193,12 @@
 		%regular polygon,
 		%regular polygon sides=5
 		%] {Pentagon};
+
+% dimension lines %{{{2
+
+	%\draw[dimension] (IdJ) -- (JdI);
+	%\draw[dimension extension] (I) -- (IdJ);
+	%\draw[dimension extension] (J) -- (JdI);
 
 % circles %{{{1
 
@@ -222,11 +225,9 @@
 	%\foreach \i in {2,...,\prevlast} { \draw[dashed] (O) -- (P\i); }
 	%\foreach \i in {2,...,\numexpr\numsides-1\relax} { \draw[dashed] (O) -- (P\i); }
 
-% dimension lines %{{{1
+% functions plots %{{{1
 
-	%\draw[dimension] (IdJ) -- (JdI);
-	%\draw[dimension extension] (I) -- (IdJ);
-	%\draw[dimension extension] (J) -- (JdI);
+	%\draw plot \foreach \x in {0,...,5} { (\x,{sin(\x)}) };
 
 % points, dots, vertices labels %{{{1
 

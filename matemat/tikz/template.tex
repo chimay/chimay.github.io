@@ -34,17 +34,24 @@
 	%\def\numsides{6}
 	%\def\rotation{90}
 
+	%\def\xnum{4}
+	%\def\ynum{3}
+
+	%\pgfmathtruncatemacro{\xnumM}{\xnum-1} % max interior column
+	%\pgfmathtruncatemacro{\ynumM}{\ynum-1} % max interior row
+
+	% ---- math
+
 	%\tikzmath{
-		%\ang = 30;
-		%\gle = 20;
-		%\endang = \ang + \gle;
+		%\xstep = 1.0;
+		%\ystep = 1.0;
 	%}
 
 	%\pgfmathsetmacro{\ang}{30}
 	%\pgfmathsetmacro{\gle}{20}
 	%\pgfmathsetmacro{\endang}{\ang+\gle}
 
-	% ---- for integers
+	% -- for integers
 
 	%\pgfmathtruncatemacro{\last}{\numsides}
 	%\pgfmathtruncatemacro{\prevlast}{\numsides-1}
@@ -78,6 +85,12 @@
 
 	%\foreach \i in {1,...,\numsides}
 		%\coordinate (P\i) at ({360/\numsides*(\i-1)+\rotation}:\radius);
+
+% grid %{{{3
+
+	%\foreach \i in {0,...,\xnum}
+		%\foreach \j in {0,...,\ynum}
+			%\coordinate (P-\i-\j) at ({\xstep*\i},{\ystep*\j});
 
 % coordinates for dimension lines %{{{3
 
@@ -169,9 +182,15 @@
 
 % polygon vertices %{{{2
 
-	%\foreach \i in {1,...,\numsides} \fill (P\i) circle (0.3mm);
+	%\foreach \i in {1,...,\numsides} \fill (P\i) circle (0.4mm);
 
-% segments, sides %{{{1
+% grid vertices %{{{2
+
+	%\foreach \i in {0,...,\xnum}
+		%\foreach \j in {0,...,\ynum}
+			%\fill (P-\i-\j) circle (0.4mm);
+
+% segments, sides, lines %{{{1
 
 	%\draw (A) -- (B);
 
@@ -194,7 +213,31 @@
 		%regular polygon sides=5
 		%] {Pentagon};
 
-% dimension lines %{{{2
+% grid %{{{2
+
+	%\draw[step=\xstep] (0,0) grid ({\xstep*\xnum},{\ystep*\ynum});
+
+	%\draw[xstep=\xstep,ystep=\ystep]
+		%(0,0) grid ({\xstep*\xnum},{\ystep*\ynum});
+
+	% ---- boundary
+
+	%\draw (P-0-0) -- (P-0-\ynum);
+	%\draw (P-\xnum-0) -- (P-\xnum-\ynum);
+	%\draw (P-0-0) -- (P-\xnum-0);
+	%\draw (P-0-\ynum) -- (P-\xnum-\ynum);
+
+	% ---- interior vertical lines
+
+	%\foreach \i in {1,...,\xnumM}
+		%\draw[dashed] ($(\i*\xstep,0)$) -- ($(\i*\xstep,\ynum*\ystep)$);
+
+	% ---- interior horizontal lines
+
+  %\foreach \j in {1,...,\ynumM}
+	  %\draw[dashed] ($ (0,\j*\ystep) $) -- ($(\xnum*\xstep,\j*\ystep)$);
+
+%% dimension lines %{{{2
 
 	%\draw[dimension] (IdJ) -- (JdI);
 	%\draw[dimension extension] (I) -- (IdJ);

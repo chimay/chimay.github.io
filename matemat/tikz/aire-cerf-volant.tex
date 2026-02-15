@@ -1,0 +1,80 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+% standard template with header in another file
+
+\input{../../include/latex/tikz/header-light.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\def\len{4.0}
+	\def\gth{2.5}
+	\def\ngt{2.0}
+
+% coordinates %{{{1
+
+	\coordinate (A) at (-\len,0);
+	\coordinate (B) at (0,-\ngt);
+	\coordinate (C) at (\gth,0);
+	\coordinate (D) at (0,\ngt);
+
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=line1] (A) -- (C);
+		\path[name path=line2] (B) -- (D);
+		\path[name intersections={of=line1 and line2, by=I}];
+	\end{pgfinterruptboundingbox}
+
+% points, dots, vertices %{{{1
+
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+	\fill (C) circle (0.4mm);
+	\fill (D) circle (0.4mm);
+	\fill (I) circle (0.4mm);
+
+% segments, sides %{{{1
+
+	\draw (A) -- (B) -- (C) -- (D) -- cycle;
+	\draw[dashed] (A) -- (C);
+	\draw[dashed] (B) -- (D);
+
+% points, dots, vertices labels %{{{1
+
+	\node[left] at (A) {$A$};
+	\node[below] at (B) {$B$};
+	\node[right] at (C) {$C$};
+	\node[above] at (D) {$D$};
+	\node[above right] at (I) {$I$};
+
+% segments, sides marks %{{{1
+
+	\tkzMarkSegments[mark=||, size=2pt](A,B)
+	\tkzMarkSegments[mark=||, size=2pt](D,A)
+	\tkzMarkSegments[mark=|, size=2pt](B,C)
+	\tkzMarkSegments[mark=|, size=2pt](C,D)
+
+	\tkzMarkSegments[mark=|, size=2pt, pos=0.45](D,I)
+	\tkzMarkSegments[mark=|, size=2pt, pos=0.50](D,I)
+	\tkzMarkSegments[mark=|, size=2pt, pos=0.55](D,I)
+
+	\tkzMarkSegments[mark=|, size=2pt, pos=0.45](B,I)
+	\tkzMarkSegments[mark=|, size=2pt, pos=0.50](B,I)
+	\tkzMarkSegments[mark=|, size=2pt, pos=0.55](B,I)
+
+% angles labels %{{{1
+
+% right angles markers %{{{2
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = D--I--A};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

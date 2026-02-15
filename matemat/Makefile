@@ -45,14 +45,14 @@ tex: $(ORG_TEX_FILES)
 # tex --> pdf {{{1
 
 %.pdf: pdf/%.pdf
-	ln -s pdf/$@ $@
+	[ -e pdf/$@ ] || ln -s pdf/$@ $@
 
-pdf/%.pdf: %.tex | pdf_dir
+pdf/%.pdf: %.tex | pdf
 	latexmk -f -pdf -shell-escape -output-directory=pdf $<
 	#mv $@ pdf/
 	#mv $**.aux pdf/
 
-pdf_dir:
+pdf:
 	mkdir -p pdf
 
 pdf_files: $(ORG_PDF_FILES)

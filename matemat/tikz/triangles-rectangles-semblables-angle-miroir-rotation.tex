@@ -1,0 +1,75 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header-light.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\def\ratio{1.7}
+
+	\def\rotation{0}
+
+% coordinates %{{{1
+
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (4,0);
+	\coordinate (C) at (4,3);
+
+	\coordinate (X) at (A);
+
+	\begin{scope}[rotate around={\rotation:(X)}]
+		\coordinate (Y) at ({4*\ratio},0);
+		\coordinate (Z) at ({4*\ratio},{-3*\ratio});
+	\end{scope}
+
+% points, dots, vertices %{{{1
+
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+	\fill (C) circle (0.4mm);
+
+	\fill (X) circle (0.4mm);
+	\fill (Y) circle (0.4mm);
+	\fill (Z) circle (0.4mm);
+
+% triangles %{{{1
+
+	\draw (A) -- (C);
+	\draw (B) -- (C);
+	\draw (X) -- (Y) -- (Z) -- cycle;
+
+% points, dots, vertices labels %{{{1
+
+	\node[below left] at (A) {$A = X_3$};
+	\node[below right] at (B) {$B$};
+	\node[above] at (C) {$C$};
+
+	\node[below right] at (Y) {$Y_3$};
+	\node[below] at (Z) {$Z_3$};
+
+% sides labels %{{{1
+
+% angles labels %{{{1
+
+	\pic[draw, ->, "$\alpha$", angle radius=1.4cm, angle eccentricity=1.2]
+	{angle = B--A--C};
+
+	\pic[draw, ->, "$\alpha$", angle radius=1.6cm, angle eccentricity=1.2]
+	{angle = Z--X--Y};
+
+% right angles markers %{{{2
+
+	\pic[draw, angle eccentricity=1, angle radius=7pt]
+	{right angle = C--B--A};
+
+	\pic[draw, angle eccentricity=1, angle radius=7pt]
+	{right angle = Z--Y--X};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

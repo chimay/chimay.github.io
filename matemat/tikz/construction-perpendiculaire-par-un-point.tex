@@ -9,13 +9,23 @@
 
 % parameters %{{{1
 
-	\def\len{6}
-	\def\radius{0.65*\len}
+	\tikzmath{
+		\len = 6;
+		\height = 4;
+		\extratio = 1.5;
+		\radius = 0.65*\len ;
+		\distPA = sqrt(\len*\len/4 + \height*\height);
+	}
 
 % coordinates %{{{1
 
 	\coordinate (A) at (0,0);
 	\coordinate (B) at (\len,0);
+
+	\coordinate (U) at ({-(\extratio - 1)*\len},0);
+	\coordinate (V) at ({\extratio*\len},0);
+
+	\coordinate (P) at ({\len/2},\height);
 
 	\coordinate (Ra) at ($(A) + (\radius, 0)$);
 	\coordinate (Rb) at ($(B) + (\radius, 0)$);
@@ -33,13 +43,17 @@
 
 	\fill (A) circle (0.5mm);
 	\fill (B) circle (0.5mm);
+
+	\fill (P) circle (0.5mm);
+
 	\fill (D) circle (0.5mm);
 	\fill (E) circle (0.5mm);
 	\fill (F) circle (0.5mm);
 
 % segments %{{{1
 
-	\draw (A) -- (B);
+	\draw (U) -- (V);
+
 	\draw (X) -- (Y);
 
 	\draw[dashed] (A) -- (D);
@@ -48,8 +62,12 @@
 	\draw[dashed] (A) -- (E);
 	\draw[dashed] (B) -- (E);
 
+	\draw[dashdotdotted] (A) -- (P);
+	\draw[dashdotdotted] (B) -- (P);
+
 % circular arcs %{{{1
 
+	\draw (P) ++(200:\distPA) arc (200:340:\distPA);
 	\draw (A) ++(-65:\radius) arc (-65:65:\radius);
 	\draw (B) ++(115:\radius) arc (115:245:\radius);
 
@@ -57,12 +75,18 @@
 
 	\node[below] at (A) {$A$};
 	\node[below] at (B) {$B$};
+
+	\node[above left] at (P) {$P$};
+
 	\node[label={[label distance=0.5]left:$D$}] at (D) {};
 	\node[label={[label distance=0.5]left:$E$}] at (E) {};
 
+	\node[above left] at (F) {$F$};
+
 % segments, sides labels %{{{1
 
-	\node[left] at ($ (X)!0.95!(Y) $) {$m$};
+	\node[above] at ($ (U)!0.05!(V) $) {$d$};
+	\node[left] at ($ (X)!0.05!(Y) $) {$p$};
 
 % segments, sides marks %{{{1
 
@@ -71,8 +95,9 @@
 
 % circular arcs labels %{{{1
 
-	\node at ($(20:{\radius+0.3}) + (0, 0)$) {$\mathscr{C}_1$};
-	\node at ($(160:{\radius+0.3}) + (\len, 0)$) {$\mathscr{C}_2$};
+	\node at ($ (P) + (320:{\distPA+0.3})$) {$\mathscr{C}_1$};
+	\node at ($ (A) + (20:{\radius+0.3}) $) {$\mathscr{C}_2$};
+	\node at ($ (B) + (160:{\radius+0.3}) $) {$\mathscr{C}_3$};
 
 % angles labels %{{{1
 

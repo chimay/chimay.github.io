@@ -11,9 +11,11 @@
 
 	\tikzmath{
 		\len = 6;
-		\height = 4;
+		\height = 6;
 		\extratio = 1.5;
-		\radius = 0.65*\len ;
+		\radiusAB = 0.65*\len;
+		\radiusP = 0.35*\len;
+		\radiusGH = 0.6*\len;
 		\distPA = sqrt(\len*\len/4 + \height*\height);
 	}
 
@@ -30,15 +32,30 @@
 % intersections %{{{1
 
 	\begin{pgfinterruptboundingbox}
-		\path[name path=circleA] (A) circle (\radius);
-		\path[name path=circleB] (B) circle (\radius);
+		\path[name path=circleA] (A) circle (\radiusAB);
+		\path[name path=circleB] (B) circle (\radiusAB);
 		\path[name intersections={of=circleA and circleB, by={D,E}}];
 	\end{pgfinterruptboundingbox}
 
 	\coordinate (X) at ($(E) - (0, 2)$);
-	\coordinate (Y) at ($(D) + (0, 2)$);
+	\coordinate (Y) at ($(D) + (0, 6)$);
 
 	\tkzInterLL(A,B)(D,E)\tkzGetPoint{F}
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=line] (X) -- (Y);
+		\path[name path=circle] (P) circle (\radiusP);
+		\path[name intersections={of=line and circle, by={G,H}}];
+	\end{pgfinterruptboundingbox}
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=circleG] (G) circle (\radiusGH);
+		\path[name path=circleH] (H) circle (\radiusGH);
+		\path[name intersections={of=circleG and circleH, by={I,J}}];
+	\end{pgfinterruptboundingbox}
+
+	\coordinate (W) at ($ (I) - ({(\extratio - 1)*\len}, 0) $);
+	\coordinate (Z) at ($ (J) + ({(\extratio - 1)*\len}, 0) $);
 
 % points, dots, vertices %{{{1
 
@@ -51,11 +68,19 @@
 	\fill (E) circle (0.5mm);
 	\fill (F) circle (0.5mm);
 
+	\fill (G) circle (0.5mm);
+	\fill (H) circle (0.5mm);
+
+	\fill (I) circle (0.5mm);
+	\fill (J) circle (0.5mm);
+
 % segments %{{{1
 
 	\draw (U) -- (V);
 
 	\draw (X) -- (Y);
+
+	\draw (W) -- (Z);
 
 	\draw[dashed] (A) -- (D);
 	\draw[dashed] (B) -- (D);
@@ -66,11 +91,19 @@
 	\draw[dashdotdotted] (A) -- (P);
 	\draw[dashdotdotted] (B) -- (P);
 
-% circular arcs %{{{1
+% circles %{{{1
+
+	\draw (P) circle (\radiusP);
+
+% circular arcs %{{{2
 
 	\draw (P) ++(200:\distPA) arc (200:340:\distPA);
-	\draw (A) ++(-65:\radius) arc (-65:65:\radius);
-	\draw (B) ++(115:\radius) arc (115:245:\radius);
+
+	\draw (A) ++(-65:\radiusAB) arc (-65:65:\radiusAB);
+	\draw (B) ++(115:\radiusAB) arc (115:245:\radiusAB);
+
+	\draw (G) ++(200:\radiusGH) arc (200:340:\radiusGH);
+	\draw (H) ++(20:\radiusGH) arc (20:160:\radiusGH);
 
 % points, dots, vertices labels %{{{1
 
@@ -84,10 +117,17 @@
 
 	\node[above left] at (F) {$F$};
 
+	\node[above left] at (G) {$G$};
+	\node[below left] at (H) {$H$};
+
+	\node[above] at (I) {$I$};
+	\node[above] at (J) {$J$};
+
 % segments, sides labels %{{{1
 
 	\node[above] at ($ (U)!0.05!(V) $) {$d$};
-	\node[left] at ($ (X)!0.05!(Y) $) {$p$};
+	\node[left] at ($ (X)!0.05!(Y) $) {$m$};
+	\node[above] at ($ (W)!0.05!(Z) $) {$n$};
 
 % segments, sides marks %{{{1
 
@@ -97,8 +137,11 @@
 % circular arcs labels %{{{1
 
 	\node at ($ (P) + (320:{\distPA+0.3})$) {$\mathscr{C}_1$};
-	\node at ($ (A) + (10:{\radius+0.3}) $) {$\mathscr{C}_2$};
-	\node at ($ (B) + (170:{\radius+0.3}) $) {$\mathscr{C}_3$};
+	\node at ($ (A) + (10:{\radiusAB+0.3}) $) {$\mathscr{C}_2$};
+	\node at ($ (B) + (170:{\radiusAB+0.3}) $) {$\mathscr{C}_3$};
+	\node at ($ (P) + (45:{\radiusP+0.3}) $) {$\mathscr{C}_4$};
+	\node at ($ (G) + (-50:{\radiusGH+0.3}) $) {$\mathscr{C}_5$};
+	\node at ($ (H) + (50:{\radiusGH+0.3}) $) {$\mathscr{C}_6$};
 
 % angles labels %{{{1
 
@@ -106,16 +149,6 @@
 
 	\pic [draw, angle radius=7pt, angle eccentricity=1]
 	{right angle = B--F--Y};
-
-% segments, sides marks %{{{1
-
-	\tkzMarkSegments[mark=||, size=2pt](A,D)
-	\tkzMarkSegments[mark=||, size=2pt](A,E)
-	\tkzMarkSegments[mark=||, size=2pt](B,D)
-	\tkzMarkSegments[mark=||, size=2pt](B,E)
-
-	\tkzMarkSegments[mark=|, size=2pt](P,A)
-	\tkzMarkSegments[mark=|, size=2pt](P,B)
 
 % closing %{{{1
 

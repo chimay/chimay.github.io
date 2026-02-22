@@ -1,0 +1,69 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\def\ratio{1.7}
+
+% coordinates %{{{1
+
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (4,0);
+	\coordinate (C) at (0,3);
+	\begin{scope}[scale=\ratio]
+		\coordinate (D) at (4,0);
+		\coordinate (E) at (0,3);
+	\end{scope}
+	\coordinate (F) at ($(D)!(A)!(E)$);
+
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=line1] (A) -- (F);
+		\path[name path=line2] (B) -- (C);
+		\path[name intersections={of=line1 and line2, by=G}];
+	\end{pgfinterruptboundingbox}
+
+% points, dots, vertices %{{{1
+
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+	\fill (C) circle (0.4mm);
+	\fill (D) circle (0.4mm);
+	\fill (E) circle (0.4mm);
+	\fill (F) circle (0.4mm);
+	\fill (G) circle (0.4mm);
+
+% lines %{{{1
+
+	\draw (A) -- (D) -- (E) -- cycle;
+	\draw (B) -- (C);
+
+	\draw[dashed] (A) -- (F);
+
+% points, dots, vertices labels %{{{1
+
+	\node[below left] at (A) {$A$};
+	\node[below] at (B) {$B$};
+	\node[left] at (C) {$C$};
+	\node[below right] at (D) {$D$};
+	\node[above] at (E) {$E$};
+	\node[above right] at (F) {$F$};
+	\node[above] at (G) {$G$};
+
+% right angle marks %{{{2
+
+	\tkzMarkRightAngle[size=0.2](B,A,C)
+	\tkzMarkRightAngle[size=0.2](A,G,B)
+	\tkzMarkRightAngle[size=0.2](A,F,D)
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

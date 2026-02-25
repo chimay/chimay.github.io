@@ -1,0 +1,86 @@
+
+\input{../../include/latex/tikz/header-light.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.6]
+
+% parameters %{{{1
+
+	% ---- triangle 3 - 4 - 5
+	% ---- arctan(4/3) in degrees
+
+	%\def\ang{53.13}
+
+	\tikzmath{
+		\ang = atan2(4, 3) ;
+	}
+
+% coordinates %{{{1
+
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (5,0);
+	\coordinate (C) at ({3*cos(\ang)},{3*sin(\ang)});
+
+	% ---- feet of altitude from B to AC
+
+	\coordinate (D) at ({3*cos(\ang)},0);
+
+% triangle %{{{1
+
+	\draw (A) -- (B) -- (C) -- cycle;
+
+	% ---- altitude
+
+	\draw[dashed] (C) -- (D);
+
+% vertices, points, dots %{{{1
+
+	\fill (A) circle (0.3mm);
+	\fill (B) circle (0.3mm);
+	\fill (C) circle (0.3mm);
+	\fill (D) circle (0.3mm);
+
+% points, dots, vertices labels %{{{1
+
+	\node[below left] at (A) {$A$};
+	\node[below right] at (B) {$B$};
+	\node[above] at (C) {$C$};
+	\node[above left] at (D) {$D$};
+
+% sides labels %{{{1
+
+	\node[above right] at ($(B)!0.5!(C)$) {$a$};
+	\node[above left]  at ($(A)!0.5!(C)$) {$b$};
+	\node[below] at ($(A)!0.5!(B)$) {$c$};
+
+	% ---- segment labels on altitude projection
+
+	\node[above] at ($(A)!0.55!(D)$) {$u$};
+	\node[above] at ($(D)!0.5!(B)$) {$v$};
+
+	% ---- height label
+
+	\node[right] at ($(C)!0.5!(D)$) {$h$};
+
+% angles labels %{{{1
+
+	\pic[draw, ->, "$\alpha$", angle radius=0.8cm, angle eccentricity=1.3]
+	{angle = B--A--C};
+
+	\pic[draw, ->, "$\beta$", angle radius=1.0cm, angle eccentricity=1.3]
+	{angle = C--B--A};
+
+% right angles markers %{{{2
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = B--C--A};
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = B--D--C};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

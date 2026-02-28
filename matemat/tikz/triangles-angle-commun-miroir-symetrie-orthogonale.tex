@@ -11,21 +11,22 @@
 
 	\def\ratio{1.7}
 
-	\def\rotation{-20}
+	\def\rotation{0}
 
 % coordinates %{{{1
 
 	\coordinate (A) at (0,0);
 	\coordinate (B) at (4,0);
-	\coordinate (C) at (4,3);
+	\coordinate (C) at (3,3);
 
-	\coordinate (D) at (8,0);
+	\coordinate (D) at (-4,0);
+	\coordinate (E) at (10,0);
 
 	\coordinate (X) at (A);
 
 	\begin{scope}[rotate around={\rotation:(X)}]
 		\coordinate (Y) at ({4*\ratio},0);
-		\coordinate (Z) at ({4*\ratio},{-3*\ratio});
+		\coordinate (Z) at ({3*\ratio},{-3*\ratio});
 	\end{scope}
 
 % points, dots, vertices %{{{1
@@ -40,40 +41,31 @@
 
 % triangles %{{{1
 
-	\draw (A) -- (B) -- (C) -- cycle;
+	\draw (A) -- (C);
+	\draw (B) -- (C);
 	\draw (X) -- (Y) -- (Z) -- cycle;
 
-	\draw[dashed] (B) -- (D);
+	\draw[dashed] (D) -- (A);
+	\draw[dashed] (B) -- (E);
 
 % points, dots, vertices labels %{{{1
 
-	\node[below left] at (A) {$A = X_2$};
+	\node[below left] at (A) {$A = X_3$};
 	\node[below right] at (B) {$B$};
 	\node[above] at (C) {$C$};
 
-	\node[below right] at (Y) {$Y_2$};
-	\node[below] at (Z) {$Z_2$};
+	\node[below right] at (Y) {$Y_3$};
+	\node[below] at (Z) {$Z_3$};
 
 % sides labels %{{{1
 
 % angles labels %{{{1
 
-	%\pic[draw, ->, "$\alpha$", angle radius=1.2cm, angle eccentricity=1.2]
-	%{angle = B--A--C};
+	\pic[draw, ->, "$\alpha$", angle radius=1.4cm, angle eccentricity=1.2]
+	{angle = B--A--C};
 
-	%\pic[draw, ->, "$\alpha$", angle radius=1.4cm, angle eccentricity=1.2]
-	%{angle = Y--X--Z};
-
-	\pic[draw, ->, "$\beta$", angle radius=2.5cm, angle eccentricity=1.1]
-	{angle = Y--A--B};
-
-% right angles markers %{{{2
-
-	\pic[draw, angle eccentricity=1, angle radius=7pt]
-	{right angle = C--B--A};
-
-	\pic[draw, angle eccentricity=1, angle radius=7pt]
-	{right angle = Z--Y--X};
+	\pic[draw, <-, "$\alpha$", angle radius=1.6cm, angle eccentricity=1.2]
+	{angle = Z--X--Y};
 
 % closing %{{{1
 

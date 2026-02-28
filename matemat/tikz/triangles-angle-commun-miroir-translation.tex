@@ -1,6 +1,6 @@
 % vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
 
-\input{../../include/latex/tikz/header-light.tex}
+\input{../../include/latex/tikz/header.tex}
 
 % opening %{{{1
 
@@ -9,24 +9,23 @@
 
 % parameters %{{{1
 
+	\def\x{2}
+	\def\y{-1}
 	\def\ratio{1.7}
 
-	\def\rotation{0}
+	\def\rotation{-20}
 
 % coordinates %{{{1
 
 	\coordinate (A) at (0,0);
 	\coordinate (B) at (4,0);
-	\coordinate (C) at (4,3);
+	\coordinate (C) at (3,3);
 
-	\coordinate (D) at (-4,0);
-	\coordinate (E) at (10,0);
-
-	\coordinate (X) at (A);
+	\coordinate (X) at (\x,\y);
 
 	\begin{scope}[rotate around={\rotation:(X)}]
-		\coordinate (Y) at ({4*\ratio},0);
-		\coordinate (Z) at ({4*\ratio},{-3*\ratio});
+		\coordinate (Y) at ({\x+4*\ratio},\y);
+		\coordinate (Z) at ({\x+3*\ratio},{\y-3*\ratio});
 	\end{scope}
 
 % points, dots, vertices %{{{1
@@ -41,39 +40,30 @@
 
 % triangles %{{{1
 
-	\draw (A) -- (C);
-	\draw (B) -- (C);
+	\draw (A) -- (B) -- (C) -- cycle;
 	\draw (X) -- (Y) -- (Z) -- cycle;
 
-	\draw[dashed] (D) -- (A);
-	\draw[dashed] (B) -- (E);
+	\draw[vector, dashed] (X) -- (A);
 
 % points, dots, vertices labels %{{{1
 
-	\node[below left] at (A) {$A = X_3$};
+	\node[above left] at (A) {$A$};
 	\node[below right] at (B) {$B$};
 	\node[above] at (C) {$C$};
 
-	\node[below right] at (Y) {$Y_3$};
-	\node[below] at (Z) {$Z_3$};
+	\node[below left] at (X) {$X$};
+	\node[below right] at (Y) {$Y$};
+	\node[below] at (Z) {$Z$};
 
 % sides labels %{{{1
 
 % angles labels %{{{1
 
-	\pic[draw, ->, "$\alpha$", angle radius=1.4cm, angle eccentricity=1.2]
+	\pic[draw, ->, "$\alpha$", angle radius=1.2cm, angle eccentricity=1.2]
 	{angle = B--A--C};
 
-	\pic[draw, ->, "$\alpha$", angle radius=1.6cm, angle eccentricity=1.2]
+	\pic[draw, <-, "$\alpha$", angle radius=1.4cm, angle eccentricity=1.2]
 	{angle = Z--X--Y};
-
-% right angles markers %{{{2
-
-	\pic[draw, angle eccentricity=1, angle radius=7pt]
-	{right angle = C--B--A};
-
-	\pic[draw, angle eccentricity=1, angle radius=7pt]
-	{right angle = Z--Y--X};
 
 % closing %{{{1
 

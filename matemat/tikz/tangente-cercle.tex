@@ -1,0 +1,72 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\def\len{1.5}
+	\def\gth{2.3}
+
+	\def\ang{70}
+
+	\def\radius{3}
+
+% coordinates %{{{1
+
+	\coordinate (O) at (0,0);
+	\coordinate (A) at (\ang:\radius);
+
+	\coordinate (B) at ($(A)!\len!90:(O)$);
+
+	\coordinate (X) at ($(A)!{- \gth + \len}!90:(O)$);
+	\coordinate (Y) at ($(A)!\gth!90:(O)$);
+
+% points, dots, vertices %{{{1
+
+	\fill (O) circle (0.4mm);
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+
+% segments, sides %{{{1
+
+	\draw (A) -- (B);
+
+	%\draw[dashed] (O) -- (A);
+
+	\draw (X) -- (A);
+	\draw (B) -- (Y);
+
+% circles %{{{1
+
+	\draw (O) circle (\radius);
+
+% points, dots, vertices labels %{{{1
+
+	\node[above left] at (O) {$O$};
+	\node[above] at (A) {$A$};
+	\node[above] at (B) {$B$};
+
+% segments, sides, lines labels %{{{1
+
+	\node[above] at ($ (X)!0.5!(Y) $) {$t$};
+
+% circles labels %{{{1
+
+	\node at ($ (O)+(135:\radius+0.3) $) {$\mathscr{C}$};
+
+% angles labels %{{{1
+
+% right angles markers %{{{2
+
+	%\pic [draw, angle radius=7pt, angle eccentricity=1]
+	%{right angle = X--A--O};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

@@ -9,9 +9,11 @@
 
 % parameters %{{{1
 
+	\def\len{1.5}
+	\def\gth{2.3}
+
 	\def\ang{-20}
-	\def\gle{80}
-	\def\ngl{210}
+	\def\gle{70}
 
 	\def\radius{3}
 
@@ -19,8 +21,12 @@
 
 	\coordinate (O) at (0,0);
 	\coordinate (A) at (\ang:\radius);
-	\coordinate (B) at (\gle:\radius);
-	\coordinate (P) at (\ngl:\radius);
+	\coordinate (P) at (\gle:\radius);
+
+	\coordinate (B) at ($(P)!\len!90:(O)$);
+
+	\coordinate (X) at ($(P)!{- \gth + \len}!90:(O)$);
+	\coordinate (Y) at ($(P)!\gth!90:(O)$);
 
 % points, dots, vertices %{{{1
 
@@ -34,6 +40,11 @@
 	\draw (P) -- (A);
 	\draw (P) -- (B);
 
+	\draw[dashed] (O) -- (P);
+
+	\draw (X) -- (P);
+	\draw (B) -- (Y);
+
 % circles %{{{1
 
 	\draw (O) circle (\radius);
@@ -43,7 +54,7 @@
 	\node[above left] at (O) {$O$};
 	\node[right] at (A) {$A$};
 	\node[above] at (B) {$B$};
-	\node[left] at (P) {$P$};
+	\node[above] at (P) {$P$};
 
 % circles labels %{{{1
 
@@ -53,6 +64,11 @@
 
 	\pic[draw, ->, "$\alpha$", angle radius=1.2cm, angle eccentricity=1.2]
 	{angle = A--P--B};
+
+% right angles markers %{{{2
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = X--P--O};
 
 % closing %{{{1
 

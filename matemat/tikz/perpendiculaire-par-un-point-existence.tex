@@ -1,0 +1,84 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\tikzmath{
+		\len = 6;
+		\height = 4;
+		\extratio = 1.5;
+		\radius = 0.65*\len ;
+		\distPA = sqrt(\len*\len/4 + \height*\height);
+	}
+
+% coordinates %{{{1
+
+	\coordinate (P) at ({\len/2},\height);
+
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (\len,0);
+
+	\coordinate (D) at ({\len/2},0);
+
+	\coordinate (U) at ({-(\extratio - 1)*\len},0);
+	\coordinate (V) at ({\extratio*\len},0);
+
+	\coordinate (X) at ($(D) - (0, 2)$);
+	\coordinate (Y) at ($(P) + (0, 2)$);
+
+% points, dots, vertices %{{{1
+
+	\fill (A) circle (0.5mm);
+	\fill (B) circle (0.5mm);
+
+	\fill (P) circle (0.5mm);
+
+	\fill (D) circle (0.5mm);
+
+% segments %{{{1
+
+	\draw (U) -- (V);
+
+	\draw (X) -- (Y);
+
+% circular arcs %{{{1
+
+	\draw (P) ++(200:\distPA) arc (200:340:\distPA);
+
+% points, dots, vertices labels %{{{1
+
+	\node[below] at (A) {$A$};
+	\node[below] at (B) {$B$};
+
+	\node[above left] at (P) {$P$};
+
+	\node[above left] at (D) {$D$};
+
+% segments, sides labels %{{{1
+
+	\node[above] at ($ (U)!0.05!(V) $) {$d$};
+	\node[left] at ($ (X)!0.05!(Y) $) {$p$};
+
+% circular arcs labels %{{{1
+
+	\node at ($ (P) + (320:{\distPA+0.3})$) {$\mathscr{C}_1$};
+	\node at ($ (A) + (10:{\radius+0.3}) $) {$\mathscr{C}_2$};
+	\node at ($ (B) + (170:{\radius+0.3}) $) {$\mathscr{C}_3$};
+
+% angles labels %{{{1
+
+% right angles markers %{{{2
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = B--D--Y};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

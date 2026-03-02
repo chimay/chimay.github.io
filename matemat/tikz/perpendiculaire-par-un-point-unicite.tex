@@ -9,8 +9,8 @@
 
 % parameters %{{{1
 
-	\def\len{2.9}
-	\def\gth{2.6}
+	\def\len{3.1}
+	\def\gth{3.2}
 
 	\def\ang{0}
 	\def\gle{90}
@@ -23,50 +23,52 @@
 % coordinates %{{{1
 
 	\coordinate (I) at (0,0);
-	\coordinate (P) at ($ (I) + \len*(v) $);
-	\coordinate (B) at ($ (I) - 0.5*(u) $);
-	\coordinate (C) at ($ (I) + 0.7*(u) $);
+	\coordinate (A) at ($ (I) + \len*(v) $);
+	\coordinate (B) at ($ (I) - 0.7*(u) $);
+	\coordinate (C) at ($ (I) + 0.9*(u) $);
 
 	\coordinate (X1) at ($ (I) - \gth*(u) $);
 	\coordinate (X2) at ($ (I) + \gth*(u) $);
 
-	%\coordinate (Y1) at ($ (I) - \gth*(v) $);
-	%\coordinate (Y2) at ($ (I) + \gth*(v) $);
+	\coordinate (Y) at ($ (B) + 0.7*(B) - 0.7*(A) $);
+	\coordinate (Z) at ($ (C) + 0.7*(C) - 0.7*(A) $);
 
 % vertices, points, dots %{{{1
 
-	\fill (P) circle (0.4mm);
+	\fill (A) circle (0.4mm);
 	\fill (B) circle (0.4mm);
 	\fill (C) circle (0.4mm);
 
 % segments %{{{1
 
 	\draw (X1) -- (X2);
-	%\draw (Y1) -- (Y2);
 
-	\draw (P) -- (B);
-	\draw (P) -- (C);
+	\draw (A) -- (B);
+	\draw (A) -- (C);
+
+	\draw (B) -- (Y);
+	\draw (C) -- (Z);
 
 % points, dots, vertices labels %{{{1
 
-	\node[above] at (P) {$P$};
-	\node[below left] at (B) {$B$};
-	\node[below] at (C) {$C$};
+	\node[above] at (A) {$A$};
+	\node[above left] at (B) {$B$};
+	\node[above right] at (C) {$C$};
 
 % segments, sides labels %{{{1
 
 	\node[above] at ($ (X1)!0.9!(X2) $) {$d$};
 
-	\node[above left] at ($ (P)!0.5!(B) $) {$f$};
-	\node[above right] at ($ (P)!0.5!(C) $) {$g$};
+	\node[above left] at ($ (B)!0.7!(Y) $) {$f$};
+	\node[above right] at ($ (C)!0.7!(Z) $) {$g$};
 
 % angles labels %{{{1
 
 	\pic[draw, angle radius=0.3cm, angle eccentricity=1.3]
-	{right angle = X2--B--P};
+	{right angle = X2--B--A};
 
 	\pic[draw, angle radius=0.3cm, angle eccentricity=1.3]
-	{right angle = P--C--X1};
+	{right angle = A--C--X1};
 
 % closing %{{{1
 

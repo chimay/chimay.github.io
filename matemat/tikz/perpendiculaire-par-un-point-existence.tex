@@ -14,85 +14,78 @@
 		\height = 4;
 		\extratio = 1.5;
 		\radius = 0.65*\len ;
-		\distPA = sqrt(\len*\len/4 + \height*\height);
+		\distAB = sqrt(\len*\len/4 + \height*\height);
 	}
 
 % coordinates %{{{1
 
-	\coordinate (P) at ({\len/2},\height);
+	\coordinate (A) at ({\len/2},\height);
 
-	\coordinate (A) at (0,0);
-	\coordinate (B) at (\len,0);
+	\coordinate (B) at (0,0);
+	\coordinate (D) at (\len,0);
 
-	\coordinate (F) at ({\len/2},0);
+	\coordinate (E) at ({\len/2},0);
 
 	\coordinate (U) at ({-(\extratio - 1)*\len},0);
 	\coordinate (V) at ({\extratio*\len},0);
 
-	\coordinate (X) at ($(F) - (0, 3)$);
-	\coordinate (Y) at ($(P) + (0, 2)$);
+	\coordinate (X) at ($(E) - (0, 3)$);
+	\coordinate (Y) at ($(A) + (0, 2)$);
 
 % points, dots, vertices %{{{1
 
 	\fill (A) circle (0.5mm);
 	\fill (B) circle (0.5mm);
-
-	\fill (P) circle (0.5mm);
-
-	\fill (F) circle (0.5mm);
+	\fill (D) circle (0.5mm);
+	\fill (E) circle (0.5mm);
 
 % segments %{{{1
 
 	\draw (U) -- (V);
 	\draw (X) -- (Y);
-	\draw[dashed] (P) -- (A);
-	\draw[dashed] (P) -- (B);
+
+	\draw[dashed] (A) -- (B);
+	\draw[dashed] (A) -- (D);
 
 % circular arcs %{{{1
 
-	\draw (P) ++(200:\distPA) arc (200:340:\distPA);
+	\draw (A) ++(200:\distAB) arc (200:340:\distAB);
 
 % points, dots, vertices labels %{{{1
 
-	\node[below] at (A) {$A$};
+	\node[above left] at (A) {$A$};
+
 	\node[below] at (B) {$B$};
-
-	\node[above left] at (P) {$P$};
-
-	\node[below left] at (F) {$F$};
+	\node[below] at (D) {$D$};
+	\node[below left] at (E) {$E$};
 
 % segments, sides labels %{{{1
 
 	\node[above] at ($ (U)!0.05!(V) $) {$d$};
 	\node[left] at ($ (X)!0.1!(Y) $) {$p$};
 
-	\node[above left] at ($ (P)!0.5!(A) $) {$r$};
-	\node[above right] at ($ (P)!0.5!(B) $) {$r$};
+	\node[above left] at ($ (A)!0.5!(B) $) {$r$};
+	\node[above right] at ($ (A)!0.5!(D) $) {$r$};
 
 % segments, sides marks %{{{1
 
-	\tkzMarkSegments[mark=|, size=2pt](P,A)
-	\tkzMarkSegments[mark=|, size=2pt](P,B)
+	\tkzMarkSegments[mark=|, size=2pt](A,B)
+	\tkzMarkSegments[mark=|, size=2pt](A,D)
 
-	\tkzMarkSegments[mark=||, size=2pt](A,F)
-	\tkzMarkSegments[mark=||, size=2pt](F,B)
+	\tkzMarkSegments[mark=||, size=2pt](B,E)
+	\tkzMarkSegments[mark=||, size=2pt](E,D)
 
 % circular arcs labels %{{{1
 
-	\node at ($ (P) + (320:{\distPA+0.3})$) {$\mathscr{C}$};
+	\node at ($ (A) + (320:{\distAB+0.3})$) {$\mathscr{C}$};
 
 % angles labels %{{{1
 
 	\pic[draw, ->, "$\alpha$", angle radius=0.8cm, angle eccentricity=1.5]
-	{angle = B--F--P};
+	{angle = D--E--A};
 
 	\pic[draw, ->, "$\beta$", angle radius=0.7cm, angle eccentricity=1.5]
-	{angle = P--F--A};
-
-% right angles markers %{{{2
-
-	%\pic [draw, angle radius=7pt, angle eccentricity=1]
-	%{right angle = B--F--Y};
+	{angle = A--E--B};
 
 % closing %{{{1
 

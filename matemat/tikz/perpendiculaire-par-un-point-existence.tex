@@ -24,12 +24,12 @@
 	\coordinate (A) at (0,0);
 	\coordinate (B) at (\len,0);
 
-	\coordinate (D) at ({\len/2},0);
+	\coordinate (F) at ({\len/2},0);
 
 	\coordinate (U) at ({-(\extratio - 1)*\len},0);
 	\coordinate (V) at ({\extratio*\len},0);
 
-	\coordinate (X) at ($(D) - (0, 2)$);
+	\coordinate (X) at ($(F) - (0, 2)$);
 	\coordinate (Y) at ($(P) + (0, 2)$);
 
 % points, dots, vertices %{{{1
@@ -39,13 +39,14 @@
 
 	\fill (P) circle (0.5mm);
 
-	\fill (D) circle (0.5mm);
+	\fill (F) circle (0.5mm);
 
 % segments %{{{1
 
 	\draw (U) -- (V);
-
 	\draw (X) -- (Y);
+	\draw[dashed] (P) -- (A);
+	\draw[dashed] (P) -- (B);
 
 % circular arcs %{{{1
 
@@ -58,25 +59,40 @@
 
 	\node[above left] at (P) {$P$};
 
-	\node[above left] at (D) {$D$};
+	\node[above left] at (F) {$F$};
 
 % segments, sides labels %{{{1
 
 	\node[above] at ($ (U)!0.05!(V) $) {$d$};
-	\node[left] at ($ (X)!0.05!(Y) $) {$p$};
+	\node[left] at ($ (X)!0.5!(Y) $) {$p$};
+
+	\node[above left] at ($ (P)!0.5!(A) $) {$r$};
+	\node[above right] at ($ (P)!0.5!(B) $) {$r$};
+
+% segments, sides marks %{{{1
+
+	\tkzMarkSegments[mark=|, size=2pt](P,A)
+	\tkzMarkSegments[mark=|, size=2pt](P,B)
+
+	\tkzMarkSegments[mark=||, size=2pt](A,F)
+	\tkzMarkSegments[mark=||, size=2pt](F,B)
 
 % circular arcs labels %{{{1
 
-	\node at ($ (P) + (320:{\distPA+0.3})$) {$\mathscr{C}_1$};
-	\node at ($ (A) + (10:{\radius+0.3}) $) {$\mathscr{C}_2$};
-	\node at ($ (B) + (170:{\radius+0.3}) $) {$\mathscr{C}_3$};
+	\node at ($ (P) + (320:{\distPA+0.3})$) {$\mathscr{C}$};
 
 % angles labels %{{{1
 
+	\pic[draw, ->, "$\alpha$", angle radius=0.8cm, angle eccentricity=1.5]
+	{angle = B--F--P};
+
+	\pic[draw, ->, "$\beta$", angle radius=0.7cm, angle eccentricity=1.5]
+	{angle = P--F--A};
+
 % right angles markers %{{{2
 
-	\pic [draw, angle radius=7pt, angle eccentricity=1]
-	{right angle = B--D--Y};
+	%\pic [draw, angle radius=7pt, angle eccentricity=1]
+	%{right angle = B--F--Y};
 
 % closing %{{{1
 

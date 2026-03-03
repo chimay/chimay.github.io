@@ -9,8 +9,11 @@
 
 % parameters %{{{1
 
-	\def\len{1.9}
-	\def\gth{2.9}
+	\def\len{2.0}
+	\def\gth{4.0}
+
+	\def\extratio{1.0}
+	\def\triangleratio{1.5}
 
 	\def\ang{0}
 	\def\gle{90}
@@ -24,32 +27,46 @@
 
 	\coordinate (I) at (0,0);
 	\coordinate (A) at ($ (I) + \len*(v) $);
+	\coordinate (B) at ($ (I) - \len*(v) $);
+	\coordinate (C) at ($ (I) + \triangleratio*\len*(u) $);
 
 	\coordinate (X1) at ($ (I) - \gth*(u) $);
 	\coordinate (X2) at ($ (I) + \gth*(u) $);
 
-	\coordinate (Y1) at ($ (I) - \gth*(v) $);
-	\coordinate (Y2) at ($ (I) + \gth*(v) $);
+	\coordinate (Y1) at ($ (I) - \extratio*\gth*(v) $);
+	\coordinate (Y2) at ($ (I) + \extratio*\gth*(v) $);
 
 % vertices, points, dots %{{{1
 
 	\fill (I) circle (0.4mm);
 	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+	\fill (C) circle (0.4mm);
 
 % segments %{{{1
 
 	\draw (X1) -- (X2);
 	\draw (Y1) -- (Y2);
 
+	\draw[very thin] (A) -- (C);
+	\draw[very thin] (B) -- (C);
+
 % points, dots, vertices labels %{{{1
 
 	\node[above left] at (I) {$I$};
-	\node[above left] at (A) {$A$};
+	\node[left] at (A) {$A$};
+	\node[left] at (B) {$B$};
+	\node[above right] at (C) {$C$};
 
 % segments, sides labels %{{{1
 
-	\node[above] at ($ (X1)!0.9!(X2) $) {$d$};
-	\node[above left] at ($ (Y1)!0.2!(Y2) $) {$p$};
+	\node[above] at ($ (X1)!0.1!(X2) $) {$d$};
+	\node[above left] at ($ (Y1)!0.1!(Y2) $) {$p$};
+
+% segments, sides marks %{{{1
+
+	\tkzMarkSegments[mark=||, size=2pt](A,I)
+	\tkzMarkSegments[mark=||, size=2pt](B,I)
 
 % angles labels %{{{1
 

@@ -1,0 +1,67 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\def\ang{10}
+	\def\gle{70}
+	\def\ngl{100}
+
+	\def\radius{3.5}
+
+% coordinates %{{{1
+
+	\coordinate (O) at (1,2);
+
+	%\coordinate (A) at (\ang:\radius);
+	%\coordinate (B) at (\gle:\radius);
+
+	\coordinate (A) at ($ (O) + (\ang:\radius) $);
+	\coordinate (B) at ($ (O) + (\gle:\radius) $);
+
+	\coordinate (labelC) at ($ (O) + (\ngl:{\radius+0.3}) $);
+
+% points, dots, vertices %{{{1
+
+	\fill (O) circle (0.7mm);
+	\fill (A) circle (0.7mm);
+	\fill (B) circle (0.7mm);
+
+% segments, sides %{{{1
+
+	\draw (O) -- (A);
+	\draw (O) -- (B);
+
+% circular arcs %{{{1
+
+	\draw[thick] (O) ++(\ang:\radius) arc (\ang:\gle:\radius);
+	\draw[dashed] (O) ++(\gle:\radius) arc (\gle:{\ang+360}:\radius);
+
+% points, dots, vertices labels %{{{1
+
+	\node[left] at (O) {$O$};
+	\node[right] at (A) {$A$};
+	\node[above] at (B) {$B$};
+
+% circle label %{{{1
+
+	%\node at (labelC) {$\mathscr{C}$};
+
+% circular arcs labels %{{{1
+
+	\node at ($ (O) + ({0.5*(\ang+\gle)}:\radius+0.3) $) {$\Gamma$};
+
+% text boxes %{{{2
+
+	\node at ($ (O) + ({0.5*(\ang+\gle)}:{0.6*\radius}) $) {$\mathscr{S}$};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

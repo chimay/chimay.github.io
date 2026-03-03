@@ -1,0 +1,85 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header-light.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\def\ext{1.4}
+
+	\tikzmath{
+		\lenx = 6 ;
+		\leny = 3 ;
+		\rotation = 180 - atan2(\leny, \lenx) ;
+	}
+
+% coordinates %{{{1
+
+	\coordinate (B) at (0,0);
+
+	\begin{scope}[rotate around={\rotation:(B)}]
+		\coordinate (C) at ({\ext*\lenx},0);
+		\coordinate (A) at ({\ext*\lenx},{\ext*\leny});
+	\end{scope}
+
+	% ---- foot of height
+
+	\coordinate (D) at ($ (A)!(C)!(B) $);
+
+	% ---- hypothenuse mid point
+
+	\coordinate (E) at ($ (A)!0.5!(B) $);
+
+% points, dots, vertices %{{{1
+
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+	\fill (C) circle (0.4mm);
+	\fill (D) circle (0.4mm);
+	\fill (E) circle (0.4mm);
+
+% segments, sides, lines %{{{1
+
+	\draw (A) -- (B) -- (C) -- cycle;
+	\draw[dashed] (C) -- (D);
+	\draw[dashed] (C) -- (E);
+
+% points, dots, vertices labels %{{{1
+
+	\node[below left] at (A) {$A$};
+	\node[below right] at (B) {$B$};
+	\node[above] at (C) {$C$};
+	\node[below] at (D) {$D$};
+	\node[below] at (E) {$E$};
+
+% segments, sides, lines labels %{{{1
+
+	\node[above left] at ($ (A)!0.5!(C) $) {$a$};
+	\node[above right] at ($ (B)!0.5!(C) $) {$b$};
+
+	\node[above right] at ($ (D)!0.4!(E) $) {$d$};
+
+	\node[right] at ($ (C)!0.5!(D) $) {$h$};
+	\node[above right] at ($ (C)!0.5!(E) $) {$m$};
+
+% segments, sides, lines marks %{{{1
+
+	%\tkzMarkSegments[mark=||, size=2pt](A,E)
+	%\tkzMarkSegments[mark=||, size=2pt](E,B)
+
+% right angles markers %{{{1
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = A--C--B};
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = C--D--A};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

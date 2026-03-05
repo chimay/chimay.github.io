@@ -1,0 +1,93 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\def\len{1.0}
+	\def\gth{2.0}
+
+	\def\ang{70}
+	\def\gle{65}
+
+	\def\radius{3}
+
+	\def\ext{1.3}
+
+% coordinates %{{{1
+
+	\coordinate (O) at (0,0);
+	\coordinate (A) at (\ang:\radius);
+
+	\coordinate (B) at ($(A)!{\ext*\len}!\gle:(O)$);
+
+	\coordinate (X) at ($(A)!{- \gth + \len}!\gle:(O)$);
+	\coordinate (Y) at ($(A)!\gth!\gle:(O)$);
+
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\tkzInterLC(A,B)(O,A)\tkzGetPoints{I}{J}
+	\end{pgfinterruptboundingbox}
+
+	\coordinate (H) at ($(A)!0.6!(I)$);
+
+% points, dots, vertices %{{{1
+
+	\fill (O) circle (0.4mm);
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+	\fill (I) circle (0.4mm);
+	\fill (H) circle (0.4mm);
+
+	%\fill (J) circle (0.4mm);
+
+% segments, sides %{{{1
+
+	\draw (A) -- (B);
+
+	\draw[dashed] (O) -- (A);
+	\draw[dashed] (O) -- (B);
+
+	\draw (X) -- (A);
+	\draw (B) -- (Y);
+
+% circles %{{{1
+
+	\draw (O) circle (\radius);
+
+% points, dots, vertices labels %{{{1
+
+	\node[above left] at (O) {$O$};
+	\node[above right] at (A) {$A$};
+	\node[above right] at (B) {$B$};
+	\node[above right] at (I) {$I$};
+	\node[below left] at (H) {$H$};
+
+	%\node[above] at (J) {$J$};
+
+% segments, sides, lines labels %{{{1
+
+	\node[above] at ($ (X)!0.9!(Y) $) {$t$};
+	\node[above left] at ($ (O)!0.5!(A) $) {$r$};
+
+% circles labels %{{{1
+
+	\node at ($ (O)+(135:\radius+0.3) $) {$\mathscr{C}$};
+
+% angles labels %{{{1
+
+% right angles markers %{{{2
+
+	%\pic [draw, angle radius=7pt, angle eccentricity=1]
+	%{right angle = X--A--O};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

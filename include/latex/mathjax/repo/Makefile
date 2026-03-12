@@ -12,10 +12,7 @@ include ../../../../Makefile.inc
 
 .PHONY: sync-html
 
-.PHONY: $(ALL_SUBDIRS)
 .PHONY: all install
-
-.PHONY: $(CLEAN_SUBDIRS) $(CLEAN_HTML_SUBDIRS) $(WIPE_SUBDIRS)
 
 .PHONY: clean clean-html wipe
 
@@ -33,26 +30,11 @@ install: all
 
 # clean, wipe {{{1
 
-$(CLEAN_SUBDIRS):
-	$(MAKELINE) -C ${@:clean-%=%} clean
+clean:
 	@$(ECHO)
 
-$(CLEAN_HTML_SUBDIRS):
-	$(MAKELINE) -C ${@:clean-html-%=%} clean-html
+clean-html:
 	@$(ECHO)
 
-$(WIPE_SUBDIRS):
-	$(MAKELINE) -C ${@:wipe-%=%} wipe
+wipe:
 	@$(ECHO)
-
-clean: $(CLEAN_SUBDIRS)
-	rm -f ?*~
-	remove-obsolete-targets.zsh +org -html
-
-clean-html: $(CLEAN_HTML_SUBDIRS)
-	rm -f ?*.html
-	rm -f ?*~
-
-wipe: $(WIPE_SUBDIRS)
-	rm -f ?*.html
-	rm -f ?*~

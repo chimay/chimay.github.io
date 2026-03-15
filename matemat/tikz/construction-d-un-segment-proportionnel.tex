@@ -1,0 +1,106 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header-light.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\def\ang{-20}
+	\def\gle{30}
+
+	\def\len{3.5}
+	\def\unit{1.1}
+
+	\tikzmath {
+		\numunits = int(7);
+		\numunitsplus = \numunits + 2;
+	}
+
+% coordinates %{{{1
+
+	\coordinate (u) at (\ang:1);
+	\coordinate (v) at (\gle:1);
+
+	\coordinate (A) at (0,0);
+	\coordinate (B) at ($ (A) + \len*(u) $);
+
+	\foreach \i in {1,...,\numunits}
+		\coordinate (P\i) at ($ (A) + \i*\unit*(v) $);
+
+	\coordinate (BX) at ($ (A) - {\len/2}*(u) $);
+	\coordinate (BY) at ($ (A) + 2.7*\len*(u) $);
+
+	\coordinate (PX) at ($ (A) - \unit*(v) $);
+	\coordinate (PY) at ($ (A) + \numunitsplus*\unit*(v) $);
+
+	% ---- parallel to P4 -- B
+
+	\coordinate (p4b) at ($ (B) - (P4) $);
+
+	\coordinate (X) at ($ (P7) + 2*(p4b) $);
+
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=line1] (BX) -- (BY);
+		\path[name path=line2] (P7) -- (X);
+		\path[name intersections={of=line1 and line2, by=C}];
+	\end{pgfinterruptboundingbox}
+
+% points, dots, vertices %{{{1
+
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+
+	\foreach \i in {1,...,\numunits}
+		\fill (P\i) circle (0.4mm);
+
+	\fill (C) circle (0.4mm);
+
+% segments, sides, lines %{{{1
+
+	\draw (BX) -- (BY);
+	\draw (PX) -- (PY);
+
+	\draw (P4) -- (B);
+	\draw (P7) -- (X);
+
+% points, dots, vertices labels %{{{1
+
+	\node[below] at (A) {$A$};
+	\node[below] at (B) {$B$};
+
+	\foreach \i in {1,...,\numunits}
+		\node[above left] at (P\i) {$P_\i$};
+
+	\node[below left] at (C) {$C$};
+
+% segments, sides, lines labels %{{{1
+
+	\node[above left] at ($ (PX)!0.95!(PY) $) {$d$};
+	\node[above left] at ($ (P4)!0.5!(B) $) {$f$};
+	\node[above left] at ($ (P7)!0.5!(C) $) {$g$};
+
+% segments, sides, lines marks %{{{1
+
+	%\tkzMarkSegments[mark=||, size=2pt](A,B)
+	%\tkzMarkSegments[mark=||, size=2pt](C,D)
+
+% angles labels %{{{1
+
+	%\pic[draw, ->, "$\alpha$", angle radius=0.8cm, angle eccentricity=1.5]
+	%{angle = B--A--C};
+
+% right angles markers %{{{2
+
+	%\pic [draw, angle radius=7pt, angle eccentricity=1]
+	%{right angle = C--B--A};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

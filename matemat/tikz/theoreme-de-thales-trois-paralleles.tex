@@ -2,6 +2,8 @@
 
 \input{../../include/latex/tikz/header-light.tex}
 
+\usetikzlibrary{fpu}
+
 % opening %{{{1
 
 \begin{document}
@@ -9,11 +11,13 @@
 
 % parameters %{{{1
 
-	\def\ratio{1.4}
-	\def\ext{1.2}
+	\def\ratio{1.7}
+	\def\proportion{2.4}
+	\def\ext{0.4}
 	\def\tens{1.2}
 	\def\exceed{2.4}
 	\def\surpass{2.4}
+	\def\outstrip{2.7}
 
 % coordinates %{{{1
 
@@ -24,20 +28,26 @@
 	\coordinate (u) at ($ (B) - (A) $);
 	\coordinate (v) at ($ (C) - (A) $);
 
-	\coordinate (D) at ($ (A) - \ratio*(u) $);
-	\coordinate (E) at ($ (A) - \ratio*(v) $);
+	\coordinate (D) at ($ (A) + \ratio*(u) $);
+	\coordinate (E) at ($ (A) + \ratio*(v) $);
 
-	\coordinate (UX) at ($ (A) - \ext*\ratio*(u) $);
-	\coordinate (VX) at ($ (A) - \ext*\ratio*(v) $);
+	\coordinate (F) at ($ (A) + \proportion*(u) $);
+	\coordinate (G) at ($ (A) + \proportion*(v) $);
 
-	\coordinate (UY) at ($ (A) + \tens*(u) $);
-	\coordinate (VY) at ($ (A) + \tens*(v) $);
+	\coordinate (UX) at ($ (A) - \ext*(u) $);
+	\coordinate (VX) at ($ (A) - \ext*(v) $);
+
+	\coordinate (UY) at ($ (A) + \tens*\proportion*(u) $);
+	\coordinate (VY) at ($ (A) + \tens*\proportion*(v) $);
 
 	\coordinate (BX) at ($ (B) - \exceed*(1,0) $);
 	\coordinate (BY) at ($ (C) + \exceed*(1,0) $);
 
-	\coordinate (DX) at ($ (D) + \surpass*(1,0) $);
-	\coordinate (DY) at ($ (E) - \surpass*(1,0) $);
+	\coordinate (DX) at ($ (D) - \surpass*(1,0) $);
+	\coordinate (DY) at ($ (E) + \surpass*(1,0) $);
+
+	\coordinate (FX) at ($ (F) - \outstrip*(1,0) $);
+	\coordinate (FY) at ($ (G) + \outstrip*(1,0) $);
 
 % points, dots, vertices %{{{1
 
@@ -46,6 +56,8 @@
 	\fill (C) circle (0.5mm);
 	\fill (D) circle (0.5mm);
 	\fill (E) circle (0.5mm);
+	\fill (F) circle (0.5mm);
+	\fill (G) circle (0.5mm);
 
 % segments, sides, lines %{{{1
 
@@ -54,6 +66,7 @@
 
 	\draw (BX) -- (BY);
 	\draw (DX) -- (DY);
+	\draw (FX) -- (FY);
 
 % points, dots, vertices labels %{{{1
 
@@ -62,24 +75,33 @@
 	\node[above right] at (C) {$C$};
 	\node[above left] at (D) {$D$};
 	\node[above right] at (E) {$E$};
+	\node[above left] at (F) {$F$};
+	\node[above right] at (G) {$G$};
 
 % segments, sides, lines labels %{{{1
 
-	%\node[above] at ($ (A)!0.5!(B) $) {$d$};
+	\node[above left] at ($ (A)!0.6!(B) $) {$a$};
+	\node[above right] at ($ (A)!0.6!(C) $) {$b$};
+
+	\node[above left] at ($ (B)!0.5!(D) $) {$c$};
+	\node[above right] at ($ (C)!0.5!(E) $) {$d$};
+
+	\node[above left] at ($ (D)!0.6!(F) $) {$f$};
+	\node[above right] at ($ (E)!0.6!(G) $) {$g$};
 
 % angles labels %{{{1
 
 	\pic[draw, ->, "$\alpha$", angle radius=0.8cm, angle eccentricity=1.3]
 	{angle = B--A--C};
 
-	\pic[draw, ->, "$\alpha$", angle radius=0.8cm, angle eccentricity=1.3]
-	{angle = D--A--E};
-
 	\pic[draw, ->, "$\beta$", angle radius=0.8cm, angle eccentricity=1.3]
 	{angle = C--B--A};
 
 	\pic[draw, ->, "$\beta$", angle radius=0.8cm, angle eccentricity=1.3]
 	{angle = E--D--A};
+
+	\pic[draw, ->, "$\beta$", angle radius=0.8cm, angle eccentricity=1.3]
+	{angle = G--F--A};
 
 % right angles markers %{{{2
 

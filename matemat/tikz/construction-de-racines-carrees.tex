@@ -9,15 +9,18 @@
 
 % parameters %{{{1
 
-
 	\tikzmath {
-		\unit = 4.0 ;
+		\unit = 6.0 ;
 		\numunits = int(5);
+		\numunitsminus = \numunits - 1;
+		\sqrtnumunitsplus = sqrt(\numunits + 1)*\unit ;
 		int \i ;
 		for \i in {1,...,\numunits} {
 			\len{\i} = sqrt(\i)*\unit;
 		};
-		\sqrtnumunitsplus = sqrt(\numunits + 2)*\unit ;
+		for \i in {1,...,\numunits} {
+			\ang{\i} = atan2(\unit, \len{\i});
+		};
 	}
 
 % coordinates %{{{1
@@ -41,7 +44,7 @@
 	\coordinate (TY) at ($ (B) + \sqrtnumunitsplus*(u) $);
 
 	\coordinate (BX) at (A);
-	\coordinate (BY) at ($ (A) + 1.2*\unit*(v) $);
+	\coordinate (BY) at ($ (A) + 1.1*\unit*(v) $);
 
 % points, dots, vertices %{{{1
 
@@ -63,6 +66,18 @@
 	\foreach \i in {1,...,\numunits}
 		\draw (P\i) -- (T\i);
 
+	%\foreach \i in {1,...,\numunits}
+		%\draw[dashdotted] (A) -- (T\i);
+
+% circles %{{{1
+
+% circular arcs %{{{2
+
+	\draw (P2) arc (0:{\ang{1}}:{\len{2}});
+	\draw (P3) arc (0:{\ang{2}}:{\len{3}});
+	\draw (P4) arc (0:{\ang{3}}:{\len{4}});
+	\draw (P5) arc (0:{\ang{4}}:{\len{5}});
+
 % points, dots, vertices labels %{{{1
 
 	\node[below left] at (A) {$A$};
@@ -80,8 +95,10 @@
 
 % segments, sides, lines marks %{{{1
 
-	%\tkzMarkSegments[mark=||, size=2pt](A,B)
-	%\tkzMarkSegments[mark=||, size=2pt](C,D)
+	\tkzMarkSegments[mark=||, size=2pt](A,B)
+	\tkzMarkSegments[mark=||, size=2pt](A,P1)
+	\tkzMarkSegments[mark=||, size=2pt](B,T1)
+	\tkzMarkSegments[mark=||, size=2pt](P1,T1)
 
 % angles labels %{{{1
 
@@ -99,7 +116,6 @@
 	\foreach \i in {1,...,\numunits} {
 		\pic [draw, angle radius=7pt, angle eccentricity=1]
 		{right angle = T\i--P\i--A};
-
 		\pic [draw, angle radius=7pt, angle eccentricity=1]
 		{right angle = B--T\i--P\i};
 	}

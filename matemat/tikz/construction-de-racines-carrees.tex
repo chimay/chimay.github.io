@@ -1,0 +1,83 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header-light.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+
+	\tikzmath {
+		\unit = 3.5 ;
+		\numunits = int(7);
+		int \i ;
+		for \i in {1,...,\numunits} {
+			\len{\i} = sqrt(\i)*\unit;
+		};
+		\sqrtnumunitsplus = sqrt(\numunits + 2)*\unit ;
+	}
+
+% coordinates %{{{1
+
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (0,\unit);
+
+	\coordinate (u) at (1,0);
+	\coordinate (v) at (0,1);
+
+	\foreach \i in {1,...,\numunits}
+		\coordinate (P\i) at ($(A) + {\len{\i}}*(u) $);
+
+	\coordinate (PX) at (A);
+	\coordinate (PY) at ($ (A) + \sqrtnumunitsplus*(u) $);
+
+	\coordinate (BX) at (A);
+	\coordinate (BY) at ($ (A) + 1.2*\unit*(v) $);
+
+% points, dots, vertices %{{{1
+
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+
+	\foreach \i in {1,...,\numunits}
+		\fill (P\i) circle (0.4mm);
+
+% segments, sides, lines %{{{1
+
+	\draw (BX) -- (BY);
+	\draw (PX) -- (PY);
+
+% points, dots, vertices labels %{{{1
+
+	\node[left] at (A) {$A$};
+	\node[left] at (B) {$B$};
+
+	\foreach \i in {1,...,\numunits}
+		\node[below] at (P\i) {$P_\i$};
+
+% segments, sides, lines labels %{{{1
+
+	%\node[above] at ($ (A)!0.5!(B) $) {$d$};
+
+% segments, sides, lines marks %{{{1
+
+	%\tkzMarkSegments[mark=||, size=2pt](A,B)
+	%\tkzMarkSegments[mark=||, size=2pt](C,D)
+
+% angles labels %{{{1
+
+	%\pic[draw, ->, "$\alpha$", angle radius=0.8cm, angle eccentricity=1.5]
+	%{angle = B--A--C};
+
+% right angles markers %{{{2
+
+	%\pic [draw, angle radius=7pt, angle eccentricity=1]
+	%{right angle = C--B--A};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

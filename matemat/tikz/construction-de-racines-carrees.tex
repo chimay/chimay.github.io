@@ -11,8 +11,8 @@
 
 
 	\tikzmath {
-		\unit = 3.5 ;
-		\numunits = int(7);
+		\unit = 4.0 ;
+		\numunits = int(5);
 		int \i ;
 		for \i in {1,...,\numunits} {
 			\len{\i} = sqrt(\i)*\unit;
@@ -31,8 +31,14 @@
 	\foreach \i in {1,...,\numunits}
 		\coordinate (P\i) at ($(A) + {\len{\i}}*(u) $);
 
+	\foreach \i in {1,...,\numunits}
+		\coordinate (T\i) at ($(B) + {\len{\i}}*(u) $);
+
 	\coordinate (PX) at (A);
 	\coordinate (PY) at ($ (A) + \sqrtnumunitsplus*(u) $);
+
+	\coordinate (TX) at (B);
+	\coordinate (TY) at ($ (B) + \sqrtnumunitsplus*(u) $);
 
 	\coordinate (BX) at (A);
 	\coordinate (BY) at ($ (A) + 1.2*\unit*(v) $);
@@ -45,18 +51,28 @@
 	\foreach \i in {1,...,\numunits}
 		\fill (P\i) circle (0.4mm);
 
+	\foreach \i in {1,...,\numunits}
+		\fill (T\i) circle (0.4mm);
+
 % segments, sides, lines %{{{1
 
 	\draw (BX) -- (BY);
 	\draw (PX) -- (PY);
+	\draw (TX) -- (TY);
+
+	\foreach \i in {1,...,\numunits}
+		\draw (P\i) -- (T\i);
 
 % points, dots, vertices labels %{{{1
 
-	\node[left] at (A) {$A$};
+	\node[below left] at (A) {$A$};
 	\node[left] at (B) {$B$};
 
 	\foreach \i in {1,...,\numunits}
 		\node[below] at (P\i) {$P_\i$};
+
+	\foreach \i in {1,...,\numunits}
+		\node[above] at (T\i) {$T_\i$};
 
 % segments, sides, lines labels %{{{1
 
@@ -74,8 +90,19 @@
 
 % right angles markers %{{{2
 
-	%\pic [draw, angle radius=7pt, angle eccentricity=1]
-	%{right angle = C--B--A};
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = PY--A--B};
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = A--B--TY};
+
+	\foreach \i in {1,...,\numunits} {
+		\pic [draw, angle radius=7pt, angle eccentricity=1]
+		{right angle = T\i--P\i--A};
+
+		\pic [draw, angle radius=7pt, angle eccentricity=1]
+		{right angle = B--T\i--P\i};
+	}
 
 % closing %{{{1
 

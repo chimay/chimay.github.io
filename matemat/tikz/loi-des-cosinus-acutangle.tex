@@ -1,39 +1,67 @@
 
 \input{../../include/latex/tikz/header-light.tex}
 
-\begin{document}
-\begin{tikzpicture}[scale=1.2]
+% opening %{{{1
 
-	% coordinate
+\begin{document}
+\begin{tikzpicture}[scale=1.3]
+
+% coordinates %{{{1
 
 	\coordinate (A) at (0,0);
-	\coordinate (C) at (5,0);
-	\coordinate (B) at (3,3);
+	\coordinate (B) at (6,0);
+	\coordinate (C) at (2.3,3);
 
-	\coordinate (D) at (3,0);
+	\coordinate (D) at ($ (A)!(C)!(B) $);
 
-	\draw (A) -- (B) -- (C) -- cycle;
-
-	\draw[dashed] (B) -- (D);
+% points, dots, vertices %{{{1
 
 	\fill (A) circle (0.4mm);
 	\fill (B) circle (0.4mm);
 	\fill (C) circle (0.4mm);
+	\fill (D) circle (0.4mm);
 
-	\node[above left]  at ($(A)!0.5!(B)$) {$a$};
-	\node[below] at ($(A)!0.5!(C)$) {$b$};
-	\node[above right] at ($(B)!0.5!(C)$) {$c$};
+% segments, sides, lines %{{{1
 
-	\node[above] at ($(A)!0.7!(D)$) {$u$};
-	\node[above] at ($(D)!0.5!(C)$) {$b-u$};
+	\draw (A) -- (B) -- (C) -- cycle;
 
-	\node[right] at ($(B)!0.5!(D)$) {$h$};
+	\draw[dashed] (C) -- (D);
 
-	\pic[draw, ->, "$\gamma$", angle eccentricity=1.3, angle radius=1cm]
-	{angle = C--A--B};
+% points, dots, vertices labels %{{{1
+
+	\node[below left] at (A) {$A$};
+	\node[below right] at (B) {$B$};
+	\node[above] at (C) {$C$};
+	\node[above right] at (D) {$D$};
+
+% segments, sides, lines labels %{{{1
+
+	\node[above right] at ($(B)!0.5!(C)$) {$a$};
+	\node[above left] at ($(C)!0.5!(A)$) {$b$};
+	\node[below]  at ($(A)!0.5!(B)$) {$c$};
+
+	\node[above] at ($(A)!0.6!(D)$) {$u$};
+	\node[above] at ($(D)!0.5!(B)$) {$v$};
+
+	\node[left] at ($(C)!0.5!(D)$) {$h$};
+
+% angles labels %{{{1
+
+	\pic[draw, ->, "$\alpha$", angle radius=1cm, angle eccentricity=1.3]
+	{angle = B--A--C};
+
+	\pic[draw, ->, "$\beta$", angle radius=1cm, angle eccentricity=1.3]
+	{angle = C--B--A};
+
+	\pic[draw, ->, "$\gamma$", angle radius=1cm, angle eccentricity=1.3]
+	{angle = A--C--B};
+
+% right angles markers %{{{2
 
 	\pic [draw, angle radius=7pt, angle eccentricity=1]
-	{right angle = B--D--A};
+	{right angle = C--D--A};
+
+% closing %{{{2
 
 \end{tikzpicture}
 \end{document}

@@ -88,22 +88,31 @@
 % norm, distance %{{{3
 
 	%\tikzmath{
-		%\distance = veclen(\x2 - \x1, \y2 - \y1) ;
-		%\dx = 2 ;
-		%\dy = 3 ;
-		%\distance = veclen(\dx,\dy) ;
+		%\x1 = 1 ;
+		%\y1 = 2 ;
+		%\x2 = 3 ;
+		%\y2 = 4 ;
+		%\dx = \x2 - \x1 ;
+		%\dy = \y2 - \y1 ;
+		%\dist = veclen(\dx,\dy) ;
 	%}
 
 	%\path let \p1 = ($(B)-(A)$)
-	%in
-	%\pgfextra{
-		%\pgfmathsetmacro{\distance}{veclen(\x1,\y1)}
-	%};
+	%in coordinate (C) at (0,{veclen(\x1,\y1)});
 
 	%\path let \p1 = ($ (B) - (A) $)
 	%in \pgfextra{
-		%\pgfmathsetmacro{\distance}{veclen(\x1,\y1)};
+		%\pgfmathsetmacro{\dist}{veclen(\x1,\y1)};
 		%\node at (0,0) {Distance: \dist};
+	%};
+
+	% ---- 28.45 is a necessary scale factor, unit change
+
+	%\path let \p1 = ($ (B) - (A) $)
+	%in
+	%\pgfextra{
+		%\pgfmathsetmacro{\distAB}{veclen(\x1,\y1)/28.45}
+		%\global\let\distAB\distAB
 	%};
 
 	%\path let \p1 = ($ (B) - (A) $)
@@ -290,6 +299,13 @@
 	%\end{pgfinterruptboundingbox}
 
 	%\begin{pgfinterruptboundingbox}
+		%\path[name path=line] (X) -- (Y);
+		%\path[name path=circle] let \p1 = ($(A)-(O)$)
+		%in (O) circle ({veclen(\x1,\y1)});
+		%\path[name intersections={of=line and circle, by={I,J}}];
+	%\end{pgfinterruptboundingbox}
+
+	%\begin{pgfinterruptboundingbox}
 		%\path[name path=circleA] (A) circle (\radius);
 		%\path[name path=circleB] (B) circle (\radius);
 		%\path[name intersections={of=circleA and circleB, by={I,J}}];
@@ -403,6 +419,9 @@
 
 	%\draw (O) circle (\radius);
 
+	%\path[draw] let \p1 = ($(A)-(O)$)
+	%in (O) circle ({veclen(\x1,\y1)});
+
 % circular arcs %{{{2
 
 	%\draw (A) ++(\ang:\radius) arc (\ang:\gle:\radius);
@@ -410,6 +429,11 @@
     %\draw (B) arc (\ang:\gle:\radius);
 
 	%\draw (B) arc[start angle=0, end angle=40, radius=\radius];
+
+	%\path[draw] let
+		%\p1 = ($(A)-(O)$),
+		%\n1 = {veclen(\x1,\y1)}
+	%in (I) ++(\ang:\n1) arc (\ang:\gle:\n1);
 
 	%\draw[vector] (A) arc (\ang:\endang:\radius);
 	%\draw[mid arrow] (A) arc (\ang:\endang:\radius);

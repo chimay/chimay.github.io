@@ -1,0 +1,160 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\def\angA{65}
+	\def\gleA{150}
+
+	\def\angB{30}
+	\def\gleB{115}
+
+	\tikzmath {
+		\x1 = 0 ;
+		\y1 = 0 ;
+		\x2 = 3 ;
+		\y2 = -2 ;
+		\dx = \x2 - \x1 ;
+		\dy = \y2 - \y1 ;
+		\dist = veclen(\dx,\dy) ;
+	}
+
+% coordinates %{{{1
+
+	\coordinate (P) at (\x1,\y1);
+
+	\coordinate (O) at (\x2,\y2);
+
+	\coordinate (X) at (-3,-3);
+	\coordinate (Y) at (9,-3);
+
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=line] (X) -- (Y);
+		\path[name path=circle] let \p1 = ($(P)-(O)$)
+		in (O) circle ({veclen(\x1,\y1)});
+		\path[name intersections={of=line and circle, by={I,J}}];
+	\end{pgfinterruptboundingbox}
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=circleA] let \p1 = ($(P)-(O)$)
+		in (O) circle ({veclen(\x1,\y1)});
+		\path[name path=circleB] let \p1 = ($(P)-(I)$)
+		in (J) circle ({veclen(\x1,\y1)});
+		\path[name intersections={of=circleA and circleB, by={K,L}}];
+	\end{pgfinterruptboundingbox}
+
+% extensions %{{{1
+
+	\coordinate (PX) at ($ (P) - (3,0) $);
+	\coordinate (PY) at ($ (K) + (3,0) $);
+
+% distance %{{{1
+
+	\path let \p1 = ($(P)-(O)$)
+	in
+	\pgfextra{
+		\pgfmathsetmacro{\distPO}{veclen(\x1,\y1)/28.45}
+		\global\let\distPO\distPO
+	};
+
+	\path let \p1 = ($(P)-(I)$)
+	in
+	\pgfextra{
+		\pgfmathsetmacro{\distPI}{veclen(\x1,\y1)/28.45}
+		\global\let\distPI\distPI
+	};
+
+% points, dots, vertices %{{{1
+
+	\fill (P) circle (0.4mm);
+	\fill (O) circle (0.4mm);
+	\fill (I) circle (0.4mm);
+	\fill (J) circle (0.4mm);
+	\fill (K) circle (0.4mm);
+
+% segments, sides, lines %{{{1
+
+	\draw (X) -- (Y);
+
+	\draw (PX) -- (PY);
+
+	\draw[dashed] (O) -- (P);
+	\draw[dashed] (O) -- (I);
+	\draw[dashed] (O) -- (J);
+	\draw[dashed] (O) -- (K);
+
+	\draw[dashed] (P) -- (I);
+	\draw[dashed] (J) -- (K);
+
+% circles %{{{1
+
+	\path[draw] let \p1 = ($(P)-(O)$)
+	in (O) circle ({veclen(\x1,\y1)});
+
+% circular arcs %{{{2
+
+	\path[draw] let
+		\p1 = ($(P)-(I)$),
+		\n1 = {veclen(\x1,\y1)}
+	in (I) ++(\angA:\n1) arc (\angA:\gleA:\n1);
+
+	\path[draw] let
+		\p1 = ($(P)-(I)$),
+		\n1 = {veclen(\x1,\y1)}
+	in (J) ++(\angB:\n1) arc (\angB:\gleB:\n1);
+
+% points, dots, vertices labels %{{{1
+
+	\node[above left] at (P) {$P$};
+	\node[above] at (O) {$O$};
+	\node[below left] at (I) {$I$};
+	\node[below right] at (J) {$J$};
+	\node[above right] at (K) {$K$};
+
+% segments, sides, lines labels %{{{1
+
+	\node[above] at ($ (X)!0.1!(Y) $) {$d$};
+
+% segments, sides, lines marks %{{{1
+
+	\tkzMarkSegments[mark=|, size=2pt](P,I)
+	\tkzMarkSegments[mark=|, size=2pt](J,K)
+
+	\tkzMarkSegments[mark=||, size=2pt](O,P)
+	\tkzMarkSegments[mark=||, size=2pt](O,I)
+	\tkzMarkSegments[mark=||, size=2pt](O,J)
+	\tkzMarkSegments[mark=||, size=2pt](O,K)
+
+% circles labels %{{{1
+
+	%\node at ($ (O) + (15:{\dist + 0.3}) $) {$\mathscr{C}$};
+
+	\node at ($ (O) + (15:{\distPO + 0.3}) $) {$\mathscr{C}$};
+
+% circular arcs labels %{{{2
+
+	\node at ($ (I) + {\distPI + 0.3}*(135:1) $) {$\mathscr{C}_1$};
+	\node at ($ (J) + {\distPI + 0.3}*(45:1) $) {$\mathscr{C}_2$};
+
+% angles labels %{{{1
+
+	%\pic[draw, ->, "$\alpha$", angle radius=0.8cm, angle eccentricity=1.5]
+	%{angle = B--A--C};
+
+% right angles markers %{{{2
+
+	%\pic [draw, angle radius=7pt, angle eccentricity=1]
+	%{right angle = C--B--A};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

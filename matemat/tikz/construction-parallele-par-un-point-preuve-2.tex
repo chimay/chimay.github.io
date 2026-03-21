@@ -27,7 +27,7 @@
 
 % coordinates %{{{1
 
-	\coordinate (A) at (\x1,\y1);
+	\coordinate (T) at (\x1,\y1);
 
 	\coordinate (O) at (\x2,\y2);
 
@@ -38,43 +38,43 @@
 
 	\begin{pgfinterruptboundingbox}
 		\path[name path=line] (X) -- (Y);
-		\path[name path=circle] let \p1 = ($(A)-(O)$)
+		\path[name path=circle] let \p1 = ($(T)-(O)$)
 		in (O) circle ({veclen(\x1,\y1)});
 		\path[name intersections={of=line and circle, by={I,J}}];
 	\end{pgfinterruptboundingbox}
 
 	\begin{pgfinterruptboundingbox}
-		\path[name path=circleA] let \p1 = ($(A)-(O)$)
+		\path[name path=circleA] let \p1 = ($(T)-(O)$)
 		in (O) circle ({veclen(\x1,\y1)});
-		\path[name path=circleB] let \p1 = ($(A)-(I)$)
+		\path[name path=circleB] let \p1 = ($(T)-(I)$)
 		in (J) circle ({veclen(\x1,\y1)});
 		\path[name intersections={of=circleA and circleB, by={K,L}}];
 	\end{pgfinterruptboundingbox}
 
 % extensions %{{{1
 
-	\coordinate (PX) at ($ (A) - (3,0) $);
+	\coordinate (PX) at ($ (T) - (3,0) $);
 	\coordinate (PY) at ($ (K) + (3,0) $);
 
 % distance %{{{1
 
-	\path let \p1 = ($(A)-(O)$)
+	\path let \p1 = ($(T)-(O)$)
 	in
 	\pgfextra{
-		\pgfmathsetmacro{\distAO}{veclen(\x1,\y1)/28.45}
-		\global\let\distAO\distAO
+		\pgfmathsetmacro{\distPO}{veclen(\x1,\y1)/28.45}
+		\global\let\distPO\distPO
 	};
 
-	\path let \p1 = ($(A)-(I)$)
+	\path let \p1 = ($(T)-(I)$)
 	in
 	\pgfextra{
-		\pgfmathsetmacro{\distAI}{veclen(\x1,\y1)/28.45}
-		\global\let\distAI\distAI
+		\pgfmathsetmacro{\distPI}{veclen(\x1,\y1)/28.45}
+		\global\let\distPI\distPI
 	};
 
 % points, dots, vertices %{{{1
 
-	\fill (A) circle (0.4mm);
+	\fill (T) circle (0.4mm);
 	\fill (O) circle (0.4mm);
 	\fill (I) circle (0.4mm);
 	\fill (J) circle (0.4mm);
@@ -86,34 +86,34 @@
 
 	\draw (PX) -- (PY);
 
-	\draw[dashed] (O) -- (A);
+	\draw[dashed] (O) -- (T);
 	\draw[dashed] (O) -- (I);
 	\draw[dashed] (O) -- (J);
 	\draw[dashed] (O) -- (K);
 
-	\draw[dashed] (A) -- (I);
+	\draw[dashed] (T) -- (I);
 	\draw[dashed] (J) -- (K);
 
 % circles %{{{1
 
-	\path[draw] let \p1 = ($(A)-(O)$)
+	\path[draw] let \p1 = ($(T)-(O)$)
 	in (O) circle ({veclen(\x1,\y1)});
 
 % circular arcs %{{{2
 
 	\path[draw] let
-		\p1 = ($(A)-(I)$),
+		\p1 = ($(T)-(I)$),
 		\n1 = {veclen(\x1,\y1)}
 	in (I) ++(\angA:\n1) arc (\angA:\gleA:\n1);
 
 	\path[draw] let
-		\p1 = ($(A)-(I)$),
+		\p1 = ($(T)-(I)$),
 		\n1 = {veclen(\x1,\y1)}
 	in (J) ++(\angB:\n1) arc (\angB:\gleB:\n1);
 
 % points, dots, vertices labels %{{{1
 
-	\node[above left] at (A) {$A$};
+	\node[above left] at (T) {$T$};
 	\node[above] at (O) {$O$};
 	\node[below left] at (I) {$I$};
 	\node[below right] at (J) {$J$};
@@ -125,24 +125,24 @@
 
 % segments, sides, lines marks %{{{1
 
-	\tkzMarkSegments[mark=|, size=2pt](A,I)
+	\tkzMarkSegments[mark=|, size=2pt](T,I)
 	\tkzMarkSegments[mark=|, size=2pt](J,K)
 
-	\tkzMarkSegments[mark=||, size=2pt](O,A)
+	\tkzMarkSegments[mark=||, size=2pt](O,T)
 	\tkzMarkSegments[mark=||, size=2pt](O,I)
 	\tkzMarkSegments[mark=||, size=2pt](O,J)
 	\tkzMarkSegments[mark=||, size=2pt](O,K)
 
 % circles labels %{{{1
 
-	%\node at ($ (O) + (15:{\dist + 0.3}) $) {$\mathscr{C}_1$};
+	%\node at ($ (O) + (15:{\dist + 0.3}) $) {$\mathscr{C}$};
 
-	\node at ($ (O) + (15:{\distAO + 0.3}) $) {$\mathscr{C}_1$};
+	\node at ($ (O) + (15:{\distPO + 0.3}) $) {$\mathscr{C}$};
 
 % circular arcs labels %{{{2
 
-	\node at ($ (I) + {\distAI + 0.3}*(135:1) $) {$\mathscr{C}_2$};
-	\node at ($ (J) + {\distAI + 0.3}*(45:1) $) {$\mathscr{C}_3$};
+	\node at ($ (I) + {\distPI + 0.3}*(135:1) $) {$\mathscr{C}_1$};
+	\node at ($ (J) + {\distPI + 0.3}*(45:1) $) {$\mathscr{C}_2$};
 
 % angles labels %{{{1
 

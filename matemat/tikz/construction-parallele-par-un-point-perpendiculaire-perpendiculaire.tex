@@ -1,0 +1,156 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\tikzmath{
+		\len = 6;
+		\height = 6;
+		\extratio = 1.5;
+		\radiusAB = 0.65*\len;
+		\radiusP = 0.35*\len;
+		\radiusGH = 0.6*\len;
+		\distPA = sqrt(\len*\len/4 + \height*\height);
+	}
+
+% coordinates %{{{1
+
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (\len,0);
+
+	\coordinate (U) at ({-(\extratio - 1)*\len},0);
+	\coordinate (V) at ({\extratio*\len},0);
+
+	\coordinate (P) at ({\len/2},\height);
+
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=circleA] (A) circle (\radiusAB);
+		\path[name path=circleB] (B) circle (\radiusAB);
+		\path[name intersections={of=circleA and circleB, by={D,E}}];
+	\end{pgfinterruptboundingbox}
+
+	\coordinate (X) at ($(E) - (0, 2)$);
+	\coordinate (Y) at ($(D) + (0, 6)$);
+
+	\tkzInterLL(A,B)(D,E)\tkzGetPoint{F}
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=line] (X) -- (Y);
+		\path[name path=circle] (P) circle (\radiusP);
+		\path[name intersections={of=line and circle, by={G,H}}];
+	\end{pgfinterruptboundingbox}
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=circleG] (G) circle (\radiusGH);
+		\path[name path=circleH] (H) circle (\radiusGH);
+		\path[name intersections={of=circleG and circleH, by={I,J}}];
+	\end{pgfinterruptboundingbox}
+
+	\coordinate (W) at ($ (I) - ({(\extratio - 1)*\len}, 0) $);
+	\coordinate (Z) at ($ (J) + ({(\extratio - 1)*\len}, 0) $);
+
+% points, dots, vertices %{{{1
+
+	\fill (A) circle (0.5mm);
+	\fill (B) circle (0.5mm);
+
+	\fill (P) circle (0.5mm);
+
+	\fill (D) circle (0.5mm);
+	\fill (E) circle (0.5mm);
+	\fill (F) circle (0.5mm);
+
+	\fill (G) circle (0.5mm);
+	\fill (H) circle (0.5mm);
+
+	\fill (I) circle (0.5mm);
+	\fill (J) circle (0.5mm);
+
+% segments %{{{1
+
+	\draw (U) -- (V);
+
+	\draw (X) -- (Y);
+
+	\draw (W) -- (Z);
+
+	%\draw[dashed] (A) -- (D);
+	%\draw[dashed] (B) -- (D);
+
+	%\draw[dashed] (A) -- (E);
+	%\draw[dashed] (B) -- (E);
+
+	%\draw[dashdotdotted] (A) -- (P);
+	%\draw[dashdotdotted] (B) -- (P);
+
+% circles %{{{1
+
+	\draw (P) circle (\radiusP);
+
+% circular arcs %{{{2
+
+	\draw (P) ++(200:\distPA) arc (200:340:\distPA);
+
+	\draw (A) ++(-65:\radiusAB) arc (-65:65:\radiusAB);
+	\draw (B) ++(115:\radiusAB) arc (115:245:\radiusAB);
+
+	\draw (G) ++(200:\radiusGH) arc (200:340:\radiusGH);
+	\draw (H) ++(20:\radiusGH) arc (20:160:\radiusGH);
+
+% points, dots, vertices labels %{{{1
+
+	\node[below] at (A) {$A$};
+	\node[below] at (B) {$B$};
+
+	\node[above left] at (P) {$P$};
+
+	\node[label={[label distance=0.5]left:$D$}] at (D) {};
+	\node[label={[label distance=0.5]left:$E$}] at (E) {};
+
+	\node[above left] at (F) {$F$};
+
+	\node[above left] at (G) {$G$};
+	\node[below left] at (H) {$H$};
+
+	\node[above] at (I) {$I$};
+	\node[above] at (J) {$J$};
+
+% segments, sides labels %{{{1
+
+	\node[above] at ($ (U)!0.05!(V) $) {$d$};
+	\node[left] at ($ (X)!0.05!(Y) $) {$m$};
+	\node[above] at ($ (W)!0.05!(Z) $) {$n$};
+
+% segments, sides marks %{{{1
+
+	\tkzMarkSegments[mark=||, size=2pt](A,F)
+	\tkzMarkSegments[mark=||, size=2pt](F,B)
+
+% circular arcs labels %{{{1
+
+	\node at ($ (P) + (320:{\distPA+0.3})$) {$\mathscr{C}_1$};
+	\node at ($ (A) + (20:{\radiusAB+0.3}) $) {$\mathscr{C}_2$};
+	\node at ($ (B) + (160:{\radiusAB+0.3}) $) {$\mathscr{C}_3$};
+	\node at ($ (P) + (45:{\radiusP+0.3}) $) {$\mathscr{C}_4$};
+	\node at ($ (G) + (-50:{\radiusGH+0.3}) $) {$\mathscr{C}_5$};
+	\node at ($ (H) + (50:{\radiusGH+0.3}) $) {$\mathscr{C}_6$};
+
+% angles labels %{{{1
+
+% right angles markers %{{{2
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = B--F--Y};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

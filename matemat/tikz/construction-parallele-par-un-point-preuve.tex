@@ -9,16 +9,16 @@
 
 % parameters %{{{1
 
-	\def\angA{65}
+	\def\angA{60}
 	\def\gleA{150}
 
 	\def\angB{30}
-	\def\gleB{115}
+	\def\gleB{120}
 
 	\tikzmath {
 		\x1 = 0 ;
 		\y1 = 0 ;
-		\x2 = 3 ;
+		\x2 = 2 ;
 		\y2 = -2 ;
 		\dx = \x2 - \x1 ;
 		\dy = \y2 - \y1 ;
@@ -32,7 +32,7 @@
 	\coordinate (O) at (\x2,\y2);
 
 	\coordinate (X) at (-3,-3);
-	\coordinate (Y) at (9,-3);
+	\coordinate (Y) at (7,-3);
 
 % intersections %{{{1
 
@@ -50,6 +50,11 @@
 		in (J) circle ({veclen(\x1,\y1)});
 		\path[name intersections={of=circleA and circleB, by={K,L}}];
 	\end{pgfinterruptboundingbox}
+
+% perpendicular coordinates, orthogonal projections %{{{2
+
+	\coordinate (L) at ($(X)!(A)!(Y)$);
+	\coordinate (M) at ($(X)!(K)!(Y)$);
 
 % extensions %{{{1
 
@@ -79,6 +84,8 @@
 	\fill (I) circle (0.4mm);
 	\fill (J) circle (0.4mm);
 	\fill (K) circle (0.4mm);
+	\fill (L) circle (0.4mm);
+	\fill (M) circle (0.4mm);
 
 % segments, sides, lines %{{{1
 
@@ -94,6 +101,9 @@
 	\draw[dashed] (A) -- (I);
 	\draw[dashed] (J) -- (K);
 
+	\draw[dashed] (A) -- (L);
+	\draw[dashed] (K) -- (M);
+
 % circles %{{{1
 
 	\path[draw] let \p1 = ($(A)-(O)$)
@@ -101,10 +111,10 @@
 
 % circular arcs %{{{2
 
-	\path[draw] let
-		\p1 = ($(A)-(I)$),
-		\n1 = {veclen(\x1,\y1)}
-	in (I) ++(\angA:\n1) arc (\angA:\gleA:\n1);
+	%\path[draw] let
+		%\p1 = ($(A)-(I)$),
+		%\n1 = {veclen(\x1,\y1)}
+	%in (I) ++(\angA:\n1) arc (\angA:\gleA:\n1);
 
 	\path[draw] let
 		\p1 = ($(A)-(I)$),
@@ -118,10 +128,13 @@
 	\node[below left] at (I) {$I$};
 	\node[below right] at (J) {$J$};
 	\node[above right] at (K) {$K$};
+	\node[below] at (L) {$L$};
+	\node[below] at (M) {$M$};
 
 % segments, sides, lines labels %{{{1
 
 	\node[above] at ($ (X)!0.1!(Y) $) {$d$};
+	\node[above] at ($ (PX)!0.1!(PY) $) {$p$};
 
 % segments, sides, lines marks %{{{1
 
@@ -141,18 +154,29 @@
 
 % circular arcs labels %{{{2
 
-	\node at ($ (I) + {\distAI + 0.3}*(135:1) $) {$\mathscr{C}_2$};
-	\node at ($ (J) + {\distAI + 0.3}*(45:1) $) {$\mathscr{C}_3$};
+	\node at ($ (J) + {\distAI + 0.3}*(45:1) $) {$\mathscr{C}_2$};
 
 % angles labels %{{{1
 
-	%\pic[draw, ->, "$\alpha$", angle radius=0.8cm, angle eccentricity=1.5]
-	%{angle = B--A--C};
+	\pic[draw, ->, "$\alpha$", angle radius=1.2cm, angle eccentricity=1.3]
+	{angle = J--I--O};
+
+	\pic[draw, ->, "$\alpha$", angle radius=1.2cm, angle eccentricity=1.3]
+	{angle = O--J--I};
+
+	\pic[draw, ->, "$\beta$", angle radius=1.1cm, angle eccentricity=1.3]
+	{angle = O--I--A};
+
+	\pic[draw, ->, "$\gamma$", angle radius=1.1cm, angle eccentricity=1.3]
+	{angle = K--J--O};
 
 % right angles markers %{{{2
 
-	%\pic [draw, angle radius=7pt, angle eccentricity=1]
-	%{right angle = C--B--A};
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = M--L--A};
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = K--M--L};
 
 % closing %{{{1
 

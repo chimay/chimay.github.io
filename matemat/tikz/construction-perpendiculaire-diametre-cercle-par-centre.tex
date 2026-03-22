@@ -1,0 +1,124 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header-light.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\tikzmath{
+		\radius = 4.5 ;
+		\angA = -90 ;
+		\gleA = 90 ;
+		\angB = 90 ;
+		\gleB = 270 ;
+		\ext = 1.3;
+		\extradius = \ext*\radius ;
+	}
+
+% coordinates %{{{1
+
+	\coordinate (O) at (0,0);
+
+	\coordinate (A) at (-\radius,0);
+	\coordinate (B) at (\radius,0);
+
+	\coordinate (I) at (60:\radius);
+	\coordinate (J) at (-60:\radius);
+
+	\coordinate (K) at (120:\radius);
+	\coordinate (L) at (-120:\radius);
+
+	\coordinate (X) at (0,-\extradius);
+	\coordinate (Y) at (0,\extradius);
+
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=line1] (A) -- (I);
+		\path[name path=line2] (B) -- (K);
+		\path[name intersections={of=line1 and line2, by=M}];
+	\end{pgfinterruptboundingbox}
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=line1] (A) -- (J);
+		\path[name path=line2] (B) -- (L);
+		\path[name intersections={of=line1 and line2, by=N}];
+	\end{pgfinterruptboundingbox}
+
+% points, dots, vertices %{{{1
+
+	\fill (O) circle (0.4mm);
+
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+
+	\fill (I) circle (0.4mm);
+	\fill (J) circle (0.4mm);
+
+	\fill (K) circle (0.4mm);
+	\fill (L) circle (0.4mm);
+
+	\fill (M) circle (0.4mm);
+	\fill (N) circle (0.4mm);
+
+% segments, sides, lines %{{{1
+
+	\draw (A) -- (B);
+	\draw (A) -- (I);
+	\draw (A) -- (J);
+	\draw (B) -- (K);
+	\draw (B) -- (L);
+	\draw (X) -- (Y);
+
+% circles %{{{1
+
+	\draw (O) circle (\radius);
+
+% circular arcs %{{{2
+
+	\draw (A) ++(\angA:\radius) arc (\angA:\gleA:\radius);
+	\draw (B) ++(\angB:\radius) arc (\angB:\gleB:\radius);
+
+% points, dots, vertices labels %{{{1
+
+	\node[below left] at (O) {$O$};
+
+	\node[below left] at (A) {$A$};
+	\node[below right] at (B) {$B$};
+
+	\node[above] at (I) {$I$};
+	\node[below] at (J) {$J$};
+
+	\node[above] at (K) {$K$};
+	\node[below] at (L) {$L$};
+
+	\node[left] at (M) {$M$};
+	\node[left] at (N) {$N$};
+
+% segments, sides, lines labels %{{{1
+
+	\node[left] at ($ (X)!0.95!(Y) $) {$p$};
+
+% segments, sides, lines marks %{{{1
+
+	%\tkzMarkSegments[mark=||, size=2pt](A,B)
+	%\tkzMarkSegments[mark=||, size=2pt](C,D)
+
+% angles labels %{{{1
+
+	%\pic[draw, ->, "$\alpha$", angle radius=0.8cm, angle eccentricity=1.5]
+	%{angle = B--A--C};
+
+% right angles markers %{{{2
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = B--O--M};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

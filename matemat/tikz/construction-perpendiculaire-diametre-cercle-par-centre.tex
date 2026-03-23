@@ -26,11 +26,11 @@
 	\coordinate (A) at (-\radius,0);
 	\coordinate (B) at (\radius,0);
 
-	\coordinate (I) at (60:\radius);
-	\coordinate (J) at (-60:\radius);
+	\coordinate (I) at (120:\radius);
+	\coordinate (J) at (-120:\radius);
 
-	\coordinate (K) at (120:\radius);
-	\coordinate (L) at (-120:\radius);
+	\coordinate (K) at (60:\radius);
+	\coordinate (L) at (-60:\radius);
 
 	\coordinate (X) at (0,-\extradius);
 	\coordinate (Y) at (0,\extradius);
@@ -38,14 +38,14 @@
 % intersections %{{{1
 
 	\begin{pgfinterruptboundingbox}
-		\path[name path=line1] (A) -- (I);
-		\path[name path=line2] (B) -- (K);
+		\path[name path=line1] (A) -- (K);
+		\path[name path=line2] (B) -- (I);
 		\path[name intersections={of=line1 and line2, by=M}];
 	\end{pgfinterruptboundingbox}
 
 	\begin{pgfinterruptboundingbox}
-		\path[name path=line1] (A) -- (J);
-		\path[name path=line2] (B) -- (L);
+		\path[name path=line1] (A) -- (L);
+		\path[name path=line2] (B) -- (J);
 		\path[name intersections={of=line1 and line2, by=N}];
 	\end{pgfinterruptboundingbox}
 
@@ -68,11 +68,16 @@
 % segments, sides, lines %{{{1
 
 	\draw (A) -- (B);
-	\draw (A) -- (I);
-	\draw (A) -- (J);
-	\draw (B) -- (K);
-	\draw (B) -- (L);
+	\draw (A) -- (K);
+	\draw (A) -- (L);
+	\draw (B) -- (I);
+	\draw (B) -- (J);
 	\draw (X) -- (Y);
+
+	\draw[dashed] (A) -- (I);
+	\draw[dashed] (A) -- (J);
+	\draw[dashed] (B) -- (K);
+	\draw[dashed] (B) -- (L);
 
 % circles %{{{1
 
@@ -105,8 +110,10 @@
 
 % segments, sides, lines marks %{{{1
 
-	%\tkzMarkSegments[mark=||, size=2pt](A,B)
-	%\tkzMarkSegments[mark=||, size=2pt](C,D)
+	\tkzMarkSegments[mark=||, size=2pt](A,I)
+	\tkzMarkSegments[mark=||, size=2pt](A,J)
+	\tkzMarkSegments[mark=||, size=2pt](B,K)
+	\tkzMarkSegments[mark=||, size=2pt](B,L)
 
 % circles labels %{{{1
 
@@ -114,7 +121,8 @@
 
 % circular arcs labels %{{{2
 
-	%\node at ($ (O) + (45:\radius+0.3) $) {$\mathscr{C}$};
+	\node at ($ (A) + (80:\radius+0.3) $) {$\mathscr{C}_1$};
+	\node at ($ (B) + (100:\radius+0.3) $) {$\mathscr{C}_2$};
 
 % angles labels %{{{1
 

@@ -16,7 +16,10 @@
 
 % parameters %{{{1
 
+% macros %{{{2
+
 	% ---- length is reserved
+
 	%\def\len{3}
 	%\def\gth{3}
 
@@ -28,6 +31,7 @@
 	%\def\ext{3.5}
 
 	% ---- angle can cause trouble
+
 	%\def\ang{60}
 	%\def\ngl{60}
 	%\def\gle{60}
@@ -37,31 +41,62 @@
 	%\def\numsides{6}
 	%\def\rotation{90}
 
-	% ---- math
+% tikzmath %{{{2
+
+% generic %{{{3
 
 	%\tikzmath{
+		%\var = value ;
+		%int \integer ;
+		%real \real ;
 		%\xnum = int(4);
 		%\ynum = int(3);
 		%\xnumM = int(\xnum - 1);
 		%\ynumM = int(\ynum - 1);
 		%\xstep = 2.1;
 		%\ystep = 2.1;
-		%\ang = atan2(-4, 3) - 90 ;
-		%int \i ;
 		%for \i in {1,...,\numunits} {
 			%\len{\i} = sqrt(\i);
 		%};
 	%}
 
-	%\pgfmathsetmacro{\ang}{
-		%atan2(-4, 3) - 90
+% distance %{{{3
+
+	%\tikzmath{
+		%\x1 = 1 ;
+		%\y1 = 2 ;
+		%\x2 = 3 ;
+		%\y2 = 4 ;
+		%\dx = \x2 - \x1 ;
+		%\dy = \y2 - \y1 ;
+		%\dist = veclen(\dx,\dy) ;
 	%}
+
+% angle %{{{3
+
+	% ------- in degrees
+
+	%\tikzmath{
+		%\x1 = 1 ;
+		%\y1 = 2 ;
+		%\x2 = 3 ;
+		%\y2 = 4 ;
+		%\dx = \x2 - \x1 ;
+		%\dy = \y2 - \y1 ;
+		%\ang = atan2(dy, dx) ;
+	%}
+
+% pgfmath %{{{2
 
 	%\pgfmathsetmacro{\ang}{30}
 	%\pgfmathsetmacro{\gle}{20}
 	%\pgfmathsetmacro{\endang}{\ang+\gle}
 
-	% -- for integers
+	%\pgfmathsetmacro{\ang}{
+		%atan2(-4, 3) - 90
+	%}
+
+% for integers %{{{3
 
 	%\pgfmathtruncatemacro{\last}{\numsides}
 	%\pgfmathtruncatemacro{\prevlast}{\numsides-1}
@@ -74,57 +109,6 @@
 
 	%\coordinate (v) at (2,3);
 	%\coordinate (w) at (\ang:\len);
-
-	%\tikzmath{
-		%\xnum = int(4);
-		%\ynum = int(3);
-		%\xnumM = int(\xnum - 1);
-		%\ynumM = int(\ynum - 1);
-		%\xstep = 2.1;
-		%\ystep = 2.1;
-		%\ang = atan2(-4, 3) - 90 ;
-	%}
-
-% norm, distance %{{{3
-
-	%\tikzmath{
-		%\x1 = 1 ;
-		%\y1 = 2 ;
-		%\x2 = 3 ;
-		%\y2 = 4 ;
-		%\dx = \x2 - \x1 ;
-		%\dy = \y2 - \y1 ;
-		%\dist = veclen(\dx,\dy) ;
-	%}
-
-	%\path let \p1 = ($(B)-(A)$)
-	%in coordinate (C) at (0,{veclen(\x1,\y1)});
-
-	%\path let \p1 = ($ (B) - (A) $)
-	%in \pgfextra{
-		%\pgfmathsetmacro{\dist}{veclen(\x1,\y1)};
-		%\node at (0,0) {Distance: \dist};
-	%};
-
-	% ---- 28.45 is a necessary scale factor, unit change
-
-	%\path let \p1 = ($ (B) - (A) $)
-	%in
-	%\pgfextra{
-		%\pgfmathsetmacro{\distAB}{veclen(\x1,\y1)/28.45}
-		%\global\let\distAB\distAB
-	%};
-
-	%\path let \p1 = ($ (B) - (A) $)
-	%in \pgfextra{\pgfmathsetmacro{\dist}{veclen(\x1,\y1)}};
-
-	%\path let
-	%\p1 = (A),
-	%\p2 = (B)
-	%in
-	%\pgfextra{
-		%\pgfmathsetmacro{\dist}{veclen(\x2-\x1,\y2-\y1)}
-	%};
 
 % unit vectors %{{{3
 
@@ -143,6 +127,11 @@
 	%\coordinate (A) at (\ang:\radius);
 	%\coordinate (B) at (\gle:\radius);
 
+	%\coordinate (D) at ($ (A) + (B) $);
+	%\coordinate (D) at ($ (A) + \ratio*(B) $);
+	%\coordinate (D) at ($ (A) + \ratio*(v) $);
+	%\coordinate (D) at ($ (A) + \ratio*(B) - \ratio*(C) $);
+
 	%\coordinate (cartesien) at (1,2);
 	%\coordinate (polar) at (\ang:\len);
 
@@ -152,18 +141,59 @@
 	%\foreach \i in {1,...,\numunits}
 		%\coordinate (P\i) at ($ (A) + {\len{\i}}*(u) $);
 
+% distance, norm %{{{2
+
+	%\path let \p1 = ($ (B) - (A) $)
+	%in coordinate (C) at (0,{veclen(\x1,\y1)});
+
+	%\path let \p1 = ($ (B) - (A) $)
+	%in \pgfextra{
+		%\pgfmathsetmacro{\dist}{veclen(\x1,\y1)};
+		%\node at (0,0) {Distance: \dist};
+	%};
+
+	%\path let \p1 = ($ (B) - (A) $)
+	%in \pgfextra{
+		%\pgfmathsetmacro{\distAB}{veclen(\x1,\y1)/1cm}
+		%\global\let\distAB\distAB
+	%};
+
+	% ------- .../1cm or .../28.45 is a necessary scale factor
+	% ------- unit change from pt to cm
+
+	%\path let \p1 = ($ (B) - (A) $)
+	%in \pgfextra{
+		%\pgfmathsetmacro{\distAB}{veclen(\x1,\y1)/1cm}
+		%\global\let\distAB\distAB
+	%};
+
+	%\path let \p1 = ($ (B) - (A) $)
+	%in \pgfextra{
+		%\pgfmathsetmacro{\distAB}{veclen(\x1,\y1)/28.45}
+		%\global\let\distAB\distAB
+	%};
+
+	%\path let
+		%\p1 = (A),
+		%\p2 = (B)
+	%in \pgfextra{
+		%\pgfmathsetmacro{\dist}{veclen(\x2-\x1,\y2-\y1)}
+	%};
+
 % perpendicular coordinates, orthogonal projections %{{{2
 
-	% ---- projection P of C onto AB
+	% ---- projection P of point C onto AB
 	% ---- PC perpendicular to AB
 
 	%\coordinate (P) at ($(A)!(C)!(B)$);
 
 	% ---- rotate 90° from vector AB and start from A, length \len
 
-	%\coordinate (P) at ($(A)!\ratio!90:(B)$);
+	%\coordinate (P) at ($(A)!\len!90:(B)$);
 
-	% ---- vector AP decomposition in parallel AH and perpendicular HP
+	% ---- vector AP decomposition in
+	% ---- AH parallel to AB
+	% ---- HP perpendicular to AB
 
 	%\coordinate (H) at ($(A)!(P)!(B)$);
 
@@ -175,15 +205,15 @@
 	% ---- reflects P across AB
 
 	%\coordinate (H) at ($(A)!(P)!(B)$);
-	%\coordinate (Q) at ($(H)!2!(P)$);
+	%\coordinate (Q) at ($(P)!2!(H)$);
 
 	%\coordinate (Q) at ($(P)!2!($(A)!(P)!(B)$)$);
 
 	% ---- variants
 
-	%\path let \p1 = ($(A)!(P)!(B)$) in
-	%coordinate (H) at
-	%({max(min(\x1,\xB),\xA)}, {max(min(\y1,\yB),\yA)});
+	%\path let
+		%\p1 = ($(A)!(P)!(B)$)
+	%in coordinate (H) at ({max(min(\x1,\xB),\xA)}, {max(min(\y1,\yB),\yA)});
 
 	%coordinate (H) at ($(A)!0.5!($(A)!(P)!(B)$)$)
 
@@ -252,10 +282,6 @@
 		%\foreach \j in {0,...,\ynum}
 			%\coordinate (P-\i-\j) at ({\xstep*\i},{\ystep*\j});
 
-% coordinates for dimension lines %{{{2
-
-	%\coordinate (IdJ) at ($ (I) + (0,0.7) $);
-
 % vectors from coordinates %{{{2
 
 	%\coordinate (v) at ($ (B) - (A) $);
@@ -282,13 +308,17 @@
 	% ---- surround with pgfinterruptboundingbox to avoid enlarging
 	% ---- the diagram frame
 
-	% ------- using path
+% using path %{{{2
+
+% line & line %{{{3
 
 	%\begin{pgfinterruptboundingbox}
 		%\path[name path=line1] (A) -- (C);
 		%\path[name path=line2] (B) -- (D);
 		%\path[name intersections={of=line1 and line2, by=I}];
 	%\end{pgfinterruptboundingbox}
+
+% line & circle %{{{3
 
 	%\begin{pgfinterruptboundingbox}
 		%\path[name path=line] (A) -- (B);
@@ -298,10 +328,14 @@
 
 	%\begin{pgfinterruptboundingbox}
 		%\path[name path=line] (X) -- (Y);
-		%\path[name path=circle] let \p1 = ($(A)-(O)$)
+		%\path[name path=circle]
+		%let
+			%\p1 = ($(A)-(O)$)
 		%in (O) circle ({veclen(\x1,\y1)});
 		%\path[name intersections={of=line and circle, by={I,J}}];
 	%\end{pgfinterruptboundingbox}
+
+% circle & circle %{{{3
 
 	%\begin{pgfinterruptboundingbox}
 		%\path[name path=circleA] (A) circle (\radius);
@@ -309,7 +343,7 @@
 		%\path[name intersections={of=circleA and circleB, by={I,J}}];
 	%\end{pgfinterruptboundingbox}
 
-	% ---- debug
+% debug %{{{3
 
 	%\path[
 		%name intersections={
@@ -319,22 +353,34 @@
 		%}
 		%];
 
-	% ------- using tkz-euclide
+% using tkz-euclide %{{{2
+
+% line & line %{{{3
 
 	%\begin{pgfinterruptboundingbox}
-		%% ---- line - line
 		%\tkzInterLL(A,B)(C,D)\tkzGetPoint{I}
-		%% ---- line - circle
+	%\end{pgfinterruptboundingbox}
+
+% line & circle %{{{3
+
+	%\begin{pgfinterruptboundingbox}
 		%\tkzInterLC(A,B)(O,C)\tkzGetPoints{I}{J}
-		%% ---- circle - circle
+	%\end{pgfinterruptboundingbox}
+
+% circle & circle %{{{3
+
+	%\begin{pgfinterruptboundingbox}
 		%\coordinate (C1) at ($ (O1) + (\radius, 0) $);
 		%\coordinate (C2) at ($ (O2) + (\ang:\radius) $);
 		%\tkzInterCC(O1,C1)(O2,C2)\tkzGetPoints{I}{J}
 	%\end{pgfinterruptboundingbox}
 
-	% -- in case of 2 intersections
+% in case of two intersections %{{{3
+
 	%\tkzGetFirstPoint{I}
-	% -- or
+
+	% ---- or
+
 	%\tkzGetSecondPoint{J}
 
 % points, dots, vertices %{{{1
@@ -364,7 +410,7 @@
 
 	%\foreach \i in {1,...,6} \draw (O) -- (u\i);
 
-	%\draw (O) -- ($(A) rotated around {45:(O)}$);
+	%\draw (O) -- ($ (A) rotated around {45:(O)} $);
 
 % vectors %{{{2
 
@@ -406,12 +452,6 @@
 
   %\foreach \j in {1,...,\ynumM}
 	  %\draw[dashed] ($ (0,\j*\ystep) $) -- ($(\xnum*\xstep,\j*\ystep)$);
-
-% dimension lines %{{{2
-
-	%\draw[dimension] (IdJ) -- (JdI);
-	%\draw[dimension extension] (I) -- (IdJ);
-	%\draw[dimension extension] (J) -- (JdI);
 
 % circles %{{{1
 
@@ -456,8 +496,6 @@
 	%\draw[domain=0:6.28, samples=100, smooth]
 		%plot ({cos(deg(\x))}, {sin(deg(\x))});
 
-	% ---- plot[mark=*] : adds markers at each sampled point.
-
 	%\draw plot \foreach \x in {0,...,5} { (\x,{sin(\x)}) };
 
 	%\draw plot coordinates {
@@ -473,6 +511,10 @@
 	%\foreach \a in {1,2,3} {
 		%\draw[domain=0:3, samples=50] plot (\x, {sin(deg(\a*\x))});
 	%}
+
+% with markers %{{{2
+
+	% ---- plot[mark=*] : adds markers at each sampled point.
 
 % points, dots, vertices labels %{{{1
 
@@ -576,6 +618,18 @@
 		%fill=blue!10,
 		%inner sep=4pt
 		%] at (2,1) {Hello};
+
+% dimensions %{{{1
+
+% coordinates for dimension lines %{{{2
+
+	%\coordinate (IdJ) at ($ (I) + (0,0.7) $);
+
+% dimension lines %{{{2
+
+	%\draw[dimension] (IdJ) -- (JdI);
+	%\draw[dimension extension] (I) -- (IdJ);
+	%\draw[dimension extension] (J) -- (JdI);
 
 % closing %{{{1
 

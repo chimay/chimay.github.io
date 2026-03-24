@@ -205,6 +205,264 @@
 % Yellow
 % YellowGreen
 
+% reserved keywords %{{{1
+
+% list %{{{2
+
+% 1. TeX primitives (strictly reserved)%{{{3
+
+% These are always off-limits because they are built into TeX:
+
+% \def, \let, \if, \else, \fi
+% \count, \dimen, \skip
+% \advance, \multiply, \divide
+% \relax, \expandafter, \csname, \endcsname
+
+% 👉 Redefining these will break everything.
+
+% 2. LaTeX core commands%{{{3
+
+% Also effectively reserved:
+
+% \documentclass, \usepackage
+% \begin, \end
+% \section, \label, \ref
+% \newcommand, \renewcommand
+
+% 3. TikZ / PGF core commands%{{{3
+
+% These are TikZ’s own commands—don’t redefine them:
+
+% Drawing:
+%
+% \draw, \path, \fill, \filldraw, \clip
+% Nodes & coords:
+% \node, \coordinate
+%
+% Scopes:
+%
+% \begin{tikzpicture}, \end{tikzpicture}
+% Libraries/macros:
+% \tikzset, \usetikzlibrary
+
+% 4. TikZ key–value system keywords%{{{3
+
+% Inside [...], many keywords are predefined:
+
+% Geometry: shift, rotate, scale
+% Styles: color, draw, fill, line width
+% Paths: to, edge, controls
+% Node options: anchor, above, below, left, right
+
+% 👉 These are not macros but keys, so redefining them breaks behavior.
+
+% 5. PGF math / tikzmath keywords%{{{3
+
+% Inside \pgfmath or \tikzmath, these names are reserved:
+
+% Functions:
+%
+% sin, cos, tan
+% sqrt, ln, exp
+% veclen, atan2, abs, mod
+%
+% Control structures:
+%
+% for, if, else
+% int (type declaration)
+
+% Example:
+
+% \tikzmath {
+%   int \i;
+%   for \i in {1,...,5} { ... };
+% }
+
+% 👉 You cannot use \sin or \sqrt as variable names there.
+
+% 6. Special coordinate syntax keywords%{{{3
+
+% These are part of TikZ parsing:
+
+% Polar: (angle:radius)
+% Relative: ++, --
+% Calculations: $ (A) + (B) $
+% let ... in
+
+% Example:
+
+% \path let \p1 = ($(A)-(B)$) in ...
+
+% 👉 \p1, \n1 are special registers, not normal macros.
+
+% 7. “Soft reserved” names (dangerous but not forbidden)%{{{3
+
+% These are not officially reserved, but often cause issues:
+
+% \length → clashes with LaTeX length system
+% \angle → common semantic conflicts
+% \distance → may collide with libraries
+% \path, \node → obviously bad to redefine
+
+% 👉 Your earlier issue with \length is exactly this category.
+
+% 8. What is actually safe?%{{{3
+
+% A macro name is safe if:
+
+% It doesn’t already exist
+% It doesn’t look like a PGF register (\p1, \n1)
+% It doesn’t shadow a math function
+% Good practice:
+% \def\mylength{2}
+% \def\myangle{45}
+% \def\distAB{...}
+% Key takeaway
+
+% There is no finite keyword list because TikZ sits on top of TeX. Instead:
+
+% Some names are strictly reserved (TeX primitives)
+% Some are functionally reserved (TikZ + PGF)
+% Many are just unsafe conventions
+
+% checklist %{{{2
+
+% 1. Does the command already exist? %{{{3
+
+% Test it:
+
+% \show\length
+% If it prints a definition → ⚠️ already taken
+% If it says undefined → ✅ safe to define
+
+% 👉 This is the most reliable test.
+
+% 2. Does it look like a PGF register? %{{{3
+
+% Avoid names like:
+
+% \p1, \p2
+% \n1, \n2
+% \x1, \y1
+
+% These are internally used by TikZ in constructs like:
+
+% \path let \p1 = (A), \n1 = {veclen(...)} in ...
+
+% 👉 Never reuse these.
+
+% 3. Is it a known math function? %{{{3
+
+% Inside \tikzmath or \pgfmath, avoid:
+
+% sin, cos, tan
+% sqrt, exp, ln
+% veclen, atan2
+
+% Bad:
+
+% \def\sqrt{...}   % ❌ breaks everything
+
+% 4. Does it collide with LaTeX conventions? %{{{3
+
+% Common traps:
+
+% \length
+% \width, \height
+% \angle
+% \value
+
+% 👉 These may work sometimes but break in subtle ways.
+
+% 5. Does it shadow a TikZ command? %{{{3
+
+% Never redefine:
+
+% \draw, \path, \node, \coordinate
+% \tikzset, \foreach
+
+% Even accidentally:
+
+% \def\path{...}   % 💀 catastrophic
+
+% 6. Are you inside a special TikZ context? %{{{3
+
+% Some contexts change the rules:
+
+% Inside let ... in
+
+% Only these are valid:
+
+% \p<number> → point
+% \n<number> → numeric
+
+% 👉 This explains your earlier error: TikZ parser rejects anything else there.
+
+% 7. Are you mixing TeX macros and pgfmath variables? %{{{3
+
+% Example pitfall:
+
+% \tikzmath {
+%   \a = 2;   % ❌ wrong
+% }
+
+% Correct:
+
+% \tikzmath {
+%   real \a;
+%   \a = 2;
+% }
+
+% 👉 pgfmath variables are not TeX macros.
+
+% 8. Does the name contain digits or unusual structure? %{{{3
+
+% Avoid:
+
+% \len1
+% \a2b
+
+% These can confuse parsers.
+
+% 9. Try a minimal rename test %{{{3
+
+% If something behaves weirdly:
+
+% \def\foo{2}
+
+% If it suddenly works → name collision confirmed.
+
+% 10. Use a safe naming convention (best practice) %{{{3
+
+% This avoids 99% of problems:
+
+% \def\myLen{2}
+% \def\myAngle{45}
+% \def\myDist{...}
+
+% or even better:
+
+% \def\tikzLen{2}
+
+% 👉 Prefixing is the cleanest solution.
+
+% 🔑 Rule of thumb
+
+% If a name is:
+
+% short
+% generic
+% mathematical
+
+% ➡️ it is probably unsafe
+
+% 🧠 Why your earlier issues happened
+% \length → clashes with LaTeX internals
+% \angle → ambiguous semantic usage
+% let ... in → only accepts \p / \n registers
+
+% So TikZ wasn’t random—it was strict parsing + name collision.
+
 % formal document %{{{1
 
 \documentclass{book}

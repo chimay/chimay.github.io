@@ -107,17 +107,22 @@
 
 	% ---- vectors defined independantly of points coordinates
 
-	%\coordinate (v) at (2,3);
-	%\coordinate (w) at (\ang:\len);
+	%\coordinate (vectorCartesian) at (\xcomp,\ycomp);
+	%\coordinate (vectorPolar) at (\ang:\len);
 
 % unit vectors %{{{3
 
 	%\coordinate (u) at ($ (0,0)!1cm!(v) $);
 
-	%\coordinate (u) at (7:1);
-	%\coordinate (v) at ({180-12}:1);
+	%\coordinate (u) at (\ang:1);
+	%\coordinate (v) at ({\ang - \gle}:1);
 
 % coordinates %{{{2
+
+% cartesian and polar %{{{3
+
+	%\coordinate (cartesien) at (1,2);
+	%\coordinate (polar) at (\ang:\len);
 
 	%\coordinate (A) at (0,0);
 	%\coordinate (B) at (4,0);
@@ -127,13 +132,26 @@
 	%\coordinate (A) at (\ang:\radius);
 	%\coordinate (B) at (\gle:\radius);
 
-	%\coordinate (D) at ($ (A) + (B) $);
-	%\coordinate (D) at ($ (A) + \ratio*(B) $);
-	%\coordinate (D) at ($ (A) + \ratio*(v) $);
-	%\coordinate (D) at ($ (A) + \ratio*(B) - \ratio*(C) $);
+% middle point %{{{3
 
-	%\coordinate (cartesien) at (1,2);
-	%\coordinate (polar) at (\ang:\len);
+	%\coordinate (M) at ($ (A)!0.5!(B) $) {$d$};
+
+% vectors from coordinates %{{{3
+
+	%\coordinate (AB) at ($ (B) - (A) $);
+
+% unit vectors %{{{4
+
+	%\coordinate (ab) at ($ (0,0)!1cm!(AB) $);
+
+% operations %{{{3
+
+	%\coordinate (D) at ($ (P) + (v) $);
+	%\coordinate (D) at ($ (P) + (AB) $);
+	%\coordinate (D) at ($ (P) + \len*(AB) $);
+	%\coordinate (D) at ($ (P) + \len*(B) - \ratio*(A) $);
+
+% loop %{{{3
 
 	%\foreach \i in {1,...,\numunits}
 		%\coordinate (P\i) at ($ (A) + \unit*(v) $);
@@ -141,55 +159,22 @@
 	%\foreach \i in {1,...,\numunits}
 		%\coordinate (P\i) at ($ (A) + {\len{\i}}*(u) $);
 
-% distance, norm %{{{2
+% perpendicularity %{{{2
 
-	%\path let \p1 = ($ (B) - (A) $)
-	%in coordinate (C) at (0,{veclen(\x1,\y1)});
-
-	%\path let \p1 = ($ (B) - (A) $)
-	%in \pgfextra{
-		%\pgfmathsetmacro{\dist}{veclen(\x1,\y1)};
-		%\node at (0,0) {Distance: \dist};
-	%};
-
-	%\path let \p1 = ($ (B) - (A) $)
-	%in \pgfextra{
-		%\pgfmathsetmacro{\distAB}{veclen(\x1,\y1)/1cm}
-		%\global\let\distAB\distAB
-	%};
-
-	% ------- .../1cm or .../28.45 is a necessary scale factor
-	% ------- unit change from pt to cm
-
-	%\path let \p1 = ($ (B) - (A) $)
-	%in \pgfextra{
-		%\pgfmathsetmacro{\distAB}{veclen(\x1,\y1)/1cm}
-		%\global\let\distAB\distAB
-	%};
-
-	%\path let \p1 = ($ (B) - (A) $)
-	%in \pgfextra{
-		%\pgfmathsetmacro{\distAB}{veclen(\x1,\y1)/28.45}
-		%\global\let\distAB\distAB
-	%};
-
-	%\path let
-		%\p1 = (A),
-		%\p2 = (B)
-	%in \pgfextra{
-		%\pgfmathsetmacro{\dist}{veclen(\x2-\x1,\y2-\y1)}
-	%};
-
-% perpendicular coordinates, orthogonal projections %{{{2
+% projection %{{{3
 
 	% ---- projection P of point C onto AB
 	% ---- PC perpendicular to AB
 
 	%\coordinate (P) at ($(A)!(C)!(B)$);
 
+% rotate from another vector %{{{3
+
 	% ---- rotate 90° from vector AB and start from A, length \len
 
 	%\coordinate (P) at ($(A)!\len!90:(B)$);
+
+% vector decomposition in parallel and perpendicular %{{{3
 
 	% ---- vector AP decomposition in
 	% ---- AH parallel to AB
@@ -197,10 +182,12 @@
 
 	%\coordinate (H) at ($(A)!(P)!(B)$);
 
-	% ---- orthonormal basis
+% orthonormal basis %{{{3
 
 	%\coordinate (E1) at ($(A)!1!(B)$);
 	%\coordinate (E2) at ($(A)!1!90:(B)$);
+
+% reflection of a point across a straight line %{{{3
 
 	% ---- reflects P across AB
 
@@ -209,15 +196,9 @@
 
 	%\coordinate (Q) at ($(P)!2!($(A)!(P)!(B)$)$);
 
-	% ---- variants
+% affine transformations %{{{2
 
-	%\path let
-		%\p1 = ($(A)!(P)!(B)$)
-	%in coordinate (H) at ({max(min(\x1,\xB),\xA)}, {max(min(\y1,\yB),\yA)});
-
-	%coordinate (H) at ($(A)!0.5!($(A)!(P)!(B)$)$)
-
-% translated coordinates %{{{2
+% translated coordinates %{{{3
 
 	%\begin{scope}[shift={(1,2)}]
 		%\coordinate (A) at (2,1);
@@ -227,7 +208,7 @@
 		%\coordinate (A) at (2,1);
 	%\end{scope}
 
-% rotated coordinates %{{{2
+% rotated coordinates %{{{3
 
 	%\coordinate (centre) at (1,2);
 
@@ -243,7 +224,7 @@
 		%\coordinate (A) at (2,1);
 	%\end{scope}
 
-% scaled coordinates %{{{2
+% scaled coordinates %{{{3
 
 	%\begin{scope}[scale=1.5]
 		%\coordinate (A) at (2,1);
@@ -253,7 +234,7 @@
 		%\coordinate (A) at (2,1);
 	%\end{scope}
 
-% nested scopes %{{{2
+% nested scopes %{{{3
 
 	%\begin{scope}[shift={(1,0)}]
 		%\begin{scope}[scale=2]
@@ -261,7 +242,7 @@
 		%\end{scope}
 	%\end{scope}
 
-% affine transformation %{{{2
+% generic affine transformation %{{{3
 
 	% ---- y = A x + t
 	% ---- A = (\matrixXX \matrix XY ; \matrixYX \matrixYY)
@@ -281,24 +262,6 @@
 	%\foreach \i in {0,...,\xnum}
 		%\foreach \j in {0,...,\ynum}
 			%\coordinate (P-\i-\j) at ({\xstep*\i},{\ystep*\j});
-
-% vectors from coordinates %{{{2
-
-	%\coordinate (v) at ($ (B) - (A) $);
-	%\coordinate (AB) at ($ (B) - (A) $);
-
-% unit vectors %{{{3
-
-	%\coordinate (u) at ($ (0,0)!1cm!(v) $);
-	%\coordinate (ab) at ($ (0,0)!1cm!(AB) $);
-
-% coordinates from vectors %{{{2
-
-	%\coordinate (E) at ($ (A) + \ratio*(v) $);
-	%\coordinate (E) at ($ (A) + \ratio*(AB) $);
-
-	%\coordinate (E) at ($ (A) + \len*(u) $);
-	%\coordinate (E) at ($ (A) + \len*(ab) $);
 
 % intersections %{{{1
 
@@ -343,6 +306,15 @@
 		%\path[name intersections={of=circleA and circleB, by={I,J}}];
 	%\end{pgfinterruptboundingbox}
 
+	%\begin{pgfinterruptboundingbox}
+		%\path[name path=circleA] (A) circle (\radius);
+		%\path[name path=circleB]
+		%let
+			%\p1 = ($ (A) - (O) $)
+		%in (O) circle ({veclen(\x1,\y1)});
+		%\path[name intersections={of=circleA and circleB, by={I,J}}];
+	%\end{pgfinterruptboundingbox}
+
 % debug %{{{3
 
 	%\path[
@@ -382,6 +354,36 @@
 	% ---- or
 
 	%\tkzGetSecondPoint{J}
+
+% distance %{{{1
+
+	% ------- .../1cm or .../28.45 is a necessary scale factor
+	% ------- unit change from pt to cm
+
+	%\path let \p1 = ($ (B) - (A) $)
+	%in \pgfextra{
+		%\pgfmathsetmacro{\distAB}{veclen(\x1,\y1)/1cm}
+		%\global\let\distAB\distAB
+	%};
+
+	%\path let
+		%\p1 = (A),
+		%\p2 = (B)
+	%in \pgfextra{
+		%\pgfmathsetmacro{\dist}{veclen(\x2-\x1,\y2-\y1)/1cm}
+		%\global\let\distAB\distAB
+	%};
+
+% direct drawing %{{{2
+
+	%\path let \p1 = ($ (B) - (A) $)
+	%in coordinate (C) at (0,{veclen(\x1,\y1)});
+
+	%\path let \p1 = ($ (B) - (A) $)
+	%in \pgfextra{
+		%\pgfmathsetmacro{\dist}{veclen(\x1,\y1)};
+		%\node at (0,0) {Distance: \dist};
+	%};
 
 % points, dots, vertices %{{{1
 
@@ -565,12 +567,12 @@
 
 % circles labels %{{{1
 
-	%\node at ($ (O) + (45:\radius+0.3) $) {$\mathscr{C}$};
-	%\node at ($ (A) + (45:\r+2mm) $) {$\mathscr C(A,r)$};
+	%\node at ($ (O) + (45:\radius + 0.3) $) {$\mathscr{C}$};
+	%\node at ($ (A) + (45:\radius + 2mm) $) {$\mathscr C(A,r)$};
 
 % circular arcs labels %{{{2
 
-	%\node at ($ (O) + (45:\radius+0.3) $) {$\mathscr{C}$};
+	%\node at ($ (O) + (45:\radius + 0.3) $) {$\mathscr{C}$};
 
 	%\node at ($ (A) + {\radiusA + 0.2}*(u) $) {$\mathscr{C}_1$};
 	%\node at ($ (B) + {\radiusB + 0.2}*(v) $) {$\mathscr{C}_2$};

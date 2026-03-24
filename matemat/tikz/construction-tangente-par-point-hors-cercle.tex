@@ -10,49 +10,64 @@
 % parameters %{{{1
 
 	\def\radius{3}
-
-	%\tikzmath{
-		%\var = 2.1;
-	%}
+	\def\extratio{0.5}
 
 % coordinates %{{{1
 
 	\coordinate (O) at (0,0);
-	\coordinate (A) at (3,1);
+	\coordinate (A) at (-5:6.5);
+	\coordinate (M) at ($ (O)!0.5!(A) $);
 
 % intersections %{{{1
 
-	%\begin{pgfinterruptboundingbox}
-		%\path[name path=line1] (A) -- (C);
-		%\path[name path=line2] (B) -- (D);
-		%\path[name intersections={of=line1 and line2, by=I}];
-	%\end{pgfinterruptboundingbox}
+	\begin{pgfinterruptboundingbox}
+		\path[name path=circleO] (O) circle (\radius);
+		\path[name path=circleM]
+		let
+			\p1 = ($ (A) - (M) $)
+		in (M) circle ({veclen(\x1,\y1)});
+		\path[name intersections={of=circleO and circleM, by={I,J}}];
+	\end{pgfinterruptboundingbox}
 
-	%\begin{pgfinterruptboundingbox}
-		%\path[name path=line] (A) -- (B);
-		%\path[name path=circle] (C) circle (\radius);
-		%\path[name intersections={of=line and circle, by={I,J}}];
-	%\end{pgfinterruptboundingbox}
+	\coordinate (IA) at ($ (A) - (I) $);
+	\coordinate (JA) at ($ (A) - (J) $);
 
-	%\begin{pgfinterruptboundingbox}
-		%\path[name path=circleA] (A) circle (\radius);
-		%\path[name path=circleB] (B) circle (\radius);
-		%\path[name intersections={of=circleA and circleB, by={I,J}}];
-	%\end{pgfinterruptboundingbox}
+	\coordinate (XI) at ($ (I) - \extratio*(IA) $);
+	\coordinate (YI) at ($ (A) + \extratio*(IA) $);
+
+	\coordinate (XJ) at ($ (J) - \extratio*(JA) $);
+	\coordinate (YJ) at ($ (A) + \extratio*(JA) $);
+
+% distance %{{{1
+
+	\path let \p1 = ($ (A) - (M) $)
+	in \pgfextra{
+		\pgfmathsetmacro{\distAM}{veclen(\x1,\y1)/1cm}
+		\global\let\distAM\distAM
+	};
 
 % points, dots, vertices %{{{1
 
-	%\fill (A) circle (0.4mm);
-	%\fill (B) circle (0.4mm);
-	%\fill (C) circle (0.4mm);
+	\fill (O) circle (0.4mm);
+	\fill (A) circle (0.4mm);
+	\fill (M) circle (0.4mm);
+	\fill (I) circle (0.4mm);
+	\fill (J) circle (0.4mm);
 
 % segments, sides, lines %{{{1
 
-	%\draw (A) -- (B);
+	\draw (O) -- (A);
+	\draw[dashed] (O) -- (I);
+	\draw[dashed] (O) -- (J);
+	\draw (XI) -- (YI);
+	\draw (XJ) -- (YJ);
 
 % circles %{{{1
 
 	\draw (O) circle (\radius);
+
+	\path[draw] let \p1 = ($(A)-(M)$)
+	in (M) circle ({veclen(\x1,\y1)});
 
 % circular arcs %{{{2
 
@@ -60,22 +75,27 @@
 
 % points, dots, vertices labels %{{{1
 
-	%\node[below] at (A) {$A$};
-	%\node[below] at (B) {$B$};
-	%\node[above] at (C) {$C$};
+	\node[above left] at (O) {$O$};
+	\node[below] at (A) {$A$};
+	\node[below] at (M) {$M$};
+	\node[above] at (I) {$I$};
+	\node[below] at (J) {$J$};
 
 % segments, sides, lines labels %{{{1
 
-	%\node[above] at ($ (A)!0.5!(B) $) {$d$};
+	\node[above] at ($ (XI)!0.9!(YI) $) {$t$};
+	\node[above] at ($ (XJ)!0.9!(YJ) $) {$u$};
 
 % segments, sides, lines marks %{{{1
 
-	%\tkzMarkSegments[mark=||, size=2pt](A,B)
-	%\tkzMarkSegments[mark=||, size=2pt](C,D)
+	\tkzMarkSegments[mark=||, size=2pt](O,I)
+	\tkzMarkSegments[mark=||, size=2pt](O,J)
 
 % circles labels %{{{1
 
-	%\node at ($ (O) + (45:\radius+0.3) $) {$\mathscr{C}$};
+	\node at ($ (O) + (135:\radius + 0.3) $) {$\mathscr{C}$};
+
+	\node at ($ (M) + (35:\distAM + 0.3) $) {$\mathscr{L}$};
 
 % circular arcs labels %{{{2
 
@@ -88,8 +108,11 @@
 
 % right angles markers %{{{2
 
-	%\pic [draw, angle radius=7pt, angle eccentricity=1]
-	%{right angle = C--B--A};
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = O--I--A};
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = A--J--O};
 
 % closing %{{{1
 

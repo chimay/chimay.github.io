@@ -1,0 +1,96 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\tikzmath{
+		\radius = 3.0 ;
+		\rad = 1.2 ;
+		\dius = 1.7 * 1.2 ;
+		\extratio = 1.7 ;
+		\ang = 30 ;
+		\ngl = \ang - 90 ;
+		\gle = \ang + 90 ;
+	}
+
+% coordinates %{{{1
+
+	\coordinate (O) at (0,0);
+	\coordinate (A) at (\ang:\radius);
+	\coordinate (XA) at ($ \extratio*(A) $);
+
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=line] (O) -- (XA);
+		\path[name path=circle] (A) circle (\rad);
+		\path[name intersections={of=line and circle, by={J,I}}];
+	\end{pgfinterruptboundingbox}
+
+% points, dots, vertices %{{{1
+
+	\fill (O) circle (0.4mm);
+	\fill (A) circle (0.4mm);
+
+	\fill (I) circle (0.4mm);
+	\fill (J) circle (0.4mm);
+
+% segments, sides, lines %{{{1
+
+	\draw (O) -- (XA);
+
+% circles %{{{1
+
+	\draw (O) circle (\radius);
+	\draw (A) circle ({\rad});
+
+% circular arcs %{{{2
+
+	\draw (I) ++(\ngl:\dius) arc (\ngl:\gle:\dius);
+	\draw (J) ++({\ngl + 180}:\dius) arc ({\ngl + 180}:{\gle + 180}:\dius);
+
+% points, dots, vertices labels %{{{1
+
+	\node[above left] at (O) {$O$};
+	\node[below] at (A) {$A$};
+
+	\node[below left] at (I) {$I$};
+	\node[right] at (J) {$J$};
+
+% segments, sides, lines labels %{{{1
+
+	 %\node[above] at ($ (XI)!0.9!(YI) $) {$t$};
+
+% segments, sides, lines marks %{{{1
+
+	%\tkzMarkSegments[mark=||, size=2pt](O,I)
+	%\tkzMarkSegments[mark=||, size=2pt](O,J)
+
+% circles labels %{{{1
+
+	\node at ($ (O) + (135:\radius + 0.3) $) {$\mathscr{C}$};
+
+% circular arcs labels %{{{2
+
+	%\node at ($ (O) + (45:\radius+0.3) $) {$\mathscr{C}$};
+
+% angles labels %{{{1
+
+	%\pic[draw, ->, "$\alpha$", angle radius=0.8cm, angle eccentricity=1.5]
+	%{angle = B--A--C};
+
+% right angles markers %{{{2
+
+% 	\pic [draw, angle radius=7pt, angle eccentricity=1]
+% 	{right angle = O--I--A};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

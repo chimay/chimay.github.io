@@ -13,66 +13,66 @@
 		\len = 6;
 		\height = 6;
 		\extratio = 1.5;
-		\radiusAB = 0.65*\len;
-		\radiusP = 0.35*\len;
-		\radiusGH = 0.6*\len;
+		\radiusDE = 0.65*\len;
+		\radiusA = 0.35*\len;
+		\radiusIJ = 0.6*\len;
 		\distPA = sqrt(\len*\len/4 + \height*\height);
 	}
 
 % coordinates %{{{1
 
-	\coordinate (A) at (0,0);
-	\coordinate (B) at (\len,0);
+	\coordinate (D) at (0,0);
+	\coordinate (E) at (\len,0);
 
 	\coordinate (U) at ({-(\extratio - 1)*\len},0);
 	\coordinate (V) at ({\extratio*\len},0);
 
-	\coordinate (P) at ({\len/2},\height);
+	\coordinate (A) at ({\len/2},\height);
 
 % intersections %{{{1
 
 	\begin{pgfinterruptboundingbox}
-		\path[name path=circleA] (A) circle (\radiusAB);
-		\path[name path=circleB] (B) circle (\radiusAB);
-		\path[name intersections={of=circleA and circleB, by={D,E}}];
+		\path[name path=circleA] (D) circle (\radiusDE);
+		\path[name path=circleB] (E) circle (\radiusDE);
+		\path[name intersections={of=circleA and circleB, by={F,G}}];
 	\end{pgfinterruptboundingbox}
 
-	\coordinate (X) at ($(E) - (0, 2)$);
-	\coordinate (Y) at ($(D) + (0, 6)$);
+	\coordinate (X) at ($(G) - (0, 2)$);
+	\coordinate (Y) at ($(F) + (0, 6)$);
 
-	\tkzInterLL(A,B)(D,E)\tkzGetPoint{F}
+	\tkzInterLL(D,E)(F,G)\tkzGetPoint{H}
 
 	\begin{pgfinterruptboundingbox}
 		\path[name path=line] (X) -- (Y);
-		\path[name path=circle] (P) circle (\radiusP);
-		\path[name intersections={of=line and circle, by={G,H}}];
+		\path[name path=circle] (A) circle (\radiusA);
+		\path[name intersections={of=line and circle, by={I,J}}];
 	\end{pgfinterruptboundingbox}
 
 	\begin{pgfinterruptboundingbox}
-		\path[name path=circleG] (G) circle (\radiusGH);
-		\path[name path=circleH] (H) circle (\radiusGH);
-		\path[name intersections={of=circleG and circleH, by={I,J}}];
+		\path[name path=circleG] (I) circle (\radiusIJ);
+		\path[name path=circleH] (J) circle (\radiusIJ);
+		\path[name intersections={of=circleG and circleH, by={K,L}}];
 	\end{pgfinterruptboundingbox}
 
-	\coordinate (W) at ($ (I) - ({(\extratio - 1)*\len}, 0) $);
-	\coordinate (Z) at ($ (J) + ({(\extratio - 1)*\len}, 0) $);
+	\coordinate (W) at ($ (K) - ({(\extratio - 1)*\len}, 0) $);
+	\coordinate (Z) at ($ (L) + ({(\extratio - 1)*\len}, 0) $);
 
 % points, dots, vertices %{{{1
 
-	\fill (A) circle (0.5mm);
-	\fill (B) circle (0.5mm);
-
-	\fill (P) circle (0.5mm);
-
 	\fill (D) circle (0.5mm);
 	\fill (E) circle (0.5mm);
-	\fill (F) circle (0.5mm);
 
+	\fill (A) circle (0.5mm);
+
+	\fill (F) circle (0.5mm);
 	\fill (G) circle (0.5mm);
 	\fill (H) circle (0.5mm);
 
 	\fill (I) circle (0.5mm);
 	\fill (J) circle (0.5mm);
+
+	\fill (K) circle (0.5mm);
+	\fill (L) circle (0.5mm);
 
 % segments %{{{1
 
@@ -82,69 +82,60 @@
 
 	\draw (W) -- (Z);
 
-	%\draw[dashed] (A) -- (D);
-	%\draw[dashed] (B) -- (D);
-
-	%\draw[dashed] (A) -- (E);
-	%\draw[dashed] (B) -- (E);
-
-	%\draw[dashdotdotted] (A) -- (P);
-	%\draw[dashdotdotted] (B) -- (P);
-
 % circles %{{{1
 
-	\draw (P) circle (\radiusP);
+	\draw (A) circle (\radiusA);
 
 % circular arcs %{{{2
 
-	\draw (P) ++(200:\distPA) arc (200:340:\distPA);
+	\draw (A) ++(200:\distPA) arc (200:340:\distPA);
 
-	\draw (A) ++(-65:\radiusAB) arc (-65:65:\radiusAB);
-	\draw (B) ++(115:\radiusAB) arc (115:245:\radiusAB);
+	\draw (D) ++(-65:\radiusDE) arc (-65:65:\radiusDE);
+	\draw (E) ++(115:\radiusDE) arc (115:245:\radiusDE);
 
-	\draw (G) ++(200:\radiusGH) arc (200:340:\radiusGH);
-	\draw (H) ++(20:\radiusGH) arc (20:160:\radiusGH);
+	\draw (I) ++(200:\radiusIJ) arc (200:340:\radiusIJ);
+	\draw (J) ++(20:\radiusIJ) arc (20:160:\radiusIJ);
 
 % points, dots, vertices labels %{{{1
 
-	\node[below] at (A) {$A$};
-	\node[below] at (B) {$B$};
+	\node[below] at (D) {$D$};
+	\node[below] at (E) {$E$};
 
-	\node[above left] at (P) {$P$};
+	\node[above left] at (A) {$A$};
 
-	\node[label={[label distance=0.5]left:$D$}] at (D) {};
-	\node[label={[label distance=0.5]left:$E$}] at (E) {};
+	\node[label={[label distance=0.5]left:$F$}] at (F) {};
+	\node[label={[label distance=0.5]left:$G$}] at (G) {};
 
-	\node[above left] at (F) {$F$};
+	\node[above left] at (H) {$H$};
 
-	\node[above left] at (G) {$G$};
-	\node[below left] at (H) {$H$};
+	\node[above left] at (I) {$I$};
+	\node[below left] at (J) {$J$};
 
-	\node[above] at (I) {$I$};
-	\node[above] at (J) {$J$};
+	\node[above] at (K) {$K$};
+	\node[above] at (L) {$L$};
 
 % segments, sides labels %{{{1
 
 	\node[above] at ($ (U)!0.05!(V) $) {$d$};
 	\node[left] at ($ (X)!0.05!(Y) $) {$m$};
-	\node[above] at ($ (W)!0.05!(Z) $) {$n$};
+	\node[above] at ($ (W)!0.05!(Z) $) {$p$};
 
 % segments, sides marks %{{{1
 
-	\tkzMarkSegments[mark=||, size=2pt](A,F)
-	\tkzMarkSegments[mark=||, size=2pt](F,B)
+	\tkzMarkSegments[mark=||, size=2pt](D,H)
+	\tkzMarkSegments[mark=||, size=2pt](H,E)
 
-	\tkzMarkSegments[mark=|, size=2pt](G,P)
-	\tkzMarkSegments[mark=|, size=2pt](P,H)
+	\tkzMarkSegments[mark=|, size=2pt](I,A)
+	\tkzMarkSegments[mark=|, size=2pt](A,J)
 
 % circular arcs labels %{{{1
 
-	\node at ($ (P) + (320:{\distPA+0.3})$) {$\mathscr{C}_1$};
-	\node at ($ (A) + (20:{\radiusAB+0.3}) $) {$\mathscr{C}_2$};
-	\node at ($ (B) + (160:{\radiusAB+0.3}) $) {$\mathscr{C}_3$};
-	\node at ($ (P) + (45:{\radiusP+0.3}) $) {$\mathscr{C}_4$};
-	\node at ($ (G) + (-50:{\radiusGH+0.3}) $) {$\mathscr{C}_5$};
-	\node at ($ (H) + (50:{\radiusGH+0.3}) $) {$\mathscr{C}_6$};
+	\node at ($ (A) + (320:{\distPA+0.3})$) {$\mathscr{C}_1$};
+	\node at ($ (D) + (20:{\radiusDE+0.3}) $) {$\mathscr{C}_2$};
+	\node at ($ (E) + (160:{\radiusDE+0.3}) $) {$\mathscr{C}_3$};
+	\node at ($ (A) + (45:{\radiusA+0.3}) $) {$\mathscr{C}_4$};
+	\node at ($ (I) + (-50:{\radiusIJ+0.3}) $) {$\mathscr{C}_5$};
+	\node at ($ (J) + (50:{\radiusIJ+0.3}) $) {$\mathscr{C}_6$};
 
 % circles labels %{{{1
 
@@ -152,17 +143,17 @@
 
 % circular arcs labels %{{{2
 
-	%\node at ($ (A) + {\radiusA + 0.2}*(u) $) {$\mathscr{C}$};
+	%\node at ($ (D) + {\radiusA + 0.2}*(u) $) {$\mathscr{C}$};
 
 % angles labels %{{{1
 
 % right angles markers %{{{2
 
 	\pic [draw, angle radius=7pt, angle eccentricity=1]
-	{right angle = B--F--Y};
+	{right angle = E--F--Y};
 
 	\pic [draw, angle radius=7pt, angle eccentricity=1]
-	{right angle = Z--P--G};
+	{right angle = Z--A--I};
 
 % closing %{{{1
 

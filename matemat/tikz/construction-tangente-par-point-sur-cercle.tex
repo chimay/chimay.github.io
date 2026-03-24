@@ -11,19 +11,20 @@
 
 	\tikzmath{
 		\radius = 3.0 ;
-		\rad = 1.2 ;
-		\dius = 1.7 * 1.2 ;
-		\extratio = 1.7 ;
-		\ang = 30 ;
-		\ngl = \ang - 90 ;
-		\gle = \ang + 90 ;
+		\rad = 1.7 ;
+		\dius = 1.7 * \rad ;
+		\extratioA = 1.7 ;
+		\extratioKL = 0.8 ;
+		\ang = 85 ;
+		\ngl = \ang - 100 ;
+		\gle = \ang + 100 ;
 	}
 
 % coordinates %{{{1
 
 	\coordinate (O) at (0,0);
 	\coordinate (A) at (\ang:\radius);
-	\coordinate (XA) at ($ \extratio*(A) $);
+	\coordinate (XA) at ($ \extratioA*(A) $);
 
 % intersections %{{{1
 
@@ -33,6 +34,17 @@
 		\path[name intersections={of=line and circle, by={J,I}}];
 	\end{pgfinterruptboundingbox}
 
+	\begin{pgfinterruptboundingbox}
+		\path[name path=circleA] (I) circle (\dius);
+		\path[name path=circleB] (J) circle (\dius);
+		\path[name intersections={of=circleA and circleB, by={L,K}}];
+	\end{pgfinterruptboundingbox}
+
+	\coordinate (KL) at ($ (L) - (K) $);
+
+	\coordinate (XKL) at ($ (K) - \extratioKL*(KL) $);
+	\coordinate (YKL) at ($ (L) + \extratioKL*(KL) $);
+
 % points, dots, vertices %{{{1
 
 	\fill (O) circle (0.4mm);
@@ -41,9 +53,13 @@
 	\fill (I) circle (0.4mm);
 	\fill (J) circle (0.4mm);
 
+	\fill (K) circle (0.4mm);
+	\fill (L) circle (0.4mm);
+
 % segments, sides, lines %{{{1
 
 	\draw (O) -- (XA);
+	\draw (XKL) -- (YKL);
 
 % circles %{{{1
 
@@ -58,10 +74,13 @@
 % points, dots, vertices labels %{{{1
 
 	\node[above left] at (O) {$O$};
-	\node[below] at (A) {$A$};
+	\node[below left] at (A) {$A$};
 
 	\node[below left] at (I) {$I$};
-	\node[right] at (J) {$J$};
+	\node[above right] at (J) {$J$};
+
+	\node[below left] at (K) {$K$};
+	\node[below right] at (L) {$L$};
 
 % segments, sides, lines labels %{{{1
 
@@ -74,7 +93,8 @@
 
 % circles labels %{{{1
 
-	\node at ($ (O) + (135:\radius + 0.3) $) {$\mathscr{C}$};
+	\node at ($ (O) + (195:\radius + 0.3) $) {$\mathscr{C}$};
+	\node at ($ (A) + (105:\rad + 0.3) $) {$\mathscr{C}_1$};
 
 % circular arcs labels %{{{2
 
@@ -87,8 +107,8 @@
 
 % right angles markers %{{{2
 
-% 	\pic [draw, angle radius=7pt, angle eccentricity=1]
-% 	{right angle = O--I--A};
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = O--A--L};
 
 % closing %{{{1
 

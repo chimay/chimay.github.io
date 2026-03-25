@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2025-12-31 mer 11:23 -->
+<!-- 2026-03-25 mer 17:09 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Pictura 01 : Géométrie</title>
@@ -193,6 +193,14 @@
   .org-svg { }
 </style>
 <link rel="stylesheet" type="text/css" href="../style/defaut.css" />
+<style>
+mjx-container {
+font-size: 1.25em !important;
+}
+mjx-math {
+line-height: 1.2;
+}
+</style>
 <script>
   window.MathJax = {
     tex: {
@@ -223,7 +231,7 @@
 <script
   id="MathJax-script"
   async
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  src="../include/latex/mathjax/repo/tex-svg.js">
 </script>
 </head>
 <body>
@@ -241,8 +249,8 @@
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf74e3af">1. Base</a></li>
-<li><a href="#orgab8a1b4">2. Trigonométrie</a></li>
+<li><a href="#org7088318">1. Base</a></li>
+<li><a href="#org15ccc1f">2. Trigonométrie</a></li>
 </ul>
 </div>
 </div>
@@ -251,7 +259,10 @@
 MathJax = {
   tex: {
     inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['\\[','\\]']],
     packages: {'[+]': ['base','ams','braket']},
+    processEscapes: true,
+    tags: 'ams',
     macros: {
       parentheses: ["\\left(#1\\right)", 1],
       crochets: ["\\left[#1\\right]", 1],
@@ -268,12 +279,17 @@ MathJax = {
       ferme: "\\mathfrak{F}",
       img: "\\mathbf{i}",
       binome: ["\\left\\{ \\begin{array}{c} #1 \\\\ #2 \\\\ \\end{array} \\right\\}", 2],
+      arcdecercle: ["\\overparen{#1}", 1],
+      angleflex: ["\\widehat{#1}", 1],
+      degre: ["#1^\\circ", 1],
+      vecteur: ["\\overrightarrow{#1}", 1],
+      combilin: ["\\mathrm{span}\\{ #1 \\}", 1],
       canonique: "\\mathfrak{c}",
       tenseuridentite: "\\boldsymbol{\\mathcal{I}}",
       permutation: "\\boldsymbol{\\epsilon}",
       matriceZero: "\\mathfrak{0}",
       matriceUn: "\\mathfrak{1}",
-      christoffel: ["\\left\\{ \\begin{array}{c} #1 \\\\ #2 \\\\ \\end{array} \\right\\}", 2],
+      christoffel: ["\\begin{Bmatrix} #1 \\\\ #2 \\\\ \\end{Bmatrix}", 2],
       lagrangien: "\\mathfrak{L}",
       sousens: "\\mathfrak{P}",
       partition: "\\mathrm{Partition}",
@@ -344,6 +360,8 @@ MathJax = {
       dual: "\\star",
       vardual: "\\circledast",
       distance: "\\mathfrak{dist}",
+      projection: "\\mathrm{proj}",
+      aire: "\\mathfrak{aire}",
       norme: ["\\left\\lVert #1 \\right\\rVert", 1],
       normetrois: ["\\left|\\left\\| #1 \\right\\|\\right|", 1],
       adh: ["\\mathop{\\mathrm{adh}\\ }\\limits",0],
@@ -372,7 +390,6 @@ MathJax = {
       dfdxdy: ["\\frac{\\partial^2 #1}{\\partial #2 \\partial #3}", 3],
       dfdxdx: ["\\frac{\\partial^2 #1}{\\partial #2^2}", 2],
       gradient: "\\mathbf{\\nabla}",
-      combilin: ["\\mathrm{span}\\{ #1 \\}", 1],
       trace: "tr",
       proba: "\\mathbb{P}",
       probaof: ["\\mathbb{P}\\left[#1\\right]", 1],
@@ -401,38 +418,18 @@ MathJax = {
   }
 };
 </script>
-
-<!-- simple online version -->
-<!-- <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script> -->
-
-<!-- script embedded in tree -->
-<!-- <script src="../include/mathjax/tex-mml-chtml.js"></script> -->
-
-<!-- hybrid online/offline -->
-<!-- does not work -->
-
-<p>
-\(
-\renewenvironment{Eqts}
-{ \begin{equation*} \begin{gathered} }
-{ \end{gathered} \end{equation*} }
-\renewenvironment{Matrix}
-{\left[ \begin{array}}
-{\end{array} \right]}
-\)
-</p>
-<div id="outline-container-orgf74e3af" class="outline-2">
-<h2 id="orgf74e3af"><span class="section-number-2">1.</span> Base</h2>
+<div id="outline-container-org7088318" class="outline-2">
+<h2 id="org7088318"><span class="section-number-2">1.</span> Base</h2>
 <div class="outline-text-2" id="text-1">
 <div id="text-table-of-contents-1" role="doc-toc">
 <ul>
-<li><a href="#org84f51e2">1.1. Angle droit</a></li>
-<li><a href="#orgb7d1f4c">1.2. Angles opposés d’une intersection</a></li>
+<li><a href="#org92d1f09">1.1. Angle droit</a></li>
+<li><a href="#org5912d2a">1.2. Angles opposés d’une intersection</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org84f51e2" class="outline-3">
-<h3 id="org84f51e2"><span class="section-number-3">1.1.</span> Angle droit</h3>
+<div id="outline-container-org92d1f09" class="outline-3">
+<h3 id="org92d1f09"><span class="section-number-3">1.1.</span> Angle droit</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Considérons deux droites perpendiculaires. Elles forment au croisement
@@ -453,8 +450,8 @@ d’où :
 </p>
 </div>
 </div>
-<div id="outline-container-orgb7d1f4c" class="outline-3">
-<h3 id="orgb7d1f4c"><span class="section-number-3">1.2.</span> Angles opposés d’une intersection</h3>
+<div id="outline-container-org5912d2a" class="outline-3">
+<h3 id="org5912d2a"><span class="section-number-3">1.2.</span> Angles opposés d’une intersection</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Soit deux droites qui s’intersectent. On note
@@ -495,16 +492,16 @@ Les angles opposés d’une intersection sont égaux.
 </div>
 </div>
 </div>
-<div id="outline-container-orgab8a1b4" class="outline-2">
-<h2 id="orgab8a1b4"><span class="section-number-2">2.</span> Trigonométrie</h2>
+<div id="outline-container-org15ccc1f" class="outline-2">
+<h2 id="org15ccc1f"><span class="section-number-2">2.</span> Trigonométrie</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org127fe03" class="outline-3">
-<h3 id="org127fe03"><span class="section-number-3">2.1.</span> Applications des formules de la tangente</h3>
+<div id="outline-container-org4b39e81" class="outline-3">
+<h3 id="org4b39e81"><span class="section-number-3">2.1.</span> Applications des formules de la tangente</h3>
 <div class="outline-text-3" id="text-2-1">
 </div>
-<div id="outline-container-orgf0095f7" class="outline-4">
-<h4 id="orgf0095f7"><span class="section-number-4">2.1.1.</span> Triangles 1/2 &amp; 1/3</h4>
+<div id="outline-container-org292494a" class="outline-4">
+<h4 id="org292494a"><span class="section-number-4">2.1.1.</span> Triangles 1/2 &amp; 1/3</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <p>
 \[\tan\alpha = \unsur{2}\]
@@ -523,8 +520,8 @@ Les angles opposés d’une intersection sont égaux.
 </p>
 </div>
 </div>
-<div id="outline-container-org415f3c1" class="outline-4">
-<h4 id="org415f3c1"><span class="section-number-4">2.1.2.</span> Triangles 1/3 &amp; 1/7</h4>
+<div id="outline-container-org773e870" class="outline-4">
+<h4 id="org773e870"><span class="section-number-4">2.1.2.</span> Triangles 1/3 &amp; 1/7</h4>
 <div class="outline-text-4" id="text-2-1-2">
 <p>
 \[\tan\alpha = \unsur{3}\]
@@ -543,8 +540,8 @@ Les angles opposés d’une intersection sont égaux.
 </p>
 </div>
 </div>
-<div id="outline-container-org0c3025b" class="outline-4">
-<h4 id="org0c3025b"><span class="section-number-4">2.1.3.</span> Double du triangles 1/2 donne 4/3</h4>
+<div id="outline-container-org60b9458" class="outline-4">
+<h4 id="org60b9458"><span class="section-number-4">2.1.3.</span> Double du triangles 1/2 donne 4/3</h4>
 <div class="outline-text-4" id="text-2-1-3">
 <p>
 \[\tan\alpha = \unsur{2}\]
@@ -555,8 +552,8 @@ Les angles opposés d’une intersection sont égaux.
 </p>
 </div>
 </div>
-<div id="outline-container-org0ecf0cf" class="outline-4">
-<h4 id="org0ecf0cf"><span class="section-number-4">2.1.4.</span> Double du triangle 1/3 donne 3/4</h4>
+<div id="outline-container-orgf81bd03" class="outline-4">
+<h4 id="orgf81bd03"><span class="section-number-4">2.1.4.</span> Double du triangle 1/3 donne 3/4</h4>
 <div class="outline-text-4" id="text-2-1-4">
 <p>
 \[\tan\alpha = \unsur{3}\]
@@ -570,8 +567,8 @@ Les angles opposés d’une intersection sont égaux.
 </p>
 </div>
 </div>
-<div id="outline-container-orge872dd4" class="outline-4">
-<h4 id="orge872dd4"><span class="section-number-4">2.1.5.</span> Double du triangle 1/\(\phi\) donne 2/1</h4>
+<div id="outline-container-orge9ee871" class="outline-4">
+<h4 id="orge9ee871"><span class="section-number-4">2.1.5.</span> Double du triangle 1/\(\phi\) donne 2/1</h4>
 <div class="outline-text-4" id="text-2-1-5">
 <p>
 \[\tan\alpha = \unsur{\phi}\]
@@ -595,7 +592,7 @@ Les angles opposés d’une intersection sont égaux.
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2025-12-31 mer 11:23</p>
+<p class="date">Created: 2026-03-25 mer 17:09</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

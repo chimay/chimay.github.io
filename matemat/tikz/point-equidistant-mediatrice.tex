@@ -9,7 +9,9 @@
 
 % parameters %{{{1
 
-	%\def\len{3}
+	\def\len{4}
+	\def\gth{3}
+	\def\extratio{1.9}
 
 	%\tikzmath{
 		%\var = 2.1;
@@ -17,9 +19,16 @@
 
 % coordinates %{{{1
 
-	%\coordinate (A) at (0,0);
-	%\coordinate (B) at (4,0);
-	%\coordinate (C) at (4,3);
+	\coordinate (P) at (0,0);
+	\coordinate (A) at (-\len,-\gth);
+	\coordinate (B) at (\len,-\gth);
+	\coordinate (O) at ($(A)!(P)!(B)$);
+
+	\coordinate (HX) at ({-\extratio*\len},-\gth);
+	\coordinate (HY) at ({\extratio*\len},-\gth);
+
+	\coordinate (VX) at (0,{-\extratio*\gth});
+	\coordinate (VY) at (0,{(\extratio - 1)*\gth});
 
 % intersections %{{{1
 
@@ -51,13 +60,21 @@
 
 % points, dots, vertices %{{{1
 
-	%\fill (A) circle (0.4mm);
-	%\fill (B) circle (0.4mm);
-	%\fill (C) circle (0.4mm);
+	\fill (P) circle (0.4mm);
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+	\fill (O) circle (0.4mm);
 
 % segments, sides, lines %{{{1
 
 	%\draw (A) -- (B);
+
+	\draw (HX) -- (HY);
+	\draw (VX) -- (VY);
+
+	\draw (P) -- (A);
+	\draw (P) -- (B);
+	\draw (P) -- (O);
 
 	%\draw (A) -- (B) -- (C) -- cycle;
 
@@ -74,18 +91,20 @@
 
 % points, dots, vertices labels %{{{1
 
-	%\node[below] at (A) {$A$};
-	%\node[below] at (B) {$B$};
-	%\node[above] at (C) {$C$};
+	\node[above left] at (P) {$P$};
+	\node[below left] at (A) {$A$};
+	\node[below right] at (B) {$B$};
+	\node[below left] at (O) {$O$};
 
 % segments, sides, lines labels %{{{1
 
-	%\node[above] at ($ (A)!0.5!(B) $) {$d$};
+	\node[above] at ($ (HX)!0.9!(HY) $) {$d$};
+	\node[left] at ($ (VX)!0.9!(VY) $) {$m$};
 
 % segments, sides, lines marks %{{{1
 
-	%\tkzMarkSegments[mark=||, size=2pt](A,B)
-	%\tkzMarkSegments[mark=||, size=2pt](C,D)
+	\tkzMarkSegments[mark=||, size=2pt](P,A)
+	\tkzMarkSegments[mark=||, size=2pt](P,B)
 
 % circles labels %{{{1
 
@@ -102,8 +121,8 @@
 
 % right angles markers %{{{2
 
-	%\pic [draw, angle radius=7pt, angle eccentricity=1]
-	%{right angle = C--B--A};
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = B--O--P};
 
 % closing %{{{1
 

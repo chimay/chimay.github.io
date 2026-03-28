@@ -22,13 +22,13 @@
 
 	\foreach \i in {0,...,\xnum}
 		\foreach \j in {0,...,\ynum}
-			\coordinate (P-\i-\j) at ({\xstep*\i},{\ystep*\j});
+			\coordinate (P_\i_\j) at ({\xstep*\i},{\ystep*\j});
 
 % grid vertices %{{{1
 
 % 	\foreach \i in {0,...,\xnum}
 % 		\foreach \j in {0,...,\ynum}
-% 			\fill (P-\i-\j) circle (0.8mm);
+% 			\fill (P_\i_\j) circle (0.8mm);
 
 % grid lines %{{{1
 
@@ -37,25 +37,25 @@
 
 	% ---- boundary
 
-	\draw (P-0-0) -- (P-0-\ynum);
-	\draw (P-\xnum-0) -- (P-\xnum-\ynum);
-	\draw (P-0-0) -- (P-\xnum-0);
-	\draw (P-0-\ynum) -- (P-\xnum-\ynum);
+	\draw (P_0_0) -- (P_0_\ynum);
+	\draw (P_\xnum_0) -- (P_\xnum_\ynum);
+	\draw (P_0_0) -- (P_\xnum_0);
+	\draw (P_0_\ynum) -- (P_\xnum_\ynum);
 
 	% ---- interior vertical lines
 
 	\foreach \i in {1,...,\xnumM}
-		\draw[dashed] ($(\i*\xstep,0)$) -- ($(\i*\xstep,\ynum*\ystep)$);
+		\draw[dashed] ($(P_\i_0)$) -- ($(P_\i_\ynum)$);
 
 	% ---- interior horizontal lines
 
   \foreach \j in {1,...,\ynumM}
-	  \draw[dashed] ($ (0,\j*\ystep) $) -- ($(\xnum*\xstep,\j*\ystep)$);
+	  \draw[dashed] ($ (P_0_\j) $) -- ($(P_\xnum_\j)$);
 
 % segments, sides labels %{{{1
 
-	\node[below] at ($ (P-0-0)!0.5!(P-\xnum-0) $) {$i \cdot j = 6$};
-	\node[left] at ($ (P-0-0)!0.5!(P-0-\ynum) $) {$i \cdot j = 6$};
+	\node[below] at ($ (P_0_0)!0.5!(P_\xnum_0) $) {$i \cdot j = 6$};
+	\node[left] at ($ (P_0_0)!0.5!(P_0_\ynum) $) {$i \cdot j = 6$};
 
 % closing %{{{1
 

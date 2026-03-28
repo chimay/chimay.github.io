@@ -1,0 +1,132 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header-light.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\def\len{4}
+	\def\gth{3}
+	\def\extratio{1.9}
+
+	%\tikzmath{
+		%\var = 2.1;
+	%}
+
+% coordinates %{{{1
+
+	\coordinate (P) at (0,0);
+	\coordinate (A) at (-\len,-\gth);
+	\coordinate (B) at (\len,-\gth);
+	\coordinate (I) at ($(A)!(P)!(B)$);
+
+	%\coordinate (HX) at ({-\extratio*\len},-\gth);
+	%\coordinate (HY) at ({\extratio*\len},-\gth);
+
+	\coordinate (VX) at (0,{-\extratio*\gth});
+	\coordinate (VY) at (0,{(\extratio - 1)*\gth});
+
+% intersections %{{{1
+
+	%\begin{pgfinterruptboundingbox}
+		%\path[name path=line1] (A) -- (C);
+		%\path[name path=line2] (B) -- (D);
+		%\path[name intersections={of=line1 and line2, by=I}];
+	%\end{pgfinterruptboundingbox}
+
+	%\begin{pgfinterruptboundingbox}
+		%\path[name path=line] (A) -- (B);
+		%\path[name path=circle] (C) circle (\radius);
+		%\path[name intersections={of=line and circle, by={I,J}}];
+	%\end{pgfinterruptboundingbox}
+
+	%\begin{pgfinterruptboundingbox}
+		%\path[name path=circleA] (A) circle (\radius);
+		%\path[name path=circleB] (B) circle (\radius);
+		%\path[name intersections={of=circleA and circleB, by={I,J}}];
+	%\end{pgfinterruptboundingbox}
+
+% distance %{{{1
+
+	%\path let \p1 = ($ (B) - (A) $)
+	%in \pgfextra{
+		%\pgfmathsetmacro{\distAB}{veclen(\x1,\y1)/1cm}
+		%\global\let\distAB\distAB
+	%};
+
+% points, dots, vertices %{{{1
+
+	\fill (P) circle (0.4mm);
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+	\fill (I) circle (0.4mm);
+
+% segments, sides, lines %{{{1
+
+	%\draw (A) -- (B);
+
+	%\draw (HX) -- (HY);
+
+	\draw (A) -- (B);
+	\draw (VX) -- (VY);
+
+	\draw (P) -- (A);
+	\draw (P) -- (B);
+	\draw (P) -- (I);
+
+	%\draw (A) -- (B) -- (C) -- cycle;
+
+% circles %{{{1
+
+	%\draw (O) circle (\radius);
+
+	%\path[draw] let \p1 = ($ (A) - (O) $)
+	%in (O) circle ({veclen(\x1,\y1)});
+
+% circular arcs %{{{2
+
+	%\draw (A) ++(\ang:\radius) arc (\ang:\gle:\radius);
+
+% points, dots, vertices labels %{{{1
+
+	\node[above left] at (P) {$P$};
+	\node[below left] at (A) {$A$};
+	\node[below right] at (B) {$B$};
+	\node[below left] at (I) {$I$};
+
+% segments, sides, lines labels %{{{1
+
+	%\node[above] at ($ (HX)!0.9!(HY) $) {$d$};
+	\node[left] at ($ (VX)!0.9!(VY) $) {$m$};
+
+% segments, sides, lines marks %{{{1
+
+	\tkzMarkSegments[mark=||, size=2pt](A,I)
+	\tkzMarkSegments[mark=||, size=2pt](B,I)
+
+% circles labels %{{{1
+
+	%\node at ($ (O) + (45:\radius + 0.3) $) {$\mathscr{C}$};
+
+% circular arcs labels %{{{2
+
+	%\node at ($ (O) + (45:\radius + 0.3) $) {$\mathscr{C}$};
+
+% angles labels %{{{1
+
+	%\pic[draw, ->, "$\alpha$", angle radius=0.8cm, angle eccentricity=1.5]
+	%{angle = B--A--C};
+
+% right angles markers %{{{2
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = B--I--P};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

@@ -233,27 +233,34 @@ ce point et sa projection orthogonale sur la droite.
 
 * Distance entre un point et une demi-droite
 
-La distance entre un point $A$ et une demi-droite $h$ se définit comme
-la comme étant la longueur minimale entre $A$ et tous les points de $h$ :
+#+TOC: headlines 1 local
 
-$$ \distance(A,h) = \min_{B \in h} \abs{AB} $$
+** Introduction
+
+La distance entre un point $A$ et une demi-droite $f$ se définit comme
+étant la distance minimale entre $A$ et tous les points de $f$ :
+
+$$ \distance(A,f) = \min_{B \in f} \abs{AB} $$
+
+** Projection orthogonale dans la demi-droite
 
 Soit :
 
-- $d$ la droite qui prolonge la demi-droite $h$
+- $d$ la droite qui prolonge la demi-droite $f$
 - $I$ la projection orthogonale du point $A$ sur $d$
+  + on suppose que $I \in f$
 - $\alpha$ l’angle formé par les demi-droite $[OI)$ et $[OA)$
 
 Le schéma ci-dessous représente tous ces éléments :
 
 #+attr_html: :width 45%
 #+attr_latex: :width 0.7\linewidth
-[[file:tikz/distance-entre-un-point-et-une-demi-droite.svg]]
+[[file:tikz/distance-entre-un-point-et-une-demi-droite-dedans.svg]]
 
-La demi-droite $h$ étant inclue dans $d$, les propriétés du minimum
+La demi-droite $f$ étant inclue dans $d$, les propriétés du minimum
 nous donnent :
 
-$$ \min_{B \in h} \abs{AB} \ge \min_{B \in d} \abs{AB} $$
+$$ \min_{B \in f} \abs{AB} \ge \min_{B \in d} \abs{AB} $$
 
 Mais comme :
 
@@ -261,21 +268,72 @@ $$ \abs{AI} = \min_{B \in d} \abs{AB} $$
 
 cette équation devient :
 
-$$ \min_{B \in h} \abs{AB} \ge \abs{AI} $$
+$$ \min_{B \in f} \abs{AB} \ge \abs{AI} $$
 
-Lorsque l’angle $\alpha$ est compris entre -90° et 90°, le point $I$
-est dans $h$, et on a aussi :
+Comme le point $I$ est dans $f$, on a aussi :
 
-$$ \min_{B \in h} \abs{AB} \le \abs{AI} $$
+$$ \min_{B \in f} \abs{AB} \le \abs{AI} $$
 
-par définition du minium. On en conclut que :
+par définition du minium. Ces deux dernières inégalités nous montrent
+que :
 
-$$ \distance(A,h) = \abs{AI} $$
+$$ \min_{B \in f} \abs{AB} = \abs{AI} $$
+
+c’est-à-dire :
+
+$$ \distance(A,f) = \abs{AI} $$
 
 On a donc la même propriété que pour la distance entre un point et
-une droite, à condition que :
+une droite.
+
+*** Condition équivalente
+
+Si $I \in f$, deux cas peuvent se présenter. Si $O \ne I$, $\alpha$
+est un angle du triangle rectangle $OIA$ et doit être aigu :
+
+$$ \abs{\alpha} < 90^\circ $$
+
+Dans le cas où $O = I$, on a :
+
+$$ (OA) = (IA) \perp d = (OI) $$
+
+car $I$ est la projection orthogonale de $A$ sur $d$. On en conclut que :
+
+$$ \abs{\alpha} = 90^\circ $$
+
+par définition de $\alpha$. Dans les deux cas, on doit avoir :
 
 $$ -90^\circ \le \alpha \le 90^\circ $$
+
+Réciproquement, si $\alpha \in [-90^\circ, 90^\circ]$, soit $\abs{\alpha}
+= 90^\circ$, on a :
+
+$$ (OA) \perp (OI) = d $$
+
+Comme il existe une unique droite $(AI)$ passant par $A$ et perpendiculaire
+à $d$
+
+la condition $I \in f$ est équivalente à la double
+condition suivante sur l’angle $\alpha$ :
+
+** Projection orthogonale en dehors de la demi-droite
+
+Soit :
+
+- $d$ la droite qui prolonge la demi-droite $f$
+- $I$ la projection orthogonale du point $A$ sur $d$
+  + on suppose que $I \notin f$
+- $\alpha$ l’angle formé par les demi-droite $[OI)$ et $[OA)$
+
+Le schéma ci-dessous représente tous ces éléments :
+
+#+attr_html: :width 45%
+#+attr_latex: :width 0.7\linewidth
+[[file:tikz/distance-entre-un-point-et-une-demi-droite-dehors.svg]]
+
+*Remarque* : la condition $I \notin f$ est équivalente à demander
+que l’angle $\alpha$ soit en dehors de l’intervalle $[-90^\circ,
+90^\circ]$.
 
 * Distance entre deux droites parallèles
 

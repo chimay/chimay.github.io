@@ -11,17 +11,21 @@
 
 	%\def\len{3}
 
-	%\tikzmath{
-		%\var = 2.1;
-	%}
+	\tikzmath{
+		\rotation = 180 - atan2(5,2) ;
+	}
 
 % coordinates %{{{1
 
-	%\coordinate (A) at (0,0);
-	%\coordinate (B) at (4,0);
-	%\coordinate (C) at (4,3);
+	\coordinate (centre) at (1,2);
 
-	%\coordinate (P) at ($(A)!(C)!(B)$);
+	\begin{scope}[rotate around={\rotation:(centre)}]
+		\coordinate (B) at (0,0);
+		\coordinate (C) at (3,0);
+		\coordinate (A) at (2,5);
+	\end{scope}
+
+	\coordinate (D) at ($(A)!(C)!(B)$);
 
 % intersections %{{{1
 
@@ -53,15 +57,16 @@
 
 % points, dots, vertices %{{{1
 
-	%\fill (A) circle (0.4mm);
-	%\fill (B) circle (0.4mm);
-	%\fill (C) circle (0.4mm);
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+	\fill (C) circle (0.4mm);
+	\fill (D) circle (0.4mm);
 
 % segments, sides, lines %{{{1
 
-	%\draw (A) -- (B);
+	\draw (A) -- (B) -- (C) -- cycle;
 
-	%\draw (A) -- (B) -- (C) -- cycle;
+	\draw[dashed] (C) -- (D);
 
 % circles %{{{1
 
@@ -76,13 +81,21 @@
 
 % points, dots, vertices labels %{{{1
 
-	%\node[below] at (A) {$A$};
-	%\node[below] at (B) {$B$};
-	%\node[above] at (C) {$C$};
+	\node[below] at (A) {$A$};
+	\node[below] at (B) {$B$};
+	\node[above] at (C) {$C$};
+	\node[above left] at (D) {$D$};
 
 % segments, sides, lines labels %{{{1
 
-	%\node[above] at ($ (A)!0.5!(B) $) {$d$};
+	\node[below] at ($ (A)!0.5!(B) $) {$a$};
+	\node[right] at ($ (B)!0.5!(C) $) {$b$};
+	\node[above left] at ($ (C)!0.5!(A) $) {$c$};
+
+	\node[left] at ($ (C)!0.5!(D) $) {$h$};
+
+	\node[above] at ($ (A)!0.5!(D) $) {$s$};
+	\node[above] at ($ (D)!0.5!(B) $) {$t$};
 
 % segments, sides, lines marks %{{{1
 

@@ -40,21 +40,21 @@ Voici les étapes de cette construction :
 1. ouvrir le compas d’un rayon $r$ suffisamment grand pour qu’un cercle
    de centre $A$ et de rayon $r$ possède deux intersection avec $d$
 2. tracer l’arc de cercle $\mathscr{C}$ de centre $A$ et de rayon $r$
-3. on note $B$ et $D$ les deux points d’intersections de
+3. on note $E$ et $F$ les deux points d’intersections de
    la droite $d$ avec l’arc de cercle $\mathscr{C}$
-4. on trace $E$ le point milieu du segment $[B,D]$
-5. on trace la droite $p = (AE)$
+4. on trace $P$ le point milieu du segment $[E,F]$
+5. on trace la droite $p = (AP)$
 
-On remarque ensuite que les triangles $ABE$ et $AED$ possèdent trois
+On remarque ensuite que les triangles $AEP$ et $APF$ possèdent trois
 côtés de longueurs identiques :
 
-- le côté commun $[A,E]$
-- les côtés $[A,B]$ et $[A,D]$ sont tous deux de longueur $r$ par
+- le côté commun $[A,P]$
+- les côtés $[A,E]$ et $[A,F]$ sont tous deux de longueur $r$ par
   construction de l’arc de cercle $\mathscr{C}$
-- les côtés $[B,E]$ et $[E,D]$ sont de même longueur par construction
-  du point $E$
+- les côtés $[E,P]$ et $[P,F]$ sont de même longueur par construction
+  du point $P$
 
-Par conséquent, les triangles $ABE$ et $AED$ sont isométriques et
+Par conséquent, les triangles $AEP$ et $APF$ sont isométriques et
 leurs angles correspondants sont de même amplitude :
 
 $$ \alpha = \beta $$
@@ -120,7 +120,16 @@ ce qui est manifestement une absurdité. On en conclut que notre hypothèse
 est invalide. Il existe donc au maximum une seule droite perpendiculaire
 à $d$ et passant par $A$.
 
-** Projection orthogonale
+** Conclusion
+
+Étant donné un point $A$ et une droite $d$, il existe une et une seule
+droite $p$ passant par $A$ et perpendiculaire à $d$.
+
+* Projection orthogonale
+
+#+TOC: headlines 1 local
+
+** Définition
 
 Soit un point $A$ et une droite $d$. Nous avons montré qu’il existe
 une et une seule droite $p$, perpendiculaire à la droite $d$ et passant
@@ -128,163 +137,20 @@ par le point $A$ :
 
 #+attr_html: :width 25%
 #+attr_latex: :width 0.7\linewidth
-[[file:tikz/perpendiculaire-par-un-point-conclusion.svg]]
+[[file:tikz/projection-orthogonale.svg]]
 
-Il existe également un et un seul point d’intersection $I$ entre $d$
-et $p$ :
+Il existe donc un et un seul point d’intersection $P$ entre $d$ et $p$ :
 
-$$ d \cap p = \{ I \} $$
+$$ d \cap p = \{ P \} $$
 
-Le point $I$ est appelé la projection orthogonale de $A$ sur $d$. On
+Le point $P$ est appelé la projection orthogonale de $A$ sur $d$. On
 la note :
 
-$$ I = \projection(A,d) $$
+$$ P = \projection(A,d) $$
 
-* Minimum
-:properties:
-:custom_id: heading:minimum
-:end:
+** Demi-droite
 
-Soit un point $A$, une droite $d$ et la droite $p$, perpendiculaire à
-$d$ et passant par $A$ :
-
-#+attr_html: :width 35%
-#+attr_latex: :width 0.7\linewidth
-[[file:tikz/perpendiculaire-par-un-point-preuve-minimum.svg]]
-
-On note $I$ la projection orthogonale de $A$ sur $d$ :
-
-$$ I = \projection(A,d) $$
-
-On trace le point $B$, situé sur $p$ et à une distance :
-
-$$ \abs{IB} = \abs{AI} $$
-
-du point $I$. L’inégalité triangulaire des distances nous donne :
-
-$$ \abs{AB} \le \abs{AC} + \abs{CB} $$
-
-Or :
-
-$$ \abs{AB} = \abs{AI} + \abs{IB} = 2 \ \abs{AI} $$
-
-Les triangles rectangles $AIC$ et $BCI$ ont  :
-
-- une cathète commune $[I,C]$
-- leurs autres cathètes $[A,I]$ et $[I,B]$ de même longueur,
-  par construction du point $B$
-
-Ce sont donc des triangles isométriques et :
-
-$$ \abs{AC} = \abs{CB} $$
-
-En tenant compte de tous ces résultats, l’inégalité triangulaire
-devient :
-
-$$ 2 \ \abs{AI} \le 2 \ \abs{AC} $$
-
-c’est-à-dire :
-
-$$ \abs{AI} \le \abs{AC} $$
-
-Lorsque $C$ est distinct de $I$, les points $A$, $B$ et $C$ ne sont pas
-alignés, et on a l’inégalité stricte :
-
-$$ \abs{AI} < \abs{AC} $$
-
-L’égalité n’est donc atteinte que dans le cas particulier où $C =
-I$. Parmi tous les points $C$ de la droite $d$, la projection orthogonale
-$I$ est l’unique point qui minimise la distance avec $A$ :
-
-$$ \abs{AI} = \min_{C \in d} \abs{AC} $$
-
-On a donc :
-
-$$ I = \arg\min_{C \in d} \abs{AC} $$
-
-ou encore :
-
-$$ \projection(A,d) = \arg\min_{C \in d} \abs{AC} $$
-
-* Distance entre un point et une droite
-
-La distance entre un point $A$ et une droite $d$ se définit comme étant
-la longueur minimale entre $A$ et tous les points de $d$ :
-
-$$ \distance(A,d) = \min_{B \in d} \abs{AB} $$
-
-Soit le point $I$, projection orthogonale de $A$ sur $d$ :
-
-#+attr_html: :width 40%
-#+attr_latex: :width 0.7\linewidth
-[[file:tikz/distance-entre-un-point-et-une-droite.svg]]
-
-Comme la projection orthogonale minimise la distance entre $A$ et $d$,
-on a :
-
-$$ \abs{AI} = \min_{B \in d} \abs{AB} $$
-
-On en conclut que :
-
-$$ \distance(A,d) = \abs{AI} $$
-
-La distance entre un point et une droite est égale à la distance entre
-ce point et sa projection orthogonale sur la droite.
-
-* Distance entre un point et une demi-droite
-
-#+TOC: headlines 1 local
-
-** Introduction
-
-La distance entre un point $A$ et une demi-droite $f$ se définit comme
-étant la distance minimale entre $A$ et tous les points de $f$ :
-
-$$ \distance(A,f) = \min_{B \in f} \abs{AB} $$
-
-** Projection orthogonale dans la demi-droite
-
-Soit :
-
-- $d$ la droite qui prolonge la demi-droite $f$
-- $I$ la projection orthogonale du point $A$ sur $d$, avec $I \in f$
-
-Le schéma ci-dessous représente tous ces éléments :
-
-#+attr_html: :width 45%
-#+attr_latex: :width 0.7\linewidth
-[[file:tikz/distance-entre-un-point-et-une-demi-droite-dedans.svg]]
-
-La demi-droite $f$ étant inclue dans $d$, les propriétés du minimum
-nous donnent :
-
-$$ \min_{B \in f} \abs{AB} \ge \min_{B \in d} \abs{AB} $$
-
-Mais comme :
-
-$$ \abs{AI} = \min_{B \in d} \abs{AB} $$
-
-cette équation devient :
-
-$$ \min_{B \in f} \abs{AB} \ge \abs{AI} $$
-
-Comme le point $I$ est dans $f$, on a aussi :
-
-$$ \min_{B \in f} \abs{AB} \le \abs{AI} $$
-
-par définition du minium. Ces deux dernières inégalités nous montrent
-que :
-
-$$ \min_{B \in f} \abs{AB} = \abs{AI} $$
-
-c’est-à-dire :
-
-$$ \distance(A,f) = \abs{AI} $$
-
-On a donc la même propriété que pour la distance entre un point et
-une droite.
-
-*** Condition équivalente
+*** Angle
 
 Soit $\alpha$ l’angle formé par les demi-droites $[OI)$ et $[OA)$
 
@@ -332,30 +198,166 @@ sur l’angle $\alpha$ :
 
 $$ -90^\circ \le \alpha \le 90^\circ $$
 
+#+attr_html: :width 45%
+#+attr_latex: :width 0.7\linewidth
+[[file:tikz/distance-point-demi-droite-dehors-angle.svg]]
+
+* Minimum
+:properties:
+:custom_id: heading:minimum
+:end:
+
+Soit un point $A$, une droite $d$ et la droite $p$, perpendiculaire à
+$d$ et passant par $A$ :
+
+#+attr_html: :width 35%
+#+attr_latex: :width 0.7\linewidth
+[[file:tikz/perpendiculaire-par-un-point-preuve-minimum.svg]]
+
+On note $P$ la projection orthogonale de $A$ sur $d$ :
+
+$$ P = \projection(A,d) $$
+
+On trace le point $B$, situé sur $p$ et à une distance :
+
+$$ \abs{PB} = \abs{AP} $$
+
+du point $P$. L’inégalité triangulaire des distances nous donne :
+
+$$ \abs{AB} \le \abs{AC} + \abs{CB} $$
+
+Or :
+
+$$ \abs{AB} = \abs{AP} + \abs{PB} = 2 \ \abs{AP} $$
+
+Les triangles rectangles $APC$ et $BPC$ ont  :
+
+- une cathète commune $[P,C]$
+- leurs autres cathètes $[A,P]$ et $[B,P]$ de même longueur,
+  par construction du point $B$
+
+Ce sont donc des triangles isométriques et :
+
+$$ \abs{AC} = \abs{CB} $$
+
+En tenant compte de tous ces résultats, l’inégalité triangulaire
+devient :
+
+$$ 2 \ \abs{AP} \le 2 \ \abs{AC} $$
+
+c’est-à-dire :
+
+$$ \abs{AP} \le \abs{AC} $$
+
+Lorsque $C$ est distinct de $P$, les points $A$, $B$ et $C$ ne sont pas
+alignés, et on a l’inégalité stricte :
+
+$$ \abs{AP} < \abs{AC} $$
+
+L’égalité n’est donc atteinte que dans le cas particulier où $C =
+P$. Parmi tous les points $C$ de la droite $d$, la projection orthogonale
+$P$ est l’unique point qui minimise la distance avec $A$ :
+
+$$ \abs{AP} = \min_{C \in d} \abs{AC} $$
+
+On a donc :
+
+$$ P = \arg\min_{C \in d} \abs{AC} $$
+
+ou encore :
+
+$$ \projection(A,d) = \arg\min_{C \in d} \abs{AC} $$
+
+* Distance entre un point et une droite
+
+La distance entre un point $A$ et une droite $d$ se définit comme étant
+la longueur minimale entre $A$ et tous les points de $d$ :
+
+$$ \distance(A,d) = \min_{X \in d} \abs{AX} $$
+
+Soit le point $P$, projection orthogonale de $A$ sur $d$ :
+
+#+attr_html: :width 40%
+#+attr_latex: :width 0.7\linewidth
+[[file:tikz/distance-entre-un-point-et-une-droite.svg]]
+
+Comme la projection orthogonale minimise la distance entre $A$ et $d$,
+on a :
+
+$$ \abs{AP} = \min_{X \in d} \abs{AX} $$
+
+On en conclut que :
+
+$$ \distance(A,d) = \abs{AP} $$
+
+La distance entre un point et une droite est égale à la distance entre
+ce point et sa projection orthogonale sur la droite.
+
+* Distance entre un point et une demi-droite
+
+#+TOC: headlines 1 local
+
+** Introduction
+
+La distance entre un point $A$ et une demi-droite $f$ se définit comme
+étant la distance minimale entre $A$ et tous les points de $f$ :
+
+$$ \distance(A,f) = \min_{B \in f} \abs{AB} $$
+
+** Projection orthogonale dans la demi-droite
+
+Soit :
+
+- $d$ la droite qui prolonge la demi-droite $f$
+- $P$ la projection orthogonale du point $A$ sur $d$, avec $P \in f$
+
+Le schéma ci-dessous représente tous ces éléments :
+
+#+attr_html: :width 45%
+#+attr_latex: :width 0.7\linewidth
+[[file:tikz/distance-entre-un-point-et-une-demi-droite-dedans.svg]]
+
+La demi-droite $f$ étant inclue dans $d$, les propriétés du minimum
+nous donnent :
+
+$$ \min_{X \in f} \abs{AX} \ge \min_{X \in d} \abs{AX} $$
+
+Mais comme :
+
+$$ \abs{AP} = \min_{X \in d} \abs{AX} $$
+
+cette équation devient :
+
+$$ \min_{X \in f} \abs{AX} \ge \abs{AP} $$
+
+Comme le point $P$ est dans $f$, on a aussi :
+
+$$ \min_{X \in f} \abs{AX} \le \abs{AP} $$
+
+par définition du minimum. Ces deux dernières inégalités nous montrent
+que :
+
+$$ \min_{X \in f} \abs{AX} = \abs{AP} $$
+
+c’est-à-dire :
+
+$$ \distance(A,f) = \abs{AP} $$
+
+On a donc la même propriété que pour la distance entre un point et
+une droite.
+
 ** Projection orthogonale en dehors de la demi-droite
 
 Soit :
 
 - $d$ la droite qui prolonge la demi-droite $f$
-- $I$ la projection orthogonale du point $A$ sur $d$, avec $I \notin f$
+- $P$ la projection orthogonale du point $A$ sur $d$, avec $P \notin f$
 
 Le schéma ci-dessous représente tous ces éléments :
 
 #+attr_html: :width 45%
 #+attr_latex: :width 0.7\linewidth
 [[file:tikz/distance-entre-un-point-et-une-demi-droite-dehors.svg]]
-
-*Remarque* : la condition $I \notin f$ est équivalente à demander
-que l’angle $\alpha$ soit en dehors de l’intervalle $[-90^\circ,
-90^\circ]$.
-
-*** Condition équivalente
-
-Soit $\alpha$ l’angle formé par les demi-droites $[OI)$ et $[OA)$
-
-#+attr_html: :width 45%
-#+attr_latex: :width 0.7\linewidth
-[[file:tikz/distance-point-demi-droite-dehors-angle.svg]]
 
 * Distance entre deux droites parallèles
 

@@ -10,7 +10,7 @@
 % parameters %{{{1
 
 	\def\len{0}
-	\def\gth{4}
+	\def\gth{5}
 
 	\def\ang{140}
 
@@ -36,18 +36,22 @@
 	\coordinate (J) at (0:{0.4*\gth});
 	\coordinate (K) at (\ang:{0.4*\gth});
 
-	\coordinate (A) at ({\ang/2.2}:{0.7*\gth});
-	\coordinate (B) at (3,2);
+	%\coordinate (A) at ({\ang/2.2}:{0.7*\gth});
+	%\coordinate (B) at (3,2);
 	\coordinate (C) at (-1,3);
 
-	\coordinate (SA) at ($ (A) - (S) $);
-	\coordinate (AX) at ($ (S) - \ratio*(SA) $);
-	\coordinate (AY) at ($ (S) + \fraction*(SA) $);
+	%\coordinate (SA) at ($ (A) - (S) $);
+	%\coordinate (AX) at ($ (S) - \ratio*(SA) $);
+	%\coordinate (AY) at ($ (S) + \fraction*(SA) $);
 
-	\coordinate (O) at ($(DX)!(A)!(DY)$);
-	\coordinate (P) at ($(FX)!(A)!(FY)$);
+	\coordinate (SC) at ($ (C) - (S) $);
+	\coordinate (CX) at ($ (S) - \ratio*(SC) $);
+	\coordinate (CY) at ($ (S) + \fraction*(SC) $);
 
-	\coordinate (U) at ($(DX)!(B)!(DY)$);
+	%\coordinate (O) at ($(DX)!(A)!(DY)$);
+	%\coordinate (P) at ($(FX)!(A)!(FY)$);
+
+	%\coordinate (U) at ($(DX)!(B)!(DY)$);
 
 	\coordinate (V) at ($(FX)!(C)!(FY)$);
 
@@ -93,13 +97,13 @@
 
 	%\fill (A) circle (0.4mm);
 	%\fill (B) circle (0.4mm);
-	%\fill (C) circle (0.4mm);
+	\fill (C) circle (0.4mm);
 
 	%\fill (O) circle (0.4mm);
 	%\fill (P) circle (0.4mm);
 
 	%\fill (U) circle (0.4mm);
-	%\fill (V) circle (0.4mm);
+	\fill (V) circle (0.4mm);
 
 	%\fill (DX) circle (0.4mm);
 	%\fill (DY) circle (0.4mm);
@@ -117,14 +121,17 @@
 
 	%\draw (AX) -- (AY);
 
+	\draw (S) -- (C);
+	\draw[dashed] (C) -- (CY);
+
 	%\draw[dashed] (A) -- (O);
 	%\draw[dashed] (A) -- (P);
 
 	%\draw[dashed] (B) -- (U);
 	%\draw[dashed] (B) -- (S);
 
-	%\draw[dashed] (C) -- (S);
-	%\draw[dashed] (C) -- (V);
+	\draw[dashed] (C) -- (S);
+	\draw[dashed] (C) -- (V);
 
 	\draw (HX) -- (HY);
 	\draw (LX) -- (LY);
@@ -150,11 +157,11 @@
 	%\node[above left] at (K) {$K$};
 	%\node[above] at (A) {$A$};
 	%\node[above] at (B) {$B$};
-	%\node[above] at (C) {$C$};
+	\node[above right] at (C) {$C$};
 	%\node[below] at (O) {$O$};
 	%\node[below left] at (P) {$P$};
 	%\node[below] at (U) {$U$};
-	%\node[below left] at (V) {$V$};
+	\node[below left] at (V) {$V$};
 
 % segments, sides, lines labels %{{{1
 
@@ -164,6 +171,8 @@
 
 	\node[left] at ($ (HX)!0.9!(HY) $) {$h$};
 	\node[above left] at ($ (LX)!0.9!(LY) $) {$l$};
+
+	\node[below left] at ($ (C)!0.9!(CY) $) {$g$};
 
 	%\node[below] at ($ (DX)!0.3!(S) $) {$a$};
 	%\node[below left] at ($ (FX)!0.3!(S) $) {$c$};
@@ -192,10 +201,10 @@
 % right angles markers %{{{2
 
 	\pic [draw, angle radius=7pt, angle eccentricity=1]
-	{right angle = HX--S--O};
+	{right angle = HX--S--DY};
 
 	\pic [draw, angle radius=7pt, angle eccentricity=1]
-	{right angle = P--S--LX};
+	{right angle = FY--S--LX};
 
 	%\pic [draw, angle radius=7pt, angle eccentricity=1]
 	%{right angle = S--O--A};

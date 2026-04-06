@@ -1,89 +1,68 @@
 
-% header %{{{1
+\input{../../include/latex/tikz/header.tex}
 
-\documentclass[tikz, border=1mm]{standalone}
-
-\usepackage{amsmath}
-\usepackage{mathrsfs}
-
-\usetikzlibrary{calc,angles,quotes,intersections,shapes.geometric}
-
-\usepackage{tkz-euclide}
-
-\definecolor{goldenbrown}{HTML}{5b3c11}
-
-\tikzset{
-	% ---- default
-	every path/.style={line width=0.3pt},
-	every coordinate/.style={fill=black, circle, inner sep=1pt},
-	every node/.style={font=\normalsize},
-	every picture/.style={scale=1.0},
-	% ---- custom
-	construction/.style={line width=0.1pt, dashed},
-	dimension/.style={line width=0.2pt, <->, goldenbrown},
-	dimension extension/.style={line width=0.2pt, dashed, goldenbrown},
-	vector/.style={->, thick},
-}
-
-% document %{{{1
-
-% opening %{{{2
+% opening %{{{1
 
 \begin{document}
 \begin{tikzpicture}[scale=0.9]
 
-% parameters %{{{2
+% parameters %{{{1
 
-	\def\radius{4}
+	\def\radius{3}
 
-% coordinates %{{{2
+% coordinates %{{{1
 
 	\coordinate (O) at (0,0);
 	\coordinate (A) at (0:-\radius);
 	\coordinate (B) at (0:\radius);
 
-% points for dimension lines %{{{2
+% points for dimension lines %{{{1
 
-	\coordinate (Ad) at ($(A) + (0,4.5)$);
-	\coordinate (Bd) at ($(B) + (0,4.5)$);
+	\coordinate (Ad) at ($(A) + (0,3.5)$);
+	\coordinate (Bd) at ($(B) + (0,3.5)$);
 
-% circle %{{{2
+% circle %{{{1
 
 	\draw (O) circle (\radius);
 
-% diameter %{{{2
+% diameter %{{{1
 
 	\draw (A) -- (B);
 
-% dimension lines %{{{2
+% dimension lines %{{{1
 
 	\draw[dimension] (Ad) -- (Bd);
 	\draw[dimension extension] (Ad) -- (A);
 	\draw[dimension extension] (Bd) -- (B);
 
-% points, dots, vertices %{{{2
+% points, dots, vertices %{{{1
 
 	\fill (O) circle (0.5mm);
 	\fill (A) circle (0.5mm);
 	\fill (B) circle (0.5mm);
 
-% points, dots, vertices labels %{{{2
+% points, dots, vertices labels %{{{1
 
 	\node[below] at (O) {$O$};
 	\node[below left] at (A) {$A$};
 	\node[below right] at (B) {$B$};
 
-% segments labels %{{{2
+% segments labels %{{{1
 
 	\node[above] at ($(O)!0.5!(A)$) {$r$};
 	\node[above] at ($(O)!0.5!(B)$) {$r$};
 	\node[above, goldenbrown] at ($(Ad)!0.5!(Bd)$) {$d$};
 
-% circle label %{{{2
+% segments, sides, lines marks %{{{1
+
+	\tkzMarkSegments[mark=||, size=2pt](O,A)
+	\tkzMarkSegments[mark=||, size=2pt](O,B)
+
+% circle label %{{{1
 
 	\node at (45:{\radius+0.3}) {$\mathscr{C}$};
 
-% closing %{{{2
+% closing %{{{1
 
 \end{tikzpicture}
 \end{document}

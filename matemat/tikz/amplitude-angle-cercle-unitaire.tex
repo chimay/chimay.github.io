@@ -1,134 +1,83 @@
 
-% header %{{{1
+\input{../../include/latex/tikz/header.tex}
 
-% opening %{{{2
-
-\documentclass[tikz, border=1mm]{standalone}
-
-% packages and libraries %{{{2
-
-\usepackage{../../include/latex/tex/custom}
-
-\usetikzlibrary{calc,angles,quotes}
-
-% colors %{{{2
-
-\definecolor{goldenbrown}{HTML}{5b3c11}
-
-% style %{{{2
-
-\tikzset{
-	% ------- every something
-	every picture/.style={
-		scale=1.0,
-	},
-	every coordinate/.style={
-		fill=black, circle, inner sep=1pt,
-	},
-	every path/.style={
-		line width=0.3pt,
-	},
-	every node/.style={
-		font=\normalsize,
-	},
-	every angle/.style={
-	},
-	every pic/.style={
-		% ---- does not worl
-		%draw,
-		%-{Straight Barb[length=1.2mm]},
-	},
-	% ------- custom
-	construction/.style={
-		line width=0.1pt,
-		dashed,
-	},
-	vector/.style={
-		-{Straight Barb[length=1.2mm]},
-		%thick,
-	},
-	dimension/.style={
-		line width=0.2pt,
-		<->,
-		goldenbrown,
-	},
-	dimension extension/.style={
-		line width=0.2pt,
-		dashed,
-		goldenbrown,
-	},
-}
-
-% document %{{{1
-
-% opening %{{{2
+% opening %{{{1
 
 \begin{document}
 \begin{tikzpicture}[scale=2.5]
 
-% parameters %{{{2
+% parameters %{{{1
 
-	\def\len{2.0}
-	\def\radius{1}
-	\def\extratio{1.2}
+	\def\unit{1.4}
+	\def\len{1.7}
 
-% coordinates %{{{2
+	\def\ang{40}
+
+	\def\extratio{1.0}
+
+% coordinates %{{{1
 
 	\coordinate (A) at (0,0);
-	\coordinate (B) at (\len,0);
-	\coordinate (C) at ({\len*cos(40)}, {\len*sin(40)});
-	\coordinate (D) at (\radius,0);
-	\coordinate (E) at ({\radius*cos(40)}, {\radius*sin(40)});
+
+	\coordinate (U) at (\unit,0);
+	\coordinate (V) at (\ang:\unit);
+
 	\coordinate (X) at ({\extratio*\len},0);
-	\coordinate (Y) at ({\extratio*\len*cos(40)}, {\extratio*\len*sin(40)});
+	\coordinate (Y) at (\ang:{\extratio*\len});
 
-% coordinates for dimension lines %{{{2
+% coordinates for dimension lines %{{{1
 
-	\coordinate (Ad) at ($ (A) + (0,-0.4) $);
-	\coordinate (Dd) at ($ (D) + (0,-0.4) $);
+	%\coordinate (dimA) at ($ (A) + (0,-0.4) $);
+	%\coordinate (dimU) at ($ (U) + (0,-0.4) $);
 
-% dots, points, vertices %{{{2
+% dots, points, vertices %{{{1
 
 	\fill (A) circle (0.2mm);
-	\fill (B) circle (0.2mm);
-	\fill (C) circle (0.2mm);
-	\fill (D) circle (0.2mm);
-	\fill (E) circle (0.2mm);
 
-% radius lines %{{{2
+% radius lines %{{{1
 
 	\draw (A) -- (X);
 	\draw (A) -- (Y);
 
-% dimension lines %{{{2
+% dimension lines %{{{1
 
-	\draw[dimension] (Ad) -- (Dd);
-	\draw[dimension extension] (A) -- (Ad);
-	\draw[dimension extension] (D) -- (Dd);
+	%\draw[dimension] (dimA) -- (dimU);
+	%\draw[dimension extension] (A) -- (dimA);
+	%\draw[dimension extension] (U) -- (dimU);
 
-% arc to represent the angle %{{{2
+% arc to represent the angle %{{{1
 
-	\draw (D) arc[start angle=0, end angle=40, radius=\radius]
-	node[midway, right=2pt] {$\arcdecercle{DE}$};
+	\draw[thick, vector] (A) ++(0:\unit) arc (0:\ang:\unit);
 
-% vertices labels %{{{2
+	%\draw[vector] (D) arc[start angle=0, end angle=40, radius=\unit]
+		%node[midway, right=2pt] {$\arcdecercle{DE}$};
+
+% vertices labels %{{{1
 
 	\node[below left] at (A) {$A$};
-	\node[below] at (B) {$B$};
-	\node[above] at (C) {$C$};
-	\node[below right] at (D) {$D$};
-	\node[above] at (E) {$E$};
 
-% segments, sides labels %{{{2
+% segments, sides labels %{{{1
 
-	\node[below, goldenbrown] at ($ (Ad)!0.5!(Dd) $) {$1$};
+	\node[below] at ($ (A)!0.5!(U) $) {$1$};
+	\node[above left] at ($ (A)!0.5!(V) $) {$1$};
 
-% angle label %{{{2
+	%\node[below, goldenbrown] at ($ (dimA)!0.5!(dimU) $) {$1$};
+
+% circular arcs labels %{{{2
+
+	\node at ($ (A) + ({\ang/2}:\unit + 0.15) $) {$\Gamma$};
+
+% segments, sides, lines marks %{{{1
+
+	\tkzMarkSegments[mark=||, size=2pt](A,U)
+	\tkzMarkSegments[mark=||, size=2pt](A,V)
+
+% angle label %{{{1
 
 	\pic[draw, ->, "$\alpha$", angle radius=1.3cm, angle eccentricity=1.2]
-	{angle = B--A--C};
+	{angle = U--A--V};
 
-% closing %{{{2
+% closing %{{{1
 
 \end{tikzpicture}
 \end{document}

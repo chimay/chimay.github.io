@@ -48,12 +48,36 @@
 	\coordinate (XCA) at ($ (MCA)!-\lenBisectorX!90:(A) $);
 	\coordinate (YCA) at ($ (MCA)!\lenBisectorY!90:(A) $);
 
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=line1] (A) -- (B);
+		\path[name path=line2] (XAB) -- (YAB);
+		\path[name intersections={of=line1 and line2, by=P}];
+	\end{pgfinterruptboundingbox}
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=line1] (B) -- (C);
+		\path[name path=line2] (XBC) -- (YBC);
+		\path[name intersections={of=line1 and line2, by=S}];
+	\end{pgfinterruptboundingbox}
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=line1] (C) -- (A);
+		\path[name path=line2] (XCA) -- (YCA);
+		\path[name intersections={of=line1 and line2, by=T}];
+	\end{pgfinterruptboundingbox}
+
 % points, dots, vertices %{{{1
 
 	\fill (O) circle (0.4mm);
 	\fill (A) circle (0.4mm);
 	\fill (B) circle (0.4mm);
 	\fill (C) circle (0.4mm);
+
+	\fill (P) circle (0.4mm);
+	\fill (S) circle (0.4mm);
+	\fill (T) circle (0.4mm);
 
 % segments, sides %{{{1
 
@@ -94,6 +118,22 @@
 % circle label %{{{1
 
 	\node at (60:{\radius+0.3}) {$\mathscr{C}$};
+
+% angles labels %{{{1
+
+	%\pic[draw, ->, "$\alpha$", angle radius=0.8cm, angle eccentricity=1.5]
+	%{angle = B--A--C};
+
+% right angles markers %{{{2
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = A--P--YAB};
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = B--S--YBC};
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = C--T--YCA};
 
 % closing %{{{1
 

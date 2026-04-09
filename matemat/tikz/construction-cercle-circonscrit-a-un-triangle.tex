@@ -1,0 +1,103 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\def\radius{3.5}
+
+	\def\ang{200}
+	\def\ngl{-30}
+	\def\gle{110}
+
+% coordinates %{{{1
+
+	\coordinate (O) at (0,0);
+	\coordinate (A) at (\ang:\radius);
+	\coordinate (B) at (\ngl:\radius);
+	\coordinate (C) at (\gle:\radius);
+
+% perpendicular bisectors %{{{3
+
+	% ------- médiatrice
+
+	% ---- assuming \lenBisector* is defined in cm
+	% ---- not without unit, for it would be a scale factor
+
+	\def\lenBisectorX{2.5cm}
+	\def\lenBisectorY{5.2cm}
+
+	% ------- médiatrice [A,B]
+
+	\coordinate (MAB) at ($ (A)!0.5!(B) $);
+	\coordinate (XAB) at ($ (MAB)!-\lenBisectorX!90:(B) $);
+	\coordinate (YAB) at ($ (MAB)!\lenBisectorY!90:(B) $);
+
+	% ------- médiatrice [B,C]
+
+	\coordinate (MBC) at ($ (B)!0.5!(C) $);
+	\coordinate (XBC) at ($ (MBC)!-\lenBisectorX!90:(C) $);
+	\coordinate (YBC) at ($ (MBC)!\lenBisectorY!90:(C) $);
+
+	% ------- médiatrice [C,A]
+
+	\coordinate (MCA) at ($ (C)!0.5!(A) $);
+	\coordinate (XCA) at ($ (MCA)!-\lenBisectorX!90:(A) $);
+	\coordinate (YCA) at ($ (MCA)!\lenBisectorY!90:(A) $);
+
+% points, dots, vertices %{{{1
+
+	\fill (O) circle (0.4mm);
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+	\fill (C) circle (0.4mm);
+
+% segments, sides %{{{1
+
+	\draw (A) -- (B) -- (C) -- cycle;
+
+	\draw (XAB) -- (YAB);
+	\draw (XBC) -- (YBC);
+	\draw (XCA) -- (YCA);
+
+	\draw[dashed] (O) -- (A);
+	\draw[dashed] (O) -- (B);
+	\draw[dashed] (O) -- (C);
+
+% circles %{{{1
+
+	\draw (O) circle (\radius);
+
+% points, dots, vertices labels %{{{1
+
+	\node[anchor=north west] at ($ (O) + (-100:0.1) $) {$O$};
+
+	\node[left] at (A) {$A$};
+	\node[right] at (B) {$B$};
+	\node[above] at (C) {$C$};
+
+% segments, sides, lines labels %{{{1
+
+	\node[left] at ($ (XAB)!0.2!(YAB) $) {$m$};
+	\node[above left] at ($ (XBC)!0.1!(YBC) $) {$p$};
+	\node[above] at ($ (XCA)!0.1!(YCA) $) {$s$};
+
+% segments, sides, lines marks %{{{1
+
+	\tkzMarkSegments[mark=||, size=2pt](O,A)
+	\tkzMarkSegments[mark=||, size=2pt](O,B)
+	\tkzMarkSegments[mark=||, size=2pt](O,C)
+
+% circle label %{{{1
+
+	\node at (60:{\radius+0.3}) {$\mathscr{C}$};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

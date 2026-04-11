@@ -14,6 +14,7 @@
 		\rotation = 90 ;
 		\numsidesfloat = 6.0 ;
 		\numsides = int(\numsidesfloat) ;
+		\numsidesminus = \numsides - 1 ;
 		int \i ;
 		for \i in {1,...,\numsides} {
 			\ang{\i} = \rotation + 360 / \numsidesfloat * (\i-1) ;
@@ -26,34 +27,6 @@
 
 	\foreach \i in {1,...,\numsides}
 		\coordinate (P_\i) at (\ang{\i}:\radius);
-
-% intersections %{{{1
-
-	%\begin{pgfinterruptboundingbox}
-		%\path[name path=line1] (A) -- (C);
-		%\path[name path=line2] (B) -- (D);
-		%\path[name intersections={of=line1 and line2, by=I}];
-	%\end{pgfinterruptboundingbox}
-
-	%\begin{pgfinterruptboundingbox}
-		%\path[name path=line] (A) -- (B);
-		%\path[name path=circle] (C) circle (\radius);
-		%\path[name intersections={of=line and circle, by={I,J}}];
-	%\end{pgfinterruptboundingbox}
-
-	%\begin{pgfinterruptboundingbox}
-		%\path[name path=circleA] (A) circle (\radius);
-		%\path[name path=circleB] (B) circle (\radius);
-		%\path[name intersections={of=circleA and circleB, by={I,J}}];
-	%\end{pgfinterruptboundingbox}
-
-% distance %{{{1
-
-	%\path let \p1 = ($ (B) - (A) $)
-	%in \pgfextra{
-		%\pgfmathsetmacro{\distAB}{veclen(\x1,\y1)/1cm}
-		%\global\let\distAB\distAB
-	%};
 
 % points, dots, vertices %{{{1
 
@@ -76,10 +49,6 @@
 	%\path[draw] let \p1 = ($ (A) - (O) $)
 	%in (O) circle ({veclen(\x1,\y1)});
 
-% circular arcs %{{{2
-
-	%\draw (A) ++(\ang:\radius) arc (\ang:\gle:\radius);
-
 % points, dots, vertices labels %{{{1
 
 	\node[anchor=east] at ($ (O) + (180:0.15) $) {$O$};
@@ -93,12 +62,20 @@
 
 % segments, sides, lines labels %{{{1
 
-	%\node[above] at ($ (A)!0.5!(B) $) {$d$};
+	\node[above left] at ($ (P_1)!0.5!(P_2) $) {$c$};
+	\node[left] at ($ (O)!0.5!(P_1) $) {$r$};
 
 % segments, sides, lines marks %{{{1
 
-	%\tkzMarkSegments[mark=||, size=2pt](A,B)
-	%\tkzMarkSegments[mark=||, size=2pt](C,D)
+	\foreach \i in {1,...,\numsides}
+		\tkzMarkSegments[mark=||, size=2pt](O,P_\i);
+
+		\foreach \i
+			[evaluate=\i as \j using { int(mod(\i,\numsides) + 1) }]
+			in {1,...,\numsides}
+		{
+			\tkzMarkSegments[mark=|, size=2pt](P_\i,P_\j);
+		}
 
 % circles labels %{{{1
 
@@ -120,6 +97,12 @@
 		\pic[draw, ->, "$\alpha$", angle radius=\angradius, angle eccentricity=1.3]
 		{angle = P_\i--O--P_\j};
 	}
+
+	\pic[draw, ->, "$\beta$", angle radius=0.7cm, angle eccentricity=1.4]
+	{angle = P_2--P_1--O};
+
+	\pic[draw, ->, "$\gamma$", angle radius=0.7cm, angle eccentricity=1.3]
+	{angle = O--P_2--P_1};
 
 % right angles markers %{{{2
 

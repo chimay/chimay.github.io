@@ -11,15 +11,15 @@
 
 	\tikzmath {
 		\unit = 6.0 ;
-		\numunits = int(5);
-		\numunitsminus = \numunits - 1;
+		\numunits = int(5) ;
+		\numunitsminus = \numunits - 1 ;
 		\sqrtnumunitsplus = sqrt(\numunits + 1)*\unit ;
 		int \i ;
 		for \i in {1,...,\numunits} {
-			\len{\i} = sqrt(\i)*\unit;
+			\len{\i} = sqrt(\i)*\unit ;
 		};
 		for \i in {1,...,\numunits} {
-			\ang{\i} = atan2(\unit, \len{\i});
+			\ang{\i} = atan2(\unit, \len{\i}) ;
 		};
 	}
 
@@ -32,10 +32,10 @@
 	\coordinate (v) at (0,1);
 
 	\foreach \i in {1,...,\numunits}
-		\coordinate (P\i) at ($(A) + {\len{\i}}*(u) $);
+		\coordinate (P_\i) at ($(A) + {\len{\i}}*(u) $);
 
 	\foreach \i in {1,...,\numunits}
-		\coordinate (T\i) at ($(B) + {\len{\i}}*(u) $);
+		\coordinate (T_\i) at ($(B) + {\len{\i}}*(u) $);
 
 	\coordinate (PX) at (A);
 	\coordinate (PY) at ($ (A) + \sqrtnumunitsplus*(u) $);
@@ -52,10 +52,10 @@
 	\fill (B) circle (0.4mm);
 
 	\foreach \i in {1,...,\numunits}
-		\fill (P\i) circle (0.4mm);
+		\fill (P_\i) circle (0.4mm);
 
 	\foreach \i in {1,...,\numunits}
-		\fill (T\i) circle (0.4mm);
+		\fill (T_\i) circle (0.4mm);
 
 % segments, sides, lines %{{{1
 
@@ -64,21 +64,21 @@
 	\draw (TX) -- (TY);
 
 	\foreach \i in {1,...,\numunits}
-		\draw (P\i) -- (T\i);
+		\draw (P_\i) -- (T_\i);
 
-	\draw[dashed] (A) -- (T1);
+	\draw[dashed] (A) -- (T_1);
 
 	%\foreach \i in {1,...,\numunits}
-		%\draw[dashdotted] (A) -- (T\i);
+		%\draw[dashdotted] (A) -- (T_\i);
 
 % circles %{{{1
 
 % circular arcs %{{{2
 
-	\draw (P2) arc (0:{\ang{1}}:{\len{2}});
-	\draw (P3) arc (0:{\ang{2}}:{\len{3}});
-	\draw (P4) arc (0:{\ang{3}}:{\len{4}});
-	\draw (P5) arc (0:{\ang{4}}:{\len{5}});
+	\draw (P_2) arc (0:{\ang{1}}:{\len{2}});
+	\draw (P_3) arc (0:{\ang{2}}:{\len{3}});
+	\draw (P_4) arc (0:{\ang{3}}:{\len{4}});
+	\draw (P_5) arc (0:{\ang{4}}:{\len{5}});
 
 % points, dots, vertices labels %{{{1
 
@@ -86,10 +86,10 @@
 	\node[left] at (B) {$B$};
 
 	\foreach \i in {1,...,\numunits}
-		\node[below] at (P\i) {$P_\i$};
+		\node[below] at (P_\i) {$P_\i$};
 
 	\foreach \i in {1,...,\numunits}
-		\node[above] at (T\i) {$T_\i$};
+		\node[above] at (T_\i) {$T_\i$};
 
 % segments, sides, lines labels %{{{1
 
@@ -98,9 +98,9 @@
 % segments, sides, lines marks %{{{1
 
 	\tkzMarkSegments[mark=||, size=2pt](A,B)
-	\tkzMarkSegments[mark=||, size=2pt](A,P1)
-	\tkzMarkSegments[mark=||, size=2pt](B,T1)
-	\tkzMarkSegments[mark=||, size=2pt](P1,T1)
+	\tkzMarkSegments[mark=||, size=2pt](A,P_1)
+	\tkzMarkSegments[mark=||, size=2pt](B,T_1)
+	\tkzMarkSegments[mark=||, size=2pt](P_1,T_1)
 
 % circles labels %{{{1
 
@@ -126,9 +126,9 @@
 
 	\foreach \i in {1,...,\numunits} {
 		\pic [draw, angle radius=7pt, angle eccentricity=1]
-		{right angle = T\i--P\i--A};
+		{right angle = T_\i--P_\i--A};
 		\pic [draw, angle radius=7pt, angle eccentricity=1]
-		{right angle = B--T\i--P\i};
+		{right angle = B--T_\i--P_\i};
 	}
 
 % closing %{{{1

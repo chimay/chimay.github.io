@@ -78,17 +78,36 @@
 		%\ang = atan2(dy, dx) ;
 	%}
 
-% grid %{{{3
+% array %{{{3
+
+	% ------- warning
+	% ---- int \var ;
+	% ------- and not
+	% ---- \int \var ;
+	% ------- no backslash before int
 
 	%\tikzmath{
-		%\xnum = int(4);
-		%\ynum = int(3);
-		%\xnumM = int(\xnum - 1);
-		%\ynumM = int(\ynum - 1);
-		%\xstep = 2.1;
-		%\ystep = 2.1;
+		%\radius = 2.0 ;
+		%\rotation = 90 ;
+		%\numsidesfloat = 6.0 ;
+		%\numsides = int(\numsidesfloat) ;
+		%int \i ;
+		%for \i in {1,...,\numsides} {
+			%\ang{\i} = \rotation + 360 / \numsides * (\i-1) ;
+		%};
+	%}
+
+	%\tikzmath {
+		%\unit = 6.0 ;
+		%\numunits = int(5) ;
+		%\numunitsminus = \numunits - 1 ;
+		%\sqrtnumunitsplus = sqrt(\numunits + 1)*\unit ;
+		%int \i ;
 		%for \i in {1,...,\numunits} {
-			%\len{\i} = sqrt(\i);
+			%\len{\i} = sqrt(\i)*\unit ;
+		%};
+		%for \i in {1,...,\numunits} {
+			%\ang{\i} = atan2(\unit, \len{\i}) ;
 		%};
 	%}
 
@@ -107,7 +126,7 @@
 	%\pgfmathtruncatemacro{\last}{\numsides}
 	%\pgfmathtruncatemacro{\prevlast}{\numsides-1}
 
-% vectors and coordinates %{{{1
+% coordinates %{{{1
 
 % vectors %{{{2
 
@@ -160,10 +179,10 @@
 % loop %{{{3
 
 	%\foreach \i in {1,...,\numunits}
-		%\coordinate (P\i) at ($ (A) + \unit*\i*(v) $);
+		%\coordinate (P_\i) at ($ (A) + \unit*\i*(v) $);
 
 	%\foreach \i in {1,...,\numunits}
-		%\coordinate (P\i) at ($ (A) + {\len{\i}}*(unitV) $);
+		%\coordinate (P_\i) at ($ (A) + {\len{\i}}*(unitV) $);
 
 % perpendicularity %{{{2
 
@@ -190,8 +209,8 @@
 
 % orthonormal basis %{{{3
 
-	%\coordinate (E1) at ($(A)!1!(B)$);
-	%\coordinate (E2) at ($(A)!1!90:(B)$);
+	%\coordinate (E_1) at ($(A)!1!(B)$);
+	%\coordinate (E_2) at ($(A)!1!90:(B)$);
 
 % reflection across a straight line %{{{3
 
@@ -299,7 +318,10 @@
 % polygon vertices %{{{2
 
 	%\foreach \i in {1,...,\numsides}
-		%\coordinate (P\i) at ({360/\numsides*(\i-1)+\rotation}:\radius);
+		%\coordinate (P_\i) at ({360/\numsides*(\i-1)+\rotation}:\radius);
+
+	%\foreach \i in {1,...,\numsides}
+		%\coordinate (P_\i) at (\ang{\i}:\radius);
 
 % grid %{{{2
 
@@ -386,9 +408,9 @@
 % circle & circle %{{{3
 
 	%\begin{pgfinterruptboundingbox}
-		%\coordinate (C1) at ($ (O1) + (\radius, 0) $);
-		%\coordinate (C2) at ($ (O2) + (\ang:\radius) $);
-		%\tkzInterCC(O1,C1)(O2,C2)\tkzGetPoints{I}{J}
+		%\coordinate (C_1) at ($ (O_1) + (\radius, 0) $);
+		%\coordinate (C_2) at ($ (O_2) + (\ang:\radius) $);
+		%\tkzInterCC(O_1,C_1)(O_2,C_2)\tkzGetPoints{I}{J}
 	%\end{pgfinterruptboundingbox}
 
 % in case of two intersections %{{{3
@@ -442,7 +464,8 @@
 
 % polygon vertices %{{{2
 
-	%\foreach \i in {1,...,\numsides} \fill (P\i) circle (0.4mm);
+	%\foreach \i in {1,...,\numsides}
+		%\fill (P_\i) circle (0.4mm);
 
 % grid vertices %{{{2
 
@@ -454,7 +477,8 @@
 
 	%\draw (A) -- (B);
 
-	%\foreach \i in {1,...,6} \draw (O) -- (u\i);
+	%\foreach \i in {1,...,\numsides}
+		%\draw (O) -- (P_\i);
 
 	%\draw (O) -- ($ (A) rotated around {45:(O)} $);
 
@@ -466,9 +490,10 @@
 
 	%\draw (A) -- (B) -- (C) -- cycle;
 
-	%\draw (P1) \foreach \i in {2,...,\numsides} { -- (P\i) } -- cycle;
+	%\draw (P_1) \foreach \i in {2,...,\numsides} { -- (P_\i) } -- cycle;
 
 	% ---- needs shapes.geometric
+
 	%\node[
 		%draw,
 		%regular polygon,
@@ -526,12 +551,12 @@
 
 % radiuses %{{{2
 
-	%\draw (O) -- (P1);
+	%\draw (O) -- (P_1);
 
-	%\foreach \i in {1,...,\numsides} { \draw (O) -- (P\i); }
+	%\foreach \i in {1,...,\numsides} { \draw (O) -- (P_\i); }
 
-	%\foreach \i in {2,...,\prevlast} { \draw[dashed] (O) -- (P\i); }
-	%\foreach \i in {2,...,\numexpr\numsides-1\relax} { \draw[dashed] (O) -- (P\i); }
+	%\foreach \i in {2,...,\prevlast} { \draw[dashed] (O) -- (P_\i); }
+	%\foreach \i in {2,...,\numexpr\numsides-1\relax} { \draw[dashed] (O) -- (P_\i); }
 
 % functions plots %{{{1
 

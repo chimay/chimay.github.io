@@ -1,0 +1,115 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\tikzmath{
+		\radius = 3.4 ;
+		\rotation = 90 ;
+		\numsidesfloat = 8.0 ;
+		\numsides = int(\numsidesfloat) ;
+		\numsidesminus = \numsides - 1 ;
+		int \i ;
+		for \i in {1,...,\numsides} {
+			\ang{\i} = \rotation + 360 / \numsidesfloat * (\i-1) ;
+		};
+	}
+
+% coordinates %{{{1
+
+	\coordinate (O) at (0,0);
+
+	\foreach \i in {1,...,\numsides}
+		\coordinate (P_\i) at (\ang{\i}:\radius);
+
+% points, dots, vertices %{{{1
+
+	\fill (O) circle (0.4mm);
+
+	\foreach \i in {1,...,\numsides}
+		\fill (P_\i) circle (0.4mm);
+
+% segments, sides, lines %{{{1
+
+	\draw (P_1) \foreach \i in {2,...,\numsides} { -- (P_\i) } -- cycle;
+
+	\foreach \i in {1,...,\numsides}
+		\draw (O) -- (P_\i);
+
+% circles %{{{1
+
+	\draw (O) circle (\radius);
+
+	%\path[draw] let \p1 = ($ (A) - (O) $)
+	%in (O) circle ({veclen(\x1,\y1)});
+
+% points, dots, vertices labels %{{{1
+
+	\node[anchor=east] at ($ (O) + (130:0.2) $) {$O$};
+
+	\node[above] at (P_1) {$P_1$};
+	\node[above left] at (P_2) {$P_2$};
+	\node[left] at (P_3) {$P_3$};
+	\node[below left] at (P_4) {$P_4$};
+	\node[below] at (P_5) {$P_5$};
+	\node[below  right] at (P_6) {$P_6$};
+	\node[right] at (P_7) {$P_7$};
+	\node[above right] at (P_8) {$P_8$};
+
+% segments, sides, lines labels %{{{1
+
+	\node[below right] at ($ (P_1)!0.5!(P_2) $) {$c$};
+	\node[left] at ($ (O)!0.5!(P_1) $) {$r$};
+
+% segments, sides, lines marks %{{{1
+
+	\foreach \i in {1,...,\numsides}
+		\tkzMarkSegments[mark=||, size=2pt](O,P_\i);
+
+		\foreach \i
+			[evaluate=\i as \j using { int(mod(\i,\numsides) + 1) }]
+			in {1,...,\numsides}
+		{
+			\tkzMarkSegments[mark=|, size=2pt](P_\i,P_\j);
+		}
+
+% circles labels %{{{1
+
+	\node at ($ (O) + (70:\radius + 0.3) $) {$\mathscr{C}$};
+
+% circular arcs labels %{{{2
+
+	%\node at ($ (O) + (45:\radius + 0.3) $) {$\mathscr{C}$};
+
+% angles labels %{{{1
+
+	\foreach \i in {1,...,\numsides} {
+		\pgfmathtruncatemacro{\j}{ mod(\i,\numsides) + 1 }
+		\ifodd\i
+			\def\angradius{0.7cm}
+		\else
+			\def\angradius{0.7cm}
+		\fi
+		\pic[draw, ->, "$\alpha_\i$", angle radius=\angradius, angle eccentricity=1.3]
+			{angle = P_\i--O--P_\j};
+		\pic[draw, ->, "$\beta_\i$", angle radius=0.7cm, angle eccentricity=1.4]
+			{angle = P_\j--P_\i--O};
+		\pic[draw, ->, "$\beta_\i$", angle radius=0.7cm, angle eccentricity=1.4]
+			{angle = O--P_\j--P_\i};
+	}
+
+% right angles markers %{{{2
+
+	%\pic [draw, angle radius=7pt, angle eccentricity=1]
+	%{right angle = C--B--A};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

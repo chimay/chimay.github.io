@@ -1,0 +1,152 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\tikzmath{
+		\radius = 3.5 ;
+		\rotation = 90 ;
+		\numsidesfloat = 6.0 ;
+		\numsides = int(\numsidesfloat) ;
+		\numsidesminus = \numsides - 1 ;
+		int \i ;
+		for \i in {1,...,\numsides} {
+			\ang{\i} = \rotation + 360 / \numsidesfloat * (\i-1) ;
+		};
+	}
+
+% coordinates %{{{1
+
+	\coordinate (O) at (0,0);
+
+	\foreach \i in {1,...,\numsides}
+		\coordinate (P_\i) at (\ang{\i}:\radius);
+
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=line1] (P_1) -- (P_4);
+		\path[name path=line2] (P_3) -- (P_5);
+		\path[name intersections={of=line1 and line2, by=I}];
+	\end{pgfinterruptboundingbox}
+
+% points, dots, vertices %{{{1
+
+	\fill (O) circle (0.4mm);
+
+	\foreach \i in {1,...,\numsides}
+		\fill (P_\i) circle (0.4mm);
+
+	\fill (I) circle (0.4mm);
+
+% segments, sides, lines %{{{1
+
+	\draw (P_1) \foreach \i in {2,...,\numsides} { -- (P_\i) } -- cycle;
+
+	\draw (P_1) -- (P_3) -- (P_5) -- cycle ;
+
+	\draw (P_1) -- (P_4) ;
+
+% circles %{{{1
+
+	\draw (O) circle (\radius);
+
+	%\path[draw] let \p1 = ($ (A) - (O) $)
+	%in (O) circle ({veclen(\x1,\y1)});
+
+% points, dots, vertices labels %{{{1
+
+	\node[anchor=east] at ($ (O) + (180:0.15) $) {$O$};
+
+	\node[above] at (P_1) {$P_1$};
+	\node[left] at (P_2) {$P_2$};
+	\node[left] at (P_3) {$P_3$};
+	\node[below] at (P_4) {$P_4$};
+	\node[right] at (P_5) {$P_5$};
+	\node[right] at (P_6) {$P_6$};
+
+	\node[below left] at (I) {$I$};
+
+% segments, sides, lines labels %{{{1
+
+	\node[above left] at ($ (P_1)!0.5!(P_2) $) {$r$};
+
+	%\node[above] at ($ (P_3)!0.5!(I) $) {$a$};
+	%\node[above] at ($ (P_5)!0.5!(I) $) {$a$};
+
+% segments, sides, lines marks %{{{1
+
+	\foreach \i
+		[evaluate=\i as \j using { int(mod(\i,\numsides) + 1) }]
+		in {1,...,\numsides}
+	{
+		\tkzMarkSegments[mark=|, size=2pt](P_\i,P_\j);
+	}
+
+	\tkzMarkSegments[mark=||, size=2pt](P_1,P_3);
+	\tkzMarkSegments[mark=||, size=2pt](P_5,P_1);
+
+	\tkzMarkSegments[mark=||, size=2pt, pos=0.45](P_3,I)
+	\tkzMarkSegments[mark=||, size=2pt, pos=0.55](P_3,I)
+
+	\tkzMarkSegments[mark=||, size=2pt, pos=0.45](I,P_5)
+	\tkzMarkSegments[mark=||, size=2pt, pos=0.55](I,P_5)
+
+% circles labels %{{{1
+
+	\node at ($ (O) + (60:\radius + 0.3) $) {$\mathscr{C}$};
+
+% circular arcs labels %{{{2
+
+	%\node at ($ (O) + (45:\radius + 0.3) $) {$\mathscr{C}$};
+
+% angles labels %{{{1
+
+	%\pic[draw, ->, "$\alpha$", angle radius=1.2cm, angle eccentricity=1.3]
+	%{angle = P_2--P_1--P_3};
+
+% right angles markers %{{{2
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = P_5--I--P_1};
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = P_4--P_3--P_1};
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = P_1--P_5--P_4};
+
+	\pic[draw, ->, "$60^\circ$", angle radius=0.8cm, angle eccentricity=1.5]
+	{angle = P_5--P_3--P_1};
+
+	\pic[draw, ->, "$60^\circ$", angle radius=0.8cm, angle eccentricity=1.5]
+	{angle = P_1--P_5--P_3};
+
+	\pic[draw, ->, "$30^\circ$", angle radius=1.3cm, angle eccentricity=1.3]
+	{angle = P_3--P_1--P_4};
+
+	\pic[draw, ->, "$30^\circ$", angle radius=1.4cm, angle eccentricity=1.3]
+	{angle = P_4--P_1--P_5};
+
+	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
+	{angle = P_4--P_3--P_5};
+
+	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
+	{angle = P_3--P_5--P_4};
+
+	\pic[draw, ->, "$60^\circ$", angle radius=0.8cm, angle eccentricity=1.4]
+	{angle = P_1--P_4--P_3};
+
+	\pic[draw, ->, "$60^\circ$", angle radius=0.7cm, angle eccentricity=1.4]
+	{angle = P_5--P_4--P_1};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

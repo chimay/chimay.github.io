@@ -19,33 +19,48 @@ include ../../Makefile.inc
 
 .PHONY: clean clean-html wipe
 
+# variables {{{1
+
+PARENT_ORG_FILES  = $(wildcard ../*.org)
+ORG_FILES         = $(patsubst ../%.org,%.org,$(PARENT_ORG_FILES))
+ORG_TEX_FILES     =  $(ORG_FILES:.org=.tex)
+ORG_PDF_FILES     =  $(ORG_FILES:.org=.pdf)
+
 # debug {{{1
 
 debug:
 	@echo $(SUBDIRS)
+	# @echo $(ORG_FILES)
+	# @echo $(ORG_TEX_FILES)
+	# @echo $(ORG_PDF_FILES)
 
-#  org -> html {{{1
+# org symlinks from parent dir {{{1
 
-%.html: %.org $(INC_FILES)
-	$(EMACS) $(EMACS_PRE_FLAGS) $< $(EMACS_POST_FLAGS)
-	remove-max-width-from-org-html-export.zsh $(patsubst %.org,%.html,$<)
+%.org: ../%.org
+	ln -s $< $@
+
+org: $(ORG_FILES)
+
+# org -> tex {{{1
+
+%.tex: %.org $(INC_FILES) $(INC_LATEX_FILES)
+	$(EMACS) $(EMACS_PRE_FLAGS) $< $(EMACS_POST_FLAGS_TEX)
+	mv ../$@ .
 	@$(ECHO)
 
-html: $(ORG_HTML_FILES)
+tex: $(ORG_TEX_FILES)
 
-# sync -> html dir {{{1
+# tex --> pdf {{{1
 
-sync-html: html $(ALL_SUBDIRS)
-	$(RSYNC) $(CUR_DIR)/ $(HTML_DIR)
-	@$(ECHO)
+%.pdf: %.tex
+	latexmk -f -pdf -shell-escape $<
 
 # all, install {{{1
 
 $(ALL_SUBDIRS):
 	$(MAKELINE) -C ${@:all-%=%} all
 
-all: html $(ALL_SUBDIRS)
-
+all: $(ALL_SUBDIRS) clean
 
 # clean, wipe {{{1
 

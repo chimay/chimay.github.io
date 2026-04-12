@@ -9,11 +9,11 @@
 
 % parameters %{{{1
 
-	\def\len{1.5}
-	\def\gth{2.3}
+	\def\len{3.0cm}
+	\def\gth{5.0cm}
 
-	\def\ang{-30}
-	\def\gle{70}
+	\def\ang{70}
+	\def\gle{190}
 
 	\def\radius{3}
 
@@ -21,29 +21,29 @@
 
 	\coordinate (O) at (0,0);
 	\coordinate (A) at (\ang:\radius);
-	\coordinate (P) at (\gle:\radius);
+	\coordinate (B) at (\gle:\radius);
 
-	\coordinate (B) at ($(P)!\len!90:(O)$);
+	\coordinate (C) at ($(A)!\len!-90:(O)$);
 
-	\coordinate (X) at ($(P)!{- \gth + \len}!90:(O)$);
-	\coordinate (Y) at ($(P)!\gth!90:(O)$);
+	\coordinate (X) at ($(A)!\gth!90:(O)$);
+	\coordinate (Y) at ($(A)!\gth!-90:(O)$);
 
 % points, dots, vertices %{{{1
 
 	\fill (O) circle (0.4mm);
 	\fill (A) circle (0.4mm);
 	\fill (B) circle (0.4mm);
-	\fill (P) circle (0.4mm);
+	\fill (C) circle (0.4mm);
 
 % segments, sides %{{{1
 
-	\draw (P) -- (A);
-	\draw (P) -- (B);
+	\draw (A) -- (B);
+	\draw (A) -- (C);
 
-	\draw[dashed] (O) -- (P);
+	\draw[dashed] (O) -- (A);
 
-	\draw (X) -- (P);
-	\draw (B) -- (Y);
+	\draw (X) -- (A);
+	\draw (C) -- (Y);
 
 % circles %{{{1
 
@@ -52,23 +52,31 @@
 % points, dots, vertices labels %{{{1
 
 	\node[above left] at (O) {$O$};
-	\node[right] at (A) {$A$};
-	\node[above] at (B) {$B$};
-	\node[above] at (P) {$P$};
+	\node[above] at (A) {$A$};
+	\node[left] at (B) {$B$};
+	\node[above] at (C) {$C$};
+
+% segments, sides, lines labels %{{{1
+
+	\node[above] at ($ (X)!0.5!(A) $) {$t$};
 
 % circles labels %{{{1
 
-	\node at ($ (O)+(135:\radius+0.3) $) {$\mathscr{C}$};
+	\node at ($ (O)+(5:\radius+0.3) $) {$\mathscr{C}$};
+
+% circular arcs labels %{{{2
+
+	\node at ($ (O) + (135:\radius + 0.3) $) {$\Gamma$};
 
 % angles labels %{{{1
 
 	\pic[draw, ->, "$\alpha$", angle radius=1.2cm, angle eccentricity=1.2]
-	{angle = A--P--B};
+	{angle = C--A--B};
 
 % right angles markers %{{{2
 
 	%\pic [draw, angle radius=7pt, angle eccentricity=1]
-	%{right angle = X--P--O};
+	%{right angle = X--C--O};
 
 % closing %{{{1
 

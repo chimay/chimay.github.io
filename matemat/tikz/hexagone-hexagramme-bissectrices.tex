@@ -28,12 +28,18 @@
 	\foreach \i in {1,...,\numsides}
 		\coordinate (P_\i) at (\ang{\i}:\radius);
 
+	\foreach \i in {1,...,\numsides}
+		\coordinate (I_\i) at (\ang{\i}:{\radius/2});
+
 % points, dots, vertices %{{{1
 
 	\fill (O) circle (0.4mm);
 
 	\foreach \i in {1,...,\numsides}
 		\fill (P_\i) circle (0.4mm);
+
+	\foreach \i in {1,...,\numsides}
+		\fill (I_\i) circle (0.4mm);
 
 % segments, sides, lines %{{{1
 
@@ -78,13 +84,13 @@
 		\tkzMarkSegments[mark=|, size=2pt](P_\i,P_\j);
 	}
 
-	\tkzMarkSegments[mark=||, size=2pt](P_1,P_3);
-	\tkzMarkSegments[mark=||, size=2pt](P_3,P_5);
-	\tkzMarkSegments[mark=||, size=2pt](P_5,P_1);
+	%\tkzMarkSegments[mark=||, size=2pt](P_1,P_3);
+	%\tkzMarkSegments[mark=||, size=2pt](P_3,P_5);
+	%\tkzMarkSegments[mark=||, size=2pt](P_5,P_1);
 
-	\tkzMarkSegments[mark=||, size=2pt](P_2,P_4);
-	\tkzMarkSegments[mark=||, size=2pt](P_4,P_6);
-	\tkzMarkSegments[mark=||, size=2pt](P_6,P_2);
+	%\tkzMarkSegments[mark=||, size=2pt](P_2,P_4);
+	%\tkzMarkSegments[mark=||, size=2pt](P_4,P_6);
+	%\tkzMarkSegments[mark=||, size=2pt](P_6,P_2);
 
 % circles labels %{{{1
 
@@ -98,72 +104,45 @@
 
 	% ------- hexagram
 
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = O--P_1--P_5};
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = P_3--P_1--O};
-
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = O--P_2--P_6};
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = P_4--P_2--O};
-
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = O--P_3--P_1};
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = P_5--P_3--O};
-
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = O--P_4--P_2};
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = P_6--P_4--O};
-
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = O--P_5--P_3};
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = P_1--P_5--O};
-
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = O--P_6--P_4};
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = P_2--P_6--O};
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i - 1 + 2, \numsides) + 1) },
+			evaluate=\i as \k using { int(mod(\i - 1 + 4, \numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
+		{angle = O--P_\i--P_\k};
+		\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
+		{angle = P_\j--P_\i--O};
+	}
 
 	% ------- isosceles triangles
 
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = P_1--P_6--P_2};
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = P_6--P_2--P_1};
-
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = P_2--P_1--P_3};
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = P_1--P_3--P_2};
-
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = P_3--P_2--P_4};
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = P_2--P_4--P_3};
-
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = P_4--P_3--P_5};
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = P_3--P_5--P_4};
-
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = P_5--P_4--P_6};
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = P_4--P_6--P_5};
-
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = P_6--P_5--P_1};
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = P_5--P_1--P_6};
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i - 1 + 1, \numsides) + 1) },
+			evaluate=\i as \k using { int(mod(\i - 1 + 2, \numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
+		{angle = P_\j--P_\i--P_\k};
+		\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
+		{angle = P_\i--P_\k--P_\j};
+	}
 
 % right angles markers %{{{2
 
-	%\pic [draw, angle radius=7pt, angle eccentricity=1]
-	%{right angle = P_4--P_3--P_1};
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i, \numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\pic [draw, angle radius=7pt, angle eccentricity=1]
+		{right angle = O--I_\i--P_\j};
+	}
 
 % closing %{{{1
 

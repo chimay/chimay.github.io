@@ -31,6 +31,22 @@
 	\foreach \i in {1,...,\numsides}
 		\coordinate (I_\i) at (\ang{\i}:{\radius/2});
 
+	\coordinate (I) at (\rotation:{\radius/2});
+
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=line13] (P_1) -- (P_3);
+		\path[name path=line26] (P_2) -- (P_6);
+		\path[name intersections={of=line13 and line26, by=J}];
+	\end{pgfinterruptboundingbox}
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=line15] (P_1) -- (P_5);
+		\path[name path=line26] (P_2) -- (P_6);
+		\path[name intersections={of=line15 and line26, by=K}];
+	\end{pgfinterruptboundingbox}
+
 % points, dots, vertices %{{{1
 
 	\fill (O) circle (0.4mm);
@@ -40,6 +56,9 @@
 
 	\foreach \i in {1,...,\numsides}
 		\fill (I_\i) circle (0.4mm);
+
+	\fill (J) circle (0.4mm);
+	\fill (K) circle (0.4mm);
 
 % segments, sides, lines %{{{1
 
@@ -89,35 +108,10 @@
 
 % angles labels %{{{1
 
-	% ------- hexagram
-
-	\foreach \i
-		[
-			evaluate=\i as \j using { int(mod(\i - 1 + 2, \numsides) + 1) },
-			evaluate=\i as \k using { int(mod(\i - 1 + 4, \numsides) + 1) }
-		]
-		in {1,...,\numsides}
-	{
-		\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-		{angle = O--P_\i--P_\k};
-		\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-		{angle = P_\j--P_\i--O};
-	}
-
-	% ------- isosceles triangles
-
-	\foreach \i
-		[
-			evaluate=\i as \j using { int(mod(\i - 1 + 1, \numsides) + 1) },
-			evaluate=\i as \k using { int(mod(\i - 1 + 2, \numsides) + 1) }
-		]
-		in {1,...,\numsides}
-	{
-		\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-		{angle = P_\j--P_\i--P_\k};
-		\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-		{angle = P_\i--P_\k--P_\j};
-	}
+	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
+	{angle = O--P_1--P_5};
+	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
+	{angle = P_3--P_1--O};
 
 % right angles markers %{{{2
 

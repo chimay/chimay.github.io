@@ -1,62 +1,63 @@
 
-% header %{{{1
+\input{../../include/latex/tikz/header-light.tex}
 
-\documentclass[tikz, border=1mm]{standalone}
-
-\usepackage{amsmath}
-\usepackage{tikz}
-
-\usetikzlibrary{calc,angles,quotes}
-
-\tikzset{
-	% ---- default
-	every path/.style={line width=0.3pt},
-	every coordinate/.style={fill=black, circle, inner sep=1pt},
-	every node/.style={font=\normalsize},
-	every picture/.style={scale=1.0},
-	% ---- custom
-	construction/.style={line width=0.1pt, dashed},
-	dimension/.style={line width=0.2pt, <->, goldenbrown},
-	dimension extension/.style={line width=0.2pt, dashed, goldenbrown},
-	vector/.style={->, thick},
-}
-
-% document %{{{1
-
-% opening %{{{2
+% opening %{{{1
 
 \begin{document}
 \begin{tikzpicture}[scale=1.0]
 
-% coordinates %{{{2
+% parameters %{{{1
+
+	\tikzmath{
+		\len = 4.0 ;
+		\gth = 2 * \len ;
+		\ang{1} = 50 ;
+		\ang{2} = 70 ;
+	}
+
+% coordinates %{{{1
 
 	\coordinate (A) at (0,0);
-	\coordinate (B) at (4.5,0);
-	\coordinate (C) at (2.5,3);
+	\coordinate (B) at (\len,0);
 
-% points, dots, vertices %{{{2
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\coordinate (X) at ($ (A) + (\ang{1}:\gth) $);
+		\coordinate (Y) at ($ (B) + ({ 180 - \ang{2} }:\gth) $);
+		\path[name path=line1] (A) -- (X);
+		\path[name path=line2] (B) -- (Y);
+		\path[name intersections={of=line1 and line2, by=C}];
+	\end{pgfinterruptboundingbox}
+
+% points, dots, vertices %{{{1
 
 	\fill (A) circle (0.4mm);
 	\fill (B) circle (0.4mm);
 	\fill (C) circle (0.4mm);
 
-% segments %{{{2
+% segments, sides, lines %{{{1
 
 	\draw (A) -- (B) -- (C) -- cycle;
 
-% points, dots, vertices labels %{{{2
+% points, dots, vertices labels %{{{1
 
-	%\node[below left] at (A) {$A$};
-	%\node[below right] at (B) {$B$};
-	%\node[above] at (C) {$C$};
+	\node[below left] at (A) {$A$};
+	\node[below right] at (B) {$B$};
+	\node[above] at (C) {$C$};
 
-% segments labels %{{{2
+% angles labels %{{{1
 
-	%\node[below]  at ($(A)!0.5!(B)$) {$c$};
-	%\node[above left] at ($(A)!0.5!(C)$) {$b$};
-	%\node[above right] at ($(B)!0.5!(C)$) {$a$};
+	\pic[draw, ->, "$\alpha$", angle radius=0.8cm, angle eccentricity=1.5]
+		{angle = B--A--C};
 
-% closing %{{{2
+	\pic[draw, ->, "$\beta$", angle radius=0.8cm, angle eccentricity=1.5]
+		{angle = C--B--A};
+
+	\pic[draw, ->, "$\gamma$", angle radius=0.8cm, angle eccentricity=1.5]
+		{angle = A--C--B};
+
+% closing %{{{1
 
 \end{tikzpicture}
 \end{document}

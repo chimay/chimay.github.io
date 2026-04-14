@@ -6,11 +6,29 @@
 \begin{document}
 \begin{tikzpicture}[scale=1.0]
 
+% parameters %{{{1
+
+	\tikzmath{
+		\len = 7.0 ;
+		\gth = 2 * \len ;
+		\ang{1} = 23 ;
+		\ang{2} = 34 ;
+	}
+
 % coordinates %{{{1
 
 	\coordinate (A) at (0,0);
-	\coordinate (B) at (9,0);
-	\coordinate (C) at (3,2.5);
+	\coordinate (B) at (\len,0);
+
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\coordinate (X) at ($ (A) + (\ang{1}:\gth) $);
+		\coordinate (Y) at ($ (B) + ({ 180 - \ang{2} }:\gth) $);
+		\path[name path=line1] (A) -- (X);
+		\path[name path=line2] (B) -- (Y);
+		\path[name intersections={of=line1 and line2, by=C}];
+	\end{pgfinterruptboundingbox}
 
 % points, dots, vertices %{{{1
 
@@ -18,21 +36,26 @@
 	\fill (B) circle (0.4mm);
 	\fill (C) circle (0.4mm);
 
-% segments %{{{1
+% segments, sides, lines %{{{1
 
 	\draw (A) -- (B) -- (C) -- cycle;
 
 % points, dots, vertices labels %{{{1
 
-	%\node[below left] at (A) {$A$};
-	%\node[below right] at (B) {$B$};
-	%\node[above] at (C) {$C$};
+	\node[below left] at (A) {$A$};
+	\node[below right] at (B) {$B$};
+	\node[above] at (C) {$C$};
 
-% segments labels %{{{1
+% angles labels %{{{1
 
-	%\node[below]  at ($(A)!0.5!(B)$) {$c$};
-	%\node[above left] at ($(A)!0.5!(C)$) {$b$};
-	%\node[above right] at ($(B)!0.5!(C)$) {$a$};
+	\pic[draw, ->, "$\alpha$", angle radius=1.5cm, angle eccentricity=1.2]
+		{angle = B--A--C};
+
+	\pic[draw, ->, "$\beta$", angle radius=1.2cm, angle eccentricity=1.2]
+		{angle = C--B--A};
+
+	\pic[draw, ->, "$\gamma$", angle radius=0.5cm, angle eccentricity=1.5]
+		{angle = A--C--B};
 
 % closing %{{{1
 

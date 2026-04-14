@@ -8,14 +8,17 @@
 
 % parameters %{{{1
 
-	\def\len{4}
-	\def\ang{40}
+	\tikzmath{
+		\len = 4.0 ;
+		\ang = 100 ;
+		\gle = 90 - \ang / 2 ;
+	}
 
 % coordinates %{{{1
 
 	\coordinate (A) at (0,0);
-	\coordinate (B) at (0:{2*\len*cos(\ang)});
-	\coordinate (C) at (\ang:\len);
+	\coordinate (B) at ({180+\gle}:\len);
+	\coordinate (C) at (-\gle:\len);
 
 % points, dots, vertices %{{{1
 
@@ -23,21 +26,27 @@
 	\fill (B) circle (0.4mm);
 	\fill (C) circle (0.4mm);
 
-% triangle %{{{1
+% segments, sides, lines %{{{1
 
 	\draw (A) -- (B) -- (C) -- cycle;
 
+% points, dots, vertices labels %{{{1
+
+	\node[above] at (A) {$A$};
+	\node[below left] at (B) {$B$};
+	\node[below right] at (C) {$C$};
+
 % segment labels %{{{1
 
-	\node[above left]  at ($(A)!0.5!(C)$) {$a$};
-	\node[above right] at ($(B)!0.5!(C)$) {$a$};
+	\node[above left]  at ($(A)!0.5!(B)$) {$a$};
+	\node[above right] at ($(A)!0.5!(C)$) {$a$};
 
-	\node[below]  at ($(A)!0.5!(B)$) {$b$};
+	\node[below]  at ($(B)!0.5!(C)$) {$b$};
 
 % segments, sides marks %{{{1
 
+	\tkzMarkSegments[mark=||, size=2pt](A,B)
 	\tkzMarkSegments[mark=||, size=2pt](A,C)
-	\tkzMarkSegments[mark=||, size=2pt](B,C)
 
 % closing %{{{1
 

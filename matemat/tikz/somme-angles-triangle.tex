@@ -1,103 +1,87 @@
 
-% header %{{{1
+\input{../../include/latex/tikz/header-light.tex}
 
-\documentclass[tikz, border=1mm]{standalone}
-
-\usepackage{amsmath}
-
-\usetikzlibrary{calc,angles,quotes}
-
-\tikzset{
-	% ---- default
-	every path/.style={line width=0.3pt},
-	every coordinate/.style={fill=black, circle, inner sep=1pt},
-	every node/.style={font=\normalsize},
-	every picture/.style={scale=1.0},
-	% ---- custom
-	construction/.style={line width=0.1pt, dashed},
-	dimension/.style={line width=0.2pt, <->, goldenbrown},
-	dimension extension/.style={line width=0.2pt, dashed, goldenbrown},
-	vector/.style={->, thick},
-}
-
-% document %{{{1
-
-% opening %{{{2
+% opening %{{{1
 
 \begin{document}
-
 \begin{tikzpicture}[scale=1.0]
 
-% floating vectors %{{{2
+% parameters %{{{1
 
-	\coordinate (v1) at (-1,-1);
-	\coordinate (v2) at (2,-3);
+	\tikzmath{
+		\len = 4.0 ;
+		\gth = 2 * \len ;
+		\ang{1} = 50 ;
+		\ang{2} = 70 ;
+		\ratio = 0.7 ;
+		\lenratio = \len * \ratio ;
+	}
 
-% unit vectors %{{{3
-
-	\coordinate (u1) at ($ (0,0)!1cm!(v1) $);
-	\coordinate (u2) at ($ (0,0)!1cm!(v2) $);
-
-% coordinates %{{{2
+% coordinates %{{{1
 
 	\coordinate (A) at (0,0);
-	\coordinate (B) at (5,0);
-	\coordinate (C) at (3,3);
+	\coordinate (B) at (\len,0);
 
-	\coordinate (X1) at (-2,0);
-	\coordinate (X2) at (7,0);
+	\coordinate (X) at ($ (A) - (\lenratio,0) $);
+	\coordinate (Y) at ($ (B) + (\lenratio,0) $);
 
-	\coordinate (Y1) at (0,3);
-	\coordinate (Y2) at (6,3);
+% intersections %{{{1
 
-	\coordinate (Z1) at ($ (A) + 1.5*(u1) $);
-	\coordinate (Z2) at ($ (B) + 1.5*(u2) $);
+	\begin{pgfinterruptboundingbox}
+		\coordinate (ACX) at ($ (A) + (\ang{1}:\gth) $);
+		\coordinate (BCY) at ($ (B) + ({ 180 - \ang{2} }:\gth) $);
+		\path[name path=line1] (A) -- (ACX);
+		\path[name path=line2] (B) -- (BCY);
+		\path[name intersections={of=line1 and line2, by=C}];
+	\end{pgfinterruptboundingbox}
 
-% vertices, points, dots %{{{2
+	\coordinate (CX) at ($ (C) - (\lenratio,0) $);
+	\coordinate (CY) at ($ (C) + (\lenratio,0) $);
+
+% points, dots, vertices %{{{1
 
 	\fill (A) circle (0.4mm);
 	\fill (B) circle (0.4mm);
 	\fill (C) circle (0.4mm);
 
-% triangle sides %{{{2
+% segments, sides, lines %{{{1
 
-	\draw (A) -- (C);
-	\draw (B) -- (C);
-	\draw (X1) -- (X2);
-	\draw (Y1) -- (Y2);
-	\draw (Z1) -- (A);
-	\draw (Z2) -- (B);
+	\draw (A) -- (B) -- (C) -- cycle;
 
-% vertices labels %{{{2
+	\draw (X) -- (A) ;
+	\draw (B) -- (Y) ;
 
-	\node[above left] at (A) {$A$};
-	\node[above right] at (B) {$B$};
+	\draw (CX) -- (CY) ;
+
+% points, dots, vertices labels %{{{1
+
+	\node[below] at (A) {$A$};
+	\node[below] at (B) {$B$};
 	\node[above] at (C) {$C$};
 
-% segments, sides labels %{{{2
+% segments, sides, lines labels %{{{1
 
-	\node[above] at ($ (X1)!0.95!(X2) $) {$a$};
-	\node[above] at ($ (Y1)!0.9!(Y2) $) {$b$};
-	\node[left] at ($ (Z1)!0.4!(A) $) {$c$};
-	\node[right] at ($ (Z2)!0.4!(B) $) {$d$};
+	\node[above] at ($ (B)!0.7!(Y) $) {$d$};
+	\node[above] at ($ (C)!0.7!(CY) $) {$f$};
 
-% angles labels %{{{2
+% angles labels %{{{1
 
-	\pic[draw, ->, "$\alpha$", angle eccentricity=1.3, angle radius=1.2cm]
-	{angle = B--A--C};
-	\pic[draw, ->, "$\alpha$", angle eccentricity=1.3, angle radius=1.2cm]
-	{angle = Y1--C--A};
+	\pic[draw, ->, "$\alpha$", angle radius=0.8cm, angle eccentricity=1.5]
+		{angle = B--A--C};
 
-	\pic[draw, ->, "$\beta$", angle eccentricity=1.3, angle radius=1.2cm]
-	{angle = C--B--A};
-	\pic[draw, ->, "$\beta$", angle eccentricity=1.3, angle radius=1.2cm]
-	{angle = B--C--Y2};
+	\pic[draw, ->, "$\beta$", angle radius=0.8cm, angle eccentricity=1.5]
+		{angle = C--B--A};
 
-	\pic[draw, ->, "$\gamma$", angle eccentricity=1.3, angle radius=1.0cm]
-	{angle = A--C--B};
+	\pic[draw, ->, "$\gamma$", angle radius=0.8cm, angle eccentricity=1.5]
+		{angle = A--C--B};
 
-% closing %{{{2
+	\pic[draw, ->, "$\alpha$", angle radius=0.9cm, angle eccentricity=1.5]
+		{angle = CX--C--A};
+
+	\pic[draw, ->, "$\beta$", angle radius=0.7cm, angle eccentricity=1.5]
+		{angle = B--C--CY};
+
+% closing %{{{1
 
 \end{tikzpicture}
-
 \end{document}

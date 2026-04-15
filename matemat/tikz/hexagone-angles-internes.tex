@@ -40,9 +40,6 @@
 
 	\draw (P_1) \foreach \i in {2,...,\numsides} { -- (P_\i) } -- cycle;
 
-	\foreach \i in {1,...,\numsides}
-		\draw (O) -- (P_\i);
-
 	%\draw[dashdotdotted] (O) -- (P_6);
 
 % circles %{{{1
@@ -66,17 +63,11 @@
 % segments, sides, lines labels %{{{1
 
 	\node[above left] at ($ (P_1)!0.5!(P_2) $) {$r$};
-	\node[left] at ($ (O)!0.5!(P_1) $) {$r$};
 
 % segments, sides, lines marks %{{{1
 
-	\foreach \i in {1,...,\numsides}
-		\tkzMarkSegments[mark=||, size=2pt](O,P_\i);
-
 	\foreach \i
-		[
-			evaluate=\i as \j using { int(mod(\i,\numsides) + 1) }
-		]
+		[evaluate=\i as \j using { int(mod(\i,\numsides) + 1) }]
 		in {1,...,\numsides}
 	{
 		\tkzMarkSegments[mark=||, size=2pt](P_\i,P_\j);
@@ -92,28 +83,15 @@
 
 % angles labels %{{{1
 
-	\foreach \i in {1,...,\numsides} {
-		\pgfmathtruncatemacro{\j}{ mod(\i,\numsides) + 1 }
-		\ifodd\i
-			\def\angradius{0.7cm}
-		\else
-			\def\angradius{0.7cm}
-		\fi
-		\pic[draw, ->, "$60^\circ$", angle radius=\angradius, angle eccentricity=1.5]
-			{angle = P_\i--O--P_\j};
-	}
-
-	\foreach \i in {1,...,\numsides} {
-		\pgfmathtruncatemacro{\j}{ mod(\i,\numsides) + 1 }
-		\ifodd\i
-			\def\angradius{0.7cm}
-		\else
-			\def\angradius{0.7cm}
-		\fi
-		\pic[draw, ->, "$60^\circ$", angle radius=0.7cm, angle eccentricity=1.5]
-			{angle = P_\j--P_\i--O};
-		\pic[draw, ->, "$60^\circ$", angle radius=0.7cm, angle eccentricity=1.5]
-			{angle = O--P_\j--P_\i};
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i - 1 + 1, \numsides) + 1) },
+			evaluate=\i as \k using { int(mod(\i - 1 + 2, \numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\pic[draw, ->, "$120^\circ$", angle radius=0.8cm, angle eccentricity=1.5]
+			{angle = P_\k--P_\j--P_\i};
 	}
 
 % right angles markers %{{{2

@@ -82,12 +82,12 @@
 	\node[right] at (P_5) {$P_5$};
 	\node[right] at (P_6) {$P_6$};
 
-	\node[above left] at (S_1) {$S_1$};
-	\node[left] at (S_2) {$S_2$};
-	\node[below left] at (S_3) {$S_3$};
-	\node[below right] at (S_4) {$S_4$};
-	\node[right] at (S_5) {$S_5$};
-	\node[above right] at (S_6) {$S_6$};
+	\node[below right] at (S_1) {$S_1$};
+	\node[right] at (S_2) {$S_2$};
+	\node[above right] at (S_3) {$S_3$};
+	\node[above left] at (S_4) {$S_4$};
+	\node[left] at (S_5) {$S_5$};
+	\node[below left] at (S_6) {$S_6$};
 
 % segments, sides, lines labels %{{{1
 
@@ -108,8 +108,20 @@
 
 % angles labels %{{{1
 
-	\pic[draw, ->, "$60^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = P_3--P_1--P_5};
+	% ------- hexagram
+
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i - 1 + 2, \numsides) + 1) },
+			evaluate=\i as \k using { int(mod(\i - 1 + 4, \numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\pic[draw, ->, "$60^\circ$", angle radius=0.7cm, angle eccentricity=1.4]
+			{angle = P_\k--P_\j--P_\i};
+	}
+
+	% ------- isosceles triangles
 
 	\foreach \i
 		[

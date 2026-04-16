@@ -14,8 +14,6 @@
 		\rotation = 90 ;
 		\numsidesfloat = 5.0 ;
 		\numsides = int(\numsidesfloat) ;
-		\numsidesminus = \numsides - 1 ;
-		\numsidesminustwo = \numsides - 2 ;
 		int \i ;
 		for \i in {1,...,\numsides} {
 			\ang{\i} = \rotation + 360 / \numsidesfloat * (\i-1) ;
@@ -40,7 +38,7 @@
 
 	\draw (P_1) \foreach \i in {2,...,\numsides} { -- (P_\i) } -- cycle;
 
-	\foreach \i in {1,...,\numsidesminus}
+	\foreach \i in {1,...,\numsides}
 		\draw (O) -- (P_\i);
 
 % circles %{{{1
@@ -67,7 +65,7 @@
 
 % segments, sides, lines marks %{{{1
 
-	\foreach \i in {1,...,\numsidesminus}
+	\foreach \i in {1,...,\numsides}
 		\tkzMarkSegments[mark=||, size=2pt](O,P_\i);
 
 		\foreach \i
@@ -87,7 +85,7 @@
 
 % angles labels %{{{1
 
-	\foreach \i in {1,...,\numsidesminustwo} {
+	\foreach \i in {1,...,\numsides} {
 		\pgfmathtruncatemacro{\j}{ mod(\i,\numsides) + 1 }
 		\ifodd\i
 			\def\angradius{0.7cm}
@@ -98,7 +96,7 @@
 			{angle = P_\i--O--P_\j};
 	}
 
-	\foreach \i in {1,...,\numsidesminustwo} {
+	\foreach \i in {1,...,\numsides} {
 		\pgfmathtruncatemacro{\j}{ mod(\i,\numsides) + 1 }
 		\ifodd\i
 			\def\angradius{0.7cm}
@@ -110,14 +108,6 @@
 		\pic[draw, ->, "$54^\circ$", angle radius=0.7cm, angle eccentricity=1.5]
 			{angle = O--P_\j--P_\i};
 	}
-
-	\pic[draw, ->, "$108^\circ$", angle radius=0.7cm, angle eccentricity=1.6]
-	{angle = P_1--P_5--P_4};
-
-% right angles markers %{{{2
-
-	%\pic [draw, angle radius=7pt, angle eccentricity=1]
-	%{right angle = C--B--A};
 
 % closing %{{{1
 

@@ -10,9 +10,9 @@
 % parameters %{{{1
 
 	\tikzmath{
-		\radius = 3.7 ;
+		\radius = 3.0 ;
 		\rotation = 90 ;
-		\numsidesfloat = 6.0 ;
+		\numsidesfloat = 5.0 ;
 		\numsides = int(\numsidesfloat) ;
 		int \i ;
 		for \i in {1,...,\numsides} {
@@ -38,8 +38,6 @@
 
 	\draw (P_1) \foreach \i in {2,...,\numsides} { -- (P_\i) } -- cycle;
 
-	%\draw[dashdotdotted] (O) -- (P_6);
-
 % circles %{{{1
 
 	\draw (O) circle (\radius);
@@ -49,27 +47,26 @@
 
 % points, dots, vertices labels %{{{1
 
-	\node[anchor=east] at ($ (O) + (180:0.15) $) {$O$};
+	\node[anchor=east] at ($ (O) + (220:0.15) $) {$O$};
 
 	\node[above] at (P_1) {$P_1$};
 	\node[left] at (P_2) {$P_2$};
 	\node[left] at (P_3) {$P_3$};
 	\node[below] at (P_4) {$P_4$};
 	\node[right] at (P_5) {$P_5$};
-	\node[right] at (P_6) {$P_6$};
 
 % segments, sides, lines labels %{{{1
 
-	\node[above left] at ($ (P_1)!0.5!(P_2) $) {$r$};
+	\node[above left] at ($ (P_1)!0.5!(P_2) $) {$c$};
 
 % segments, sides, lines marks %{{{1
 
-	\foreach \i
-		[evaluate=\i as \j using { int(mod(\i,\numsides) + 1) }]
-		in {1,...,\numsides}
-	{
-		\tkzMarkSegments[mark=||, size=2pt](P_\i,P_\j);
-	}
+		\foreach \i
+			[evaluate=\i as \j using { int(mod(\i,\numsides) + 1) }]
+			in {1,...,\numsides}
+		{
+			\tkzMarkSegments[mark=|, size=2pt](P_\i,P_\j);
+		}
 
 % circles labels %{{{1
 
@@ -84,7 +81,7 @@
 		]
 		in {1,...,\numsides}
 	{
-		\pic[draw, ->, "$120^\circ$", angle radius=0.8cm, angle eccentricity=1.5]
+		\pic[draw, ->, "$108^\circ$", angle radius=0.8cm, angle eccentricity=1.5]
 			{angle = P_\k--P_\j--P_\i};
 	}
 

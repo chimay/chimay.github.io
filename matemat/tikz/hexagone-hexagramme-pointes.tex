@@ -10,11 +10,10 @@
 % parameters %{{{1
 
 	\tikzmath{
-		\radius = 5.0 ;
+		\radius = 4.0 ;
 		\rotation = 90 ;
 		\numsidesfloat = 6.0 ;
 		\numsides = int(\numsidesfloat) ;
-		\numsidesminus = \numsides - 1 ;
 		int \i ;
 		for \i in {1,...,\numsides} {
 			\ang{\i} = \rotation + 360 / \numsidesfloat * (\i-1) ;
@@ -25,9 +24,9 @@
 		\ymax = \radius + 1 ;
 	}
 
-% box %{{{1
+% bounding box %{{{1
 
-	\useasboundingbox (\xmin,\ymin) rectangle (\xmax,\ymax);
+	%\useasboundingbox (\xmin,\ymin) rectangle (\xmax,\ymax);
 
 % coordinates %{{{1
 
@@ -36,23 +35,19 @@
 	\foreach \i in {1,...,\numsides}
 		\coordinate (P_\i) at (\ang{\i}:\radius);
 
-	\foreach \i in {1,...,\numsides}
-		\coordinate (I_\i) at (\ang{\i}:{\radius/2});
-
-	\coordinate (I) at (\rotation:{\radius/2});
-
 % intersections %{{{1
 
 	\begin{pgfinterruptboundingbox}
-		\path[name path=line13] (P_1) -- (P_3);
-		\path[name path=line26] (P_2) -- (P_6);
-		\path[name intersections={of=line13 and line26, by=J}];
-	\end{pgfinterruptboundingbox}
-
-	\begin{pgfinterruptboundingbox}
-		\path[name path=line15] (P_1) -- (P_5);
-		\path[name path=line26] (P_2) -- (P_6);
-		\path[name intersections={of=line15 and line26, by=K}];
+		\foreach \i
+			[
+				evaluate=\i as \j using { int(mod(\i, \numsides) + 1) },
+				evaluate=\i as \k using { int(mod(\i + 1, \numsides) + 1) },
+				evaluate=\i as \l using { int(mod(\i + 2, \numsides) + 1) }
+			]
+			in {1,...,\numsides}
+		{
+			\tkzInterLL(P_\i,P_\k)(P_\j,P_\l)\tkzGetPoint{S_\j}
+		}
 	\end{pgfinterruptboundingbox}
 
 % points, dots, vertices %{{{1
@@ -63,17 +58,11 @@
 		\fill (P_\i) circle (0.4mm);
 
 	\foreach \i in {1,...,\numsides}
-		\fill (I_\i) circle (0.4mm);
-
-	\fill (J) circle (0.4mm);
-	\fill (K) circle (0.4mm);
+		\fill (S_\i) circle (0.4mm);
 
 % segments, sides, lines %{{{1
 
 	\draw (P_1) \foreach \i in {2,...,\numsides} { -- (P_\i) } -- cycle;
-
-	\foreach \i in {1,...,\numsides}
-		\draw (O) -- (P_\i);
 
 	\draw (P_1) -- (P_3) -- (P_5) -- cycle ;
 	\draw (P_2) -- (P_4) -- (P_6) -- cycle ;
@@ -93,15 +82,16 @@
 	\node[right] at (P_5) {$P_5$};
 	\node[right] at (P_6) {$P_6$};
 
-	\node[below right] at (I) {$I$};
-	\node[below right] at (J) {$J$};
-	\node[below left] at (K) {$K$};
+	\node[above left] at (S_1) {$S_1$};
+	\node[left] at (S_2) {$S_2$};
+	\node[below left] at (S_3) {$S_3$};
+	\node[below right] at (S_4) {$S_4$};
+	\node[right] at (S_5) {$S_5$};
+	\node[above right] at (S_6) {$S_6$};
 
 % segments, sides, lines labels %{{{1
 
 	\node[above left] at ($ (P_1)!0.5!(P_2) $) {$r$};
-
-	\node[above left] at ($ (P_1)!0.5!(J) $) {$a$};
 
 % segments, sides, lines marks %{{{1
 
@@ -116,46 +106,41 @@
 
 	\node at ($ (O) + (60:\radius + 0.3) $) {$\mathscr{C}$};
 
-% circular arcs labels %{{{2
-
-	%\node at ($ (O) + (45:\radius + 0.3) $) {$\mathscr{C}$};
-
 % angles labels %{{{1
 
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = O--P_1--P_5};
-	\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = P_3--P_1--O};
-
-	\pic[draw, ->, "$\alpha$", angle radius=0.8cm, angle eccentricity=1.3]
-	{angle = I--J--P_1};
-
-	\pic[draw, ->, "$\beta$", angle radius=0.8cm, angle eccentricity=1.3]
-	{angle = P_1--K--I};
-
-	\pic[draw, ->, "$\lambda$", angle radius=0.6cm, angle eccentricity=1.5]
-	{angle = P_1--J--P_2};
-
-	\pic[draw, ->, "$\lambda$", angle radius=0.7cm, angle eccentricity=1.5]
-	{angle = P_3--J--P_6};
-
-	\pic[draw, ->, "$\mu$", angle radius=0.6cm, angle eccentricity=1.5]
-	{angle = P_6--K--P_1};
-
-	\pic[draw, ->, "$\mu$", angle radius=0.7cm, angle eccentricity=1.5]
-	{angle = P_2--K--P_5};
-
-% right angles markers %{{{2
+	\pic[draw, ->, "$60^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
+	{angle = P_3--P_1--P_5};
 
 	\foreach \i
 		[
-			evaluate=\i as \j using { int(mod(\i, \numsides) + 1) }
+			evaluate=\i as \j using { int(mod(\i - 1 + 1, \numsides) + 1) },
+			evaluate=\i as \k using { int(mod(\i - 1 + 2, \numsides) + 1) }
 		]
 		in {1,...,\numsides}
 	{
-		\pic [draw, angle radius=7pt, angle eccentricity=1]
-		{right angle = O--I_\i--P_\j};
+		\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
+			{angle = P_\j--P_\i--P_\k};
+		\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
+			{angle = P_\i--P_\k--P_\j};
 	}
+
+	%\pic[draw, ->, "$\alpha$", angle radius=0.8cm, angle eccentricity=1.3]
+	%{angle = I--J--P_1};
+
+	%\pic[draw, ->, "$\beta$", angle radius=0.8cm, angle eccentricity=1.3]
+	%{angle = P_1--K--I};
+
+	%\pic[draw, ->, "$\lambda$", angle radius=0.6cm, angle eccentricity=1.5]
+	%{angle = P_1--J--P_2};
+
+	%\pic[draw, ->, "$\lambda$", angle radius=0.7cm, angle eccentricity=1.5]
+	%{angle = P_3--J--P_6};
+
+	%\pic[draw, ->, "$\mu$", angle radius=0.6cm, angle eccentricity=1.5]
+	%{angle = P_6--K--P_1};
+
+	%\pic[draw, ->, "$\mu$", angle radius=0.7cm, angle eccentricity=1.5]
+	%{angle = P_2--K--P_5};
 
 % closing %{{{1
 

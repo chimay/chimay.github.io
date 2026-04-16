@@ -18,10 +18,6 @@
 		for \i in {1,...,\numsides} {
 			\ang{\i} = \rotation + 360 / \numsidesfloat * (\i-1) ;
 		};
-		\xmin = - \radius ;
-		\xmax = \radius + 1 ;
-		\ymin = \radius/4 ;
-		\ymax = \radius + 1 ;
 	}
 
 % coordinates %{{{1
@@ -89,13 +85,6 @@
 
 	\node[above left] at ($ (P_1)!0.5!(P_2) $) {$r$};
 
-	\node[above left] at ($ (P_1)!0.7!(S_1) $) {$a$};
-	\node[above right] at ($ (P_1)!0.7!(S_6) $) {$b$};
-	\node[below] at ($ (S_1)!0.5!(S_6) $) {$c$};
-
-	\node[below] at ($ (P_2)!0.6!(S_1) $) {$d$};
-	\node[below] at ($ (P_6)!0.6!(S_6) $) {$f$};
-
 % segments, sides, lines marks %{{{1
 
 	\foreach \i
@@ -105,6 +94,15 @@
 		\tkzMarkSegments[mark=|, size=2pt](P_\i,P_\j);
 	}
 
+	\foreach \i
+		[evaluate=\i as \j using { int(mod(\i,\numsides) + 1) }]
+		in {1,...,\numsides}
+	{
+		\tkzMarkSegments[mark=||, size=2pt, pos=0.5](S_\i,S_\j);
+		\tkzMarkSegments[mark=||, size=2pt, pos=0.4](S_\i,P_\i);
+		\tkzMarkSegments[mark=||, size=2pt, pos=0.4](S_\i,P_\j);
+	}
+
 % circles labels %{{{1
 
 	\node at ($ (O) + (60:\radius + 0.3) $) {$\mathscr{C}$};
@@ -112,6 +110,18 @@
 % angles labels %{{{1
 
 	% ------- hexagram
+
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i - 1 + 1, \numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\pic[draw, ->, "$60^\circ$", angle radius=0.7cm, angle eccentricity=1.5]
+			{angle = P_\j--S_\i--S_\j};
+		\pic[draw, ->, "$60^\circ$", angle radius=0.7cm, angle eccentricity=1.5]
+			{angle = S_\i--S_\j--P_\j};
+	}
 
 	\foreach \i
 		[
@@ -139,25 +149,28 @@
 			{angle = P_\i--P_\k--P_\j};
 	}
 
-	% ------- others
+	% ------- 120° angles
 
-	\pic[draw, ->, "$\alpha$", angle radius=0.6cm, angle eccentricity=1.5]
-		{angle = S_6--S_1--P_1};
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i - 1 + 1, \numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\pic[draw, ->, "$120^\circ$", angle radius=0.4cm, angle eccentricity=1.9]
+			{angle = P_\i--S_\i--P_\j};
+	}
 
-	\pic[draw, ->, "$\beta$", angle radius=0.6cm, angle eccentricity=1.5]
-		{angle = P_1--S_6--S_1};
-
-	\pic[draw, ->, "$\lambda$", angle radius=0.4cm, angle eccentricity=1.5]
-		{angle = P_1--S_1--P_2};
-
-	\pic[draw, ->, "$\lambda$", angle radius=0.7cm, angle eccentricity=1.3]
-		{angle = S_2--S_1--S_6};
-
-	\pic[draw, ->, "$\mu$", angle radius=0.4cm, angle eccentricity=1.5]
-		{angle = P_6--S_6--P_1};
-
-	\pic[draw, ->, "$\mu$", angle radius=0.7cm, angle eccentricity=1.3]
-		{angle = S_1--S_6--S_5};
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i - 1 + 1, \numsides) + 1) },
+			evaluate=\i as \k using { int(mod(\i - 1 + 2, \numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\pic[draw, ->, "$120^\circ$", angle radius=0.7cm, angle eccentricity=1.5]
+			{angle = S_\k--S_\j--S_\i};
+	}
 
 % closing %{{{1
 

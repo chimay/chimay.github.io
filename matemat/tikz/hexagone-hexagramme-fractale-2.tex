@@ -1,0 +1,155 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\tikzmath{
+		\radius = 3.5 ;
+		\rotation = 90 ;
+		\numsidesfloat = 6.0 ;
+		\numsides = int(\numsidesfloat) ;
+		\numsidesminus = \numsides - 1 ;
+		int \i ;
+		for \i in {1,...,\numsides} {
+			\ang{\i} = \rotation + 360 / \numsidesfloat * (\i-1) ;
+		};
+	}
+
+% coordinates %{{{1
+
+	\coordinate (O) at (0,0);
+
+	\foreach \i in {1,...,\numsides}
+		\coordinate (P_\i) at (\ang{\i}:\radius);
+
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\foreach \i
+			[
+				evaluate=\i as \j using { int(mod(\i, \numsides) + 1) },
+				evaluate=\i as \k using { int(mod(\i + 1, \numsides) + 1) },
+				evaluate=\i as \l using { int(mod(\i + 2, \numsides) + 1) }
+			]
+			in {1,...,\numsides}
+		{
+			\tkzInterLL(P_\i,P_\k)(P_\j,P_\l)\tkzGetPoint{S_\j}
+		}
+	\end{pgfinterruptboundingbox}
+
+	\begin{pgfinterruptboundingbox}
+		\foreach \i
+			[
+				evaluate=\i as \j using { int(mod(\i, \numsides) + 1) },
+				evaluate=\i as \k using { int(mod(\i + 1, \numsides) + 1) },
+				evaluate=\i as \l using { int(mod(\i + 2, \numsides) + 1) }
+			]
+			in {1,...,\numsides}
+		{
+			\tkzInterLL(S_\i,S_\k)(S_\j,S_\l)\tkzGetPoint{T_\j}
+		}
+	\end{pgfinterruptboundingbox}
+
+% points, dots, vertices %{{{1
+
+	\fill (O) circle (0.4mm);
+
+	\foreach \i in {1,...,\numsides}
+		\fill (P_\i) circle (0.4mm);
+
+	\foreach \i in {1,...,\numsides}
+		\fill (S_\i) circle (0.4mm);
+
+	\foreach \i in {1,...,\numsides}
+		\fill (T_\i) circle (0.4mm);
+
+% segments, sides, lines %{{{1
+
+	\draw (P_1) \foreach \i in {2,...,\numsides} { -- (P_\i) } -- cycle;
+
+	\draw (P_1) -- (P_3) -- (P_5) -- cycle ;
+	\draw (P_2) -- (P_4) -- (P_6) -- cycle ;
+
+	\draw (S_1) -- (S_3) -- (S_5) -- cycle ;
+	\draw (S_2) -- (S_4) -- (S_6) -- cycle ;
+
+	\draw (T_1) -- (T_3) -- (T_5) -- cycle ;
+	\draw (T_2) -- (T_4) -- (T_6) -- cycle ;
+
+% circles %{{{1
+
+	\draw (O) circle (\radius);
+
+	%\path[draw] let \p1 = ($ (A) - (O) $)
+	%in (O) circle ({veclen(\x1,\y1)});
+
+% points, dots, vertices labels %{{{1
+
+	\node[left] at (O) {$O$};
+
+	\node[above] at (P_1) {$P_1$};
+	\node[left] at (P_2) {$P_2$};
+	\node[left] at (P_3) {$P_3$};
+	\node[below] at (P_4) {$P_4$};
+	\node[right] at (P_5) {$P_5$};
+	\node[right] at (P_6) {$P_6$};
+
+% segments, sides, lines labels %{{{1
+
+	\node[above left] at ($ (P_1)!0.5!(P_2) $) {$r$};
+
+	%\node[above] at ($ (P_3)!0.5!(P_5) $) {$r \ \sqrt{3}$};
+
+% segments, sides, lines marks %{{{1
+
+	\foreach \i
+		[evaluate=\i as \j using { int(mod(\i,\numsides) + 1) }]
+		in {1,...,\numsides}
+	{
+		\tkzMarkSegments[mark=|, size=2pt](P_\i,P_\j);
+	}
+
+	%\tkzMarkSegments[mark=||, size=2pt](P_1,P_3);
+	%\tkzMarkSegments[mark=||, size=2pt](P_3,P_5);
+	%\tkzMarkSegments[mark=||, size=2pt](P_5,P_1);
+
+	%\tkzMarkSegments[mark=||, size=2pt](P_2,P_4);
+	%\tkzMarkSegments[mark=||, size=2pt](P_4,P_6);
+	%\tkzMarkSegments[mark=||, size=2pt](P_6,P_2);
+
+% circles labels %{{{1
+
+	\node at ($ (O) + (60:\radius + 0.3) $) {$\mathscr{C}$};
+
+% circular arcs labels %{{{2
+
+	%\node at ($ (O) + (45:\radius + 0.3) $) {$\mathscr{C}$};
+
+% angles labels %{{{1
+
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i - 1 + 2, \numsides) + 1) },
+			evaluate=\i as \k using { int(mod(\i - 1 + 4, \numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\pic[draw, ->, "$60^\circ$", angle radius=0.7cm, angle eccentricity=1.5]
+			{angle = P_\k--P_\j--P_\i};
+	}
+
+% right angles markers %{{{2
+
+	%\pic [draw, angle radius=7pt, angle eccentricity=1]
+	%{right angle = P_4--P_3--P_1};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

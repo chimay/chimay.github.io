@@ -10,7 +10,7 @@
 % parameters %{{{1
 
 	\tikzmath{
-		\radius = 3.0 ;
+		\radius = 4.0 ;
 		\rotation = 90 ;
 		\numsidesfloat = 5.0 ;
 		\numsides = int(\numsidesfloat) ;
@@ -27,6 +27,14 @@
 	\foreach \i in {1,...,\numsides}
 		\coordinate (P_\i) at (\ang{\i}:\radius);
 
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=line1] (O) -- (P_1);
+		\path[name path=line2] (P_2) -- (P_5);
+		\path[name intersections={of=line1 and line2, by=I}];
+	\end{pgfinterruptboundingbox}
+
 % points, dots, vertices %{{{1
 
 	\fill (O) circle (0.4mm);
@@ -34,11 +42,17 @@
 	\foreach \i in {1,...,\numsides}
 		\fill (P_\i) circle (0.4mm);
 
+	\fill (I) circle (0.4mm);
+
 % segments, sides, lines %{{{1
 
 	\draw (P_1) \foreach \i in {2,...,\numsides} { -- (P_\i) } -- cycle;
 
 	\draw (P_2) -- (P_5);
+
+	\draw (O) -- (P_1);
+	\draw (O) -- (P_2);
+	\draw (O) -- (P_5);
 
 % circles %{{{1
 
@@ -49,13 +63,15 @@
 
 % points, dots, vertices labels %{{{1
 
-	\node[anchor=east] at ($ (O) + (220:0.0) $) {$O$};
+	\node[anchor=north east] at ($ (O) + (270:0pt) $) {$O$};
 
 	\node[above] at (P_1) {$P_1$};
 	\node[left] at (P_2) {$P_2$};
 	\node[left] at (P_3) {$P_3$};
 	\node[below] at (P_4) {$P_4$};
 	\node[right] at (P_5) {$P_5$};
+
+	\node[above left] at (I) {$I$};
 
 % segments, sides, lines labels %{{{1
 
@@ -70,20 +86,49 @@
 			\tkzMarkSegments[mark=||, size=2pt](P_\i,P_\j);
 		}
 
+	\tkzMarkSegments[mark=|, size=2pt](O,P_2)
+	\tkzMarkSegments[mark=|, size=2pt](O,P_5)
+
+	\tkzMarkSegments[mark=||, size=2pt, pos=0.3](I,P_2)
+	\tkzMarkSegments[mark=||, size=2pt, pos=0.4](I,P_2)
+
+	\tkzMarkSegments[mark=||, size=2pt, pos=0.3](I,P_5)
+	\tkzMarkSegments[mark=||, size=2pt, pos=0.4](I,P_5)
+
 % circles labels %{{{1
 
 	\node at ($ (O) + (60:\radius + 0.3) $) {$\mathscr{C}$};
 
 % angles labels %{{{1
 
-	\pic[draw, ->, "$108^\circ$", angle radius=0.5cm, angle eccentricity=1.5]
-		{angle = P_2--P_1--P_5};
+	\pic[draw, ->, "$72^\circ$", angle radius=0.5cm, angle eccentricity=1.6]
+		{angle = P_5--O--P_1};
 
-	\pic[draw, ->, "$\alpha$", angle radius=1.0cm, angle eccentricity=1.3]
+	\pic[draw, ->, "$72^\circ$", angle radius=0.5cm, angle eccentricity=1.6]
+		{angle = P_1--O--P_2};
+
+	\pic[draw, ->, "$54^\circ$", angle radius=0.7cm, angle eccentricity=1.4]
+		{angle = P_2--P_1--O};
+
+	\pic[draw, ->, "$54^\circ$", angle radius=0.7cm, angle eccentricity=1.4]
+		{angle = O--P_1--P_5};
+
+	\pic[draw, ->, "$36^\circ$", angle radius=1.2cm, angle eccentricity=1.4]
 		{angle = P_5--P_2--P_1};
 
-	\pic[draw, ->, "$\alpha$", angle radius=1.0cm, angle eccentricity=1.3]
+	\pic[draw, ->, "$36^\circ$", angle radius=1.2cm, angle eccentricity=1.4]
 		{angle = P_1--P_5--P_2};
+
+	\pic[draw, ->, "$18^\circ$", angle radius=1.5cm, angle eccentricity=1.25]
+		{angle = O--P_2--I};
+
+	\pic[draw, ->, "$18^\circ$", angle radius=1.5cm, angle eccentricity=1.25]
+		{angle = I--P_5--O};
+
+% right angles markers %{{{2
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+		{right angle = P_5--I--P_1};
 
 % closing %{{{1
 

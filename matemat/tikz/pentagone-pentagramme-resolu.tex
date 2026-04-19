@@ -10,7 +10,7 @@
 % parameters %{{{1
 
 	\tikzmath{
-		\radius = 4.7 ;
+		\radius = 5.0 ;
 		\rotation = 90 ;
 		\numsidesfloat = 5.0 ;
 		\numsides = int(\numsidesfloat) ;
@@ -34,6 +34,18 @@
 			[
 				evaluate=\i as \j using { int(mod(\i, \numsides) + 1) },
 				evaluate=\i as \k using { int(mod(\i + 1, \numsides) + 1) },
+			]
+			in {1,...,\numsides}
+		{
+			\tkzInterLL(O,P_\j)(P_\i,P_\k)\tkzGetPoint{I_\j}
+		}
+	\end{pgfinterruptboundingbox}
+
+	\begin{pgfinterruptboundingbox}
+		\foreach \i
+			[
+				evaluate=\i as \j using { int(mod(\i, \numsides) + 1) },
+				evaluate=\i as \k using { int(mod(\i + 1, \numsides) + 1) },
 				evaluate=\i as \l using { int(mod(\i + 2, \numsides) + 1) }
 			]
 			in {1,...,\numsides}
@@ -49,6 +61,9 @@
 	\foreach \i in {1,...,\numsides}
 		\fill (P_\i) circle (0.4mm);
 
+	%\foreach \i in {1,...,\numsides}
+		%\fill (I_\i) circle (0.4mm);
+
 	\foreach \i in {1,...,\numsides}
 		\fill (S_\i) circle (0.4mm);
 
@@ -58,9 +73,18 @@
 
 	\draw (P_1) -- (P_3) -- (P_5) -- (P_2) -- (P_4) -- cycle;
 
+	%\foreach \i in {1,...,\numsides}
+		%\draw[dashed] (O) -- (P_\i);
+
+	%\foreach \i in {1,...,\numsides}
+		%\draw[dashed] (O) -- (S_\i);
+
 % circles %{{{1
 
 	\draw (O) circle (\radius);
+
+	%\path[draw] let \p1 = ($ (A) - (O) $)
+	%in (O) circle ({veclen(\x1,\y1)});
 
 % points, dots, vertices labels %{{{1
 
@@ -71,6 +95,12 @@
 	\node[left] at (P_3) {$P_3$};
 	\node[below] at (P_4) {$P_4$};
 	\node[right] at (P_5) {$P_5$};
+
+	%\node[below left] at (I_1) {$I_1$};
+	%\node[below right] at ($ (I_2) + (240:3pt) $) {$I_2$};
+	%\node[above right] at (I_3) {$I_3$};
+	%\node[above] at (I_4) {$I_4$};
+	%\node[above left] at (I_5) {$I_5$};
 
 	\node[above left] at (S_1) {$S_1$};
 	\node[left] at (S_2) {$S_2$};
@@ -110,6 +140,28 @@
 			{angle = P_\j--P_\i--P_\k};
 	}
 
+	% ------- between radius and diagonal
+
+	%\foreach \i
+		%[
+			%evaluate=\i as \j using { int(mod(\i - 1 + 2, \numsides) + 1) }
+		%]
+		%in {1,...,\numsides}
+	%{
+		%\pic[draw, ->, "$18^\circ$", angle radius=1.5cm, angle eccentricity=1.2]
+			%{angle = P_\j--P_\i--O};
+	%}
+
+	%\foreach \i
+		%[
+			%evaluate=\i as \j using { int(mod(\i - 1 + 3, \numsides) + 1) }
+		%]
+		%in {1,...,\numsides}
+	%{
+		%\pic[draw, ->, "$18^\circ$", angle radius=1.5cm, angle eccentricity=1.2]
+			%{angle = O--P_\i--P_\j};
+	%}
+
 	% ------- iscosceles triangles outside the pentagram
 
 	\foreach \i
@@ -125,19 +177,61 @@
 			{angle = P_\j--P_\i--P_\k};
 	}
 
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i - 1 + 1, \numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\pic[draw, ->, "$108^\circ$", angle radius=0.7cm, angle eccentricity=1.5]
+			{angle = P_\i--S_\i--P_\j};
+	}
+
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i - 1 + 1, \numsides) + 1) },
+			evaluate=\i as \k using { int(mod(\i - 1 + 3, \numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\pic[draw, ->, "$108^\circ$", angle radius=0.5cm, angle eccentricity=1.7]
+			{angle = P_\k--S_\j--P_\i};
+	}
+
 	% ------- pentagram tips
 
-	\pic[draw, ->, "$\alpha$", angle radius=0.6cm, angle eccentricity=1.5]
-		{angle = P_5--S_1--P_1};
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i - 1 + 1, \numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\pic[draw, ->, "$72^\circ$", angle radius=0.6cm, angle eccentricity=1.4]
+			{angle = P_\i--S_\j--P_\j};
+	}
 
-	\pic[draw, ->, "$\beta$", angle radius=0.6cm, angle eccentricity=1.5]
-		{angle = P_1--S_5--P_2};
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i - 1 + 1, \numsides) + 1) },
+			evaluate=\i as \k using { int(mod(\i - 1 + 2, \numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\pic[draw, ->, "$72^\circ$", angle radius=0.6cm, angle eccentricity=1.4]
+			{angle = P_\j--S_\i--P_\k};
+	}
 
-	\pic[draw, ->, "$\lambda$", angle radius=0.8cm, angle eccentricity=1.5]
-		{angle = P_1--S_1--P_2};
+% right angles markers %{{{2
 
-	\pic[draw, ->, "$\mu$", angle radius=0.8cm, angle eccentricity=1.5]
-		{angle = P_5--S_5--P_1};
+	%\foreach \i
+		%[
+			%evaluate=\i as \j using { int(mod(\i, \numsides) + 1) }
+		%]
+		%in {1,...,\numsides}
+	%{
+		%\pic [draw, angle radius=7pt, angle eccentricity=1]
+			%{right angle = O--I_\j--P_\i};
+	%}
 
 % closing %{{{1
 

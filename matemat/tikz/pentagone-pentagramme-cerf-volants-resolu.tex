@@ -10,7 +10,7 @@
 % parameters %{{{1
 
 	\tikzmath{
-		\radius = 6.2 ;
+		\radius = 5.4 ;
 		\rotation = 90 ;
 		\numsidesfloat = 5.0 ;
 		\numsides = int(\numsidesfloat) ;
@@ -23,15 +23,6 @@
 		\ymin = - \radius / 6 ;
 		\ymax = \radius + 1 ;
 	}
-
-% bounding box %{{{1
-
-	\useasboundingbox (\xmin,\ymin) rectangle (\xmax,\ymax);
-
-	\draw
-		($ (current bounding box.south west) - (0.0, 0.1) $)
-		rectangle
-		(current bounding box.north east);
 
 % coordinates %{{{1
 
@@ -102,8 +93,8 @@
 
 	\node[above] at (P_1) {$P_1$};
 	\node[left] at (P_2) {$P_2$};
-	\node[left] at (P_3) {$P_3$};
-	\node[below] at (P_4) {$P_4$};
+	\node[below left] at (P_3) {$P_3$};
+	\node[below right] at (P_4) {$P_4$};
 	\node[right] at (P_5) {$P_5$};
 
 	\node[above left] at (I_1) {$I_1$};
@@ -120,32 +111,7 @@
 
 % segments, sides, lines labels %{{{1
 
-	\node[above left] at ($ (P_1)!0.65!(S_1) $) {$a$};
-	\node[below left] at ($ (P_2)!0.65!(S_2) $) {$a$};
-	\node[below right] at ($ (P_3)!0.65!(S_3) $) {$a$};
-	\node[above right] at ($ (P_4)!0.65!(S_4) $) {$a$};
-	\node[above] at ($ (P_5)!0.65!(S_5) $) {$a$};
-
-	\node[above right] at ($ (P_1)!0.65!(S_5) $) {$a$};
-	\node[above] at ($ (P_2)!0.65!(S_1) $) {$a$};
-	\node[above left] at ($ (P_3)!0.65!(S_2) $) {$a$};
-	\node[below left] at ($ (P_4)!0.65!(S_3) $) {$a$};
-	\node[below right] at ($ (P_5)!0.65!(S_4) $) {$a$};
-
-	\node[above] at ($ (I_1)!0.6!(S_1) $) {$b_1$};
-	\node[above] at ($ (I_1)!0.6!(S_5) $) {$c_1$};
-
-	\node[left] at ($ (I_2)!0.5!(S_2) $) {$b_2$};
-	\node[left] at ($ (I_2)!0.6!(S_1) $) {$c_2$};
-
-	\node[left] at ($ (P_1)!0.7!(I_1) $) {$h_1$};
-	\node[below] at ($ (P_2)!0.7!(I_2) $) {$h_2$};
-
-	\node[left] at ($ (O)!0.8!(I_1) $) {$s_1$};
-	\node[below] at ($ (O)!0.8!(I_2) $) {$s_2$};
-
-	\node[below left] at ($ (O)!0.7!(S_1) $) {$f_1$};
-	\node[below] at ($ (O)!0.5!(S_2) $) {$f_2$};
+	%\node[above left] at ($ (P_1)!0.65!(S_1) $) {$a$};
 
 % segments, sides, lines marks %{{{1
 
@@ -159,6 +125,35 @@
 		in {1,...,\numsides}
 	{
 		\tkzMarkSegments[mark=||, size=2pt, pos=0.65](P_\j,S_\i);
+	}
+
+	\foreach \i in {1,...,\numsides}
+		\tkzMarkSegments[mark=|, size=2pt, pos=0.5](I_\i,S_\i);
+
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i,\numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\tkzMarkSegments[mark=|, size=2pt, pos=0.5](I_\j,S_\i);
+	}
+
+	\foreach \i in {1,...,\numsides} {
+		\tkzMarkSegments[mark=|, size=2pt, pos=0.65](P_\i,I_\i)
+		\tkzMarkSegments[mark=|, size=2pt, pos=0.70](P_\i,I_\i)
+		\tkzMarkSegments[mark=|, size=2pt, pos=0.75](P_\i,I_\i)
+	}
+
+	\foreach \i in {1,...,\numsides} {
+		\tkzMarkSegments[mark=||, size=2pt, pos=0.65](O,S_\i)
+		\tkzMarkSegments[mark=||, size=2pt, pos=0.75](O,S_\i)
+	}
+
+	\foreach \i in {1,...,\numsides} {
+		\tkzMarkSegments[mark=||, size=2pt, pos=0.65](O,I_\i)
+		\tkzMarkSegments[mark=||, size=2pt, pos=0.70](O,I_\i)
+		\tkzMarkSegments[mark=||, size=2pt, pos=0.75](O,I_\i)
 	}
 
 % circles labels %{{{1
@@ -204,16 +199,21 @@
 			{angle = P_\j--P_\i--P_\k};
 	}
 
-	% ------- miscellaneous
+	% ------- around center
 
-	\pic[draw, ->, "$\alpha$", angle radius=0.9cm, angle eccentricity=1.3]
-		{angle = P_1--O--S_1};
+	\foreach \i in {1,...,\numsides}
+		\pic[draw, ->, "$36^\circ$", angle radius=0.8cm, angle eccentricity=1.4]
+			{angle = I_\i--O--S_\i};
 
-	\pic[draw, ->, "$\beta$", angle radius=0.8cm, angle eccentricity=1.3]
-		{angle = S_1--O--P_2};
-
-	\pic[draw, ->, "$72^\circ$" {xshift=9pt, yshift=-5pt}, angle radius=0.8cm, angle eccentricity=1.4]
-		{angle = P_5--O--P_1};
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i - 1 + 1, \numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\pic[draw, ->, "$36^\circ$", angle radius=0.8cm, angle eccentricity=1.4]
+			{angle = S_\i--O--I_\j};
+	}
 
 % right angles markers %{{{2
 

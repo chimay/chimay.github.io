@@ -96,12 +96,18 @@
 
 % segments, sides, lines marks %{{{1
 
-		\foreach \i
-			[evaluate=\i as \j using { int(mod(\i,\numsides) + 1) }]
-			in {1,...,\numsides}
-		{
-			\tkzMarkSegments[mark=||, size=2pt](P_\i,P_\j);
-		}
+	\foreach \i in {1,...,\numsides}
+		\tkzMarkSegments[mark=||, size=2pt, pos=0.6](P_\i,S_\i);
+
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i,\numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\tkzMarkSegments[mark=||, size=2pt, pos=0.6](P_\j,S_\i);
+		\tkzMarkSegments[mark=|, size=2pt, pos=0.5](S_\i,S_\j);
+	}
 
 % circles labels %{{{1
 

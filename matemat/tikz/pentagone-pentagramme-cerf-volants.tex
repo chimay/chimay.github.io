@@ -120,26 +120,43 @@
 
 % segments, sides, lines labels %{{{1
 
-	\node[above left] at ($ (P_1)!0.65!(S_1) $) {$a_1$};
-	\node[below left] at ($ (P_2)!0.65!(S_2) $) {$a_2$};
-	\node[below right] at ($ (P_3)!0.65!(S_3) $) {$a_3$};
-	\node[above right] at ($ (P_4)!0.65!(S_4) $) {$a_4$};
-	\node[above] at ($ (P_5)!0.65!(S_5) $) {$a_5$};
+	\node[above left] at ($ (P_1)!0.65!(S_1) $) {$a$};
+	\node[below left] at ($ (P_2)!0.65!(S_2) $) {$a$};
+	\node[below right] at ($ (P_3)!0.65!(S_3) $) {$a$};
+	\node[above right] at ($ (P_4)!0.65!(S_4) $) {$a$};
+	\node[above] at ($ (P_5)!0.65!(S_5) $) {$a$};
 
-	\node[above right] at ($ (P_1)!0.65!(S_5) $) {$b_1$};
-	\node[above] at ($ (P_2)!0.65!(S_1) $) {$b_2$};
-	\node[above left] at ($ (P_3)!0.65!(S_2) $) {$b_3$};
-	\node[below left] at ($ (P_4)!0.65!(S_3) $) {$b_4$};
-	\node[below right] at ($ (P_5)!0.65!(S_4) $) {$b_5$};
+	\node[above right] at ($ (P_1)!0.65!(S_5) $) {$a$};
+	\node[above] at ($ (P_2)!0.65!(S_1) $) {$a$};
+	\node[above left] at ($ (P_3)!0.65!(S_2) $) {$a$};
+	\node[below left] at ($ (P_4)!0.65!(S_3) $) {$a$};
+	\node[below right] at ($ (P_5)!0.65!(S_4) $) {$a$};
+
+	\node[above] at ($ (S_1)!0.5!(I_1) $) {$b_1$};
+	\node[left] at ($ (S_2)!0.5!(I_2) $) {$b_2$};
+	\node[below left] at ($ (S_3)!0.5!(I_3) $) {$b_3$};
+	\node[below right] at ($ (S_4)!0.5!(I_4) $) {$b_4$};
+	\node[right] at ($ (S_5)!0.5!(I_5) $) {$b_5$};
+
+	\node[above] at ($ (S_5)!0.5!(I_1) $) {$c_1$};
+	\node[left] at ($ (S_1)!0.5!(I_2) $) {$c_2$};
+	\node[below left] at ($ (S_2)!0.5!(I_3) $) {$c_3$};
+	\node[below right] at ($ (S_3)!0.5!(I_4) $) {$c_4$};
+	\node[right] at ($ (S_4)!0.5!(I_5) $) {$c_5$};
 
 % segments, sides, lines marks %{{{1
 
-		\foreach \i
-			[evaluate=\i as \j using { int(mod(\i,\numsides) + 1) }]
-			in {1,...,\numsides}
-		{
-			\tkzMarkSegments[mark=||, size=2pt](P_\i,P_\j);
-		}
+	\foreach \i in {1,...,\numsides}
+		\tkzMarkSegments[mark=||, size=2pt, pos=0.65](P_\i,S_\i);
+
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i,\numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\tkzMarkSegments[mark=||, size=2pt, pos=0.65](P_\j,S_\i);
+	}
 
 % circles labels %{{{1
 

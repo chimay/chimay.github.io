@@ -1,116 +1,103 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
 
-% header %{{{1
+\input{../../include/latex/tikz/header.tex}
 
-\documentclass[tikz, border=1mm]{standalone}
-
-\usepackage{amsmath}
-
-\usepackage{tikz}
-
-\usetikzlibrary{calc,angles,quotes,shapes.geometric}
-
-\usepackage{tkz-euclide}
-
-% document %{{{1
-
-% opening %{{{2
+% opening %{{{1
 
 \begin{document}
 \begin{tikzpicture}[scale=1.0]
 
-% parameters %{{{2
+% parameters %{{{1
 
-	\def\numsides{5}
-	\def\radius{3.5}
-	\def\rotation{90}
+	\tikzmath{
+		\radius = 3.0 ;
+		\rotation = 90 ;
+		\numsidesfloat = 5.0 ;
+		\numsides = int(\numsidesfloat) ;
+		int \i ;
+		for \i in {1,...,\numsides} {
+			\ang{\i} = \rotation + 360 / \numsidesfloat * (\i-1) ;
+		};
+	}
 
-% coordinates %{{{2
+% coordinates %{{{1
 
 	\coordinate (O) at (0,0);
 
-	\foreach \i in {1,...,\numsides} {
-		\coordinate (P\i) at ({360/\numsides*(\i-1)+\rotation}:\radius);
-	}
+	\foreach \i in {1,...,\numsides}
+		\coordinate (P_\i) at (\ang{\i}:\radius);
 
-% intersections %{{{2
+% points, dots, vertices %{{{1
 
-	\tkzInterLL(P1,P2)(O,P4)\tkzGetPoint{F}
+	\fill (O) circle (0.4mm);
 
-% circle %{{{2
+	\foreach \i in {1,...,\numsides}
+		\fill (P_\i) circle (0.4mm);
+
+% segments, sides, lines %{{{1
+
+	\draw (P_1) \foreach \i in {2,...,\numsides} { -- (P_\i) } -- cycle;
+
+	\foreach \i in {1,...,\numsides}
+		\draw (O) -- (P_\i);
+
+% circles %{{{1
 
 	\draw (O) circle (\radius);
 
-% polygon %{{{2
+	%\path[draw] let \p1 = ($ (A) - (O) $)
+	%in (O) circle ({veclen(\x1,\y1)});
 
-	\draw (P1) \foreach \i in {2,...,\numsides} { -- (P\i) } -- cycle;
+% points, dots, vertices labels %{{{1
 
-% radiuses %{{{2
+	\node[anchor=east] at ($ (O) + (220:0.15) $) {$O$};
 
-	\draw[solid] (O) -- (P1);
-	\draw[solid] (O) -- (P2);
-	\draw[dashdotdotted] (O) -- (P3);
-	\draw[dashdotdotted] (O) -- (P4);
-	\draw[dashdotdotted] (O) -- (P5);
+	\node[above] at (P_1) {$P_1$};
+	\node[left] at (P_2) {$P_2$};
+	\node[below left] at (P_3) {$P_3$};
+	\node[below right] at (P_4) {$P_4$};
+	\node[right] at (P_5) {$P_5$};
 
-	\draw[solid] (O) -- (F);
+% segments, sides, lines labels %{{{1
 
-% points, dots, vertices %{{{2
+	\node[above left] at ($ (P_1)!0.5!(P_2) $) {$c$};
+	\node[left] at ($ (O)!0.5!(P_1) $) {$r$};
+	\node[below] at ($ (O)!0.5!(P_2) $) {$r$};
 
-	\foreach \i in {1,...,\numsides} { \fill (P\i) circle (0.5mm); }
+% segments, sides, lines marks %{{{1
 
-	\fill (F) circle (0.5mm);
+	\foreach \i in {1,...,\numsides}
+		\tkzMarkSegments[mark=|, size=2pt](O,P_\i);
 
-	\filldraw (O) circle (0.9pt);
+		\foreach \i
+			[evaluate=\i as \j using { int(mod(\i,\numsides) + 1) }]
+			in {1,...,\numsides}
+		{
+			\tkzMarkSegments[mark=||, size=2pt](P_\i,P_\j);
+		}
 
-% points, dots, vertices labels %{{{2
+% circles labels %{{{1
 
-	\node[below left] at (O) {$O$};
-	\node[above left] at (F) {$F$};
+	\node at ($ (O) + (60:\radius + 0.3) $) {$\mathscr{C}$};
 
-	\node[above] at (P1) {$A$};
-	\node[left] at (P2) {$B$};
-	\node[below left] at (P3) {$C$};
-	\node[below right] at (P4) {$D$};
-	\node[right] at (P5) {$E$};
+% circular arcs labels %{{{2
 
-% segments labels %{{{2
+	%\node at ($ (O) + (45:\radius + 0.3) $) {$\mathscr{C}$};
 
-	\node[right] at ($(O)!0.5!(P1)$) {$r$};
-	\node[below] at ($(O)!0.5!(P2)$) {$r$};
+% angles labels %{{{1
 
-	\node[above] at ($(P5)!0.5!(P1)$) {$l$};
+	\foreach \i in {1,...,1} {
+		\pgfmathtruncatemacro{\j}{ mod(\i,\numsides) + 1 }
+		\ifodd\i
+			\def\angradius{0.7cm}
+		\else
+			\def\angradius{0.7cm}
+		\fi
+		\pic[draw, ->, "$72^\circ$", angle radius=\angradius, angle eccentricity=1.5]
+			{angle = P_\i--O--P_\j};
+	}
 
-	\node[above] at ($(P1)!0.5!(F)$) {$a$};
-	\node[above] at ($(F)!0.5!(P2)$) {$b$};
-	\node[above] at ($(O)!0.55!(F)$) {$c$};
-
-% angles labels %{{{2
-
-	\pic[draw, ->, "$72^\circ$", angle radius=0.9cm, angle eccentricity=1.3]
-	{angle = P5--O--P1};
-
-	\pic[draw, ->, "$72^\circ$", angle radius=0.9cm, angle eccentricity=1.3]
-	{angle = P4--O--P5};
-
-	\pic[draw, ->, "$72^\circ$", angle radius=0.9cm, angle eccentricity=1.3]
-	{angle = P3--O--P4};
-
-	\pic[draw, ->, "$72^\circ$", angle radius=0.9cm, angle eccentricity=1.3]
-	{angle = P2--O--P3};
-
-	\pic[draw, ->, "$\alpha$", angle radius=1.0cm, angle eccentricity=1.3]
-	{angle = P1--O--F};
-
-	\pic[draw, ->, "$\gamma$", angle radius=1.0cm, angle eccentricity=1.3]
-	{angle = F--O--P2};
-
-	\pic[draw, ->, "$\delta$", angle radius=0.6cm, angle eccentricity=1.3]
-	{angle = O--F--P1};
-
-	\pic[draw, ->, "$\epsilon$", angle radius=0.6cm, angle eccentricity=1.3]
-	{angle = P2--F--O};
-
-% closing %{{{2
+% closing %{{{1
 
 \end{tikzpicture}
 \end{document}

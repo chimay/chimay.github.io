@@ -1,0 +1,238 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\tikzmath{
+		\radius = 6.2 ;
+		\rotation = 90 ;
+		\numsidesfloat = 6.0 ;
+		\numsides = int(\numsidesfloat) ;
+		int \i ;
+		for \i in {1,...,\numsides} {
+			\ang{\i} = \rotation + 360 / \numsidesfloat * (\i-1) ;
+		};
+		\xmin = - \radius - 1 ;
+		\xmax = \radius + 1 ;
+		\ymin = - \radius / 6 ;
+		\ymax = \radius + 1 ;
+	}
+
+% bounding box %{{{1
+
+	%\useasboundingbox (\xmin,\ymin) rectangle (\xmax,\ymax);
+
+	%\draw
+		%($ (current bounding box.south west) - (0.0, 0.1) $)
+		%rectangle
+		%(current bounding box.north east);
+
+% coordinates %{{{1
+
+	\coordinate (O) at (0,0);
+
+	\foreach \i in {1,...,\numsides}
+		\coordinate (P_\i) at (\ang{\i}:\radius);
+
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\foreach \i
+			[
+				evaluate=\i as \j using { int(mod(\i, \numsides) + 1) },
+				evaluate=\i as \k using { int(mod(\i + 1, \numsides) + 1) },
+			]
+			in {1,...,\numsides}
+		{
+			\tkzInterLL(O,P_\j)(P_\i,P_\k)\tkzGetPoint{I_\j}
+		}
+	\end{pgfinterruptboundingbox}
+
+	\begin{pgfinterruptboundingbox}
+		\foreach \i
+			[
+				evaluate=\i as \j using { int(mod(\i, \numsides) + 1) },
+				evaluate=\i as \k using { int(mod(\i + 1, \numsides) + 1) },
+				evaluate=\i as \l using { int(mod(\i + 2, \numsides) + 1) }
+			]
+			in {1,...,\numsides}
+		{
+			\tkzInterLL(P_\i,P_\k)(P_\j,P_\l)\tkzGetPoint{S_\j}
+		}
+	\end{pgfinterruptboundingbox}
+
+% points, dots, vertices %{{{1
+
+	\fill (O) circle (0.4mm);
+
+	\foreach \i in {1,...,\numsides}
+		\fill (P_\i) circle (0.4mm);
+
+	\foreach \i in {1,...,\numsides}
+		\fill (I_\i) circle (0.4mm);
+
+	\foreach \i in {1,...,\numsides}
+		\fill (S_\i) circle (0.4mm);
+
+% segments, sides, lines %{{{1
+
+	\draw (P_1) \foreach \i in {2,...,\numsides} { -- (P_\i) } -- cycle;
+
+	\draw (P_1) -- (P_3) -- (P_5) -- cycle;
+	\draw (P_2) -- (P_4) -- (P_6) -- cycle;
+
+	\foreach \i in {1,...,\numsides}
+		\draw[dashed] (O) -- (P_\i);
+
+	\foreach \i in {1,...,\numsides}
+		\draw[dashed] (O) -- (S_\i);
+
+% circles %{{{1
+
+	\draw (O) circle (\radius);
+
+% points, dots, vertices labels %{{{1
+
+	\node[anchor=east] at ($ (O) + (250:7pt) $) {$O$};
+
+	\node[above] at (P_1) {$P_1$};
+	\node[left] at (P_2) {$P_2$};
+	\node[below left] at (P_3) {$P_3$};
+	\node[below right] at (P_4) {$P_4$};
+	\node[right] at (P_5) {$P_5$};
+	\node[right] at (P_6) {$P_6$};
+
+	\node[above left] at (I_1) {$I_1$};
+	\node[left] at ($ (I_2) + (240:3pt) $) {$I_2$};
+	\node[below] at (I_3) {$I_3$};
+	\node[right] at (I_4) {$I_4$};
+	\node[above right] at (I_5) {$I_5$};
+
+	\node[above left] at (S_1) {$S_1$};
+	\node[left] at (S_2) {$S_2$};
+	\node[below] at (S_3) {$S_3$};
+	\node[right] at (S_4) {$S_4$};
+	\node[right] at (S_5) {$S_5$};
+	\node[above right] at (S_6) {$S_6$};
+
+% segments, sides, lines labels %{{{1
+
+	\node[above left] at ($ (P_1)!0.65!(S_1) $) {$a$};
+	\node[below left] at ($ (P_2)!0.65!(S_2) $) {$a$};
+	\node[below right] at ($ (P_3)!0.65!(S_3) $) {$a$};
+	\node[below right] at ($ (P_4)!0.65!(S_4) $) {$a$};
+	\node[above right] at ($ (P_5)!0.65!(S_5) $) {$a$};
+	\node[above] at ($ (P_6)!0.65!(S_6) $) {$a$};
+
+	\node[above right] at ($ (P_1)!0.65!(S_6) $) {$a$};
+	\node[above] at ($ (P_2)!0.65!(S_1) $) {$a$};
+	\node[above left] at ($ (P_3)!0.65!(S_2) $) {$a$};
+	\node[below left] at ($ (P_4)!0.65!(S_3) $) {$a$};
+	\node[below right] at ($ (P_5)!0.65!(S_4) $) {$a$};
+	\node[below right] at ($ (P_6)!0.65!(S_5) $) {$a$};
+
+	\node[above] at ($ (I_1)!0.6!(S_1) $) {$b_1$};
+	\node[above] at ($ (I_1)!0.6!(S_6) $) {$c_1$};
+
+	\node[left] at ($ (I_2)!0.5!(S_2) $) {$b_2$};
+	\node[left] at ($ (I_2)!0.6!(S_1) $) {$c_2$};
+
+	\node[left] at ($ (P_1)!0.7!(I_1) $) {$h_1$};
+	\node[below] at ($ (P_2)!0.7!(I_2) $) {$h_2$};
+
+	\node[left] at ($ (O)!0.8!(I_1) $) {$s_1$};
+	\node[below] at ($ (O)!0.8!(I_2) $) {$s_2$};
+
+	\node[below left] at ($ (O)!0.7!(S_1) $) {$f_1$};
+	\node[below] at ($ (O)!0.5!(S_2) $) {$f_2$};
+
+% segments, sides, lines marks %{{{1
+
+	\foreach \i in {1,...,\numsides}
+		\tkzMarkSegments[mark=||, size=2pt, pos=0.65](P_\i,S_\i);
+
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i,\numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\tkzMarkSegments[mark=||, size=2pt, pos=0.65](P_\j,S_\i);
+	}
+
+% circles labels %{{{1
+
+	\node at ($ (O) + (60:\radius + 0.3) $) {$\mathscr{C}$};
+
+% angles labels %{{{1
+
+	% ------- between radius and diagonal
+
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i - 1 + 2, \numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\pic[draw, ->, "$30^\circ$", angle radius=1.5cm, angle eccentricity=1.2]
+			{angle = P_\j--P_\i--O};
+	}
+
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i - 1 + 4, \numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\pic[draw, ->, "$30^\circ$", angle radius=1.5cm, angle eccentricity=1.2]
+			{angle = O--P_\i--P_\j};
+	}
+
+	% ------- isosceles triangles outside the pentagram
+
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i - 1 + 1, \numsides) + 1) },
+			evaluate=\i as \k using { int(mod(\i - 1 + 2, \numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
+			{angle = P_\i--P_\k--P_\j};
+		\pic[draw, ->, "$30^\circ$", angle radius=1.1cm, angle eccentricity=1.3]
+			{angle = P_\j--P_\i--P_\k};
+	}
+
+	% ------- miscellaneous
+
+	\pic[draw, ->, "$\alpha$", angle radius=0.9cm, angle eccentricity=1.3]
+		{angle = P_1--O--S_1};
+
+	\pic[draw, ->, "$\beta$", angle radius=0.8cm, angle eccentricity=1.3]
+		{angle = S_1--O--P_2};
+
+	\pic[draw, ->, "$60^\circ$" {xshift=9pt, yshift=-5pt}, angle radius=0.8cm, angle eccentricity=1.4]
+		{angle = P_6--O--P_1};
+
+% right angles markers %{{{2
+
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i, \numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\pic [draw, angle radius=7pt, angle eccentricity=1]
+			{right angle = P_\i--I_\j--P_\j};
+	}
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

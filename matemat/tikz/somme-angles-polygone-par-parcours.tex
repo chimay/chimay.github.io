@@ -1,136 +1,113 @@
 
-\documentclass[tikz, border=1mm]{standalone}
+\input{../../include/latex/tikz/header-light.tex}
 
-\usepackage{amsmath}
-
-\usetikzlibrary{calc,angles,quotes,intersections,shapes.geometric}
-
-\usepackage{tkz-euclide}
+% opening %{{{1
 
 \begin{document}
 \begin{tikzpicture}[scale=0.7]
 
-	% ---- parameters
+% parameters %{{{1
 
-	\def\arrowlength{2.5}
-	\def\arrowratio{0.6}
+	\tikzmath{
+		\arrowlength = 2.5 ;
+		\arrowratio = 0.6 ;
+		\numsides = int(6) ;
+	}
 
-	% ---- coordinates
+% coordinates %{{{1
 
-	\coordinate (P1) at (0,0);
-	\coordinate (P2) at (4,0);
-	\coordinate (P3) at (7,3);
-	\coordinate (P4) at (5,6);
-	\coordinate (P5) at (2,7);
-	\coordinate (P6) at (-2,4);
+	\coordinate (P_1) at (0,0);
+	\coordinate (P_2) at (4,0);
+	\coordinate (P_3) at (7,3);
+	\coordinate (P_4) at (5,6);
+	\coordinate (P_5) at (2,7);
+	\coordinate (P_6) at (-2,4);
 
-	% ---- vectors
+% vectors %{{{2
 
-	\coordinate (v1) at ($ (P1) - (P6) $);
-	\coordinate (v2) at ($ (P2) - (P1) $);
-	\coordinate (v3) at ($ (P3) - (P2) $);
-	\coordinate (v4) at ($ (P4) - (P3) $);
-	\coordinate (v5) at ($ (P5) - (P4) $);
-	\coordinate (v6) at ($ (P6) - (P5) $);
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i - 1 + 1, \numsides) + 1) },
+		]
+		in {1,...,\numsides}
+	{
+		\coordinate (v_\j) at ($ (P_\j) - (P_\i) $);
+	}
 
-	% -- unit vectors
+% unit vectors %{{{2
 
-	\coordinate (u1) at ($ (0,0)!1cm!(v1) $);
-	\coordinate (u2) at ($ (0,0)!1cm!(v2) $);
-	\coordinate (u3) at ($ (0,0)!1cm!(v3) $);
-	\coordinate (u4) at ($ (0,0)!1cm!(v4) $);
-	\coordinate (u5) at ($ (0,0)!1cm!(v5) $);
-	\coordinate (u6) at ($ (0,0)!1cm!(v6) $);
+	\foreach \i in {1,...,\numsides}
+		\coordinate (u_\i) at ($ (0,0)!1cm!(v_\i) $);
 
-	% ---- arrows tips
+% arrow tips %{{{2
 
-	% -- fixed length
+	% ---- fixed length
 
-	\coordinate (A1) at ($ (P1) + \arrowlength*(u1) $);
-	\coordinate (A2) at ($ (P2) + \arrowlength*(u2) $);
-	\coordinate (A3) at ($ (P3) + \arrowlength*(u3) $);
-	\coordinate (A4) at ($ (P4) + \arrowlength*(u4) $);
-	\coordinate (A5) at ($ (P5) + \arrowlength*(u5) $);
-	\coordinate (A6) at ($ (P6) + \arrowlength*(u6) $);
+	\foreach \i in {1,...,\numsides}
+		\coordinate (A_\i) at ($ (P_\i) + \arrowlength*(u_\i) $);
 
-	% -- proportional length
+	% ---- proportional length
 
-% 	\coordinate (A1) at ($ (P1) + \arrowratio*(v1) $);
-% 	\coordinate (A2) at ($ (P2) + \arrowratio*(v2) $);
-% 	\coordinate (A3) at ($ (P3) + \arrowratio*(v3) $);
-% 	\coordinate (A4) at ($ (P4) + \arrowratio*(v4) $);
-% 	\coordinate (A5) at ($ (P5) + \arrowratio*(v5) $);
-% 	\coordinate (A6) at ($ (P6) + \arrowratio*(v6) $);
+% 	\foreach \i in {1,...,\numsides}
+% 		\coordinate (A_\i) at ($ (P_\i) + \arrowratio*(v_\i) $);
 
-	% ---- polygon
+% points, dots, vertices %{{{1
 
-	\draw (P1) \foreach \i in {2,...,6} { -- (P\i) } -- cycle;
+	\foreach \i in {1,...,\numsides}
+		\fill (P_\i) circle (0.9mm);
+
+% segments, sides, lines %{{{1
+
+	\draw (P_1) \foreach \i in {2,...,\numsides} { -- (P_\i) } -- cycle;
 
 	% ---- arrows
 
-	\draw[dashed, ->] (P1) -- (A1);
-	\draw[dashed, ->] (P2) -- (A2);
-	\draw[dashed, ->] (P3) -- (A3);
-	\draw[dashed, ->] (P4) -- (A4);
-	\draw[dashed, ->] (P5) -- (A5);
-	\draw[dashed, ->] (P6) -- (A6);
+	\draw[dashed, ->] (P_1) -- (A_1);
+	\draw[dashed, ->] (P_2) -- (A_2);
+	\draw[dashed, ->] (P_3) -- (A_3);
+	\draw[dashed, ->] (P_4) -- (A_4);
+	\draw[dashed, ->] (P_5) -- (A_5);
+	\draw[dashed, ->] (P_6) -- (A_6);
 
-	% ---- thick vertices
+% points, dots, vertices labels %{{{1
 
-	\foreach \i in {1,...,6} { \fill (P\i) circle (0.9mm); }
+	\node[below left] at (P_1) {$P_1$};
 
-	% ---- vertices labels
-
-	\node[below left] at (P1) {$P$};
-
-% 	\node[above right] at (P1) {$P_1$};
-% 	\node[right] at (P2) {$P_2$};
-% 	\node[below] at (P3) {$P_3$};
-% 	\node[below] at (P4) {$P_4$};
-% 	\node[left] at (P5) {$P_5$};
-% 	\node[above left] at (P6) {$P_6$};
+	%\node[above right] at (P1) {$P_1$};
+	%\node[right] at (P2) {$P_2$};
+	%\node[below] at (P3) {$P_3$};
+	%\node[below] at (P4) {$P_4$};
+	%\node[left] at (P5) {$P_5$};
+	%\node[above left] at (P6) {$P_6$};
 
 	% ---- vectors labels
 
-	\node[left] at ($(P1)!0.8!(A1)$) {$\vec{u}$};
+	\node[left] at ($(P_1)!0.8!(A_1)$) {$\vec{u}_1$};
 
-	% ---- angles labels
+% angles labels %{{{1
 
-	\pic[draw, ->, "$\alpha_1$", angle radius=0.9cm, angle eccentricity=1.4]
-	{angle = A1--P1--P2};
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i - 1 + 1, \numsides) + 1) },
+		]
+		in {1,...,\numsides}
+	{
+		\pic[draw, ->, "$\alpha_\i$", angle radius=0.9cm, angle eccentricity=1.4]
+			{angle = A_\i--P_\i--P_\j};
+	}
 
-	\pic[draw, ->, "$\alpha_2$", angle radius=0.9cm, angle eccentricity=1.4]
-	{angle = A2--P2--P3};
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i - 1 + 1, \numsides) + 1) },
+			evaluate=\i as \k using { int(mod(\i - 1 + 2, \numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\pic[draw, ->, "$\beta_\i$", angle radius=0.7cm, angle eccentricity=1.4]
+		{angle = P_\k--P_\j--P_\i};
+	}
 
-	\pic[draw, ->, "$\alpha_3$", angle radius=0.9cm, angle eccentricity=1.4]
-	{angle = A3--P3--P4};
-
-	\pic[draw, ->, "$\alpha_4$", angle radius=0.9cm, angle eccentricity=1.4]
-	{angle = A4--P4--P5};
-
-	\pic[draw, ->, "$\alpha_5$", angle radius=0.9cm, angle eccentricity=1.4]
-	{angle = A5--P5--P6};
-
-	\pic[draw, ->, "$\alpha_6$", angle radius=0.9cm, angle eccentricity=1.4]
-	{angle = A6--P6--P1};
-
-	\pic[draw, ->, "$\gamma_1$", angle radius=0.7cm, angle eccentricity=1.5]
-	{angle = P2--P1--P6};
-
-	\pic[draw, ->, "$\gamma_2$", angle radius=0.7cm, angle eccentricity=1.5]
-	{angle = P3--P2--P1};
-
-	\pic[draw, ->, "$\gamma_3$", angle radius=0.7cm, angle eccentricity=1.5]
-	{angle = P4--P3--P2};
-
-	\pic[draw, ->, "$\gamma_4$", angle radius=0.7cm, angle eccentricity=1.5]
-	{angle = P5--P4--P3};
-
-	\pic[draw, ->, "$\gamma_5$", angle radius=0.7cm, angle eccentricity=1.5]
-	{angle = P6--P5--P4};
-
-	\pic[draw, ->, "$\gamma_6$", angle radius=0.7cm, angle eccentricity=1.5]
-	{angle = P1--P6--P5};
+% closing %{{{1
 
 \end{tikzpicture}
 \end{document}

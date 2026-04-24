@@ -22,11 +22,7 @@
 
 #+INCLUDE: "../include/latex/latex.org"
 
-* Introduction
-
-#+TOC: headlines 1 local
-
-** Définition
+* Définition
 
 Soit un nombre naturel $n$.
 
@@ -69,7 +65,7 @@ On définit généralement un polygone par la liste de ces sommets. Le
 polygone du schéma ci-dessus est appelé polygone $P_1 P_2 P_3 P_4 P_5
 P_6 P_7$.
 
-** Nomenclature
+* Nomenclature
 
 Les polygones les plus courants portent un nom. Nous avons déjà
 rencontré le triangle, qui n’est rien d’autre qu’un polygone à
@@ -89,7 +85,11 @@ voici quelques autres :
 | hendécagone  |              11 |
 | dodécagone   |              12 |
 
-** Diagonales
+* Diagonales
+
+#+TOC: headlines 1 local
+
+** Introduction
 
 Une diagonale d’un polygone $\mathcal{P}$ est un segment obtenu en
 reliant deux sommets non adjacents de $\mathcal{P}$.
@@ -101,33 +101,15 @@ $[P_5,P_7]$ sont des diagonales du polygone $P_1 P_2 \ldots P_7$ :
 #+attr_latex: :width 0.7\linewidth
 [[file:tikz/diagonales-polygone.svg]]
 
-* Polygone régulier
+** Classification
+
+TODO
+
+* Somme des angles
 
 #+TOC: headlines 1 local
 
-** Définition
-
-Un polygone régulier est un polygone dont :
-
-- tous les côtés ont la même longueur
-- tous les angles sont de même amplitude
-
-** Invariance sous rotation
-
-Ses côtés et ses angles étant identiques, un polygone régulier à $n$
-côtés est invariant lorsqu’on lui applique une rotation de :
-
-$$ \frac{2 \ \pi}{n} = \frac{360^\circ}{n} $$
-
-* Angles d’un polygone
-
-#+TOC: headlines 1 local
-
-** Somme des angles
-
-#+TOC: headlines 1 local
-
-*** Par une décomposition en triangles
+** Par une décomposition en triangles
 
 On obtient la smme des angles d’un polygone générique à $n$ côtés
 en le décomposant en triangles. Il y a toutefois quelques précautions
@@ -160,18 +142,7 @@ $\pi = 180^\circ$, la somme des angles de $\mathcal{P}_n$ vaut :
 
 $$ (n - 2) \cdot \pi = (n - 2) \cdot 180^\circ $$
 
-On a en particulier le tableau suivant :
-
-| Polygone     | Nombre de côtés | Somme des angles                  |
-|--------------+-----------------+-----------------------------------|
-| quadrilatère |               4 | $2 \cdot 180^\circ = 360^\circ$   |
-| pentagone    |               5 | $3 \cdot 180^\circ = 540^\circ$   |
-| hexagone     |               6 | $4 \cdot 180^\circ = 720^\circ$   |
-| octogone     |               8 | $6 \cdot 180^\circ = 1080^\circ$  |
-| décagone     |              10 | $8 \cdot 180^\circ = 1440^\circ$  |
-| dodécagone   |              12 | $10 \cdot 180^\circ = 1800^\circ$ |
-
-*** Par un parcours autour du polygone
+** Par un parcours autour du polygone
 
 Ce raisonnement est inspiré de
 [[https://www.youtube.com/watch?v=7wY-Byh8d6M][cette vidéo de Micmath]].
@@ -183,10 +154,10 @@ polygone suivant :
 #+attr_latex: :width 0.7\linewidth
 [[file:tikz/somme-angles-polygone-par-parcours.svg]]
 
-Ce parcours se fait dans le sens anti-horlogique, en partant du point
-$P$, avec une direction initiale donnée par le vecteur $\vec{u}$. Notre
-personnage tourne à chaque sommet d’un angle $\alpha_i$. l’angle
-total de sa rotation vaut donc  :
+Ce parcours se fait dans le sens anti-horlogique, en partant du
+point $P_1$, avec une direction initiale donnée par le vecteur
+$\vec{u}_1$. Notre personnage tourne à chaque sommet d’un angle
+$\alpha_i$. l’angle total de sa rotation vaut donc  :
 
 $$ S = \sum_{i=1}^n \alpha_i $$
 
@@ -199,70 +170,53 @@ On en déduit que :
 
 $$ \sum_{i=1}^n \alpha_i = 2 \ \pi $$
 
-À chaque sommet $i$, les angles $\alpha_i$ et $\gamma_i$ forment ensemble
+À chaque sommet $i$, les angles $\alpha_i$ et $\beta_i$ forment ensemble
 un angle plat :
 
-$$ \alpha_i + \gamma_i = \pi $$
+$$ \alpha_i + \beta_i = \pi $$
 
 On a donc :
 
-$$ \alpha_i = \pi - \gamma_i $$
+$$ \alpha_i = \pi - \beta_i $$
 
 La relation sur la somme des angles devient :
 
-$$ \sum_{i=1}^n (\pi - \gamma_i) = 2 \ \pi $$
+$$ \sum_{i=1}^n (\pi - \beta_i) = 2 \ \pi $$
 
 ou encore :
 
-$$ \sum_{i=1}^n \pi - \sum_{i=1}^n \gamma_i = 2 \ \pi $$
+$$ \sum_{i=1}^n \pi - \sum_{i=1}^n \beta_i = 2 \ \pi $$
 
 La constante $\pi$ ne dépendant pas de $i$, on a simplement :
 
-$$ n \ \pi - \sum_{i=1}^n \gamma_i = 2 \ \pi $$
+$$ n \ \pi - \sum_{i=1}^n \beta_i = 2 \ \pi $$
 
 Isolons la somme des angles internes du polygone :
 
-$$ \sum_{i=1}^n \gamma_i = n \ \pi - 2 \ \pi $$
+$$ \sum_{i=1}^n \beta_i = n \ \pi - 2 \ \pi $$
 
 Mettons en évidence $\pi$ :
 
-$$ \sum_{i=1}^n \gamma_i = (n - 2) \ \pi $$
+$$ \sum_{i=1}^n \beta_i = (n - 2) \ \pi $$
 
 La somme dans le membre de gauche n’est rien d’autre que la somme
 des angles internes du polygone. Nous avons donc montré que cette somme
 vaut :
 
-$$ \sum_{i=1}^n \gamma_i = (n - 2) \cdot \pi = (n - 2) \cdot 180^\circ $$
+$$ \sum_{i=1}^n \beta_i = (n - 2) \cdot \pi = (n - 2) \cdot 180^\circ $$
 
-** Angle d’un polygone régulier
-
-Dans le cas d’un polygone régulier, tous les angles sont égaux. Notons
-$\alpha_n$ un angle quelconque d’un polygone à $n$ côtés. La somme des
-angles vaut :
-
-$$ n \ \alpha_n = (n - 2) \ \pi $$
-
-On a donc :
-
-$$ \alpha_n = \frac{(n - 2) \ \pi}{n} =  \frac{(n - 2) \cdot 180^\circ}{n} $$
+** Polygones courants
 
 On a en particulier le tableau suivant :
 
-| Polygone régulier | Nombre de côtés | Somme des angles | Angle                       |
-|-------------------+-----------------+------------------+-----------------------------|
-| quadrilatère      |               4 | $360^\circ$      | $360^\circ/4 = 90^\circ$    |
-| pentagone         |               5 | $540^\circ$      | $540^\circ/5 = 108^\circ$   |
-| hexagone          |               6 | $720^\circ$      | $720^\circ/6 = 120^\circ$   |
-| octogone          |               8 | $1080^\circ$     | $1080^\circ/8 = 135^\circ$  |
-| décagone          |              10 | $1440^\circ$     | $1440^\circ/10 = 144^\circ$ |
-| dodécagone        |              12 | $1800^\circ$     | $1800^\circ/12 = 150^\circ$ |
-
-On remarque aussi que :
-
-$$ \lim_{n \to \infty} \alpha_n = \lim_{n \to \infty} \frac{(n - 2) \ \pi}{n}  = \pi $$
-
-Lorsque le nombre de côtés devient très grand, l’angle $\alpha_n$ converge
-vers $\pi = 180^\circ$.
+| Polygone     | Nombre de côtés | Somme des angles |
+|--------------+-----------------+------------------|
+| quadrilatère |               4 | $360^\circ$      |
+| pentagone    |               5 | $540^\circ$      |
+| hexagone     |               6 | $720^\circ$      |
+| octogone     |               8 | $1080^\circ$     |
+| décagone     |              10 | $1440^\circ$     |
+| dodécagone   |              12 | $1800^\circ$     |
 
 * Polygone et cercle
 

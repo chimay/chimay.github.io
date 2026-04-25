@@ -11,20 +11,31 @@
 
 % parameters %{{{1
 
-	%\def\len{3}
-	%\def\gth{3}
-
-	\def\ext{3}
+	\tikzmath{
+		\greatBasis = 7.0 ;
+		\smallBasis = 4.0 ;
+		\elevation = 3.0 ;
+		\slide = 2.0 ;
+		\pick = 0.6 * \greatBasis ;
+		\extratio = 1.2 ;
+		\extratiominus = \extratio - 1 ;
+	}
 
 % coordinates %{{{1
 
 	\coordinate (A) at (0,0);
-	\coordinate (B) at (7,0);
-	\coordinate (C) at (6,3);
-	\coordinate (D) at (3,3);
+	\coordinate (B) at (\greatBasis, 0);
+	\coordinate (C) at ({\slide + \smallBasis}, \elevation);
+	\coordinate (D) at (\slide, \elevation);
 
-	\coordinate (E) at (4,3);
-	\coordinate (F) at (4,0);
+	\coordinate (E) at (\pick, 0);
+	\coordinate (F) at (\pick, \elevation);
+
+	\coordinate (X_1) at ({-\greatBasis * \extratiominus}, 0);
+	\coordinate (Y_1) at ({\greatBasis * \extratio}, 0);
+
+	\coordinate (X_2) at ({-\greatBasis * \extratiominus}, \elevation);
+	\coordinate (Y_2) at ({\greatBasis * \extratio}, \elevation);
 
 % points, dots, vertices %{{{1
 
@@ -34,11 +45,18 @@
 	\fill (D) circle (0.4mm);
 
 	\fill (E) circle (0.4mm);
+	\fill (F) circle (0.4mm);
 
 % segments, sides %{{{1
 
 	\draw (A) -- (B) -- (C) -- (D) -- cycle;
 	\draw[dashed] (E) -- (F);
+
+	\draw[dashed] (X_1) -- (A);
+	\draw[dashed] (B) -- (Y_1);
+
+	\draw[dashed] (X_2) -- (D);
+	\draw[dashed] (C) -- (Y_2);
 
 % points, dots, vertices labels %{{{1
 
@@ -47,8 +65,8 @@
 	\node[above right] at (C) {$C$};
 	\node[above left] at (D) {$D$};
 
-	\node[above] at (E) {$E$};
-	\node[below] at (F) {$F$};
+	\node[below] at (E) {$E$};
+	\node[above] at (F) {$F$};
 
 % segments, sides labels %{{{1
 
@@ -59,10 +77,10 @@
 % right angles markers %{{{2
 
 	\pic [draw, angle radius=7pt, angle eccentricity=1]
-	{right angle = B--F--E};
+	{right angle = B--E--F};
 
 	\pic [draw, angle radius=7pt, angle eccentricity=1]
-	{right angle = F--E--C};
+	{right angle = E--F--C};
 
 % closing %{{{1
 

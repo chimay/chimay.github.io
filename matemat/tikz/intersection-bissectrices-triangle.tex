@@ -1,0 +1,154 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header-light.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\def\radius{4.5}
+
+	\def\ang{200}
+	\def\ngl{-30}
+	\def\gle{120}
+
+	\def\lenBisector{10.0cm}
+
+	%\tikzmath{
+		%\var = 2.1;
+	%}
+
+% coordinates %{{{1
+
+	\coordinate (A) at (\ang:\radius);
+	\coordinate (B) at (\ngl:\radius);
+	\coordinate (C) at (\gle:\radius);
+
+	\coordinate (lenAB) at ($(A)!\lenBisector!(B)$);
+	\coordinate (lenAC) at ($(A)!\lenBisector!(C)$);
+	\coordinate (XbisectorBAC) at ($(lenAB)!0.5!(lenAC)$);
+
+	\coordinate (lenBA) at ($(B)!\lenBisector!(A)$);
+	\coordinate (lenBC) at ($(B)!\lenBisector!(C)$);
+	\coordinate (XbisectorCBA) at ($(lenBA)!0.5!(lenBC)$);
+
+	\coordinate (lenCA) at ($(C)!\lenBisector!(A)$);
+	\coordinate (lenCB) at ($(C)!\lenBisector!(B)$);
+	\coordinate (XbisectorACB) at ($(lenCA)!0.5!(lenCB)$);
+
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=line1] (A) -- (XbisectorBAC);
+		\path[name path=line2] (B) -- (XbisectorCBA);
+		\path[name intersections={of=line1 and line2, by=O}];
+	\end{pgfinterruptboundingbox}
+
+	% ---- projection of O onto triangle sides are
+	% ---- intersections of inscribed circle and sides
+	% ---- also to compute the inscribed circle radius
+
+	\coordinate (P) at ($ (A)!(O)!(B) $);
+	\coordinate (S) at ($ (B)!(O)!(C) $);
+	\coordinate (T) at ($ (C)!(O)!(A) $);
+
+% distance %{{{1
+
+	\path let \p1 = ($ (P) - (O) $)
+	in \pgfextra{
+		\pgfmathsetmacro{\radiusInscribed}{veclen(\x1,\y1)/1cm}
+		\global\let\radiusInscribed\radiusInscribed
+	};
+
+% points, dots, vertices %{{{1
+
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+	\fill (C) circle (0.4mm);
+
+	%\fill (XbisectorBAC) circle (0.4mm);
+	%\fill (XbisectorCBA) circle (0.4mm);
+	%\fill (XbisectorACB) circle (0.4mm);
+
+	\fill (O) circle (0.4mm);
+
+	\fill (P) circle (0.4mm);
+	\fill (S) circle (0.4mm);
+	\fill (T) circle (0.4mm);
+
+% segments, sides, lines %{{{1
+
+	\draw (A) -- (B) -- (C) -- cycle;
+
+	\draw (A) -- (XbisectorBAC);
+	\draw (B) -- (XbisectorCBA);
+	\draw (C) -- (XbisectorACB);
+
+	\draw[dashed] (O) -- (P);
+	\draw[dashed] (O) -- (S);
+	\draw[dashed] (O) -- (T);
+
+% circles %{{{1
+
+	%\path[draw] let \p1 = ($ (O) - (T) $)
+		%in (O) circle ({veclen(\x1,\y1)});
+
+% circular arcs %{{{2
+
+	%\draw (A) ++(\ang:\radius) arc (\ang:\gle:\radius);
+
+% points, dots, vertices labels %{{{1
+
+	\node[below] at (A) {$A$};
+	\node[below] at (B) {$B$};
+	\node[above] at (C) {$C$};
+
+	\node[anchor=north east] at ($ (O) + (260:0.1) $) {$O$};
+
+	\node[below] at (P) {$P$};
+	\node[above right] at (S) {$S$};
+	\node[anchor=north east] at ($ (T) + (205:0.05) $) {$T$};
+
+% segments, sides, lines labels %{{{1
+
+	\node[above left] at ($ (A)!0.9!(XbisectorBAC) $) {$b$};
+	\node[above] at ($ (B)!0.95!(XbisectorCBA) $) {$d$};
+	\node[above right] at ($ (C)!0.9!(XbisectorACB) $) {$f$};
+
+% segments, sides, lines marks %{{{1
+
+	\tkzMarkSegments[mark=||, size=2pt](O,P)
+	\tkzMarkSegments[mark=||, size=2pt](O,S)
+	\tkzMarkSegments[mark=||, size=2pt](O,T)
+
+% circles labels %{{{1
+
+	%\node at ($ (O) + (-40:\radiusInscribed + 0.3) $) {$\mathscr{C}$};
+
+% circular arcs labels %{{{2
+
+	%\node at ($ (O) + (45:\radius + 0.3) $) {$\mathscr{C}$};
+
+% angles labels %{{{1
+
+	%\pic[draw, ->, "$\alpha$", angle radius=0.8cm, angle eccentricity=1.5]
+	%{angle = B--A--C};
+
+% right angles markers %{{{2
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = B--P--O};
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = C--S--O};
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+	{right angle = A--T--O};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

@@ -1,37 +1,44 @@
-% Minimal TikZ standalone example
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
 
-\documentclass[tikz,border=10pt]{standalone}
+\input{../../include/latex/tikz/header-light.tex}
 
-\usepackage{tikz}
-\usepackage{tkz-euclide}
-
-\usetikzlibrary{angles,quotes,calc}
+% opening %{{{1
 
 \begin{document}
 \begin{tikzpicture}[scale=1,>=stealth]
 
-	% parameters
+% parameters %{{{1
 
-	\def\len{8.0}
-	\def\a{40}
-	\def\b{25}
+	\tikzmath{
+		\len = 8.0 ;
+		\alp = 40.0 ;
+		\bet = 25.0 ;
+		\sinalpha = sin(\alp) ;
+		\sinbeta = sin(\bet) ;
+		\cosalpha = cos(\alp) ;
+		\cosbeta = cos(\bet) ;
+		\sinsum = sin(\alp + \bet) ;
+		\cossum = cos(\alp + \bet) ;
+	}
 
-	% base triangle ABC for alpha (unit hypotenuse)
+% coordinates %{{{1
+
+	% ------- triangle ABC for alpha
 
 	\coordinate (A) at (0,0);
-	\coordinate (B) at ({\len*cos(\b)*cos(\a)},{\len*cos(\b)*sin(\a)});
-	\coordinate (C) at ({\len*cos(\b)*cos(\a)},0);
+	\coordinate (B) at ({\len*\cosbeta*\cosalpha}, 0);
+	\coordinate (C) at ({\len*\cosbeta*\cosalpha}, {\len*\cosbeta*\sinalpha});
 
-	% triangle ADB for beta
+	% ------- triangle ABD for beta (unit hypotenuse)
 
-	\coordinate (D) at ({\len*cos(\a+\b},{\len*sin(\a+\b)});
+	\coordinate (D) at ({\len*\cossum}, {\len*\sinsum});
 
-	% engulfing rectangle
+	% ------- engulfing rectangle ABEF
 
-	\coordinate (E) at ({\len*cos(\b)*cos(\a)},{\len*sin(\a+\b)});
-	\coordinate (F) at (0,{\len*sin(\a+\b)});
+	\coordinate (E) at ({\len*\cosbeta*\cosalpha}, {\len*\sinsum});
+	\coordinate (F) at (0, {\len*\sinsum});
 
-	% points
+% points, dots, vertices %{{{1
 
 	\fill (A) circle (0.4mm);
 	\fill (B) circle (0.4mm);
@@ -40,59 +47,75 @@
 	\fill (E) circle (0.4mm);
 	\fill (F) circle (0.4mm);
 
-	% projections
-
-	%\coordinate (G) at ({cos(\a)*cos(\b)},0);
-
-	% triangle sides
+% segments, sides, lines %{{{1
 
 	\draw (A) -- (B) -- (C) -- cycle;
-	\draw (A) -- (D) -- (B);
-	%\draw[dashed] (D) -- (G);
+	\draw (A) -- (D) -- (C);
 
-	% rectangle
+	\draw (C) -- (E) -- (F) -- (A);
 
-	\draw (A) rectangle (E);
+	%\draw (A) rectangle (E);
 
-	% segments labels
+% points, dots, vertices labels %{{{1
 
-	\node[left] at ($(A)!0.5!(D)$) {$1$};
+	\node[below left] at (A) {$A$};
+	\node[below right] at (B) {$B$};
+	\node[right] at (C) {$C$};
+	\node[above] at (D) {$D$};
+	\node[above right] at (E) {$E$};
+	\node[above left] at (F) {$F$};
 
-	\node[above left] at ($(A)!0.7!(B)$) {$\cos\beta$};
-	\node[below left] at ($(D)!0.5!(B)$) {$\sin\beta$};
+% segments, sides, lines labels %{{{1 %{{{1
 
-	\node[below]  at ($(A)!0.5!(C)$) {$\cos\beta \cos \alpha$};
-	\node[right]  at ($(B)!0.5!(C)$) {$\cos\beta \sin \alpha$};
+	\node[above left] at ($(A)!0.5!(D)$) {$1$};
 
-	\node[right]  at ($(E)!0.5!(B)$) {$\sin\beta \cos \delta$};
+	\node[above left] at ($(A)!0.7!(C)$) {$\cos\beta$};
+	\node[below left] at ($(D)!0.5!(C)$) {$\sin\beta$};
+
+	\node[below]  at ($(A)!0.5!(B)$) {$\cos\beta \cos \alpha$};
+	\node[right]  at ($(C)!0.5!(B)$) {$\cos\beta \sin \alpha$};
+
+	\node[right]  at ($(E)!0.5!(C)$) {$\sin\beta \cos \delta$};
 	\node[above]  at ($(D)!0.5!(E)$) {$\sin\beta \sin \delta$};
 
-	\node[above] at ($(F)!0.5!(D)$) {$\cos(\alpha+\beta)$};
-	\node[left] at ($(A)!0.5!(F)$) {$\sin(\alpha+\beta)$};
+	\node[above] at ($(F)!0.5!(D)$) {$\cos(\alpha + \beta)$};
+	\node[left] at ($(A)!0.5!(F)$) {$\sin(\alpha + \beta)$};
 
-	% angle labels
+% angle labels %{{{1
 
-	\pic[draw, ->, "$\alpha$", angle radius=1cm, angle eccentricity=1.2]
-	{angle = C--A--B};
+	\pic[draw, ->, "$\alpha$", angle radius=1.2cm, angle eccentricity=1.2]
+		{angle = B--A--C};
 
-	\pic[draw, ->, "$\beta$", angle radius=1.5cm, angle eccentricity=1.2]
-	{angle = B--A--D};
+	\pic[draw, ->, "$\beta$", angle radius=1.7cm, angle eccentricity=1.2]
+		{angle = C--A--D};
 
-	\pic[draw, ->, "$\alpha+\beta$", angle radius=2.5cm, angle eccentricity=1.2]
-	{angle = C--A--D};
+	\pic[draw, ->, "$\alpha + \beta$" {xshift=9, yshift=-12}, angle radius=2.7cm, angle eccentricity=1.2]
+		{angle = B--A--D};
+
+	\pic[draw, ->, "$\alpha + \beta$", angle radius=1.0cm, angle eccentricity=1.5]
+		{angle = F--D--A};
 
 	\pic[draw, ->, "$\gamma$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = A--B--C};
+		{angle = A--C--B};
 
 	\pic[draw, ->, "$\delta$", angle radius=1.1cm, angle eccentricity=1.3]
-	{angle = E--B--D};
+		{angle = E--C--D};
 
-	% right angles
+% right angle markers %{{{2
 
-	\tkzMarkRightAngle[size=0.05](D,B,A)
-	\tkzMarkRightAngle[size=0.05](B,C,A)
-	\tkzMarkRightAngle[size=0.05](D,E,B)
-	\tkzMarkRightAngle[size=0.05](A,F,D)
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+		{right angle = D--C--A};
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+		{right angle = C--B--A};
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+		{right angle = D--E--C};
+
+	\pic [draw, angle radius=7pt, angle eccentricity=1]
+		{right angle = A--F--D};
+
+% closing %{{{1
 
 \end{tikzpicture}
 \end{document}

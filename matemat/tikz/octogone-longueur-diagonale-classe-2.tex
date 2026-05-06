@@ -1,0 +1,115 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header-light.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\tikzmath{
+		\radius = 3.4 ;
+		\rotation = 90 ;
+		\numsidesfloat = 8.0 ;
+		\numsides = int(\numsidesfloat) ;
+		\numsidesminus = \numsides - 1 ;
+		int \i ;
+		for \i in {1,...,\numsides} {
+			\ang{\i} = \rotation + 360 / \numsidesfloat * (\i-1) ;
+		};
+	}
+
+% coordinates %{{{1
+
+	\coordinate (O) at (0,0);
+
+	\foreach \i in {1,...,\numsides}
+		\coordinate (P_\i) at (\ang{\i}:\radius);
+
+% points, dots, vertices %{{{1
+
+	\fill (O) circle (0.4mm);
+
+	\foreach \i in {1,...,\numsides}
+		\fill (P_\i) circle (0.4mm);
+
+% segments, sides, lines %{{{1
+
+	\draw (P_1) \foreach \i in {2,...,\numsides} { -- (P_\i) } -- cycle;
+
+	\draw (O) -- (P_1);
+	\draw (O) -- (P_4);
+
+	\draw (P_1) -- (P_4);
+
+	\draw[dashed] (O) -- (P_2);
+	\draw[dashed] (O) -- (P_3);
+
+% circles %{{{1
+
+	%\draw (O) circle (\radius);
+
+% points, dots, vertices labels %{{{1
+
+	\node[right] at (O) {$O$};
+
+	\node[above] at (P_1) {$P_1$};
+	\node[above left] at (P_2) {$P_2$};
+	\node[left] at (P_3) {$P_3$};
+	\node[below left] at (P_4) {$P_4$};
+	\node[below] at (P_5) {$P_5$};
+	\node[below  right] at (P_6) {$P_6$};
+	\node[right] at (P_7) {$P_7$};
+	\node[above right] at (P_8) {$P_8$};
+
+% segments, sides, lines labels %{{{1
+
+	\node[above] at ($ (P_1)!0.5!(P_2) $) {$c$};
+
+	\node[right] at ($ (O)!0.5!(P_1) $) {$r$};
+	\node[below right] at ($ (O)!0.5!(P_4) $) {$r$};
+
+	\node[above left] at ($ (P_1)!0.5!(P_4) $) {$D$};
+
+% segments, sides, lines marks %{{{1
+
+	\tkzMarkSegments[mark=||, size=2pt](O,P_1);
+	\tkzMarkSegments[mark=||, size=2pt](O,P_4);
+
+		\foreach \i
+			[evaluate=\i as \j using { int(mod(\i,\numsides) + 1) }]
+			in {1,...,\numsides}
+		{
+			\tkzMarkSegments[mark=|, size=2pt](P_\i,P_\j);
+		}
+
+% circles labels %{{{1
+
+	%\node at ($ (O) + (70:\radius + 0.3) $) {$\mathscr{C}$};
+
+% circular arcs labels %{{{2
+
+	%\node at ($ (O) + (45:\radius + 0.3) $) {$\mathscr{C}$};
+
+% angles labels %{{{1
+
+	\pic[draw, ->, "$45^\circ$", angle radius=0.5cm, angle eccentricity=1.7]
+		{angle = P_1--O--P_2};
+
+	\pic[draw, ->, "$45^\circ$", angle radius=0.5cm, angle eccentricity=1.7]
+		{angle = P_2--O--P_3};
+
+	\pic[draw, ->, "$45^\circ$", angle radius=0.5cm, angle eccentricity=1.7]
+		{angle = P_3--O--P_4};
+
+% right angles markers %{{{2
+
+	%\pic [draw, angle radius=7pt, angle eccentricity=1]
+	%{right angle = C--B--A};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

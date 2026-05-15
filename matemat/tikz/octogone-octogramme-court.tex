@@ -88,8 +88,15 @@
 
 % right angles markers %{{{2
 
-	%\pic [draw, angle radius=7pt, angle eccentricity=1]
-	%{right angle = C--B--A};
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i - 1 + 2, \numsides) + 1) },
+			evaluate=\i as \k using { int(mod(\i - 1 + 4, \numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\pic [draw, angle radius=7pt] {right angle = P_\i--P_\j--P_\k};
+	}
 
 % closing %{{{1
 

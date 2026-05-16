@@ -31,9 +31,10 @@
 % intersections %{{{1
 
 	\begin{pgfinterruptboundingbox}
-		\path[name path=line1] (P_2) -- (P_5);
-		\path[name path=line2] (P_3) -- (P_8);
-		\path[name intersections={of=line1 and line2, by=I}];
+		\tkzInterLL(P_2,P_5)(P_3,P_8)\tkzGetPoint{I_1}
+		\tkzInterLL(P_2,P_5)(P_4,P_7)\tkzGetPoint{I_2}
+		\tkzInterLL(P_1,P_6)(P_4,P_7)\tkzGetPoint{I_3}
+		\tkzInterLL(P_1,P_6)(P_3,P_8)\tkzGetPoint{I_4}
 	\end{pgfinterruptboundingbox}
 
 % points, dots, vertices %{{{1
@@ -43,7 +44,8 @@
 	\foreach \i in {1,...,\numsides}
 		\fill (P_\i) circle (0.4mm);
 
-	\fill (I) circle (0.4mm);
+	\foreach \i in {1,...,4}
+		\fill (I_\i) circle (0.4mm);
 
 % segments, sides, lines %{{{1
 
@@ -51,6 +53,8 @@
 
 	\draw (P_2) -- (P_5);
 	\draw (P_3) -- (P_8);
+	\draw (P_4) -- (P_7);
+	\draw (P_1) -- (P_6);
 
 % circles %{{{1
 
@@ -69,21 +73,34 @@
 	\node[right] at (P_7) {$P_7$};
 	\node[above right] at (P_8) {$P_8$};
 
-	\node[below left] at (I) {$I$};
+	\node[above left] at (I_1) {$I_1$};
+	\node[below left] at (I_2) {$I_2$};
+	\node[below right] at (I_3) {$I_3$};
+	\node[above right] at (I_4) {$I_4$};
 
 % segments, sides, lines labels %{{{1
 
-	%\node[below left] at ($ (O)!0.5!(P_3) $) {$r$};
-	%\node[below right] at ($ (O)!0.5!(P_8) $) {$r$};
+	\node[above] at ($ (P_1)!0.5!(P_2) $) {$c$};
+	\node[left] at ($ (P_3)!0.5!(P_4) $) {$c$};
+	\node[below] at ($ (P_5)!0.5!(P_6) $) {$c$};
+	\node[right] at ($ (P_7)!0.5!(P_8) $) {$c$};
+
+	\node[above left] at ($ (P_2)!0.5!(P_3) $) {$c$};
+
+	\node[right] at ($ (P_2)!0.5!(I_1) $) {$a$};
+	\node[below] at ($ (P_3)!0.5!(I_1) $) {$a$};
 
 % segments, sides, lines marks %{{{1
 
-		\foreach \i
-			[evaluate=\i as \j using { int(mod(\i,\numsides) + 1) }]
-			in {1,...,\numsides}
-		{
-			\tkzMarkSegments[mark=|, size=2pt](P_\i,P_\j);
-		}
+	\foreach \i
+		[evaluate=\i as \j using { int(mod(\i,\numsides) + 1) }]
+		in {1,...,\numsides}
+	{
+		\tkzMarkSegments[mark=||, size=2pt](P_\i,P_\j);
+	}
+
+	\tkzMarkSegments[mark=|, size=2pt](P_3,I_1);
+	\tkzMarkSegments[mark=|, size=2pt](P_2,I_1);
 
 % circles labels %{{{1
 
@@ -101,25 +118,47 @@
 	\pic[draw, ->, "$45^\circ$", angle radius=0.7cm, angle eccentricity=1.5]
 		{angle = P_3--P_2--P_5};
 
-	\pic[draw, ->, "$135^\circ$", angle radius=0.7cm, angle eccentricity=1.5]
-		{angle = P_2--P_1--P_8};
-
-	\pic[draw, ->, "$135^\circ$", angle radius=0.7cm, angle eccentricity=1.6]
-		{angle = P_1--P_8--P_7};
-
-	\pic[draw, ->, "$\alpha$", angle radius=0.5cm, angle eccentricity=1.5]
-		{angle = P_2--I--P_3};
-
-	\pic[draw, ->, "$\beta$", angle radius=0.5cm, angle eccentricity=1.5]
-		{angle = P_5--P_2--P_1};
-
-	\pic[draw, ->, "$\gamma$", angle radius=0.5cm, angle eccentricity=1.5]
-		{angle = P_4--P_3--P_8};
-
 % right angles markers %{{{2
 
-	%\pic [draw, angle radius=7pt, angle eccentricity=1]
-	%{right angle = C--B--A};
+	% ------- square
+
+	\pic[draw, angle radius=7]
+		{right angle = P_5--I_1--P_8};
+
+	\pic[draw, angle radius=7]
+		{right angle = P_7--I_2--P_2};
+
+	\pic[draw, angle radius=7]
+		{right angle = P_1--I_3--P_4};
+
+	\pic[draw, angle radius=7]
+		{right angle = P_3--I_4--P_6};
+
+	% ------- rectangles
+
+	\pic[draw, angle radius=7]
+		{right angle = P_5--P_2--P_1};
+
+	\pic[draw, angle radius=7]
+		{right angle = P_2--P_1--P_6};
+
+	\pic[draw, angle radius=7]
+		{right angle = P_4--P_3--P_8};
+
+	\pic[draw, angle radius=7]
+		{right angle = P_7--P_4--P_3};
+
+	\pic[draw, angle radius=7]
+		{right angle = P_6--P_5--P_2};
+
+	\pic[draw, angle radius=7]
+		{right angle = P_1--P_6--P_5};
+
+	\pic[draw, angle radius=7]
+		{right angle = P_8--P_7--P_4};
+
+	\pic[draw, angle radius=7]
+		{right angle = P_3--P_8--P_7};
 
 % closing %{{{1
 

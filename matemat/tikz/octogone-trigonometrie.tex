@@ -1,0 +1,187 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header-light.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\tikzmath{
+		\radius = 4.5 ;
+		\rotation = 67.5 ;
+		\numsidesfloat = 8.0 ;
+		\numsides = int(\numsidesfloat) ;
+		\numsidesminus = \numsides - 1 ;
+		int \i ;
+		for \i in {1,...,\numsides} {
+			\ang{\i} = \rotation + 360 / \numsidesfloat * (\i-1) ;
+		};
+	}
+
+% coordinates %{{{1
+
+	\coordinate (O) at (0,0);
+
+	\foreach \i in {1,...,\numsides}
+		\coordinate (P_\i) at (\ang{\i}:\radius);
+
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\tkzInterLL(P_2,P_5)(P_3,P_8)\tkzGetPoint{I_1}
+		\tkzInterLL(P_2,P_5)(P_4,P_7)\tkzGetPoint{I_2}
+		\tkzInterLL(P_1,P_6)(P_4,P_7)\tkzGetPoint{I_3}
+		\tkzInterLL(P_1,P_6)(P_3,P_8)\tkzGetPoint{I_4}
+	\end{pgfinterruptboundingbox}
+
+% points, dots, vertices %{{{1
+
+	\fill (O) circle (0.4mm);
+
+	\foreach \i in {1,...,\numsides}
+		\fill (P_\i) circle (0.4mm);
+
+	\foreach \i in {1,...,4}
+		\fill (I_\i) circle (0.4mm);
+
+% segments, sides, lines %{{{1
+
+	\draw (P_1) \foreach \i in {2,...,\numsides} { -- (P_\i) } -- cycle;
+
+	\draw (P_2) -- (P_5);
+	\draw (P_3) -- (P_8);
+	\draw (P_4) -- (P_7);
+	\draw (P_1) -- (P_6);
+
+	\draw (P_4) -- (P_8);
+
+% circles %{{{1
+
+	%\draw (O) circle (\radius);
+
+% points, dots, vertices labels %{{{1
+
+	\node[below] at (O) {$O$};
+
+	\node[above] at (P_1) {$P_1$};
+	\node[above left] at (P_2) {$P_2$};
+	\node[left] at (P_3) {$P_3$};
+	\node[below left] at (P_4) {$P_4$};
+	\node[below] at (P_5) {$P_5$};
+	\node[below  right] at (P_6) {$P_6$};
+	\node[right] at (P_7) {$P_7$};
+	\node[above right] at (P_8) {$P_8$};
+
+	\node[above left] at (I_1) {$I_1$};
+	\node[below right] at (I_2) {$I_2$};
+	\node[below left] at (I_3) {$I_3$};
+	\node[above right] at (I_4) {$I_4$};
+
+% segments, sides, lines labels %{{{1
+
+	\node[above] at ($ (P_1)!0.5!(P_2) $) {$c$};
+	\node[left] at ($ (P_3)!0.5!(P_4) $) {$c$};
+	\node[below] at ($ (P_5)!0.5!(P_6) $) {$c$};
+	\node[right] at ($ (P_7)!0.5!(P_8) $) {$c$};
+
+	\node[above left] at ($ (P_2)!0.5!(P_3) $) {$c$};
+
+	\node[left] at ($ (I_1)!0.5!(I_2) $) {$c$};
+	\node[below] at ($ (I_2)!0.5!(I_3) $) {$c$};
+	\node[right] at ($ (I_3)!0.5!(I_4) $) {$c$};
+	\node[below] at ($ (I_4)!0.5!(I_1) $) {$c$};
+
+	\node[below] at ($ (P_4)!0.5!(I_2) $) {$c \ \sqrt{2} / 2$};
+	\node[below] at ($ (P_7)!0.5!(I_3) $) {$c \ \sqrt{2} / 2$};
+
+% segments, sides, lines marks %{{{1
+
+	\foreach \i
+		[evaluate=\i as \j using { int(mod(\i,\numsides) + 1) }]
+		in {1,...,\numsides}
+	{
+		\tkzMarkSegments[mark=||, size=2pt](P_\i,P_\j);
+	}
+
+	\tkzMarkSegments[mark=||, size=2pt](I_1,I_2);
+	\tkzMarkSegments[mark=||, size=2pt](I_2,I_3);
+	\tkzMarkSegments[mark=||, size=2pt](I_3,I_4);
+	\tkzMarkSegments[mark=||, size=2pt](I_4,I_1);
+
+	\tkzMarkSegments[mark=|, size=2pt](P_3,I_1);
+	\tkzMarkSegments[mark=|, size=2pt](P_2,I_1);
+
+	\tkzMarkSegments[mark=|, size=2pt](P_4,I_2);
+	\tkzMarkSegments[mark=|, size=2pt](P_5,I_2);
+
+	\tkzMarkSegments[mark=|, size=2pt](P_6,I_3);
+	\tkzMarkSegments[mark=|, size=2pt](P_7,I_3);
+
+	\tkzMarkSegments[mark=|, size=2pt](P_8,I_4);
+	\tkzMarkSegments[mark=|, size=2pt](P_1,I_4);
+
+% circles labels %{{{1
+
+	%\node at ($ (O) + (70:\radius + 0.3) $) {$\mathscr{C}$};
+
+% circular arcs labels %{{{2
+
+	%\node at ($ (O) + (45:\radius + 0.3) $) {$\mathscr{C}$};
+
+% angles labels %{{{1
+
+	\pic[draw, ->, "$22.5^\circ$", angle radius=3.0cm, angle eccentricity=1.2]
+		{angle = P_7--P_4--P_8};
+
+	\pic[draw, ->, "$67.5^\circ$", angle radius=0.7cm, angle eccentricity=1.5]
+		{angle = P_4--P_8--P_7};
+
+% right angles markers %{{{2
+
+	% ------- square
+
+	\pic[draw, angle radius=7]
+		{right angle = P_5--I_1--P_8};
+
+	\pic[draw, angle radius=7]
+		{right angle = P_7--I_2--P_2};
+
+	\pic[draw, angle radius=7]
+		{right angle = P_1--I_3--P_4};
+
+	\pic[draw, angle radius=7]
+		{right angle = P_3--I_4--P_6};
+
+	% ------- rectangles
+
+	\pic[draw, angle radius=7]
+		{right angle = P_5--P_2--P_1};
+
+	\pic[draw, angle radius=7]
+		{right angle = P_2--P_1--P_6};
+
+	\pic[draw, angle radius=7]
+		{right angle = P_4--P_3--P_8};
+
+	%\pic[draw, angle radius=7]
+		%{right angle = P_7--P_4--P_3};
+
+	\pic[draw, angle radius=7]
+		{right angle = P_6--P_5--P_2};
+
+	\pic[draw, angle radius=7]
+		{right angle = P_1--P_6--P_5};
+
+	\pic[draw, angle radius=7]
+		{right angle = P_8--P_7--P_4};
+
+	%\pic[draw, angle radius=7]
+		%{right angle = P_3--P_8--P_7};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

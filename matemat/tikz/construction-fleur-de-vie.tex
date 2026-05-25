@@ -32,12 +32,31 @@
 	\coordinate (X) at (0,-\extradius);
 	\coordinate (Y) at (0,\extradius);
 
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=circle_1] (P_1) circle (\radius);
+		\path[name path=circle_2] (P_2) circle (\radius);
+		\path[name path=circle_3] (P_3) circle (\radius);
+		\path[name path=circle_4] (P_4) circle (\radius);
+		\path[name path=circle_5] (P_5) circle (\radius);
+		\path[name path=circle_6] (P_6) circle (\radius);
+		\path[name intersections={of=circle_1 and circle_2, by={I_1,J_1}}];
+		\path[name intersections={of=circle_2 and circle_3, by={I_2,J_2}}];
+		\path[name intersections={of=circle_3 and circle_4, by={J_3,I_3}}];
+		\path[name intersections={of=circle_4 and circle_5, by={J_4,I_4}}];
+		\path[name intersections={of=circle_5 and circle_6, by={I_5,J_5}}];
+		\path[name intersections={of=circle_6 and circle_1, by={I_6,J_6}}];
+	\end{pgfinterruptboundingbox}
+
 % points, dots, vertices %{{{1
 
 	\fill (O) circle (0.4mm);
 
-	\foreach \i in {1,...,\numsides}
+	\foreach \i in {1,...,\numsides} {
 		\fill (P_\i) circle (0.4mm);
+		\fill (I_\i) circle (0.4mm);
+	}
 
 % segments, sides, lines %{{{1
 
@@ -47,8 +66,10 @@
 
 	\draw (O) circle (\radius);
 
-	\foreach \i in {1,...,\numsides}
+	\foreach \i in {1,...,\numsides} {
 		\draw (P_\i) circle (\radius);
+		\draw (I_\i) circle (\radius);
+	}
 
 % circular arcs %{{{2
 
@@ -59,12 +80,12 @@
 
 	\node[anchor=south east] at ($ (O) + (180:4pt) $) {$O$};
 
-	\node[anchor=south east] at ($ (P_1) + (180:3pt) $) {$P_1$};
-	\node[anchor=south east] at ($ (P_2) + (180:2pt) $) {$P_2$};
-	\node[anchor=north east] at ($ (P_3) + (180:3pt) $) {$P_3$};
-	\node[below] at ($ (P_4) + (270:3pt) $) {$P_4$};
-	\node[anchor=north west] at ($ (P_5) + (0:3pt) $) {$P_5$};
-	\node[anchor=south west] at ($ (P_6) + (0:3pt) $) {$P_6$};
+	%\node[anchor=south east] at ($ (P_1) + (180:3pt) $) {$P_1$};
+	%\node[anchor=south east] at ($ (P_2) + (180:2pt) $) {$P_2$};
+	%\node[anchor=north east] at ($ (P_3) + (180:3pt) $) {$P_3$};
+	%\node[below] at ($ (P_4) + (270:3pt) $) {$P_4$};
+	%\node[anchor=north west] at ($ (P_5) + (0:3pt) $) {$P_5$};
+	%\node[anchor=south west] at ($ (P_6) + (0:3pt) $) {$P_6$};
 
 % segments, sides, lines labels %{{{1
 
@@ -77,14 +98,14 @@
 
 % circles labels %{{{1
 
-	\node at ($ (O) + (60:\radius + 0.3) $) {$\mathscr{C}$};
+	%\node at ($ (O) + (60:\radius + 0.3) $) {$\mathscr{C}$};
 
-	\node at ($ (P_1) + (60:\radius + 0.3) $) {$\mathscr{C}_1$};
-	\node at ($ (P_2) + (180:\radius + 0.3) $) {$\mathscr{C}_2$};
-	\node at ($ (P_3) + (180:\radius + 0.3) $) {$\mathscr{C}_3$};
-	\node at ($ (P_4) + (270:\radius + 0.3) $) {$\mathscr{C}_4$};
-	\node at ($ (P_5) + (0:\radius + 0.3) $) {$\mathscr{C}_5$};
-	\node at ($ (P_6) + (0:\radius + 0.3) $) {$\mathscr{C}_6$};
+	%\node at ($ (P_1) + (60:\radius + 0.3) $) {$\mathscr{C}_1$};
+	%\node at ($ (P_2) + (180:\radius + 0.3) $) {$\mathscr{C}_2$};
+	%\node at ($ (P_3) + (180:\radius + 0.3) $) {$\mathscr{C}_3$};
+	%\node at ($ (P_4) + (270:\radius + 0.3) $) {$\mathscr{C}_4$};
+	%\node at ($ (P_5) + (0:\radius + 0.3) $) {$\mathscr{C}_5$};
+	%\node at ($ (P_6) + (0:\radius + 0.3) $) {$\mathscr{C}_6$};
 
 % circular arcs labels %{{{2
 

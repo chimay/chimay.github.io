@@ -1,0 +1,103 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\tikzmath{
+		\radius = 2.5 ;
+		\rotation = 90 ;
+		\numsidesfloat = 6.0 ;
+		\numsides = int(\numsidesfloat) ;
+		int \i ;
+		for \i in {1,...,\numsides} {
+			\ang{\i} = \rotation + 360 / \numsidesfloat * (\i-1) ;
+		};
+		\extratio = 1.7 ;
+		\extradius = \extratio * \radius ;
+	}
+
+% coordinates %{{{1
+
+	\coordinate (O) at (0,0);
+
+	\foreach \i in {1,...,\numsides}
+		\coordinate (P_\i) at (\ang{\i}:\radius);
+
+	\coordinate (X) at (0,-\extradius);
+	\coordinate (Y) at (0,\extradius);
+
+% points, dots, vertices %{{{1
+
+	\fill (O) circle (0.4mm);
+
+	\foreach \i in {1,...,\numsides}
+		\fill (P_\i) circle (0.4mm);
+
+% segments, sides, lines %{{{1
+
+	\draw[dashed] (P_1) -- (P_4) ;
+
+% circles %{{{1
+
+	\draw (O) circle (\radius);
+
+	\foreach \i in {1,...,\numsides}
+		\draw (P_\i) circle (\radius);
+
+% circular arcs %{{{2
+
+	%\draw (P_1) ++(-100:\radius) arc (-100:100:\radius);
+	%\draw (P_4) ++(80:\radius) arc (80:280:\radius);
+
+% points, dots, vertices labels %{{{1
+
+	\node[anchor=south east] at ($ (O) + (180:4pt) $) {$O$};
+
+	\node[anchor=south east] at ($ (P_1) + (180:3pt) $) {$P_1$};
+	\node[anchor=south east] at ($ (P_2) + (180:2pt) $) {$P_2$};
+	\node[anchor=north east] at ($ (P_3) + (180:3pt) $) {$P_3$};
+	\node[below] at ($ (P_4) + (270:3pt) $) {$P_4$};
+	\node[anchor=north west] at ($ (P_5) + (0:3pt) $) {$P_5$};
+	\node[anchor=south west] at ($ (P_6) + (0:3pt) $) {$P_6$};
+
+% segments, sides, lines labels %{{{1
+
+	%\node[left] at ($ (P_1)!0.3!(P_4) $) {$d$};
+
+% segments, sides, lines marks %{{{1
+
+	%\tkzMarkSegments[mark=||, size=2pt](O,P_1);
+	%\tkzMarkSegments[mark=||, size=2pt](O,P_4);
+
+% circles labels %{{{1
+
+	\node at ($ (O) + (60:\radius + 0.3) $) {$\mathscr{C}$};
+
+	\node at ($ (P_1) + (60:\radius + 0.3) $) {$\mathscr{C}_1$};
+	\node at ($ (P_2) + (180:\radius + 0.3) $) {$\mathscr{C}_2$};
+	\node at ($ (P_3) + (180:\radius + 0.3) $) {$\mathscr{C}_3$};
+	\node at ($ (P_4) + (270:\radius + 0.3) $) {$\mathscr{C}_4$};
+	\node at ($ (P_5) + (0:\radius + 0.3) $) {$\mathscr{C}_5$};
+	\node at ($ (P_6) + (0:\radius + 0.3) $) {$\mathscr{C}_6$};
+
+% circular arcs labels %{{{2
+
+	%\node at ($ (O) + (45:\radius + 0.3) $) {$\mathscr{C}$};
+
+% angles labels %{{{1
+
+% right angles markers %{{{2
+
+	%\pic [draw, angle radius=7pt, angle eccentricity=1]
+	%{right angle = C--B--A};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

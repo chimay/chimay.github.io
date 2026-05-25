@@ -10,7 +10,7 @@
 % parameters %{{{1
 
 	\tikzmath{
-		\radius = 3.0 ;
+		\radius = 2.5 ;
 		\rotation = 90 ;
 		\numsidesfloat = 6.0 ;
 		\numsides = int(\numsidesfloat) ;
@@ -32,6 +32,23 @@
 	\coordinate (X) at (0,-\extradius);
 	\coordinate (Y) at (0,\extradius);
 
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=circle_1] (P_1) circle (\radius);
+		\path[name path=circle_2] (P_2) circle (\radius);
+		\path[name path=circle_3] (P_3) circle (\radius);
+		\path[name path=circle_4] (P_4) circle (\radius);
+		\path[name path=circle_5] (P_5) circle (\radius);
+		\path[name path=circle_6] (P_6) circle (\radius);
+		\path[name intersections={of=circle_1 and circle_2, by={I_1,J_1}}];
+		\path[name intersections={of=circle_2 and circle_3, by={I_2,J_2}}];
+		\path[name intersections={of=circle_3 and circle_4, by={J_3,I_3}}];
+		\path[name intersections={of=circle_4 and circle_5, by={J_4,I_4}}];
+		\path[name intersections={of=circle_5 and circle_6, by={I_5,J_5}}];
+		\path[name intersections={of=circle_6 and circle_1, by={I_6,J_6}}];
+	\end{pgfinterruptboundingbox}
+
 % points, dots, vertices %{{{1
 
 	\fill (O) circle (0.4mm);
@@ -39,25 +56,27 @@
 	\foreach \i in {1,...,\numsides}
 		\fill (P_\i) circle (0.4mm);
 
+	\foreach \i in {1,...,\numsides}
+		\fill (I_\i) circle (0.4mm);
+
 % segments, sides, lines %{{{1
 
-	%\draw[dashed] (P_1) -- (P_4) ;
+	\draw[dashed] (P_1) -- (P_4) ;
+	\draw[dashed] (I_1) -- (I_4) ;
+	\draw[dashed] (I_2) -- (I_5) ;
+	\draw[dashed] (I_3) -- (I_6) ;
 
 % circles %{{{1
 
 	\draw (O) circle (\radius);
 
+	\foreach \i in {1,...,\numsides}
+		\draw (P_\i) circle (\radius);
+
 % circular arcs %{{{2
 
-	\foreach \i
-		[
-			evaluate=\i as \j using { 210 + (\i - 1) * 60 },
-			evaluate=\i as \k using { 210 + (\i - 1) * 60 + 120 }
-		]
-		in {1,...,\numsides}
-	{
-		\draw (P_\i) ++(\j:\radius) arc (\j:\k:\radius);
-	}
+	%\draw (P_1) ++(-100:\radius) arc (-100:100:\radius);
+	%\draw (P_4) ++(80:\radius) arc (80:280:\radius);
 
 % points, dots, vertices labels %{{{1
 
@@ -69,6 +88,13 @@
 	\node[below] at ($ (P_4) + (270:3pt) $) {$P_4$};
 	\node[anchor=north west] at ($ (P_5) + (0:3pt) $) {$P_5$};
 	\node[anchor=south west] at ($ (P_6) + (0:3pt) $) {$P_6$};
+
+	\node[above left] at (I_1) {$I_1$};
+	\node[left] at (I_2) {$I_2$};
+	\node[below left] at (I_3) {$I_3$};
+	\node[below right] at (I_4) {$I_4$};
+	\node[right] at (I_5) {$I_5$};
+	\node[above right] at (I_6) {$I_6$};
 
 % segments, sides, lines labels %{{{1
 
@@ -82,6 +108,13 @@
 % circles labels %{{{1
 
 	\node at ($ (O) + (60:\radius + 0.3) $) {$\mathscr{C}$};
+
+	\node at ($ (P_1) + (60:\radius + 0.3) $) {$\mathscr{C}_1$};
+	\node at ($ (P_2) + (180:\radius + 0.3) $) {$\mathscr{C}_2$};
+	\node at ($ (P_3) + (180:\radius + 0.3) $) {$\mathscr{C}_3$};
+	\node at ($ (P_4) + (270:\radius + 0.3) $) {$\mathscr{C}_4$};
+	\node at ($ (P_5) + (0:\radius + 0.3) $) {$\mathscr{C}_5$};
+	\node at ($ (P_6) + (0:\radius + 0.3) $) {$\mathscr{C}_6$};
 
 % circular arcs labels %{{{2
 

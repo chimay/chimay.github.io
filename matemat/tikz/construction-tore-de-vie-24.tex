@@ -10,7 +10,7 @@
 % parameters %{{{1
 
 	\tikzmath{
-		\radius = 2.3 ;
+		\radius = 2.5 ;
 		\rotation = 90 ;
 		\numsidesfloat = 6.0 ;
 		\numsides = int(\numsidesfloat) ;
@@ -34,49 +34,57 @@
 
 % intersections %{{{1
 
-	\begin{pgfinterruptboundingbox}
-		\path[name path=circle_1] (P_1) circle (\radius);
-		\path[name path=circle_2] (P_2) circle (\radius);
-		\path[name path=circle_3] (P_3) circle (\radius);
-		\path[name path=circle_4] (P_4) circle (\radius);
-		\path[name path=circle_5] (P_5) circle (\radius);
-		\path[name path=circle_6] (P_6) circle (\radius);
-		\path[name intersections={of=circle_1 and circle_2, by={I_1,J_1}}];
-		\path[name intersections={of=circle_2 and circle_3, by={I_2,J_2}}];
-		\path[name intersections={of=circle_3 and circle_4, by={J_3,I_3}}];
-		\path[name intersections={of=circle_4 and circle_5, by={J_4,I_4}}];
-		\path[name intersections={of=circle_5 and circle_6, by={I_5,J_5}}];
-		\path[name intersections={of=circle_6 and circle_1, by={I_6,J_6}}];
-	\end{pgfinterruptboundingbox}
+	%\begin{pgfinterruptboundingbox}
+		%\path[name path=circle_1] (P_1) circle (\radius);
+		%\path[name path=circle_2] (P_2) circle (\radius);
+		%\path[name path=circle_3] (P_3) circle (\radius);
+		%\path[name path=circle_4] (P_4) circle (\radius);
+		%\path[name path=circle_5] (P_5) circle (\radius);
+		%\path[name path=circle_6] (P_6) circle (\radius);
+		%\path[name intersections={of=circle_1 and circle_2, by={I_1,J_1}}];
+		%\path[name intersections={of=circle_2 and circle_3, by={I_2,J_2}}];
+		%\path[name intersections={of=circle_3 and circle_4, by={J_3,I_3}}];
+		%\path[name intersections={of=circle_4 and circle_5, by={J_4,I_4}}];
+		%\path[name intersections={of=circle_5 and circle_6, by={I_5,J_5}}];
+		%\path[name intersections={of=circle_6 and circle_1, by={I_6,J_6}}];
+	%\end{pgfinterruptboundingbox}
 
-	\begin{pgfinterruptboundingbox}
-		\path[name path=circle_1] (I_1) circle (\radius);
-		\path[name path=circle_2] (I_2) circle (\radius);
-		\path[name path=circle_3] (I_3) circle (\radius);
-		\path[name path=circle_4] (I_4) circle (\radius);
-		\path[name path=circle_5] (I_5) circle (\radius);
-		\path[name path=circle_6] (I_6) circle (\radius);
-		\path[name intersections={of=circle_1 and circle_2, by={J_1,K_1}}];
-		\path[name intersections={of=circle_2 and circle_3, by={J_2,K_2}}];
-		\path[name intersections={of=circle_3 and circle_4, by={K_3,J_3}}];
-		\path[name intersections={of=circle_4 and circle_5, by={J_4,K_4}}];
-		\path[name intersections={of=circle_5 and circle_6, by={J_5,K_5}}];
-		\path[name intersections={of=circle_6 and circle_1, by={J_6,K_6}}];
-	\end{pgfinterruptboundingbox}
+	%\begin{pgfinterruptboundingbox}
+		%\path[name path=line_1] (I_1) -- (I_4);
+		%\path[name path=line_2] (I_2) -- (I_5);
+		%\path[name path=line_3] (I_3) -- (I_6);
+		%\path[name path=circle] (O) circle (\radius);
+		%\path[name intersections={of=line_1 and circle, by={J_1,J_4}}];
+		%\path[name intersections={of=line_2 and circle, by={J_2,J_5}}];
+		%\path[name intersections={of=line_3 and circle, by={J_6,J_3}}];
+	%\end{pgfinterruptboundingbox}
+
+	% ------- to simplify intersection calculus
+
+	\foreach \i in {1,...,\numsides}
+		\coordinate (J_\i) at ({120 + 60 * \i}:\radius) ;
+
+	\foreach \i in {1,...,12}
+		\coordinate (K_\i) at ({15 + 30 * \i}:\radius) ;
 
 % points, dots, vertices %{{{1
 
 	\fill (O) circle (0.4mm);
 
-	\foreach \i in {1,...,\numsides} {
-		\fill (P_\i) circle (0.4mm);
-		\fill (I_\i) circle (0.4mm);
-		\fill (J_\i) circle (0.4mm);
-	}
+	%\foreach \i in {1,...,\numsides} {
+		%\fill (P_\i) circle (0.4mm);
+		%\fill (J_\i) circle (0.4mm);
+	%}
+
+	%\foreach \i in {1,...,12}
+		%\fill (K_\i) circle (0.4mm);
 
 % segments, sides, lines %{{{1
 
 	%\draw[dashed] (P_1) -- (P_4) ;
+	%\draw[dashed] (I_1) -- (I_4) ;
+	%\draw[dashed] (I_2) -- (I_5) ;
+	%\draw[dashed] (I_3) -- (I_6) ;
 
 % circles %{{{1
 
@@ -84,9 +92,11 @@
 
 	\foreach \i in {1,...,\numsides} {
 		\draw (P_\i) circle (\radius);
-		\draw (I_\i) circle (\radius);
 		\draw (J_\i) circle (\radius);
 	}
+
+	\foreach \i in {1,...,12}
+		\draw (K_\i) circle (\radius);
 
 % circular arcs %{{{2
 
@@ -97,15 +107,17 @@
 
 	%\node[anchor=south east] at ($ (O) + (180:4pt) $) {$O$};
 
-	%\foreach \i in {1,...,\numsides} {
-		%\node[above] at (P_\i) {$P_\i$};
-		%\node[above] at (I_\i) {$I_\i$};
-		%\node[above] at (J_\i) {$J_\i$};
-	%}
-
 % segments, sides, lines labels %{{{1
 
 	%\node[left] at ($ (P_1)!0.3!(P_4) $) {$d$};
+
+	%\foreach \i in {1,...,\numsides} {
+		%\node[above] at (P_\i) {$P_\i$};
+		%\node[above] at (J_\i) {$J_\i$};
+	%}
+
+	%\foreach \i in {1,...,12}
+		%\node[above] at (K_\i) {$K_\i$};
 
 % segments, sides, lines marks %{{{1
 
@@ -114,7 +126,7 @@
 
 % circles labels %{{{1
 
-	%\node at ($ (O) + (60:\radius + 0.3) $) {$\mathscr{C}$};
+	%\node at ($ (O) + (75:\radius + 0.3) $) {$\mathscr{C}$};
 
 	%\node at ($ (P_1) + (60:\radius + 0.3) $) {$\mathscr{C}_1$};
 	%\node at ($ (P_2) + (180:\radius + 0.3) $) {$\mathscr{C}_2$};

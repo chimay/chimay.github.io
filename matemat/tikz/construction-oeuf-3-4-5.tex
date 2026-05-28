@@ -1,6 +1,6 @@
 % vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
 
-\input{../../include/latex/tikz/header-light.tex}
+\input{../../include/latex/tikz/header.tex}
 
 % opening %{{{1
 
@@ -22,11 +22,14 @@
 	\coordinate (D) at (0,{3*\unit});
 	\coordinate (E) at (0,{-3*\unit});
 
+	\coordinate (F) at (0,{4*\unit});
+	\coordinate (G) at (0,{-4*\unit});
+
 	\coordinate (HX) at ({-5*\unit},0);
 	\coordinate (HY) at ({7*\unit},0);
 
-	\coordinate (F) at (0,{-4*\unit});
-	\coordinate (G) at (0,{4*\unit});
+	\coordinate (VX) at (0,{-5*\unit});
+	\coordinate (VY) at (0,{5*\unit});
 
 	\coordinate (EB) at ($ (B) - (E) $);
 	\coordinate (unitEB) at ($ (0,0)!1cm!(EB) $);
@@ -42,10 +45,10 @@
 	\begin{pgfinterruptboundingbox}
 		\path[name path=line_1] (E) -- (EX);
 		\path[name path=circle_1] (E) circle ({7*\unit});
-		\path[name intersections={of=line_1 and circle_1, by=I_1}];
+		\path[name intersections={of=line_1 and circle_1, by=I}];
 		\path[name path=line_2] (D) -- (DX);
 		\path[name path=circle_2] (D) circle ({7*\unit});
-		\path[name intersections={of=line_2 and circle_2, by=I_2}];
+		\path[name intersections={of=line_2 and circle_2, by=J}];
 	\end{pgfinterruptboundingbox}
 
 % distance %{{{1
@@ -65,8 +68,8 @@
 	\fill (F) circle (0.4mm);
 	\fill (G) circle (0.4mm);
 
-	\fill (I_1) circle (0.4mm);
-	\fill (I_2) circle (0.4mm);
+	\fill (I) circle (0.4mm);
+	\fill (J) circle (0.4mm);
 
 % segments, sides, lines %{{{1
 
@@ -75,8 +78,8 @@
 	\draw (D) -- (B);
 	\draw (E) -- (B);
 
-	\draw[dashed] (F) -- (E);
-	\draw[dashed] (G) -- (D);
+	\draw[dashed] (VX) -- (E);
+	\draw[dashed] (VY) -- (D);
 
 	\draw[dashed] (HX) -- (A);
 	\draw[dashed] (HY) -- (B);
@@ -88,17 +91,14 @@
 
 	%\draw (O) circle (\radius);
 
-	%\path[draw] let \p1 = ($ (A) - (O) $)
-	%in (O) circle ({veclen(\x1,\y1)});
-
 % circular arcs %{{{2
 
 	\draw (A) ++(90:{4*\unit}) arc (90:270:{4*\unit});
 
-	\draw (D) ++(-90:{7*\unit}) arc (-90:-\compl:{7*\unit});
 	\draw (E) ++(\compl:{7*\unit}) arc (\compl:90:{7*\unit});
+	\draw (D) ++(-90:{7*\unit}) arc (-90:-\compl:{7*\unit});
 
-	\path[draw] let \p1 = ($ (I_1) - (B) $)
+	\path[draw] let \p1 = ($ (I) - (B) $)
 	in (B) ++(-\compl:{veclen(\x1,\y1)}) arc (-\compl:\compl:{veclen(\x1,\y1)});
 
 % points, dots, vertices labels %{{{1
@@ -108,9 +108,16 @@
 	\node[above left] at (D) {$D$};
 	\node[above left] at (E) {$E$};
 
+	%\node[above right] at (F) {$F$};
+	%\node[below right] at (G) {$G$};
+
+	\node[above] at (I) {$I$};
+	\node[below] at (J) {$J$};
+
 % segments, sides, lines labels %{{{1
 
-	%\node[above] at ($ (A)!0.5!(B) $) {$d$};
+	\node[above] at ($ (HX)!0.5!(A) $) {$d$};
+	\node[left] at ($ (VY)!0.2!(D) $) {$f$};
 
 % segments, sides, lines marks %{{{1
 
@@ -119,7 +126,10 @@
 
 % circles labels %{{{1
 
-	%\node at ($ (O) + (45:\radius + 0.3) $) {$\mathscr{C}$};
+	\node at ($ (A) + (135:{4*\unit + 0.3}) $) {$\mathscr{C}_1$};
+	\node at ($ (E) + (60:{7*\unit + 0.3}) $) {$\mathscr{C}_2$};
+	\node at ($ (D) + (-60:{7*\unit + 0.3}) $) {$\mathscr{C}_3$};
+	\node at ($ (B) + (10:{2*\unit + 0.3}) $) {$\mathscr{C}_4$};
 
 % circular arcs labels %{{{2
 
@@ -132,7 +142,7 @@
 
 % right angles markers %{{{2
 
-	%\pic [draw, angle radius=7] {right angle = C--B--A};
+	\pic [draw, angle radius=7] {right angle = B--A--D};
 
 % closing %{{{1
 

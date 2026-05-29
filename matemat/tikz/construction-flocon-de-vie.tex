@@ -11,7 +11,7 @@
 
 	\tikzmath{
 		\radius = 2.5 ;
-		\rotation = 90 ;
+		\rotation = 0 ;
 		\numsidesfloat = 6.0 ;
 		\numsides = int(\numsidesfloat) ;
 		int \i ;
@@ -32,41 +32,58 @@
 	\coordinate (X) at (0,-\extradius);
 	\coordinate (Y) at (0,\extradius);
 
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\foreach \i
+			[
+				evaluate=\i as \j using { int(mod(\i, \numsides) + 1) }
+			]
+			in {1,...,\numsides}
+		{
+			\tkzInterCC(P_\i,O)(P_\j,O)\tkzGetPoints{J_\i}{I_\i}
+		}
+	\end{pgfinterruptboundingbox}
+
 % points, dots, vertices %{{{1
 
 	\fill (O) circle (0.4mm);
 
-	\foreach \i in {1,...,\numsides}
+	\foreach \i in {1,...,\numsides} {
 		\fill (P_\i) circle (0.4mm);
+		\fill (I_\i) circle (0.4mm);
+	}
 
 % segments, sides, lines %{{{1
 
-	%\draw[dashed] (P_1) -- (P_4) ;
-
-% circles %{{{1
-
-	\draw (O) circle (\radius);
-
-% circular arcs %{{{2
+	\draw[solid] (P_1) -- (P_4) ;
+	\draw[solid] (P_2) -- (P_5) ;
+	\draw[solid] (P_3) -- (P_6) ;
 
 	\foreach \i
 		[
-			evaluate=\i as \j using { 210 + (\i - 1) * 60 },
-			evaluate=\i as \k using { 210 + (\i - 1) * 60 + 120 }
+			evaluate=\i as \j using { int(mod(\i, \numsides) + 1) }
 		]
-		in {1,...,\numsides}
-	{
-		\draw (P_\i) ++(\j:\radius) arc (\j:\k:\radius);
+	in {1,...,\numsides} {
+		\draw (P_\i) -- (I_\i) ;
+		\draw (P_\j) -- (I_\i) ;
 	}
+
+% circles %{{{1
+
+	\draw[dashed] (O) circle (\radius);
+
+	\foreach \i in {1,...,\numsides}
+		\draw[dashed] (P_\i) circle (\radius);
+
+% circular arcs %{{{2
+
+	%\draw (P_1) ++(-100:\radius) arc (-100:100:\radius);
+	%\draw (P_4) ++(80:\radius) arc (80:280:\radius);
 
 % points, dots, vertices labels %{{{1
 
-	\node[above] at (P_1) {$P_1$};
-	\node[above left] at (P_2) {$P_2$};
-	\node[below left] at (P_3) {$P_3$};
-	\node[below] at (P_4) {$P_4$};
-	\node[below right] at (P_5) {$P_5$};
-	\node[above right] at (P_6) {$P_6$};
+	%\node[anchor=south east] at ($ (O) + (180:4pt) $) {$O$};
 
 % segments, sides, lines labels %{{{1
 
@@ -79,7 +96,7 @@
 
 % circles labels %{{{1
 
-	\node at ($ (O) + (60:\radius + 0.3) $) {$\mathscr{C}$};
+	%\node at ($ (O) + (60:\radius + 0.3) $) {$\mathscr{C}$};
 
 % circular arcs labels %{{{2
 

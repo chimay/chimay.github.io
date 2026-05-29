@@ -10,7 +10,7 @@
 % parameters %{{{1
 
 	\tikzmath{
-		\radius = 0.8 ;
+		\radius = 1.0 ;
 		\rotation = 90 ;
 		\numsidesfloat = 6.0 ;
 		\numsides = int(\numsidesfloat) ;
@@ -42,17 +42,40 @@
 	\fill (O) circle (0.4mm);
 
 	\foreach \i in {1,...,\numsides} {
-		\fill (P_\i) circle (0.4mm);
 		\fill (D_\i) circle (0.4mm);
-		\fill (E_\i) circle (0.4mm);
 		\fill (F_\i) circle (0.4mm);
 	}
 
 % segments, sides, lines %{{{1
 
-	\draw[dashed] (G_1) -- (G_4) ;
-	\draw[dashed] (G_2) -- (G_5) ;
-	\draw[dashed] (G_3) -- (G_6) ;
+	\draw (F_1) -- (F_4) ;
+	\draw (F_2) -- (F_5) ;
+	\draw (F_3) -- (F_6) ;
+
+	\draw (F_1) \foreach \i in {2,...,\numsides} { -- (F_\i) } -- cycle;
+
+	\draw (D_1) \foreach \i in {2,...,\numsides} { -- (D_\i) } -- cycle;
+
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i - 1 + 2, \numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\draw (F_\i) -- (F_\j);
+		\draw (D_\i) -- (D_\j);
+	}
+
+	\foreach \i
+		[
+			evaluate=\i as \j using { int(mod(\i - 1 + 2, \numsides) + 1) },
+			evaluate=\i as \k using { int(mod(\i - 1 + 4, \numsides) + 1) }
+		]
+		in {1,...,\numsides}
+	{
+		\draw (F_\i) -- (D_\j);
+		\draw (F_\i) -- (D_\k);
+	}
 
 % circles %{{{1
 

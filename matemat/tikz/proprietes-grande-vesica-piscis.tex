@@ -1,0 +1,154 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\tikzmath{
+		\radius = 1.5 ;
+		\sqrtradius = \radius * sqrt(3) ;
+	}
+
+% coordinates %{{{1
+
+	\coordinate (O_1) at (0,0);
+	\coordinate (O_2) at (\radius,0);
+
+	\coordinate (A) at (-\radius,0);
+	\coordinate (B) at ({2*\radius},0);
+
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=circleA] (O_1) circle (\radius);
+		\path[name path=circleB] (O_2) circle (\radius);
+		\path[name intersections={of=circleA and circleB, by={I,J}}];
+	\end{pgfinterruptboundingbox}
+
+	\begin{pgfinterruptboundingbox}
+		\path[name path=line1] (O_1) -- (O_2);
+		\path[name path=line2] (I) -- (J);
+		\path[name intersections={of=line1 and line2, by=M}];
+	\end{pgfinterruptboundingbox}
+
+% distance %{{{1
+
+	%\path let \p1 = ($ (B) - (A) $)
+	%in \pgfextra{
+		%\pgfmathsetmacro{\distAB}{veclen(\x1,\y1)/1cm}
+		%\global\let\distAB\distAB
+	%};
+
+% points, dots, vertices %{{{1
+
+	\fill (O_1) circle (0.4mm);
+	\fill (O_2) circle (0.4mm);
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+	\fill (I) circle (0.4mm);
+	\fill (J) circle (0.4mm);
+	\fill (M) circle (0.4mm);
+
+% segments, sides, lines %{{{1
+
+	\draw (A) -- (B);
+	\draw (I) -- (J);
+	\draw (A) -- (I);
+	\draw (A) -- (J);
+	\draw (B) -- (I);
+	\draw (B) -- (J);
+
+% circles %{{{1
+
+	\draw[dashed] (O_1) circle (\radius);
+	\draw[dashed] (O_2) circle (\radius);
+
+	\draw (I) circle (\sqrtradius);
+	\draw (J) circle (\sqrtradius);
+
+% circular arcs %{{{2
+
+	%\draw (A) ++(\ang:\radius) arc (\ang:\gle:\radius);
+
+% points, dots, vertices labels %{{{1
+
+	\node[below left] at (O_1) {$O_1$};
+	\node[below right] at (O_2) {$O_2$};
+
+	\node[left] at (A) {$A$};
+	\node[right] at (B) {$B$};
+
+	\node[above] at (I) {$I$};
+	\node[below] at (J) {$J$};
+
+	%\node[above left] at (M) {$M$};
+
+% segments, sides, lines labels %{{{1
+
+	%\node[above left] at ($ (O_1)!0.5!(I) $) {$r$};
+	%\node[below left] at ($ (O_1)!0.5!(J) $) {$r$};
+
+	%\node[above right] at ($ (O_2)!0.5!(I) $) {$r$};
+	%\node[below right] at ($ (O_2)!0.5!(J) $) {$r$};
+
+	%\node[below] at ($ (O_1)!0.8!(M) $) {$r/2$};
+	%\node[below] at ($ (O_2)!0.8!(M) $) {$r/2$};
+
+	%\node[right] at ($ (M)!0.3!(I) $) {$r \ \sqrt{3} / 2$};
+
+% segments, sides, lines marks %{{{1
+
+	%\tkzMarkSegments[mark=|, size=2pt, pos=0.8](O_1,M)
+	%\tkzMarkSegments[mark=|, size=2pt, pos=0.8](O_2,M)
+
+% circles labels %{{{1
+
+	\node at ($ (O_1) + (145:\radius + 0.3) $) {$\mathscr{C}_1$};
+	\node at ($ (O_2) + (35:\radius + 0.3) $) {$\mathscr{C}_2$};
+
+	\node at ($ (I) + (45:\sqrtradius + 0.3) $) {$\mathscr{C}_3$};
+	\node at ($ (J) + (-45:\sqrtradius + 0.3) $) {$\mathscr{C}_4$};
+
+% circular arcs labels %{{{2
+
+	%\node at ($ (O) + (45:\radius + 0.3) $) {$\mathscr{C}$};
+
+% angles labels %{{{1
+
+	%\pic[draw, ->, "$60^\circ$", angle radius=0.9cm, angle eccentricity=1.4]
+		%{angle = I--J--A};
+
+	%\pic[draw, ->, "$60^\circ$", angle radius=0.9cm, angle eccentricity=1.4]
+		%{angle = B--J--I};
+
+	%\pic[draw, ->, "$60^\circ$", angle radius=0.9cm, angle eccentricity=1.4]
+		%{angle = A--I--J};
+
+	%\pic[draw, ->, "$60^\circ$", angle radius=0.9cm, angle eccentricity=1.4]
+		%{angle = J--I--B};
+
+	%\pic[draw, ->, "$30^\circ$", angle radius=1.5cm, angle eccentricity=1.3]
+		%{angle = B--A--I};
+
+	%\pic[draw, ->, "$30^\circ$", angle radius=1.5cm, angle eccentricity=1.3]
+		%{angle = J--A--B};
+
+	%\pic[draw, ->, "$30^\circ$", angle radius=1.5cm, angle eccentricity=1.3]
+		%{angle = I--B--A};
+
+	%\pic[draw, ->, "$30^\circ$", angle radius=1.5cm, angle eccentricity=1.3]
+		%{angle = A--B--J};
+
+% right angles markers %{{{2
+
+	\pic [draw, angle radius=7] {right angle = O_2--M--I};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

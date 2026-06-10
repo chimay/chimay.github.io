@@ -1,6 +1,6 @@
 % vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
 
-\input{../../include/latex/tikz/header-light.tex}
+\input{../../include/latex/tikz/header.tex}
 
 % opening %{{{1
 
@@ -9,32 +9,23 @@
 
 % parameters %{{{1
 
-	%\tikzmath{
-		%\var = 2.1;
-		%\numsides = int(3) ;
-	%}
+	\tikzmath{
+		\radius = 2.1;
+		\sqrtradius = sqrt(3)/2 * \radius ;
+	}
 
 % coordinates %{{{1
 
-	%\coordinate (A) at (0,0);
-	%\coordinate (B) at (4,0);
-	%\coordinate (C) at (4,3);
+	\coordinate (O_1) at (-\radius,0);
+	\coordinate (O_2) at (0,0);
+	\coordinate (O_3) at (\radius,0);
+	\coordinate (O_4) at ({-\radius/2},\sqrtradius);
+	\coordinate (O_5) at ({\radius/2},\sqrtradius);
 
-	%\coordinate (P) at ($(A)!(C)!(B)$);
+	\coordinate (X) at ({-2.5*\radius},0);
+	\coordinate (Y) at ({2.5*\radius},0);
 
 % intersections %{{{1
-
-	%\begin{pgfinterruptboundingbox}
-		%\path[name path=line1] (A) -- (C);
-		%\path[name path=line2] (B) -- (D);
-		%\path[name intersections={of=line1 and line2, by=I}];
-	%\end{pgfinterruptboundingbox}
-
-	%\begin{pgfinterruptboundingbox}
-		%\path[name path=line] (A) -- (B);
-		%\path[name path=circle] (C) circle (\radius);
-		%\path[name intersections={of=line and circle, by={I,J}}];
-	%\end{pgfinterruptboundingbox}
 
 	%\begin{pgfinterruptboundingbox}
 		%\path[name path=circleA] (A) circle (\radius);
@@ -52,22 +43,17 @@
 
 % points, dots, vertices %{{{1
 
-	%\fill (A) circle (0.4mm);
-	%\fill (B) circle (0.4mm);
-	%\fill (C) circle (0.4mm);
+	\foreach \i in {1,...,5} \fill (O_\i) circle (0.4mm);
 
 % segments, sides, lines %{{{1
 
-	%\draw (A) -- (B);
+	\draw[dashed] (X) -- (Y);
 
 	%\draw (A) -- (B) -- (C) -- cycle;
 
 % circles %{{{1
 
-	%\draw (O) circle (\radius);
-
-	%\path[draw] let \p1 = ($ (A) - (O) $)
-	%in (O) circle ({veclen(\x1,\y1)});
+	\foreach \i in {1,...,5} \draw (O_\i) circle (\radius);
 
 % circular arcs %{{{2
 
@@ -75,9 +61,9 @@
 
 % points, dots, vertices labels %{{{1
 
-	%\node[below] at (A) {$A$};
-	%\node[below] at (B) {$B$};
-	%\node[above] at (C) {$C$};
+	\node[below left] at (O_1) {$O_1$};
+	\node[below left] at (O_2) {$O_2$};
+	\node[below left] at (O_3) {$O_3$};
 
 % segments, sides, lines labels %{{{1
 
@@ -90,7 +76,11 @@
 
 % circles labels %{{{1
 
-	%\node at ($ (O) + (45:\radius + 0.3) $) {$\mathscr{C}$};
+	\node at ($ (O_1) + (45:\radius + 0.3) $) {$\mathscr{C}_1$};
+	\node at ($ (O_2) + (45:\radius + 0.3) $) {$\mathscr{C}_2$};
+	\node at ($ (O_3) + (45:\radius + 0.3) $) {$\mathscr{C}_3$};
+	\node at ($ (O_4) + (45:\radius + 0.3) $) {$\mathscr{C}_4$};
+	\node at ($ (O_5) + (45:\radius + 0.3) $) {$\mathscr{C}_5$};
 
 % circular arcs labels %{{{2
 

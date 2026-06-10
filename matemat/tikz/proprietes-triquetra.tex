@@ -10,13 +10,20 @@
 % parameters %{{{1
 
 	\tikzmath{
-		\radius = 2.1;
+		\radius = 2.8;
+		\sqrtradius = sqrt(3)/2 * \radius ;
 	}
 
 % coordinates %{{{1
 
 	\coordinate (O_1) at (0,0);
 	\coordinate (O_2) at (\radius,0);
+
+	\coordinate (X) at ({-1.5*\radius},0);
+	\coordinate (Y) at ({2.5*\radius},0);
+
+	\coordinate (IX) at ({-1.5*\radius},\sqrtradius);
+	\coordinate (IY) at ({2.5*\radius},\sqrtradius);
 
 % intersections %{{{1
 
@@ -50,11 +57,19 @@
 
 % segments, sides, lines %{{{1
 
-	\draw[dashed] (O_1) -- (O_2);
-	\draw[dashed] (O_1) -- (I);
-	\draw[dashed] (I) -- (K);
-	\draw[dashed] (O_2) -- (I);
-	\draw[dashed] (I) -- (L);
+	\draw (O_1) -- (O_2);
+	\draw (O_1) -- (K);
+	\draw (O_1) -- (I);
+	\draw (I) -- (K);
+	\draw (O_2) -- (I);
+	\draw (I) -- (L);
+	\draw (O_2) -- (L);
+
+	\draw[dashed] (X) -- (O_1);
+	\draw[dashed] (O_2) -- (Y);
+
+	\draw[dashed] (IX) -- (K);
+	\draw[dashed] (L) -- (IY);
 
 % circles %{{{1
 
@@ -80,7 +95,8 @@
 
 % segments, sides, lines labels %{{{1
 
-	%\node[above] at ($ (O_1)!0.5!(O_2) $) {$r$};
+	\node[above] at ($ (X)!0.15!(O_1) $) {$d$};
+	\node[above] at ($ (IX)!0.2!(K) $) {$f$};
 
 % segments, sides, lines marks %{{{1
 
@@ -99,8 +115,20 @@
 
 % angles labels %{{{1
 
-	%\pic[draw, ->, "$\alpha$", angle radius=0.8cm, angle eccentricity=1.5]
-		%{angle = B--A--C};
+	\pic[draw, ->, "$60^\circ$", angle radius=0.8cm, angle eccentricity=1.4]
+		{angle = I--O_2--O_1};
+
+	\pic[draw, ->, "$60^\circ$", angle radius=0.8cm, angle eccentricity=1.4]
+		{angle = O_1--I--O_2};
+
+	\pic[draw, ->, "$60^\circ$", angle radius=0.8cm, angle eccentricity=1.4]
+		{angle = K--I--O_1};
+
+	\pic[draw, ->, "$60^\circ$", angle radius=0.8cm, angle eccentricity=1.4]
+		{angle = O_2--O_1--I};
+
+	\pic[draw, ->, "$60^\circ$", angle radius=0.8cm, angle eccentricity=1.4]
+		{angle = O_2--I--L};
 
 % right angles markers %{{{2
 

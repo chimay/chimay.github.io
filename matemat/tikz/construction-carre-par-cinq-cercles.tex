@@ -10,20 +10,23 @@
 % parameters %{{{1
 
 	\tikzmath{
-		\radius = 2.1;
+		\radius = 2.4 ;
 		\sqrtradius = sqrt(3)/2 * \radius ;
 	}
 
 % coordinates %{{{1
 
-	\coordinate (O_1) at (-\radius,0);
-	\coordinate (O_2) at (0,0);
-	\coordinate (O_3) at (\radius,0);
-	\coordinate (O_4) at ({-\radius/2},\sqrtradius);
-	\coordinate (O_5) at ({\radius/2},\sqrtradius);
+	\coordinate (O_1) at ({-\radius/2},\sqrtradius);
+	\coordinate (O_2) at ({\radius/2},\sqrtradius);
+	\coordinate (O_3) at (0,0);
+	\coordinate (O_4) at (-\radius,0);
+	\coordinate (O_5) at (\radius,0);
 
-	\coordinate (X) at ({-2.5*\radius},0);
-	\coordinate (Y) at ({2.5*\radius},0);
+	\coordinate (M) at ({-\radius/2},{\sqrtradius - \radius});
+	\coordinate (N) at ({\radius/2},{\sqrtradius - \radius});
+
+	\coordinate (I) at ({-\radius/2},-\sqrtradius);
+	\coordinate (J) at ({\radius/2},-\sqrtradius);
 
 % intersections %{{{1
 
@@ -45,15 +48,22 @@
 
 	\foreach \i in {1,...,5} \fill (O_\i) circle (0.4mm);
 
+	\fill (I) circle (0.4mm);
+	\fill (J) circle (0.4mm);
+
+	\fill (M) circle (0.4mm);
+	\fill (N) circle (0.4mm);
+
 % segments, sides, lines %{{{1
 
-	\draw[dashed] (X) -- (Y);
+	\draw (O_1) -- (M) -- (N) -- (O_2) -- cycle ;
 
-	%\draw (A) -- (B) -- (C) -- cycle;
+	\draw[dashed] (M) -- (I);
+	\draw[dashed] (N) -- (J);
 
 % circles %{{{1
 
-	\foreach \i in {1,...,5} \draw (O_\i) circle (\radius);
+	\foreach \i in {1,...,5} \draw[dashed] (O_\i) circle (\radius);
 
 % circular arcs %{{{2
 
@@ -61,9 +71,17 @@
 
 % points, dots, vertices labels %{{{1
 
-	\node[below left] at (O_1) {$O_1$};
-	\node[below left] at (O_2) {$O_2$};
-	\node[below left] at (O_3) {$O_3$};
+	\node[left] at ($ (O_1) + (180:4pt) $) {$O_1$};
+	\node[right] at ($ (O_2) + (0:4pt) $) {$O_2$};
+	\node[left] at ($ (O_3) + (180:4pt) $) {$O_3$};
+	\node[below left] at (O_4) {$O_4$};
+	\node[below right] at (O_5) {$O_5$};
+
+	\node[below] at (I) {$I$};
+	\node[below] at (J) {$J$};
+
+	\node[below left] at (M) {$M$};
+	\node[below right] at (N) {$N$};
 
 % segments, sides, lines labels %{{{1
 
@@ -76,11 +94,11 @@
 
 % circles labels %{{{1
 
-	\node at ($ (O_1) + (45:\radius + 0.3) $) {$\mathscr{C}_1$};
+	\node at ($ (O_1) + (135:\radius + 0.3) $) {$\mathscr{C}_1$};
 	\node at ($ (O_2) + (45:\radius + 0.3) $) {$\mathscr{C}_2$};
-	\node at ($ (O_3) + (45:\radius + 0.3) $) {$\mathscr{C}_3$};
-	\node at ($ (O_4) + (45:\radius + 0.3) $) {$\mathscr{C}_4$};
-	\node at ($ (O_5) + (45:\radius + 0.3) $) {$\mathscr{C}_5$};
+	\node at ($ (O_3) + (270:\radius + 0.3) $) {$\mathscr{C}_3$};
+	\node at ($ (O_4) + (225:\radius + 0.3) $) {$\mathscr{C}_4$};
+	\node at ($ (O_5) + (-45:\radius + 0.3) $) {$\mathscr{C}_5$};
 
 % circular arcs labels %{{{2
 

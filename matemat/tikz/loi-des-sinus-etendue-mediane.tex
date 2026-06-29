@@ -1,0 +1,110 @@
+
+\input{../../include/latex/tikz/header.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\tikzmath{
+		\ang = 210 ;
+		\ngl = -30 ;
+		\gle = 80 ;
+		\radius = 3.2 ;
+	}
+
+% coordinates %{{{1
+
+	\coordinate (O) at (0,0);
+	\coordinate (A) at (\ang:\radius);
+	\coordinate (B) at (\ngl:\radius);
+	\coordinate (C) at (\gle:\radius);
+
+	\coordinate (M) at ($(B)!(O)!(C)$);
+
+% points, dots, vertices %{{{1
+
+	\fill (O) circle (0.4mm);
+	\fill (A) circle (0.4mm);
+	\fill (B) circle (0.4mm);
+	\fill (C) circle (0.4mm);
+
+	\fill (M) circle (0.3mm);
+
+% segments, sides, lines %{{{1
+
+	\draw (A) -- (B) -- (C) -- cycle;
+
+	\draw[dashed] (O) -- (A);
+	\draw[dashed] (O) -- (B);
+	\draw[dashed] (O) -- (C);
+
+	\draw[dashed] (O) -- (M);
+
+% circles %{{{1
+
+	\draw (O) circle (\radius);
+
+% points, dots, vertices labels %{{{1
+
+	\node[left] at ($ (O) + (130:3pt) $) {$O$};
+	\node[below left] at (A) {$A$};
+	\node[below right] at (B) {$B$};
+	\node[above] at (C) {$C$};
+
+	\node[above left] at ($ (M) + (180:3pt) $) {$M$};
+
+% segments, sides, lines labels %{{{1
+
+	\node[above right] at ($(M)!0.4!(B)$) {$a/2$};
+	\node[above right] at ($(M)!0.4!(C)$) {$a/2$};
+
+	\node[above left] at ($(A)!0.5!(C)$) {$b$};
+	\node[below]  at ($(A)!0.5!(B)$) {$c$};
+
+	\node[above left] at ($(O)!0.4!(A)$) {$r$};
+	\node[below left] at ($(O)!0.4!(B)$) {$r$};
+	\node[left] at ($(O)!0.4!(C)$) {$r$};
+
+	%\node[left] at ($(O)!0.6!(M)$) {$h$};
+
+% segments, sides, lines marks %{{{1
+
+	\tkzMarkSegments[mark=||, size=2pt, pos=0.4](O,A)
+	\tkzMarkSegments[mark=||, size=2pt, pos=0.4](O,B)
+	\tkzMarkSegments[mark=||, size=2pt, pos=0.4](O,C)
+
+	\tkzMarkSegments[mark=|, size=2pt, pos=0.4](M,B)
+	\tkzMarkSegments[mark=|, size=2pt, pos=0.4](M,C)
+
+% circle label %{{{1
+
+	\node at (40:{\radius+0.3}) {$\mathscr{C}$};
+
+% angles labels %{{{1
+
+	\pic[draw, ->, "$\alpha$" {xshift=1, yshift=-5}, angle radius=1cm, angle eccentricity=1.3]
+		{angle = B--A--C};
+
+	\pic[draw, ->, "$\beta$" {xshift=-1, yshift=-9}, angle radius=1cm, angle eccentricity=1.3]
+		{angle = C--B--A};
+
+	\pic[draw, ->, "$\gamma$" {xshift=-9, yshift=2}, angle radius=1cm, angle eccentricity=1.3]
+		{angle = A--C--B};
+
+	\pic[draw, ->, "$\alpha$", angle radius=0.7cm, angle eccentricity=1.5]
+		{angle = M--O--C};
+
+	\pic[draw, ->, "$\alpha$", angle radius=0.7cm, angle eccentricity=1.5]
+		{angle = B--O--M};
+
+% right angle markers %{{{2
+
+	\pic [draw, angle radius=7pt] {right angle = O--M--B};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

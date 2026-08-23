@@ -1,0 +1,137 @@
+% vim: set ft=tex tabstop=4 shiftwidth=4 noexpandtab:
+
+\input{../../include/latex/tikz/header.tex}
+
+% opening %{{{1
+
+\begin{document}
+\begin{tikzpicture}[scale=1.0]
+
+% parameters %{{{1
+
+	\tikzmath{
+		\radius = 2.8;
+		\sqrtradius = sqrt(3)/2 * \radius ;
+	}
+
+% coordinates %{{{1
+
+	\coordinate (O_1) at (0,0);
+	\coordinate (O_2) at (\radius,0);
+
+	\coordinate (X) at ({-1.5*\radius},0);
+	\coordinate (Y) at ({2.5*\radius},0);
+
+	\coordinate (IX) at ({-1.5*\radius},\sqrtradius);
+	\coordinate (IY) at ({2.5*\radius},\sqrtradius);
+
+% intersections %{{{1
+
+	\begin{pgfinterruptboundingbox}
+		\coordinate (C_1) at ($ (O_1) + (0:\radius) $);
+		\coordinate (C_2) at ($ (O_2) + (0:\radius) $);
+		\tkzInterCC(O_1,C_1)(O_2,C_2)\tkzGetPoints{I}{J}
+		\coordinate (C_3) at ($ (I) + (0:\radius) $);
+		\tkzInterCC(O_1,C_1)(I,C_3)\tkzGetPoints{K}{K_O}
+		\tkzInterCC(O_2,C_2)(I,C_3)\tkzGetPoints{L_O}{L}
+	\end{pgfinterruptboundingbox}
+
+% distance %{{{1
+
+	%\path let \p1 = ($ (B) - (A) $)
+	%in \pgfextra{
+		%\pgfmathsetmacro{\distAB}{veclen(\x1,\y1)/1cm}
+		%\global\let\distAB\distAB
+	%};
+
+% points, dots, vertices %{{{1
+
+	\fill (O_1) circle (0.4mm);
+	\fill (O_2) circle (0.4mm);
+
+	\fill (I) circle (0.4mm);
+	\fill (J) circle (0.4mm);
+
+	\fill (K) circle (0.4mm);
+	\fill (L) circle (0.4mm);
+
+% segments, sides, lines %{{{1
+
+	\draw (O_1) -- (K);
+	\draw (O_1) -- (I);
+	\draw (I) -- (K);
+	\draw (O_2) -- (I);
+	\draw (I) -- (L);
+	\draw (O_2) -- (L);
+
+	\draw (I) -- (J);
+
+	\draw[dashed] (X) -- (Y);
+
+	\draw[dashed] (IX) -- (K);
+	\draw[dashed] (L) -- (IY);
+
+% circles %{{{1
+
+	\draw (O_1) circle (\radius);
+	\draw (O_2) circle (\radius);
+
+	\draw (I) circle (\radius);
+
+% circular arcs %{{{2
+
+	%\draw (A) ++(\ang:\radius) arc (\ang:\gle:\radius);
+
+% points, dots, vertices labels %{{{1
+
+	\node[below left] at (O_1) {$O_1$};
+	\node[below right] at (O_2) {$O_2$};
+
+	\node[above] at (I) {$I$};
+	\node[below] at (J) {$J$};
+
+	\node[above left] at (K) {$K$};
+	\node[above right] at (L) {$L$};
+
+% segments, sides, lines labels %{{{1
+
+	\node[above] at ($ (X)!0.15!(O_1) $) {$d$};
+	\node[above] at ($ (IX)!0.2!(K) $) {$f$};
+
+% segments, sides, lines marks %{{{1
+
+	%\tkzMarkSegments[mark=||, size=2pt, pos=0.5](A,B)
+	%\tkzMarkSegments[mark=||, size=2pt, pos=0.5](C,D)
+
+% circles labels %{{{1
+
+	\node at ($ (O_1) + (155:\radius + 0.3) $) {$\mathscr{C}_1$};
+	\node at ($ (O_2) + (25:\radius + 0.3) $) {$\mathscr{C}_2$};
+	\node at ($ (I) + (35:\radius + 0.3) $) {$\mathscr{C}_3$};
+
+% circular arcs labels %{{{2
+
+	%\node at ($ (O) + (45:\radius + 0.3) $) {$\mathscr{C}$};
+
+% angles labels %{{{1
+
+	\pic[draw, ->, "$60^\circ$", angle radius=0.8cm, angle eccentricity=1.4]
+		{angle = K--I--O_1};
+
+	\pic[draw, ->, "$60^\circ$", angle radius=0.8cm, angle eccentricity=1.4]
+		{angle = O_2--I--L};
+
+	\pic[draw, ->, "$30^\circ$", angle radius=1.0cm, angle eccentricity=1.4]
+		{angle = O_1--I--J};
+
+	\pic[draw, ->, "$30^\circ$", angle radius=1.0cm, angle eccentricity=1.4]
+		{angle = J--I--O_2};
+
+% right angles markers %{{{2
+
+	%\pic [draw, angle radius=7] {right angle = C--B--A};
+
+% closing %{{{1
+
+\end{tikzpicture}
+\end{document}

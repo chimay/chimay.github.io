@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2026-07-02 jeu 15:52 -->
+<!-- 2026-09-23 mer 16:16 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Géométrie plane</title>
@@ -56,6 +56,7 @@
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
   pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -70,7 +71,7 @@
   pre.src-haskell:before { content: 'Haskell'; }
   pre.src-hledger:before { content: 'hledger'; }
   pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
+  pre.src-js:before { content: 'JavaScript'; }
   pre.src-latex:before { content: 'LaTeX'; }
   pre.src-ledger:before { content: 'Ledger'; }
   pre.src-lisp:before { content: 'Lisp'; }
@@ -249,31 +250,40 @@ line-height: 1.2;
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc51e7f4">1. Point</a></li>
-<li><a href="#orgc018219">2. Plan</a></li>
-<li><a href="#org72aea62">3. Droite</a></li>
-<li><a href="#orgcc42c2d">4. Demi-droite</a></li>
-<li><a href="#orgd3c9f09">5. Segment</a></li>
+<li><a href="#org562e9bd">1. Point</a></li>
+<li><a href="#orgc1efb10">2. Plan</a></li>
+<li><a href="#org72119eb">3. Droite</a></li>
+<li><a href="#orge9809ac">4. Demi-droite</a></li>
+<li><a href="#org0304ded">5. Segment</a></li>
 <li><a href="#heading:distance">6. Distance</a></li>
-<li><a href="#orgadb4868">7. Parallèles</a></li>
-<li><a href="#org1a259b7">8. Circuit</a></li>
-<li><a href="#org117c3a1">9. Droite orientée</a></li>
+<li><a href="#org6f94d7b">7. Parallèles</a></li>
+<li><a href="#org70be043">8. Circuit</a></li>
+<li><a href="#org740ded0">9. Droite orientée</a></li>
 <li><a href="#heading:segment_oriente">10. Segment orienté</a></li>
 <li><a href="#heading:vecteur_geometrique">11. Vecteur géométrique</a></li>
-<li><a href="#orgdf8a7cf">12. Cercle</a></li>
-<li><a href="#org8c48d63">13. Tangente à un cercle</a></li>
-<li><a href="#org79b2a71">14. Arc de cercle</a></li>
-<li><a href="#orgf2177de">15. Disque</a></li>
+<li><a href="#orga1acee8">12. Cercle</a></li>
+<li><a href="#orgb24db08">13. Tangente à un cercle</a></li>
+<li><a href="#org84b49d9">14. Arc de cercle</a></li>
+<li><a href="#org904a8ba">15. Disque</a></li>
 </ul>
 </div>
 </div>
 
 <script>
 MathJax = {
+  loader: { load: [
+            '[tex]/mathtools',
+            '[tex]/braket',
+  ], },
   tex: {
+    packages: {'[+]': [
+      'base',
+      'ams',
+      'braket',
+      'mathtools',
+    ]},
     inlineMath: [['$', '$'], ['\\(', '\\)']],
     displayMath: [['\\[','\\]']],
-    packages: {'[+]': ['base','ams','braket']},
     processEscapes: true,
     tags: 'ams',
     macros: {
@@ -431,8 +441,8 @@ MathJax = {
   }
 };
 </script>
-<div id="outline-container-orgc51e7f4" class="outline-2">
-<h2 id="orgc51e7f4"><span class="section-number-2">1.</span> Point</h2>
+<div id="outline-container-org562e9bd" class="outline-2">
+<h2 id="org562e9bd"><span class="section-number-2">1.</span> Point</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Le point est l’élément le plus fondamental en géométrie. Les autres
@@ -445,8 +455,8 @@ On note par convention un point par une lettre majuscule.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc018219" class="outline-2">
-<h2 id="orgc018219"><span class="section-number-2">2.</span> Plan</h2>
+<div id="outline-container-orgc1efb10" class="outline-2">
+<h2 id="orgc1efb10"><span class="section-number-2">2.</span> Plan</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Un plan \(\Pi\) est une surface plane composée d’un ensemble de
@@ -454,20 +464,20 @@ points qui s’étend à l’infini.
 </p>
 </div>
 </div>
-<div id="outline-container-org72aea62" class="outline-2">
-<h2 id="org72aea62"><span class="section-number-2">3.</span> Droite</h2>
+<div id="outline-container-org72119eb" class="outline-2">
+<h2 id="org72119eb"><span class="section-number-2">3.</span> Droite</h2>
 <div class="outline-text-2" id="text-3">
 <div id="text-table-of-contents-1" role="doc-toc">
 <ul>
-<li><a href="#org862665b">3.1. Définition</a></li>
-<li><a href="#orga8a34a0">3.2. Sécantes</a></li>
-<li><a href="#org0b98de1">3.3. Points alignés</a></li>
-<li><a href="#org8ee77de">3.4. Autres notations</a></li>
+<li><a href="#org4650ad1">3.1. Définition</a></li>
+<li><a href="#org2f38df6">3.2. Sécantes</a></li>
+<li><a href="#orge0580fb">3.3. Points alignés</a></li>
+<li><a href="#orge5a9a3f">3.4. Autres notations</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org862665b" class="outline-3">
-<h3 id="org862665b"><span class="section-number-3">3.1.</span> Définition</h3>
+<div id="outline-container-org4650ad1" class="outline-3">
+<h3 id="org4650ad1"><span class="section-number-3">3.1.</span> Définition</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Une droite \(d\) est un ensemble de points alignés sur une ligne droite
@@ -479,7 +489,7 @@ Le schéma ci-dessous représente une droite \(d\) :
 </p>
 
 
-<div id="org09d01f1" class="figure">
+<div id="org30436f3" class="figure">
 <p><img src="tikz/droite.svg" alt="droite.svg" class="org-svg" width="30%" />
 </p>
 </div>
@@ -491,7 +501,7 @@ donc s’en servir pour désigner \(d\). Dans le schéma ci-dessous :
 </p>
 
 
-<div id="org4e5aaef" class="figure">
+<div id="orgf72dbc0" class="figure">
 <p><img src="tikz/droite-deux-points.svg" alt="droite-deux-points.svg" class="org-svg" width="40%" />
 </p>
 </div>
@@ -513,8 +523,8 @@ On a donc :
 </p>
 </div>
 </div>
-<div id="outline-container-orga8a34a0" class="outline-3">
-<h3 id="orga8a34a0"><span class="section-number-3">3.2.</span> Sécantes</h3>
+<div id="outline-container-org2f38df6" class="outline-3">
+<h3 id="org2f38df6"><span class="section-number-3">3.2.</span> Sécantes</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 On dit que deux droites \(a\) et \(b\) sont sécantes si elles se
@@ -535,14 +545,14 @@ Le schéma ci-dessous représenté un exemple de deux droites sécantes
 </p>
 
 
-<div id="org8462a41" class="figure">
+<div id="orgbe06512" class="figure">
 <p><img src="tikz/droites-secantes.svg" alt="droites-secantes.svg" class="org-svg" width="45%" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org0b98de1" class="outline-3">
-<h3 id="org0b98de1"><span class="section-number-3">3.3.</span> Points alignés</h3>
+<div id="outline-container-orge0580fb" class="outline-3">
+<h3 id="orge0580fb"><span class="section-number-3">3.3.</span> Points alignés</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 On dit d’une série de points qu’ils sont alignés si ils appartiennent
@@ -551,14 +561,14 @@ On dit d’une série de points qu’ils sont alignés si ils appartiennent
 </p>
 
 
-<div id="orga0d8cc7" class="figure">
+<div id="org6ffdc4b" class="figure">
 <p><img src="tikz/points-alignes.svg" alt="points-alignes.svg" class="org-svg" width="30%" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org8ee77de" class="outline-3">
-<h3 id="org8ee77de"><span class="section-number-3">3.4.</span> Autres notations</h3>
+<div id="outline-container-orge5a9a3f" class="outline-3">
+<h3 id="orge5a9a3f"><span class="section-number-3">3.4.</span> Autres notations</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 On ne note pas toujours les parenthèses :
@@ -570,21 +580,21 @@ On ne note pas toujours les parenthèses :
 </div>
 </div>
 </div>
-<div id="outline-container-orgcc42c2d" class="outline-2">
-<h2 id="orgcc42c2d"><span class="section-number-2">4.</span> Demi-droite</h2>
+<div id="outline-container-orge9809ac" class="outline-2">
+<h2 id="orge9809ac"><span class="section-number-2">4.</span> Demi-droite</h2>
 <div class="outline-text-2" id="text-4">
 <div id="text-table-of-contents-2" role="doc-toc">
 <ul>
-<li><a href="#orged7b5e1">4.1. Définition</a></li>
-<li><a href="#org38618d8">4.2. Origine</a></li>
-<li><a href="#org47fca30">4.3. Ouverte ou fermée</a></li>
-<li><a href="#org468f719">4.4. Droite prolongeant une demi-droite</a></li>
-<li><a href="#org69c4087">4.5. Autres notations</a></li>
+<li><a href="#org41e691b">4.1. Définition</a></li>
+<li><a href="#org5f74e8c">4.2. Origine</a></li>
+<li><a href="#org8100769">4.3. Ouverte ou fermée</a></li>
+<li><a href="#org1539321">4.4. Droite prolongeant une demi-droite</a></li>
+<li><a href="#org97fe180">4.5. Autres notations</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orged7b5e1" class="outline-3">
-<h3 id="orged7b5e1"><span class="section-number-3">4.1.</span> Définition</h3>
+<div id="outline-container-org41e691b" class="outline-3">
+<h3 id="org41e691b"><span class="section-number-3">4.1.</span> Définition</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Si on coupe une droite \((AB)\) en deux au niveau du point \(A\), et
@@ -597,22 +607,22 @@ Le schéma ci-dessous donne un exemple de demi-droite \([AB)\) :
 </p>
 
 
-<div id="org0141328" class="figure">
+<div id="org1b394da" class="figure">
 <p><img src="tikz/demi-droite.svg" alt="demi-droite.svg" class="org-svg" width="35%" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org38618d8" class="outline-3">
-<h3 id="org38618d8"><span class="section-number-3">4.2.</span> Origine</h3>
+<div id="outline-container-org5f74e8c" class="outline-3">
+<h3 id="org5f74e8c"><span class="section-number-3">4.2.</span> Origine</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Le point \(A\) est appelé origine de la demi-droite \([AB)\).
 </p>
 </div>
 </div>
-<div id="outline-container-org47fca30" class="outline-3">
-<h3 id="org47fca30"><span class="section-number-3">4.3.</span> Ouverte ou fermée</h3>
+<div id="outline-container-org8100769" class="outline-3">
+<h3 id="org8100769"><span class="section-number-3">4.3.</span> Ouverte ou fermée</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 Il existe plusieurs variantes de demi-droite :
@@ -630,8 +640,8 @@ Il existe plusieurs variantes de demi-droite :
 </ul>
 </div>
 </div>
-<div id="outline-container-org468f719" class="outline-3">
-<h3 id="org468f719"><span class="section-number-3">4.4.</span> Droite prolongeant une demi-droite</h3>
+<div id="outline-container-org1539321" class="outline-3">
+<h3 id="org1539321"><span class="section-number-3">4.4.</span> Droite prolongeant une demi-droite</h3>
 <div class="outline-text-3" id="text-4-4">
 <p>
 On dit qu’une droite \(d\) prolonge la demi-droite \([AB)\) si les points \(A\)
@@ -643,8 +653,8 @@ et \(B\) appartiennent à \(d\), autrement dit si :
 </p>
 </div>
 </div>
-<div id="outline-container-org69c4087" class="outline-3">
-<h3 id="org69c4087"><span class="section-number-3">4.5.</span> Autres notations</h3>
+<div id="outline-container-org97fe180" class="outline-3">
+<h3 id="org97fe180"><span class="section-number-3">4.5.</span> Autres notations</h3>
 <div class="outline-text-3" id="text-4-5">
 <p>
 On ne note pas toujours la parenthèse :
@@ -664,21 +674,21 @@ On peut aussi noter une demi-droite par une lettre minuscule :
 </div>
 </div>
 </div>
-<div id="outline-container-orgd3c9f09" class="outline-2">
-<h2 id="orgd3c9f09"><span class="section-number-2">5.</span> Segment</h2>
+<div id="outline-container-org0304ded" class="outline-2">
+<h2 id="org0304ded"><span class="section-number-2">5.</span> Segment</h2>
 <div class="outline-text-2" id="text-5">
 <div id="text-table-of-contents-3" role="doc-toc">
 <ul>
-<li><a href="#org7aafbd4">5.1. Définition</a></li>
-<li><a href="#org8a92644">5.2. Extrémités</a></li>
-<li><a href="#org69b628b">5.3. Droite prolongeant un segment</a></li>
-<li><a href="#orgbe8c99b">5.4. Autres notations</a></li>
-<li><a href="#org77bd674">5.5. Mesure et construction</a></li>
+<li><a href="#orgb40318d">5.1. Définition</a></li>
+<li><a href="#orgfd000b2">5.2. Extrémités</a></li>
+<li><a href="#org1523bb8">5.3. Droite prolongeant un segment</a></li>
+<li><a href="#orga7f4577">5.4. Autres notations</a></li>
+<li><a href="#orgc888bad">5.5. Mesure et construction</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org7aafbd4" class="outline-3">
-<h3 id="org7aafbd4"><span class="section-number-3">5.1.</span> Définition</h3>
+<div id="outline-container-orgb40318d" class="outline-3">
+<h3 id="orgb40318d"><span class="section-number-3">5.1.</span> Définition</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 Si on coupe une droite \((AB)\) au niveau des points \(A\) et $B, et que
@@ -691,7 +701,7 @@ Le schéma ci-dessous donne un exemple de segment :
 </p>
 
 
-<div id="orge2dc6a8" class="figure">
+<div id="org83aaf8b" class="figure">
 <p><img src="tikz/segment.svg" alt="segment.svg" class="org-svg" width="25%" />
 </p>
 </div>
@@ -708,8 +718,8 @@ Il existe plusieurs variantes de segments :
 </ul>
 </div>
 </div>
-<div id="outline-container-org8a92644" class="outline-3">
-<h3 id="org8a92644"><span class="section-number-3">5.2.</span> Extrémités</h3>
+<div id="outline-container-orgfd000b2" class="outline-3">
+<h3 id="orgfd000b2"><span class="section-number-3">5.2.</span> Extrémités</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 Les extrémités d’un segment \([A,B]\) sont simplement les points \(A\)
@@ -721,8 +731,8 @@ Il est clair que les extrémités d’un segment suffisent à le définir.
 </p>
 </div>
 </div>
-<div id="outline-container-org69b628b" class="outline-3">
-<h3 id="org69b628b"><span class="section-number-3">5.3.</span> Droite prolongeant un segment</h3>
+<div id="outline-container-org1523bb8" class="outline-3">
+<h3 id="org1523bb8"><span class="section-number-3">5.3.</span> Droite prolongeant un segment</h3>
 <div class="outline-text-3" id="text-5-3">
 <p>
 On dit qu’une droite \(d\) prolonge un segment \([A,B]\) si les points \(A\)
@@ -734,8 +744,8 @@ et \(B\) appartiennent à \(d\), autrement dit si :
 </p>
 </div>
 </div>
-<div id="outline-container-orgbe8c99b" class="outline-3">
-<h3 id="orgbe8c99b"><span class="section-number-3">5.4.</span> Autres notations</h3>
+<div id="outline-container-orga7f4577" class="outline-3">
+<h3 id="orga7f4577"><span class="section-number-3">5.4.</span> Autres notations</h3>
 <div class="outline-text-3" id="text-5-4">
 <p>
 On ne note pas toujours la virgule :
@@ -754,8 +764,8 @@ Une lettre minuscule peut aussi servir à désigner un segment :
 </p>
 </div>
 </div>
-<div id="outline-container-org77bd674" class="outline-3">
-<h3 id="org77bd674"><span class="section-number-3">5.5.</span> Mesure et construction</h3>
+<div id="outline-container-orgc888bad" class="outline-3">
+<h3 id="orgc888bad"><span class="section-number-3">5.5.</span> Mesure et construction</h3>
 <div class="outline-text-3" id="text-5-5">
 <p>
 On utilise une règle graduée pour :
@@ -773,15 +783,15 @@ On utilise une règle graduée pour :
 <div class="outline-text-2" id="text-heading:distance">
 <div id="text-table-of-contents-4" role="doc-toc">
 <ul>
-<li><a href="#org2df1001">6.1. Introduction</a></li>
+<li><a href="#org196f669">6.1. Introduction</a></li>
 <li><a href="#heading:distance_proprietes">6.2. Propriétés générales</a></li>
 <li><a href="#heading:distance_inegalite_triangulaire">6.3. Inégalité triangulaire</a></li>
-<li><a href="#org169bdb5">6.4. Isométrie</a></li>
+<li><a href="#orgda1224e">6.4. Isométrie</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org2df1001" class="outline-3">
-<h3 id="org2df1001"><span class="section-number-3">6.1.</span> Introduction</h3>
+<div id="outline-container-org196f669" class="outline-3">
+<h3 id="org196f669"><span class="section-number-3">6.1.</span> Introduction</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 La distance entre deux points \(A\) et \(B\) se note :
@@ -855,8 +865,8 @@ point \(X\) lui-même :
 \[\abs{XY} = 0 \quad \Longrightarrow \quad X = Y\]
 </p>
 </div>
-<div id="outline-container-org1a03caa" class="outline-4">
-<h4 id="org1a03caa"><span class="section-number-4">6.2.1.</span> Corollaire</h4>
+<div id="outline-container-org8212e9b" class="outline-4">
+<h4 id="org8212e9b"><span class="section-number-4">6.2.1.</span> Corollaire</h4>
 <div class="outline-text-4" id="text-6-2-1">
 <p>
 Si \(A\) et \(B\) sont deux points distincts, leur distance ne peut être
@@ -888,7 +898,7 @@ l’ordre présenté ci-dessous :
 </p>
 
 
-<div id="org9f4b7b8" class="figure">
+<div id="org0cf2333" class="figure">
 <p><img src="tikz/distance-inegalite-triangulaire-egalite.svg" alt="distance-inegalite-triangulaire-egalite.svg" class="org-svg" width="30%" />
 </p>
 </div>
@@ -910,7 +920,7 @@ Par contre, si les trois points ne sont pas alignés :
 </p>
 
 
-<div id="orge49daf7" class="figure">
+<div id="org6a0a2a2" class="figure">
 <p><img src="tikz/distance-inegalite-triangulaire.svg" alt="distance-inegalite-triangulaire.svg" class="org-svg" width="30%" />
 </p>
 </div>
@@ -924,8 +934,8 @@ l’inégalité triangulaire est clairement stricte :
 </p>
 </div>
 </div>
-<div id="outline-container-org169bdb5" class="outline-3">
-<h3 id="org169bdb5"><span class="section-number-3">6.4.</span> Isométrie</h3>
+<div id="outline-container-orgda1224e" class="outline-3">
+<h3 id="orgda1224e"><span class="section-number-3">6.4.</span> Isométrie</h3>
 <div class="outline-text-3" id="text-6-4">
 <p>
 On dit que deux segments sont isométriques lorsqu’ils ont la même
@@ -934,19 +944,19 @@ longueur.
 </div>
 </div>
 </div>
-<div id="outline-container-orgadb4868" class="outline-2">
-<h2 id="orgadb4868"><span class="section-number-2">7.</span> Parallèles</h2>
+<div id="outline-container-org6f94d7b" class="outline-2">
+<h2 id="org6f94d7b"><span class="section-number-2">7.</span> Parallèles</h2>
 <div class="outline-text-2" id="text-7">
 <div id="text-table-of-contents-5" role="doc-toc">
 <ul>
-<li><a href="#orga3d300f">7.1. Droites</a></li>
-<li><a href="#orgbf72059">7.2. Segments</a></li>
-<li><a href="#orgb4ec1ab">7.3. Droite et segment</a></li>
+<li><a href="#orgd00e407">7.1. Droites</a></li>
+<li><a href="#orgc6b6596">7.2. Segments</a></li>
+<li><a href="#org0f97ee7">7.3. Droite et segment</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orga3d300f" class="outline-3">
-<h3 id="orga3d300f"><span class="section-number-3">7.1.</span> Droites</h3>
+<div id="outline-container-orgd00e407" class="outline-3">
+<h3 id="orgd00e407"><span class="section-number-3">7.1.</span> Droites</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 On dit que deux droites \(a\) et \(b\) sont parallèles si elles ne se
@@ -979,14 +989,14 @@ Le schéma ci-dessous représenté un exemple de deux droites parallèles
 </p>
 
 
-<div id="orga2a2375" class="figure">
+<div id="orgb83c3cb" class="figure">
 <p><img src="tikz/droites-paralleles.svg" alt="droites-paralleles.svg" class="org-svg" width="45%" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgbf72059" class="outline-3">
-<h3 id="orgbf72059"><span class="section-number-3">7.2.</span> Segments</h3>
+<div id="outline-container-orgc6b6596" class="outline-3">
+<h3 id="orgc6b6596"><span class="section-number-3">7.2.</span> Segments</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 On dit que deux segments \([A,B]\) et \([C,D]\) sont parallèles lorsque
@@ -998,8 +1008,8 @@ les droites qui les prolongent sont parallèles :
 </p>
 </div>
 </div>
-<div id="outline-container-orgb4ec1ab" class="outline-3">
-<h3 id="orgb4ec1ab"><span class="section-number-3">7.3.</span> Droite et segment</h3>
+<div id="outline-container-org0f97ee7" class="outline-3">
+<h3 id="org0f97ee7"><span class="section-number-3">7.3.</span> Droite et segment</h3>
 <div class="outline-text-3" id="text-7-3">
 <p>
 On dit qu’une droite \(d\) est parallèle à un segment \([A,B]\) lorsque
@@ -1012,19 +1022,19 @@ la droite qui prolonge \([A,B]\) est parallèle à \(d\) :
 </div>
 </div>
 </div>
-<div id="outline-container-org1a259b7" class="outline-2">
-<h2 id="org1a259b7"><span class="section-number-2">8.</span> Circuit</h2>
+<div id="outline-container-org70be043" class="outline-2">
+<h2 id="org70be043"><span class="section-number-2">8.</span> Circuit</h2>
 <div class="outline-text-2" id="text-8">
 <div id="text-table-of-contents-6" role="doc-toc">
 <ul>
-<li><a href="#org5d3ddfe">8.1. Introduction</a></li>
-<li><a href="#org0051b65">8.2. Polygone</a></li>
-<li><a href="#orgf109bb0">8.3. Périmètre</a></li>
+<li><a href="#org6f12af5">8.1. Introduction</a></li>
+<li><a href="#org677ff49">8.2. Polygone</a></li>
+<li><a href="#orgc223c36">8.3. Périmètre</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org5d3ddfe" class="outline-3">
-<h3 id="org5d3ddfe"><span class="section-number-3">8.1.</span> Introduction</h3>
+<div id="outline-container-org6f12af5" class="outline-3">
+<h3 id="org6f12af5"><span class="section-number-3">8.1.</span> Introduction</h3>
 <div class="outline-text-3" id="text-8-1">
 <p>
 Certaines figures géométriques forment un circuit. Ce circuit est
@@ -1032,8 +1042,8 @@ généralement composé de segments et de courbes.
 </p>
 </div>
 </div>
-<div id="outline-container-org0051b65" class="outline-3">
-<h3 id="org0051b65"><span class="section-number-3">8.2.</span> Polygone</h3>
+<div id="outline-container-org677ff49" class="outline-3">
+<h3 id="org677ff49"><span class="section-number-3">8.2.</span> Polygone</h3>
 <div class="outline-text-3" id="text-8-2">
 <p>
 Un polygone est une figure géométrique délimitée par des segments
@@ -1043,8 +1053,8 @@ est appelé <b>sommet</b> du polygone, tandis que chaque segment est appelé
 </p>
 </div>
 </div>
-<div id="outline-container-orgf109bb0" class="outline-3">
-<h3 id="orgf109bb0"><span class="section-number-3">8.3.</span> Périmètre</h3>
+<div id="outline-container-orgc223c36" class="outline-3">
+<h3 id="orgc223c36"><span class="section-number-3">8.3.</span> Périmètre</h3>
 <div class="outline-text-3" id="text-8-3">
 <p>
 Le périmètre d’une figure géométrique formant un circuit est la
@@ -1053,8 +1063,8 @@ longueur parcourue le long de ce circuit.
 </div>
 </div>
 </div>
-<div id="outline-container-org117c3a1" class="outline-2">
-<h2 id="org117c3a1"><span class="section-number-2">9.</span> Droite orientée</h2>
+<div id="outline-container-org740ded0" class="outline-2">
+<h2 id="org740ded0"><span class="section-number-2">9.</span> Droite orientée</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 Une droite orienté est une droite à laquelle on donne un sens de
@@ -1078,7 +1088,7 @@ Le schéma ci-dessous représente un exemple de droite orientée \((A \to B)\) :
 </p>
 
 
-<div id="org9bba526" class="figure">
+<div id="orgc27e6ab" class="figure">
 <p><img src="tikz/droite-orientee.svg" alt="droite-orientee.svg" class="org-svg" width="30%" />
 </p>
 </div>
@@ -1089,15 +1099,15 @@ Le schéma ci-dessous représente un exemple de droite orientée \((A \to B)\) :
 <div class="outline-text-2" id="text-heading:segment_oriente">
 <div id="text-table-of-contents-7" role="doc-toc">
 <ul>
-<li><a href="#orgd9fce91">10.1. Définition</a></li>
-<li><a href="#org61c4729">10.2. Nomenclature</a></li>
-<li><a href="#org50116f3">10.3. Caractéristiques</a></li>
-<li><a href="#org45c4e24">10.4. Équivalence</a></li>
+<li><a href="#orgad60df7">10.1. Définition</a></li>
+<li><a href="#orgf2e55f7">10.2. Nomenclature</a></li>
+<li><a href="#org6353505">10.3. Caractéristiques</a></li>
+<li><a href="#org01c28df">10.4. Équivalence</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd9fce91" class="outline-3">
-<h3 id="orgd9fce91"><span class="section-number-3">10.1.</span> Définition</h3>
+<div id="outline-container-orgad60df7" class="outline-3">
+<h3 id="orgad60df7"><span class="section-number-3">10.1.</span> Définition</h3>
 <div class="outline-text-3" id="text-10-1">
 <p>
 Un segment orienté est un segment auquel on donne un sens de progression,
@@ -1119,14 +1129,14 @@ Le schéma ci-dessous représente un exemple de segment orienté \([A
 </p>
 
 
-<div id="orgd14fb6b" class="figure">
+<div id="orgfe38be9" class="figure">
 <p><img src="tikz/segment-oriente.svg" alt="segment-oriente.svg" class="org-svg" width="25%" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org61c4729" class="outline-3">
-<h3 id="org61c4729"><span class="section-number-3">10.2.</span> Nomenclature</h3>
+<div id="outline-container-orgf2e55f7" class="outline-3">
+<h3 id="orgf2e55f7"><span class="section-number-3">10.2.</span> Nomenclature</h3>
 <div class="outline-text-3" id="text-10-2">
 <ul class="org-ul">
 <li>le point \(A\) est appelé origine ou point de départ du segment orienté \([A \to B]\) :</li>
@@ -1134,8 +1144,8 @@ Le schéma ci-dessous représente un exemple de segment orienté \([A
 </ul>
 </div>
 </div>
-<div id="outline-container-org50116f3" class="outline-3">
-<h3 id="org50116f3"><span class="section-number-3">10.3.</span> Caractéristiques</h3>
+<div id="outline-container-org6353505" class="outline-3">
+<h3 id="org6353505"><span class="section-number-3">10.3.</span> Caractéristiques</h3>
 <div class="outline-text-3" id="text-10-3">
 <p>
 Un segment orienté \([A \to B]\) est caractérisé par :
@@ -1149,8 +1159,8 @@ Un segment orienté \([A \to B]\) est caractérisé par :
 </ul>
 </div>
 </div>
-<div id="outline-container-org45c4e24" class="outline-3">
-<h3 id="org45c4e24"><span class="section-number-3">10.4.</span> Équivalence</h3>
+<div id="outline-container-org01c28df" class="outline-3">
+<h3 id="org01c28df"><span class="section-number-3">10.4.</span> Équivalence</h3>
 <div class="outline-text-3" id="text-10-4">
 <p>
 On considère que deux segments orientés \([A \to B]\) et \([C \to D]\) sont
@@ -1168,15 +1178,15 @@ Nous allons à présent définir précisément ce que signifie un sens
 de progression identique.
 </p>
 </div>
-<div id="outline-container-org641e71c" class="outline-4">
-<h4 id="org641e71c"><span class="section-number-4">10.4.1.</span> Droites non confondues</h4>
+<div id="outline-container-orgd14dba4" class="outline-4">
+<h4 id="orgd14dba4"><span class="section-number-4">10.4.1.</span> Droites non confondues</h4>
 <div class="outline-text-4" id="text-10-4-1">
 <p>
 Examinons le cas où les droites \((AB)\) et \((CD)\) sont distinctes.
 </p>
 </div>
-<div id="outline-container-org2a3701a" class="outline-5">
-<h5 id="org2a3701a"><span class="section-number-5">10.4.1.1.</span> Sens identique</h5>
+<div id="outline-container-orgc40fd8b" class="outline-5">
+<h5 id="orgc40fd8b"><span class="section-number-5">10.4.1.1.</span> Sens identique</h5>
 <div class="outline-text-5" id="text-10-4-1-1">
 <p>
 Pour que le sens de progression de \([A \to B]\) soit identique au sens de
@@ -1185,14 +1195,14 @@ et \([B,D]\) ne se croisent pas, comme dans le schéma ci-dessous :
 </p>
 
 
-<div id="orgccfcb7e" class="figure">
+<div id="org1f8dfed" class="figure">
 <p><img src="tikz/segments-orientes-sans-croisement.svg" alt="segments-orientes-sans-croisement.svg" class="org-svg" width="35%" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org7ebecb8" class="outline-5">
-<h5 id="org7ebecb8"><span class="section-number-5">10.4.1.2.</span> Sens opposés</h5>
+<div id="outline-container-orgc9fb2f8" class="outline-5">
+<h5 id="orgc9fb2f8"><span class="section-number-5">10.4.1.2.</span> Sens opposés</h5>
 <div class="outline-text-5" id="text-10-4-1-2">
 <p>
 Par contre, dans le schéma ci-dessous, les segments orientés \([E \to
@@ -1202,15 +1212,15 @@ sont opposés :
 </p>
 
 
-<div id="org5274330" class="figure">
+<div id="orgb8a0683" class="figure">
 <p><img src="tikz/segments-orientes-avec-croisement.svg" alt="segments-orientes-avec-croisement.svg" class="org-svg" width="35%" />
 </p>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-orgaafed8b" class="outline-4">
-<h4 id="orgaafed8b"><span class="section-number-4">10.4.2.</span> Droites confondues</h4>
+<div id="outline-container-org1d44315" class="outline-4">
+<h4 id="org1d44315"><span class="section-number-4">10.4.2.</span> Droites confondues</h4>
 <div class="outline-text-4" id="text-10-4-2">
 <p>
 Lorsque les droites :
@@ -1225,8 +1235,8 @@ sont confondues, il suffit de vérifier que l’on progresse dans le même
 sens sur la droite \(d\) pour aller de \(A\) vers \(B\) ou de \(C\) vers \(D\).
 </p>
 </div>
-<div id="outline-container-orgbc84af4" class="outline-5">
-<h5 id="orgbc84af4"><span class="section-number-5">10.4.2.1.</span> Sens identique</h5>
+<div id="outline-container-orgc892908" class="outline-5">
+<h5 id="orgc892908"><span class="section-number-5">10.4.2.1.</span> Sens identique</h5>
 <div class="outline-text-5" id="text-10-4-2-1">
 <p>
 Le schéma ci-dessous représente deux segments orientés \([A \to B]\)
@@ -1234,7 +1244,7 @@ et \([C \to D]\) qui progressent dans le même sens :
 </p>
 
 
-<div id="org3d842c4" class="figure">
+<div id="orga886f28" class="figure">
 <p><img src="tikz/segments-orientes-meme-droite-meme-sens.svg" alt="segments-orientes-meme-droite-meme-sens.svg" class="org-svg" width="40%" />
 </p>
 </div>
@@ -1301,8 +1311,8 @@ points d’arrivée.
 </p>
 </div>
 </div>
-<div id="outline-container-org0762e9f" class="outline-5">
-<h5 id="org0762e9f"><span class="section-number-5">10.4.2.2.</span> Sens opposés</h5>
+<div id="outline-container-org89abab4" class="outline-5">
+<h5 id="org89abab4"><span class="section-number-5">10.4.2.2.</span> Sens opposés</h5>
 <div class="outline-text-5" id="text-10-4-2-2">
 <p>
 Par contre, dans le schéma ci-dessous, les segments orientés \([E \to
@@ -1311,7 +1321,7 @@ sont clairement opposés :
 </p>
 
 
-<div id="orgd13319e" class="figure">
+<div id="org17b069d" class="figure">
 <p><img src="tikz/segments-orientes-meme-droite-sens-opposes.svg" alt="segments-orientes-meme-droite-sens-opposes.svg" class="org-svg" width="40%" />
 </p>
 </div>
@@ -1335,13 +1345,13 @@ points d’arrivée :
 <div class="outline-text-2" id="text-heading:vecteur_geometrique">
 <div id="text-table-of-contents-8" role="doc-toc">
 <ul>
-<li><a href="#org7b4622f">11.1. Définition</a></li>
-<li><a href="#orgb941316">11.2. Notation</a></li>
+<li><a href="#org147bb87">11.1. Définition</a></li>
+<li><a href="#org7a37b3f">11.2. Notation</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org7b4622f" class="outline-3">
-<h3 id="org7b4622f"><span class="section-number-3">11.1.</span> Définition</h3>
+<div id="outline-container-org147bb87" class="outline-3">
+<h3 id="org147bb87"><span class="section-number-3">11.1.</span> Définition</h3>
 <div class="outline-text-3" id="text-11-1">
 <p>
 Un vecteur géométrique est une classe d’équivalence de segments
@@ -1379,8 +1389,8 @@ caractéristiques.
 </p>
 </div>
 </div>
-<div id="outline-container-orgb941316" class="outline-3">
-<h3 id="orgb941316"><span class="section-number-3">11.2.</span> Notation</h3>
+<div id="outline-container-org7a37b3f" class="outline-3">
+<h3 id="org7a37b3f"><span class="section-number-3">11.2.</span> Notation</h3>
 <div class="outline-text-3" id="text-11-2">
 <p>
 On peut aussi désigner un vecteur géométrique par une lettre minuscule
@@ -1394,21 +1404,21 @@ le point \(B\) peut être noté :
 </div>
 </div>
 </div>
-<div id="outline-container-orgdf8a7cf" class="outline-2">
-<h2 id="orgdf8a7cf"><span class="section-number-2">12.</span> Cercle</h2>
+<div id="outline-container-orga1acee8" class="outline-2">
+<h2 id="orga1acee8"><span class="section-number-2">12.</span> Cercle</h2>
 <div class="outline-text-2" id="text-12">
 <div id="text-table-of-contents-9" role="doc-toc">
 <ul>
-<li><a href="#org99d0230">12.1. Définition</a></li>
-<li><a href="#orgc11182a">12.2. Rayon</a></li>
-<li><a href="#orgfac8bb4">12.3. Corde</a></li>
-<li><a href="#org255a356">12.4. Diamètre</a></li>
-<li><a href="#orgd570dc2">12.5. Nombre \(\pi\)</a></li>
+<li><a href="#orgede7ffb">12.1. Définition</a></li>
+<li><a href="#org493cc83">12.2. Rayon</a></li>
+<li><a href="#org4bfe17b">12.3. Corde</a></li>
+<li><a href="#org200e0de">12.4. Diamètre</a></li>
+<li><a href="#orgb9bad08">12.5. Nombre \(\pi\)</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org99d0230" class="outline-3">
-<h3 id="org99d0230"><span class="section-number-3">12.1.</span> Définition</h3>
+<div id="outline-container-orgede7ffb" class="outline-3">
+<h3 id="orgede7ffb"><span class="section-number-3">12.1.</span> Définition</h3>
 <div class="outline-text-3" id="text-12-1">
 <p>
 Un cercle \(\mathscr{C}\) de centre \(O\) et de rayon \(r\) est l’ensemble
@@ -1416,7 +1426,7 @@ des points situés à une distance \(r\) du point \(O\) :
 </p>
 
 
-<div id="org519c133" class="figure">
+<div id="org4a8240f" class="figure">
 <p><img src="tikz/cercle.svg" alt="cercle.svg" class="org-svg" width="27%" />
 </p>
 </div>
@@ -1452,8 +1462,8 @@ avec le neutre pour l’addition \(0\).
 </p>
 </div>
 </div>
-<div id="outline-container-orgc11182a" class="outline-3">
-<h3 id="orgc11182a"><span class="section-number-3">12.2.</span> Rayon</h3>
+<div id="outline-container-org493cc83" class="outline-3">
+<h3 id="org493cc83"><span class="section-number-3">12.2.</span> Rayon</h3>
 <div class="outline-text-3" id="text-12-2">
 <p>
 Le rayon d’un cercle \(\mathscr{C}\) de centre \(O\) est à la fois :
@@ -1465,8 +1475,8 @@ Le rayon d’un cercle \(\mathscr{C}\) de centre \(O\) est à la fois :
 </ul>
 </div>
 </div>
-<div id="outline-container-orgfac8bb4" class="outline-3">
-<h3 id="orgfac8bb4"><span class="section-number-3">12.3.</span> Corde</h3>
+<div id="outline-container-org4bfe17b" class="outline-3">
+<h3 id="org4bfe17b"><span class="section-number-3">12.3.</span> Corde</h3>
 <div class="outline-text-3" id="text-12-3">
 <p>
 Une corde du cercle \(\mathscr{C}\) est un segment qui relie deux points
@@ -1478,14 +1488,14 @@ Le schéma ci-dessous représenté une corde \([A,B]\) du cercle \(\mathscr{C}\)
 </p>
 
 
-<div id="org49e736f" class="figure">
+<div id="org783d958" class="figure">
 <p><img src="tikz/corde-cercle.svg" alt="corde-cercle.svg" class="org-svg" width="25%" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org255a356" class="outline-3">
-<h3 id="org255a356"><span class="section-number-3">12.4.</span> Diamètre</h3>
+<div id="outline-container-org200e0de" class="outline-3">
+<h3 id="org200e0de"><span class="section-number-3">12.4.</span> Diamètre</h3>
 <div class="outline-text-3" id="text-12-4">
 <p>
 Soit un cercle \(\mathscr{C}\) de centre \(O\) et de rayon \(r\). Un diamètre
@@ -1498,7 +1508,7 @@ et de rayon \(r\) et un diamètre \([A,B]\) :
 </p>
 
 
-<div id="orgce1bfce" class="figure">
+<div id="orgab15ff8" class="figure">
 <p><img src="tikz/diametre.svg" alt="diametre.svg" class="org-svg" width="30%" />
 </p>
 </div>
@@ -1531,8 +1541,8 @@ cercle donné, et vaut le double du rayon du cercle.
 </p>
 </div>
 </div>
-<div id="outline-container-orgd570dc2" class="outline-3">
-<h3 id="orgd570dc2"><span class="section-number-3">12.5.</span> Nombre \(\pi\)</h3>
+<div id="outline-container-orgb9bad08" class="outline-3">
+<h3 id="orgb9bad08"><span class="section-number-3">12.5.</span> Nombre \(\pi\)</h3>
 <div class="outline-text-3" id="text-12-5">
 <p>
 Il va de soi que tous les cercles de rayon \(1\) ont le même périmètre
@@ -1554,19 +1564,19 @@ Le périmètre d’un cercle de rayon \(1\) vaut donc :
 </div>
 </div>
 </div>
-<div id="outline-container-org8c48d63" class="outline-2">
-<h2 id="org8c48d63"><span class="section-number-2">13.</span> Tangente à un cercle</h2>
+<div id="outline-container-orgb24db08" class="outline-2">
+<h2 id="orgb24db08"><span class="section-number-2">13.</span> Tangente à un cercle</h2>
 <div class="outline-text-2" id="text-13">
 <div id="text-table-of-contents-10" role="doc-toc">
 <ul>
-<li><a href="#orge313949">13.1. Définition</a></li>
-<li><a href="#orge5db1a2">13.2. Demi-droite</a></li>
-<li><a href="#org2c12790">13.3. Segment</a></li>
+<li><a href="#orgb462b32">13.1. Définition</a></li>
+<li><a href="#org5286dd9">13.2. Demi-droite</a></li>
+<li><a href="#org4b1aaac">13.3. Segment</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orge313949" class="outline-3">
-<h3 id="orge313949"><span class="section-number-3">13.1.</span> Définition</h3>
+<div id="outline-container-orgb462b32" class="outline-3">
+<h3 id="orgb462b32"><span class="section-number-3">13.1.</span> Définition</h3>
 <div class="outline-text-3" id="text-13-1">
 <p>
 Une droite \(t\) est dite tangente au cercle \(\mathscr{C}\) au point \(A\) si
@@ -1592,14 +1602,14 @@ cercle \(\mathscr{C}\) au point \(A\) :
 </p>
 
 
-<div id="orgdefb686" class="figure">
+<div id="org20224df" class="figure">
 <p><img src="tikz/tangente-cercle.svg" alt="tangente-cercle.svg" class="org-svg" width="40%" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orge5db1a2" class="outline-3">
-<h3 id="orge5db1a2"><span class="section-number-3">13.2.</span> Demi-droite</h3>
+<div id="outline-container-org5286dd9" class="outline-3">
+<h3 id="org5286dd9"><span class="section-number-3">13.2.</span> Demi-droite</h3>
 <div class="outline-text-3" id="text-13-2">
 <p>
 On dit qu’une demi-droite \([AB)\) est tangente à un cercle \(\mathscr{C}\)
@@ -1607,8 +1617,8 @@ si la droite \((AB)\) qui la prolonge est tangente à \(\mathscr{C}\).
 </p>
 </div>
 </div>
-<div id="outline-container-org2c12790" class="outline-3">
-<h3 id="org2c12790"><span class="section-number-3">13.3.</span> Segment</h3>
+<div id="outline-container-org4b1aaac" class="outline-3">
+<h3 id="org4b1aaac"><span class="section-number-3">13.3.</span> Segment</h3>
 <div class="outline-text-3" id="text-13-3">
 <p>
 On dit qu’un segment \([A,B]\) est tangent à un cercle \(\mathscr{C}\)
@@ -1617,20 +1627,20 @@ si la droite \((AB)\) qui le prolonge est tangente à \(\mathscr{C}\).
 </div>
 </div>
 </div>
-<div id="outline-container-org79b2a71" class="outline-2">
-<h2 id="org79b2a71"><span class="section-number-2">14.</span> Arc de cercle</h2>
+<div id="outline-container-org84b49d9" class="outline-2">
+<h2 id="org84b49d9"><span class="section-number-2">14.</span> Arc de cercle</h2>
 <div class="outline-text-2" id="text-14">
 <div id="text-table-of-contents-11" role="doc-toc">
 <ul>
-<li><a href="#org556e61a">14.1. Définition</a></li>
-<li><a href="#orga0c7efc">14.2. Longueur</a></li>
-<li><a href="#org4700d04">14.3. Fraction d’un cercle unitaire</a></li>
-<li><a href="#orgb916123">14.4. Orienté</a></li>
+<li><a href="#org891df89">14.1. Définition</a></li>
+<li><a href="#org10f2430">14.2. Longueur</a></li>
+<li><a href="#org6d4adfa">14.3. Fraction d’un cercle unitaire</a></li>
+<li><a href="#org6f0ac3b">14.4. Orienté</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org556e61a" class="outline-3">
-<h3 id="org556e61a"><span class="section-number-3">14.1.</span> Définition</h3>
+<div id="outline-container-org891df89" class="outline-3">
+<h3 id="org891df89"><span class="section-number-3">14.1.</span> Définition</h3>
 <div class="outline-text-3" id="text-14-1">
 <p>
 Un arc de cercle \(\Gamma\) est une partie d’un cercle \(\mathscr{C}\)
@@ -1646,7 +1656,7 @@ Le schéma ci-dessous représente un arc de cercle \(\Gamma\)
 </p>
 
 
-<div id="org4e32e82" class="figure">
+<div id="org02c2b32" class="figure">
 <p><img src="tikz/arc-de-cercle.svg" alt="arc-de-cercle.svg" class="org-svg" width="25%" />
 </p>
 </div>
@@ -1667,8 +1677,8 @@ on a par exemple :
 </p>
 </div>
 </div>
-<div id="outline-container-orga0c7efc" class="outline-3">
-<h3 id="orga0c7efc"><span class="section-number-3">14.2.</span> Longueur</h3>
+<div id="outline-container-org10f2430" class="outline-3">
+<h3 id="org10f2430"><span class="section-number-3">14.2.</span> Longueur</h3>
 <div class="outline-text-3" id="text-14-2">
 <p>
 La longeur d’un arc de cercle :
@@ -1687,8 +1697,8 @@ peut être notée :
 </p>
 </div>
 </div>
-<div id="outline-container-org4700d04" class="outline-3">
-<h3 id="org4700d04"><span class="section-number-3">14.3.</span> Fraction d’un cercle unitaire</h3>
+<div id="outline-container-org6d4adfa" class="outline-3">
+<h3 id="org6d4adfa"><span class="section-number-3">14.3.</span> Fraction d’un cercle unitaire</h3>
 <div class="outline-text-3" id="text-14-3">
 <p>
 Considérons un arc issu d’un cercle de rayon \(1\) et engloblant
@@ -1754,8 +1764,8 @@ Le tableau ci-dessous recense quelques cas courants :
 </table>
 </div>
 </div>
-<div id="outline-container-orgb916123" class="outline-3">
-<h3 id="orgb916123"><span class="section-number-3">14.4.</span> Orienté</h3>
+<div id="outline-container-org6f0ac3b" class="outline-3">
+<h3 id="org6f0ac3b"><span class="section-number-3">14.4.</span> Orienté</h3>
 <div class="outline-text-3" id="text-14-4">
 <p>
 Un arc de cercle peut être orienté positivement ou négativement.
@@ -1767,7 +1777,7 @@ inverse des aiguilles d’une monte :
 </p>
 
 
-<div id="orgf52f782" class="figure">
+<div id="org13420dd" class="figure">
 <p><img src="tikz/arc-de-cercle-oriente-positif.svg" alt="arc-de-cercle-oriente-positif.svg" class="org-svg" width="25%" />
 </p>
 </div>
@@ -1778,25 +1788,25 @@ des aiguilles d’une monte :
 </p>
 
 
-<div id="org8853ff4" class="figure">
+<div id="org657a3af" class="figure">
 <p><img src="tikz/arc-de-cercle-oriente-negatif.svg" alt="arc-de-cercle-oriente-negatif.svg" class="org-svg" width="25%" />
 </p>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-orgf2177de" class="outline-2">
-<h2 id="orgf2177de"><span class="section-number-2">15.</span> Disque</h2>
+<div id="outline-container-org904a8ba" class="outline-2">
+<h2 id="org904a8ba"><span class="section-number-2">15.</span> Disque</h2>
 <div class="outline-text-2" id="text-15">
 <div id="text-table-of-contents-12" role="doc-toc">
 <ul>
-<li><a href="#org0a0483d">15.1. Définition</a></li>
-<li><a href="#org3fde3e3">15.2. Secteur angulaire</a></li>
+<li><a href="#orga3ab931">15.1. Définition</a></li>
+<li><a href="#org377cb68">15.2. Secteur angulaire</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org0a0483d" class="outline-3">
-<h3 id="org0a0483d"><span class="section-number-3">15.1.</span> Définition</h3>
+<div id="outline-container-orga3ab931" class="outline-3">
+<h3 id="orga3ab931"><span class="section-number-3">15.1.</span> Définition</h3>
 <div class="outline-text-3" id="text-15-1">
 <p>
 Un disque \(\mathscr{D}\) de centre \(O\) et de rayon \(r\) est l’ensemble
@@ -1804,7 +1814,7 @@ des points situé sur ou à l’intérieur du cercle \(\mathscr{C}(O,r)\) :
 </p>
 
 
-<div id="org4cbf021" class="figure">
+<div id="orgbaa530c" class="figure">
 <p><img src="tikz/disque.svg" alt="disque.svg" class="org-svg" width="25%" />
 </p>
 </div>
@@ -1826,8 +1836,8 @@ Si \(\Pi\) est le plan dans lequel le disque \(\mathscr{D}\) est tracé, on a :
 </p>
 </div>
 </div>
-<div id="outline-container-org3fde3e3" class="outline-3">
-<h3 id="org3fde3e3"><span class="section-number-3">15.2.</span> Secteur angulaire</h3>
+<div id="outline-container-org377cb68" class="outline-3">
+<h3 id="org377cb68"><span class="section-number-3">15.2.</span> Secteur angulaire</h3>
 <div class="outline-text-3" id="text-15-2">
 <p>
 Un secteur angulaire est un ensemble de point compris entre :
@@ -1844,7 +1854,7 @@ Le schéma suivant représente un secteur angulaire \(\mathscr{S}\) :
 </p>
 
 
-<div id="orgd89bbfc" class="figure">
+<div id="orgbf55697" class="figure">
 <p><img src="tikz/secteur-angulaire.svg" alt="secteur-angulaire.svg" class="org-svg" width="25%" />
 </p>
 </div>
@@ -1859,7 +1869,7 @@ sont inclus dans le secteur angulaire.
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2026-07-02 jeu 15:52</p>
+<p class="date">Created: 2026-09-23 mer 16:16</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2026-07-02 jeu 15:52 -->
+<!-- 2026-09-23 mer 16:15 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Calcul variationnel</title>
@@ -56,6 +56,7 @@
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
   pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -70,7 +71,7 @@
   pre.src-haskell:before { content: 'Haskell'; }
   pre.src-hledger:before { content: 'hledger'; }
   pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
+  pre.src-js:before { content: 'JavaScript'; }
   pre.src-latex:before { content: 'LaTeX'; }
   pre.src-ledger:before { content: 'Ledger'; }
   pre.src-lisp:before { content: 'Lisp'; }
@@ -249,21 +250,30 @@ line-height: 1.2;
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org48ae265">1. Méthode des variations</a></li>
-<li><a href="#orge9e0f62">2. Discrétisation</a></li>
-<li><a href="#orged11735">3. Moindres carrés</a></li>
-<li><a href="#orga6b4098">4. Lax-Milgram</a></li>
-<li><a href="#orgdf74e14">5. Valeurs propres</a></li>
+<li><a href="#org7a4d000">1. Méthode des variations</a></li>
+<li><a href="#org8d4ba96">2. Discrétisation</a></li>
+<li><a href="#org94c67d9">3. Moindres carrés</a></li>
+<li><a href="#orgd2b0425">4. Lax-Milgram</a></li>
+<li><a href="#org2095cd0">5. Valeurs propres</a></li>
 </ul>
 </div>
 </div>
 
 <script>
 MathJax = {
+  loader: { load: [
+            '[tex]/mathtools',
+            '[tex]/braket',
+  ], },
   tex: {
+    packages: {'[+]': [
+      'base',
+      'ams',
+      'braket',
+      'mathtools',
+    ]},
     inlineMath: [['$', '$'], ['\\(', '\\)']],
     displayMath: [['\\[','\\]']],
-    packages: {'[+]': ['base','ams','braket']},
     processEscapes: true,
     tags: 'ams',
     macros: {
@@ -425,8 +435,8 @@ MathJax = {
 <p>
 \label{chap:varia}
 </p>
-<div id="outline-container-org48ae265" class="outline-2">
-<h2 id="org48ae265"><span class="section-number-2">1.</span> Méthode des variations</h2>
+<div id="outline-container-org7a4d000" class="outline-2">
+<h2 id="org7a4d000"><span class="section-number-2">1.</span> Méthode des variations</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Soit l'espace fonctionnel \(\mathcal{F}\) et la forme \(I : \mathcal{F} \mapsto \setR\). Un problème variationnel consiste à chercher une fonction \(u\) qui minimise \(I\) sur \(\mathcal{F}\) :
@@ -473,8 +483,8 @@ Ces équations nous permettent de caractériser la solution \(u\) de notre probl
 </p>
 </div>
 </div>
-<div id="outline-container-orge9e0f62" class="outline-2">
-<h2 id="orge9e0f62"><span class="section-number-2">2.</span> Discrétisation</h2>
+<div id="outline-container-org8d4ba96" class="outline-2">
+<h2 id="org8d4ba96"><span class="section-number-2">2.</span> Discrétisation</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Une technique couramment employée pour résoudre les problèmes variationnels
@@ -494,8 +504,8 @@ au sens de la distance \(\distance\) définie sur \(\mathcal{F}\). Pour toute pr
 </p>
 </div>
 </div>
-<div id="outline-container-orged11735" class="outline-2">
-<h2 id="orged11735"><span class="section-number-2">3.</span> Moindres carrés</h2>
+<div id="outline-container-org94c67d9" class="outline-2">
+<h2 id="org94c67d9"><span class="section-number-2">3.</span> Moindres carrés</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Soit \(f : A \mapsto \setR\) et le sous-ensemble \(\mathcal{F} \subseteq \fonction(A,\setR)\). On cherche la fonction \(u \in \mathcal{F}\) qui se rapproche le plus possible de \(f\) au sens intégral des moindres carrés. On cherche donc le \(u\) qui minimise la fonctionnelle :
@@ -541,8 +551,8 @@ donc :
 pour tout \(v \in F\).
 </p>
 </div>
-<div id="outline-container-orgf47fec9" class="outline-3">
-<h3 id="orgf47fec9"><span class="section-number-3">3.1.</span> Discrétisation</h3>
+<div id="outline-container-org30c7ae2" class="outline-3">
+<h3 id="org30c7ae2"><span class="section-number-3">3.1.</span> Discrétisation</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 On résout approximativement ce problème en posant :
@@ -612,8 +622,8 @@ et nous en déduisons notre approximation \(u_n = \sum_i U_i \cdot \varphi_i\).
 </div>
 </div>
 </div>
-<div id="outline-container-orga6b4098" class="outline-2">
-<h2 id="orga6b4098"><span class="section-number-2">4.</span> Lax-Milgram</h2>
+<div id="outline-container-orgd2b0425" class="outline-2">
+<h2 id="orgd2b0425"><span class="section-number-2">4.</span> Lax-Milgram</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Soit un espace fonctionnel de Hilbert \(\mathcal{F}\). Nous considérons une forme bilinéaire \(a : \mathcal{F} \times \mathcal{F} \mapsto \setR\), de norme finie, coercive et symétrique :
@@ -717,8 +727,8 @@ On a donc :
 \[u = \arg\min_{ v \in \mathcal{F} } I(v)\]
 </p>
 </div>
-<div id="outline-container-org6317003" class="outline-3">
-<h3 id="org6317003"><span class="section-number-3">4.1.</span> Orthogonalité</h3>
+<div id="outline-container-org9eb507f" class="outline-3">
+<h3 id="org9eb507f"><span class="section-number-3">4.1.</span> Orthogonalité</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Soit le sous-espace vectoriel \(\mathcal{G} \subseteq \mathcal{F}\) et :
@@ -773,8 +783,8 @@ ce qui prouve que :
 </p>
 </div>
 </div>
-<div id="outline-container-orgf33d3f4" class="outline-3">
-<h3 id="orgf33d3f4"><span class="section-number-3">4.2.</span> Borne inférieure</h3>
+<div id="outline-container-org55598d4" class="outline-3">
+<h3 id="org55598d4"><span class="section-number-3">4.2.</span> Borne inférieure</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Comme \(a\) est coercive, on peut trouver un réel \(\varrho \strictsuperieur 0\) tel que :
@@ -874,8 +884,8 @@ Ce résultat étant valable pour tout \(v \in \mathcal{F}\), on a la borne infé
 </p>
 </div>
 </div>
-<div id="outline-container-orgffd804d" class="outline-3">
-<h3 id="orgffd804d"><span class="section-number-3">4.3.</span> Discrétisation</h3>
+<div id="outline-container-orgc0d47a2" class="outline-3">
+<h3 id="orgc0d47a2"><span class="section-number-3">4.3.</span> Discrétisation</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 Afin de trouver une approximation \(u_n \approx u\), on pose :
@@ -937,8 +947,8 @@ ce qui nous donne \(U\) et donc \(u_n\).
 </div>
 </div>
 </div>
-<div id="outline-container-orgdf74e14" class="outline-2">
-<h2 id="orgdf74e14"><span class="section-number-2">5.</span> Valeurs propres</h2>
+<div id="outline-container-org2095cd0" class="outline-2">
+<h2 id="org2095cd0"><span class="section-number-2">5.</span> Valeurs propres</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Soit un espace vectoriel \(E\) et les formes bilinéaires \(a,b : E \times E \mapsto \setR\). Nous supposons que \(a,b\) sont symétriques et définies positives. Nous allons tenter de minimiser la fonctionnelle :
@@ -1050,8 +1060,8 @@ que cela donne un rapport de Rayleigh généralisé :
 \[\lambda = \frac{\biforme{w}{a}{u}}{\biforme{w}{b}{u}}\]
 </p>
 </div>
-<div id="outline-container-org662529c" class="outline-3">
-<h3 id="org662529c"><span class="section-number-3">5.1.</span> Propriétés extrémales</h3>
+<div id="outline-container-orgc27fc86" class="outline-3">
+<h3 id="orgc27fc86"><span class="section-number-3">5.1.</span> Propriétés extrémales</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 Si nous choisissons \(w = u\), nous obtenons :
@@ -1070,8 +1080,8 @@ La valeur propre est donc la valeur minimale de \(I\) sur \(\Omega\) :
 </p>
 </div>
 </div>
-<div id="outline-container-org96360c2" class="outline-3">
-<h3 id="org96360c2"><span class="section-number-3">5.2.</span> Rapport de Rayleigh</h3>
+<div id="outline-container-orgbde270a" class="outline-3">
+<h3 id="orgbde270a"><span class="section-number-3">5.2.</span> Rapport de Rayleigh</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 Supposons que \(b\) soit strictement définie positive. Posons \(x = \alpha \cdot u\), pour un certain \(\alpha \in \setR\) non nul. On a \(\biforme{x}{a}{x} = \alpha^2 \cdot \biforme{u}{a}{u}\) et \(\biforme{x}{b}{x} = \alpha^2 \cdot \biforme{u}{b}{u} = \alpha^2\). Donc :
@@ -1126,8 +1136,8 @@ Comme \(\Omega \subseteq F\), on en conclut que la réciproque est vraie : si \
 </p>
 </div>
 </div>
-<div id="outline-container-org09ddd81" class="outline-3">
-<h3 id="org09ddd81"><span class="section-number-3">5.3.</span> Suite de vecteurs propres</h3>
+<div id="outline-container-org94cce78" class="outline-3">
+<h3 id="org94cce78"><span class="section-number-3">5.3.</span> Suite de vecteurs propres</h3>
 <div class="outline-text-3" id="text-5-3">
 <p>
 On peut en fait définir une suite de vecteurs et de valeurs propres. Soit \(\Omega_1 = \Omega\) et \(e_1 = u\). On pose récursivement :
@@ -1150,8 +1160,8 @@ On aura alors bien sûr \(\Omega_{n + 1} \subseteq \Omega_n \subseteq ... \Omega
 </p>
 </div>
 </div>
-<div id="outline-container-orgddc45bd" class="outline-3">
-<h3 id="orgddc45bd"><span class="section-number-3">5.4.</span> Discrétisation</h3>
+<div id="outline-container-orge7a284b" class="outline-3">
+<h3 id="orge7a284b"><span class="section-number-3">5.4.</span> Discrétisation</h3>
 <div class="outline-text-3" id="text-5-4">
 <p>
 On pose :
@@ -1267,7 +1277,7 @@ U^\dual \cdot U = 1
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2026-07-02 jeu 15:52</p>
+<p class="date">Created: 2026-09-23 mer 16:15</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

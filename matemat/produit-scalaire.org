@@ -24,11 +24,6 @@
 
 \label{chap:ps}
 
-* Dépendances
-
-  - Chapitre \ref{chap:vecteur} : Les espaces vectoriels
-  - Chapitre \ref{chap:norme} : Les normes
-
 * Introduction
 
 Soit $E$ un espace vectoriel sur $\corps$ et une famille de fonctions linéaires $\phi_u \in E^\dual$ où $u \in E$ est un paramètre vectoriel. Nous pouvons écrire :
@@ -39,29 +34,35 @@ pour tout $u,v \in E$. Cette expression introduit implicitement le produit déri
 
 $$\scalaire{u}{v} = \forme{\phi_u}{v}$$
 
-pour tout $u,v \in E$. Ce produit hérite bien entendu la linéarité à droite de la forme associée :
+pour tout $u,v \in E$. Ce produit hérite bien entendu la
+[[file:formes-lineaires.org::#heading:bilinearite][bilinéarité]]
+de la forme associée :
 
-$$\scalaire{u}{\alpha \cdot v + \beta \cdot w}  = \alpha \cdot \scalaire{u}{v} + \beta \cdot \scalaire{u}{w}$$
+$$\scalaire{w}{\alpha \cdot u + \beta \cdot v}  = \alpha \cdot
+\scalaire{w}{u} + \beta \cdot \scalaire{w}{v}$$ $$\scalaire{\alpha
+\cdot u + \beta \cdot v}{w}  = \alpha \cdot \scalaire{u}{w} + \beta
+\cdot \scalaire{v}{w}$$
 
-pour tout $u,v,w \in E$ et pour tout $\alpha,\beta \in \corps$.
-
-Les produits scalaires sont des cas particuliers de ce type de produit.
-
-
-** Notation
-
-On note aussi le produit scalaire sous forme de point :
-
-$$u \cdot v = \scalaire{u}{v}$$
+pour tout $\alpha,\beta \in \corps$ et pour tout $u,v \in E$.
 
 * Produit scalaire réel
 
-Considérons le cas particulier où $\corps = \setR$. et un produit linéaire à droite $\scalaire{}{} : E \times E \mapsto \setR$. Nous voudrions en plus que la valeur de $\scalaire{u}{u}$ en chaque $u \in E$ puisse représenter la norme de $u$. Nous imposons donc la positivité :
+Considérons le cas particulier où $\corps = \setR$. Un produit scalaire
+réel est un produit bilinéaire $\scalaire{}{} : E \times E \mapsto
+\setR$ :
+
+$$\scalaire{w}{\alpha \cdot u + \beta \cdot v}  = \alpha \cdot \scalaire{w}{u} + \beta \cdot \scalaire{w}{v}$$
+
+$$\scalaire{\alpha \cdot u + \beta \cdot v}{w}  = \alpha \cdot \scalaire{u}{w} + \beta \cdot \scalaire{v}{w}$$
+
+pour tout $\alpha,\beta \in \setR$ et $u,v,w \in E$. Nous imposons en plus
+que la valeur de $\scalaire{u}{u}$ en chaque $u \in E$ puisse représenter
+le carré de la norme de $u$. Nous imposons donc la positivité :
 
 $$\scalaire{u}{u} \ge 0$$
 
-Pour compléter le caractère strictement défini positif, on impose
-également que le seul élément $u \in E$ vérifiant :
+La norme étant un cas particulier de distance, on impose également
+que le seul élément $u \in E$ vérifiant :
 
 $$\scalaire{u}{u} = 0$$
 
@@ -71,33 +72,31 @@ $$\scalaire{u}{u} > 0$$
 
 pour tout $u \in E \setminus \{ 0 \}$.
 
-Si on peut également interchanger n'importe quels $u,v \in E$ sans changer le résultat :
+Enfin, le produit scalaire est symétrique, c’est-à-dire qu’on peut
+interchanger n'importe quels $u,v \in E$ sans modifier le résultat :
 
 $$\scalaire{u}{v} = \scalaire{v}{u}$$
 
-on dit que $\scalaire{}{}$ est un produit scalaire réel sur $E$.
+** Notation
 
-Nous déduisons directement de la linéarité à droite et de la symétrie que :
+Dans le cas de vecteurs géométriques, on note aussi le produit scalaire
+sous forme de point :
 
-$$\scalaire{\alpha \cdot u + \beta \cdot v}{w} = \alpha \cdot \scalaire{u}{w} + \beta \cdot \scalaire{v}{w}$$
-
-pour tout $\alpha,\beta \in \setR$ et $u,v,w \in E$. Le produit scalaire réel est bilinéaire.
-
+$$u \cdot v = \scalaire{u}{v}$$
 
 * Produit scalaire complexe
 
-Examinons à présent le cas $\corps = \setC$. On demande qu'un produit scalaire $\scalaire{}{} : E \times E \mapsto \setC$ soit strictement défini positif. Pour cela, les valeurs de $\scalaire{u}{u}$ doivent être réelles et positives :
+Examinons à présent le cas $\corps = \setC$. On demande qu'un produit
+scalaire $\scalaire{}{} : E \times E \mapsto \setC$ soit strictement
+défini positif. Pour cela, les valeurs de $\scalaire{u}{u}$ doivent
+être réelles et positives :
 
-#+BEGIN_CENTER
-\(
-\scalaire{u}{u} \in \setR \)
+$$ \scalaire{u}{u} \in \setR
+\qquad \qquad \qquad
+\scalaire{u}{u} \ge 0 $$
 
-\(
-\scalaire{u}{u} \ge 0
-\)
-#+END_CENTER
-
-pour tout $u \in E$. Ensuite, il faut également que le seul élément $u \in E$ vérifiant :
+pour tout $u \in E$. Ensuite, il faut également que le seul élément
+$u \in E$ vérifiant :
 
 $$\scalaire{u}{u} = 0$$
 
@@ -107,29 +106,39 @@ Le caractère réel de $\scalaire{u}{u}$ implique que :
 
 $$\scalaire{u}{u} = \conjaccent{\scalaire{u}{u}}$$
 
-où la barre supérieure désigne comme d'habitude le complexe conjugué. Cette constatation nous mène à une variante de la symétrie. On impose :
+où la barre supérieure désigne comme d'habitude le complexe
+conjugué. Cette constatation nous mène à une variante de la
+symétrie. On impose :
 
 $$\scalaire{u}{v} = \conjaccent{\scalaire{v}{u}}$$
 
-pour tout $u,v \in E$. On dit que le produit scalaire complexe est hermitien.
+pour tout $u,v \in E$. On dit que le produit scalaire complexe est
+hermitien.
 
 La linéarité à droite s'exprime simplement par :
 
-$$\scalaire{u}{\alpha \cdot v + \beta \cdot w}  = \alpha \cdot \scalaire{u}{v} + \beta \cdot \scalaire{u}{w}$$
+$$ \scalaire{w}{\alpha \cdot u + \beta \cdot v} =
+\alpha \cdot \scalaire{w}{u} + \beta \cdot \scalaire{w}{v} $$
 
-pour tout $u,v,w \in E$ et pour tout $\alpha,\beta \in \setC$. On déduit de la linéarité et du caractère hermitien du produit scalaire complexe que :
+pour tout $\alpha,\beta \in \setC$ et pour tout $u,v,w \in E$. On déduit
+de cette linéarité et du caractère hermitien du produit scalaire
+complexe que :
 
-\begin{align}
-\scalaire{\alpha \cdot u + \beta \cdot v}{w}  &= \conjaccent{\scalaire{w}{\alpha \cdot u + \beta \cdot v}} \\
+\begin{align*}
+\scalaire{\alpha \cdot u + \beta \cdot v}{w}
+&= \conjaccent{\scalaire{w}{\alpha \cdot u + \beta \cdot v}} \\
 &= \conjaccent{\alpha} \cdot \conjaccent{\scalaire{w}{u}} + \conjaccent{\beta} \cdot \conjaccent{\scalaire{w}{v}}
-\end{align}
+\end{align*}
 
 et finalement :
 
-$$\scalaire{\alpha \cdot u + \beta \cdot v}{w} = \conjaccent{\alpha} \cdot \scalaire{u}{w} + \conjaccent{\beta} \cdot \scalaire{v}{w}$$
+$$ \scalaire{\alpha \cdot u + \beta \cdot v}{w} =
+\conjaccent{\alpha} \cdot \scalaire{u}{w} + \conjaccent{\beta} \cdot \scalaire{v}{w}$$
 
-On dit que le produit scalaire est antilinéaire à gauche.
+On dit que le produit scalaire complexe est :
 
+- antilinéaire ou semi-linéaire à gauche
+- une forme sesquilinéaire (linéaire et demie)
 
 ** Corollaire
 
@@ -230,8 +239,8 @@ $$u = \sum_{i = 1}^n \frac{\scalaire{e_i}{u}}{\scalaire{e_i}{e_i}} \cdot e_i$$
 
 ** Indépendance linéaire
 
-On peut voir que si une suite de vecteurs $e_i$ est orthogonale,
-(ils ne forment pas forcément une base) ils sont toujours linéairement
+On peut voir que si une suite de vecteurs $e_i$ est orthogonale (ils
+ne forment pas forcément une base), ils sont toujours linéairement
 indépendant. En effet si les scalaires $a_i$, sont tels que :
 
 $$\sum_{i=1}^n a_i \cdot e_i = 0$$
@@ -274,8 +283,8 @@ $$u = \sum_{i = 1}^n \scalaire{e_i}{u} \cdot e_i$$
 
 ** Indépendance linéaire
 
-On peut voir que si une suite de vecteurs $e_i$ est orthonormée,
-(ils ne forment pas forcément une base) ils sont toujours linéairement
+On peut voir que si une suite de vecteurs $e_i$ est orthonormée (ils
+ne forment pas forcément une base), ils sont toujours linéairement
 indépendant. En effet si les scalaires $a_i$, sont tels que :
 
 $$\sum_{i=1}^n a_i \cdot e_i = 0$$
@@ -408,10 +417,10 @@ Le membre de droite n'est rien d'autre que le produit « matriciel » $\conjac
 
 $$\scalaire{x}{y} = \conjaccent{x^T} \cdot y$$
 
-On vérifie que la base $(e_1,...,e_n)$ est orthonormée pour ce produit scalaire :
+On vérifie que la base canonique $(\canonique_1,...,\canonique_n)$ est orthonormée pour
+ce produit scalaire :
 
-$$e_i^T \cdot e_j = \indicatrice_{ij}$$
-
+$$\canonique_i^T \cdot \canonique_j = \indicatrice_{ij}$$
 
 * Application linéaire
 
@@ -433,7 +442,7 @@ Soit un espace vectoriel $E$ sur $\corps$ et un produit scalaire $\scalaire{}{}$
 \)
 #+END_CENTER
 
-pour certains $x_i,y_i \in S$. Or, nous avons vu que :
+pour certains $x_i,y_i \in \corps$. Or, nous avons vu que :
 
 $$\scalaire{\hat{x}}{\hat{y}} = \sum_{i,j} \conjaccent{x}_i \scalaire{e_i}{e_j} y_j$$
 

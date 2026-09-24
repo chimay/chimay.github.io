@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2026-07-02 jeu 15:53 -->
+<!-- 2026-09-24 jeu 18:00 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Produit scalaire</title>
@@ -56,6 +56,7 @@
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
   pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -70,7 +71,7 @@
   pre.src-haskell:before { content: 'Haskell'; }
   pre.src-hledger:before { content: 'hledger'; }
   pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
+  pre.src-js:before { content: 'JavaScript'; }
   pre.src-latex:before { content: 'LaTeX'; }
   pre.src-ledger:before { content: 'Ledger'; }
   pre.src-lisp:before { content: 'Lisp'; }
@@ -249,34 +250,42 @@ line-height: 1.2;
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgd189c4c">1. Dépendances</a></li>
-<li><a href="#org4e55e89">2. Introduction</a></li>
-<li><a href="#orga482232">3. Produit scalaire réel</a></li>
-<li><a href="#org3e81896">4. Produit scalaire complexe</a></li>
-<li><a href="#orgf5e4adb">5. Espace orthogonal</a></li>
-<li><a href="#org4201a3f">6. Egalité</a></li>
-<li><a href="#org33c5dcf">7. Base orthogonale</a></li>
-<li><a href="#org29ff682">8. Base orthonormée</a></li>
-<li><a href="#org591f5fb">9. Produit scalaire et coordonnées</a></li>
-<li><a href="#org44a8d18">10. Application définie positive</a></li>
-<li><a href="#orgf6be80a">11. Produit scalaire sur \(\setR^n\)</a></li>
-<li><a href="#org2f2382d">12. Produit scalaire sur \(\setC^n\)</a></li>
-<li><a href="#org4c4d1de">13. Base orthonormée sur \(\corps^n\)</a></li>
-<li><a href="#orgbca9133">14. Représentation matricielle</a></li>
-<li><a href="#org6dc6a7c">15. Application linéaire</a></li>
-<li><a href="#org623a149">16. Matrice de produit scalaire</a></li>
-<li><a href="#orgbe9bdcc">17. Bases de vecteurs colonnes</a></li>
-<li><a href="#orge0e2bce">18. Noyau</a></li>
+<li><a href="#orgb541007">1. Introduction</a></li>
+<li><a href="#org940afff">2. Produit scalaire réel</a></li>
+<li><a href="#org73d7b73">3. Produit scalaire complexe</a></li>
+<li><a href="#orgfb98593">4. Espace orthogonal</a></li>
+<li><a href="#orga6906d7">5. Egalité</a></li>
+<li><a href="#org54b3c5c">6. Base orthogonale</a></li>
+<li><a href="#org9853607">7. Base orthonormée</a></li>
+<li><a href="#org3f3524e">8. Produit scalaire et coordonnées</a></li>
+<li><a href="#orge475efd">9. Application définie positive</a></li>
+<li><a href="#org9e5bcbe">10. Produit scalaire sur \(\setR^n\)</a></li>
+<li><a href="#orgfe385de">11. Produit scalaire sur \(\setC^n\)</a></li>
+<li><a href="#org3094e15">12. Base orthonormée sur \(\corps^n\)</a></li>
+<li><a href="#orgcfa35d9">13. Représentation matricielle</a></li>
+<li><a href="#org34e9935">14. Application linéaire</a></li>
+<li><a href="#orgfd62c94">15. Matrice de produit scalaire</a></li>
+<li><a href="#org2e51c06">16. Bases de vecteurs colonnes</a></li>
+<li><a href="#org61ee530">17. Noyau</a></li>
 </ul>
 </div>
 </div>
 
 <script>
 MathJax = {
+  loader: { load: [
+            '[tex]/mathtools',
+            '[tex]/braket',
+  ], },
   tex: {
+    packages: {'[+]': [
+      'base',
+      'ams',
+      'braket',
+      'mathtools',
+    ]},
     inlineMath: [['$', '$'], ['\\(', '\\)']],
     displayMath: [['\\[','\\]']],
-    packages: {'[+]': ['base','ams','braket']},
     processEscapes: true,
     tags: 'ams',
     macros: {
@@ -438,18 +447,9 @@ MathJax = {
 <p>
 \label{chap:ps}
 </p>
-<div id="outline-container-orgd189c4c" class="outline-2">
-<h2 id="orgd189c4c"><span class="section-number-2">1.</span> Dépendances</h2>
+<div id="outline-container-orgb541007" class="outline-2">
+<h2 id="orgb541007"><span class="section-number-2">1.</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
-<ul class="org-ul">
-<li>Chapitre \ref{chap:vecteur} : Les espaces vectoriels</li>
-<li>Chapitre \ref{chap:norme} : Les normes</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-org4e55e89" class="outline-2">
-<h2 id="org4e55e89"><span class="section-number-2">2.</span> Introduction</h2>
-<div class="outline-text-2" id="text-2">
 <p>
 Soit \(E\) un espace vectoriel sur \(\corps\) et une famille de fonctions linéaires \(\phi_u \in E^\dual\) où \(u \in E\) est un paramètre vectoriel. Nous pouvons écrire :
 </p>
@@ -467,39 +467,44 @@ pour tout \(u,v \in E\). Cette expression introduit implicitement le produit dé
 </p>
 
 <p>
-pour tout \(u,v \in E\). Ce produit hérite bien entendu la linéarité à droite de la forme associée :
+pour tout \(u,v \in E\). Ce produit hérite bien entendu la
+<a href="formes-lineaires.html#heading:bilinearite">bilinéarité</a>
+de la forme associée :
 </p>
 
 <p>
-\[\scalaire{u}{\alpha \cdot v + \beta \cdot w}  = \alpha \cdot \scalaire{u}{v} + \beta \cdot \scalaire{u}{w}\]
+\[\scalaire{w}{\alpha \cdot u + \beta \cdot v}  = \alpha \cdot
+\scalaire{w}{u} + \beta \cdot \scalaire{w}{v}\] \[\scalaire{\alpha
+\cdot u + \beta \cdot v}{w}  = \alpha \cdot \scalaire{u}{w} + \beta
+\cdot \scalaire{v}{w}\]
 </p>
 
 <p>
-pour tout \(u,v,w \in E\) et pour tout \(\alpha,\beta \in \corps\).
+pour tout \(\alpha,\beta \in \corps\) et pour tout \(u,v \in E\).
+</p>
+</div>
+</div>
+<div id="outline-container-org940afff" class="outline-2">
+<h2 id="org940afff"><span class="section-number-2">2.</span> Produit scalaire réel</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Considérons le cas particulier où \(\corps = \setR\). Un produit scalaire
+réel est un produit bilinéaire \(\scalaire{}{} : E \times E \mapsto
+\setR\) :
 </p>
 
 <p>
-Les produits scalaires sont des cas particuliers de ce type de produit.
-</p>
-</div>
-<div id="outline-container-org85612f8" class="outline-3">
-<h3 id="org85612f8"><span class="section-number-3">2.1.</span> Notation</h3>
-<div class="outline-text-3" id="text-2-1">
-<p>
-On note aussi le produit scalaire sous forme de point :
+\[\scalaire{w}{\alpha \cdot u + \beta \cdot v}  = \alpha \cdot \scalaire{w}{u} + \beta \cdot \scalaire{w}{v}\]
 </p>
 
 <p>
-\[u \cdot v = \scalaire{u}{v}\]
+\[\scalaire{\alpha \cdot u + \beta \cdot v}{w}  = \alpha \cdot \scalaire{u}{w} + \beta \cdot \scalaire{v}{w}\]
 </p>
-</div>
-</div>
-</div>
-<div id="outline-container-orga482232" class="outline-2">
-<h2 id="orga482232"><span class="section-number-2">3.</span> Produit scalaire réel</h2>
-<div class="outline-text-2" id="text-3">
+
 <p>
-Considérons le cas particulier où \(\corps = \setR\). et un produit linéaire à droite \(\scalaire{}{} : E \times E \mapsto \setR\). Nous voudrions en plus que la valeur de \(\scalaire{u}{u}\) en chaque \(u \in E\) puisse représenter la norme de \(u\). Nous imposons donc la positivité :
+pour tout \(\alpha,\beta \in \setR\) et \(u,v,w \in E\). Nous imposons en plus
+que la valeur de \(\scalaire{u}{u}\) en chaque \(u \in E\) puisse représenter
+le carré de la norme de \(u\). Nous imposons donc la positivité :
 </p>
 
 <p>
@@ -507,8 +512,8 @@ Considérons le cas particulier où \(\corps = \setR\). et un produit linéaire 
 </p>
 
 <p>
-Pour compléter le caractère strictement défini positif, on impose
-également que le seul élément \(u \in E\) vérifiant :
+La norme étant un cas particulier de distance, on impose également
+que le seul élément \(u \in E\) vérifiant :
 </p>
 
 <p>
@@ -528,52 +533,47 @@ pour tout \(u \in E \setminus \{ 0 \}\).
 </p>
 
 <p>
-Si on peut également interchanger n'importe quels \(u,v \in E\) sans changer le résultat :
+Enfin, le produit scalaire est symétrique, c’est-à-dire qu’on peut
+interchanger n'importe quels \(u,v \in E\) sans modifier le résultat :
 </p>
 
 <p>
 \[\scalaire{u}{v} = \scalaire{v}{u}\]
 </p>
-
+</div>
+<div id="outline-container-orgba6fca1" class="outline-3">
+<h3 id="orgba6fca1"><span class="section-number-3">2.1.</span> Notation</h3>
+<div class="outline-text-3" id="text-2-1">
 <p>
-on dit que \(\scalaire{}{}\) est un produit scalaire réel sur \(E\).
+Dans le cas de vecteurs géométriques, on note aussi le produit scalaire
+sous forme de point :
 </p>
 
 <p>
-Nous déduisons directement de la linéarité à droite et de la symétrie que :
-</p>
-
-<p>
-\[\scalaire{\alpha \cdot u + \beta \cdot v}{w} = \alpha \cdot \scalaire{u}{w} + \beta \cdot \scalaire{v}{w}\]
-</p>
-
-<p>
-pour tout \(\alpha,\beta \in \setR\) et \(u,v,w \in E\). Le produit scalaire réel est bilinéaire.
+\[u \cdot v = \scalaire{u}{v}\]
 </p>
 </div>
 </div>
-<div id="outline-container-org3e81896" class="outline-2">
-<h2 id="org3e81896"><span class="section-number-2">4.</span> Produit scalaire complexe</h2>
-<div class="outline-text-2" id="text-4">
-<p>
-Examinons à présent le cas \(\corps = \setC\). On demande qu'un produit scalaire \(\scalaire{}{} : E \times E \mapsto \setC\) soit strictement défini positif. Pour cela, les valeurs de \(\scalaire{u}{u}\) doivent être réelles et positives :
-</p>
-
-<div class="org-center">
-<p>
-\(
-\scalaire{u}{u} \in \setR \)
-</p>
-
-<p>
-\(
-\scalaire{u}{u} \ge 0
-\)
-</p>
 </div>
+<div id="outline-container-org73d7b73" class="outline-2">
+<h2 id="org73d7b73"><span class="section-number-2">3.</span> Produit scalaire complexe</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Examinons à présent le cas \(\corps = \setC\). On demande qu'un produit
+scalaire \(\scalaire{}{} : E \times E \mapsto \setC\) soit strictement
+défini positif. Pour cela, les valeurs de \(\scalaire{u}{u}\) doivent
+être réelles et positives :
+</p>
 
 <p>
-pour tout \(u \in E\). Ensuite, il faut également que le seul élément \(u \in E\) vérifiant :
+\[ \scalaire{u}{u} \in \setR
+\qquad \qquad \qquad
+\scalaire{u}{u} \ge 0 \]
+</p>
+
+<p>
+pour tout \(u \in E\). Ensuite, il faut également que le seul élément
+\(u \in E\) vérifiant :
 </p>
 
 <p>
@@ -593,7 +593,9 @@ Le caractère réel de \(\scalaire{u}{u}\) implique que :
 </p>
 
 <p>
-où la barre supérieure désigne comme d'habitude le complexe conjugué. Cette constatation nous mène à une variante de la symétrie. On impose :
+où la barre supérieure désigne comme d'habitude le complexe
+conjugué. Cette constatation nous mène à une variante de la
+symétrie. On impose :
 </p>
 
 <p>
@@ -601,7 +603,8 @@ où la barre supérieure désigne comme d'habitude le complexe conjugué. Cette 
 </p>
 
 <p>
-pour tout \(u,v \in E\). On dit que le produit scalaire complexe est hermitien.
+pour tout \(u,v \in E\). On dit que le produit scalaire complexe est
+hermitien.
 </p>
 
 <p>
@@ -609,33 +612,43 @@ La linéarité à droite s'exprime simplement par :
 </p>
 
 <p>
-\[\scalaire{u}{\alpha \cdot v + \beta \cdot w}  = \alpha \cdot \scalaire{u}{v} + \beta \cdot \scalaire{u}{w}\]
+\[ \scalaire{w}{\alpha \cdot u + \beta \cdot v} =
+\alpha \cdot \scalaire{w}{u} + \beta \cdot \scalaire{w}{v} \]
 </p>
 
 <p>
-pour tout \(u,v,w \in E\) et pour tout \(\alpha,\beta \in \setC\). On déduit de la linéarité et du caractère hermitien du produit scalaire complexe que :
+pour tout \(\alpha,\beta \in \setC\) et pour tout \(u,v,w \in E\). On déduit
+de cette linéarité et du caractère hermitien du produit scalaire
+complexe que :
 </p>
 
-\begin{align}
-\scalaire{\alpha \cdot u + \beta \cdot v}{w}  &= \conjaccent{\scalaire{w}{\alpha \cdot u + \beta \cdot v}} \\
+\begin{align*}
+\scalaire{\alpha \cdot u + \beta \cdot v}{w}
+&= \conjaccent{\scalaire{w}{\alpha \cdot u + \beta \cdot v}} \\
 &= \conjaccent{\alpha} \cdot \conjaccent{\scalaire{w}{u}} + \conjaccent{\beta} \cdot \conjaccent{\scalaire{w}{v}}
-\end{align}
+\end{align*}
 
 <p>
 et finalement :
 </p>
 
 <p>
-\[\scalaire{\alpha \cdot u + \beta \cdot v}{w} = \conjaccent{\alpha} \cdot \scalaire{u}{w} + \conjaccent{\beta} \cdot \scalaire{v}{w}\]
+\[ \scalaire{\alpha \cdot u + \beta \cdot v}{w} =
+\conjaccent{\alpha} \cdot \scalaire{u}{w} + \conjaccent{\beta} \cdot \scalaire{v}{w}\]
 </p>
 
 <p>
-On dit que le produit scalaire est antilinéaire à gauche.
+On dit que le produit scalaire complexe est :
 </p>
+
+<ul class="org-ul">
+<li>antilinéaire ou semi-linéaire à gauche</li>
+<li>une forme sesquilinéaire (linéaire et demie)</li>
+</ul>
 </div>
-<div id="outline-container-org7d8e46d" class="outline-3">
-<h3 id="org7d8e46d"><span class="section-number-3">4.1.</span> Corollaire</h3>
-<div class="outline-text-3" id="text-4-1">
+<div id="outline-container-org45d83d2" class="outline-3">
+<h3 id="org45d83d2"><span class="section-number-3">3.1.</span> Corollaire</h3>
+<div class="outline-text-3" id="text-3-1">
 <p>
 En particulier, si \(u,v,w,x\) sont des vecteurs de \(E\) et
 si \(\alpha = \scalaire{u}{v} \in \setC\), on a :
@@ -655,22 +668,22 @@ si \(\alpha = \scalaire{u}{v} \in \setC\), on a :
 </div>
 </div>
 </div>
-<div id="outline-container-orgdc2e05e" class="outline-3">
-<h3 id="orgdc2e05e"><span class="section-number-3">4.2.</span> Cas particulier</h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-org649f953" class="outline-3">
+<h3 id="org649f953"><span class="section-number-3">3.2.</span> Cas particulier</h3>
+<div class="outline-text-3" id="text-3-2">
 <p>
 Comme \(\conjaccent{x} = x\) pour tout \(x \in \setR \subseteq \setC\), on peut considérer le produit scalaire réel comme un cas particulier de produit scalaire complexe.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgf5e4adb" class="outline-2">
-<h2 id="orgf5e4adb"><span class="section-number-2">5.</span> Espace orthogonal</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-orgfb98593" class="outline-2">
+<h2 id="orgfb98593"><span class="section-number-2">4.</span> Espace orthogonal</h2>
+<div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-org5f9f0c0" class="outline-3">
-<h3 id="org5f9f0c0"><span class="section-number-3">5.1.</span> A un vecteur</h3>
-<div class="outline-text-3" id="text-5-1">
+<div id="outline-container-org53f4a61" class="outline-3">
+<h3 id="org53f4a61"><span class="section-number-3">4.1.</span> A un vecteur</h3>
+<div class="outline-text-3" id="text-4-1">
 <p>
 Soit \(x \in H\). On définit l'ensemble \(x^\orthogonal\) par :
 </p>
@@ -684,9 +697,9 @@ On dit des vecteurs de \(x^\orthogonal\) qu'ils sont orthogonaux à \(x\).
 </p>
 </div>
 </div>
-<div id="outline-container-orgbb1b4bc" class="outline-3">
-<h3 id="orgbb1b4bc"><span class="section-number-3">5.2.</span> A un ensemble</h3>
-<div class="outline-text-3" id="text-5-2">
+<div id="outline-container-org75ea2f3" class="outline-3">
+<h3 id="org75ea2f3"><span class="section-number-3">4.2.</span> A un ensemble</h3>
+<div class="outline-text-3" id="text-4-2">
 <p>
 Pour tout sous-ensemble \(V \subseteq E\), l'ensemble orthogonal à \(V\) est l'ensemble des vecteurs qui sont orthogonaux à tous les éléments de \(V\) :
 </p>
@@ -713,9 +726,9 @@ ce qui montre que \(\alpha \cdot x + \beta \cdot y \in V^\orthogonal\).
 </div>
 </div>
 </div>
-<div id="outline-container-org4201a3f" class="outline-2">
-<h2 id="org4201a3f"><span class="section-number-2">6.</span> Egalité</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-orga6906d7" class="outline-2">
+<h2 id="orga6906d7"><span class="section-number-2">5.</span> Egalité</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 Si \(u,v \in E\) sont tels que :
 </p>
@@ -745,9 +758,9 @@ ce qui implique \(u - v = 0\) et donc \(u = v\).
 </p>
 </div>
 </div>
-<div id="outline-container-org33c5dcf" class="outline-2">
-<h2 id="org33c5dcf"><span class="section-number-2">7.</span> Base orthogonale</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-org54b3c5c" class="outline-2">
+<h2 id="org54b3c5c"><span class="section-number-2">6.</span> Base orthogonale</h2>
+<div class="outline-text-2" id="text-6">
 <p>
 Une base \((e_1,...,e_n)\) de \(E\) est dite orthogonale si le produit
 scalaire de deux vecteurs \(e_i \ne e_j\) s'annule :
@@ -757,9 +770,9 @@ scalaire de deux vecteurs \(e_i \ne e_j\) s'annule :
 \[\scalaire{e_i}{e_j} = \indicatrice_{ij} \scalaire{e_i}{e_i}\]
 </p>
 </div>
-<div id="outline-container-org2ffa003" class="outline-3">
-<h3 id="org2ffa003"><span class="section-number-3">7.1.</span> Coordonnées</h3>
-<div class="outline-text-3" id="text-7-1">
+<div id="outline-container-org7b42cdc" class="outline-3">
+<h3 id="org7b42cdc"><span class="section-number-3">6.1.</span> Coordonnées</h3>
+<div class="outline-text-3" id="text-6-1">
 <p>
 Soit \(u \in E\) de coordonnée \(u_i \in \corps\) :
 </p>
@@ -804,12 +817,12 @@ On peut donc écrire :
 </p>
 </div>
 </div>
-<div id="outline-container-orgc9838a4" class="outline-3">
-<h3 id="orgc9838a4"><span class="section-number-3">7.2.</span> Indépendance linéaire</h3>
-<div class="outline-text-3" id="text-7-2">
+<div id="outline-container-org23edc0f" class="outline-3">
+<h3 id="org23edc0f"><span class="section-number-3">6.2.</span> Indépendance linéaire</h3>
+<div class="outline-text-3" id="text-6-2">
 <p>
-On peut voir que si une suite de vecteurs \(e_i\) est orthogonale,
-(ils ne forment pas forcément une base) ils sont toujours linéairement
+On peut voir que si une suite de vecteurs \(e_i\) est orthogonale (ils
+ne forment pas forcément une base), ils sont toujours linéairement
 indépendant. En effet si les scalaires \(a_i\), sont tels que :
 </p>
 
@@ -827,9 +840,9 @@ on a alors :
 </div>
 </div>
 </div>
-<div id="outline-container-org29ff682" class="outline-2">
-<h2 id="org29ff682"><span class="section-number-2">8.</span> Base orthonormée</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-org9853607" class="outline-2">
+<h2 id="org9853607"><span class="section-number-2">7.</span> Base orthonormée</h2>
+<div class="outline-text-2" id="text-7">
 <p>
 Une base \((e_1,...,e_n)\) de \(E\) est dite orthonormée si le produit scalaire de deux vecteurs \(e_i \ne e_j\) s'annule, tandis que le produit scalaire d'un \(e_i\) avec lui-même donne l'unité :
 </p>
@@ -838,9 +851,9 @@ Une base \((e_1,...,e_n)\) de \(E\) est dite orthonormée si le produit scalaire
 \[\scalaire{e_i}{e_j} = \indicatrice_{ij}\]
 </p>
 </div>
-<div id="outline-container-org692ff42" class="outline-3">
-<h3 id="org692ff42"><span class="section-number-3">8.1.</span> Coordonnées</h3>
-<div class="outline-text-3" id="text-8-1">
+<div id="outline-container-org1a734a5" class="outline-3">
+<h3 id="org1a734a5"><span class="section-number-3">7.1.</span> Coordonnées</h3>
+<div class="outline-text-3" id="text-7-1">
 <p>
 Soit \(u \in E\) de coordonnée \(u_i \in \corps\) :
 </p>
@@ -883,12 +896,12 @@ On peut donc écrire :
 </p>
 </div>
 </div>
-<div id="outline-container-orgf42b4df" class="outline-3">
-<h3 id="orgf42b4df"><span class="section-number-3">8.2.</span> Indépendance linéaire</h3>
-<div class="outline-text-3" id="text-8-2">
+<div id="outline-container-orga140d44" class="outline-3">
+<h3 id="orga140d44"><span class="section-number-3">7.2.</span> Indépendance linéaire</h3>
+<div class="outline-text-3" id="text-7-2">
 <p>
-On peut voir que si une suite de vecteurs \(e_i\) est orthonormée,
-(ils ne forment pas forcément une base) ils sont toujours linéairement
+On peut voir que si une suite de vecteurs \(e_i\) est orthonormée (ils
+ne forment pas forcément une base), ils sont toujours linéairement
 indépendant. En effet si les scalaires \(a_i\), sont tels que :
 </p>
 
@@ -906,9 +919,9 @@ on a alors :
 </div>
 </div>
 </div>
-<div id="outline-container-org591f5fb" class="outline-2">
-<h2 id="org591f5fb"><span class="section-number-2">9.</span> Produit scalaire et coordonnées</h2>
-<div class="outline-text-2" id="text-9">
+<div id="outline-container-org3f3524e" class="outline-2">
+<h2 id="org3f3524e"><span class="section-number-2">8.</span> Produit scalaire et coordonnées</h2>
+<div class="outline-text-2" id="text-8">
 <p>
 Soit \((e_1,...,e_n)\) une base de \(E\) et \(u,v \in E\). On a :
 </p>
@@ -942,9 +955,9 @@ où \(\scalaire{}{} : E \times E \mapsto \setC\) est un produit scalaire complex
 \[\scalaire{u}{v} = \sum_{i,j} \conjaccent{u}_i \cdot g_{ij} \cdot v_j\]
 </p>
 </div>
-<div id="outline-container-orgcc67f7a" class="outline-3">
-<h3 id="orgcc67f7a"><span class="section-number-3">9.1.</span> Réel</h3>
-<div class="outline-text-3" id="text-9-1">
+<div id="outline-container-org35fc994" class="outline-3">
+<h3 id="org35fc994"><span class="section-number-3">8.1.</span> Réel</h3>
+<div class="outline-text-3" id="text-8-1">
 <p>
 Dans les cas d'un produit scalaire réel, on a \(\conjaccent{u}_i = u_i\) et l'expression devient :
 </p>
@@ -954,9 +967,9 @@ Dans les cas d'un produit scalaire réel, on a \(\conjaccent{u}_i = u_i\) et l'e
 </p>
 </div>
 </div>
-<div id="outline-container-org617afaa" class="outline-3">
-<h3 id="org617afaa"><span class="section-number-3">9.2.</span> Base orthonormée</h3>
-<div class="outline-text-3" id="text-9-2">
+<div id="outline-container-org14b35c7" class="outline-3">
+<h3 id="org14b35c7"><span class="section-number-3">8.2.</span> Base orthonormée</h3>
+<div class="outline-text-3" id="text-8-2">
 <p>
 Si la base \((e_1,...,e_n)\) est orthonormée, l'expression du produit scalaire se simplifie en :
 </p>
@@ -967,9 +980,9 @@ Si la base \((e_1,...,e_n)\) est orthonormée, l'expression du produit scalaire 
 </div>
 </div>
 </div>
-<div id="outline-container-org44a8d18" class="outline-2">
-<h2 id="org44a8d18"><span class="section-number-2">10.</span> Application définie positive</h2>
-<div class="outline-text-2" id="text-10">
+<div id="outline-container-orge475efd" class="outline-2">
+<h2 id="orge475efd"><span class="section-number-2">9.</span> Application définie positive</h2>
+<div class="outline-text-2" id="text-9">
 <p>
 Soit une application linéaire \(A : E \mapsto E\). Si le produit scalaire de \(u\) avec \(A(u)\) est un réel positif :
 </p>
@@ -983,9 +996,9 @@ pour tout \(u \in E\), on dit que \(A\) est définie positive.
 </p>
 </div>
 </div>
-<div id="outline-container-orgf6be80a" class="outline-2">
-<h2 id="orgf6be80a"><span class="section-number-2">11.</span> Produit scalaire sur \(\setR^n\)</h2>
-<div class="outline-text-2" id="text-11">
+<div id="outline-container-org9e5bcbe" class="outline-2">
+<h2 id="org9e5bcbe"><span class="section-number-2">10.</span> Produit scalaire sur \(\setR^n\)</h2>
+<div class="outline-text-2" id="text-10">
 <p>
 Soit \(x,y \in \setR^n\) tels que :
 </p>
@@ -1016,9 +1029,9 @@ Le produit scalaire usuel sur \(\setR^n\) est défini par :
 </p>
 </div>
 </div>
-<div id="outline-container-org2f2382d" class="outline-2">
-<h2 id="org2f2382d"><span class="section-number-2">12.</span> Produit scalaire sur \(\setC^n\)</h2>
-<div class="outline-text-2" id="text-12">
+<div id="outline-container-orgfe385de" class="outline-2">
+<h2 id="orgfe385de"><span class="section-number-2">11.</span> Produit scalaire sur \(\setC^n\)</h2>
+<div class="outline-text-2" id="text-11">
 <p>
 Soit \(x,y \in \setC^n\) tels que :
 </p>
@@ -1049,9 +1062,9 @@ Le produit scalaire usuel est défini par :
 </p>
 </div>
 </div>
-<div id="outline-container-org4c4d1de" class="outline-2">
-<h2 id="org4c4d1de"><span class="section-number-2">13.</span> Base orthonormée sur \(\corps^n\)</h2>
-<div class="outline-text-2" id="text-13">
+<div id="outline-container-org3094e15" class="outline-2">
+<h2 id="org3094e15"><span class="section-number-2">12.</span> Base orthonormée sur \(\corps^n\)</h2>
+<div class="outline-text-2" id="text-12">
 <p>
 Soit \(\corps \in \{ \setR , \setC \}\). Il est clair que la base canonique de \(\corps^n\) :
 </p>
@@ -1073,9 +1086,9 @@ pour le produit scalaire usuel sur \(\corps^n\). La suite \((e_1,...,e_n)\) form
 </p>
 </div>
 </div>
-<div id="outline-container-orgbca9133" class="outline-2">
-<h2 id="orgbca9133"><span class="section-number-2">14.</span> Représentation matricielle</h2>
-<div class="outline-text-2" id="text-14">
+<div id="outline-container-orgcfa35d9" class="outline-2">
+<h2 id="orgcfa35d9"><span class="section-number-2">13.</span> Représentation matricielle</h2>
+<div class="outline-text-2" id="text-13">
 <p>
 Soit \(x = (x_1,..,x_n) , y = (y_1,...,y_n) \in \setC^n\). On définit les vecteurs colonne associé :
 </p>
@@ -1115,17 +1128,18 @@ Le membre de droite n'est rien d'autre que le produit « matriciel » \(\conja
 </p>
 
 <p>
-On vérifie que la base \((e_1,...,e_n)\) est orthonormée pour ce produit scalaire :
+On vérifie que la base canonique \((\canonique_1,...,\canonique_n)\) est orthonormée pour
+ce produit scalaire :
 </p>
 
 <p>
-\[e_i^T \cdot e_j = \indicatrice_{ij}\]
+\[\canonique_i^T \cdot \canonique_j = \indicatrice_{ij}\]
 </p>
 </div>
 </div>
-<div id="outline-container-org6dc6a7c" class="outline-2">
-<h2 id="org6dc6a7c"><span class="section-number-2">15.</span> Application linéaire</h2>
-<div class="outline-text-2" id="text-15">
+<div id="outline-container-org34e9935" class="outline-2">
+<h2 id="org34e9935"><span class="section-number-2">14.</span> Application linéaire</h2>
+<div class="outline-text-2" id="text-14">
 <p>
 Soit les espaces vectoriels \(E,F\) sur \(\corps\) et une application linéaire \(\mathcal{A} : E \mapsto F\). On prend une base \((e_1,..,e_n)\) de \(E\) et une base orthonormée \((f_1,...,f_m)\) de \(F\). Comme les composantes de la matrice associée \(A\) sont les coordonnées de \(\mathcal{A}(e_j)\) dans la base des \(f_i\), on a :
 </p>
@@ -1135,9 +1149,9 @@ Soit les espaces vectoriels \(E,F\) sur \(\corps\) et une application linéaire 
 </p>
 </div>
 </div>
-<div id="outline-container-org623a149" class="outline-2">
-<h2 id="org623a149"><span class="section-number-2">16.</span> Matrice de produit scalaire</h2>
-<div class="outline-text-2" id="text-16">
+<div id="outline-container-orgfd62c94" class="outline-2">
+<h2 id="orgfd62c94"><span class="section-number-2">15.</span> Matrice de produit scalaire</h2>
+<div class="outline-text-2" id="text-15">
 <p>
 Soit un espace vectoriel \(E\) sur \(\corps\) et un produit scalaire \(\scalaire{}{}\) quelconque défini sur \(E\). Soit \((e_1,...,e_n)\) une base quelconque de \(E\) (nous ne supposons pas qu'elle soit orthonormée). Si \(\hat{x},\hat{y} \in E\), on a :
 </p>
@@ -1156,7 +1170,7 @@ Soit un espace vectoriel \(E\) sur \(\corps\) et un produit scalaire \(\scalaire
 </div>
 
 <p>
-pour certains \(x_i,y_i \in S\). Or, nous avons vu que :
+pour certains \(x_i,y_i \in \corps\). Or, nous avons vu que :
 </p>
 
 <p>
@@ -1200,9 +1214,9 @@ y = [y_1 \ y_2 \ ... \ y_n]^T
 Cette matrice possède d'importantes propriétés issues du produit scalaire. On a \(\conjaccent{x^T} \cdot A \cdot x > 0\) pour tout \(x \ne 0\). On dit que \(A\) est une matrice définie positive. Le caractère hermitien du produit scalaire nous donne aussi \(\conjaccent{A^T} = A\). On dit que \(A\) est une matrice hermitienne, ou auto-adjointe.
 </p>
 </div>
-<div id="outline-container-orgdbb5581" class="outline-3">
-<h3 id="orgdbb5581"><span class="section-number-3">16.1.</span> Réciproque</h3>
-<div class="outline-text-3" id="text-16-1">
+<div id="outline-container-orgbec9422" class="outline-3">
+<h3 id="orgbec9422"><span class="section-number-3">15.1.</span> Réciproque</h3>
+<div class="outline-text-3" id="text-15-1">
 <p>
 Si \(A\) est une matrice carrée définie positive et hermitienne, l'application définie par :
 </p>
@@ -1227,9 +1241,9 @@ est bien un produit scalaire. En effet, la définie positivité de la matrice es
 </div>
 </div>
 </div>
-<div id="outline-container-orgbe9bdcc" class="outline-2">
-<h2 id="orgbe9bdcc"><span class="section-number-2">17.</span> Bases de vecteurs colonnes</h2>
-<div class="outline-text-2" id="text-17">
+<div id="outline-container-org2e51c06" class="outline-2">
+<h2 id="org2e51c06"><span class="section-number-2">16.</span> Bases de vecteurs colonnes</h2>
+<div class="outline-text-2" id="text-16">
 <p>
 Un cas particulier important survient lorsque les vecteurs sont des vecteurs colonnes. Soit une suite de vecteurs linéairement indépendants \(u_1,u_2,...,u_m \in \matrice(\corps,n,1)\). Soit des \(x_i,y_i \in \corps\) et les vecteurs :
 </p>
@@ -1301,9 +1315,9 @@ On a alors :
 On en conclut que la matrice \(A = \conjaccent{U^T} \cdot U \in \matrice(\corps,m,m)\) est une matrice de produit scalaire
 </p>
 </div>
-<div id="outline-container-org3a1e7a2" class="outline-3">
-<h3 id="org3a1e7a2"><span class="section-number-3">17.1.</span> Réciproque</h3>
-<div class="outline-text-3" id="text-17-1">
+<div id="outline-container-org867c2f3" class="outline-3">
+<h3 id="org867c2f3"><span class="section-number-3">16.1.</span> Réciproque</h3>
+<div class="outline-text-3" id="text-16-1">
 <p>
 Soit \(U \in \matrice(\corps,n,m)\) telle que \(\noyau U = \{0\}\). La matrice \(A = \conjaccent{U^T} \cdot U \in \matrice(\corps,m,m)\) est une matrice de produit scalaire. En effet :
 </p>
@@ -1322,9 +1336,9 @@ Si \(x \ne 0\), on a de plus \(U \cdot x \ne 0\) et \(\conjaccent{x}^T \cdot A \
 </div>
 </div>
 </div>
-<div id="outline-container-orge0e2bce" class="outline-2">
-<h2 id="orge0e2bce"><span class="section-number-2">18.</span> Noyau</h2>
-<div class="outline-text-2" id="text-18">
+<div id="outline-container-org61ee530" class="outline-2">
+<h2 id="org61ee530"><span class="section-number-2">17.</span> Noyau</h2>
+<div class="outline-text-2" id="text-17">
 <p>
 Soit \(l_i = \ligne_i A\) et \(x \in \noyau A\). On a alors :
 </p>
@@ -1345,7 +1359,7 @@ On en conclut que les lignes de \(A\) sont orthogonales aux \(\conjaccent{l}_i\)
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2026-07-02 jeu 15:53</p>
+<p class="date">Created: 2026-09-24 jeu 18:00</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2026-07-02 jeu 15:52 -->
+<!-- 2026-09-23 mer 16:16 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Géométrie paramétrique</title>
@@ -56,6 +56,7 @@
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
   pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -70,7 +71,7 @@
   pre.src-haskell:before { content: 'Haskell'; }
   pre.src-hledger:before { content: 'hledger'; }
   pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
+  pre.src-js:before { content: 'JavaScript'; }
   pre.src-latex:before { content: 'LaTeX'; }
   pre.src-ledger:before { content: 'Ledger'; }
   pre.src-lisp:before { content: 'Lisp'; }
@@ -249,20 +250,29 @@ line-height: 1.2;
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org09f46ea">1. Courbe</a></li>
-<li><a href="#org54398a7">2. Segment</a></li>
-<li><a href="#orgaf19d23">3. Enveloppe convexe</a></li>
-<li><a href="#org2618595">4. Surface</a></li>
+<li><a href="#org0fc094c">1. Courbe</a></li>
+<li><a href="#orge99c2cf">2. Segment</a></li>
+<li><a href="#org92e42a3">3. Enveloppe convexe</a></li>
+<li><a href="#org04d40f2">4. Surface</a></li>
 </ul>
 </div>
 </div>
 
 <script>
 MathJax = {
+  loader: { load: [
+            '[tex]/mathtools',
+            '[tex]/braket',
+  ], },
   tex: {
+    packages: {'[+]': [
+      'base',
+      'ams',
+      'braket',
+      'mathtools',
+    ]},
     inlineMath: [['$', '$'], ['\\(', '\\)']],
     displayMath: [['\\[','\\]']],
-    packages: {'[+]': ['base','ams','braket']},
     processEscapes: true,
     tags: 'ams',
     macros: {
@@ -420,8 +430,8 @@ MathJax = {
   }
 };
 </script>
-<div id="outline-container-org09f46ea" class="outline-2">
-<h2 id="org09f46ea"><span class="section-number-2">1.</span> Courbe</h2>
+<div id="outline-container-org0fc094c" class="outline-2">
+<h2 id="org0fc094c"><span class="section-number-2">1.</span> Courbe</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Une courbe sur \(\setR^n\) est de la forme :
@@ -440,8 +450,8 @@ où \(\lambda : [\alpha,\beta] \mapsto E\) est une fonction continue et où \(\a
 </p>
 </div>
 </div>
-<div id="outline-container-org54398a7" class="outline-2">
-<h2 id="org54398a7"><span class="section-number-2">2.</span> Segment</h2>
+<div id="outline-container-orge99c2cf" class="outline-2">
+<h2 id="orge99c2cf"><span class="section-number-2">2.</span> Segment</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Les segments sont une généralisation des intervalles. Un segment de \(u
@@ -470,8 +480,8 @@ pour tout \(s \in [0,1] \subseteq \setR\). On voit que \(\lambda(0) = u\) et que
 </p>
 </div>
 </div>
-<div id="outline-container-orgddada49" class="outline-3">
-<h3 id="orgddada49"><span class="section-number-3">2.1.</span> Alternative</h3>
+<div id="outline-container-org49c7613" class="outline-3">
+<h3 id="org49c7613"><span class="section-number-3">2.1.</span> Alternative</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 On dispose aussi d'une définition alternative. On utilise :
@@ -503,8 +513,8 @@ On a alors \([u,v] = \sigma(L)\). On voit aussi que \(\sigma(1,0) = u\) et \(\si
 </div>
 </div>
 </div>
-<div id="outline-container-orgaf19d23" class="outline-2">
-<h2 id="orgaf19d23"><span class="section-number-2">3.</span> Enveloppe convexe</h2>
+<div id="outline-container-org92e42a3" class="outline-2">
+<h2 id="org92e42a3"><span class="section-number-2">3.</span> Enveloppe convexe</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Soit \(A \subseteq E\) et la collection des segments reliant deux points
@@ -543,16 +553,16 @@ s \cdot u + t \cdot v \in \convexe(A)
 </p>
 </div>
 </div>
-<div id="outline-container-org43db386" class="outline-3">
-<h3 id="org43db386"><span class="section-number-3">3.1.</span> Inclusion</h3>
+<div id="outline-container-org91b2d03" class="outline-3">
+<h3 id="org91b2d03"><span class="section-number-3">3.1.</span> Inclusion</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Il suffit de considérer le choix \((s,t) = (1,0)\) pour voir que tout \(u \in A\) appartient à \(\convexe(A)\). On a donc \(A \subseteq \convexe(A)\).
 </p>
 </div>
 </div>
-<div id="outline-container-orgc9b8f43" class="outline-3">
-<h3 id="orgc9b8f43"><span class="section-number-3">3.2.</span> Ensemble convexe</h3>
+<div id="outline-container-org48b87dc" class="outline-3">
+<h3 id="org48b87dc"><span class="section-number-3">3.2.</span> Ensemble convexe</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 On dit qu'un ensemble \(C \subseteq E\) est convexe si \(\convexe(C) = C\).
@@ -560,8 +570,8 @@ On dit qu'un ensemble \(C \subseteq E\) est convexe si \(\convexe(C) = C\).
 </div>
 </div>
 </div>
-<div id="outline-container-org2618595" class="outline-2">
-<h2 id="org2618595"><span class="section-number-2">4.</span> Surface</h2>
+<div id="outline-container-org04d40f2" class="outline-2">
+<h2 id="org04d40f2"><span class="section-number-2">4.</span> Surface</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Une surface de \(E\) est de la forme :
@@ -583,7 +593,7 @@ où \(\varphi : [a,b] \times [c,d] \mapsto E\) est une fonction continue et où 
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2026-07-02 jeu 15:52</p>
+<p class="date">Created: 2026-09-23 mer 16:16</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

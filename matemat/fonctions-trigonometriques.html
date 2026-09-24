@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2026-07-02 jeu 15:52 -->
+<!-- 2026-09-23 mer 16:16 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Fonctions trigonometriques</title>
@@ -56,6 +56,7 @@
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
   pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -70,7 +71,7 @@
   pre.src-haskell:before { content: 'Haskell'; }
   pre.src-hledger:before { content: 'hledger'; }
   pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
+  pre.src-js:before { content: 'JavaScript'; }
   pre.src-latex:before { content: 'LaTeX'; }
   pre.src-ledger:before { content: 'Ledger'; }
   pre.src-lisp:before { content: 'Lisp'; }
@@ -249,29 +250,38 @@ line-height: 1.2;
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org734ca8c">1. Dépendances</a></li>
-<li><a href="#org55b5ead">2. Introduction</a></li>
-<li><a href="#org37f7d98">3. Angle nul</a></li>
-<li><a href="#orge2098e7">4. Produit scalaire</a></li>
-<li><a href="#org4b4b1aa">5. Différentielle</a></li>
-<li><a href="#orgaa66778">6. Additivité</a></li>
-<li><a href="#org3329270">7. Dérivées</a></li>
-<li><a href="#orge92687a">8. Équations différentielles</a></li>
-<li><a href="#orgb9c3833">9. Racines</a></li>
-<li><a href="#org192b9c1">10. Périodicité</a></li>
-<li><a href="#orgf58060a">11. Angle double</a></li>
-<li><a href="#orgd011bd6">12. Intégrale</a></li>
-<li><a href="#orgc5f9ace">13. Tangente</a></li>
+<li><a href="#org56da4bd">1. Dépendances</a></li>
+<li><a href="#org95e216c">2. Introduction</a></li>
+<li><a href="#orgea4706b">3. Angle nul</a></li>
+<li><a href="#orgcb7b37d">4. Produit scalaire</a></li>
+<li><a href="#org6ff8f30">5. Différentielle</a></li>
+<li><a href="#org81f4475">6. Additivité</a></li>
+<li><a href="#org7be8577">7. Dérivées</a></li>
+<li><a href="#orgf4b0d04">8. Équations différentielles</a></li>
+<li><a href="#orga63957f">9. Racines</a></li>
+<li><a href="#org9f55158">10. Périodicité</a></li>
+<li><a href="#orgfe6a7e7">11. Angle double</a></li>
+<li><a href="#org44d3a28">12. Intégrale</a></li>
+<li><a href="#orgd5d58e1">13. Tangente</a></li>
 </ul>
 </div>
 </div>
 
 <script>
 MathJax = {
+  loader: { load: [
+            '[tex]/mathtools',
+            '[tex]/braket',
+  ], },
   tex: {
+    packages: {'[+]': [
+      'base',
+      'ams',
+      'braket',
+      'mathtools',
+    ]},
     inlineMath: [['$', '$'], ['\\(', '\\)']],
     displayMath: [['\\[','\\]']],
-    packages: {'[+]': ['base','ams','braket']},
     processEscapes: true,
     tags: 'ams',
     macros: {
@@ -429,16 +439,16 @@ MathJax = {
   }
 };
 </script>
-<div id="outline-container-org734ca8c" class="outline-2">
-<h2 id="org734ca8c"><span class="section-number-2">1.</span> Dépendances</h2>
+<div id="outline-container-org56da4bd" class="outline-2">
+<h2 id="org56da4bd"><span class="section-number-2">1.</span> Dépendances</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:complexe} : Les complexes</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org55b5ead" class="outline-2">
-<h2 id="org55b5ead"><span class="section-number-2">2.</span> Introduction</h2>
+<div id="outline-container-org95e216c" class="outline-2">
+<h2 id="org95e216c"><span class="section-number-2">2.</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Les fonctions trigonométriques cosinus (\(\cos\)), sinus (\(\sin\)) et associées peuvent se définir
@@ -455,8 +465,8 @@ qui associe à chaque valeur de l'angle de rotation \(\theta \in \setR\) une mat
 </p>
 </div>
 </div>
-<div id="outline-container-org37f7d98" class="outline-2">
-<h2 id="org37f7d98"><span class="section-number-2">3.</span> Angle nul</h2>
+<div id="outline-container-orgea4706b" class="outline-2">
+<h2 id="orgea4706b"><span class="section-number-2">3.</span> Angle nul</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Il semble logique de demander qu'une rotation d'angle \(0\) d'un vecteur ne modifie pas ce vecteur, c'est-à-dire :
@@ -467,8 +477,8 @@ Il semble logique de demander qu'une rotation d'angle \(0\) d'un vecteur ne modi
 </p>
 </div>
 </div>
-<div id="outline-container-orge2098e7" class="outline-2">
-<h2 id="orge2098e7"><span class="section-number-2">4.</span> Produit scalaire</h2>
+<div id="outline-container-orgcb7b37d" class="outline-2">
+<h2 id="orgcb7b37d"><span class="section-number-2">4.</span> Produit scalaire</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Une rotation doit conserver les angles entre les vecteurs, ainsi que leur norme. Autrement dit, le produit scalaire sur \(\setR^2\) :
@@ -584,8 +594,8 @@ avec :
 </p>
 </div>
 </div>
-<div id="outline-container-org81517ae" class="outline-3">
-<h3 id="org81517ae"><span class="section-number-3">4.1.</span> Relation fondamentale et bornes</h3>
+<div id="outline-container-orgfd2cc6e" class="outline-3">
+<h3 id="orgfd2cc6e"><span class="section-number-3">4.1.</span> Relation fondamentale et bornes</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Soit \(x \in \setR\). Comme les fonctions \(\cos\) et \(\sin\) sont à valeurs dans \(\setR\), on a :
@@ -642,8 +652,8 @@ On en déduit les bornes :
 </div>
 </div>
 </div>
-<div id="outline-container-org4b4b1aa" class="outline-2">
-<h2 id="org4b4b1aa"><span class="section-number-2">5.</span> Différentielle</h2>
+<div id="outline-container-org6ff8f30" class="outline-2">
+<h2 id="org6ff8f30"><span class="section-number-2">5.</span> Différentielle</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Posons \(x = \cos(\theta)\) et \(y = \sin(\theta)\). En différentiant la condition :
@@ -812,8 +822,8 @@ ou :
 </p>
 </div>
 </div>
-<div id="outline-container-orgaa66778" class="outline-2">
-<h2 id="orgaa66778"><span class="section-number-2">6.</span> Additivité</h2>
+<div id="outline-container-org81f4475" class="outline-2">
+<h2 id="org81f4475"><span class="section-number-2">6.</span> Additivité</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Une rotation d'angle \(\theta_1\) suivie d'une rotation d'angle \(\theta_2\) doit
@@ -902,8 +912,8 @@ les formules suivantes :
 </div>
 </div>
 </div>
-<div id="outline-container-org3329270" class="outline-2">
-<h2 id="org3329270"><span class="section-number-2">7.</span> Dérivées</h2>
+<div id="outline-container-org7be8577" class="outline-2">
+<h2 id="org7be8577"><span class="section-number-2">7.</span> Dérivées</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 La dérivée de la fonction \(\cos\) s'écrit :
@@ -971,8 +981,8 @@ On a donc :
 </div>
 </div>
 </div>
-<div id="outline-container-orge92687a" class="outline-2">
-<h2 id="orge92687a"><span class="section-number-2">8.</span> Équations différentielles</h2>
+<div id="outline-container-orgf4b0d04" class="outline-2">
+<h2 id="orgf4b0d04"><span class="section-number-2">8.</span> Équations différentielles</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 La dérivée seconde de la fonction \(\cos\) s'écrit :
@@ -1039,8 +1049,8 @@ vérifié pour tout \(t \in \setR\).
 </p>
 </div>
 </div>
-<div id="outline-container-orgb9c3833" class="outline-2">
-<h2 id="orgb9c3833"><span class="section-number-2">9.</span> Racines</h2>
+<div id="outline-container-orga63957f" class="outline-2">
+<h2 id="orga63957f"><span class="section-number-2">9.</span> Racines</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 Nous allons maintenant nous occuper du problème des éventuelles racines
@@ -1262,8 +1272,8 @@ tel que \(u(\psi) = 0\). Donc :
 </p>
 </div>
 </div>
-<div id="outline-container-org192b9c1" class="outline-2">
-<h2 id="org192b9c1"><span class="section-number-2">10.</span> Périodicité</h2>
+<div id="outline-container-org9f55158" class="outline-2">
+<h2 id="org9f55158"><span class="section-number-2">10.</span> Périodicité</h2>
 <div class="outline-text-2" id="text-10">
 <p>
 Nous allons à présent montrer d'importantes propriétés de périodicité des fonctions trigonométriques. Considérons la plus petite racine positive de \(u\) :
@@ -1403,8 +1413,8 @@ u(4\psi) = 1 \qquad v(4\psi) = 0
 </p>
 </div>
 </div>
-<div id="outline-container-org29fa5a2" class="outline-3">
-<h3 id="org29fa5a2"><span class="section-number-3">10.1.</span> Extension</h3>
+<div id="outline-container-org3bffb03" class="outline-3">
+<h3 id="org3bffb03"><span class="section-number-3">10.1.</span> Extension</h3>
 <div class="outline-text-3" id="text-10-1">
 <p>
 Donc \(u(4\psi) = u(0)\) et \(v(4\psi) = v(0)\). On en déduit
@@ -1480,8 +1490,8 @@ pour tout \(k\in\setZ\).
 </div>
 </div>
 </div>
-<div id="outline-container-orgf58060a" class="outline-2">
-<h2 id="orgf58060a"><span class="section-number-2">11.</span> Angle double</h2>
+<div id="outline-container-orgfe6a7e7" class="outline-2">
+<h2 id="orgfe6a7e7"><span class="section-number-2">11.</span> Angle double</h2>
 <div class="outline-text-2" id="text-11">
 <p>
 L'additivité nous donne :
@@ -1499,8 +1509,8 @@ On a donc :
 \[\cos(2 \ x) = \cos(x)^2 - \sin(x)^2\]
 </p>
 </div>
-<div id="outline-container-org7549689" class="outline-3">
-<h3 id="org7549689"><span class="section-number-3">11.1.</span> Alternative</h3>
+<div id="outline-container-org27e0b5f" class="outline-3">
+<h3 id="org27e0b5f"><span class="section-number-3">11.1.</span> Alternative</h3>
 <div class="outline-text-3" id="text-11-1">
 <p>
 En utilisant :
@@ -1527,8 +1537,8 @@ et :
 </p>
 </div>
 </div>
-<div id="outline-container-orgab28171" class="outline-3">
-<h3 id="orgab28171"><span class="section-number-3">11.2.</span> Relations inverses</h3>
+<div id="outline-container-org9031b76" class="outline-3">
+<h3 id="org9031b76"><span class="section-number-3">11.2.</span> Relations inverses</h3>
 <div class="outline-text-3" id="text-11-2">
 <p>
 Il est aisé d'inverser ces deux relations, on a :
@@ -1548,8 +1558,8 @@ et :
 </div>
 </div>
 </div>
-<div id="outline-container-orgd011bd6" class="outline-2">
-<h2 id="orgd011bd6"><span class="section-number-2">12.</span> Intégrale</h2>
+<div id="outline-container-org44d3a28" class="outline-2">
+<h2 id="org44d3a28"><span class="section-number-2">12.</span> Intégrale</h2>
 <div class="outline-text-2" id="text-12">
 <p>
 Comme \(\sin\) est une primitive de \(\cos\), on a :
@@ -1576,8 +1586,8 @@ ou :
 </p>
 </div>
 </div>
-<div id="outline-container-orgc5f9ace" class="outline-2">
-<h2 id="orgc5f9ace"><span class="section-number-2">13.</span> Tangente</h2>
+<div id="outline-container-orgd5d58e1" class="outline-2">
+<h2 id="orgd5d58e1"><span class="section-number-2">13.</span> Tangente</h2>
 <div class="outline-text-2" id="text-13">
 <p>
 La tangente \(\tan\) est définie par :
@@ -1591,8 +1601,8 @@ La tangente \(\tan\) est définie par :
 pour tout \(x \in \setR\).
 </p>
 </div>
-<div id="outline-container-org2f19a3a" class="outline-3">
-<h3 id="org2f19a3a"><span class="section-number-3">13.1.</span> Dérivée</h3>
+<div id="outline-container-org7c1e2c7" class="outline-3">
+<h3 id="org7c1e2c7"><span class="section-number-3">13.1.</span> Dérivée</h3>
 <div class="outline-text-3" id="text-13-1">
 <p>
 On a :
@@ -1603,8 +1613,8 @@ On a :
 </p>
 </div>
 </div>
-<div id="outline-container-org1671a71" class="outline-3">
-<h3 id="org1671a71"><span class="section-number-3">13.2.</span> Problème différentiel</h3>
+<div id="outline-container-orgf3573bc" class="outline-3">
+<h3 id="orgf3573bc"><span class="section-number-3">13.2.</span> Problème différentiel</h3>
 <div class="outline-text-3" id="text-13-2">
 <p>
 Comme :
@@ -1634,7 +1644,7 @@ vérifié pour tout \(t \in \setR\).
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2026-07-02 jeu 15:52</p>
+<p class="date">Created: 2026-09-23 mer 16:16</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

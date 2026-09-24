@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2026-07-02 jeu 15:53 -->
+<!-- 2026-09-23 mer 16:16 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Matrices unitaires</title>
@@ -56,6 +56,7 @@
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
   pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -70,7 +71,7 @@
   pre.src-haskell:before { content: 'Haskell'; }
   pre.src-hledger:before { content: 'hledger'; }
   pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
+  pre.src-js:before { content: 'JavaScript'; }
   pre.src-latex:before { content: 'LaTeX'; }
   pre.src-ledger:before { content: 'Ledger'; }
   pre.src-lisp:before { content: 'Lisp'; }
@@ -249,20 +250,29 @@ line-height: 1.2;
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org230d06e">1. Conservation du produit scalaire</a></li>
-<li><a href="#org2a19e85">2. Matrices élémentaires unitaires</a></li>
-<li><a href="#org3759bb2">3. Matrices de Householder</a></li>
-<li><a href="#org2fe473c">4. Décomposition de Householder</a></li>
+<li><a href="#orgf1804c6">1. Conservation du produit scalaire</a></li>
+<li><a href="#org46f99e8">2. Matrices élémentaires unitaires</a></li>
+<li><a href="#org28c8535">3. Matrices de Householder</a></li>
+<li><a href="#orgb6b3a02">4. Décomposition de Householder</a></li>
 </ul>
 </div>
 </div>
 
 <script>
 MathJax = {
+  loader: { load: [
+            '[tex]/mathtools',
+            '[tex]/braket',
+  ], },
   tex: {
+    packages: {'[+]': [
+      'base',
+      'ams',
+      'braket',
+      'mathtools',
+    ]},
     inlineMath: [['$', '$'], ['\\(', '\\)']],
     displayMath: [['\\[','\\]']],
-    packages: {'[+]': ['base','ams','braket']},
     processEscapes: true,
     tags: 'ams',
     macros: {
@@ -424,8 +434,8 @@ MathJax = {
 <p>
 \label{chap:unitaire}
 </p>
-<div id="outline-container-org230d06e" class="outline-2">
-<h2 id="org230d06e"><span class="section-number-2">1.</span> Conservation du produit scalaire</h2>
+<div id="outline-container-orgf1804c6" class="outline-2">
+<h2 id="orgf1804c6"><span class="section-number-2">1.</span> Conservation du produit scalaire</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Les matrices unitaires sont une généralisation des rotations. Or, la propriété essentielle d'une rotation est qu'elle conserve les distances. Comme les distances usuelles découlent des normes usuelles, elles-mêmes dérivées du produit scalaire, on impose que ce soit le produit scalaire qui soit conservé. On veut donc que :
@@ -455,8 +465,8 @@ On en conclut que :
 Si cette condition est vérifiée, on dit que \(U\) est une matrice unitaire.
 </p>
 </div>
-<div id="outline-container-orgdab58ef" class="outline-3">
-<h3 id="orgdab58ef"><span class="section-number-3">1.1.</span> Norme</h3>
+<div id="outline-container-org106b8f6" class="outline-3">
+<h3 id="org106b8f6"><span class="section-number-3">1.1.</span> Norme</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 La conservation de la norme usuelle \(\norme{x} = \sqrt{\scalaire{x}{x} }\) découle de celle du produit scalaire. Si \(U\) est unitaire, on a donc \(\norme{U \cdot x} = \norme{x}\).
@@ -464,8 +474,8 @@ La conservation de la norme usuelle \(\norme{x} = \sqrt{\scalaire{x}{x} }\) déc
 </div>
 </div>
 </div>
-<div id="outline-container-org2a19e85" class="outline-2">
-<h2 id="org2a19e85"><span class="section-number-2">2.</span> Matrices élémentaires unitaires</h2>
+<div id="outline-container-org46f99e8" class="outline-2">
+<h2 id="org46f99e8"><span class="section-number-2">2.</span> Matrices élémentaires unitaires</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Soit la matrice élémentaire :
@@ -526,8 +536,8 @@ On les note :
 \[\matunitaire(u) = I - \frac{2}{u^\dual \cdot u} \cdot u \cdot u^\dual\]
 </p>
 </div>
-<div id="outline-container-orgfbc62b2" class="outline-3">
-<h3 id="orgfbc62b2"><span class="section-number-3">2.1.</span> Propriétés</h3>
+<div id="outline-container-orgf20d8cb" class="outline-3">
+<h3 id="orgf20d8cb"><span class="section-number-3">2.1.</span> Propriétés</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 On a donc \(U^\dual \cdot U = I\). Comme \(U\) est carrée, on a également \(U^{-1} = U^\dual\). On voit également que :
@@ -543,8 +553,8 @@ On en conclut que \(U^{-1} = U\).
 </div>
 </div>
 </div>
-<div id="outline-container-org3759bb2" class="outline-2">
-<h2 id="org3759bb2"><span class="section-number-2">3.</span> Matrices de Householder</h2>
+<div id="outline-container-org28c8535" class="outline-2">
+<h2 id="org28c8535"><span class="section-number-2">3.</span> Matrices de Householder</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Soit deux vecteurs \(x,y \in \corps^n\). On aimerait bien trouver une matrice élémentaire unitaire \(U\) telle que \(U \cdot x \approx y\). Par analogie avec les matrices de transformation élémentaire, on pose \(u = x - y\) et \(U = \matunitaire(u)\). On a alors :
@@ -604,8 +614,8 @@ où :
 Le vecteur \(U \cdot x\) est donc identique à \(y\) à un scalaire près.
 </p>
 </div>
-<div id="outline-container-orgc07bf76" class="outline-3">
-<h3 id="orgc07bf76"><span class="section-number-3">3.1.</span> Base canonique</h3>
+<div id="outline-container-org40e9cbd" class="outline-3">
+<h3 id="org40e9cbd"><span class="section-number-3">3.1.</span> Base canonique</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Un cas particulier intéressant est celui où \(y\) est proportionnel au \(i^{eme}\) vecteur de la base canonique :
@@ -678,8 +688,8 @@ pour un certain \(\gamma \in \setC\).
 </div>
 </div>
 </div>
-<div id="outline-container-org2fe473c" class="outline-2">
-<h2 id="org2fe473c"><span class="section-number-2">4.</span> Décomposition de Householder</h2>
+<div id="outline-container-orgb6b3a02" class="outline-2">
+<h2 id="orgb6b3a02"><span class="section-number-2">4.</span> Décomposition de Householder</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Soit une matrice \(A\) de taille \((m,n)\) et le partitionnement en colonnes :
@@ -889,7 +899,7 @@ où \(Q\) est une matrice unitaire et \(R\) une matrice triangulaire supérieure
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2026-07-02 jeu 15:53</p>
+<p class="date">Created: 2026-09-23 mer 16:16</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

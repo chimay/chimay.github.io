@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2026-07-02 jeu 15:53 -->
+<!-- 2026-09-23 mer 16:16 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Opérations</title>
@@ -56,6 +56,7 @@
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
   pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -70,7 +71,7 @@
   pre.src-haskell:before { content: 'Haskell'; }
   pre.src-hledger:before { content: 'hledger'; }
   pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
+  pre.src-js:before { content: 'JavaScript'; }
   pre.src-latex:before { content: 'LaTeX'; }
   pre.src-ledger:before { content: 'Ledger'; }
   pre.src-lisp:before { content: 'Lisp'; }
@@ -249,24 +250,33 @@ line-height: 1.2;
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org270f044">1. Dépendances</a></li>
-<li><a href="#orgb16647f">2. Introduction</a></li>
-<li><a href="#orgbd4cad2">3. Neutre</a></li>
-<li><a href="#org955ba39">4. Inverse</a></li>
-<li><a href="#org96623fe">5. Associativité</a></li>
-<li><a href="#org9a94531">6. Commutativité</a></li>
-<li><a href="#org9266772">7. Distributivité</a></li>
-<li><a href="#orgb33404e">8. Opération induite</a></li>
+<li><a href="#orgd61c901">1. Dépendances</a></li>
+<li><a href="#orgb554f7f">2. Introduction</a></li>
+<li><a href="#orgcb9dc2e">3. Neutre</a></li>
+<li><a href="#org706bbea">4. Inverse</a></li>
+<li><a href="#org9907051">5. Associativité</a></li>
+<li><a href="#org7e065a1">6. Commutativité</a></li>
+<li><a href="#orgbcff0e9">7. Distributivité</a></li>
+<li><a href="#org5100555">8. Opération induite</a></li>
 </ul>
 </div>
 </div>
 
 <script>
 MathJax = {
+  loader: { load: [
+            '[tex]/mathtools',
+            '[tex]/braket',
+  ], },
   tex: {
+    packages: {'[+]': [
+      'base',
+      'ams',
+      'braket',
+      'mathtools',
+    ]},
     inlineMath: [['$', '$'], ['\\(', '\\)']],
     displayMath: [['\\[','\\]']],
-    packages: {'[+]': ['base','ams','braket']},
     processEscapes: true,
     tags: 'ams',
     macros: {
@@ -428,16 +438,16 @@ MathJax = {
 <p>
 \label{chap:operations}
 </p>
-<div id="outline-container-org270f044" class="outline-2">
-<h2 id="org270f044"><span class="section-number-2">1.</span> Dépendances</h2>
+<div id="outline-container-orgd61c901" class="outline-2">
+<h2 id="orgd61c901"><span class="section-number-2">1.</span> Dépendances</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:fonctions} : Les fonctions</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgb16647f" class="outline-2">
-<h2 id="orgb16647f"><span class="section-number-2">2.</span> Introduction</h2>
+<div id="outline-container-orgb554f7f" class="outline-2">
+<h2 id="orgb554f7f"><span class="section-number-2">2.</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Soit un ensemble \(\Omega\). Une opération \(\opera\) sur \(\Omega\), ou loi de composition interne sur \(\Omega\), est une fonction qui, à deux éléments de \(\Omega\), associe un troisième élément de \(\Omega\) appelé résultat. On a donc formellement :
@@ -456,12 +466,12 @@ Si \(z \in \Omega\) est le résultat de l'opération \(\opera\) sur \(x,y \in \O
 </p>
 </div>
 </div>
-<div id="outline-container-orgbd4cad2" class="outline-2">
-<h2 id="orgbd4cad2"><span class="section-number-2">3.</span> Neutre</h2>
+<div id="outline-container-orgcb9dc2e" class="outline-2">
+<h2 id="orgcb9dc2e"><span class="section-number-2">3.</span> Neutre</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org2574a5e" class="outline-3">
-<h3 id="org2574a5e"><span class="section-number-3">3.1.</span> À gauche</h3>
+<div id="outline-container-orgd7d8639" class="outline-3">
+<h3 id="orgd7d8639"><span class="section-number-3">3.1.</span> À gauche</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 On dit qu'un élément \(n \in \Omega\) est neutre à gauche pour la loi \(\opera\) si :
@@ -476,8 +486,8 @@ pour tout \(x \in \Omega\).
 </p>
 </div>
 </div>
-<div id="outline-container-orgdc753de" class="outline-3">
-<h3 id="orgdc753de"><span class="section-number-3">3.2.</span> À droite</h3>
+<div id="outline-container-org5d87b4b" class="outline-3">
+<h3 id="org5d87b4b"><span class="section-number-3">3.2.</span> À droite</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 On dit qu'un élément \(n \in \Omega\) est neutre à droite pour la loi \(\opera\) si :
@@ -492,8 +502,8 @@ pour tout \(x \in \Omega\).
 </p>
 </div>
 </div>
-<div id="outline-container-org11e74d4" class="outline-3">
-<h3 id="org11e74d4"><span class="section-number-3">3.3.</span> Simultané</h3>
+<div id="outline-container-org6823d48" class="outline-3">
+<h3 id="org6823d48"><span class="section-number-3">3.3.</span> Simultané</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 On dit qu'un élément \(n \in \Omega\) est neutre pour la loi \(\opera\) si :
@@ -508,8 +518,8 @@ pour tout \(x \in \Omega\).
 </p>
 </div>
 </div>
-<div id="outline-container-orgd6645d1" class="outline-3">
-<h3 id="orgd6645d1"><span class="section-number-3">3.4.</span> Unicité</h3>
+<div id="outline-container-org71d6946" class="outline-3">
+<h3 id="org71d6946"><span class="section-number-3">3.4.</span> Unicité</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 Si \(m,n \in \Omega\) sont des éléments neutres pour \(\opera\), on a :
@@ -525,15 +535,15 @@ Si un neutre existe, il est unique.
 </div>
 </div>
 </div>
-<div id="outline-container-org955ba39" class="outline-2">
-<h2 id="org955ba39"><span class="section-number-2">4.</span> Inverse</h2>
+<div id="outline-container-org706bbea" class="outline-2">
+<h2 id="org706bbea"><span class="section-number-2">4.</span> Inverse</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Supposons que \(n \in \Omega\) soit l'unique neutre pour la loi \(\opera\).
 </p>
 </div>
-<div id="outline-container-org067390d" class="outline-3">
-<h3 id="org067390d"><span class="section-number-3">4.1.</span> À gauche</h3>
+<div id="outline-container-orgfa25d3f" class="outline-3">
+<h3 id="orgfa25d3f"><span class="section-number-3">4.1.</span> À gauche</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 On dit qu'un élément \(y \in \Omega\) est un inverse à gauche de \(x \in \Omega\) pour la loi \(\opera\) si :
@@ -544,8 +554,8 @@ On dit qu'un élément \(y \in \Omega\) est un inverse à gauche de \(x \in \Ome
 </p>
 </div>
 </div>
-<div id="outline-container-orgdbc80f0" class="outline-3">
-<h3 id="orgdbc80f0"><span class="section-number-3">4.2.</span> À droite</h3>
+<div id="outline-container-orgde53aeb" class="outline-3">
+<h3 id="orgde53aeb"><span class="section-number-3">4.2.</span> À droite</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 On dit qu'un élément \(y \in \Omega\) est un inverse à droite de \(x \in \Omega\) pour la loi \(\opera\) si :
@@ -556,8 +566,8 @@ On dit qu'un élément \(y \in \Omega\) est un inverse à droite de \(x \in \Ome
 </p>
 </div>
 </div>
-<div id="outline-container-orgce969c4" class="outline-3">
-<h3 id="orgce969c4"><span class="section-number-3">4.3.</span> Simultané</h3>
+<div id="outline-container-org0bce8b4" class="outline-3">
+<h3 id="org0bce8b4"><span class="section-number-3">4.3.</span> Simultané</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 On dit qu'un élément \(x^\inverse \in \Omega\) est l'inverse de \(x \in
@@ -570,8 +580,8 @@ On dit qu'un élément \(x^\inverse \in \Omega\) est l'inverse de \(x \in
 </div>
 </div>
 </div>
-<div id="outline-container-org96623fe" class="outline-2">
-<h2 id="org96623fe"><span class="section-number-2">5.</span> Associativité</h2>
+<div id="outline-container-org9907051" class="outline-2">
+<h2 id="org9907051"><span class="section-number-2">5.</span> Associativité</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 On dit que \(\opera\) est associative si :
@@ -589,16 +599,16 @@ pour tout \(x,y,z \in \Omega\). On définit alors :
 \[x \opera y \opera z = x \opera (y \opera z) = (x \opera y) \opera z\]
 </p>
 </div>
-<div id="outline-container-org6d7580e" class="outline-3">
-<h3 id="org6d7580e"><span class="section-number-3">5.1.</span> Extension</h3>
+<div id="outline-container-org0c1107f" class="outline-3">
+<h3 id="org0c1107f"><span class="section-number-3">5.1.</span> Extension</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 Soit \(x_1,x_2,...,x_n \in \Omega\). On définit
 </p>
 </div>
 </div>
-<div id="outline-container-orgeebfb25" class="outline-3">
-<h3 id="orgeebfb25"><span class="section-number-3">5.2.</span> Unicité de l'inverse</h3>
+<div id="outline-container-org5ade7d3" class="outline-3">
+<h3 id="org5ade7d3"><span class="section-number-3">5.2.</span> Unicité de l'inverse</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 On suppose que \(\opera\) admet \(n\) comme neutre. Soit \(x \in \Omega\)
@@ -632,8 +642,8 @@ donné est unique.
 </div>
 </div>
 </div>
-<div id="outline-container-org9a94531" class="outline-2">
-<h2 id="org9a94531"><span class="section-number-2">6.</span> Commutativité</h2>
+<div id="outline-container-org7e065a1" class="outline-2">
+<h2 id="org7e065a1"><span class="section-number-2">6.</span> Commutativité</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 On dit que \(\opera\) est commutative si :
@@ -648,8 +658,8 @@ pour tout \(x,y \in \Omega\).
 </p>
 </div>
 </div>
-<div id="outline-container-org9266772" class="outline-2">
-<h2 id="org9266772"><span class="section-number-2">7.</span> Distributivité</h2>
+<div id="outline-container-orgbcff0e9" class="outline-2">
+<h2 id="orgbcff0e9"><span class="section-number-2">7.</span> Distributivité</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Soit \(\autreaddition, \autremultiplication\) deux lois de composition
@@ -674,8 +684,8 @@ pour tout \(x,y,z \in \Omega\).
 </p>
 </div>
 </div>
-<div id="outline-container-orgb33404e" class="outline-2">
-<h2 id="orgb33404e"><span class="section-number-2">8.</span> Opération induite</h2>
+<div id="outline-container-org5100555" class="outline-2">
+<h2 id="org5100555"><span class="section-number-2">8.</span> Opération induite</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 Soit une opération \(\opera\) définie sur l'ensemble \(\Omega\). L'opération
@@ -738,7 +748,7 @@ pour tout \(i \in \{1,2,...,n\}\).
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2026-07-02 jeu 15:53</p>
+<p class="date">Created: 2026-09-23 mer 16:16</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2026-07-02 jeu 15:52 -->
+<!-- 2026-09-23 mer 16:15 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Applications linéaires</title>
@@ -56,6 +56,7 @@
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
   pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -70,7 +71,7 @@
   pre.src-haskell:before { content: 'Haskell'; }
   pre.src-hledger:before { content: 'hledger'; }
   pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
+  pre.src-js:before { content: 'JavaScript'; }
   pre.src-latex:before { content: 'LaTeX'; }
   pre.src-ledger:before { content: 'Ledger'; }
   pre.src-lisp:before { content: 'Lisp'; }
@@ -249,24 +250,33 @@ line-height: 1.2;
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgd1be57a">1. Dépendances</a></li>
-<li><a href="#org12c60ab">2. Définition</a></li>
-<li><a href="#orgb94bec9">3. Norme des applications linéaires</a></li>
-<li><a href="#org878e2ce">4. Norme d'une composée</a></li>
-<li><a href="#org2ee2d4e">5. Norme d'une puissance</a></li>
-<li><a href="#orgb040a3c">6. Continuité</a></li>
-<li><a href="#org01529cf">7. n-linéarité</a></li>
-<li><a href="#orgf34a864">8. Représentation matricielle</a></li>
+<li><a href="#orge795c0c">1. Dépendances</a></li>
+<li><a href="#orgeeb715a">2. Définition</a></li>
+<li><a href="#org3d1858e">3. Norme des applications linéaires</a></li>
+<li><a href="#org909bb52">4. Norme d'une composée</a></li>
+<li><a href="#orgb7a1797">5. Norme d'une puissance</a></li>
+<li><a href="#org74de222">6. Continuité</a></li>
+<li><a href="#org34c5453">7. n-linéarité</a></li>
+<li><a href="#org36cfce8">8. Représentation matricielle</a></li>
 </ul>
 </div>
 </div>
 
 <script>
 MathJax = {
+  loader: { load: [
+            '[tex]/mathtools',
+            '[tex]/braket',
+  ], },
   tex: {
+    packages: {'[+]': [
+      'base',
+      'ams',
+      'braket',
+      'mathtools',
+    ]},
     inlineMath: [['$', '$'], ['\\(', '\\)']],
     displayMath: [['\\[','\\]']],
-    packages: {'[+]': ['base','ams','braket']},
     processEscapes: true,
     tags: 'ams',
     macros: {
@@ -428,16 +438,16 @@ MathJax = {
 <p>
 \label{chap:lineaire}
 </p>
-<div id="outline-container-orgd1be57a" class="outline-2">
-<h2 id="orgd1be57a"><span class="section-number-2">1.</span> Dépendances</h2>
+<div id="outline-container-orge795c0c" class="outline-2">
+<h2 id="orge795c0c"><span class="section-number-2">1.</span> Dépendances</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:fonction} : Les fonctions</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org12c60ab" class="outline-2">
-<h2 id="org12c60ab"><span class="section-number-2">2.</span> Définition</h2>
+<div id="outline-container-orgeeb715a" class="outline-2">
+<h2 id="orgeeb715a"><span class="section-number-2">2.</span> Définition</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Soit les espaces vectoriels \(E\) et \(F\) sur \(\corps\). Une application
@@ -445,8 +455,8 @@ linéaire \(f\) est une fonction linéaire \(f : E \mapsto F\).
 </p>
 </div>
 </div>
-<div id="outline-container-orgb94bec9" class="outline-2">
-<h2 id="orgb94bec9"><span class="section-number-2">3.</span> Norme des applications linéaires</h2>
+<div id="outline-container-org3d1858e" class="outline-2">
+<h2 id="org3d1858e"><span class="section-number-2">3.</span> Norme des applications linéaires</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 La norme d'une application linéaire est définie comme étant l'extension maximale qu'elle produit :
@@ -468,8 +478,8 @@ On a donc :
 pour tout \(x \in E \setminus \{ 0 \}\).
 </p>
 </div>
-<div id="outline-container-org515f506" class="outline-3">
-<h3 id="org515f506"><span class="section-number-3">3.1.</span> Vérification</h3>
+<div id="outline-container-org35d2a1d" class="outline-3">
+<h3 id="org35d2a1d"><span class="section-number-3">3.1.</span> Vérification</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Nous allons vérifier qu'il s'agit bien d'une norme. On a \(\norme{f} \ge 0\) par positivité de la norme sur \(E\) et \(F\). La condition \(\norme{f} = 0\) implique \(\norme{f(x)} = 0\) et donc \(f(x) = 0\) pour tout \(x \ne 0\). Comme \(f\) est linéaire, on a aussi \(f(0) = 0\) et \(f = 0\).
@@ -508,8 +518,8 @@ En passant au supremum, on obtient :
 </p>
 </div>
 </div>
-<div id="outline-container-org4f18b57" class="outline-3">
-<h3 id="org4f18b57"><span class="section-number-3">3.2.</span> Notation</h3>
+<div id="outline-container-org440727c" class="outline-3">
+<h3 id="org440727c"><span class="section-number-3">3.2.</span> Notation</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
 Lorsqu'il est nécessaire de différentier la norme au sens des applications linéaires d'autres types de normes utilisées, on note :
@@ -520,8 +530,8 @@ Lorsqu'il est nécessaire de différentier la norme au sens des applications lin
 </p>
 </div>
 </div>
-<div id="outline-container-org8f00625" class="outline-3">
-<h3 id="org8f00625"><span class="section-number-3">3.3.</span> Définition alternative</h3>
+<div id="outline-container-org48275d8" class="outline-3">
+<h3 id="org48275d8"><span class="section-number-3">3.3.</span> Définition alternative</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 Soit \(N \in \corps\), avec \(N \strictsuperieur 0\) et :
@@ -608,8 +618,8 @@ On en conclut que les deux supremums sont égaux :
 </p>
 </div>
 </div>
-<div id="outline-container-org70e684c" class="outline-3">
-<h3 id="org70e684c"><span class="section-number-3">3.4.</span> Norme unitaire</h3>
+<div id="outline-container-orgfd8f941" class="outline-3">
+<h3 id="orgfd8f941"><span class="section-number-3">3.4.</span> Norme unitaire</h3>
 <div class="outline-text-3" id="text-3-4">
 <p>
 Une conséquence importante du résultat ci-dessus est le cas particulier \(N = 1\). On a alors :
@@ -621,8 +631,8 @@ Une conséquence importante du résultat ci-dessus est le cas particulier \(N = 
 </div>
 </div>
 </div>
-<div id="outline-container-org878e2ce" class="outline-2">
-<h2 id="org878e2ce"><span class="section-number-2">4.</span> Norme d'une composée</h2>
+<div id="outline-container-org909bb52" class="outline-2">
+<h2 id="org909bb52"><span class="section-number-2">4.</span> Norme d'une composée</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Soit \(f : E \mapsto F\) et \(g : F \mapsto G\) deux applications linéaires de normes finies. Si \(x \in E\) avec \(x \ne 0\) on a \(f(x) \in F\) et :
@@ -649,8 +659,8 @@ et en passant au supremum sur \(x \ne 0\), on en conclut que :
 </p>
 </div>
 </div>
-<div id="outline-container-org2ee2d4e" class="outline-2">
-<h2 id="org2ee2d4e"><span class="section-number-2">5.</span> Norme d'une puissance</h2>
+<div id="outline-container-orgb7a1797" class="outline-2">
+<h2 id="orgb7a1797"><span class="section-number-2">5.</span> Norme d'une puissance</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 On a clairement :
@@ -661,8 +671,8 @@ On a clairement :
 </p>
 </div>
 </div>
-<div id="outline-container-orgb040a3c" class="outline-2">
-<h2 id="orgb040a3c"><span class="section-number-2">6.</span> Continuité</h2>
+<div id="outline-container-org74de222" class="outline-2">
+<h2 id="org74de222"><span class="section-number-2">6.</span> Continuité</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Nous allons montrer que, pour tout \(f \in \lineaire(A,B)\), on a l'équivalence entre l'hypothèse d'une norme de \(f\) finie et l'hypothèse de \(f\) continue.
@@ -701,8 +711,8 @@ La norme est donc finie :
 </p>
 </div>
 </div>
-<div id="outline-container-org01529cf" class="outline-2">
-<h2 id="org01529cf"><span class="section-number-2">7.</span> n-linéarité</h2>
+<div id="outline-container-org34c5453" class="outline-2">
+<h2 id="org34c5453"><span class="section-number-2">7.</span> n-linéarité</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 On dit que la fonction \(f : E_1 \times ... \times E_n \mapsto F\) est
@@ -720,8 +730,8 @@ pour tout \(\alpha,\beta \in \corps\) et \(x,y \in E\). On note
 \(E_1 \times ... \times E_n\) vers \(F\).
 </p>
 </div>
-<div id="outline-container-org1126c55" class="outline-3">
-<h3 id="org1126c55"><span class="section-number-3">7.1.</span> Norme</h3>
+<div id="outline-container-org383cd42" class="outline-3">
+<h3 id="org383cd42"><span class="section-number-3">7.1.</span> Norme</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 La norme est définie dans ce cas par :
@@ -744,8 +754,8 @@ pour tout \((x_1,...,x_n) \in E_1 \times ... \times E_n\).
 </p>
 </div>
 </div>
-<div id="outline-container-org353b09d" class="outline-3">
-<h3 id="org353b09d"><span class="section-number-3">7.2.</span> Bilinéarité</h3>
+<div id="outline-container-org0f6a9c3" class="outline-3">
+<h3 id="org0f6a9c3"><span class="section-number-3">7.2.</span> Bilinéarité</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 On dit aussi des fonctions $2$-linéaires qu'elles sont bilinéaires. La norme d'une fonction \(f : E_1 \times E_2 \mapsto F\) bilinéaire est définie par :
@@ -769,19 +779,19 @@ pour tout \((u,v) \in E_1 \times E_2\).
 </div>
 </div>
 </div>
-<div id="outline-container-orgf34a864" class="outline-2">
-<h2 id="orgf34a864"><span class="section-number-2">8.</span> Représentation matricielle</h2>
+<div id="outline-container-org36cfce8" class="outline-2">
+<h2 id="org36cfce8"><span class="section-number-2">8.</span> Représentation matricielle</h2>
 <div class="outline-text-2" id="text-8">
 <div id="text-table-of-contents-1" role="doc-toc">
 <ul>
-<li><a href="#org9ab62b8">8.1. Norme</a></li>
-<li><a href="#org44996dc">8.2. Image</a></li>
-<li><a href="#orge5128cf">8.3. Noyau</a></li>
+<li><a href="#orgb2c9869">8.1. Norme</a></li>
+<li><a href="#org78a6645">8.2. Image</a></li>
+<li><a href="#org12c82fb">8.3. Noyau</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org9ab62b8" class="outline-3">
-<h3 id="org9ab62b8"><span class="section-number-3">8.1.</span> Norme</h3>
+<div id="outline-container-orgb2c9869" class="outline-3">
+<h3 id="orgb2c9869"><span class="section-number-3">8.1.</span> Norme</h3>
 <div class="outline-text-3" id="text-8-1">
 <p>
 La norme d'une matrice est la norme de l'application linéaire associée, c'est-à-dire :
@@ -820,8 +830,8 @@ La norme d'une matrice finie (\(m,n \strictinferieur \infty\)) existe toujours.
 </p>
 </div>
 </div>
-<div id="outline-container-org44996dc" class="outline-3">
-<h3 id="org44996dc"><span class="section-number-3">8.2.</span> Image</h3>
+<div id="outline-container-org78a6645" class="outline-3">
+<h3 id="org78a6645"><span class="section-number-3">8.2.</span> Image</h3>
 <div class="outline-text-3" id="text-8-2">
 <p>
 L'image d'une matrice est l'image de l'application linéaire associée, c'est-à-dire :
@@ -856,8 +866,8 @@ autrement dit l'image de \(A\) est l'espace vectoriel engendré par ses colonnes
 </p>
 </div>
 </div>
-<div id="outline-container-orge5128cf" class="outline-3">
-<h3 id="orge5128cf"><span class="section-number-3">8.3.</span> Noyau</h3>
+<div id="outline-container-org12c82fb" class="outline-3">
+<h3 id="org12c82fb"><span class="section-number-3">8.3.</span> Noyau</h3>
 <div class="outline-text-3" id="text-8-3">
 <p>
 Le noyau d'une matrice est le noyau de l'application linéaire associée, c'est-à-dire :
@@ -872,7 +882,7 @@ Le noyau d'une matrice est le noyau de l'application linéaire associée, c'est-
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2026-07-02 jeu 15:52</p>
+<p class="date">Created: 2026-09-23 mer 16:15</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

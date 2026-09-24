@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2026-07-02 jeu 15:53 -->
+<!-- 2026-09-23 mer 16:16 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Résolution d’équations</title>
@@ -56,6 +56,7 @@
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
   pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -70,7 +71,7 @@
   pre.src-haskell:before { content: 'Haskell'; }
   pre.src-hledger:before { content: 'hledger'; }
   pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
+  pre.src-js:before { content: 'JavaScript'; }
   pre.src-latex:before { content: 'LaTeX'; }
   pre.src-ledger:before { content: 'Ledger'; }
   pre.src-lisp:before { content: 'Lisp'; }
@@ -249,20 +250,29 @@ line-height: 1.2;
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org1fb24d5">1. Introduction</a></li>
-<li><a href="#org90027d9">2. Newton-Raphson</a></li>
-<li><a href="#org9ef488d">3. Banach</a></li>
-<li><a href="#orgc320b24">4. Méthode hybride d'Aitken</a></li>
+<li><a href="#org894d3bf">1. Introduction</a></li>
+<li><a href="#org81e1031">2. Newton-Raphson</a></li>
+<li><a href="#orgdf5d8c2">3. Banach</a></li>
+<li><a href="#org222c874">4. Méthode hybride d'Aitken</a></li>
 </ul>
 </div>
 </div>
 
 <script>
 MathJax = {
+  loader: { load: [
+            '[tex]/mathtools',
+            '[tex]/braket',
+  ], },
   tex: {
+    packages: {'[+]': [
+      'base',
+      'ams',
+      'braket',
+      'mathtools',
+    ]},
     inlineMath: [['$', '$'], ['\\(', '\\)']],
     displayMath: [['\\[','\\]']],
-    packages: {'[+]': ['base','ams','braket']},
     processEscapes: true,
     tags: 'ams',
     macros: {
@@ -424,8 +434,8 @@ MathJax = {
 <p>
 \label{chap:resolu}
 </p>
-<div id="outline-container-org1fb24d5" class="outline-2">
-<h2 id="org1fb24d5"><span class="section-number-2">1.</span> Introduction</h2>
+<div id="outline-container-org894d3bf" class="outline-2">
+<h2 id="org894d3bf"><span class="section-number-2">1.</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Soit une fonction \(F : \setR^n \mapsto \setR^n\) et l'espace des solutions :
@@ -456,8 +466,8 @@ A moins que l'on ait déjà une vague idée d'une région \(X \subseteq \setR^n\
 </p>
 </div>
 </div>
-<div id="outline-container-org90027d9" class="outline-2">
-<h2 id="org90027d9"><span class="section-number-2">2.</span> Newton-Raphson</h2>
+<div id="outline-container-org81e1031" class="outline-2">
+<h2 id="org81e1031"><span class="section-number-2">2.</span> Newton-Raphson</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 On demande à chaque étape que le développement du premier ordre autour de \(x_k\) s'annule en \(x_{k + 1} = x_k + \Delta_k\). On impose donc :
@@ -492,8 +502,8 @@ et :
 </p>
 </div>
 </div>
-<div id="outline-container-org9ef488d" class="outline-2">
-<h2 id="org9ef488d"><span class="section-number-2">3.</span> Banach</h2>
+<div id="outline-container-orgdf5d8c2" class="outline-2">
+<h2 id="orgdf5d8c2"><span class="section-number-2">3.</span> Banach</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 On voit que la condition \(F(s) = 0\) est équivalente à \(F(s) + s = s\). On définit donc la fonction \(f : \setR^n \to \setR^n\) par :
@@ -521,8 +531,8 @@ Pour \(K\) assez grand, on a alors :
 </p>
 </div>
 </div>
-<div id="outline-container-orgc320b24" class="outline-2">
-<h2 id="orgc320b24"><span class="section-number-2">4.</span> Méthode hybride d'Aitken</h2>
+<div id="outline-container-org222c874" class="outline-2">
+<h2 id="org222c874"><span class="section-number-2">4.</span> Méthode hybride d'Aitken</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Supposons à présent que \(F,f : \setR \to \setR\) avec \(f(x) = F(x) + x\) pour tout \(x \in \setR\). L'idée est d'utiliser simultanément les deux approches \(F(s) = 0\) et \(f(s) = F(s) + s = s\). Soit :
@@ -611,7 +621,7 @@ On espère que la suite des \(x_k\) ainsi définie converge plus vite vers la so
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2026-07-02 jeu 15:53</p>
+<p class="date">Created: 2026-09-23 mer 16:16</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

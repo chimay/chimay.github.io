@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2026-07-02 jeu 15:53 -->
+<!-- 2026-09-23 mer 16:16 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Suites</title>
@@ -56,6 +56,7 @@
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
   pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -70,7 +71,7 @@
   pre.src-haskell:before { content: 'Haskell'; }
   pre.src-hledger:before { content: 'hledger'; }
   pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
+  pre.src-js:before { content: 'JavaScript'; }
   pre.src-latex:before { content: 'LaTeX'; }
   pre.src-ledger:before { content: 'Ledger'; }
   pre.src-lisp:before { content: 'Lisp'; }
@@ -249,26 +250,35 @@ line-height: 1.2;
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org85c0c98">1. Dépendances</a></li>
-<li><a href="#orgb72fbab">2. Définition</a></li>
-<li><a href="#orgb28652f">3. Limite</a></li>
-<li><a href="#orga481983">4. Limites extrémales</a></li>
-<li><a href="#org7d83699">5. Équivalence</a></li>
-<li><a href="#org8e619da">6. Ordre</a></li>
-<li><a href="#org3cd95c9">7. Monotonie</a></li>
-<li><a href="#orge99ae04">8. Opérations</a></li>
-<li><a href="#org360dcef">9. Cauchy</a></li>
-<li><a href="#orgb7067a6">10. Ensemble complet</a></li>
+<li><a href="#org9d713d3">1. Dépendances</a></li>
+<li><a href="#orga4b298e">2. Définition</a></li>
+<li><a href="#org1302b8f">3. Limite</a></li>
+<li><a href="#org8c42035">4. Limites extrémales</a></li>
+<li><a href="#orgfef2d63">5. Équivalence</a></li>
+<li><a href="#orgf3ad799">6. Ordre</a></li>
+<li><a href="#orgc501f0a">7. Monotonie</a></li>
+<li><a href="#org238d591">8. Opérations</a></li>
+<li><a href="#org6dea9bf">9. Cauchy</a></li>
+<li><a href="#org0cf64e7">10. Ensemble complet</a></li>
 </ul>
 </div>
 </div>
 
 <script>
 MathJax = {
+  loader: { load: [
+            '[tex]/mathtools',
+            '[tex]/braket',
+  ], },
   tex: {
+    packages: {'[+]': [
+      'base',
+      'ams',
+      'braket',
+      'mathtools',
+    ]},
     inlineMath: [['$', '$'], ['\\(', '\\)']],
     displayMath: [['\\[','\\]']],
-    packages: {'[+]': ['base','ams','braket']},
     processEscapes: true,
     tags: 'ams',
     macros: {
@@ -430,16 +440,16 @@ MathJax = {
 <p>
 \label{chap:suites}
 </p>
-<div id="outline-container-org85c0c98" class="outline-2">
-<h2 id="org85c0c98"><span class="section-number-2">1.</span> Dépendances</h2>
+<div id="outline-container-org9d713d3" class="outline-2">
+<h2 id="org9d713d3"><span class="section-number-2">1.</span> Dépendances</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:limites} : Les limites</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgb72fbab" class="outline-2">
-<h2 id="orgb72fbab"><span class="section-number-2">2.</span> Définition</h2>
+<div id="outline-container-orga4b298e" class="outline-2">
+<h2 id="orga4b298e"><span class="section-number-2">2.</span> Définition</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Une suite est une fonction \(\mathcal{S} : \setN \mapsto \Omega\) définie par :
@@ -471,8 +481,8 @@ ou même :
 </p>
 </div>
 </div>
-<div id="outline-container-orgb28652f" class="outline-2">
-<h2 id="orgb28652f"><span class="section-number-2">3.</span> Limite</h2>
+<div id="outline-container-org1302b8f" class="outline-2">
+<h2 id="org1302b8f"><span class="section-number-2">3.</span> Limite</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 On dit qu'une suite \(\mathcal{S} : n \mapsto s_n \in \Omega\) converge
@@ -498,8 +508,8 @@ sera au moins aussi faible que demandée. On a donc :
 pour tout \(n \ge K(\epsilon)\).
 </p>
 </div>
-<div id="outline-container-orgfe32db0" class="outline-3">
-<h3 id="orgfe32db0"><span class="section-number-3">3.1.</span> Notation</h3>
+<div id="outline-container-org669cc37" class="outline-3">
+<h3 id="org669cc37"><span class="section-number-3">3.1.</span> Notation</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Comme la limite d'une suite est toujours sous-entendue vers l'infini,
@@ -512,8 +522,8 @@ on note :
 </div>
 </div>
 </div>
-<div id="outline-container-orga481983" class="outline-2">
-<h2 id="orga481983"><span class="section-number-2">4.</span> Limites extrémales</h2>
+<div id="outline-container-org8c42035" class="outline-2">
+<h2 id="org8c42035"><span class="section-number-2">4.</span> Limites extrémales</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 On définit :
@@ -527,8 +537,8 @@ On définit :
 \[\liminf_{n \to \infty} s_n = \lim_{n \to \infty} \inf \{ s_m : m \in \setN, \ m \ge n \}\]
 </p>
 </div>
-<div id="outline-container-org1135663" class="outline-3">
-<h3 id="org1135663"><span class="section-number-3">4.1.</span> Notation</h3>
+<div id="outline-container-org3d3815b" class="outline-3">
+<h3 id="org3d3815b"><span class="section-number-3">4.1.</span> Notation</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 On note aussi :
@@ -544,8 +554,8 @@ On note aussi :
 </div>
 </div>
 </div>
-<div id="outline-container-org7d83699" class="outline-2">
-<h2 id="org7d83699"><span class="section-number-2">5.</span> Équivalence</h2>
+<div id="outline-container-orgfef2d63" class="outline-2">
+<h2 id="orgfef2d63"><span class="section-number-2">5.</span> Équivalence</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Soit les suites :
@@ -599,8 +609,8 @@ n'implique nullement que la limite de \(\mathcal{S}\) ou de \(\mathcal{T}\)
 existe.
 </p>
 </div>
-<div id="outline-container-org80af4f5" class="outline-3">
-<h3 id="org80af4f5"><span class="section-number-3">5.1.</span> Existence des limites</h3>
+<div id="outline-container-orgd049607" class="outline-3">
+<h3 id="orgd049607"><span class="section-number-3">5.1.</span> Existence des limites</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 Suppons que :
@@ -665,8 +675,8 @@ Les limites de suites équivalentes sont identiques.
 </div>
 </div>
 </div>
-<div id="outline-container-org8e619da" class="outline-2">
-<h2 id="org8e619da"><span class="section-number-2">6.</span> Ordre</h2>
+<div id="outline-container-orgf3ad799" class="outline-2">
+<h2 id="orgf3ad799"><span class="section-number-2">6.</span> Ordre</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Soit les suites :
@@ -707,18 +717,18 @@ pour tout \(n \in \setN\).
 </p>
 </div>
 </div>
-<div id="outline-container-org3cd95c9" class="outline-2">
-<h2 id="org3cd95c9"><span class="section-number-2">7.</span> Monotonie</h2>
+<div id="outline-container-orgc501f0a" class="outline-2">
+<h2 id="orgc501f0a"><span class="section-number-2">7.</span> Monotonie</h2>
 <div class="outline-text-2" id="text-7">
 <div id="text-table-of-contents-1" role="doc-toc">
 <ul>
-<li><a href="#org33a1afd">7.1. Croissance</a></li>
-<li><a href="#org899e911">7.2. Décroissance</a></li>
+<li><a href="#org261b78b">7.1. Croissance</a></li>
+<li><a href="#orge5f8cb5">7.2. Décroissance</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org33a1afd" class="outline-3">
-<h3 id="org33a1afd"><span class="section-number-3">7.1.</span> Croissance</h3>
+<div id="outline-container-org261b78b" class="outline-3">
+<h3 id="org261b78b"><span class="section-number-3">7.1.</span> Croissance</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 On dit qu'une suite :
@@ -741,8 +751,8 @@ pour tout \(m,n \in \setN\) tels que \(m \le n\).
 </p>
 </div>
 </div>
-<div id="outline-container-org899e911" class="outline-3">
-<h3 id="org899e911"><span class="section-number-3">7.2.</span> Décroissance</h3>
+<div id="outline-container-orge5f8cb5" class="outline-3">
+<h3 id="orge5f8cb5"><span class="section-number-3">7.2.</span> Décroissance</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 On dit qu'une suite :
@@ -766,18 +776,18 @@ pour tout \(m,n \in \setN\) tels que \(m \ge n\).
 </div>
 </div>
 </div>
-<div id="outline-container-orge99ae04" class="outline-2">
-<h2 id="orge99ae04"><span class="section-number-2">8.</span> Opérations</h2>
+<div id="outline-container-org238d591" class="outline-2">
+<h2 id="org238d591"><span class="section-number-2">8.</span> Opérations</h2>
 <div class="outline-text-2" id="text-8">
 <div id="text-table-of-contents-2" role="doc-toc">
 <ul>
-<li><a href="#orgf3f206c">8.1. Définition</a></li>
-<li><a href="#org490e7e9">8.2. Usuelles</a></li>
+<li><a href="#org956c0fb">8.1. Définition</a></li>
+<li><a href="#org369fbeb">8.2. Usuelles</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf3f206c" class="outline-3">
-<h3 id="orgf3f206c"><span class="section-number-3">8.1.</span> Définition</h3>
+<div id="outline-container-org956c0fb" class="outline-3">
+<h3 id="org956c0fb"><span class="section-number-3">8.1.</span> Définition</h3>
 <div class="outline-text-3" id="text-8-1">
 <p>
 Soit les suites :
@@ -814,8 +824,8 @@ pour tout \(n \in \setN\). On note aussi :
 </p>
 </div>
 </div>
-<div id="outline-container-org490e7e9" class="outline-3">
-<h3 id="org490e7e9"><span class="section-number-3">8.2.</span> Usuelles</h3>
+<div id="outline-container-org369fbeb" class="outline-3">
+<h3 id="org369fbeb"><span class="section-number-3">8.2.</span> Usuelles</h3>
 <div class="outline-text-3" id="text-8-2">
 <p>
 Sur les ensembles où sont définies les opérations usuelles,
@@ -856,18 +866,18 @@ pour tout \(n \in \setN\).
 </div>
 </div>
 </div>
-<div id="outline-container-org360dcef" class="outline-2">
-<h2 id="org360dcef"><span class="section-number-2">9.</span> Cauchy</h2>
+<div id="outline-container-org6dea9bf" class="outline-2">
+<h2 id="org6dea9bf"><span class="section-number-2">9.</span> Cauchy</h2>
 <div class="outline-text-2" id="text-9">
 <div id="text-table-of-contents-3" role="doc-toc">
 <ul>
-<li><a href="#orga837820">9.1. Définition</a></li>
-<li><a href="#org42d6446">9.2. Suite convergente</a></li>
+<li><a href="#org5215509">9.1. Définition</a></li>
+<li><a href="#orgd1f070c">9.2. Suite convergente</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orga837820" class="outline-3">
-<h3 id="orga837820"><span class="section-number-3">9.1.</span> Définition</h3>
+<div id="outline-container-org5215509" class="outline-3">
+<h3 id="org5215509"><span class="section-number-3">9.1.</span> Définition</h3>
 <div class="outline-text-3" id="text-9-1">
 <p>
 On dit qu'une suite :
@@ -893,8 +903,8 @@ pour tout \(m,n \ge K(\epsilon)\).
 </p>
 </div>
 </div>
-<div id="outline-container-org42d6446" class="outline-3">
-<h3 id="org42d6446"><span class="section-number-3">9.2.</span> Suite convergente</h3>
+<div id="outline-container-orgd1f070c" class="outline-3">
+<h3 id="orgd1f070c"><span class="section-number-3">9.2.</span> Suite convergente</h3>
 <div class="outline-text-3" id="text-9-2">
 <p>
 Toute suite convergente vers une limite :
@@ -927,18 +937,18 @@ pour tout \(m,n \ge K\).
 </div>
 </div>
 </div>
-<div id="outline-container-orgb7067a6" class="outline-2">
-<h2 id="orgb7067a6"><span class="section-number-2">10.</span> Ensemble complet</h2>
+<div id="outline-container-org0cf64e7" class="outline-2">
+<h2 id="org0cf64e7"><span class="section-number-2">10.</span> Ensemble complet</h2>
 <div class="outline-text-2" id="text-10">
 <div id="text-table-of-contents-4" role="doc-toc">
 <ul>
-<li><a href="#org304d56a">10.1. Définition</a></li>
-<li><a href="#org7563089">10.2. Complétion</a></li>
+<li><a href="#org5cfc402">10.1. Définition</a></li>
+<li><a href="#org832df9f">10.2. Complétion</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org304d56a" class="outline-3">
-<h3 id="org304d56a"><span class="section-number-3">10.1.</span> Définition</h3>
+<div id="outline-container-org5cfc402" class="outline-3">
+<h3 id="org5cfc402"><span class="section-number-3">10.1.</span> Définition</h3>
 <div class="outline-text-3" id="text-10-1">
 <p>
 On dit qu'un ensemble \(X\) est complet si toute suite de Cauchy inclue
@@ -946,8 +956,8 @@ dans \(X\) converge vers une limite \(L \in X\).
 </p>
 </div>
 </div>
-<div id="outline-container-org7563089" class="outline-3">
-<h3 id="org7563089"><span class="section-number-3">10.2.</span> Complétion</h3>
+<div id="outline-container-org832df9f" class="outline-3">
+<h3 id="org832df9f"><span class="section-number-3">10.2.</span> Complétion</h3>
 <div class="outline-text-3" id="text-10-2">
 <p>
 On peut compléter tout ensemble \(A\) incomplet en créant un ensemble
@@ -971,7 +981,7 @@ On note alors symboliquement :
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2026-07-02 jeu 15:53</p>
+<p class="date">Created: 2026-09-23 mer 16:16</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

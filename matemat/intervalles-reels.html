@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2026-07-02 jeu 15:53 -->
+<!-- 2026-09-23 mer 16:16 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Intervalles de réels</title>
@@ -56,6 +56,7 @@
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
   pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -70,7 +71,7 @@
   pre.src-haskell:before { content: 'Haskell'; }
   pre.src-hledger:before { content: 'hledger'; }
   pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
+  pre.src-js:before { content: 'JavaScript'; }
   pre.src-latex:before { content: 'LaTeX'; }
   pre.src-ledger:before { content: 'Ledger'; }
   pre.src-lisp:before { content: 'Lisp'; }
@@ -249,24 +250,33 @@ line-height: 1.2;
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org7958681">1. Dépendances</a></li>
-<li><a href="#org5dbddc7">2. Intervalles bornés</a></li>
-<li><a href="#org1cda686">3. Intervalles non bornés</a></li>
-<li><a href="#orgbe5feb1">4. Boules</a></li>
-<li><a href="#org2a85e73">5. Majorants et minorants</a></li>
-<li><a href="#orga67cbf1">6. Maximum et minimum</a></li>
-<li><a href="#orgcbc5d97">7. Supremum et infimum</a></li>
-<li><a href="#orgb96c48e">8. Adhérence, intérieur et frontière</a></li>
+<li><a href="#orge11b0bc">1. Dépendances</a></li>
+<li><a href="#orgddd345d">2. Intervalles bornés</a></li>
+<li><a href="#orgad549ee">3. Intervalles non bornés</a></li>
+<li><a href="#org840e250">4. Boules</a></li>
+<li><a href="#orgc829785">5. Majorants et minorants</a></li>
+<li><a href="#org334ee86">6. Maximum et minimum</a></li>
+<li><a href="#org5f73663">7. Supremum et infimum</a></li>
+<li><a href="#org8e28365">8. Adhérence, intérieur et frontière</a></li>
 </ul>
 </div>
 </div>
 
 <script>
 MathJax = {
+  loader: { load: [
+            '[tex]/mathtools',
+            '[tex]/braket',
+  ], },
   tex: {
+    packages: {'[+]': [
+      'base',
+      'ams',
+      'braket',
+      'mathtools',
+    ]},
     inlineMath: [['$', '$'], ['\\(', '\\)']],
     displayMath: [['\\[','\\]']],
-    packages: {'[+]': ['base','ams','braket']},
     processEscapes: true,
     tags: 'ams',
     macros: {
@@ -428,16 +438,16 @@ MathJax = {
 <p>
 \label{chap:intervallesDeReels}
 </p>
-<div id="outline-container-org7958681" class="outline-2">
-<h2 id="org7958681"><span class="section-number-2">1.</span> Dépendances</h2>
+<div id="outline-container-orge11b0bc" class="outline-2">
+<h2 id="orge11b0bc"><span class="section-number-2">1.</span> Dépendances</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:reel} : Les nombres réels</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org5dbddc7" class="outline-2">
-<h2 id="org5dbddc7"><span class="section-number-2">2.</span> Intervalles bornés</h2>
+<div id="outline-container-orgddd345d" class="outline-2">
+<h2 id="orgddd345d"><span class="section-number-2">2.</span> Intervalles bornés</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Soit \(a,b \in \setR\) avec \(a \le b\). L'intervalle fermé \([a,b]\) est défini par :
@@ -472,8 +482,8 @@ ou à droite :
 </p>
 </div>
 </div>
-<div id="outline-container-org1cda686" class="outline-2">
-<h2 id="org1cda686"><span class="section-number-2">3.</span> Intervalles non bornés</h2>
+<div id="outline-container-orgad549ee" class="outline-2">
+<h2 id="orgad549ee"><span class="section-number-2">3.</span> Intervalles non bornés</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Soit \(a \in \setR\). Les intervalles non bornés sont des intervalles
@@ -489,8 +499,8 @@ partant de l'infini négatif ou/et allant jusqu'à l'infini positif :
 \end{align}
 </div>
 </div>
-<div id="outline-container-orgbe5feb1" class="outline-2">
-<h2 id="orgbe5feb1"><span class="section-number-2">4.</span> Boules</h2>
+<div id="outline-container-org840e250" class="outline-2">
+<h2 id="org840e250"><span class="section-number-2">4.</span> Boules</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Soit \(c,r,x \in \setR\) avec \(r \ge 0\). La condition \(\abs{x - c} \le r\) est équivalente à \(x - c \le r\) et \(-(x - c) = c - x \le r\). On en déduit que :
@@ -547,8 +557,8 @@ On en déduit que :
 \end{align}
 </div>
 </div>
-<div id="outline-container-org2a85e73" class="outline-2">
-<h2 id="org2a85e73"><span class="section-number-2">5.</span> Majorants et minorants</h2>
+<div id="outline-container-orgc829785" class="outline-2">
+<h2 id="orgc829785"><span class="section-number-2">5.</span> Majorants et minorants</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 Soit \(a,b \in \setR\) avec \(a \le b\) et \(x \in \setR\).
@@ -595,8 +605,8 @@ ainsi que pour les intervalles semi-ouverts.
 </p>
 </div>
 </div>
-<div id="outline-container-orga67cbf1" class="outline-2">
-<h2 id="orga67cbf1"><span class="section-number-2">6.</span> Maximum et minimum</h2>
+<div id="outline-container-org334ee86" class="outline-2">
+<h2 id="org334ee86"><span class="section-number-2">6.</span> Maximum et minimum</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Soit \(a,b \in \setR\) avec \(a \le b\). On a clairement :
@@ -612,8 +622,8 @@ Les autre types d'intervalles n'admettent ni maximum ni minimum.
 </p>
 </div>
 </div>
-<div id="outline-container-orgcbc5d97" class="outline-2">
-<h2 id="orgcbc5d97"><span class="section-number-2">7.</span> Supremum et infimum</h2>
+<div id="outline-container-org5f73663" class="outline-2">
+<h2 id="org5f73663"><span class="section-number-2">7.</span> Supremum et infimum</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Dans le cas où le maximum de l'intervalle \(I\) existe, on a \(\sup I = \max I\). Dans les autres cas, on a par exemple :
@@ -640,8 +650,8 @@ et le même résultat pour les intervalles semi-ouverts.
 </p>
 </div>
 </div>
-<div id="outline-container-orgb96c48e" class="outline-2">
-<h2 id="orgb96c48e"><span class="section-number-2">8.</span> Adhérence, intérieur et frontière</h2>
+<div id="outline-container-org8e28365" class="outline-2">
+<h2 id="org8e28365"><span class="section-number-2">8.</span> Adhérence, intérieur et frontière</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 On peut vérifier que :
@@ -664,7 +674,7 @@ et ainsi de suite. La frontière est donc simplement :
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2026-07-02 jeu 15:53</p>
+<p class="date">Created: 2026-09-23 mer 16:16</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

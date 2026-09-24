@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
 <head>
-<!-- 2026-07-02 jeu 15:44 -->
+<!-- 2026-09-23 mer 16:16 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Eclats de vers : Matemat : Polynômes</title>
@@ -56,6 +56,7 @@
   pre.src-asymptote:before { content: 'Asymptote'; }
   pre.src-awk:before { content: 'Awk'; }
   pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-c:before { content: 'C'; }
   pre.src-C:before { content: 'C'; }
   /* pre.src-C++ doesn't work in CSS */
   pre.src-clojure:before { content: 'Clojure'; }
@@ -70,7 +71,7 @@
   pre.src-haskell:before { content: 'Haskell'; }
   pre.src-hledger:before { content: 'hledger'; }
   pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
+  pre.src-js:before { content: 'JavaScript'; }
   pre.src-latex:before { content: 'LaTeX'; }
   pre.src-ledger:before { content: 'Ledger'; }
   pre.src-lisp:before { content: 'Lisp'; }
@@ -249,10 +250,10 @@ line-height: 1.2;
 <h2>Table des matières</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org65f7f14">1. Dépendances</a></li>
-<li><a href="#org305b66c">2. Introduction</a></li>
-<li><a href="#org17e8e92">3. Division Euclidienne polynômiale</a></li>
-<li><a href="#org6abdc15">4. Borne maximale pour les racines</a></li>
+<li><a href="#orgd273cf9">1. Dépendances</a></li>
+<li><a href="#org589e613">2. Introduction</a></li>
+<li><a href="#orgfe80089">3. Division Euclidienne polynômiale</a></li>
+<li><a href="#org5e5e4fd">4. Borne maximale pour les racines</a></li>
 <li><a href="#heading:factorisation">5. Factorisation</a></li>
 </ul>
 </div>
@@ -260,10 +261,19 @@ line-height: 1.2;
 
 <script>
 MathJax = {
+  loader: { load: [
+            '[tex]/mathtools',
+            '[tex]/braket',
+  ], },
   tex: {
+    packages: {'[+]': [
+      'base',
+      'ams',
+      'braket',
+      'mathtools',
+    ]},
     inlineMath: [['$', '$'], ['\\(', '\\)']],
     displayMath: [['\\[','\\]']],
-    packages: {'[+]': ['base','ams','braket']},
     processEscapes: true,
     tags: 'ams',
     macros: {
@@ -425,8 +435,8 @@ MathJax = {
 <p>
 \label{chap:polynomes}
 </p>
-<div id="outline-container-org65f7f14" class="outline-2">
-<h2 id="org65f7f14"><span class="section-number-2">1.</span> Dépendances</h2>
+<div id="outline-container-orgd273cf9" class="outline-2">
+<h2 id="orgd273cf9"><span class="section-number-2">1.</span> Dépendances</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Chapitre \ref{chap:reel} : Les réels</li>
@@ -436,20 +446,20 @@ MathJax = {
 </ul>
 </div>
 </div>
-<div id="outline-container-org305b66c" class="outline-2">
-<h2 id="org305b66c"><span class="section-number-2">2.</span> Introduction</h2>
+<div id="outline-container-org589e613" class="outline-2">
+<h2 id="org589e613"><span class="section-number-2">2.</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 <div id="text-table-of-contents-1" role="doc-toc">
 <ul>
-<li><a href="#org4fae156">2.1. Monôme</a></li>
-<li><a href="#org30dceb7">2.2. Polynôme</a></li>
-<li><a href="#orgc1cd975">2.3. Équivalence avec \(\corps^{n+1}\)</a></li>
-<li><a href="#orgd819190">2.4. Racine ou zéro</a></li>
+<li><a href="#orgad8d378">2.1. Monôme</a></li>
+<li><a href="#org3008953">2.2. Polynôme</a></li>
+<li><a href="#org3353ae3">2.3. Équivalence avec \(\corps^{n+1}\)</a></li>
+<li><a href="#org7b810c5">2.4. Racine ou zéro</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org4fae156" class="outline-3">
-<h3 id="org4fae156"><span class="section-number-3">2.1.</span> Monôme</h3>
+<div id="outline-container-orgad8d378" class="outline-3">
+<h3 id="orgad8d378"><span class="section-number-3">2.1.</span> Monôme</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Un monôme \(\mu_i : \corps \mapsto \corps\) de degré \(i\) est une fonction
@@ -465,8 +475,8 @@ pour tout \(x \in \corps\).
 </p>
 </div>
 </div>
-<div id="outline-container-org30dceb7" class="outline-3">
-<h3 id="org30dceb7"><span class="section-number-3">2.2.</span> Polynôme</h3>
+<div id="outline-container-org3008953" class="outline-3">
+<h3 id="org3008953"><span class="section-number-3">2.2.</span> Polynôme</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Soit un corps \(\corps\). On dit qu'une fonction \(p : \corps \mapsto
@@ -491,8 +501,8 @@ Un cas particulier important est celui des polynômes réels :
 </p>
 </div>
 </div>
-<div id="outline-container-orgc1cd975" class="outline-3">
-<h3 id="orgc1cd975"><span class="section-number-3">2.3.</span> Équivalence avec \(\corps^{n+1}\)</h3>
+<div id="outline-container-org3353ae3" class="outline-3">
+<h3 id="org3353ae3"><span class="section-number-3">2.3.</span> Équivalence avec \(\corps^{n+1}\)</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Tout n-tuple \((p_0,p_1,p_2,...,p_n)\in\corps^{n+1}\) peut être associé
@@ -512,8 +522,8 @@ et vice versa. On a donc l’équivalence :
 </p>
 </div>
 </div>
-<div id="outline-container-orgd819190" class="outline-3">
-<h3 id="orgd819190"><span class="section-number-3">2.4.</span> Racine ou zéro</h3>
+<div id="outline-container-org7b810c5" class="outline-3">
+<h3 id="org7b810c5"><span class="section-number-3">2.4.</span> Racine ou zéro</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 On dit que \(r\) est une racine ou un zéro du polynôme \(p\) si :
@@ -525,18 +535,18 @@ On dit que \(r\) est une racine ou un zéro du polynôme \(p\) si :
 </div>
 </div>
 </div>
-<div id="outline-container-org17e8e92" class="outline-2">
-<h2 id="org17e8e92"><span class="section-number-2">3.</span> Division Euclidienne polynômiale</h2>
+<div id="outline-container-orgfe80089" class="outline-2">
+<h2 id="orgfe80089"><span class="section-number-2">3.</span> Division Euclidienne polynômiale</h2>
 <div class="outline-text-2" id="text-3">
 <div id="text-table-of-contents-2" role="doc-toc">
 <ul>
-<li><a href="#org8b51abe">3.1. Définition</a></li>
-<li><a href="#org3dfbcf8">3.2. Méthode de Ruffini-Horner</a></li>
+<li><a href="#orgce03ea1">3.1. Définition</a></li>
+<li><a href="#org5070ca5">3.2. Méthode de Ruffini-Horner</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org8b51abe" class="outline-3">
-<h3 id="org8b51abe"><span class="section-number-3">3.1.</span> Définition</h3>
+<div id="outline-container-orgce03ea1" class="outline-3">
+<h3 id="orgce03ea1"><span class="section-number-3">3.1.</span> Définition</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 Soit deux polynomes \(p \in \mathcal{P}_n\) et \(d \in \mathcal{P}_m\)
@@ -589,21 +599,21 @@ où \(p \strictinferieur m \le n\).
 </p>
 </div>
 </div>
-<div id="outline-container-org3dfbcf8" class="outline-3">
-<h3 id="org3dfbcf8"><span class="section-number-3">3.2.</span> Méthode de Ruffini-Horner</h3>
+<div id="outline-container-org5070ca5" class="outline-3">
+<h3 id="org5070ca5"><span class="section-number-3">3.2.</span> Méthode de Ruffini-Horner</h3>
 <div class="outline-text-3" id="text-3-2">
 <div id="text-table-of-contents-3" role="doc-toc">
 <ul>
-<li><a href="#orgdd89082">3.2.1. Introduction</a></li>
-<li><a href="#orgdf9168a">3.2.2. Valeur du polynôme au point \(a\)</a></li>
-<li><a href="#org331cec5">3.2.3. Racine au point \(a\)</a></li>
-<li><a href="#org1184b5b">3.2.4. Calcul du polynôme quotient et du reste</a></li>
-<li><a href="#org9b08ebd">3.2.5. Factorisation d’une différence de puissances</a></li>
+<li><a href="#org557d56a">3.2.1. Introduction</a></li>
+<li><a href="#org2b68c8e">3.2.2. Valeur du polynôme au point \(a\)</a></li>
+<li><a href="#org451198b">3.2.3. Racine au point \(a\)</a></li>
+<li><a href="#orge56d151">3.2.4. Calcul du polynôme quotient et du reste</a></li>
+<li><a href="#org1d87530">3.2.5. Factorisation d’une différence de puissances</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgdd89082" class="outline-4">
-<h4 id="orgdd89082"><span class="section-number-4">3.2.1.</span> Introduction</h4>
+<div id="outline-container-org557d56a" class="outline-4">
+<h4 id="org557d56a"><span class="section-number-4">3.2.1.</span> Introduction</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <p>
 La méthode de Horner permet de diviser un polynôme \(p\) de degré \(n\) :
@@ -656,8 +666,8 @@ ou encore :
 </p>
 </div>
 </div>
-<div id="outline-container-orgdf9168a" class="outline-4">
-<h4 id="orgdf9168a"><span class="section-number-4">3.2.2.</span> Valeur du polynôme au point \(a\)</h4>
+<div id="outline-container-org2b68c8e" class="outline-4">
+<h4 id="org2b68c8e"><span class="section-number-4">3.2.2.</span> Valeur du polynôme au point \(a\)</h4>
 <div class="outline-text-4" id="text-3-2-2">
 <p>
 En évaluant la division euclidienne polynômiale en \(x = a\), on obtient :
@@ -672,8 +682,8 @@ Le reste est donc égal à la valeur du polynôme \(p\) au point \(a\).
 </p>
 </div>
 </div>
-<div id="outline-container-org331cec5" class="outline-4">
-<h4 id="org331cec5"><span class="section-number-4">3.2.3.</span> Racine au point \(a\)</h4>
+<div id="outline-container-org451198b" class="outline-4">
+<h4 id="org451198b"><span class="section-number-4">3.2.3.</span> Racine au point \(a\)</h4>
 <div class="outline-text-4" id="text-3-2-3">
 <p>
 Si le reste \(R\) est nul, on a :
@@ -704,8 +714,8 @@ et donc :
 </p>
 </div>
 </div>
-<div id="outline-container-org1184b5b" class="outline-4">
-<h4 id="org1184b5b"><span class="section-number-4">3.2.4.</span> Calcul du polynôme quotient et du reste</h4>
+<div id="outline-container-orge56d151" class="outline-4">
+<h4 id="orge56d151"><span class="section-number-4">3.2.4.</span> Calcul du polynôme quotient et du reste</h4>
 <div class="outline-text-4" id="text-3-2-4">
 <p>
 Examinons à présent plus en détail la division euclidienne polynômiale :
@@ -745,8 +755,8 @@ R &= p_0 + a \cdot q_0
 \end{align*}
 </div>
 </div>
-<div id="outline-container-org9b08ebd" class="outline-4">
-<h4 id="org9b08ebd"><span class="section-number-4">3.2.5.</span> Factorisation d’une différence de puissances</h4>
+<div id="outline-container-org1d87530" class="outline-4">
+<h4 id="org1d87530"><span class="section-number-4">3.2.5.</span> Factorisation d’une différence de puissances</h4>
 <div class="outline-text-4" id="text-3-2-5">
 <p>
 Nous avons déjà vu dans le chapitre sur les progressions
@@ -824,8 +834,8 @@ ce qui nous donne l’expression suivante pour la factorisation de \(p\) :
 </div>
 </div>
 </div>
-<div id="outline-container-org6abdc15" class="outline-2">
-<h2 id="org6abdc15"><span class="section-number-2">4.</span> Borne maximale pour les racines</h2>
+<div id="outline-container-org5e5e4fd" class="outline-2">
+<h2 id="org5e5e4fd"><span class="section-number-2">4.</span> Borne maximale pour les racines</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Nous allons montrer que tout polynôme de degré \(n\) non nul
@@ -945,8 +955,8 @@ pour tout \(x \in \corps\). Le polynôme \(p_n\) est également nul et la
 thèse est démontrée.
 </p>
 </div>
-<div id="outline-container-org5f5a662" class="outline-3">
-<h3 id="org5f5a662"><span class="section-number-3">4.1.</span> Egalité</h3>
+<div id="outline-container-org10cc268" class="outline-3">
+<h3 id="org10cc268"><span class="section-number-3">4.1.</span> Egalité</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Si deux polynômes \(p_1,p_2 \in \mathcal{P}_n\) sont égaux en \(m + 1 \ge n + 1\) points distincts, alors le polynôme de degré \(n\) :
@@ -1025,7 +1035,7 @@ on a \(A = a_n\) et :
 </div>
 <div id="postamble" class="status">
 <p class="author">Auteur: chimay</p>
-<p class="date">Created: 2026-07-02 jeu 15:44</p>
+<p class="date">Created: 2026-09-23 mer 16:16</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
